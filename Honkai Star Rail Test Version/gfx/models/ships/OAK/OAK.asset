@@ -1,0 +1,208 @@
+entity = {
+	name = "OAK_frem_entity"
+	pdxmesh = "humanoid_01_titan_frame_mesh"
+	game_data = {
+		size = 50
+	}
+	locator = { name = "part1"	position = { 0 0 0 } rotation = { 0 0 0 } }
+	locator = { name = "part2"	position = { 0 0 0 } rotation = { 0 0 0 } }
+	locator = { name = "part3"	position = { 0 0 0 } rotation = { 0 0 0 } }
+	locator = { name = "part4"	position = { 0 0 0 } rotation = { 0 0 0 } }
+	locator = { name = "part5"	position = { 0 0 0 } rotation = { 0 0 0 } }
+	attach = { part5 = "OAK_main_entity" }
+	
+	default_state = "idle"
+	state = { name = "idle" animation = "idle" 
+	
+		start_event = { trigger_once = yes sound = { soundeffect = "amb_titan_ship_hum_01" } }
+		start_event = { trigger_once = yes sound = { soundeffect = "amb_titan_ship_hum_02" } }
+		start_event = { trigger_once = yes sound = { soundeffect = "amb_titan_ship_hum_03" } }
+	
+	}
+	state = { name = "moving" animation = "idle"
+		event =  { trigger_once = yes sound = { soundeffect = "moving_out_titan" } }
+	}
+	state = { name = "death" animation = "death" looping = no 
+		event = { time = 2.5 node = "explosion_locator_01" particle = "ship_explosion_particle" keep_particle = yes trigger_once = yes sound = { soundeffect = "ship_explosion" } }
+		event = { time = 3.5 node = "explosion_locator_02" particle = "ship_explosion_particle" keep_particle = yes trigger_once = yes sound = { soundeffect = "ship_explosion" } }
+		event = { time = 5.5 node = "explosion_locator_03" particle = "ship_explosion_particle" keep_particle = yes trigger_once = yes sound = { soundeffect = "ship_explosion" } }
+		event = { time = 7.5 node = "explosion_locator_04" particle = "ship_explosion_particle" keep_particle = yes trigger_once = yes sound = { soundeffect = "ship_explosion" } }
+		event = { time = 9.5 node = "explosion_locator_05" particle = "ship_explosion_particle" keep_particle = yes trigger_once = yes sound = { soundeffect = "ship_explosion" } }
+		event = { time = 12.5 node = "ship_main" particle = "dreadnought_explosion_particle" keep_particle = yes trigger_once = yes sound = { soundeffect = "amb_titan_ship_death" } }
+	}
+	
+	scale = 1.0
+}
+
+entity = {
+	name = "OAK_main_entity"
+	pdxmesh = "OAK_mesh"
+	
+	default_state = "idle"
+	state = { name = "idle" state_time = 5
+		start_event = { node = "EDDY01" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY02" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY03" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY04" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY05" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY06" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+	}
+	state = { name = "moving" state_time = 5
+		start_event = { node = "EDDY01" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY02" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY03" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY04" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY05" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY06" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+	}
+	state = { name = "death" state_time = 5 looping = no }
+	locator = { name = "large_gun_01" position = { -10 0 0 } }
+	locator = { name = "large_gun_02" position = { 10 0 0 } }
+	locator = { name = "root" position = { 0 0 0 } }
+	locator = { name = "xl_gun_01" position = { 0 10 0 } }
+	locator = { name = "xl_gun_02" position = { 5 10 0 } }
+	locator = { name = "xl_gun_03" position = { -5 10 0 } }
+	locator = { name = "L01" position = { 0 3 20 } }
+	scale = 1.4
+}
+
+entity = {
+	name = "OAK_mid_entity"
+	pdxmesh = "OAK_mesh"
+	
+	default_state = "idle"
+	state = { name = "idle" state_time = 5
+		start_event = { node = "EDDY01" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY02" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY03" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY04" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY05" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY06" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+	}
+	state = { name = "moving" state_time = 5
+		start_event = { node = "EDDY01" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY02" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY03" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY04" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY05" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY06" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+	}
+	state = { name = "death" state_time = 5 looping = no }
+	locator = { name = "large_gun_01" position = { -10 0 0 } }
+	locator = { name = "large_gun_02" position = { 10 0 0 } }
+	locator = { name = "root" position = { 0 0 0 } }
+	locator = { name = "xl_gun_01" position = { 0 10 0 } }
+	locator = { name = "xl_gun_02" position = { 5 10 0 } }
+	locator = { name = "xl_gun_03" position = { -5 10 0 } }
+	locator = { name = "L01" position = { 0 3 20 } }
+	
+	scale = 1.4
+}
+
+entity = {
+	name = "OAK_core_entity"
+	pdxmesh = "OAK_mesh"
+	
+	default_state = "idle"
+	state = { name = "idle" state_time = 5
+		start_event = { node = "EDDY01" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY02" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY03" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY04" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY05" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY06" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+	}
+	state = { name = "moving" state_time = 5
+		start_event = { node = "EDDY01" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY02" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY03" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY04" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY05" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY06" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+	}
+	state = { name = "death" state_time = 5 looping = no }
+	locator = { name = "large_gun_01" position = { -10 0 0 } }
+	locator = { name = "large_gun_02" position = { 10 0 0 } }
+	locator = { name = "root" position = { 0 0 0 } }
+	locator = { name = "xl_gun_01" position = { 0 10 0 } }
+	locator = { name = "xl_gun_02" position = { 5 10 0 } }
+	locator = { name = "xl_gun_03" position = { -5 10 0 } }
+	locator = { name = "L01" position = { 0 3 20 } }
+	
+	scale = 1.4
+}
+
+entity = {
+	name = "OAK_data_entity"
+	pdxmesh = "OAK_mesh"
+	
+	default_state = "idle"
+	state = { name = "idle" state_time = 5
+		start_event = { node = "EDDY01" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY02" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY03" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY04" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY05" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY06" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+	}
+	state = { name = "moving" state_time = 5
+		start_event = { node = "EDDY01" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY02" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY03" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY04" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY05" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY06" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+	}
+	state = { name = "death" state_time = 5 looping = no }
+	locator = { name = "large_gun_01" position = { -10 0 0 } }
+	locator = { name = "large_gun_02" position = { 10 0 0 } }
+	locator = { name = "root" position = { 0 0 0 } }
+	locator = { name = "xl_gun_01" position = { 0 10 0 } }
+	locator = { name = "xl_gun_02" position = { 5 10 0 } }
+	locator = { name = "xl_gun_03" position = { -5 10 0 } }
+	locator = { name = "L01" position = { 0 3 20 } }
+	
+	scale = 1.4
+}
+
+entity = {
+	name = "OAK_bow_entity"
+	pdxmesh = "OAK_mesh"
+	
+	default_state = "idle"
+	state = { name = "idle" state_time = 5
+		start_event = { node = "EDDY01" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY02" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY03" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY04" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY05" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY06" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+	}
+	state = { name = "moving" state_time = 5
+		start_event = { node = "EDDY01" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY02" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY03" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY04" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY05" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+		start_event = { node = "EDDY06" particle = "SG_01_8_1_ship_exhaust_moving_particle" keep_particle = yes trigger_once = yes }
+	}
+	state = { name = "death" state_time = 5 looping = no }
+	locator = { name = "large_gun_01" position = { -10 0 0 } }
+	locator = { name = "large_gun_02" position = { 10 0 0 } }
+	locator = { name = "root" position = { 0 0 0 } }
+	locator = { name = "xl_gun_01" position = { 0 10 0 } }
+	locator = { name = "xl_gun_02" position = { 5 10 0 } }
+	locator = { name = "xl_gun_03" position = { -5 10 0 } }
+	locator = { name = "L01" position = { 0 3 20 } }
+	
+	scale = 1.4
+}
+
+
+entity = {
+	name = "OAK_planet_entity"
+	pdxmesh = "OAK_planet_mesh"
+
+	
+	scale = 1.4
+}

@@ -1,0 +1,15 @@
+version="1.0"
+tags={
+	"Balance"
+	"Species"
+	"Technologies"
+	"Translation"
+	"Utilities"
+	"Galaxy Generation"
+	"Events"
+	"Overhaul"
+	"Leaders"
+	"Economy"
+}
+name="Honkai Star Rail Test Version"
+supported_version="3.8.*"
