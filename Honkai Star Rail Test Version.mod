@@ -12,5 +12,5 @@ tags={
 	"Economy"
 }
 name="Honkai Star Rail Test Version"
-supported_version="3.8.4"
+supported_version="3.8.*"
 path="mod/Honkai Star Rail Test Version"
