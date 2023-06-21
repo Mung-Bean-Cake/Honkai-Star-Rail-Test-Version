@@ -1,0 +1,281 @@
+###################################
+#城市区划
+###################################
+
+district_honkai_city = {
+	base_buildtime = 480
+	is_capped_by_modifier = no
+	exempt_from_ai_planet_specialization = yes
+
+	show_on_uncolonized = {
+		uses_district_Set = habitat_honkai
+	}
+
+	potential = {
+		uses_district_Set = habitat_honkai
+	}
+
+	resources = {
+		category = planet_districts_cities
+		cost = {
+			minerals = 600
+		}
+		upkeep = {
+			energy = 2
+		}
+	}
+
+	planet_modifier = {
+		planet_housing_add = 8
+		planet_max_buildings_add = 1
+		job_clerk_add = 2
+	}
+
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = {
+				has_valid_civic = civic_agrarian_idyll
+			}
+		}
+		modifier = {
+			planet_housing_add = -1
+		}
+	}
+
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = { has_active_tradition = tr_prosperity_public_works }
+		}
+		modifier = {
+			planet_housing_add = 1
+		}
+	}
+
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = {
+				has_technology = tech_housing_1
+			}
+		}
+		modifier = {
+			planet_housing_add = 1
+		}
+	}
+
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = {
+				has_technology = tech_housing_2
+				NOT = { has_valid_civic = civic_agrarian_idyll }
+			}
+		}
+		modifier = {
+			planet_housing_add = 1
+		}
+	}
+
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = { has_active_tradition = tr_mercantile_trickle_up_economics }
+		}
+		modifier = {
+			job_clerk_add = 1
+		}
+	}
+
+	triggered_desc = {
+		text = xianzhou_clerk_text
+	}
+}
+
+###################################
+#工业区划
+###################################
+
+district_honkai_industrial = {
+	base_buildtime = 480
+	is_capped_by_modifier = no
+
+	show_on_uncolonized = {
+		uses_district_set = habitat_honkai
+	}
+
+	potential = {
+		exists = owner
+		uses_district_set = habitat_honkai
+	}
+
+	resources = {
+		category = planet_districts_industrial
+		cost = {
+			minerals = 600
+		}
+		upkeep = {
+			energy = 2
+		}
+	}
+
+	planet_modifier = {
+		planet_housing_add = 4
+		job_foundry_add = 2
+		job_artisan_add = 2
+	}
+
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = { is_crafter_empire = yes }
+		}
+		modifier = {
+			planet_max_buildings_add = 0.34
+		}
+	}
+
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = { is_crafter_empire = yes }
+		}
+		modifier = {
+			job_artisan_add = -2
+			job_artificer_add = 2
+		}
+	}
+
+	
+	triggered_desc = {
+		text = xianzhou_artisan_text
+	}
+}
+
+###################################
+#采矿区划
+###################################
+
+district_honkai_mining = {
+	expansion_planner = yes
+
+	base_buildtime = 240
+	is_capped_by_modifier = no
+
+	potential = { uses_district_set = habitat_honkai }
+
+	show_on_uncolonized = {
+		uses_district_set = habitat_honkai
+	}
+
+	resources = {
+		category = planet_districts_mining
+		cost = {
+			minerals = 480
+		}
+		upkeep = {
+			energy = 1
+		}
+	}
+
+	planet_modifier = {
+		planet_housing_add = 3
+		job_miner_add = 3
+	}
+
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = {
+				has_valid_civic = civic_agrarian_idyll
+			}
+		}
+		modifier = {
+			planet_housing_add = 1
+		}
+	}
+
+	triggered_desc = { text = job_xianzhou_miner_desc }
+}
+
+###################################
+#发电区划
+###################################
+district_honkai_generator = {
+	expansion_planner = yes
+
+	base_buildtime = 240
+	is_capped_by_modifier = no
+
+	show_on_uncolonized = {
+		uses_district_set = habitat_honkai
+	}
+
+	potential = {
+		uses_district_set = habitat_honkai
+	}
+
+	resources = {
+		category = planet_districts_generator
+		cost = {
+			minerals = 480
+		}
+		upkeep = {
+			energy = 1
+		}
+	}
+
+	planet_modifier = {
+		planet_housing_add = 3
+		job_technician_add = 3
+	}
+
+	triggered_desc = { text = job_xianzhou_famer_desc }
+}
+
+###################################
+#农业区划
+###################################
+district_honkai_farming = {
+	expansion_planner = yes
+
+	base_buildtime = 240
+	is_capped_by_modifier = no
+
+	potential = { uses_district_set = habitat_honkai }
+
+	show_on_uncolonized = {
+		uses_district_set = habitat_honkai
+	}
+
+	resources = {
+		category = planet_districts_farming
+		cost = {
+			minerals = 480
+		}
+		upkeep = {
+			energy = 1
+		}
+	}
+
+	planet_modifier = {
+		planet_housing_add = 3
+		job_farmer_add = 3
+	}
+
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = {
+				has_technology = tech_housing_agrarian_idyll
+				has_valid_civic = civic_agrarian_idyll
+			}
+		}
+		modifier = {
+			planet_housing_add = 1
+		}
+	}
+
+	triggered_desc = { text = job_xianzhou_famer_desc }
+}

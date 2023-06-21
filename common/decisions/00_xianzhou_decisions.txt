@@ -1,0 +1,94 @@
+decision_xianzhou_project = {
+	owned_planets_only = yes
+	icon = decision_arcology_project
+
+	enactment_time = 3600
+	resources = {
+		category = decisions
+		cost = {
+			influence = 200
+			minerals = 20000
+			alloys = 5000
+		}
+	}
+
+	potential = {
+		NOR = {
+			is_planet_class = pc_ringworld
+		}
+		OR = {
+			is_planet_class = pc_habitat
+			is_planet_class = pc_habitat_honkai
+		}
+		is_artificial = yes
+		exists = owner
+		owner = { has_ascension_perk = ap_xianzhou_world }
+	}
+
+	allow = {
+		if = {
+			limit = { owner = { is_ai = no } }
+			custom_tooltip = {
+				fail_text = decision_arcology_project_requirements
+				free_district_slots < 1
+				num_districts = { type = district_farming value < 1 }
+				num_districts = { type = district_mining value < 1 }
+				num_districts = { type = district_generator value < 1 }
+				num_districts = { type = district_farming_uncapped value < 1 }
+				num_districts = { type = district_mining_uncapped value < 1 }
+				num_districts = { type = district_generator_uncapped value < 1 }
+			}
+			
+		}
+		num_uncleared_blockers < 1
+	}
+
+	effect = {
+		# Make city-planet
+		custom_tooltip = decision_arcology_project_effects
+		hidden_effect = {
+			clear_deposits = yes
+			set_industrial_focus_flags = yes
+			change_pc = pc_xianzhou_world
+			relic_world_conversion_effect = {
+				DISTRICT = district_xz_city
+				VARIABLE = num_housing_districts
+			}
+			relic_world_conversion_effect = {
+				DISTRICT = district_xz_industrial
+				VARIABLE = num_industrial_districts
+			}
+			set_ecu_industrial_districts_effect = yes
+			set_planet_entity = {
+				entity = "ringworld_habitable_entity"
+				graphical_culture = owner
+			}
+
+			planet_event = { id = xianzhou.200 }
+		}
+	}
+
+	if = {
+		limit = {
+			OR = {
+				is_active_resolution = "resolution_ecology_environmental_control_board"
+				is_active_resolution = "resolution_ecology_paradise_initiative"
+			}
+		}
+		owner = {
+			set_timed_country_flag = { flag = resolution_breached_terraformed days = 3600 }
+		}
+	}
+
+	ai_weight = {
+		weight = 1
+		modifier = {
+			factor = 100
+			exists = owner
+			OR = {
+				num_pops >= 70
+				is_capital = yes
+			}
+		}
+	}
+}

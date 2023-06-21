@@ -1,0 +1,219 @@
+###################################
+#城市区段
+###################################
+
+district_xz_city = {
+	base_buildtime = 480
+	is_capped_by_modifier = no
+	exempt_from_ai_planet_specialization = yes
+
+	show_on_uncolonized = {
+		exists = from
+		from = { is_regular_empire = yes }
+		uses_district_set = xianzhou_world
+	}
+
+	potential = {
+		exists = owner
+		owner = { is_regular_empire = yes }
+		uses_district_set = xianzhou_world
+	}
+
+	resources = {
+		category = planet_districts
+		cost = {
+			minerals = 1200
+		}
+		upkeep = {
+			energy = 5
+		}
+	}
+
+	planet_modifier = {
+		planet_housing_add = 25
+		job_enforcer_add = 4
+		job_healthcare_add = 2
+	}
+
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = { has_active_tradition = tr_prosperity_public_works }
+		}
+		modifier = {
+			planet_housing_add = 5
+		}
+	}
+
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = {
+				has_technology = tech_housing_1
+			}
+		}
+		modifier = {
+			planet_housing_add = 5
+		}
+	}
+
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = {
+				has_technology = tech_housing_2
+				NOT = { has_valid_civic = civic_agrarian_idyll }
+			}
+		}
+		modifier = {
+			planet_housing_add = 5
+		}
+	}
+
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = { has_active_tradition = tr_mercantile_trickle_up_economics }
+		}
+		modifier = {
+			job_clerk_add = 3
+		}
+	}
+
+	triggered_desc = {
+		trigger = {
+			exists = owner
+			owner = { is_regular_empire = yes }
+		}
+		text = job_clerk_effect_desc
+	}
+}
+
+###################################
+#工业区段
+###################################
+district_xz_industrial = {
+	base_buildtime = 480
+	is_capped_by_modifier = no
+
+	show_on_uncolonized = { uses_district_set = xianzhou_world }
+
+	potential = {
+		uses_district_set = xianzhou_world
+	}
+
+	resources = {
+		category = planet_districts
+		cost = {
+			minerals = 1200
+			volatile_motes = 50
+		}
+		upkeep = {
+			energy = 10
+			volatile_motes = 5
+		}
+		upkeep = {
+			trigger = {
+				exists = owner
+				owner = {
+					has_edict = industrial_maintenance
+				}
+			}
+			energy = 4
+		}
+	}
+
+	triggered_planet_modifier = {
+		planet_housing_add = 20
+		job_alloy_drone_add = 15
+		job_artisan_add = 5
+	}
+}
+###################################
+#科研区段
+###################################
+district_xz_science = {
+	base_buildtime = 480
+	is_capped_by_modifier = no
+
+	show_on_uncolonized = { uses_district_set = xianzhou_world }
+
+	potential = { uses_district_set = xianzhou_world }
+
+	resources = {
+		category = planet_districts
+		cost = {
+			minerals = 1200
+			exotic_gases = 50
+		}
+		upkeep = {
+			energy = 10
+			exotic_gases = 5
+		}
+	}
+
+	triggered_planet_modifier = {
+		planet_housing_add = 10
+		job_researcher_add = 15
+		job_head_researcher_add = 2
+	}
+
+	triggered_desc = {
+		trigger = {
+			exists = owner
+			owner = { is_regular_empire = yes }
+		}
+		text = job_researcher_effect_desc
+	}
+}
+
+###################################
+#商业
+###################################
+
+district_xz_trade = {
+	base_buildtime = 480
+	is_capped_by_modifier = no
+
+	show_on_uncolonized = { uses_district_set = xianzhou_world }
+
+	potential = { uses_district_set = xianzhou_world }
+
+	resources = {
+		category = planet_districts
+		cost = {
+			minerals = 1200
+			rare_crystals = 50
+		}
+		upkeep = {
+			energy = 10
+			rare_crystals = 5
+		}
+	}
+
+	triggered_planet_modifier = {
+		planet_housing_add = 10
+		job_merchant_add = 4
+		job_clerk_add = 6
+	}
+
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = {
+				has_active_tradition = tr_mercantile_commercial_enterprise
+			}
+		}
+		modifier = {
+			job_merchant_add = 2
+		}
+	}
+
+	triggered_desc = {
+		text = job_merchant_effect_desc
+	}
+
+	triggered_desc = {
+		text = job_clerk_effect_desc
+	}
+}
