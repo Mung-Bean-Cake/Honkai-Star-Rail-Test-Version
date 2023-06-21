@@ -1,15 +1,7 @@
-version="1.0"
+version="3.8.4"
 tags={
-	"Balance"
-	"Diplomacy"
-	"Economy"
 	"Events"
-	"Spaceships"
 	"Species"
-	"Technologies"
-	"Galaxy Generation"
-	"Gameplay"
-	"Translation"
 }
-name="Honkai: Star Rail | Test Version"
-supported_version="3.8.*"
+name="崩坏星穹铁道"
+supported_version="3.8.4"
