@@ -3,5 +3,5 @@ tags={
 	"Events"
 	"Species"
 }
-name="崩坏星穹铁道"
-supported_version="3.8.4"
+name="Honkai: StarRail | Test Version"
+supported_version="3.8.*"
