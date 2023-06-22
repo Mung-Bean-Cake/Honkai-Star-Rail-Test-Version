@@ -24,10 +24,19 @@ country_event = {
 	}
 	option = {
 		name = DOT_SR.001.a
-		give_technology = { tech = tech_jump_drive_1  message = no }
-		give_technology = { tech = tech_hyper_drive_1  message = no }
-		give_technology = { tech = tech_hyper_drive_2  message = no }
-		give_technology = { tech = tech_hyper_drive_3  message = no }
+		give_technology = { tech = tech_hyper_drive_2 = yes }
+		add_tech_progress = {
+			tech = tech_lgate_activation
+			progress = 0.1
+		}
+		add_tech_progress = {
+			tech = tech_jump_drive_1
+			progress = 0.1
+		}
+		add_tech_progress = {
+			tech = tech_wormhole_stabilization
+			progress = 0.2
+		}
 		country_event = { id = DOT_SR.002 days = 30 }
 	}
 	}
@@ -134,4 +143,47 @@ country_event = {
  		name = DOT_SR.001.a
 		custom_tooltip = "ap_voidborn_habitat_effect"
 	}
-	}
+}
+
+country_event = {
+    id = DOT_SR.00200
+    hide_window = yes
+    is_triggered_only = yes
+
+    trigger = {
+            has_origin = origin_Xianzhou
+    }
+
+    immediate = {
+        capital_scope = {
+            while = {
+                count = 3
+                remove_district = district_city
+            }
+            while = {
+                count = 2
+                remove_district = district_industrial
+                remove_district = district_generator
+                remove_district = district_mining
+                remove_district = district_farming
+            }
+            while = {
+                count = 28
+                create_pop = {
+                    species = Root
+                    effect = {
+                        set_pop_flag = xianzhou_capital
+                    }
+                }
+            }
+            every_owned_pop = {
+                limit = {
+                    NOT = { 
+                        has_pop_flag = xianzhou_capital
+                    }
+                }
+                kill_pop = yes
+            }
+        }
+    }
+}
