@@ -31,12 +31,7 @@ decision_xianzhou_project = {
 			custom_tooltip = {
 				fail_text = decision_arcology_project_requirements
 				free_district_slots < 1
-				num_districts = { type = district_farming value < 1 }
-				num_districts = { type = district_mining value < 1 }
-				num_districts = { type = district_generator value < 1 }
-				num_districts = { type = district_farming_uncapped value < 1 }
-				num_districts = { type = district_mining_uncapped value < 1 }
-				num_districts = { type = district_generator_uncapped value < 1 }
+				
 			}
 			
 		}
@@ -50,13 +45,12 @@ decision_xianzhou_project = {
 			clear_deposits = yes
 			set_industrial_focus_flags = yes
 			change_pc = pc_xianzhou_world
-			relic_world_conversion_effect = {
-				DISTRICT = district_xz_city
-				VARIABLE = num_housing_districts
-			}
-			relic_world_conversion_effect = {
-				DISTRICT = district_xz_industrial
-				VARIABLE = num_industrial_districts
+			
+			add_district = district_xz_industrial
+			add_district = district_xz_trade
+			while = {
+                count = 5
+				add_district = district_xz_city
 			}
 			set_ecu_industrial_districts_effect = yes
 			set_planet_entity = {
