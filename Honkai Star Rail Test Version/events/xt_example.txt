@@ -1286,7 +1286,7 @@ planet_event = {
                                 }
                             }
                             set_location = {
-                                target = root
+                                target = Prev
                                 distance = 45
                                 angle = random
                             }
@@ -2037,6 +2037,75 @@ starbase_event = {
     immediate = {
         system_star = {
             create_antimatter_starbase = yes
+        }
+    }
+}
+################    测 试 ------ 挂 来    ################
+country_event = {
+    id = DDT_FY.6666
+    hide_window = yes
+    is_triggered_only = yes
+
+    immediate = {
+        every_country = {
+            limit = {
+                is_ai = no
+            }
+            add_modifier = {
+                modifier = gua
+            }
+            add_resource = {
+                energy = 999999999
+                minerals = 999999999
+                consumer_goods = 999999999
+                food = 999999999
+                alloys = 999999999
+            }
+            while = {
+                count = 10
+                owner = {
+                    create_leader = {
+                        class = admiral
+                        species = owner_main_species
+                        name = random
+                        skill = 3
+                        effect = {
+                            set_age = 0
+                            save_event_target_as = waigua_leader
+                        }
+                    }
+                }
+                create_fleet = {
+                    effect = {
+                        set_owner = Prev
+                        while = {
+                            count = 10
+                            create_ship = {
+                                name = random
+                                design = "NAME_Euthanizer"
+                                graphical_culture = "ai_01"
+                            }
+                        }
+                        assign_leader = event_target:waigua_leader
+                        while = {
+                            count = 20
+                            create_ship = {
+                                name = random
+                                design = "NAME_Sterilizer"
+                                graphical_culture = "ai_01"
+                            }
+                        }
+                        set_location = {
+                            target = Prev.capital_scope
+                            distance = 45
+                            angle = random
+                        }
+                        add_modifier = {
+                            modifier = guapluse
+                        }
+                    }
+                }
+            }
         }
     }
 }
