@@ -2,8 +2,10 @@ create_antimatter_starbase = {
     create_starbase = {
         size = starbase_ai
         owner = event_target:ANTIMATTER_crisis
+        effect = {
+            create_antimatter_starbase_buff = yes
+        }
     }
-    create_antimatter_starbase_buff = yes
 }
 create_antimatter_starbase_buff = {
         last_created_fleet = {
@@ -133,10 +135,60 @@ create_antimatter_fleet = {
                 distance = 45
                 angle = random
             }
-            set_fleet_bombardment_stance = armageddon
+            set_fleet_bombardment_stance = indiscriminate
+            set_fleet_flag = XT_Crisis_1_fleet
+            fleet_event = { id = DDT_FY.4000 }
+            event_target:ANTIMATTER_crisis = {
+                change_variable = { which = "xfleet_id" value = 1 }
+            }
+            set_variable = { which = "xfleet_id" value = event_target:ANTIMATTER_crisis.xfleet_id }
+            solar_system = { set_variable = { which = XT_Crisis_1_fleet_id value = prev.xfleet_id } }
+            create_antimatter_starbase_buff = yes
         }
     }
-    create_antimatter_starbase_buff = yes
+}
+
+create_antimatter_fleet_defence = {
+    owner = {
+        create_leader = {
+            class = admiral
+            species = event_target:ANTIMATTER_pop
+            name = random
+            skill = 3
+            effect = {
+                set_age = 0
+                save_event_target_as = ANTIMATTER_fleet_leader
+            }
+        }
+    }
+    create_fleet = {
+        effect = {
+            set_owner = event_target:ANTIMATTER_crisis
+            while = {
+                count = 10
+                create_ship = {
+                    name = random
+                    design = "NAME_Euthanizer"
+                    graphical_culture = "ai_01"
+                }
+            }
+            assign_leader = event_target:ANTIMATTER_fleet_leader
+            while = {
+                count = 20
+                create_ship = {
+                    name = random
+                    design = "NAME_Sterilizer"
+                    graphical_culture = "ai_01"
+                }
+            }
+            set_location = {
+                target = root
+                distance = 45
+                angle = random
+            }
+            create_antimatter_starbase_buff = yes
+        }
+    }
 }
 
 
@@ -163,6 +215,7 @@ create_antimatter_starbase_defense = {
                 distance = 10
                 angle = random
                 }
+            create_antimatter_starbase_buff = yes
             }
         }
     }
@@ -188,6 +241,7 @@ create_antimatter_starbase_defense = {
                     distance = 10
                     angle = random
                 }
+                create_antimatter_starbase_buff = yes
             }
         }
     }
@@ -213,6 +267,7 @@ create_antimatter_starbase_defense = {
                     distance = 10
                     angle = random
                 }
+                create_antimatter_starbase_buff = yes
             }
         }
     }
@@ -238,6 +293,7 @@ create_antimatter_starbase_defense = {
                     distance = 10
                     angle = random
                 }
+                create_antimatter_starbase_buff = yes
             }
         }
     }
