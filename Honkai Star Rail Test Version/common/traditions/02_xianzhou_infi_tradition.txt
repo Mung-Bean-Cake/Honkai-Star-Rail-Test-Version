@@ -1,0 +1,72 @@
+tr_xianzhou_infi_adopt = { #起始修正
+	possible = {
+		if = {
+			limit = { is_hive_empire = no }
+			has_ascension_perk = ap_the_flesh_is_weak
+		}
+		else = {
+			has_ascension_perk = ap_organo_machine_interfacing
+		}
+	}
+	unlocks_agenda = agenda_cybernetic_advantage
+	custom_tooltip = tr_xianzhou_infi_adopt_desc
+
+	on_enabled = {
+		hidden_effect = {
+			country_event = { id = utopia.2500 }
+		}
+		
+	}
+
+	tradition_swap = {
+		name = tr_cybernetics_adopt_hive
+		inherit_name = yes
+		inherit_icon = yes
+		trigger = {
+			is_hive_empire = yes
+		}
+		custom_tooltip = tr_cybernetics_adopt_hive_desc
+		on_enabled = {
+			hidden_effect = {
+				country_event = { id = utopia.2500 }
+			}
+		}
+		weight = {
+			factor = 1
+		}
+	}
+}
+
+tr_cybernetics_infi_finish = { #结束修正
+	modifier = {
+		planet_cyborg_jobs_produces_mult = 0.10
+		BIOLOGICAL_species_trait_picks_add = 1
+		ascension_perks_add = 1
+	}
+}
+
+tr_cybernetics_transubstantiation_synthesis = {
+	possible = {
+		if = {
+			limit = { has_country_flag = cyborg_empire }
+			has_tradition = tr_cybernetics_adopt
+		}
+		else = {
+			custom_tooltip = {
+				fail_text = REQUIRES_CYBORG_EMPIRE
+				has_country_flag = cyborg_empire
+			}
+		}
+	}
+	custom_tooltip = tr_cybernetics_transubstantiation_synthesis_desc
+
+	tradition_swap = {
+		name = tr_cybernetics_organ_harvesting
+		inherit_name = no
+		inherit_icon = no
+		trigger = {
+			is_homicidal = yes
+		}
+		custom_tooltip = tr_cybernetics_organ_harvesting_desc
+	}
+}
