@@ -15,12 +15,12 @@ decision_xianzhou_project = {
 	potential = {
 		NOR = {
 			is_planet_class = pc_ringworld
+			is_planet_class = pc_xianzhou_world
 		}
 		OR = {
 			is_planet_class = pc_habitat
 			is_planet_class = pc_habitat_honkai
 		}
-		is_artificial = yes
 		exists = owner
 		owner = { has_ascension_perk = ap_xianzhou_world }
 	}
@@ -84,5 +84,46 @@ decision_xianzhou_project = {
 				is_capital = yes
 			}
 		}
+	}
+}
+
+#仙舟扩张区划
+decision_xianzhou_expansion = {
+	owned_planets_only = yes
+	icon = d_central_spire #需要图标！
+
+	enactment_time = 30
+	resources = {
+		category = decisions
+		cost = {
+			minerals = 4000
+			alloys = 4000
+		}
+	}
+
+	potential = {
+		OR = {
+			is_planet_class = pc_xianzhou_world
+		}
+		exists = owner
+	}
+
+	allow = {
+		custom_tooltip = {
+			free_district_slots < 1
+		}
+		
+		custom_tooltip = {
+			fail_text = 需要完成飞升和传统
+			owner = { 
+				has_ascension_perk = ap_xianzhou_world
+				has_tradition = tr_xianzhou_finish
+			}
+		}
+	}
+
+	effect = {
+		custom_tooltip = decision_xianzhou_project_expansion
+		add_deposit = d_prosperous_city
 	}
 }
