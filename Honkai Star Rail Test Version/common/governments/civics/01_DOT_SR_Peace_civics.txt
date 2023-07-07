@@ -1,0 +1,252 @@
+
+#星际和平公司 - 主题理念
+civic_Interastral_Peace_Corporation = {
+	description = "Civic_Interastral_Peace_Corporation_desc"
+	potential = { 
+		always = no
+		OR = {
+			authority = { value = auth_corporate }
+			civics = { value = civic_galactic_sovereign_megacorp }
+		}
+		is_criminal_syndicate = no 
+		NOT = { civics = { value = civic_criminal_heritage } }
+	}
+	possible = {
+		NOT = { civics = { value = civic_criminal_heritage } }
+	}
+	modifier = {
+		custom_tooltip = IPC_Main_Theme
+		planet_branch_offices_influence_cost_mult = -10
+		empire_size_branch_office_mult = -1
+		trade_value_mult = 0.25
+		branch_office_value_mult = 0.25
+		empire_size_systems_mult = 1
+	}
+	random_weight = { base = 0 }
+}
+#通用， 教育普及机构 civic_Education_Corp
+#通用： 星际传媒公司 civic_Galactic_Media
+#通用： 垄断银河市场 civic_Market_Control
+#通用： 银河就业组织 civic_Employment_Org
+civic_Employment_Org = {
+	description = "civic_Employment_Org_desc"
+	potential = { 
+		civics = { value = civic_Interastral_Peace_Corporation }
+		OR = {
+			authority = { value = auth_corporate }
+			civics = { value = civic_galactic_sovereign_megacorp }
+		}
+		is_criminal_syndicate = no 
+		NOT = { civics = { value = civic_criminal_heritage } }
+	}
+	possible = {
+		NOT = { civics = { value = civic_criminal_heritage } }
+	}
+	modifier = {
+		custom_tooltip = IPC_tt_Employment_Org
+		job_clerk_per_pop = 0.2
+		job_enforcer_per_pop = 0.1
+		job_merchant_per_pop = 0.05
+	}
+	random_weight = { base = 0 }
+}
+#通用：星际地产公司 civic_Housing_Corp
+civic_Housing_Corp = {
+	description = "civic_Housing_Corp_desc"
+	potential = { 
+		civics = { value = civic_Interastral_Peace_Corporation }
+		OR = {
+			authority = { value = auth_corporate }
+			civics = { value = civic_galactic_sovereign_megacorp }
+		}
+		is_criminal_syndicate = no 
+		NOT = { civics = { value = civic_criminal_heritage } }
+	}
+	possible = {
+		NOT = { civics = { value = civic_criminal_heritage } }
+	}
+	modifier = {
+		custom_tooltip = IPC_tt_Housing_Corp
+		planet_housing_add = 5
+		planet_housing_mult = 0.25
+	}
+	random_weight = { base = 0 }
+}
+#通用：星河欢乐组织 civic_Happy_Org
+civic_Happy_Org = {
+	description = "civic_Happy_Org_desc"
+	potential = { 
+		civics = { value = civic_Interastral_Peace_Corporation }
+		OR = {
+			authority = { value = auth_corporate }
+			civics = { value = civic_galactic_sovereign_megacorp }
+		}
+		is_criminal_syndicate = no 
+		NOT = { civics = { value = civic_criminal_heritage } }
+	}
+	possible = {
+		NOT = { civics = { value = civic_criminal_heritage } }
+	}
+	modifier = {
+		custom_tooltip = IPC_tt_Happy_Org
+		planet_amenities_add = 10
+		planet_amenities_mult = 0.25
+	}
+	random_weight = { base = 0 }
+}
+#非和平可带， 商业维稳协议 civic_Stability_Keeper
+civic_Stability_Keeper = {
+	description = "civic_Stability_Keeper_desc"
+	potential = { 
+		civics = { value = civic_Interastral_Peace_Corporation }
+		OR = {
+			authority = { value = auth_corporate }
+			civics = { value = civic_galactic_sovereign_megacorp }
+		}
+		is_criminal_syndicate = no 
+		NOT = { civics = { value = civic_criminal_heritage } }
+		ethics = {
+			NOR = {
+				value = ethic_pacifist
+				value = ethic_fanatic_pacifist
+			}
+		}
+	}
+	possible = {
+		NOT = { civics = { value = civic_criminal_heritage } }
+		ethics = {
+			NOR = {
+				value = ethic_pacifist
+				value = ethic_fanatic_pacifist
+			}
+		}
+	}
+	modifier = {
+		custom_tooltip = IPC_tt_Stability_Keeper
+		planet_stability_add = 10
+		pop_happiness = -0.05
+	}
+	random_weight = { base = 0 }
+}
+#军国可带， 开门自由贸易 civic_Military_Corp
+civic_Military_Corp = {
+	description = "civic_Military_Corp_desc"
+	potential = { 
+		civics = { value = civic_Interastral_Peace_Corporation }
+		OR = {
+			authority = { value = auth_corporate }
+			civics = { value = civic_galactic_sovereign_megacorp }
+		}
+		is_criminal_syndicate = no 
+		NOT = { civics = { value = civic_criminal_heritage } }
+		ethics = {
+			OR = {
+				text = civic_tooltip_militarist
+				value = ethic_militarist
+				value = ethic_fanatic_militarist
+			}
+		}
+	}
+	possible = {
+		NOT = { civics = { value = civic_criminal_heritage } }
+		ethics = {
+			OR = {
+				text = civic_tooltip_militarist
+				value = ethic_militarist
+				value = ethic_fanatic_militarist
+			}
+		}
+	}
+	modifier = {
+		custom_tooltip = IPC_tt_Military_Corp
+		ship_fire_rate_mult = 0.1
+		ship_starting_experience_add = 100
+		country_naval_cap_mult = 0.25
+	}
+	random_weight = { base = 0 }
+}
+#和平可带， 生育促进组织 civic_Birth_Org
+civic_Birth_Org = {
+	description = "civic_Birth_Org_desc"
+	potential = { 
+		civics = { value = civic_Interastral_Peace_Corporation }
+		OR = {
+			authority = { value = auth_corporate }
+			civics = { value = civic_galactic_sovereign_megacorp }
+		}
+		is_criminal_syndicate = no 
+		NOT = { civics = { value = civic_criminal_heritage } }
+		ethics = {
+			OR = {
+				text = civic_tooltip_pacifist
+				value = ethic_pacifist
+				value = ethic_fanatic_pacifist
+			}
+		}
+	}
+	possible = {
+		NOT = { civics = { value = civic_criminal_heritage } }
+		ethics = {
+			OR = {
+				text = civic_tooltip_pacifist
+				value = ethic_pacifist
+				value = ethic_fanatic_pacifist
+			}
+		}
+	}
+	modifier = {
+		custom_tooltip = civic_Birth_Org
+		bio_pop_growth_speed = 0.2
+	}
+	random_weight = { base = 0 }
+}
+#和平可带， 环境改善集团 civic_Enviroment_Corp
+civic_Enviroment_Corp = {
+	description = "civic_Enviroment_Corp_desc"
+	potential = { 
+		civics = { value = civic_Interastral_Peace_Corporation }
+		OR = {
+			authority = { value = auth_corporate }
+			civics = { value = civic_galactic_sovereign_megacorp }
+		}
+		is_criminal_syndicate = no 
+		NOT = { civics = { value = civic_criminal_heritage } }
+		ethics = {
+			OR = {
+				text = civic_tooltip_pacifist
+				value = ethic_pacifist
+				value = ethic_fanatic_pacifist
+			}
+		}
+	}
+	possible = {
+		NOT = { civics = { value = civic_criminal_heritage } }
+		ethics = {
+			OR = {
+				text = civic_tooltip_pacifist
+				value = ethic_pacifist
+				value = ethic_fanatic_pacifist
+			}
+		}
+	}
+	modifier = {
+		custom_tooltip = civic_Enviroment_Corp
+		pop_environment_tolerance = 0.15
+
+	}
+	random_weight = { base = 0 }
+}
+#非平等可带， 劳动监督公司 civic_Labour_Corp
+#威权可带， 上流社会沙龙 civic_Upper_Salon
+#威权可带， 特别资产公司 civic_Slave_Corp
+#非威权可带， 基层治理组织 civic_Breu_Corp
+#平等可带， 市场社会主义 civic_Market_Socialism
+#平等可带， 星海解放组织 civic_Liberation_Org
+#非排外可带， 星际移民中介 civic_Migration_Corp
+#亲外可带， 银河慈善机构 civic_Charity_Org
+#非唯心可带，  科学技术集团 civic_Tech_Corp
+#唯物可带，  机器生产集团 civic_Robot_Corp
+#唯物可带，  生物组装集团 civic_Clone_Corp
+#唯物可带，  科学普及组织 civic_Scientific_Corp
+#唯心可带，  星际和平教会 civic_Peace_Church
+
