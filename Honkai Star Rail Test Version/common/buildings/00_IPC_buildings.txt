@@ -54,7 +54,7 @@ building_Agri_Fac = {
 	}
 	planet_modifier = {
 		job_farmer_add = 2
-		job_farmer_per_pop = 0.05
+		job_farmer_per_pop = 0.2
 		job_manager_per_pop = 0.1
 		job_merchant_per_pop = 0.04
 		planet_farmers_food_produces_add = 1.5
@@ -92,7 +92,7 @@ building_Mine_Fac = {
 	}
 	planet_modifier = {
 		job_miner_add = 2
-		job_miner_add_per_pop = 0.05
+		job_miner_add_per_pop = 0.2
 		job_manager_per_pop = 0.1
 		job_merchant_per_pop = 0.04
 		planet_miner_minerals_produces_add = 1.5
@@ -131,7 +131,7 @@ building_Energy_Fac = {
 	}
 	planet_modifier = {
 		job_technician_add = 2
-		job_technician_add_per_pop = 0.05
+		job_technician_add_per_pop = 0.2
 		job_manager_per_pop = 0.1
 		job_merchant_per_pop = 0.04
 		planet_technician_energy_produces_add = 1.5
@@ -156,6 +156,47 @@ building_Energy_Fac = {
 	}
 }
 
+#银河媒体平台
+building_Energy_Fac = {
+	base_buildtime = @b1_time
+	owner_type = corporate
+	category = government
+	potential = {
+		has_branch_office = yes
+		branch_office_owner = {
+			is_criminal_syndicate = no
+			has_civic = civic_Interastral_Peace_Corporation
+		}
+	}
+	planet_modifier = {
+		job_clerk_per_pop = 0.2
+		job_manager_per_pop = 0.1
+		job_merchant_per_pop = 0.04
+		trade_value_add = 20
+	}
+	country_modifier = {
+		planet_clerk_unity_produces_add = 0.1
+		planet_manager_unity_produces_add = 0.25
+	}
+	resources = {
+		category = planet_branch_office_buildings
+		cost = {
+			minerals = 800
+		}
+		produces = {
+			unity = 20
+		}
+		upkeep = {
+			energy = 5
+		}
+	}
+	ai_weight = {
+		factor = 100
+	}
+}
+
+
+
 #劳务派遣机构
 building_Labour_Dispatch = {
 	base_buildtime = @b1_time
@@ -165,21 +206,22 @@ building_Labour_Dispatch = {
 		has_branch_office = yes
 		branch_office_owner = {
 			is_criminal_syndicate = no
-			has_civic = civic_Employment_Org
+			has_civic = civic_Interastral_Peace_Corporation
 		}
 	}
 	allow = {
-		num_pops > 24
+		
 	}
 	planet_modifier = {
 		job_merchant_add = 1
 		job_clerk_add = 5
-		job_clerk_per_pop = 0.25
-		job_manager_per_pop = 0.2
+		job_manager_add = 3
+		job_merchant_add = 1
+		job_clerk_per_pop = 0.5
+		job_manager_per_pop = 0.25
 		job_merchant_per_pop = 0.1
 		branch_office_value_mult = 0.25
 		trade_value_mult = 0.25
-		MOD_PLANET_IMMIGRATION_PUSH_MULT = 0.25
 	}
 	country_modifier = {
 		trade_value_mult = 0.05
@@ -202,7 +244,7 @@ building_Labour_Dispatch = {
 		factor = 100
 	}
 }
-#房产建设公司
+#房产建设计划
 building_Housing_Corp = {
 	base_buildtime = @b1_time
 	owner_type = corporate
@@ -215,7 +257,7 @@ building_Housing_Corp = {
 		}
 	}
 	allow = {
-		num_pops > 24
+		
 	}
 	planet_modifier = {
 		job_clerk_per_pop = 0.2
@@ -228,7 +270,7 @@ building_Housing_Corp = {
 	}
 	country_modifier = {
 		planet_housing_mult = 0.05
-		PLANET_BUILDING_BUILD_SPEED_MULT = 0.05
+		PLANET_BUILDING_BUILD_SPEED_MULT = 0.1
 	}
 	resources = {
 		category = planet_branch_office_buildings
@@ -259,7 +301,7 @@ building_Amenity_Corp = {
 		}
 	}
 	allow = {
-		num_pops > 24
+		
 	}
 	planet_modifier = {
 		job_clerk_per_pop = 0.2
