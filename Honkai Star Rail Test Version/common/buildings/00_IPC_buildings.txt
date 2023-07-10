@@ -6,7 +6,7 @@ building_Defence_Barrier = {
 	base_buildtime = @b1_time
 	owner_type = corporate
 	category = government
-	potentialpotential = {
+	potential = {
 		has_branch_office = yes
 		branch_office_owner = {
 			is_criminal_syndicate = no
@@ -331,6 +331,85 @@ building_Amenity_Corp = {
 		factor = 100
 	}
 }
+#偶像培训机构
+building_Idol_Cultivator = {
+	base_buildtime = @b1_time
+	owner_type = corporate
+	category = amenity
+	potential = {
+		has_branch_office = yes
+		branch_office_owner = {
+			is_criminal_syndicate = no
+			has_civic = civic_Idol_Institution
+		}
+	}
+	allow = {
+		
+	}
+	planet_modifier = {
+		job_IPC_Satelite_Idol_add = 2
+		job_IPC_Satelite_Idol_per_pop = 0.1
+		job_IPC_IPC_Students_add = 2
+		job_IPC_IPC_Students_per_pop = 0.1
+		job_manager_per_pop = 0.05
+		job_merchant_per_pop = 0.05
+		planet_amenities_add = 20
+		planet_amenities_mult = 0.25
+		trade_value_mult = 0.25
+	}
+	country_modifier = {
+		planet_amenities_mult = 0.05
+		planet_unity_produces_mult = 0.03
+		planet_IPC_Idol_produces_mult = 0.1
+		COUNTRY_IMMIGRATION_PULL_MULT = 0.25
+	}
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			branch_office_owner = { has_civic = civic_DarkIdol_Institution }
+		}
+		modifier = {
+			job_IPC_Idol_add = 1
+			job_IPC_Idol_per_pop = 0.05
+			job_IPC_IPC_Students_add = 2
+			job_IPC_IPC_Students_per_pop = 0.1
+			planet_amenities_mult = 0.1
+			trade_value_mult = 0.1
+			planet_pop_assembly_organic_add = 1
+			planet_crime_mult = 1
+		}
+	}
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			branch_office_owner = { has_civic = civic_LightIdol_Institution }
+		}
+		modifier = {
+			job_IPC_Idol_add = 1
+			job_IPC_Idol_per_pop = 0.05
+			job_IPC_Satelite_Idol_add = 2
+			job_IPC_Satelite_Idol_per_pop = 0.1
+			planet_amenities_mult = 0.1
+			trade_value_mult = 0.1
+			pop_happiness_add = 0.1
+		}
+	}
+	resources = {
+		category = planet_branch_office_buildings
+		cost = {
+			minerals = 800
+		}
+		produces = {
+			energy = 20
+		}
+		upkeep = {
+			food = 5
+		}
+	}
+	ai_weight = {
+		factor = 100
+	}
+}
 #商业维稳集团
 building_Stability_Corp = {
 	base_buildtime = @b1_time
@@ -420,6 +499,8 @@ building_BirthGiving_Corp = {
 	base_buildtime = @b1_time
 	owner_type = corporate
 	category = pop_assembly
+	base_cap_amount  = 1
+	is_capped_by_modifier = yes
 	potential = {
 		has_branch_office = yes
 		branch_office_owner = {
@@ -434,6 +515,22 @@ building_BirthGiving_Corp = {
 		job_enforcer_per_pop = 0.1
 		job_merchant_per_pop = 0.05
 		branch_office_value_mult = 0.25
+	}
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			branch_office_owner = { has_civic = civic_BiggerBirthGiving_Corp }
+		}
+		POP_GROWTH_SPEED = 0.15
+		branch_office_value_mult = 0.1
+	}
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			branch_office_owner = { has_civic = civic_FasterBirthGiving_Corp }
+		}
+		planet_pop_assembly_organic_add = 2
+		branch_office_value_mult = 0.1
 	}
 	country_modifier = {
 		POP_GROWTH_SPEED = 0.05
