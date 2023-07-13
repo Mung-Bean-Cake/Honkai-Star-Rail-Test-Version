@@ -22,7 +22,7 @@ IPC_Idol = {
 
 	resources = {
 		category = planet_entertainers
-		category = planet_Idols
+		
 		produces = {
 			unity = 2
 			energy = 4
@@ -30,13 +30,17 @@ IPC_Idol = {
 		}
 		produces = {
 			trigger = {
-				has_civic = civic_LightIdol_Institution
+				owner = {
+					has_civic = civic_LightIdol_Institution
+				}
 			}
 			unity = 3
 		}
 		produces = {
 			trigger = {
-				has_civic = civic_DarkIdol_Institution
+				owner = {
+					has_civic = civic_DarkIdol_Institution
+				}
 			}
 			energy = 4
 			society_research = 3
@@ -47,8 +51,12 @@ IPC_Idol = {
 		upkeep = {
 			trigger = {
 				OR = {
-					has_civic = civic_LightIdol_Institution
-					has_civic = civic_DarkIdol_Institution
+					owner = {
+						has_civic = civic_LightIdol_Institution
+					}
+					owner = {
+						has_civic = civic_DarkIdol_Institution
+					}
 				}
 			}
 			consumer_goods = 1
@@ -85,8 +93,12 @@ IPC_Idol = {
 	triggered_planet_modifier = {
 		potential = {
 			exists = owner
-			has_civic = civic_LightIdol_Institution
-			has_civic = civic_DarkIdol_Institution
+			owner = {
+				has_civic = civic_LightIdol_Institution
+			}
+			owner = {
+				has_civic = civic_DarkIdol_Institution
+			}
 		}
 		trade_value_add = 2
 		trade_value_mult = 0.05
@@ -105,7 +117,9 @@ IPC_Idol = {
 	triggered_planet_modifier = {
 		potential = {
 			exists = owner
-			owner = { has_civic = civic_DarkIdol_Institution }
+			owner = {
+				has_civic = civic_DarkIdol_Institution
+			}
 		}
 		modifier = {
 			pop_growth_speed = 0.02
@@ -115,7 +129,9 @@ IPC_Idol = {
 	triggered_planet_modifier = {
 		potential = {
 			exists = owner
-			owner = { has_civic = civic_LightIdol_Institution }
+			owner = { owner = {
+					has_civic = civic_LightIdol_Institution
+				} }
 		}
 		modifier = {
 			planet_jobs_worker_produces_mult = 0.02
@@ -142,7 +158,7 @@ IPC_Idol = {
 		}
 		modifier = {
 			factor = 1.5
-			has_job = Idol
+			has_job = IPC_Idol
 		}
 		modifier = {
 			factor = 0.1
@@ -150,7 +166,7 @@ IPC_Idol = {
 		}
 		modifier = {
 			factor = 2
-			NOT = { has_job = Idol }
+			NOT = { has_job = IPC_Idol }
 			exists = planet
 			planet = {
 				free_amenities < 10
@@ -187,7 +203,7 @@ IPC_Satelite_Idol = {
 
 	resources = {
 		category = planet_entertainers
-		category = planet_Idols
+		
 		produces = {
 			unity = 1
 			energy = 2
@@ -195,13 +211,17 @@ IPC_Satelite_Idol = {
 		}
 		produces = {
 			trigger = {
-				has_civic = civic_LightIdol_Institution
+				branch_office_owner = {
+					has_civic = civic_LightIdol_Institution
+				}
 			}
 			unity = 2
 		}
 		produces = {
 			trigger = {
-				has_civic = civic_DarkIdol_Institution
+				branch_office_owner = {
+					has_civic = civic_DarkIdol_Institution
+				}
 			}
 			energy = 2
 			society_research = 1
@@ -212,8 +232,12 @@ IPC_Satelite_Idol = {
 		upkeep = {
 			trigger = {
 				OR = {
-					has_civic = civic_LightIdol_Institution
-					has_civic = civic_DarkIdol_Institution
+					branch_office_owner = {
+						has_civic = civic_LightIdol_Institution
+					}
+					branch_office_owner = {
+						has_civic = civic_DarkIdol_Institution
+					}
 				}
 			}
 			consumer_goods = 1
@@ -231,8 +255,12 @@ IPC_Satelite_Idol = {
 			exists = owner
 			owner = {
 				OR = {
-					has_civic = civic_LightIdol_Institution
-					has_civic = civic_DarkIdol_Institution
+					branch_office_owner = {
+						has_civic = civic_LightIdol_Institution
+					}
+					branch_office_owner = {
+						has_civic = civic_DarkIdol_Institution
+					}
 				}
 			}
 		}
@@ -255,8 +283,12 @@ IPC_Satelite_Idol = {
 			exists = owner
 			owner = {
 				OR = {
-					has_civic = civic_LightIdol_Institution
-					has_civic = civic_DarkIdol_Institution
+					branch_office_owner = {
+						has_civic = civic_LightIdol_Institution
+					}
+					branch_office_owner = {
+						has_civic = civic_DarkIdol_Institution
+					}
 				}
 			}
 		}
@@ -276,7 +308,9 @@ IPC_Satelite_Idol = {
 	triggered_planet_modifier = {
 		potential = {
 			exists = owner
-			owner = { has_civic = civic_DarkIdol_Institution }
+			branch_office_owner = {
+				has_civic = civic_DarkIdol_Institution
+			}
 		}
 		modifier = {
 			pop_growth_speed = 0.01
@@ -285,7 +319,9 @@ IPC_Satelite_Idol = {
 	triggered_planet_modifier = {
 		potential = {
 			exists = owner
-			owner = { has_civic = civic_LightIdol_Institution }
+			branch_office_owner = {
+				has_civic = civic_LightIdol_Institution
+			}
 		}
 		modifier = {
 			planet_jobs_worker_produces_mult = 0.01
@@ -310,7 +346,7 @@ IPC_Satelite_Idol = {
 		}
 		modifier = {
 			factor = 1.5
-			has_job = Idol
+			has_job = IPC_Idol
 		}
 		modifier = {
 			factor = 0.1
@@ -318,7 +354,7 @@ IPC_Satelite_Idol = {
 		}
 		modifier = {
 			factor = 2
-			NOT = { has_job = Idol }
+			NOT = { has_job = IPC_Idol }
 			exists = planet
 			planet = {
 				free_amenities < 10
@@ -355,20 +391,34 @@ IPC_Students = {
 
 	resources = {
 		category = planet_entertainers
-		category = planet_Idols
+		
 		produces = {
 			unity = 1
 			society_research = 1
 		}
 		produces = {
 			trigger = {
-				has_civic = civic_LightIdol_Institution
+				OR = {
+					owner = {
+						has_civic = civic_LightIdol_Institution
+					}
+					branch_office_owner = {
+						has_civic = civic_LightIdol_Institution
+					}
+				}
 			}
 			unity = 1
 		}
 		produces = {
 			trigger = {
-				has_civic = civic_DarkIdol_Institution
+				OR = {
+					owner = {
+						has_civic = civic_DarkIdol_Institution
+					}
+					branch_office_owner = {
+						has_civic = civic_DarkIdol_Institution
+					}
+				}
 			}
 			energy = 1
 			society_research = 1
@@ -379,8 +429,18 @@ IPC_Students = {
 		upkeep = {
 			trigger = {
 				OR = {
-					has_civic = civic_LightIdol_Institution
-					has_civic = civic_DarkIdol_Institution
+					owner = {
+						has_civic = civic_LightIdol_Institution
+					}
+					owner = {
+						has_civic = civic_DarkIdol_Institution
+					}
+					branch_office_owner = {
+						has_civic = civic_LightIdol_Institution
+					}
+					branch_office_owner = {
+						has_civic = civic_DarkIdol_Institution
+					}
 				}
 			}
 			energy = 1
@@ -402,9 +462,17 @@ IPC_Students = {
 	triggered_planet_modifier = {
 		potential = {
 			exists = owner
-			owner = {
-				OR = {
+			OR = {
+				owner = {
 					has_civic = civic_LightIdol_Institution
+				}
+				owner = {
+					has_civic = civic_DarkIdol_Institution
+				}
+				branch_office_owner = {
+					has_civic = civic_LightIdol_Institution
+				}
+				branch_office_owner = {
 					has_civic = civic_DarkIdol_Institution
 				}
 			}
@@ -424,8 +492,13 @@ IPC_Students = {
 	triggered_planet_modifier = {
 		potential = {
 			exists = owner
-			owner = {
-				has_civic = civic_LightIdol_Institution
+			OR = {
+				owner = {
+					has_civic = civic_LightIdol_Institution
+				}
+				branch_office_owner = {
+					has_civic = civic_LightIdol_Institution
+				}
 			}
 		}
 		trade_value_add = 3
@@ -436,8 +509,13 @@ IPC_Students = {
 	triggered_planet_modifier = {
 		potential = {
 			exists = owner
-			owner = {
-				has_civic = civic_DarkIdol_Institution
+			OR = {
+				owner = {
+					has_civic = civic_DarkIdol_Institution
+				}
+				branch_office_owner = {
+					has_civic = civic_DarkIdol_Institution
+				}
 			}
 		}
 		trade_value_add = 4
@@ -458,7 +536,14 @@ IPC_Students = {
 	triggered_planet_modifier = {
 		potential = {
 			exists = owner
-			owner = { has_civic = civic_DarkIdol_Institution }
+			OR = {
+				owner = {
+					has_civic = civic_DarkIdol_Institution
+				}
+				branch_office_owner = {
+					has_civic = civic_DarkIdol_Institution
+				}
+			}
 		}
 		modifier = {
 			pop_growth_speed = 0.01
@@ -467,7 +552,14 @@ IPC_Students = {
 	triggered_planet_modifier = {
 		potential = {
 			exists = owner
-			owner = { has_civic = civic_LightIdol_Institution }
+			OR = {
+				owner = {
+					has_civic = civic_LightIdol_Institution
+				}
+				branch_office_owner = {
+					has_civic = civic_LightIdol_Institution
+				}
+			}
 		}
 		modifier = {
 			planet_jobs_worker_produces_mult = 0.01
