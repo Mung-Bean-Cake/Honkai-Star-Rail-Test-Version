@@ -11,7 +11,7 @@ civic_Interastral_Peace_Corporation = {
 		civics = { Not = { value = civic_criminal_heritage } }
 	}
 	modifier = {
-		custom_tooltip = IPC_Main_Theme
+		commercial_pact_mult = 1
 		planet_branch_offices_cost_mult = -0.5
 		empire_size_branch_office_mult = -1
 		trade_value_mult = 0.25
@@ -268,14 +268,13 @@ civic_Birth_Org = {
 		}
 	}
 	modifier = {
-		custom_tooltip = civic_Birth_Org
 		bio_pop_growth_speed = 0.2
 	}
 	random_weight = { base = 0 }
 }
 #和平可带， 环境改善集团 civic_Enviroment_Corp
 civic_Enviroment_Corp = {
-	description = "civic_Enviroment_Corp_desc"
+	description = "Civic_Enviroment_Corp_desc2"
 	potential = { 
 		civics = { value = civic_Interastral_Peace_Corporation }
 		authority = { value = auth_corporate }
@@ -307,9 +306,107 @@ civic_Enviroment_Corp = {
 	random_weight = { base = 0 }
 }
 #非平等可带， 劳动监督公司 civic_Labour_Corp
+civic_Labour_Corp = {
+	description = "Civic_Labour_Corp_desc2"
+	potential = { 
+		civics = { value = civic_Interastral_Peace_Corporation }
+		authority = { value = auth_corporate }
+		is_criminal_syndicate = no 
+		civics = { NOT = { value = civic_criminal_heritage } }
+		ethics = {
+			NOR = {
+				text = civic_tooltip_not_egalitarian
+				value = ethic_egalitarian
+				value = ethic_fanatic_egalitarian
+			}
+		}
+	}
+	possible = {
+		civics = { value = civic_Interastral_Peace_Corporation }
+		civics = { NOT = { value = civic_criminal_heritage } }
+		ethics = {
+			NOR = {
+				text = civic_tooltip_not_egalitarian
+				value = ethic_egalitarian
+				value = ethic_fanatic_egalitarian
+			}
+		}
+	}
+	modifier = {
+		planet_jobs_worker_produces_mult = 0.1
+		planet_worker_consumer_goods_upkeep_mult = -0.1
+		planet_worker_food_upkeep_mult = -0.1
+	}
+	random_weight = { base = 0 }
+}
 #威权可带， 上流社会沙龙 civic_Upper_Salon
 #威权可带， 特别资产公司 civic_Slave_Corp
+civic_Slave_Corp = {
+	description = "Civic_Slave_Corp_desc2"
+	potential = { 
+		civics = { value = civic_Interastral_Peace_Corporation }
+		authority = { value = auth_corporate }
+		is_criminal_syndicate = no 
+		civics = { NOT = { value = civic_criminal_heritage } }
+		ethics = {
+			OR = {
+				text = civic_tooltip_authoritarian
+				value = ethic_authoritarian
+				value = ethic_fanatic_authoritarian
+			}
+		}
+	}
+	possible = {
+		civics = { value = civic_Interastral_Peace_Corporation }
+		civics = { NOT = { value = civic_criminal_heritage } }
+		ethics = {
+			OR = {
+				text = civic_tooltip_authoritarian
+				value = ethic_authoritarian
+				value = ethic_fanatic_authoritarian
+			}
+		}
+	}
+	modifier = {
+		pop_cat_slave_political_power = -0.5
+		pop_category_slave_upkeep_mult = -0.15
+		planet_jobs_slave_produces_mult = 0.15
+		country_pop_enslaved_mult = 0.05
+	}
+	random_weight = { base = 0 }
+}
 #非威权可带， 基层治理组织 civic_Breu_Corp
+civic_Breu_Corp = {
+	description = "Civic_Breu_Corp_desc2"
+	potential = { 
+		civics = { value = civic_Interastral_Peace_Corporation }
+		authority = { value = auth_corporate }
+		is_criminal_syndicate = no 
+		civics = { NOT = { value = civic_criminal_heritage } }
+		ethics = {
+			NOR = {
+				text = civic_tooltip_not_authoritarian
+				value = ethic_authoritarian
+				value = ethic_fanatic_authoritarian
+			}
+		}
+	}
+	possible = {
+		civics = { value = civic_Interastral_Peace_Corporation }
+		civics = { NOT = { value = civic_criminal_heritage } }
+		ethics = {
+			NOR = {
+				text = civic_tooltip_not_authoritarian
+				value = ethic_authoritarian
+				value = ethic_fanatic_authoritarian
+			}
+		}
+	}
+	modifier = {
+		country_admin_cap_add = 50
+	}
+	random_weight = { base = 0 }
+}
 #平等可带， 市场社会主义 civic_Market_Socialism
 #平等可带， 星海解放组织 civic_Liberation_Org
 #非排外可带， 星际移民中介 civic_Migration_Corp
