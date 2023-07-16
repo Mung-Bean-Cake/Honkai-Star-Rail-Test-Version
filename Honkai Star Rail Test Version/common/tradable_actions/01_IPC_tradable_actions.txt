@@ -344,3 +344,118 @@ trade_action_VIP_Ship_Treat = {
 		weight = 1
 	}
 }
+#星际慈善援助
+trade_action_Charity_Treat = {
+	fire_and_forget = no
+	potential = {
+		has_valid_civic = civic_Charity_Org
+		FROM = {
+			NOT = { is_country_type = fallen_empire }
+			is_machine_empire = no
+			NOR = {
+				has_modifier = country_modifier_Service_PeopleUpkeep
+				is_action_active = {
+					action = trade_action_Charity_Treat
+					with_country = ROOT
+				}
+			}
+		}
+		NOR = {
+			is_rival = FROM
+			FROM = { is_rival = ROOT }
+		}
+	}
+	active = {
+		has_valid_civic = civic_Military_Corp
+		FROM = {
+			NOT = { is_country_type = fallen_empire }
+		}
+	}
+	on_traded_effect = {
+		tooltip = {
+			add_modifier = {
+				modifier = country_modifier_Service_PeopleUpkeep
+			}
+		}
+		FROM = {
+			add_modifier_multiplier = {
+				modifier = country_modifier_Service_PeopleUpkeep
+				variable = country_modifier_Service_PeopleUpkeep_count
+				value = 1
+			}
+		}
+	}
+	on_deal_ended_sender_effect = {
+		tooltip = {
+			remove_modifier = country_modifier_Service_PeopleUpkeep
+		}
+		hidden_effect = {
+			add_modifier_multiplier = {
+				modifier = country_modifier_Service_PeopleUpkeep
+				variable = country_modifier_Service_PeopleUpkeep_count
+				value = -1
+			}
+		}
+	}
+	ai_weight = {
+		weight = 0.75
+	}
+}
+
+#增长促进协议
+trade_action_Faster_Growth = {
+	fire_and_forget = no
+	potential = {
+		has_valid_civic = civic_Birth_Org
+		FROM = {
+			NOT = { is_country_type = fallen_empire }
+			is_machine_empire = no
+			NOR = {
+				has_modifier = country_modifier_Service_PopGrow
+				is_action_active = {
+					action = trade_action_Faster_Growth
+					with_country = ROOT
+				}
+			}
+		}
+		NOR = {
+			is_rival = FROM
+			FROM = { is_rival = ROOT }
+		}
+	}
+	active = {
+		has_valid_civic = civic_Military_Corp
+		FROM = {
+			NOT = { is_country_type = fallen_empire }
+		}
+	}
+	on_traded_effect = {
+		tooltip = {
+			add_modifier = {
+				modifier = country_modifier_Service_PopGrow
+			}
+		}
+		FROM = {
+			add_modifier_multiplier = {
+				modifier = country_modifier_Service_PopGrow
+				variable = country_modifier_Service_PopGrow_count
+				value = 1
+			}
+		}
+	}
+	on_deal_ended_sender_effect = {
+		tooltip = {
+			remove_modifier = country_modifier_Service_PopGrow
+		}
+		hidden_effect = {
+			add_modifier_multiplier = {
+				modifier = country_modifier_Service_PopGrow
+				variable = country_modifier_Service_PopGrow_count
+				value = -1
+			}
+		}
+	}
+	ai_weight = {
+		weight = 1.5
+	}
+}
