@@ -1,0 +1,346 @@
+# These actions can be traded in trade deals to provide the empires with modifiers or other sorts of effects.
+#
+# Example:
+#
+# trade_action_my_example_action = {
+# 	# If this is set to 'yes', then the action will be fired and then removed from the trade deal.
+# 	# If 'no', then the trade deal will be treated as a treaty that lasts for at least 10 years.
+# 	fire_and_forget = no
+#
+# 	# Determines if the action will show up in the list in the trade deals view.
+# 	# SCOPE: Country "giving" the action
+# 	# FROM: Country "receiving" the action
+# 	potential = {
+# 		has_overlord = from
+# 		is_specialist_subject_type = { TYPE = bulwark }
+# 	}
+#
+# 	# If this trigger returns 'no', then the trade deal will be cancelled. Checked on daily tick. Only relevant if fire_and_forget is 'no'.
+# 	# SCOPE: Country "giving" the action
+# 	# FROM: Country "receiving" the action
+# 	active = {
+# 		has_overlord = from
+# 		is_specialist_subject_type = { TYPE = bulwark }
+# 	}
+#
+# 	# Effect that fires when the trade deal is accepted.
+# 	# SCOPE: Country "giving" the action
+# 	# FROM: Country "receiving" the action
+# 	on_traded_effect = {
+# 		from = {
+# 			set_galactic_custodian = yes
+# 		}
+# 	}
+#
+# 	# Effect that fires when the trade deal ends. Only relevant if fire_and_forget is 'no'.
+# 	# SCOPE: Country "giving" the action
+# 	# FROM: Country "receiving" the action. Not guaranteed to be valid, since a trade deal is cancelled if one of the countries dies.
+# 	on_deal_ended_sender_effect = {
+# 	}
+#
+# 	# Effect that fires when the trade deal ends. Only relevant if fire_and_forget is 'no'.
+# 	# SCOPE: Country "receiving" the action
+# 	# FROM: Country "giving" the action. Not guaranteed to be valid, since a trade deal is cancelled if one of the countries dies.
+# 	on_deal_ended_recipient_effect = {
+# 		set_galactic_custodian = no
+# 	}
+#
+# 	# Used to determine how much the AI will value the action in a trade deal.
+# 	ai_weight = {
+# 		weight = 1
+#
+# 		modifier = {
+# 			weight = 2
+# 			from = {
+# 				is_galactic_custodian = no
+# 			}
+# 		}
+# 	}
+# }
+
+#财富增值服务
+trade_action_Trade_More = {
+	fire_and_forget = no
+	potential = {
+		has_valid_civic = civic_Interastral_Peace_Corporation
+		FROM = {
+			NOT = { is_country_type = fallen_empire }
+			is_machine_empire = no
+			NOR = {
+				has_modifier = country_modifier_Trade_Service
+				is_action_active = {
+					action = trade_action_Trade_More
+					with_country = ROOT
+				}
+			}
+		}
+		NOR = {
+			is_rival = FROM
+			FROM = { is_rival = ROOT }
+		}
+	}
+	active = {
+		has_valid_civic = civic_Interastral_Peace_Corporation
+		FROM = {
+			NOT = { is_country_type = fallen_empire }
+			is_machine_empire = no
+		}
+	}
+	on_traded_effect = {
+		tooltip = {
+			add_modifier = {
+				modifier = country_modifier_Trade_Service
+			}
+		}
+		FROM = {
+			add_modifier_multiplier = {
+				modifier = country_modifier_Trade_Service
+				variable = country_modifier_Trade_Service_count
+				value = 1
+			}
+		}
+	}
+	on_deal_ended_sender_effect = {
+		tooltip = {
+			remove_modifier = country_modifier_Trade_Service
+		}
+		hidden_effect = {
+			add_modifier_multiplier = {
+				modifier = country_modifier_Trade_Service
+				variable = country_modifier_Trade_Service_count
+				value = -1
+			}
+		}
+	}
+	ai_weight = {
+		weight = 1
+	}
+}
+#偶像巡回演出
+trade_action_Idol_Show = {
+	fire_and_forget = no
+	potential = {
+		has_valid_civic = civic_Idol_Institution
+		FROM = {
+			NOT = { is_country_type = fallen_empire }
+			is_machine_empire = no
+			NOR = {
+				has_modifier = country_modifier_Idol_Service
+				is_action_active = {
+					action = trade_action_Idol_Show
+					with_country = ROOT
+				}
+			}
+		}
+		NOR = {
+			is_rival = FROM
+			FROM = { is_rival = ROOT }
+		}
+	}
+	active = {
+		has_valid_civic = civic_Idol_Institution
+		FROM = {
+			is_machine_empire = no
+		}
+	}
+	on_traded_effect = {
+		tooltip = {
+			add_modifier = {
+				modifier = country_modifier_Idol_Service
+			}
+		}
+		FROM = {
+			add_modifier_multiplier = {
+				modifier = country_modifier_Idol_Service
+				variable = country_modifier_Idol_Service_count
+				value = 1
+			}
+		}
+	}
+	on_deal_ended_sender_effect = {
+		tooltip = {
+			remove_modifier = country_modifier_Idol_Service
+		}
+		hidden_effect = {
+			add_modifier_multiplier = {
+				modifier = country_modifier_Idol_Service
+				variable = country_modifier_Idol_Service_count
+				value = -1
+			}
+		}
+	}
+	ai_weight = {
+		weight = 1
+	}
+}
+#稳定维护服务
+trade_action_Stability_Keep = {
+	fire_and_forget = no
+	potential = {
+		has_valid_civic = civic_Stability_Keeper
+		FROM = {
+			NOT = { is_country_type = fallen_empire }
+			is_machine_empire = no
+			NOR = {
+				has_modifier = country_modifier_Stable_Service
+				is_action_active = {
+					action = trade_action_Stability_Keep
+					with_country = ROOT
+				}
+			}
+		}
+		NOR = {
+			is_rival = FROM
+			FROM = { is_rival = ROOT }
+		}
+	}
+	active = {
+		has_valid_civic = civic_Stability_Keeper
+		FROM = {
+			NOT = { is_country_type = fallen_empire }
+		}
+	}
+	on_traded_effect = {
+		tooltip = {
+			add_modifier = {
+				modifier = country_modifier_Stable_Service
+			}
+		}
+		FROM = {
+			add_modifier_multiplier = {
+				modifier = country_modifier_Stable_Service
+				variable = country_modifier_Stable_Service_count
+				value = 1
+			}
+		}
+	}
+	on_deal_ended_sender_effect = {
+		tooltip = {
+			remove_modifier = country_modifier_Stable_Service
+		}
+		hidden_effect = {
+			add_modifier_multiplier = {
+				modifier = country_modifier_Stable_Service
+				variable = country_modifier_Stable_Service_count
+				value = -1
+			}
+		}
+	}
+	ai_weight = {
+		weight = 1
+	}
+}
+#商务军事训练
+trade_action_Military_Training = {
+	fire_and_forget = no
+	potential = {
+		has_valid_civic = civic_Military_Corp
+		FROM = {
+			NOT = { is_country_type = fallen_empire }
+			is_machine_empire = no
+			NOR = {
+				has_modifier = country_modifier_Service_Training
+				is_action_active = {
+					action = trade_action_Military_Training
+					with_country = ROOT
+				}
+			}
+		}
+		NOR = {
+			is_rival = FROM
+			FROM = { is_rival = ROOT }
+		}
+	}
+	active = {
+		has_valid_civic = civic_Military_Corp
+		FROM = {
+			NOT = { is_country_type = fallen_empire }
+		}
+	}
+	on_traded_effect = {
+		tooltip = {
+			add_modifier = {
+				modifier = country_modifier_Service_Training
+			}
+		}
+		FROM = {
+			add_modifier_multiplier = {
+				modifier = country_modifier_Service_Training
+				variable = country_modifier_Service_Training_count
+				value = 1
+			}
+		}
+	}
+	on_deal_ended_sender_effect = {
+		tooltip = {
+			remove_modifier = country_modifier_Service_Training
+		}
+		hidden_effect = {
+			add_modifier_multiplier = {
+				modifier = country_modifier_Service_Training
+				variable = country_modifier_Service_Training_count
+				value = -1
+			}
+		}
+	}
+	ai_weight = {
+		weight = 1
+	}
+}
+#VIP舰队服务
+trade_action_VIP_Ship_Treat = {
+	fire_and_forget = no
+	potential = {
+		has_valid_civic = civic_Military_Corp
+		FROM = {
+			NOT = { is_country_type = fallen_empire }
+			is_machine_empire = no
+			NOR = {
+				has_modifier = country_modifier_Service_ShipUpkeep
+				is_action_active = {
+					action = trade_action_VIP_Ship_Treat
+					with_country = ROOT
+				}
+			}
+		}
+		NOR = {
+			is_rival = FROM
+			FROM = { is_rival = ROOT }
+		}
+	}
+	active = {
+		has_valid_civic = civic_Military_Corp
+		FROM = {
+			NOT = { is_country_type = fallen_empire }
+		}
+	}
+	on_traded_effect = {
+		tooltip = {
+			add_modifier = {
+				modifier = country_modifier_Service_ShipUpkeep
+			}
+		}
+		FROM = {
+			add_modifier_multiplier = {
+				modifier = country_modifier_Service_ShipUpkeep
+				variable = country_modifier_Service_ShipUpkeep_count
+				value = 1
+			}
+		}
+	}
+	on_deal_ended_sender_effect = {
+		tooltip = {
+			remove_modifier = country_modifier_Service_ShipUpkeep
+		}
+		hidden_effect = {
+			add_modifier_multiplier = {
+				modifier = country_modifier_Service_ShipUpkeep
+				variable = country_modifier_Service_ShipUpkeep_count
+				value = -1
+			}
+		}
+	}
+	ai_weight = {
+		weight = 1
+	}
+}
