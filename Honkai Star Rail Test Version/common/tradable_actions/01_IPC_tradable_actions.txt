@@ -350,6 +350,7 @@ trade_action_Charity_Treat = {
 	potential = {
 		has_valid_civic = civic_Charity_Org
 		FROM = {
+			NOT = { has_ethic = ethic_gestalt_consciousness }
 			NOT = { is_country_type = fallen_empire }
 			is_machine_empire = no
 			NOR = {
@@ -366,7 +367,7 @@ trade_action_Charity_Treat = {
 		}
 	}
 	active = {
-		has_valid_civic = civic_Military_Corp
+		has_valid_civic = civic_Charity_Org
 		FROM = {
 			NOT = { is_country_type = fallen_empire }
 		}
@@ -424,7 +425,7 @@ trade_action_Faster_Growth = {
 		}
 	}
 	active = {
-		has_valid_civic = civic_Military_Corp
+		has_valid_civic = civic_Birth_Org
 		FROM = {
 			NOT = { is_country_type = fallen_empire }
 		}
@@ -457,5 +458,702 @@ trade_action_Faster_Growth = {
 	}
 	ai_weight = {
 		weight = 1.5
+	}
+}
+#管理人力资源
+trade_action_Worker_Better = {
+	fire_and_forget = no
+	potential = {
+			NOT = { has_ethic = ethic_gestalt_consciousness }
+		has_valid_civic = civic_Labour_Corp
+		FROM = {
+			NOT = { is_country_type = fallen_empire }
+			is_machine_empire = no
+			NOR = {
+				has_modifier = country_modifier_Labour_ProUp
+				is_action_active = {
+					action = trade_action_Worker_Better
+					with_country = ROOT
+				}
+			}
+		}
+		NOR = {
+			is_rival = FROM
+			FROM = { is_rival = ROOT }
+		}
+	}
+	active = {
+		has_valid_civic = civic_Labour_Corp
+		FROM = {
+			NOT = { is_country_type = fallen_empire }
+		}
+	}
+	on_traded_effect = {
+		tooltip = {
+			add_modifier = {
+				modifier = country_modifier_Labour_ProUp
+			}
+		}
+		FROM = {
+			add_modifier_multiplier = {
+				modifier = country_modifier_Labour_ProUp
+				variable = country_modifier_Labour_ProUp_count
+				value = 1
+			}
+		}
+	}
+	on_deal_ended_sender_effect = {
+		tooltip = {
+			remove_modifier = country_modifier_Labour_ProUp
+		}
+		hidden_effect = {
+			add_modifier_multiplier = {
+				modifier = country_modifier_Labour_ProUp
+				variable = country_modifier_Labour_ProUp_count
+				value = -1
+			}
+		}
+	}
+	ai_weight = {
+		weight = 1
+	}
+}
+#管理特别资产
+trade_action_Slave_Better = {
+	fire_and_forget = no
+	potential = {
+		has_valid_civic = civic_Slave_Corp
+		FROM = {
+			NOT = { has_ethic = ethic_gestalt_consciousness }
+			NOT = { is_country_type = fallen_empire }
+			is_machine_empire = no
+			NOR = {
+				has_modifier = country_modifier_Slave_ProUp
+				is_action_active = {
+					action = trade_action_Slave_Better
+					with_country = ROOT
+				}
+			}
+		}
+		NOR = {
+			is_rival = FROM
+			FROM = { is_rival = ROOT }
+		}
+	}
+	active = {
+		has_valid_civic = civic_Slave_Corp
+		FROM = {
+			NOT = { is_country_type = fallen_empire }
+		}
+	}
+	on_traded_effect = {
+		tooltip = {
+			add_modifier = {
+				modifier = country_modifier_Slave_ProUp
+			}
+		}
+		FROM = {
+			add_modifier_multiplier = {
+				modifier = country_modifier_Slave_ProUp
+				variable = country_modifier_Slave_ProUp_count
+				value = 1
+			}
+		}
+	}
+	on_deal_ended_sender_effect = {
+		tooltip = {
+			remove_modifier = country_modifier_Slave_ProUp
+		}
+		hidden_effect = {
+			add_modifier_multiplier = {
+				modifier = country_modifier_Slave_ProUp
+				variable = country_modifier_Slave_ProUp_count
+				value = -1
+			}
+		}
+	}
+	ai_weight = {
+		weight = 1
+	}
+}
+#帝国管理套餐
+trade_action_Control_Better = {
+	fire_and_forget = no
+	potential = {
+		has_valid_civic = civic_Breu_Corp
+		FROM = {
+			NOT = { has_ethic = ethic_gestalt_consciousness }
+			NOT = { is_country_type = fallen_empire }
+			is_machine_empire = no
+			NOR = {
+				has_modifier = country_modifier_Control_Up
+				is_action_active = {
+					action = trade_action_Control_Better
+					with_country = ROOT
+				}
+			}
+		}
+		NOR = {
+			is_rival = FROM
+			FROM = { is_rival = ROOT }
+		}
+	}
+	active = {
+		has_valid_civic = civic_Breu_Corp
+		FROM = {
+			NOT = { is_country_type = fallen_empire }
+		}
+	}
+	on_traded_effect = {
+		tooltip = {
+			add_modifier = {
+				modifier = country_modifier_Control_Up
+			}
+		}
+		FROM = {
+			add_modifier_multiplier = {
+				modifier = country_modifier_Control_Up
+				variable = country_modifier_Control_Up_count
+				value = 1
+			}
+		}
+	}
+	on_deal_ended_sender_effect = {
+		tooltip = {
+			remove_modifier = country_modifier_Control_Up
+		}
+		hidden_effect = {
+			add_modifier_multiplier = {
+				modifier = country_modifier_Control_Up
+				variable = country_modifier_Control_Up_count
+				value = -1
+			}
+		}
+	}
+	ai_weight = {
+		weight = 1
+	}
+}
+#传播平等思潮
+trade_action_Equal_Better = {
+	fire_and_forget = no
+	potential = {
+		has_valid_civic = civic_Market_Socialism
+		FROM = {
+			NOT = { has_ethic = ethic_gestalt_consciousness }
+			NOT = { is_country_type = fallen_empire }
+			is_machine_empire = no
+			NOR = {
+				has_modifier = country_modifier_Control_Up
+				is_action_active = {
+					action = trade_action_Equal_Better
+					with_country = ROOT
+				}
+			}
+		}
+		NOR = {
+			is_rival = FROM
+			FROM = { is_rival = ROOT }
+		}
+	}
+	active = {
+		has_valid_civic = civic_Market_Socialism
+		FROM = {
+			NOT = { is_country_type = fallen_empire }
+		}
+	}
+	on_traded_effect = {
+		tooltip = {
+			add_modifier = {
+				modifier = country_modifier_Call_of_People
+			}
+		}
+		FROM = {
+			add_modifier_multiplier = {
+				modifier = country_modifier_Call_of_People
+				variable = country_modifier_Call_of_People_count
+				value = 1
+			}
+		}
+	}
+	on_deal_ended_sender_effect = {
+		tooltip = {
+			remove_modifier = country_modifier_Call_of_People
+		}
+		hidden_effect = {
+			add_modifier_multiplier = {
+				modifier = country_modifier_Call_of_People
+				variable = country_modifier_Call_of_People_count
+				value = -1
+			}
+		}
+	}
+	ai_weight = {
+		weight = 0.25
+		modifier = {
+			factor = 2
+			FROM = { has_ethic = ethic_egalitarian }
+		}
+		modifier = {
+			factor = 3
+			FROM = { has_ethic = ethic_fanatic_egalitarian }
+		}
+		modifier = {
+			factor = -1
+			FROM = {
+				NOR = {
+					has_ethic = ethic_fanatic_authoritarian
+					has_ethic = ethic_authoritarian
+					has_ethic = ethic_fanatic_egalitarian
+					has_ethic = ethic_egalitarian
+				}
+			}
+		}
+		modifier = {
+			factor = -2
+			FROM = {
+				has_ethic = ethic_authoritarian
+			}
+		}
+		modifier = {
+			factor = -4
+			FROM = {
+				has_ethic = ethic_fanatic_authoritarian
+			}
+		}
+	}
+}
+#降低移民要求
+trade_action_Migrate_Better = {
+	fire_and_forget = no
+	potential = {
+		has_valid_civic = civic_Migration_Corp
+		FROM = {
+			NOT = { has_ethic = ethic_gestalt_consciousness }
+			NOT = { is_country_type = fallen_empire }
+			is_machine_empire = no
+			NOR = {
+				has_modifier = country_modifier_Open_Door
+				is_action_active = {
+					action = trade_action_Migrate_Better
+					with_country = ROOT
+				}
+			}
+		}
+		NOR = {
+			is_rival = FROM
+			FROM = { is_rival = ROOT }
+		}
+	}
+	active = {
+		has_valid_civic = civic_Migration_Corp
+		FROM = {
+			NOT = { is_country_type = fallen_empire }
+		}
+	}
+	on_traded_effect = {
+		tooltip = {
+			add_modifier = {
+				modifier = country_modifier_Open_Door
+			}
+		}
+		FROM = {
+			add_modifier_multiplier = {
+				modifier = country_modifier_Open_Door
+				variable = country_modifier_Open_Door_count
+				value = 1
+			}
+		}
+	}
+	on_deal_ended_sender_effect = {
+		tooltip = {
+			remove_modifier = country_modifier_Open_Door
+		}
+		hidden_effect = {
+			add_modifier_multiplier = {
+				modifier = country_modifier_Open_Door
+				variable = country_modifier_Open_Door_count
+				value = -1
+			}
+		}
+	}
+	ai_weight = {
+		weight = -1
+		modifier = {
+			factor = 0.5
+			FROM = { has_ethic = ethic_xenophile }
+		}
+		modifier = {
+			factor = -1
+			FROM = { has_ethic = ethic_fanatic_xenophile }
+		}
+		modifier = {
+			factor = 2
+			FROM = { has_ethic = ethic_xenophobe }
+		}
+		modifier = {
+			factor = 9999
+			FROM = { has_ethic = ethic_fanatic_xenophobe }
+		}
+	}
+}
+#科技研发协助
+trade_action_Research_Better = {
+	fire_and_forget = no
+	potential = {
+		has_valid_civic = civic_Tech_Corp
+		FROM = {
+			NOT = { is_country_type = fallen_empire }
+			is_machine_empire = no
+			NOR = {
+				has_modifier = country_modifier_Open_Door
+				is_action_active = {
+					action = trade_action_Research_Better
+					with_country = ROOT
+				}
+			}
+		}
+		NOR = {
+			is_rival = FROM
+			FROM = { is_rival = ROOT }
+		}
+	}
+	active = {
+		has_valid_civic = civic_Tech_Corp
+		FROM = {
+			NOT = { is_country_type = fallen_empire }
+		}
+	}
+	on_traded_effect = {
+		tooltip = {
+			add_modifier = {
+				modifier = country_modifier_Research_Faster
+			}
+		}
+		FROM = {
+			add_modifier_multiplier = {
+				modifier = country_modifier_Research_Faster
+				variable = country_modifier_Research_Faster_count
+				value = 1
+			}
+		}
+	}
+	on_deal_ended_sender_effect = {
+		tooltip = {
+			remove_modifier = country_modifier_Research_Faster
+		}
+		hidden_effect = {
+			add_modifier_multiplier = {
+				modifier = country_modifier_Research_Faster
+				variable = country_modifier_Research_Faster_count
+				value = -1
+			}
+		}
+	}
+	ai_weight = {
+		weight = 1
+		modifier = {
+			factor = 2
+			FROM = { has_ethic = ethic_materialist }
+		}
+		modifier = {
+			factor = 3
+			FROM = { has_ethic = ethic_fanatic_materialist }
+		}
+		modifier = {
+			factor = 0.5
+			FROM = { has_ethic = ethic_fanatic_spiritualist }
+		}
+	}
+}
+
+#科学普及准入
+trade_action_Study_Better = {
+	fire_and_forget = no
+	potential = {
+		has_valid_civic = civic_Scientific_Corp
+		FROM = {
+			NOT = { is_country_type = fallen_empire }
+			is_machine_empire = no
+			NOR = {
+				has_modifier = country_modifier_Call_of_Knowledge
+				is_action_active = {
+					action = trade_action_Study_Better
+					with_country = ROOT
+				}
+			}
+		}
+		NOR = {
+			is_rival = FROM
+			FROM = { is_rival = ROOT }
+		}
+	}
+	active = {
+		has_valid_civic = civic_Scientific_Corp
+		FROM = {
+			NOT = { is_country_type = fallen_empire }
+		}
+	}
+	on_traded_effect = {
+		tooltip = {
+			add_modifier = {
+				modifier = country_modifier_Call_of_Knowledge
+			}
+		}
+		FROM = {
+			add_modifier_multiplier = {
+				modifier = country_modifier_Call_of_Knowledge
+				variable = country_modifier_Call_of_Knowledge_count
+				value = 1
+			}
+		}
+	}
+	on_deal_ended_sender_effect = {
+		tooltip = {
+			remove_modifier = country_modifier_Research_Faster
+		}
+		hidden_effect = {
+			add_modifier_multiplier = {
+				modifier = country_modifier_Call_of_Knowledge
+				variable = country_modifier_Call_of_Knowledge_count
+				value = -1
+			}
+		}
+	}
+	ai_weight = {
+		weight = 1
+		modifier = {
+			factor = 2
+			has_ethic = ethic_materialist
+		}
+		modifier = {
+			factor = 3
+			has_ethic = ethic_fanatic_materialist
+		}
+		modifier = {
+			factor = -2
+			has_ethic = ethic_spiritualist
+		}
+		modifier = {
+			factor = -4
+			has_ethic = ethic_fanatic_spiritualist
+		}
+	}
+}
+#传教活动准许
+trade_action_KLB_Better = {
+	fire_and_forget = no
+	potential = {
+		has_valid_civic = civic_Peace_Church
+		FROM = {
+			NOT = { is_country_type = fallen_empire }
+			is_machine_empire = no
+			NOR = {
+				has_modifier = country_modifier_Call_of_KLB
+				is_action_active = {
+					action = trade_action_KLB_Better
+					with_country = ROOT
+				}
+			}
+		}
+		NOR = {
+			is_rival = FROM
+			FROM = { is_rival = ROOT }
+		}
+	}
+	active = {
+		has_valid_civic = civic_Peace_Church
+		FROM = {
+			NOT = { is_country_type = fallen_empire }
+		}
+	}
+	on_traded_effect = {
+		tooltip = {
+			add_modifier = {
+				modifier = country_modifier_Call_of_KLB
+			}
+		}
+		FROM = {
+			add_modifier_multiplier = {
+				modifier = country_modifier_Call_of_KLB
+				variable = country_modifier_Call_of_KLB_count
+				value = 1
+			}
+		}
+	}
+	on_deal_ended_sender_effect = {
+		tooltip = {
+			remove_modifier = country_modifier_Call_of_KLB
+		}
+		hidden_effect = {
+			add_modifier_multiplier = {
+				modifier = country_modifier_Call_of_KLB
+				variable = country_modifier_Call_of_KLB_count
+				value = -1
+			}
+		}
+	}
+	ai_weight = {
+		weight = 2
+		modifier = {
+			factor = 2
+			has_ethic = ethic_materialist
+		}
+		modifier = {
+			factor = 2
+			has_ethic = ethic_fanatic_materialist
+		}
+		modifier = {
+			factor = -3
+			OR = {
+				has_ethic = ethic_xenophobe
+				has_ethic = ethic_fanatic_xenophobe
+			}
+			has_ethic = ethic_spiritualist
+		}
+		modifier = {
+			factor = -5
+			OR = {
+				has_ethic = ethic_xenophobe
+				has_ethic = ethic_fanatic_xenophobe
+			}
+			has_ethic = ethic_fanatic_spiritualist
+		}
+		modifier = {
+			factor = -1
+				has_ethic = ethic_xenophobe
+			NOR = {
+				has_ethic = ethic_spiritualist
+				has_ethic = ethic_fanatic_spiritualist
+			}
+		}
+		modifier = {
+			factor = -3
+				has_ethic = ethic_fanatic_xenophobe
+			NOR = {
+				has_ethic = ethic_spiritualist
+				has_ethic = ethic_fanatic_spiritualist
+			}
+		}
+	}
+}
+#传教活动准许
+trade_action_IPC_Better = {
+	fire_and_forget = no
+	potential = {
+		has_valid_civic = civic_Interastral_Peace_Corporation
+		FROM = {
+			NOT = { is_country_type = fallen_empire }
+			NOR = {
+				has_modifier = country_modifier_Help_of_IPC
+				is_action_active = {
+					action = trade_action_IPC_Better
+					with_country = ROOT
+				}
+			}
+		}
+		NOR = {
+			is_rival = FROM
+			FROM = { is_rival = ROOT }
+		}
+	}
+	active = {
+		has_valid_civic = civic_Interastral_Peace_Corporation
+		FROM = {
+			NOT = { is_country_type = fallen_empire }
+		}
+	}
+	on_traded_effect = {
+		tooltip = {
+			add_modifier = {
+				modifier = country_modifier_Help_of_IPC
+			}
+		}
+		FROM = {
+			add_modifier_multiplier = {
+				modifier = country_modifier_Help_of_IPC
+				variable = country_modifier_Help_of_IPC_count
+				value = 1
+			}
+		}
+	}
+	on_deal_ended_sender_effect = {
+		tooltip = {
+			remove_modifier = country_modifier_Help_of_IPC
+		}
+		hidden_effect = {
+			add_modifier_multiplier = {
+				modifier = country_modifier_Help_of_IPC
+				variable = country_modifier_Help_of_IPC_count
+				value = -1
+			}
+		}
+	}
+	ai_weight = {
+		weight = 1
+		modifier = {
+			factor = 4
+			is_at_war = yes
+		}
+	}
+}
+#筑城者的协助
+trade_action_Build_Better = {
+	fire_and_forget = no
+	potential = {
+		has_valid_civic = civic_Interastral_Peace_Corporation
+		FROM = {
+			NOT = { is_country_type = fallen_empire }
+			NOR = {
+				has_modifier = country_modifier_Help_of_Builder
+				is_action_active = {
+					action = trade_action_Build_Better
+					with_country = ROOT
+				}
+			}
+		}
+		NOR = {
+			is_rival = FROM
+			FROM = { is_rival = ROOT }
+		}
+	}
+	active = {
+		has_valid_civic = civic_Interastral_Peace_Corporation
+		FROM = {
+			NOT = { is_country_type = fallen_empire }
+		}
+	}
+	on_traded_effect = {
+		tooltip = {
+			add_modifier = {
+				modifier = country_modifier_Help_of_Builder
+			}
+		}
+		FROM = {
+			add_modifier_multiplier = {
+				modifier = country_modifier_Help_of_Builder
+				variable = country_modifier_Help_of_Builder_count
+				value = 1
+			}
+		}
+	}
+	on_deal_ended_sender_effect = {
+		tooltip = {
+			remove_modifier = country_modifier_Help_of_Builder
+		}
+		hidden_effect = {
+			add_modifier_multiplier = {
+				modifier = country_modifier_Help_of_Builder
+				variable = country_modifier_Help_of_Builder_count
+				value = -1
+			}
+		}
+	}
+	ai_weight = {
+		weight = 1
+		modifier = {
+			factor = 3
+			years_passed < 50
+		}
 	}
 }
