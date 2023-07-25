@@ -54,7 +54,7 @@ tr_ipc_infi_spreadcreditpoints = {
 		has_tradition = tr_ipc_infi_expressnetwork
 	}
 	modifier = {
-		planet_branch_offices_cost_mult = -1
+		planet_branch_offices_cost_mult = -0.25
 	}
 	unlocks_agenda = agenda_ipc_More_Branches
 	custom_tooltip = tr_ipc_infi_spreadcreditpoints_desc
@@ -75,7 +75,6 @@ tr_interastral_adopt = {
 		country_starbase_influence_cost_mult = -0.1
 	}
 	unlocks_agenda = iPC_expand_faster
-	unlocks_agenda = iPC_faster_than_Light
 }
 
 tr_interastral_finish = {
@@ -134,6 +133,7 @@ tr_interastral_fly_us_to_the_star = {
 		shipclass_science_ship_build_cost_mult = -0.15
 	}
 	custom_tooltip = tr_interastral_fly_us_to_the_star_desc
+	unlocks_agenda = iPC_faster_than_Light
 
 	ai_weight = {
 		factor = 1000
@@ -149,5 +149,61 @@ tr_interastral_better_colonist = {
 	}
 	ai_weight = {
 		factor = 5000
+	}
+}
+tr_peace_adopt = {
+	unlocks_agenda = agenda_build_relations
+	modifier = {
+		country_trade_attractiveness = 0.1
+		diplo_weight_mult = 0.1
+	}
+}
+tr_peace_finish = {
+	modifier = {
+		country_influence_produces_add = 1
+		diplo_weight_mult = 0.1
+		ascension_perks_add = 1
+	}
+}
+tr_peace_we_are_the_world = {
+	possible = { has_tradition = tr_peace_adopt }
+	custom_tooltip = tr_peace_we_are_the_world_desc
+	modifier = {
+		country_trust_cap_add = 100
+		country_trust_growth = 0.5
+	}
+}
+tr_peace_we_are_the_one = {
+	possible = { has_tradition = tr_peace_we_are_the_world }
+	custom_tooltip = tr_peace_we_are_the_one_desc
+	modifier = {
+		envoys_add = 2
+		country_trade_attractiveness = 0.05
+	}
+}
+tr_peace_fate_together = {
+	possible = { has_tradition = tr_peace_we_are_the_one }
+	custom_tooltip = tr_peace_fate_together_desc
+	modifier = {
+		envoys_add = 2
+		country_trade_attractiveness = 0.05
+	}
+}
+tr_peace_influence_galaxy = {
+	possible = { has_tradition = tr_peace_adopt }
+	custom_tooltip = tr_peace_influence_galaxy_desc
+	modifier = {
+		branch_office_value_mult = 0.25
+		planet_branch_offices_cost_mult = -0.25
+	}
+}
+tr_peace_peace_ours = {
+	possible = { has_tradition = tr_peace_influence_galaxy }
+	custom_tooltip = tr_peace_peace_ours_desc
+	modifier = {
+		federation_naval_cap_contribution_mult = 1
+		diplo_action_acceptance_add = 10
+		starbase_defensive_war_ship_build_speed_mult = 1
+		ship_home_territory_fire_rate_mult = 0.2
 	}
 }
