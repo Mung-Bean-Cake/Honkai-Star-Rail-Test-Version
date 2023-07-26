@@ -1,0 +1,56 @@
+
+
+DOT_SR_01_arc_sites = {
+	desc = DOT_SR_01_arc_sites_desc
+	picture = GFX_evt_baol_ruins
+	stages = 6
+	max_instances = 1
+	weight = {
+		base = 0
+	}
+	potential = {
+		is_ship_class = shipclass_science_ship
+		exists = leader
+		is_species_class = The_Xianzhou_Luofu
+	}
+	allow = {
+		is_ship_class = shipclass_science_ship
+		exists = leader
+	}
+	visible = {
+		default_site_visible_trigger = yes
+		is_gestalt = no
+		is_species_class = The_Xianzhou_Luofu
+	}
+	on_visible = {
+		country_event = { id = story.5 days = 30 }
+	}
+	stage = {
+		difficulty = 2
+		event = ancrel.11000
+		icon = GFX_archaeology_runes_D1
+	}
+	stage = {
+		difficulty = 3
+		event = ancrel.11005
+		icon = GFX_archaeology_runes_D2
+	}
+	stage = {
+		difficulty = 4
+		event = ancrel.11010
+		icon = GFX_archaeology_runes_D3
+	}
+	stage = {
+		difficulty = 5
+		event = ancrel.11015
+		icon = GFX_archaeology_runes_D4
+	}
+	stage = {
+		difficulty = 6
+		event = ancrel.11016
+		icon = GFX_archaeology_runes_D4
+	}
+	on_roll_failed = {
+		from = { standard_archaeological_site_on_roll_failed = { RANDOM_EVENTS = all_random_events } }
+	}
+}
