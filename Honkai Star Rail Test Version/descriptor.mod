@@ -3,5 +3,5 @@ tags={
 	"Events"
 	"Species"
 }
-name="Honkai: StarRail | Test Version"
+name="Honkai: Star Rail | Test Version"
 supported_version="3.8.*"
