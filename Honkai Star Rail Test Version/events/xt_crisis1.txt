@@ -1,17 +1,8 @@
 namespace = DDT_FY
-##########
-#country_event = {
-#    id = DDT_FY.1000
-#    hide_window = yes
-#    is_test_event = yes
-#
-#    immediate = {
-#        country_event = { id = DDT_FY.10 }
-#        country_event = { id = DDT_FY.138 days = 2000 }
-#        country_event = { id = DDT_FY.43 days = 3000 }
-#    }
-#}
-###########
+###### 天灾启动
+#country_event DDT_FY.10
+###### 事件链开始
+#提醒事件
 country_event = {
     id = DDT_FY.1
     title = DDT_FY.1_name
@@ -87,10 +78,20 @@ country_event = {
     picture = GFX_evt_crisis_2
     is_triggered_only = yes
 
+    trigger = {
+        is_ai = no
+    }
+
     option = {
         name = DDT_FY.4_name_one
         hidden_effect = {
-            country_event = { id = DDT_FY.11 }
+            country_event = { id = DDT_FY.11 days = 10 }
+            country_event = { id = DDT_FY.13 days = 20 }
+            country_event = { id = DDT_FY.14 days = 30 }
+            country_event = { id = DDT_FY.15 days = 40 }
+            country_event = { id = DDT_FY.16 days = 50 }
+            country_event = { id = DDT_FY.17 days = 60 }
+            country_event = { id = DDT_FY.18 days = 70 }
         }
         owner = {
             add_event_chain_counter = {
@@ -151,8 +152,7 @@ country_event = {
         name = DDT_FY.8_name_one
     }
 }
-
-# Crisis Initiated effect change_pc = pc_brokrn
+##############   准备开始，提醒
 country_event = {
     id = DDT_FY.10
     is_triggered_only = yes
@@ -173,18 +173,19 @@ country_event = {
         }
         every_country = {
             limit = { is_antimatter_must = yes }
-            country_event = { id = DDT_FY.2 days = 500 random = 50 }
+            country_event = { id = DDT_FY.2 days = 300 random = 50 }
         }
         every_country = {
             limit = { is_antimatter_must = yes }
-            country_event = { id = DDT_FY.3 days = 700 random = 50 }
+            country_event = { id = DDT_FY.3 days = 600 random = 50 }
         }
         every_country = {
             limit = { is_antimatter_must = yes }
-            country_event = { id = DDT_FY.4 days = 1000 random = 50 }
+            country_event = { id = DDT_FY.4 days = 900 random = 100 }
         }
     }
 }
+#选择目标星系
 country_event = {
     id = DDT_FY.11
     is_triggered_only = yes
@@ -219,6 +220,13 @@ country_event = {
                 to = This
             }
         }
+    }
+}
+country_event = {
+    id = DDT_FY.13
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = {
         random_system = {
             limit = {
             }
@@ -245,6 +253,13 @@ country_event = {
                 to = This
             }
         }
+    }
+}
+country_event = {
+    id = DDT_FY.14
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = {
         random_system = {
             if = {
                 limit = {
@@ -308,6 +323,13 @@ country_event = {
                 }
             }
         }
+    }
+}
+country_event = {
+    id = DDT_FY.15
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = {
         random_system = {
             if = {
                 limit = {
@@ -398,6 +420,13 @@ country_event = {
                 }
             }
         }
+    }
+}
+country_event = {
+    id = DDT_FY.16
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = {
         random_system = {
             limit = {
             }
@@ -424,6 +453,13 @@ country_event = {
                 to = This
             }
         }
+    }
+}
+country_event = {
+    id = DDT_FY.17
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = {
         random_system = {
             limit = {
                 count_system_planet = {
@@ -456,6 +492,13 @@ country_event = {
                 to = This
             }
         }
+    }
+}
+country_event = {
+    id = DDT_FY.18
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = {
         random_system = {
             limit = {
                 star = {
@@ -507,9 +550,9 @@ country_event = {
     }
 
     picture_event_data = {
-                room = didui_0_room
-                portrait = From.leader
-            }
+        room = didui_0_room
+        portrait = From.leader
+    }
 
     option = {
         name = DDT_FY.12_name_one
@@ -528,7 +571,6 @@ country_event = {
         name = DDT_FY.12_name_four
     }
 }
-
 ###first_star_order
 planet_event = {
     id = DDT_FY.21
@@ -546,13 +588,11 @@ planet_event = {
             }
             enable_special_project = {
                 name = "FIND_HOME_SYSTEM.1"
-                location = root
+                location = root.solar_system
                 owner = this.capital_scope
             }
         }
         set_planet_flag = an_planet1
-        #set_crisis_sound =
-        #set_crisis_stage_1 = yes
         create_species = {
             name = "NAME_antimatter_hm"
             class = "ANTIMATTER"
@@ -664,7 +704,6 @@ planet_event = {
         }
     }
 }
-
 ###second_star_order
 planet_event = {
     id = DDT_FY.22
@@ -676,7 +715,7 @@ planet_event = {
             limit = { is_ai = no }
             enable_special_project = {
                 name = "FIND_HOME_SYSTEM.2"
-                location = root
+                location = root.solar_system
                 owner = this.capital_scope
             }
         }
@@ -739,7 +778,7 @@ planet_event = {
             limit = { is_ai = no }
             enable_special_project = {
                 name = "FIND_HOME_SYSTEM.3"
-                location = root
+                location = root.solar_system
                 owner = this.capital_scope
             }
         }
@@ -802,7 +841,7 @@ planet_event = {
             limit = { is_ai = no }
             enable_special_project = {
                 name = "FIND_HOME_SYSTEM.4"
-                location = root
+                location = root.solar_system
                 owner = this.capital_scope
             }
         }
@@ -865,7 +904,7 @@ planet_event = {
             limit = { is_ai = no }
             enable_special_project = {
                 name = "FIND_HOME_SYSTEM.5"
-                location = root
+                location = root.solar_system
                 owner = this.capital_scope
             }
         }
@@ -928,7 +967,7 @@ planet_event = {
             limit = { is_ai = no }
             enable_special_project = {
                 name = "FIND_HOME_SYSTEM.6"
-                location = root
+                location = root.solar_system
                 owner = this.capital_scope
             }
         }
@@ -992,7 +1031,7 @@ planet_event = {
             limit = { is_ai = no }
             enable_special_project = {
                 name = "FIND_HOME_SYSTEM.7"
-                location = root
+                location = root.solar_system
                 owner = this.capital_scope
             }
         }
@@ -1109,6 +1148,7 @@ country_event = {
         country_event = { id = DDT_FY.138 days = 1 }
     }
 }
+#判断特殊项目是否完成
 country_event = {
     id = DDT_FY.138
     hide_window = yes
@@ -1138,6 +1178,7 @@ country_event = {
         }
     }
 }
+#添加最后的星系
 planet_event = {
     id = DDT_FY.32
     is_triggered_only = yes
@@ -1161,6 +1202,7 @@ planet_event = {
             #limit = {
             #    has_star_flag = antimatter_legion_home_system
             #}
+            #移除可能的问题，一般也用不上
             every_country = {
                 limit = { is_ai = no }
                 abort_special_project = {
@@ -1185,6 +1227,7 @@ planet_event = {
                     type = FIND_HOME_SYSTEM.1
                 }
             }
+            #添加特殊项目
             random_system_planet = {
                 limit = {
                     has_planet_flag = antimatter_legion_home_planet
@@ -1196,7 +1239,7 @@ planet_event = {
                     }
                     enable_special_project = {
                         name = "FIND_HOME_SYSTEM.8"
-                        location = Prev
+                        location = Prev.solar_system
                         owner = this.capital_scope
                     }
                 }
@@ -1295,6 +1338,7 @@ planet_event = {
                     }
                 }
             }
+            #刷防御平台
             random_system_planet = {
                 create_antimatter_starbase_defense = yes
             }
@@ -1332,6 +1376,7 @@ planet_event = {
         }
     }
 }
+#特殊项目完成，毁灭天灾主线就此结束
 country_event = {
     id = DDT_FY.43
     title = DDT_FY.43_name
@@ -1552,7 +1597,7 @@ country_event = {
         name = OK
     }
 }
-
+#七个特殊项目完成提示加移除不必要的flag
 country_event = {
     id = DDT_FY.211
     title = DDT_FY.211_name
@@ -1715,7 +1760,7 @@ country_event = {
         name = OK
     }
 }
-###################### U I 事 件 (建议不要动) ######################
+######################  U I 事 件 (建议不要动)   ######################
 country_event = {
     id = DDT_FY.1999
     is_triggered_only = yes
@@ -1759,7 +1804,7 @@ country_event = {
         }
     }
 }
-###################### 舰 队 事 件 (建议不要动) ######################
+######################  舰 队 事 件 (建议不要动)  ######################
 planet_event = {
     id = DDT_FY.3000
     hide_window = yes
@@ -1823,7 +1868,7 @@ planet_event = {
         }
     }
 }
-#舰队行为主触发
+#舰队行为主触发#   ##该模板取自地砖大佬公用素材##
 fleet_event = {
     id = DDT_FY.4000
     hide_window = yes
@@ -2021,26 +2066,7 @@ planet_event = {
        # }
    # }
 }
-starbase_event = {
-    id = DDT_FY.5000
-    hide_window = yes
-    is_triggered_only = yes
-
-    trigger = {
-        From = {
-            controller = {
-                is_country_type = antimatter_legion
-            }
-        }
-    }
-
-    immediate = {
-        system_star = {
-            create_antimatter_starbase = yes
-        }
-    }
-}
-################    测 试 ------ 挂 来    ################
+######################    测 试 ------ 挂 来    ######################
 country_event = {
     id = DDT_FY.6666
     hide_window = yes
