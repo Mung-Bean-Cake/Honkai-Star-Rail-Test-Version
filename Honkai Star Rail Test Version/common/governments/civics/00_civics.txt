@@ -1,0 +1,2578 @@
+#civic_example = {
+#	playable = {}								# AND trigger, no scope; use this to prevent the civic from being selectable by the player (UI)
+#	potential = {}								# requirements list, see ../readme_requirements.txt
+#	possible = {}								# requirements list, see ../readme_requirements.txt
+#	pickable_at_start = yes / no				# default: yes
+#	modification = yes / no						# default: yes, set to no to prevent adding or removing this after creation of the empire
+#
+#	random_weight = { base = 5 }				# scriptable weight for randomizing a civic
+#												# Note: If omitted, a default weight of 1 is used
+#												# Also note: after game start, AI selection of new civics uses the below weight instead
+#
+#	ai_weight = { base = 5 }					# scriptable weight for AI picking civics in-game (when unlocking a new slot).
+#												# Note: If omitted, a default weight of 1 is used. Not needed when "modification = no"
+#
+#	modifier = {}								# modifier added to the country if the civic is selected and valid
+#	can_build_ruler_ship = yes / no				# default: no
+#	traits = { trait = ... }					# default: empty; trait set to enforce on the primary species. They cannot be removed, but more can be added if points/picks permit
+#	has_secondary_species = {					# default: none; if present, will enable secondary species customization in empire designer and will create secondary species & pops at galaxy generation time (see empire_init_create_capital_secondary_pops)
+#		traits = { trait = ... }					# default: empty; trait set to enforce on the secondary species. They cannot be removed, but more can be added if points/picks permit
+#	}
+#	is_origin = yes / no						# default: no, set to yes if civic should be treated as an Origin
+#
+#	swap_type = {								# triggered name, desc, custom desc and modifiers
+#		name = ...
+#		description = ...
+#		trigger = {								# In empire creation / galaxy setup, this has no scope. During the game, when there are actual countries existing, it is set to country scope.
+#			local_human_species_class = ..		# If you want to use country scope here, you must always check is_scope_valid first (see civic_devouring_swarm), or you will get errors or it won't work as intended.
+#		}
+#		modifier = {							# modifier that is applied to the country when triggers are evaluated as true
+#			...
+#		}
+#	}
+#	ai_playable = {}							# Similar to "playable", for AI
+#}
+
+civic_corvee_system = {
+	description = "civic_corvee_system_effects"
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	possible = {
+		ethics = {
+			NOR = {
+				text = civic_tooltip_not_egalitarian
+				value = ethic_egalitarian
+				value = ethic_fanatic_egalitarian
+			}
+		}
+		civics = {
+			NOT = {
+				value = civic_free_haven
+			}
+		}
+	}
+	random_weight = { base = @civic_default_random_weight }
+	ai_weight = {
+		base = @ai_civic_default_base_weight
+		modifier = {
+			factor = @ai_civic_personality_match_factor
+			OR = {
+				has_ai_personality = ruthless_capitalists
+				has_ai_personality = hegemonic_imperialists
+				has_ai_personality = slaving_despots
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_mismatch_factor
+			OR = {
+				has_ai_personality = peaceful_traders
+				has_ai_personality = democratic_crusaders
+				has_ai_personality = slaving_despots
+			}
+		}
+	}
+	modifier = {
+		pop_growth_from_immigration = 0.15
+	}
+}
+
+civic_imperial_cult = {
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	possible = {
+		authority = {
+			value = auth_imperial
+		}
+		ethics = {
+			OR = {
+				text = civic_tooltip_authoritarian
+				value = ethic_authoritarian
+				value = ethic_fanatic_authoritarian
+			}
+			OR = {
+				text = civic_tooltip_spiritualist
+				value = ethic_spiritualist
+				value = ethic_fanatic_spiritualist
+			}
+		}
+	}
+	random_weight = { base = @civic_default_random_weight }
+	ai_weight = {
+		base = @ai_civic_default_base_weight
+		modifier = {
+			factor = @ai_civic_personality_match_factor
+			OR = {
+				has_ai_personality = evangelising_zealots
+				has_ai_personality = hegemonic_imperialists
+				has_ai_personality = decadent_hierarchy
+				has_ai_personality = fanatic_purifiers
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_mismatch_factor
+			OR = {
+				has_ai_personality = peaceful_traders
+				has_ai_personality = democratic_crusaders
+				has_ai_personality = erudite_explorers
+				has_ai_personality = harmonious_hierarchy
+			}
+		}
+	}
+	modifier = {
+		country_edict_fund_add = 100
+	}
+}
+
+civic_beacon_of_liberty = {
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	possible = {
+		authority = {
+			value = auth_democratic
+		}
+		ethics = {
+			OR = {
+				text = civic_tooltip_egalitarian
+				value = ethic_egalitarian
+				value = ethic_fanatic_egalitarian
+			}
+			NOR = {
+				text = civic_tooltip_not_xenophobe
+				value = ethic_xenophobe
+				value = ethic_fanatic_xenophobe
+			}
+		}
+		civics = {
+			NOT = { value = civic_crusader_spirit }
+		}
+	}
+	random_weight = { base = @civic_default_random_weight }
+	ai_weight = {
+		base = @ai_civic_default_base_weight
+		modifier = {
+			factor = @ai_civic_personality_match_factor
+			OR = {
+				has_ai_personality = erudite_explorers
+				has_ai_personality = spiritual_seekers
+				has_ai_personality = peaceful_traders
+				has_ai_personality = democratic_crusaders
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_mismatch_factor
+			OR = {
+				has_ai_personality = hegemonic_imperialists
+				has_ai_personality = evangelising_zealots
+				has_ai_personality = ruthless_capitalists
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_forbid_factor
+			OR = {
+				has_ai_personality = slaving_despots
+				has_ai_personality = xenophobic_isolationists
+				has_ai_personality = fanatic_purifiers
+			}
+		}
+	}
+	modifier = {
+		country_unity_produces_mult = 0.15
+		empire_size_pops_mult = -0.15
+	}
+}
+
+civic_exalted_priesthood = {
+	description = "civic_tooltip_exalted_priesthood_effects"
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	possible = {
+		authority = {
+			OR = {
+				value = auth_oligarchic
+				value = auth_dictatorial
+			}
+		}
+		ethics = {
+			OR = {
+				text = civic_tooltip_spiritualist
+				value = ethic_spiritualist
+				value = ethic_fanatic_spiritualist
+			}
+		}
+		civics = {
+			NOR = {
+				value = civic_merchant_guilds
+				value = civic_aristocratic_elite
+				value = civic_technocracy
+			}
+		}
+	}
+	modifier = {
+		planet_priests_unity_produces_add = 1
+	}
+	random_weight = { base = @civic_default_random_weight }
+	ai_weight = {
+		base = @ai_civic_default_base_weight
+		modifier = {
+			factor = @ai_civic_personality_match_factor
+			OR = {
+				has_ai_personality = spiritual_seekers
+				has_ai_personality = evangelising_zealots
+				has_ai_personality = decadent_hierarchy
+				has_ai_personality = fanatic_purifiers
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_mismatch_factor
+			OR = {
+				has_ai_personality = hegemonic_imperialists
+				has_ai_personality = erudite_explorers
+				has_ai_personality = democratic_crusaders
+				has_ai_personality = peaceful_traders
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_forbid_factor
+			OR = {
+				has_ai_personality = ruthless_capitalists
+				has_ai_personality = slaving_despots
+			}
+		}
+	}
+}
+
+civic_philosopher_king = {
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	possible = {
+		authority = {
+			OR = {
+				text = civic_tooltip_dic_imp
+				value = auth_dictatorial
+				value = auth_imperial
+			}
+		}
+	}
+	random_weight = { base = @civic_default_random_weight }
+	ai_weight = {
+		base = @ai_civic_default_base_weight
+		modifier = {
+			factor = @ai_civic_personality_match_factor
+			OR = {
+				has_ai_personality = erudite_explorers
+				has_ai_personality = spiritual_seekers
+				has_ai_personality = harmonious_hierarchy
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_mismatch_factor
+			OR = {
+				has_ai_personality = hegemonic_imperialists
+				has_ai_personality = decadent_hierarchy
+				has_ai_personality = fanatic_purifiers
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_forbid_factor
+			OR = {
+				has_ai_personality = ruthless_capitalists
+				has_ai_personality = slaving_despots
+			}
+		}
+	}
+	modifier = {
+		councilor_exp_gain = 0.2
+		negative_traits_country = -1
+	}
+}
+
+civic_meritocracy = {
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	possible = {
+		authority = {
+			OR = {
+				text = civic_tooltip_dem_oli
+				value = auth_democratic
+				value = auth_oligarchic
+			}
+		}
+	}
+	random_weight = { base = @civic_default_random_weight }
+	ai_weight = {
+		base = @ai_civic_default_base_weight
+		modifier = {
+			factor = @ai_civic_personality_match_factor
+			OR = {
+				has_ai_personality = honorbound_warriors
+				has_ai_personality = erudite_explorers
+				has_ai_personality = harmonious_hierarchy
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_mismatch_factor
+			OR = {
+				has_ai_personality = decadent_hierarchy
+				has_ai_personality = evangelising_zealots
+				has_ai_personality = fanatic_purifiers
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_forbid_factor
+			OR = {
+				has_ai_personality = slaving_despots
+				has_ai_personality = ruthless_capitalists
+			}
+		}
+	}
+	modifier = {
+		planet_jobs_specialist_produces_mult = 0.10
+	}
+
+	swap_type = {
+		trigger = {
+			
+		}
+
+		modifier = {
+			leader_trait_selection_options_add = 1
+		}
+	}
+}
+
+civic_citizen_service = {
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	possible = {
+		ethics = {
+			OR = {
+				text = civic_tooltip_militarist
+				value = ethic_militarist
+				value = ethic_fanatic_militarist
+			}
+			NOT = {
+				value = ethic_fanatic_xenophile
+			}
+		}
+		authority = {
+			OR = {
+				text = civic_tooltip_dem_oli
+				value = auth_democratic
+				value = auth_oligarchic
+			}
+		}
+		civics = {
+			NOT = { value = civic_reanimated_armies }
+		}
+	}
+	random_weight = { base = @civic_default_random_weight }
+	ai_weight = {
+		base = @ai_civic_default_base_weight
+		modifier = {
+			factor = @ai_civic_personality_match_factor
+			OR = {
+				has_ai_personality = honorbound_warriors
+				has_ai_personality = evangelising_zealots
+				has_ai_personality = peaceful_traders
+				has_ai_personality = democratic_crusaders
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_mismatch_factor
+			OR = {
+				has_ai_personality = erudite_explorers
+				has_ai_personality = decadent_hierarchy
+				has_ai_personality = spiritual_seekers
+				has_ai_personality = harmonious_hierarchy
+				has_ai_personality = fanatic_befrienders
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_forbid_factor
+			OR = {
+				has_ai_personality = slaving_despots
+			}
+		}
+	}
+	modifier = {
+		country_naval_cap_mult = 0.15
+		planet_soldiers_unity_produces_add = 2
+	}
+	description = "civic_tooltip_citizen_service_effects"
+}
+
+civic_technocracy = {
+	description = civic_tooltip_technocracy_effects
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	possible = {
+		ethics = {
+			OR = {
+				text = civic_tooltip_materialist
+				value = ethic_materialist
+				value = ethic_fanatic_materialist
+			}
+		}
+		civics = {
+			NOR = {
+				value = civic_merchant_guilds
+				value = civic_exalted_priesthood
+				value = civic_aristocratic_elite
+				value = civic_shared_burden
+			}
+		}
+	}
+	modifier = {
+		num_tech_alternatives_add = 1
+	}
+	random_weight = { base = @civic_default_random_weight }
+	ai_weight = {
+		base = @ai_civic_default_base_weight
+		modifier = {
+			factor = @ai_civic_personality_match_factor
+			OR = {
+				has_ai_personality = erudite_explorers
+				has_ai_personality = ruthless_capitalists
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_mismatch_factor
+			OR = {
+				has_ai_personality = harmonious_hierarchy
+				has_ai_personality = democratic_crusaders
+				has_ai_personality = evangelising_zealots
+				has_ai_personality = spiritual_seekers
+			}
+		}
+	}
+}
+
+civic_feudal_realm = {
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	possible = {
+		authority = {
+			value = auth_imperial
+		}
+	}
+	random_weight = { base = @civic_default_random_weight }
+	ai_weight = {
+		base = @ai_civic_default_base_weight
+		modifier = {
+			factor = @ai_civic_personality_match_factor
+			OR = {
+				has_ai_personality = hegemonic_imperialists
+				has_ai_personality = slaving_despots
+				has_ai_personality = decadent_hierarchy
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_mismatch_factor
+			OR = {
+				has_ai_personality = peaceful_traders
+				has_ai_personality = fanatic_befrienders
+				has_ai_personality = harmonious_hierarchy
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_forbid_factor
+			OR = {
+				has_ai_personality = erudite_explorers
+				has_ai_personality = democratic_crusaders
+			}
+		}
+	}
+
+	modifier = {
+		leaders_cost_mult = -0.5
+	}
+	description = "civic_tooltip_feudal_realm_effects"
+}
+
+civic_police_state = {
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	possible = {
+		ethics = {
+			NOT = {
+				value = ethic_fanatic_egalitarian
+			}
+		}
+	}
+	modifier = {
+		planet_stability_add = 5
+		planet_enforcers_unity_produces_add = 1
+		planet_telepaths_unity_produces_add = 1
+	}
+	random_weight = { base = @civic_default_random_weight }
+	ai_weight = {
+		base = @ai_civic_default_base_weight
+		modifier = {
+			factor = @ai_civic_personality_match_factor
+			OR = {
+				has_ai_personality = evangelising_zealots
+				has_ai_personality = ruthless_capitalists
+				has_ai_personality = hegemonic_imperialists
+				has_ai_personality = slaving_despots
+				has_ai_personality = decadent_hierarchy
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_mismatch_factor
+			OR = {
+				has_ai_personality = spiritual_seekers
+				has_ai_personality = harmonious_hierarchy
+				has_ai_personality = fanatic_befrienders
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_forbid_factor
+			OR = {
+				has_ai_personality = democratic_crusaders
+				has_ai_personality = erudite_explorers
+				has_ai_personality = peaceful_traders
+			}
+		}
+	}
+}
+
+civic_idealistic_foundation = {
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	possible = {
+		ethics = {
+			OR = {
+				text = civic_tooltip_egalitarian
+				value = ethic_egalitarian
+				value = ethic_fanatic_egalitarian
+			}
+		}
+	}
+	random_weight = { base = @civic_default_random_weight }
+	ai_weight = {
+		base = @ai_civic_default_base_weight
+		modifier = {
+			factor = @ai_civic_personality_match_factor
+			OR = {
+				has_ai_personality = erudite_explorers
+				has_ai_personality = peaceful_traders
+				has_ai_personality = fanatic_befrienders
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_mismatch_factor
+			OR = {
+				has_ai_personality = spiritual_seekers
+				has_ai_personality = harmonious_hierarchy
+				has_ai_personality = democratic_crusaders
+				has_ai_personality = fanatic_purifiers
+				has_ai_personality = xenophobic_isolationists
+				has_ai_personality = evangelising_zealots
+				has_ai_personality = decadent_hierarchy
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_forbid_factor
+			OR = {
+				has_ai_personality = slaving_despots
+				has_ai_personality = ruthless_capitalists
+				has_ai_personality = hegemonic_imperialists
+			}
+		}
+	}
+	modifier = {
+		pop_citizen_happiness = 0.10
+	}
+}
+
+civic_environmentalist = {
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	possible = {
+		civics = {
+			NOR = {
+				value = civic_relentless_industrialists
+				value = civic_dystopian_society
+			}
+		}
+	}
+	random_weight = { base = @civic_default_random_weight }
+	ai_weight = {
+		base = @ai_civic_default_base_weight
+		modifier = {
+			factor = @ai_civic_personality_match_factor
+			OR = {
+				has_ai_personality = erudite_explorers
+				has_ai_personality = spiritual_seekers
+				has_ai_personality = harmonious_hierarchy
+				has_ai_personality = fanatic_befrienders
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_mismatch_factor
+			OR = {
+				has_ai_personality = honorbound_warriors
+				has_ai_personality = evangelising_zealots
+				has_ai_personality = hegemonic_imperialists
+				has_ai_personality = slaving_despots
+				has_ai_personality = decadent_hierarchy
+				has_ai_personality = fanatic_purifiers
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_forbid_factor
+			OR = {
+				has_ai_personality = ruthless_capitalists
+			}
+		}
+	}
+	modifier = {
+		planet_pops_consumer_goods_upkeep_mult = -0.20
+	}
+	description = "civic_tooltip_environmentalist_effects"
+}
+
+civic_slaver_guilds = {
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	possible = {
+		ethics = {
+			OR = {
+				text = civic_tooltip_authoritarian
+				value = ethic_authoritarian
+				value = ethic_fanatic_authoritarian
+			}
+		}
+		civics = { NOT = { value = civic_pleasure_seekers } }
+	}
+	random_weight = { base = @civic_default_random_weight }
+	ai_weight = {
+		base = @ai_civic_default_base_weight
+		modifier = {
+			factor = @ai_civic_personality_match_factor
+			OR = {
+				has_ai_personality = ruthless_capitalists
+				has_ai_personality = slaving_despots
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_mismatch_factor
+			OR = {
+				has_ai_personality = spiritual_seekers
+				has_ai_personality = harmonious_hierarchy
+				has_ai_personality = peaceful_traders
+				has_ai_personality = fanatic_befrienders
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_forbid_factor
+			OR = {
+				has_ai_personality = erudite_explorers
+				has_ai_personality = democratic_crusaders
+			}
+		}
+	}
+	modifier = {
+		planet_jobs_slave_produces_mult = 0.10
+		country_pop_enslaved_mult = 0.35
+	}
+}
+
+civic_inwards_perfection = {
+	modification = no
+	description = "civic_tooltip_inward_perfection_effects"
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	possible = {
+		ethics = {
+			OR = {
+				text = civic_tooltip_pacifist
+				value = ethic_pacifist
+				value = ethic_fanatic_pacifist
+			}
+			OR = {
+				text = civic_tooltip_xenophobe
+				value = ethic_xenophobe
+				value = ethic_fanatic_xenophobe
+			}
+		}
+		origin = {
+			NOR = {
+				value = origin_common_ground
+				value = origin_hegemon
+				value = origin_fear_of_the_dark
+			}
+		}
+		civics = {
+			NOR = {
+				value = civic_pompous_purists
+				value = civic_eager_explorers
+			}
+		}
+	}
+	random_weight = { base = 1000 }
+	ai_weight = {
+		base = @ai_civic_default_base_weight
+		modifier = {
+			factor = @ai_civic_personality_match_factor
+			OR = {
+				has_ai_personality = spiritual_seekers
+				has_ai_personality = slaving_despots
+				has_ai_personality = decadent_hierarchy
+				has_ai_personality = harmonious_hierarchy
+				has_ai_personality = xenophobic_isolationists
+				has_ai_personality = fanatic_purifiers
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_mismatch_factor
+			OR = {
+				has_ai_personality = peaceful_traders
+				has_ai_personality = ruthless_capitalists
+				has_ai_personality = evangelising_zealots
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_forbid_factor
+			OR = {
+				has_ai_personality = fanatic_befrienders
+				has_ai_personality = federation_builders
+				has_ai_personality = democratic_crusaders
+				has_ai_personality = hegemonic_imperialists
+				has_ai_personality = honorbound_warriors
+			}
+		}
+	}
+	modifier = {
+		country_unity_produces_mult = 0.20
+		pop_growth_speed = 0.10
+		country_edict_fund_add = 50
+		pop_citizen_happiness = 0.05
+		envoys_add = -1
+		intel_encryption_add = 1
+		intel_decryption_add = -1
+	}
+}
+
+civic_warrior_culture = {
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	possible = {
+		ethics = {
+			OR = {
+				text = civic_tooltip_militarist
+				value = ethic_militarist
+				value = ethic_fanatic_militarist
+			}
+		}
+		civics = {
+			NOR = {
+				value = civic_dystopian_society
+				value = civic_pleasure_seekers
+			}
+		}
+	}
+	random_weight = { base = @civic_default_random_weight }
+	ai_weight = {
+		base = @ai_civic_default_base_weight
+		modifier = {
+			factor = @ai_civic_personality_match_factor
+			OR = {
+				has_ai_personality = honorbound_warriors
+				has_ai_personality = evangelising_zealots
+				has_ai_personality = democratic_crusaders
+				has_ai_personality = fanatic_purifiers
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_mismatch_factor
+			OR = {
+				has_ai_personality = erudite_explorers
+				has_ai_personality = spiritual_seekers
+				has_ai_personality = ruthless_capitalists
+				has_ai_personality = slaving_despots
+				has_ai_personality = decadent_hierarchy
+				has_ai_personality = federation_builders
+				has_ai_personality = fanatic_befrienders
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_forbid_factor
+			OR = {
+				has_ai_personality = harmonious_hierarchy
+				has_ai_personality = peaceful_traders
+			}
+		}
+	}
+	description = "civic_tooltip_warrior_culture_effects"
+	modifier = {
+		army_damage_mult = 0.20
+	}
+	swap_type = {
+		description = "civic_tooltip_warrior_culture_effects"
+		trigger = {
+			
+		}
+		modifier = {
+			country_enclave_capacity_add = 1
+		}
+	}
+}
+
+civic_distinguished_admiralty = {
+	description = civic_tooltip_distinguished_admiralty_effects
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	possible = {
+		ethics = {
+			OR = {
+				text = civic_tooltip_militarist
+				value = ethic_militarist
+				value = ethic_fanatic_militarist
+			}
+		}
+	}
+	random_weight = { base = @civic_default_random_weight }
+	ai_weight = {
+		base = @ai_civic_default_base_weight
+		modifier = {
+			factor = @ai_civic_personality_match_factor
+			OR = {
+				has_ai_personality = honorbound_warriors
+				has_ai_personality = hegemonic_imperialists
+				has_ai_personality = democratic_crusaders
+				has_ai_personality = fanatic_purifiers
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_mismatch_factor
+			OR = {
+				has_ai_personality = ruthless_capitalists
+				has_ai_personality = erudite_explorers
+				has_ai_personality = harmonious_hierarchy
+				has_ai_personality = fanatic_befrienders
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_forbid_factor
+			OR = {
+				has_ai_personality = peaceful_traders
+				has_ai_personality = spiritual_seekers
+			}
+		}
+	}
+	modifier = {
+		ship_fire_rate_mult = 0.10
+		admiral_exp_gain = 0.2
+		command_limit_add = 10
+	}
+}
+
+civic_free_haven = {
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	possible = {
+		ethics = {
+			OR = {
+				text = civic_tooltip_xenophile
+				value = ethic_xenophile
+				value = ethic_fanatic_xenophile
+			}
+		}
+		civics = {
+			NOR = {
+				value = civic_corvee_system
+				value = civic_dystopian_society
+			}
+		}
+	}
+	random_weight = { base = @civic_default_random_weight }
+	ai_weight = {
+		base = @ai_civic_default_base_weight
+		modifier = {
+			factor = @ai_civic_personality_match_factor
+			OR = {
+				has_ai_personality = erudite_explorers
+				has_ai_personality = peaceful_traders
+				has_ai_personality = democratic_crusaders
+				has_ai_personality = harmonious_hierarchy
+				has_ai_personality = federation_builders
+				has_ai_personality = fanatic_befrienders
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_mismatch_factor
+			OR = {
+				has_ai_personality = decadent_hierarchy
+				has_ai_personality = honorbound_warriors
+				has_ai_personality = evangelising_zealots
+				has_ai_personality = hegemonic_imperialists
+				has_ai_personality = ruthless_capitalists
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_forbid_factor
+			OR = {
+				has_ai_personality = xenophobic_isolationists
+				has_ai_personality = slaving_despots
+				has_ai_personality = fanatic_purifiers
+			}
+		}
+	}
+	modifier = {
+		pop_growth_from_immigration = 0.15
+		planet_immigration_pull_mult = 0.50
+	}
+}
+
+civic_cutthroat_politics = {
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	random_weight = { base = @civic_default_random_weight }
+	ai_weight = {
+		base = @ai_civic_default_base_weight
+		modifier = {
+			factor = @ai_civic_personality_match_factor
+			OR = {
+				has_ai_personality = evangelising_zealots
+				has_ai_personality = ruthless_capitalists
+				has_ai_personality = hegemonic_imperialists
+				has_ai_personality = slaving_despots
+				has_ai_personality = decadent_hierarchy
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_mismatch_factor
+			OR = {
+				has_ai_personality = federation_builders
+				has_ai_personality = erudite_explorers
+				has_ai_personality = democratic_crusaders
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_forbid_factor
+			OR = {
+				has_ai_personality = harmonious_hierarchy
+				has_ai_personality = peaceful_traders
+				has_ai_personality = spiritual_seekers
+			}
+		}
+	}
+	modifier = {
+		edicts_upkeep_mult = -0.20
+		intel_decryption_add = 1
+	}
+}
+
+# Disable this civic if host has MegaCorp as it's replaced by the Corporate authority
+civic_corporate_dominion = {
+	playable = { NOT = {  } }
+	ai_playable = { NOT = {  } }
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	possible = {
+		authority = {
+			value = auth_oligarchic
+		}
+		ethics = {
+			NOR = {
+				text = civic_tooltip_not_xenophobe
+				value = ethic_xenophobe
+				value = ethic_fanatic_xenophobe
+			}
+		}
+	}
+	random_weight = {
+		base = @civic_uncommon_random_weight
+		modifier = {
+			factor = 0
+			
+		}
+	}
+	ai_weight = {
+		base = @ai_civic_default_base_weight
+		modifier = {
+			factor = @ai_civic_personality_match_factor
+			OR = {
+				has_ai_personality = ruthless_capitalists
+				has_ai_personality = slaving_despots
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_mismatch_factor
+			OR = {
+				has_ai_personality = evangelising_zealots
+				has_ai_personality = harmonious_hierarchy
+				has_ai_personality = federation_builders
+				has_ai_personality = xenophobic_isolationists
+				has_ai_personality = fanatic_befrienders
+				has_ai_personality = fanatic_purifiers
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_forbid_factor
+			OR = {
+				has_ai_personality = spiritual_seekers
+				has_ai_personality = erudite_explorers
+				has_ai_personality = honorbound_warriors
+				has_ai_personality = democratic_crusaders
+			}
+		}
+	}
+
+	# unlocks sponsored_colonizer ship size
+
+	description = "civic_tooltip_corporate_dominion_effects"
+}
+
+civic_agrarian_idyll = {
+	description = "civic_tooltip_agrarian_idyll_effects"
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	possible = {
+		ethics = {
+			OR = {
+				text = civic_tooltip_pacifist
+				value = ethic_pacifist
+				value = ethic_fanatic_pacifist
+			}
+		}
+		origin = {
+			NOR = {
+				value = origin_post_apocalyptic
+				value = origin_shattered_ring
+				value = origin_void_dwellers
+				value = origin_remnants
+			}
+		}
+		civics = {
+			NOR = {
+				value = civic_relentless_industrialists
+				value = civic_dystopian_society
+			}
+		}
+	}
+
+	leader_background_job_weight = {
+		"farmer" = 50
+	}
+
+	random_weight = { base = @civic_default_random_weight }
+	ai_weight = {
+		base = @ai_civic_default_base_weight
+		modifier = {
+			factor = @ai_civic_personality_match_factor
+			OR = {
+				has_ai_personality = peaceful_traders
+				has_ai_personality = harmonious_hierarchy
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_mismatch_factor
+			OR = {
+				has_ai_personality = erudite_explorers
+				has_ai_personality = evangelising_zealots
+				has_ai_personality = fanatic_purifiers
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_forbid_factor
+			OR = {
+				has_ai_personality = slaving_despots
+				has_ai_personality = hegemonic_imperialists
+				has_ai_personality = honorbound_warriors
+				has_ai_personality = ruthless_capitalists
+			}
+		}
+	}
+	swap_type = {
+		description = "civic_tooltip_agrarian_anglers_effects"
+		trigger = {
+			is_scope_valid = yes
+			has_civic = civic_anglers
+		}
+	}
+}
+
+civic_shadow_council = {
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	possible = {
+		authority = {
+			OR = {
+				text = civic_tooltip_dem_oli_dic
+				value = auth_democratic
+				value = auth_oligarchic
+				value = auth_dictatorial
+			}
+		}
+	}
+	ai_weight = {
+		base = @ai_civic_default_base_weight
+		modifier = {
+			factor = @ai_civic_personality_match_factor
+			OR = {
+				has_ai_personality = evangelising_zealots
+				has_ai_personality = hegemonic_imperialists
+				has_ai_personality = slaving_despots
+				has_ai_personality = decadent_hierarchy
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_mismatch_factor
+			OR = {
+				has_ai_personality = erudite_explorers
+				has_ai_personality = democratic_crusaders
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_forbid_factor
+			OR = {
+				has_ai_personality = peaceful_traders
+			}
+		}
+	}
+	random_weight = { base = @civic_default_random_weight }
+	modifier = {
+		country_election_cost_mult = -0.75
+		planet_jobs_ruler_produces_mult = 0.10
+		intel_decryption_add = 1
+	}
+}
+
+civic_mining_guilds = {
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	random_weight = { base = @civic_default_random_weight }
+	ai_weight = {
+		base = @ai_civic_default_base_weight
+		modifier = {
+			factor = @ai_civic_personality_match_factor
+			OR = {
+				has_ai_personality = ruthless_capitalists
+				has_ai_personality = peaceful_traders
+				has_ai_personality = slaving_despots
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_mismatch_factor
+			OR = {
+				has_ai_personality = honorbound_warriors
+				has_ai_personality = evangelising_zealots
+				has_ai_personality = spiritual_seekers
+				has_ai_personality = democratic_crusaders
+			}
+		}
+	}
+	modifier = {
+		planet_miners_minerals_produces_add = 1
+	}
+}
+
+civic_parliamentary_system = {
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	possible = {
+		authority = {
+			value = auth_democratic
+		}
+	}
+	random_weight = { base = @civic_default_random_weight }
+	ai_weight = {
+		base = @ai_civic_default_base_weight
+		modifier = {
+			factor = @ai_civic_personality_match_factor
+			OR = {
+				has_ai_personality = erudite_explorers
+				has_ai_personality = peaceful_traders
+				has_ai_personality = harmonious_hierarchy
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_mismatch_factor
+			OR = {
+				has_ai_personality = evangelising_zealots
+				has_ai_personality = ruthless_capitalists
+				has_ai_personality = hegemonic_imperialists
+				has_ai_personality = decadent_hierarchy
+				has_ai_personality = xenophobic_isolationists
+				has_ai_personality = fanatic_purifiers
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_forbid_factor
+			OR = {
+				has_ai_personality = slaving_despots
+			}
+		}
+	}
+	description = "civic_tooltip_parliamentary_system_effects"
+	modifier = {
+		pop_factions_produces_mult = 0.40
+	}
+}
+
+civic_efficient_bureaucracy = {
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	random_weight = { base = @civic_default_random_weight }
+	ai_weight = {
+		base = @ai_civic_default_base_weight
+		modifier = {
+			factor = @ai_civic_personality_match_factor
+			OR = {
+				has_ai_personality = ruthless_capitalists
+				has_ai_personality = peaceful_traders
+				has_ai_personality = harmonious_hierarchy
+				has_ai_personality = federation_builders
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_mismatch_factor
+			OR = {
+				has_ai_personality = honorbound_warriors
+				has_ai_personality = spiritual_seekers
+				has_ai_personality = democratic_crusaders
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_forbid_factor
+			OR = {
+				has_ai_personality = decadent_hierarchy
+			}
+		}
+	}
+	# The edict fund production is deliberately only limited to  Bureaucrats, Priests, Managers and Death Priests.
+	description = "civic_tooltip_efficient_bureaucracy_effects"
+	modifier = {
+		planet_administrators_upkeep_mult = -0.20
+	}
+}
+
+civic_nationalistic_zeal = {
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	possible = {
+		ethics = {
+			OR = {
+				text = civic_tooltip_militarist
+				value = ethic_militarist
+				value = ethic_fanatic_militarist
+			}
+		}
+	}
+	random_weight = { base = @civic_default_random_weight }
+	ai_weight = {
+		base = @ai_civic_default_base_weight
+		modifier = {
+			factor = @ai_civic_personality_match_factor
+			OR = {
+				has_ai_personality = honorbound_warriors
+				has_ai_personality = evangelising_zealots
+				has_ai_personality = hegemonic_imperialists
+				has_ai_personality = democratic_crusaders
+				has_ai_personality = xenophobic_isolationists
+				has_ai_personality = fanatic_purifiers
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_mismatch_factor
+			OR = {
+				has_ai_personality = erudite_explorers
+				has_ai_personality = spiritual_seekers
+				has_ai_personality = peaceful_traders
+				has_ai_personality = decadent_hierarchy
+				has_ai_personality = harmonious_hierarchy
+				has_ai_personality = federation_builders
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_forbid_factor
+			OR = {
+				has_ai_personality = fanatic_befrienders
+			}
+		}
+	}
+	modifier = {
+		country_war_exhaustion_mult = -0.2
+		country_claim_influence_cost_mult = -0.15
+	}
+}
+
+civic_functional_architecture = {
+	description = "civic_tooltip_functional_architecture_effects"
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	random_weight = { base = @civic_default_random_weight }
+	ai_weight = {
+		base = @ai_civic_default_base_weight
+		modifier = {
+			factor = @ai_civic_personality_match_factor
+			OR = {
+				has_ai_personality = erudite_explorers
+				has_ai_personality = ruthless_capitalists
+				has_ai_personality = hegemonic_imperialists
+				has_ai_personality = harmonious_hierarchy
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_mismatch_factor
+			OR = {
+				has_ai_personality = spiritual_seekers
+				has_ai_personality = decadent_hierarchy
+				has_ai_personality = peaceful_traders
+			}
+		}
+	}
+	modifier = {
+		planet_structures_cost_mult = -0.15
+		planet_max_buildings_add = 1
+	}
+}
+
+civic_aristocratic_elite = {
+	description = "civic_tooltip_aristocratic_elite_effects"
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	modifier = {
+		governor_exp_gain = 0.2
+	}
+	possible = {
+		ethics = {
+			NOR = {
+				text = civic_tooltip_not_egalitarian
+				value = ethic_egalitarian
+				value = ethic_fanatic_egalitarian
+			}
+		}
+		authority = {
+			OR = {
+				text = civic_tooltip_oli_imp
+				value = auth_oligarchic
+				value = auth_imperial
+			}
+		}
+		civics = {
+			NOR = {
+				value = civic_merchant_guilds
+				value = civic_exalted_priesthood
+				value = civic_technocracy
+			}
+		}
+	}
+	random_weight = { base = @civic_default_random_weight }
+	ai_weight = {
+		base = @ai_civic_default_base_weight
+		modifier = {
+			factor = @ai_civic_personality_match_factor
+			OR = {
+				has_ai_personality = hegemonic_imperialists
+				has_ai_personality = slaving_despots
+				has_ai_personality = decadent_hierarchy
+				has_ai_personality = harmonious_hierarchy
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_mismatch_factor
+			OR = {
+				has_ai_personality = erudite_explorers
+				has_ai_personality = spiritual_seekers
+				has_ai_personality = peaceful_traders
+				has_ai_personality = fanatic_befrienders
+				has_ai_personality = federation_builders
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_forbid_factor
+			OR = {
+				has_ai_personality = democratic_crusaders
+			}
+		}
+	}
+}
+
+civic_shared_burden = {
+	playable = {  }
+	ai_playable = {  }
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	possible = {
+		ethics = {
+			value = ethic_fanatic_egalitarian
+			NOR = {
+				text = civic_tooltip_not_xenophobe
+				value = ethic_xenophobe
+				value = ethic_fanatic_xenophobe
+			}
+		}
+		civics = {
+			NOT = {
+				value = civic_technocracy
+				value = civic_pleasure_seekers
+			}
+
+		}
+	}
+	modifier = {
+		planet_stability_add = 5
+		pop_demotion_time_mult = -0.45
+	}
+	random_weight = {
+		base = @civic_rare_random_weight # Should be fairly rare
+	}
+	ai_weight = {
+		base = @ai_civic_rare_base_weight
+		modifier = {
+			factor = @ai_civic_personality_match_factor
+			OR = {
+				has_ai_personality = spiritual_seekers
+				has_ai_personality = harmonious_hierarchy
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_mismatch_factor
+			OR = {
+				has_ai_personality = evangelising_zealots
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_forbid_factor
+			OR = {
+				has_ai_personality = slaving_despots
+				has_ai_personality = hegemonic_imperialists
+				has_ai_personality = ruthless_capitalists
+				has_ai_personality = decadent_hierarchy
+			}
+		}
+	}
+
+	description = civic_tooltip_shared_burden_effects
+}
+
+civic_fanatic_purifiers = {
+	modification = no
+	playable = {  }
+	ai_playable = {  }
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	possible = {
+		ethics = {
+			value = ethic_fanatic_xenophobe
+			OR = {
+				value = ethic_militarist
+				value = ethic_spiritualist
+			}
+		}
+		civics = {
+			NOR = {
+				value = civic_barbaric_despoilers
+				value = civic_pompous_purists
+				value = civic_crusader_spirit
+			}
+		}
+		origin = {
+			NOR = {
+				value = origin_syncretic_evolution
+				value = origin_common_ground
+				value = origin_hegemon
+				value = origin_toxic_knights
+				value = origin_broken_shackles
+			}
+		}
+	}
+	random_weight = {
+		base = 1000
+		modifier = {
+			factor = 0
+			NOT = {  }
+		}
+	}
+
+	description = "civic_tooltip_fanatic_purifiers_effects"
+	modifier = {
+		ship_fire_rate_mult = 0.33
+		army_damage_mult = 0.33
+		starbase_shipyard_build_cost_mult = -0.15
+		country_naval_cap_mult = 0.33
+	}
+
+	swap_type = {
+		trigger = {
+			is_scope_valid = yes
+			has_country_flag = dark_forest_achievement
+		}
+		description = "civic_tooltip_fanatic_purifiers_effects"
+		modifier = {
+			country_government_civic_points_add = 1
+		}
+	}
+}
+
+civic_barbaric_despoilers = {
+	playable = {
+		
+	}
+	ai_playable = {
+		
+	}
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+		origin = {
+			NOT = {
+				value = origin_slavers
+			}
+		}
+	}
+	possible = {
+		ethics = {
+			OR = {
+				text = civic_tooltip_militarist
+				value = ethic_fanatic_militarist
+				value = ethic_militarist
+			}
+			OR = {
+				value = ethic_fanatic_authoritarian
+				value = ethic_authoritarian
+				value = ethic_fanatic_xenophobe
+				value = ethic_xenophobe
+			}
+			NOR = {
+				value = ethic_xenophile
+				value = ethic_fanatic_xenophile
+			}
+		}
+		civics = {
+			NOR = {
+				value = civic_fanatic_purifiers
+			}
+		}
+		origin = {
+			NOT = {
+				value = origin_common_ground
+			}
+		}
+	}
+	modification = no
+	random_weight = {
+		base = @civic_uncommon_random_weight
+		modifier = {
+			factor = 0
+			NOT = {  }
+		}
+		modifier = {
+			# civic has no effect after galaxy generation, disable for random generation
+			factor = 0
+			has_global_flag = game_started
+		}
+	}
+	description = "civic_tooltip_barbaric_despoilers_effects"
+	swap_type = {
+		description = "civic_tooltip_barbaric_despoilers_effects"
+		trigger = {
+			
+		}
+		modifier = {
+			country_enclave_capacity_add = 1
+		}
+	}
+}
+
+civic_byzantine_bureaucracy = {
+	playable = {  }
+	ai_playable = {  }
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	possible = {
+		ethics = {
+			NOR = {
+				text = civic_tooltip_not_spiritualist
+				value = ethic_spiritualist
+				value = ethic_fanatic_spiritualist
+			}
+		}
+	}
+	random_weight = {
+		base = @civic_uncommon_random_weight
+	}
+	ai_weight = {
+		base = @ai_civic_uncommon_base_weight
+		modifier = {
+			factor = @ai_civic_personality_match_factor
+			OR = {
+				has_ai_personality = ruthless_capitalists
+				has_ai_personality = hegemonic_imperialists
+				has_ai_personality = decadent_hierarchy
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_mismatch_factor
+			OR = {
+				has_ai_personality = erudite_explorers
+				has_ai_personality = peaceful_traders
+				has_ai_personality = democratic_crusaders
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_forbid_factor
+			OR = {
+				has_ai_personality = spiritual_seekers
+			}
+		}
+	}
+	modifier = {
+		planet_administrators_unity_produces_add = 1
+	}
+	description = "civic_tooltip_byzantine_bureaucracy_effects"
+}
+
+civic_merchant_guilds = {
+	description = "civic_tooltip_merchant_guilds_effects"
+	playable = {  }
+	ai_playable = {  }
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	possible = {
+		civics = {
+			NOR = {
+				value = civic_exalted_priesthood
+				value = civic_aristocratic_elite
+				value = civic_technocracy
+			}
+		}
+	}
+	random_weight = {
+		base = @civic_uncommon_random_weight
+	}
+	ai_weight = {
+		base = @ai_civic_uncommon_base_weight
+		modifier = {
+			factor = @ai_civic_personality_match_factor
+			OR = {
+				has_ai_personality = ruthless_capitalists
+				has_ai_personality = peaceful_traders
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_mismatch_factor
+			OR = {
+				has_ai_personality = spiritual_seekers
+				has_ai_personality = hegemonic_imperialists
+				has_ai_personality = decadent_hierarchy
+				has_ai_personality = democratic_crusaders
+				has_ai_personality = fanatic_purifiers
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_forbid_factor
+			OR = {
+				has_ai_personality = honorbound_warriors
+				has_ai_personality = evangelising_zealots
+			}
+		}
+	}
+}
+
+civic_reanimated_armies = {
+	playable = {  }
+	ai_playable = {  }
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	possible = {
+		ethics = {
+			NOR = {
+				value = ethic_gestalt_consciousness
+				value = ethic_pacifist
+				value = ethic_fanatic_pacifist
+			}
+		}
+		civics = {
+			NOT = { value = civic_citizen_service }
+		}
+		species_archetype = {
+			NOT = {
+				text = disabled_by_synthetic_ascension
+				value = ROBOT
+			}
+		}
+	}
+	random_weight = {
+		base = @civic_uncommon_random_weight
+	}
+	ai_weight = {
+		base = @ai_civic_uncommon_base_weight
+		modifier = {
+			factor = @ai_civic_personality_match_factor
+			OR = {
+				has_ai_personality = evangelising_zealots
+				has_ai_personality = hegemonic_imperialists
+				has_ai_personality = slaving_despots
+				has_ai_personality = decadent_hierarchy
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_mismatch_factor
+			OR = {
+				has_ai_personality = honorbound_warriors
+				has_ai_personality = erudite_explorers
+				has_ai_personality = democratic_crusaders
+				has_ai_personality = harmonious_hierarchy
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_forbid_factor
+			OR = {
+				has_ai_personality = peaceful_traders
+				has_ai_personality = federation_builders
+				has_ai_personality = fanatic_befrienders
+			}
+		}
+	}
+	description = "civic_tooltip_reanimated_armies_effects"
+}
+
+civic_diplomatic_corps = {
+	playable = {  }
+	ai_playable = {  }
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	possible = {
+		civics = {
+			NOR = {
+				value = civic_fanatic_purifiers
+				value = civic_inwards_perfection
+			}
+		}
+	}
+	random_weight = {
+		base = @civic_uncommon_random_weight
+	}
+	ai_weight = {
+		base = @ai_civic_uncommon_base_weight
+		modifier = {
+			factor = @ai_civic_personality_match_factor
+			OR = {
+				has_ai_personality = erudite_explorers
+				has_ai_personality = peaceful_traders
+				has_ai_personality = harmonious_hierarchy
+				has_ai_personality = federation_builders
+				has_ai_personality = fanatic_befrienders
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_mismatch_factor
+			OR = {
+				has_ai_personality = honorbound_warriors
+				has_ai_personality = evangelising_zealots
+				has_ai_personality = hegemonic_imperialists
+				has_ai_personality = democratic_crusaders
+				has_ai_personality = xenophobic_isolationists
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_forbid_factor
+			OR = {
+				has_ai_personality = slaving_despots
+				has_ai_personality = fanatic_purifiers
+			}
+		}
+	}
+	modifier = {
+		envoys_add = 2
+		diplo_weight_mult = 0.1
+	}
+}
+
+civic_death_cult = {
+	playable = {  }
+	ai_playable = {  }
+	description = "civic_tooltip_death_cult_effects"
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } } #Corps get their own version
+	}
+	possible = {
+		origin = {
+			NOT = { value = origin_necrophage }
+		}
+		civics = {
+			NOR = {
+				value = civic_fanatic_purifiers
+				value = civic_inwards_perfection
+				value = civic_ancient_preservers
+				value = civic_death_cult_corporate
+			}
+		}
+		ethics = {
+			OR = {
+				text = civic_tooltip_spiritualist
+				value = ethic_spiritualist
+				value = ethic_fanatic_spiritualist
+			}
+		}
+	}
+	random_weight = {
+		base = @civic_rare_random_weight
+	}
+	ai_weight = {
+		base = @ai_civic_rare_base_weight
+		modifier = {
+			factor = @ai_civic_personality_match_factor
+			OR = {
+				has_ai_personality = evangelising_zealots
+				has_ai_personality = spiritual_seekers
+				has_ai_personality = decadent_hierarchy
+				has_ai_personality = xenophobic_isolationists
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_mismatch_factor
+			OR = {
+				has_ai_personality = honorbound_warriors
+				has_ai_personality = peaceful_traders
+				has_ai_personality = democratic_crusaders
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_forbid_factor
+			OR = {
+				has_ai_personality = erudite_explorers
+				has_ai_personality = ruthless_capitalists
+				has_ai_personality = federation_builders
+				has_ai_personality = fanatic_befrienders
+			}
+		}
+	}
+}
+
+civic_memorialist = {
+	playable = {  }
+	ai_playable = {  }
+	description = "civic_tooltip_memorialist_effects"
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } } #Gestalts get their own versions
+		authority = { NOT = { value = auth_corporate } }
+	}
+	possible = {
+		civics = {
+			NOR = {
+				value = civic_fanatic_purifiers
+				value = civic_relentless_industrialists
+			}
+		}
+	}
+	random_weight = {
+		base = @civic_default_random_weight
+	}
+	ai_weight = {
+		base = @ai_civic_default_base_weight
+		modifier = {
+			factor = @ai_civic_personality_match_factor
+			OR = {
+				has_ai_personality = honorbound_warriors
+				has_ai_personality = erudite_explorers
+				has_ai_personality = spiritual_seekers
+				has_ai_personality = harmonious_hierarchy
+				has_ai_personality = fanatic_befrienders
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_mismatch_factor
+			OR = {
+				has_ai_personality = peaceful_traders
+				has_ai_personality = hegemonic_imperialists
+				has_ai_personality = decadent_hierarchy
+				has_ai_personality = xenophobic_isolationists
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_forbid_factor
+			OR = {
+				has_ai_personality = ruthless_capitalists
+				has_ai_personality = slaving_despots
+				has_ai_personality = fanatic_purifiers
+			}
+		}
+	}
+}
+
+civic_catalytic_processing = {
+	playable = {  }
+	ai_playable = {  }
+	description = "civic_tooltip_catalytic_processing_effects"
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } } #Gestalts get their own versions
+		authority = { NOT = { value = auth_corporate } }
+	}
+	possible = {
+		origin = {
+			NOT = {
+				value = origin_lithoid
+			}
+		}
+		civics = {
+			NOT = {
+				value = civic_corporate_catalytic_processing
+			}
+		}
+	}
+	random_weight = { base = @civic_default_random_weight }
+	ai_weight = {
+		base = 0	# Too dangerous to switch this mid-game
+	}
+}
+
+civic_crafters = {
+	playable = {  }
+	ai_playable = {  }
+	description = "civic_tooltip_crafters_effects"
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	possible = {
+		always = yes
+	}
+	possible = {
+		civics = { NOT = { value = civic_corporate_crafters }	}
+	}
+	random_weight = {
+		base = @civic_uncommon_random_weight
+	}
+	ai_weight = {
+		base = @ai_civic_uncommon_base_weight
+		modifier = {
+			factor = @ai_civic_personality_match_factor
+			OR = {
+				has_ai_personality = ruthless_capitalists
+				has_ai_personality = peaceful_traders
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_mismatch_factor
+			OR = {
+				has_ai_personality = honorbound_warriors
+				has_ai_personality = evangelising_zealots
+				has_ai_personality = hegemonic_imperialists
+				has_ai_personality = decadent_hierarchy
+				has_ai_personality = democratic_crusaders
+				has_ai_personality = fanatic_purifiers
+			}
+		}
+	}
+}
+
+civic_pleasure_seekers = {
+	playable = {  }
+	ai_playable = {  }
+	description = "civic_tooltip_pleasure_seekers_effects"
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	possible = {
+		civics = {
+			NOT = {
+				value = civic_warrior_culture
+				value = civic_shared_burden
+				value = civic_slaver_guilds # would enslave hedonists
+				value = civic_corporate_hedonism
+				value = civic_dystopian_society
+			}
+		}
+	}
+	random_weight = {
+		base = @civic_uncommon_random_weight
+	}
+	ai_weight = {
+		base = @ai_civic_uncommon_base_weight
+		modifier = {
+			factor = @ai_civic_personality_match_factor
+			OR = {
+				has_ai_personality = ruthless_capitalists
+				has_ai_personality = peaceful_traders
+				has_ai_personality = hegemonic_imperialists
+				has_ai_personality = slaving_despots
+				has_ai_personality = decadent_hierarchy
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_mismatch_factor
+			OR = {
+				has_ai_personality = spiritual_seekers
+				has_ai_personality = evangelising_zealots
+				has_ai_personality = honorbound_warriors
+				has_ai_personality = democratic_crusaders
+				has_ai_personality = harmonious_hierarchy
+				has_ai_personality = fanatic_purifiers
+			}
+		}
+	}
+}
+
+civic_idyllic_bloom = {
+	modification = no
+	playable = {  }
+	ai_playable = {  }
+	description = "civic_tooltip_idyllic_bloom_effects"
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	possible = {
+		species_class = {
+			OR = {
+				value = FUN
+				value = PLANT
+			}
+		}
+		origin = {
+			NOT = {
+				value = origin_void_dwellers
+			}
+		}
+		civics = {
+			NOT = { value = civic_relentless_industrialists }
+		}
+	}
+	random_weight = {
+		base = @civic_rare_random_weight
+	}
+}
+
+civic_anglers = {
+	modification = no
+	playable = { has_aquatics = yes }
+	ai_playable = { has_aquatics = yes }
+	description = "civic_tooltip_anglers_effects"
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	possible = {
+		origin = {
+			NOR = {
+				value = origin_post_apocalyptic
+				value = origin_shattered_ring
+				value = origin_void_dwellers
+				value = origin_subterranean
+			}
+		}
+	}
+	traits = {
+		trait = trait_aquatic
+	}
+	random_weight = {
+		base = @civic_default_random_weight
+	}
+}
+
+civic_pompous_purists = {
+	playable = { has_humanoids = yes }
+	ai_playable = { has_humanoids = yes }
+	description = "civic_tooltip_pompous_purists_effects"
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	possible = {
+		ethics = {
+			OR = {
+				text = civic_tooltip_xenophobe
+				value = ethic_xenophobe
+				value = ethic_fanatic_xenophobe
+			}
+		}
+		civics = {
+			NOR = {
+				value = civic_fanatic_purifiers
+				value = civic_inwards_perfection
+			}
+		}
+		origin = { NOT = { value = origin_scion } }
+	}
+	random_weight = {
+		base = @civic_rare_random_weight
+	}
+	ai_weight = {
+		base = @ai_civic_uncommon_base_weight
+		modifier = {
+			factor = @ai_civic_personality_match_factor
+			OR = {
+				has_ai_personality = decadent_hierarchy
+				has_ai_personality = xenophobic_isolationists
+				has_ai_personality = fanatic_purifiers
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_mismatch_factor
+			OR = {
+				has_ai_personality = honorbound_warriors
+				has_ai_personality = spiritual_seekers
+				has_ai_personality = slaving_despots
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_forbid_factor
+			OR = {
+				has_ai_personality = evangelising_zealots
+				has_ai_personality = erudite_explorers
+				has_ai_personality = ruthless_capitalists
+				has_ai_personality = peaceful_traders
+				has_ai_personality = hegemonic_imperialists
+				has_ai_personality = democratic_crusaders
+				has_ai_personality = federation_builders
+				has_ai_personality = fanatic_befrienders
+			}
+		}
+	}
+
+	modifier = {
+		country_trust_growth = 0.30
+		envoys_add = 2
+	}
+}
+
+civic_toxic_baths = {
+	playable = { has_toxoids = yes }
+	ai_playable = { has_toxoids = yes }
+	description = "civic_tooltip_toxic_baths_effects"
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	possible = {
+		origin = { NOT = { value = origin_life_seeded } }
+		civics = { NOT = { value = civic_corporate_toxic_baths } }
+	}
+	random_weight = {
+		base = @civic_uncommon_random_weight
+	}
+	ai_weight = {
+		base = @ai_civic_uncommon_base_weight
+		modifier = {
+			factor = @ai_civic_personality_match_factor
+			OR = {
+				has_ai_personality = decadent_hierarchy
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_mismatch_factor
+			OR = {
+				has_ai_personality = democratic_crusaders
+				has_ai_personality = honorbound_warriors
+				has_ai_personality = evangelising_zealots
+			}
+		}
+	}
+}
+
+civic_relentless_industrialists = {
+	playable = { has_toxoids = yes }
+	ai_playable = { has_toxoids = yes }
+	description = "civic_tooltip_relentless_industrialists_effects"
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	possible = {
+		ethics = {
+			OR = {
+				text = civic_tooltip_materialist
+				value = ethic_materialist
+				value = ethic_fanatic_materialist
+			}
+		}
+		origin = { NOT = { value = origin_life_seeded } }
+		civics = {
+			NOR = {
+				value = civic_environmentalist
+				value = civic_agrarian_idyll
+				value = civic_idyllic_bloom
+				value = civic_memorialist
+				value = civic_corporate_relentless_industrialists
+			}
+		}
+	}
+	random_weight = {
+		base = @civic_uncommon_random_weight
+	}
+	ai_weight = {
+		base = @ai_civic_uncommon_base_weight
+		modifier = {
+			factor = @ai_civic_personality_match_factor
+			OR = {
+				has_ai_personality = ruthless_capitalists
+				has_ai_personality = slaving_despots
+				has_ai_personality = decadent_hierarchy
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_mismatch_factor
+			OR = {
+				has_ai_personality = honorbound_warriors
+				has_ai_personality = peaceful_traders
+				has_ai_personality = federation_builders
+				has_ai_personality = xenophobic_isolationists
+				has_ai_personality = fanatic_befrienders
+				has_ai_personality = fanatic_purifiers
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_forbid_factor
+			OR = {
+				has_ai_personality = evangelising_zealots
+				has_ai_personality = erudite_explorers
+				has_ai_personality = spiritual_seekers
+				has_ai_personality = democratic_crusaders
+				has_ai_personality = harmonious_hierarchy
+			}
+		}
+	}
+}
+
+civic_scavengers = {
+	playable = { has_toxoids = yes }
+	ai_playable = { has_toxoids = yes }
+	description = "civic_scavengers_effects"
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	possible = {
+		civics = {
+			NOT = {
+				value = civic_corporate_scavengers
+			}
+		}
+	}
+	random_weight = {
+		base = @civic_default_random_weight
+	}
+	ai_weight = {
+		base = @ai_civic_default_base_weight
+		modifier = {
+			factor = @ai_civic_personality_match_factor
+			OR = {
+				has_ai_personality = ruthless_capitalists
+				has_ai_personality = peaceful_traders
+				has_ai_personality = slaving_despots
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_mismatch_factor
+			OR = {
+				has_ai_personality = evangelising_zealots
+				has_ai_personality = spiritual_seekers
+				has_ai_personality = decadent_hierarchy
+				has_ai_personality = democratic_crusaders
+				has_ai_personality = fanatic_purifiers
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_forbid_factor
+			OR = {
+				has_ai_personality = honorbound_warriors
+				has_ai_personality = xenophobic_isolationists
+			}
+		}
+	}
+}
+
+civic_ascensionists = {
+	playable = {  }
+	ai_playable = {  }
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	possible = {
+		ethics = {
+			OR = {
+				text = civic_tooltip_spiritualist
+				value = ethic_spiritualist
+				value = ethic_fanatic_spiritualist
+			}
+		}
+		civics = {
+			NOT = {
+				value = civic_corporate_ascensionists
+			}
+		}
+	}
+	random_weight = {
+		base = @civic_uncommon_random_weight
+	}
+	ai_weight = {
+		base = @ai_civic_uncommon_base_weight
+		modifier = {
+			factor = @ai_civic_personality_match_factor
+			OR = {
+				has_ai_personality = spiritual_seekers
+				has_ai_personality = harmonious_hierarchy
+				has_ai_personality = xenophobic_isolationists
+			}
+		}
+		modifier = {
+			factor = @ai_civic_personality_mismatch_factor
+			OR = {
+				has_ai_personality = honorbound_warriors
+				has_ai_personality = evangelising_zealots
+				has_ai_personality = slaving_despots
+				has_ai_personality = federation_builders
+				has_ai_personality = fanatic_purifiers
+			}
+		}
+	}
+	modifier = {
+		planetary_ascension_effect_mult = 0.25
+		planetary_ascension_cost_mult = -0.1
+		tradition_cost_empire_size_mult = -0.25
+	}
+}
+
+civic_memory_vault = {
+	playable = {  }
+	ai_playable = {  }
+	random_weight = {
+		base = 3
+	}
+	description = "civic_tooltip_memory_vault_effects"
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	possible = {
+		civics = {
+			NOT = {
+				value = civic_memory_vault_corporate
+			}
+		}
+	}
+	modifier = {
+		councilor_skill_add = 1
+	}
+}
+
+civic_crusader_spirit = {
+	playable = {  }
+	ai_playable = {  }
+	random_weight = {
+		base = @civic_default_random_weight
+	}
+	description = "civic_tooltip_crusader_spirit_effects"
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	possible = {
+		ethics = {
+			OR = {
+				text = civic_tooltip_authoritarian_or_militarist_or_spiritualist
+				value = ethic_militarist
+				value = ethic_fanatic_militarist
+				value = ethic_authoritarian
+				value = ethic_fanatic_authoritarian
+				value = ethic_spiritualist
+				value = ethic_fanatic_spiritualist
+			}
+			NOR = {
+				text = civic_tooltip_not_pacifist
+				value = ethic_pacifist
+				value = ethic_fanatic_pacifist
+			}
+		}
+		civics = {
+			NOR = {
+				value = civic_fanatic_purifiers
+				value = civic_beacon_of_liberty
+			}
+		}
+	}
+	modifier = {
+		ship_weapon_damage = 0.05
+		starbase_shipyard_build_cost_mult = -0.05
+	}
+
+	ai_weight = {
+		base = @ai_civic_default_base_weight
+		modifier = {
+			factor = @ai_civic_personality_match_factor
+			OR = {
+				has_ai_personality = democratic_crusaders
+				has_ai_personality = evangelising_zealots
+				has_ai_personality = fanatic_befrienders
+			}
+		}
+	}
+}
+
+civic_eager_explorers = {
+	playable = {
+		
+	}
+
+	description = "civic_eager_explorers_effects"
+	modification = no
+	potential = {
+		ethics = {
+			NOT = {
+				value = ethic_gestalt_consciousness
+			}
+		}
+
+		authority = {
+			NOT = {
+				value = auth_corporate
+			}
+		}
+	}
+
+	possible = {
+		origin = {
+			NOR = {
+				# No FC origins.
+				value = origin_payback
+				value = origin_broken_shackles
+				value = origin_fear_of_the_dark
+			}
+		}
+		civics = {
+			NOT = {
+				value = civic_inwards_perfection
+			}
+		}
+	}
+
+	modifier = {
+		ship_speed_mult = 0.15
+		science_ship_survey_speed = 0.2
+		ship_anomaly_generation_chance_mult = 0.05
+		category_voidcraft_draw_chance_mult = 0.5
+	}
+
+	random_weight = {
+		base = 0
+	}
+}
+
+civic_heroic_tales = {
+	playable = {  }
+	ai_playable = {  }
+	random_weight = {
+		base = 4
+	}
+	description = "civic_heroic_tales_effects"
+	potential = {
+		ethics = { NOT = { value = ethic_gestalt_consciousness } }
+		authority = { NOT = { value = auth_corporate } }
+	}
+	possible = {
+	}
+	modifier = {
+		negative_traits_country = -1
+	}
+}
+
+civic_dystopian_society = {
+	modification = no
+	playable = {  }
+	ai_playable = {  }
+	random_weight = {
+		base = @civic_rare_random_weight # Should be fairly rare
+	}
+	potential = {
+		ethics = {
+			NOT = { value = ethic_gestalt_consciousness }
+		}
+		authority = {
+			NOT = { value = auth_corporate }
+		}
+	}
+	possible = {
+		ethics = {
+			value = ethic_fanatic_authoritarian
+		}
+		civics = {
+			NOR = {
+				value = civic_pleasure_seekers
+				value = civic_free_haven
+				value = civic_warrior_culture
+				value = civic_agrarian_idyll
+				value = civic_environmentalist
+			}
+		}
+	}
+	modifier = {
+		country_leader_cap_add = 1
+		leaders_upkeep_mult = -0.2
+	}
+
+	description = civic_tooltip_dystopian_society_effects
+}
