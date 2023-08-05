@@ -1,0 +1,317 @@
+#auth_example = {
+#	potential = {}									# requirements list, see ../readme_requirements.txt
+#	possible = {}									# requirements list, see ../readme_requirements.txt
+#	random_weight = { value = 1 }					# random weight, no scope; default: 1
+#
+#	traits = { trait = tait1 trait = tait2 }		# force listed traits on the founder species (only verified for empire designs, no eefect after game start)
+#
+#	has_heir = yes / no								# default: no; you can either have a hereditary system (has_heir = yes), or an election system (has_heir = no)
+#	election_type = oligarchic / democratic	/ none	# default: none; oligarchic generate candidates only from leaders in the country
+#	election_term_years = 40						# default: 0
+#	election_term_variance = 10						# default: 0; actual election term = election_term_years +/- election_term_variance
+#	re_election_allowed = yes / no					# default: no
+#	can_have_emergency_elections = yes / no			# default: no
+#	emergency_election_cost = 42.5					# default: 0; influence cost for starting an emergency election
+#	max_election_candidates = 5						# default: -1; -1 == no limit
+#	can_reform = yes / no							# default = yes, whether you can reform into/out of this government type
+#
+#	has_agendas = yes / no							# default: no
+#	uses_mandates = yes / no						# default: no
+#
+#	tags = { <key> <key2> }							# add these translation tags to the description
+#}
+
+
+auth_democratic = {
+	election_term_years = 10
+	re_election_allowed = yes
+	election_type = democratic
+
+	uses_mandates = yes
+
+	ruler_council_position = councilor_ruler_democratic
+
+	possible = {
+		origin = {
+			NOR = {
+				text = origin_legendary_leader_no_gov_change
+				value = origin_legendary_leader_dictatorial
+				value = origin_legendary_leader_imperial
+			}
+		}
+		ethics = {
+			NOR = {
+				value = ethic_gestalt_consciousness
+				value = ethic_authoritarian
+				value = ethic_fanatic_authoritarian
+			}
+		}
+	}
+
+	country_modifier = {
+		faction_approval = 0.10
+		custom_tooltip = auth_democratic_tt
+	}
+
+	random_weight = {
+		base = 2
+	}
+
+	tags = {
+		AUTHORITY_ELECTION_DEMOCRATIC
+	}
+}
+
+auth_oligarchic = {
+	election_term_years = 20
+	election_type = oligarchic
+	can_have_emergency_elections = yes
+	max_election_candidates = 4
+
+	has_agendas = yes
+
+	ruler_council_position = councilor_ruler_oligarchic
+
+	possible = {
+		origin = {
+			NOR = {
+				text = origin_legendary_leader_no_gov_change
+				value = origin_legendary_leader_dictatorial
+				value = origin_legendary_leader_imperial
+			}
+		}
+		ethics = {
+			NOR = {
+				value = ethic_gestalt_consciousness
+				value = ethic_fanatic_egalitarian
+				value = ethic_fanatic_authoritarian
+			}
+		}
+	}
+
+	country_modifier = {
+		councilor_skill_add = 2
+	}
+
+	random_weight = {
+		base = 2
+	}
+
+	tags = {
+		AUTHORITY_ELECTION_OLIGARCHIC
+	}
+}
+
+auth_dictatorial = {
+	election_type = oligarchic
+
+	has_agendas = yes
+
+	ruler_council_position = councilor_ruler_dictatorial
+
+	possible = {
+		origin = {
+			NOT = {
+				text = origin_legendary_leader_no_gov_change
+				value = origin_legendary_leader_imperial
+			}
+		}
+		ethics = {
+			NOR = {
+				value = ethic_gestalt_consciousness
+				value = ethic_egalitarian
+				value = ethic_fanatic_egalitarian
+			}
+		}
+	}
+
+	country_modifier = {
+		# All modifiers are on "councilor_ruler_dictatorial".
+	}
+
+	random_weight = {
+		base = 2
+	}
+
+	tags = {
+		AUTHORITY_ELECTION_ON_RULER_DEATH
+	}
+}
+
+auth_imperial = {
+	has_heir = yes
+
+	has_agendas = yes
+
+	ruler_council_position = councilor_ruler_imperial
+
+	possible = {
+		origin = {
+			NOT = {
+				text = origin_legendary_leader_no_gov_change
+				value = origin_legendary_leader_dictatorial
+			}
+		}
+		ethics = {
+			NOR = {
+				value = ethic_gestalt_consciousness
+				value = ethic_egalitarian
+				value = ethic_fanatic_egalitarian
+			}
+		}
+	}
+
+	country_modifier = {
+		# Country modifier is on Capital buildings.
+	}
+
+	random_weight = {
+		base = 2
+	}
+
+	tags = {
+		AUTHORITY_HAS_HEIR
+		AUTH_IMPERIAL_CAPITAL_SYSTEM_BONUS
+	}
+}
+
+auth_hive_mind = {
+	has_heir = no
+	election_type = none
+	has_factions = no
+	can_reform = no
+	localization_postfix = hive_mind
+
+	valid_for_released_vassal = yes
+
+	ruler_council_position = councilor_ruler_hive_mind
+
+	playable = {  }
+	possible = {
+		ethics = {
+			value = ethic_gestalt_consciousness
+		}
+	}
+	random_weight = {
+		base = 2
+	}
+
+	traits = {
+		trait = trait_hive_mind
+	}
+
+	country_modifier = {
+		pop_growth_speed = 0.25
+		empire_size_penalty_mult = -0.25
+	}
+
+	tags = {
+		AUTH_HIVE_MIND_AI_RESTRICTIONS
+		AUTH_HIVE_MIND_FOREIGN_POP_SURVIVAL
+		AUTH_HIVE_MIND_GENEMODDING
+		AUTH_HIVE_MIND_ASCENSION_RESTRICTIONS
+	}
+}
+
+auth_machine_intelligence = {
+	machine_empire = yes
+	has_heir = no
+	election_type = none
+	has_factions = no
+	can_reform = no
+	localization_postfix = machine_intelligence
+
+	valid_for_released_vassal = no
+
+	ruler_council_position = councilor_ruler_machine_intelligence
+
+	playable = {
+		
+	}
+	possible = {
+		ethics = {
+			value = ethic_gestalt_consciousness
+		}
+	}
+	random_weight = {
+		base = 2
+	}
+
+	traits = {
+		trait = trait_machine_unit
+	}
+
+	country_modifier = {
+		colony_start_num_pops_add = 1
+		planet_pop_assembly_add = 1
+		station_gatherers_produces_mult = 0.1
+		empire_size_colonies_mult = 0.5
+		pop_growth_speed_reduction = 0.5
+	}
+
+	tags = {
+		AUTH_MACHINE_INTELLIGENCE_IMMORTAL_LEADERS
+		AUTH_MACHINE_NATIVE_POPS
+		AUTH_MACHINE_FOREIGN_POP_SURVIVAL
+		AUTH_MACHINE_TECH_ADDITIONS
+		AUTH_MACHINE_TECH_RESTRICTIONS
+		AUTH_MACHINE_ASCENSION_RESTRICTIONS
+	}
+}
+
+auth_ancient_machine_intelligence = {
+	has_heir = no
+	election_type = none
+	can_reform = no
+
+	valid_for_released_vassal = no
+
+	ruler_council_position = councilor_ruler_machine_intelligence
+
+	icon = "gfx/interface/icons/governments/authorities/auth_hive_mind.dds"
+
+	potential = { country_type = { value = ai_empire } }
+}
+
+auth_corporate = {
+	election_term_years = 20
+	election_type = oligarchic
+	can_have_emergency_elections = yes
+	max_election_candidates = 4
+	localization_postfix = corporate
+
+	has_agendas = yes
+
+	ruler_council_position = councilor_ruler_corporate
+
+	potential = {
+		country_type = { NOT = { value = primitive } }
+	}
+
+	playable = { }
+	possible = {
+		origin = {
+			NOR = {
+				text = origin_legendary_leader_no_gov_change
+				value = origin_legendary_leader_dictatorial
+				value = origin_legendary_leader_imperial
+			}
+		}
+		ethics = {
+			NOR = {
+				value = ethic_gestalt_consciousness
+				value = ethic_fanatic_egalitarian
+				value = ethic_fanatic_authoritarian
+			}
+		}
+	}
+
+	country_modifier = {
+		commercial_pact_mult = 0.20
+		empire_size_colonies_mult = 0.50
+	}
+
+	tags = {
+		AUTHORITY_ELECTION_OLIGARCHIC
+	}
+}

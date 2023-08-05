@@ -1,0 +1,675 @@
+
+#星际和平公司 - 主题理念
+civic_Interastral_Peace_Corporation = {
+	description = "Civic_Interastral_Peace_Corporation_desc2"
+	potential = { 
+		# always = no
+		authority = { value = auth_corporate }
+		civics = { NOT = { value = civic_criminal_heritage } }
+	}
+	possible = {
+		civics = { Not = { value = civic_criminal_heritage } }
+	}
+	modifier = {
+		commercial_pact_mult = 1
+		planet_branch_offices_cost_mult = -0.5
+		empire_size_branch_office_mult = -1
+		trade_value_mult = 0.25
+		branch_office_value_mult = 0.25
+		empire_size_systems_mult = 1
+	}
+	random_weight = { base = 0 }
+}
+#通用： 垄断银河市场 civic_Market_Control
+#通用： 星海偶像机构 civic_Idol_Institution
+civic_Idol_Institution = {
+	description = "Civic_Idol_Institution_desc2"
+	potential = { 
+		civics = { value = civic_Interastral_Peace_Corporation }
+		authority = { value = auth_corporate }
+		is_criminal_syndicate = no 
+		civics = { NOT = { value = civic_criminal_heritage } }
+	}
+	possible = {
+		civics = { NOT = { value = civic_criminal_heritage } }
+	}
+	modifier = {
+		planet_amenities_add = 20
+		job_IPC_Idol_add = 1
+		job_IPC_Idol_per_pop = 0.1
+		job_IPC_Students_add = 2
+		job_IPC_Students_per_pop = 0.2
+	}
+	random_weight = { base = 0 }
+}
+#进阶 梦想的存护者
+civic_LightIdol_Institution = {
+	description = "Civic_LightIdol_Institution_desc2"
+	pickable_at_start = no
+	modification = no
+	
+	potential = {
+		hidden_trigger = {
+			has_country_flag = IPC_50years_Idol
+		}
+		civics = { value = civic_Interastral_Peace_Corporation }
+		civics = { value = civic_Idol_Institution }
+		civics = { NOT = { value = civic_DarkIdol_Institution } }
+		authority = { value = auth_corporate }
+		is_criminal_syndicate = no 
+		civics = { NOT = { value = civic_criminal_heritage } }
+	}
+	possible = {
+		civics = { NOT = { value = civic_criminal_heritage } }
+		civics = { value = civic_Idol_Institution }
+		civics = { NOT = { value = civic_DarkIdol_Institution } }
+	}
+	modifier = {
+		job_IPC_Idol_add = 2
+		job_IPC_Idol_per_pop = 0.05
+		pop_citizen_happiness = 0.1
+	}
+	random_weight = { base = 0 }
+}
+#进阶 偶像机构之影
+civic_DarkIdol_Institution = {
+	description = "Civic_DarkIdol_Institution_desc2"
+	pickable_at_start = no
+	modification = no
+	
+	potential = { 
+		hidden_trigger = {
+			has_country_flag = IPC_50years_Idol
+		}
+		civics = { value = civic_Interastral_Peace_Corporation }
+		civics = { value = civic_Idol_Institution }
+		civics = { NOT = { value = civic_LightIdol_Institution } }
+		authority = { value = auth_corporate }
+		is_criminal_syndicate = no 
+		civics = { NOT = { value = civic_criminal_heritage } }
+	}
+	possible = {
+		civics = { NOT = { value = civic_criminal_heritage } }
+		civics = { value = civic_Idol_Institution }
+		civics = { NOT = { value = civic_LightIdol_Institution } }
+	}
+	modifier = {
+		job_IPC_Idol_add = 1
+		job_IPC_Idol_per_pop = 0.1
+		planet_stability_add = 5
+	}
+	random_weight = { base = 0 }
+}
+#非和平可带， 商业维稳协议 civic_Stability_Keeper
+civic_Stability_Keeper = {
+	description = "Civic_Stability_Keeper_desc2"
+	potential = { 
+		civics = { value = civic_Interastral_Peace_Corporation }
+		authority = { value = auth_corporate }
+		is_criminal_syndicate = no 
+		civics = { NOT = { value = civic_criminal_heritage } }
+		ethics = {
+			NOR = {
+				value = ethic_pacifist
+				value = ethic_fanatic_pacifist
+			}
+		}
+	}
+	possible = {
+		civics = { NOT = { value = civic_criminal_heritage } }
+		ethics = {
+			NOR = {
+				value = ethic_pacifist
+				value = ethic_fanatic_pacifist
+			}
+		}
+	}
+	modifier = {
+		planet_stability_add = 10
+		pop_happiness = -0.05
+	}
+	random_weight = { base = 0 }
+}
+#进阶 安乐的存护者
+civic_Stability_Keeper_Wild = {
+	description = "Civic_Stability_Keeper_Wild_desc2"
+	pickable_at_start = no
+	modification = no
+	potential = { 
+		hidden_trigger = {
+			has_country_flag = IPC_50years_stkeeper
+		}
+		civics = { value = civic_Stability_Keeper }
+		civics = { value = civic_Interastral_Peace_Corporation }
+		civics = { NOT = { value = civic_Stability_Keeper_Quick } }
+		authority = { value = auth_corporate }
+		is_criminal_syndicate = no 
+		civics = { NOT = { value = civic_criminal_heritage } }
+		ethics = {
+			NOR = {
+				value = ethic_pacifist
+				value = ethic_fanatic_pacifist
+			}
+		}
+	}
+	possible = {
+		civics = { NOT = { value = civic_Stability_Keeper_Quick } }
+		civics = { NOT = { value = civic_criminal_heritage } }
+		ethics = {
+			NOR = {
+				value = ethic_pacifist
+				value = ethic_fanatic_pacifist
+			}
+		}
+	}
+	modifier = {
+		planet_unity_produces_mult = 0.15
+		pop_happiness = 0.1
+	}
+	random_weight = { base = 0 }
+}
+#进阶 和平明日公约
+civic_Stability_Keeper_Quick = {
+	description = "Civic_Stability_Keeper_Quick_desc2"
+	pickable_at_start = no
+	modification = no
+	
+	potential = { 
+		hidden_trigger = {
+			has_country_flag = IPC_50years_stkeeper
+		}
+		civics = { value = civic_Stability_Keeper }
+		civics = { value = civic_Interastral_Peace_Corporation }
+		civics = { NOT = { value = civic_Stability_Keeper_Wild } }
+		authority = { value = auth_corporate }
+		is_criminal_syndicate = no 
+		civics = { NOT = { value = civic_criminal_heritage } }
+		ethics = {
+			NOR = {
+				value = ethic_pacifist
+				value = ethic_fanatic_pacifist
+			}
+		}
+	}
+	possible = {
+		civics = { NOT = { value = civic_Stability_Keeper_Wild } }
+		civics = { NOT = { value = civic_criminal_heritage } }
+		ethics = {
+			NOR = {
+				value = ethic_pacifist
+				value = ethic_fanatic_pacifist
+			}
+		}
+	}
+	modifier = {
+		planet_stability_add = 10
+		pop_happiness = -0.1
+	}
+	random_weight = { base = 0 }
+}
+#军国可带， 开门自由贸易 civic_Military_Corp
+civic_Military_Corp = {
+	description = "Civic_Military_Corp_desc2"
+	potential = { 
+		civics = { value = civic_Interastral_Peace_Corporation }
+		authority = { value = auth_corporate }
+		is_criminal_syndicate = no 
+		civics = { NOT = { value = civic_criminal_heritage } }
+		ethics = {
+			OR = {
+				text = civic_tooltip_militarist
+				value = ethic_militarist
+				value = ethic_fanatic_militarist
+			}
+		}
+	}
+	possible = {
+		civics = { NOT = { value = civic_criminal_heritage } }
+		ethics = {
+			OR = {
+				text = civic_tooltip_militarist
+				value = ethic_militarist
+				value = ethic_fanatic_militarist
+			}
+		}
+	}
+	modifier = {
+		custom_tooltip = IPC_tt_Military_Corp
+		ship_fire_rate_mult = 0.1
+		ship_starting_experience_add = 100
+		country_naval_cap_mult = 0.25
+	}
+	random_weight = { base = 0 }
+}
+#和平可带， 生育促进组织 civic_Birth_Org
+civic_Birth_Org = {
+	description = "Civic_Birth_Org_desc2"
+	potential = { 
+		civics = { value = civic_Interastral_Peace_Corporation }
+		authority = { value = auth_corporate }
+		is_criminal_syndicate = no 
+		civics = { NOT = { value = civic_criminal_heritage } }
+		ethics = {
+			OR = {
+				text = civic_tooltip_pacifist
+				value = ethic_pacifist
+				value = ethic_fanatic_pacifist
+			}
+		}
+	}
+	possible = {
+		civics = { NOT = { value = civic_criminal_heritage } }
+		ethics = {
+			OR = {
+				text = civic_tooltip_pacifist
+				value = ethic_pacifist
+				value = ethic_fanatic_pacifist
+			}
+		}
+	}
+	modifier = {
+		bio_pop_growth_speed = 0.2
+	}
+	random_weight = { base = 0 }
+}
+#和平可带， 环境改善集团 civic_Enviroment_Corp
+civic_Enviroment_Corp = {
+	description = "Civic_Enviroment_Corp_desc2"
+	potential = { 
+		civics = { value = civic_Interastral_Peace_Corporation }
+		authority = { value = auth_corporate }
+		is_criminal_syndicate = no 
+		civics = { NOT = { value = civic_criminal_heritage } }
+		ethics = {
+			OR = {
+				text = civic_tooltip_pacifist
+				value = ethic_pacifist
+				value = ethic_fanatic_pacifist
+			}
+		}
+	}
+	possible = {
+		civics = { NOT = { value = civic_criminal_heritage } }
+		ethics = {
+			OR = {
+				text = civic_tooltip_pacifist
+				value = ethic_pacifist
+				value = ethic_fanatic_pacifist
+			}
+		}
+	}
+	modifier = {
+		custom_tooltip = civic_Enviroment_Corp
+		pop_environment_tolerance = 0.15
+
+	}
+	random_weight = { base = 0 }
+}
+#非平等可带， 劳动监督公司 civic_Labour_Corp
+civic_Labour_Corp = {
+	description = "Civic_Labour_Corp_desc2"
+	potential = { 
+		civics = { value = civic_Interastral_Peace_Corporation }
+		authority = { value = auth_corporate }
+		is_criminal_syndicate = no 
+		civics = { NOT = { value = civic_criminal_heritage } }
+		ethics = {
+			NOR = {
+				text = civic_tooltip_not_egalitarian
+				value = ethic_egalitarian
+				value = ethic_fanatic_egalitarian
+			}
+		}
+	}
+	possible = {
+		civics = { value = civic_Interastral_Peace_Corporation }
+		civics = { NOT = { value = civic_criminal_heritage } }
+		ethics = {
+			NOR = {
+				text = civic_tooltip_not_egalitarian
+				value = ethic_egalitarian
+				value = ethic_fanatic_egalitarian
+			}
+		}
+	}
+	modifier = {
+		planet_jobs_worker_produces_mult = 0.1
+		planet_worker_consumer_goods_upkeep_mult = -0.1
+		planet_worker_food_upkeep_mult = -0.1
+	}
+	random_weight = { base = 0 }
+}
+#威权可带， 上流社会沙龙 civic_Upper_Salon
+#威权可带， 特别资产公司 civic_Slave_Corp
+civic_Slave_Corp = {
+	description = "Civic_Slave_Corp_desc2"
+	potential = { 
+		civics = { value = civic_Interastral_Peace_Corporation }
+		authority = { value = auth_corporate }
+		is_criminal_syndicate = no 
+		civics = { NOT = { value = civic_criminal_heritage } }
+		ethics = {
+			OR = {
+				text = civic_tooltip_authoritarian
+				value = ethic_authoritarian
+				value = ethic_fanatic_authoritarian
+			}
+		}
+	}
+	possible = {
+		civics = { value = civic_Interastral_Peace_Corporation }
+		civics = { NOT = { value = civic_criminal_heritage } }
+		ethics = {
+			OR = {
+				text = civic_tooltip_authoritarian
+				value = ethic_authoritarian
+				value = ethic_fanatic_authoritarian
+			}
+		}
+	}
+	modifier = {
+		pop_cat_slave_political_power = -0.5
+		pop_category_slave_upkeep_mult = -0.15
+		planet_jobs_slave_produces_mult = 0.15
+		country_pop_enslaved_mult = 0.05
+	}
+	random_weight = { base = 0 }
+}
+#非威权可带， 基层治理组织 civic_Breu_Corp
+civic_Breu_Corp = {
+	description = "Civic_Breu_Corp_desc2"
+	potential = { 
+		civics = { value = civic_Interastral_Peace_Corporation }
+		authority = { value = auth_corporate }
+		is_criminal_syndicate = no 
+		civics = { NOT = { value = civic_criminal_heritage } }
+		ethics = {
+			NOR = {
+				text = civic_tooltip_not_authoritarian
+				value = ethic_authoritarian
+				value = ethic_fanatic_authoritarian
+			}
+		}
+	}
+	possible = {
+		civics = { value = civic_Interastral_Peace_Corporation }
+		civics = { NOT = { value = civic_criminal_heritage } }
+		ethics = {
+			NOR = {
+				text = civic_tooltip_not_authoritarian
+				value = ethic_authoritarian
+				value = ethic_fanatic_authoritarian
+			}
+		}
+	}
+	modifier = {
+		country_admin_cap_add = 50
+	}
+	random_weight = { base = 0 }
+}
+#平等可带， 市场社会主义 civic_Market_Socialism
+civic_Market_Socialism = {
+	description = "Civic_Market_Socialism_desc2"
+	potential = { 
+		civics = { value = civic_Interastral_Peace_Corporation }
+		authority = { value = auth_corporate }
+		is_criminal_syndicate = no 
+		civics = { NOT = { value = civic_criminal_heritage } }
+		ethics = {
+			OR = {
+				text = civic_tooltip_egalitarian
+				value = ethic_egalitarian
+				value = ethic_fanatic_egalitarian
+			}
+		}
+	}
+	possible = {
+		civics = { value = civic_Interastral_Peace_Corporation }
+		civics = { NOT = { value = civic_criminal_heritage } }
+		ethics = {
+			OR = {
+				text = civic_tooltip_egalitarian
+				value = ethic_egalitarian
+				value = ethic_fanatic_egalitarian
+			}
+		}
+	}
+	modifier = {
+		pop_cat_worker_happiness = 0.1
+		pop_cat_worker_political_power = 1
+		pop_factions_unity_produces_mult = 0.5
+		planet_clerk_produces_mult = 1
+	}
+	random_weight = { base = 0 }
+}
+#非排外可带， 星际移民中介 civic_Migration_Corp
+civic_Migration_Corp = {
+	description = "Civic_Migration_Corp_desc2"
+	potential = { 
+		civics = { value = civic_Interastral_Peace_Corporation }
+		authority = { value = auth_corporate }
+		is_criminal_syndicate = no 
+		civics = { NOT = { value = civic_criminal_heritage } }
+		ethics = {
+			NOR = {
+				text = civic_tooltip_not_xenophobe
+				value = ethic_xenophobe
+				value = ethic_fanatic_xenophobe
+			}
+		}
+	}
+	possible = {
+		civics = { value = civic_Interastral_Peace_Corporation }
+		civics = { NOT = { value = civic_criminal_heritage } }
+		ethics = {
+			NOR = {
+				text = civic_tooltip_not_xenophobe
+				value = ethic_xenophobe
+				value = ethic_fanatic_xenophobe
+			}
+		}
+	}
+	modifier = {
+		pop_growth_from_immigration = 0.5
+		planet_immigration_pull_mult = 0.5
+	}
+	random_weight = { base = 0 }
+}
+#亲外可带， 银河慈善机构 civic_Charity_Org
+civic_Charity_Org = {
+	description = "Civic_Charity_Org_desc2"
+	potential = { 
+		civics = { value = civic_Interastral_Peace_Corporation }
+		authority = { value = auth_corporate }
+		is_criminal_syndicate = no 
+		civics = { NOT = { value = civic_criminal_heritage } }
+		ethics = {
+			OR = {
+				text = civic_tooltip_xenophile
+				value = ethic_xenophile
+				value = ethic_fanatic_xenophile
+			}
+		}
+	}
+	possible = {
+		civics = { value = civic_Interastral_Peace_Corporation }
+		civics = { NOT = { value = civic_criminal_heritage } }
+		ethics = {
+			OR = {
+				text = civic_tooltip_xenophile
+				value = ethic_xenophile
+				value = ethic_fanatic_xenophile
+			}
+		}
+	}
+	modifier = {
+		planet_immigration_pull_mult = 2
+		country_unity_produces_mult = 0.15
+	}
+	random_weight = { base = 0 }
+}
+#非唯心可带，  科学技术集团 civic_Tech_Corp
+civic_Tech_Corp = {
+	description = "Civic_Tech_Corp_desc2"
+	potential = { 
+		civics = { value = civic_Interastral_Peace_Corporation }
+		authority = { value = auth_corporate }
+		is_criminal_syndicate = no 
+		civics = { NOT = { value = civic_criminal_heritage } }
+		ethics = {
+			NOR = {
+				text = civic_tooltip_not_spiritualist
+				value = ethic_spiritualist
+				value = ethic_fanatic_spiritualist
+			}
+		}
+	}
+	possible = {
+		civics = { value = civic_Interastral_Peace_Corporation }
+		civics = { NOT = { value = civic_criminal_heritage } }
+		ethics = {
+			NOR = {
+				text = civic_tooltip_not_spiritualist
+				value = ethic_spiritualist
+				value = ethic_fanatic_spiritualist
+			}
+		}
+	}
+	modifier = {
+		all_technology_research_speed = 0.05
+		planet_researchers_produces_mult = 0.15
+	}
+	random_weight = { base = 0 }
+}
+#唯物可带，  机器生产集团 civic_Robot_Corp
+civic_Robot_Corp = {
+	description = "Civic_Robot_Corp_desc2"
+	potential = { 
+		civics = { value = civic_Interastral_Peace_Corporation }
+		authority = { value = auth_corporate }
+		is_criminal_syndicate = no 
+		civics = { NOT = { value = civic_criminal_heritage } }
+		ethics = {
+			OR = {
+				text = civic_tooltip_materialist
+				value = ethic_materialist
+				value = ethic_fanatic_materialist
+			}
+		}
+	}
+	possible = {
+		civics = { value = civic_Interastral_Peace_Corporation }
+		civics = { NOT = { value = civic_criminal_heritage } }
+		ethics = {
+			OR = {
+				text = civic_tooltip_materialist
+				value = ethic_materialist
+				value = ethic_fanatic_materialist
+			}
+		}
+	}
+	modifier = {
+		planet_pop_assemblers_upkeep_mult = -0.25
+		planet_pop_assembly_mult = 0.25
+	}
+	random_weight = { base = 0 }
+}
+#唯物可带，  生物组装集团 civic_Clone_Corp
+civic_Clone_Corp = {
+	description = "Civic_Clone_Corp_desc2"
+	potential = { 
+		civics = { value = civic_Interastral_Peace_Corporation }
+		authority = { value = auth_corporate }
+		is_criminal_syndicate = no 
+		civics = { NOT = { value = civic_criminal_heritage } }
+		ethics = {
+			OR = {
+				text = civic_tooltip_materialist
+				value = ethic_materialist
+				value = ethic_fanatic_materialist
+			}
+		}
+	}
+	possible = {
+		civics = { value = civic_Interastral_Peace_Corporation }
+		civics = { NOT = { value = civic_criminal_heritage } }
+		ethics = {
+			OR = {
+				text = civic_tooltip_materialist
+				value = ethic_materialist
+				value = ethic_fanatic_materialist
+			}
+		}
+	}
+	modifier = {
+		planet_pop_assembly_organic_add = 0.5
+		planet_pop_assembly_organic_mult = 0.25
+	}
+	random_weight = { base = 0 }
+}
+#唯物可带，  科学普及组织 civic_Scientific_Corp
+civic_Scientific_Corp = {
+	description = "Civic_Scientific_Corp_desc2"
+	potential = { 
+		civics = { value = civic_Interastral_Peace_Corporation }
+		authority = { value = auth_corporate }
+		is_criminal_syndicate = no 
+		civics = { NOT = { value = civic_criminal_heritage } }
+		ethics = {
+			OR = {
+				text = civic_tooltip_materialist
+				value = ethic_materialist
+				value = ethic_fanatic_materialist
+			}
+		}
+	}
+	possible = {
+		civics = { value = civic_Interastral_Peace_Corporation }
+		civics = { NOT = { value = civic_criminal_heritage } }
+		ethics = {
+			OR = {
+				text = civic_tooltip_materialist
+				value = ethic_materialist
+				value = ethic_fanatic_materialist
+			}
+		}
+	}
+	modifier = {
+		job_researchers_per_pop = 0.15
+	}
+	random_weight = { base = 0 }
+}
+#唯心可带，  星际和平教会 civic_Peace_Church
+civic_Peace_Church = {
+	description = "Civic_Peace_Church_desc2"
+	potential = { 
+		civics = { value = civic_Interastral_Peace_Corporation }
+		authority = { value = auth_corporate }
+		is_criminal_syndicate = no 
+		civics = { NOT = { value = civic_criminal_heritage } }
+		ethics = {
+			OR = {
+				text = civic_tooltip_spiritualist
+				value = ethic_spiritualist
+				value = ethic_fanatic_spiritualist
+			}
+		}
+	}
+	possible = {
+		civics = { value = civic_Interastral_Peace_Corporation }
+		civics = { NOT = { value = civic_criminal_heritage } }
+		ethics = {
+			OR = {
+				text = civic_tooltip_spiritualist
+				value = ethic_spiritualist
+				value = ethic_fanatic_spiritualist
+			}
+		}
+	}
+	modifier = {
+		country_unity_produces_mult = 0.15
+		pop_ethic_spiritualist_attraction_mult = 1
+	}
+	random_weight = { base = 0 }
+}
+

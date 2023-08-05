@@ -1,4 +1,5 @@
 #Holy_Dustbin
+
 Holy_Dustbin = {
     entity = "Holy_Dustbin_entity"
     construction_entity = "Holy_Dustbin_entity"
@@ -8,14 +9,21 @@ Holy_Dustbin = {
     resources = {
         category = megastructures
         cost = {
-            alloys = 10
-            unity = 10
+           alloys = 10
+           unity = 10
         }
     }
     upgrade_from = {  }
     prerequisites = {  }
     on_build_start = {  }
-    on_build_complete = {  }
+    on_build_complete = {
+        From = { 
+    	change_variable = { which = NUM_Holy_Dustbin value = 1 } 
+        }
+    }
+    potential = {
+        check_variable = { which = NUM_Holy_Dustbin value < 9 }
+    } 
     country_modifier = {
 		add_base_country_intel = 25
 		planet_amenities_mult = 0.25
@@ -24,23 +32,29 @@ Holy_Dustbin = {
 		factor = 0
         modifier = {
            add = 1.5
-            From = {
-                owner_main_species = {
-                    is_species_class = Belobog
-                }
-            }
+           From = {
+               owner_main_species = {
+                   is_species_class = Belobog
+               }
+           }
         }
         modifier = {
            add = 1.5
-            From = {
-                has_ascension_perk = ap_galactic_wonders_utopia
-            }
+           From = {
+               has_ascension_perk = ap_galactic_wonders_utopia
+           }
         }
         modifier = {
            add = 1.5
-            From = {
-                has_ascension_perk = ap_galactic_wonders_megacorp
-            }
+           From = {
+               has_ascension_perk = ap_galactic_wonders_megacorp
+           }
+        }
+        modifier = {
+           add = -4.5
+           From = {
+               check_variable = { which = NUM_Holy_Dustbin value > 4 }
+           }
         }
 		}
 }
