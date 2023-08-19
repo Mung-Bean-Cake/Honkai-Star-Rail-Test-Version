@@ -1,0 +1,58 @@
+on_game_start_country = {
+	events = {
+		SRB_story.1 
+	}
+}
+
+on_yearly_pulse_country = {
+	events = {
+		SRB_story.190
+	}
+}
+
+# Triggers country_event for the attacker upon victory
+# (Before controller is switched)
+# This = country, leader attacker
+# From = country, planet owner
+# FromFrom = planet
+# IDENTITIES: attacker is the side that "IsHostile" to
+# the planet controller; e.g. spawned monster armies
+# are attackers, but if they win and the player attempts
+# to retake the planet, the player is the attacker
+on_planet_attackers_win = {
+	events = {
+		SRB_story.102
+	}
+}
+
+# Triggers country_event for the defender upon victory
+# Root = country, planet owner
+# From = country, attack leader
+# FromFrom = planet
+on_planet_defenders_win = {
+	events = {
+		SRB_story.103
+	}
+}
+
+# Triggers when ground combat starts
+# This = planet
+# From = country attacking
+on_ground_combat_started = {
+	events = {
+		action.485 # Prevents With Great Power achievement
+		paragon_2.1105 # Supreme Warrior trait effect
+		awareness.125 # Pre-ftl planet invaded, sets awareness to 100.
+		preftl.10156 # Violation of Non-Interference Act by Invasion.
+		fircon.5034 #Invading Solarpunks
+		paragon_2.2085
+	}
+}
+
+# A planet has been colonized.
+# Scope = Planet
+on_colonized = {
+	events = {
+		SRB_story.301
+	}
+}

@@ -1,0 +1,1740 @@
+### 玩家剧情事件 ###
+
+namespace = SRB_story
+
+############################
+## SRB_story.1+
+## 主线
+############################
+
+country_event = { #初始化
+	id = SRB_story.1
+	hide_window = yes
+
+	fire_only_once = yes
+	is_triggered_only = yes	#on_game_start_country
+	trigger = {
+		has_origin = origin_belobog
+	}
+
+	immediate = {
+		set_country_flag = SRB_country
+
+		capital_scope = {	#雅利洛-VI
+			#标记
+			save_global_event_target_as = SRB_planet_jarilo
+			set_planet_flag = SRB_capital
+			#对母星做一些更改避免开局问题
+			change_planet_size = 10	#增加8个格子避免开局倒欠7个格子致使运营爆炸
+			#添加起源的buff
+			add_modifier = { modifier = planet_jarilo_start_modifier }
+			#添加母星上的地块障碍
+			while = {
+				count = 2
+				add_deposit = d_belobog_blocker_1	#2个裂界
+			}
+			while = {
+				count = 10
+				add_deposit = d_belobog_blocker_2	#10个寒潮
+			}
+			#添加“下层区”建筑
+			add_building = "building_belobog_underworld"
+			#添加裂界陆军国家，后续优化可以将该国家与毁灭天灾合并
+			create_country = {
+				name = "d_belobog_blocker_1"
+				type = global_event
+				ignore_initial_colony_error = yes
+				flag = random
+				effect = {
+					save_global_event_target_as = belobog_blocker_1_country
+				}
+			}
+			#声明变量
+			set_variable = {	#裂界怪物总数
+				which = belobog_blocker_1_army_num
+				value = 1000
+			}
+			set_variable = {	#裂界入侵的怪物总数
+				which = belobog_blocker_1_battle_army_num
+				value = 0
+			}
+			set_variable = {	#裂界怪物中群总数
+				which = belobog_blocker_1_army_2_limit
+				value = 25
+			}
+			set_variable = {	#裂界怪物大群总数
+				which = belobog_blocker_1_army_3_limit
+				value = 8
+			}
+			set_variable = {	#可以承受的裂界冲击（对抗裂界怪物失败）次数
+				which = belobog_blocker_1_battle_defense
+				value = 3
+			}
+			set_variable = {	#裂界生成累积值
+				which = belobog_blocker_1_cumulative_value
+				value = 0
+			}
+		}
+
+		country_event = { id = SRB_story.2 days = 10 }	#启动主线 
+		country_event = { id = SRB_story.9999 }	#呜呜
+	}
+}
+
+##选择主线方向
+country_event = { #主线，启动！
+	id = SRB_story.2
+	title = "SRB_story.2.title"
+	desc = "SRB_story.2.desc"
+	picture = GFX_evt_cold_barren
+	show_sound = event_default	
+
+	fire_only_once = yes
+	is_triggered_only = yes	#SRB_story.1
+	trigger = {
+		has_country_flag = SRB_country
+	}
+
+	option = {
+		name = "SRB_story.2.a"
+		custom_tooltip = "SRB_story.2.a.desc"
+		begin_event_chain = {	#主线事件链
+			event_chain = SRB_story_main_chain
+			target = this
+		}
+		enable_special_project = {	#选择离开
+			name = "SRB_main_story_choice_leave"
+			owner = this
+		}
+		enable_special_project = {	#选择改造
+			name = "SRB_main_story_choice_stay"
+			owner = this
+		}
+		hidden_effect = {
+			country_event = { id = SRB_story.4 days = 1800 }	#若五年之后仍没有做出决策完成特殊项目则自动选择一个
+		}
+	}
+}
+country_event = { #选择主线方向完成
+	id = SRB_story.3
+	title = "SRB_story.3.title"
+	desc = "SRB_story.3.desc"
+	picture = GFX_evt_alien_propaganda
+	show_sound = event_factions	
+
+	fire_only_once = yes
+	is_triggered_only = yes	#特殊项目SRB_main_story_choice_xx
+	trigger = {
+		has_country_flag = SRB_country
+	}
+
+	option = {
+		name = "SRB_story.3.a"
+		custom_tooltip  = "SRB_story.3.a.desc"
+		hidden_effect = {
+			#不管选择了哪个方向，都会出现研究寒潮、研究裂界的特殊项目
+			enable_special_project = { #裂界研究1
+				name = "belobog_blocker_1_research_1"
+				owner = this
+			}
+			enable_special_project = { #寒潮研究1
+				name = "belobog_blocker_2_research_1"
+				owner = this
+			}
+			#允许裂界不定期发动攻势
+			set_country_flag = "belobog_blocker_1_attack_ready"
+			##选择了不同方向之后能够触发其它不同内容，不在这里写出
+		}
+	}
+}
+country_event = { #若一年后仍没有选择主线方向则随机确定一个
+	id = SRB_story.4
+	title = "SRB_story.4.title"
+	desc = "SRB_story.4.desc"
+	picture = GFX_evt_voting
+	show_sound = event_factions	
+
+	fire_only_once = yes
+	is_triggered_only = yes	#SRB_story.2
+	trigger = {
+		nand = {
+			has_country_flag = SRB_main_story_leave_chosen
+			has_country_flag = SRB_main_story_stay_chosen
+		}
+	}
+
+	option = {
+		name = "SRB_story.4.a"
+		hidden_effect = {
+			random_list = {
+				30 = { set_country_flag = "SRB_main_story_leave_chosen" }
+				70 = { set_country_flag = "SRB_main_story_stay_chosen" }
+			}
+			#接下来一段与SRB_story.3相同，具体注释见上
+			enable_special_project = {
+				name = "belobog_blocker_1_research_1"
+				owner = this
+			}
+			enable_special_project = {
+				name = "belobog_blocker_2_research_1"
+				owner = this
+			}
+			set_country_flag = "belobog_blocker_1_attack_ready"
+		}
+	}
+}
+
+##裂界研究特殊项目
+country_event = { #新的裂界研究项目已解锁
+	id = SRB_story.10
+	title = "SRB_story.10.title"
+	desc = "SRB_story.10.desc"
+	picture = GFX_evt_news_room
+	show_sound = event_default
+
+	is_triggered_only = yes #在裂界研究支线中被触发
+	trigger = {
+		is_ai = no
+		has_country_flag = SRB_country
+	}
+
+	option = {
+		name = "SRB_story.10.a"
+		hidden_effect = { #解锁新的裂界研究项目
+			if = {
+				limit = {
+					has_country_flag = belobog_blocker_1_research_1_finished
+				}
+				remove_country_flag = belobog_blocker_1_research_1_finished
+				every_situation = {
+					limit = {
+						is_situation_type = belobog_blocker_1_situation
+					}
+					set_situation_flag = approach_1_available
+				}
+				enable_special_project = {
+					name = "belobog_blocker_1_research_2"
+					owner = this
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = belobog_blocker_1_research_2_finished
+				}
+				remove_country_flag = belobog_blocker_1_research_2_finished
+				every_situation = {
+					limit = {
+						is_situation_type = belobog_blocker_1_situation
+					}
+					set_situation_flag = approach_3_available
+				}
+				enable_special_project = {
+					name = "belobog_blocker_1_research_3"
+					owner = this
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = belobog_blocker_1_research_3_finished
+				}
+				remove_country_flag = belobog_blocker_1_research_3_finished
+				every_situation = {
+					limit = {
+						is_situation_type = belobog_blocker_1_situation
+					}
+					set_situation_flag = approach_4_available
+				}
+				enable_special_project = {
+					name = "belobog_blocker_1_research_4"
+					owner = this
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = belobog_blocker_1_research_4_finished
+				}
+				remove_country_flag = belobog_blocker_1_research_4_finished
+				enable_special_project = {
+					name = "belobog_blocker_1_research_5"
+					owner = this
+				}
+			}
+		}
+	}
+}
+country_event = { #裂界研究1完成
+	id = SRB_story.11
+	title = "SRB_story.11.title"
+	desc = "SRB_story.11.desc"
+	picture = GFX_evt_physics_research
+
+	fire_only_once = yes
+	is_triggered_only = yes	#特殊项目belobog_blocker_1_research_1
+	trigger = {
+		has_country_flag = SRB_country
+		has_country_flag = belobog_blocker_1_research_1_finished
+	}
+
+	option = {
+		name = "SRB_story.11.a"
+		hidden_effect = {
+			country_event = {
+				id = SRB_story.10
+				days = 60
+			}
+		}
+		
+		start_situation = {
+			type = belobog_blocker_1_situation
+			target = event_target:SRB_planet_jarilo
+		}
+	}
+}
+country_event = { #裂界研究2完成
+	id = SRB_story.12
+	title = "SRB_story.12.title"
+	desc = "SRB_story.12.desc"
+	picture = GFX_evt_scientific_experiments
+
+	fire_only_once = yes
+	is_triggered_only = yes	#特殊项目belobog_blocker_1_research_2
+	trigger = {
+		has_country_flag = SRB_country
+		has_country_flag = belobog_blocker_1_research_2_finished
+	}
+
+	option = {
+		name = "SRB_story.12.a"
+		hidden_effect = {
+			country_event = {
+				id = SRB_story.10
+				days = 75
+			}
+		}
+	}
+}
+country_event = { #裂界研究3完成
+	id = SRB_story.13
+	title = "SRB_story.13.title"
+	desc = "SRB_story.13.desc"
+	picture = GFX_evt_scientific_experiments
+
+	fire_only_once = yes
+	is_triggered_only = yes	#特殊项目belobog_blocker_1_research_3
+	trigger = {
+		has_country_flag = SRB_country
+		has_country_flag = belobog_blocker_1_research_3_finished
+	}
+
+	option = {
+		name = "SRB_story.13.a"
+		hidden_effect = {
+			if = {
+				limit = {
+					has_country_flag = SRB_main_story_stay_chosen
+				}
+				country_event = {
+					id = SRB_story.10
+					days = 75
+				}
+			}
+		}
+	}
+}
+country_event = { #裂界研究4完成
+	id = SRB_story.14
+	title = "SRB_story.14.title"
+	desc = "SRB_story.14.desc"
+	picture = GFX_evt_scientific_experiments
+
+	fire_only_once = yes
+	is_triggered_only = yes	#特殊项目belobog_blocker_1_research_4
+	trigger = {
+		has_country_flag = SRB_country
+		has_country_flag = belobog_blocker_1_research_4_finished
+	}
+
+	option = {
+		name = "SRB_story.14.a"
+		hidden_effect = {
+			country_event = {
+				id = SRB_story.10
+				days = 75
+			}
+		}
+	}
+}
+country_event = { #裂界研究5完成
+	id = SRB_story.15
+	title = "SRB_story.15.title"
+	desc = "SRB_story.15.desc"
+	picture = GFX_evt_scientific_experiments
+
+	fire_only_once = yes
+	is_triggered_only = yes	#特殊项目belobog_blocker_1_research_5
+	trigger = {
+		has_country_flag = SRB_country
+	}
+
+	option = {
+		name = "SRB_story.15.a"
+		hidden_effect = {
+			set_country_flag = "SRB_main_story_blocker_1_research_finished"
+			country_event = { id = SRB_story.91 }
+			#!记得在实机调试时找出其它blocker_1_research残留flag，在此处清除:)
+		}
+	}
+}
+##寒潮研究特殊项目
+country_event = { #新的寒潮研究项目已解锁
+	id = SRB_story.20
+	title = "SRB_story.20.title"
+	desc = "SRB_story.20.desc"
+	picture = GFX_evt_news_room
+	show_sound = event_default
+
+	is_triggered_only = yes #在裂界研究支线中被触发
+	trigger = {
+		is_ai = no
+		has_country_flag = SRB_country
+	}
+
+	option = {
+		name = "SRB_story.20.a"
+		hidden_effect = { #解锁新的裂界研究项目
+			if = {
+				limit = {
+					has_country_flag = belobog_blocker_2_research_1_finished
+				}
+				remove_country_flag = belobog_blocker_2_research_1_finished
+				enable_special_project = {
+					name = "belobog_blocker_2_research_2"
+					owner = this
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = belobog_blocker_2_research_2_finished
+				}
+				remove_country_flag = belobog_blocker_2_research_2_finished
+				enable_special_project = {
+					name = "belobog_blocker_2_research_3"
+					owner = this
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = belobog_blocker_2_research_3_finished
+				}
+				remove_country_flag = belobog_blocker_2_research_3_finished
+				enable_special_project = {
+					name = "belobog_blocker_2_research_4"
+					owner = this
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = belobog_blocker_2_research_4_finished
+				}
+				remove_country_flag = belobog_blocker_2_research_4_finished
+				enable_special_project = {
+					name = "belobog_blocker_2_research_5"
+					owner = this
+				}
+			}
+		}
+	}
+}
+country_event = { #寒潮研究1完成
+	id = SRB_story.21
+	title = "SRB_story.21.title"
+	desc = "SRB_story.21.desc"
+	picture = GFX_evt_physics_research
+
+	fire_only_once = yes
+	is_triggered_only = yes	#特殊项目belobog_blocker_2_research_1
+	trigger = {
+		has_country_flag = SRB_country
+		has_country_flag = belobog_blocker_2_research_1_finished
+	}
+
+	option = {
+		name = "SRB_story.21.a"
+		hidden_effect = {
+			country_event = {
+				id = SRB_story.20
+				days = 60
+			}
+		}
+	}
+}
+country_event = { #寒潮研究2完成
+	id = SRB_story.22
+	title = "SRB_story.22.title"
+	desc = "SRB_story.22.desc"
+	picture = GFX_evt_scientific_experiments
+
+	fire_only_once = yes
+	is_triggered_only = yes	#特殊项目belobog_blocker_2_research_2
+	trigger = {
+		has_country_flag = SRB_country
+		has_country_flag = belobog_blocker_2_research_2_finished
+	}
+
+	option = {
+		name = "SRB_story.22.a"
+		event_target:SRB_planet_jarilo = {
+			remove_deposit = d_belobog_blocker_2
+		}
+		hidden_effect = {
+			set_country_flag = "SRB_blocker_2_removeable" #为防止玩家将该事件拖到一边并清除大量地貌障碍导致bug，将flag移至此处
+			country_event = {
+				id = SRB_story.20
+				days = 75
+			}
+		}
+	}
+}
+country_event = { #寒潮研究3完成
+	id = SRB_story.23
+	title = "SRB_story.23.title"
+	desc = "SRB_story.23.desc"
+	picture = GFX_evt_scientific_experiments
+
+	fire_only_once = yes
+	is_triggered_only = yes	#特殊项目belobog_blocker_2_research_3
+	trigger = {
+		has_country_flag = SRB_country
+		has_country_flag = belobog_blocker_2_research_3_finished
+	}
+
+	option = {
+		name = "SRB_story.23.a"
+		hidden_effect = {
+			if = {
+				limit = {
+					has_country_flag = SRB_main_story_stay_chosen
+				}
+				country_event = {
+					id = SRB_story.20
+					days = 75
+				}
+			}
+		}
+	}
+}
+country_event = { #寒潮研究4完成
+	id = SRB_story.24
+	title = "SRB_story.24.title"
+	desc = "SRB_story.24.desc"
+	picture = GFX_evt_scientific_experiments
+
+	fire_only_once = yes
+	is_triggered_only = yes	#特殊项目belobog_blocker_2_research_4
+	trigger = {
+		has_country_flag = SRB_country
+		has_country_flag = belobog_blocker_2_research_4_finished
+	}
+
+	option = {
+		name = "SRB_story.24.a"
+		hidden_effect = {
+			country_event = {
+				id = SRB_story.20
+				days = 75
+			}
+		}
+	}
+}
+country_event = { #寒潮研究5完成
+	id = SRB_story.25
+	title = "SRB_story.25.title"
+	desc = "SRB_story.25.desc"
+	picture = GFX_evt_scientific_experiments
+
+	fire_only_once = yes
+	is_triggered_only = yes	#特殊项目belobog_blocker_2_research_5
+	trigger = {
+		has_country_flag = SRB_country
+	}
+
+	option = {
+		name = "SRB_story.25.a"
+		hidden_effect = {
+			set_country_flag = "SRB_main_story_blocker_2_research_finished"
+			country_event = { id = SRB_story.91 }
+			#!记得在实机调试时找出其它blocker_2_research残留flag，在此处清除:)
+		}
+	}
+}
+
+##地貌障碍
+country_event = {
+	id = SRB_story.31
+	title = "SRB_story.31.title"
+	desc = "SRB_story.31.desc"
+	picture = GFX_evt_crisis_defeated
+	show_sound = event_celebration
+
+	is_triggered_only = yes #SRB_story.30
+	fire_only_once = yes 
+	trigger = {
+		is_ai = no
+		has_country_flag = SRB_country
+	}
+
+	option = {
+		name = "SRB_story.31.a"
+	}
+	option = {
+		name = "SRB_story.31.b"
+	}
+	after = {
+		hidden_effect = {
+			country_event = { id = SRB_story.93 }
+		}
+	}
+}
+
+##局势：抑制裂界
+situation_event = { #发起后的介绍
+	id = SRB_story.51
+	title = "SRB_story.51.title"
+	desc = "SRB_story.51.desc"
+	picture = GFX_evt_crisis_defeated #!
+	show_sound = event_celebration	  #!
+
+	fire_only_once = yes
+	is_triggered_only = yes #belobog_blocker_1_situation:on_start
+	trigger = {}
+
+	option = {
+		name = "SRB_story.51.a"
+	}
+	option = {
+		name = "SRB_story.51.b"
+	}
+}
+situation_event = { #完成后的介绍
+	id = SRB_story.52
+	title = "SRB_story.52.title"
+	desc = "SRB_story.52.desc"
+	picture = GFX_evt_crisis_defeated #!
+	show_sound = event_celebration	  #!
+
+	fire_only_once = yes
+	is_triggered_only = yes #belobog_blocker_1_situation:on_progress_complete
+	trigger = {}
+
+	option = {
+		name = "SRB_story.52.a"
+		destroy_situation = belobog_blocker_1_situation
+	}
+}
+situation_event = { #侵蚀严重介绍
+	id = SRB_story.53
+	title = "SRB_story.53.title"
+	desc = "SRB_story.53.desc"
+	picture = GFX_evt_crisis_defeated #!
+	show_sound = event_celebration	  #!
+
+	fire_only_once = yes
+	is_triggered_only = yes #belobog_blocker_1_situation:on_fail
+	trigger = {}
+
+	option = {
+		name = "SRB_story.53.a"
+		hidden_effect = {
+			owner = {
+				set_country_flag = SRB_planet_jarilo_lost_blocker_1_army
+			}
+		}
+	}
+}
+situation_event = { #侵蚀逐渐失控
+	id = SRB_story.54
+	title = "SRB_story.54.title"
+	desc = "SRB_story.54.desc"
+	picture = GFX_evt_crisis_defeated #!
+	show_sound = event_celebration	  #!
+
+	fire_only_once = yes
+	is_triggered_only = yes #belobog_blocker_1_situation:belobog_blocker_1_stage_1:on_first_enter
+	trigger = {}
+
+	option = {
+		name = "SRB_story.54.a"
+	}
+}
+situation_event = { #抑制裂界完成在即
+	id = SRB_story.55
+	title = "SRB_story.55.title"
+	desc = "SRB_story.55.desc"
+	picture = GFX_evt_crisis_defeated #!
+	show_sound = event_celebration	  #!
+
+	fire_only_once = yes
+	is_triggered_only = yes #belobog_blocker_1_situation:belobog_blocker_1_stage_5:on_first_enter
+	trigger = {}
+
+	option = {
+		name = "SRB_story.55.a"
+	}
+}
+situation_event = { #裂界生成累积
+	id = SRB_story.60
+	hide_window = yes
+
+	is_triggered_only = yes #belobog_blocker_1_situation:on_monthly
+	trigger = {
+		owner = {
+			has_country_flag = SRB_country
+		}
+	}
+
+	immediate = {
+		##裂界生成累积的计算，值视所处阶段决定
+		if = {
+			limit = {
+				current_stage = approach_1
+			}
+			owner = {
+				change_variable = { #将值归零
+					which = belobog_blocker_1_cumulative_value
+					value = 0.5
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				current_stage = approach_2
+			}
+			owner = {
+				change_variable = { #将值归零
+					which = belobog_blocker_1_cumulative_value
+					value = 0.1
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				current_stage = approach_3
+			}
+			owner = {
+				change_variable = { #将值归零
+					which = belobog_blocker_1_cumulative_value
+					value = -0.05
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				current_stage = approach_4
+			}
+			owner = {
+				change_variable = { #将值归零
+					which = belobog_blocker_1_cumulative_value
+					value = -0.1
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				current_stage = approach_5
+			}
+			owner = {
+				change_variable = { #将值归零
+					which = belobog_blocker_1_cumulative_value
+					value = -0.5
+				}
+			}
+		}
+		##裂界生成累积的效果
+		owner = {	#防止scope不对
+			if = {	#当累积值>=10时，生成一个裂界地貌障碍在雅利洛-VI上
+				limit = {
+					check_variable = {
+						which = belobog_blocker_1_cumulative_value
+						value >= 10
+					}
+				}
+				change_variable = { #将值归零
+					which = belobog_blocker_1_cumulative_value
+					value = -10
+				}
+				country_event = { id = SRB_story.61 } #通知
+				root = {
+					target = {		#生成裂界
+						add_deposit = d_belobog_blocker_1
+					}
+				}
+			}
+			else_if = {	#当累积值<=-10时，除掉一个裂界地貌障碍在雅利洛-VI上
+				limit = {
+					check_variable = {
+						which = belobog_blocker_1_cumulative_value
+						value <= -10
+					}
+				}
+				change_variable = { #将值归零
+					which = belobog_blocker_1_cumulative_value
+					value = 10
+				}
+				root = {
+					target = {		#除去裂界
+						if = {
+							limit = { 
+								any_deposit = {
+									is_deposit_type = d_belobog_blocker_1
+								}
+							}
+							remove_deposit = d_belobog_blocker_1
+						}
+						else = {	#如果没有就不除了，奖励1000电
+							add_resourse = {
+								energy = 1000
+							}
+						}
+					}
+					owner = {
+						country_event = { id = SRB_story.62 } #通知
+					}
+				}
+			}
+		}
+	}
+}
+situation_event = { #累积生成通知
+	id = SRB_story.61
+	title = "SRB_story.61.title"
+	desc = "SRB_story.61.desc"
+	picture = GFX_evt_crisis_defeated #!
+	show_sound = event_celebration	  #!
+
+	fire_only_once = yes
+	is_triggered_only = yes #SRB_story.60
+	trigger = {}
+
+	option = {
+		name = "SRB_story.61.a"
+	}
+}
+situation_event = { #累积消除通知
+	id = SRB_story.62
+	title = "SRB_story.62.title"
+	desc = "SRB_story.62.desc"
+	picture = GFX_evt_crisis_defeated #!
+	show_sound = event_celebration	  #!
+
+	fire_only_once = yes
+	is_triggered_only = yes #SRB_story.60
+	trigger = {}
+
+	option = {
+		name = "SRB_story.62.a"
+	}
+}
+
+##母星陷落的各种情况
+country_event = { #大判断器
+	id = SRB_story.80
+	hide_window = yes
+
+	is_triggered_only = yes
+	trigger = {
+		has_country_flag = SRB_country
+		any_owned_planet = {
+			not = {
+				has_planet_flag = SRB_capital
+			}
+		}
+	}
+
+	immediate = {
+		if = {			#母星自然陷落
+			limit = {
+				has_country_flag = SRB_planet_jarilo_lost_natrual
+			}
+			if = {
+				limit = {
+					has_country_flag = SRB_main_story_stay_chosen
+				}
+				country_event = { id = SRB_story.85 }
+			}
+			else_if = {
+				limit = {
+					has_country_flag = SRB_main_story_leave_chosen
+				}
+				country_event = { id = SRB_story.86 }
+			}
+		}
+		else_if = {		#被裂界怪物攻陷
+			limit = {
+				has_country_flag = SRB_planet_jarilo_lost_blocker_1_army
+			}
+			if = {
+				limit = {
+					has_country_flag = SRB_main_story_stay_chosen
+				}
+				country_event = { id = SRB_story.83 }
+			}
+			else_if = {
+				limit = {
+					has_country_flag = SRB_main_story_leave_chosen
+				}
+				country_event = { id = SRB_story.84 }
+			}
+		}
+		else_if = {		#控制裂界失败
+			limit = {
+				has_country_flag = SRB_planet_jarilo_lost_blocker_1_control
+			}
+			if = {
+				limit = {
+					has_country_flag = SRB_main_story_stay_chosen
+				}
+				country_event = { id = SRB_story.81 }
+			}
+			else_if = {
+				limit = {
+					has_country_flag = SRB_main_story_leave_chosen
+				}
+				country_event = { id = SRB_story.82 }
+			}
+		}
+		##放这里了。应该有这种情况，但我也不清楚其中机制，不知道该怎么办 #!
+		#else_if = {
+		#	limit = {
+		#		has_country_flag = SRB_planet_jarilo_lost_war
+		#	}
+		#}
+		
+		##于是，目前来说都会摧毁母星
+		event_target:planet_jarilo = {
+			destroy_colony = yes
+		}
+		add_planet_devastation = 200
+		change_pc = pc_frozen
+	}
+}
+country_event = { #控制裂界失败，母星陷落-stay
+	id = SRB_story.81
+	title = "SRB_story.81.title"
+	desc = "SRB_story.81.desc"
+	picture = GFX_evt_city_ruins
+	show_sound = event_celebration	  #!
+
+	fire_only_once = yes
+	is_triggered_only = yes #SRB_story.80
+	trigger = {}
+
+	option = {
+		name = "SRB_story.81.a"
+		endgame_telemetry = yes
+	}
+}
+country_event = { #控制裂界失败，母星陷落-leave
+	id = SRB_story.82
+	title = "SRB_story.82.title"
+	desc = "SRB_story.82.desc"
+	picture = GFX_evt_city_ruins
+	show_sound = event_celebration	  #!
+
+	fire_only_once = yes
+	is_triggered_only = yes #SRB_story.80
+	trigger = {}
+
+	option = {
+		name = "SRB_story.82.a"
+	}
+}
+country_event = { #能承受的裂界战斗失利次数耗完-stay
+	id = SRB_story.83
+	title = "SRB_story.83.title"
+	desc = "SRB_story.83.desc"
+	picture = GFX_evt_city_ruins
+	show_sound = event_celebration	  #!
+
+	fire_only_once = yes
+	is_triggered_only = yes #SRB_story.80
+	trigger = {}
+
+	option = {
+		name = "SRB_story.83.a"
+		endgame_telemetry = yes
+	}
+}
+country_event = { #能承受的裂界战斗失利次数耗完-leave
+	id = SRB_story.84
+	title = "SRB_story.84.title"
+	desc = "SRB_story.84.desc"
+	picture = GFX_evt_city_ruins
+	show_sound = event_celebration	  #!
+
+	fire_only_once = yes
+	is_triggered_only = yes #SRB_story.80
+	trigger = {}
+
+	option = {
+		name = "SRB_story.84.a"
+	}
+}
+country_event = { #母星自然陷落-stay
+	id = SRB_story.85
+	title = "SRB_story.85.title"
+	desc = "SRB_story.85.desc"
+	picture = GFX_evt_city_ruins
+	show_sound = event_celebration	  #!
+
+	fire_only_once = yes
+	is_triggered_only = yes #SRB_story.80
+	trigger = {}
+
+	option = {
+		name = "SRB_story.85.a"
+		endgame_telemetry = yes
+	}
+}
+country_event = { #母星自然陷落-leave
+	id = SRB_story.86
+	title = "SRB_story.86.title"
+	desc = "SRB_story.86.desc"
+	picture = GFX_evt_city_ruins
+	show_sound = event_celebration	  #!
+
+	fire_only_once = yes
+	is_triggered_only = yes #SRB_story.80
+	trigger = {}
+
+	option = {
+		name = "SRB_story.86.a"
+	}
+}
+
+##主线完成阶段
+country_event = { #完成全部的寒潮裂界研究（S）
+	id = SRB_story.91
+	hide_window = yes
+
+	is_triggered_only = yes #SRB_story.15 + SRB_story.25
+	trigger = {
+		has_country_flag = SRB_main_story_blocker_1_research_finished
+		has_country_flag = SRB_main_story_blocker_2_research_finished
+	}
+
+	immediate = {
+		country_event = { id = SRB_story.93 }
+	}
+}
+country_event = { #清理所有的地貌障碍（S）
+	id = SRB_story.92
+	hide_window = yes
+
+	is_triggered_only = yes #在移除寒潮/裂界地貌障碍时被触发
+	trigger = {
+		has_country_flag = SRB_country
+		event_target:SRB_planet_jarilo = { has_planet_flag = SRB_capital }
+	}
+
+	immediate = {
+		event_target:SRB_planet_jarilo = {
+			if = {
+				limit = {
+					num_uncleared_blockers = 0
+				}
+				set_country_flag = "SRB_main_story_blockers_remove_finished"
+				country_event = { id = SRB_story.31 }
+			}
+		}
+	}
+}
+country_event = { #发起复苏雅利洛-VI特殊项目（S）
+	id = SRB_story.93
+	title = "SRB_story.93.title"
+	desc = "SRB_story.93.desc"
+	picture = GFX_evt_news_room
+	show_sound = event_celebration
+
+	is_triggered_only = yes #SRB_story.91 + SRB_story.31
+	trigger = {
+		has_country_flag = SRB_main_story_blockers_remove_finished
+		has_country_flag = SRB_main_story_blocker_1_research_finished
+		has_country_flag = SRB_main_story_blocker_2_research_finished
+	}
+
+	option = {
+		name = "SRB_story.93.a"
+		enable_special_project = {
+			name = SRB_main_story_save_jarilo
+			owner = this
+		}
+	}
+}
+country_event = { #完成复苏雅利洛-VI特殊项目（S）
+	id = SRB_story.94
+	title = "SRB_story.94.title"
+	desc = "SRB_story.94.desc"
+	picture = GFX_evt_news_room
+	show_sound = event_celebration
+
+	is_triggered_only = yes #特殊项目SRB_main_story_save_jarilo
+	trigger = {
+		has_country_flag = SRB_main_story_blockers_remove_finished
+		has_country_flag = SRB_main_story_blocker_1_research_finished
+		has_country_flag = SRB_main_story_blocker_2_research_finished
+	}
+
+	option = {
+		name = "SRB_story.94.a"
+		hidden_effect = {
+			set_country_flag = "SRB_main_story_save_jarilo_finished"
+			country_event = { id = SRB_story.95 }
+		}
+	}
+}
+country_event = { #不断判断是否清除所有裂界怪物（S）
+	id = SRB_story.95
+	hide_window = yes
+
+	is_triggered_only = yes #SRB_story.94,95
+	trigger = {
+		has_country_flag = SRB_main_story_save_jarilo_finished
+		has_country_flag = SRB_main_story_blockers_remove_finished
+		has_country_flag = SRB_main_story_blocker_1_research_finished
+		has_country_flag = SRB_main_story_blocker_2_research_finished
+		check_variable = {
+			which = belobog_blocker_1_army_num
+			value <= 0
+		}
+	}
+
+	immediate = {
+		if = {
+			limit = {
+				check_variable = {
+					which = belobog_blocker_1_army_num
+					value = 0
+				}
+			}
+			country_event = { id = SRB_story.96 }
+		}
+		else = {
+			country_event = { 
+				id = SRB_story.95 
+				days = 30
+			}
+		}
+	}
+}
+country_event = { #主线完成（S）
+	id = SRB_story.96
+	title = "SRB_story.96.title"
+	desc = "SRB_story.96.desc"
+	picture = GFX_evt_news_room
+	show_sound = event_celebration
+
+	is_triggered_only = yes #SRB_story.95
+	trigger = {
+		has_country_flag = SRB_main_story_save_jarilo_finished
+		has_country_flag = SRB_main_story_blockers_remove_finished
+		has_country_flag = SRB_main_story_blocker_1_research_finished
+		has_country_flag = SRB_main_story_blocker_2_research_finished
+		check_variable = {
+			which = belobog_blocker_1_army_num
+			value = 0
+		}
+	}
+
+	option = {
+		name = "SRB_story.96.a"
+	}
+	option = {
+		name = "SRB_story.96.b"
+		
+	}
+	after = {
+		hidden_effect = {
+			set_country_flag = "SRB_main_story_finished"
+			remove_country_flag = SRB_main_story_save_jarilo_finished
+			remove_country_flag = SRB_main_story_blockers_remove_finished
+			remove_country_flag = SRB_main_story_blocker_1_research_finished
+			remove_country_flag = SRB_main_story_blocker_2_research_finished
+		}
+	}
+}
+
+##主线完成
+	#1、成功迁出母星（L）		       #SRB_main_story_leave_jarilo_finished
+	#2、清理所有的地貌障碍（S）			SRB_main_story_blockers_remove_finished
+	#3、裂界侵蚀局势推条到底（S			SRB_main_story_blocker_1_situation_stage_4
+	#4、清理所有的裂界怪物（S）			belobog_blocker_1_army_num = 0
+	#5、完成全部的寒潮裂界研究（S） 	SRB_main_story_blocker_1_research_finished + SRB_main_story_blocker_2_research_finished
+	#6、完成复苏母星特殊项目（S）		SRB_main_story_save_jarilo_finished
+
+############################
+## SRB_story.100+
+## 裂界战斗
+############################
+
+country_event = { #裂界入侵控制器
+	id = SRB_story.100
+	hide_window = yes
+
+	mean_time_to_happen = {
+		years = 4
+		modifier = {
+			factor = 1
+			
+		}
+		modifier = {
+			factor = 0.75
+			has_country_flag = belobog_blocker_1_research_4_finished
+		}
+	}
+	trigger = {
+		has_country_flag = SRB_country
+		any_owned_planet = { has_planet_flag = SRB_capital }
+
+		has_country_flag = belobog_blocker_1_attack_ready	#没有完成前置剧情不能触发裂界进攻
+		any_owned_planet = { 
+			is_homeworld = no  								#只有母星一个殖民地不能触发裂界进攻
+		}
+		any_owned_planet = {
+			is_homeworld = yes  							#母星
+			planet_garrison_strength <= 200					#驻军实力过低不能触发裂界进攻
+		}
+	}
+
+	immediate = {
+		#在星球上生成裂界军队
+		belobog_blocker_1_defense_effect = yes
+		#出事件提示玩家裂界发动进攻
+		country_event = { id = SRB_story.101 }
+	}
+}
+
+##裂界战斗通用
+country_event = { #裂界入侵通知
+	id = SRB_story.101
+	title = "SRB_story.101.title"
+	desc = "SRB_story.101.desc"
+	picture = GFX_evt_burning_settlement
+	show_sound = event_air_raid_siren
+
+	is_triggered_only = yes #SRB_story.5
+	trigger = {
+		has_country_flag = SRB_country
+	}
+
+	option = {
+		name = "SRB_story.101.a"
+	}
+}
+country_event = { #陆军战斗，裂界赢了
+	id = SRB_story.102
+	hide_window = yes
+
+	is_triggered_only = yes #on_planet_attackers_win
+	trigger = {
+		from = {		#应该是贝洛伯格国家
+			has_country_flag = SRB_country
+		}
+		fromfrom = {	#肯定是雅利洛-VI
+			has_planet_flag = SRB_capital
+		}
+	}
+
+	#裂界入侵成功第一次。战略撤退，放弃部分领地
+	#裂界入侵成功第二次。撤回贝洛伯格，不计代价坚守防线
+	#裂界入侵成功第三次。母星陷落，裂界怪物开始大肆摧毁母星殖民地
+	#进攻裂界失败，40%成功撤退；30%撤退失败遭受损失；30%遭到反扑造成损失，但不按裂界入侵成功计算
+	immediate = {
+		from = {	#先回到贝洛伯格国家
+			##扣除一点裂界抵抗次数
+			change_variable = {
+				which = belobog_blocker_1_battle_defense
+				value = -1
+			}
+			##自动增加20数量
+			change_variable = {
+				which = belobog_blocker_1_army_num
+				value = 20
+			}
+			##触发机制
+			if = {		#进攻裂界失败
+				limit = {
+					fromfrom = {	#雅利洛-VI
+						has_planet_flag = belobog_blocker_1_attack_ongoing
+					}
+				}
+				random_list = {
+					40 = { country_event = { id = SRB_story.111 } }	#40%成功撤退
+					30 = { country_event = { id = SRB_story.112 } }	#30%撤退失败遭受损失
+					30 = { country_event = { id = SRB_story.113 } }	#30%遭到反扑遭受损失
+				}
+			}
+			else_if = {	#防守裂界失败
+				limit = {
+					fromfrom = {	#雅利洛-VI
+						has_planet_flag = belobog_blocker_1_defense_ongoing 
+					}
+				}
+				if = {		#当裂界抵抗次数为2时:战略撤退，放弃部分领地
+					limit = {
+						check_variable = {
+							which = belobog_blocker_1_battle_defense
+							value = 2
+						}
+						fromfrom = { #雅利洛-VI
+							not = { has_planet_flag = belobog_blocker_1_attack_ongoing }
+						}
+					}
+					country_event = { id = SRB_story.114 }
+				}
+				else_if = {	#当裂界抵抗次数为1时:撤回贝洛伯格，放弃其余领地
+					limit = {
+						check_variable = {
+							which = belobog_blocker_1_battle_defense
+							value = 1
+						}
+						fromfrom = { #雅利洛-VI
+							not = { has_planet_flag = belobog_blocker_1_attack_ongoing }
+						}
+					}
+					country_event = { id = SRB_story.115 }
+				}
+				else_if = {	#当裂界抵抗次数为0时:母星陷落
+					limit = {
+						check_variable = {
+							which = belobog_blocker_1_battle_defense
+							value = 0
+						}
+					}
+					country_event = { id = SRB_story.116 }
+				}
+			}
+			else = {	#报错
+				country_event = { id = SRB_story.199 } #裂界入侵系列通用报错
+			}
+		}
+	}
+}
+country_event = { #陆军战斗，玩家赢了
+	id = SRB_story.103
+	hide_window = yes
+
+	is_triggered_only = yes #on_planet_defenders_win
+	trigger = {
+		root = {		#应该是贝洛伯格国家
+			has_country_flag = SRB_country
+		}
+		fromfrom = {	#肯定是雅利洛-VI
+			has_planet_flag = SRB_capital
+		}
+	}
+
+	immediate = {
+		root = {	#先回到贝洛伯格国家
+			##自动减少20数量
+			change_variable = {
+				which = belobog_blocker_1_army_num
+				value = -20
+			}
+			##触发机制
+			if = {		#进攻裂界成功
+				limit = {
+					fromfrom = {	#雅利洛-VI
+						has_planet_flag = belobog_blocker_1_attack_ongoing
+					}
+				}
+				country_event = { id = SRB_story.121 }
+			}
+			else_if = {	#防守裂界成功
+				limit = {
+					fromfrom = {	#雅利洛-VI
+						has_planet_flag = belobog_blocker_1_defense_ongoing 
+					}
+				}
+				country_event = { id = SRB_story.122 }
+			}
+			else = {	#报错
+				country_event = { id = SRB_story.199 } #裂界入侵系列通用报错
+			}
+		}
+	}
+}
+
+##裂界获胜
+country_event = { #进攻裂界失败，40%成功撤退
+	id = SRB_story.111
+	title = "SRB_story.111.title"
+	desc = "SRB_story.111.desc"
+	picture = GFX_evt_salute
+	show_sound = event_default	#!
+
+	is_triggered_only = yes #SRB_story.102
+	trigger = {
+		has_country_flag = SRB_country
+		event_target:SRB_planet_jarilo = {
+			has_planet_flag = SRB_capital
+			has_planet_flag = belobog_blocker_1_attack_ongoing
+		}
+	}
+
+	option = {
+		name = "SRB_story.111.a"
+	}
+	
+	after = {
+		hidden_effect = {
+			event_target:SRB_planet_jarilo = {
+				remove_planet_flag = belobog_blocker_1_attack_ongoing
+			}
+		}
+	}
+}
+country_event = { #进攻裂界失败，30%撤退失败遭受损失
+	id = SRB_story.112
+	title = "SRB_story.112.title"
+	desc = "SRB_story.112.desc"
+	picture = GFX_evt_archaeologists_escaping
+	show_sound = event_default	#!
+
+	is_triggered_only = yes #SRB_story.102
+	trigger = {
+		has_country_flag = SRB_country
+		event_target:planet_jarilo = {
+			has_planet_flag = SRB_capital
+			has_planet_flag = belobog_blocker_1_attack_ongoing
+		}
+	}
+
+	option = {
+		name = "SRB_story.112.a"
+	}
+	option = {
+		name = "SRB_story.112.b"
+	}
+	#!没做效果
+	after = {
+		event_target:planet_jarilo = {
+			add_planet_devastation = 10
+		}
+		hidden_effect = {
+			event_target:planet_jarilo = {
+				remove_planet_flag = belobog_blocker_1_attack_ongoing
+			}
+		}
+	}
+}
+country_event = { #进攻裂界失败，30%遭到反扑遭受损失
+	id = SRB_story.113
+	title = "SRB_story.113.title"
+	desc = "SRB_story.113.desc"
+	picture = GFX_evt_burning_settlement
+	show_sound = event_default	#!
+
+	is_triggered_only = yes #SRB_story.102
+	trigger = {
+		has_country_flag = SRB_country
+		event_target:SRB_planet_jarilo = {
+			has_planet_flag = SRB_capital
+			has_planet_flag = belobog_blocker_1_attack_ongoing
+		}
+	}
+
+	option = {
+		name = "SRB_story.113.a"
+	}
+	option = {
+		name = "SRB_story.113.b"
+	}
+	
+	after = {
+		event_target:planet_jarilo = {
+			add_planet_devastation = 30
+			kill_pop = yes
+		}
+		hidden_effect = {
+			event_target:planet_jarilo = {
+				remove_planet_flag = belobog_blocker_1_attack_ongoing
+			}
+		}
+	}
+}
+country_event = { #防守裂界失败，当裂界抵抗次数为2时:战略撤退，放弃部分领地
+	id = SRB_story.114
+	title = "SRB_story.114.title"
+	desc = "SRB_story.114.desc"
+	picture = GFX_evt_burning_settlement
+	show_sound = event_default	#!
+
+	is_triggered_only = yes #SRB_story.102
+	trigger = {
+		has_country_flag = SRB_country
+		event_target:planet_jarilo = {
+			has_planet_flag = SRB_capital
+			has_planet_flag = belobog_blocker_1_attack_ongoing
+		}
+	}
+
+	option = {
+		name = "SRB_story.114.a"
+		custom_tooltip = "SRB_story.114.tooltip"
+	}
+	option = {
+		name = "SRB_story.114.b"
+		custom_tooltip = "SRB_story.114.tooltip"
+	}
+	
+	after = {
+		event_target:planet_jarilo = {
+			add_planet_devastation = 15
+			while = {
+				count = 2
+				add_deposit = d_belobog_blocker_1	#2个裂界
+			}
+		}
+		hidden_effect = {
+			event_target:planet_jarilo = {
+				remove_planet_flag = belobog_blocker_1_attack_ongoing
+			}
+		}
+	}
+}
+country_event = { #防守裂界失败，当裂界抵抗次数为1时:撤回贝洛伯格，放弃其余领地 #!有大问题
+	id = SRB_story.115
+	title = "SRB_story.115.title"
+	desc = "SRB_story.115.desc"
+	picture = GFX_evt_burning_city
+	show_sound = event_default	#!
+
+	is_triggered_only = yes #SRB_story.102
+	trigger = {
+		has_country_flag = SRB_country
+		event_target:planet_jarilo = {
+			has_planet_flag = SRB_capital
+			has_planet_flag = belobog_blocker_1_attack_ongoing
+		}
+	}
+
+	option = {
+		name = "SRB_story.115.a"
+		custom_tooltip = "SRB_story.115.tooltip"
+	}
+	option = {
+		name = "SRB_story.115.b"
+		custom_tooltip = "SRB_story.115.tooltip"
+	}
+	
+	after = {
+		event_target:planet_jarilo = {
+			remove_all_districts = yes
+			every_building = {
+				destroy_building = yes
+			}
+		}
+		hidden_effect = {
+			event_target:planet_jarilo = {
+				remove_planet_flag = belobog_blocker_1_attack_ongoing
+			}
+		}
+	}
+}
+country_event = { #防守裂界失败，当裂界抵抗次数为0时:母星陷落
+	id = SRB_story.116
+	title = "SRB_story.116.title"
+	desc = "SRB_story.116.desc"
+	picture = GFX_evt_city_ruins
+	show_sound = event_default	#!
+
+	is_triggered_only = yes #SRB_story.102
+	trigger = {
+		has_country_flag = SRB_country
+		event_target:SRB_planet_jarilo = {
+			has_planet_flag = SRB_capital
+			has_planet_flag = belobog_blocker_1_attack_ongoing
+		}
+	}
+
+	option = {
+		name = "SRB_story.116.a"
+		custom_tooltip = "SRB_story.116.tooltip"
+	}
+	option = {
+		name = "SRB_story.116.b"
+		custom_tooltip = "SRB_story.116.tooltip"
+	}
+	
+	after = {
+		event_target:planet_jarilo = {
+			destroy_colony = yes
+		}
+		hidden_effect = {
+			set_country_flag = SRB_planet_jarilo_lost_blocker_1_army
+			country_event = { id = SRB_story.80 }
+			event_target:planet_jarilo = {
+				remove_planet_flag = belobog_blocker_1_attack_ongoing
+			}
+		}
+	}
+}
+
+##玩家获胜
+country_event = { #进攻裂界成功
+	id = SRB_story.121
+	title = "SRB_story.121.title"
+	desc = "SRB_story.121.desc"
+	picture = GFX_evt_victorious_army
+	show_sound = event_default	#!
+
+	is_triggered_only = yes #SRB_story.103
+	trigger = {
+		has_country_flag = SRB_country
+		event_target:SRB_planet_jarilo = {
+			has_planet_flag = SRB_capital
+			has_planet_flag = belobog_blocker_1_defense_ongoing
+		}
+	}
+
+	option = {
+		name = "SRB_story.121.a"
+	}
+	option = {
+		name = "SRB_story.121.b"
+	}
+	
+	after = {
+		add_resourse = {
+			unity = 5500
+		}
+		hidden_effect = {
+			event_target:SRB_planet_jarilo = {
+				remove_planet_flag = belobog_blocker_1_defense_ongoing
+			}
+		}
+	}
+}
+country_event = { #防守裂界成功
+	id = SRB_story.122
+	title = "SRB_story.122.title"
+	desc = "SRB_story.122.desc"
+	picture = GFX_evt_ground_combat
+	show_sound = event_default	#!
+
+	is_triggered_only = yes #SRB_story.103
+	trigger = {
+		has_country_flag = SRB_country
+		event_target:SRB_planet_jarilo = {
+			has_planet_flag = SRB_capital
+			has_planet_flag = belobog_blocker_1_defense_ongoing
+		}
+	}
+
+	option = {
+		name = "SRB_story.122.a"
+	}
+
+	after = {
+		add_resourse = {
+			unity = 5500
+		}
+		hidden_effect = {
+			event_target:SRB_planet_jarilo = {
+				remove_planet_flag = belobog_blocker_1_defense_ongoing
+			}
+		}
+	}
+}
+
+##战争结束
+country_event = { #裂界怪物被清除
+	id = SRB_story.190
+	title = "SRB_story.190.title"
+	desc = "SRB_story.190.desc"
+	picture = GFX_evt_victorious_army
+	show_sound = event_air_raid_siren #!
+
+	is_triggered_only = yes #on_yearly_pulse_country
+	trigger = {
+		has_country_flag = SRB_country
+		check_variable = {
+			which = belobog_blocker_1_army_num
+			value = 0
+		}
+	}
+
+	option = {
+		name = "SRB_story.190.a"
+	}
+}
+
+##报错器
+country_event = {
+	id = SRB_story.199
+	title = "SRB_story.199.title"
+	desc = "SRB_story.199.desc"
+	#没有picture
+	show_sound = event_air_raid_siren
+
+	is_triggered_only = yes #SRB_story.100+
+	trigger = {}			#any
+
+	option = {
+		name = "SRB_story.199.a"
+	}
+}
+
+############################
+## SRB_story.200+
+## DLC:寒潮之下
+############################
+
+############################
+## SRB_story.300+
+## 大迁移
+############################
+country_event = {
+	id = SRB_story.301
+	title = "SRB_story.301.title"
+	desc = "SRB_story.301.desc"
+	picture = GFX_evt_announcement
+	show_sound = event_celebration
+
+	is_triggered_only = yes #on_colonized
+	trigger = {
+		has_country_flag = SRB_country
+		has_country_flag = SRB_main_story_leave_chosen
+	}
+
+	option = {
+		name = "SRB_story.301.a"
+		add_resourse = {
+			energy = 200
+			influence = 2000
+		}
+	}
+	option = {
+		name = "SRB_story.301.b"
+	}
+
+}
+
+
+
+##test
+country_event = {
+	id = SRB_story.9999
+	title = "SRB_story.9999.title"
+	desc = "SRB_story.9999.desc"
+
+	is_triggered_only = yes	#SRB_story.1
+	trigger = {
+		has_country_flag = SRB_country
+	}
+
+	option = {
+		name = "SRB_story.9999.a"
+		custom_tooltip = "SRB_story.9999.a.desc"
+	}
+}

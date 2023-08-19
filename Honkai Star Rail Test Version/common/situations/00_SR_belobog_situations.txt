@@ -1,0 +1,294 @@
+### 抑制裂界 ###
+belobog_blocker_1_situation = {
+
+	##文本
+	desc = {
+		trigger = {
+			owner = {
+				has_country_flag = SRB_main_story_stay_chosen
+			}
+		}
+		text = "belobog_blocker_1_situation_triggered_desc.1"
+	}
+	desc = {
+		trigger = {
+			owner = {
+				has_country_flag = SRB_main_story_leave_chosen
+			}
+		}
+		text = "belobog_blocker_1_situation_triggered_desc.2"
+	}
+
+	##图片和UI
+	picture = GFX_evt_zro_3
+	#picture = {}												#triggered picture
+	complete_icon = GFX_situation_outcome_positive    			#定义进度条右方的图标
+	complete_icon_frame = GFX_situation_outcome_frame_red 		#定义进度条右方图标的外框
+	fail_icon = GFX_situation_outcome_negative       			#定义进度条左方的图标
+	fail_icon_frame = GFX_situation_outcome_frame_red 			#定义进度条左方图标的外框
+
+	##整体定义
+	category = negative
+	progress_direction = bidirectional
+	complete_category = positive
+	fail_category = negative
+	
+	##程序事件
+	on_start = {
+		situation_event = { id = SRB_story.51 }
+	}
+	on_progress_complete = {
+		situation_event = { id = SRB_story.52 }
+	}
+	on_fail = {
+		situation_event = { id = SRB_story.53 }
+	}
+	abort_trigger = { }						#当局势满足trigger之时将中断局势并触发on_abort
+	on_abort = { }
+
+	##阶段
+	start_value = 40
+	stages = {
+		belobog_blocker_1_stage_1 = {
+			custom_tooltip = "belobog_blocker_1_stage_1_tooltip" 
+			icon = GFX_situation_stage_1 
+			icon_background = GFX_situation_stage_frame_red 
+			end = 20 
+
+			on_first_enter = {
+				situation_event = { id = SRB_story.54 }
+			} 
+
+			target_modifier = {
+				planet_stability_add = -20
+				planet_amenities_add = -20
+				planet_jobs_produces_mult = -0.3
+				planet_emigration_push_add = 50
+			}
+			triggered_target_modifier = { 
+				potential = {
+					owner = { has_country_flag = SRB_main_story_leave_chosen }
+				}
+				modifier = {
+					planet_emigration_push_mult = 0.75
+				}
+			}
+		}
+		belobog_blocker_1_stage_2 = {
+			custom_tooltip = "belobog_blocker_1_stage_2_tooltip" 
+			icon = GFX_situation_stage_2
+			icon_background = GFX_situation_stage_frame_red
+			end = 40
+
+			#on_first_enter = {} 
+
+			target_modifier = {
+				planet_stability_add = -10
+				planet_amenities_add = -10
+				planet_jobs_produces_mult = -0.1
+				planet_emigration_push_add = 20
+			}
+			triggered_target_modifier = { 
+				potential = {
+					owner = { has_country_flag = SRB_main_story_leave_chosen }
+				}
+				modifier = {
+					planet_emigration_push_mult = 0.35
+				}
+			}
+		}
+		belobog_blocker_1_stage_3 = {
+			custom_tooltip = "belobog_blocker_1_stage_3_tooltip" 
+			icon = GFX_situation_stage_3
+			icon_background = GFX_situation_stage_frame_yellow 
+			end = 60
+
+			#on_first_enter = {} 
+
+			target_modifier = {
+				planet_emigration_push_add = 5
+			}
+			triggered_target_modifier = { 
+				potential = {
+					owner = { has_country_flag = SRB_main_story_leave_chosen }
+				}
+				modifier = {
+					planet_emigration_push_mult = 0.1
+				}
+			}
+		}
+		belobog_blocker_1_stage_4 = {
+			custom_tooltip = "belobog_blocker_1_stage_4_tooltip" 
+			icon = GFX_situation_stage_4
+			icon_background = GFX_situation_stage_frame_green 
+			end = 80 
+
+			#on_first_enter = {} 
+
+			modifier = {
+				country_unity_produces_mult = 0.1
+			}
+			target_modifier = {
+				planet_stability_add = 5
+				planet_amenities_add = 10
+				planet_jobs_produces_mult = 0.1
+			}
+			triggered_target_modifier = { 
+				potential = {
+					owner = { has_country_flag = SRB_main_story_leave_chosen }
+				}
+				modifier = {
+					planet_amenities_mult = 0.1
+				}
+			}
+		}
+		belobog_blocker_1_stage_5 = {
+			custom_tooltip = "belobog_blocker_1_stage_5_tooltip" 
+			icon = GFX_situation_stage_5
+			icon_background = GFX_situation_stage_frame_green 
+			end = 100 
+
+			on_first_enter = {
+				situation_event = { id = SRB_story.55 }
+			} 
+
+			modifier = {
+				country_unity_produces_mult = 0.15
+			}
+			target_modifier = {
+				planet_stability_add = 10
+				planet_amenities_add = 15
+				planet_jobs_produces_mult = 0.2
+			}
+			triggered_target_modifier = { 
+				potential = {
+					owner = { has_country_flag = SRB_main_story_leave_chosen }
+				}
+				modifier = {
+					planet_amenities_mult = 0.15
+				}
+			}
+		}
+	}
+
+	##进度
+	monthly_progress = { #每个月刷新一次进度
+		base = -0.05 #默认的月进度
+		modifier = {
+			add = -0.2
+			desc = "belobog_blocker_1_progress_desc_a1"
+			current_situation_approach = approach_1
+		}
+		modifier = {
+			add = -0.075
+			desc = "belobog_blocker_1_progress_desc_a2"
+			current_situation_approach = approach_2
+		}
+		modifier = {
+			add = 0.25
+			desc = "belobog_blocker_1_progress_desc_a3"
+			current_situation_approach = approach_1
+		}
+		modifier = {
+			add = 1
+			desc = "belobog_blocker_1_progress_desc_a4"
+			current_situation_approach = approach_1
+		}
+	}
+
+	##选项
+	approach_1 = {
+		name = "belobog_blocker_1_approach_1"
+		icon = GFX_situation_approach_shrug
+		icon_background = GFX_situation_approach_bg_red
+
+		potential = {
+			has_situation_flag = approach_1_available
+		}
+		default = no
+		
+
+		resources = {
+			category = situations
+			cost = {}
+			upkeep = {
+				unity = 20
+			}
+			produces = {
+				energy = 20
+			}
+		}       
+	}
+	approach_2 = {
+		name = "belobog_blocker_1_approach_2"
+		icon = GFX_situation_approach_shrug
+		icon_background = GFX_situation_approach_bg_red
+
+		potential = {
+
+		}
+		default = no
+		
+
+		resources = {
+			category = situations
+			cost = {}
+			upkeep = {}
+			produces = {
+				unity = 1
+			}
+		}       
+	}
+	approach_3 = {
+		name = "belobog_blocker_1_approach_3"
+		icon = GFX_situation_approach_shrug
+		icon_background = GFX_situation_approach_bg_red
+
+		potential = {
+			has_situation_flag = approach_3_available
+		}
+		default = no
+		
+
+		resources = {
+			category = situations
+			cost = {}
+			upkeep = {
+				energy = 20
+			}
+			produces = {
+				unity = 20
+			}
+		}       
+	}
+	approach_4 = {
+		name = "belobog_blocker_1_approach_4"
+		icon = GFX_situation_approach_shrug
+		icon_background = GFX_situation_approach_bg_red
+
+		potential = {
+			has_situation_flag = approach_4_available
+		}
+		default = no
+		
+
+		resources = {
+			category = situations
+			cost = {}
+			upkeep = {
+				energy = 35
+				physics = 5
+			}
+			produces = {
+				unity = 50
+			}
+		}       
+	}
+
+	#触发的事件类型只能为situation_event
+	on_monthly = {
+		events = {
+			situation_event = { id = SRB_story.60 }
+		}
+	}
+}

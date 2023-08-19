@@ -1,0 +1,335 @@
+##############
+#!运行起来一定有问题，因为很多写法都可能是不对的。但是未经优化的思路差不多就是这样
+##############
+
+##直接生成裂界陆军
+create_belobog_blocker_1_army_1 = {	#小群
+	if = {		#当一切正常，剩余可用数量足够，则正常生成，扣除剩余可用数量
+		limit = {
+			check_variable = {
+				which = belobog_blocker_1_battle_army_num
+				value > 10
+			}
+		}
+		create_army = {
+			name = "belobog_blocker_1_army_1"
+			#!以下的owner和species，如果可以的话直接给毁灭天灾
+			owner = event_target:belobog_blocker_1_country
+			#species
+			type = belobog_blocker_1_army_1
+		}
+		change_variable = {
+			which = belobog_blocker_1_battle_army_num
+			value = -10
+		}
+	}
+	else = {	#当出现问题，剩余可用数量不够，则结束生成，清零剩余可用数量
+		change_variable = {
+			which = belobog_blocker_1_battle_army_num
+			value = 0
+		}
+	}
+}
+create_belobog_blocker_1_army_2 = {	#中群
+	if = {		#当一切正常，剩余可用数量足够，限制数未达到，则正常生成，扣除剩余可用数量，并增加限制数
+		limit = {
+			check_variable = {
+				which = belobog_blocker_1_battle_army_num
+				value > 30
+			}
+			check_variable = {
+				which = belobog_blocker_1_army_2_limit
+				value > 0
+			}
+		}
+		create_army = {
+			name = "belobog_blocker_1_army_2"
+			#!以下的owner和species，如果可以的话直接给毁灭天灾
+			owner = event_target:belobog_blocker_1_country
+			type = belobog_blocker_1_army_2
+		}
+		change_variable = {
+			which = belobog_blocker_1_battle_army_num
+			value = -30
+		}
+		change_variable = {
+			which = belobog_blocker_1_battle_army_2_limit
+			value = +1
+		}
+	}
+	else_if = {	#当出现问题，剩余可用数量足够，限制数已达到，则代替生成，扣除剩余可用数量，不增加限制数
+		limit = {
+			check_variable = {
+				which = belobog_blocker_1_battle_army_num
+				value > 30
+			}
+			check_variable = {
+				which = belobog_blocker_1_army_2_limit
+				value = 0
+			}
+		}
+		while = {
+			count = 3
+			create_army = {
+				name = "belobog_blocker_1_army_1"
+				#!以下的owner和species，如果可以的话直接给毁灭天灾
+				owner = event_target:belobog_blocker_1_country
+				type = belobog_blocker_1_army_1
+			}
+		}
+		change_variable = {
+			which = belobog_blocker_1_battle_army_num
+			value = -30
+		}
+	}
+	else_if = {	#当出现问题，剩余可用数量不够，限制数不重要，则不再生成，跳回循环随机生成，不再进行操作
+		limit = {
+			check_variable = {
+				which = belobog_blocker_1_battle_army_num
+				value < 30
+			}
+			check_variable = {
+				which = belobog_blocker_1_army_2_limit
+				value >= 0
+			}
+		}
+		break = yes
+	}
+}
+create_belobog_blocker_1_army_3 = {	#大群
+	if = {		#当一切正常，剩余可用数量足够，限制数未达到，则正常生成，扣除剩余可用数量，并增加限制数
+		limit = {
+			check_variable = {
+				which = belobog_blocker_1_battle_army_num
+				value > 50
+			}
+			check_variable = {
+				which = belobog_blocker_1_army_3_limit
+				value > 0
+			}
+		}
+		create_army = {
+			name = "belobog_blocker_1_army_3"
+			#!以下的owner和species，如果可以的话直接给毁灭天灾
+			owner = event_target:belobog_blocker_1_country
+			type = belobog_blocker_1_army_3
+		}
+		change_variable = {
+			which = belobog_blocker_1_battle_army_num
+			value = -50
+		}
+		change_variable = {
+			which = belobog_blocker_1_battle_army_2_limit
+			value = +1
+		}
+	}
+	else_if = {	#当出现问题，剩余可用数量足够，限制数已达到，则代替生成，扣除剩余可用数量，不增加限制数
+		limit = {
+			check_variable = {
+				which = belobog_blocker_1_battle_army_num
+				value > 50
+			}
+			check_variable = {
+				which = belobog_blocker_1_army_2_limit
+				value = 0
+			}
+		}
+		create_army = {
+			name = "belobog_blocker_1_army_2"
+			#!以下的owner和species，如果可以的话直接给毁灭天灾
+			owner = event_target:belobog_blocker_1_country
+			type = belobog_blocker_1_army_2
+		}
+		while = {
+			count = 2
+			create_army = {
+				name = "belobog_blocker_1_army_1"
+				#!以下的owner和species，如果可以的话直接给毁灭天灾
+				owner = event_target:belobog_blocker_1_country
+				type = belobog_blocker_1_army_1
+			}
+		}
+		change_variable = {
+			which = belobog_blocker_1_battle_army_num
+			value = -50
+		}
+	}
+	else_if = {	#当出现问题，剩余可用数量不够，限制数不重要，则不再生成，跳回循环随机生成，不再进行操作
+		limit = {
+			check_variable = {
+				which = belobog_blocker_1_battle_army_num
+				value < 50
+			}
+			check_variable = {
+				which = belobog_blocker_1_army_2_limit
+				value >= 0
+			}
+		}
+		break = yes
+	}
+}
+
+#生成裂界陆军主机制
+#This = planet(雅利洛-VI)
+belobog_blocker_1_army_generation = {
+	if = {			#当战斗力200-300，50%生成小群，35%生成中群，15%生成大群
+		limit = {
+			planet_garrison_strength >= 200
+			planet_garrison_strength <300
+		}
+		while = {
+			count = 999
+			limit = {
+				check_variable = {
+					which = belobog_blocker_1_battle_army_num
+					value > 0
+				}
+			}
+			random_list = {
+				50 = { create_belobog_blocker_1_army_1 = yes }
+				35 = { create_belobog_blocker_1_army_2 = yes }
+				15 = { create_belobog_blocker_1_army_3 = yes }
+			}
+		}
+	}
+	else_if = {		#当战斗力300-500，40%生成小群，40%生成中群，20%生成大群
+		limit = {
+			planet_garrison_strength >= 300
+			planet_garrison_strength < 500
+		}
+		while = {
+			count = 999
+			limit = {
+				check_variable = {
+					which = belobog_blocker_1_battle_army_num
+					value > 0
+				}
+			}
+			random_list = {
+				40 = { create_belobog_blocker_1_army_1 = yes }
+				40 = { create_belobog_blocker_1_army_2 = yes }
+				20 = { create_belobog_blocker_1_army_3 = yes }
+			}
+		}
+	}
+	else_if = {		#当战斗力500-750，35%生成小群，45%生成中群，20%生成大群
+		limit = {
+			planet_garrison_strength >= 500
+			planet_garrison_strength < 750
+		}
+		while = {
+			count = 999
+			limit = {
+				check_variable = {
+					which = belobog_blocker_1_battle_army_num
+					value > 0
+				}
+			}
+			random_list = {
+				35 = { create_belobog_blocker_1_army_1 = yes }
+				45 = { create_belobog_blocker_1_army_2 = yes }
+				20 = { create_belobog_blocker_1_army_3 = yes }
+			}
+		}
+	}
+	else_if = {		#当战斗力750-900，25%生成小群，50%生成中群，25%生成大群
+		limit = {
+			planet_garrison_strength >= 750
+			planet_garrison_strength < 900
+		}
+		while = {
+			count = 999
+			limit = {
+				check_variable = {
+					which = belobog_blocker_1_battle_army_num
+					value > 0
+				}
+			}
+			random_list = {
+				25 = { create_belobog_blocker_1_army_1 = yes }
+				50 = { create_belobog_blocker_1_army_2 = yes }
+				25 = { create_belobog_blocker_1_army_3 = yes }
+			}
+		}
+	}
+	else_if = {		#当战斗力高于900，20%生成小群，45%生成中群，35%生成大群
+		limit = {
+			planet_garrison_strength > 900
+		}
+		while = {
+			count = 999
+			limit = {
+				check_variable = {
+					which = belobog_blocker_1_battle_army_num
+					value > 0
+				}
+			}
+			random_list = {
+				20 = { create_belobog_blocker_1_army_1 = yes }
+				45 = { create_belobog_blocker_1_army_2 = yes }
+				35 = { create_belobog_blocker_1_army_3 = yes }
+			}
+		}
+	}
+	else = {		#再有然后直接报错，包括战斗力小于200但是触发了的和不知道怎么可能的
+		owner = {
+			country_event = { id = SRB_story.199 }
+		}
+	}
+}
+
+
+#用于在裂界入侵时生成裂界军队
+#This = planet(雅利洛-VI)
+belobog_blocker_1_defense_effect = {
+	set_planet_flag = "belobog_blocker_1_defense_ongoing"
+	#自动消耗15数量，生成一个“游荡的裂界怪物”
+	change_variable = {
+		which = belobog_blocker_1_army_num
+		value = -15
+	}
+	create_army = {
+		name = "belobog_blocker_1_army_3"
+		#!以下的owner和species，如果可以的话直接给毁灭天灾
+		owner = event_target:belobog_blocker_1_country
+		type = belobog_blocker_1_army_4
+	}
+	#自动减少20数量
+	change_variable = {
+		which = belobog_blocker_1_army_num
+		value = -20
+	}
+	#划出可用总数
+	change_variable = {
+		which = belobog_blocker_1_army_num
+		value = -$blocker_1_army_num_available$
+	}
+	change_variable = {
+		which = belobog_blocker_1_battle_army_num
+		value = $blocker_1_army_num_available$
+	}
+	#开始生成（可用总数已划出）
+	belobog_blocker_1_army_generation = yes
+}
+
+#用于在进攻裂界时生成裂界军队
+#This = planet(雅利洛-VI)
+belobog_blocker_1_attack_effect = {
+	set_planet_flag = "belobog_blocker_1_attack_ongoing"
+	#自动添加10数量
+	change_variable = {
+		which = belobog_blocker_1_army_num
+		value = 10
+	}
+	#划出可用总数
+	change_variable = {
+		which = belobog_blocker_1_army_num
+		value = -$blocker_1_army_num_available$
+	}
+	change_variable = {
+		which = belobog_blocker_1_battle_army_num
+		value = $blocker_1_army_num_available$
+	}
+	#开始生成
+	belobog_blocker_1_army_generation = yes
+}
