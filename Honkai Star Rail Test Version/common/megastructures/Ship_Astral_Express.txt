@@ -3,9 +3,11 @@
 Ship_Astral_Express = {
     entity = "Astral_Express_fleet_entity"
     construction_entity = "Astral_Express_fleet_entity"
-    entity_offset = { x = -10 y = -10 }
+    entity_offset = { x = -30 y = -30 }
     portrait = "GFX_megastructure_construction_background"
     build_time = 30
+    place_entity_on_planet_plane = no
+	build_outside_gravity_well = no
     resources = {
         category = megastructures
         cost = {
@@ -41,6 +43,14 @@ Ship_Astral_Express = {
         modifier = {
            add = 1.5
            From = {
+               owner_main_species = {
+                   is_species_class = The_Xianzhou_Luofu
+               }
+           }
+        }
+        modifier = {
+           add = 1.5
+           From = {
                has_ascension_perk = ap_galactic_wonders_utopia
            }
         }
@@ -53,7 +63,7 @@ Ship_Astral_Express = {
         modifier = {
            add = -4.5
            From = {
-               check_variable = { which = NUM_Ship_Astral_Express value > 2 }
+               check_variable = { which = NUM_Ship_Astral_Express value > 0 }
            }
         }
 		}
