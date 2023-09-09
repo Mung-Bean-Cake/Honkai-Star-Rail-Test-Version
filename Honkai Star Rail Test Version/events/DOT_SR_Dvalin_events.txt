@@ -21,21 +21,18 @@ country_event = {
 	immediate = {
 		create_leader = {
 		    name = "Dvalin"
-		    gender = female
-		    portrait = "Dvalin"
+		    # gender = female
+			class = governor
 			species = Star_Rail
-		    texture = 0
-		    attachment = 1
-		    clothes = 0
-		    trait="trait_ruler_eye_for_talent"
-		    leader_class="governor"
+			effect = {
+				change_leader_portrait = "Dvalin"
+			}
 		}
         create_fleet = {
                 name = Dvalin_General
                 effect = {
                     set_owner = ROOT
-					assign_leader = Dvalin
-					save_global_event_target_as = Dvalin_General_Exist
+					assign_leader = last_created_leader
                     create_ship = {
                         name =  Dvalin_General
                         design = Dvalin_General
@@ -46,6 +43,7 @@ country_event = {
                         angle = random
                         direction = in_system
                     }
+					save_global_event_target_as = Dvalin_General_Exist
                 }
         }
 	}
@@ -65,9 +63,12 @@ country_event = {
 		add_resource = { minerals = 100 }
 		# country_event = { id = DOT_SR_Dvalin.002 days = 120 }
 		delete_fleet = event_target:Dvalin_General_Exist # 删除风魔龙
+		every_owned_fleet = { 
+			limit = { is_ship_size = Dvalin_General }
+			delete_fleet = This
+		}
 	}
 }
-
 
 country_event = {
 	id = DOT_SR_Dvalin.002
