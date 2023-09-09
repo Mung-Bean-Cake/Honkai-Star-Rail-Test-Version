@@ -1,0 +1,273 @@
+
+namespace = DOT_SR_Dvalin
+
+#风魔龙传奇
+
+country_event = {
+	id = DOT_SR_Dvalin.001
+	title = "DOT_SR_Dvalin.001.name"
+	desc = "DOT_SR_Dvalin.001.desc"
+	picture = GFX_evt_DOT_SR_003
+	show_sound = event_psionic
+	location = root
+	trigger = {
+		has_technology = tech_hyper_drive_1
+		years_passed > 10
+		or = { 
+		    is_ai = no
+		    is_species_class = The_Xianzhou_Luofu
+		}
+	}
+	immediate = {
+		create_leader = {
+		    name = "Dvalin"
+		    gender = female
+		    portrait = "Dvalin"
+			species = Star_Rail
+		    texture = 0
+		    attachment = 1
+		    clothes = 0
+		    trait="trait_ruler_eye_for_talent"
+		    leader_class="governor"
+		}
+        create_fleet = {
+                name = Dvalin_General
+                effect = {
+                    set_owner = ROOT
+					assign_leader = Dvalin
+					save_global_event_target_as = Dvalin_General_Exist
+                    create_ship = {
+                        name =  Dvalin_General
+                        design = Dvalin_General
+                    }
+                    set_location = {
+                        target = ROOT.capital_scope
+                        distance = 50
+                        angle = random
+                        direction = in_system
+                    }
+                }
+        }
+	}
+	diplomatic = yes #是否启用外交界面
+	# diplomatic_title = DOT_SR_Dvalin.001.name #外交界面标题本地化 Key，不写默认为“传入通讯”
+	picture_event_data = { 
+	room = "DOT_SR_Dvalin_1_room" #房间图层
+	# portrait = Dvalin #肖像图层，可承接 Root.Leader
+	}
+	option = {
+		name = DOT_SR_Dvalin.001.a
+		add_resource = { minerals = 100 }
+		country_event = { id = DOT_SR_Dvalin.002 days = 120 }
+	}
+	option = {
+		name = DOT_SR_Dvalin.001.b
+		add_resource = { minerals = 100 }
+		# country_event = { id = DOT_SR_Dvalin.002 days = 120 }
+		delete_fleet = event_target:Dvalin_General_Exist # 删除风魔龙
+	}
+}
+
+
+country_event = {
+	id = DOT_SR_Dvalin.002
+	title = "DOT_SR_Dvalin.002.name"
+	desc = "DOT_SR_Dvalin.002.desc"
+	picture = GFX_evt_DOT_SR_003
+	show_sound = event_psionic
+	location = root
+	is_triggered_only = yes
+	immediate = {
+	}
+	diplomatic = yes #是否启用外交界面
+	# diplomatic_title = DOT_SR_Dvalin.001.name #外交界面标题本地化 Key，不写默认为“传入通讯”
+	picture_event_data = { 
+	room = "DOT_SR_Dvalin_1_room" #房间图层
+	# portrait = Dvalin #肖像图层，可承接 Root.Leader
+	}
+	option = {
+		name = DOT_SR_Dvalin.002.a
+		add_resource = { minerals = 100 }
+		country_event = { id = DOT_SR_Dvalin.003 days = 120 }
+	}
+	option = {
+		name = DOT_SR_Dvalin.002.b
+		add_resource = { food = 800 }
+		# country_event = { id = DOT_SR_Dvalin.003 days = 120 }
+		clear_global_event_target = Dvalin_General_Exist # 删除风魔龙
+	}
+}
+
+country_event = {
+	id = DOT_SR_Dvalin.003
+	title = "DOT_SR_Dvalin.003.name"
+	desc = "DOT_SR_Dvalin.003.desc"
+	picture = GFX_evt_DOT_SR_003
+	show_sound = event_psionic
+	location = root
+	is_triggered_only = yes
+	immediate = {
+	}
+	diplomatic = yes #是否启用外交界面
+	# diplomatic_title = DOT_SR_Dvalin.001.name #外交界面标题本地化，不写默认为“传入通讯”
+	picture_event_data = { 
+	room = "DOT_SR_Dvalin_1_room" #房间图层
+	# portrait = Dvalin #肖像图层，可承接 Root.Leader
+	}
+	option = {
+		name = DOT_SR_Dvalin.003.a
+		add_resource = { minerals = 100 }
+		country_event = { id = DOT_SR_Dvalin.004 days = 120 }
+	}
+	option = {
+		name = DOT_SR_Dvalin.003.b
+		add_resource = { food = 800 }
+		# country_event = { id = DOT_SR_Dvalin.003 days = 120 }
+		clear_global_event_target = Dvalin_General_Exist # 删除风魔龙
+	}
+}
+
+country_event = {
+	id = DOT_SR_Dvalin.004
+	title = "DOT_SR_Dvalin.004.name"
+	desc = "DOT_SR_Dvalin.004.desc"
+	picture = GFX_evt_DOT_SR_003
+	show_sound = event_psionic
+	location = root
+	is_triggered_only = yes
+	immediate = {
+	}
+	diplomatic = yes #是否启用外交界面
+	# diplomatic_title = DOT_SR_Dvalin.001.name #外交界面标题本地化，不写默认为“传入通讯”
+	picture_event_data = { 
+	room = "DOT_SR_Dvalin_1_room" #房间图层
+	# portrait = Dvalin #肖像图层，可承接 Root.Leader
+	}
+	option = {
+		name = DOT_SR_Dvalin.004.a
+		add_resource = { minerals = 100 }
+		country_event = { id = DOT_SR_Dvalin.005 days = 120 }
+	}
+	option = {
+		name = DOT_SR_Dvalin.004.b
+		add_resource = { food = 800 }
+		# country_event = { id = DOT_SR_Dvalin.003 days = 120 }
+		clear_global_event_target = Dvalin_General_Exist # 删除风魔龙
+	}
+}
+
+country_event = {
+	id = DOT_SR_Dvalin.005
+	title = "DOT_SR_Dvalin.005.name"
+	desc = "DOT_SR_Dvalin.005.desc"
+	picture = GFX_evt_DOT_SR_003
+	show_sound = event_psionic
+	location = root
+	is_triggered_only = yes
+	immediate = {
+	}
+	diplomatic = yes #是否启用外交界面
+	# diplomatic_title = DOT_SR_Dvalin.001.name #外交界面标题本地化，不写默认为“传入通讯”
+	picture_event_data = { 
+	room = "DOT_SR_Dvalin_1_room" #房间图层
+	# portrait = Dvalin #肖像图层，可承接 Root.Leader
+	}
+	option = {
+		name = DOT_SR_Dvalin.005.a
+		add_resource = { minerals = 100 }
+		country_event = { id = DOT_SR_Dvalin.006 days = 120 }
+	}
+	option = {
+		name = DOT_SR_Dvalin.005.b
+		add_resource = { food = 800 }
+		# country_event = { id = DOT_SR_Dvalin.003 days = 120 }
+		clear_global_event_target = Dvalin_General_Exist # 删除风魔龙
+	}
+}
+
+country_event = {
+	id = DOT_SR_Dvalin.006
+	title = "DOT_SR_Dvalin.006.name"
+	desc = "DOT_SR_Dvalin.006.desc"
+	picture = GFX_evt_DOT_SR_003
+	show_sound = event_psionic
+	location = root
+	is_triggered_only = yes
+	immediate = {
+	}
+	diplomatic = yes #是否启用外交界面
+	# diplomatic_title = DOT_SR_Dvalin.001.name #外交界面标题本地化，不写默认为“传入通讯”
+	picture_event_data = { 
+	room = "DOT_SR_Dvalin_1_room" #房间图层
+	# portrait = Dvalin #肖像图层，可承接 Root.Leader
+	}
+	option = {
+		name = DOT_SR_Dvalin.006.a
+		add_resource = { minerals = 100 }
+		country_event = { id = DOT_SR_Dvalin.007 days = 120 }
+	}
+	option = {
+		name = DOT_SR_Dvalin.006.b
+		add_resource = { food = 800 }
+		# country_event = { id = DOT_SR_Dvalin.003 days = 120 }
+		clear_global_event_target = Dvalin_General_Exist # 删除风魔龙
+	}
+}
+
+country_event = {
+	id = DOT_SR_Dvalin.007
+	title = "DOT_SR_Dvalin.007.name"
+	desc = "DOT_SR_Dvalin.007.desc"
+	picture = GFX_evt_DOT_SR_003
+	show_sound = event_psionic
+	location = root
+	is_triggered_only = yes
+	immediate = {
+	}
+	diplomatic = yes #是否启用外交界面
+	# diplomatic_title = DOT_SR_Dvalin.001.name #外交界面标题本地化，不写默认为“传入通讯”
+	picture_event_data = { 
+	room = "DOT_SR_Dvalin_1_room" #房间图层
+	# portrait = Dvalin #肖像图层，可承接 Root.Leader
+	}
+	option = {
+		name = DOT_SR_Dvalin.007.a
+		add_resource = { minerals = 100 }
+		# country_event = { id = DOT_SR_Dvalin.008 days = 120 }
+	}
+	option = {
+		name = DOT_SR_Dvalin.007.b
+		add_resource = { food = 800 }
+		# country_event = { id = DOT_SR_Dvalin.003 days = 120 }
+		clear_global_event_target = Dvalin_General_Exist # 删除风魔龙
+	}
+}
+
+
+country_event = {
+	id = DOT_SR_Dvalin.008
+	title = "DOT_SR_Dvalin.008.name"
+	desc = "DOT_SR_Dvalin.008.desc"
+	picture = GFX_evt_DOT_SR_003
+	show_sound = event_psionic
+	location = root
+	is_triggered_only = yes
+	immediate = {
+	}
+	diplomatic = yes #是否启用外交界面
+	# diplomatic_title = DOT_SR_Dvalin.001.name #外交界面标题本地化，不写默认为“传入通讯”
+	picture_event_data = { 
+	room = "DOT_SR_Dvalin_1_room" #房间图层
+	# portrait = Dvalin #肖像图层，可承接 Root.Leader
+	}
+	option = {
+		name = DOT_SR_Dvalin.008.a
+		add_resource = { minerals = 100 }
+		# country_event = { id = DOT_SR_Dvalin.008 days = 120 }
+	}
+	option = {
+		name = DOT_SR_Dvalin.008.b
+		add_resource = { minerals = 100 }
+		# country_event = { id = DOT_SR_Dvalin.008 days = 120 }
+	}
+}

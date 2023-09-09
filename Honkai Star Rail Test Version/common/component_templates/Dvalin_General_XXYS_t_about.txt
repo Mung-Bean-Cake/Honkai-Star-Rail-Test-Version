@@ -1,0 +1,52 @@
+weapon_component_template = {
+    key = "FML_WEAPON"
+    size = titanic
+    type = instant
+    prio_projectile = yes
+
+    icon = "GFX_ship_part_perdition_beam"
+    icon_frame = 1
+
+    firing_arc = 10.0
+    use_ship_kill_target = no
+
+    tags = { weapon_type_energy weapon_role_artillery t_slot }
+
+    #prerequisites = {  }
+    component_set = "PERDITION_BEAM"
+    projectile_gfx = "perdition_beam"
+    size_restriction = { fml }
+    resources = {
+        category = ship_components
+        cost = {
+            alloys = @titanic_t6_cost
+            rare_crystals = @titanic_t6_rare
+        }
+        upkeep = {
+            energy = @titanic_t6_upkeep_energy
+            alloys = @titanic_t6_upkeep_alloys
+        }
+    }
+
+    power = -1000
+    damage = { min = 20000 max = 40000 }
+    hull_damage = 2
+    shield_damage = 2
+    shield_penetration = 0
+    windup = { max = 30 min = 10 }
+    range = 300 #射程
+    accuracy = 2.0 #命中
+
+    target_weights = {
+        titan = 3
+        battleship = 2
+    }
+
+    ai_weight = {
+        weight = 1
+        modifier = {
+            factor = 0.0
+            no_resource_for_component = { RESOURCE = rare_crystals }
+        }
+    }
+}
