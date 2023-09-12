@@ -12,4 +12,4 @@ tags={
 	"Sound"
 }
 name="Honkai: Star Rail | Test Version"
-supported_version="3.8.*"
+supported_version="3.9.*"
