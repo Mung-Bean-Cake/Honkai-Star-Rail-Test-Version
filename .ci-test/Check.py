@@ -81,10 +81,10 @@ def CheckDirBracket(dirPath):
     return allFilesCorrect
 
 def main():
-    modPath = "Ilyich Genshin Test Version"
+    modPath = "Honkai Star Rail Test Version"
     if not CheckDirBracket(modPath):
         sys.exit(1)
-    chineseLocalisationPath = "Ilyich Genshin Test Version/localisation/simp_chinese" # 目前只检测中文
+    chineseLocalisationPath = "Honkai Star Rail Test Version/localisation/simp_chinese" # 目前只检测中文
     if not CheckDirQuotation(chineseLocalisationPath):
         sys.exit(1)
 
