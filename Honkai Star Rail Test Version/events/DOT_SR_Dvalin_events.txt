@@ -262,3 +262,49 @@ country_event = {
 		add_resource = { minerals = 100 }
 	}
 }
+
+#帝弓司命的赠与
+country_event = {
+	id = DOT_SR_Dvalin.009
+	title = "DOT_SR_Dvalin.009.name"
+	desc = "DOT_SR_Dvalin.009.desc"
+	picture = GFX_evt_DOT_SR_003
+	show_sound = event_psionic
+	location = root
+	trigger = {
+		years_passed > 10
+		or = { 
+		    is_ai = no
+		}
+	}
+	immediate = {
+        create_fleet = {
+                name = Xingcha_Ship
+                effect = {
+                    set_owner = ROOT
+                    create_ship = {
+                        name =  Xingcha_Ship
+                        design = Xingcha_Ship
+                    }
+                    set_location = {
+                        target = ROOT.capital_scope
+                        distance = 50
+                        angle = random
+                        direction = in_system
+                    }
+                }
+        }
+	}
+	diplomatic = yes
+	picture_event_data = { 
+	room = "DOT_SR_Xingcha_1_room" #房间图层
+	}
+	option = {
+		name = DOT_SR_Dvalin.009.a
+		add_resource = { energy = 100 }
+	}
+	option = {
+		name = DOT_SR_Dvalin.009.b
+		add_resource = { energy = 100 }
+	}
+}
