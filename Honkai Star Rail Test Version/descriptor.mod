@@ -1,4 +1,4 @@
-version="3.8.4"
+version="3.*"
 tags={
 	"Balance"
 	"Species"
@@ -12,4 +12,4 @@ tags={
 	"Sound"
 }
 name="Honkai: Star Rail | Test Version"
-supported_version="3.9.*"
+supported_version="3.10.*"
