@@ -789,7 +789,7 @@ entity = {
 
 
 entity = {
-    name = "mammalian_stations_test_entity"
+    name = "FDOT_stations_test_entity"
 
     locator = { name = "pos_s4_ships" 						position = { -80 	0 	-20	} }
     locator = { name = "pos_s4_orbital_habitat" 			position = { -30 	0 	5 	} }
@@ -1080,7 +1080,7 @@ entity = {
 
 
 entity = {
-    name = "mammalian_01_juggernaut_entity"
+    name = "FDOT_01_juggernaut_entity"
     pdxmesh = "mammalian_01_juggernaut_frame_mesh"
 
     default_state = "idle"
@@ -5394,7 +5394,7 @@ entity = {
 #####################################################
 
 entity = {
-    name = "mammalian_01_star_eater_entity"
+    name = "FDOT_01_star_eater_entity"
     pdxmesh = "star_eater_01_frame_mesh"
 
     default_state = "idle"
@@ -5794,7 +5794,7 @@ entity = {
 #####################################################
 
 entity = {
-    name = "mammalian_01_thinktank_part1_entity"
+    name = "FDOT_01_thinktank_part1_entity"
     pdxmesh = "thinktank_part1_mesh"
 
     default_state = "idle"
@@ -5818,7 +5818,7 @@ entity = {
 }
 
 entity = {
-    name = "mammalian_01_thinktank_part2_entity"
+    name = "FDOT_01_thinktank_part2_entity"
     pdxmesh = "thinktank_part2_mesh"
 
     default_state = "idle"
@@ -6021,4 +6021,36 @@ entity = {
     }
 
     scale = 1
+}
+
+###### Ion Cannon ######
+
+entity = {
+    name = "FDOT_01_ion_cannon_entity"
+    locator = { name = "part1" position = { 0 0 0 } }
+}
+
+entity = {
+    name = "FDOT_01_ion_cannon_section_entity"
+    pdxmesh = "mammalian_01_ion_cannon_mesh"
+    scale = 0.5
+    locator = { name = "root" position = { 0 0 0 } }
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { node = "root" particle = "ion_cannon_core_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    attach = { "root" = "ion_cannon_core_entity" }
+}
+
+entity = {
+    name = "ion_cannon_core_entity"
+    pdxmesh = "mammalian_01_ion_cannon_core_mesh"
+    scale = 1.0
+
+    game_data = {
+        uv_animation_speed   = -0.05
+        uv_animation_direction  = { 0.5 1.0 }
+    }
 }
