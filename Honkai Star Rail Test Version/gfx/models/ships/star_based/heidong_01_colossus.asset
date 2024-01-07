@@ -1,0 +1,84 @@
+#发射器
+entity = {
+	name = zhongyangfasheqi
+	pdxmesh = gaizaofasheqi
+}
+#中央2环
+entity = {
+	name = zhongyang_2huan
+	pdxmesh = zhongyang2huan
+	default_state = "idle"
+	state = { name = idle animation = zhongyang_2huan }
+	game_data = {
+		size = 30
+	}
+}
+#中央1环
+entity = {
+	name = zhongyang_1huan
+	pdxmesh = zhongyang1huan
+	default_state = "idle"
+	state = { name = idle animation = zhongyang_1huan }
+}
+#上下环
+entity = {
+	name = shang_huan
+	pdxmesh = shangxiahuan
+	default_state = "idle"
+	state = { name = idle animation = shangxia_huan }
+	game_data = {
+		size = 30
+	}
+}
+#总模型
+entity = {
+	name = star_based
+	scale = 1
+	pdxmesh = zhongyang1huan
+	default_state = "idle"
+	#state = { name = idle animation = zhongyang_1huan }
+	attach = { shang_fasheqi = yasuotuijinqi }
+	attach = { xia_fasheqi = yasuotuijinqi }
+	attach = { shanghuan_lo = shang_huan }
+	attach = { xiahuan_lo = shang_huan }
+	attach = { root = zhongyangfasheqi }
+	attach = { root = zhongyang_2huan }
+	state = {
+		name = idle state_time = 5 animation = zhongyang_1huan
+		start_event = { node = "rootfasheqi.001" particle = "sbmatde_2core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "rootfasheqi.002" particle = "sbmatde_2core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "rootfasheqi.003" particle = "sbmatde_2core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "rootfasheqi.004" particle = "sbmatde_2core_beam_effect" keep_particle = yes trigger_once = yes }
+	}
+	game_data = {
+		size = 30
+	}
+}
+#环的动画
+animation = {
+	name = zhongyang_1huan
+	file = zhongyang_1huan.anim
+}
+animation = {
+	name = zhongyang_2huan
+	file = zhongyang_2huan.anim
+}
+animation = {
+	name = shangxia_huan
+	file = shangxia_huan.anim
+}
+#推进器
+entity = {
+	name = yasuotuijinqi
+	scale = 3
+	pdxmesh = xxys_tjq
+	default_state = "idle"
+	state = { name = "idle" animation = nemesis_01_colossus_open }
+	game_data = {
+		size = 30
+	}
+}
+animation = {
+	name = nemesis_01_colossus_open
+	file = "nemesis_01_colossus_open.anim"
+}
