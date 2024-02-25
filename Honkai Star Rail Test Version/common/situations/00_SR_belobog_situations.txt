@@ -100,7 +100,7 @@ belobog_blocker_1_situation = {
 		belobog_blocker_1_stage_3 = {
 			custom_tooltip = "belobog_blocker_1_stage_3_tooltip" 
 			icon = GFX_situation_stage_3
-			icon_background = GFX_situation_stage_frame_green
+			icon_background = GFX_situation_stage_frame_yellow
 			end = 60
 
 			#on_first_enter = {} 
@@ -120,7 +120,7 @@ belobog_blocker_1_situation = {
 		belobog_blocker_1_stage_4 = {
 			custom_tooltip = "belobog_blocker_1_stage_4_tooltip" 
 			icon = GFX_situation_stage_4
-			icon_background = GFX_situation_stage_frame_blue
+			icon_background = GFX_situation_stage_frame_green 
 			end = 80 
 
 			#on_first_enter = {} 
@@ -176,28 +176,28 @@ belobog_blocker_1_situation = {
 		base = -0.05 #默认的月进度
 		modifier = {
 			add = -0.2
-			desc = "belobog_blocker_1_progress_desc"
-			current_situation_approach = belobog_blocker_1_approach_1
+			desc = "belobog_blocker_1_progress_desc_a1"
+			current_situation_approach = approach_1
 		}
 		modifier = {
 			add = -0.075
-			desc = "belobog_blocker_1_progress_desc"
-			current_situation_approach = belobog_blocker_1_approach_2
+			desc = "belobog_blocker_1_progress_desc_a2"
+			current_situation_approach = approach_2
 		}
 		modifier = {
 			add = 0.25
-			desc = "belobog_blocker_1_progress_desc"
-			current_situation_approach = belobog_blocker_1_approach_3
+			desc = "belobog_blocker_1_progress_desc_a3"
+			current_situation_approach = approach_1
 		}
 		modifier = {
 			add = 1
-			desc = "belobog_blocker_1_progress_desc"
-			current_situation_approach = belobog_blocker_1_approach_4
+			desc = "belobog_blocker_1_progress_desc_a4"
+			current_situation_approach = approach_1
 		}
 	}
 
 	##选项
-	approach = {
+	approach_1 = {
 		name = "belobog_blocker_1_approach_1"
 		icon = GFX_situation_approach_shrug
 		icon_background = GFX_situation_approach_bg_red
@@ -205,6 +205,7 @@ belobog_blocker_1_situation = {
 		potential = {
 			has_situation_flag = approach_1_available
 		}
+		default = no
 
 
 		resources = {
@@ -218,7 +219,7 @@ belobog_blocker_1_situation = {
 			}
 		}
 	}
-	approach = {
+	approach_2 = {
 		name = "belobog_blocker_1_approach_2"
 		icon = GFX_situation_approach_shrug
 		icon_background = GFX_situation_approach_bg_red
@@ -226,6 +227,7 @@ belobog_blocker_1_situation = {
 		potential = {
 
 		}
+		default = no
 		
 
 		resources = {
@@ -237,7 +239,7 @@ belobog_blocker_1_situation = {
 			}
 		}       
 	}
-	approach = {
+	approach_3 = {
 		name = "belobog_blocker_1_approach_3"
 		icon = GFX_situation_approach_shrug
 		icon_background = GFX_situation_approach_bg_red
@@ -245,6 +247,7 @@ belobog_blocker_1_situation = {
 		potential = {
 			has_situation_flag = approach_3_available
 		}
+		default = no
 		
 
 		resources = {
@@ -258,7 +261,7 @@ belobog_blocker_1_situation = {
 			}
 		}       
 	}
-	approach = {
+	approach_4 = {
 		name = "belobog_blocker_1_approach_4"
 		icon = GFX_situation_approach_shrug
 		icon_background = GFX_situation_approach_bg_red
@@ -266,6 +269,7 @@ belobog_blocker_1_situation = {
 		potential = {
 			has_situation_flag = approach_4_available
 		}
+		default = no
 		
 
 		resources = {
@@ -273,7 +277,7 @@ belobog_blocker_1_situation = {
 			cost = {}
 			upkeep = {
 				energy = 35
-				physics_research = 5
+				physics = 5
 			}
 			produces = {
 				unity = 50
@@ -284,7 +288,7 @@ belobog_blocker_1_situation = {
 	#触发的事件类型只能为situation_event
 	on_monthly = {
 		events = {
-			SRB_story.60
+			situation_event = { id = SRB_story.60 }
 		}
 	}
 }
