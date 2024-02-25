@@ -38,44 +38,42 @@ country_event = { #初始化
 				add_deposit = d_belobog_blocker_2	#10个寒潮
 			}
 			#添加“下层区”建筑
-			add_building = "building_belobog"
 			add_building = "building_belobog_underworld"
-
-		}
-		#添加裂界陆军国家，后续优化可以将该国家与毁灭天灾合并
-		create_country = {
-			name = "belobog_blocker_1_country"
-			type = global_event
-			ignore_initial_colony_error = yes
-			flag = random
-			effect = {
-				save_global_event_target_as = belobog_blocker_1_country
+			#添加裂界陆军国家，后续优化可以将该国家与毁灭天灾合并
+			create_country = {
+				name = "d_belobog_blocker_1"
+				type = global_event
+				ignore_initial_colony_error = yes
+				flag = random
+				effect = {
+					save_global_event_target_as = belobog_blocker_1_country
+				}
 			}
-		}
-		#声明变量
-		set_variable = {	#裂界怪物总数
-			which = belobog_blocker_1_army_num
-			value = 1000
-		}
-		set_variable = {	#裂界入侵的怪物总数
-			which = belobog_blocker_1_battle_army_num
-			value = 0
-		}
-		set_variable = {	#裂界怪物中群总数
-			which = belobog_blocker_1_army_2_limit
-			value = 25
-		}
-		set_variable = {	#裂界怪物大群总数
-			which = belobog_blocker_1_army_3_limit
-			value = 8
-		}
-		set_variable = {	#可以承受的裂界冲击（对抗裂界怪物失败）次数
-			which = belobog_blocker_1_battle_defense
-			value = 3
-		}
-		set_variable = {	#裂界生成累积值
-			which = belobog_blocker_1_cumulative_value
-			value = 0
+			#声明变量
+			set_variable = {	#裂界怪物总数
+				which = belobog_blocker_1_army_num
+				value = 1000
+			}
+			set_variable = {	#裂界入侵的怪物总数
+				which = belobog_blocker_1_battle_army_num
+				value = 0
+			}
+			set_variable = {	#裂界怪物中群总数
+				which = belobog_blocker_1_army_2_limit
+				value = 25
+			}
+			set_variable = {	#裂界怪物大群总数
+				which = belobog_blocker_1_army_3_limit
+				value = 8
+			}
+			set_variable = {	#可以承受的裂界冲击（对抗裂界怪物失败）次数
+				which = belobog_blocker_1_battle_defense
+				value = 3
+			}
+			set_variable = {	#裂界生成累积值
+				which = belobog_blocker_1_cumulative_value
+				value = 0
+			}
 		}
 
 		country_event = { id = SRB_story.2 days = 10 }	#启动主线 
@@ -145,10 +143,10 @@ country_event = { #选择主线方向完成
 			}
 			#允许裂界不定期发动攻势
 			set_country_flag = "belobog_blocker_1_attack_ready"
+			##选择了不同方向之后能够触发其它不同内容，不在这里写出
 		}
 	}
 }
-
 country_event = { #若一年后仍没有选择主线方向则随机确定一个
 	id = SRB_story.4
 	title = "SRB_story.4.title"
@@ -159,7 +157,7 @@ country_event = { #若一年后仍没有选择主线方向则随机确定一个
 	fire_only_once = yes
 	is_triggered_only = yes	#SRB_story.2
 	trigger = {
-		nor = {
+		nand = {
 			has_country_flag = SRB_main_story_leave_chosen
 			has_country_flag = SRB_main_story_stay_chosen
 		}
@@ -289,12 +287,6 @@ country_event = { #裂界研究1完成
 		start_situation = {
 			type = belobog_blocker_1_situation
 			target = event_target:SRB_planet_jarilo
-		}
-		every_situation = {
-			limit = {
-				is_situation_type = belobog_blocker_1_situation
-			}
-			save_global_event_target_as = blocker_1_situation
 		}
 	}
 }
@@ -636,8 +628,8 @@ situation_event = { #完成后的介绍
 
 	option = {
 		name = "SRB_story.52.a"
-
-		destroy_situation = event_target:blocker_1_situation
+		#destroy_situation = belobog_blocker_1_situation
+		destroy_situation = Root
 	}
 }
 situation_event = { #侵蚀严重介绍
@@ -705,7 +697,7 @@ situation_event = { #裂界生成累积
 		##裂界生成累积的计算，值视所处阶段决定
 		if = {
 			limit = {
-				current_stage = belobog_blocker_1_stage_1
+				current_stage = approach_1
 			}
 			owner = {
 				change_variable = { #将值归零
@@ -716,7 +708,7 @@ situation_event = { #裂界生成累积
 		}
 		else_if = {
 			limit = {
-				current_stage = belobog_blocker_1_stage_2
+				current_stage = approach_2
 			}
 			owner = {
 				change_variable = { #将值归零
@@ -727,7 +719,7 @@ situation_event = { #裂界生成累积
 		}
 		else_if = {
 			limit = {
-				current_stage = belobog_blocker_1_stage_3
+				current_stage = approach_3
 			}
 			owner = {
 				change_variable = { #将值归零
@@ -738,7 +730,7 @@ situation_event = { #裂界生成累积
 		}
 		else_if = {
 			limit = {
-				current_stage = belobog_blocker_1_stage_4
+				current_stage = approach_4
 			}
 			owner = {
 				change_variable = { #将值归零
@@ -749,7 +741,7 @@ situation_event = { #裂界生成累积
 		}
 		else_if = {
 			limit = {
-				current_stage = belobog_blocker_1_stage_5
+				current_stage = approach_5
 			}
 			owner = {
 				change_variable = { #将值归零
@@ -771,9 +763,7 @@ situation_event = { #裂界生成累积
 					which = belobog_blocker_1_cumulative_value
 					value = -10
 				}
-				event_target:blocker_1_situation = {
-					situation_event = { id = SRB_story.61 } #通知
-				}
+				country_event = { id = SRB_story.61 } #通知
 				root = {
 					target = {		#生成裂界
 						add_deposit = d_belobog_blocker_1
@@ -807,7 +797,9 @@ situation_event = { #裂界生成累积
 							}
 						}
 					}
-					situation_event = { id = SRB_story.62 } #通知
+					owner = {
+						country_event = { id = SRB_story.62 } #通知
+					}
 				}
 			}
 		}
@@ -921,9 +913,9 @@ country_event = { #大判断器
 		##于是，目前来说都会摧毁母星
 		event_target:planet_jarilo = {
 			destroy_colony = yes
-			add_planet_devastation = 200
-			change_pc = pc_frozen
 		}
+		add_planet_devastation = 200
+		change_pc = pc_frozen
 	}
 }
 country_event = { #控制裂界失败，母星陷落-stay
@@ -1177,7 +1169,7 @@ country_event = { #主线完成（S）
 	#2、清理所有的地貌障碍（S）			SRB_main_story_blockers_remove_finished
 	#3、裂界侵蚀局势推条到底（S			SRB_main_story_blocker_1_situation_stage_4
 	#4、清理所有的裂界怪物（S）			belobog_blocker_1_army_num = 0
-	#5、完成全部的寒潮裂界研究（S） 		SRB_main_story_blocker_1_research_finished + SRB_main_story_blocker_2_research_finished
+	#5、完成全部的寒潮裂界研究（S） 	SRB_main_story_blocker_1_research_finished + SRB_main_story_blocker_2_research_finished
 	#6、完成复苏母星特殊项目（S）		SRB_main_story_save_jarilo_finished
 
 ############################
@@ -1216,7 +1208,7 @@ country_event = { #裂界入侵控制器
 
 	immediate = {
 		#在星球上生成裂界军队
-		belobog_blocker_1_defense_effect = { blocker_1_army_num_available = 200 }
+		belobog_blocker_1_defense_effect = yes
 		#出事件提示玩家裂界发动进攻
 		country_event = { id = SRB_story.101 }
 	}
@@ -1539,6 +1531,9 @@ country_event = { #防守裂界失败，当裂界抵抗次数为1时:撤回贝�
 	after = {
 		event_target:planet_jarilo = {
 			remove_all_districts = yes
+			every_building = {
+				destroy_building = yes
+			}
 		}
 		hidden_effect = {
 			event_target:planet_jarilo = {
@@ -1611,7 +1606,7 @@ country_event = { #进攻裂界成功
 	}
 	
 	after = {
-		add_resource = {
+		add_resourse = {
 			unity = 5500
 		}
 		hidden_effect = {
@@ -1700,7 +1695,7 @@ country_event = {
 ## SRB_story.300+
 ## 大迁移
 ############################
-planet_event = {
+country_event = {
 	id = SRB_story.301
 	title = "SRB_story.301.title"
 	desc = "SRB_story.301.desc"
@@ -1709,19 +1704,15 @@ planet_event = {
 
 	is_triggered_only = yes #on_colonized
 	trigger = {
-		owner = {
-			has_country_flag = SRB_country
-			has_country_flag = SRB_main_story_leave_chosen
-		}
+		has_country_flag = SRB_country
+		has_country_flag = SRB_main_story_leave_chosen
 	}
 
 	option = {
 		name = "SRB_story.301.a"
-		owner = {
-			add_resource = {
-				energy = 200
-				influence = 2000
-			}
+		add_resource = {
+			energy = 200
+			influence = 2000
 		}
 	}
 	option = {
