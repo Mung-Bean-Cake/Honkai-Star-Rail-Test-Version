@@ -1,5 +1,5 @@
-#下层区
-building_belobog_underworld = {
+#贝洛伯格
+building_belobog = {
 	capital = yes
 	can_build = no
 	can_demolish = no
@@ -10,9 +10,78 @@ building_belobog_underworld = {
 
 	category = government
 	potential = {
+		exists = owner
+		owner = {
+			has_country_flag = SRB_country
+		}
 		has_planet_flag = SRB_capital
 	}
-	allow = {}
+	convert_to = {
+		building_hive_capital
+		building_machine_capital
+		building_resort_capital
+		building_slave_capital
+		building_ancient_control_center
+		building_ancient_palace
+	}
+
+	destroy_trigger = {
+
+	}
+	ruined_trigger = {
+
+	}
+
+	planet_modifier = {
+		job_enforcer_add = 1
+		job_politician_add = 2
+		planet_housing_add = 7
+		planet_amenities_add = 15
+		defense_armies_add = 7
+		planet_max_buildings_add = 2
+	}
+	country_modifier = {
+		planet_max_buildings_add = 3
+		defense_armies_add = 5
+	}
+	resources = {
+		category = planet_buildings
+		cost = {}
+		upkeep = {
+			rare_crystals = 5
+		}
+		produces = {}
+	}
+
+	upgrades = {}
+}
+
+#下层区
+building_belobog_underworld = {
+	capital = no
+	can_build = no
+	can_demolish = no
+	can_be_disabled = no
+	can_be_ruined = yes
+	icon = default
+	position_priority = 0
+
+	category = government
+	potential = {
+		exists = owner
+		owner = {
+			has_country_flag = SRB_country
+		}
+		has_planet_flag = SRB_capital
+	}
+	convert_to = {
+		building_hive_capital
+		building_machine_capital
+		building_resort_capital
+		building_slave_capital
+		building_ancient_control_center
+		building_ancient_palace
+	}
 
 	destroy_trigger = {
 		
@@ -22,7 +91,9 @@ building_belobog_underworld = {
 	}
 
 	planet_modifier = {
-		
+		job_miner_add = 6
+		job_crystal_miner_add = 3
+		planet_max_districts_add = 4
 	}
 	country_modifier = {
 		
@@ -30,8 +101,13 @@ building_belobog_underworld = {
 	resources = {
 		category = planet_buildings
 		cost = {}
-		upkeep = {}
-		produces = {}
+		upkeep = {
+			energy = 15
+		}
+		produces = {
+			minerals = 48
+			rare_crystals = 20
+		}
 	}
 
 	upgrades = {}
@@ -39,7 +115,7 @@ building_belobog_underworld = {
 
 #贝洛伯格历史文化博物馆
 building_belobog_history_and_culture_museum = {
-	capital = yes
+	capital = no
 	can_build = yes
 	can_demolish = yes
 	can_be_disabled = yes
@@ -49,6 +125,11 @@ building_belobog_history_and_culture_museum = {
 
 	category = unity
 	potential = {
+		exists = owner
+		owner = {
+			is_fallen_empire = no
+			has_country_flag = SRB_country
+		}
 		has_planet_flag = SRB_capital
 	}
 	allow = {}
@@ -61,17 +142,27 @@ building_belobog_history_and_culture_museum = {
 	}
 
 	planet_modifier = {
-		
+		job_culture_worker_add = 2
+		planet_clear_blocker_speed_mult = 0.15
 	}
 	country_modifier = {
-		
+		job_culture_worker_per_pop = 15
 	}
 	resources = {
 		category = planet_buildings
-		cost = {}
-		upkeep = {}
-		produces = {}
+		cost = {
+			minerals = 800
+			consumer_goods = 250
+			alloys = 100
+		}
+		upkeep = {
+			energy = 5
+		}
+		produces = {
+			unity = 150
+		}
 	}
+
 
 	upgrades = {}
 }
