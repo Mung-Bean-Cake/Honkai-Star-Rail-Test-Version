@@ -1,111 +1,36 @@
-create_antimatter_starbase = {
+create_antimatter_starbase_home = {
     create_starbase = {
-        size = starbase_ai
+        size = HMTT
         owner = event_target:ANTIMATTER_crisis
         effect = {
-            create_antimatter_starbase_buff = yes
+            set_starbase_flag = antimatter_starbase_home
         }
     }
-}
-create_antimatter_starbase_buff = {
-        last_created_fleet = {
-            if = {
-                limit = {
-                    trigger_allow_starbase_basic_buff.1 = yes
-                    trigger_allow_starbase_special_buff.2 = yes
-                }
-            #add_modifier = {
-            #    #modifier = an_starbase_buff1
-            #}
-        }
-            else_if = {
-                limit = {
-                    trigger_allow_starbase_basic_buff.2 = yes
-                    trigger_allow_starbase_special_buff.2 = yes
-                }
-                add_modifier = {
-                    modifier = an_starbase_buff2
-                }
-            }
-            else_if = {
-                limit = {
-                    trigger_allow_starbase_basic_buff.3 = yes
-                    trigger_allow_starbase_special_buff.2 = yes
-                }
-                add_modifier = {
-                    modifier = an_starbase_buff3
-                }
-            }
-            else_if = {
-                limit = {
-                    trigger_allow_starbase_basic_buff.4 = yes
-                    trigger_allow_starbase_special_buff.2 = yes
-                }
-                add_modifier = {
-                    modifier = an_starbase_buff4
-                }
-            }
-            else_if = {
-                limit = {
-                    trigger_allow_starbase_basic_buff.1 = yes
-                    trigger_allow_starbase_special_buff.1 = yes
-                }
-                #add_modifier = {
-                #    modifier = an_starbase_buff2
-                #}
-                #add_modifier = {
-                #    modifier = an_starbase_buff2
-                #}
-            }
-            else_if = {
-                limit = {
-                    trigger_allow_starbase_basic_buff.2 = yes
-                    trigger_allow_starbase_special_buff.1 = yes
-                }
-                add_modifier = {
-                    modifier = an_starbase_buff2
-                }
-                add_modifier = {
-                    modifier = an_starbase_buff2
-                }
-            }
-            else_if = {
-                limit = {
-                    trigger_allow_starbase_basic_buff.3 = yes
-                    trigger_allow_starbase_special_buff.1 = yes
-                }
-                add_modifier = {
-                    modifier = an_starbase_buff3
-                }
-                add_modifier = {
-                    modifier = an_starbase_buff3
-                }
-            }
-            else_if = {
-                limit = {
-                    trigger_allow_starbase_basic_buff.4 = yes
-                    trigger_allow_starbase_special_buff.1 = yes
-                }
-                add_modifier = {
-                    modifier = an_starbase_buff4
-                }
-                add_modifier = {
-                    modifier = an_starbase_buff4
-                }
-            }
+    last_created_ship = {
+        create_antimatter_HMTT_buff = yes
     }
 }
-
-
+create_antimatter_starbase = {
+    create_starbase = {
+        size = HMTT2
+        owner = event_target:ANTIMATTER_crisis
+        effect = {
+            set_starbase_flag = antimatter_starbase$num$
+        }
+    }
+    last_created_ship = {
+        create_antimatter_starbase_buff = yes
+    }
+}
 create_antimatter_fleet = {
     owner = {
         create_leader = {
-            class = admiral
+            class = commander
             species = event_target:ANTIMATTER_pop
             name = random
-            skill = 3
+            skill = 10
             effect = {
-                set_age = 0
+                set_age = 10
                 save_event_target_as = ANTIMATTER_fleet_leader
             }
         }
@@ -114,22 +39,14 @@ create_antimatter_fleet = {
         effect = {
             set_owner = event_target:ANTIMATTER_crisis
             while = {
-                count = 10
+                count = 30
                 create_ship = {
                     name = random
-                    design = "NAME_Euthanizer"
-                    graphical_culture = "ai_01"
+                    design = "NAME_Crisis_XQTD"
+                    graphical_culture = humanoid_01
                 }
             }
             assign_leader = event_target:ANTIMATTER_fleet_leader
-            while = {
-                count = 20
-                create_ship = {
-                    name = random
-                    design = "NAME_Sterilizer"
-                    graphical_culture = "ai_01"
-                }
-            }
             set_location = {
                 target = root
                 distance = 45
@@ -143,368 +60,184 @@ create_antimatter_fleet = {
             }
             set_variable = { which = "xfleet_id" value = event_target:ANTIMATTER_crisis.xfleet_id }
             solar_system = { set_variable = { which = XT_Crisis_1_fleet_id value = prev.xfleet_id } }
-            create_antimatter_starbase_buff = yes
+            create_antimatter_ship_buff = yes
         }
     }
 }
-
-create_antimatter_fleet_defence = {
-    owner = {
-        create_leader = {
-            class = admiral
-            species = event_target:ANTIMATTER_pop
-            name = random
-            skill = 3
-            effect = {
-                set_age = 0
-                save_event_target_as = ANTIMATTER_fleet_leader
-            }
-        }
-    }
+create_neutron_ship = {
     create_fleet = {
         effect = {
             set_owner = event_target:ANTIMATTER_crisis
-            while = {
-                count = 10
                 create_ship = {
                     name = random
-                    design = "NAME_Euthanizer"
-                    graphical_culture = "ai_01"
+                    design = XQTD_neutronstar_war_ship
                 }
-            }
-            assign_leader = event_target:ANTIMATTER_fleet_leader
-            while = {
-                count = 20
-                create_ship = {
-                    name = random
-                    design = "NAME_Sterilizer"
-                    graphical_culture = "ai_01"
-                }
-            }
             set_location = {
                 target = root
                 distance = 45
                 angle = random
             }
-            create_antimatter_starbase_buff = yes
+            set_fleet_bombardment_stance = indiscriminate
+            set_fleet_flag = GWDG_Crisis_1_fleet
+            fleet_event = { id = DDT_FY.4002 }
+            event_target:ANTIMATTER_crisis = {
+                change_variable = { which = "xfleet_id" value = 1 }
+            }
+            set_variable = { which = "xfleet_id" value = event_target:ANTIMATTER_crisis.xfleet_id }
+            solar_system = { set_variable = { which = GWDG_Crisis_1_fleet_id value = prev.xfleet_id } }
+            create_antimatter_starship_buff = yes
         }
     }
 }
 
 
-create_antimatter_starbase_defense = {
-    if = {
-        limit = {
-            any_country = {
-                is_ai = no
-                has_country_flag = allow_stage1_xt
-            }
-            trigger_starbase_buff.1 = yes
-        }
-        create_fleet = {
-        name = "NAME_AI_Core"
-        effect = {
-            set_owner = event_target:ANTIMATTER_crisis
-            create_ship = {
-                name = random
-                design = "NAME_AI_Core"
-                graphical_culture = "ai_01"
-            }
-            set_location = {
-                target = Prev
-                distance = 10
-                angle = random
+
+
+
+
+
+
+create_antimatter_ship_buff = {
+    last_created_fleet = {
+        if = {
+            limit = {
+                event_target:global_event_country = {
+                    check_variable = { which = XQTD_crisis_stage value = 1}
                 }
-            create_antimatter_starbase_buff = yes
             }
+            add_modifier = { modifier = XQTD_crisis_buff1 }
         }
-    }
-    else_if = {
-        limit = {
-            any_country = {
-                is_ai = no
-                has_country_flag = allow_stage2_xt
+        if = {
+            limit = {
+                event_target:global_event_country = {
+                    check_variable = { which = XQTD_crisis_stage value = 2}
+                }
             }
-            trigger_starbase_buff.2 = yes
+            add_modifier = { modifier = XQTD_crisis_buff2 }
         }
-        create_fleet = {
-            name = "NAME_AI_Core"
-            effect = {
-                set_owner = event_target:ANTIMATTER_crisis
-                create_ship = {
-                    name = random
-                    design = "NAME_AI_Core"
-                    graphical_culture = "ai_01"
+        if = {
+            limit = {
+                event_target:global_event_country = {
+                    check_variable = { which = XQTD_crisis_stage value = 3}
                 }
-                set_location = {
-                    target = Prev
-                    distance = 10
-                    angle = random
-                }
-                create_antimatter_starbase_buff = yes
             }
+            add_modifier = { modifier = XQTD_crisis_buff3 }
         }
-    }
-    else_if = {
-        limit = {
-            any_country = {
-                is_ai = no
-                has_country_flag = allow_stage3_xt
-            }
-            trigger_starbase_buff.3 = yes
-        }
-        create_fleet = {
-            name = "NAME_AI_Core"
-            effect = {
-                set_owner = event_target:ANTIMATTER_crisis
-                create_ship = {
-                    name = random
-                    design = "NAME_AI_Core"
-                    graphical_culture = "ai_01"
+        if = {
+            limit = {
+                event_target:global_event_country = {
+                    check_variable = { which = XQTD_crisis_stage value = 4}
                 }
-                set_location = {
-                    target = Prev
-                    distance = 10
-                    angle = random
-                }
-                create_antimatter_starbase_buff = yes
             }
-        }
-    }
-    else_if = {
-        limit = {
-            any_country = {
-                is_ai = no
-                has_country_flag = allow_stage4_xt
-            }
-            #trigger_starbase_buff.4 = yes
-        }
-        create_fleet = {
-            name = "NAME_AI_Core"
-            effect = {
-                set_owner = event_target:ANTIMATTER_crisis
-                create_ship = {
-                    name = random
-                    design = "NAME_AI_Core"
-                    graphical_culture = "ai_01"
-                }
-                set_location = {
-                    target = Prev
-                    distance = 10
-                    angle = random
-                }
-                create_antimatter_starbase_buff = yes
-            }
+            add_modifier = { modifier = XQTD_crisis_buff4 }
         }
     }
 }
-
-
-create_antimatter_planet_defense ={
-    create_fleet = {
-        name = "NAME_AI_Core"
-        effect = {
-            set_owner = event_target:ANTIMATTER_crisis
-            create_ship = {
-                name = random
-                design = "NAME_AI_Core"
-                graphical_culture = "ai_01"
-            }
-            set_location = {
-                target = root
-                distance = 10
-                angle = random
-            }
-        }
-    }
-    owner = {
-        create_leader = {
-            class = admiral
-            species = event_target:ANTIMATTER_pop
-            name = random
-            skill = 3
-            effect = {
-                set_age = 0
-                save_event_target_as = ANTIMATTER_fleet_leader
-            }
-        }
-    }
-    create_fleet = {
-        effect = {
-            set_owner = event_target:ANTIMATTER_pop
-            while = {
-                count = 25
-                create_ship = {
-                    name = random
-                    design = "NAME_Euthanizer"
-                    graphical_culture = "ai_01"
+create_antimatter_starship_buff = {
+    last_created_fleet = {
+        if = {
+            limit = {
+                event_target:global_event_country = {
+                    check_variable = { which = XQTD_crisis_stage value = 1}
                 }
             }
-            assign_leader = event_target:ANTIMATTER_fleet_leader
-            while = {
-                count = 50
-                create_ship = {
-                    name = random
-                    design = "NAME_Sterilizer"
-                    graphical_culture = "ai_01"
+            add_modifier = { modifier = XQTD_crisis_buff5 }
+        }
+        if = {
+            limit = {
+                event_target:global_event_country = {
+                    check_variable = { which = XQTD_crisis_stage value = 2}
                 }
             }
-            set_location = {
-                target = root
-                distance = 45
-                angle = random
-            }
-            set_fleet_bombardment_stance = armageddon
+            add_modifier = { modifier = XQTD_crisis_buff6 }
         }
-        settings = {
-            garrison = yes
-        }
-    }
-    create_antimatter_starbase_buff = yes
-    create_fleet = {
-        effect = {
-            set_owner = event_target:ANTIMATTER_crisis
-            while = {
-                count = 20
-                create_army_transport = {
-                    graphical_culture = "ai_01"
-                    army_type = "robotic_army"
+        if = {
+            limit = {
+                event_target:global_event_country = {
+                    check_variable = { which = XQTD_crisis_stage value = 3}
                 }
             }
-            set_location = {
-                target = root
-                distance = 45
-                angle = random
-            }
+            add_modifier = { modifier = XQTD_crisis_buff7 }
         }
-    }
-    create_fleet = {
-        effect = {
-            set_owner = event_target:ANTIMATTER_crisis
-            create_ship = {
-                name = random
-                design = "NAME_AI_Constructor"
-                graphical_culture = "ai_01"
+        if = {
+            limit = {
+                event_target:global_event_country = {
+                    check_variable = { which = XQTD_crisis_stage value = 4}
+                }
             }
-            set_location = {
-                target = root
-                distance = 45
-                angle = random
-            }
-        }
-    }
-    create_fleet = {
-        effect = {
-            set_owner = event_target:ANTIMATTER_crisis
-            create_ship = {
-                name = random
-                design = "NAME_AI_Constructor"
-                graphical_culture = "ai_01"
-            }
-            set_location = {
-                target = root
-                distance = 45
-                angle = random
-            }
-        }
-    }
-    create_fleet = {
-        effect = {
-            set_owner = event_target:ANTIMATTER_crisis
-            create_ship = {
-                name = random
-                design = "NAME_AI_Constructor"
-                graphical_culture = "ai_01"
-            }
-            set_location = {
-                target = root
-                distance = 45
-                angle = random
-            }
+            add_modifier = { modifier = XQTD_crisis_buff8 }
         }
     }
 }
-#create_antimatter_starbase1 = {
-#    create_starbase = {
-#        size = starbase_antimatter
-#        owner = event_target:ANTIMATTER_crisis
-#        effect = {
-#            set_starbase_flag = antimatter_starbase1
-#            fleet = {
-#                set_fleet_flag = antimatter_starbase1
-#            }
-#        }
-#    }
-#}
-#create_antimatter_starbase2 = {
-#    create_starbase = {
-#        size = starbase_antimatter
-#        owner = event_target:ANTIMATTER_crisis
-#        effect = {
-#            set_starbase_flag = antimatter_starbase2
-#            fleet = {
-#                set_fleet_flag = antimatter_starbase2
-#            }
-#        }
-#    }
-#}
-#create_antimatter_starbase3 = {
-#    create_starbase = {
-#        size = starbase_antimatter
-#        owner = event_target:ANTIMATTER_crisis
-#        effect = {
-#            set_starbase_flag = antimatter_starbase3
-#            fleet = {
-#                set_fleet_flag = antimatter_starbase3
-#            }
-#        }
-#    }
-#}
-#create_antimatter_starbase4 = {
-#    create_starbase = {
-#        size = starbase_antimatter
-#        owner = event_target:ANTIMATTER_crisis
-#        effect = {
-#            set_starbase_flag = antimatter_starbase4
-#            fleet = {
-#                set_fleet_flag = antimatter_starbase4
-#            }
-#        }
-#    }
-#}
-#create_antimatter_starbase5 = {
-#    create_starbase = {
-#        size = starbase_antimatter
-#        owner = event_target:ANTIMATTER_crisis
-#        effect = {
-#            set_starbase_flag = antimatter_starbase5
-#            fleet = {
-#                set_fleet_flag = antimatter_starbase4
-#            }
-#        }
-#    }
-#}
-#create_antimatter_starbase6 = {
-#    create_starbase = {
-#        size = starbase_antimatter
-#        owner = event_target:ANTIMATTER_crisis
-#        effect = {
-#            set_starbase_flag = antimatter_starbase6
-#            fleet = {
-#                set_fleet_flag = antimatter_starbase6
-#            }
-#        }
-#    }
-#}
-#create_antimatter_starbase7 = {
-#    create_starbase = {
-#        size = starbase_antimatter
-#        owner = event_target:ANTIMATTER_crisis
-#        effect = {
-#            set_starbase_flag = antimatter_starbase7
-#            fleet = {
-#                set_fleet_flag = antimatter_starbase7
-#            }
-#        }
-#    }
-#}
+create_antimatter_starbase_buff = {
+    last_created_fleet = {
+        if = {
+            limit = {
+                event_target:global_event_country = {
+                    check_variable = { which = XQTD_crisis_stage value = 1}
+                }
+            }
+            add_modifier = { modifier = XQTD_crisis_buff9 }
+        }
+        if = {
+            limit = {
+                event_target:global_event_country = {
+                    check_variable = { which = XQTD_crisis_stage value = 2}
+                }
+            }
+            add_modifier = { modifier = XQTD_crisis_buff10 }
+        }
+        if = {
+            limit = {
+                event_target:global_event_country = {
+                    check_variable = { which = XQTD_crisis_stage value = 3}
+                }
+            }
+            add_modifier = { modifier = XQTD_crisis_buff11 }
+        }
+        if = {
+            limit = {
+                event_target:global_event_country = {
+                    check_variable = { which = XQTD_crisis_stage value = 4}
+                }
+            }
+            add_modifier = { modifier = XQTD_crisis_buff12 }
+        }
+    }
+}
+create_antimatter_HMTT_buff = {
+    last_created_fleet = {
+        if = {
+            limit = {
+                event_target:global_event_country = {
+                    check_variable = { which = XQTD_crisis_stage value = 1}
+                }
+            }
+            add_modifier = { modifier = XQTD_crisis_buff13 }
+        }
+        if = {
+            limit = {
+                event_target:global_event_country = {
+                    check_variable = { which = XQTD_crisis_stage value = 2}
+                }
+            }
+            add_modifier = { modifier = XQTD_crisis_buff14 }
+        }
+        if = {
+            limit = {
+                event_target:global_event_country = {
+                    check_variable = { which = XQTD_crisis_stage value = 3}
+                }
+            }
+            add_modifier = { modifier = XQTD_crisis_buff15 }
+        }
+        if = {
+            limit = {
+                event_target:global_event_country = {
+                    check_variable = { which = XQTD_crisis_stage value = 4}
+                }
+            }
+            add_modifier = { modifier = XQTD_crisis_buff16 }
+        }
+    }
+}
