@@ -84,17 +84,15 @@ country_event = {
 
     option = {
         name = DDT_FY.4_name_one
-        #hidden_effect = {
-        #    country_event = { id = DDT_FY.11 days = 10 }
-        #    country_event = { id = DDT_FY.13 days = 20 }
-        #    country_event = { id = DDT_FY.14 days = 30 }
-        #    country_event = { id = DDT_FY.15 days = 40 }
-        #    country_event = { id = DDT_FY.16 days = 50 }
-        #    country_event = { id = DDT_FY.17 days = 60 }
-        #    country_event = { id = DDT_FY.18 days = 70 }
-        #    country_event = { id = DDT_FY.19 days = 80 }
-        #    country_event = { id = DDT_FY.20 days = 90 }
-        #}
+        hidden_effect = {
+            country_event = { id = DDT_FY.11 days = 10 }
+            country_event = { id = DDT_FY.13 days = 20 }
+            country_event = { id = DDT_FY.14 days = 30 }
+            country_event = { id = DDT_FY.15 days = 40 }
+            country_event = { id = DDT_FY.16 days = 50 }
+            country_event = { id = DDT_FY.17 days = 60 }
+            country_event = { id = DDT_FY.18 days = 70 }
+        }
         owner = {
             add_event_chain_counter = {
                 event_chain = "antimatter_legion_chain"
@@ -103,27 +101,38 @@ country_event = {
             }
         }
     }
+}
+country_event = {
+    id = DDT_FY.5
+    hide_window = yes
+    is_triggered_only = yes
+
     immediate = {
-        hidden_effect = {
-            country_event = { id = DDT_FY.11 days = 10 }
-            every_country = { country_event = { id = DDT_FY.201 days = 10 } }
-            country_event = { id = DDT_FY.13 days = 20 }
-            every_country = { country_event = { id = DDT_FY.202 days = 20 } }
-            country_event = { id = DDT_FY.14 days = 30 }
-            every_country = { country_event = { id = DDT_FY.203 days = 30 } }
-            country_event = { id = DDT_FY.15 days = 40 }
-            every_country = { country_event = { id = DDT_FY.204 days = 40 } }
-            country_event = { id = DDT_FY.16 days = 50 }
-            every_country = { country_event = { id = DDT_FY.205 days = 50 } }
-            country_event = { id = DDT_FY.17 days = 60 }
-            every_country = { country_event = { id = DDT_FY.206 days = 60 } }
-            country_event = { id = DDT_FY.18 days = 70 }
-            every_country = { country_event = { id = DDT_FY.207 days = 70 } }
-            country_event = { id = DDT_FY.19 days = 80 }
-            every_country = { country_event = { id = DDT_FY.208 days = 80 } }
-            country_event = { id = DDT_FY.20 days = 100 }
-            every_country = { country_event = { id = DDT_FY.209 days = 90 } }
+        every_country = {
+            country_event = { id = DDT_FY.12 }
         }
+    }
+}
+observer_event = {
+    id = DDT_FY.6
+    title = DDT_FY.6_name
+    desc = DDT_FY.6_desc
+    picture = GFX_evt_crisis_4
+    is_triggered_only = yes
+
+    option = {
+        name = OK
+    }
+}
+country_event = {
+    id = DDT_FY.7
+    title = DDT_FY.6_name
+    desc = DDT_FY.6_desc
+    picture = GFX_evt_crisis_4
+    is_triggered_only = yes
+
+    option = {
+        name = OK
     }
 }
 country_event = {
@@ -141,12 +150,6 @@ country_event = {
 
     option = {
         name = DDT_FY.8_name_one
-    }
-    option = {
-        name = DDT_FY.8_name_two
-    }
-    option = {
-        name = DDT_FY.8_name_three
     }
 }
 ##############   准备开始，提醒
@@ -178,11 +181,7 @@ country_event = {
         }
         every_country = {
             limit = { is_antimatter_must = yes }
-            country_event = { id = DDT_FY.8 days = 900 }
-        }
-        every_country = {
-            limit = { is_antimatter_must = yes }
-            country_event = { id = DDT_FY.4 days = 910 }
+            country_event = { id = DDT_FY.4 days = 900 random = 100 }
         }
     }
 }
@@ -531,98 +530,6 @@ country_event = {
         }
     }
 }
-#添加战争熔炉星系
-country_event = {
-    id = DDT_FY.19
-    hide_window = yes
-    is_triggered_only = yes
-    immediate = {
-        set_spawn_system_batch = begin
-        no_scope = {
-            spawn_system = {
-                min_distance = 20
-                max_distance = 30
-                initializer = The_Crucible_of_War
-            }
-        }
-        set_spawn_system_batch = end
-        last_created_system = {
-            random_country = {
-                limit = { is_country_type = antimatter_legion }
-                save_event_target_as = ANTIMATTER_crisis
-            }
-            system_star = {
-                create_antimatter_fleet = yes
-                create_antimatter_fleet = yes
-                create_antimatter_fleet = yes
-                create_neutron_ship = yes
-            }
-            every_country = {
-                limit = { has_event_chain = "antimatter_legion_chain" }
-                add_event_chain_counter = {
-                    event_chain = "antimatter_legion_chain"
-                    counter = "antimatter_or"
-                    amount = 1
-                }
-            }
-            solar_system = {
-                if = {
-                    limit = { exists = starbase }
-                    starbase = {
-                        fleet = {
-                            destroy_fleet = this
-                        }
-                    }
-                }
-                create_antimatter_starbase = { num = 8 }
-            }
-        }
-        every_country = { country_event = { id = DDT_FY.208 } }
-    }
-}
-#添加毁灭星系
-country_event = {
-    id = DDT_FY.20
-    hide_window = yes
-    is_triggered_only = yes
-    immediate = {
-        set_spawn_system_batch = begin
-        no_scope = {
-            spawn_system = {
-                min_distance = 20
-                max_distance = 30
-                initializer = antimatter_legion_home_system
-            }
-        }
-        set_spawn_system_batch = end
-        last_created_system = {
-            random_country = {
-                limit = { is_country_type = antimatter_legion }
-                save_event_target_as = ANTIMATTER_crisis
-            }
-            every_country = {
-                limit = { has_event_chain = "antimatter_legion_chain" }
-                add_event_chain_counter = {
-                    event_chain = "antimatter_legion_chain"
-                    counter = "antimatter_or"
-                    amount = 1
-                }
-            }
-            solar_system = {
-                if = {
-                    limit = { exists = starbase }
-                    starbase = {
-                        fleet = {
-                            destroy_fleet = this
-                        }
-                    }
-                }
-                create_antimatter_starbase_home = yes
-            }
-        }
-        every_country = { country_event = { id = DDT_FY.209 } }
-    }
-}
 #####diplomatic#####
 country_event = {
     id = DDT_FY.12
@@ -671,11 +578,26 @@ planet_event = {
     is_triggered_only = yes
 
     immediate = {
+        every_country = {
+            limit = { is_ai = no }
+            owner = {
+                begin_event_chain = {
+                    event_chain = "antimatter_system_chain"
+                    target = this
+                }
+            }
+            enable_special_project = {
+                name = "FIND_HOME_SYSTEM.1"
+                location = root.solar_system
+                owner = this.capital_scope
+            }
+        }
         set_planet_flag = an_planet1
         create_species = {
             name = "NAME_antimatter_hm"
             class = "ANTIMATTER"
             namelist = "DOT_SR_HUMAN1"
+            #portrait = "hum_robot_red"
             traits = {
                 trait = "trait_The_Destruction_special"
             }
@@ -705,7 +627,7 @@ planet_event = {
             effect = {
                 set_graphical_culture = ai_01
                 create_leader = {
-                    class = commander
+                    class = admiral
                     species = event_target:HUIMIE_ruler
                     name = random
                     effect = {
@@ -714,17 +636,17 @@ planet_event = {
                     }
                 }
                 set_leader = event_target:antimatter_ruler
-                create_ship_design = { design = "NAME_Crisis_XQTD" }
+                create_ship_design = { design = "NAME_AI_Transport" }
                 add_ship_design = last_created_design
-                create_ship_design = { design = XQTD_neutronstar_war_ship }
+                create_ship_design = { design = "NAME_AI_Constructor" }
                 add_ship_design = last_created_design
-                create_ship_design = { design = "HMTT1" }
+                create_ship_design = { design = "NAME_AI_1" }
                 add_ship_design = last_created_design
-                create_ship_design = { design = "HMTT2" }
+                create_ship_design = { design = "NAME_AI_2" }
+                add_ship_design = last_created_design
+                create_ship_design = { design = "NAME_antimatter_Starbase" }
                 add_ship_design = last_created_design
                 save_event_target_as = ANTIMATTER_crisis
-                save_global_event_target_as = ANTIMATTER_crisis
-                set_variable = { which = the_num_of_antimatter_starbase value = 7}
             }
         }
         every_owned_pop = { kill_pop = yes }
@@ -732,10 +654,15 @@ planet_event = {
         set_name = "NAME_FENFENG"
         set_owner = event_target:ANTIMATTER_crisis
         set_controller = event_target:ANTIMATTER_crisis
+        event_target:antimatter_legion_Sub_galaxies1 = {
+            every_system_planet = {
+                create_antimatter_starbase_defense = yes
+            }
+        }
+        create_antimatter_planet_defense = yes
         create_antimatter_fleet = yes
         create_antimatter_fleet = yes
-        create_antimatter_fleet = yes
-        create_neutron_ship = yes
+        create_antimatter_fleet_defence = yes
         every_country = {
             limit = {
                 OR = {
@@ -746,6 +673,8 @@ planet_event = {
             }
             establish_communications_no_message = event_target:ANTIMATTER_crisis
         }
+        planet_event = { id = DDT_FY.3000 } # Start Fleet reinforcement cycle
+        planet_event = { id = DDT_FY.3001 } # Start Army reinforcement cycle
         every_country = {
             limit = { has_event_chain = "antimatter_legion_chain" }
             add_event_chain_counter = {
@@ -754,7 +683,8 @@ planet_event = {
                 amount = 1
             }
         }
-        #every_country = { country_event = { id = DDT_FY.201 } }
+        every_country = { country_event = { id = DDT_FY.201 } }
+
         solar_system = {
             if = {
                 limit = { exists = starbase }
@@ -764,7 +694,7 @@ planet_event = {
                     }
                 }
             }
-            create_antimatter_starbase= { num = 1 }
+            create_antimatter_starbase = yes
         }
         create_point_of_interest = {
             id = an_crisis.1
@@ -781,6 +711,14 @@ planet_event = {
     is_triggered_only = yes
 
     immediate = {
+        every_country = {
+            limit = { is_ai = no }
+            enable_special_project = {
+                name = "FIND_HOME_SYSTEM.2"
+                location = root.solar_system
+                owner = this.capital_scope
+            }
+        }
         set_planet_flag = an_planet2
         random_country = {
             limit = { is_country_type = antimatter_legion }
@@ -790,10 +728,17 @@ planet_event = {
         set_name = "NAME_XINGXIAO"
         set_owner = event_target:ANTIMATTER_crisis
         set_controller = event_target:ANTIMATTER_crisis
+        event_target:antimatter_legion_Sub_galaxies2 = {
+            every_system_planet = {
+                create_antimatter_starbase_defense = yes
+            }
+        }
+        create_antimatter_planet_defense = yes
         create_antimatter_fleet = yes
         create_antimatter_fleet = yes
-        create_antimatter_fleet = yes
-        create_neutron_ship = yes
+        create_antimatter_fleet_defence = yes
+        planet_event = { id = DDT_FY.3000 } # Start Fleet reinforcement cycle
+        planet_event = { id = DDT_FY.3001 } # Start Army reinforcement cycle
         every_country = {
             limit = { has_event_chain = "antimatter_legion_chain" }
             add_event_chain_counter = {
@@ -802,7 +747,7 @@ planet_event = {
                 amount = 1
             }
         }
-        #every_country = { country_event = { id = DDT_FY.202 } }
+        every_country = { country_event = { id = DDT_FY.202 } }
         solar_system = {
             if = {
                 limit = { exists = starbase }
@@ -812,7 +757,7 @@ planet_event = {
                     }
                 }
             }
-            create_antimatter_starbase = { num = 2 }
+            create_antimatter_starbase = yes
         }
         create_point_of_interest = {
             id = an_crisis.2
@@ -829,6 +774,14 @@ planet_event = {
     is_triggered_only = yes
 
     immediate = {
+        every_country = {
+            limit = { is_ai = no }
+            enable_special_project = {
+                name = "FIND_HOME_SYSTEM.3"
+                location = root.solar_system
+                owner = this.capital_scope
+            }
+        }
         set_planet_flag = an_planet3
         random_country = {
             limit = { is_country_type = antimatter_legion }
@@ -838,10 +791,17 @@ planet_event = {
         set_name = "NAME_TIEMU"
         set_owner = event_target:ANTIMATTER_crisis
         set_controller = event_target:ANTIMATTER_crisis
+        event_target:antimatter_legion_Sub_galaxies3 = {
+            every_system_planet = {
+                create_antimatter_starbase_defense = yes
+            }
+        }
+        create_antimatter_planet_defense = yes
         create_antimatter_fleet = yes
         create_antimatter_fleet = yes
-        create_antimatter_fleet = yes
-        create_neutron_ship = yes
+        create_antimatter_fleet_defence = yes
+        planet_event = { id = DDT_FY.3000 } # Start Fleet reinforcement cycle
+        planet_event = { id = DDT_FY.3001 } # Start Army reinforcement cycle
         every_country = {
             limit = { has_event_chain = "antimatter_legion_chain" }
             add_event_chain_counter = {
@@ -850,7 +810,7 @@ planet_event = {
                 amount = 1
             }
         }
-        #every_country = { country_event = { id = DDT_FY.203 } }
+        every_country = { country_event = { id = DDT_FY.203 } }
         solar_system = {
             if = {
                 limit = { exists = starbase }
@@ -860,7 +820,7 @@ planet_event = {
                     }
                 }
             }
-            create_antimatter_starbase= { num = 3 }
+            create_antimatter_starbase = yes
         }
         create_point_of_interest = {
             id = an_crisis.3
@@ -877,6 +837,14 @@ planet_event = {
     is_triggered_only = yes
 
     immediate = {
+        every_country = {
+            limit = { is_ai = no }
+            enable_special_project = {
+                name = "FIND_HOME_SYSTEM.4"
+                location = root.solar_system
+                owner = this.capital_scope
+            }
+        }
         set_planet_flag = an_planet4
         random_country = {
             limit = { is_country_type = antimatter_legion }
@@ -886,10 +854,17 @@ planet_event = {
         set_name = "NAME_DUSHEN"
         set_owner = event_target:ANTIMATTER_crisis
         set_controller = event_target:ANTIMATTER_crisis
+        event_target:antimatter_legion_Sub_galaxies4 = {
+            every_system_planet = {
+                create_antimatter_starbase_defense = yes
+            }
+        }
+        create_antimatter_planet_defense = yes
         create_antimatter_fleet = yes
         create_antimatter_fleet = yes
-        create_antimatter_fleet = yes
-        create_neutron_ship = yes
+        create_antimatter_fleet_defence = yes
+        planet_event = { id = DDT_FY.3000 } # Start Fleet reinforcement cycle
+        planet_event = { id = DDT_FY.3001 } # Start Army reinforcement cycle
         every_country = {
             limit = { has_event_chain = "antimatter_legion_chain" }
             add_event_chain_counter = {
@@ -898,7 +873,7 @@ planet_event = {
                 amount = 1
             }
         }
-        #every_country = { country_event = { id = DDT_FY.204 } }
+        every_country = { country_event = { id = DDT_FY.204 } }
         solar_system = {
             if = {
                 limit = { exists = starbase }
@@ -908,7 +883,7 @@ planet_event = {
                     }
                 }
             }
-            create_antimatter_starbase = { num = 4 }
+            create_antimatter_starbase = yes
         }
         create_point_of_interest = {
             id = an_crisis.4
@@ -925,6 +900,14 @@ planet_event = {
     is_triggered_only = yes
 
     immediate = {
+        every_country = {
+            limit = { is_ai = no }
+            enable_special_project = {
+                name = "FIND_HOME_SYSTEM.5"
+                location = root.solar_system
+                owner = this.capital_scope
+            }
+        }
         set_planet_flag = an_planet5
         random_country = {
             limit = { is_country_type = antimatter_legion }
@@ -934,10 +917,17 @@ planet_event = {
         set_name = "NAME_ZHIZUO"
         set_owner = event_target:ANTIMATTER_crisis
         set_controller = event_target:ANTIMATTER_crisis
+        event_target:antimatter_legion_Sub_galaxies5 = {
+            every_system_planet = {
+                create_antimatter_starbase_defense = yes
+            }
+        }
+        create_antimatter_planet_defense = yes
         create_antimatter_fleet = yes
         create_antimatter_fleet = yes
-        create_antimatter_fleet = yes
-        create_neutron_ship = yes
+        create_antimatter_fleet_defence = yes
+        planet_event = { id = DDT_FY.3000 } # Start Fleet reinforcement cycle
+        planet_event = { id = DDT_FY.3001 } # Start Army reinforcement cycle
         every_country = {
             limit = { has_event_chain = "antimatter_legion_chain" }
             add_event_chain_counter = {
@@ -946,7 +936,7 @@ planet_event = {
                 amount = 1
             }
         }
-        #every_country = { country_event = { id = DDT_FY.205 } }
+        every_country = { country_event = { id = DDT_FY.205 } }
         solar_system = {
             if = {
                 limit = { exists = starbase }
@@ -956,7 +946,7 @@ planet_event = {
                     }
                 }
             }
-            create_antimatter_starbase = { num = 5 }
+            create_antimatter_starbase = yes
         }
         create_point_of_interest = {
             id = an_crisis.5
@@ -973,6 +963,14 @@ planet_event = {
     is_triggered_only = yes
 
     immediate = {
+        every_country = {
+            limit = { is_ai = no }
+            enable_special_project = {
+                name = "FIND_HOME_SYSTEM.6"
+                location = root.solar_system
+                owner = this.capital_scope
+            }
+        }
         set_planet_flag = an_planet6
         random_country = {
             limit = { is_country_type = antimatter_legion }
@@ -982,10 +980,17 @@ planet_event = {
         set_name = "NAME_TUNXING"
         set_owner = event_target:ANTIMATTER_crisis
         set_controller = event_target:ANTIMATTER_crisis
+        event_target:antimatter_legion_Sub_galaxies6 = {
+            every_system_planet = {
+                create_antimatter_starbase_defense = yes
+            }
+        }
+        create_antimatter_planet_defense = yes
         create_antimatter_fleet = yes
         create_antimatter_fleet = yes
-        create_antimatter_fleet = yes
-        create_neutron_ship = yes
+        create_antimatter_fleet_defence = yes
+        planet_event = { id = DDT_FY.3000 } # Start Fleet reinforcement cycle
+        planet_event = { id = DDT_FY.3001 } # Start Army reinforcement cycle
         every_country = {
             limit = { has_event_chain = "antimatter_legion_chain" }
             add_event_chain_counter = {
@@ -994,7 +999,7 @@ planet_event = {
                 amount = 1
             }
         }
-        #every_country = { country_event = { id = DDT_FY.206 } }
+        every_country = { country_event = { id = DDT_FY.206 } }
         solar_system = {
             if = {
                 limit = { exists = starbase }
@@ -1004,7 +1009,7 @@ planet_event = {
                     }
                 }
             }
-            create_antimatter_starbase = { num = 6 }
+            create_antimatter_starbase = yes
 
         }
         create_point_of_interest = {
@@ -1022,19 +1027,35 @@ planet_event = {
     is_triggered_only = yes
 
     immediate = {
+        every_country = {
+            limit = { is_ai = no }
+            enable_special_project = {
+                name = "FIND_HOME_SYSTEM.7"
+                location = root.solar_system
+                owner = this.capital_scope
+            }
+        }
         set_planet_flag = an_planet7
         random_country = {
             limit = { is_country_type = antimatter_legion }
             save_event_target_as = ANTIMATTER_crisis
+            country_event = { id = DDT_FY.5 }
         }
         reset_planet = yes
         set_name = "NAME_CHONGXIAN"
         set_owner = event_target:ANTIMATTER_crisis
         set_controller = event_target:ANTIMATTER_crisis
+        event_target:antimatter_legion_Sub_galaxies7 = {
+            every_system_planet = {
+                create_antimatter_starbase_defense = yes
+            }
+        }
+        create_antimatter_planet_defense = yes
         create_antimatter_fleet = yes
         create_antimatter_fleet = yes
-        create_antimatter_fleet = yes
-        create_neutron_ship = yes
+        create_antimatter_fleet_defence = yes
+        planet_event = { id = DDT_FY.3000 } # Start Fleet reinforcement cycle
+        planet_event = { id = DDT_FY.3001 } # Start Army reinforcement cycle
         every_country = {
             limit = { has_event_chain = "antimatter_legion_chain" }
             add_event_chain_counter = {
@@ -1043,7 +1064,7 @@ planet_event = {
                 amount = 1
             }
         }
-        #every_country = { country_event = { id = DDT_FY.207 } }
+        every_country = { country_event = { id = DDT_FY.207 } }
         solar_system = {
             if = {
                 limit = { exists = starbase }
@@ -1053,13 +1074,454 @@ planet_event = {
                     }
                 }
             }
-            create_antimatter_starbase = { num = 7 }
+            create_antimatter_starbase = yes
         }
         create_point_of_interest = {
             id = an_crisis.7
             name = "NAME_CHONGXIAN"
             event_chain = "antimatter_legion_chain"
             location = from
+        }
+    }
+}
+####### Final System ########
+country_event = {
+    id = DDT_FY.131
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = {
+        set_global_flag = find_an_system.1
+        country_event = { id = DDT_FY.138 days = 1 }
+    }
+}
+country_event = {
+    id = DDT_FY.132
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = {
+        set_global_flag = find_an_system.2
+        country_event = { id = DDT_FY.138 days = 1 }
+    }
+}
+country_event = {
+    id = DDT_FY.133
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = {
+        set_global_flag = find_an_system.3
+        country_event = { id = DDT_FY.138 days = 1 }
+    }
+}
+country_event = {
+    id = DDT_FY.134
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = {
+        set_global_flag = find_an_system.4
+        country_event = { id = DDT_FY.138 days = 1 }
+    }
+}
+country_event = {
+    id = DDT_FY.135
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = {
+        set_global_flag = find_an_system.5
+        country_event = { id = DDT_FY.138 days = 1 }
+    }
+}
+country_event = {
+    id = DDT_FY.136
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = {
+        set_global_flag = find_an_system.6
+        country_event = { id = DDT_FY.138 days = 1 }
+    }
+}
+country_event = {
+    id = DDT_FY.137
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = {
+        set_global_flag = find_an_system.7
+        country_event = { id = DDT_FY.138 days = 1 }
+    }
+}
+#判断特殊项目是否完成
+country_event = {
+    id = DDT_FY.138
+    hide_window = yes
+    is_triggered_only = yes
+    trigger = {
+        has_global_flag = find_an_system.1
+        has_global_flag = find_an_system.2
+        has_global_flag = find_an_system.3
+        has_global_flag = find_an_system.4
+        has_global_flag = find_an_system.5
+        has_global_flag = find_an_system.6
+        has_global_flag = find_an_system.7
+    }
+
+    immediate = {
+        random_rim_system = {
+            random_system_planet = {
+                planet_event = { id = DDT_FY.32 days = 10 }
+            }
+        }
+        every_country = {
+            limit = {
+                is_ai = no
+                is_antimatter_must = yes
+            }
+            set_country_flag = allow_stage_special
+        }
+    }
+}
+#添加最后的星系
+planet_event = {
+    id = DDT_FY.32
+    is_triggered_only = yes
+    hide_window = yes
+
+    trigger = {
+    }
+
+    immediate = {
+        random_rim_system = {
+            spawn_system = {
+                min_distance >= 20
+                max_distance <= 50
+                initializer = "antimatter_legion_home_system"
+                effect = {
+                    save_global_event_target_as = antimatter_legion_home_system
+                }
+            }
+        }
+        event_target:antimatter_legion_home_system = {
+            #limit = {
+            #    has_star_flag = antimatter_legion_home_system
+            #}
+            #移除可能的问题，一般也用不上
+            every_country = {
+                limit = { is_ai = no }
+                abort_special_project = {
+                    type = FIND_HOME_SYSTEM.7
+                }
+                abort_special_project = {
+                    type = FIND_HOME_SYSTEM.6
+                }
+                abort_special_project = {
+                    type = FIND_HOME_SYSTEM.5
+                }
+                abort_special_project = {
+                    type = FIND_HOME_SYSTEM.4
+                }
+                abort_special_project = {
+                    type = FIND_HOME_SYSTEM.3
+                }
+                abort_special_project = {
+                    type = FIND_HOME_SYSTEM.2
+                }
+                abort_special_project = {
+                    type = FIND_HOME_SYSTEM.1
+                }
+            }
+            #添加特殊项目
+            random_system_planet = {
+                limit = {
+                    has_planet_flag = antimatter_legion_home_planet
+                }
+                every_country = {
+                    limit = {
+                        is_ai = no
+                        is_antimatter_must = yes
+                    }
+                    enable_special_project = {
+                        name = "FIND_HOME_SYSTEM.8"
+                        location = Prev.solar_system
+                        owner = this.capital_scope
+                    }
+                }
+                while = {
+                    count = 10
+                    owner = {
+                        create_leader = {
+                            class = admiral
+                            species = event_target:ANTIMATTER_pop
+                            name = random
+                            skill = 3
+                            effect = {
+                                set_age = 0
+                                save_event_target_as = ANTIMATTER_fleet_leader
+                            }
+                        }
+                    }
+                    create_fleet = {
+                        effect = {
+                            set_owner = event_target:ANTIMATTER_crisis
+                            while = {
+                                count = 10
+                                create_ship = {
+                                    name = random
+                                    design = "NAME_Euthanizer"
+                                    graphical_culture = "ai_01"
+                                }
+                            }
+                            assign_leader = event_target:ANTIMATTER_fleet_leader
+                            while = {
+                                count = 20
+                                create_ship = {
+                                    name = random
+                                    design = "NAME_Sterilizer"
+                                    graphical_culture = "ai_01"
+                                }
+                            }
+                            set_location = {
+                                target = Prev
+                                distance = 45
+                                angle = random
+                            }
+                            set_fleet_bombardment_stance = indiscriminate
+                            set_fleet_flag = XT_Crisis_1_fleet
+                            fleet_event = { id = DDT_FY.4000 }
+                            event_target:ANTIMATTER_crisis = {
+                                change_variable = { which = "xfleet_id" value = 1 }
+                            }
+                            set_variable = { which = "xfleet_id" value = event_target:ANTIMATTER_crisis.xfleet_id }
+                            solar_system = { set_variable = { which = XT_Crisis_1_fleet_id value = prev.xfleet_id } }
+                            create_antimatter_starbase_buff = yes
+                        }
+                    }
+                }
+                while = {
+                    count = 5
+                    owner = {
+                        create_leader = {
+                            class = admiral
+                            species = event_target:ANTIMATTER_pop
+                            name = random
+                            skill = 3
+                            effect = {
+                                set_age = 0
+                                save_event_target_as = ANTIMATTER_fleet_leader
+                            }
+                        }
+                    }
+                    create_fleet = {
+                        effect = {
+                            set_owner = event_target:ANTIMATTER_crisis
+                            while = {
+                                count = 10
+                                create_ship = {
+                                    name = random
+                                    design = "NAME_Euthanizer"
+                                    graphical_culture = "ai_01"
+                                }
+                            }
+                            assign_leader = event_target:ANTIMATTER_fleet_leader
+                            while = {
+                                count = 20
+                                create_ship = {
+                                    name = random
+                                    design = "NAME_Sterilizer"
+                                    graphical_culture = "ai_01"
+                                }
+                            }
+                            set_location = {
+                                target = Prev
+                                distance = 45
+                                angle = random
+                            }
+                            create_antimatter_starbase_buff = yes
+                        }
+                    }
+                }
+            }
+            #刷防御平台
+            random_system_planet = {
+                create_antimatter_starbase_defense = yes
+            }
+            if = {
+                limit = { exists = starbase }
+                starbase = {
+                    fleet = {
+                        destroy_fleet = this
+                    }
+                }
+            }
+            create_antimatter_starbase = yes
+        }
+        observer_event = { id = DDT_FY.6 }
+        every_country = {
+            limit = { is_ai = no
+                is_antimatter_must = yes }
+            country_event = { id = DDT_FY.7 }
+            country_event = { id = DDT_FY.8 days = 5 }
+            end_event_chain = antimatter_system_chain
+        }
+        every_country = {
+            limit = { has_event_chain = "antimatter_legion_chain" }
+            add_event_chain_counter = {
+                event_chain = "antimatter_legion_chain"
+                counter = "antimatter_jz"
+                amount = 1
+            }
+        }
+        create_point_of_interest = {
+            id = an_crisis_home1
+            name = "NAME_YDLF"
+            event_chain = "antimatter_legion_chain"
+            location = from
+        }
+    }
+}
+#特殊项目完成，毁灭天灾主线就此结束
+country_event = {
+    id = DDT_FY.43
+    title = DDT_FY.43_name
+    desc = DDT_FY.43_desc
+    is_triggered_only = yes
+    picture = GFX_evt_exploding_planet
+
+    immediate = {
+        every_country = {
+            abort_special_project = {
+                type = FIND_HOME_SYSTEM.8
+            }
+        }
+    }
+
+    option = {
+        name = DDT_FY.43_name_one
+        every_country = {
+            limit = { has_event_chain = "antimatter_legion_chain" }
+            add_event_chain_counter = {
+                event_chain = "antimatter_legion_chain"
+                counter = "antimatter_jz"
+                amount = 1
+            }
+            country_event = { id = DDT_FY.50 days = 100 }
+        }
+    }
+    option = {
+        name = DDT_FY.43_name_two
+        every_country = {
+            limit = { has_event_chain = "antimatter_legion_chain" }
+            end_event_chain = antimatter_legion_chain
+        }
+    }
+}
+#####彩蛋
+country_event = {
+    id = DDT_FY.50
+    title = DDT_FY.50_name
+    desc = DDT_FY.50_desc
+    is_triggered_only = yes
+    picture = GFX_evt_crisis_3
+
+    option = {
+        name = DDT_FY.50_name_one
+        every_country = {
+            limit = { has_event_chain = "antimatter_legion_chain" }
+            end_event_chain = antimatter_legion_chain
+        }
+    }
+    option = {
+        name = DDT_FY.50_name_two
+        every_country = {
+            limit = {
+                has_event_chain = "antimatter_legion_chain"
+                is_ai = no
+            }
+            add_event_chain_counter = {
+                event_chain = "antimatter_legion_chain"
+                counter = "antimatter_jz"
+                amount = 1
+            }
+            country_event = { id = DDT_FY.51  days = 100}
+        }
+    }
+}
+country_event = {
+    id = DDT_FY.51
+    hide_window = yes
+    is_triggered_only = yes
+
+    immediate = {
+        no_scope = {
+            spawn_system = {
+                min_distance = 50
+                max_distance = 200
+                initializer = home_system_huimie_star
+                effect = {
+                    save_global_event_target_as = home_system_huimie_star
+                }
+            }
+        }
+        event_target:home_system_huimie_star = {
+            random_system_planet = {
+                limit = {
+                    has_planet_flag = home_system_huimie_star_planet
+                }
+                planet_event = { id = DDT_FY.52 }
+            }
+        }
+    }
+}
+planet_event = {
+    id = DDT_FY.52
+    hide_window = yes
+    is_triggered_only = yes
+
+    immediate = {
+        every_country = {
+            limit = { is_ai = no
+                is_antimatter_must = yes}
+            enable_special_project = {
+                name = "FIND_HOME_SYSTEM_HUIMIE"
+                location = root
+                owner = this.capital_scope
+            }
+        }
+        random_system = {
+            limit = {
+                has_star_flag = home_system_huimie_star_star
+            }
+            random_system_planet = {
+                limit = {
+                    has_planet_flag = home_system_huimie_star_planet
+                }
+                #enable_special_project = {
+                #    name = "FIND_HOME_SYSTEM_HUIMIE"
+                #    location = This
+                #    owner = Root.owner
+                #}
+                create_point_of_interest = {
+                    id = an_crisis_home_home1
+                    name = "NAME_YDLF"
+                    event_chain = "antimatter_legion_chain"
+                    location = from
+                }
+            }
+        }
+    }
+}
+country_event = {
+    id = DDT_FY.53
+    title = DDT_FY.53_name
+    desc = DDT_FY.53_desc
+    is_triggered_only = yes
+    picture = GFX_evt_crisis_3
+
+    option = {
+        name = OK
+        every_country = {
+            limit = { has_event_chain = "antimatter_legion_chain" }
+            end_event_chain = antimatter_legion_chain
+            abort_special_project = {
+                type = FIND_HOME_SYSTEM_HUIMIE
+            }
         }
     }
 }
@@ -1135,178 +1597,167 @@ country_event = {
         name = OK
     }
 }
+#七个特殊项目完成提示加移除不必要的flag
 country_event = {
-    id = DDT_FY.208
-    title = DDT_FY.208_name
-    desc = DDT_FY.208_desc
+    id = DDT_FY.211
+    title = DDT_FY.211_name
+    desc = DDT_FY.211_desc
     is_triggered_only = yes
-    picture = GFX_evt_crisis_1
+    picture = GFX_evt_crisis_3
+
+    immediate = {
+            every_country = {
+                limit = {
+                    is_country_type = antimatter_legion
+                }
+                every_owned_planet = {
+                    limit = {
+                        has_planet_flag = an_planet1
+                    }
+                    remove_planet_flag = an_planet1
+                }
+            }
+    }
     option = {
         name = OK
     }
 }
 country_event = {
-    id = DDT_FY.209
-    title = DDT_FY.209_name
-    desc = DDT_FY.209_desc
+    id = DDT_FY.212
+    title = DDT_FY.212_name
+    desc = DDT_FY.212_desc
     is_triggered_only = yes
-    picture = GFX_evt_crisis_1
-    option = {
-        name = OK
-    }
-}
-###################### 舰队机制  ######################
-#在至少四个毁灭之塔被摧毁前战争熔炉星系的毁灭之塔和在至少七个毁灭之塔被摧毁前亚德丽芬星系的毁灭天塔不得被摧毁。
-starbase_event = {
-    id = DDT_FY.300
-    hide_window = yes
-    is_triggered_only = yes
-    trigger = {
-        NOT = { has_global_flag = can_not_use_DDT_FY.300 }
-        #has_starbase_size = HMTT
-        has_starbase_flag = antimatter_starbase_home
-    }
+    picture = GFX_evt_crisis_3
     immediate = {
-        every_system = {
-            limit = {
-                has_star_flag = HMTT_center_of_galaxy
-            }
-            save_global_event_target_as = HMTT_center_of_galaxy
-        }
-        event_target:HMTT_center_of_galaxy.system_star = {
-            create_starbase = {
-                size = HMTT
-                owner = event_target:ANTIMATTER_crisis
-                effect = {
-
-                }
-            }
-        }
-    }
-}
-starbase_event = {
-    id = DDT_FY.301
-    hide_window = yes
-    is_triggered_only = yes
-    trigger = {
-        NOT = { has_global_flag = can_not_use_DDT_FY.301 }
-        #has_starbase_size = HMTT2
-        has_starbase_flag = antimatter_starbase8
-    }
-    immediate = {
-        every_system = {
-            limit = {
-                has_star_flag = HMTT_center_of_The_Crucible_of_War
-            }
-            save_global_event_target_as = HMTT_center_of_The_Crucible_of_War
-        }
-        event_target:HMTT_center_of_The_Crucible_of_War.system_star = {
-            create_starbase = {
-                size = HMTT2
-                owner = event_target:ANTIMATTER_crisis
-                effect = {
-
-                }
-            }
-        }
-    }
-}
-starbase_event = {
-    id = DDT_FY.302
-    hide_window = yes
-    is_triggered_only = yes
-    trigger = {
-        NOT = { has_global_flag = can_not_use_DDT_FY.300 }
-        #has_starbase_size = HMTT2
-        OR = {
-            has_starbase_flag = antimatter_starbase1
-            has_starbase_flag = antimatter_starbase2
-            has_starbase_flag = antimatter_starbase3
-            has_starbase_flag = antimatter_starbase4
-            has_starbase_flag = antimatter_starbase5
-            has_starbase_flag = antimatter_starbase6
-            has_starbase_flag = antimatter_starbase7
-        }
-    }
-    immediate = {
-        This.owner = {
-            change_variable = { which = the_num_of_antimatter_starbase value = -1 }
-            if = {
-                limit = {
-                    check_variable = { which = the_num_of_antimatter_starbase value <= 3 }
-                }
-                set_global_flag = can_not_use_DDT_FY.301
-            }
-            if = {
-                limit = {
-                    check_variable = { which = the_num_of_antimatter_starbase value <= 0 }
-                }
-                set_global_flag = can_not_use_DDT_FY.300
-            }
-        }
-    }
-}
-#舰队增援只会刷在战争熔炉星系，每年增添7-n单位舰队
-planet_event = {
-    id = DDT_FY.310
-    hide_window = yes
-    is_triggered_only = yes
-    trigger = {
-        this.starbase = {
-            exists = owner
-            owner = {
-                is_country_type = antimatter_legion
-            }
-        }
-    }
-    immediate = {
-        while = {
-            count = this.starbase.owner.the_num_of_antimatter_starbase
-            create_neutron_ship = yes
-            create_antimatter_fleet = yes
-            create_antimatter_fleet = yes
-            create_antimatter_fleet = yes
-        }
-        planet_event = { id = DDT_FY.310 days = 360 }
-    }
-}
-#获胜
-starbase_event = {
-    id = DDT_FY.305
-    hide_window = yes
-    is_triggered_only = yes
-    trigger = {
-        has_global_flag = can_not_use_DDT_FY.300
-        OR = {
-            has_starbase_flag = antimatter_starbase_home
-        }
-    }
-    immediate = {
-        This.owner = {
-            destroy_country = yes
-        }
         every_country = {
             limit = {
-                OR = {
-                    is_country_type = default
-                    is_country_type = fallen_empire
-                    is_country_type = awakened_fallen_empire
-                }
+                is_country_type = antimatter_legion
             }
-            country_event = { id = DDT_FY.306 }
+            every_owned_planet = {
+                limit = {
+                    has_planet_flag = an_planet2
+                }
+                remove_planet_flag = an_planet2
+            }
         }
+    }
+    option = {
+        name = OK
     }
 }
 country_event = {
-    id = DDT_FY.306
-    title = DDT_FY.306_title
-    desc = DDT_FY.306_desc
+    id = DDT_FY.213
+    title = DDT_FY.213_name
+    desc = DDT_FY.213_desc
     is_triggered_only = yes
-    option = {
-        name = DDT_FY.306_desc_a
+    picture = GFX_evt_crisis_3
+    immediate = {
+        every_country = {
+            limit = {
+                is_country_type = antimatter_legion
+            }
+            every_owned_planet = {
+                limit = {
+                    has_planet_flag = an_planet3
+                }
+                remove_planet_flag = an_planet3
+            }
+        }
     }
     option = {
-        name = DDT_FY.306_desc_b
+        name = OK
+    }
+}
+country_event = {
+    id = DDT_FY.214
+    title = DDT_FY.214_name
+    desc = DDT_FY.214_desc
+    is_triggered_only = yes
+    picture = GFX_evt_crisis_3
+    immediate = {
+        every_country = {
+            limit = {
+                is_country_type = antimatter_legion
+            }
+            every_owned_planet = {
+                limit = {
+                    has_planet_flag = an_planet4
+                }
+                remove_planet_flag = an_planet4
+            }
+        }
+    }
+    option = {
+        name = OK
+    }
+}
+country_event = {
+    id = DDT_FY.215
+    title = DDT_FY.215_name
+    desc = DDT_FY.215_desc
+    is_triggered_only = yes
+    picture = GFX_evt_crisis_3
+    immediate = {
+        every_country = {
+            limit = {
+                is_country_type = antimatter_legion
+            }
+            every_owned_planet = {
+                limit = {
+                    has_planet_flag = an_planet5
+                }
+                remove_planet_flag = an_planet5
+            }
+        }
+    }
+    option = {
+        name = OK
+    }
+}
+country_event = {
+    id = DDT_FY.216
+    title = DDT_FY.216_name
+    desc = DDT_FY.216_desc
+    is_triggered_only = yes
+    picture = GFX_evt_crisis_3
+    immediate = {
+        every_country = {
+            limit = {
+                is_country_type = antimatter_legion
+            }
+            every_owned_planet = {
+                limit = {
+                    has_planet_flag = an_planet6
+                }
+                remove_planet_flag = an_planet6
+            }
+        }
+    }
+    option = {
+        name = OK
+    }
+}
+country_event = {
+    id = DDT_FY.217
+    title = DDT_FY.217_name
+    desc = DDT_FY.217_desc
+    is_triggered_only = yes
+    picture = GFX_evt_crisis_3
+    immediate = {
+        every_country = {
+            limit = {
+                is_country_type = antimatter_legion
+            }
+            every_owned_planet = {
+                limit = {
+                    has_planet_flag = an_planet7
+                }
+                remove_planet_flag = an_planet7
+            }
+        }
+    }
+    option = {
+        name = OK
     }
 }
 ######################  U I 事 件 (建议不要动)   ######################
@@ -1321,10 +1772,8 @@ country_event = {
     }
 
     immediate = {
+            set_country_flag = allow_stage1_xt
         set_country_flag = allow_set_xt_crisis_global
-        event_target:global_event_country = {
-            set_variable = { which = XQTD_crisis_stage value = 1 }
-        }
     }
 }
 country_event = {
@@ -1338,10 +1787,8 @@ country_event = {
     }
 
     immediate = {
-        event_target:global_event_country = {
-            set_country_flag = allow_add_xtui
-            set_country_flag = allow_sub_xtui
-        }
+        set_country_flag = allow_add_xtui
+        set_country_flag = allow_sub_xtui
         set_country_flag = allow_set_xt_crisis_global
         if = {
             limit = {
@@ -1361,6 +1808,69 @@ country_event = {
     }
 }
 ######################  舰 队 事 件 (建议不要动)  ######################
+planet_event = {
+    id = DDT_FY.3000
+    hide_window = yes
+
+    is_triggered_only = yes
+
+    trigger = {
+        owner = { is_country_type = "antimatter_legion" }
+    }
+
+    immediate = {
+        if = {
+            limit = {
+                has_global_flag = find_an_system.1
+                has_global_flag = find_an_system.2
+                has_global_flag = find_an_system.3
+                has_global_flag = find_an_system.4
+                has_global_flag = find_an_system.5
+                has_global_flag = find_an_system.6
+                has_global_flag = find_an_system.7
+            }
+        }
+        else_if = {
+            limit = {
+                owner = { num_ships > 8000 }
+            }
+            planet_event = { id = DDT_FY.3000 days = 600 }
+        }
+        else = {
+            #limit = { trigger_planet_add_fleet = yes }
+            planet_event = { id = DDT_FY.3000 days = 600 random = 200 }
+            create_antimatter_fleet = yes
+        }
+    }
+}
+planet_event = {
+    id = DDT_FY.3001
+    hide_window = yes
+
+    is_triggered_only = yes
+
+    trigger = {
+        owner = { is_country_type = "antimatter_legion" }
+    }
+
+    immediate = {
+        if = {
+            limit = {
+                has_global_flag = find_an_system.1
+                has_global_flag = find_an_system.2
+                has_global_flag = find_an_system.3
+                has_global_flag = find_an_system.4
+                has_global_flag = find_an_system.5
+                has_global_flag = find_an_system.6
+                has_global_flag = find_an_system.7
+            }
+        }
+        else = {
+            planet_event = { id = DDT_FY.3001 days = 600 random = 200 }
+            create_antimatter_fleet = yes
+        }
+    }
+}
 #舰队行为主触发#   ##该模板取自地砖大佬公用素材##
 fleet_event = {
     id = DDT_FY.4000
@@ -1561,168 +2071,72 @@ planet_event = {
        # }
    # }
 }
-fleet_event = {
-    id = DDT_FY.4002
+######################    测 试 ------ 挂 来    ######################
+country_event = {
+    id = DDT_FY.6666
     hide_window = yes
     is_triggered_only = yes
-    trigger = {
-        exists = this
-        has_fleet_flag = GWDG_Crisis_1_fleet
-        #owner = { is_country_type = GW_wonders_crisis_country }
-    }
+
     immediate = {
-        queue_actions = {
-            repeat = {
-                effect = {
-                    id = SRA_RE_Crisis.39.e0
-                    if = {
-                        limit = {
-                            count_system = {
-                                limit = { check_variable = { which = GWDG_Crisis_1_fleet_id value > 0 } }
-                                count = all
-                            }
+        every_country = {
+            limit = {
+                is_ai = no
+            }
+            add_modifier = {
+                modifier = gua
+            }
+            add_resource = {
+                energy = 999999999
+                minerals = 999999999
+                consumer_goods = 999999999
+                food = 999999999
+                alloys = 999999999
+            }
+            while = {
+                count = 10
+                owner = {
+                    create_leader = {
+                        class = admiral
+                        species = owner_main_species
+                        name = random
+                        skill = 3
+                        effect = {
+                            set_age = 0
+                            save_event_target_as = waigua_leader
                         }
-                        every_system = {
-                            set_variable = { which = GWDG_Crisis_1_fleet_id value = 0 }
-                            clear_variable = GWDG_Crisis_1_fleet_id
-                        }
-                    }
-                    if = {
-                        limit = { has_fleet_flag = GWDG_Crisis_cannot_find_path }
-                        random_system = {
-                            limit = {
-                                OR = {
-                                    AND = {
-                                        exists = starbase
-                                    }
-                                    any_system_planet = { OR = { is_colony = yes is_colonizable = yes } }
-                                }
-                            }
-                            random_system_planet = { ROOT = { set_location = { target = PREV distance = 5 angle = random } } }
-                        }
-                        remove_fleet_flag = GWDG_Crisis_cannot_find_path
                     }
                 }
-                find_closest_system = {
-                    trigger = {
-                        id = SRA_RE_Crisis.39.t1
-                        OR = {
-                            AND = {
-                                exists = starbase
+                create_fleet = {
+                    effect = {
+                        set_owner = Prev
+                        while = {
+                            count = 10
+                            create_ship = {
+                                name = random
+                                design = "NAME_Euthanizer"
+                                graphical_culture = "ai_01"
                             }
-                            any_system_planet = { OR = { is_star = yes } NOT = { is_planet_class = pc_black_hole } }
                         }
-                        ROOT = { can_access_system = prev }
-                        check_variable = { which = GWDG_Crisis_1_fleet_id value < 1 }
-                    }
-                    found_system = {
-                        effect = {
-                            id = SRA_RE_Crisis.39.e1
-                            set_variable = { which = GWDG_Crisis_1_fleet_id value = root.xfleet_id }
-                        }
-                        move_to = this
-                        repeat = {
-                            while = {
-                                id = SRA_RE_Crisis.39.t2
-                                any_system_planet = { AND = { is_star = yes } NOT = { is_planet_class = pc_black_hole } }
+                        assign_leader = event_target:waigua_leader
+                        while = {
+                            count = 20
+                            create_ship = {
+                                name = random
+                                design = "NAME_Sterilizer"
+                                graphical_culture = "ai_01"
                             }
-                            find_closest_planet = {
-                                trigger = {
-                                    id = SRA_RE_Crisis.39.t3
-                                    OR = { is_star = yes } NOT = { is_planet_class = pc_black_hole }
-                                }
-                                found_planet = {
-                                    orbit_planet = this
-                                    effect = {
-                                        id = SRA_RE_Crisis.39.e2
-                                        ROOT = { set_fleet_flag = GWDG_Crisis_bombarding_planet }
-                                    }
-                                    destroy_planet = {
-                                        target = This
-                                    }
-                                    repeat = {
-                                        while = {
-                                            id = SRA_RE_Crisis.39.t4
-                                            ROOT = { has_fleet_flag = GWDG_Crisis_bombarding_planet }
-                                        }
-                                        effect = {
-                                            id = SRA_RE_Crisis.39.e3
-                                            if = {
-                                                limit = { OR = { is_star = yes } NOT = { is_planet_class = pc_black_hole } }
-                                                ROOT = { remove_fleet_flag = GWDG_Crisis_bombarding_planet }
-                                            }
-                                        }
-                                        wait = { duration = 5 random = 10 }
-                                    }
-                                }
-                            }
-                            move_to = this							# move away from the planet
-                            wait = { duration = 5 random = 10 }
                         }
-                        wait = { duration = 5 random = 10 }
-                    }
-                    failed = { find_closest_system = {
-                        trigger = {
-                            id = SRA_RE_Crisis.39.t9
-                            ROOT = { can_access_system = prev }
-                            check_variable = { which = GWDG_Crisis_1_fleet_id value < 1 }
+                        set_location = {
+                            target = Prev.capital_scope
+                            distance = 45
+                            angle = random
                         }
-                        found_system = {
-                            effect = {
-                                id = SRA_RE_Crisis.39.t91
-                                set_variable = { which = GWDG_Crisis_1_fleet_id value = root.xfleet_id }
-                            }
-                            move_to = this
-                            repeat = {
-                                while = {
-                                    id = SRA_RE_Crisis.39.t10
-                                    any_system_planet = { OR = { is_star = yes } NOT = { is_planet_class = pc_black_hole } }
-                                }
-                                find_closest_planet = {
-                                    trigger = {
-                                        id = SRA_RE_Crisis.39.t11
-                                        OR = { is_star = yes } NOT = { is_planet_class = pc_black_hole }
-                                    }
-                                    found_planet = {
-                                        orbit_planet = this
-                                        effect = {
-                                            id = SRA_RE_Crisis.39.e10
-                                            ROOT = { set_fleet_flag = GWDG_Crisis_bombarding_planet }
-                                            if = {
-                                                limit = { OR = { is_star = yes } NOT = { is_planet_class = pc_black_hole } }
-                                                set_planet_flag = GWDG_Crisis_target_planet
-                                            }
-                                        }
-                                        destroy_planet = {
-                                            target = This
-                                        }
-                                        repeat = {
-                                            while = {
-                                                id = SRA_RE_Crisis.39.t12
-                                                ROOT = { has_fleet_flag = GWDG_Crisis_bombarding_planet }
-                                            }
-                                            effect = {
-                                                id = SRA_RE_Crisis.39.e11
-                                                if = {
-                                                    limit = { OR = { is_star = yes } NOT = { is_planet_class = pc_black_hole } }
-                                                    ROOT = { remove_fleet_flag = GWDG_Crisis_bombarding_planet }
-                                                }
-                                            }
-                                            wait = { duration = 5 random = 10 }
-                                        }
-                                    }
-                                }
-                                move_to = this											# move away from the planet
-                                wait = { duration = 5 random = 10 }
-                            }
-                            wait = { duration = 5 random = 10 }
+                        add_modifier = {
+                            modifier = guapluse
                         }
-                        failed = { effect = { id = SRA_RE_Crisis.39.e13 ROOT = { set_fleet_flag = GWDG_Crisis_cannot_find_path } } wait = 200 }
-                    }
                     }
                 }
             }
         }
-        fleet_event = { id = DDT_FY.4002 days = 150 }
     }
 }
