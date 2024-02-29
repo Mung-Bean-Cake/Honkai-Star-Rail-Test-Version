@@ -4,8 +4,8 @@ import chardet
 
 blackList = ["Daybreak of Teyvat Alpha Version\common\备份文件", "Daybreak of Teyvat Alpha Version/common/备份文件", 
              "Daybreak of Teyvat Alpha Version\.backups", "Daybreak of Teyvat Alpha Version/.backups",
-             "Daybreak of Teyvat Beta Version\common\备份文件", "Daybreak of Teyvat Beta Version/common/备份文件", 
-             "Daybreak of Teyvat Beta Version\.backups", "Daybreak of Teyvat Beta Version/.backups"]
+             "Honkai Star Rail Test Version\common\备份文件", "Honkai Star Rail Test Version/common/备份文件", 
+             "Honkai Star Rail Test Version\.backups", "Honkai Star Rail Test Version/.backups"]
 
 # 检测本地化文件的双引号
 def CheckFileQuotation(filePath):
@@ -107,11 +107,11 @@ def CheckDirBracket(dirPath):
     return allFilesCorrect
 
 def main():
-    modPath = "Daybreak of Teyvat Beta Version"
+    modPath = "Honkai Star Rail Test Version"
     if not CheckDirBracket(modPath):
         sys.exit(1)
-    chineseLocalisationPath = "Daybreak of Teyvat Beta Version/localisation/simp_chinese"
-    englishLocalisationPath = "Daybreak of Teyvat Beta Version/localisation/english"
+    chineseLocalisationPath = "Honkai Star Rail Test Version/localisation/simp_chinese"
+    englishLocalisationPath = "Honkai Star Rail Test Version/localisation/english"
     if not CheckDirQuotation(chineseLocalisationPath): # 目前引号只检测中文
         sys.exit(1)
     if not (CheckDirEncoding(chineseLocalisationPath) and CheckDirEncoding(englishLocalisationPath)):
