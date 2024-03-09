@@ -1,0 +1,455 @@
+
+#控制球
+entity = {
+	name = "hda1"
+	pdxmesh = hda1
+	default_state = "idle"
+	scale = 0.5
+	state = {
+		name = idle state_time = 5 animation = "idle"
+		#start_event = { node = "black_hole_flag" particle = "matde_black_7hole_effect" keep_particle = yes trigger_once = yes }
+		#start_event = { node = "root" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "qian" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "hou" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "qianxia" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "houshang" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "zuoqianshang" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "youqianshang" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "zuohoushang" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "zuohouxia" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+	}
+}
+#前方主炮
+entity = {
+	name = "hda2"
+	pdxmesh = hda2
+}
+#控制球＋前方主炮
+entity = {
+	name = "hda12"
+	pdxmesh = hda1
+	attach = { qianduan_entity = hda2 }
+	default_state = "idle"
+	scale = 0.5
+	state = {
+		name = idle state_time = 5 animation = "idle"
+		#start_event = { node = "root" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "qian" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "hou" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "qianxia" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "houshang" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "zuoqianshang" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "youqianshang" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "zuohoushang" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "zuohouxia" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+	}
+}
+#环骨架
+entity = {
+	name = "hda3"
+	pdxmesh = hda3
+}
+#前方主炮+环骨架
+entity = {
+	name = "hda23"
+	pdxmesh = hda2
+	attach = { huan_hexin_flag = hda3 }
+}
+#控制球＋(前方主炮+环骨架)
+entity = {
+	name = "hda1(23)"
+	pdxmesh = hda1
+	attach = { qianduan_entity = hda23 }
+	default_state = "idle"
+	scale = 0.5
+	state = {
+		name = idle state_time = 5 animation = "idle"
+		#start_event = { node = "root" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "qian" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "hou" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "qianxia" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "houshang" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "zuoqianshang" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "youqianshang" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "zuohoushang" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "zuohouxia" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+	}
+}
+#环
+entity = {
+	name = "hda4"
+	pdxmesh = hda4
+	default_state = "idle"
+	state = { name = "idle" animation = huan_donghua1 }
+	game_data = {
+		size = 30
+	}
+}
+entity = {
+	name = "hda5"
+	pdxmesh = hda5
+	default_state = "idle"
+	state = { name = "idle" animation = huan_donghua2 }
+	game_data = {
+		size = 30
+	}
+}
+#环的动画
+animation = {
+	name = huan_donghua1
+	file = huan_donghua1.anim
+}
+animation = {
+	name = huan_donghua2
+	file = huan_donghua2.anim
+}
+#前方主炮+环骨架+环
+entity = {
+	name = "hda2345"
+	pdxmesh = hda2
+	attach = { huan_hexin_flag = hda3 }
+	attach = { huan_hexin_flag = hda4 }
+	attach = { huan_hexin_flag = hda5 }
+}
+#控制球＋(前方主炮+环骨架+环)
+entity = {
+	name = "hda1(2345)"
+	pdxmesh = hda1
+	attach = { qianduan_entity = hda2345 }
+	default_state = "idle"
+	scale = 0.5
+	state = {
+		name = idle state_time = 5 animation = "idle"
+		#start_event = { node = "root" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "qian" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "hou" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "qianxia" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "houshang" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "zuoqianshang" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "youqianshang" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "zuohoushang" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "zuohouxia" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+	}
+}
+#推进器
+entity = {
+	name = xxys_tjq
+	pdxmesh = xxys_tjq
+	default_state = "idle"
+	state = { name = "idle" animation = nemesis_01_colossus_open }
+	game_data = {
+		size = 30
+	}
+}
+animation = {
+	name = nemesis_01_colossus_open
+	file = "nemesis_01_colossus_open.anim"
+}
+#控制球＋(前方主炮+环骨架+环)+推进器
+entity = {
+	name = "hda1(2345)xxys_tjq"
+	pdxmesh = hda1
+	attach = { qianduan_entity = hda2345 }
+	attach = { houduan_entity = xxys_tjq }
+	default_state = "idle"
+	scale = 0.5
+	state = {
+		name = idle state_time = 5 animation = "idle"
+		#start_event = { node = "root" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "qian" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "hou" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "qianxia" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "houshang" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "zuoqianshang" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "youqianshang" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "zuohoushang" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "zuohouxia" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+	}
+}
+#获取能量--获取
+entity = {
+	name = energy_get1
+	pdxmesh = energy_get1
+	default_state = "idle"
+	state = { name = "idle" animation = "idle"
+		start_event = { node = "eg1" particle = "matde_6core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "eg2" particle = "matde_6core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "eg3" particle = "matde_6core_beam_effect" keep_particle = yes trigger_once = yes }
+
+		start_event = { node = "eg1" particle = "matde_black_hole_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "eg2" particle = "matde_black_hole_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "eg3" particle = "matde_black_hole_effect" keep_particle = yes trigger_once = yes }
+
+		start_event = { node = "eg1.001" particle = "matde_core_small_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "eg1.002" particle = "matde_core_small_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "eg1.003" particle = "matde_core_small_beam_effect" keep_particle = yes trigger_once = yes }
+
+		start_event = { node = "eg2.001" particle = "matde_core_small_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "eg2.002" particle = "matde_core_small_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "eg2.003" particle = "matde_core_small_beam_effect" keep_particle = yes trigger_once = yes }
+
+		start_event = { node = "eg3.001" particle = "matde_core_small_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "eg3.002" particle = "matde_core_small_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "eg3.003" particle = "matde_core_small_beam_effect" keep_particle = yes trigger_once = yes }
+
+		start_event = { node = "eg1.004" particle = "matde_platform_small_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "eg2.004" particle = "matde_platform_small_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "eg3.004" particle = "matde_platform_small_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "eg3.005" particle = "matde_platform_small_beam_effect" keep_particle = yes trigger_once = yes }
+	}
+}
+#控制球＋(前方主炮+环骨架+环)+推进器+获取能量--获取
+entity = {
+	name = "hda1(2345)xxys_tjqenergy_get1"
+	pdxmesh = hda1
+	attach = { qianduan_entity = hda2345 }
+	attach = { houduan_entity = xxys_tjq }
+	attach = { root = energy_get1 }
+	default_state = "idle"
+	scale = 0.5
+	state = {
+		name = idle state_time = 5 animation = "idle"
+		#start_event = { node = "root" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "qian" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "hou" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "qianxia" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "houshang" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "zuoqianshang" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "youqianshang" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "zuohoushang" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "zuohouxia" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+	}
+}
+#获取能量--利用
+entity = {
+	name = energy_get2
+	pdxmesh = energy_get2
+	default_state = "idle"
+	state = { name = "idle"
+		animation = "idle"
+		start_event = { node = "shangyou" particle = "matde_4.7core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "shangzuo" particle = "matde_4.5core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "xiayou" particle = "matde_7.5core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "xiazuo" particle = "matde_7.5core_beam_effect" keep_particle = yes trigger_once = yes }
+	}
+}
+#巨构用
+#控制球＋(前方主炮+环骨架+环)+推进器+获取能量--获取+获取能量--利用
+entity = {
+	name = "megahda1(2345)xxys_tjqenergy_get12"
+	pdxmesh = hda1
+	attach = { qianduan_entity = hda2345 }
+	attach = { houduan_entity = xxys_tjq }
+	attach = { root = energy_get1 }
+	attach = { root = energy_get2 }
+	attach = { black_hole_flag = "xxys_black_hole_entity" }
+	default_state = "idle"
+	scale = 0.5
+	state = {
+		name = idle state_time = 5 animation = "idle"
+		start_event = { node = "black_hole_flag" particle = "matde_black_7hole_effect" keep_particle = yes trigger_once = yes }
+		#start_event = { node = "root" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "qian" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "hou" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "qianxia" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "houshang" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "zuoqianshang" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "youqianshang" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "zuohoushang" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "zuohouxia" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+	}
+}
+#舰船用
+#控制球＋(前方主炮+环骨架+环)+推进器+获取能量--获取+获取能量--利用
+entity = {
+	name = "hda1(2345)xxys_tjqenergy_get12"
+	pdxmesh = hda1
+	attach = { qianduan_entity = hda2345 }
+	attach = { houduan_entity = xxys_tjq }
+	attach = { root = energy_get1 }
+	attach = { root = energy_get2 }
+	attach = { black_hole_flag = "xxys_black_hole_entity" }
+	default_state = "idle"
+	scale = 2.5
+	state = {
+		name = idle state_time = 5 animation = "idle"
+		start_event = { node = "black_hole_flag" particle = "matde_black_7hole_effect" keep_particle = yes trigger_once = yes }
+		#start_event = { node = "root" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "qian" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "hou" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "qianxia" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "houshang" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "zuoqianshang" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "youqianshang" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "zuohoushang" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+		start_event = { node = "zuohouxia" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+	}
+}
+entity = {
+	name = "xxys_black_hole_entity"
+	pdxmesh = "black_hole_new_mesh"
+
+	scale = 3.3
+	default_state = "idle"
+	state = { name = "idle" state_time = 5
+		#event = { time = 0 particle = "black_hole_particle" trigger_once = yes keep_particle = yes }
+		event = { trigger_once = yes sound = { soundeffect = "blackhole_hum_idle" } }
+	}
+	locator = { name = "planet" }
+	#attach = { "planet" = "black_hole_rings_entity" }
+	#attach = { "planet" = "black_hole_grav_lens_entity" }
+	#attach = { "planet" = "black_hole_grav_animation_entity" }
+
+	game_data = {
+		size = 1.0
+		bloom_factor = 5
+	}
+	#cull_radius = 700
+}
+#section
+entity = {
+	name = energy_get1_section
+	pdxmesh = energy_get1
+}
+#获取能量--利用
+entity = {
+	name = energy_get2_section
+	pdxmesh = energy_get2
+}
+entity = {
+	name = "hda1(2345)xxys_tjqenergy_get12section"
+	pdxmesh = hda1
+	attach = { qianduan_entity = hda2345 }
+	attach = { houduan_entity = xxys_tjq }
+	attach = { root = energy_get1_section }
+	attach = { root = energy_get2_section }
+	#attach = { black_hole_flag = "xxys_black_hole_entity" }
+	scale = 2.5
+}
+##获取能量--利用(动画)
+#entity = {
+#	name = energy_get3.1ex
+#	pdxmesh = energy_get3.1
+#	default_state = "idle"
+#	#state = { name = "idle" animation = energy_get3 }
+#	game_data = {
+#		size = 30
+#	}
+#	state = { name = "idle"
+#		animation = "energy_get3.1"
+#		start_event = { node = "shangzuo" particle = "matde_4.5core_beam_effect" keep_particle = yes trigger_once = yes }
+#	}
+#}
+#entity = {
+#	name = energy_get3.2ex
+#	pdxmesh = energy_get3.2
+#	default_state = "idle"
+#	state = { name = "idle" animation = energy_get3.2 }
+#	game_data = {
+#		size = 30
+#	}
+#	state = { name = "idle"
+#		animation = "energy_get3.2"
+#		start_event = { node = "shangyou" particle = "matde_4.7core_beam_effect" keep_particle = yes trigger_once = yes }
+#	}
+#}
+#entity = {
+#	name = energy_get3.3ex
+#	pdxmesh = energy_get3.3
+#	default_state = "idle"
+#	state = { name = "working" animation = energy_get3.3 }
+#	game_data = {
+#		size = 30
+#	}
+#	state = { name = "idle"
+#		animation = "energy_get3.3"
+#		start_event = { node = "xiazuo" particle = "matde_7.5core_beam_effect" keep_particle = yes trigger_once = yes }
+#	}
+#}
+#entity = {
+#	name = energy_get3.4ex
+#	pdxmesh = energy_get3.4
+#	default_state = "idle"
+#	state = { name = "idle" animation = energy_get3.4 }
+#	game_data = {
+#		size = 30
+#	}
+#	#state = { name = "idle"
+#	#	animation = "idle"
+#	#	start_event = { node = "xiayou" particle = "matde_7.5core_beam_effect" keep_particle = yes trigger_once = yes }
+#	#}
+#}
+#animation = {
+#	name = energy_get3.1
+#	file = energy_get3.1.anim
+#}
+#animation = {
+#	name = energy_get3.2
+#	file = energy_get3.2.anim
+#}
+#animation = {
+#	name = energy_get3.3
+#	file = energy_get3.3.anim
+#}
+#animation = {
+#	name = energy_get3.4
+#	file = energy_get3.4.anim
+#}
+##控制球＋(前方主炮+环骨架+环)+推进器+获取能量--获取+获取能量--利用(动画)
+#entity = {
+#	name = "hda1(2345)xxys_tjqenergy_get13"
+#	pdxmesh = hda1
+#	attach = { qianduan_entity = hda2345 }
+#	attach = { houduan_entity = xxys_tjq }
+#	attach = { root = energy_get1 }
+#	attach = { root = energy_get3.1ex }
+#	attach = { root = energy_get3.2ex }
+#	attach = { root = energy_get3.3ex }
+#	attach = { root = energy_get3.4ex }
+#	default_state = "idle"
+#	scale = 0.5
+#	state = {
+#		name = idle state_time = 5 animation = "idle"
+#		#start_event = { node = "root" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+#		start_event = { node = "qian" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+#		start_event = { node = "hou" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+#		start_event = { node = "qianxia" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+#		start_event = { node = "houshang" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+#		start_event = { node = "zuoqianshang" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+#		start_event = { node = "youqianshang" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+#		start_event = { node = "zuohoushang" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+#		start_event = { node = "zuohouxia" particle = "matde_3core_beam_effect" keep_particle = yes trigger_once = yes }
+#	}
+#}
+
+###   损毁的
+entity = {
+	name = "heidong_star_part1_01_entity"
+	pdxmesh = "debris_large_01_mesh"
+
+	default_state = "idle"
+	state = { name = "idle" animation = "idle"
+		start_event = { trigger_once = yes sound = { soundeffect = "amb_wrecked_shipyard_idle" } }
+		event = { time = 0 particle = "debris_large_dust_effect" keep_particle = yes trigger_once = yes }
+	}
+	scale = 3.9
+}
+entity = {
+	name = "heidong_star_part1_02_entity"
+	pdxmesh = "debris_large_01_mesh"
+
+	default_state = "idle"
+	state = { name = "idle" animation = "idle"
+		start_event = { trigger_once = yes sound = { soundeffect = "amb_wrecked_shipyard_idle" } }
+		event = { time = 0 particle = "debris_large_dust_effect" keep_particle = yes trigger_once = yes }
+	}
+	scale = 4.3
+}
+entity = {
+	name = heidong_star_ship_destroy
+	pdxmesh = heidong_star_ship_destroy
+	attach = { root = "xxys_black_hole_entity" }
+	attach = { root = heidong_star_part1_01_entity }
+	attach = { root = heidong_star_part1_02_entity }
+	scale = 2.5
+}

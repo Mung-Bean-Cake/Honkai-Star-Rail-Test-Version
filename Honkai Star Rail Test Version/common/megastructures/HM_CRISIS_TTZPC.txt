@@ -1,0 +1,68 @@
+
+mega_HM_CRISIS_TTZPC = {
+    entity = "YS_zpc1234567"
+    construction_entity = "YS_zpc7"
+    upgrade_from = {  }
+    place_entity_on_planet_plane = yes
+    scales_with_planet = yes
+
+    build_time = 700
+    resources = {
+        category = megastructures
+        cost = { alloys = 70000 influence = 200 }
+        upkeep = {
+            trigger = {
+                exists = star
+                NOT = {
+                    solar_system = {
+                        star = {
+                            is_star_class = sc_black_hole
+                        }
+                    }
+                }
+            }
+            alloys = 400
+        }
+        upkeep = {
+            trigger = {
+                exists = star
+                solar_system = {
+                    star = {
+                        is_star_class = sc_black_hole
+                    }
+                }
+            }
+            energy = 1000
+        }
+    }
+
+    potential = {
+        always = no
+    }
+
+    possible = {  }
+
+    ai_weight = {
+        weight = 50
+        modifier = {
+            factor = 20
+        }
+    }
+    ship_modifier = {
+        ship_starting_experience_add = 1000
+    }
+
+    station_modifier = {
+        starbase_shipyard_capacity_add = 50
+        shipsize_titan_build_speed_mult = 1
+        shipsize_colossus_build_speed_mult = 1
+    }
+
+    country_modifier = {
+        starbase_shipyard_build_speed_mult = 1
+        ship_military_alloys_upkeep_mult = -0.5
+    }
+
+    on_build_complete = {
+    }
+}

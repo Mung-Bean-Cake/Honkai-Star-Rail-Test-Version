@@ -1,0 +1,136 @@
+antimatter_legion_home_system = {
+    name = "NAME_YDLF"
+
+    class = "rl_standard_stars"
+    #usage = misc_system_init
+    usage_odds = 0
+
+    asteroid_belt = {
+        type = rocky_asteroid_belt
+        radius = 190
+    }
+
+    flags = { antimatter_legion_home_system HMTT_center_of_galaxy }
+
+    planet = {
+        name = "NAME_YDLF"
+        class = "pc_black_hole"
+        orbit_distance = 0
+        orbit_angle = 1
+        size = 30
+        has_ring = no
+    }
+
+
+    change_orbit = 800
+
+    init_effect = {
+        #create_antimatter_starbase_home = yes
+        spawn_natural_wormhole = {
+            bypass_type = wormhole
+            orbit_distance = 300
+        }
+    }
+}
+antimatter_legion_Sub_galaxies = {
+    name = "NAME_Sub_galaxies"
+
+    class = "rl_standard_stars"
+    usage = misc_system_init
+    usage_odds = 0
+
+    asteroid_belt = {
+        type = rocky_asteroid_belt
+        radius = 190
+    }
+
+    flags = { antimatter_legion_home_small }
+
+    planet = {
+        class = "pc_black_hole"
+        orbit_distance = 0
+        orbit_angle = 1
+        size = 30
+        has_ring = no
+        init_effect = {
+            set_planet_flag = born_antimatter_legion
+        }
+    }
+
+    change_orbit = 800
+
+    init_effect = {
+        spawn_natural_wormhole = {
+            bypass_type = wormhole
+            orbit_distance = 300
+        }
+    }
+
+}
+#战争熔炉
+The_Crucible_of_War = {
+    #usage = fallen_empire_init
+    class = sc_binary_3
+    asteroid_belt = {
+        type = rocky_asteroid_belt
+        radius = 50
+    }
+
+    flags = {The_Crucible_of_War HMTT_center_of_The_Crucible_of_War }
+
+    planet = {
+        count = 1
+        class = pc_black_hole
+        orbit_distance = 300
+        orbit_angle = 0
+        size = { min = 20 max = 30 }
+        has_ring = no
+        name = The_Crucible_of_War
+        init_effect = {
+            set_planet_flag = The_Crucible_of_War
+            planet_event = { id = DDT_FY.310 days = 180 }
+        }
+    }
+    planet = {
+        count = 1
+        class = pc_black_hole
+        orbit_distance = 300
+        orbit_angle = 120
+        size = { min = 20 max = 30 }
+        has_ring = no
+        name = The_Crucible_of_War
+        init_effect = {
+            save_global_event_target_as = The_Crucible_of_War_2star
+            solar_system = {
+                spawn_megastructure = {
+                    type = mega_HM_CRISIS_TTZPC
+                    planet = event_target:The_Crucible_of_War_2star
+                }
+            }
+        }
+    }
+    planet = {
+        count = 1
+        class = pc_black_hole
+        orbit_distance = 300
+        orbit_angle = 240
+        size = { min = 20 max = 30 }
+        has_ring = no
+        name = The_Crucible_of_War
+        init_effect = {
+            create_antimatter_starbase = { num = 9 }
+        }
+    }
+
+    change_orbit = 200
+    
+    
+    init_effect = {
+        set_name = The_Crucible_of_War
+        save_global_event_target_as = The_Crucible_of_War
+        spawn_natural_wormhole = {
+            bypass_type = wormhole
+            orbit_distance = 300
+        }
+    }
+}
