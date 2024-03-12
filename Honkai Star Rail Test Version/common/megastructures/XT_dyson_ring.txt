@@ -1,0 +1,129 @@
+#Holy_Dustbin
+
+XT_dyson_sphere_ring_0 = {
+    entity = "construction_platform_entity"
+    construction_entity = "construction_platform_entity"
+    portrait = "GFX_megastructure_construction_background"
+    place_entity_on_planet_plane = no
+    entity_offset = { x = -7 y = -7 }
+    build_time = 200
+    resources = {
+        category = megastructures
+        cost = {
+            alloys = 2000
+        }
+
+        upkeep = {
+            energy = 5
+        }
+    }
+
+    prerequisites = {  }
+
+    possible = {
+        exists = starbase
+        custom_tooltip = {
+            fail_text = "requires_inside_border"
+            is_inside_border = from
+        }
+        custom_tooltip = {
+            fail_text = "requires_surveyed_system"
+            NOT = {
+                any_system_planet = {
+                    is_surveyed = {
+                        who = prev.from
+                        status = no
+                    }
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = "requires_no_black_hole_neutron_star_pulsar"
+            NOT = {
+                is_star_class = sc_black_hole
+                is_star_class = sc_neutron_star
+                is_star_class = sc_pulsar
+            }
+        }
+        custom_tooltip = {
+            fail_text = "requires_no_existing_megastructure"
+            #NOT = { has_any_megastructure = yes }
+            has_no_non_gate_megastructure = yes
+        }
+    }
+
+    placement_rules = {
+        planet_possible = {
+            custom_tooltip = {
+                fail_text = "must_build_around_star"
+                is_star = yes
+            }
+            custom_tooltip = {
+                fail_text = "requires_no_anomaly"
+                NOT = { has_anomaly = yes }
+            }
+        }
+    }
+
+    # root = system
+    # from = country
+    ai_weight = {
+        factor = 15
+
+        modifier = {
+            factor = 0.1
+            starbase = { NOT = { has_starbase_size >= starbase_starfortress } }
+        }
+
+        modifier = {
+            factor = 0.1
+            any_neighbor_system = {
+                exists = owner
+                NOT = {
+                    owner = { is_same_value = from }
+                }
+            }
+        }
+    }
+
+    on_build_start = {}
+    on_build_cancel = {}
+    on_build_complete = {
+        fromfrom.planet = {
+            if = {
+                limit = { has_orbital_station = yes }
+                orbital_station = {
+                    dismantle = yes
+                }
+            }
+        }
+    }
+}
+
+#Dyson Sphere Frame
+XT_dyson_sphere_ring_1 = {
+    entity = "XT_dyson_sphere_ring"
+    construction_entity = "XT_dyson_sphere_ring"
+    portrait = "GFX_megastructure_construction_background"
+    build_time = 300
+    scales_with_planet = yes
+    resources = {
+        category = megastructures
+        cost = {
+            alloys = 5000
+            unity = 1000
+        }
+        produces = {
+            energy = 200
+        }
+    }
+
+    upgrade_from = {
+        XT_dyson_sphere_ring_0
+    }
+
+    prerequisites = {  }
+
+    on_build_complete = {
+    }
+}
