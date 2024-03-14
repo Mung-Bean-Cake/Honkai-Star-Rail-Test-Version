@@ -1,0 +1,74 @@
+@colossus_scale = 24
+
+entity = {
+	name = food_station
+	pdxmesh = ship_entity_instand
+	locator = { name = root1 position = { 0 0 0 } rotation = { 0 -90 0 } }
+	scale = 1
+	attach = { root1 = food_station_sion }
+}
+
+entity = {
+	name = food_station_sion
+	pdxmesh = "plantoid_01_colossus_mesh"
+	scale = 1.5
+	
+	#get_state_from_parent = no
+	
+	default_state = "idle"
+	# Actual idle state when being in idle/moving.
+	state = { name = "idle" animation = "idle" looping = no next_state = "idle" animation_blend_time = 5
+		chance = {
+			if_current_state = {
+				"working" = 100
+			}
+		}
+		start_event = { trigger_once = yes sound = { soundeffect = "plantoid_colossus_idle" } }
+		
+		event = { time = 0 node = "engine_large_01" particle = "generic_big_3_exhaust_circle_idle" keep_particle = yes trigger_once = yes }
+		
+		event = { time = 0 	 node = "light_locator_01" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0.2 node = "light_locator_02" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+		
+		event = { time = 0 node = "inner_ship_effect" particle = "food_station_inner_core_effect" keep_particle = yes trigger_once = yes }
+	}
+	# Opening state", goes into "open" state when done.
+	state = { name = "working" animation = "opening" looping = no next_state = "working_looping" 
+		event = { trigger_once = yes sound = { soundeffect = "plantoid_colossus_opening" stop_on_state_change = yes } }
+		
+		event = { time = 1000 id = "beam_start" } #will never fire, but lets the game know that an event with this ID exists
+		
+		event = { time = 0 node = "engine_large_01" particle = "generic_big_3_exhaust_circle_moving" keep_particle = yes trigger_once = yes }
+		
+		event = { time = 0 	 node = "light_locator_01" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0.2 node = "light_locator_02" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+	
+		event = { time = 0 node = "inner_ship_effect" particle = food_station_inner_core_effect keep_particle = yes trigger_once = yes }
+		
+		event = { time = 9.63 node = "hatch_smoke_locator_01" particle = "colossus_hatch_smoke_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 9.63 node = "hatch_smoke_locator_02" particle = "colossus_hatch_smoke_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 9.63 node = "hatch_smoke_locator_03" particle = "colossus_hatch_smoke_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 9.63 node = "hatch_smoke_locator_04" particle = "colossus_hatch_smoke_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 9.63 node = "hatch_smoke_locator_05" particle = "colossus_hatch_smoke_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 9.63 node = "hatch_smoke_locator_06" particle = "colossus_hatch_smoke_effect" keep_particle = yes trigger_once = yes }
+	}
+
+	#locator = { name = "planet_killer_gun_01" position = { 0 0 0 } } # Actual locator in mesh.
+}
+
+animation = {
+	name = "plantoid_01_colossus_idle_animation"
+	file = "plantoid_01_colossus_idle.anim"
+}
+animation = {
+	name = "plantoid_01_colossus_open_animation"
+	file = "plantoid_01_colossus_open.anim"
+}
+animation = {
+	name = "plantoid_01_colossus_opening_animation"
+	file = "plantoid_01_colossus_opening.anim"
+}
+animation = {
+	name = "plantoid_01_colossus_closing_animation"
+	file = "plantoid_01_colossus_closing.anim"
+}

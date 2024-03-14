@@ -1,0 +1,118 @@
+#Holy_Dustbin
+
+XT_alloys_station_0 = {
+    entity = "construction_platform_entity"
+    construction_entity = "construction_platform_entity"
+    portrait = "GFX_megastructure_construction_background"
+    place_entity_on_planet_plane = no
+    entity_offset = { x = -7 y = -7 }
+    build_time = 200
+    resources = {
+        category = megastructures
+        cost = {
+            alloys = 2000
+        }
+
+        upkeep = {
+            energy = 5
+        }
+    }
+
+    prerequisites = {  }
+
+    possible = {
+        exists = starbase
+        custom_tooltip = {
+            fail_text = "requires_inside_border"
+            is_inside_border = from
+        }
+        custom_tooltip = {
+            fail_text = "requires_surveyed_system"
+            NOT = {
+                any_system_planet = {
+                    is_surveyed = {
+                        who = prev.from
+                        status = no
+                    }
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = "requires_no_existing_megastructure"
+            #NOT = { has_any_megastructure = yes }
+            has_no_non_gate_megastructure = yes
+        }
+    }
+
+    placement_rules = {
+        planet_possible = {
+            custom_tooltip = {
+                fail_text = "must_build_around_star"
+                is_star = yes
+            }
+            custom_tooltip = {
+                fail_text = "requires_no_anomaly"
+                NOT = { has_anomaly = yes }
+            }
+        }
+    }
+
+    # root = system
+    # from = country
+    ai_weight = {
+        factor = 15
+
+        modifier = {
+            factor = 0.1
+            starbase = { NOT = { has_starbase_size >= starbase_starfortress } }
+        }
+
+        modifier = {
+            factor = 0.1
+            any_neighbor_system = {
+                exists = owner
+                NOT = {
+                    owner = { is_same_value = from }
+                }
+            }
+        }
+    }
+
+    on_build_start = {}
+    on_build_cancel = {}
+    on_build_complete = {
+    }
+}
+
+#Dyson Sphere Frame
+XT_alloys_station_1 = {
+    entity = "XT_alloys_station"
+    construction_entity = "XT_alloys_station"
+    portrait = "GFX_megastructure_construction_background"
+    build_time = 300
+    #scales_with_planet = yes
+    place_entity_on_planet_plane = no
+    entity_offset = { x = 10 y = -7 }
+    resources = {
+        category = megastructures
+        cost = {
+            alloys = 5000
+            unity = 1000
+        }
+        produces = {
+            alloys = 80
+        }
+        upkeep = {
+            minerals = 10
+        }
+    }
+
+    upgrade_from = {
+        XT_alloys_station_0
+    }
+
+    prerequisites = {  }
+
+    on_build_complete = {
+    }
+}
