@@ -14,7 +14,7 @@ create_belobog_blocker_1_army_1 = {	#小群
 		create_army = {
 			name = "belobog_blocker_1_army_1"
 			#!以下的owner和species，如果可以的话直接给毁灭天灾
-			owner = event_target:belobog_blocker_1_country
+			owner = event_target:belobog_blockerLJ_country				#驻军实力过低不能触发裂界进攻
 			#species
 			type = belobog_blocker_1_army_1
 		}
@@ -45,7 +45,7 @@ create_belobog_blocker_1_army_2 = {	#中群
 		create_army = {
 			name = "belobog_blocker_1_army_2"
 			#!以下的owner和species，如果可以的话直接给毁灭天灾
-			owner = event_target:belobog_blocker_1_country
+			owner = event_target:belobog_blockerLJ_country				#驻军实力过低不能触发裂界进攻
 			type = belobog_blocker_1_army_2
 		}
 		change_variable = {
@@ -73,7 +73,7 @@ create_belobog_blocker_1_army_2 = {	#中群
 			create_army = {
 				name = "belobog_blocker_1_army_1"
 				#!以下的owner和species，如果可以的话直接给毁灭天灾
-				owner = event_target:belobog_blocker_1_country
+				owner = event_target:belobog_blockerLJ_country				#驻军实力过低不能触发裂界进攻
 				type = belobog_blocker_1_army_1
 			}
 		}
@@ -93,7 +93,6 @@ create_belobog_blocker_1_army_2 = {	#中群
 				value >= 0
 			}
 		}
-		break = yes
 	}
 }
 create_belobog_blocker_1_army_3 = {	#大群
@@ -111,7 +110,7 @@ create_belobog_blocker_1_army_3 = {	#大群
 		create_army = {
 			name = "belobog_blocker_1_army_3"
 			#!以下的owner和species，如果可以的话直接给毁灭天灾
-			owner = event_target:belobog_blocker_1_country
+			owner = event_target:belobog_blockerLJ_country				#驻军实力过低不能触发裂界进攻
 			type = belobog_blocker_1_army_3
 		}
 		change_variable = {
@@ -137,7 +136,7 @@ create_belobog_blocker_1_army_3 = {	#大群
 		create_army = {
 			name = "belobog_blocker_1_army_2"
 			#!以下的owner和species，如果可以的话直接给毁灭天灾
-			owner = event_target:belobog_blocker_1_country
+			owner = event_target:belobog_blockerLJ_country				#驻军实力过低不能触发裂界进攻
 			type = belobog_blocker_1_army_2
 		}
 		while = {
@@ -145,7 +144,7 @@ create_belobog_blocker_1_army_3 = {	#大群
 			create_army = {
 				name = "belobog_blocker_1_army_1"
 				#!以下的owner和species，如果可以的话直接给毁灭天灾
-				owner = event_target:belobog_blocker_1_country
+				owner = event_target:belobog_blockerLJ_country				#驻军实力过低不能触发裂界进攻
 				type = belobog_blocker_1_army_1
 			}
 		}
@@ -165,7 +164,6 @@ create_belobog_blocker_1_army_3 = {	#大群
 				value >= 0
 			}
 		}
-		break = yes
 	}
 }
 
@@ -178,7 +176,6 @@ belobog_blocker_1_army_generation = {
 			planet_garrison_strength < 300
 		}
 		while = {
-			count = 999
 			limit = {
 				check_variable = {
 					which = belobog_blocker_1_battle_army_num
@@ -198,7 +195,6 @@ belobog_blocker_1_army_generation = {
 			planet_garrison_strength < 500
 		}
 		while = {
-			count = 999
 			limit = {
 				check_variable = {
 					which = belobog_blocker_1_battle_army_num
@@ -218,7 +214,6 @@ belobog_blocker_1_army_generation = {
 			planet_garrison_strength < 750
 		}
 		while = {
-			count = 999
 			limit = {
 				check_variable = {
 					which = belobog_blocker_1_battle_army_num
@@ -238,7 +233,6 @@ belobog_blocker_1_army_generation = {
 			planet_garrison_strength < 900
 		}
 		while = {
-			count = 999
 			limit = {
 				check_variable = {
 					which = belobog_blocker_1_battle_army_num
@@ -257,7 +251,6 @@ belobog_blocker_1_army_generation = {
 			planet_garrison_strength > 900
 		}
 		while = {
-			count = 999
 			limit = {
 				check_variable = {
 					which = belobog_blocker_1_battle_army_num
@@ -273,7 +266,7 @@ belobog_blocker_1_army_generation = {
 	}
 	else = {		#再有然后直接报错，包括战斗力小于200但是触发了的和不知道怎么可能的
 		owner = {
-			country_event = { id = SRB_story.199 }
+			country_event = { id = SR_belobog.199 }
 		}
 	}
 }
@@ -291,7 +284,7 @@ belobog_blocker_1_defense_effect = {
 	create_army = {
 		name = "belobog_blocker_1_army_3"
 		#!以下的owner和species，如果可以的话直接给毁灭天灾
-		owner = event_target:belobog_blocker_1_country
+		owner = event_target:belobog_blockerLJ_country				#驻军实力过低不能触发裂界进攻
 		type = belobog_blocker_1_army_4
 	}
 	#自动减少20数量
@@ -302,11 +295,11 @@ belobog_blocker_1_defense_effect = {
 	#划出可用总数
 	change_variable = {
 		which = belobog_blocker_1_army_num
-		value = -$blocker_1_army_num_available$
+		value = blocker_1_army_num_available
 	}
 	change_variable = {
 		which = belobog_blocker_1_battle_army_num
-		value = $blocker_1_army_num_available$
+		value = blocker_1_army_num_available
 	}
 	#开始生成（可用总数已划出）
 	belobog_blocker_1_army_generation = yes

@@ -1,53 +1,38 @@
 ### 抑制裂界 ###
 belobog_blocker_1_situation = {
-
-	##文本
 	desc = {
-		trigger = {
-			owner = {
-				has_country_flag = SRB_main_story_stay_chosen
-			}
-		}
+		trigger = { owner = { has_country_flag = SRB_main_story_stay_chosen } }
 		text = "belobog_blocker_1_situation_triggered_desc.1"
 	}
 	desc = {
-		trigger = {
-			owner = {
-				has_country_flag = SRB_main_story_leave_chosen
-			}
-		}
+		trigger = { owner = { has_country_flag = SRB_main_story_leave_chosen } }
 		text = "belobog_blocker_1_situation_triggered_desc.2"
 	}
 
-	##图片和UI
+	category = negative
+	progress_direction = bidirectional
+	complete_category = positive
+	fail_category = negative
 	picture = GFX_evt_zro_3
-	#picture = {}												#triggered picture
 	complete_icon = GFX_situation_outcome_positive    			#定义进度条右方的图标
 	complete_icon_frame = GFX_situation_outcome_frame_red 		#定义进度条右方图标的外框
 	fail_icon = GFX_situation_outcome_negative       			#定义进度条左方的图标
 	fail_icon_frame = GFX_situation_outcome_frame_red 			#定义进度条左方图标的外框
 
-	##整体定义
-	category = negative
-	progress_direction = bidirectional
-	complete_category = positive
-	fail_category = negative
-	
-	##程序事件
 	on_start = {
-		situation_event = { id = SRB_story.51 }
+		situation_event = { id = SR_belobog.51 }
 	}
 	on_progress_complete = {
-		situation_event = { id = SRB_story.52 }
+		situation_event = { id = SR_belobog.52 }
 	}
 	on_fail = {
-		situation_event = { id = SRB_story.53 }
+		situation_event = { id = SR_belobog.53 }
 	}
 	abort_trigger = { }						#当局势满足trigger之时将中断局势并触发on_abort
 	on_abort = { }
 
 	##阶段
-	start_value = 40
+	start_value = 45
 	stages = {
 		belobog_blocker_1_stage_1 = {
 			custom_tooltip = "belobog_blocker_1_stage_1_tooltip" 
@@ -56,7 +41,7 @@ belobog_blocker_1_situation = {
 			end = 20 
 
 			on_first_enter = {
-				situation_event = { id = SRB_story.54 }
+				situation_event = { id = SR_belobog.54 }
 			} 
 
 			target_modifier = {
@@ -100,7 +85,7 @@ belobog_blocker_1_situation = {
 		belobog_blocker_1_stage_3 = {
 			custom_tooltip = "belobog_blocker_1_stage_3_tooltip" 
 			icon = GFX_situation_stage_3
-			icon_background = GFX_situation_stage_frame_yellow
+			icon_background = GFX_situation_stage_frame_green
 			end = 60
 
 			#on_first_enter = {} 
@@ -120,7 +105,7 @@ belobog_blocker_1_situation = {
 		belobog_blocker_1_stage_4 = {
 			custom_tooltip = "belobog_blocker_1_stage_4_tooltip" 
 			icon = GFX_situation_stage_4
-			icon_background = GFX_situation_stage_frame_green 
+			icon_background = GFX_situation_stage_frame_blue
 			end = 80 
 
 			#on_first_enter = {} 
@@ -149,7 +134,7 @@ belobog_blocker_1_situation = {
 			end = 100 
 
 			on_first_enter = {
-				situation_event = { id = SRB_story.55 }
+				situation_event = { id = SR_belobog.55 }
 			} 
 
 			modifier = {
@@ -176,28 +161,28 @@ belobog_blocker_1_situation = {
 		base = -0.05 #默认的月进度
 		modifier = {
 			add = -0.2
-			desc = "belobog_blocker_1_progress_desc_a1"
-			current_situation_approach = approach_1
+			desc = "belobog_blocker_1_progress_desc"
+			current_situation_approach = belobog_blocker_1_approach_1
 		}
 		modifier = {
 			add = -0.075
-			desc = "belobog_blocker_1_progress_desc_a2"
-			current_situation_approach = approach_2
+			desc = "belobog_blocker_1_progress_desc"
+			current_situation_approach = belobog_blocker_1_approach_2
 		}
 		modifier = {
 			add = 0.25
-			desc = "belobog_blocker_1_progress_desc_a3"
-			current_situation_approach = approach_1
+			desc = "belobog_blocker_1_progress_desc"
+			current_situation_approach = belobog_blocker_1_approach_3
 		}
 		modifier = {
 			add = 1
-			desc = "belobog_blocker_1_progress_desc_a4"
-			current_situation_approach = approach_1
+			desc = "belobog_blocker_1_progress_desc"
+			current_situation_approach = belobog_blocker_1_approach_4
 		}
 	}
 
 	##选项
-	approach_1 = {
+	approach = {
 		name = "belobog_blocker_1_approach_1"
 		icon = GFX_situation_approach_shrug
 		icon_background = GFX_situation_approach_bg_red
@@ -205,7 +190,6 @@ belobog_blocker_1_situation = {
 		potential = {
 			has_situation_flag = approach_1_available
 		}
-		default = no
 
 
 		resources = {
@@ -219,7 +203,7 @@ belobog_blocker_1_situation = {
 			}
 		}
 	}
-	approach_2 = {
+	approach = {
 		name = "belobog_blocker_1_approach_2"
 		icon = GFX_situation_approach_shrug
 		icon_background = GFX_situation_approach_bg_red
@@ -227,7 +211,6 @@ belobog_blocker_1_situation = {
 		potential = {
 
 		}
-		default = no
 		
 
 		resources = {
@@ -239,7 +222,7 @@ belobog_blocker_1_situation = {
 			}
 		}       
 	}
-	approach_3 = {
+	approach = {
 		name = "belobog_blocker_1_approach_3"
 		icon = GFX_situation_approach_shrug
 		icon_background = GFX_situation_approach_bg_red
@@ -247,7 +230,6 @@ belobog_blocker_1_situation = {
 		potential = {
 			has_situation_flag = approach_3_available
 		}
-		default = no
 		
 
 		resources = {
@@ -261,7 +243,7 @@ belobog_blocker_1_situation = {
 			}
 		}       
 	}
-	approach_4 = {
+	approach = {
 		name = "belobog_blocker_1_approach_4"
 		icon = GFX_situation_approach_shrug
 		icon_background = GFX_situation_approach_bg_red
@@ -269,7 +251,6 @@ belobog_blocker_1_situation = {
 		potential = {
 			has_situation_flag = approach_4_available
 		}
-		default = no
 		
 
 		resources = {
@@ -277,7 +258,7 @@ belobog_blocker_1_situation = {
 			cost = {}
 			upkeep = {
 				energy = 35
-				physics = 5
+				physics_research = 5
 			}
 			produces = {
 				unity = 50
@@ -288,7 +269,448 @@ belobog_blocker_1_situation = {
 	#触发的事件类型只能为situation_event
 	on_monthly = {
 		events = {
-			situation_event = { id = SRB_story.60 }
+			SR_belobog.60
 		}
 	}
+}
+
+### 寒潮研究 ###
+SRB_blockerHC_research_situation = {
+	desc = {
+		trigger = { current_stage = blockerHC_research_stage1 }
+		text = "SRB_blockerHC_research_stage1_desc"
+	}
+	desc = {
+		trigger = { current_stage = blockerHC_research_stage2 }
+		text = "SRB_blockerHC_research_stage2_desc"
+	}
+	desc = {
+		trigger = { current_stage = blockerHC_research_stage3 }
+		text = "SRB_blockerHC_research_stage3_desc"
+	}
+	desc = {
+		trigger = { current_stage = blockerHC_research_stage4 }
+		text = "SRB_blockerHC_research_stage4_desc"
+	}
+	desc = {
+		trigger = { current_stage = blockerHC_research_stage5 }
+		text = "SRB_blockerHC_research_stage5_desc"
+	}
+	picture = {
+		trigger = { current_stage = blockerHC_research_stage1 }
+		picture = GFX_evt_arctic
+	}
+	picture = {
+		trigger = { current_stage = blockerHC_research_stage2 }
+		picture = GFX_evt_outpost
+	}
+	picture = {
+		trigger = { current_stage = blockerHC_research_stage3 }
+		picture = GFX_evt_icelocked_settlement
+	}
+	picture = {
+		trigger = { current_stage = blockerHC_research_stage4 }
+		picture = GFX_evt_satellite_in_orbit
+	}
+	picture = {
+		trigger = { current_stage = blockerHC_research_stage5 }
+		picture = GFX_evt_kaleidoscopic_lights
+	}
+
+	category = positive
+	progress_direction = monodirectional
+	complete_icon = GFX_situation_outcome_positive
+	complete_icon_frame = GFX_situation_outcome_frame_green
+	fail_icon = GFX_situation_outcome_negative
+	fail_icon_frame = GFX_situation_outcome_frame_red
+
+	on_progress_complete = {
+		situation_event = { id = SR_belobog.25 }
+		custom_tooltip = "SRB_blockerHC_research_complete_tooltip"
+	}
+	abort_trigger = {}
+	on_abort = {}
+
+	##阶段
+	start_value = 0
+	stages = {
+		blockerHC_research_stage1 = {
+			custom_tooltip = "blockerHC_research_stages_desc"
+			icon = GFX_situation_stage_1
+			icon_background = GFX_situation_stage_frame_red
+			end = 20
+
+			on_first_enter = {}
+
+		}
+		blockerHC_research_stage2 = {
+			custom_tooltip = "blockerHC_research_stages_desc"
+			icon = GFX_situation_stage_2
+			icon_background = GFX_situation_stage_frame_red
+			end = 40
+
+			on_first_enter = {
+				situation_event = { id = SR_belobog.21 }
+			}
+
+		}
+		blockerHC_research_stage3 = {
+			custom_tooltip = "blockerHC_research_stages_desc"
+			icon = GFX_situation_stage_3
+			icon_background = GFX_situation_stage_frame_green
+			end = 60
+
+			on_first_enter = {
+				situation_event = { id = SR_belobog.22 }
+			}
+
+		}
+		blockerHC_research_stage4 = {
+			custom_tooltip = "blockerHC_research_stages_desc"
+			icon = GFX_situation_stage_4
+			icon_background = GFX_situation_stage_frame_green
+			end = 80
+
+			on_first_enter = {
+				situation_event = { id = SR_belobog.23 }
+			}
+
+		}
+		blockerHC_research_stage5 = {
+			custom_tooltip = "blockerHC_research_stages_desc"
+			icon = GFX_situation_stage_5
+			icon_background = GFX_situation_stage_frame_blue
+			end = 100
+
+			on_first_enter = {
+				situation_event = { id = SR_belobog.24 }
+			}
+
+		}
+	}
+
+	##进度
+	monthly_progress = { #每个月刷新一次进度
+		base = 0
+		modifier = {
+			add = 0.2
+			desc = "blockerHC_research_progress_desc"
+			current_situation_approach = blockerHC_research_approach1
+		}
+		modifier = {
+			add = 0.15
+			desc = "blockerHC_research_progress_desc"
+			current_situation_approach = blockerHC_research_approach2
+		}
+		modifier = {
+			add = 0.35
+			desc = "blockerHC_research_progress_desc"
+			current_situation_approach = blockerHC_research_approach3
+		}
+		modifier = {
+			add = 0.2
+			desc = "blockerHC_research_progress_desc"
+			current_situation_approach = blockerHC_research_approach4
+		}
+	}
+
+	##选项
+	approach = {
+		name = "blockerHC_research_approach1"
+		icon = GFX_situation_approach_energy_credits
+		icon_background = GFX_situation_approach_bg_yellow
+
+		potential = {}
+
+		resources = {
+			category = situations
+			cost = {}
+			upkeep = {
+				energy = 15
+			}
+			produces = {
+				physics_research = 25
+			}
+		}
+	}
+	approach = {
+		name = "blockerHC_research_approach2"
+		icon = GFX_situation_approach_research
+		icon_background = GFX_situation_approach_bg_green
+
+		potential = {}
+
+		resources = {
+			category = situations
+			cost = {}
+			upkeep = {
+				energy = 45
+				consumer_goods = 8
+			}
+			produces = {
+				physics_research = 55
+			}
+		}
+	}
+	approach = {
+		name = "blockerHC_research_approach3"
+		icon = GFX_situation_approach_fist
+		icon_background = GFX_situation_approach_bg_green
+
+		potential = {}
+
+
+		resources = {
+			category = situations
+			cost = {}
+			upkeep = {
+				energy = 45
+				unity = 20
+			}
+			produces = {
+				physics_research = 25
+			}
+		}
+	}
+	approach = {
+		name = "blockerHC_research_approach4"
+		icon = GFX_situation_approach_balance_sheet
+		icon_background = GFX_situation_approach_bg_green
+
+		potential = {}
+
+		resources = {
+			category = situations
+			cost = {}
+			upkeep = {
+				energy = 35
+				society_research = 5
+			}
+			produces = {
+				unity = 50
+			}
+		}
+	}
+
+}
+
+### 裂界研究 ###
+SRB_blockerLJ_research_situation = {
+	desc = {
+		trigger = { current_stage = blockerLJ_research_stage1 }
+		text = "SRB_blockerLJ_research_stage1_desc"
+	}
+	desc = {
+		trigger = { current_stage = blockerLJ_research_stage2 }
+		text = "SRB_blockerLJ_research_stage2_desc"
+	}
+	desc = {
+		trigger = { current_stage = blockerLJ_research_stage3 }
+		text = "SRB_blockerLJ_research_stage3_desc"
+	}
+	desc = {
+		trigger = { current_stage = blockerLJ_research_stage4 }
+		text = "SRB_blockerLJ_research_stage4_desc"
+	}
+	desc = {
+		trigger = { current_stage = blockerLJ_research_stage5 }
+		text = "SRB_blockerLJ_research_stage5_desc"
+	}
+	picture = {
+		trigger = { current_stage = blockerHC_research_stage1 }
+		picture = GFX_evt_physics_research
+	}
+	picture = {
+		trigger = { current_stage = blockerHC_research_stage2 }
+		picture = GFX_evt_society_research
+	}
+	picture = {
+		trigger = { current_stage = blockerHC_research_stage3 }
+		picture = GFX_evt_decryption
+	}
+	picture = {
+		trigger = { current_stage = blockerHC_research_stage4 }
+		picture = GFX_evt_inhabited_solar_system
+	}
+	picture = {
+		trigger = { current_stage = blockerHC_research_stage5 }
+		picture = GFX_evt_astral_rift_psionic_stranger
+	}
+
+	category = positive
+	progress_direction = monodirectional
+	complete_icon = GFX_situation_outcome_positive
+	complete_icon_frame = GFX_situation_outcome_frame_green
+	fail_icon = GFX_situation_outcome_negative
+	fail_icon_frame = GFX_situation_outcome_frame_red
+
+	on_progress_complete = {
+		situation_event = { id = SR_belobog.15 }
+		custom_tooltip = "SRB_blockerLJ_research_complete_tooltip"
+	}
+	abort_trigger = {}
+	on_abort = {}
+
+	##阶段
+	start_value = 0
+	stages = {
+		blockerLJ_research_stage1 = {
+			custom_tooltip = "blockerLJ_research_stages_desc"
+			icon = GFX_situation_stage_1
+			icon_background = GFX_situation_stage_frame_red
+			end = 20
+
+			on_first_enter = {}
+
+		}
+		blockerLJ_research_stage2 = {
+			custom_tooltip = "blockerLJ_research_stages_desc"
+			icon = GFX_situation_stage_2
+			icon_background = GFX_situation_stage_frame_red
+			end = 40
+
+			on_first_enter = {
+				situation_event = { id = SR_belobog.11 }
+			}
+
+		}
+		blockerLJ_research_stage3 = {
+			custom_tooltip = "blockerLJ_research_stages_desc"
+			icon = GFX_situation_stage_3
+			icon_background = GFX_situation_stage_frame_green
+			end = 60
+
+			on_first_enter = {
+				situation_event = { id = SR_belobog.12 }
+			}
+
+		}
+		blockerLJ_research_stage4 = {
+			custom_tooltip = "blockerLJ_research_stages_desc"
+			icon = GFX_situation_stage_4
+			icon_background = GFX_situation_stage_frame_green
+			end = 80
+
+			on_first_enter = {
+				situation_event = { id = SR_belobog.13 }
+			}
+
+		}
+		blockerLJ_research_stage5 = {
+			custom_tooltip = "blockerLJ_research_stages_desc"
+			icon = GFX_situation_stage_5
+			icon_background = GFX_situation_stage_frame_blue
+			end = 100
+
+			on_first_enter = {
+				owner = { set_country_flag = belobog_blockerLJ_research4_finished }
+				situation_event = { id = SR_belobog.14 }
+			}
+
+		}
+	}
+
+	##进度
+	monthly_progress = { #每个月刷新一次进度
+		base = 0
+		modifier = {
+			add = 0.2
+			desc = "blockerLJ_research_progress_desc"
+			current_situation_approach = blockerLJ_research_approach1
+		}
+		modifier = {
+			add = 0.15
+			desc = "blockerLJ_research_progress_desc"
+			current_situation_approach = blockerLJ_research_approach2
+		}
+		modifier = {
+			add = 0.35
+			desc = "blockerLJ_research_progress_desc"
+			current_situation_approach = blockerLJ_research_approach3
+		}
+		modifier = {
+			add = 0.2
+			desc = "blockerLJ_research_progress_desc"
+			current_situation_approach = blockerLJ_research_approach4
+		}
+	}
+
+	##选项
+	approach = {
+		name = "blockerLJ_research_approach1"
+		icon = GFX_situation_approach_energy_credits
+		icon_background = GFX_situation_approach_bg_yellow
+
+		potential = {}
+
+		resources = {
+			category = situations
+			cost = {}
+			upkeep = {
+				energy = 15
+			}
+			produces = {
+				engineering_research = 25
+			}
+		}
+	}
+	approach = {
+		name = "blockerLJ_research_approach2"
+		icon = GFX_situation_approach_research
+		icon_background = GFX_situation_approach_bg_green
+
+		potential = {}
+
+		resources = {
+			category = situations
+			cost = {}
+			upkeep = {
+				energy = 45
+				consumer_goods = 8
+			}
+			produces = {
+				engineering_research = 55
+			}
+		}
+	}
+	approach = {
+		name = "blockerLJ_research_approach3"
+		icon = GFX_situation_approach_fist
+		icon_background = GFX_situation_approach_bg_green
+
+		potential = {}
+
+
+		resources = {
+			category = situations
+			cost = {}
+			upkeep = {
+				energy = 45
+				unity = 20
+			}
+			produces = {
+				engineering_research = 25
+			}
+		}
+	}
+	approach = {
+		name = "blockerLJ_research_approach4"
+		icon = GFX_situation_approach_balance_sheet
+		icon_background = GFX_situation_approach_bg_green
+
+		potential = {}
+
+		resources = {
+			category = situations
+			cost = {}
+			upkeep = {
+				energy = 35
+				society_research = 5
+			}
+			produces = {
+				unity = 50
+			}
+		}
+	}
+
 }

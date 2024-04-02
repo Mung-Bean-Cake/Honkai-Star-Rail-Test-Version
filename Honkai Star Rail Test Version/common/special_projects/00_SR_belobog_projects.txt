@@ -1,243 +1,78 @@
-#主线的分支选项
+#火种计划：决定未来方向
 special_project = {
 	key = "SRB_main_story_choice_leave"
 	event_chain = SRB_story_main_chain
-	cost = 0
-	days_to_research = 60
-	tech_department = society_technology
 	picture = GFX_evt_baol_datacrystals
-
 	event_scope = country_event
+
+	cost = 0
+	days_to_research = 360
+	tech_department = society_technology
+	timelimit = 1800
 
 	on_success = {
 		owner = {
 			set_country_flag = "SRB_main_story_leave_chosen"
-			country_event = { id = SRB_story.3 }
+			country_event = { id = SR_belobog.3 }
 		}
 	}
- 
-	on_fail = {}
+
+	on_fail = {
+		owner = { country_event = { id = SR_belobog.4 } }
+	}
 }
 special_project = {
 	key = "SRB_main_story_choice_stay"
 	event_chain = SRB_story_main_chain
-	cost = 0
-	days_to_research = 60
-	tech_department = society_technology
 	picture = GFX_evt_baol_datacrystals
-
 	event_scope = country_event
+
+	cost = 0
+	days_to_research = 360
+	tech_department = society_technology
+	timelimit = 1800
+
+	same_option_group_as = { SRB_main_story_choice_leave }
 
 	on_success = {
 		owner = {
 			set_country_flag = "SRB_main_story_stay_chosen"
-			country_event = { id = SRB_story.3 }
+			country_event = { id = SR_belobog.3 }
 			add_modifier = { #添加 严寒的拷打 修正
 				modifier = severe_cold_torture
 			}
 		}
 	}
 
-	on_fail = {}
-}
-
-#研究裂界1~5
-special_project = {
-	key = "belobog_blocker_1_research_1"
-	event_chain = SRB_story_main_chain
-	cost = 1000
-	tech_department = physics_technology
-	picture = GFX_evt_baol_datacrystals
-
-	event_scope = country_event
-
-	on_success = {
-		owner = {
-			set_country_flag = "SRB_blocker_1_removeable"
-			set_country_flag = "belobog_blocker_1_research_1_finished"
-			country_event = { id = SRB_story.11 }
-		}
+	on_fail = {
+		owner = { country_event = { id = SR_belobog.4 } }
 	}
-
-	on_fail = {}
-}
-special_project = {
-	key = "belobog_blocker_1_research_2"
-	event_chain = SRB_story_main_chain
-	cost = 1500
-	tech_department = physics_technology
-	picture = GFX_evt_baol_datacrystals
-
-	event_scope = country_event
-
-	on_success = {
-		owner = {
-			set_country_flag = "belobog_blocker_1_research_2_finished"
-			country_event = { id = SRB_story.12 }
-		}
-	}
-
-	on_fail = {}
-}
-special_project = {
-	key = "belobog_blocker_1_research_3"
-	event_chain = SRB_story_main_chain
-	cost = 3000
-	tech_department = physics_technology
-	picture = GFX_evt_baol_datacrystals
-
-	event_scope = country_event
-
-	on_success = {
-		owner = {
-			set_country_flag = "belobog_blocker_1_research_3_finished"
-			country_event = { id = SRB_story.13 }
-		}
-	}
-
-	on_fail = {}
-}
-special_project = {
-	key = "belobog_blocker_1_research_4"
-	event_chain = SRB_story_main_chain
-	cost = 4750
-	tech_department = physics_technology
-	picture = GFX_evt_baol_datacrystals
-
-	event_scope = country_event
-
-	on_success = {
-		owner = {
-			set_country_flag = "belobog_blocker_1_research_4_finished"
-			country_event = { id = SRB_story.14 }
-		}
-	}
-
-	on_fail = {}
-}
-special_project = {
-	key = "belobog_blocker_1_research_5"
-	event_chain = SRB_story_main_chain
-	cost = 6000
-	tech_department = physics_technology
-	picture = GFX_evt_baol_datacrystals
-
-	event_scope = country_event
-
-	on_success = {
-		owner = {
-			country_event = { id = SRB_story.15 }
-		}
-	}
-
-	on_fail = {}
-}
-
-#研究寒潮1~5
-special_project = {
-	key = "belobog_blocker_2_research_1"
-	event_chain = SRB_story_main_chain
-	cost = 1000
-	tech_department = engineering_technology
-	picture = GFX_evt_baol_datacrystals
-
-	event_scope = country_event
-
-	on_success = {
-		owner = {
-			set_country_flag = "belobog_blocker_2_research_1_finished"
-			country_event = { id = SRB_story.21 }
-		}
-	}
-
-	on_fail = {}
-}
-special_project = {
-	key = "belobog_blocker_2_research_2"
-	event_chain = SRB_story_main_chain
-	cost = 1500
-	tech_department = engineering_technology
-	picture = GFX_evt_baol_datacrystals
-
-	event_scope = country_event
-
-	on_success = {
-		owner = {
-			#为防止玩家将该事件拖到一边并清除大量地貌障碍导致bug，将flag移至SRB_story.22
-			set_country_flag = "belobog_blocker_2_research_2_finished"
-			country_event = { id = SRB_story.22 }
-		}
-	}
-
-	on_fail = {}
-}
-special_project = {
-	key = "belobog_blocker_2_research_3"
-	event_chain = SRB_story_main_chain
-	cost = 3000
-	tech_department = engineering_technology
-	picture = GFX_evt_baol_datacrystals
-
-	event_scope = country_event
-
-	on_success = {
-		owner = {
-			set_country_flag = "belobog_blocker_2_research_3_finished"
-			country_event = { id = SRB_story.23 }
-		}
-	}
-
-	on_fail = {}
-}
-special_project = {
-	key = "belobog_blocker_2_research_4"
-	event_chain = SRB_story_main_chain
-	cost = 4750
-	tech_department = engineering_technology
-	picture = GFX_evt_baol_datacrystals
-
-	event_scope = country_event
-
-	on_success = {
-		owner = {
-			set_country_flag = "belobog_blocker_2_research_4_finished"
-			country_event = { id = SRB_story.24 }
-		}
-	}
-
-	on_fail = {}
-}
-special_project = {
-	key = "belobog_blocker_2_research_5"
-	event_chain = SRB_story_main_chain
-	cost = 6000
-	tech_department = engineering_technology
-	picture = GFX_evt_baol_datacrystals
-
-	event_scope = country_event
-
-	on_success = {
-		owner = {
-			country_event = { id = SRB_story.25 }
-		}
-	}
-
-	on_fail = {}
 }
 
 #复苏雅利洛-VI
 special_project = {
 	key = "SRB_main_story_save_jarilo"
 	event_chain = SRB_story_main_chain
-	cost = 114514
+	cost = 10000
 	tech_department = engineering_technology
-	picture = GFX_evt_baol_datacrystals
+	picture = GFX_evt_ocean
 
 	event_scope = country_event
 
 	on_success = {
 		owner = {
-			country_event = { id = SRB_story.94 }
+			country_event = { id = SR_belobog.94 }
+			set_country_flag = SRB_main_story_blockers_remove_finished
+			event_target:SRB_planet_jarilo = {
+				###############
+				#！真的可以这样写吗
+				every_deposit = {
+					limit = { is_blocker = yes }
+					remove_deposit = yes
+				}
+				###############
+
+			}
 		}
 	}
 

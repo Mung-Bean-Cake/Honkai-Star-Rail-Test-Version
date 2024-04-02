@@ -2,14 +2,15 @@
 
 ##地块障碍
 d_belobog_blocker_1 = {#裂界
-	icon = d_metal_boneyard #d_belobog_blocker_1
+	icon = d_buried_lithoids #d_belobog_blocker_1
 	time = 270
 	is_for_colonizable = yes
 	category = deposit_cat_blockers
+	drop_weight = { base = 0 }
 
 	can_be_cleared = {
 		custom_tooltip = {
-			fail_text = "SRB_blocker_1_remove_fail"
+			fail_text = "SRB_blocker_remove_fail"
 			planet = {
 				has_planet_flag = SRB_capital
 			}
@@ -19,11 +20,7 @@ d_belobog_blocker_1 = {#裂界
 			}
 		}
 	}
-	on_cleared = {
-		owner = {
-			country_event = { id = SRB_story.92 }
-		}
-	}
+	on_cleared = { event_target:SRB_planet_jarilo = { planet_event = { id = SR_belobog.30 } } }
 
 	potential = { always = yes }
 
@@ -37,18 +34,18 @@ d_belobog_blocker_1 = {#裂界
 			energy = 500
 		}
 	}
-	drop_weight = {  }
 }
 
 d_belobog_blocker_2 = {#寒潮
-	icon = d_metal_boneyard #d_belobog_blocker_2
+	icon = d_massive_glacier #d_belobog_blocker_2
 	time = 180
 	is_for_colonizable = yes
 	category = deposit_cat_blockers
+	drop_weight = { base = 0 }
 
 	can_be_cleared = {
 		custom_tooltip = {
-			fail_text = "SRB_blocker_2_remove_fail"
+			fail_text = "SRB_blocker_remove_fail"
 			planet = {
 				has_planet_flag = SRB_capital
 			}
@@ -58,7 +55,7 @@ d_belobog_blocker_2 = {#寒潮
 			}
 		}
 	}
-	on_cleared = { owner = {country_event = { id = SRB_story.92 } }}
+	on_cleared = { event_target:SRB_planet_jarilo = { planet_event = { id = SR_belobog.30 } } }
 
 	potential = { always = yes }
 
@@ -72,5 +69,4 @@ d_belobog_blocker_2 = {#寒潮
 			energy = 500
 		}
 	}
-	drop_weight = {  }
 }
