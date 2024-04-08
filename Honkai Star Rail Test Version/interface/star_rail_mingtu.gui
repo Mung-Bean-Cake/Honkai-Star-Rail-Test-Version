@@ -1,0 +1,4442 @@
+guiTypes = {
+
+	### FACTION OVERVIEW GUI ###
+
+	containerWindowType = {
+		name = "star_rail_mingtu"
+		orientation = center
+		origo = center
+		moveable = yes
+		size = { width = 1400 height = 855 }
+
+		background = {
+			name = "background"
+			quadTextureSprite = "GFX_honkai_star_rail_ui_window_bg"
+		}
+
+		iconType = {
+			name = "hex_bg"
+			spriteType = "GFX_hex_bg"
+			position = { x = -10000 y = -14000 }
+			alwaysTransparent = yes
+		}
+		iconType = {
+			name = "empire_header_line"
+			quadTextureSprite = "GFX_line_long"
+			position = { x = -6000 y = -220000 }
+			alwaysTransparent = yes
+		}
+
+		buttonType = {
+			name = "close"
+			quadTextureSprite = "GFX_close"
+			position = { x= -42 y = 12 }
+			orientation = "UPPER_RIGHT"
+			shortcut = "ESCAPE"
+			clicksound = "back_click"
+		}
+		#iconType = {
+			#name = "honkai_star_rail_mingtu_start"
+			#quadTextureSprite = "GFX_honkai_star_rail_mingtu_start"
+			#size = { x = 400 y = 100 }
+			#position = { x = 500 y = 50 }
+			#alwaysTransparent = yes
+		#}
+		instantTextboxType = {
+			name = "honkai_star_rail_mingtu_start"
+			position = { x = 450 y = 50  }
+			font = "fandebiao"
+			borderSize = { x = -10 y =40 }
+			text = "请选择想要踏上的命途"
+			text_color_code = "P"
+			maxHeight = 600
+			maxWidth = 600
+			fixedSize = yes
+		}
+		effectButtonType = {
+			name = honkai_star_rail_cunhu
+			quadTextureSprite = "GFX_honkai_star_rail_cunhu"
+			size = { x = 111 y = 369 }
+			position = {x = 40 y = 450 }
+			effect = the_star_rail_mingtu_cunhu_effect
+		}
+		effectButtonType = {
+			name = honkai_star_rail_jiyi
+			quadTextureSprite = "GFX_honkai_star_rail_jiyi"
+			size = { x = 230 y = 369 }
+			position = {x = 190 y = 450 }
+			effect = the_star_rail_mingtu_jiyi_effect
+		}
+		effectButtonType = {
+			name = honkai_star_rail_huanyu
+			quadTextureSprite = "GFX_honkai_star_rail_huanyu"
+			size = { x = 111 y = 369 }
+			position = {x = 340 y = 450 }
+			effect = the_star_rail_mingtu_huanyu_effect
+		}
+		effectButtonType = {
+			name = honkai_star_rail_xunlie
+			quadTextureSprite = "GFX_honkai_star_rail_xunlie"
+			size = { x = 111 y = 369 }
+			position = {x = 490 y = 450 }
+			effect = the_star_rail_mingtu_xunlie_effect
+		}
+		effectButtonType = {
+			name = honkai_star_rail_huimie
+			quadTextureSprite = "GFX_honkai_star_rail_huimie"
+			size = { x = 111 y = 369 }
+			position = {x = 640 y = 450 }
+			effect = the_star_rail_mingtu_huimie_effect
+		}
+		effectButtonType = {
+			name = honkai_star_rail_xuwu
+			quadTextureSprite = "GFX_honkai_star_rail_xuwu"
+			size = { x = 111 y = 369 }
+			position = {x = 790 y = 450 }
+			effect = the_star_rail_mingtu_xuwu_effect
+		}
+		effectButtonType = {
+			name = honkai_star_rail_fengrao
+			quadTextureSprite = "GFX_honkai_star_rail_fengrao"
+			size = { x = 111 y = 369 }
+			position = {x = 940 y = 450 }
+			effect = the_star_rail_mingtu_fengrao_effect
+		}
+		effectButtonType = {
+			name = honkai_star_rail_fanyu
+			quadTextureSprite = "GFX_honkai_star_rail_fanyu"
+			size = { x = 111 y = 369 }
+			position = {x = 1100 y = 450 }
+			effect = the_star_rail_mingtu_fanyu_effect
+		}
+		effectButtonType = {
+			name = honkai_star_rail_zhishi
+			quadTextureSprite = "GFX_honkai_star_rail_zhishi"
+			size = { x = 111 y = 369 }
+			position = {x = 1250 y = 450 }
+			effect = the_star_rail_mingtu_zhishi_effect
+		}
+
+		# Custom header
+		instantTextBoxType = {
+			name = "irm_some_header"
+			font = "malgun_goth_24"
+			text = "ui_faction_header" 	# header text
+			position = { x = 20000 y = 50000 }
+			maxWidth = 543
+			maxHeight = 22
+			fixedSize = yes
+			alwaysTransparent = yes
+		}
+
+		### ALL OF THIS IS HIDDEN OR DISPLACED ! ###
+
+		buttonType = { name = "focus_button" position = { x = -1180 y = -1112 } spriteType = "GFX_fleetview_focus" } # hidden
+		instantTextBoxType = { name = "heading" font = "malgun_goth_24" position = { x = -1120 y = -115 } } # hidden
+		buttonType = { name = "alien_message_background" size = { x = 0 y = 0 } position = { x = -1110 y = -11430 } spriteType = "GFX_tiles_dark_area_cut_8" } # hidden
+		buttonType = { name = "confirm_button" quadTextureSprite = "GFX_standard_button_142_34_button" } # hidden
+		containerWindowType = {
+			name = "portrait_background"
+			position = { x = -1117 y = -1145 }
+			size = { width = 0 height = 0 } 	# hide portrait window
+			iconType = { name = "event_picture" spriteType = "GFX_diplomacy_portrait_frame" } # hidden
+			iconType = { name = "portrait" spriteType = "GFX_portrait_character" } # hidden
+		}
+		containerWindowType = {
+			name = "portrait"
+			position = { x = -1117 y = -1145 }
+			size = { width = 0 height = 0 } # hide portrait window
+			iconType = { name = "portrait" spriteType = "GFX_portrait_gamesetup_mask" } # hidden
+			iconType = { name = "black_frame" spriteType = "GFX_diplomacy_portrait_shadow_frame" } # hidden
+			iconType = { name = "stripes_1" spriteType = "GFX_diplomacy_stripes_2" } # hidden
+			iconType = { name = "city_frame" spriteType = "GFX_diplomacy_portrait_frame" } # hidden
+		}
+		iconType = { name = "empire_info_bg" spriteType = "GFX_diplomacy_dark_fade_bg" } # hidden
+		instantTextBoxType = { name = "empire_name" font = "malgun_goth_24" } # hidden
+		instantTextBoxType = { name = "empire_government_type" font = "cg_16b" } # hidden
+		instantTextBoxType = { name = "empire_personality_type" font = "cg_16b" } # hidden
+		overlappingElementsBoxType = { name = "empire_ethics_icons" position = { x = -1145 y = -11138 } } # hidden
+		iconType = { name = "empire_flag" spriteType = "GFX_empire_flag_128" position = { x = -1125 y = -11235 } } # hidden
+		containerWindowType = {
+			name = "leader_details"
+			position = { x = -1125 y = -1175 }
+			containerWindowType = { name = "empire_traits_box" } # hidden
+			instantTextBoxType = { name = "empire_traits_label" font = "cg_16b" } # hidden
+			overlappingElementsBoxType = { name = "leader_traits" } # hidden
+			instantTextBoxType = { name = "leader_name" font = "cg_16b" } # hidden
+			instantTextBoxType = { name = "leader_species" font = "cg_16b" } # hidden
+		}
+		containerWindowType = {
+			name = "opinion_window"
+			position = { x = -1127 y = -11110 }
+			size = { width = 94 height = 30 }
+			iconType = { name = "their_opinion_icon" spriteType = "GFX_diplomacy_opinion" } # hidden
+			instantTextBoxType = { name = "their_opinion" font = "cg_16b" }
+		}
+
+		### EVENT DIPLO ###
+
+		containerWindowType = {
+			name = "EVENT_DIPLO"
+			position = { x = 20000 y = 50000 }
+			#size = { width = 563 height = 220 }
+			moveable = no
+
+			instantTextBoxType = {
+				name = "action_title"
+				font = "malgun_goth_24"
+				position = { x = 20 y = 0 }
+				maxWidth = 200
+				alwaysTransparent = yes
+			}
+			instantTextBoxType = {
+				name = "action_desc"
+				font = "malgun_goth_24"
+				position = { x = 490 y = 0 }
+				maxWidth = 500
+				maxHeight = 180
+				orientation = "UPPER_LEFT"
+				format = center
+				alwaysTransparent = yes
+				text_color_code = "H"
+			}
+			listboxType = { name = "option_list" position = { x = -11500 y = -1130 } } # hidden option list
+		}
+		# Description Section
+		instantTextBoxType = {
+			name = "alien_message"
+			font = "cg_16b"
+			position = { x = 20000 y = 100000 }
+			maxWidth = 465
+			maxHeight = 220
+			format = left
+			scrollbartype = "standardtext_slider"
+		}
+	}
+	containerWindowType = {
+		name = "star_rail_mingtu_cunhu"
+		orientation = center
+		origo = center
+		moveable = yes
+		size = { width = 1600 height = 800 }
+
+		background = {
+			name = "background"
+			quadTextureSprite = "GFX_honkai_star_rail_ui_mingtu_window_bg"
+		}
+
+		iconType = {
+			name = "hex_bg"
+			spriteType = "GFX_hex_bg"
+			position = { x = -10000 y = -14000 }
+			alwaysTransparent = yes
+		}
+		iconType = {
+			name = "empire_header_line"
+			quadTextureSprite = "GFX_line_long"
+			position = { x = -6000 y = -220000 }
+			alwaysTransparent = yes
+		}
+
+		buttonType = {
+			name = "close"
+			quadTextureSprite = "GFX_close"
+			position = { x= -42 y = 12 }
+			orientation = "UPPER_RIGHT"
+			shortcut = "ESCAPE"
+			clicksound = "back_click"
+		}
+		instantTextboxType = {
+			name = "honkai_star_rail_mingtu_cunhu"
+			position = { x = 650 y = 20  }
+			font = "fandebiao"
+			borderSize = { x = -10 y =40 }
+			text = "mingtu_cunhu"
+			text_color_code = "P"
+			maxHeight = 600
+			maxWidth = 600
+			fixedSize = yes
+		}
+		#effectButtonType = {
+			#name = honkai_star_go_back
+			#quadTextureSprite = "GFX_honkai_star_rail_go_back_button"
+			#size = { x = 32 y = 32 }
+			#position = {x = 30 y = 30 }
+			#effect = the_star_rail_null_effect
+		#}
+		effectButtonType = {
+			name = honkai_star_cunhu_1
+			quadTextureSprite = "GFX_honkai_star_rail_cunhu_1"
+			size = { x = 103 y = 120 }
+			position = {x = 160 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "cunhu_arrow_1"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x =265 y = 220 }
+			alwaysTransparent = yes
+		}
+		iconType = {
+			name = "cunhu_arrow_tri_1"
+			spriteType = "GFX_honkai_star_rail_arrow_merge_wide_right"
+			position = { x = 975 y = 225 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_cunhu_2
+			quadTextureSprite = "GFX_honkai_star_rail_cunhu_2"
+			size = { x = 103 y = 120 }
+			position = {x = 300 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_cunhu_3
+			quadTextureSprite = "GFX_honkai_star_rail_cunhu_3"
+			size = { x = 103 y = 120 }
+			position = {x = 20 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "cunhu_arrow_2"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 125 y = 570 }
+			alwaysTransparent = yes
+		}
+		iconType = {
+			name = "cunhu_arrow_3"
+			spriteType = "GFX_honkai_star_rail_arrow_up_1"
+			position = { x = 195 y = 640 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_cunhu_4
+			quadTextureSprite = "GFX_honkai_star_rail_cunhu_4"
+			size = { x = 103 y = 120 }
+			position = {x = 160 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_cunhu_5
+			quadTextureSprite = "GFX_honkai_star_rail_cunhu_5"
+			size = { x = 103 y = 120 }
+			position = {x = 160 y = 675 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "cunhu_arrow_5"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 265 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_cunhu_6
+			quadTextureSprite = "GFX_honkai_star_rail_cunhu_6"
+			size = { x = 103 y = 120 }
+			position = {x = 300 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "cunhu_arrow_6"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 125 y = 725 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_cunhu_7
+			quadTextureSprite = "GFX_honkai_star_rail_cunhu_7"
+			size = { x = 103 y = 120 }
+			position = {x = 20 y = 675 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "cunhu_arrow_7"
+			spriteType = "GFX_honkai_star_rail_arrow_left_1"
+			position = { x = 265 y = 725 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_cunhu_8
+			quadTextureSprite = "GFX_honkai_star_rail_cunhu_8"
+			size = { x = 103 y = 120 }
+			position = {x = 300 y = 675 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "cunhu_arrow_8"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 405 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_cunhu_9
+			quadTextureSprite = "GFX_honkai_star_rail_cunhu_9"
+			size = { x = 103 y = 120 }
+			position = {x = 440 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "cunhu_arrow_9"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 545 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_cunhu_10
+			quadTextureSprite = "GFX_honkai_star_rail_cunhu_10"
+			size = { x = 103 y = 120 }
+			position = {x = 580 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "cunhu_arrow_10"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 685 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_cunhu_11
+			quadTextureSprite = "GFX_honkai_star_rail_cunhu_11"
+			size = { x = 103 y = 120 }
+			position = {x = 720 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "cunhu_arrow_11"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 405 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_cunhu_12
+			quadTextureSprite = "GFX_honkai_star_rail_cunhu_12"
+			size = { x = 103 y = 120 }
+			position = {x = 440 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "cunhu_arrow_12"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 545 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_cunhu_13
+			quadTextureSprite = "GFX_honkai_star_rail_cunhu_13"
+			size = { x = 103 y = 120 }
+			position = {x = 580 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "cunhu_arrow_13"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 685 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_cunhu_14
+			quadTextureSprite = "GFX_honkai_star_rail_cunhu_14"
+			size = { x = 103 y = 120 }
+			position = {x = 720 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "cunhu_arrow_14"
+			spriteType = "GFX_honkai_star_rail_arrow_up_1"
+			position = { x = 760 y = 290 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_cunhu_15
+			quadTextureSprite = "GFX_honkai_star_rail_cunhu_15"
+			size = { x = 103 y = 120 }
+			position = {x = 720 y = 325 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "cunhu_arrow_15"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 825 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_cunhu_16
+			quadTextureSprite = "GFX_honkai_star_rail_cunhu_16"
+			size = { x = 103 y = 120 }
+			position = {x = 860 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "cunhu_arrow_16"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 825 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_cunhu_17
+			quadTextureSprite = "GFX_honkai_star_rail_cunhu_17"
+			size = { x = 103 y = 120 }
+			position = {x = 860 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "cunhu_arrow_17"
+			spriteType = "GFX_honkai_star_rail_arrow_single_1"
+			position = { x = 900 y = 290 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_cunhu_18
+			quadTextureSprite = "GFX_honkai_star_rail_cunhu_18"
+			size = { x = 103 y = 120 }
+			position = {x = 860 y = 325 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_cunhu_19
+			quadTextureSprite = "GFX_honkai_star_rail_cunhu_19"
+			size = { x = 103 y = 120 }
+			position = {x = 1260 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_cunhu_20
+			quadTextureSprite = "GFX_honkai_star_rail_cunhu_20"
+			size = { x = 103 y = 120 }
+			position = {x = 1060 y = 350 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_cunhu_23
+			quadTextureSprite = "GFX_honkai_star_rail_cunhu_23"
+			size = { x = 103 y = 120 }
+			position = {x = 1260 y = 350 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_cunhu_22
+			quadTextureSprite = "GFX_honkai_star_rail_cunhu_22"
+			size = { x = 103 y = 120 }
+			position = {x = 1460 y = 350 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_cunhu_21
+			quadTextureSprite = "GFX_honkai_star_rail_cunhu_21"
+			size = { x = 103 y = 120 }
+			position = {x = 1060 y = 530 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_cunhu_24
+			quadTextureSprite = "GFX_honkai_star_rail_cunhu_24"
+			size = { x = 103 y = 120 }
+			position = {x = 1260 y = 530 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_cunhu_25
+			quadTextureSprite = "GFX_honkai_star_rail_cunhu_25"
+			size = { x = 103 y = 120 }
+			position = {x = 1460 y = 530 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_cunhu_26
+			quadTextureSprite = "GFX_honkai_star_rail_cunhu_25"
+			size = { x = 103 y = 120 }
+			position = {x = 1260 y = 670 }
+			effect = the_star_rail_null_effect
+		}
+		instantTextboxType = {
+			name = "honkai_star_rail_mingtu_cunhu1"
+			position = { x = 1250 y = 90  }
+			font = "fandebiao1"
+			borderSize = { x = -10 y =40 }
+			text = "mingtuhuixiang"
+			text_color_code = "H"
+			maxHeight = 600
+			maxWidth = 600
+			fixedSize = yes
+		}
+		instantTextboxType = {
+			name = "honkai_star_rail_mingtu_cunhu2"
+			position = { x = 1250 y = 450  }
+			font = "fandebiao1"
+			borderSize = { x = -10 y =40 }
+			text = "huixiangjiaocuo"
+			text_color_code = "H"
+			maxHeight = 600
+			maxWidth = 600
+			fixedSize = yes
+		}
+		instantTextboxType = {
+			name = "honkai_star_rail_mingtu_cunhu3"
+			position = { x = 1250 y = 270  }
+			font = "fandebiao1"
+			borderSize = { x = -10 y =40 }
+			text = "huixianggouyin"
+			text_color_code = "H"
+			maxHeight = 600
+			maxWidth = 600
+			fixedSize = yes
+		}
+		# Custom header
+		instantTextBoxType = {
+			name = "irm_some_header"
+			font = "malgun_goth_24"
+			text = "ui_faction_header" 	# header text
+			position = { x = 20000 y = 50000 }
+			maxWidth = 543
+			maxHeight = 22
+			fixedSize = yes
+			alwaysTransparent = yes
+		}
+
+		### ALL OF THIS IS HIDDEN OR DISPLACED ! ###
+
+		buttonType = { name = "focus_button" position = { x = -1180 y = -1112 } spriteType = "GFX_fleetview_focus" } # hidden
+		instantTextBoxType = { name = "heading" font = "malgun_goth_24" position = { x = -1120 y = -115 } } # hidden
+		buttonType = { name = "alien_message_background" size = { x = 0 y = 0 } position = { x = -1110 y = -11430 } spriteType = "GFX_tiles_dark_area_cut_8" } # hidden
+		buttonType = { name = "confirm_button" quadTextureSprite = "GFX_standard_button_142_34_button" } # hidden
+		containerWindowType = {
+			name = "portrait_background"
+			position = { x = -1117 y = -1145 }
+			size = { width = 0 height = 0 } 	# hide portrait window
+			iconType = { name = "event_picture" spriteType = "GFX_diplomacy_portrait_frame" } # hidden
+			iconType = { name = "portrait" spriteType = "GFX_portrait_character" } # hidden
+		}
+		containerWindowType = {
+			name = "portrait"
+			position = { x = -1117 y = -1145 }
+			size = { width = 0 height = 0 } # hide portrait window
+			iconType = { name = "portrait" spriteType = "GFX_portrait_gamesetup_mask" } # hidden
+			iconType = { name = "black_frame" spriteType = "GFX_diplomacy_portrait_shadow_frame" } # hidden
+			iconType = { name = "stripes_1" spriteType = "GFX_diplomacy_stripes_2" } # hidden
+			iconType = { name = "city_frame" spriteType = "GFX_diplomacy_portrait_frame" } # hidden
+		}
+		iconType = { name = "empire_info_bg" spriteType = "GFX_diplomacy_dark_fade_bg" } # hidden
+		instantTextBoxType = { name = "empire_name" font = "malgun_goth_24" } # hidden
+		instantTextBoxType = { name = "empire_government_type" font = "cg_16b" } # hidden
+		instantTextBoxType = { name = "empire_personality_type" font = "cg_16b" } # hidden
+		overlappingElementsBoxType = { name = "empire_ethics_icons" position = { x = -1145 y = -11138 } } # hidden
+		iconType = { name = "empire_flag" spriteType = "GFX_empire_flag_128" position = { x = -1125 y = -11235 } } # hidden
+		containerWindowType = {
+			name = "leader_details"
+			position = { x = -1125 y = -1175 }
+			containerWindowType = { name = "empire_traits_box" } # hidden
+			instantTextBoxType = { name = "empire_traits_label" font = "cg_16b" } # hidden
+			overlappingElementsBoxType = { name = "leader_traits" } # hidden
+			instantTextBoxType = { name = "leader_name" font = "cg_16b" } # hidden
+			instantTextBoxType = { name = "leader_species" font = "cg_16b" } # hidden
+		}
+		containerWindowType = {
+			name = "opinion_window"
+			position = { x = -1127 y = -11110 }
+			size = { width = 94 height = 30 }
+			iconType = { name = "their_opinion_icon" spriteType = "GFX_diplomacy_opinion" } # hidden
+			instantTextBoxType = { name = "their_opinion" font = "cg_16b" }
+		}
+
+		### EVENT DIPLO ###
+
+		containerWindowType = {
+			name = "EVENT_DIPLO"
+			position = { x = 20000 y = 50000 }
+			#size = { width = 563 height = 220 }
+			moveable = no
+
+			instantTextBoxType = {
+				name = "action_title"
+				font = "malgun_goth_24"
+				position = { x = 20 y = 0 }
+				maxWidth = 200
+				alwaysTransparent = yes
+			}
+			instantTextBoxType = {
+				name = "action_desc"
+				font = "malgun_goth_24"
+				position = { x = 490 y = 0 }
+				maxWidth = 500
+				maxHeight = 180
+				orientation = "UPPER_LEFT"
+				format = center
+				alwaysTransparent = yes
+				text_color_code = "H"
+			}
+			listboxType = { name = "option_list" position = { x = -11500 y = -1130 } } # hidden option list
+		}
+		# Description Section
+		instantTextBoxType = {
+			name = "alien_message"
+			font = "cg_16b"
+			position = { x = 20000 y = 100000 }
+			maxWidth = 465
+			maxHeight = 220
+			format = left
+			scrollbartype = "standardtext_slider"
+		}
+	}
+	containerWindowType = {
+		name = "star_rail_mingtu_jiyi"
+		orientation = center
+		origo = center
+		moveable = yes
+		size = { width = 1600 height = 800 }
+
+		background = {
+			name = "background"
+			quadTextureSprite = "GFX_honkai_star_rail_ui_mingtu_window_bg"
+		}
+
+		iconType = {
+			name = "hex_bg"
+			spriteType = "GFX_hex_bg"
+			position = { x = -10000 y = -14000 }
+			alwaysTransparent = yes
+		}
+		iconType = {
+			name = "empire_header_line"
+			quadTextureSprite = "GFX_line_long"
+			position = { x = -6000 y = -220000 }
+			alwaysTransparent = yes
+		}
+
+		buttonType = {
+			name = "close"
+			quadTextureSprite = "GFX_close"
+			position = { x= -42 y = 12 }
+			orientation = "UPPER_RIGHT"
+			shortcut = "ESCAPE"
+			clicksound = "back_click"
+		}
+		instantTextboxType = {
+			name = "honkai_star_rail_mingtu_jiyi"
+			position = { x = 650 y = 20  }
+			font = "fandebiao"
+			borderSize = { x = -10 y =40 }
+			text = "mingtu_jiyi"
+			text_color_code = "B"
+			maxHeight = 600
+			maxWidth = 600
+			fixedSize = yes
+		}
+		#effectButtonType = {
+			#name = honkai_star_go_back
+			#quadTextureSprite = "GFX_honkai_star_rail_go_back_button"
+			#size = { x = 32 y = 32 }
+			#position = {x = 30 y = 30 }
+			#effect = the_star_rail_null_effect
+		#}
+		effectButtonType = {
+			name = honkai_star_jiyi_4
+			quadTextureSprite = "GFX_honkai_star_rail_jiyi_4"
+			size = { x = 103 y = 120 }
+			position = {x = 20 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "jiyi_arrow_0"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x =125 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_jiyi_1
+			quadTextureSprite = "GFX_honkai_star_rail_jiyi_1"
+			size = { x = 103 y = 120 }
+			position = {x = 160 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "jiyi_arrow_1"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x =265 y = 220 }
+			alwaysTransparent = yes
+		}
+		iconType = {
+			name = "jiyi_arrow_tri_1"
+			spriteType = "GFX_honkai_star_rail_arrow_merge_wide_right"
+			position = { x = 975 y = 225 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_jiyi_2
+			quadTextureSprite = "GFX_honkai_star_rail_jiyi_2"
+			size = { x = 103 y = 120 }
+			position = {x = 300 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_jiyi_3
+			quadTextureSprite = "GFX_honkai_star_rail_jiyi_3"
+			size = { x = 103 y = 120 }
+			position = {x = 20 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "jiyi_arrow_2"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 125 y = 570 }
+			alwaysTransparent = yes
+		}
+		iconType = {
+			name = "jiyi_arrow_3"
+			spriteType = "GFX_honkai_star_rail_arrow_up_1"
+			position = { x = 200 y = 290 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_jiyi_6
+			quadTextureSprite = "GFX_honkai_star_rail_jiyi_6"
+			size = { x = 103 y = 120 }
+			position = {x = 160 y = 325 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "jiyi_arrow_4"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 125 y = 380 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_jiyi_7
+			quadTextureSprite = "GFX_honkai_star_rail_jiyi_7"
+			size = { x = 53 y = 320 }
+			position = {x = 20 y = 325 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_jiyi_5
+			quadTextureSprite = "GFX_honkai_star_rail_jiyi_5"
+			size = { x = 103 y = 120 }
+			position = {x = 160 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "jiyi_arrow_5"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 265 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_jiyi_8
+			quadTextureSprite = "GFX_honkai_star_rail_jiyi_8"
+			size = { x = 103 y = 120 }
+			position = {x = 300 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "jiyi_arrow_6"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 403 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_jiyi_9
+			quadTextureSprite = "GFX_honkai_star_rail_jiyi_9"
+			size = { x = 103 y = 120 }
+			position = {x = 440 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "jiyi_arrow_7"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 545 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_jiyi_10
+			quadTextureSprite = "GFX_honkai_star_rail_jiyi_10"
+			size = { x = 103 y = 120 }
+			position = {x = 580 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "jiyi_arrow_8"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 405 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_jiyi_11
+			quadTextureSprite = "GFX_honkai_star_rail_jiyi_11"
+			size = { x = 103 y = 120 }
+			position = {x = 440 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "jiyi_arrow_9"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 685 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_jiyi_12
+			quadTextureSprite = "GFX_honkai_star_rail_jiyi_12"
+			size = { x = 103 y = 120 }
+			position = {x = 720 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "jiyi_arrow_9_1"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 545 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_jiyi_13
+			quadTextureSprite = "GFX_honkai_star_rail_jiyi_13"
+			size = { x = 103 y = 120 }
+			position = {x = 580 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "jiyi_arrow_10"
+			spriteType = "GFX_honkai_star_rail_arrow_up_1"
+			position = { x = 620 y = 640 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_jiyi_14
+			quadTextureSprite = "GFX_honkai_star_rail_jiyi_14"
+			size = { x = 103 y = 120 }
+			position = {x = 580 y = 675 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "jiyi_arrow_11"
+			spriteType = "GFX_honkai_star_rail_arrow_up_1"
+			position = { x = 760 y = 640 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_jiyi_15
+			quadTextureSprite = "GFX_honkai_star_rail_jiyi_15"
+			size = { x = 103 y = 120 }
+			position = {x = 720 y = 675 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "jiyi_arrow_12"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 685 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_jiyi_24
+			quadTextureSprite = "GFX_honkai_star_rail_jiyi_24"
+			size = { x = 103 y = 120 }
+			position = {x = 720 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "jiyi_arrow_13"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 830 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_jiyi_25
+			quadTextureSprite = "GFX_honkai_star_rail_jiyi_25"
+			size = { x = 103 y = 120 }
+			position = {x = 870 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "jiyi_arrow_14"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 830 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_jiyi_26
+			quadTextureSprite = "GFX_honkai_star_rail_jiyi_26"
+			size = { x = 103 y = 120 }
+			position = {x = 870 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_jiyi_16
+			quadTextureSprite = "GFX_honkai_star_rail_jiyi_16"
+			size = { x = 103 y = 120 }
+			position = {x = 1260 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_jiyi_17
+			quadTextureSprite = "GFX_honkai_star_rail_jiyi_17"
+			size = { x = 103 y = 120 }
+			position = {x = 1060 y = 350 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_jiyi_18
+			quadTextureSprite = "GFX_honkai_star_rail_jiyi_18"
+			size = { x = 103 y = 120 }
+			position = {x = 1260 y = 350 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_jiyi_19
+			quadTextureSprite = "GFX_honkai_star_rail_jiyi_19"
+			size = { x = 103 y = 120 }
+			position = {x = 1460 y = 350 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_jiyi_20
+			quadTextureSprite = "GFX_honkai_star_rail_jiyi_20"
+			size = { x = 103 y = 120 }
+			position = {x = 1060 y = 530 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_jiyi_21
+			quadTextureSprite = "GFX_honkai_star_rail_jiyi_21"
+			size = { x = 103 y = 120 }
+			position = {x = 1260 y = 530 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_jiyi_22
+			quadTextureSprite = "GFX_honkai_star_rail_jiyi_22"
+			size = { x = 103 y = 120 }
+			position = {x = 1460 y = 530 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_jiyi_23
+			quadTextureSprite = "GFX_honkai_star_rail_jiyi_23"
+			size = { x = 103 y = 120 }
+			position = {x = 1260 y = 670 }
+			effect = the_star_rail_null_effect
+		}
+		instantTextboxType = {
+			name = "honkai_star_rail_mingtu_jiyi1"
+			position = { x = 1250 y = 90  }
+			font = "fandebiao1"
+			borderSize = { x = -10 y =40 }
+			text = "mingtuhuixiang"
+			text_color_code = "H"
+			maxHeight = 600
+			maxWidth = 600
+			fixedSize = yes
+		}
+		instantTextboxType = {
+			name = "honkai_star_rail_mingtu_jiyi2"
+			position = { x = 1250 y = 450  }
+			font = "fandebiao1"
+			borderSize = { x = -10 y =40 }
+			text = "huixiangjiaocuo"
+			text_color_code = "H"
+			maxHeight = 600
+			maxWidth = 600
+			fixedSize = yes
+		}
+		instantTextboxType = {
+			name = "honkai_star_rail_mingtu_jiyi3"
+			position = { x = 1250 y = 270  }
+			font = "fandebiao1"
+			borderSize = { x = -10 y =40 }
+			text = "huixianggouyin"
+			text_color_code = "H"
+			maxHeight = 600
+			maxWidth = 600
+			fixedSize = yes
+		}
+
+
+		# Custom header
+		instantTextBoxType = {
+			name = "irm_some_header"
+			font = "malgun_goth_24"
+			text = "ui_faction_header" 	# header text
+			position = { x = 20000 y = 50000 }
+			maxWidth = 543
+			maxHeight = 22
+			fixedSize = yes
+			alwaysTransparent = yes
+		}
+
+		### ALL OF THIS IS HIDDEN OR DISPLACED ! ###
+
+		buttonType = { name = "focus_button" position = { x = -1180 y = -1112 } spriteType = "GFX_fleetview_focus" } # hidden
+		instantTextBoxType = { name = "heading" font = "malgun_goth_24" position = { x = -1120 y = -115 } } # hidden
+		buttonType = { name = "alien_message_background" size = { x = 0 y = 0 } position = { x = -1110 y = -11430 } spriteType = "GFX_tiles_dark_area_cut_8" } # hidden
+		buttonType = { name = "confirm_button" quadTextureSprite = "GFX_standard_button_142_34_button" } # hidden
+		containerWindowType = {
+			name = "portrait_background"
+			position = { x = -1117 y = -1145 }
+			size = { width = 0 height = 0 } 	# hide portrait window
+			iconType = { name = "event_picture" spriteType = "GFX_diplomacy_portrait_frame" } # hidden
+			iconType = { name = "portrait" spriteType = "GFX_portrait_character" } # hidden
+		}
+		containerWindowType = {
+			name = "portrait"
+			position = { x = -1117 y = -1145 }
+			size = { width = 0 height = 0 } # hide portrait window
+			iconType = { name = "portrait" spriteType = "GFX_portrait_gamesetup_mask" } # hidden
+			iconType = { name = "black_frame" spriteType = "GFX_diplomacy_portrait_shadow_frame" } # hidden
+			iconType = { name = "stripes_1" spriteType = "GFX_diplomacy_stripes_2" } # hidden
+			iconType = { name = "city_frame" spriteType = "GFX_diplomacy_portrait_frame" } # hidden
+		}
+		iconType = { name = "empire_info_bg" spriteType = "GFX_diplomacy_dark_fade_bg" } # hidden
+		instantTextBoxType = { name = "empire_name" font = "malgun_goth_24" } # hidden
+		instantTextBoxType = { name = "empire_government_type" font = "cg_16b" } # hidden
+		instantTextBoxType = { name = "empire_personality_type" font = "cg_16b" } # hidden
+		overlappingElementsBoxType = { name = "empire_ethics_icons" position = { x = -1145 y = -11138 } } # hidden
+		iconType = { name = "empire_flag" spriteType = "GFX_empire_flag_128" position = { x = -1125 y = -11235 } } # hidden
+		containerWindowType = {
+			name = "leader_details"
+			position = { x = -1125 y = -1175 }
+			containerWindowType = { name = "empire_traits_box" } # hidden
+			instantTextBoxType = { name = "empire_traits_label" font = "cg_16b" } # hidden
+			overlappingElementsBoxType = { name = "leader_traits" } # hidden
+			instantTextBoxType = { name = "leader_name" font = "cg_16b" } # hidden
+			instantTextBoxType = { name = "leader_species" font = "cg_16b" } # hidden
+		}
+		containerWindowType = {
+			name = "opinion_window"
+			position = { x = -1127 y = -11110 }
+			size = { width = 94 height = 30 }
+			iconType = { name = "their_opinion_icon" spriteType = "GFX_diplomacy_opinion" } # hidden
+			instantTextBoxType = { name = "their_opinion" font = "cg_16b" }
+		}
+
+		### EVENT DIPLO ###
+
+		containerWindowType = {
+			name = "EVENT_DIPLO"
+			position = { x = 20000 y = 50000 }
+			#size = { width = 563 height = 220 }
+			moveable = no
+
+			instantTextBoxType = {
+				name = "action_title"
+				font = "malgun_goth_24"
+				position = { x = 20 y = 0 }
+				maxWidth = 200
+				alwaysTransparent = yes
+			}
+			instantTextBoxType = {
+				name = "action_desc"
+				font = "malgun_goth_24"
+				position = { x = 490 y = 0 }
+				maxWidth = 500
+				maxHeight = 180
+				orientation = "UPPER_LEFT"
+				format = center
+				alwaysTransparent = yes
+				text_color_code = "H"
+			}
+			listboxType = { name = "option_list" position = { x = -11500 y = -1130 } } # hidden option list
+		}
+		# Description Section
+		instantTextBoxType = {
+			name = "alien_message"
+			font = "cg_16b"
+			position = { x = 20000 y = 100000 }
+			maxWidth = 465
+			maxHeight = 220
+			format = left
+			scrollbartype = "standardtext_slider"
+		}
+	}
+	containerWindowType = {
+		name = "star_rail_mingtu_xuwu"
+		orientation = center
+		origo = center
+		moveable = yes
+		size = { width = 1600 height = 800 }
+
+		background = {
+			name = "background"
+			quadTextureSprite = "GFX_honkai_star_rail_ui_mingtu_window_bg"
+		}
+
+		iconType = {
+			name = "hex_bg"
+			spriteType = "GFX_hex_bg"
+			position = { x = -10000 y = -14000 }
+			alwaysTransparent = yes
+		}
+		iconType = {
+			name = "empire_header_line"
+			quadTextureSprite = "GFX_line_long"
+			position = { x = -6000 y = -220000 }
+			alwaysTransparent = yes
+		}
+
+		buttonType = {
+			name = "close"
+			quadTextureSprite = "GFX_close"
+			position = { x= -42 y = 12 }
+			orientation = "UPPER_RIGHT"
+			shortcut = "ESCAPE"
+			clicksound = "back_click"
+		}
+		instantTextboxType = {
+			name = "honkai_star_rail_mingtu_xuwu"
+			position = { x = 650 y = 20  }
+			font = "fandebiao"
+			borderSize = { x = -10 y =40 }
+			text = "mingtu_xuwu"
+			text_color_code = "M"
+			maxHeight = 600
+			maxWidth = 600
+			fixedSize = yes
+		}
+		#effectButtonType = {
+			#name = honkai_star_go_back
+			#quadTextureSprite = "GFX_honkai_star_rail_go_back_button"
+			#size = { x = 32 y = 32 }
+			#position = {x = 30 y = 30 }
+			#effect = the_star_rail_null_effect
+		#}
+		effectButtonType = {
+			name = honkai_star_xuwu_1
+			quadTextureSprite = "GFX_honkai_star_rail_xuwu_1"
+			size = { x = 103 y = 120 }
+			position = {x = 20 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "xuwu_arrow_1"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x =125 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_xuwu_2
+			quadTextureSprite = "GFX_honkai_star_rail_xuwu_2"
+			size = { x = 103 y = 120 }
+			position = {x = 160 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "xuwu_arrow_2"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x =265 y = 220 }
+			alwaysTransparent = yes
+		}
+		iconType = {
+			name = "xuwu_arrow_tri_1"
+			spriteType = "GFX_honkai_star_rail_arrow_merge_wide_right"
+			position = { x = 975 y = 225 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_xuwu_3
+			quadTextureSprite = "GFX_honkai_star_rail_xuwu_3"
+			size = { x = 103 y = 120 }
+			position = {x = 160 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_xuwu_4
+			quadTextureSprite = "GFX_honkai_star_rail_xuwu_4"
+			size = { x = 103 y = 120 }
+			position = {x = 20 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "xuwu_arrow_3"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 125 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_xuwu_5
+			quadTextureSprite = "GFX_honkai_star_rail_xuwu_5"
+			size = { x = 103 y = 120 }
+			position = {x = 160 y = 675 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "xuwu_arrow_4"
+			spriteType = "GFX_honkai_star_rail_arrow_up_1"
+			position = { x = 200 y = 640 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_xuwu_6
+			quadTextureSprite = "GFX_honkai_star_rail_xuwu_6"
+			size = { x = 120 y = 120 }
+			position = {x = 305 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "xuwu_arrow_5"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 265 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_xuwu_7
+			quadTextureSprite = "GFX_honkai_star_rail_xuwu_7"
+			size = { x = 120 y = 120 }
+			position = {x = 305 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "xuwu_arrow_6"
+			spriteType = "GFX_honkai_star_rail_arrow_up_1"
+			position = { x = 345 y = 290 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_xuwu_8
+			quadTextureSprite = "GFX_honkai_star_rail_xuwu_8"
+			size = { x = 120 y = 120 }
+			position = {x = 305 y = 325 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "xuwu_arrow_7"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 410 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_xuwu_9
+			quadTextureSprite = "GFX_honkai_star_rail_xuwu_9"
+			size = { x = 120 y = 120 }
+			position = {x = 445 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "xuwu_arrow_8"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 550 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_xuwu_10
+			quadTextureSprite = "GFX_honkai_star_rail_xuwu_10"
+			size = { x = 120 y = 120 }
+			position = {x = 585 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "xuwu_arrow_9"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 410 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_xuwu_11
+			quadTextureSprite = "GFX_honkai_star_rail_xuwu_11"
+			size = { x = 120 y = 120 }
+			position = {x = 445 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "xuwu_arrow_10"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 550 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_xuwu_12
+			quadTextureSprite = "GFX_honkai_star_rail_xuwu_12"
+			size = { x = 120 y = 120 }
+			position = {x = 585 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "xuwu_arrow_11"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 690 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_xuwu_13
+			quadTextureSprite = "GFX_honkai_star_rail_xuwu_13"
+			size = { x = 120 y = 120 }
+			position = {x = 725 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "xuwu_arrow_12"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 690 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_xuwu_14
+			quadTextureSprite = "GFX_honkai_star_rail_xuwu_14"
+			size = { x = 120 y = 120 }
+			position = {x = 725 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "xuwu_arrow_13"
+			spriteType = "GFX_honkai_star_rail_arrow_up_1"
+			position = { x = 765 y = 290 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_xuwu_15
+			quadTextureSprite = "GFX_honkai_star_rail_xuwu_15"
+			size = { x = 120 y = 120 }
+			position = {x = 725 y = 325 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "xuwu_arrow_14"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 830 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_xuwu_16
+			quadTextureSprite = "GFX_honkai_star_rail_xuwu_16"
+			size = { x = 120 y = 120 }
+			position = {x = 870 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "xuwu_arrow_15"
+			spriteType = "GFX_honkai_star_rail_arrow_single_1"
+			position = { x = 910 y = 290 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_xuwu_17
+			quadTextureSprite = "GFX_honkai_star_rail_xuwu_17"
+			size = { x = 120 y = 120 }
+			position = {x = 870 y = 325 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "xuwu_arrow_16"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 830 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_xuwu_18
+			quadTextureSprite = "GFX_honkai_star_rail_xuwu_18"
+			size = { x = 120 y = 120 }
+			position = {x = 870 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_xuwu_26
+			quadTextureSprite = "GFX_honkai_star_rail_xuwu_26"
+			size = { x = 103 y = 120 }
+			position = {x = 1260 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_xuwu_23
+			quadTextureSprite = "GFX_honkai_star_rail_xuwu_23"
+			size = { x = 103 y = 120 }
+			position = {x = 1060 y = 350 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_xuwu_24
+			quadTextureSprite = "GFX_honkai_star_rail_xuwu_24"
+			size = { x = 103 y = 120 }
+			position = {x = 1260 y = 350 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_xuwu_25
+			quadTextureSprite = "GFX_honkai_star_rail_xuwu_25"
+			size = { x = 103 y = 120 }
+			position = {x = 1460 y = 350 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_xuwu_19
+			quadTextureSprite = "GFX_honkai_star_rail_xuwu_19"
+			size = { x = 103 y = 120 }
+			position = {x = 1060 y = 530 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_xuwu_20
+			quadTextureSprite = "GFX_honkai_star_rail_xuwu_20"
+			size = { x = 103 y = 120 }
+			position = {x = 1260 y = 530 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_xuwu_21
+			quadTextureSprite = "GFX_honkai_star_rail_xuwu_21"
+			size = { x = 103 y = 120 }
+			position = {x = 1460 y = 530 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_xuwu_22
+			quadTextureSprite = "GFX_honkai_star_rail_xuwu_22"
+			size = { x = 103 y = 120 }
+			position = {x = 1260 y = 670 }
+			effect = the_star_rail_null_effect
+		}
+		instantTextboxType = {
+			name = "honkai_star_rail_mingtu_xuwu1"
+			position = { x = 1250 y = 90  }
+			font = "fandebiao1"
+			borderSize = { x = -10 y =40 }
+			text = "mingtuhuixiang"
+			text_color_code = "H"
+			maxHeight = 600
+			maxWidth = 600
+			fixedSize = yes
+		}
+		instantTextboxType = {
+			name = "honkai_star_rail_mingtu_xuwu2"
+			position = { x = 1250 y = 450  }
+			font = "fandebiao1"
+			borderSize = { x = -10 y =40 }
+			text = "huixiangjiaocuo"
+			text_color_code = "H"
+			maxHeight = 600
+			maxWidth = 600
+			fixedSize = yes
+		}
+		instantTextboxType = {
+			name = "honkai_star_rail_mingtu_xuwu3"
+			position = { x = 1250 y = 270  }
+			font = "fandebiao1"
+			borderSize = { x = -10 y =40 }
+			text = "huixianggouyin"
+			text_color_code = "H"
+			maxHeight = 600
+			maxWidth = 600
+			fixedSize = yes
+		}
+
+
+		# Custom header
+		instantTextBoxType = {
+			name = "irm_some_header"
+			font = "malgun_goth_24"
+			text = "ui_faction_header" 	# header text
+			position = { x = 20000 y = 50000 }
+			maxWidth = 543
+			maxHeight = 22
+			fixedSize = yes
+			alwaysTransparent = yes
+		}
+
+		### ALL OF THIS IS HIDDEN OR DISPLACED ! ###
+
+		buttonType = { name = "focus_button" position = { x = -1180 y = -1112 } spriteType = "GFX_fleetview_focus" } # hidden
+		instantTextBoxType = { name = "heading" font = "malgun_goth_24" position = { x = -1120 y = -115 } } # hidden
+		buttonType = { name = "alien_message_background" size = { x = 0 y = 0 } position = { x = -1110 y = -11430 } spriteType = "GFX_tiles_dark_area_cut_8" } # hidden
+		buttonType = { name = "confirm_button" quadTextureSprite = "GFX_standard_button_142_34_button" } # hidden
+		containerWindowType = {
+			name = "portrait_background"
+			position = { x = -1117 y = -1145 }
+			size = { width = 0 height = 0 } 	# hide portrait window
+			iconType = { name = "event_picture" spriteType = "GFX_diplomacy_portrait_frame" } # hidden
+			iconType = { name = "portrait" spriteType = "GFX_portrait_character" } # hidden
+		}
+		containerWindowType = {
+			name = "portrait"
+			position = { x = -1117 y = -1145 }
+			size = { width = 0 height = 0 } # hide portrait window
+			iconType = { name = "portrait" spriteType = "GFX_portrait_gamesetup_mask" } # hidden
+			iconType = { name = "black_frame" spriteType = "GFX_diplomacy_portrait_shadow_frame" } # hidden
+			iconType = { name = "stripes_1" spriteType = "GFX_diplomacy_stripes_2" } # hidden
+			iconType = { name = "city_frame" spriteType = "GFX_diplomacy_portrait_frame" } # hidden
+		}
+		iconType = { name = "empire_info_bg" spriteType = "GFX_diplomacy_dark_fade_bg" } # hidden
+		instantTextBoxType = { name = "empire_name" font = "malgun_goth_24" } # hidden
+		instantTextBoxType = { name = "empire_government_type" font = "cg_16b" } # hidden
+		instantTextBoxType = { name = "empire_personality_type" font = "cg_16b" } # hidden
+		overlappingElementsBoxType = { name = "empire_ethics_icons" position = { x = -1145 y = -11138 } } # hidden
+		iconType = { name = "empire_flag" spriteType = "GFX_empire_flag_128" position = { x = -1125 y = -11235 } } # hidden
+		containerWindowType = {
+			name = "leader_details"
+			position = { x = -1125 y = -1175 }
+			containerWindowType = { name = "empire_traits_box" } # hidden
+			instantTextBoxType = { name = "empire_traits_label" font = "cg_16b" } # hidden
+			overlappingElementsBoxType = { name = "leader_traits" } # hidden
+			instantTextBoxType = { name = "leader_name" font = "cg_16b" } # hidden
+			instantTextBoxType = { name = "leader_species" font = "cg_16b" } # hidden
+		}
+		containerWindowType = {
+			name = "opinion_window"
+			position = { x = -1127 y = -11110 }
+			size = { width = 94 height = 30 }
+			iconType = { name = "their_opinion_icon" spriteType = "GFX_diplomacy_opinion" } # hidden
+			instantTextBoxType = { name = "their_opinion" font = "cg_16b" }
+		}
+
+		### EVENT DIPLO ###
+
+		containerWindowType = {
+			name = "EVENT_DIPLO"
+			position = { x = 20000 y = 50000 }
+			#size = { width = 563 height = 220 }
+			moveable = no
+
+			instantTextBoxType = {
+				name = "action_title"
+				font = "malgun_goth_24"
+				position = { x = 20 y = 0 }
+				maxWidth = 200
+				alwaysTransparent = yes
+			}
+			instantTextBoxType = {
+				name = "action_desc"
+				font = "malgun_goth_24"
+				position = { x = 490 y = 0 }
+				maxWidth = 500
+				maxHeight = 180
+				orientation = "UPPER_LEFT"
+				format = center
+				alwaysTransparent = yes
+				text_color_code = "H"
+			}
+			listboxType = { name = "option_list" position = { x = -11500 y = -1130 } } # hidden option list
+		}
+		# Description Section
+		instantTextBoxType = {
+			name = "alien_message"
+			font = "cg_16b"
+			position = { x = 20000 y = 100000 }
+			maxWidth = 465
+			maxHeight = 220
+			format = left
+			scrollbartype = "standardtext_slider"
+		}
+	}
+	containerWindowType = {
+		name = "star_rail_mingtu_fengrao"
+		orientation = center
+		origo = center
+		moveable = yes
+		size = { width = 1600 height = 800 }
+
+		background = {
+			name = "background"
+			quadTextureSprite = "GFX_honkai_star_rail_ui_mingtu_window_bg"
+		}
+
+		iconType = {
+			name = "hex_bg"
+			spriteType = "GFX_hex_bg"
+			position = { x = -10000 y = -14000 }
+			alwaysTransparent = yes
+		}
+		iconType = {
+			name = "empire_header_line"
+			quadTextureSprite = "GFX_line_long"
+			position = { x = -6000 y = -220000 }
+			alwaysTransparent = yes
+		}
+
+		buttonType = {
+			name = "close"
+			quadTextureSprite = "GFX_close"
+			position = { x= -42 y = 12 }
+			orientation = "UPPER_RIGHT"
+			shortcut = "ESCAPE"
+			clicksound = "back_click"
+		}
+		instantTextboxType = {
+			name = "honkai_star_rail_mingtu_fengrao"
+			position = { x = 650 y = 20  }
+			font = "fandebiao"
+			borderSize = { x = -10 y =40 }
+			text = "mingtu_fengrao"
+			text_color_code = "Y"
+			maxHeight = 600
+			maxWidth = 600
+			fixedSize = yes
+		}
+		#effectButtonType = {
+			#name = honkai_star_go_back
+			#quadTextureSprite = "GFX_honkai_star_rail_go_back_button"
+			#size = { x = 32 y = 32 }
+			#position = {x = 30 y = 30 }
+			#effect = the_star_rail_null_effect
+		#}
+		effectButtonType = {
+			name = honkai_star_fengrao_1
+			quadTextureSprite = "GFX_honkai_star_rail_fengrao_1"
+			size = { x = 103 y = 120 }
+			position = {x = 20 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "fengrao_arrow_1"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x =125 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_fengrao_2
+			quadTextureSprite = "GFX_honkai_star_rail_fengrao_2"
+			size = { x = 103 y = 120 }
+			position = {x = 160 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "fengrao_arrow_2"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x =265 y = 220 }
+			alwaysTransparent = yes
+		}
+		iconType = {
+			name = "fengrao_arrow_tri_1"
+			spriteType = "GFX_honkai_star_rail_arrow_merge_wide_right"
+			position = { x = 975 y = 225 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_fengrao_3
+			quadTextureSprite = "GFX_honkai_star_rail_fengrao_3"
+			size = { x = 103 y = 120 }
+			position = {x = 160 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_fengrao_4
+			quadTextureSprite = "GFX_honkai_star_rail_fengrao_4"
+			size = { x = 103 y = 120 }
+			position = {x = 20 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "fengrao_arrow_3"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 125 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_fengrao_5
+			quadTextureSprite = "GFX_honkai_star_rail_fengrao_5"
+			size = { x = 103 y = 120 }
+			position = {x = 300 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "fengrao_arrow_4"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 265 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_fengrao_6
+			quadTextureSprite = "GFX_honkai_star_rail_fengrao_6"
+			size = { x = 103 y = 120 }
+			position = {x = 20 y = 675 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "fengrao_arrow_5"
+			spriteType = "GFX_honkai_star_rail_arrow_up_1"
+			position = { x = 60 y = 640 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_fengrao_7
+			quadTextureSprite = "GFX_honkai_star_rail_fengrao_7"
+			size = { x = 103 y = 120 }
+			position = {x = 160 y = 675 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "fengrao_arrow_6"
+			spriteType = "GFX_honkai_star_rail_arrow_left_1"
+			position = { x = 120 y = 720 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_fengrao_8
+			quadTextureSprite = "GFX_honkai_star_rail_fengrao_8"
+			size = { x = 103 y = 120 }
+			position = {x = 300 y = 675 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "fengrao_arrow_7"
+			spriteType = "GFX_honkai_star_rail_arrow_up_1"
+			position = { x = 340 y = 640 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_fengrao_9
+			quadTextureSprite = "GFX_honkai_star_rail_fengrao_9"
+			size = { x = 103 y = 120 }
+			position = {x = 440 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "fengrao_arrow_8"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 405 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_fengrao_10
+			quadTextureSprite = "GFX_honkai_star_rail_fengrao_10"
+			size = { x = 103 y = 120 }
+			position = {x = 580 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "fengrao_arrow_9"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 545 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_fengrao_11
+			quadTextureSprite = "GFX_honkai_star_rail_fengrao_11"
+			size = { x = 103 y = 120 }
+			position = {x = 300 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "fengrao_arrow_10"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 405 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_fengrao_12
+			quadTextureSprite = "GFX_honkai_star_rail_fengrao_11"
+			size = { x = 103 y = 120 }
+			position = {x = 440 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "fengrao_arrow_11"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 685 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_fengrao_13
+			quadTextureSprite = "GFX_honkai_star_rail_fengrao_13"
+			size = { x = 103 y = 120 }
+			position = {x = 720 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "fengrao_arrow_12"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 545 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_fengrao_14
+			quadTextureSprite = "GFX_honkai_star_rail_fengrao_14"
+			size = { x = 103 y = 120 }
+			position = {x = 580 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "fengrao_arrow_13"
+			spriteType = "GFX_honkai_star_rail_arrow_up_1"
+			position = { x = 620 y = 640 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_fengrao_15
+			quadTextureSprite = "GFX_honkai_star_rail_fengrao_15"
+			size = { x = 103 y = 120 }
+			position = {x = 580 y = 675 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "fengrao_arrow_14"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 825 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_fengrao_16
+			quadTextureSprite = "GFX_honkai_star_rail_fengrao_16"
+			size = { x = 103 y = 120 }
+			position = {x = 860 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "fengrao_arrow_15"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 825 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_fengrao_17
+			quadTextureSprite = "GFX_honkai_star_rail_fengrao_17"
+			size = { x = 103 y = 120 }
+			position = {x = 860 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "fengrao_arrow_16"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 685 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_fengrao_18
+			quadTextureSprite = "GFX_honkai_star_rail_fengrao_17"
+			size = { x = 103 y = 120 }
+			position = {x = 720 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_fengrao_26
+			quadTextureSprite = "GFX_honkai_star_rail_fengrao_26"
+			size = { x = 103 y = 120 }
+			position = {x = 1260 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_fengrao_23
+			quadTextureSprite = "GFX_honkai_star_rail_fengrao_23"
+			size = { x = 103 y = 120 }
+			position = {x = 1060 y = 350 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_fengrao_24
+			quadTextureSprite = "GFX_honkai_star_rail_fengrao_24"
+			size = { x = 103 y = 120 }
+			position = {x = 1260 y = 350 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_fengrao_25
+			quadTextureSprite = "GFX_honkai_star_rail_fengrao_25"
+			size = { x = 103 y = 120 }
+			position = {x = 1460 y = 350 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_fengrao_19
+			quadTextureSprite = "GFX_honkai_star_rail_fengrao_19"
+			size = { x = 103 y = 120 }
+			position = {x = 1060 y = 530 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_fengrao_20
+			quadTextureSprite = "GFX_honkai_star_rail_fengrao_20"
+			size = { x = 103 y = 120 }
+			position = {x = 1260 y = 530 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_fengrao_21
+			quadTextureSprite = "GFX_honkai_star_rail_fengrao_21"
+			size = { x = 103 y = 120 }
+			position = {x = 1460 y = 530 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_fengrao_22
+			quadTextureSprite = "GFX_honkai_star_rail_fengrao_22"
+			size = { x = 103 y = 120 }
+			position = {x = 1260 y = 670 }
+			effect = the_star_rail_null_effect
+		}
+		instantTextboxType = {
+			name = "honkai_star_rail_mingtu_fengrao1"
+			position = { x = 1250 y = 90  }
+			font = "fandebiao1"
+			borderSize = { x = -10 y =40 }
+			text = "mingtuhuixiang"
+			text_color_code = "H"
+			maxHeight = 600
+			maxWidth = 600
+			fixedSize = yes
+		}
+		instantTextboxType = {
+			name = "honkai_star_rail_mingtu_fengrao2"
+			position = { x = 1250 y = 450  }
+			font = "fandebiao1"
+			borderSize = { x = -10 y =40 }
+			text = "huixiangjiaocuo"
+			text_color_code = "H"
+			maxHeight = 600
+			maxWidth = 600
+			fixedSize = yes
+		}
+		instantTextboxType = {
+			name = "honkai_star_rail_mingtu_fengrao3"
+			position = { x = 1250 y = 270  }
+			font = "fandebiao1"
+			borderSize = { x = -10 y =40 }
+			text = "huixianggouyin"
+			text_color_code = "H"
+			maxHeight = 600
+			maxWidth = 600
+			fixedSize = yes
+		}
+
+
+		# Custom header
+		instantTextBoxType = {
+			name = "irm_some_header"
+			font = "malgun_goth_24"
+			text = "ui_faction_header" 	# header text
+			position = { x = 20000 y = 50000 }
+			maxWidth = 543
+			maxHeight = 22
+			fixedSize = yes
+			alwaysTransparent = yes
+		}
+
+		### ALL OF THIS IS HIDDEN OR DISPLACED ! ###
+
+		buttonType = { name = "focus_button" position = { x = -1180 y = -1112 } spriteType = "GFX_fleetview_focus" } # hidden
+		instantTextBoxType = { name = "heading" font = "malgun_goth_24" position = { x = -1120 y = -115 } } # hidden
+		buttonType = { name = "alien_message_background" size = { x = 0 y = 0 } position = { x = -1110 y = -11430 } spriteType = "GFX_tiles_dark_area_cut_8" } # hidden
+		buttonType = { name = "confirm_button" quadTextureSprite = "GFX_standard_button_142_34_button" } # hidden
+		containerWindowType = {
+			name = "portrait_background"
+			position = { x = -1117 y = -1145 }
+			size = { width = 0 height = 0 } 	# hide portrait window
+			iconType = { name = "event_picture" spriteType = "GFX_diplomacy_portrait_frame" } # hidden
+			iconType = { name = "portrait" spriteType = "GFX_portrait_character" } # hidden
+		}
+		containerWindowType = {
+			name = "portrait"
+			position = { x = -1117 y = -1145 }
+			size = { width = 0 height = 0 } # hide portrait window
+			iconType = { name = "portrait" spriteType = "GFX_portrait_gamesetup_mask" } # hidden
+			iconType = { name = "black_frame" spriteType = "GFX_diplomacy_portrait_shadow_frame" } # hidden
+			iconType = { name = "stripes_1" spriteType = "GFX_diplomacy_stripes_2" } # hidden
+			iconType = { name = "city_frame" spriteType = "GFX_diplomacy_portrait_frame" } # hidden
+		}
+		iconType = { name = "empire_info_bg" spriteType = "GFX_diplomacy_dark_fade_bg" } # hidden
+		instantTextBoxType = { name = "empire_name" font = "malgun_goth_24" } # hidden
+		instantTextBoxType = { name = "empire_government_type" font = "cg_16b" } # hidden
+		instantTextBoxType = { name = "empire_personality_type" font = "cg_16b" } # hidden
+		overlappingElementsBoxType = { name = "empire_ethics_icons" position = { x = -1145 y = -11138 } } # hidden
+		iconType = { name = "empire_flag" spriteType = "GFX_empire_flag_128" position = { x = -1125 y = -11235 } } # hidden
+		containerWindowType = {
+			name = "leader_details"
+			position = { x = -1125 y = -1175 }
+			containerWindowType = { name = "empire_traits_box" } # hidden
+			instantTextBoxType = { name = "empire_traits_label" font = "cg_16b" } # hidden
+			overlappingElementsBoxType = { name = "leader_traits" } # hidden
+			instantTextBoxType = { name = "leader_name" font = "cg_16b" } # hidden
+			instantTextBoxType = { name = "leader_species" font = "cg_16b" } # hidden
+		}
+		containerWindowType = {
+			name = "opinion_window"
+			position = { x = -1127 y = -11110 }
+			size = { width = 94 height = 30 }
+			iconType = { name = "their_opinion_icon" spriteType = "GFX_diplomacy_opinion" } # hidden
+			instantTextBoxType = { name = "their_opinion" font = "cg_16b" }
+		}
+
+		### EVENT DIPLO ###
+
+		containerWindowType = {
+			name = "EVENT_DIPLO"
+			position = { x = 20000 y = 50000 }
+			#size = { width = 563 height = 220 }
+			moveable = no
+
+			instantTextBoxType = {
+				name = "action_title"
+				font = "malgun_goth_24"
+				position = { x = 20 y = 0 }
+				maxWidth = 200
+				alwaysTransparent = yes
+			}
+			instantTextBoxType = {
+				name = "action_desc"
+				font = "malgun_goth_24"
+				position = { x = 490 y = 0 }
+				maxWidth = 500
+				maxHeight = 180
+				orientation = "UPPER_LEFT"
+				format = center
+				alwaysTransparent = yes
+				text_color_code = "H"
+			}
+			listboxType = { name = "option_list" position = { x = -11500 y = -1130 } } # hidden option list
+		}
+		# Description Section
+		instantTextBoxType = {
+			name = "alien_message"
+			font = "cg_16b"
+			position = { x = 20000 y = 100000 }
+			maxWidth = 465
+			maxHeight = 220
+			format = left
+			scrollbartype = "standardtext_slider"
+		}
+	}
+	containerWindowType = {
+		name = "star_rail_mingtu_xunlie"
+		orientation = center
+		origo = center
+		moveable = yes
+		size = { width = 1600 height = 800 }
+
+		background = {
+			name = "background"
+			quadTextureSprite = "GFX_honkai_star_rail_ui_mingtu_window_bg"
+		}
+
+		iconType = {
+			name = "hex_bg"
+			spriteType = "GFX_hex_bg"
+			position = { x = -10000 y = -14000 }
+			alwaysTransparent = yes
+		}
+		iconType = {
+			name = "empire_header_line"
+			quadTextureSprite = "GFX_line_long"
+			position = { x = -6000 y = -220000 }
+			alwaysTransparent = yes
+		}
+
+		buttonType = {
+			name = "close"
+			quadTextureSprite = "GFX_close"
+			position = { x= -42 y = 12 }
+			orientation = "UPPER_RIGHT"
+			shortcut = "ESCAPE"
+			clicksound = "back_click"
+		}
+		instantTextboxType = {
+			name = "honkai_star_rail_mingtu_xunlie"
+			position = { x = 650 y = 20  }
+			font = "fandebiao"
+			borderSize = { x = -10 y =40 }
+			text = "mingtu_xunlie"
+			text_color_code = "G"
+			maxHeight = 600
+			maxWidth = 600
+			fixedSize = yes
+		}
+		#effectButtonType = {
+			#name = honkai_star_go_back
+			#quadTextureSprite = "GFX_honkai_star_rail_go_back_button"
+			#size = { x = 32 y = 32 }
+			#position = {x = 30 y = 30 }
+			#effect = the_star_rail_null_effect
+		#}
+		effectButtonType = {
+			name = honkai_star_xunlie_1
+			quadTextureSprite = "GFX_honkai_star_rail_xunlie_1"
+			size = { x = 103 y = 120 }
+			position = {x = 20 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "xunlie_arrow_1"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x =125 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_xunlie_2
+			quadTextureSprite = "GFX_honkai_star_rail_xunlie_2"
+			size = { x = 103 y = 120 }
+			position = {x = 160 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "xunlie_arrow_2"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x =265 y = 220 }
+			alwaysTransparent = yes
+		}
+		iconType = {
+			name = "xunlie_arrow_tri_1"
+			spriteType = "GFX_honkai_star_rail_arrow_merge_wide_right"
+			position = { x = 975 y = 225 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_xunlie_3
+			quadTextureSprite = "GFX_honkai_star_rail_xunlie_3"
+			size = { x = 103 y = 120 }
+			position = {x = 160 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_xunlie_4
+			quadTextureSprite = "GFX_honkai_star_rail_xunlie_4"
+			size = { x = 103 y = 120 }
+			position = {x = 20 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "xunlie_arrow_3"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 125 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_xunlie_5
+			quadTextureSprite = "GFX_honkai_star_rail_xunlie_5"
+			size = { x = 103 y = 120 }
+			position = {x = 300 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "xunlie_arrow_4"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 265 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_xunlie_6
+			quadTextureSprite = "GFX_honkai_star_rail_xunlie_6"
+			size = { x = 103 y = 120 }
+			position = {x = 20 y = 675 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "xunlie_arrow_5"
+			spriteType = "GFX_honkai_star_rail_arrow_up_1"
+			position = { x = 60 y = 640 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_xunlie_7
+			quadTextureSprite = "GFX_honkai_star_rail_xunlie_7"
+			size = { x = 103 y = 120 }
+			position = {x = 160 y = 675 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "xunlie_arrow_6"
+			spriteType = "GFX_honkai_star_rail_arrow_left_1"
+			position = { x = 120 y = 720 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_xunlie_8
+			quadTextureSprite = "GFX_honkai_star_rail_xunlie_8"
+			size = { x = 103 y = 120 }
+			position = {x = 300 y = 325 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "xunlie_arrow_7"
+			spriteType = "GFX_honkai_star_rail_arrow_up_1"
+			position = { x = 340 y = 290 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_xunlie_9
+			quadTextureSprite = "GFX_honkai_star_rail_xunlie_9"
+			size = { x = 103 y = 120 }
+			position = {x = 440 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "xunlie_arrow_8"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 405 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_xunlie_10
+			quadTextureSprite = "GFX_honkai_star_rail_xunlie_10"
+			size = { x = 103 y = 120 }
+			position = {x = 580 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "xunlie_arrow_9"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 545 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_xunlie_11
+			quadTextureSprite = "GFX_honkai_star_rail_xunlie_11"
+			size = { x = 103 y = 120 }
+			position = {x = 300 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "xunlie_arrow_10"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 405 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_xunlie_12
+			quadTextureSprite = "GFX_honkai_star_rail_xunlie_11"
+			size = { x = 103 y = 120 }
+			position = {x = 440 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "xunlie_arrow_11"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 685 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_xunlie_13
+			quadTextureSprite = "GFX_honkai_star_rail_xunlie_13"
+			size = { x = 103 y = 120 }
+			position = {x = 720 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "xunlie_arrow_12"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 545 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_xunlie_14
+			quadTextureSprite = "GFX_honkai_star_rail_xunlie_14"
+			size = { x = 103 y = 120 }
+			position = {x = 580 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "xunlie_arrow_13"
+			spriteType = "GFX_honkai_star_rail_arrow_up_1"
+			position = { x = 620 y = 290 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_xunlie_15
+			quadTextureSprite = "GFX_honkai_star_rail_xunlie_15"
+			size = { x = 103 y = 120 }
+			position = {x = 580 y =325 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "xunlie_arrow_14"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 825 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_xunlie_16
+			quadTextureSprite = "GFX_honkai_star_rail_xunlie_16"
+			size = { x = 103 y = 120 }
+			position = {x = 860 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "xunlie_arrow_15"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 825 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_xunlie_17
+			quadTextureSprite = "GFX_honkai_star_rail_xunlie_17"
+			size = { x = 103 y = 120 }
+			position = {x = 860 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "xunlie_arrow_16"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 685 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_xunlie_18
+			quadTextureSprite = "GFX_honkai_star_rail_xunlie_17"
+			size = { x = 103 y = 120 }
+			position = {x = 720 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_xunlie_26
+			quadTextureSprite = "GFX_honkai_star_rail_xunlie_26"
+			size = { x = 103 y = 120 }
+			position = {x = 1260 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_xunlie_23
+			quadTextureSprite = "GFX_honkai_star_rail_xunlie_23"
+			size = { x = 103 y = 120 }
+			position = {x = 1060 y = 350 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_xunlie_24
+			quadTextureSprite = "GFX_honkai_star_rail_xunlie_24"
+			size = { x = 103 y = 120 }
+			position = {x = 1260 y = 350 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_xunlie_25
+			quadTextureSprite = "GFX_honkai_star_rail_xunlie_25"
+			size = { x = 103 y = 120 }
+			position = {x = 1460 y = 350 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_xunlie_19
+			quadTextureSprite = "GFX_honkai_star_rail_xunlie_19"
+			size = { x = 103 y = 120 }
+			position = {x = 1060 y = 530 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_xunlie_20
+			quadTextureSprite = "GFX_honkai_star_rail_xunlie_20"
+			size = { x = 103 y = 120 }
+			position = {x = 1260 y = 530 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_xunlie_21
+			quadTextureSprite = "GFX_honkai_star_rail_xunlie_21"
+			size = { x = 103 y = 120 }
+			position = {x = 1460 y = 530 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_xunlie_22
+			quadTextureSprite = "GFX_honkai_star_rail_xunlie_22"
+			size = { x = 103 y = 120 }
+			position = {x = 1260 y = 670 }
+			effect = the_star_rail_null_effect
+		}
+		instantTextboxType = {
+			name = "honkai_star_rail_mingtu_xunlie1"
+			position = { x = 1250 y = 90  }
+			font = "fandebiao1"
+			borderSize = { x = -10 y =40 }
+			text = "mingtuhuixiang"
+			text_color_code = "H"
+			maxHeight = 600
+			maxWidth = 600
+			fixedSize = yes
+		}
+		instantTextboxType = {
+			name = "honkai_star_rail_mingtu_xunlie2"
+			position = { x = 1250 y = 450  }
+			font = "fandebiao1"
+			borderSize = { x = -10 y =40 }
+			text = "huixiangjiaocuo"
+			text_color_code = "H"
+			maxHeight = 600
+			maxWidth = 600
+			fixedSize = yes
+		}
+		instantTextboxType = {
+			name = "honkai_star_rail_mingtu_xunlie3"
+			position = { x = 1250 y = 270  }
+			font = "fandebiao1"
+			borderSize = { x = -10 y =40 }
+			text = "huixianggouyin"
+			text_color_code = "H"
+			maxHeight = 600
+			maxWidth = 600
+			fixedSize = yes
+		}
+
+
+		# Custom header
+		instantTextBoxType = {
+			name = "irm_some_header"
+			font = "malgun_goth_24"
+			text = "ui_faction_header" 	# header text
+			position = { x = 20000 y = 50000 }
+			maxWidth = 543
+			maxHeight = 22
+			fixedSize = yes
+			alwaysTransparent = yes
+		}
+
+		### ALL OF THIS IS HIDDEN OR DISPLACED ! ###
+
+		buttonType = { name = "focus_button" position = { x = -1180 y = -1112 } spriteType = "GFX_fleetview_focus" } # hidden
+		instantTextBoxType = { name = "heading" font = "malgun_goth_24" position = { x = -1120 y = -115 } } # hidden
+		buttonType = { name = "alien_message_background" size = { x = 0 y = 0 } position = { x = -1110 y = -11430 } spriteType = "GFX_tiles_dark_area_cut_8" } # hidden
+		buttonType = { name = "confirm_button" quadTextureSprite = "GFX_standard_button_142_34_button" } # hidden
+		containerWindowType = {
+			name = "portrait_background"
+			position = { x = -1117 y = -1145 }
+			size = { width = 0 height = 0 } 	# hide portrait window
+			iconType = { name = "event_picture" spriteType = "GFX_diplomacy_portrait_frame" } # hidden
+			iconType = { name = "portrait" spriteType = "GFX_portrait_character" } # hidden
+		}
+		containerWindowType = {
+			name = "portrait"
+			position = { x = -1117 y = -1145 }
+			size = { width = 0 height = 0 } # hide portrait window
+			iconType = { name = "portrait" spriteType = "GFX_portrait_gamesetup_mask" } # hidden
+			iconType = { name = "black_frame" spriteType = "GFX_diplomacy_portrait_shadow_frame" } # hidden
+			iconType = { name = "stripes_1" spriteType = "GFX_diplomacy_stripes_2" } # hidden
+			iconType = { name = "city_frame" spriteType = "GFX_diplomacy_portrait_frame" } # hidden
+		}
+		iconType = { name = "empire_info_bg" spriteType = "GFX_diplomacy_dark_fade_bg" } # hidden
+		instantTextBoxType = { name = "empire_name" font = "malgun_goth_24" } # hidden
+		instantTextBoxType = { name = "empire_government_type" font = "cg_16b" } # hidden
+		instantTextBoxType = { name = "empire_personality_type" font = "cg_16b" } # hidden
+		overlappingElementsBoxType = { name = "empire_ethics_icons" position = { x = -1145 y = -11138 } } # hidden
+		iconType = { name = "empire_flag" spriteType = "GFX_empire_flag_128" position = { x = -1125 y = -11235 } } # hidden
+		containerWindowType = {
+			name = "leader_details"
+			position = { x = -1125 y = -1175 }
+			containerWindowType = { name = "empire_traits_box" } # hidden
+			instantTextBoxType = { name = "empire_traits_label" font = "cg_16b" } # hidden
+			overlappingElementsBoxType = { name = "leader_traits" } # hidden
+			instantTextBoxType = { name = "leader_name" font = "cg_16b" } # hidden
+			instantTextBoxType = { name = "leader_species" font = "cg_16b" } # hidden
+		}
+		containerWindowType = {
+			name = "opinion_window"
+			position = { x = -1127 y = -11110 }
+			size = { width = 94 height = 30 }
+			iconType = { name = "their_opinion_icon" spriteType = "GFX_diplomacy_opinion" } # hidden
+			instantTextBoxType = { name = "their_opinion" font = "cg_16b" }
+		}
+
+		### EVENT DIPLO ###
+
+		containerWindowType = {
+			name = "EVENT_DIPLO"
+			position = { x = 20000 y = 50000 }
+			#size = { width = 563 height = 220 }
+			moveable = no
+
+			instantTextBoxType = {
+				name = "action_title"
+				font = "malgun_goth_24"
+				position = { x = 20 y = 0 }
+				maxWidth = 200
+				alwaysTransparent = yes
+			}
+			instantTextBoxType = {
+				name = "action_desc"
+				font = "malgun_goth_24"
+				position = { x = 490 y = 0 }
+				maxWidth = 500
+				maxHeight = 180
+				orientation = "UPPER_LEFT"
+				format = center
+				alwaysTransparent = yes
+				text_color_code = "H"
+			}
+			listboxType = { name = "option_list" position = { x = -11500 y = -1130 } } # hidden option list
+		}
+		# Description Section
+		instantTextBoxType = {
+			name = "alien_message"
+			font = "cg_16b"
+			position = { x = 20000 y = 100000 }
+			maxWidth = 465
+			maxHeight = 220
+			format = left
+			scrollbartype = "standardtext_slider"
+		}
+	}
+	containerWindowType = {
+		name = "star_rail_mingtu_huimie"
+		orientation = center
+		origo = center
+		moveable = yes
+		size = { width = 1600 height = 800 }
+
+		background = {
+			name = "background"
+			quadTextureSprite = "GFX_honkai_star_rail_ui_mingtu_window_bg"
+		}
+
+		iconType = {
+			name = "hex_bg"
+			spriteType = "GFX_hex_bg"
+			position = { x = -10000 y = -14000 }
+			alwaysTransparent = yes
+		}
+		iconType = {
+			name = "empire_header_line"
+			quadTextureSprite = "GFX_line_long"
+			position = { x = -6000 y = -220000 }
+			alwaysTransparent = yes
+		}
+
+		buttonType = {
+			name = "close"
+			quadTextureSprite = "GFX_close"
+			position = { x= -42 y = 12 }
+			orientation = "UPPER_RIGHT"
+			shortcut = "ESCAPE"
+			clicksound = "back_click"
+		}
+		instantTextboxType = {
+			name = "honkai_star_rail_mingtu_huimie"
+			position = { x = 650 y = 20  }
+			font = "fandebiao"
+			borderSize = { x = -10 y =40 }
+			text = "mingtu_huimie"
+			text_color_code = "R"
+			maxHeight = 600
+			maxWidth = 600
+			fixedSize = yes
+		}
+		#effectButtonType = {
+			#name = honkai_star_go_back
+			#quadTextureSprite = "GFX_honkai_star_rail_go_back_button"
+			#size = { x = 32 y = 32 }
+			#position = {x = 30 y = 30 }
+			#effect = the_star_rail_null_effect
+		#}
+		effectButtonType = {
+			name = honkai_star_huimie_1
+			quadTextureSprite = "GFX_honkai_star_rail_huimie_1"
+			size = { x = 103 y = 120 }
+			position = {x = 20 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "huimie_arrow_1"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x =125 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_huimie_2
+			quadTextureSprite = "GFX_honkai_star_rail_huimie_2"
+			size = { x = 103 y = 120 }
+			position = {x = 160 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "huimie_arrow_2"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x =265 y = 220 }
+			alwaysTransparent = yes
+		}
+		iconType = {
+			name = "huimie_arrow_tri_1"
+			spriteType = "GFX_honkai_star_rail_arrow_merge_wide_right"
+			position = { x = 975 y = 225 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_huimie_3
+			quadTextureSprite = "GFX_honkai_star_rail_huimie_3"
+			size = { x = 103 y = 120 }
+			position = {x = 160 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_huimie_4
+			quadTextureSprite = "GFX_honkai_star_rail_huimie_4"
+			size = { x = 103 y = 120 }
+			position = {x = 20 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "huimie_arrow_3"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 125 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_huimie_5
+			quadTextureSprite = "GFX_honkai_star_rail_huimie_5"
+			size = { x = 103 y = 120 }
+			position = {x = 300 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "huimie_arrow_4"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 265 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_huimie_6
+			quadTextureSprite = "GFX_honkai_star_rail_huimie_6"
+			size = { x = 103 y = 120 }
+			position = {x = 20 y = 675 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "huimie_arrow_5"
+			spriteType = "GFX_honkai_star_rail_arrow_up_1"
+			position = { x = 60 y = 640 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_huimie_7
+			quadTextureSprite = "GFX_honkai_star_rail_huimie_7"
+			size = { x = 103 y = 120 }
+			position = {x = 160 y = 345 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "huimie_arrow_7_1"
+			spriteType = "GFX_honkai_star_rail_arrow_up_1"
+			position = { x = 200 y = 290 }
+			alwaysTransparent = yes
+		}
+		iconType = {
+			name = "huimie_arrow_7_2"
+			spriteType = "GFX_honkai_star_rail_arrow_single_1"
+			position = { x = 200 y = 480 }
+			alwaysTransparent = yes
+		}
+		iconType = {
+			name = "huimie_arrow_7_3"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 265 y = 400 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_huimie_8
+			quadTextureSprite = "GFX_honkai_star_rail_huimie_8"
+			size = { x = 103 y = 120 }
+			position = {x = 300 y = 345 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "huimie_arrow_8_1"
+			spriteType = "GFX_honkai_star_rail_arrow_single_1"
+			position = { x = 340 y = 480 }
+			alwaysTransparent = yes
+		}
+		iconType = {
+			name = "huimie_arrow_7"
+			spriteType = "GFX_honkai_star_rail_arrow_up_1"
+			position = { x = 340 y = 290 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_huimie_9
+			quadTextureSprite = "GFX_honkai_star_rail_huimie_9"
+			size = { x = 103 y = 120 }
+			position = {x = 440 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "huimie_arrow_8"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 405 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_huimie_10
+			quadTextureSprite = "GFX_honkai_star_rail_huimie_10"
+			size = { x = 103 y = 120 }
+			position = {x = 580 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "huimie_arrow_9"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 545 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_huimie_11
+			quadTextureSprite = "GFX_honkai_star_rail_huimie_11"
+			size = { x = 103 y = 120 }
+			position = {x = 300 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "huimie_arrow_10"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 405 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_huimie_12
+			quadTextureSprite = "GFX_honkai_star_rail_huimie_11"
+			size = { x = 103 y = 120 }
+			position = {x = 440 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "huimie_arrow_11"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 685 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_huimie_13
+			quadTextureSprite = "GFX_honkai_star_rail_huimie_13"
+			size = { x = 103 y = 120 }
+			position = {x = 720 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "huimie_arrow_12"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 545 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_huimie_14
+			quadTextureSprite = "GFX_honkai_star_rail_huimie_14"
+			size = { x = 103 y = 120 }
+			position = {x = 580 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "huimie_arrow_13"
+			spriteType = "GFX_honkai_star_rail_arrow_up_1"
+			position = { x = 620 y = 290 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_huimie_15
+			quadTextureSprite = "GFX_honkai_star_rail_huimie_15"
+			size = { x = 103 y = 120 }
+			position = {x = 580 y =350 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "huimie_arrow_13_1"
+			spriteType = "GFX_honkai_star_rail_arrow_single_1"
+			position = { x = 620 y = 480 }
+			alwaysTransparent = yes
+		}
+		iconType = {
+			name = "huimie_arrow_14"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 825 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_huimie_16
+			quadTextureSprite = "GFX_honkai_star_rail_huimie_16"
+			size = { x = 103 y = 120 }
+			position = {x = 860 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "huimie_arrow_15"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 825 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_huimie_17
+			quadTextureSprite = "GFX_honkai_star_rail_huimie_17"
+			size = { x = 103 y = 120 }
+			position = {x = 860 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "huimie_arrow_16"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 685 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_huimie_18
+			quadTextureSprite = "GFX_honkai_star_rail_huimie_17"
+			size = { x = 103 y = 120 }
+			position = {x = 720 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_huimie_26
+			quadTextureSprite = "GFX_honkai_star_rail_huimie_26"
+			size = { x = 103 y = 120 }
+			position = {x = 1260 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_huimie_23
+			quadTextureSprite = "GFX_honkai_star_rail_huimie_23"
+			size = { x = 103 y = 120 }
+			position = {x = 1060 y = 350 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_huimie_24
+			quadTextureSprite = "GFX_honkai_star_rail_huimie_24"
+			size = { x = 103 y = 120 }
+			position = {x = 1260 y = 350 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_huimie_25
+			quadTextureSprite = "GFX_honkai_star_rail_huimie_25"
+			size = { x = 103 y = 120 }
+			position = {x = 1460 y = 350 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_huimie_19
+			quadTextureSprite = "GFX_honkai_star_rail_huimie_19"
+			size = { x = 103 y = 120 }
+			position = {x = 1060 y = 530 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_huimie_20
+			quadTextureSprite = "GFX_honkai_star_rail_huimie_20"
+			size = { x = 103 y = 120 }
+			position = {x = 1260 y = 530 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_huimie_21
+			quadTextureSprite = "GFX_honkai_star_rail_huimie_21"
+			size = { x = 103 y = 120 }
+			position = {x = 1460 y = 530 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_huimie_22
+			quadTextureSprite = "GFX_honkai_star_rail_huimie_22"
+			size = { x = 103 y = 120 }
+			position = {x = 1260 y = 670 }
+			effect = the_star_rail_null_effect
+		}
+		instantTextboxType = {
+			name = "honkai_star_rail_mingtu_huimie1"
+			position = { x = 1250 y = 90  }
+			font = "fandebiao1"
+			borderSize = { x = -10 y =40 }
+			text = "mingtuhuixiang"
+			text_color_code = "H"
+			maxHeight = 600
+			maxWidth = 600
+			fixedSize = yes
+		}
+		instantTextboxType = {
+			name = "honkai_star_rail_mingtu_huimie2"
+			position = { x = 1250 y = 450  }
+			font = "fandebiao1"
+			borderSize = { x = -10 y =40 }
+			text = "huixiangjiaocuo"
+			text_color_code = "H"
+			maxHeight = 600
+			maxWidth = 600
+			fixedSize = yes
+		}
+		instantTextboxType = {
+			name = "honkai_star_rail_mingtu_huimie3"
+			position = { x = 1250 y = 270  }
+			font = "fandebiao1"
+			borderSize = { x = -10 y =40 }
+			text = "huixianggouyin"
+			text_color_code = "H"
+			maxHeight = 600
+			maxWidth = 600
+			fixedSize = yes
+		}
+
+
+		# Custom header
+		instantTextBoxType = {
+			name = "irm_some_header"
+			font = "malgun_goth_24"
+			text = "ui_faction_header" 	# header text
+			position = { x = 20000 y = 50000 }
+			maxWidth = 543
+			maxHeight = 22
+			fixedSize = yes
+			alwaysTransparent = yes
+		}
+
+		### ALL OF THIS IS HIDDEN OR DISPLACED ! ###
+
+		buttonType = { name = "focus_button" position = { x = -1180 y = -1112 } spriteType = "GFX_fleetview_focus" } # hidden
+		instantTextBoxType = { name = "heading" font = "malgun_goth_24" position = { x = -1120 y = -115 } } # hidden
+		buttonType = { name = "alien_message_background" size = { x = 0 y = 0 } position = { x = -1110 y = -11430 } spriteType = "GFX_tiles_dark_area_cut_8" } # hidden
+		buttonType = { name = "confirm_button" quadTextureSprite = "GFX_standard_button_142_34_button" } # hidden
+		containerWindowType = {
+			name = "portrait_background"
+			position = { x = -1117 y = -1145 }
+			size = { width = 0 height = 0 } 	# hide portrait window
+			iconType = { name = "event_picture" spriteType = "GFX_diplomacy_portrait_frame" } # hidden
+			iconType = { name = "portrait" spriteType = "GFX_portrait_character" } # hidden
+		}
+		containerWindowType = {
+			name = "portrait"
+			position = { x = -1117 y = -1145 }
+			size = { width = 0 height = 0 } # hide portrait window
+			iconType = { name = "portrait" spriteType = "GFX_portrait_gamesetup_mask" } # hidden
+			iconType = { name = "black_frame" spriteType = "GFX_diplomacy_portrait_shadow_frame" } # hidden
+			iconType = { name = "stripes_1" spriteType = "GFX_diplomacy_stripes_2" } # hidden
+			iconType = { name = "city_frame" spriteType = "GFX_diplomacy_portrait_frame" } # hidden
+		}
+		iconType = { name = "empire_info_bg" spriteType = "GFX_diplomacy_dark_fade_bg" } # hidden
+		instantTextBoxType = { name = "empire_name" font = "malgun_goth_24" } # hidden
+		instantTextBoxType = { name = "empire_government_type" font = "cg_16b" } # hidden
+		instantTextBoxType = { name = "empire_personality_type" font = "cg_16b" } # hidden
+		overlappingElementsBoxType = { name = "empire_ethics_icons" position = { x = -1145 y = -11138 } } # hidden
+		iconType = { name = "empire_flag" spriteType = "GFX_empire_flag_128" position = { x = -1125 y = -11235 } } # hidden
+		containerWindowType = {
+			name = "leader_details"
+			position = { x = -1125 y = -1175 }
+			containerWindowType = { name = "empire_traits_box" } # hidden
+			instantTextBoxType = { name = "empire_traits_label" font = "cg_16b" } # hidden
+			overlappingElementsBoxType = { name = "leader_traits" } # hidden
+			instantTextBoxType = { name = "leader_name" font = "cg_16b" } # hidden
+			instantTextBoxType = { name = "leader_species" font = "cg_16b" } # hidden
+		}
+		containerWindowType = {
+			name = "opinion_window"
+			position = { x = -1127 y = -11110 }
+			size = { width = 94 height = 30 }
+			iconType = { name = "their_opinion_icon" spriteType = "GFX_diplomacy_opinion" } # hidden
+			instantTextBoxType = { name = "their_opinion" font = "cg_16b" }
+		}
+
+		### EVENT DIPLO ###
+
+		containerWindowType = {
+			name = "EVENT_DIPLO"
+			position = { x = 20000 y = 50000 }
+			#size = { width = 563 height = 220 }
+			moveable = no
+
+			instantTextBoxType = {
+				name = "action_title"
+				font = "malgun_goth_24"
+				position = { x = 20 y = 0 }
+				maxWidth = 200
+				alwaysTransparent = yes
+			}
+			instantTextBoxType = {
+				name = "action_desc"
+				font = "malgun_goth_24"
+				position = { x = 490 y = 0 }
+				maxWidth = 500
+				maxHeight = 180
+				orientation = "UPPER_LEFT"
+				format = center
+				alwaysTransparent = yes
+				text_color_code = "H"
+			}
+			listboxType = { name = "option_list" position = { x = -11500 y = -1130 } } # hidden option list
+		}
+		# Description Section
+		instantTextBoxType = {
+			name = "alien_message"
+			font = "cg_16b"
+			position = { x = 20000 y = 100000 }
+			maxWidth = 465
+			maxHeight = 220
+			format = left
+			scrollbartype = "standardtext_slider"
+		}
+	}
+	containerWindowType = {
+		name = "star_rail_mingtu_huanyu"
+		orientation = center
+		origo = center
+		moveable = yes
+		size = { width = 1600 height = 800 }
+
+		background = {
+			name = "background"
+			quadTextureSprite = "GFX_honkai_star_rail_ui_mingtu_window_bg"
+		}
+
+		iconType = {
+			name = "hex_bg"
+			spriteType = "GFX_hex_bg"
+			position = { x = -10000 y = -14000 }
+			alwaysTransparent = yes
+		}
+		iconType = {
+			name = "empire_header_line"
+			quadTextureSprite = "GFX_line_long"
+			position = { x = -6000 y = -220000 }
+			alwaysTransparent = yes
+		}
+
+		buttonType = {
+			name = "close"
+			quadTextureSprite = "GFX_close"
+			position = { x= -42 y = 12 }
+			orientation = "UPPER_RIGHT"
+			shortcut = "ESCAPE"
+			clicksound = "back_click"
+		}
+		instantTextboxType = {
+			name = "honkai_star_rail_mingtu_huanyu"
+			position = { x = 650 y = 20  }
+			font = "fandebiao"
+			borderSize = { x = -10 y =40 }
+			text = "mingtu_huanyu"
+			text_color_code = "P"
+			maxHeight = 600
+			maxWidth = 600
+			fixedSize = yes
+		}
+		#effectButtonType = {
+			#name = honkai_star_go_back
+			#quadTextureSprite = "GFX_honkai_star_rail_go_back_button"
+			#size = { x = 32 y = 32 }
+			#position = {x = 30 y = 30 }
+			#effect = the_star_rail_null_effect
+		#}
+		effectButtonType = {
+			name = honkai_star_huanyu_1
+			quadTextureSprite = "GFX_honkai_star_rail_huanyu_1"
+			size = { x = 103 y = 120 }
+			position = {x = 20 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "huanyu_arrow_1"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x =125 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_huanyu_2
+			quadTextureSprite = "GFX_honkai_star_rail_huanyu_2"
+			size = { x = 103 y = 120 }
+			position = {x = 160 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "huanyu_arrow_2"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x =265 y = 220 }
+			alwaysTransparent = yes
+		}
+		iconType = {
+			name = "huanyu_arrow_tri_1"
+			spriteType = "GFX_honkai_star_rail_arrow_merge_wide_right"
+			position = { x = 975 y = 225 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_huanyu_3
+			quadTextureSprite = "GFX_honkai_star_rail_huanyu_3"
+			size = { x = 103 y = 120 }
+			position = {x = 160 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_huanyu_4
+			quadTextureSprite = "GFX_honkai_star_rail_huanyu_4"
+			size = { x = 103 y = 120 }
+			position = {x = 20 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "huanyu_arrow_3"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 125 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_huanyu_5
+			quadTextureSprite = "GFX_honkai_star_rail_huanyu_5"
+			size = { x = 103 y = 120 }
+			position = {x = 300 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "huanyu_arrow_4"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 265 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_huanyu_6
+			quadTextureSprite = "GFX_honkai_star_rail_huanyu_6"
+			size = { x = 103 y = 120 }
+			position = {x = 440 y = 345 }
+			effect = the_star_rail_null_effect
+		}
+
+		effectButtonType = {
+			name = honkai_star_huanyu_7
+			quadTextureSprite = "GFX_honkai_star_rail_huanyu_7"
+			size = { x = 103 y = 120 }
+			position = {x = 160 y = 345 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "huanyu_arrow_7_1"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 405 y = 400 }
+			alwaysTransparent = yes
+		}
+		iconType = {
+			name = "huanyu_arrow_7_2"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 545 y = 400 }
+			alwaysTransparent = yes
+		}
+		iconType = {
+			name = "huanyu_arrow_7_3"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 265 y = 400 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_huanyu_8
+			quadTextureSprite = "GFX_honkai_star_rail_huanyu_8"
+			size = { x = 103 y = 120 }
+			position = {x = 300 y = 345 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_huanyu_9
+			quadTextureSprite = "GFX_honkai_star_rail_huanyu_9"
+			size = { x = 103 y = 120 }
+			position = {x = 440 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "huanyu_arrow_8"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 405 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_huanyu_10
+			quadTextureSprite = "GFX_honkai_star_rail_huanyu_10"
+			size = { x = 103 y = 120 }
+			position = {x = 580 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "huanyu_arrow_9"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 545 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_huanyu_11
+			quadTextureSprite = "GFX_honkai_star_rail_huanyu_11"
+			size = { x = 103 y = 120 }
+			position = {x = 300 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "huanyu_arrow_10"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 405 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_huanyu_12
+			quadTextureSprite = "GFX_honkai_star_rail_huanyu_11"
+			size = { x = 103 y = 120 }
+			position = {x = 440 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "huanyu_arrow_11"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 685 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_huanyu_13
+			quadTextureSprite = "GFX_honkai_star_rail_huanyu_13"
+			size = { x = 103 y = 120 }
+			position = {x = 720 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "huanyu_arrow_12"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 545 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_huanyu_14
+			quadTextureSprite = "GFX_honkai_star_rail_huanyu_14"
+			size = { x = 103 y = 120 }
+			position = {x = 580 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "huanyu_arrow_13"
+			spriteType = "GFX_honkai_star_rail_arrow_up_1"
+			position = { x = 620 y = 290 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_huanyu_15
+			quadTextureSprite = "GFX_honkai_star_rail_huanyu_15"
+			size = { x = 103 y = 120 }
+			position = {x = 580 y =345 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "huanyu_arrow_14"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 825 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_huanyu_16
+			quadTextureSprite = "GFX_honkai_star_rail_huanyu_16"
+			size = { x = 103 y = 120 }
+			position = {x = 860 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "huanyu_arrow_15"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 825 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_huanyu_17
+			quadTextureSprite = "GFX_honkai_star_rail_huanyu_17"
+			size = { x = 103 y = 120 }
+			position = {x = 860 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "huanyu_arrow_16"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 685 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_huanyu_18
+			quadTextureSprite = "GFX_honkai_star_rail_huanyu_17"
+			size = { x = 103 y = 120 }
+			position = {x = 720 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_huanyu_26
+			quadTextureSprite = "GFX_honkai_star_rail_huanyu_26"
+			size = { x = 103 y = 120 }
+			position = {x = 1260 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_huanyu_23
+			quadTextureSprite = "GFX_honkai_star_rail_huanyu_23"
+			size = { x = 103 y = 120 }
+			position = {x = 1060 y = 350 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_huanyu_24
+			quadTextureSprite = "GFX_honkai_star_rail_huanyu_24"
+			size = { x = 103 y = 120 }
+			position = {x = 1260 y = 350 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_huanyu_25
+			quadTextureSprite = "GFX_honkai_star_rail_huanyu_25"
+			size = { x = 103 y = 120 }
+			position = {x = 1460 y = 350 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_huanyu_19
+			quadTextureSprite = "GFX_honkai_star_rail_huanyu_19"
+			size = { x = 103 y = 120 }
+			position = {x = 1060 y = 530 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_huanyu_20
+			quadTextureSprite = "GFX_honkai_star_rail_huanyu_20"
+			size = { x = 103 y = 120 }
+			position = {x = 1260 y = 530 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_huanyu_21
+			quadTextureSprite = "GFX_honkai_star_rail_huanyu_21"
+			size = { x = 103 y = 120 }
+			position = {x = 1460 y = 530 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_huanyu_22
+			quadTextureSprite = "GFX_honkai_star_rail_huanyu_22"
+			size = { x = 103 y = 120 }
+			position = {x = 1260 y = 670 }
+			effect = the_star_rail_null_effect
+		}
+		instantTextboxType = {
+			name = "honkai_star_rail_mingtu_huanyu1"
+			position = { x = 1250 y = 90  }
+			font = "fandebiao1"
+			borderSize = { x = -10 y =40 }
+			text = "mingtuhuixiang"
+			text_color_code = "H"
+			maxHeight = 600
+			maxWidth = 600
+			fixedSize = yes
+		}
+		instantTextboxType = {
+			name = "honkai_star_rail_mingtu_huanyu2"
+			position = { x = 1250 y = 450  }
+			font = "fandebiao1"
+			borderSize = { x = -10 y =40 }
+			text = "huixiangjiaocuo"
+			text_color_code = "H"
+			maxHeight = 600
+			maxWidth = 600
+			fixedSize = yes
+		}
+		instantTextboxType = {
+			name = "honkai_star_rail_mingtu_huanyu3"
+			position = { x = 1250 y = 270  }
+			font = "fandebiao1"
+			borderSize = { x = -10 y =40 }
+			text = "huixianggouyin"
+			text_color_code = "H"
+			maxHeight = 600
+			maxWidth = 600
+			fixedSize = yes
+		}
+
+
+		# Custom header
+		instantTextBoxType = {
+			name = "irm_some_header"
+			font = "malgun_goth_24"
+			text = "ui_faction_header" 	# header text
+			position = { x = 20000 y = 50000 }
+			maxWidth = 543
+			maxHeight = 22
+			fixedSize = yes
+			alwaysTransparent = yes
+		}
+
+		### ALL OF THIS IS HIDDEN OR DISPLACED ! ###
+
+		buttonType = { name = "focus_button" position = { x = -1180 y = -1112 } spriteType = "GFX_fleetview_focus" } # hidden
+		instantTextBoxType = { name = "heading" font = "malgun_goth_24" position = { x = -1120 y = -115 } } # hidden
+		buttonType = { name = "alien_message_background" size = { x = 0 y = 0 } position = { x = -1110 y = -11430 } spriteType = "GFX_tiles_dark_area_cut_8" } # hidden
+		buttonType = { name = "confirm_button" quadTextureSprite = "GFX_standard_button_142_34_button" } # hidden
+		containerWindowType = {
+			name = "portrait_background"
+			position = { x = -1117 y = -1145 }
+			size = { width = 0 height = 0 } 	# hide portrait window
+			iconType = { name = "event_picture" spriteType = "GFX_diplomacy_portrait_frame" } # hidden
+			iconType = { name = "portrait" spriteType = "GFX_portrait_character" } # hidden
+		}
+		containerWindowType = {
+			name = "portrait"
+			position = { x = -1117 y = -1145 }
+			size = { width = 0 height = 0 } # hide portrait window
+			iconType = { name = "portrait" spriteType = "GFX_portrait_gamesetup_mask" } # hidden
+			iconType = { name = "black_frame" spriteType = "GFX_diplomacy_portrait_shadow_frame" } # hidden
+			iconType = { name = "stripes_1" spriteType = "GFX_diplomacy_stripes_2" } # hidden
+			iconType = { name = "city_frame" spriteType = "GFX_diplomacy_portrait_frame" } # hidden
+		}
+		iconType = { name = "empire_info_bg" spriteType = "GFX_diplomacy_dark_fade_bg" } # hidden
+		instantTextBoxType = { name = "empire_name" font = "malgun_goth_24" } # hidden
+		instantTextBoxType = { name = "empire_government_type" font = "cg_16b" } # hidden
+		instantTextBoxType = { name = "empire_personality_type" font = "cg_16b" } # hidden
+		overlappingElementsBoxType = { name = "empire_ethics_icons" position = { x = -1145 y = -11138 } } # hidden
+		iconType = { name = "empire_flag" spriteType = "GFX_empire_flag_128" position = { x = -1125 y = -11235 } } # hidden
+		containerWindowType = {
+			name = "leader_details"
+			position = { x = -1125 y = -1175 }
+			containerWindowType = { name = "empire_traits_box" } # hidden
+			instantTextBoxType = { name = "empire_traits_label" font = "cg_16b" } # hidden
+			overlappingElementsBoxType = { name = "leader_traits" } # hidden
+			instantTextBoxType = { name = "leader_name" font = "cg_16b" } # hidden
+			instantTextBoxType = { name = "leader_species" font = "cg_16b" } # hidden
+		}
+		containerWindowType = {
+			name = "opinion_window"
+			position = { x = -1127 y = -11110 }
+			size = { width = 94 height = 30 }
+			iconType = { name = "their_opinion_icon" spriteType = "GFX_diplomacy_opinion" } # hidden
+			instantTextBoxType = { name = "their_opinion" font = "cg_16b" }
+		}
+
+		### EVENT DIPLO ###
+
+		containerWindowType = {
+			name = "EVENT_DIPLO"
+			position = { x = 20000 y = 50000 }
+			#size = { width = 563 height = 220 }
+			moveable = no
+
+			instantTextBoxType = {
+				name = "action_title"
+				font = "malgun_goth_24"
+				position = { x = 20 y = 0 }
+				maxWidth = 200
+				alwaysTransparent = yes
+			}
+			instantTextBoxType = {
+				name = "action_desc"
+				font = "malgun_goth_24"
+				position = { x = 490 y = 0 }
+				maxWidth = 500
+				maxHeight = 180
+				orientation = "UPPER_LEFT"
+				format = center
+				alwaysTransparent = yes
+				text_color_code = "H"
+			}
+			listboxType = { name = "option_list" position = { x = -11500 y = -1130 } } # hidden option list
+		}
+		# Description Section
+		instantTextBoxType = {
+			name = "alien_message"
+			font = "cg_16b"
+			position = { x = 20000 y = 100000 }
+			maxWidth = 465
+			maxHeight = 220
+			format = left
+			scrollbartype = "standardtext_slider"
+		}
+	}
+	containerWindowType = {
+		name = "star_rail_mingtu_fanyu"
+		orientation = center
+		origo = center
+		moveable = yes
+		size = { width = 1600 height = 800 }
+
+		background = {
+			name = "background"
+			quadTextureSprite = "GFX_honkai_star_rail_ui_mingtu_window_bg"
+		}
+
+		iconType = {
+			name = "hex_bg"
+			spriteType = "GFX_hex_bg"
+			position = { x = -10000 y = -14000 }
+			alwaysTransparent = yes
+		}
+		iconType = {
+			name = "empire_header_line"
+			quadTextureSprite = "GFX_line_long"
+			position = { x = -6000 y = -220000 }
+			alwaysTransparent = yes
+		}
+
+		buttonType = {
+			name = "close"
+			quadTextureSprite = "GFX_close"
+			position = { x= -42 y = 12 }
+			orientation = "UPPER_RIGHT"
+			shortcut = "ESCAPE"
+			clicksound = "back_click"
+		}
+		instantTextboxType = {
+			name = "honkai_star_rail_mingtu_fanyu"
+			position = { x = 650 y = 20  }
+			font = "fandebiao"
+			borderSize = { x = -10 y =40 }
+			text = "mingtu_fanyu"
+			text_color_code = "S"
+			maxHeight = 600
+			maxWidth = 600
+			fixedSize = yes
+		}
+		#effectButtonType = {
+			#name = honkai_star_go_back
+			#quadTextureSprite = "GFX_honkai_star_rail_go_back_button"
+			#size = { x = 32 y = 32 }
+			#position = {x = 30 y = 30 }
+			#effect = the_star_rail_null_effect
+		#}
+		effectButtonType = {
+			name = honkai_star_fanyu_1
+			quadTextureSprite = "GFX_honkai_star_rail_fanyu_1"
+			size = { x = 103 y = 120 }
+			position = {x = 20 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "fanyu_arrow_1"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x =125 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_fanyu_2
+			quadTextureSprite = "GFX_honkai_star_rail_fanyu_2"
+			size = { x = 103 y = 120 }
+			position = {x = 160 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "fanyu_arrow_2"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x =265 y = 220 }
+			alwaysTransparent = yes
+		}
+		iconType = {
+			name = "fanyu_arrow_tri_1"
+			spriteType = "GFX_honkai_star_rail_arrow_merge_wide_right"
+			position = { x = 975 y = 225 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_fanyu_3
+			quadTextureSprite = "GFX_honkai_star_rail_fanyu_3"
+			size = { x = 103 y = 120 }
+			position = {x = 160 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_fanyu_4
+			quadTextureSprite = "GFX_honkai_star_rail_fanyu_4"
+			size = { x = 103 y = 120 }
+			position = {x = 20 y = 345 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "fanyu_arrow_3"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 125 y = 400 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_fanyu_5
+			quadTextureSprite = "GFX_honkai_star_rail_fanyu_5"
+			size = { x = 103 y = 120 }
+			position = {x = 300 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "fanyu_arrow_4"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 265 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_fanyu_6
+			quadTextureSprite = "GFX_honkai_star_rail_fanyu_6"
+			size = { x = 103 y = 120 }
+			position = {x = 440 y = 345 }
+			effect = the_star_rail_null_effect
+		}
+
+		effectButtonType = {
+			name = honkai_star_fanyu_7
+			quadTextureSprite = "GFX_honkai_star_rail_fanyu_7"
+			size = { x = 103 y = 120 }
+			position = {x = 160 y = 345 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "fanyu_arrow_7_1"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 405 y = 400 }
+			alwaysTransparent = yes
+		}
+		iconType = {
+			name = "fanyu_arrow_7_2"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 545 y = 400 }
+			alwaysTransparent = yes
+		}
+		iconType = {
+			name = "fanyu_arrow_7_3"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 265 y = 400 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_fanyu_8
+			quadTextureSprite = "GFX_honkai_star_rail_fanyu_8"
+			size = { x = 103 y = 120 }
+			position = {x = 300 y = 345 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_fanyu_9
+			quadTextureSprite = "GFX_honkai_star_rail_fanyu_9"
+			size = { x = 103 y = 120 }
+			position = {x = 440 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "fanyu_arrow_8"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 405 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_fanyu_10
+			quadTextureSprite = "GFX_honkai_star_rail_fanyu_10"
+			size = { x = 103 y = 120 }
+			position = {x = 580 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "fanyu_arrow_9"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 545 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_fanyu_11
+			quadTextureSprite = "GFX_honkai_star_rail_fanyu_11"
+			size = { x = 103 y = 120 }
+			position = {x = 300 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "fanyu_arrow_10"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 405 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_fanyu_12
+			quadTextureSprite = "GFX_honkai_star_rail_fanyu_11"
+			size = { x = 103 y = 120 }
+			position = {x = 440 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "fanyu_arrow_11"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 685 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_fanyu_13
+			quadTextureSprite = "GFX_honkai_star_rail_fanyu_13"
+			size = { x = 103 y = 120 }
+			position = {x = 720 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "fanyu_arrow_12"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 545 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_fanyu_14
+			quadTextureSprite = "GFX_honkai_star_rail_fanyu_14"
+			size = { x = 103 y = 120 }
+			position = {x = 580 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "fanyu_arrow_13"
+			spriteType = "GFX_honkai_star_rail_arrow_up_1"
+			position = { x = 620 y = 290 }
+			alwaysTransparent = yes
+		}
+		iconType = {
+			name = "fanyu_arrow_13_1"
+			spriteType = "GFX_honkai_star_rail_arrow_single_1"
+			position = { x = 620 y = 485 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_fanyu_15
+			quadTextureSprite = "GFX_honkai_star_rail_fanyu_15"
+			size = { x = 103 y = 120 }
+			position = {x = 580 y =345 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "fanyu_arrow_14"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 825 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_fanyu_16
+			quadTextureSprite = "GFX_honkai_star_rail_fanyu_16"
+			size = { x = 103 y = 120 }
+			position = {x = 860 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "fanyu_arrow_15"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 825 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_fanyu_17
+			quadTextureSprite = "GFX_honkai_star_rail_fanyu_17"
+			size = { x = 103 y = 120 }
+			position = {x = 860 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "fanyu_arrow_16"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 685 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_fanyu_18
+			quadTextureSprite = "GFX_honkai_star_rail_fanyu_17"
+			size = { x = 103 y = 120 }
+			position = {x = 720 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_fanyu_26
+			quadTextureSprite = "GFX_honkai_star_rail_fanyu_26"
+			size = { x = 103 y = 120 }
+			position = {x = 1260 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_fanyu_23
+			quadTextureSprite = "GFX_honkai_star_rail_fanyu_23"
+			size = { x = 103 y = 120 }
+			position = {x = 1060 y = 350 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_fanyu_24
+			quadTextureSprite = "GFX_honkai_star_rail_fanyu_24"
+			size = { x = 103 y = 120 }
+			position = {x = 1260 y = 350 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_fanyu_25
+			quadTextureSprite = "GFX_honkai_star_rail_fanyu_25"
+			size = { x = 103 y = 120 }
+			position = {x = 1460 y = 350 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_fanyu_19
+			quadTextureSprite = "GFX_honkai_star_rail_fanyu_19"
+			size = { x = 103 y = 120 }
+			position = {x = 1060 y = 530 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_fanyu_20
+			quadTextureSprite = "GFX_honkai_star_rail_fanyu_20"
+			size = { x = 103 y = 120 }
+			position = {x = 1260 y = 530 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_fanyu_21
+			quadTextureSprite = "GFX_honkai_star_rail_fanyu_21"
+			size = { x = 103 y = 120 }
+			position = {x = 1460 y = 530 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_fanyu_22
+			quadTextureSprite = "GFX_honkai_star_rail_fanyu_22"
+			size = { x = 103 y = 120 }
+			position = {x = 1260 y = 670 }
+			effect = the_star_rail_null_effect
+		}
+		instantTextboxType = {
+			name = "honkai_star_rail_mingtu_fanyu1"
+			position = { x = 1250 y = 90  }
+			font = "fandebiao1"
+			borderSize = { x = -10 y =40 }
+			text = "mingtuhuixiang"
+			text_color_code = "H"
+			maxHeight = 600
+			maxWidth = 600
+			fixedSize = yes
+		}
+		instantTextboxType = {
+			name = "honkai_star_rail_mingtu_fanyu2"
+			position = { x = 1250 y = 450  }
+			font = "fandebiao1"
+			borderSize = { x = -10 y =40 }
+			text = "huixiangjiaocuo"
+			text_color_code = "H"
+			maxHeight = 600
+			maxWidth = 600
+			fixedSize = yes
+		}
+		instantTextboxType = {
+			name = "honkai_star_rail_mingtu_fanyu3"
+			position = { x = 1250 y = 270  }
+			font = "fandebiao1"
+			borderSize = { x = -10 y =40 }
+			text = "huixianggouyin"
+			text_color_code = "H"
+			maxHeight = 600
+			maxWidth = 600
+			fixedSize = yes
+		}
+
+
+		# Custom header
+		instantTextBoxType = {
+			name = "irm_some_header"
+			font = "malgun_goth_24"
+			text = "ui_faction_header" 	# header text
+			position = { x = 20000 y = 50000 }
+			maxWidth = 543
+			maxHeight = 22
+			fixedSize = yes
+			alwaysTransparent = yes
+		}
+
+		### ALL OF THIS IS HIDDEN OR DISPLACED ! ###
+
+		buttonType = { name = "focus_button" position = { x = -1180 y = -1112 } spriteType = "GFX_fleetview_focus" } # hidden
+		instantTextBoxType = { name = "heading" font = "malgun_goth_24" position = { x = -1120 y = -115 } } # hidden
+		buttonType = { name = "alien_message_background" size = { x = 0 y = 0 } position = { x = -1110 y = -11430 } spriteType = "GFX_tiles_dark_area_cut_8" } # hidden
+		buttonType = { name = "confirm_button" quadTextureSprite = "GFX_standard_button_142_34_button" } # hidden
+		containerWindowType = {
+			name = "portrait_background"
+			position = { x = -1117 y = -1145 }
+			size = { width = 0 height = 0 } 	# hide portrait window
+			iconType = { name = "event_picture" spriteType = "GFX_diplomacy_portrait_frame" } # hidden
+			iconType = { name = "portrait" spriteType = "GFX_portrait_character" } # hidden
+		}
+		containerWindowType = {
+			name = "portrait"
+			position = { x = -1117 y = -1145 }
+			size = { width = 0 height = 0 } # hide portrait window
+			iconType = { name = "portrait" spriteType = "GFX_portrait_gamesetup_mask" } # hidden
+			iconType = { name = "black_frame" spriteType = "GFX_diplomacy_portrait_shadow_frame" } # hidden
+			iconType = { name = "stripes_1" spriteType = "GFX_diplomacy_stripes_2" } # hidden
+			iconType = { name = "city_frame" spriteType = "GFX_diplomacy_portrait_frame" } # hidden
+		}
+		iconType = { name = "empire_info_bg" spriteType = "GFX_diplomacy_dark_fade_bg" } # hidden
+		instantTextBoxType = { name = "empire_name" font = "malgun_goth_24" } # hidden
+		instantTextBoxType = { name = "empire_government_type" font = "cg_16b" } # hidden
+		instantTextBoxType = { name = "empire_personality_type" font = "cg_16b" } # hidden
+		overlappingElementsBoxType = { name = "empire_ethics_icons" position = { x = -1145 y = -11138 } } # hidden
+		iconType = { name = "empire_flag" spriteType = "GFX_empire_flag_128" position = { x = -1125 y = -11235 } } # hidden
+		containerWindowType = {
+			name = "leader_details"
+			position = { x = -1125 y = -1175 }
+			containerWindowType = { name = "empire_traits_box" } # hidden
+			instantTextBoxType = { name = "empire_traits_label" font = "cg_16b" } # hidden
+			overlappingElementsBoxType = { name = "leader_traits" } # hidden
+			instantTextBoxType = { name = "leader_name" font = "cg_16b" } # hidden
+			instantTextBoxType = { name = "leader_species" font = "cg_16b" } # hidden
+		}
+		containerWindowType = {
+			name = "opinion_window"
+			position = { x = -1127 y = -11110 }
+			size = { width = 94 height = 30 }
+			iconType = { name = "their_opinion_icon" spriteType = "GFX_diplomacy_opinion" } # hidden
+			instantTextBoxType = { name = "their_opinion" font = "cg_16b" }
+		}
+
+		### EVENT DIPLO ###
+
+		containerWindowType = {
+			name = "EVENT_DIPLO"
+			position = { x = 20000 y = 50000 }
+			#size = { width = 563 height = 220 }
+			moveable = no
+
+			instantTextBoxType = {
+				name = "action_title"
+				font = "malgun_goth_24"
+				position = { x = 20 y = 0 }
+				maxWidth = 200
+				alwaysTransparent = yes
+			}
+			instantTextBoxType = {
+				name = "action_desc"
+				font = "malgun_goth_24"
+				position = { x = 490 y = 0 }
+				maxWidth = 500
+				maxHeight = 180
+				orientation = "UPPER_LEFT"
+				format = center
+				alwaysTransparent = yes
+				text_color_code = "H"
+			}
+			listboxType = { name = "option_list" position = { x = -11500 y = -1130 } } # hidden option list
+		}
+		# Description Section
+		instantTextBoxType = {
+			name = "alien_message"
+			font = "cg_16b"
+			position = { x = 20000 y = 100000 }
+			maxWidth = 465
+			maxHeight = 220
+			format = left
+			scrollbartype = "standardtext_slider"
+		}
+	}
+	containerWindowType = {
+		name = "star_rail_mingtu_zhishi"
+		orientation = center
+		origo = center
+		moveable = yes
+		size = { width = 1600 height = 800 }
+
+		background = {
+			name = "background"
+			quadTextureSprite = "GFX_honkai_star_rail_ui_mingtu_window_bg"
+		}
+
+		iconType = {
+			name = "hex_bg"
+			spriteType = "GFX_hex_bg"
+			position = { x = -10000 y = -14000 }
+			alwaysTransparent = yes
+		}
+		iconType = {
+			name = "empire_header_line"
+			quadTextureSprite = "GFX_line_long"
+			position = { x = -6000 y = -220000 }
+			alwaysTransparent = yes
+		}
+
+		buttonType = {
+			name = "close"
+			quadTextureSprite = "GFX_close"
+			position = { x= -42 y = 12 }
+			orientation = "UPPER_RIGHT"
+			shortcut = "ESCAPE"
+			clicksound = "back_click"
+		}
+		instantTextboxType = {
+			name = "honkai_star_rail_mingtu_zhishi"
+			position = { x = 650 y = 20  }
+			font = "fandebiao"
+			borderSize = { x = -10 y =40 }
+			text = "mingtu_zhishi"
+			text_color_code = "E"
+			maxHeight = 600
+			maxWidth = 600
+			fixedSize = yes
+		}
+		#effectButtonType = {
+			#name = honkai_star_go_back
+			#quadTextureSprite = "GFX_honkai_star_rail_go_back_button"
+			#size = { x = 32 y = 32 }
+			#position = {x = 30 y = 30 }
+			#effect = the_star_rail_null_effect
+		#}
+		effectButtonType = {
+			name = honkai_star_zhishi_1
+			quadTextureSprite = "GFX_honkai_star_rail_zhishi_1"
+			size = { x = 103 y = 120 }
+			position = {x = 20 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "zhishi_arrow_1"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x =125 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_zhishi_2
+			quadTextureSprite = "GFX_honkai_star_rail_zhishi_2"
+			size = { x = 103 y = 120 }
+			position = {x = 160 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "zhishi_arrow_2"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x =265 y = 220 }
+			alwaysTransparent = yes
+		}
+		iconType = {
+			name = "zhishi_arrow_tri_1"
+			spriteType = "GFX_honkai_star_rail_arrow_merge_wide_right"
+			position = { x = 975 y = 225 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_zhishi_3
+			quadTextureSprite = "GFX_honkai_star_rail_zhishi_3"
+			size = { x = 103 y = 120 }
+			position = {x = 160 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_zhishi_4
+			quadTextureSprite = "GFX_honkai_star_rail_zhishi_4"
+			size = { x = 103 y = 120 }
+			position = {x = 20 y = 345 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "zhishi_arrow_3"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 125 y = 400 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_zhishi_5
+			quadTextureSprite = "GFX_honkai_star_rail_zhishi_5"
+			size = { x = 103 y = 120 }
+			position = {x = 300 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "zhishi_arrow_4"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 265 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_zhishi_6
+			quadTextureSprite = "GFX_honkai_star_rail_zhishi_6"
+			size = { x = 103 y = 120 }
+			position = {x = 440 y = 345 }
+			effect = the_star_rail_null_effect
+		}
+
+		effectButtonType = {
+			name = honkai_star_zhishi_7
+			quadTextureSprite = "GFX_honkai_star_rail_zhishi_7"
+			size = { x = 103 y = 120 }
+			position = {x = 160 y = 345 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "zhishi_arrow_7_1"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 405 y = 400 }
+			alwaysTransparent = yes
+		}
+		iconType = {
+			name = "zhishi_arrow_7_2"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 545 y = 400 }
+			alwaysTransparent = yes
+		}
+		iconType = {
+			name = "zhishi_arrow_7_3"
+			spriteType = "GFX_honkai_star_rail_arrow_left_1"
+			position = { x = 265 y = 400 }
+			alwaysTransparent = yes
+		}
+		iconType = {
+			name = "zhishi_arrow_7_4"
+			spriteType = "GFX_honkai_star_rail_arrow_single_1"
+			position = { x = 200 y = 485 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_zhishi_8
+			quadTextureSprite = "GFX_honkai_star_rail_zhishi_8"
+			size = { x = 103 y = 120 }
+			position = {x = 300 y = 345 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_zhishi_9
+			quadTextureSprite = "GFX_honkai_star_rail_zhishi_9"
+			size = { x = 103 y = 120 }
+			position = {x = 440 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "zhishi_arrow_8"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 405 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_zhishi_10
+			quadTextureSprite = "GFX_honkai_star_rail_zhishi_10"
+			size = { x = 103 y = 120 }
+			position = {x = 580 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "zhishi_arrow_9"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 545 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_zhishi_11
+			quadTextureSprite = "GFX_honkai_star_rail_zhishi_11"
+			size = { x = 103 y = 120 }
+			position = {x = 300 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "zhishi_arrow_10"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 405 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_zhishi_12
+			quadTextureSprite = "GFX_honkai_star_rail_zhishi_11"
+			size = { x = 103 y = 120 }
+			position = {x = 440 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "zhishi_arrow_11"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 685 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_zhishi_13
+			quadTextureSprite = "GFX_honkai_star_rail_zhishi_13"
+			size = { x = 103 y = 120 }
+			position = {x = 720 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "zhishi_arrow_12"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 545 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_zhishi_14
+			quadTextureSprite = "GFX_honkai_star_rail_zhishi_14"
+			size = { x = 103 y = 120 }
+			position = {x = 580 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "zhishi_arrow_13"
+			spriteType = "GFX_honkai_star_rail_arrow_up_1"
+			position = { x = 620 y = 290 }
+			alwaysTransparent = yes
+		}
+		iconType = {
+			name = "zhishi_arrow_13_1"
+			spriteType = "GFX_honkai_star_rail_arrow_single_1"
+			position = { x = 620 y = 485 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_zhishi_15
+			quadTextureSprite = "GFX_honkai_star_rail_zhishi_15"
+			size = { x = 103 y = 120 }
+			position = {x = 580 y =345 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "zhishi_arrow_14"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 825 y = 570 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_zhishi_16
+			quadTextureSprite = "GFX_honkai_star_rail_zhishi_16"
+			size = { x = 103 y = 120 }
+			position = {x = 860 y = 520 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "zhishi_arrow_15"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 825 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_zhishi_17
+			quadTextureSprite = "GFX_honkai_star_rail_zhishi_17"
+			size = { x = 103 y = 120 }
+			position = {x = 860 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		iconType = {
+			name = "zhishi_arrow_16"
+			spriteType = "GFX_honkai_star_rail_arrow_right"
+			position = { x = 685 y = 220 }
+			alwaysTransparent = yes
+		}
+		effectButtonType = {
+			name = honkai_star_zhishi_18
+			quadTextureSprite = "GFX_honkai_star_rail_zhishi_17"
+			size = { x = 103 y = 120 }
+			position = {x = 720 y = 170 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_zhishi_23
+			quadTextureSprite = "GFX_honkai_star_rail_zhishi_23"
+			size = { x = 103 y = 120 }
+			position = {x = 1060 y = 350 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_zhishi_24
+			quadTextureSprite = "GFX_honkai_star_rail_zhishi_24"
+			size = { x = 103 y = 120 }
+			position = {x = 1260 y = 180 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_zhishi_19
+			quadTextureSprite = "GFX_honkai_star_rail_zhishi_19"
+			size = { x = 103 y = 120 }
+			position = {x = 1060 y = 530 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_zhishi_20
+			quadTextureSprite = "GFX_honkai_star_rail_zhishi_20"
+			size = { x = 103 y = 120 }
+			position = {x = 1260 y = 530 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_zhishi_21
+			quadTextureSprite = "GFX_honkai_star_rail_zhishi_21"
+			size = { x = 103 y = 120 }
+			position = {x = 1460 y = 350 }
+			effect = the_star_rail_null_effect
+		}
+		effectButtonType = {
+			name = honkai_star_zhishi_22
+			quadTextureSprite = "GFX_honkai_star_rail_zhishi_22"
+			size = { x = 103 y = 120 }
+			position = {x = 1260 y = 350 }
+			effect = the_star_rail_null_effect
+		}
+		instantTextboxType = {
+			name = "honkai_star_rail_mingtu_zhishi1"
+			position = { x = 1250 y = 90  }
+			font = "fandebiao1"
+			borderSize = { x = -10 y =40 }
+			text = "mingtuhuixiang"
+			text_color_code = "H"
+			maxHeight = 600
+			maxWidth = 600
+			fixedSize = yes
+		}
+		instantTextboxType = {
+			name = "honkai_star_rail_mingtu_zhishi2"
+			position = { x = 1250 y = 450  }
+			font = "fandebiao1"
+			borderSize = { x = -10 y =40 }
+			text = "huixiangjiaocuo"
+			text_color_code = "H"
+			maxHeight = 600
+			maxWidth = 600
+			fixedSize = yes
+		}
+		instantTextboxType = {
+			name = "honkai_star_rail_mingtu_zhishi3"
+			position = { x = 1250 y = 270  }
+			font = "fandebiao1"
+			borderSize = { x = -10 y =40 }
+			text = "huixianggouyin"
+			text_color_code = "H"
+			maxHeight = 600
+			maxWidth = 600
+			fixedSize = yes
+		}
+
+
+		# Custom header
+		instantTextBoxType = {
+			name = "irm_some_header"
+			font = "malgun_goth_24"
+			text = "ui_faction_header" 	# header text
+			position = { x = 20000 y = 50000 }
+			maxWidth = 543
+			maxHeight = 22
+			fixedSize = yes
+			alwaysTransparent = yes
+		}
+
+		### ALL OF THIS IS HIDDEN OR DISPLACED ! ###
+
+		buttonType = { name = "focus_button" position = { x = -1180 y = -1112 } spriteType = "GFX_fleetview_focus" } # hidden
+		instantTextBoxType = { name = "heading" font = "malgun_goth_24" position = { x = -1120 y = -115 } } # hidden
+		buttonType = { name = "alien_message_background" size = { x = 0 y = 0 } position = { x = -1110 y = -11430 } spriteType = "GFX_tiles_dark_area_cut_8" } # hidden
+		buttonType = { name = "confirm_button" quadTextureSprite = "GFX_standard_button_142_34_button" } # hidden
+		containerWindowType = {
+			name = "portrait_background"
+			position = { x = -1117 y = -1145 }
+			size = { width = 0 height = 0 } 	# hide portrait window
+			iconType = { name = "event_picture" spriteType = "GFX_diplomacy_portrait_frame" } # hidden
+			iconType = { name = "portrait" spriteType = "GFX_portrait_character" } # hidden
+		}
+		containerWindowType = {
+			name = "portrait"
+			position = { x = -1117 y = -1145 }
+			size = { width = 0 height = 0 } # hide portrait window
+			iconType = { name = "portrait" spriteType = "GFX_portrait_gamesetup_mask" } # hidden
+			iconType = { name = "black_frame" spriteType = "GFX_diplomacy_portrait_shadow_frame" } # hidden
+			iconType = { name = "stripes_1" spriteType = "GFX_diplomacy_stripes_2" } # hidden
+			iconType = { name = "city_frame" spriteType = "GFX_diplomacy_portrait_frame" } # hidden
+		}
+		iconType = { name = "empire_info_bg" spriteType = "GFX_diplomacy_dark_fade_bg" } # hidden
+		instantTextBoxType = { name = "empire_name" font = "malgun_goth_24" } # hidden
+		instantTextBoxType = { name = "empire_government_type" font = "cg_16b" } # hidden
+		instantTextBoxType = { name = "empire_personality_type" font = "cg_16b" } # hidden
+		overlappingElementsBoxType = { name = "empire_ethics_icons" position = { x = -1145 y = -11138 } } # hidden
+		iconType = { name = "empire_flag" spriteType = "GFX_empire_flag_128" position = { x = -1125 y = -11235 } } # hidden
+		containerWindowType = {
+			name = "leader_details"
+			position = { x = -1125 y = -1175 }
+			containerWindowType = { name = "empire_traits_box" } # hidden
+			instantTextBoxType = { name = "empire_traits_label" font = "cg_16b" } # hidden
+			overlappingElementsBoxType = { name = "leader_traits" } # hidden
+			instantTextBoxType = { name = "leader_name" font = "cg_16b" } # hidden
+			instantTextBoxType = { name = "leader_species" font = "cg_16b" } # hidden
+		}
+		containerWindowType = {
+			name = "opinion_window"
+			position = { x = -1127 y = -11110 }
+			size = { width = 94 height = 30 }
+			iconType = { name = "their_opinion_icon" spriteType = "GFX_diplomacy_opinion" } # hidden
+			instantTextBoxType = { name = "their_opinion" font = "cg_16b" }
+		}
+
+		### EVENT DIPLO ###
+
+		containerWindowType = {
+			name = "EVENT_DIPLO"
+			position = { x = 20000 y = 50000 }
+			#size = { width = 563 height = 220 }
+			moveable = no
+
+			instantTextBoxType = {
+				name = "action_title"
+				font = "malgun_goth_24"
+				position = { x = 20 y = 0 }
+				maxWidth = 200
+				alwaysTransparent = yes
+			}
+			instantTextBoxType = {
+				name = "action_desc"
+				font = "malgun_goth_24"
+				position = { x = 490 y = 0 }
+				maxWidth = 500
+				maxHeight = 180
+				orientation = "UPPER_LEFT"
+				format = center
+				alwaysTransparent = yes
+				text_color_code = "H"
+			}
+			listboxType = { name = "option_list" position = { x = -11500 y = -1130 } } # hidden option list
+		}
+		# Description Section
+		instantTextBoxType = {
+			name = "alien_message"
+			font = "cg_16b"
+			position = { x = 20000 y = 100000 }
+			maxWidth = 465
+			maxHeight = 220
+			format = left
+			scrollbartype = "standardtext_slider"
+		}
+	}
+}
+#reload star_rail_mingtu.gui
+#guibounds
+#event mingtu.1

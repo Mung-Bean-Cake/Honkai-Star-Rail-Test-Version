@@ -1,9 +1,9 @@
 ahawanou = {#啊哈玩偶
     desc = strange_signal_category
     picture = GFX_evt_cold_barren
-    level = 2
+    level = 3
     spawn_chance = {
-        base = 200
+        base = 30
         modifier = {
             factor = 3
             from.owner = {
@@ -20,11 +20,117 @@ ahawanou = {#啊哈玩偶
     on_spawn = {
         from = {
             leader = {
-                add_experience = 300
+                add_experience = 100
             }
         }
     }
     on_success = honkai_anomaly.1
+    should_ai_and_humans_use = yes
+    should_ai_use = no
+}
+yinheshangren = {#银河商人
+    desc = yinheshangren_desc
+    picture = GFX_evt_astral_rift_interdimensional_circus
+    level = 1
+    spawn_chance = {
+        base = 30
+        modifier = {
+            factor = 3
+            from.owner = {
+                OR = {
+                    has_origin = origin_Xianzhou
+                    has_origin = origin_Astral_Express
+                    has_origin = origin_Herta_Space_Station
+                    has_origin = origin_Stellaron_Hunters
+                    has_origin = origin_IPC_Default
+                }
+			}
+        }
+    }
+    on_spawn = {
+        from = {
+            leader = {
+                add_experience = 100
+            }
+        }
+    }
+    on_success = honkai_anomaly.4
+    should_ai_and_humans_use = yes
+    should_ai_use = no
+}
+yinheshangren2 = {#银河商人2
+    desc = yinheshangren2_desc
+    picture = GFX_evt_astral_rift_interdimensional_circus_2
+    level = 2
+    spawn_chance = {
+        base = 20
+        modifier = {
+            factor = 3
+            from.owner = {
+                OR = {
+                    has_origin = origin_Xianzhou
+                    has_origin = origin_Astral_Express
+                    has_origin = origin_Herta_Space_Station
+                    has_origin = origin_Stellaron_Hunters
+                    has_origin = origin_IPC_Default
+                }
+			}
+        }
+        modifier = {
+            factor = 0
+            from.owner = {
+                NOT = {
+                    has_global_flag = yinheshangren
+                }
+			}
+        }
+    }
+    on_spawn = {
+        from = {
+            leader = {
+                add_experience = 150
+            }
+        }
+    }
+    on_success = honkai_anomaly.6
+    should_ai_and_humans_use = yes
+    should_ai_use = no
+}
+yinheshangren3 = {#银河商人2
+    desc = yinheshangren3_desc
+    picture = GFX_evt_black_market
+    level = 2
+    spawn_chance = {
+        base = 20
+        modifier = {
+            factor = 3
+            from.owner = {
+                OR = {
+                    has_origin = origin_Xianzhou
+                    has_origin = origin_Astral_Express
+                    has_origin = origin_Herta_Space_Station
+                    has_origin = origin_Stellaron_Hunters
+                    has_origin = origin_IPC_Default
+                }
+			}
+        }
+        modifier = {
+            factor = 0
+            from.owner = {
+                NOT = {
+                    has_global_flag = yinheshangren2
+                }
+			}
+        }
+    }
+    on_spawn = {
+        from = {
+            leader = {
+                add_experience = 150
+            }
+        }
+    }
+    on_success = honkai_anomaly.7
     should_ai_and_humans_use = yes
     should_ai_use = no
 }
