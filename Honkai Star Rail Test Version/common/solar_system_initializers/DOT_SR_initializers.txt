@@ -1465,8 +1465,238 @@ DOT_SR_system_03 = {
 	}
 }
 
-# 星核猎手
+
+# 匹诺康尼
 DOT_SR_system_04 = {
+	flags = { empire_home_system ring_world_built shattered_ring_system }
+	usage = origin
+
+	init_effect = {
+		every_neighbor_system = {
+			set_star_flag = empire_cluster
+			every_neighbor_system = {
+				set_star_flag = empire_cluster
+			}
+		}
+		generate_home_system_resources = yes
+		spawn_megastructure = {
+			type = "ring_world_ruined"
+			orbit_angle = 0
+			orbit_distance = 45
+			init_effect = {
+				set_megastructure_flag = guaranteed_1
+			}
+		}
+		spawn_megastructure = {
+			type = "ring_world_ruined"
+			orbit_angle = 180
+			orbit_distance = 45
+		}
+	}
+
+	class = "sc_g"
+	planet = {
+		class = star
+		orbit_distance = 0
+		orbit_angle = 0
+		init_effect = {
+			set_deposit = d_energy_4
+			# set_planet_entity = { entity = "heidong_star_based_02" }
+		}
+	}
+
+	change_orbit = 45
+
+	planet = {
+		class = "pc_ringworld_tech"
+		name = "NAME_Ring_Section"
+		orbit_angle = 240
+		orbit_distance = 0
+	}
+
+	planet = {
+		class = "pc_ringworld_seam"
+		name = "NAME_Ring_Section"
+		orbit_angle = 30
+		orbit_distance = 0
+		init_effect = {
+			set_deposit = d_energy_4
+			create_archaeological_site = oracle_digsite
+		}
+	}
+
+	planet = {
+		class = "pc_shattered_ring_habitable"
+		name = "NAME_Ring_Section"
+		orbit_angle = 30
+		orbit_distance = 0
+		deposit_blockers = none
+		modifiers = none
+		flags = { ignore_startup_effect starting_mining_target starting_deposit}
+		init_effect = {
+			create_ambient_object = {
+				type = "medium_debris_01_object"
+				entity_offset_height = -15
+				location = this
+			}
+			last_created_ambient_object = {
+				set_location = {
+					target = prev
+					distance = 0
+					angle = 0
+				}
+			}
+			set_deposit = d_engineering_5
+		}
+	}
+
+	planet = {
+		class = "pc_ringworld_tech_damaged"
+		name = "NAME_Ring_Section"
+		orbit_angle = 120
+		orbit_distance = 0
+	}
+
+	planet = {
+		class = "pc_ringworld_seam_damaged"
+		name = "NAME_Irreparable_Damage"
+		orbit_angle = 30
+		orbit_distance = 0
+		flags = { ignore_startup_effect starting_mining_target starting_deposit}
+		init_effect = {
+			create_ambient_object = {
+				type = "medium_debris_01_object"
+				entity_offset_height = -15
+				location = this
+			}
+			last_created_ambient_object = {
+				set_location = {
+					target = prev
+					distance = 0
+					angle = 0
+				}
+			}
+			set_deposit = d_engineering_5
+			set_planet_flag = starting_research_target
+			set_planet_flag = starting_deposit
+		}
+	}
+
+	planet = {
+		class = "pc_shattered_2"
+		name = "NAME_The_Interloper"
+		orbit_distance = -5
+		orbit_angle = 0
+		size = 5
+		has_ring = no
+		flags = { ignore_startup_effect starting_mining_target starting_deposit}
+		init_effect = {
+			set_deposit = d_minerals_10
+		}
+	}
+
+	planet = {
+		class = "pc_ringworld_seam_damaged"
+		name = "NAME_Ring_Section"
+		orbit_angle = 30
+		orbit_distance = 5
+		init_effect = {
+			set_deposit = d_energy_4
+			create_archaeological_site = endless_expanse_digsite
+		}
+	}
+
+	planet = {
+		orbit_distance = 30
+		class = pc_city
+		name = "Penacony"
+		orbit_angle = { min = 0 max = 360 }
+		size = 20
+		has_ring = yes
+		modifiers = none
+		starting_planet = yes
+		flags = { planet_earth }
+		init_effect = { 
+			add_deposit = d_society_3
+			set_planet_entity = { entity = "heidong_star_based_02" }
+			set_owner = root
+			set_controller = root
+			
+			create_ambient_object = {
+				type = "large_debris_object"
+				entity_offset_height = { min = -0 max = -25 }
+				location = this
+			}
+			last_created_ambient_object = {
+				set_location = {
+					target = prev
+					distance = 15
+					angle = random
+				}
+			}
+			create_ambient_object = {
+				type = "medium_debris_01_object"
+				entity_offset_height = { min = -0 max = -25 }
+				location = this
+			}
+			last_created_ambient_object = {
+				set_location = {
+					target = prev
+					distance = 15
+					angle = random
+				}
+			}
+			create_ambient_object = {
+				type = "medium_debris_02_object"
+				entity_offset_height = { min = -0 max = -25 }
+				location = this
+			}
+			last_created_ambient_object = {
+				set_location = {
+					target = prev
+					distance = 15
+					angle = random
+				}
+			}
+			create_ambient_object = {
+				type = "small_debris_object"
+				entity_offset_height = { min = -0 max = -25 }
+				location = this
+			}
+			last_created_ambient_object = {
+				set_location = {
+					target = prev
+					distance = 15
+					angle = random
+				}
+			}
+			
+			}
+	}
+	planet = {
+		orbit_distance = 30
+		class = pc_city
+		orbit_angle = { min = 0 max = 360 }
+		size = 20
+		has_ring = yes
+		modifiers = none
+		flags = { planet_earth }
+	}
+
+	neighbor_system = {
+		trigger = { num_guaranteed_colonies >= 2 }
+		hyperlane_jumps = { min = 1 max = @jumps }
+		initializer = "neighbor_t1"
+	}
+	neighbor_system = {
+		trigger = { num_guaranteed_colonies >= 1 }
+		hyperlane_jumps = { min = 1 max = @jumps }
+		initializer = "neighbor_t1_first_colony"
+	}
+}
+
+# 星核猎手
+DOT_SR_system_05 = {
 	class = "rl_trinary_stars"
 	usage = origin
 	flags = { empire_home_system }
