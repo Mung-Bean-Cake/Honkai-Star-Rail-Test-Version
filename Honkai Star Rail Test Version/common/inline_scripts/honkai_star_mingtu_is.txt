@@ -1,0 +1,61 @@
+potential = { always = yes }
+allow = {
+    custom_tooltip = {
+        fail_text = honkai_star_mingtu_not_allow_chance
+        hidden_trigger = {
+            event_target:global_event_country = {
+                has_country_flag = allow_honkai_star_$TYPE$_effect_$NUM$
+            }
+        }
+    }
+    custom_tooltip = {
+        fail_text = honkai_star_$TYPE$_effect_$NUM$_custom_tooltip
+        hidden_trigger = {
+            event_target:global_event_country = {
+                has_country_flag = allow_honkai_star_$TYPE$_effect_$NUM$
+            }
+        }
+    }
+    custom_tooltip = {
+        fail_text = honkai_star_cunhu_stage_custom_tooltip
+        hidden_trigger = {
+            event_target:global_event_country = {
+                check_variable = { which = honkai_star_$TYPE$_stage value >= $MIN_LIMIT$ }
+                check_variable = { which = honkai_star_$TYPE$_stage value <= $MAX_LIMIT$ }
+            }
+        }
+    }
+}
+effect = {
+    custom_tooltip = honkai_star_mingtu_yuzhousuipian_custom_tooltip
+    if = {
+        limit = {
+            event_target:global_event_country = {
+                has_country_flag = allow_honkai_star_$TYPE$_effect_$NUM$
+                check_variable = { which = honkai_star_$TYPE$_stage value >= $MIN_LIMIT$ }
+                check_variable = { which = honkai_star_$TYPE$_stage value <= $MAX_LIMIT$ }
+            }
+        }
+        custom_tooltip = honkai_star_mingtu_allow_chance
+    }
+    custom_tooltip = honkai_star_$TYPE$_effect_$NUM$_custom_tooltip
+    if = {
+        limit = {
+            event_target:global_event_country = {
+                check_variable = { which = yuzhousuipian value >= $VALUE$ }
+                check_variable = { which = honkai_star_$TYPE$_stage value >= $MIN_LIMIT$ }
+                check_variable = { which = honkai_star_$TYPE$_stage value <= $MAX_LIMIT$ }
+            }
+        }
+        hidden_effect = {
+            event_target:global_event_country = {
+                subtract_variable = { which = yuzhousuipian value = $VALUE$ }
+                change_variable = { which = honkai_star_$TYPE$_stage value = 1 }
+                remove_country_flag = allow_honkai_star_$TYPE$_effect_$NUM$
+            }
+            FROM = {
+                add_modifier = { modifier = $MODIFIER$ }
+            }
+        }
+    }
+}
