@@ -1,0 +1,59 @@
+decision_SW = {
+    owned_planets_only = no
+    icon = decision_arcology_project
+
+    enactment_time = 150
+    resources = {
+        category = decisions
+        cost = {
+            influence = 10
+            minerals = 500
+            alloys = 150
+        }
+    }
+
+    potential = {
+        From = {
+            is_ai = no
+        }
+        This = {
+            OR = {
+                is_planet_class = pc_shielded_white
+                is_planet_class = pc_shielded_yellow
+                is_planet_class = pc_shielded_red
+            }
+        }
+    }
+
+    allow = {
+        This.solar_system = {
+            exists = starbase
+        }
+    }
+
+    effect = {
+        custom_tooltip = decision_SW_desc
+        hidden_effect = {
+            planet_event = { id = SW_change.1 }
+            planet_event = { id = SW_change.11 }
+            planet_event = { id = SW_change.12 }
+            planet_event = { id = SW_change.13 }
+            planet_event = { id = SW_change.14 }
+            planet_event = { id = SW_change.15 }
+            planet_event = { id = SW_change.16 }
+            planet_event = { id = SW_change.21 }
+            planet_event = { id = SW_change.22 }
+            planet_event = { id = SW_change.23 }
+            planet_event = { id = SW_change.24 }
+            planet_event = { id = SW_change.25 }
+            planet_event = { id = SW_change.26 }
+            event_target:global_event_country = {
+                change_variable = { which = yuzhousuipian value = 1 }
+            }
+        }
+    }
+
+    ai_weight = {
+        weight = 0
+    }
+}
