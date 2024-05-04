@@ -1,51 +1,10 @@
-#category = starbase_modules 6格
-#category = starbase_buildings 4格
-#空模块,水培舱
-#hydroponics_bay = {
-#	icon = "GFX_spaceport_module_hydroponic_farms"
-#	construction_days = 180
-#
-#	potential = {
-#		exists = owner
-#		owner = { has_technology = "tech_hydroponics" }
-#	}
-#
-#	possible = {
-#		exists = owner
-#		OR = {
-#			owner = { is_ai = no }
-#			owner = { country_uses_food = yes }
-#		}
-#	}
-#
-#	resources = {
-#		category = starbase_buildings
-#		cost = {
-#			alloys = 50
-#		}
-#
-#		produces = {
-#			food = 10
-#		}
-#
-#		upkeep = {
-#			energy = 1
-#		}
-#	}
-#
-#	show_in_tech = "tech_hydroponics"
-#	ai_weight = {
-#		weight = 100 #use same weight here - ai weighting is done in starbase_types.txt
-#	}
-#}
 
 ###################################
 #电力中继T1
 ###################################
 space_energy_core_t1 = {
 
-	icon = "" #你猜
-	section = "SCIENCE_STARBASE_SECTION"
+	icon = "GFX_space_energy_core_t1"
 	construction_days = 270
 
 	potential = {
@@ -66,13 +25,21 @@ space_energy_core_t1 = {
 	resources = {
 		category = starbase_buildings
 		cost = {
-			alloys = 200
+			alloys = 250
 			influence = 4
 		}
+		upkeep = {
+			energy = 4
+		}
 		produces = {
-			energy = 12
+			energy = 20
+			minerals = 5
 		}
 	}
+	triggered_system_modifier = {
+        planet_jobs_physics_research_produces_mult = 0.01
+		planet_jobs_energy_produces_mult = 0.01
+    }
 	show_in_tech = "tech_heita_t1" #记得填
 }
 
@@ -81,7 +48,7 @@ space_energy_core_t1 = {
 ###################################
 space_energy_core_t2 = {
 
-	icon = "" #你猜
+	icon = "GFX_space_energy_core_t2"
 	construction_days = 360
 
 	potential = {
@@ -101,13 +68,22 @@ space_energy_core_t2 = {
 	resources = {
 		category = starbase_buildings
 		cost = {
-			alloys = 500
-			influence = 12
+			alloys = 700
+			influence = 8
 		}
 		produces = {
-			energy = 60
+			energy = 70
+			minerals = 20
+			physics_research = 5
+		}
+		upkeep = {
+			energy = 8
 		}
 	}
+	triggered_system_modifier = {
+        planet_jobs_physics_research_produces_mult = 0.025
+		planet_jobs_energy_produces_mult = 0.025
+    }
 	show_in_tech = "tech_heita_t2" #记得填
 }
 
@@ -116,8 +92,8 @@ space_energy_core_t2 = {
 ###################################
 space_energy_core_t3 = {
 
-	icon = "" #你猜
-	construction_days = 360
+	icon = "GFX_space_energy_core_t3"
+	construction_days = 480
 
 	potential = {
 		exists = owner
@@ -140,12 +116,19 @@ space_energy_core_t3 = {
 			influence = 50
 		}
 		produces = {
-			energy = 360
+			energy = 200
+			minerals = 35
+			physics_research = 50
+			sr_dark_matter = 5
 		}
 		upkeep = {
-			exotic_gases = 2
+			energy = 20
 		}
 	}
+	triggered_system_modifier = {
+        planet_jobs_physics_research_produces_mult = 0.05
+		planet_jobs_energy_produces_mult = 0.05
+    }
 	show_in_tech = "tech_heita_t3" #记得填
 }
 
@@ -154,7 +137,7 @@ space_energy_core_t3 = {
 ###################################
 space_rare_resource_t1 = {
 
-	icon = "" #你猜
+	icon = "GFX_space_rare_resource_t1"
 	construction_days = 360
 
 	potential = {
@@ -178,15 +161,20 @@ space_rare_resource_t1 = {
 			influence = 18
 		}
 		produces = {
-			exotic_gases = 3
-			rare_crystals = 3
-			volatile_motes = 3
+			exotic_gases = 5
+			rare_crystals = 5
+			volatile_motes = 5
+			engineering_research = 5
 		}
 		upkeep = {
-			minerals = 24
+			minerals = 12
 			energy = 12
 		}
 	}
+	triggered_system_modifier = {
+        planet_jobs_alloys_produces_mult = 0.05
+		planet_jobs_consumer_goods_produces_mult = 0.05
+    }
 	show_in_tech = "tech_heita_t2" #记得填
 }
 ###################################
@@ -194,7 +182,7 @@ space_rare_resource_t1 = {
 ###################################
 space_rare_resource_t2 = {
 
-	icon = "" 
+	icon = "GFX_space_rare_resource_2"
 	construction_days = 720
 
 	potential = {
@@ -214,19 +202,24 @@ space_rare_resource_t2 = {
 	resources = {
 		category = starbase_buildings
 		cost = {
-			alloys = 1500
+			alloys = 1000
 			influence = 36
 		}
 		produces = {
-			exotic_gases = 12
-			rare_crystals = 8
-			volatile_motes = 8
+			exotic_gases = 15
+			rare_crystals = 15
+			volatile_motes = 15
+			engineering_research = 15
 		}
 		upkeep = {
-			minerals = 80
-			energy = 36
+			minerals = 40
+			energy = 40
 		}
 	}
+	triggered_system_modifier = {
+        planet_jobs_alloys_produces_mult = 0.075
+		planet_jobs_consumer_goods_produces_mult = 0.075
+    }
 	show_in_tech = "tech_heita_t3" #记得填
 }
 ###################################
@@ -234,7 +227,7 @@ space_rare_resource_t2 = {
 ###################################
 space_anchorage_t1 = {
 
-	icon = "" #你猜
+	icon = "GFX_space_anchorage_t1"
 	construction_days = 360
 
 	potential = {
@@ -255,8 +248,25 @@ space_anchorage_t1 = {
 		category = starbase_buildings
 		cost = {
 			alloys = 500
+			influence = 15
+		}
+		upkeep = {
+			energy = 25
 		}
 	}
+	orbit_modifier = {
+        ship_orbit_upkeep_mult = -0.1
+    }
+	station_modifier = {
+		starbase_shipyard_build_speed_mult = 0.1
+        starbase_shipyard_build_cost_mult = -0.05
+		ship_cloaking_detection_add = 2
+        starbase_trade_collection_range_add = 3
+        trade_value_add = 15
+	}
+    ship_modifier = {
+        ship_starting_experience_add = 500
+    }
 	country_modifier = {
 		country_naval_cap_add = 50
 	}
@@ -267,7 +277,7 @@ space_anchorage_t1 = {
 ###################################
 space_influence_t1 = {
 
-	icon = "" #你猜
+	icon = "GFX_space_influence_t1"
 	construction_days = 360
 
 	potential = {
@@ -287,14 +297,18 @@ space_influence_t1 = {
 	resources = {
 		category = starbase_buildings
 		cost = {
-			alloys = 250
+			alloys = 300
 			influence = 12
 		}
 		produces = {
+			unity = 10
+			consumer_goods = 10
+			food = 10
 			influence = 0.4
+			society_research = 5
 		}
 		upkeep = {
-			minerals = 36
+			minerals = 12
 			energy = 12
 		}
 	}

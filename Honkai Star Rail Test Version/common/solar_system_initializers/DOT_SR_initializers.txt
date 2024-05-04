@@ -907,27 +907,10 @@ DOT_SR_system_03 = {
 		class = star
 		orbit_distance = 0
 	}
-
-	planet = {
-		name = "Lan" 
-		class = "pc_shrouded"
-		orbit_distance = 35
-		orbit_angle = 40
-		size = 18
-		has_ring = yes
-		flags = { Zrocursor_homeworld }
-		init_effect = {
-			prevent_anomaly = yes
-			clear_deposits = yes
-			create_archaeological_site = zroni_digsite_6
-			add_deposit = d_zro_deposit_5
-		}
-	}
-
 	planet = {
 		name = "The_Xianzhou_Motherland"
 		class = pc_ocean
-		orbit_distance = 20
+		orbit_distance = 80
 		orbit_angle = 250
 		size = 25
 		has_ring = yes
@@ -941,7 +924,7 @@ DOT_SR_system_03 = {
 			class = pc_habitat_honkai
 			orbit_angle = { min = 90 max = 270 }
 			orbit_distance = 15
-			size = 18
+			size = 20
 			starting_planet = yes
 			init_effect = { 
 			set_planet_entity = { entity = "Xingcha_Planet_entity" }
@@ -1010,7 +993,7 @@ DOT_SR_system_03 = {
 	planet = {
 		name = "The_Chiming_Motherland"
 		class = "pc_shattered"
-		orbit_distance = 20
+		orbit_distance = 60
 		orbit_angle = 170
 		size = 20
 		has_ring = yes
@@ -1069,7 +1052,7 @@ DOT_SR_system_03 = {
 			class = pc_habitat_honkai
 			orbit_angle = { min = 90 max = 270 }
 			orbit_distance = 18
-			size = 18
+			size = 22
 			init_effect = { 
 				set_planet_entity = { entity = "Xingcha_Planet_entity" }
 				set_owner = root
@@ -1149,7 +1132,7 @@ DOT_SR_system_03 = {
 			class = pc_habitat_honkai
 			orbit_angle = { min = 90 max = 270 }
 			orbit_distance = 15
-			size = 18
+			size = 22
 			init_effect = { 
 			set_planet_entity = { entity = "Xingcha_Planet_entity" }
 			set_owner = root
@@ -1232,236 +1215,6 @@ DOT_SR_system_03 = {
 				}
 				deposit_blockers = none
 			}
-	}
-
-	planet = {
-		class = "pc_nuked"
-		orbit_distance = 50
-		orbit_angle = 145
-		size = 35
-		has_ring = no
-		flags = { Zrocursor_homeworld }
-		init_effect = {
-			prevent_anomaly = yes
-			clear_deposits = yes
-			create_archaeological_site = zroni_digsite_6
-			add_deposit = d_zro_deposit_5
-			set_deposit = d_minerals_5
-		}
-	}
-
-	planet = {
-		class = pc_relic # class = "pc_gas_giant"
-		orbit_distance = 20
-		orbit_angle = 145
-		size = 20
-		has_ring = no
-		flags = { hive_planet_larion }
-		init_effect = {
-			prevent_anomaly = yes
-			set_planet_flag = planet_with_too_many_moons
-
-			create_ambient_object = {
-				type = "ancient_battlefield_02_object"
-			}
-			last_created_ambient_object = {
-				set_location = {
-					target = prev
-					distance = 5
-					direction = in_system
-				}
-			}
-			create_archaeological_site = site_ruins_of_shallash
-		}
-
-		moon = {
-			class = "pc_frozen"
-			size = 10
-			orbit_distance = 12
-			orbit_angle = 320
-			has_ring = no
-			init_effect = {
-				add_deposit = d_energy_5
-				set_deposit = d_exotic_gases_3
-			}
-		}
-
-		moon = {
-			class = "pc_machine"
-			size = 10
-			orbit_distance = 4
-			orbit_angle = 150
-			has_ring = no
-			init_effect = {
-				if = {
-				limit = { has_ancrel = yes }
-				create_archaeological_site = site_lost_moments
-				}
-			}
-			init_effect = {
-				set_deposit = d_volatile_motes_5
-				set_deposit = d_engineering_4
-			}
-		}
-	}
-
-	planet = {
-		class = pc_f_star
-		orbit_distance = 20
-		orbit_angle = 100
-		size = 10
-		has_ring = yes
-		init_effect = {
-			prevent_anomaly = yes
-		}
-		init_effect = {
-			set_deposit = d_volatile_motes_5
-		}
-		moon = {
-			class = pc_habitat
-			orbit_angle = { min = 90 max = 270 }
-			orbit_distance = 15
-			size = 10
-			flags = {
-				void_dweller_habitat_1
-				special_start_planet
-				megastructure habitat
-				research_habitat
-				earth_habitat
-			}
-		}
-		init_effect = {
-				create_archaeological_site = site_the_chosen_backstory
-				create_ambient_object = {
-					type = abandoned_observation_outpost
-					effect = {
-						set_location = {
-							target = prev
-							distance = 10
-						}
-					}
-				}
-			}
-		init_effect = {
-			create_ambient_object = {
-				type = "large_debris_object"
-				entity_offset_height = { min = -0 max = -25 }
-				location = this
-			}
-			last_created_ambient_object = {
-				set_location = {
-					target = prev
-					distance = 15
-					angle = random
-				}
-			}
-			create_ambient_object = {
-				type = "medium_debris_01_object"
-				entity_offset_height = { min = -0 max = -25 }
-				location = this
-			}
-			last_created_ambient_object = {
-				set_location = {
-					target = prev
-					distance = 15
-					angle = random
-				}
-			}
-			create_ambient_object = {
-				type = "medium_debris_02_object"
-				entity_offset_height = { min = -0 max = -25 }
-				location = this
-			}
-			last_created_ambient_object = {
-				set_location = {
-					target = prev
-					distance = 15
-					angle = random
-				}
-			}
-			create_ambient_object = {
-				type = "small_debris_object"
-				entity_offset_height = { min = -0 max = -25 }
-				location = this
-			}
-			last_created_ambient_object = {
-				set_location = {
-					target = prev
-					distance = 15
-					angle = random
-				}
-			}
-		}
-	}
-
-	planet = {
-		class = "pc_black_hole"
-		orbit_distance = 20
-		orbit_angle = 300
-		size = 10
-		has_ring = no
-		init_effect = {
-			    create_archaeological_site = larion_digsite
-			    add_deposit = d_ore_rich_caverns
-			    add_deposit = d_rich_mountain
-			    add_deposit = d_green_hills
-			    add_deposit = d_lush_jungle
-			    add_deposit = d_tempestous_mountain
-			    add_deposit = d_prosperous_mesa
-			    add_deposit = d_submerged_ore_veins
-				set_deposit = d_energy_6
-				set_deposit = d_engineering_4
-			}
-		init_effect = {
-			create_ambient_object = {
-				type = "large_debris_object"
-				entity_offset_height = { min = -0 max = -25 }
-				location = this
-			}
-			last_created_ambient_object = {
-				set_location = {
-					target = prev
-					distance = 15
-					angle = random
-				}
-			}
-			create_ambient_object = {
-				type = "medium_debris_01_object"
-				entity_offset_height = { min = -0 max = -25 }
-				location = this
-			}
-			last_created_ambient_object = {
-				set_location = {
-					target = prev
-					distance = 15
-					angle = random
-				}
-			}
-			create_ambient_object = {
-				type = "medium_debris_02_object"
-				entity_offset_height = { min = -0 max = -25 }
-				location = this
-			}
-			last_created_ambient_object = {
-				set_location = {
-					target = prev
-					distance = 15
-					angle = random
-				}
-			}
-			create_ambient_object = {
-				type = "small_debris_object"
-				entity_offset_height = { min = -0 max = -25 }
-				location = this
-			}
-			last_created_ambient_object = {
-				set_location = {
-					target = prev
-					distance = 15
-					angle = random
-				}
-			}
-		}
 	}
 }
 

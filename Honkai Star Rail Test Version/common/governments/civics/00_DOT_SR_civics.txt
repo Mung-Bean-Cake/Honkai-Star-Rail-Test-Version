@@ -11,6 +11,8 @@ civic_The_Destruction = {
 				value = civic_The_Erudition
 				value = civic_The_Nihility
 				value = civic_The_Propagation
+				value = civic_jiyi
+				value = civic_huanyu
 			}
 		}
 	}
@@ -36,6 +38,8 @@ civic_The_Harmony = {
 				value = civic_The_Erudition
 				value = civic_The_Nihility
 				value = civic_The_Propagation
+				value = civic_jiyi
+				value = civic_huanyu
 			}
 		}
 	}
@@ -59,6 +63,8 @@ civic_The_Abundance = {
 				value = civic_The_Erudition
 				value = civic_The_Nihility
 				value = civic_The_Propagation
+				value = civic_jiyi
+				value = civic_huanyu
 			}
 		}
 	}
@@ -66,7 +72,7 @@ civic_The_Abundance = {
 	modifier = {
 		planet_jobs_produces_mult = 0.1
 		pop_growth_speed = 0.20
-		leader_age = 361
+		planet_pop_assembly_organic_mult = 0.2
 		planet_building_build_speed_mult = 0.25
 	}
 }
@@ -83,6 +89,8 @@ civic_The_Hunt = {
 				value = civic_The_Erudition
 				value = civic_The_Nihility
 				value = civic_The_Propagation
+				value = civic_jiyi
+				value = civic_huanyu
 			}
 		}
 	}
@@ -106,6 +114,8 @@ civic_The_Preservation = {
 				value = civic_The_Erudition
 				value = civic_The_Nihility
 				value = civic_The_Propagation
+				value = civic_jiyi
+				value = civic_huanyu
 			}
 		}
 	}
@@ -131,6 +141,8 @@ civic_The_Erudition = {
 				value = civic_The_Preservation
 				value = civic_The_Nihility
 				value = civic_The_Propagation
+				value = civic_jiyi
+				value = civic_huanyu
 			}
 		}
 	}
@@ -155,6 +167,8 @@ civic_The_Nihility = {
 				value = civic_The_Preservation
 				value = civic_The_Erudition
 				value = civic_The_Propagation
+				value = civic_jiyi
+				value = civic_huanyu
 			}
 		}
 	}
@@ -182,20 +196,104 @@ civic_The_Propagation = {
 				value = civic_The_Preservation
 				value = civic_The_Erudition
 				value = civic_The_Nihility
+				value = civic_jiyi
+				value = civic_huanyu
 			}
 		}
 	}
 	random_weight = { base = 5 }
 	modifier = {
-		planet_pop_assembly_organic_mult = 0.25
-		pop_growth_speed = 0.40
-		empire_size_pops_mult = -0.20
+		planet_pop_assembly_mult = 0.4
+		planet_pop_assembly_organic_mult = 0.4
+		ROBOT_species_trait_picks_add = 3
+		pop_government_ethic_attraction = 0.50
+	}
+}
+civic_jiyi={
+	icon="gfx/interface/icons/governments/civics/civic_jiyi.dds"
+	potential={}
+	possible={
+		civics = {
+			NOR = {
+				value = civic_The_Destruction
+				value = civic_The_Harmony
+				value = civic_The_Abundance
+				value = civic_The_Hunt
+				value = civic_The_Preservation
+				value = civic_The_Erudition
+				value = civic_The_Nihility
+				value = civic_The_Propagation
+				value = civic_huanyu
+			}
+		}
+	}
+
+	random_weight={
+		base=10
+	}
+
+	modifier={
+		country_edict_fund_add = 200
+		planet_researchers_society_research_produces_mult = 0.25
+		negative_traits_country = -2
+		councilor_exp_gain = 0.5
+		leader_trait_selection_options_add = 3
+	}
+}
+civic_huanyu={
+	icon="gfx/interface/icons/governments/civics/civic_huanyu.dds"
+	potential={}
+	possible={
+		civics = {
+			NOR = {
+				value = civic_The_Destruction
+				value = civic_The_Harmony
+				value = civic_The_Abundance
+				value = civic_The_Hunt
+				value = civic_The_Preservation
+				value = civic_The_Erudition
+				value = civic_The_Nihility
+				value = civic_The_Propagation
+				value = civic_jiyi
+			}
+		}
+	}
+
+	random_weight={
+		base=10
+	}
+
+	modifier={
+		intel_encryption_add = 2
+		intel_decryption_add = 2
+		species_leader_exp_gain = 0.15
+		empire_size_systems_mult = -0.15
+		empire_size_colonies_mult = -0.15
+	}
+}
+civic_kaituo={
+	icon="gfx/interface/icons/governments/civics/civic_kaituo.dds"
+	potential={}
+	possible={
+
+	}
+
+	random_weight={
+		base=10
+	}
+
+	modifier={
+		country_unity_produces_mult	 = 0.15
+		country_starbase_influence_cost_mult = -0.15
+		station_gatherers_produces_mult = 0.15
+		station_researchers_produces_mult = 0.15
 	}
 }
 civic_gongzao={
 	icon="gfx/interface/icons/governments/civics/civic_gongzao.dds"
 	potential={origin = { value = origin_Xianzhou }}
 	possible={
+		origin = { value = origin_Xianzhou }
 	}
 
 	random_weight={
@@ -214,6 +312,7 @@ civic_zhuxing ={
 	icon="gfx/interface/icons/governments/civics/civic_zhuxing.dds"
 	potential={origin = { value = origin_Xianzhou }}
 	possible={
+		origin = { value = origin_Xianzhou }
 	}
 
 	random_weight={
@@ -232,6 +331,7 @@ civic_yongshou ={
 	icon="gfx/interface/icons/governments/civics/civic_yongshou.dds"
 	potential={origin = { value = origin_Xianzhou }}
 	possible={
+		origin = { value = origin_Xianzhou }
 	}
 
 	random_weight={
@@ -239,15 +339,17 @@ civic_yongshou ={
 	}
 
 	modifier={
-		species_leader_exp_gain = 0.1
-		leader_age = 20
-		negative_traits_country = -1
+		species_leader_exp_gain = 0.25
+		leader_initial_skill = 3
+		leader_lifespan_add = 100
+		negative_traits_country = -2
 	}
 }
 civic_yonghen ={
 	icon="gfx/interface/icons/governments/civics/civic_yonghen.dds"
 	potential={origin = { value = origin_Xianzhou }}
 	possible={
+		origin = { value = origin_Xianzhou }
 	}
 
 	random_weight={

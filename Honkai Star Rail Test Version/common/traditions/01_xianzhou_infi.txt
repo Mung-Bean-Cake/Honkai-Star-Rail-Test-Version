@@ -3,39 +3,62 @@ tr_xianzhou_adopt = { #采用仙舟传统树效果
 		has_ascension_perk = ap_xianzhou_world
 		has_origin = origin_Xianzhou
 	}
+	modifier = {
+		station_gatherers_produces_mult = 0.20
+	}
+	on_enabled = {
+		hidden_effect = {
+			add_research_option = tech_mineral_and_energy
+		}
+	}
 	unlocks_agenda = agenda_xianzhou_advantage
 	custom_tooltip = tr_xianzhou_adopt_desc
 }
 
 tr_xianzhou_finish = { #w完成仙舟传统树
+	custom_tooltip = tr_xianzhou_finish_desc
 	modifier = {
+		empire_size_penalty_mult = -0.10
+		planet_jobs_upkeep_mult = -0.05
 		ascension_perks_add = 1
 	}
-	on_enabled = {
-		custom_tooltip = "allow_xianzhou_expantion"
-	}
-	custom_tooltip = tr_xianzhou_finish_desc
-	
 }
 
 tr_xianzhou_infi_dexterity_bird_logistics = { #机巧物流中心
 	possible = { #前置采用仙舟传统树
 		has_tradition = tr_xianzhou_adopt
 	}
-	custom_tooltip = tr_xianzhou_infi_dexterity_bird_logistics_desc
+	#custom_tooltip = tr_xianzhou_infi_dexterity_bird_logistics_desc
 	modifier = {
-		#没想好
+		planet_structures_cost_mult = -0.15
+		planet_buildings_upkeep_mult = -0.15
+		planet_districts_upkeep_mult = -0.15
+		planet_building_build_speed_mult = 0.20
 	}
-
+	on_enabled = {
+		hidden_effect = {
+			add_research_option = tech_kuozhang
+			add_research_option = tech_gongzao_1
+		}
+	}
 }
 
 tr_xianzhou_infi_war_factory = { #仙舟战争工厂
 	possible = { #前置采用机巧物流中心
 		has_tradition = tr_xianzhou_infi_dexterity_bird_logistics
 	}
-	custom_tooltip = tr_xianzhou_infi_dexterity_bird_logistics
+	#custom_tooltip = tr_xianzhou_infi_dexterity_bird_logistics
 	modifier = {
-		#没想好
+		starbase_upgrade_speed_mult = 0.20
+		starbase_upgrade_cost_mult = -0.20
+		starbase_shipyard_build_speed_mult = 0.15
+		starbase_shipyard_build_cost_mult = -0.15
+	}
+	on_enabled = {
+		hidden_effect = {
+			add_research_option = tech_gongzao_2
+			add_research_option = tech_yunqi
+		}
 	}
 }
 
@@ -44,7 +67,15 @@ tr_xianzhou_infi_xingcha_transportation = { #星槎航道网络
 		has_tradition = tr_xianzhou_adopt
 	}
 	modifier = {
-		#没想好
+		ship_speed_mult = 0.25
+		ship_ftl_jumpdrive_range_mult = 0.25
+		ship_winddown_mult = -0.25
+		ship_windup_mult = -0.25
+	}
+	on_enabled = {
+		hidden_effect = {
+			add_research_option = tech_dandingsi_1
+		}
 	}
 	custom_tooltip = tr_xianzhou_infi_xingcha_transportation_desc
 }
@@ -53,9 +84,10 @@ tr_xianzhou_infi_trade_network = { #仙舟贸易网络
 	possible = { #前置采用机巧物流中心
 		has_tradition = tr_xianzhou_infi_dexterity_bird_logistics
 	}
-	custom_tooltip_with_modifiers = tr_xianzhou_infi_trade_network_desc
+	#custom_tooltip_with_modifiers = tr_xianzhou_infi_trade_network_desc
 	modifier = {
-		#没想好
+		country_produces_mult = 0.05
+		planet_jobs_produces_mult = 0.05
 	}
 }
 
@@ -63,8 +95,17 @@ tr_xianzhou_infi_divine_department = { #太卜司气运场
 	possible = { #前置采用星槎航道网络
 		has_tradition = tr_xianzhou_infi_xingcha_transportation
 	}
-	custom_tooltip_with_modifiers = tr_xianzhou_infi_divine_department_desc
+	#custom_tooltip_with_modifiers = tr_xianzhou_infi_divine_department_desc
 	modifier = {
-		#没想好
+		intel_decryption_add = 4
+		intel_encryption_add = 4
+		physics_tech_cost_mult = -0.15
+		society_tech_cost_mult = -0.15
+		engineering_tech_cost_mult = -0.15
+	}
+	on_enabled = {
+		hidden_effect = {
+			add_research_option = tech_taipu
+		}
 	}
 }

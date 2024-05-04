@@ -14,9 +14,15 @@ decision_xianzhou_project = {
 
 	potential = {
 		NOR = {
+			is_planet_class = pc_city
+			is_planet_class = pc_relic
 			is_planet_class = pc_ringworld_habitable
 			is_planet_class = pc_ringworld_seam
+			is_planet_class = pc_habitat
 			is_planet_class = pc_xianzhou_world
+			has_modifier = resort_colony
+			has_modifier = penal_colony
+			has_modifier = slave_colony
 		}
 		OR = {
 			is_planet_class = pc_habitat
@@ -27,15 +33,6 @@ decision_xianzhou_project = {
 	}
 
 	allow = {
-		if = {
-			limit = { owner = { is_ai = no } }
-			custom_tooltip = {
-				fail_text = decision_xianzhou_project_requirements
-				free_district_slots < 1
-				
-			}
-			
-		}
 		num_uncleared_blockers < 1
 	}
 
@@ -44,21 +41,23 @@ decision_xianzhou_project = {
 		custom_tooltip = decision_xianzhou_project_effects
 		hidden_effect = {
 			clear_deposits = yes
-			set_industrial_focus_flags = yes
 			change_pc = pc_xianzhou_world
 			
 			add_district = district_xz_industrial
+			add_district = district_xz_industrial
+			add_district = district_xz_city
+			add_district = district_xz_city
+			add_district = district_xz_science
+			add_district = district_xz_science
 			add_district = district_xz_trade
-			while = {
-                count = 5
-				add_district = district_xz_city
-			}
-			set_ecu_industrial_districts_effect = yes
+			add_district = district_xz_trade
 			set_planet_entity = {
 				entity = "ringworld_habitable_entity"
 				graphical_culture = owner
 			}
-
+			owner = {
+				country_event = { id = distar.201 } # port for living planet distar.197, triggers in event
+			}
 			#planet_event = { id = xianzhou.200 }
 		}
 	}
@@ -98,10 +97,6 @@ decision_xianzhou_expansion = {
 	}
 
 	allow = {
-		custom_tooltip = {
-			free_district_slots < 1
-		}
-		
 		custom_tooltip = {
 			fail_text = decision_xianzhou_expansion_tt
 			owner = { 

@@ -1,0 +1,336 @@
+xz_building_mineral_and_energy = {
+	base_buildtime = 700
+	base_cap_amount = 1
+	category = resource
+	potential = {
+		exists = owner
+		owner = {
+			has_origin = origin_Xianzhou
+		}
+		NOT = {
+			has_modifier = slave_colony
+		}
+	}
+	planet_modifier = {
+		job_xz_mineral_and_energy_add = 4
+		planet_jobs_minerals_produces_mult = 0.15
+        planet_jobs_energy_produces_mult = 0.15
+	}
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = {
+				has_valid_civic = civic_gongzao
+			}
+		}
+		modifier = {
+			job_xz_mineral_and_energy_add = 1
+		}
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			"minerals" = 1200
+		}
+		upkeep = {
+			energy = 6
+		}
+	}
+	triggered_desc = {
+		text = job_xz_mineral_and_energy
+	}
+	prerequisites = {
+		"tech_gongzao_1"
+	}
+	ai_weight = {
+		weight = 10
+	}
+}
+xz_building_food_and_consumer_goods = {
+	base_buildtime = 600
+	base_cap_amount = 1
+	category = resource
+	prerequisites = {
+		"tech_dandingsi_1"
+	}
+	potential = {
+		exists = owner
+		owner = {
+			has_origin = origin_Xianzhou
+		}
+		NOT = {
+			has_modifier = slave_colony
+		}
+	}
+	planet_modifier = {
+		job_xz_food_and_consumer_goods_add = 3
+		planet_jobs_consumer_goods_produces_mult = 0.15
+		planet_jobs_food_produces_mult = 0.15
+	}
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = {
+				OR = {
+					has_valid_civic = civic_yongshou
+					has_valid_civic = civic_yonghen
+				}
+			}
+		}
+		modifier = {
+			job_xz_food_and_consumer_goods_add = 1
+		}
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			minerals = 1500
+		}
+		upkeep = {
+			energy = 8
+		}
+	}
+	triggered_desc = {
+		text = job_xz_food_and_consumer_goods_effect_desc
+	}
+	ai_weight = {
+		weight = 10
+	}
+}
+xz_building_alloys_and_rare = {
+	base_buildtime = 1000
+	base_cap_amount = 1
+	category = manufacturing
+	potential = {
+		exists = owner
+		owner = {
+			has_origin = origin_Xianzhou
+		}
+		NOT = {
+			has_modifier = slave_colony
+		}
+	}
+	planet_modifier = {
+		job_xz_alloys_and_rare_add = 4
+		planet_jobs_alloys_produces_mult = 0.1
+		planet_jobs_rare_crystals_produces_mult = 0.15
+		planet_jobs_volatile_motes_produces_mult = 0.15
+		planet_jobs_exotic_gases_produces_mult = 0.15
+	}
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = {
+				OR = {
+					has_valid_civic = civic_gongzao
+					has_valid_civic = civic_zhuxing
+				}
+			}
+		}
+		modifier = {
+			job_xz_alloys_and_rare_add = 1
+		}
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			minerals = 1500
+		}
+		upkeep = {
+			energy = 10
+		}
+	}
+	triggered_desc = {
+		text = job_xz_alloys_and_rare_effect_desc
+	}
+	prerequisites = {
+		"tech_gongzao_1"
+	}
+	ai_weight = {
+		weight = 10
+	}
+}
+xz_building_amenities_and_unity = {
+	base_buildtime = 700
+	base_cap_amount = 1
+	category = unity
+	potential = {
+		exists = owner
+		owner = {
+			has_origin = origin_Xianzhou
+		}
+		NOT = {
+			has_modifier = slave_colony
+		}
+	}
+	planet_modifier = {
+		job_xz_amenities_and_unity_add = 4
+		job_xz_clinic_and_care_add = 2
+		planet_jobs_unity_produces_mult = 0.15
+	}
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = {
+				OR = {
+					has_valid_civic = civic_yonghen
+					has_valid_civic = civic_yongshou
+				}
+			}
+		}
+		modifier = {
+			job_xz_alloys_and_rare_add = 1
+		}
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			minerals = 1800
+		}
+		upkeep = {
+			energy = 12
+		}
+	}
+	triggered_desc = {
+		text = job_xz_clinic_and_care_effect_desc
+	}
+	prerequisites = {
+		"tech_dandingsi_1"
+	}
+	ai_weight = {
+		weight = 10
+	}
+}
+xz_building_xz_stronghold = {
+	base_buildtime = 800
+	base_cap_amount = 1
+	category = army
+	potential = {
+		exists = owner
+		owner = {
+			has_origin = origin_Xianzhou
+		}
+		NOT = {
+			has_modifier = slave_colony
+		}
+	}
+	planet_modifier = {
+		planet_crime_add = -200
+		job_xz_stronghold_add = 3
+	}
+	army_modifier = {
+		army_starting_experience_add = 100
+	}
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = {
+				has_valid_civic = civic_zhuxing
+			}
+		}
+		modifier = {
+			job_xz_stronghold_add = 2
+		}
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			minerals = 1400
+		}
+		upkeep = {
+			energy = 8
+		}
+	}
+	triggered_desc = {
+		text = job_xz_stronghold_effect_desc
+	}
+	prerequisites = {
+		"tech_yunqi"
+	}
+	ai_weight = {
+		weight = 10
+	}
+}
+xz_building_xz_researcher = {
+	base_buildtime = 1000
+	base_cap_amount = 1
+	category = research
+	potential = {
+		exists = owner
+		owner = {
+			has_origin = origin_Xianzhou
+		}
+		NOT = {
+			has_modifier = slave_colony
+		}
+	}
+	planet_modifier = {
+		job_xz_researcher_add = 4
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			minerals = 2000
+			exotic_gases = 100
+		}
+		upkeep = {
+			energy = 16
+			exotic_gases = 2
+		}
+	}
+	triggered_desc = {
+		text = job_xz_researcher_effect_desc
+	}
+	prerequisites = {
+		"tech_taipu"
+	}
+	ai_weight = {
+		weight = 10
+	}
+}
+xz_building_xz_roboticist = {
+	base_buildtime = 1200
+	base_cap_amount = 1
+	category = pop_assembly
+	potential = {
+		exists = owner
+		owner = {
+			has_origin = origin_Xianzhou
+		}
+		NOT = {
+			#has_modifier = slave_colony
+		}
+	}
+	prerequisites = {
+		"tech_gongzao_2"
+	}
+	planet_modifier = {
+		job_xz_roboticist_add = 2
+		planet_pop_assembly_organic_add = 3
+		planet_pop_assembly_add = 3
+	}
+	destroy_trigger = {
+		exists = owner
+		owner = {
+			NOR = {
+				has_origin = origin_Xianzhou
+			}
+		}
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			minerals = 2000
+		}
+		upkeep = {
+			energy = 20
+			alloys = 5
+		}
+	}
+	triggered_desc = {
+		text =  job_xz_roboticist_effect_desc
+	}
+	ai_weight = {
+		weight = 20
+	}
+}

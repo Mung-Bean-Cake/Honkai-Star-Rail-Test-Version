@@ -26,17 +26,9 @@ country_event = {
 	}
 	option = {
 		name = DOT_SR.001.a
-		give_technology = { tech = tech_hyper_drive_1  message = no }
+		give_technology = { tech = tech_psionic_theory message = no }
 		give_technology = { tech = tech_hyper_drive_2  message = no }
 		give_technology = { tech = tech_hyper_drive_3  message = no }
-		add_tech_progress = {
-			tech = tech_lgate_activation
-			progress = 0.1
-		}
-		add_tech_progress = {
-			tech = tech_jump_drive_1
-			progress = 0.1
-		}
 		add_tech_progress = {
 			tech = tech_wormhole_stabilization
 			progress = 0.2
@@ -49,21 +41,15 @@ country_event = {
 	id = DOT_SR.002
 	title = "DOT_SR.002.name"
 	desc = "DOT_SR.002.desc"
-	#picture = GFX_evt_DOT_SR_001
+	picture = GFX_evt_kaleidoscopic_lights
 	show_sound = event_psionic
 	location = root
 	is_triggered_only = yes
 	immediate = {
 	}
-	diplomatic = yes #是否启用外交界面
-	diplomatic_title = DOT_SR.002.name #外交界面标题本地化 Key，不写默认为“传入通讯”
-	picture_event_data = { 
-	room = "herta_2_room" #房间图层
-	portrait = heita #肖像图层，可承接 Root.Leader
-	}
 	option = {
  		name = DOT_SR.002.a
-		country_event = { id = DOT_SR.003 days = 180  }
+		#country_event = { id = DOT_SR.003 days = 180  }
 		add_resource = { influence = 100 }
 		trigger = {
 			    or = {
@@ -85,9 +71,6 @@ country_event = {
 	}
 	option = {
  		name = DOT_SR.002_civic_The_Destruction
-		force_add_civic = civic_The_Destruction
-		add_modifier = { modifier = country_government_civic_points_add }
-		country_event = { 	id = DOT_SR.003 days = 180  }
 		trigger = {
 			nor = {
                 has_civic = civic_The_Destruction
@@ -99,6 +82,13 @@ country_event = {
                 has_civic = civic_The_Nihility
                 has_civic = civic_The_Propagation
 			}
+		}
+		hidden_effect = {
+			owner = {
+				add_modifier = { modifier = country_government_civic_points_add }
+				force_add_civic = civic_The_Destruction
+			}
+			#country_event = { 	id = DOT_SR.003 days = 180  }
 		}
     }
 	option = {
@@ -124,7 +114,7 @@ country_event = {
  		name = DOT_SR.002_civic_The_Abundance
 		force_add_civic = civic_The_Abundance
 		add_modifier = { modifier = country_government_civic_points_add }
-		country_event = { 	id = DOT_SR.003 days = 180  }
+		#country_event = { 	id = DOT_SR.003 days = 180  }
 		trigger = {
 			nor = {
                 has_civic = civic_The_Destruction
@@ -142,7 +132,7 @@ country_event = {
  		name = DOT_SR.002_civic_The_Hunt
 		force_add_civic = civic_The_Hunt
 		add_modifier = { modifier = country_government_civic_points_add }
-		country_event = { 	id = DOT_SR.003 days = 180  }
+		#country_event = { 	id = DOT_SR.003 days = 180  }
 		trigger = {
 			nor = {
                 has_civic = civic_The_Destruction
@@ -160,7 +150,7 @@ country_event = {
  		name = DOT_SR.002_civic_The_Preservation
 		force_add_civic = civic_The_Preservation
 		add_modifier = { modifier = country_government_civic_points_add }
-		country_event = { 	id = DOT_SR.003 days = 180  }
+		#country_event = { 	id = DOT_SR.003 days = 180  }
 		trigger = {
 			nor = {
                 has_civic = civic_The_Destruction
@@ -178,7 +168,7 @@ country_event = {
  		name = DOT_SR.002_civic_The_Erudition
 		force_add_civic = civic_The_Erudition
 		add_modifier = { modifier = country_government_civic_points_add }
-		country_event = { 	id = DOT_SR.003 days = 180  }
+		#country_event = { 	id = DOT_SR.003 days = 180  }
 		trigger = {
 			nor = {
                 has_civic = civic_The_Destruction
@@ -196,7 +186,7 @@ country_event = {
  		name = DOT_SR.002_civic_The_Nihility
 		force_add_civic = civic_The_Nihility
 		add_modifier = { modifier = country_government_civic_points_add }
-		country_event = { 	id = DOT_SR.003 days = 180  }
+		#country_event = { 	id = DOT_SR.003 days = 180  }
 		trigger = {
 			nor = {
                 has_civic = civic_The_Destruction
@@ -240,30 +230,6 @@ country_event = {
 	}
 
 #################101
-country_event = {
-	id = DOT_SR.00101
-	title = "DOT_SR.001.name"
-	desc = "DOT_SR.001.desc"
-	picture = GFX_evt_DOT_SR_001
-	show_sound = event_psionic
-	hidden = yes	
-	location = root
-	fire_only_once = yes
-	#is_triggered_only = yes
-	trigger = {
-	OR = { 
-	#is_species_class = Astral_Express
-	#is_species_class = The_Xianzhou_Luofu
-	is_species_class = The_Xianzhou_Luofu_X
-	}	
-	}
-	immediate = {
-	}
-	option = {
- 		name = DOT_SR.001.a
-		custom_tooltip = "ap_voidborn_habitat_effect"
-	}
-}
 ############200
 country_event = {
     id = DOT_SR.00200
@@ -276,6 +242,7 @@ country_event = {
 
     immediate = {
         capital_scope = {
+			change_planet_size = 30
             while = {
                 count = 3
                 remove_district = district_city
@@ -287,8 +254,27 @@ country_event = {
                 remove_district = district_mining
                 remove_district = district_farming
             }
+			add_district = district_honkai_city
+			add_district = district_honkai_industrial
+			add_district = district_honkai_industrial
+			add_district = district_honkai_mining
+			add_district = district_honkai_mining
+			add_district = district_honkai_mining
+			add_district = district_honkai_mining
+			add_district = district_honkai_mining
+			add_district = district_honkai_generator
+			add_district = district_honkai_generator
+			add_district = district_honkai_generator
+			add_district = district_honkai_generator
+			add_district = district_honkai_farming
+			add_district = district_honkai_farming
+			add_building = xz_building_xz_roboticist
+			add_building = xz_building_amenities_and_unity
+			add_building = building_research_lab_1
+			add_building = building_research_lab_1
+
             while = {
-                count = 28
+                count = 70
                 create_pop = {
                     species = Root
                     effect = {
@@ -305,5 +291,26 @@ country_event = {
                 kill_pop = yes
             }
         }
+		give_technology = { tech = tech_robotic_workers message = no }
+		give_technology = { tech = tech_powered_exoskeletons message = no }
+		give_technology = { tech = tech_robomodding message = no }
+		give_technology = { tech = tech_habitat_1 message = no }
+		give_technology = { tech = tech_droid_workers message = no }
+		give_technology = { tech = tech_integrated_cybernetics message = no }
+		give_technology = { tech = tech_robomodding_points_1 message = no }
+		give_technology = { tech = tech_robot_assembly_complex message = no }
+		give_technology = { tech = tech_robomodding_points_2 message = no }
+		give_technology = { tech = tech_positronic_implants message = no }
+		give_technology = { tech = tech_frontier_health message = no }
+		give_technology = { tech = tech_genome_mapping message = no }
+		give_technology = { tech = tech_vitality_boosters message = no }
+		give_technology = { tech = tech_epigenetic_triggers message = no }
+		give_technology = { tech = tech_cloning message = no }
+		give_technology = { tech = tech_gene_banks message = no }
+		give_technology = { tech = tech_gene_seed_purification message = no }
+		give_technology = { tech = tech_morphogenetic_field_mastery message = no }
+		give_technology = { tech = tech_gene_tailoring message = no }
+		give_technology = { tech = tech_glandular_acclimation message = no }
+		give_technology = { tech = tech_gene_expressions message = no }
     }
 }
