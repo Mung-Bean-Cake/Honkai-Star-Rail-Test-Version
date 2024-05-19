@@ -42,12 +42,27 @@ mega_HM_CRISIS_TTZPC = {
 
     possible = {  }
 
-    ai_weight = {
-        weight = 50
-        modifier = {
-            factor = 20
+    on_build_complete = {
+        From = { 
+            change_variable = { which = NUM_mega_HM_CRISIS_TTZPC value = 1 } 
         }
     }
+    ai_weight = {
+		factor = 0
+        modifier = {
+            add = 1.5
+            From = {
+                has_resource = { type = alloys amount > 2500 }
+            }
+        }
+        modifier = {
+           add = -4.5
+           From = {
+               check_variable = { which = NUM_mega_HM_CRISIS_TTZPC value > 0 }
+           }
+        }
+	}
+
     ship_modifier = {
         ship_starting_experience_add = 1000
     }

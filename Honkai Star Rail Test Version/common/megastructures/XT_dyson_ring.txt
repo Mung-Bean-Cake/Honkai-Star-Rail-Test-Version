@@ -68,27 +68,27 @@ XT_dyson_sphere_ring_0 = {
     # root = system
     # from = country
     ai_weight = {
-        factor = 15
-
+		factor = 0
         modifier = {
-            factor = 0.1
-            starbase = { NOT = { has_starbase_size >= starbase_starfortress } }
-        }
-
-        modifier = {
-            factor = 0.1
-            any_neighbor_system = {
-                exists = owner
-                NOT = {
-                    owner = { is_same_value = from }
-                }
+            add = 1.5
+            From = {
+                has_resource = { type = alloys amount > 3000 }
             }
         }
-    }
+        modifier = {
+           add = -4.5
+           From = {
+               check_variable = { which = NUM_XT_dyson_sphere_ring value > 0 }
+           }
+        }
+	}
 
     on_build_start = {}
     on_build_cancel = {}
     on_build_complete = {
+        From = { 
+            change_variable = { which = NUM_XT_dyson_sphere_ring value = 1 } 
+        }
         fromfrom.planet = {
             if = {
                 limit = { has_orbital_station = yes }
