@@ -159,6 +159,11 @@ country_event = {
     trigger = {
         is_ai = no
         is_antimatter_must = yes
+        event_target:global_event_country = {
+            NOR = {
+                check_variable = { which = XQTD_crisis_stage value = 0}
+            }
+        }
     }
 
     immediate = {
@@ -1494,7 +1499,7 @@ country_event = {
     id = DDT_FY.2000
     is_triggered_only = yes
     diplomatic = yes
-    custom_gui = xt_crisis_set
+    custom_gui = "XQTD_GLOBAL_SET"
 
     trigger = {
         is_antimatter_must = yes
@@ -1599,16 +1604,16 @@ fleet_event = {
                                         id = SRA_RE_Crisis.39.e2
                                         ROOT = { set_fleet_flag = XT_Crisis_bombarding_planet }
                                         if = {
-                                            #未殖民宜居星球过3个月炸掉
+                                            #未殖民宜居星球过2个月炸掉
                                             limit = { is_colony = no is_colonizable = yes }
                                             set_planet_flag = XT_Crisis_target_planet
-                                            planet_event = { id = DDT_FY.4001 days = 90 }
+                                            planet_event = { id = DDT_FY.4001 days = 60 }
                                         }
                                         if = {
-                                            #已殖民宜居星球过3个月炸掉
+                                            #已殖民宜居星球过2个月炸掉
                                             limit = { is_colony = yes is_colonizable = yes }
                                             set_planet_flag = XT_Crisis_target_planet
-                                            planet_event = { id = DDT_FY.4001 days = 90 }
+                                            planet_event = { id = DDT_FY.4001 days = 60 }
                                         }
                                     }
                                     repeat = {
@@ -1700,29 +1705,26 @@ planet_event = {
     is_triggered_only = yes
 
     immediate = {
-        #every_system = {
-            #every_system_planet = {
-                #limit = {
-                    #has_planet_flag = XT_Crisis_target_planet
-                #}
-                if = {
-                    limit = {
-                        OR = {
-                            is_planet_class = pc_habitat_honkai
-                            is_planet_class = pc_habitat_shielded
-                            is_planet_class = pc_habitat
-                            is_planet_class = pc_ringworld_habitable
-                        }
-                    }
-                    remove_planet = yes
-                    destroy_colony = yes
-                }
-                else = {
-                    change_pc = pc_broken
+        if = {
+            limit = {
+                OR = {
+                    is_planet_class = pc_habitat_honkai
+                    is_planet_class = pc_habitat_shielded
+                    is_planet_class = pc_habitat
+                    is_planet_class = pc_ringworld_habitable
+                    is_planet_class = pc_xianzhou_world
+                    is_planet_class = pc_habitat_planet_class
+                    is_planet_class = pc_astral_express
                 }
             }
-       # }
-   # }
+            destroy_colony = yes
+            remove_planet = yes
+        }
+        else = {
+            destroy_colony = yes
+            change_pc = pc_broken
+        }
+    }
 }
 fleet_event = {
     id = DDT_FY.4002

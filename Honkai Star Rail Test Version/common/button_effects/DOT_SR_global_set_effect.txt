@@ -1,0 +1,309 @@
+but_add_xt_effect = {
+    potential = {
+        event_target:global_event_country = {
+            has_country_flag = allow_add_xtui
+        }
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        hidden_effect = {
+            event_target:global_event_country = {
+                change_variable = { which = XQTD_crisis_stage value = 1 }
+                if = {
+                    limit = { check_variable = { which = XQTD_crisis_stage value < 1} }
+                    set_variable = { which = XQTD_crisis_stage value = 1 }
+                }
+                if = {
+                    limit = { check_variable = { which = XQTD_crisis_stage value > 4} }
+                    set_variable = { which = XQTD_crisis_stage value = 1 }
+                }
+            }
+        }
+    }
+}
+but_sub_xt_effect ={
+    potential = {
+        event_target:global_event_country = {
+            has_country_flag = allow_sub_xtui
+        }
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        hidden_effect = {
+            event_target:global_event_country = {
+                change_variable = { which = XQTD_crisis_stage value = -1 }
+                if = {
+                    limit = { check_variable = { which = XQTD_crisis_stage value < 1} }
+                    set_variable = { which = XQTD_crisis_stage value = 1 }
+                }
+                if = {
+                    limit = { check_variable = { which = XQTD_crisis_stage value > 4} }
+                    set_variable = { which = XQTD_crisis_stage value = 1 }
+                }
+            }
+        }
+    }
+}
+but_stage1_xt_effect = {
+    potential = {
+        event_target:global_event_country = {
+            check_variable = { which = XQTD_crisis_stage value = 1}
+        }
+    }
+    allow = {}
+    effect = {
+        custom_tooltip = allow_stage1_xt
+        hidden_effect = {
+            country_event = { id = DDT_FY.10 }
+            remove_country_flag = allow_set_xt_crisis_global
+        }
+    }
+}
+but_stage2_xt_effect = {
+    potential = {
+        event_target:global_event_country = {
+            check_variable = { which = XQTD_crisis_stage value = 2}
+        }
+    }
+    allow = {}
+    effect = {
+        custom_tooltip = allow_stage2_xt
+        hidden_effect = {
+            country_event = { id = DDT_FY.10 }
+            remove_country_flag = allow_set_xt_crisis_global
+        }
+    }
+}
+but_stage3_xt_effect = {
+    potential = {
+        event_target:global_event_country = {
+            check_variable = { which = XQTD_crisis_stage value = 3}
+        }
+    }
+    allow = {}
+    effect = {
+        custom_tooltip = allow_stage3_xt
+        hidden_effect = {
+            country_event = { id = DDT_FY.10 }
+            remove_country_flag = allow_set_xt_crisis_global
+        }
+    }
+}
+but_stage4_xt_effect = {
+    potential = {
+        event_target:global_event_country = {
+            check_variable = { which = XQTD_crisis_stage value = 4}
+        }
+    }
+    allow = {}
+    effect = {
+        custom_tooltip = allow_stage4_xt
+        hidden_effect = {
+            country_event = { id = DDT_FY.10 }
+            remove_country_flag = allow_set_xt_crisis_global
+        }
+    }
+}
+#开关
+XQTD_crisis1_set1_effect = {
+    potential = {
+        event_target:global_event_country = {
+            OR = {
+                check_variable = { which = XQTD_crisis_stage value = 1}
+                check_variable = { which = XQTD_crisis_stage value = 2}
+                check_variable = { which = XQTD_crisis_stage value = 3}
+                check_variable = { which = XQTD_crisis_stage value = 4}
+                check_variable = { which = XQTD_crisis_stage value = 5}
+            }
+        }
+    }
+    allow = { always = yes }
+    effect = {
+        if = {
+            limit = {
+                event_target:global_event_country = {
+                    OR = {
+                        check_variable = { which = XQTD_crisis_stage value = 1}
+                        check_variable = { which = XQTD_crisis_stage value = 2}
+                        check_variable = { which = XQTD_crisis_stage value = 3}
+                        check_variable = { which = XQTD_crisis_stage value = 4}
+                        check_variable = { which = XQTD_crisis_stage value = 5}
+                    }
+                }
+            }
+            custom_tooltip = XQTD_crisis1_set1_effect_custom_tooltip
+        }
+        hidden_effect = {
+            event_target:global_event_country = {
+                set_variable = { which = XQTD_crisis_stage value = 0 }
+            }
+        }
+    }
+}
+XQTD_crisis1_set2_effect = {
+    potential = {
+        event_target:global_event_country = {
+            OR = {
+                check_variable = { which = XQTD_crisis_stage value = 0}
+            }
+        }
+    }
+    allow = { always = yes }
+    effect = {
+        if = {
+            limit = {
+                event_target:global_event_country = {
+                    OR = {
+                        check_variable = { which = XQTD_crisis_stage value = 0}
+                    }
+                }
+            }
+            custom_tooltip = XQTD_crisis1_set2_effect_custom_tooltip
+        }
+        hidden_effect = {
+            event_target:global_event_country = {
+                set_variable = { which = XQTD_crisis_stage value = 1 }
+            }
+        }
+    }
+}
+#加
+XQTD_crisis1_set_add_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        hidden_effect = {
+            event_target:global_event_country = {
+                change_variable = { which = XQTD_crisis_stage value = 1 }
+                if = {
+                    limit = { check_variable = { which = XQTD_crisis_stage value > 5} }
+                    set_variable = { which = XQTD_crisis_stage value = 1 }
+                }
+            }
+        }
+    }
+}
+#进度条
+XQTD_crisis1_set_show1_effect = {
+    potential = { always = yes }
+    allow = { always = yes }
+    effect = {
+        custom_tooltip = XQTD_crisis1_set_show1_effect_custom_tooltip
+        hidden_effect = {
+            event_target:global_event_country = {
+                set_variable = { which = XQTD_crisis_stage value = 1}
+            }
+        }
+    }
+}
+XQTD_crisis1_set_show2_effect = {
+    potential = { always = yes }
+    allow = { always = yes }
+    effect = {
+        custom_tooltip = XQTD_crisis1_set_show2_effect_custom_tooltip
+        hidden_effect = {
+            event_target:global_event_country = {
+                set_variable = { which = XQTD_crisis_stage value = 2}
+            }
+        }
+    }
+}
+XQTD_crisis1_set_show3_effect= {
+    potential = { always = yes }
+    allow = { always = yes }
+    effect = {
+        custom_tooltip = XQTD_crisis1_set_show3_effect_custom_tooltip
+        hidden_effect = {
+            event_target:global_event_country = {
+                set_variable = { which = XQTD_crisis_stage value = 3}
+            }
+        }
+    }
+}
+XQTD_crisis1_set_show4_effect= {
+    potential = { always = yes }
+    allow = { always = yes }
+    effect = {
+        custom_tooltip = XQTD_crisis1_set_show4_effect_custom_tooltip
+        hidden_effect = {
+            event_target:global_event_country = {
+                set_variable = { which = XQTD_crisis_stage value = 4}
+            }
+        }
+    }
+}
+XQTD_crisis1_set_show5_effect= {
+    potential = { always = yes }
+    allow = { always = yes }
+    effect = {
+        custom_tooltip = XQTD_crisis1_set_show5_effect_custom_tooltip
+        hidden_effect = {
+            event_target:global_event_country = {
+                set_variable = { which = XQTD_crisis_stage value = 5}
+            }
+        }
+    }
+}
+#进度标记
+XQTD_crisis1_set_show6_effect = {
+    potential = {
+        event_target:global_event_country = {
+            OR = {
+                check_variable = { which = XQTD_crisis_stage value = 0}
+            }
+        }
+    }
+}
+XQTD_crisis1_set_show7_effect = {
+    potential = {
+        event_target:global_event_country = {
+            OR = {
+                check_variable = { which = XQTD_crisis_stage value = 1}
+            }
+        }
+    }
+}
+XQTD_crisis1_set_show8_effect = {
+    potential = {
+        event_target:global_event_country = {
+            OR = {
+                check_variable = { which = XQTD_crisis_stage value = 2}
+            }
+        }
+    }
+}
+XQTD_crisis1_set_show9_effect = {
+    potential = {
+        event_target:global_event_country = {
+            OR = {
+                check_variable = { which = XQTD_crisis_stage value = 3}
+            }
+        }
+    }
+}
+XQTD_crisis1_set_show10_effect = {
+    potential = {
+        event_target:global_event_country = {
+            OR = {
+                check_variable = { which = XQTD_crisis_stage value = 4}
+            }
+        }
+    }
+}
+XQTD_crisis1_set_show11_effect = {
+    potential = {
+        event_target:global_event_country = {
+            OR = {
+                check_variable = { which = XQTD_crisis_stage value = 5}
+            }
+        }
+    }
+}
