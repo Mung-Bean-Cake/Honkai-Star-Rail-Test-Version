@@ -1,0 +1,56 @@
+
+namespace = SR_Paragon_Leader
+
+###############
+# 传奇领袖
+###############
+
+country_event = {
+	id = SR_Paragon_Leader.001
+	title = "SR_Paragon_Leader.001.name"
+	desc = "SR_Paragon_Leader.001.desc"
+	picture = GFX_evt_DOT_SR_003
+	show_sound = event_psionic
+	location = root
+	fire_only_once = yes
+	is_triggered_only = yes
+	# trigger = { years_passed > 30 is_ai = no }
+	immediate = {
+		ethic_leader_creator = {
+			SPECIES_CLASS = random_non_machine
+			LEADER_PORTRAIT = "sanyueqi"
+			LEVEL = 5
+			CLASS = commander
+			NAME = "March_7th"
+			GENDER = female
+			IMMORTAL = yes
+			ETHIC = materialist
+			CATCH_PHRASE = materialist2_catch_phrase
+			desc = March_7th_backstory
+			event_target = March_7th_leader
+		}
+		last_created_leader = { }
+	}
+	diplomatic = yes #是否启用外交界面
+	# diplomatic_title = SR_Paragon_Leader.001.name #外交界面标题本地化Key，不写默认为“传入通讯”
+	picture_event_data = { 
+	room = "DOT_SR_Dvalin_1_room" #房间图层
+	# portrait = Dvalin #肖像图层，可承接 Root.Leader
+	}
+	picture_event_data = {
+		portrait = event_target:ethic_leader
+		room = ethic_spaceship_room
+	}
+	option = {
+		name = SR_Paragon_Leader.001.a
+		add_resource = { minerals = 100 }
+		response_text = SR_Paragon_Leader.001.a.response
+		is_dialog_only = yes
+		# country_event = { id = SR_Paragon_Leader.002 days = 200 }
+	}
+	option = {
+		name = SR_Paragon_Leader.001.b
+		add_resource = { alloys = 100 }
+		# country_event = { id = SR_Paragon_Leader.002 days = 200 }
+	}
+}
