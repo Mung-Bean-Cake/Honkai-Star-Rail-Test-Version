@@ -1,109 +1,109 @@
-SPWCIAL_leader_creator = {
-	create_country = {		
-		name = "NAME_leader_country"
-		type = faction
-		auto_delete = yes
-		flag = {
-			icon = {
-				category = "special"
-				file = "unknown.dds"
-			}
-			background = {
-				category = "backgrounds"
-				file = "00_solid.dds"
-			}
-			colors = {
-				"red"
-				"red"
-				"null"
-				"null"
-			}
-		}
-		effect = {
-			save_event_target_as = leader_country
-		}
-	}
-	event_target:leader_country = {
-		create_species = {
-			name = $SPECIES_NAME$
-			class = $SPECIES_CLASS$
-			portrait = $LEADER_PORTRAIT$
-			traits = {
-				trait = "trait_enduring"
-			}
-			immortal = yes
-			allow_negative_traits = no
-			effect = {
-				save_event_target_as = leader_species
-			}
-		}
-		create_leader = {
-			class = $CLASS$
-			species = event_target:leader_species
-			name = $NAME$
-			skill = $SKILL$
-			gender = $GENDER$
-			#event_leader = yes #若加这一项，可能会使该领袖无法进入内阁，无法参与竞选
-			immortal = yes
-			background_ethic = $ETHIC$
-			skip_background_generation = yes
-			custom_description = $DESC$
-			custom_catch_phrase = $CATCH_PHRASE$
-			hide_age = $HIDEAGE$
-			randomize_traits = no
-			effect = {
-				freeze_leader_age = yes #冻结领袖年龄
-				set_leader_flag = legendary_leader #传奇领袖，不占容量
-				set_leader_flag = should_not_have_upkeep #无维护费
-				set_leader_flag = is_in_recruit_window #位于招募事件窗口内，内阁特质不显示×
-				save_event_target_as = $EVENT_TARGET$
-				if = {
-					limit = {
-						mid_game_years_passed < 0
-					}
-					add_skill_without_trait_selection = 2
-				}
-				else_if = {
-					limit = {
-						mid_game_years_passed >= 0
-						end_game_years_passed < 0
-					}
-					add_skill_without_trait_selection = 5
-				}
-				else_if = {
-					limit = {
-						end_game_years_passed >= 0
-					}
-					add_skill_without_trait_selection = 9
-				}
-			}
-		}
-	}
-	event_target:$EVENT_TARGET$ = {
-		set_owner = root
-		exile_leader_as = SPECIAL_leader_exiled #没有这项（作为什么放逐）就会导致事件一触发就加入玩家的帝国
-	}
+SR_leader_creator = { # 领袖生成脚本：本质上是创建一个新国家，物种，领袖，然后把这个领袖clone给玩家【原版】
+    create_country = { # 创建一个新国家
+        name = "NAME_leader_country"
+        type = faction
+        auto_delete = yes
+        flag = {
+            icon = {
+                category = "special"
+                file = "unknown.dds"
+            }
+            background = {
+                category = "backgrounds"
+                file = "00_solid.dds"
+            }
+            colors = {
+                "red"
+                "red"
+                "null"
+                "null"
+            }
+        }
+        effect = {
+            save_event_target_as = leader_country
+        }
+    }
+    event_target:leader_country = { # 创建一个新物种
+        create_species = {
+            name = $SPECIES_NAME$ # 物种名称
+            class = $SPECIES_CLASS$ # 物种类别
+            portrait = $LEADER_PORTRAIT$ # 肖像
+            traits = {
+                trait = "trait_enduring" # 物种特质
+            }
+            immortal = yes
+            allow_negative_traits = no
+            effect = {
+                save_event_target_as = leader_species
+            }
+        }
+        create_leader = {
+            class = $CLASS$ # 领袖类别：科学家，指挥官，行政官
+            species = event_target:leader_species # 领袖物种
+            name = $NAME$ # 领袖名字
+            skill = $SKILL$ # 等级
+            gender = $GENDER$ # 性别
+            # event_leader = yes # 注意：若为是，领袖无法参与国家选举
+            immortal = yes # 是否为不朽
+            background_ethic = $ETHIC$ # 领袖思潮
+            skip_background_generation = yes # 禁用背景随机生成
+            custom_description = $DESC$ # 自定义文本
+            custom_catch_phrase = $CATCH_PHRASE$ # 自定义文本
+            hide_age = $HIDEAGE$ # 是否隐藏年龄
+            randomize_traits = no # 是否使用随机特质
+            effect = {
+                # freeze_leader_age = yes  # 冻结领袖年龄
+                set_leader_flag = legendary_leader  # 传奇领袖，不占容量
+                # set_leader_flag = should_not_have_upkeep  # 无维护费
+                set_leader_flag = is_in_recruit_window  # 位于招募事件窗口内，内阁特质不显示×
+                save_event_target_as = $EVENT_TARGET$
+                if = { # 下面的效果是：不到游戏中期触发：等级+2，中期末期之间，等级+5，末期以后，等级+9
+                    limit = {
+                        mid_game_years_passed < 0
+                    }
+                    add_skill_without_trait_selection = 2
+                }
+                else_if = {
+                    limit = {
+                        mid_game_years_passed >= 0
+                        end_game_years_passed < 0
+                    }
+                    add_skill_without_trait_selection = 5
+                }
+                else_if = {
+                    limit = {
+                        end_game_years_passed >= 0
+                    }
+                    add_skill_without_trait_selection = 9
+                }
+            }
+        }
+    }
+    event_target:$EVENT_TARGET$ = {
+        set_owner = root # 将领袖从空国家转移到玩家帝国
+        exile_leader_as = SR_leader_exiled  # 没有这项（作为什么放逐）就会导致事件一触发就加入玩家的帝国
+    }
 }
-SPWCIAL_hire_leader = {
-	event_target:$EVENT_TARGET$ = {
-		set_owner = root
-		remove_leader_flag = is_in_recruit_window
-		set_leader_flag = leader_death_events_blocked #阻止原版葬礼事件
-		set_leader_flag = immune_to_negative_traits #阻止自动获得负面特质
-	}
-	create_message = {
-		type = MESSAGE_RECRUITED_LEADER
-		localization =  MESSAGE_RECRUITED_LEADER_DESC
-		days = @toast_message_days
-		target = event_target:$EVENT_TARGET$
-		variable = {
-			type = name
-			localization = LEADER
-			scope = event_target:$EVENT_TARGET$
-		}
-		variable = {
-			key = "border"
-			value = "GFX_border_legendary"
-		}
-	}
+SR_hire_leader = { # 招募脚本
+    event_target:$EVENT_TARGET$ = {
+        set_owner = root
+        remove_leader_flag = is_in_recruit_window
+        set_leader_flag = leader_death_events_blocked  # 阻止原版葬礼事件
+        set_leader_flag = immune_to_negative_traits  # 阻止自动获得负面特质
+    }
+    create_message = { # 发送信息
+        type = MESSAGE_RECRUITED_LEADER
+        localization =  MESSAGE_RECRUITED_LEADER_DESC
+        days = @toast_message_days
+        target = event_target:$EVENT_TARGET$
+        variable = {
+            type = name
+            localization = LEADER
+            scope = event_target:$EVENT_TARGET$
+        }
+        variable = {
+            key = "border"
+            value = "GFX_border_legendary"
+        }
+    }
 }

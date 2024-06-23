@@ -5,71 +5,71 @@ namespace = SR_Paragon
 # 传奇领袖
 ###############
 
-###############
 # 三月七
-###############
 
 country_event = {
 	id = SR_Paragon.001
 	title = "SR_Paragon.001.name"
 	desc = "SR_Paragon.001.desc"
-	picture = GFX_evt_DOT_SR_003
-	show_sound = event_psionic
-	location = root
-	fire_only_once = yes
+	# fire_only_once = yes
 	is_triggered_only = yes
 	# trigger = { years_passed > 30 is_ai = no }
+	picture = GFX_leader_recruitment_bg_legendary_mengde
+	# 领袖招募事件背景，在gfx/interface/leaders/recruitment_bgs
+	event_window_type = leader_recruit # 使用原版的领袖招募事件ui
 	immediate = {
-		SPWCIAL_leader_creator = {
-			SPECIES_CLASS = "Star_Rail"
+		SR_leader_creator = {
+			SPECIES_NAME = "Star_Rail"
+            SPECIES_CLASS = "Star_Rail"
 			LEADER_PORTRAIT = "sanyueqi"
 			LEVEL = 5
 			CLASS = commander
 			NAME = "March_7th"
 			GENDER = female
-			# ETHIC = materialist
-			catch_phrase = materialist2_catch_phrase
-			desc = March_7th_backstory
+			ETHIC = ethic_materialist
+			CATCH_PHRASE = March_7th_catch_phrase
+            DESC = March_7th_backstory
 			event_target = March_7th_leader
 		}
 		last_created_leader = {
+			remove_all_positive_traits = yes
 			add_trait = leader_energy_countercurrent
 			add_trait = leader_stop_space
 			add_trait = leader_phase_shuttle
 			add_trait = leader_void_power
 			add_trait = leader_endless_realm
 			add_trait = leader_end_yan_law_and_order
+			# change_background_job = SR_researcher # 更改角色的背景职业
 		}
 	}
-	diplomatic = yes #是否启用外交界面
-	# diplomatic_title = SR_Paragon.001.name #外交界面标题本地化，默认为“传入通讯”
+	# diplomatic = yes # 是否启用外交界面
+	# diplomatic_title = SR_Paragon.001.name # 外交界面标题本地化，默认为“传入通讯”
 	picture_event_data = { 
-		room = "DOT_SR_Dvalin_1_room" #房间图层
-		portrait = March_7th #肖像图层，可承接 Root.Leader
+		room = "DOT_SR_Dvalin_1_room" # 房间图层
+		portrait = event_target:March_7th_leader # 存储的领袖target的肖像
 	}
 	option = {
-		name = SR_Paragon.001.a
+        name = SR_Paragon.001.a
+		# name = HIRE
 		add_resource = { minerals = 100 }
-		response_text = SR_Paragon.001.a.response
-		is_dialog_only = yes
-		tag = hire_leader
-		SPWCIAL_hire_leader = {
-			EVENT_TARGET = March_7th_leader
-		}
-		set_country_flag = March_7th_set
-        last_created_leader = {
-			set_leader_flag = legendary_leader
-			save_global_event_target_as = March_7th_leader
-			set_leader_flag = immune_to_negative_traits
-			set_leader_flag = March_7th
-		}
-		# country_event = { id = SR_Paragon.002 days = 200 }
-	}
+        tag = hire_leader
+        hidden_effect = {
+            SR_hire_leader = {# 领袖招募脚本
+                EVENT_TARGET = March_7th_leader
+            }
+            set_country_flag = March_7th_set
+            last_created_leader = {
+                set_leader_flag = legendary_leader
+                save_global_event_target_as = March_7th_leader
+                set_leader_flag = immune_to_negative_traits
+                set_leader_flag = March_7th
+            }
+        }
+    }
 	option = {
 		name = SR_Paragon.001.b
+		# name = DISMISS
+        tag = dismiss_leader
 		add_resource = { alloys = 100 }
-		# response_text = SR_Paragon.001.b.response
-		# is_dialog_only = yes
-		# country_event = { id = SR_Paragon.002 days = 200 }
 	}
 }
