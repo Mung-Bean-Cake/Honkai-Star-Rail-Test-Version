@@ -21,7 +21,7 @@ country_event = {
 	}
 	diplomatic = yes #是否启用外交界面
 	picture_event_data = { 
-	room = "DOT_SR_Dvalin_1_room" #房间图层
+	room = "DOT_SR_Dvalin_3_room" #房间图层
 	}
 	option = {
 		name = SR_Paragon.101.a
@@ -47,6 +47,26 @@ country_event = {
 		name = SR_Paragon.101.e
 		add_resource = { food = -100 }
 		country_event = { id = SR_Paragon.005 days = 10 }
+	}
+	option = {
+		name = SR_Paragon.101.f
+		add_resource = { food = -100 }
+		country_event = { id = SR_Paragon.006 days = 10 }
+	}
+	# option = {
+	#	name = SR_Paragon.101.g
+	#	add_resource = { food = -100 }
+	#	country_event = { id = SR_Paragon.007 days = 10 }
+	# }
+	option = {
+		name = SR_Paragon.101.h
+		add_resource = { food = -100 }
+		country_event = { id = SR_Paragon.008 days = 10 }
+	}
+	option = {
+		name = SR_Paragon.101.i
+		add_resource = { alloys = -100 }
+		country_event = { id = SR_Paragon.009 days = 10 }
 	}
 }
 
@@ -479,6 +499,354 @@ country_event = {
 		tag = dismiss_leader
 		hidden_effect = {
 			event_target:yinlang_leader = {
+				kill_leader = { show_notification = no }
+			}
+		}
+	}
+}
+
+# Acheron:"命途行者：黄泉" huangquan
+country_event = {
+	id = SR_Paragon.006
+	title = "SR_Paragon_Acheron"
+	desc = "SR_Paragon_Acheron_desc"
+	is_triggered_only = yes
+	picture = GFX_leader_recruitment_bg_SR_01
+	# 领袖招募事件背景，在gfx/interface/leaders/recruitment_bgs
+	event_window_type = leader_recruit # 使用原版的领袖招募事件UI
+	picture_event_data = {
+		portrait = event_target:huangquan_leader 
+		# 存储的领袖target的肖像（可以类比c语言的指针）
+		room = paragon_keides_room # 房间图像
+	}
+	immediate = {
+		hidden_effect = {
+			SR_leader_creator = { # 使用脚本，直接填写脚本的参数就行
+				SPECIES_NAME = "Star_Rail"
+				SPECIES_CLASS = "Star_Rail"
+				NAME = SR_Paragon_Acheron # 名字
+				CATCH_PHRASE = SR_Paragon_Acheron_desc # 描述
+				DESC = SR_Paragon_Acheron_desc # 描述
+				LEADER_PORTRAIT = huangquan
+				SKILL = 5
+				CLASS = commander
+				GENDER = female
+				HIDEAGE = yes
+				ETHIC = ethic_materialist
+				EVENT_TARGET = huangquan_leader
+
+			}
+			last_created_leader = {
+				remove_all_positive_traits = yes 
+				# 移除所有的特质，使用原版的领袖生成脚本会导致额外选一次特质，触发特质黑箱
+				add_trait = leader_trait_carefree
+				add_trait = leader_trait_archaeologist
+				add_trait = leader_trait_meticulous_2
+				add_trait = leader_trait_sapient_AI_assistant
+				add_trait = leader_trait_fleet_organizer
+				add_trait = trait_ruler_charismatic
+				# change_background_job = tiwate_researcher # 更改角色的背景职业
+			}
+		}
+	}
+	option = { # 对话文本
+		trigger = { }
+		name = SR_Paragon.001.a
+		is_dialog_only = yes
+		response_text = SR_Paragon.001.a.response
+	}
+	option = {
+		trigger = { }
+		name = SR_Paragon.001.b
+		is_dialog_only = yes
+		response_text = SR_Paragon.001.b.response
+	}
+
+	option = {
+		name = SR_Paragon.001.c
+		response_text = SR_Paragon.001.c.response
+		is_dialog_only = yes
+	}
+	option = {
+		name = HIRE
+		tag = hire_leader
+		SR_hire_leader = { # 领袖招募脚本
+			EVENT_TARGET = huangquan_leader
+		}
+		set_country_flag = huangquan_set
+		last_created_leader = {
+			set_leader_flag = legendary_leader
+			save_global_event_target_as = huangquan_leader
+			set_leader_flag = immune_to_negative_traits
+			set_leader_flag = huangquan
+		}
+	}
+	option = {
+		name = DISMISS
+		tag = dismiss_leader
+		hidden_effect = {
+			event_target:huangquan_leader = {
+				kill_leader = { show_notification = no }
+			}
+		}
+	}
+}
+
+# Firefly:"命途行者：流萤" liuying
+country_event = {
+	id = SR_Paragon.007
+	title = "SR_Paragon_Firefly"
+	desc = "SR_Paragon_Firefly_desc"
+	is_triggered_only = yes
+	picture = GFX_leader_recruitment_bg_SR_01
+	# 领袖招募事件背景，在gfx/interface/leaders/recruitment_bgs
+	event_window_type = leader_recruit # 使用原版的领袖招募事件UI
+	picture_event_data = {
+		portrait = event_target:liuying_leader 
+		# 存储的领袖target的肖像（可以类比c语言的指针）
+		room = paragon_keides_room # 房间图像
+	}
+	immediate = {
+		hidden_effect = {
+			SR_leader_creator = { # 使用脚本，直接填写脚本的参数就行
+				SPECIES_NAME = "Star_Rail"
+				SPECIES_CLASS = "Star_Rail"
+				NAME = SR_Paragon_Firefly # 名字
+				CATCH_PHRASE = SR_Paragon_Firefly_desc # 描述
+				DESC = SR_Paragon_Firefly_desc # 描述
+				LEADER_PORTRAIT = liuying
+				SKILL = 5
+				CLASS = commander
+				GENDER = female
+				HIDEAGE = yes
+				ETHIC = ethic_materialist
+				EVENT_TARGET = liuying_leader
+
+			}
+			last_created_leader = {
+				remove_all_positive_traits = yes 
+				# 移除所有的特质，使用原版的领袖生成脚本会导致额外选一次特质，触发特质黑箱
+				add_trait = leader_trait_carefree
+				add_trait = leader_trait_archaeologist
+				add_trait = leader_trait_meticulous_2
+				add_trait = leader_trait_sapient_AI_assistant
+				add_trait = leader_trait_fleet_organizer
+				add_trait = trait_ruler_charismatic
+				# change_background_job = tiwate_researcher # 更改角色的背景职业
+			}
+		}
+	}
+	option = { # 对话文本
+		trigger = { }
+		name = SR_Paragon.001.a
+		is_dialog_only = yes
+		response_text = SR_Paragon.001.a.response
+	}
+	option = {
+		trigger = { }
+		name = SR_Paragon.001.b
+		is_dialog_only = yes
+		response_text = SR_Paragon.001.b.response
+	}
+
+	option = {
+		name = SR_Paragon.001.c
+		response_text = SR_Paragon.001.c.response
+		is_dialog_only = yes
+	}
+	option = {
+		name = HIRE
+		tag = hire_leader
+		SR_hire_leader = { # 领袖招募脚本
+			EVENT_TARGET = liuying_leader
+		}
+		set_country_flag = liuying_set
+		last_created_leader = {
+			set_leader_flag = legendary_leader
+			save_global_event_target_as = liuying_leader
+			set_leader_flag = immune_to_negative_traits
+			set_leader_flag = liuying
+		}
+	}
+	option = {
+		name = DISMISS
+		tag = dismiss_leader
+		hidden_effect = {
+			event_target:liuying_leader = {
+				kill_leader = { show_notification = no }
+			}
+		}
+	}
+}
+
+# Jingliu:"命途行者：镜流" jingliu
+country_event = {
+	id = SR_Paragon.008
+	title = "SR_Paragon_Jingliu"
+	desc = "SR_Paragon_Jingliu_desc"
+	is_triggered_only = yes
+	picture = GFX_leader_recruitment_bg_SR_01
+	# 领袖招募事件背景，在gfx/interface/leaders/recruitment_bgs
+	event_window_type = leader_recruit # 使用原版的领袖招募事件UI
+	picture_event_data = {
+		portrait = event_target:jingliu_leader 
+		# 存储的领袖target的肖像（可以类比c语言的指针）
+		room = paragon_keides_room # 房间图像
+	}
+	immediate = {
+		hidden_effect = {
+			SR_leader_creator = { # 使用脚本，直接填写脚本的参数就行
+				SPECIES_NAME = "Star_Rail"
+				SPECIES_CLASS = "Star_Rail"
+				NAME = SR_Paragon_Jingliu # 名字
+				CATCH_PHRASE = SR_Paragon_Jingliu_desc # 描述
+				DESC = SR_Paragon_Jingliu_desc # 描述
+				LEADER_PORTRAIT = jingliu
+				SKILL = 5
+				CLASS = commander
+				GENDER = female
+				HIDEAGE = yes
+				ETHIC = ethic_materialist
+				EVENT_TARGET = jingliu_leader
+
+			}
+			last_created_leader = {
+				remove_all_positive_traits = yes 
+				# 移除所有的特质，使用原版的领袖生成脚本会导致额外选一次特质，触发特质黑箱
+				add_trait = leader_trait_carefree
+				add_trait = leader_trait_archaeologist
+				add_trait = leader_trait_meticulous_2
+				add_trait = leader_trait_sapient_AI_assistant
+				add_trait = leader_trait_fleet_organizer
+				add_trait = trait_ruler_charismatic
+				# change_background_job = tiwate_researcher # 更改角色的背景职业
+			}
+		}
+	}
+	option = { # 对话文本
+		trigger = { }
+		name = SR_Paragon.001.a
+		is_dialog_only = yes
+		response_text = SR_Paragon.001.a.response
+	}
+	option = {
+		trigger = { }
+		name = SR_Paragon.001.b
+		is_dialog_only = yes
+		response_text = SR_Paragon.001.b.response
+	}
+
+	option = {
+		name = SR_Paragon.001.c
+		response_text = SR_Paragon.001.c.response
+		is_dialog_only = yes
+	}
+	option = {
+		name = HIRE
+		tag = hire_leader
+		SR_hire_leader = { # 领袖招募脚本
+			EVENT_TARGET = jingliu_leader
+		}
+		set_country_flag = jingliu_set
+		last_created_leader = {
+			set_leader_flag = legendary_leader
+			save_global_event_target_as = jingliu_leader
+			set_leader_flag = immune_to_negative_traits
+			set_leader_flag = jingliu
+		}
+	}
+	option = {
+		name = DISMISS
+		tag = dismiss_leader
+		hidden_effect = {
+			event_target:jingliu_leader = {
+				kill_leader = { show_notification = no }
+			}
+		}
+	}
+}
+
+# Ruan_Mei:"命途行者：阮梅" ruanmei
+country_event = {
+	id = SR_Paragon.009
+	title = "SR_Paragon_Ruan_Mei"
+	desc = "SR_Paragon_Ruan_Mei_desc"
+	is_triggered_only = yes
+	picture = GFX_leader_recruitment_bg_SR_01
+	# 领袖招募事件背景，在gfx/interface/leaders/recruitment_bgs
+	event_window_type = leader_recruit # 使用原版的领袖招募事件UI
+	picture_event_data = {
+		portrait = event_target:ruanmei_leader 
+		# 存储的领袖target的肖像（可以类比c语言的指针）
+		room = paragon_keides_room # 房间图像
+	}
+	immediate = {
+		hidden_effect = {
+			SR_leader_creator = { # 使用脚本，直接填写脚本的参数就行
+				SPECIES_NAME = "Star_Rail"
+				SPECIES_CLASS = "Star_Rail"
+				NAME = SR_Paragon_Ruan_Mei # 名字
+				CATCH_PHRASE = SR_Paragon_Ruan_Mei_desc # 描述
+				DESC = SR_Paragon_Ruan_Mei_desc # 描述
+				LEADER_PORTRAIT = ruanmei
+				SKILL = 5
+				CLASS = scientist
+				GENDER = female
+				HIDEAGE = yes
+				ETHIC = ethic_materialist
+				EVENT_TARGET = ruanmei_leader
+
+			}
+			last_created_leader = {
+				remove_all_positive_traits = yes 
+				# 移除所有的特质，使用原版的领袖生成脚本会导致额外选一次特质，触发特质黑箱
+				add_trait = leader_trait_carefree
+				add_trait = leader_trait_archaeologist
+				add_trait = leader_trait_meticulous_2
+				add_trait = leader_trait_sapient_AI_assistant
+				add_trait = leader_trait_fleet_organizer
+				add_trait = trait_ruler_charismatic
+				# change_background_job = tiwate_researcher # 更改角色的背景职业
+			}
+		}
+	}
+	option = { # 对话文本
+		trigger = { }
+		name = SR_Paragon.001.a
+		is_dialog_only = yes
+		response_text = SR_Paragon.001.a.response
+	}
+	option = {
+		trigger = { }
+		name = SR_Paragon.001.b
+		is_dialog_only = yes
+		response_text = SR_Paragon.001.b.response
+	}
+
+	option = {
+		name = SR_Paragon.001.c
+		response_text = SR_Paragon.001.c.response
+		is_dialog_only = yes
+	}
+	option = {
+		name = HIRE
+		tag = hire_leader
+		SR_hire_leader = { # 领袖招募脚本
+			EVENT_TARGET = ruanmei_leader
+		}
+		set_country_flag = ruanmei_set
+		last_created_leader = {
+			set_leader_flag = legendary_leader
+			save_global_event_target_as = ruanmei_leader
+			set_leader_flag = immune_to_negative_traits
+			set_leader_flag = ruanmei
+		}
+	}
+	option = {
+		name = DISMISS
+		tag = dismiss_leader
+		hidden_effect = {
+			event_target:ruanmei_leader = {
 				kill_leader = { show_notification = no }
 			}
 		}
