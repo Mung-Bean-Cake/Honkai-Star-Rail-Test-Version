@@ -921,7 +921,7 @@ DOT_SR_system_03 = {
 		}
 		moon = {
 			name = "The_Xianzhou_Luofu"
-			class = pc_habitat_honkai
+			class = pc_xianzhou
 			orbit_angle = { min = 90 max = 270 }
 			orbit_distance = 15
 			size = 20
@@ -934,6 +934,7 @@ DOT_SR_system_03 = {
 				clear_blockers = yes
 				generate_start_luofu_buildings_and_districts = yes
 				generate_start_luofu_pops = yes
+				add_deposit = d_former_battlefield
 			}		
 			deposit_blockers = none
 		}
@@ -988,7 +989,7 @@ DOT_SR_system_03 = {
 			}
 		}
 	}
-	#持明 虚陵
+	#持明 方壶
 	planet = {
 		name = "The_Chiming_Motherland"
 		class = "pc_shattered"
@@ -997,6 +998,7 @@ DOT_SR_system_03 = {
 		size = 20
 		has_ring = yes
 		init_effect = {
+			add_deposit = d_volatile_motes_5
 			create_ambient_object = {
 				type = "large_debris_object"
 				entity_offset_height = { min = -0 max = -25 }
@@ -1047,8 +1049,8 @@ DOT_SR_system_03 = {
 			}
 		}
 		moon = {
-			name = "The_Xianzhou_Xvling"
-			class = pc_habitat_honkai
+			name = "The_Xianzhou_Fanghu"
+			class = pc_xianzhou
 			orbit_angle = { min = 90 max = 270 }
 			orbit_distance = 18
 			size = 30
@@ -1058,6 +1060,7 @@ DOT_SR_system_03 = {
 				clear_blockers = yes
 				generate_start_luofu_buildings_and_districts = yes
 				generate_start_luofu_pops = yes
+				add_deposit = d_former_battlefield
 			}
 			# deposit_blockers = none
 		}
@@ -1071,7 +1074,7 @@ DOT_SR_system_03 = {
 		size = 15
 		has_ring = yes
 		init_effect = {
-			add_deposit = d_energy_5
+			add_deposit = d_dark_matter_deposit_10
 		}
 		init_effect = {
 			create_ambient_object = {
@@ -1125,7 +1128,7 @@ DOT_SR_system_03 = {
 		}
 		moon = {
 			name = "The_Xianzhou_Yaoqing"
-			class = pc_habitat_honkai
+			class = pc_xianzhou
 			orbit_angle = { min = 90 max = 270 }
 			orbit_distance = 15
 			size = 30
@@ -1135,6 +1138,7 @@ DOT_SR_system_03 = {
 				clear_blockers = yes
 				generate_start_luofu_buildings_and_districts = yes
 				generate_start_luofu_pops = yes
+				add_deposit = d_former_battlefield
 			}
 			# deposit_blockers = none
 		}
@@ -1142,10 +1146,10 @@ DOT_SR_system_03 = {
 
 	planet = {
 		name = "The_Xianzhou_Yuque"
-		class = pc_habitat_honkai
+		class = pc_xianzhou
 		has_ring = yes
 		orbit_distance = 30
-		orbit_angle = -210
+		orbit_angle = -90
 		size = 30
 		init_effect = { 
 			set_planet_entity = { entity = "Xingcha_Planet_entity" }
@@ -1153,40 +1157,80 @@ DOT_SR_system_03 = {
 			clear_blockers = yes
 			generate_start_luofu_buildings_and_districts = yes
 			generate_start_luofu_pops = yes
+			add_deposit = d_former_battlefield
 		}
 		# deposit_blockers = none
 	}
 
 	planet = {
-		class = "pc_asteroid"
-		orbit_distance = 0
-		orbit_angle = -95
-		size = 5
-		has_ring = no
-		init_effect = {
-			add_deposit = d_energy_5
-			set_deposit = d_rare_crystals_3
-		}
-	}
-
-	planet = {
+		name = "Jianmu"
 		class = "pc_asteroid"
 		orbit_distance = 0
 		orbit_angle = -150
 		size = 5
 		has_ring = no
 		init_effect = {
-			set_deposit = d_volatile_motes_5
+			add_deposit = d_energy_5
 			set_deposit = d_rare_crystals_3
+		}
+		init_effect = {
+			create_ambient_object = {
+				type = "large_debris_object"
+				entity_offset_height = { min = -0 max = -25 }
+				location = this
+			}
+			last_created_ambient_object = {
+				set_location = {
+					target = prev
+					distance = 15
+					angle = random
+				}
+			}
+			create_ambient_object = {
+				type = "medium_debris_01_object"
+				entity_offset_height = { min = -0 max = -25 }
+				location = this
+			}
+			last_created_ambient_object = {
+				set_location = {
+					target = prev
+					distance = 15
+					angle = random
+				}
+			}
+			create_ambient_object = {
+				type = "medium_debris_02_object"
+				entity_offset_height = { min = -0 max = -25 }
+				location = this
+			}
+			last_created_ambient_object = {
+				set_location = {
+					target = prev
+					distance = 15
+					angle = random
+				}
+			}
+			create_ambient_object = {
+				type = "small_debris_object"
+				entity_offset_height = { min = -0 max = -25 }
+				location = this
+			}
+			last_created_ambient_object = {
+				set_location = {
+					target = prev
+					distance = 15
+					angle = random
+				}
+			}
 		}
 	}
 
 	planet = {
-		name = "The_Xianzhou_Zhuming"
-		class = pc_habitat_honkai
+		name = "The_Xianzhou_Xvling"
+		class = pc_xianzhou
 		has_ring = yes
 		orbit_distance = 0
-		orbit_angle = -320
+		orbit_angle = -270
 		size = 30
 		init_effect = { 
 			set_planet_entity = { entity = "Xingcha_Planet_entity" }
@@ -1199,25 +1243,43 @@ DOT_SR_system_03 = {
 	}
 
 	planet = {
-		class = "pc_barren"
+		name = "The_Xianzhou_Zhuming"
+		class = pc_xianzhou
+		has_ring = yes
+		orbit_distance = 0
+		orbit_angle = -180
+		size = 30
+		init_effect = { 
+			set_planet_entity = { entity = "Xingcha_Planet_entity" }
+			generate_luofu_deposits_and_blockers = yes
+			clear_blockers = yes
+			generate_start_luofu_buildings_and_districts = yes
+			generate_start_luofu_pops = yes
+		}
+		# deposit_blockers = none
+	}
+
+	planet = {
+		name = "Ten_Lords_Commission"
+		class = pc_molten
 		orbit_distance = 30
 		orbit_angle = 45
 		size = 20
 		has_ring = no
 		init_effect = {
-			add_deposit = d_energy_5
+			add_deposit = d_zro_deposit_5
 		}
 		moon = {
-				class = "pc_toxic"
-				orbit_angle = { min = 90 max = 270 }
-				orbit_distance = 15
-				size = 5
-				flags = { planet_earth }
-				init_effect = { 
-				add_deposit = d_energy_4	
-				}
-				deposit_blockers = none
+			class = "pc_toxic"
+			orbit_angle = { min = 90 max = 270 }
+			orbit_distance = 15
+			size = 5
+			flags = { planet_earth }
+			init_effect = { 
+				add_deposit = d_exotic_gases_5
 			}
+			deposit_blockers = none
+		}
 	}
 }
 
