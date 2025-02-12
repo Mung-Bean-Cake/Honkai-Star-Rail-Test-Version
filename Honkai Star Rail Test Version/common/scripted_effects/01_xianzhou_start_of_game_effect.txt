@@ -39,3 +39,125 @@ generate_start_luofu_pops = {
 		}
 	}
 }
+create_xianzhou_npc_effect = {
+	optimize_memory
+	create_species = {
+		class = "Star_Rail"
+		portrait = "Xianzhou_Alliance"
+		name = "Xianzhou_Alliance_People"
+		plural = "Xianzhou_Alliance_People"
+		adjective = "Xianzhou_Alliance_People"
+		# name_list = "HUMAN2"
+		name_list = "DOT_SR_HUMAN1"
+		traits = {
+			trait="trait_Honkai"
+			trait="trait_The_Hunt"
+			trait="trait_IPC_Life_Saver"
+		}
+	}
+	create_country = {
+		name = "Xianzhou_Alliance"
+		adjective = "Xianzhou_Alliance"
+		species = last_created_species
+		type = default
+		flag = {
+			icon= {
+				category = "DOT_SR"
+				file = "DOT_SR_06.dds"
+			}
+			background= {
+				category = "backgrounds"
+				file = "00_solid.dds"
+			}
+			colors={
+				"white"
+				"black"
+				"null"
+				"null"
+			}
+		}
+		origin = "origin_Xianzhou"
+		ethos = {
+			ethic = ethic_xenophile
+			ethic = ethic_militarist
+			ethic = ethic_materialist
+		}
+		civics = {
+			civic = civic_The_Hunt
+			civic = civic_zhuxing
+		}
+		authority = auth_dictatorial
+		ship_prefix = "Xianzhou_Alliance"
+		effect = {
+			save_global_event_target_as = xianzhou_country
+			set_country_flag =xianzhou
+		}
+	}
+	create_colony = {
+		owner = event_target:xianzhou_country
+	}
+	generate_start_deposits_and_blockers = yes
+	generate_start_buildings_and_districts = yes
+	generate_start_pops = yes
+	event_target:xianzhou_country = {
+		create_starting_leaders = yes
+		set_ai_personality =  erudite_explorers
+		add_resource = { minerals = 10000 energy = 10000 alloys = 5000 consumer_goods = 5000 food = 1000  unity = 10000}
+		ruler = {
+			set_name = "Jing_Yuan"
+			set_gender = male
+			change_leader_portrait = "jingyuan"
+			add_trait="leader_trait_fleet_organizer"
+			change_leader_class="commander"
+			add_skill_without_trait_selection = 6
+		}
+		create_fleet = {
+			effect = {
+				set_owner = event_target:xianzhou_country
+				create_ship = {
+					name = random
+					random_existing_design = science
+				}
+				set_fleet_stance = evasive
+				set_location = event_target:xianzhou_country.capital_scope.star
+				owner = {
+					create_leader = {
+						class = scientist
+						sub_type = survey
+						name = random
+						species = owner_main_species
+					}
+				}
+				set_leader = last_created_leader
+			}
+		}
+		create_fleet = {
+			name = "Xianzhou_Alliance"
+			effect = {
+				set_owner = event_target:xianzhou_country
+				while = {
+					count = 20
+					create_ship = {
+						name = "NAME_Payback_Digsite_Drone"
+						design = "NAME_Payback_Digsite_Drone"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+				}
+				set_location = event_target:xianzhou_country.capital_scope.star
+				set_fleet_stance = aggressive
+				set_aggro_range_measure_from = return_point
+				set_aggro_range = 0
+				queue_actions = {
+					wait = {
+						duration = 320
+						random = 80
+					}
+				}
+			}
+		}
+		capital_scope.system_star = {
+
+		}
+		owner_species = { set_species_homeworld = prevprev }
+	}
+}

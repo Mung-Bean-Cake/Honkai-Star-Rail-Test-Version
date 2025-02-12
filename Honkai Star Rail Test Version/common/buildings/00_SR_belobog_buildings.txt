@@ -157,3 +157,209 @@ building_belobog_history_and_culture_museum = {
 
 	upgrades = {}
 }
+building_kelibobao = {
+	capital = no
+	can_build = no
+	can_demolish = no
+	can_be_disabled = no
+	can_be_ruined = yes
+	icon = building_kelibobao
+	position_priority = 0
+	empire_limit = 1
+
+	category = government
+	potential = {
+		exists = owner
+		owner = { has_origin = origin_belobog }
+	}
+	convert_to = {
+		building_hive_capital
+		building_machine_capital
+		building_resort_capital
+		building_slave_capital
+		building_ancient_control_center
+		building_ancient_palace
+	}
+
+	destroy_trigger = {}
+	ruined_trigger = {}
+
+	planet_modifier = {
+		job_enforcer_add = 1
+		job_politician_add = 1
+		job_researcher_add = 1
+		job_tiwei_soldier_add = 3
+		planet_housing_add = 4
+		planet_amenities_add = 15
+		trade_value_add = 5
+		planet_max_buildings_add = 1
+	}
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = {
+				has_country_flag = belobog_story_outer_space_exploration_start
+			}
+		}
+		job_researcher_add = 1
+		planet_amenities_add = 5
+	}
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = {
+				has_country_flag = yaliluo_liexie_over
+				check_variable = {
+					which = count_zaowuyinqing
+					value = 1
+				}
+			}
+		}
+		job_yaliluo_maintenance_worker_add = 10
+	}
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = {
+				has_country_flag = yaliluo_liexie_over
+				check_variable = {
+					which = count_zaowuyinqing
+					value = 2
+				}
+			}
+		}
+		job_yaliluo_maintenance_worker_add = 20
+	}
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = {
+				has_country_flag = yaliluo_liexie_over
+				check_variable = {
+					which = count_zaowuyinqing
+					value = 3
+				}
+			}
+		}
+		job_yaliluo_maintenance_worker_add = 30
+	}
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = {
+				has_country_flag = yaliluo_liexie_over
+				check_variable = {
+					which = count_zaowuyinqing
+					value = 4
+				}
+			}
+		}
+		job_yaliluo_maintenance_worker_add = 40
+	}
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = {
+				has_country_flag = yaliluo_liexie_over
+				check_variable = {
+					which = count_zaowuyinqing
+					value = 5
+				}
+			}
+		}
+		job_yaliluo_maintenance_worker_add = 50
+	}
+	resources = {
+		category = planet_buildings
+		produces = {
+			energy = 15
+			minerals = 15
+			alloys = 5
+			consumer_goods = 5
+		}
+		upkeep = {
+			energy = 4
+			minerals = 4
+		}
+		produces = {}
+	}
+
+	upgrades = {}
+}
+building_belobog_museum = {
+	capital = no
+	can_build = no
+	can_demolish = no
+	can_be_disabled = no
+	can_be_ruined = yes
+	icon = building_belobog_museum
+	position_priority = 0
+	empire_limit = 1
+
+	category = government
+	potential = {
+		exists = owner
+		owner = { has_origin = origin_belobog }
+	}
+
+	destroy_trigger = {}
+	ruined_trigger = {}
+
+	planet_modifier = {
+		job_culture_worker_add = 1
+		job_culture_worker_per_pop = 15
+		planet_jobs_unity_produces_mult = 0.15
+		planet_amenities_mult = 0.25
+		trade_value_add = 10
+	}
+	country_modifier = {
+		leader_initial_skill = 1
+		pop_happiness = 0.1
+	}
+	resources = {
+		category = planet_buildings
+		upkeep = {
+			energy = 3
+			minerals = 3
+			consumer_goods = 3
+		}
+		produces = {}
+	}
+
+	upgrades = {}
+}
+building_yinbing_tiewei = {
+	base_buildtime = 600
+	base_cap_amount = 1
+	category = resource
+	potential = {
+		exists = owner
+		owner = {
+			is_regular_empire = yes
+			has_civic = civic_tiewei
+		}
+		NOT = {
+			has_modifier = slave_colony
+		}
+	}
+	planet_modifier = {
+		job_tiwei_soldier_add = 4
+	}
+	country_modifier = {
+		country_commander_cap_add = 1
+		country_naval_cap_mult = 0.05
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			minerals = 1500
+		}
+		upkeep = {
+			energy = 3
+			minerals = 1
+		}
+		produces = {}
+	}
+
+	upgrades = {}
+}

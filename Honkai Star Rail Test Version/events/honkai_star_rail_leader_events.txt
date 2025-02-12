@@ -1,0 +1,399 @@
+namespace = hsr_leader
+planet_event = {	#作战再部署，招募陆军
+    id = hsr_leader.1
+    is_triggered_only = yes
+    hide_window = yes
+
+    trigger = {
+        this.owner = {
+            any_owned_leader = {
+                is_councilor = yes
+                has_trait = leader_trait_combat_redeployment
+            }
+        }
+    }
+
+    immediate = {
+        this.owner = {
+            add_resource = { unity = 50 }
+            random_owned_leader = {
+                add_experience = 50
+            }
+        }
+    }
+}
+country_event = {#贝洛伯格进行曲，太空战斗获胜
+    id = hsr_leader.2
+    hide_window = yes
+    is_triggered_only = yes
+
+    trigger = {
+        this = {
+            any_owned_leader = {
+                is_councilor = yes
+                has_trait = leader_trait_the_belobog_march
+            }
+        }
+    }
+
+    immediate = {
+        this = {
+            random_owned_leader = {
+                add_experience = 300
+                remove_trait = all_negative
+            }
+            add_monthly_resource_mult = {
+                resource = unity
+                value = 0.25
+            }
+        }
+    }
+}
+country_event = {	#杰帕德，震慑之击
+    id = hsr_leader.3
+    is_triggered_only = yes
+    hide_window = yes
+
+    trigger = {
+        OR = {
+            fromfromfrom = {
+                exists = leader
+                leader = {
+                    OR = {
+                        has_trait = leader_trait_daunting_smite
+                    }
+                }
+            }
+            fromfrom = {
+                exists = leader
+                leader = {
+                    OR = {
+                        has_trait = leader_trait_daunting_smite
+                    }
+                }
+            }
+        }
+    }
+
+    immediate = {
+        if = {
+            limit = {
+                exists = leader
+                leader = {
+                    OR = {
+                        has_trait = leader_trait_daunting_smite
+                    }
+                }
+            }
+            fromfrom = {
+                if = {
+                    limit = {
+                        NOT = {
+                            has_fleet_flag = frost_skill_fleet_flag
+                        }
+                    }
+                    if = {
+                        limit = {
+                            fromfromfrom = {
+                                leader = {
+                                    has_trait = leader_trait_daunting_smite
+                                }
+                            }
+                        }
+                        add_modifier = {
+                            modifier = frost_skill
+                            days = 15
+                        }
+                        set_timed_fleet_flag = {
+                            flag = frost_skill_fleet_flag
+                            days = 90
+                        }
+                    }
+                }
+            }
+        }
+        else = {
+            fromfromfrom = {
+                if = {
+                    limit = {
+                        NOT = {
+                            has_fleet_flag = frost_skill_fleet_flag
+                        }
+                    }
+                    if = {
+                        limit = {
+                            fromfrom = {
+                                leader = {
+                                    has_trait = leader_trait_daunting_smite
+                                }
+                            }
+                        }
+                        add_modifier = {
+                            modifier = frost_skill
+                            days = 15
+                        }
+                        set_timed_fleet_flag = {
+                            flag = frost_skill_fleet_flag
+                            days = 90
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+country_event = {		#杰帕德，永屹之壁
+    id = hsr_leader.4
+    is_triggered_only = yes
+    hide_window = yes
+
+    trigger = {
+        from = {
+            OR = {
+                AND = {
+                    exists = attacker
+                    attacker = {
+                        leader = {
+                            is_councilor = yes
+                            OR = {
+                                has_trait = leader_trait_enduring_bulwark
+                            }
+                        }
+                    }
+                }
+                AND = {
+                    exists = defender
+                    defender = {
+                        leader = {
+                            is_councilor = yes
+                            OR = {
+                                has_trait = leader_trait_enduring_bulwark
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    immediate = {
+        remove_modifier = daunting_smite
+        if = {
+            limit = {
+                any_owned_leader = {
+                    is_councilor = yes
+                    has_trait = leader_trait_enduring_bulwark
+                }
+            }
+            add_modifier = {
+                modifier = daunting_smite
+                days = 360
+            }
+        }
+    }
+}
+country_event = {
+	id = hsr_leader.5
+	is_triggered_only = yes
+	hide_window = yes
+
+	trigger = {
+		any_owned_leader = {
+			OR = {
+				has_trait = leader_trait_lightning_flash
+			}
+			exists = solar_system
+			solar_system = {
+				is_same_value = from.solar_system
+			}
+		}
+	}
+
+	immediate = {
+		salvage_ships_from_debris = {
+			CHANCE = 90
+		}
+	}
+}
+country_event = {#领袖升级触发器
+    id = hsr_leader.6
+    hide_window = yes
+    is_triggered_only = yes
+    trigger = {
+        any_owned_leader = {
+            is_councilor = yes
+            has_trait = leader_trait_here_comes_the_mechanical_fever
+        }
+    }
+    immediate = {
+        from = {
+            leader_event = {
+                id = hsr_leader.7
+            }
+        }
+    }
+}
+leader_event= {
+    id = hsr_leader.7
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = {
+        ROOT.owner = {
+            add_random_research_option = {
+                add_progress = 0.1
+                ignore_prereqs = no
+                fail_effects = {
+                    add_monthly_resource_mult = {
+                        resource = physics_research
+                        value = @tier3researchreward
+                        min = @tier3researchmin
+                        max = @tier3researchmax
+                    }
+                }
+            }
+        }
+    }
+}
+country_event = {	#希儿归刃
+    id = hsr_leader.8
+    is_triggered_only = yes
+    hide_window = yes
+
+    trigger = {
+        fromfrom = {
+            exists = leader
+            any_owned_leader = {
+                OR = {
+                    has_trait = leader_trait_xier_1
+                }
+            }
+        }
+        fromfromfrom = {
+            is_ship_class = shipclass_military
+        }
+    }
+
+    immediate = {
+        fromfrom = {
+            if = {
+                limit = {
+                    leader = {
+                        has_trait = leader_trait_xier_1
+                    }
+                }
+                root = {
+                    change_variable = {
+                        which = count_cold_heart
+                        value = 1
+                    }
+                    add_monthly_resource_mult = {
+                        resource = energy
+                        value = 0.15
+                    }
+                    add_monthly_resource_mult = {
+                        resource = alloys
+                        value = 0.15
+                    }
+                }
+            }
+        }
+    }
+}
+country_event = {
+    id = hsr_leader.9
+    is_triggered_only = yes
+    hide_window = yes
+
+    trigger = {
+        OR = {
+            fromfromfrom = {
+                exists = leader
+                leader = {
+                    OR = {
+                        has_trait = leader_trait_xier_2
+                    }
+                }
+            }
+            fromfrom = {
+                exists = leader
+                leader = {
+                    OR = {
+                        has_trait = leader_trait_xier_2
+                    }
+                }
+            }
+        }
+    }
+
+    immediate = {
+        if = {
+            limit = {
+                fromfromfrom = {
+                    leader = {
+                        OR = {
+                            has_trait = leader_trait_xier_2
+                        }
+                    }
+                }
+            }
+            if = {
+                limit = {
+                    fromfrom = {
+                        NOT = {
+                            has_fleet_flag = xier_skil_fleet_flag
+                        }
+                    }
+                }
+                fromfrom = {
+                    if = {
+                        limit = {
+                            fromfromfrom = {
+                                leader = {
+                                    has_trait = leader_trait_xier_2
+                                }
+                            }
+                        }
+                        add_modifier = {
+                            modifier = xier_debuff
+                            days = 30
+                        }
+                        set_timed_fleet_flag = {
+                            flag = xier_skil_fleet_flag
+                            days = 28
+                        }
+                    }
+                }
+            }
+        }
+        else = {
+            if = {
+                limit = {
+                    fromfromfrom = {
+                        NOT = {
+                            has_fleet_flag = xier_skil_fleet_flag
+                        }
+                    }
+                }
+                fromfromfrom = {
+                    if = {
+                        limit = {
+                            fromfrom = {
+                                leader = {
+                                    has_trait = leader_trait_xier_2
+                                }
+                            }
+                        }
+                        add_modifier = {
+                            modifier = xier_debuff
+                            days = 30
+                        }
+                        set_timed_fleet_flag = {
+                            flag = xier_skil_fleet_flag
+                            days = 28
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -70,3 +70,239 @@ d_belobog_blocker_2 = {#寒潮
 		}
 	}
 }
+d_belobog_blocker_liexi = {#大裂界
+	icon = d_buried_lithoids #d_belobog_blocker_1
+	time = 270
+	is_for_colonizable = yes
+	category = deposit_cat_blockers
+	drop_weight = { base = 0 }
+
+	can_be_cleared = {
+		always = no
+	}
+	#on_cleared = { event_target:SRB_planet_jarilo = { planet_event = { id = SR_belobog.30 } } }
+
+	potential = { always = yes }
+
+	planet_modifier = {
+		planet_max_districts_add = -1	##
+		planet_stability_add = -1
+	}
+
+	resources = {
+		category = deposit_blockers
+		cost = {
+			#energy = 500
+		}
+	}
+}
+d_belobog_blocker_small = {#小裂界
+	icon = d_city_ruins
+	time = 270
+	is_for_colonizable = yes
+	category = deposit_cat_blockers
+	drop_weight = { base = 0 }
+
+	can_be_cleared = {
+		owner = {
+			has_technology = tech_yaliluo_liexi_research_2
+		}
+	}
+	on_cleared = {
+		if = {
+			limit = { owner = {has_country_flag = liexie_research has_technology = tech_yaliluo_liexi_research_2} }
+			owner = {
+				add_resource = {
+					physics_research = 15
+					society_research = 15
+					engineering_research = 15
+				}
+			}
+		}
+		else_if = {
+			limit = { owner = {has_country_flag = liexie_energy has_technology = tech_yaliluo_liexi_research_2} }
+			owner = {
+				add_resource = {
+					energy = 70
+					minerals = 50
+				}
+			}
+		}
+		create_country = {
+			name = "NAME_lieixi"
+			type = faction
+			flag = random
+		}
+		while = {
+			count = value:num_belobog_blocker_liexi_small
+			create_army = {
+				name = "belobog_blocker_1_army_1"
+				owner = last_created_country
+				type = belobog_blocker_1_army_1
+			}
+			create_army = {
+				name = "belobog_blocker_1_army_4"
+				owner = last_created_country
+				type = belobog_blocker_1_army_4
+			}
+		}
+		while = {
+			count = value:num_belobog_blocker_liexi_small
+			create_army = {
+				name = "belobog_blocker_1_army_1"
+				owner = last_created_country
+				type = belobog_blocker_1_army_1
+			}
+		}
+	}
+
+	potential = { always = yes }
+
+	planet_modifier = {
+		pop_environment_tolerance = -0.025
+		planet_jobs_upkeep_mult = 0.025
+	}
+
+	resources = {
+		category = deposit_blockers
+		cost = {
+			#energy = 500
+		}
+	}
+}
+d_belobog = {
+	is_for_colonizable = yes
+	planet_modifier = {
+		pop_happiness = 0.2
+		pop_growth_speed = 0.2
+		planet_jobs_upkeep_mult = -0.2
+	}
+	resources = {
+		category = deposit_blockers
+		produces = {
+			unity = 10
+			energy = 20
+			minerals = 20
+			food = 10
+			consumer_goods = 5
+			alloys = 5
+		}
+	}
+	drop_weight = {
+		weight = 0
+	}
+}
+d_zaowuyinqing = {
+	is_for_colonizable = yes
+	planet_modifier = {
+		job_yaliluo_maintenance_worker_add = 20
+	}
+	resources = {
+		category = deposit_blockers
+		produces = {
+			engineering_research = 6
+			society_research = 6
+			physics_research = 6
+		}
+		upkeep = {
+			energy = 5
+			minerals = 5
+			alloys = 3
+		}
+	}
+	drop_weight = {
+		weight = 0
+	}
+}
+d_energy_block = {
+	is_for_colonizable = yes
+	planet_modifier = {
+		planet_jobs_energy_produces_mult = 0.1
+		job_yaliluo_maintenance_worker_add = 10
+	}
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = { has_country_flag = yaliluo_story_development_first }
+		}
+		planet_jobs_physics_research_produces_mult = 0.1
+		job_yaliluo_maintenance_worker_add = 5
+	}
+	resources = {
+		category = deposit_blockers
+		produces = {
+			energy = 10
+		}
+	}
+	drop_weight = {
+		weight = 0
+	}
+}
+d_mineral_block = {
+	is_for_colonizable = yes
+	planet_modifier = {
+		planet_jobs_minerals_produces_mult = 0.1
+		job_researcher_add = 5
+	}
+	resources = {
+		category = deposit_blockers
+		produces = {
+			minerals = 10
+		}
+	}
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = { has_country_flag = yaliluo_story_development_first }
+		}
+		planet_jobs_engineering_research_produces_mult = 0.1
+		job_researcher_add = 5
+	}
+	drop_weight = {
+		weight = 0
+	}
+}
+d_mineral_alloy = {
+	is_for_colonizable = yes
+	icon = d_mineral_striations
+	planet_modifier = {
+		district_mining_max = 1
+		district_generator_max = 1
+		planet_max_districts_add = 2
+		job_yaliluo_maintenance_worker_add = 5
+	}
+	resources = {
+		category = deposit_blockers
+		produces = {
+			minerals = 20
+			energy = 20
+			alloys = 5
+		}
+	}
+	drop_weight = {
+		weight = 0
+	}
+}
+d_west_research = {
+	is_for_colonizable = yes
+	icon = d_building_complex
+	planet_modifier = {
+		job_head_researcher_add = 2
+		job_yaliluo_maintenance_worker_add = 5
+		job_researcher_add = 5
+		planet_jobs_physics_research_produces_mult = 0.15
+		planet_jobs_society_research_produces_mult = 0.15
+		planet_jobs_engineering_research_produces_mult = 0.15
+	}
+	resources = {
+		category = deposit_blockers
+		produces = {
+			physics_research = 10
+			society_research = 10
+			engineering_research = 10
+		}
+	}
+	drop_weight = {
+		weight = 0
+	}
+}

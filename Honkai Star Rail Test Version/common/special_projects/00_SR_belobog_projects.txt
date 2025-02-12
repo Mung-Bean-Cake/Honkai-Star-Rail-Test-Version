@@ -78,3 +78,185 @@ special_project = {
 
 	on_fail = {}
 }
+special_project = {
+	key = "belobog_story_outer_space_exploration"
+	event_chain = belobog_story_outer_space_exploration_chain
+	cost = 800
+	tech_department = engineering_technology
+	picture = GFX_evt_mining_operations
+	event_scope = country_event
+	on_success = {
+		owner = {
+			country_event = { id = yaliluo_story.300 }
+		}
+	}
+	on_fail = {}
+}
+special_project = {
+	key = "belobog_story_internal_power_integration"
+	event_chain = belobog_story_internal_power_integration_chain
+	days_to_research = 120
+	picture = GFX_evt_civil_action
+	event_scope = country_event
+	on_success = {
+		owner = {
+			country_event = { id = yaliluo_story.302 }
+		}
+	}
+	on_fail = {}
+}
+special_project = {
+	key = "belobog_story_internal_power_integration_sec"
+	event_chain = belobog_story_internal_power_integration_chain
+	days_to_research = 120
+	picture = GFX_evt_yaliluo_leader_speech
+	event_scope = country_event
+	on_success = {
+		owner = {
+			country_event = { id = yaliluo_story.303 }
+		}
+	}
+	on_fail = {}
+}
+special_project = {
+	key = "belobog_story_liexi_research"
+	event_chain = belobog_story_liexi_research_chain
+	cost = 1200
+	tech_department = society_technology
+	picture = GFX_evt_belobog_liexi_research
+	event_scope = country_event
+	on_success = {
+		owner = {
+			country_event = { id = yaliluo_story.320 }
+		}
+	}
+	on_fail = {}
+}
+special_project = {
+	key = "belobog_story_plan_of_operation"
+	event_chain = belobog_story_plan_of_operation_chain
+	days_to_research = 30
+	picture = GFX_evt_interior_battle
+	event_scope = country_event
+	abort_trigger = {
+		#想要移除项目时时写它
+	}
+	on_success = {
+		set_country_flag = attack_liexi_east
+		random_owned_planet = {
+			limit = { has_planet_flag = yaliluo }
+			remove_deposit = d_belobog_blocker_liexi
+			create_country = {
+				name = "NAME_lieixi"
+				type = faction
+				flag = random
+			}
+			while = {
+				count = value:num_belobog_blocker_liexi_small
+				create_army = {
+					name = "belobog_blocker_1_army_1"
+					owner = last_created_country
+					type = belobog_blocker_1_army_1
+				}
+				create_army = {
+					name = "belobog_blocker_1_army_4"
+					owner = last_created_country
+					type = belobog_blocker_1_army_4
+				}
+			}
+			while = {
+				count = value:num_belobog_blocker_liexi_big
+				create_army = {
+					name = "belobog_blocker_1_army_2"
+					owner = last_created_country
+					type = belobog_blocker_1_army_2
+				}
+			}
+			create_army = {
+				name = "belobog_blocker_1_army_3"
+				owner = last_created_country
+				type = belobog_blocker_1_army_3
+			}
+		}
+	}
+	on_fail = {}
+}
+special_project = {
+	key = "belobog_story_plan_of_operation_west"
+	event_chain = belobog_story_plan_of_operation_chain
+	days_to_research = 30
+	picture = GFX_evt_interior_battle
+	event_scope = country_event
+	abort_trigger = {
+		#想要移除项目时时写它
+	}
+	on_success = {
+		set_country_flag = attack_liexi_west
+		random_owned_planet = {
+			limit = { has_planet_flag = yaliluo }
+			remove_deposit = d_belobog_blocker_liexi
+			create_country = {
+				name = "NAME_lieixi"
+				type = faction
+				flag = random
+			}
+			while = {
+				count = value:num_belobog_blocker_liexi_small
+				create_army = {
+					name = "belobog_blocker_1_army_1"
+					owner = last_created_country
+					type = belobog_blocker_1_army_1
+				}
+				create_army = {
+					name = "belobog_blocker_1_army_4"
+					owner = last_created_country
+					type = belobog_blocker_1_army_4
+				}
+			}
+			while = {
+				count = value:num_belobog_blocker_liexi_big
+				create_army = {
+					name = "belobog_blocker_1_army_2"
+					owner = last_created_country
+					type = belobog_blocker_1_army_2
+				}
+			}
+			create_army = {
+				name = "belobog_blocker_1_army_3"
+				owner = last_created_country
+				type = belobog_blocker_1_army_3
+			}
+		}
+	}
+	on_fail = {}
+}
+special_project = {
+	key = "belobog_story_establish_the_galactic_rescue_alliance_a"
+	event_chain = belobog_story_establish_the_galactic_rescue_alliance_chain
+	days_to_research = 180
+	picture = GFX_evt_city_planet
+	event_scope = country_event
+	abort_trigger = {
+		#想要移除项目时时写它
+	}
+	on_success = {
+		set_country_flag = gra_a
+		country_event = { id = yaliluo_story.220 }
+	}
+	on_fail = {}
+}
+special_project = {
+	key = "belobog_story_establish_the_galactic_rescue_alliance_b"
+	event_chain = belobog_story_establish_the_galactic_rescue_alliance_chain
+	days_to_research = 180
+	picture = GFX_evt_city_planet
+	event_scope = country_event
+	abort_trigger = {
+		#想要移除项目时时写它
+	}
+	on_success = {
+		set_country_flag = gra_b
+		country_event = { id = yaliluo_story.221 }
+	}
+	on_fail = {}
+}

@@ -34,7 +34,7 @@ country_event = {
 			tech = tech_wormhole_stabilization
 			progress = 0.2
 		}
-		country_event = { id = DOT_SR.002 days = 90 }
+		#country_event = { id = DOT_SR.002 days = 90 }
 		event_target:global_event_country = {
 			change_variable = { which = yuzhousuipian value = 2 }
 		}
@@ -317,4 +317,64 @@ country_event = {
 		give_technology = { tech = tech_glandular_acclimation message = no }
 		give_technology = { tech = tech_gene_expressions message = no }
     }
+}
+event = {
+	id = DOT_SR.10
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		if = {
+			limit = {
+				has_origin = origin_Xianzhou
+			}
+			save_event_target_as = xianzhou_country
+		}
+		if = {
+			limit = {
+				has_origin = origin_belobog
+			}
+			save_event_target_as = yaliluo_country
+		}
+		if = {
+			limit = {
+				any_country = {
+					is_ai = no
+					has_origin = origin_belobog
+				}
+				any_country = {
+					NOT = { has_origin = origin_Xianzhou }
+				}
+			}
+			random_system = {
+				limit = {
+					#has_owner = no
+					#has_special_star_flag_trigger = no
+				}
+				spawn_system = { initializer = "DOT_SR_system_03" }
+			}
+			last_created_system = {
+				random_system_planet = {
+					limit = { has_planet_flag = xianzhou }
+					create_xianzhou_npc_effect =yes
+					set_name = The_Xianzhou_Luofu
+				}
+				create_starbase = {
+					size = starbase_starport
+					module = shipyard
+					building = crew_quarters
+					owner = event_target:xianzhou_country
+					effect = {
+						set_starbase_module = {
+							slot = 1
+							module = trading_hub
+						}
+						set_starbase_module = {
+							slot = 2
+							module = shipyard
+						}
+					}
+				}
+			}
+		}
+	}
 }

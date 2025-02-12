@@ -1,0 +1,3896 @@
+namespace = yaliluo_story
+country_event = {#非ai雅利洛起源
+    id = yaliluo_story.1
+    is_triggered_only = yes
+    hide_window = yes
+
+    trigger = {
+        has_origin = origin_belobog
+        is_ai = no
+    }
+    immediate = {
+		every_controlled_fleet = {
+			if = {
+				limit = {
+					exists = leader
+					OR = {
+						is_ship_class = shipclass_science_ship
+						is_ship_class = shipclass_military
+					}
+				}
+				unassign_leader = this
+				delete_fleet = this
+			}
+			else_if = {
+				limit = {
+					OR = {
+						is_ship_class = shipclass_constructor
+					}
+				}
+				delete_fleet = this
+			}
+		}
+        set_country_flag = protected_from_queen_storm
+		change_variable = {
+			which = count_debt
+			value = 15
+		}
+		add_modifier = {
+			modifier = a_debt_that_lasts_for_seven_hundred_years
+			multiplier = count_debt
+			days = -1
+		}
+		add_modifier = {
+			modifier = the_power_that_has_not_yet_been_fully_integrated
+			days = -1
+		}
+		add_modifier = {
+			modifier = surviving_in_a_desperate_situation
+			days = -1
+		}
+		add_modifier = {
+			modifier = belobog_technology_cooperation
+			days = -1
+		}
+		begin_event_chain = {
+			event_chain = "belobog_story_internal_power_integration_chain"
+			target = ROOT
+		}
+		begin_event_chain = {
+			event_chain = "belobog_story_liexi_research_chain"
+			target = ROOT
+		}
+		change_variable = {
+			which = count_zaowuyinqing
+			value = 1
+		}
+		hidden_effect = {
+			ruler = {
+				set_name = belobog_bronya
+				set_skill = 3
+				set_gender = female
+				change_leader_class = commander
+				change_background_ethic = ethic_militarist
+				change_leader_portrait = lande
+				change_background_job = tiwei_soldier
+				remove_all_traits = yes
+				add_trait= leader_trait_combat_redeployment
+				add_trait = leader_trait_the_belobog_march
+				add_trait = leader_trait_leading_the_way
+				add_trait = leader_trait_banner_of_command
+				add_trait = leader_trait_battlefield
+				add_trait = leader_trait_military_might
+				set_leader_flag = legendary_leader
+				set_leader_flag = immune_to_negative_traits
+				set_leader_flag = belobog_bronya
+				save_global_event_target_as = belobog_bronya_leader
+			}
+			random_owned_leader = {
+				limit = {
+					is_ruler = no
+					leader_class = commander
+				}
+				set_name = belobog_gepard
+				set_skill = 1
+				set_gender = male
+				change_leader_class = commander
+				change_background_ethic = ethic_militarist
+				change_leader_portrait = jiepade
+				change_background_job = tiwei_soldier
+				remove_all_traits = yes
+				add_trait = leader_trait_daunting_smite
+				add_trait = leader_trait_enduring_bulwark
+				add_trait = leader_trait_unyielding_will
+				add_trait = leader_trait_comradery
+				set_leader_flag = legendary_leader
+				set_leader_flag = immune_to_negative_traits
+				set_leader_flag = belobog_gepard
+				save_global_event_target_as = belobog_gepard_leader
+			}
+			random_owned_leader = {
+				limit = {
+					is_ruler = no
+					leader_class = scientist
+				}
+				set_name = belobog_serval
+				set_skill = 1
+				set_gender = female
+				change_leader_class = scientist
+				change_background_ethic = ethic_materialist
+				change_leader_portrait = xiluwa
+				change_background_job = researcher
+				remove_all_traits = yes
+				add_trait = leader_trait_lightning_flash
+				add_trait = leader_trait_here_comes_the_mechanical_fever
+				add_trait = leader_trait_galvanic_chords
+				add_trait = leader_trait_good_night_belobog
+				set_leader_flag = legendary_leader
+				set_leader_flag = immune_to_negative_traits
+				set_leader_flag = belobog_xiluwa
+				save_global_event_target_as = belobog_xiluwa_leader
+			}
+			random_owned_leader = {
+				limit = {
+					is_ruler = no
+					leader_class = official
+				}
+				set_name = belobog_natasha
+				set_skill = 1
+				set_gender = female
+				change_leader_class = official
+				change_background_ethic = ethic_xenophile
+				change_leader_portrait = natasha
+				change_background_job = healthcare
+				remove_all_traits = yes
+				add_trait = leader_trait_love_heal_and_choose
+				add_trait = leader_trait_gift_of_rebirth
+				add_trait = leader_trait_innervation
+				add_trait = leader_trait_hypnosis_research
+				set_leader_flag = legendary_leader
+				set_leader_flag = immune_to_negative_traits
+				set_leader_flag = belobog_natasha
+				save_global_event_target_as = belobog_natasha_leader
+			}
+			start_situation = { type = situation_engine_of_creation }
+		}
+        create_species = {
+			class = "ROBOT"
+			portrait = "chilang"
+			name = "NAME_yaliluo_robot"
+			plural = "NAME_yaliluo_robot"
+			adjective = "NAME_yaliluo_robot"
+			name_list = "MACHINE1"
+			traits = {
+				trait = trait_mechanical
+				trait = trait_frozen_planet_preference
+			}
+			effect = {
+				save_global_event_target_as = yaliluo_robot_species
+			}
+		}
+        capital_scope = {
+			create_archaeological_site = yaliluo_site
+			add_modifier = {
+				modifier = "yaliluo_cold_wave"
+				days = -1
+			}
+            add_modifier = {
+				modifier = "yaliluo_united_as_one"
+				days = -1
+			}
+			enable_special_project = {
+				name = "belobog_story_internal_power_integration"
+				location = this
+				owner = root
+			}
+			enable_special_project = {
+				name = "belobog_story_liexi_research"
+				location = this
+				owner = root
+			}
+			remove_building = building_commercial_zone
+            remove_building = building_research_lab_1
+            remove_building = building_bureaucratic_1
+			remove_district = district_city
+			remove_district = district_industrial
+			remove_district = district_farming
+			add_building = building_kelibobao
+			add_building = building_yinbing_tiewei
+			add_building = building_robot_assembly_plant
+			add_building = building_belobog_museum
+			add_deposit = d_zaowuyinqing
+			add_deposit = d_belobog
+            add_planet_devastation = 45
+			while = {
+				count = 10
+				add_deposit = d_belobog_blocker_small
+			}
+            while = {
+                count = 18
+                random_owned_pop = { kill_pop = yes }
+            }
+			while = {
+				count = 5
+				create_pop = {
+					species = event_target:yaliluo_robot_species
+				}
+				add_deposit = d_belobog_blocker_liexi
+				create_army = {
+					name = tiewei_guardian
+					owner = owner
+					species = owner
+					type = "tiewei_guardian_defensive"
+				}
+			}
+		}
+        give_technology = { tech = tech_robotic_workers message = no }
+		give_specimen = { key = biological_wave_exploration_instrument origin = NAME_yaliluo_core }
+		give_specimen = { key = yongdong_stele_stone origin = NAME_yaliluo_core }
+		country_event = { id = yaliluo_story.1000 }
+		country_event = { id = yaliluo_story.100 days = 60 }
+		establish_communications_no_message = event_target:xianzhou_country
+    }
+}
+country_event = {#非ai雅利洛起源,每隔五年刷裂隙怪物作战，局势结束
+	id = yaliluo_story.2
+	is_triggered_only = yes
+	hide_window = yes
+
+	trigger = {
+		has_origin = origin_belobog
+		is_ai = no
+		NOT = {
+			has_country_flag = yaliluo_liexie_over
+		}
+	}
+	immediate = {
+		random_owned_planet = {
+			limit = { has_planet_flag = yaliluo }
+			create_country = {
+				name = "NAME_lieixi"
+				type = faction
+				flag = random
+			}
+			while = {
+				count = value:num_belobog_blocker_liexi_small
+				create_army = {
+					name = "belobog_blocker_1_army_1"
+					owner = last_created_country
+					type = belobog_blocker_1_army_1
+				}
+				create_army = {
+					name = "belobog_blocker_1_army_4"
+					owner = last_created_country
+					type = belobog_blocker_1_army_4
+				}
+				random_list = { 25 = { create_army = { name = "belobog_blocker_1_army_1" owner = last_created_country type = belobog_blocker_1_army_1 } } 75 = {}}
+			}
+			while = {
+				count = value:num_belobog_blocker_liexi_big
+				create_army = {
+					name = "belobog_blocker_1_army_2"
+					owner = last_created_country
+					type = belobog_blocker_1_army_2
+				}
+			}
+			if = {
+				limit = { this.owner = { NOT = { has_country_flag = liexie_set_back}} }
+				while = {
+					count = value:num_belobog_blocker_liexi_big
+					add_deposit = d_belobog_blocker_small
+				}
+			}
+		}
+	}
+}
+country_event = {
+	#非ai雅利洛起源
+	id = yaliluo_story.3
+	title = yaliluo_story.3.name
+	desc = yaliluo_story.3.desc
+	picture = GFX_evt_burning_settlement
+	is_triggered_only = yes
+
+	trigger = {
+		FROMFROM = { has_planet_flag = yaliluo }
+		this= {
+			has_origin = origin_belobog
+			is_ai = no
+		}
+	}
+	immediate = {
+		fromfrom = {
+			#set_planet_flag = we_lose
+			hidden_effect = {
+				add_deposit = d_belobog_blocker_small
+				add_planet_devastation = 10
+			}
+		}
+	}
+	option = {
+		name = yaliluo_story.3.a
+		add_resource = {
+			energy = -500
+			minerals = -500
+			influence = -10
+		}
+	}
+}
+country_event = {
+	#非ai雅利洛起源
+	id = yaliluo_story.4
+	title = yaliluo_story.4.name
+	desc = yaliluo_story.4.desc
+	picture = GFX_evt_ground_combat
+	is_triggered_only = yes
+
+	trigger = {
+		FROM = { has_origin = origin_belobog }
+		#FROMFROM = { has_planet_flag = we_lose }
+		FROMFROM = { has_planet_flag = yaliluo }
+	}
+	immediate = {
+		FROMFROM = {
+			remove_planet_flag = we_lose
+			every_planet_army = {
+			limit = {
+					OR = {
+						army_type = belobog_blocker_1_army_1
+						army_type = belobog_blocker_1_army_2
+						army_type = belobog_blocker_1_army_3
+						army_type = belobog_blocker_1_army_4
+					}
+				}
+				remove_army = yes
+			}
+			random_list = {
+				2 = { remove_deposit = d_belobog_blocker_small }
+				2 = {}
+			}
+		}
+	}
+	option = {
+		name = yaliluo_story.4.a
+		add_resource = {
+			influence = 50
+		}
+		add_monthly_resource_mult = {
+			resource = unity
+			value = @tier3unityreward
+			min = @tier3unitymin
+			max = @tier3unitymax
+		}
+	}
+}
+#直接获胜一个事件，失败触发一个，再胜利一个
+country_event = {#直接获胜
+	#非ai雅利洛起源
+	id = yaliluo_story.5
+	title = yaliluo_story.5.name
+	desc = {
+		trigger = {
+			has_country_flag = attack_liexi_east
+		}
+		text = yaliluo_story.5.desc
+	}
+	desc = {
+		trigger = {
+			has_country_flag = attack_liexi_west
+		}
+		text = yaliluo_story.5.a.desc
+	}
+	picture = GFX_evt_ground_combat
+	is_triggered_only = yes
+
+	trigger = {
+		root= {
+			has_origin = origin_belobog
+			is_ai = no
+			OR = {
+				has_country_flag = attack_liexi_east
+				has_country_flag = attack_liexi_west
+			}
+			FROMFROM = { has_planet_flag = yaliluo }
+		}
+	}
+	immediate = {
+		if = {
+			limit = { root = {has_country_flag = attack_liexi_east} }
+			fromfrom = {
+				add_deposit = d_mineral_alloy
+			}
+		}
+		else_if = {
+			limit = { root = {has_country_flag = attack_liexi_west} }
+			fromfrom = {
+				add_deposit = d_west_research
+			}
+		}
+	}
+	option = {
+		name = yaliluo_story.5.a
+		custom_tooltip = yaliluo_story.5.a.tt
+		if = {
+			limit = { has_country_flag = attack_liexi_east }
+			add_monthly_resource_mult = {
+				resource = unity
+				value = @tier4unityreward
+				min = @tier4unitymin
+				max = @tier4unitymax
+			}
+			add_resource = { influence = 100  energy = 1000 minerals = 1000 alloys = 500}
+			every_owned_leader = { add_experience = 150 }
+			#capital_scope = {
+				#enable_special_project = {
+					#name = "belobog_story_plan_of_operation_west"
+					#location = this
+					#owner = root
+				#}
+			#}
+			hidden_effect = {
+				change_variable = {
+					which = bronya_military
+					value = 1
+				}
+				change_variable = {
+					which = bronya_army
+					value = 1
+				}
+				remove_country_flag = attack_liexi_east
+			}
+		}
+		if = {
+			limit = { has_country_flag = attack_liexi_west }
+			add_monthly_resource_mult = {
+				resource = unity
+				value = @tier4unityreward
+				min = @tier4unitymin
+				max = @tier4unitymax
+			}
+			add_resource = { influence = 100 }
+			every_owned_leader = { add_experience = 300 }
+			hidden_effect = {
+				change_variable = {
+					which = bronya_military
+					value = 1
+				}
+				change_variable = {
+					which = bronya_army
+					value = 1
+				}
+				remove_country_flag = attack_liexi_west
+				country_event = { id = yaliluo_story.105 days = 180 }
+			}
+		}
+	}
+}
+country_event = {#先失败后获胜#planb
+	#非ai雅利洛起源
+	id = yaliluo_story.6
+	title = yaliluo_story.5.name
+	desc = {
+		trigger = {
+			has_country_flag = attack_liexi_east
+		}
+		text = yaliluo_story.5.desc
+	}
+	desc = {
+		trigger = {
+			has_country_flag = attack_liexi_west
+		}
+		text = yaliluo_story.5.a.desc
+	}
+	picture = GFX_evt_ground_combat
+	is_triggered_only = yes
+
+	trigger = {
+		this = {
+			has_origin = origin_belobog
+			is_ai = no
+			OR = {
+				has_country_flag = attack_liexi_east
+				has_country_flag = attack_liexi_west
+			}
+		}
+	}
+	immediate = {
+		if = {
+			limit = { this = {has_country_flag = attack_liexi_east} }
+			fromfrom = {
+				add_deposit = d_mineral_alloy
+			}
+		}
+		else_if = {
+			limit = { this = {has_country_flag = attack_liexi_west} }
+			fromfrom = {
+				add_deposit = d_west_research
+			}
+		}
+	}
+	option = {
+		name = yaliluo_story.5.a
+		if = {
+			limit = { has_country_flag = attack_liexi_east }
+			add_monthly_resource_mult = {
+				resource = unity
+				value = @tier4unityreward
+				min = @tier4unitymin
+				max = @tier4unitymax
+			}
+			add_resource = { influence = 100  energy = 1200 minerals = 1200 alloys = 800}
+			every_owned_leader = { add_experience = 150 }
+			capital_scope = {
+				enable_special_project = {
+					name = "belobog_story_plan_of_operation_west"
+					location = this
+					owner = root
+				}
+			}
+			hidden_effect = { remove_country_flag = attack_liexi_east }
+		}
+		if = {
+			limit = { has_country_flag = attack_liexi_west }
+			add_monthly_resource_mult = {
+				resource = unity
+				value = @tier5unityreward
+				min = @tier5unitymin
+				max = @tier5unitymax
+			}
+			add_resource = { influence = 100 }
+			every_owned_leader = { add_experience = 300 }
+			hidden_effect = { remove_country_flag = attack_liexi_west  end_event_chain = belobog_story_plan_of_operation_chain}
+		}
+	}
+}
+country_event = {
+	#非ai雅利洛起源
+	id = yaliluo_story.7
+	title = yaliluo_story.3.name
+	desc = yaliluo_story.7.desc
+	picture = GFX_evt_burning_settlement
+	is_triggered_only = yes
+
+	trigger = {
+		this= {
+			has_origin = origin_belobog
+			is_ai = no
+			OR = {
+				has_country_flag = attack_liexi_east
+				has_country_flag = attack_liexi_west
+			}
+		}
+	}
+	immediate = {
+		fromfrom = {
+			hidden_effect = {
+				add_planet_devastation = 20
+			}
+		}
+	}
+	option = {
+		name = yaliluo_story.3.a
+		hidden_effect = {
+			fromfrom = {
+				while = {
+					count = 20
+					create_army = {
+						name = tiewei_guardian
+						owner = owner
+						species = owner
+						type = "tiewei_guardian"
+					}
+				}
+			}
+		}
+	}
+}
+#主线故事部分，从100开始计数
+country_event = {
+	#非ai雅利洛起源
+	id = yaliluo_story.100
+	title = yaliluo_story.100.name
+	desc = yaliluo_story.100.desc
+	picture = GFX_evt_galactic_senate
+	is_triggered_only = yes
+
+	trigger = {
+		has_origin = origin_belobog
+		is_ai = no
+	}
+	immediate = {
+		set_country_flag = yaliluo_story_start
+	}
+	option = {
+		name = yaliluo_story.100.a
+		add_resource = { influence = 10 }
+		hidden_effect = {
+			country_event = { id = yaliluo_story.101 days = 180  }
+		}
+	}
+}
+country_event = {
+	id = yaliluo_story.101
+	title = yaliluo_story.101.name
+	desc = yaliluo_story.101.desc
+	picture = GFX_evt_board_meeting
+	is_triggered_only = yes
+
+	trigger = {
+		has_origin = origin_belobog
+		is_ai = no
+	}
+	immediate = {
+		set_country_flag = yaliluo_story_start
+	}
+	option = {#军事线：裂隙消除科技项目（可铲除小裂隙，进一步利用裂隙提升科研和能源）{通用}，走事件消除两个大裂隙，加快项目进程，刷陆军和给专属陆军
+		name = yaliluo_story.101.a
+		custom_tooltip = yaliluo_story.101.a.desc
+		begin_event_chain = {
+			event_chain = "belobog_story_outer_space_exploration_chain"
+			target = ROOT
+		}
+		capital_scope = {
+			enable_special_project = {
+				name = "belobog_story_outer_space_exploration"
+				location = this
+				owner = root
+			}
+		}
+		hidden_effect = {
+			change_variable = {
+				which = bronya_army
+				value = 1
+			}
+			change_variable = {
+				which = bronya_economy
+				value = 1
+			}
+			set_country_flag = yaliluo_story_war_first
+			country_event = { id = yaliluo_story.102 days = 480 }
+		}
+	}
+	option = {#开采线，专精资源开采和对外贸易，主力研究新式机器人和对内基建水平，给专属机器人特质，后续解锁有节制出击裂隙
+		name = yaliluo_story.101.b
+		custom_tooltip = yaliluo_story.101.b.desc
+		capital_scope = {
+			enable_special_project = {
+				name = "belobog_story_outer_space_exploration"
+				location = this
+				owner = root
+			}
+		}
+		hidden_effect = {
+			change_variable = {
+				which = bronya_economy
+				value = 1
+			}
+			change_variable = {
+				which = bronya_diplomacy
+				value = 1
+			}
+			set_country_flag = yaliluo_story_development_first
+			country_event = { id = yaliluo_story.150 days = 480 }
+		}
+	}
+}
+country_event = {#军事线
+	id = yaliluo_story.102
+	title = yaliluo_story.102.name
+	desc = yaliluo_story.102.desc
+	picture = GFX_evt_belobog_army
+	is_triggered_only = yes
+
+	trigger = {
+		has_origin = origin_belobog
+		is_ai = no
+	}
+	option = {#军事线：裂隙消除科技项目（可铲除小裂隙，进一步利用裂隙提升科研和能源）{通用}，走事件消除两个大裂隙，加快项目进程，刷陆军和给专属陆军
+		name = yaliluo_story.102.a
+		add_research_option = tech_yaliluo_new_army
+		add_tech_progress = { tech = tech_yaliluo_new_army progress = 0.5 }
+		custom_tooltip = yaliluo_story.102.a.desc
+		hidden_effect = {
+			change_variable = {
+				which = bronya_military
+				value = 1
+			}
+			change_variable = {
+				which = bronya_army
+				value = 1
+			}
+			random_owned_planet = {
+				limit = { has_planet_flag = yaliluo }
+				while = {
+					count = 8
+					create_army = {
+						name = yaliluo_robotic_defense_army
+						owner = owner
+						species = owner
+						type = "yaliluo_robotic_defense_army"
+					}
+				}
+			}
+			country_event = { id = yaliluo_story.103 days = 120 }
+		}
+	}
+}
+country_event = {#军事线
+	id = yaliluo_story.103
+	title = yaliluo_story.103.name
+	desc = yaliluo_story.103.desc
+	picture = GFX_evt_board_meeting
+	is_triggered_only = yes
+
+	trigger = {
+		has_origin = origin_belobog
+		is_ai = no
+	}
+	option = {#军事线：裂隙消除科技项目（可铲除小裂隙，进一步利用裂隙提升科研和能源）{通用}，走事件消除两个大裂隙，加快项目进程，刷陆军和给专属陆军
+		name = yaliluo_story.103.a
+		allow = { resource_stockpile_compare = { resource = energy value >= 500 } }
+		add_resource = { energy = -500 }
+		custom_tooltip = yaliluo_story.103.a.desc
+		hidden_effect = {
+			random_owned_planet = {
+				limit = { has_planet_flag = yaliluo }
+				while = {
+					count = 5
+					create_army = {
+						name = yaliluo_robotic_defense_army
+						owner = owner
+						species = owner
+						type = "yaliluo_robotic_defense_army"
+					}
+				}
+			}
+			country_event = { id = yaliluo_story.104 days = 180 }
+		}
+	}
+	option = {#军事线：裂隙消除科技项目（可铲除小裂隙，进一步利用裂隙提升科研和能源）{通用}，走事件消除两个大裂隙，加快项目进程，刷陆军和给专属陆军
+		name = yaliluo_story.103.b
+		custom_tooltip = yaliluo_story.103.b.desc
+		#begin_event_chain = {
+			#event_chain = "belobog_story_plan_of_operation_chain"
+			#target = ROOT
+		#}
+		#capital_scope = {
+			#enable_special_project = {
+				#name = "belobog_story_plan_of_operation"
+				#location = this
+				#owner = root
+			#}
+		#}
+		hidden_effect = {
+			change_variable = {
+				which = count_war_chance
+				value = 2
+			}
+			set_country_flag = attacker_liexi_blocker
+			random_owned_planet = {
+				limit = { has_planet_flag = yaliluo }
+				while = {
+					count = 1
+					create_army = {
+						name = yaliluo_robotic_defense_army
+						owner = owner
+						species = owner
+						type = "yaliluo_robotic_defense_army"
+					}
+				}
+			}
+
+		}
+	}
+}
+country_event = {#军事线
+	id = yaliluo_story.104
+	title = yaliluo_story.104.name
+	desc = yaliluo_story.104.desc
+	picture = GFX_evt_interior_battle
+	is_triggered_only = yes
+
+	trigger = {
+		has_origin = origin_belobog
+		is_ai = no
+	}
+	option = {#军事线：裂隙消除科技项目（可铲除小裂隙，进一步利用裂隙提升科研和能源）{通用}，走事件消除两个大裂隙，加快项目进程，刷陆军和给专属陆军
+		name = yaliluo_story.104.a
+		custom_tooltip = yaliluo_story.104.a.desc
+		#begin_event_chain = {
+			#event_chain = "belobog_story_plan_of_operation_chain"
+			#target = ROOT
+		#}
+		#capital_scope = {
+			#enable_special_project = {
+				#name = "belobog_story_plan_of_operation"
+				#location = this
+				#owner = root
+			#}
+		#}
+		hidden_effect = {
+			change_variable = {
+				which = count_war_chance
+				value = 2
+			}
+			set_country_flag = attacker_liexi_blocker
+		}
+	}
+}
+country_event = {#军事线
+	id = yaliluo_story.105
+	title = yaliluo_story.105.name
+	desc = yaliluo_story.105.desc
+	picture = GFX_evt_grand_speech
+	is_triggered_only = yes
+
+	trigger = {
+		has_origin = origin_belobog
+		is_ai = no
+	}
+	option = {
+		name = yaliluo_story.105.a
+		custom_tooltip = yaliluo_story.105.a.desc
+		add_resource = { influence = 100 }
+		add_monthly_resource_mult = {
+			resource = unity
+			value = @tier5unityreward
+			min = @tier5unitymin
+			max = @tier5unitymax
+		}
+		hidden_effect = {
+			change_variable = {
+				which = bronya_military
+				value = 1
+			}
+			change_variable = {
+				which = bronya_army
+				value = 1
+			}
+			change_variable = {
+				which = bronya_interior
+				value = 1
+			}
+			change_variable = {
+				which = bronya_science
+				value = 1
+			}
+			change_variable = {
+				which = bronya_diplomacy
+				value = 1
+			}
+			change_variable = {
+				which = bronya_economy
+				value = 1
+			}
+			set_country_flag = yaliluo_junshi_win
+		}
+	}
+}
+country_event = {#发展线
+	id = yaliluo_story.150
+	title = yaliluo_story.150.name
+	desc = yaliluo_story.150.desc
+	picture = GFX_evt_robot_assembly_plant
+	is_triggered_only = yes
+
+	trigger = {
+		has_origin = origin_belobog
+		is_ai = no
+	}
+	option = {
+		name = yaliluo_story.150.a
+		custom_tooltip = yaliluo_story.150.a.desc
+		add_research_option = tech_trait_power_arm
+		add_tech_progress = { tech = tech_trait_power_arm progress = 0.25 }
+		hidden_effect = {
+			change_variable = {
+				which = bronya_economy
+				value = 1
+			}
+			change_variable = {
+				which = bronya_interior
+				value = 1
+			}
+			change_variable = {
+				which = count_resource_exploitation
+				value = 4
+			}
+			random_owned_planet = {
+				limit = { has_planet_flag = yaliluo }
+				create_species = {
+					class = "ROBOT"
+					portrait = "chilang"
+					name = "NAME_yaliluo_robot"
+					plural = "NAME_yaliluo_robot"
+					adjective = "NAME_yaliluo_robot"
+					name_list = "MACHINE1"
+					traits = {
+						trait = trait_mechanical
+						trait = trait_frozen_planet_preference
+						trait = trait_power_arm
+					}
+					effect = {
+						save_global_event_target_as = yaliluo_robot_better_species
+					}
+				}
+				while = {
+					count = 2
+					create_pop = {
+						species = event_target:yaliluo_robot_better_species
+					}
+				}
+			}
+		}
+	}
+}
+country_event = {#发展线
+	id = yaliluo_story.151
+	title = yaliluo_story.151.name
+	desc = yaliluo_story.151.desc
+	picture = GFX_evt_belobog_liexi_trade
+	is_triggered_only = yes
+
+	trigger = {
+		has_origin = origin_belobog
+		is_ai = no
+	}
+	option = {
+		name = yaliluo_story.151.a
+		hidden_effect = {
+			country_event = { id = yaliluo_story.153 days = 360 }
+		}
+	}
+	option = {
+		name = yaliluo_story.151.b
+		hidden_effect = {
+			country_event = { id = yaliluo_story.152 days = 30 }
+		}
+	}
+	option = {
+		name = yaliluo_story.151.c
+	}
+}
+country_event = {#发展线
+	id = yaliluo_story.152
+	title = yaliluo_story.152.name
+	desc = yaliluo_story.152.desc
+	picture = GFX_evt_board_meeting
+	is_triggered_only = yes
+
+	trigger = {
+		has_origin = origin_belobog
+		is_ai = no
+	}
+	option = {
+		name = yaliluo_story.152.a
+		hidden_effect = {
+			country_event = { id = yaliluo_story.152 days = 360 }
+		}
+	}
+	option = {
+		name = yaliluo_story.152.b
+	}
+}
+country_event = {#发展线
+	id = yaliluo_story.153
+	title = yaliluo_story.153.name
+	desc = yaliluo_story.153.desc
+	picture = GFX_evt_belobog_liexi_celebrae
+	is_triggered_only = yes
+
+	trigger = {
+		has_origin = origin_belobog
+		is_ai = no
+	}
+	option = {
+		name = yaliluo_story.150.a
+		custom_tooltip = yaliluo_story.153.a.desc
+		add_resource = { energy = 3000 }
+		hidden_effect = {
+			change_variable = {
+				which = bronya_diplomacy
+				value = 1
+			}
+			change_variable = {
+				which = bronya_economy
+				value = 1
+			}
+		}
+		random_owned_planet = {
+			limit = { has_planet_flag = yaliluo }
+			add_modifier = { modifier = yaliluo_ethereum_front days = -1 }
+		}
+	}
+}
+country_event = {
+	id = yaliluo_story.154
+	title = yaliluo_story.154.name
+	desc = yaliluo_story.154.desc
+	picture = GFX_evt_grand_speech
+	is_triggered_only = yes
+
+	trigger = {
+		has_origin = origin_belobog
+		is_ai = no
+	}
+	option = {
+		name = yaliluo_story.105.a
+		custom_tooltip = yaliluo_story.105.a.desc
+		add_resource = { influence = 100 }
+		add_monthly_resource_mult = {
+			resource = unity
+			value = @tier5unityreward
+			min = @tier5unitymin
+			max = @tier5unitymax
+		}
+		hidden_effect = {
+			set_country_flag = yaliluo_ziyuan_full
+			change_variable = {
+				which = bronya_military
+				value = 1
+			}
+			change_variable = {
+				which = bronya_army
+				value = 1
+			}
+			change_variable = {
+				which = bronya_interior
+				value = 1
+			}
+			change_variable = {
+				which = bronya_science
+				value = 1
+			}
+			change_variable = {
+				which = bronya_diplomacy
+				value = 1
+			}
+			change_variable = {
+				which = bronya_economy
+				value = 1
+			}
+		}
+	}
+}
+planet_event = {
+	id = yaliluo_story.155
+	title = yaliluo_story.155.name
+	desc = yaliluo_story.155.desc
+	picture = GFX_evt_animal_wildlife
+	is_triggered_only = yes
+
+	trigger = {
+		has_planet_flag = yaliluo
+	}
+	option = {
+		name = yaliluo_story.150.a
+		hidden_effect = {
+			random_list = {
+				1 = {add_modifier = { modifier = ultra_rich }}
+				1 = {add_modifier = { modifier = hazardous_weather }}
+				1 = {add_modifier = { modifier = strong_magnetic_field }}
+				1 = {add_modifier = { modifier = mineral_rich }}
+			}
+		}
+	}
+}
+#200以后，局势类
+situation_event = {
+	id = yaliluo_story.200
+	title = yaliluo_story.200.name
+	desc = yaliluo_story.200.desc
+	picture = GFX_evt_engine_of_creation
+	is_triggered_only = yes
+	option = {
+		name = yaliluo_story.200.a
+		custom_tooltip = yaliluo_story.200.a.desc
+		owner = {
+			add_resource = { unity = 1000 influence = 50 }
+			hidden_effect = {
+				country_event = { id = yaliluo_story.201 days = 30 }
+				change_variable = {
+					which = bronya_military
+					value = 1
+				}
+				change_variable = {
+					which = bronya_army
+					value = 1
+				}
+				change_variable = {
+					which = bronya_interior
+					value = 1
+				}
+				change_variable = {
+					which = bronya_science
+					value = 1
+				}
+				change_variable = {
+					which = bronya_diplomacy
+					value = 1
+				}
+				change_variable = {
+					which = bronya_economy
+					value = 1
+				}
+			}
+		}
+	}
+}
+country_event = {
+	id = yaliluo_story.201
+	title = yaliluo_story.201.name
+	desc = yaliluo_story.201.desc
+	picture = GFX_evt_generator_powerup
+	is_triggered_only = yes
+	option = {
+		name = yaliluo_story.201.a
+		hidden_effect = { country_event = { id = yaliluo_story.202 days = 60 } }
+	}
+}
+country_event = {
+	id = yaliluo_story.202
+	title = yaliluo_story.202.name
+	desc = yaliluo_story.202.desc
+	picture = GFX_evt_rift_sphere
+	is_triggered_only = yes
+	option = {
+		name = yaliluo_story.202.a
+		custom_tooltip = yaliluo_story.202.a.desc
+		hidden_effect = {
+			set_country_flag = more_zaowuyinqing
+			change_variable = {
+				which = next_zaowuyinqing
+				value = 4
+			}
+		}
+	}
+}
+situation_event = {
+	id = yaliluo_story.203
+	title = yaliluo_story.203.name
+	desc = yaliluo_story.203.desc
+	picture = GFX_evt_decryption
+	is_triggered_only = yes
+	option = {
+		name = yaliluo_story.203.a
+		custom_tooltip = yaliluo_story.200.a.desc
+		owner = {
+			hidden_effect = {
+				change_variable = {
+					which = bronya_military
+					value = 1
+				}
+				change_variable = {
+					which = bronya_army
+					value = 1
+				}
+				change_variable = {
+					which = bronya_interior
+					value = 1
+				}
+				change_variable = {
+					which = bronya_science
+					value = 1
+				}
+				change_variable = {
+					which = bronya_diplomacy
+					value = 1
+				}
+				change_variable = {
+					which = bronya_economy
+					value = 1
+				}
+				country_event = { id = yaliluo_story.204 days = 30 }
+			}
+		}
+	}
+}
+country_event = {
+	id = yaliluo_story.204
+	title = yaliluo_story.204.name
+	desc = yaliluo_story.204.desc
+	picture = GFX_evt_robot_assembly_plant
+	is_triggered_only = yes
+	option = {
+		name = yaliluo_story.204.a
+		custom_tooltip = yaliluo_story.204.a.desc
+		hidden_effect = {
+			random_owned_planet = {
+				limit = { has_planet_flag = yaliluo }
+				while = {
+					count = 2
+					create_pop = {
+						species = event_target:yaliluo_robot_species
+					}
+				}
+			}
+		}
+	}
+}
+situation_event = {
+	id = yaliluo_story.205
+	title = yaliluo_story.205.name
+	desc = yaliluo_story.205.desc
+	picture = GFX_evt_archaeology_camp
+	is_triggered_only = yes
+	option = {
+		name = yaliluo_story.205.a
+		custom_tooltip = yaliluo_story.200.a.desc
+		hidden_effect = {
+			owner = {
+				change_variable = {
+					which = bronya_military
+					value = 1
+				}
+				change_variable = {
+					which = bronya_army
+					value = 1
+				}
+				change_variable = {
+					which = bronya_interior
+					value = 1
+				}
+				change_variable = {
+					which = bronya_science
+					value = 1
+				}
+				change_variable = {
+					which = bronya_diplomacy
+					value = 1
+				}
+				change_variable = {
+					which = bronya_economy
+					value = 1
+				}
+				random_list = {
+					1= {country_event = { id = yaliluo_story.206 days = 60 }}
+					1= {country_event = { id = yaliluo_story.207 days = 60 }}
+					1= {country_event = { id = yaliluo_story.208 days = 60 }}
+				}
+			}
+		}
+	}
+}
+country_event = {
+	id = yaliluo_story.206
+	title = yaliluo_story.206.name
+	desc = yaliluo_story.206.desc
+	picture = GFX_evt_archaeologists_escaping
+	is_triggered_only = yes
+	option = {
+		name = yaliluo_story.206.a
+		random_owned_planet = {
+			limit = { has_planet_flag = yaliluo }
+			add_planet_devastation = 10
+			add_modifier = {
+				modifier = yaliluo_burn
+				days = 360
+			}
+		}
+	}
+}
+country_event = {
+	id = yaliluo_story.207
+	title = yaliluo_story.207.name
+	desc = yaliluo_story.207.desc
+	picture = GFX_evt_collapsing_roof
+	is_triggered_only = yes
+	option = {
+		name = yaliluo_story.207.a
+		add_resource = { minerals = 1000 }
+	}
+}
+country_event = {
+	id = yaliluo_story.208
+	title = yaliluo_story.208.name
+	desc = yaliluo_story.208.desc
+	picture = GFX_evt_crusher_droid
+	is_triggered_only = yes
+	option = {
+		name = yaliluo_story.208.a
+		add_resource = { unity = 1000 minor_artifacts = 100 }
+	}
+}
+situation_event = {
+	id = yaliluo_story.209
+	title = yaliluo_story.209.name
+	desc = yaliluo_story.209.desc
+	picture = GFX_evt_cosmic_storms_calibration
+	is_triggered_only = yes
+	option = {
+		name = yaliluo_story.209.a
+		custom_tooltip = yaliluo_story.200.a.desc
+		owner = {
+			add_monthly_resource_mult = {
+				resource = unity
+				value = @tier3unityreward
+				min = @tier3unitymin
+				max = @tier3unitymax
+			}
+			hidden_effect = {
+				change_variable = {
+					which = bronya_military
+					value = 1
+				}
+				change_variable = {
+					which = bronya_army
+					value = 1
+				}
+				change_variable = {
+					which = bronya_interior
+					value = 1
+				}
+				change_variable = {
+					which = bronya_science
+					value = 1
+				}
+				change_variable = {
+					which = bronya_diplomacy
+					value = 1
+				}
+				change_variable = {
+					which = bronya_economy
+					value = 1
+				}
+			}
+		}
+	}
+}
+situation_event = {
+	id = yaliluo_story.210
+	title = yaliluo_story.210.name
+	desc = yaliluo_story.210.desc
+	picture = GFX_evt_ground_combat
+	is_triggered_only = yes
+	option = {
+		name = yaliluo_story.210.a
+		custom_tooltip = yaliluo_story.200.a.desc
+		owner = {
+			hidden_effect = {
+				change_variable = {
+					which = bronya_military
+					value = 1
+				}
+				change_variable = {
+					which = bronya_army
+					value = 1
+				}
+				change_variable = {
+					which = bronya_interior
+					value = 1
+				}
+				change_variable = {
+					which = bronya_science
+					value = 1
+				}
+				change_variable = {
+					which = bronya_diplomacy
+					value = 1
+				}
+				change_variable = {
+					which = bronya_economy
+					value = 1
+				}
+				set_country_flag = yaliluo_liexie_over
+				set_country_flag = liexie_set_back
+				set_country_flag = liexie_all_die
+				random_owned_planet = {
+					limit = { has_planet_flag = yaliluo }
+					create_country = {
+						name = "NAME_lieixi"
+						type = faction
+						flag = random
+					}
+					while = {
+						count = value:num_belobog_blocker_liexi_big
+						create_army = {
+							name = "belobog_blocker_1_army_2"
+							owner = last_created_country
+							type = belobog_blocker_1_army_2
+						}
+						create_army = {
+							name = "belobog_blocker_1_army_3"
+							owner = last_created_country
+							type = belobog_blocker_1_army_3
+						}
+						remove_deposit = d_belobog_blocker_liexi
+					}
+					while = {
+						count = value:num_belobog_blocker_liexi_small
+						create_army = {
+							name = "belobog_blocker_1_army_1"
+							owner = last_created_country
+							type = belobog_blocker_1_army_1
+						}
+						create_army = {
+							name = "belobog_blocker_1_army_4"
+							owner = last_created_country
+							type = belobog_blocker_1_army_4
+						}
+						random_list = { 25 = { create_army = { name = "belobog_blocker_1_army_1" owner = last_created_country type = belobog_blocker_1_army_1 } } 75 = {}}
+						remove_deposit = d_belobog_blocker_small
+					}
+					while = {
+						count = this.owner.count_zaowuyinqing
+						create_army = {
+							name = yaliluo_robotic_zaowuyinqing
+							owner = owner
+							species = owner
+							type = "yaliluo_robotic_zaowuyinqing"
+						}
+						remove_deposit = d_zaowuyinqing
+					}
+				}
+			}
+		}
+	}
+}
+country_event = {
+	#非ai雅利洛起源
+	id = yaliluo_story.211
+	title = yaliluo_story.211.name
+	desc = yaliluo_story.211.desc
+	picture = GFX_evt_victorious_army
+	is_triggered_only = yes
+
+	trigger = {
+		FROMFROM = { has_planet_flag = yaliluo }
+		root = { has_country_flag = liexie_all_die}
+	}
+	option = {
+		name = yaliluo_story.211.a
+		custom_tooltip = yaliluo_story.200.a.desc
+		add_resource = { influence = 300 }
+		add_modifier = { modifier = belobog_liexi_setback days = -1 }
+		owner = {
+			add_monthly_resource_mult = {
+				resource = unity
+				value = @tier5unityreward
+				min = @tier5unitymin
+				max = @tier5unitymax
+			}
+			hidden_effect = {
+				change_variable = {
+					which = bronya_military
+					value = 1
+				}
+				change_variable = {
+					which = bronya_army
+					value = 1
+				}
+				change_variable = {
+					which = bronya_interior
+					value = 1
+				}
+				change_variable = {
+					which = bronya_science
+					value = 1
+				}
+				change_variable = {
+					which = bronya_diplomacy
+					value = 1
+				}
+				change_variable = {
+					which = bronya_economy
+					value = 1
+				}
+				remove_country_flag = liexie_all_die
+			}
+		}
+	}
+}
+situation_event = {
+	id = yaliluo_story.212
+	title = yaliluo_story.212.name
+	desc = yaliluo_story.212.desc
+	picture = GFX_evt_engineering_research
+	is_triggered_only = yes
+	option = {
+		name = yaliluo_story.212.a
+		custom_tooltip = yaliluo_story.200.a.desc
+		owner = {
+			change_variable = {
+				which = bronya_military
+				value = 1
+			}
+			change_variable = {
+				which = bronya_army
+				value = 1
+			}
+			change_variable = {
+				which = bronya_interior
+				value = 1
+			}
+			change_variable = {
+				which = bronya_science
+				value = 1
+			}
+			change_variable = {
+				which = bronya_diplomacy
+				value = 1
+			}
+			change_variable = {
+				which = bronya_economy
+				value = 1
+			}
+		}
+	}
+}
+situation_event = {
+	id = yaliluo_story.213
+	title = yaliluo_story.213.name
+	desc = yaliluo_story.213.desc
+	picture = GFX_evt_arctic
+	is_triggered_only = yes
+	option = {
+		name = yaliluo_story.213.a
+		custom_tooltip = yaliluo_story.200.a.desc
+		hidden_effect = {
+			owner = {
+				change_variable = {
+					which = bronya_military
+					value = 1
+				}
+				change_variable = {
+					which = bronya_army
+					value = 1
+				}
+				change_variable = {
+					which = bronya_interior
+					value = 1
+				}
+				change_variable = {
+					which = bronya_science
+					value = 1
+				}
+				change_variable = {
+					which = bronya_diplomacy
+					value = 1
+				}
+				change_variable = {
+					which = bronya_economy
+					value = 1
+				}
+				country_event = { id = yaliluo_story.214 days = 360 }
+			}
+		}
+	}
+}
+country_event = {
+	#非ai雅利洛起源
+	id = yaliluo_story.214
+	title = yaliluo_story.214.name
+	desc = yaliluo_story.214.desc
+	picture = GFX_evt_gaia
+	is_triggered_only = yes
+
+	trigger = {
+
+	}
+	option = {
+		name = yaliluo_story.214.a
+		random_owned_planet = {
+			limit = { has_planet_flag = yaliluo }
+			remove_modifier = yaliluo_cold_wave
+			change_pc = pc_gaia
+		}
+	}
+}
+situation_event = {
+	id = yaliluo_story.215
+	title = yaliluo_story.215.name
+	desc = yaliluo_story.215.desc
+	picture = GFX_evt_yaliluo_leader_speech
+	is_triggered_only = yes
+	option = {
+		name = yaliluo_story.215.a
+		custom_tooltip = yaliluo_story.200.a.desc
+		owner = {
+			add_monthly_resource_mult = {
+				resource = unity
+				value = @tier5unityreward
+				min = @tier5unitymin
+				max = @tier5unitymax
+			}
+			add_resource = { energy = 2000 minerals = 2000 alloys = 500 }
+			remove_modifier = belobog_technology_cooperation
+			hidden_effect = {
+				change_variable = {
+					which = bronya_military
+					value = 1
+				}
+				change_variable = {
+					which = bronya_army
+					value = 1
+				}
+				change_variable = {
+					which = bronya_interior
+					value = 1
+				}
+				change_variable = {
+					which = bronya_science
+					value = 1
+				}
+				change_variable = {
+					which = bronya_diplomacy
+					value = 1
+				}
+				change_variable = {
+					which = bronya_economy
+					value = 1
+				}
+				country_event = { id = yaliluo_story.214 days = 360 }
+			}
+		}
+	}
+	after = {
+		destroy_situation = this
+	}
+}
+country_event = {
+	id = yaliluo_story.216
+	title = yaliluo_story.216.name
+	desc = yaliluo_story.216.desc
+	picture = GFX_evt_galactic_senate
+	is_triggered_only = yes
+
+	trigger = {
+
+	}
+	option = {
+		name = yaliluo_story.216.a
+		hidden_effect = {
+			country_event = { id = yaliluo_story.217 days = 180 }
+		}
+	}
+	option = {
+		name = yaliluo_story.216.b
+		hidden_effect = {
+			country_event = { id = yaliluo_story.218 days = 180 }
+		}
+	}
+	option = {
+		name = yaliluo_story.216.c
+		hidden_effect = {
+			country_event = { id = yaliluo_story.219 days = 180 }
+		}
+	}
+}
+country_event = {
+	id = yaliluo_story.217
+	title = yaliluo_story.217.name
+	desc = yaliluo_story.217.desc
+	picture = GFX_evt_obelisk_tourists
+	is_triggered_only = yes
+
+	trigger = {
+
+	}
+	option = {
+		name = yaliluo_story.217.a
+		custom_tooltip = yaliluo_story.200.a.desc
+		add_resource = { unity = 10000 }
+		hidden_effect = {
+			change_variable = {
+				which = bronya_military
+				value = 1
+			}
+			change_variable = {
+				which = bronya_army
+				value = 1
+			}
+			change_variable = {
+				which = bronya_interior
+				value = 1
+			}
+			change_variable = {
+				which = bronya_science
+				value = 1
+			}
+			change_variable = {
+				which = bronya_diplomacy
+				value = 1
+			}
+			change_variable = {
+				which = bronya_economy
+				value = 1
+			}
+		}
+		random_owned_planet = {
+			limit = { has_planet_flag = yaliluo }
+			add_modifier = { modifier = yaliluo_wonderful_life days = -1 }
+		}
+	}
+}
+country_event = {
+	id = yaliluo_story.218
+	title = yaliluo_story.218.name
+	desc = yaliluo_story.218.desc
+	picture = GFX_evt_signing
+	is_triggered_only = yes
+
+	trigger = {
+
+	}
+	option = {
+		name = yaliluo_story.218.a
+		custom_tooltip = yaliluo_story.200.a.desc
+		hidden_effect = {
+			change_variable = {
+				which = bronya_military
+				value = 1
+			}
+			change_variable = {
+				which = bronya_army
+				value = 1
+			}
+			change_variable = {
+				which = bronya_interior
+				value = 1
+			}
+			change_variable = {
+				which = bronya_science
+				value = 1
+			}
+			change_variable = {
+				which = bronya_diplomacy
+				value = 1
+			}
+			change_variable = {
+				which = bronya_economy
+				value = 1
+			}
+		}
+		add_resource = { unity = 10000 }
+		add_modifier = { modifier = belobog_big_cunhu days = -1 }
+	}
+}
+country_event = {
+	id = yaliluo_story.219
+	title = yaliluo_story.219.name
+	desc = yaliluo_story.219.desc
+	picture = GFX_evt_open_revolt
+	is_triggered_only = yes
+
+	trigger = {
+
+	}
+	option = {
+		name = yaliluo_story.219.a
+	}
+}
+country_event = {
+	id = yaliluo_story.220
+	title = yaliluo_story.220.name
+	desc = yaliluo_story.220.desc
+	picture = GFX_evt_city_planet
+	is_triggered_only = yes
+
+	trigger = {
+
+	}
+	option = {
+		name = yaliluo_story.220.a
+		random_owned_planet = {
+			limit = { has_planet_flag = yaliluo }
+			add_modifier = { modifier = yaliluo_new_life days = -1 }
+		}
+		hidden_effect = {
+			if = {
+				limit = { has_country_flag = gra_b }
+			}
+			country_event = { id = yaliluo_story.222 days = 180 }
+		}
+	}
+}
+country_event = {
+	id = yaliluo_story.221
+	title = yaliluo_story.221.name
+	desc = yaliluo_story.221.desc
+	picture = GFX_evt_hand_shake
+	is_triggered_only = yes
+
+	trigger = {
+
+	}
+	option = {
+		name = yaliluo_story.221.a
+		hidden_effect = {
+			if = {
+				limit = { has_country_flag = gra_a }
+			}
+			country_event = { id = yaliluo_story.222 days = 180 }
+		}
+	}
+}
+country_event = {
+	id = yaliluo_story.222
+	title = yaliluo_story.222.name
+	desc = yaliluo_story.222.desc
+	picture = GFX_evt_galactic_community
+	is_triggered_only = yes
+
+	trigger = {
+
+	}
+	option = {
+		name = yaliluo_story.222.a
+		custom_tooltip = yaliluo_story.222.a.desc
+		end_event_chain = belobog_story_establish_the_galactic_rescue_alliance_chain
+		hidden_effect = {
+			change_variable = {
+				which = bronya_military
+				value = 1
+			}
+			change_variable = {
+				which = bronya_army
+				value = 1
+			}
+			change_variable = {
+				which = bronya_interior
+				value = 1
+			}
+			change_variable = {
+				which = bronya_science
+				value = 1
+			}
+			change_variable = {
+				which = bronya_diplomacy
+				value = 1
+			}
+			change_variable = {
+				which = bronya_economy
+				value = 1
+			}
+			set_country_flag = galactic_rescue_federation
+		}
+	}
+}
+#300以后，特殊项目类
+country_event = {
+	id = yaliluo_story.300
+	title = yaliluo_story.300.name
+	desc = yaliluo_story.300.desc
+	picture = GFX_evt_engineering_research
+	is_triggered_only = yes
+	event_chain = belobog_story_outer_space_exploration_chain
+	trigger = {
+		has_origin = origin_belobog
+		is_ai = no
+	}
+	option = {
+		name = yaliluo_story.300.a
+		hidden_effect = {
+			create_fleet = {
+				name = "NAME_belobog_first"
+				settings = {
+					can_upgrade = yes
+					can_change_composition = yes
+					can_change_leader = yes
+					can_disband = yes
+					spawn_debris = no
+				}
+				effect = {
+					set_owner = root.owner
+					create_ship = {
+						design = NAME_belobog_first
+						name = "NAME_belobog_first"
+						prefix = no
+						upgradable = yes
+					}
+					set_fleet_stance = evasive
+					set_location = root.capital_scope
+				}
+			}
+			create_fleet = {
+				name = "NAME_belobog_first"
+				settings = {
+					can_upgrade = yes
+					can_change_composition = yes
+					can_change_leader = yes
+					can_disband = yes
+					spawn_debris = no
+				}
+				effect = {
+					set_owner = root.owner
+					create_ship = {
+						design = NAME_belobog_constructor
+						name = "NAME_belobog_first"
+						prefix = no
+						upgradable = yes
+					}
+					set_fleet_stance = evasive
+					set_location = root.capital_scope
+				}
+			}
+			country_event = { id = yaliluo_story.301 days = 120 }
+		}
+	}
+	option = {
+		name = yaliluo_story.300.b
+		allow = { resource_stockpile_compare = { resource = energy value >= 300 } }
+		add_resource = { energy = -300 }
+		hidden_effect = {
+			create_fleet = {
+				name = "NAME_belobog_first"
+				settings = {
+					can_upgrade = yes
+					can_change_composition = yes
+					can_change_leader = yes
+					can_disband = yes
+					spawn_debris = no
+				}
+				effect = {
+					set_owner = root.owner
+					create_ship = {
+						design = NAME_belobog_first_better
+						name = "NAME_belobog_first"
+						prefix = no
+						upgradable = yes
+					}
+					set_fleet_stance = evasive
+					set_location = root.capital_scope
+				}
+			}
+			create_fleet = {
+				name = "NAME_belobog_first"
+				settings = {
+					can_upgrade = yes
+					can_change_composition = yes
+					can_change_leader = yes
+					can_disband = yes
+					spawn_debris = no
+				}
+				effect = {
+					set_owner = root.owner
+					create_ship = {
+						design = NAME_belobog_constructor_better
+						name = "NAME_belobog_first"
+						prefix = no
+						upgradable = yes
+					}
+					set_fleet_stance = evasive
+					set_location = root.capital_scope
+				}
+			}
+			country_event = { id = yaliluo_story.301 days = 120 }
+		}
+	}
+	option = {
+		name = yaliluo_story.300.c
+		allow = { resource_stockpile_compare = { resource = energy value >= 800 }  resource_stockpile_compare = { resource = influence value >= 10 } }
+		add_resource = { energy = -800  influence = -10}
+		hidden_effect = {
+			create_fleet = {
+				name = "NAME_belobog_first"
+				settings = {
+					can_upgrade = yes
+					can_change_composition = yes
+					can_change_leader = yes
+					can_disband = yes
+					spawn_debris = no
+				}
+				effect = {
+					set_owner = root.owner
+					create_ship = {
+						design = NAME_belobog_first_best
+						name = "NAME_belobog_first"
+						prefix = no
+						upgradable = yes
+					}
+					set_fleet_stance = evasive
+					set_location = root.capital_scope
+				}
+			}
+			create_fleet = {
+				name = "NAME_belobog_first"
+				settings = {
+					can_upgrade = yes
+					can_change_composition = yes
+					can_change_leader = yes
+					can_disband = yes
+					spawn_debris = no
+				}
+				effect = {
+					set_owner = root.owner
+					create_ship = {
+						design = NAME_belobog_constructor_best
+						name = "NAME_belobog_first"
+						prefix = no
+						upgradable = yes
+					}
+					set_fleet_stance = evasive
+					set_location = root.capital_scope
+				}
+			}
+			country_event = { id = yaliluo_story.301 days = 120 }
+		}
+	}
+}
+country_event = {
+	id = yaliluo_story.301
+	title = yaliluo_story.301.name
+	desc = yaliluo_story.301.desc
+	picture = GFX_evt_ship_in_orbit_3
+	is_triggered_only = yes
+	event_chain = belobog_story_outer_space_exploration_chain
+	trigger = {
+		has_origin = origin_belobog
+		is_ai = no
+	}
+	option = {
+		name = yaliluo_story.301.a
+		end_event_chain = "belobog_story_outer_space_exploration_chain"
+		add_modifier = {
+			modifier = belobog_endless_exploration_of_the_universe
+			days = -1
+		}
+		add_monthly_resource_mult = {
+			resource = unity
+			value = @tier2unityreward
+			min = @tier2unitymin
+			max = @tier2unitymax
+		}
+		custom_tooltip = yaliluo_story.301.a.desc
+		hidden_effect = {
+			set_country_flag = belobog_story_outer_space_exploration_start
+			change_variable = {
+				which = bronya_economy
+				value = 1
+			}
+		}
+	}
+}
+country_event = {#内政线——消除debuff,选外交路线，解锁更多领袖招募
+	id = yaliluo_story.302
+	title = yaliluo_story.302.name
+	desc = yaliluo_story.302.desc
+	picture = GFX_evt_civil_action
+	is_triggered_only = yes
+	event_chain = belobog_story_internal_power_integration_chain
+	trigger = {
+		has_origin = origin_belobog
+		is_ai = no
+	}
+	option = {
+		name = yaliluo_story.302.a
+		add_resource = {
+			influence = 10
+		}
+		hidden_effect = {
+			capital_scope = {
+				enable_special_project = {
+					name = "belobog_story_internal_power_integration_sec"
+					location = this
+					owner = root
+				}
+			}
+		}
+	}
+}
+country_event = {
+	id = yaliluo_story.303
+	title = yaliluo_story.303.name
+	desc = yaliluo_story.303.desc
+	picture = GFX_evt_yaliluo_leader_speech
+	is_triggered_only = yes
+	event_chain = belobog_story_internal_power_integration_chain
+	trigger = {
+		has_origin = origin_belobog
+		is_ai = no
+	}
+	option = {
+		name = yaliluo_story.303.a
+		custom_tooltip = yaliluo_story.303.a.desc
+		remove_modifier = the_power_that_has_not_yet_been_fully_integrated
+		add_monthly_resource_mult = {
+			resource = unity
+			value = @tier3unityreward
+			min = @tier3unitymin
+			max = @tier3unitymax
+		}
+		hidden_effect = {
+			change_variable = {
+				which = bronya_diplomacy
+				value = 1
+			}
+			change_variable = {
+				which = bronya_economy
+				value = 1
+			}
+			country_event = { id = yaliluo_story.304 days = 120 }
+		}
+	}
+}
+country_event = {
+	id = yaliluo_story.304
+	title = yaliluo_story.304.name
+	desc = yaliluo_story.304.desc
+	picture = GFX_evt_metropolis
+	is_triggered_only = yes
+	event_chain = belobog_story_internal_power_integration_chain
+	trigger = {
+		has_origin = origin_belobog
+		is_ai = no
+	}
+	option = {
+		name = yaliluo_story.304.a
+		custom_tooltip = yaliluo_story.304.a.desc
+		add_monthly_resource_mult = {
+			resource = unity
+			value = @tier2unityreward
+			min = @tier2unitymin
+			max = @tier2unitymax
+		}
+		add_modifier = {
+			modifier = belobog_talent_emergence
+			days = -1
+		}
+		hidden_effect = {
+			change_variable = {
+				which = bronya_interior
+				value = 1
+			}
+			set_country_flag = belobog_more_leader_internal
+			country_event = { id = yaliluo_story.305 days = 150 }
+			country_event = { id = yaliluo_story.306 days = 300 }
+		}
+	}
+}
+country_event = {
+	id = yaliluo_story.305
+	title = yaliluo_story.305.name
+	desc = yaliluo_story.305.desc
+	picture = GFX_evt_metropolis
+	is_triggered_only = yes
+	event_chain = belobog_story_internal_power_integration_chain
+	trigger = {
+		has_origin = origin_belobog
+		is_ai = no
+	}
+	option = {
+		name = yaliluo_story.305.a
+		custom_tooltip = yaliluo_story.305.a.desc
+		hidden_effect = {
+			random_owned_planet = {
+				limit = { has_planet_flag = yaliluo }
+				add_deposit = d_mineral_block
+				add_district = district_mining
+			}
+		}
+	}
+	option = {
+		name = yaliluo_story.305.b
+		custom_tooltip = yaliluo_story.305.b.desc
+		hidden_effect = {
+			random_owned_planet = {
+				limit = { has_planet_flag = yaliluo }
+				add_deposit = d_energy_block
+				add_district = district_generator
+			}
+		}
+	}
+}
+country_event = {
+	id = yaliluo_story.306
+	title = yaliluo_story.306.name
+	desc = yaliluo_story.306.desc
+	picture = GFX_evt_belobog_diplomatic
+	is_triggered_only = yes
+	event_chain = belobog_story_internal_power_integration_chain
+	trigger = {
+		has_origin = origin_belobog
+		is_ai = no
+	}
+	option = {
+		name = yaliluo_story.306.a
+		custom_tooltip = yaliluo_story.306.a.desc
+		set_policy = {
+			policy = diplomatic_stance
+			option = diplo_stance_cooperative
+		}
+		set_policy = {
+			policy = first_contact_protocol
+			option = first_contact_proactive
+		}
+		hidden_effect = {
+			change_variable = {
+				which = bronya_diplomacy
+				value = 1
+			}
+			end_event_chain = belobog_story_internal_power_integration_chain
+		}
+	}
+	option = {
+		name = yaliluo_story.306.b
+		custom_tooltip = yaliluo_story.306.a.desc
+		set_policy = {
+			policy = diplomatic_stance
+			option = diplo_stance_expansionist
+		}
+		set_policy = {
+			policy = first_contact_protocol
+			option = first_contact_proactive
+		}
+		hidden_effect = {
+			change_variable = {
+				which = bronya_diplomacy
+				value = 1
+			}
+			end_event_chain = belobog_story_internal_power_integration_chain
+		}
+	}
+	option = {
+		name = yaliluo_story.306.c
+		custom_tooltip = yaliluo_story.306.a.desc
+		set_policy = {
+			policy = diplomatic_stance
+			option = diplo_stance_mercantile
+		}
+		set_policy = {
+			policy = first_contact_protocol
+			option = first_contact_proactive
+		}
+		hidden_effect = {
+			change_variable = {
+				which = bronya_diplomacy
+				value = 1
+			}
+			end_event_chain = belobog_story_internal_power_integration_chain
+		}
+	}
+}
+country_event = {
+	id = yaliluo_story.320
+	title = yaliluo_story.320.name
+	desc = yaliluo_story.320.desc
+	picture = GFX_evt_belobog_liexi_research
+	is_triggered_only = yes
+	event_chain = belobog_story_liexi_research_chain
+	trigger = {
+		has_origin = origin_belobog
+		is_ai = no
+	}
+	option = {
+		name = yaliluo_story.320.a
+		custom_tooltip = yaliluo_story.320.a.desc
+		add_research_option = tech_yaliluo_liexi_research_1
+		add_tech_progress = { tech = tech_yaliluo_liexi_research_1 progress = 0.75 }
+		hidden_effect = {
+			change_variable = {
+				which = bronya_science
+				value = 1
+			}
+			country_event = { id = yaliluo_story.321 days = 360 }
+		}
+	}
+}
+country_event = {
+	id = yaliluo_story.321
+	title = yaliluo_story.321.name
+	desc = yaliluo_story.321.desc
+	picture = GFX_evt_astral_rift_windswept_planet
+	is_triggered_only = yes
+	event_chain = belobog_story_liexi_research_chain
+	trigger = {
+		has_origin = origin_belobog
+		is_ai = no
+	}
+	option = {
+		name = yaliluo_story.321.a
+		custom_tooltip = yaliluo_story.321.a.desc
+		add_research_option = tech_yaliluo_liexi_research_2
+		add_tech_progress = { tech = tech_yaliluo_liexi_research_2 progress = 0.25 }
+		end_event_chain = belobog_story_liexi_research_chain
+		hidden_effect = {
+			change_variable = {
+				which = bronya_science
+				value = 1
+			}
+			set_country_flag = liexie_research
+		}
+	}
+	option = {
+		name = yaliluo_story.321.b
+		add_research_option = tech_yaliluo_liexi_research_2
+		add_tech_progress = { tech = tech_yaliluo_liexi_research_2 progress = 0.25 }
+		end_event_chain = belobog_story_liexi_research_chain
+		hidden_effect = {
+			change_variable = {
+				which = bronya_science
+				value = 1
+			}
+			set_country_flag = liexie_energy
+		}
+	}
+}
+#400 杂项事件
+planet_event = { #第一次殖民
+	id = yaliluo_story.400
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+		owner = {
+			NOT = {
+				has_country_flag = yaliluo_first_colony
+			}
+			has_origin = origin_belobog
+			is_ai = no
+		}
+	}
+	immediate = {
+		owner = {
+			set_country_flag = yaliluo_first_colony
+		}
+		set_planet_flag = yaliluo_first_colonized_planet
+	}
+}
+planet_event = { #第一次殖民
+	id = yaliluo_story.401
+	title = "yaliluo_story.401.name"
+	desc = "yaliluo_story.401.desc"
+	picture = GFX_evt_alien_propaganda
+	is_triggered_only = yes
+	trigger = {
+		owner = {
+			has_origin = origin_belobog
+			is_ai = no
+		}
+		has_planet_flag = yaliluo_first_colonized_planet
+	}
+	option = {
+		name = yaliluo_story.401.a
+		owner = {
+			add_monthly_resource_mult = {
+				resource = unity
+				value = @tier2unityreward
+				min = @tier2unitymin
+				max = @tier2unitymax
+			}
+		}
+	}
+}
+country_event = {
+	id = yaliluo_story.402
+	title = yaliluo_story.402.name
+	desc = yaliluo_story.402.desc
+	picture = GFX_evt_belobog_yaliluo_luka
+	is_triggered_only = yes
+	trigger = {
+		has_origin = origin_belobog
+		is_ai = no
+		NOT = { has_country_flag = yaliluo_xianzhoudianyi }
+	}
+	option = {
+		name = yaliluo_story.402.a
+		hidden_effect = {
+			set_country_flag = yaliluo_xianzhoudianyi
+			country_event = { id = yaliluo_story.403 days = 90 }
+		}
+	}
+}
+country_event = {
+	id = yaliluo_story.403
+	title = yaliluo_story.403.name
+	desc = yaliluo_story.403.desc
+	picture = GFX_evt_belobog_yaliluo_luka_2
+	is_triggered_only = yes
+	trigger = {
+		has_origin = origin_belobog
+		is_ai = no
+	}
+	option = {
+		name = yaliluo_story.403.a
+		custom_tooltip = yaliluo_story.403.a.desc
+		hidden_effect = {
+			if = {
+				limit = {
+					any_owned_leader = { has_leader_flag = belobog_luka }
+				}
+				event_target:belobog_luka = {
+					add_experience = 1000
+				}
+			}
+			change_variable = { which = count_ipc_like value = 10 }
+			change_variable = { which = count_xianzhou_like value = 10 }
+			change_variable = { which = count_heitacountry_like value = 10 }
+			country_event = { id = yaliluo_story.404 days = 90 }
+		}
+	}
+}
+country_event = {
+	id = yaliluo_story.404
+	title = yaliluo_story.404.name
+	desc = yaliluo_story.404.desc
+	picture = GFX_evt_belobog_xianzhou
+	is_triggered_only = yes
+	trigger = {
+
+	}
+	option = {
+		name = yaliluo_story.404.a
+		custom_tooltip = yaliluo_story.200.a.desc
+		add_favors = {
+			target = event_target:xianzhou_country
+			value = 2
+		}
+		add_opinion_modifier = {
+			who = event_target:xianzhou_country
+			modifier = opinion_yaliluo_xianzhou_help
+		}
+		add_modifier = { modifier = xianzhou_help_event days = -1 }
+		give_specimen = { key = final_special_issue origin = yaliluo_story.402.name }
+		add_resource = { unity = 2000 }
+		hidden_effect = {
+			change_variable = {
+				which = bronya_military
+				value = 1
+			}
+			change_variable = {
+				which = bronya_army
+				value = 1
+			}
+			change_variable = {
+				which = bronya_interior
+				value = 1
+			}
+			change_variable = {
+				which = bronya_science
+				value = 1
+			}
+			change_variable = {
+				which = bronya_diplomacy
+				value = 1
+			}
+			change_variable = {
+				which = bronya_economy
+				value = 1
+			}
+			set_country_flag = xianzhou_yaliluo_help
+			event_target:xianzhou_country = {
+				add_opinion_modifier = {
+					who = event_target:yaliluo_country
+					modifier = opinion_yaliluo_xianzhou_help
+				}
+				add_modifier = { modifier = xianzhou_help_event days = -1 }
+				give_specimen = { key = final_special_issue origin = yaliluo_story.402.name }
+				add_resource = { unity = 2000 }
+			}
+		}
+	}
+}
+#遗址
+fleet_event = {
+	id = yaliluo_story.500
+	title = yaliluo_story.500.name
+	desc = yaliluo_story.500.desc
+	picture = GFX_evt_ancient_records
+	show_sound = event_finding_loot
+	location = from
+
+	archaeology = yes
+
+	is_triggered_only = yes
+	option = {
+		name = yaliluo_story.500.a
+		owner = {
+			small_artifact_reward = yes
+			give_specimen = { key = final_special_issue origin = yaliluo_story.500.name }
+		}
+	}
+}
+fleet_event = {
+	id = yaliluo_story.501
+	title = yaliluo_story.501.name
+	desc = yaliluo_story.501.desc
+	picture = GFX_evt_arctic
+	show_sound = event_finding_loot
+	location = from
+
+	archaeology = yes
+
+	is_triggered_only = yes
+	trigger = {
+
+	}
+	option = {
+		name = yaliluo_story.500.a
+		owner = {
+			small_artifact_reward = yes
+			add_resource = { society_research = 100 }
+		}
+	}
+}
+fleet_event = {
+	id = yaliluo_story.502
+	title = yaliluo_story.502.name
+	desc = yaliluo_story.502.desc
+	picture = GFX_evt_astral_rift_windswept_planet
+	show_sound = event_finding_loot
+	location = from
+
+	archaeology = yes
+
+	is_triggered_only = yes
+	option = {
+		name = yaliluo_story.502.a
+		owner = {
+			small_artifact_reward = yes
+			give_specimen = { key = mimetic_snow_slug origin = yaliluo_story.502.name }
+		}
+	}
+}
+fleet_event = {
+	id = yaliluo_story.503
+	title = yaliluo_story.503.name
+	desc = yaliluo_story.503.desc
+	picture = GFX_evt_barren_dig_site
+	show_sound = event_finding_loot
+	location = from
+
+	archaeology = yes
+
+	is_triggered_only = yes
+	option = {
+		name = yaliluo_story.503.a
+		owner = {
+			small_artifact_reward = yes
+			add_resource = { society_research = 500  engineering_research = 500 physics_research = 500}
+			give_specimen = { key = activate_components origin = yaliluo_story.503.name }
+		}
+	}
+}
+fleet_event = {
+	id = yaliluo_story.504
+	title = yaliluo_story.504.name
+	desc = yaliluo_story.504.desc
+	picture = GFX_evt_city_ruins
+	show_sound = event_finding_loot
+	location = from
+
+	archaeology = yes
+
+	is_triggered_only = yes
+	option = {
+		name = yaliluo_story.504.a
+		owner = {
+			small_artifact_reward = yes
+			add_resource = { society_research = 200  engineering_research = 200 physics_research = 200}
+			give_specimen = { key = monster_armor origin = yaliluo_story.504.name }
+		}
+	}
+}
+country_event = {#办公室
+	id = yaliluo_story.1000
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = {
+		has_origin = origin_belobog
+		is_ai = no
+	}
+	immediate = {
+		create_country = {
+			name = yaliluo_story.1001.title
+			type = yaliluo_work
+			flag = {
+				icon={
+					category="DOT_SR"
+					file="flag_belobog.dds"
+				}
+				background={
+					category="backgrounds"
+					file="00_solid.dds"
+				}
+				colors={
+					"blue"
+					"black"
+					"null"
+					"null"
+				}
+			}
+		}
+		last_created_country = {
+			establish_communications_no_message = root
+		}
+		save_global_event_target_as = yaliluo_work
+	}
+}
+country_event = {#办公室
+	id = yaliluo_story.1001
+	title = "yaliluo_story.1001.title"
+	desc = "yaliluo_story.1001.desc"
+	diplomatic = yes
+
+	picture_event_data = {
+		room = yaliluo_work_space_room
+	}
+
+	is_triggered_only = yes
+	option = {
+		name = yaliluo_story.1001.a
+		custom_tooltip = yaliluo_story.1001.a.desc
+		hidden_effect = {
+			country_event = { id = yaliluo_story.1003 }
+		}
+	}
+	option = {
+		name = yaliluo_story.1001.b
+		custom_tooltip = yaliluo_story.1001.b.desc
+	}
+	option = {
+		name = yaliluo_story.1001.c
+		custom_tooltip = yaliluo_story.1001.c.desc
+		hidden_effect = {
+			country_event = { id = yaliluo_story.1004 }
+		}
+	}
+	option = {
+		name = BACK
+		default_hide_option = yes
+	}
+}
+country_event = {#办公室
+	id = yaliluo_story.1002
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		from = { is_country_type = yaliluo_work }
+		is_same_value = event_target:yaliluo_work
+	}
+	immediate = {
+		country_event = {id = yaliluo_story.1001 }
+	}
+}
+country_event = {
+	id = yaliluo_story.1003
+	title = "yaliluo_story.1003.title"
+	desc = "yaliluo_story.1003.desc"
+	diplomatic = yes
+
+	picture_event_data = {
+		room = yaliluo_work_space_room
+	}
+
+	is_triggered_only = yes
+	option = {
+		name = yaliluo_story.1003.a
+		is_dialog_only = yes
+		custom_tooltip = yaliluo_story.1003.b.desc
+		allow = {
+			custom_tooltip = {
+				fail_text = yaliluo_story.1003.b.fail
+				hidden_trigger = {
+					not ={
+						any_owned_leader = {
+							has_leader_flag = belobog_pela
+						}
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			country_event = { id = yaliluo_story.1100}
+		}
+	}
+	option = {
+		name = yaliluo_story.1003.b
+		allow = {
+			custom_tooltip = {
+				fail_text = yaliluo_story.1003.b.fail
+				hidden_trigger = {
+					not ={
+						any_owned_leader = {
+							has_leader_flag = belobog_xier
+						}
+					}
+				}
+			}
+			custom_tooltip = {
+				fail_text = yaliluo_story.1003.a.desc
+				hidden_trigger = {
+					owner = {
+						has_country_flag = belobog_more_leader_internal
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			country_event = { id = yaliluo_story.1105}
+		}
+	}
+	option = {
+		name = yaliluo_story.1003.c
+		allow = {
+			custom_tooltip = {
+				fail_text = yaliluo_story.1003.b.fail
+				hidden_trigger = {
+					not ={
+						any_owned_leader = {
+							has_leader_flag = belobog_kelala
+						}
+					}
+				}
+			}
+			custom_tooltip = {
+				fail_text = yaliluo_story.1003.a.desc
+				hidden_trigger = {
+					owner = {
+						has_country_flag = belobog_more_leader_internal
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			country_event = { id = yaliluo_story.1104}
+		}
+	}
+	option = {
+		name = yaliluo_story.1003.d
+		allow = {
+			custom_tooltip = {
+				fail_text = yaliluo_story.1003.b.fail
+				hidden_trigger = {
+					not ={
+						any_owned_leader = {
+							has_leader_flag = belobog_huke
+						}
+					}
+				}
+			}
+			custom_tooltip = {
+				fail_text = yaliluo_story.1003.a.desc
+				hidden_trigger = {
+					owner = {
+						has_country_flag = belobog_more_leader_internal
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			country_event = { id = yaliluo_story.1103}
+		}
+	}
+	option = {
+		name = yaliluo_story.1003.e
+		is_dialog_only = yes
+		custom_tooltip = yaliluo_story.1003.b.desc
+		allow = {
+			custom_tooltip = {
+				fail_text = yaliluo_story.1003.b.fail
+				hidden_trigger = {
+					not ={
+						any_owned_leader = {
+							has_leader_flag = belobog_lingke
+						}
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			country_event = { id = yaliluo_story.1101}
+		}
+	}
+	option = {
+		name = yaliluo_story.1003.f
+		is_dialog_only = yes
+		custom_tooltip = yaliluo_story.1003.b.desc
+		allow = {
+			custom_tooltip = {
+				fail_text = yaliluo_story.1003.a.desc
+				hidden_trigger = {
+					owner = {
+						has_country_flag = belobog_more_leader_internal
+					}
+				}
+			}
+			custom_tooltip = {
+				fail_text = yaliluo_story.1003.b.fail
+				hidden_trigger = {
+					not ={
+						any_owned_leader = {
+							has_leader_flag = belobog_luka
+						}
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			country_event = { id = yaliluo_story.1102}
+		}
+	}
+	option = {
+		name = BACK
+		default_hide_option = yes
+	}
+}
+country_event = {
+	id = yaliluo_story.1004
+	title = "yaliluo_story.1004.title"
+	desc = "yaliluo_story.1004.desc"
+	diplomatic = yes
+
+	picture_event_data = {
+		room = yaliluo_work_space_room
+	}
+
+	is_triggered_only = yes
+	option = {
+		name = yaliluo_story.1004.a
+		hidden_effect = {
+			country_event = { id = yaliluo_story.1005 }
+		}
+	}
+	option = {
+		name = yaliluo_story.1004.b
+		hidden_effect = {
+			country_event = { id = yaliluo_story.1020 }
+		}
+	}
+	option = {
+		name = yaliluo_story.1004.c
+		hidden_effect = {
+			country_event = { id = yaliluo_story.1030 }
+		}
+	}
+	option = {
+		name = yaliluo_story.1004.d
+		is_dialog_only = yes
+		response_text = yaliluo_story.1004.d.desc
+	}
+	option = {
+		name = BACK
+		hidden_effect = {
+			country_event = { id = yaliluo_story.1001 }
+		}
+	}
+}
+country_event = {
+	id = yaliluo_story.1005
+	title = "yaliluo_story.1005.title"
+	desc = "yaliluo_story.1005.desc"
+	diplomatic = yes
+
+	picture_event_data = {
+		room = yaliluo_work_space_room
+	}
+
+	is_triggered_only = yes
+	option = {
+		name = yaliluo_story.1005.a
+		is_dialog_only = yes
+		response_text = yaliluo_story.1005.a.desc
+		allow = {
+			resource_stockpile_compare = { resource = energy value >= 500 }
+			custom_tooltip = {
+				fail_text = yaliluo_story.1005.a.tt
+				NOT = {
+					has_country_flag = com_with_ipc
+				}
+			}
+		}
+		hidden_effect = {
+			country_event = { id = yaliluo_story.1006 }
+		}
+	}
+	option = {
+		name = yaliluo_story.1005.b
+		allow = {
+			custom_tooltip = {
+				fail_text = yaliluo_story.1005.b.tt
+				hidden_trigger = {
+					check_variable = {
+						which = count_ipc_like
+						value >50
+					}
+				}
+			}
+		}
+		is_dialog_only = yes
+		response_text = yaliluo_story.1005.b.desc
+	}
+	option = {
+		name = yaliluo_story.1005.c
+		allow = {
+			custom_tooltip = {
+				fail_text = yaliluo_story.1005.c.tt.a
+				hidden_trigger = {
+					check_variable = {
+						which = count_ipc_like
+						value >30
+					}
+				}
+			}
+			custom_tooltip = {
+				fail_text = yaliluo_story.1005.c.tt.b
+				hidden_trigger = {
+					NOT = { has_country_flag = ipc_help }
+				}
+			}
+		}
+		is_dialog_only = yes
+		response_text = yaliluo_story.1005.a.desc
+		hidden_effect = {
+			country_event = { id = yaliluo_story.1007 }
+		}
+	}
+	option = {
+		name = yaliluo_story.1005.d
+		allow = {
+			custom_tooltip = {
+				fail_text = yaliluo_story.1005.c.tt.a
+				hidden_trigger = {
+					check_variable = {
+						which = count_ipc_like
+						value >30
+					}
+				}
+			}
+			custom_tooltip = {
+				fail_text = yaliluo_story.1005.c.tt.c
+				hidden_trigger = {
+					NOT = { has_modifier = a_debt_that_lasts_for_seven_hundred_years  }
+				}
+			}
+			custom_tooltip = {
+				fail_text = yaliluo_story.1005.a.tt
+				NOT = {
+					has_country_flag = com_with_ipc_date
+				}
+			}
+		}
+		is_dialog_only = yes
+		response_text = yaliluo_story.1005.a.desc
+		hidden_effect = {
+			country_event = { id = yaliluo_story.1008 }
+		}
+	}
+	option = {
+		name = BACK
+		hidden_effect = {
+			country_event = { id = yaliluo_story.1004 }
+		}
+	}
+}
+country_event = {
+	id = yaliluo_story.1006
+	title = "yaliluo_story.1006.title"
+	desc = "yaliluo_story.1006.desc"
+	picture = GFX_evt_diplomatic_visit
+	is_triggered_only = yes
+	option = {
+		name = yaliluo_story.1006.a
+		hidden_effect = {
+			set_timed_country_flag = { flag = com_with_ipc  days = 1080 }
+			random_list = {
+				1 = { change_variable = { which = count_ipc_like value = 10 }}
+				1 = { change_variable = { which = count_ipc_like value = 7 }}
+				1 = { change_variable = { which = count_ipc_like value = 3 }}
+			}
+			add_resource = { energy = -500 }
+		}
+	}
+}
+country_event = {
+	id = yaliluo_story.1007
+	title = "yaliluo_story.1007.title"
+	desc = "yaliluo_story.1007.desc"
+	picture = GFX_evt_financial_instruments
+	is_triggered_only = yes
+	option = {
+		name = yaliluo_story.1007.a
+		custom_tooltip = yaliluo_story.200.a.desc
+		add_modifier = { modifier = ipc_help days = -1 }
+		hidden_effect = {
+			change_variable = {
+				which = bronya_military
+				value = 1
+			}
+			change_variable = {
+				which = bronya_army
+				value = 1
+			}
+			change_variable = {
+				which = bronya_interior
+				value = 1
+			}
+			change_variable = {
+				which = bronya_science
+				value = 1
+			}
+			change_variable = {
+				which = bronya_diplomacy
+				value = 1
+			}
+			change_variable = {
+				which = bronya_economy
+				value = 1
+			}
+			set_country_flag = ipc_help
+			random_list = {
+				1 = { change_variable = { which = count_ipc_like value = 10 }}
+				1 = { change_variable = { which = count_ipc_like value = 7 }}
+				1 = { change_variable = { which = count_ipc_like value = 3 }}
+			}
+		}
+	}
+}
+country_event = {
+	id = yaliluo_story.1008
+	title = "yaliluo_story.1008.title"
+	desc = "yaliluo_story.1008.desc"
+	picture = GFX_evt_striking_a_deal
+	is_triggered_only = yes
+
+	option = {
+		name = yaliluo_story.1008.a
+		hidden_effect = {
+			set_timed_country_flag = {flag = com_with_ipc_date days = 1080}
+			if = {
+				limit = { check_variable = { which = count_debt value >0 } }
+				if = {
+					limit = {
+						check_variable = { which = count_debt value >30 }
+						check_variable = { which = count_debt value <50 }
+					}
+				}
+				random_list = {
+					1 = { country_event = { id = yaliluo_story.1009 days = 30 }}
+					1 = { country_event = { id = yaliluo_story.1010 days = 30 }}
+				}
+				else_if = {
+					limit = {
+						check_variable = { which = count_debt value >50 }
+						check_variable = { which = count_debt value <70 }
+					}
+				}
+				random_list = {
+					7 = { country_event = { id = yaliluo_story.1009 days = 30 }}
+					3 = { country_event = { id = yaliluo_story.1010 days = 30 }}
+				}
+				else_if = {
+					limit = {
+						check_variable = { which = count_debt value >70 }
+					}
+				}
+				random_list = {
+					9 = { country_event = { id = yaliluo_story.1009 days = 30 }}
+					1 = { country_event = { id = yaliluo_story.1010 days = 30 }}
+				}
+			}
+		}
+	}
+}
+country_event = {
+	id = yaliluo_story.1009
+	title = "yaliluo_story.1009.title"
+	desc = "yaliluo_story.1009.desc"
+	picture = GFX_evt_hand_shake
+	is_triggered_only = yes
+
+	option = {
+		name = yaliluo_story.1009.a
+		hidden_effect = {
+			if = {
+				limit = { check_variable = { which = count_debt value >0 } }
+				random_list = {
+					1 = { change_variable = { which = count_debt value = -1 }}
+					1 = { change_variable = { which = count_debt value = -2 }}
+					1 = { change_variable = { which = count_debt value = -3 }}
+				}
+				if = {
+					limit = { check_variable = { which = count_debt value <= 0 } }
+					remove_modifier = a_debt_that_lasts_for_seven_hundred_years
+					change_variable = {
+						which = bronya_military
+						value = 1
+					}
+					change_variable = {
+						which = bronya_army
+						value = 1
+					}
+					change_variable = {
+						which = bronya_interior
+						value = 1
+					}
+					change_variable = {
+						which = bronya_science
+						value = 1
+					}
+					change_variable = {
+						which = bronya_diplomacy
+						value = 1
+					}
+					change_variable = {
+						which = bronya_economy
+						value = 1
+					}
+				}
+			}
+		}
+	}
+}
+country_event = {
+	id = yaliluo_story.1010
+	title = "yaliluo_story.1010.title"
+	desc = "yaliluo_story.1010.desc"
+	picture = GFX_evt_tradedeal
+	is_triggered_only = yes
+	event_window_type = leader_story
+	event_picture_background = "GFX_leader_recruitment_bg_renowned"
+
+	picture_event_data = {
+		portrait = tuopa
+	}
+	option = {
+		name = yaliluo_story.1010.a
+	}
+}
+country_event = {
+	id = yaliluo_story.1020
+	title = "yaliluo_story.1020.title"
+	desc = "yaliluo_story.1020.desc"
+	diplomatic = yes
+
+	picture_event_data = {
+		room = yaliluo_work_space_room
+	}
+
+	is_triggered_only = yes
+	option = {
+		name = yaliluo_story.1005.a
+		is_dialog_only = yes
+		response_text = yaliluo_story.1020.a.desc
+		allow = {
+			resource_stockpile_compare = { resource = energy value >= 500 }
+			custom_tooltip = {
+				fail_text = yaliluo_story.1005.a.tt
+				NOT = {
+					has_country_flag = com_with_xianzhou
+				}
+			}
+		}
+		hidden_effect = {
+			country_event = { id = yaliluo_story.1021 }
+		}
+	}
+	option = {
+		name = yaliluo_story.1005.b
+		allow = {
+			custom_tooltip = {
+				fail_text = yaliluo_story.1005.b.tt
+				hidden_trigger = {
+					check_variable = {
+						which = count_xianzhou_like
+						value >50
+					}
+				}
+			}
+		}
+		is_dialog_only = yes
+		response_text = yaliluo_story.1005.b.desc
+	}
+	option = {
+		name = yaliluo_story.1005.c
+		allow = {
+			custom_tooltip = {
+				fail_text = yaliluo_story.1005.c.tt.a
+				hidden_trigger = {
+					check_variable = {
+						which = count_xianzhou_like
+						value >30
+					}
+				}
+			}
+			custom_tooltip = {
+				fail_text = yaliluo_story.1005.c.tt.b
+				hidden_trigger = {
+					NOT = { has_country_flag = xianzhou_help }
+				}
+			}
+		}
+		is_dialog_only = yes
+		response_text = yaliluo_story.1020.a.desc
+		hidden_effect = {
+			country_event = { id = yaliluo_story.1022 }
+		}
+	}
+	option = {
+		name = BACK
+		hidden_effect = {
+			country_event = { id = yaliluo_story.1004 }
+		}
+	}
+}
+country_event = {
+	id = yaliluo_story.1021
+	title = "yaliluo_story.1006.title"
+	desc = "yaliluo_story.1021.desc"
+	picture = GFX_evt_diplomatic_visit
+	is_triggered_only = yes
+
+	option = {
+		name = yaliluo_story.1006.a
+		hidden_effect = {
+			set_timed_country_flag = { flag = com_with_xianzhou  days = 1080 }
+			random_list = {
+				1 = { change_variable = { which = count_xianzhou_like value = 10 }}
+				1 = { change_variable = { which = count_xianzhou_like value = 7 }}
+				1 = { change_variable = { which = count_xianzhou_like value = 3 }}
+			}
+			add_resource = { energy = -500 }
+
+		}
+	}
+}
+country_event = {
+	id = yaliluo_story.1022
+	title = "yaliluo_story.1022.title"
+	desc = "yaliluo_story.1022.desc"
+	picture = GFX_evt_financial_instruments
+	is_triggered_only = yes
+
+	option = {
+		name = yaliluo_story.1022.a
+		custom_tooltip = yaliluo_story.200.a.desc
+		add_modifier = { modifier = xianzhou_help days = -1 }
+		add_favors = {
+			target = event_target:xianzhou_country
+			value = 2
+		}
+		add_opinion_modifier = {
+			who = event_target:xianzhou_country
+			modifier = opinion_xianzhou_help
+		}
+		event_target:xianzhou_country = {
+			add_opinion_modifier = {
+				who = root
+				modifier = opinion_xianzhou_help
+			}
+		}
+		hidden_effect = {
+			set_country_flag = xianzhou_help
+			change_variable = {
+				which = bronya_military
+				value = 1
+			}
+			change_variable = {
+				which = bronya_army
+				value = 1
+			}
+			change_variable = {
+				which = bronya_interior
+				value = 1
+			}
+			change_variable = {
+				which = bronya_science
+				value = 1
+			}
+			change_variable = {
+				which = bronya_diplomacy
+				value = 1
+			}
+			change_variable = {
+				which = bronya_economy
+				value = 1
+			}
+		}
+	}
+}
+country_event = {
+	id = yaliluo_story.1030
+	title = "yaliluo_story.1030.title"
+	desc = "yaliluo_story.1030.desc"
+	diplomatic = yes
+
+	picture_event_data = {
+		room = yaliluo_work_space_room
+	}
+
+	is_triggered_only = yes
+	option = {
+		name = yaliluo_story.1005.a
+		is_dialog_only = yes
+		response_text = yaliluo_story.1030.a.desc
+		allow = {
+			resource_stockpile_compare = { resource = energy value >= 500 }
+			custom_tooltip = {
+				fail_text = yaliluo_story.1005.a.tt
+				NOT = {
+					has_country_flag = com_with_heitacountry
+				}
+			}
+		}
+		hidden_effect = {
+			country_event = { id = yaliluo_story.1031 }
+		}
+	}
+	option = {
+		name = yaliluo_story.1005.b
+		allow = {
+			custom_tooltip = {
+				fail_text = yaliluo_story.1005.b.tt
+				hidden_trigger = {
+					check_variable = {
+						which = count_heitacountry_like
+						value >50
+					}
+				}
+			}
+		}
+		is_dialog_only = yes
+		response_text = yaliluo_story.1005.b.desc
+	}
+	option = {
+		name = yaliluo_story.1005.c
+		allow = {
+			custom_tooltip = {
+				fail_text = yaliluo_story.1005.c.tt.a
+				hidden_trigger = {
+					check_variable = {
+						which = count_heitacountry_like
+						value >30
+					}
+				}
+			}
+			custom_tooltip = {
+				fail_text = yaliluo_story.1005.c.tt.b
+				hidden_trigger = {
+					NOT = { has_country_flag = heitacountry_help }
+				}
+			}
+		}
+		is_dialog_only = yes
+		response_text = yaliluo_story.1005.a.desc
+		hidden_effect = {
+			country_event = { id = yaliluo_story.1032 }
+		}
+	}
+	option = {
+		name = BACK
+		hidden_effect = {
+			country_event = { id = yaliluo_story.1004 }
+		}
+	}
+}
+country_event = {
+	id = yaliluo_story.1031
+	title = "yaliluo_story.1006.title"
+	desc = "yaliluo_story.1031.desc"
+	picture = GFX_evt_diplomatic_visit
+	is_triggered_only = yes
+
+	option = {
+		name = yaliluo_story.1006.a
+		hidden_effect = {
+			set_timed_country_flag = { flag = com_with_heitacountry  days = 1080 }
+			random_list = {
+				1 = { change_variable = { which = count_heitacountry_like value = 10 }}
+				1 = { change_variable = { which = count_heitacountry_like value = 7 }}
+				1 = { change_variable = { which = count_heitacountry_like value = 3 }}
+			}
+			add_resource = { energy = -500 }
+		}
+	}
+}
+country_event = {
+	id = yaliluo_story.1032
+	title = "yaliluo_story.1007.title"
+	desc = "yaliluo_story.1032.desc"
+	picture = GFX_evt_financial_instruments
+	is_triggered_only = yes
+
+	option = {
+		name = yaliluo_story.1007.a
+		custom_tooltip = yaliluo_story.200.a.desc
+		add_modifier = { modifier = heitacountry_help days = -1 }
+		hidden_effect = {
+			change_variable = {
+				which = bronya_military
+				value = 1
+			}
+			change_variable = {
+				which = bronya_army
+				value = 1
+			}
+			change_variable = {
+				which = bronya_interior
+				value = 1
+			}
+			change_variable = {
+				which = bronya_science
+				value = 1
+			}
+			change_variable = {
+				which = bronya_diplomacy
+				value = 1
+			}
+			change_variable = {
+				which = bronya_economy
+				value = 1
+			}
+			set_country_flag = heitacountry_help
+		}
+	}
+}
+#1100领袖系列
+country_event = {
+	id = yaliluo_story.1100
+	title = "yaliluo_story.1100"
+	desc = "belobog_pela_tt"
+	is_triggered_only = yes
+
+	picture = GFX_leader_recruitment_bg_legendary_beholder
+	event_window_type = leader_recruit
+
+	picture_event_data = {
+		portrait = event_target:belobog_pela
+		room = paragon_keides_room
+	}
+	immediate = {
+		hidden_effect = {
+			SR_leader_creator = {
+				SPECIES_NAME = "Star_Rail"
+				SPECIES_CLASS = "Star_Rail"
+				LEADER_PORTRAIT = peila
+				SKILL = 1
+				CLASS = scientist
+				NAME = belobog_pela
+				GENDER = female
+				HIDEAGE = yes
+				ETHIC = ethic_materialist
+				CATCH_PHRASE = belobog_pela_tt
+				DESC = belobog_pela_desc
+				EVENT_TARGET = belobog_pela
+			}
+			last_created_leader = {
+				set_age = 18
+				remove_all_positive_traits = yes
+				add_trait = leader_trait_frost_shot
+				add_trait = leader_trait_zone_suppression
+				add_trait = leader_trait_data_collecting
+				add_trait = leader_trait_preemptive_strike
+				change_background_job = tiwei_soldier
+			}
+		}
+	}
+	option = {
+		trigger = { }
+		name = yaliluo_story.1100.a
+		is_dialog_only = yes
+		response_text = yaliluo_story.1100.a.response
+	}
+	option = {
+		trigger = { }
+		name = yaliluo_story.1100.b
+		is_dialog_only = yes
+		response_text = yaliluo_story.1100.b.response
+	}
+	option = {
+		name = HIRE
+		tag = hire_leader
+		hidden_effect = {
+			SR_hire_leader = {
+				EVENT_TARGET = belobog_pela
+			}
+			set_country_flag = belobog_pela_set
+			last_created_leader = {
+				set_leader_flag = legendary_leader
+				save_global_event_target_as = belobog_pela_leader
+				set_leader_flag = immune_to_negative_traits
+				set_leader_flag = belobog_pela
+			}
+		}
+	}
+	option = {
+		# DISMISS
+		name = DISMISS
+		tag = dismiss_leader
+		hidden_effect = {
+			event_target:belobog_pela = {
+				kill_leader = { show_notification = no }
+			}
+		}
+	}
+	after = {hidden_effect = {country_event = { id = yaliluo_story.1003}}}
+}
+country_event = {
+	id = yaliluo_story.1101
+	title = "yaliluo_story.1101"
+	desc = "belobog_lingke_tt"
+	is_triggered_only = yes
+
+	picture = GFX_leader_recruitment_bg_legendary_beholder
+	event_window_type = leader_recruit
+
+	picture_event_data = {
+		portrait = event_target:belobog_lingke
+		room = paragon_keides_room
+	}
+	immediate = {
+		hidden_effect = {
+			SR_leader_creator = {
+				SPECIES_NAME = "Star_Rail"
+				SPECIES_CLASS = "Star_Rail"
+				LEADER_PORTRAIT = lingke
+				SKILL = 1
+				CLASS = scientist
+				NAME = belobog_lingke
+				GENDER = female
+				HIDEAGE = yes
+				ETHIC = ethic_materialist
+				CATCH_PHRASE = belobog_lingke_tt
+				DESC = belobog_lingke_desc
+				EVENT_TARGET = belobog_lingke
+			}
+			last_created_leader = {
+				set_age = 18
+				remove_all_positive_traits = yes
+				add_trait = leader_trait_salted_camping_cans
+				add_trait = leader_trait_snowfield_first_aid
+				add_trait = leader_trait_outdoor_survival_experience
+				add_trait = leader_trait_chocolate_energy_bar
+				change_background_job = researcher
+			}
+		}
+	}
+	option = {
+		trigger = { }
+		name = yaliluo_story.1100.a
+		is_dialog_only = yes
+		response_text = yaliluo_story.1101.a.response
+	}
+	option = {
+		trigger = { }
+		name = yaliluo_story.1100.b
+		is_dialog_only = yes
+		response_text = yaliluo_story.1101.b.response
+	}
+	option = {
+		name = HIRE
+		tag = hire_leader
+		hidden_effect = {
+			SR_hire_leader = {
+				EVENT_TARGET = belobog_lingke
+			}
+			set_country_flag = belobog_lingke_set
+			last_created_leader = {
+				set_leader_flag = legendary_leader
+				save_global_event_target_as = belobog_lingke_leader
+				set_leader_flag = immune_to_negative_traits
+				set_leader_flag = belobog_lingke
+			}
+		}
+	}
+	option = {
+		# DISMISS
+		name = DISMISS
+		tag = dismiss_leader
+		hidden_effect = {
+			event_target:belobog_lingke = {
+				kill_leader = { show_notification = no }
+			}
+		}
+	}
+	after = {hidden_effect = {country_event = { id = yaliluo_story.1003}}}
+}
+country_event = {
+	id = yaliluo_story.1102
+	title = "yaliluo_story.1102"
+	desc = "belobog_luka_tt"
+	is_triggered_only = yes
+
+	picture = GFX_leader_recruitment_bg_legendary_beholder
+	event_window_type = leader_recruit
+
+	picture_event_data = {
+		portrait = event_target:belobog_luka
+		room = paragon_keides_room
+	}
+	immediate = {
+		hidden_effect = {
+			SR_leader_creator = {
+				SPECIES_NAME = "Star_Rail"
+				SPECIES_CLASS = "Star_Rail"
+				LEADER_PORTRAIT = luka
+				SKILL = 1
+				CLASS = commander
+				NAME = belobog_luka
+				GENDER = male
+				HIDEAGE = yes
+				ETHIC = ethic_militarist
+				CATCH_PHRASE = belobog_luka_tt
+				DESC = belobog_luka_desc
+				EVENT_TARGET = belobog_luka
+			}
+			last_created_leader = {
+				set_age = 18
+				remove_all_positive_traits = yes
+				add_trait = leader_trait_direct_punch
+				add_trait = leader_trait_coup_de_grace
+				add_trait = leader_trait_flying_sparks
+				add_trait = leader_trait_anticipator
+				change_background_job = researcher
+			}
+		}
+	}
+	option = {
+		trigger = { }
+		name = yaliluo_story.1100.a
+		is_dialog_only = yes
+		response_text = yaliluo_story.1102.a.response
+	}
+	option = {
+		trigger = { }
+		name = yaliluo_story.1100.b
+		is_dialog_only = yes
+		response_text = yaliluo_story.1102.b.response
+	}
+	option = {
+		name = HIRE
+		tag = hire_leader
+		hidden_effect = {
+			SR_hire_leader = {
+				EVENT_TARGET = belobog_luka
+			}
+			set_country_flag = belobog_luka_set
+			last_created_leader = {
+				set_leader_flag = legendary_leader
+				save_global_event_target_as = belobog_luka_leader
+				set_leader_flag = immune_to_negative_traits
+				set_leader_flag = belobog_luka
+			}
+		}
+	}
+	option = {
+		# DISMISS
+		name = DISMISS
+		tag = dismiss_leader
+		hidden_effect = {
+			event_target:belobog_luka = {
+				kill_leader = { show_notification = no }
+			}
+		}
+	}
+	after = {hidden_effect = {country_event = { id = yaliluo_story.1003}}}
+}
+country_event = {
+	id = yaliluo_story.1103
+	title = "yaliluo_story.1103"
+	desc = "belobog_huke_tt"
+	is_triggered_only = yes
+
+	picture = GFX_leader_recruitment_bg_legendary_beholder
+	event_window_type = leader_recruit
+
+	picture_event_data = {
+		portrait = event_target:belobog_huke
+		room = paragon_keides_room
+	}
+	immediate = {
+		hidden_effect = {
+			SR_leader_creator = {
+				SPECIES_NAME = "Star_Rail"
+				SPECIES_CLASS = "Star_Rail"
+				LEADER_PORTRAIT = huke
+				SKILL = 1
+				CLASS = official
+				NAME = belobog_huke
+				GENDER = female
+				HIDEAGE = yes
+				ETHIC = ethic_xenophile
+				CATCH_PHRASE = belobog_huke_tt
+				DESC = belobog_huke_desc
+				EVENT_TARGET = belobog_huke
+			}
+			last_created_leader = {
+				set_age = 12
+				remove_all_positive_traits = yes
+				add_trait = leader_trait_get_burned
+				add_trait = leader_trait_remember_hook
+				add_trait = leader_trait_here_comes_fire
+				add_trait = leader_trait_look_at_this_mess
+				change_background_job = researcher
+			}
+		}
+	}
+	option = {
+		trigger = { }
+		name = yaliluo_story.1100.a
+		is_dialog_only = yes
+		response_text = yaliluo_story.1103.a.response
+	}
+	option = {
+		trigger = { }
+		name = yaliluo_story.1100.b
+		is_dialog_only = yes
+		response_text = yaliluo_story.1103.b.response
+	}
+	option = {
+		name = HIRE
+		tag = hire_leader
+		hidden_effect = {
+			SR_hire_leader = {
+				EVENT_TARGET = belobog_huke
+			}
+			set_country_flag = belobog_huke_set
+			last_created_leader = {
+				set_leader_flag = legendary_leader
+				save_global_event_target_as = belobog_huke_leader
+				set_leader_flag = immune_to_negative_traits
+				set_leader_flag = belobog_huke
+			}
+		}
+	}
+	option = {
+		# DISMISS
+		name = DISMISS
+		tag = dismiss_leader
+		hidden_effect = {
+			event_target:belobog_huke = {
+				kill_leader = { show_notification = no }
+			}
+		}
+	}
+	after = {hidden_effect = {country_event = { id = yaliluo_story.1003}}}
+}
+country_event = {
+	id = yaliluo_story.1104
+	title = "yaliluo_story.1104"
+	desc = "belobog_kelala_tt"
+	is_triggered_only = yes
+
+	picture = GFX_leader_recruitment_bg_legendary_beholder
+	event_window_type = leader_recruit
+
+	picture_event_data = {
+		portrait = event_target:belobog_kelala
+		room = paragon_keides_room
+	}
+	immediate = {
+		hidden_effect = {
+			SR_leader_creator = {
+				SPECIES_NAME = "Star_Rail"
+				SPECIES_CLASS = "Star_Rail"
+				LEADER_PORTRAIT = kelala
+				SKILL = 1
+				CLASS = official
+				NAME = belobog_kelala
+				GENDER = female
+				HIDEAGE = yes
+				ETHIC = ethic_xenophile
+				CATCH_PHRASE = belobog_kelala_tt
+				DESC = belobog_kelala_desc
+				EVENT_TARGET = belobog_kelala
+			}
+			last_created_leader = {
+				set_age = 12
+				remove_all_positive_traits = yes
+				add_trait = leader_trait_svarog_watches_over_you
+				add_trait = leader_trait_promise_not_command
+				add_trait = leader_trait_because_family
+				add_trait = leader_trait_small_price_for_victory
+				change_background_job = roboticist
+			}
+		}
+	}
+	option = {
+		trigger = { }
+		name = yaliluo_story.1100.a
+		is_dialog_only = yes
+		response_text = yaliluo_story.1104.a.response
+	}
+	option = {
+		trigger = { }
+		name = yaliluo_story.1100.b
+		is_dialog_only = yes
+		response_text = yaliluo_story.1104.b.response
+	}
+	option = {
+		name = HIRE
+		tag = hire_leader
+		hidden_effect = {
+			SR_hire_leader = {
+				EVENT_TARGET = belobog_kelala
+			}
+			set_country_flag = belobog_kelala_set
+			last_created_leader = {
+				set_leader_flag = legendary_leader
+				save_global_event_target_as = belobog_kelala_leader
+				set_leader_flag = immune_to_negative_traits
+				set_leader_flag = belobog_kelala
+			}
+		}
+	}
+	option = {
+		# DISMISS
+		name = DISMISS
+		tag = dismiss_leader
+		hidden_effect = {
+			event_target:belobog_kelala = {
+				kill_leader = { show_notification = no }
+			}
+		}
+	}
+	after = {hidden_effect = {country_event = { id = yaliluo_story.1003}}}
+}
+country_event = {
+	id = yaliluo_story.1105
+	title = "yaliluo_story.1105"
+	desc = "belobog_xier_tt"
+	is_triggered_only = yes
+
+	picture = GFX_leader_recruitment_bg_legendary_beholder
+	event_window_type = leader_recruit
+
+	picture_event_data = {
+		portrait = event_target:belobog_xier
+		room = paragon_keides_room
+	}
+	immediate = {
+		hidden_effect = {
+			SR_leader_creator = {
+				SPECIES_NAME = "Star_Rail"
+				SPECIES_CLASS = "Star_Rail"
+				LEADER_PORTRAIT = xier
+				SKILL = 1
+				CLASS = commander
+				NAME = belobog_xier
+				GENDER = female
+				HIDEAGE = yes
+				ETHIC = ethic_militarist
+				CATCH_PHRASE = belobog_xier_tt
+				DESC = belobog_xier_desc
+				EVENT_TARGET = belobog_xier
+			}
+			last_created_leader = {
+				set_age = 18
+				remove_all_positive_traits = yes
+				add_trait = leader_trait_xier_1
+				add_trait = leader_trait_xier_2
+				add_trait = leader_trait_xier_3
+				add_trait = leader_trait_xier_4
+				change_background_job = tiwei_soldier
+			}
+		}
+	}
+	option = {
+		trigger = { }
+		name = yaliluo_story.1100.a
+		is_dialog_only = yes
+		response_text = yaliluo_story.1105.a.response
+	}
+	option = {
+		trigger = { }
+		name = yaliluo_story.1100.b
+		is_dialog_only = yes
+		response_text = yaliluo_story.1105.b.response
+	}
+	option = {
+		name = HIRE
+		tag = hire_leader
+		hidden_effect = {
+			SR_hire_leader = {
+				EVENT_TARGET = belobog_xier
+			}
+			set_country_flag = belobog_xier_set
+			last_created_leader = {
+				set_leader_flag = legendary_leader
+				save_global_event_target_as = belobog_xier_leader
+				set_leader_flag = immune_to_negative_traits
+				set_leader_flag = belobog_xier
+			}
+		}
+	}
+	option = {
+		# DISMISS
+		name = DISMISS
+		tag = dismiss_leader
+		hidden_effect = {
+			event_target:belobog_xier = {
+				kill_leader = { show_notification = no }
+			}
+		}
+	}
+	after = {hidden_effect = {country_event = { id = yaliluo_story.1003}}}
+}

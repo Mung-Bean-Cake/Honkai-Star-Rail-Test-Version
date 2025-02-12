@@ -714,3 +714,195 @@ SRB_blockerLJ_research_situation = {
 	}
 
 }
+situation_engine_of_creation = {
+	picture = GFX_evt_engine_of_creation
+	complete_icon_frame = GFX_situation_outcome_frame_blue
+	complete_icon = GFX_situation_outcome_positive
+	on_progress_complete = {
+		custom_tooltip = situation_engine_of_creation_outcome
+		hidden_effect = {
+			situation_event = { id = yaliluo_story.215 }
+		}
+		set_situation_locked = yes
+	}
+	stages = {
+		stage_1 = {
+			icon = GFX_situation_stage_1
+			icon_background = GFX_situation_stage_frame_blue
+			end = 125#修零件
+			custom_tooltip = stage_engine_of_creation_effects
+		}
+		stage_2 = {
+			icon = GFX_situation_stage_2
+			icon_background = GFX_situation_stage_frame_blue
+			end = 250#组装
+			on_first_enter = {
+				situation_event = { id = yaliluo_story.200 }
+			}
+			custom_tooltip = stage_engine_of_creation_effects
+		}
+		stage_3 = {
+			icon = GFX_situation_stage_3
+			icon_background = GFX_situation_stage_frame_blue
+			end = 375#抽取能源，供给能源
+			on_first_enter = {
+				situation_event = { id = yaliluo_story.203 }
+			}
+			custom_tooltip = stage_engine_of_creation_effects
+		}
+		stage_4 = {
+			icon = GFX_situation_stage_4
+			icon_background = GFX_situation_stage_frame_blue
+			end = 500#重启引擎，各项机能实验
+			on_first_enter = {
+				situation_event = { id = yaliluo_story.205 }
+			}
+			custom_tooltip = stage_engine_of_creation_effects
+		}
+		stage_5 = {
+			icon = GFX_situation_stage_5
+			icon_background = GFX_situation_stage_frame_blue
+			end = 625#完成行星表面裂隙清除
+			on_first_enter = {
+				situation_event = { id = yaliluo_story.209 }
+			}
+			custom_tooltip = stage_engine_of_creation_effects
+		}
+		stage_6 = {
+			icon = GFX_situation_stage_6
+			icon_background = GFX_situation_stage_frame_blue
+			end = 750#环境改造
+			on_first_enter = {
+				situation_event = { id = yaliluo_story.210 }
+			}
+			custom_tooltip = stage_engine_of_creation_effects
+		}
+		stage_7 = {
+			icon = GFX_situation_stage_7
+			icon_background = GFX_situation_stage_frame_blue
+			end = 875#修缮完善，将能量供给回行星
+			on_first_enter = {
+				situation_event = { id = yaliluo_story.212 }
+			}
+			custom_tooltip = stage_engine_of_creation_effects
+		}
+		stage_8 = {
+			icon = GFX_situation_stage_8
+			icon_background = GFX_situation_stage_frame_blue
+			end = 1000#迈向宇宙
+			on_first_enter = {
+				situation_event = { id = yaliluo_story.213 }
+			}
+			custom_tooltip = stage_engine_of_creation_effects
+		}
+	}
+	approach = {
+		name = situation_engine_of_creation_regular
+		icon = GFX_situation_approach_balance_sheet
+		icon_background = GFX_situation_approach_bg_yellow
+		on_select = {
+			custom_tooltip = approach_engine_of_creation_regular_tt
+		}
+		modifier = {
+			planet_jobs_engineering_research_produces_mult = 0.2
+			planet_jobs_physics_research_produces_mult = 0.2
+			planet_jobs_unity_produces_mult = 0.2
+			planet_jobs_alloys_produces_mult = -0.2
+			planet_jobs_energy_produces_mult = -0.2
+			planet_jobs_minerals_produces_mult = -0.2
+		}
+	}
+	approach = {
+		name = situation_engine_of_creation_generous
+		icon = GFX_situation_approach_balance_sheet
+		icon_background = GFX_situation_approach_bg_green
+		on_select = {
+			custom_tooltip = approach_engine_of_creation_generous_tt
+		}
+		modifier = {
+			planet_jobs_engineering_research_produces_mult = 0.3
+			planet_jobs_physics_research_produces_mult = 0.3
+			planet_jobs_unity_produces_mult = 0.3
+			planet_jobs_alloys_produces_mult = -0.3
+			planet_jobs_energy_produces_mult = -0.3
+			planet_jobs_minerals_produces_mult = -0.3
+		}
+	}
+	approach = {
+		name = situation_engine_of_creation_frugal
+		icon = GFX_situation_approach_balance_sheet
+		icon_background = GFX_situation_approach_bg_red
+		default = yes
+		on_select = {
+			custom_tooltip = approach_engine_of_creation_frugal_tt
+		}
+		modifier = {
+			planet_jobs_engineering_research_produces_mult = 0.1
+			planet_jobs_physics_research_produces_mult = 0.1
+			planet_jobs_unity_produces_mult = 0.1
+			planet_jobs_alloys_produces_mult = -0.1
+			planet_jobs_energy_produces_mult = -0.1
+			planet_jobs_minerals_produces_mult = -0.1
+		}
+	}
+	on_monthly = {
+		events = {
+			#toxoids.8010
+	    }
+		random_events = {
+			1200 = 0
+			#10 = toxoids.8000
+			#10 = toxoids.8005
+		}
+	}
+	monthly_progress = {
+		base = 0.4
+		modifier = {
+			add = 0.2
+			desc = belobog_get_help
+			owner = {
+				OR = {
+					has_country_flag = xianzhou_yaliluo_help
+					has_country_flag = xianzhou_help
+					has_country_flag = ipc_help
+					has_country_flag = heitacountry_help
+				}
+				has_modifier = belobog_technology_cooperation
+			}
+		}
+		modifier = {
+			add = 0.1
+			desc = belobog_resource_full
+			owner = {
+				OR = {
+					has_country_flag = yaliluo_junshi_win
+					has_country_flag = yaliluo_ziyuan_full
+				}
+			}
+		}
+		modifier = {
+			add = -0.1
+			desc = more_zaowuyinqing_build
+			owner = {
+				OR = {
+					has_country_flag = more_zaowuyinqing_build
+					has_country_flag = yaliluo_ziyuan_full
+				}
+			}
+		}
+		modifier = {
+			add = 0.2
+			desc = situation_engine_of_creation_generous
+			current_situation_approach = situation_engine_of_creation_generous
+		}
+		modifier = {
+			add = -0.2
+			desc = situation_engine_of_creation_frugal
+			current_situation_approach = situation_engine_of_creation_frugal
+		}
+		modifier = {
+			add = owner.value:engine_of_creation_job_number
+			desc = situation_engine_of_creation_job_number_tt
+		}
+	}
+}

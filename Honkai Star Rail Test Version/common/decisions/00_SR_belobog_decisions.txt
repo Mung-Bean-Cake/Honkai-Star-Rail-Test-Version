@@ -36,3 +36,272 @@ decision_attacker_belobog_blocker_1 = {
 		weight = 0
 	}
 }
+decision_attacker_belobog_blocker = {
+	owned_planets_only = yes
+	sound = event_ground_battle_02
+	icon = decision_victorious_army
+
+	resources = {
+		category = decisions
+		cost = {
+			energy = 100
+			food = 100
+			consumer_goods = 25
+		}
+		produces = {
+			unity = 1000
+		}
+	}
+
+	potential = {
+		has_planet_flag = yaliluo
+	}
+
+	allow = {
+		custom_tooltip = {
+			fail_text = more_juntuan
+			NOT = {
+				has_planet_flag = yaliluo
+				has_planet_flag = more_juntuan
+			}
+		}
+	}
+
+	effect = {
+		custom_tooltip = decision_attacker_belobog_blocker_tt
+		hidden_effect = {
+			while = {
+			count = 15
+			create_army = {
+				name = tiewei_guardian
+				owner = owner
+				species = owner
+				type = "tiewei_guardian"
+			}
+		}
+			set_timed_planet_flag = { flag = more_juntuan days = 2700 }
+		}
+	}
+
+	ai_weight = {
+		weight = 5
+	}
+}
+decision_deep_resource_exploitation = {
+	owned_planets_only = yes
+	icon = decision_drilling_for_gas
+	enactment_time = 360
+	resources = {
+		category = decisions
+		cost = {
+			energy = 500
+			minerals = 500
+		}
+	}
+	potential = {
+
+	}
+
+	allow = {
+		custom_tooltip = {
+			fail_text = the_way_used
+			has_planet_flag = yaliluo
+			from = {
+				has_technology = tech_trait_power_arm
+				check_variable = {
+					which = count_resource_exploitation
+					value >0
+				}
+			}
+		}
+	}
+
+	effect = {
+		custom_tooltip = decision_deep_resource_exploitation_tt
+		hidden_effect = {
+			change_variable = {
+				which = count_resource_exploitation
+				value = -1
+			}
+			random_list = {
+				4 = {add_deposit = d_mineral_block}
+				4 = {add_deposit = d_energy_block}
+				2 = {add_deposit = d_mineral_block add_deposit = d_energy_block}
+			}
+			random_list = {
+				1 = {planet_event = { id = yaliluo_story.155 }}
+				3 = {}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						which = count_resource_exploitation
+						value = 0
+					}
+				}
+				from ={
+					country_event = { id = yaliluo_story.154 }
+				}
+			}
+		}
+	}
+
+	ai_weight = {
+		weight = 5
+	}
+}
+decision_attacker_liexi_blocker = {
+	owned_planets_only = yes
+	sound = event_ground_battle_02
+	icon = decision_martial_law
+	enactment_time = 60
+
+	potential = {
+
+	}
+
+	allow = {
+		custom_tooltip = {
+			fail_text = need_chance
+			has_planet_flag = yaliluo
+			from = {
+				check_variable = {
+					which = count_war_chance
+					value >0
+				}
+			}
+
+		}
+		custom_tooltip = {
+			fail_text = decision_attacker_belobog_blocker_1_fail
+			planet_garrison_strength >= 1000
+		}
+	}
+
+	effect = {
+		hidden_effect = {
+			remove_deposit = d_belobog_blocker_liexi
+			create_country = {
+				name = "NAME_lieixi"
+				type = faction
+				flag = random
+			}
+			while = {
+				count = value:num_belobog_blocker_liexi_small
+				create_army = {
+					name = "belobog_blocker_1_army_1"
+					owner = last_created_country
+					type = belobog_blocker_1_army_1
+				}
+				create_army = {
+					name = "belobog_blocker_1_army_4"
+					owner = last_created_country
+					type = belobog_blocker_1_army_4
+				}
+			}
+			while = {
+				count = value:num_belobog_blocker_liexi_big
+				create_army = {
+					name = "belobog_blocker_1_army_2"
+					owner = last_created_country
+					type = belobog_blocker_1_army_2
+				}
+			}
+			create_army = {
+				name = "belobog_blocker_1_army_3"
+				owner = last_created_country
+				type = belobog_blocker_1_army_3
+			}
+			from = {
+				change_variable = {
+					which = count_war_chance
+					value = -1
+				}
+				if = {
+					limit = {
+						check_variable = {
+							which = count_war_chance
+							value = 1
+						}
+					}
+					set_country_flag = attack_liexi_east
+				}
+				if = {
+					limit = {
+						check_variable = {
+							which = count_war_chance
+							value = 0
+						}
+					}
+					set_country_flag = attack_liexi_west
+				}
+			}
+		}
+	}
+
+	ai_weight = {
+		weight = 0
+	}
+}
+decision_more_zaowuyinqing = {
+	owned_planets_only = yes
+	icon = decision_drilling_for_gas
+	enactment_time = 1800
+	resources = {
+		category = decisions
+		cost = {
+			minerals = 500
+			energy = 500
+			alloys = 200
+		}
+	}
+
+	potential = {
+		custom_tooltip = {
+			fail_text = more_zaowuyinqing
+			has_planet_flag = yaliluo
+			from = {
+				has_country_flag = more_zaowuyinqing
+				check_variable = {
+					which = next_zaowuyinqing
+					value >0
+				}
+			}
+		}
+	}
+
+	allow = {
+		custom_tooltip = {
+			fail_text = more_zaowuyinqing
+			has_planet_flag = yaliluo
+			from = {
+				has_country_flag = more_zaowuyinqing
+				check_variable = {
+					which = next_zaowuyinqing
+					value >0
+				}
+			}
+		}
+	}
+
+	effect = {
+		hidden_effect = {
+			add_deposit = d_zaowuyinqing
+			from = {
+				set_timed_country_flag = { flag = more_zaowuyinqing_build days = 1500 }
+				change_variable = {
+					which = next_zaowuyinqing
+					value = -1
+				}
+				change_variable = {
+					which = count_zaowuyinqing
+					value = 1
+				}
+			}
+		}
+	}
+
+	ai_weight = {
+		weight = 0
+	}
+}

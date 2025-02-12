@@ -1,9 +1,9 @@
 #裂界怪物集群（小）
 belobog_blocker_1_army_1 = {
 	defensive = yes
-	damage = 0.25
-	morale_damage = 0.25
-	health = 0.5
+	damage = 0.75
+	morale_damage = 0.75
+	health = 0.75
 	has_morale = no
 	icon = GFX_army_type_xenomorph
 	has_species = no
@@ -16,9 +16,9 @@ belobog_blocker_1_army_1 = {
 #裂界怪物集群（中）
 belobog_blocker_1_army_2 = {
 	defensive = yes
-	damage = 0.5
-	morale_damage = 0.5
-	health = 1
+	damage = 1.25
+	morale_damage = 1.25
+	health = 1.75
 	has_morale = no
 	icon = GFX_army_type_xenomorph
 	has_species = no
@@ -31,9 +31,9 @@ belobog_blocker_1_army_2 = {
 #裂界怪物集群（大）
 belobog_blocker_1_army_3 = {
 	defensive = yes
-	damage = 2.5
-	morale_damage = 2.5
-	collateral_damage = 5.0
+	damage = 2
+	morale_damage = 2
+	collateral_damage = 0
 	health = 3
 	has_morale = no
 	icon = GFX_army_type_xenomorph
@@ -47,15 +47,187 @@ belobog_blocker_1_army_3 = {
 #游荡的裂界怪物集群
 belobog_blocker_1_army_4 = {
 	defensive = yes
-	damage = 0.1
-	morale_damage = 0
-	collateral_damage = 1
-	health = 5
+	damage = 0.15
+	morale_damage = 0.15
+	health = 0.15
 	has_morale = no
 	icon = GFX_army_type_xenomorph
 	has_species = no
 
 	potential_country = {
 		always = no
+	}
+}
+tiewei_guardian = {
+	damage = 1.2
+	health = 1.2
+	morale = 1.2
+	morale_damage = 1.2
+	collateral_damage = 0
+	war_exhaustion = 0.5
+	time = 90
+	icon = GFX_army_tiwei
+	resources = {
+		category = armies
+		cost = {
+			minerals = 100
+		}
+
+		upkeep = {
+			energy = 1
+		}
+	}
+	potential = {
+		this.owner = {
+			has_civic = civic_tiewei
+		}
+	}
+
+	ai_weight = {
+		base = 100
+	}
+}
+tiewei_guardian_defensive = {
+	defensive = yes
+	is_pop_spawned = yes
+	damage = 1.2
+	health = 1.2
+	morale = 1.2
+	morale_damage = 1.2
+	war_exhaustion = 0
+	icon = GFX_army_tiwei
+	resources = {
+		category = armies
+		produces = {
+			trigger = {
+				exists = owner
+				owner = { has_active_tradition = tr_unyielding_resistance_is_frugal }
+			}
+			unity = 0.5
+		}
+	}
+
+	potential = {
+		from = {
+			NOR = {
+				has_trait = "trait_mechanical"
+				has_trait = "trait_machine_unit"
+				is_sapient = no
+			}
+		}
+		owner = {
+			is_primitive = no
+			OR = {
+				is_machine_empire = no
+				has_valid_civic = civic_machine_assimilator
+			}
+		}
+	}
+
+	ai_weight = {
+		base = 100
+	}
+}
+yaliluo_robotic_army = {
+	damage = 1.50
+	health = 2.0
+	morale_damage = 1.00
+	collateral_damage = 1.0
+	war_exhaustion = 0.50
+	has_morale = no
+	time = 90
+	icon = GFX_army_type_robot
+	has_species = yes
+
+	resources = {
+		category = armies
+		cost = {
+			minerals = 150
+		}
+
+		upkeep = {
+			energy = 1.5
+		}
+	}
+	potential = {
+		from = { has_trait = "trait_mechanical" }
+	}
+
+	prerequisites = { "tech_yaliluo_new_army" }
+
+	allow = {
+		owner = { has_origin = origin_belobog }
+	}
+
+	ai_weight = {
+		base = 100
+	}
+}
+yaliluo_robotic_defense_army = {
+	defensive = yes
+	damage = 1.50
+	health = 2
+	morale_damage = 1.00
+	collateral_damage = 0.0
+	war_exhaustion = 0.0 # No WE from defense armies
+	has_morale = no
+	icon = GFX_army_type_robot
+
+	potential = {
+		from = {
+			has_trait = "trait_mechanical"
+		}
+		owner = {
+			is_machine_empire = no
+		}
+	}
+
+	resources = {
+		category = armies
+		produces = {
+			trigger = {
+				exists = owner
+				owner = { has_active_tradition = tr_unyielding_resistance_is_frugal }
+			}
+			unity = 0.5
+		}
+	}
+
+	allow = {
+		owner = { has_origin = origin_belobog has_technology = tech_yaliluo_new_army }
+	}
+}
+yaliluo_robotic_zaowuyinqing = {
+	defensive = yes
+	damage = 7.0
+	health = 10.0
+	has_morale = no
+	morale_damage = 2
+	collateral_damage = 0.0
+	war_exhaustion = 0.0
+	has_species = no
+
+	icon = GFX_army_type_machine_assault
+
+	resources = {
+		category = armies
+		produces = {
+			trigger = {
+				exists = owner
+				owner = { has_active_tradition = tr_unyielding_resistance_is_frugal }
+			}
+			unity = 0.5
+		}
+
+		upkeep = {
+			energy = 8
+		}
+	}
+	potential = { always = no }
+	allow = {
+		always = no
+	}
+	ai_weight = {
+		base = 50
 	}
 }
