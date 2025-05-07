@@ -162,7 +162,7 @@ country_event = {#非ai雅利洛起源
 			name_list = "MACHINE1"
 			traits = {
 				trait = trait_mechanical
-				trait = trait_frozen_planet_preference
+				#trait = trait_frozen_planet_preference
 			}
 			effect = {
 				save_global_event_target_as = yaliluo_robot_species
@@ -192,7 +192,7 @@ country_event = {#非ai雅利洛起源
             remove_building = building_research_lab_1
             remove_building = building_bureaucratic_1
 			remove_district = district_city
-			remove_district = district_industrial
+			#remove_district = district_industrial
 			remove_district = district_farming
 			add_building = building_kelibobao
 			add_building = building_yinbing_tiewei
@@ -207,11 +207,17 @@ country_event = {#非ai雅利洛起源
 			}
             while = {
                 count = 18
-                random_owned_pop = { kill_pop = yes }
+				random_owned_pop_group = {
+					kill_pop_group = {
+						pop_group = this
+						amount = 100
+					}
+				}
             }
 			while = {
 				count = 5
-				create_pop = {
+				create_pop_group = {
+					size = 100
 					species = event_target:yaliluo_robot_species
 				}
 				add_deposit = d_belobog_blocker_liexi
@@ -906,7 +912,7 @@ country_event = {#发展线
 					name_list = "MACHINE1"
 					traits = {
 						trait = trait_mechanical
-						trait = trait_frozen_planet_preference
+						#trait = trait_frozen_planet_preference
 						trait = trait_power_arm
 					}
 					effect = {
@@ -915,7 +921,8 @@ country_event = {#发展线
 				}
 				while = {
 					count = 2
-					create_pop = {
+					create_pop_group = {
+						size = 100
 						species = event_target:yaliluo_robot_better_species
 					}
 				}
@@ -1199,8 +1206,9 @@ country_event = {
 				limit = { has_planet_flag = yaliluo }
 				while = {
 					count = 2
-					create_pop = {
-						species = event_target:yaliluo_robot_species
+					create_pop_group = {
+						size = 100
+						species = event_target:yaliluo_robot_better_species
 					}
 				}
 			}
@@ -1218,34 +1226,36 @@ situation_event = {
 		custom_tooltip = yaliluo_story.200.a.desc
 		hidden_effect = {
 			owner = {
-				change_variable = {
-					which = bronya_military
-					value = 1
-				}
-				change_variable = {
-					which = bronya_army
-					value = 1
-				}
-				change_variable = {
-					which = bronya_interior
-					value = 1
-				}
-				change_variable = {
-					which = bronya_science
-					value = 1
-				}
-				change_variable = {
-					which = bronya_diplomacy
-					value = 1
-				}
-				change_variable = {
-					which = bronya_economy
-					value = 1
-				}
-				random_list = {
-					1= {country_event = { id = yaliluo_story.206 days = 60 }}
-					1= {country_event = { id = yaliluo_story.207 days = 60 }}
-					1= {country_event = { id = yaliluo_story.208 days = 60 }}
+				hidden_effect = {
+					change_variable = {
+						which = bronya_military
+						value = 1
+					}
+					change_variable = {
+						which = bronya_army
+						value = 1
+					}
+					change_variable = {
+						which = bronya_interior
+						value = 1
+					}
+					change_variable = {
+						which = bronya_science
+						value = 1
+					}
+					change_variable = {
+						which = bronya_diplomacy
+						value = 1
+					}
+					change_variable = {
+						which = bronya_economy
+						value = 1
+					}
+					random_list = {
+						1= {country_event = { id = yaliluo_story.206 days = 60 }}
+						1= {country_event = { id = yaliluo_story.207 days = 60 }}
+						1= {country_event = { id = yaliluo_story.208 days = 60 }}
+					}
 				}
 			}
 		}
@@ -1619,7 +1629,7 @@ situation_event = {
 					which = bronya_economy
 					value = 1
 				}
-				country_event = { id = yaliluo_story.214 days = 360 }
+				country_event = { id = yaliluo_story.216 days = 360 }
 			}
 		}
 	}
@@ -1745,7 +1755,7 @@ country_event = {
 		add_modifier = { modifier = belobog_big_cunhu days = -1 }
 	}
 }
-country_event = {
+country_event = {#忘写项目了
 	id = yaliluo_story.219
 	title = yaliluo_story.219.name
 	desc = yaliluo_story.219.desc
@@ -1757,6 +1767,24 @@ country_event = {
 	}
 	option = {
 		name = yaliluo_story.219.a
+		begin_event_chain = {
+			event_chain = "belobog_story_establish_the_galactic_rescue_alliance_chain"
+			target = ROOT
+		}
+		capital_scope = {
+			enable_special_project = {
+			name = "belobog_story_establish_the_galactic_rescue_alliance_a"
+			location = this
+			owner = root
+			}
+		}
+		capital_scope = {
+			enable_special_project = {
+				name = "belobog_story_establish_the_galactic_rescue_alliance_b"
+				location = this
+				owner = root
+			}
+		}
 	}
 }
 country_event = {
@@ -1779,7 +1807,7 @@ country_event = {
 			if = {
 				limit = { has_country_flag = gra_b }
 			}
-			country_event = { id = yaliluo_story.222 days = 180 }
+			country_event = { id = yaliluo_story.222 days = 190 }
 		}
 	}
 }
@@ -1799,7 +1827,7 @@ country_event = {
 			if = {
 				limit = { has_country_flag = gra_a }
 			}
-			country_event = { id = yaliluo_story.222 days = 180 }
+			country_event = { id = yaliluo_story.222 days = 190 }
 		}
 	}
 }
@@ -2897,7 +2925,7 @@ country_event = {
 				hidden_trigger = {
 					check_variable = {
 						which = count_ipc_like
-						value >30
+						value >=30
 					}
 				}
 			}
@@ -2922,14 +2950,14 @@ country_event = {
 				hidden_trigger = {
 					check_variable = {
 						which = count_ipc_like
-						value >30
+						value >=30
 					}
 				}
 			}
 			custom_tooltip = {
 				fail_text = yaliluo_story.1005.c.tt.c
 				hidden_trigger = {
-					NOT = { has_modifier = a_debt_that_lasts_for_seven_hundred_years  }
+					has_modifier = a_debt_that_lasts_for_seven_hundred_years
 				}
 			}
 			custom_tooltip = {
@@ -3027,31 +3055,28 @@ country_event = {
 		hidden_effect = {
 			set_timed_country_flag = {flag = com_with_ipc_date days = 1080}
 			if = {
-				limit = { check_variable = { which = count_debt value >0 } }
-				if = {
-					limit = {
-						check_variable = { which = count_debt value >30 }
-						check_variable = { which = count_debt value <50 }
-					}
+				limit = {
+					check_variable = { which = count_ipc_like value >=30 }
+					check_variable = { which = count_ipc_like value <50 }
 				}
 				random_list = {
 					1 = { country_event = { id = yaliluo_story.1009 days = 30 }}
 					1 = { country_event = { id = yaliluo_story.1010 days = 30 }}
 				}
-				else_if = {
-					limit = {
-						check_variable = { which = count_debt value >50 }
-						check_variable = { which = count_debt value <70 }
-					}
+			}
+			else_if = {
+				limit = {
+					check_variable = { which = count_ipc_like value >=50 }
+					check_variable = { which = count_ipc_like value <70 }
 				}
 				random_list = {
 					7 = { country_event = { id = yaliluo_story.1009 days = 30 }}
 					3 = { country_event = { id = yaliluo_story.1010 days = 30 }}
 				}
-				else_if = {
-					limit = {
-						check_variable = { which = count_debt value >70 }
-					}
+			}
+			else_if = {
+				limit = {
+					check_variable = { which = count_ipc_like value >=70 }
 				}
 				random_list = {
 					9 = { country_event = { id = yaliluo_story.1009 days = 30 }}
@@ -3074,9 +3099,15 @@ country_event = {
 			if = {
 				limit = { check_variable = { which = count_debt value >0 } }
 				random_list = {
-					1 = { change_variable = { which = count_debt value = -1 }}
 					1 = { change_variable = { which = count_debt value = -2 }}
-					1 = { change_variable = { which = count_debt value = -3 }}
+					1 = { change_variable = { which = count_debt value = -4 }}
+					1 = { change_variable = { which = count_debt value = -6 }}
+				}
+				remove_modifier = a_debt_that_lasts_for_seven_hundred_years
+				add_modifier = {
+					modifier = a_debt_that_lasts_for_seven_hundred_years
+					multiplier = count_debt
+					days = -1
 				}
 				if = {
 					limit = { check_variable = { which = count_debt value <= 0 } }
@@ -3116,12 +3147,6 @@ country_event = {
 	desc = "yaliluo_story.1010.desc"
 	picture = GFX_evt_tradedeal
 	is_triggered_only = yes
-	event_window_type = leader_story
-	event_picture_background = "GFX_leader_recruitment_bg_renowned"
-
-	picture_event_data = {
-		portrait = tuopa
-	}
 	option = {
 		name = yaliluo_story.1010.a
 	}

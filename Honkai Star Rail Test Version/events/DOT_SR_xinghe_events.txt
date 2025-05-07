@@ -39,6 +39,9 @@ country_event = {
     picture = GFX_evt_DOT_SR_001
     is_triggered_only = yes
     trigger = {
+        NOT = {
+            has_global_flag = no_use_hsr_cosmos
+        }
         From = {
             NOT = {
                 has_star_flag = not_allow_change_pc_shield
@@ -49,22 +52,26 @@ country_event = {
         From = {
             set_star_flag = not_allow_change_pc_shield
             random_list = {
-                180 = {
+                3 = {
                     modifier = {
-                        factor = 0.08
+                        factor = 6
+                        has_global_flag = allow_change_pc_shield_stage5#极大量
+                    }
+                    modifier = {
+                        factor = 9
                         has_global_flag = allow_change_pc_shield_stage4
                     }
                     modifier = {
-                        factor = 0.26
+                        factor = 12
                         has_global_flag = allow_change_pc_shield_stage3
                     }
                     modifier = {
-                        factor = 0.5
+                        factor = 24
                         has_global_flag = allow_change_pc_shield_stage2
                     }
                     modifier = {
-                        factor = 0.7
-                        has_global_flag = allow_change_pc_shield_stage1
+                        factor = 54
+                        has_global_flag = allow_change_pc_shield_stage1#极少量
                     }
                 }
                 1 = { change_planet_to_pc_shield_special = { planet_class = pc_shielded_yellow planet_flag = pc_shielded_yellow_1 } }

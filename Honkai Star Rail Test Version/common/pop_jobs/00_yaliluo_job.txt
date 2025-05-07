@@ -1,8 +1,21 @@
 tiwei_soldier = {
 	category = worker
-	condition_string = SPECIALIST_JOB_TRIGGER
-	building_icon = building_stronghold
-	clothes_texture_index = 4
+	swappable_data = {
+		default = {
+			condition_string = SOLDIER_JOB_TRIGGER
+			building_icon = building_stronghold
+		}
+		swap_type = {
+			trigger = {
+				soldier_is_necromancer = yes
+			}
+			name = necromancer
+			desc = necromancer
+			icon = necromancer
+			building_icon = building_dread_encampment
+			weight = 50
+		}
+	}
 	possible_pre_triggers = {
 		has_owner = yes
 		is_being_purged = no
@@ -13,6 +26,7 @@ tiwei_soldier = {
 		soldier_job_check_trigger = yes
 		owner = { is_gestalt = no }
 	}
+	tags = { soldier }
 	triggered_country_modifier = {
 		potential = {
 			exists = owner
@@ -41,20 +55,26 @@ tiwei_soldier = {
 	}
 
 	country_modifier = {
-		country_naval_cap_add = 1
+		country_naval_cap_add = 4
 	}
-	pop_modifier = {
-		pop_defense_armies_add = 1
-	}
+	inline_script = "output/soldier_triggered_modifiers"
 
 	resources = {
 		category = planet_soldiers
-        produces = {
-            unity = 1
-        }
+		inline_script = "output/soldier_output"
+		produces = {
+			trigger = {
+				soldier_is_necromancer = yes
+			}
+			physics_research = 2
+			society_research = 2
+		}
 		upkeep = {
-			energy = 1.5
-			food = 0.25
+			trigger = {
+				soldier_is_necromancer = yes
+			}
+			food = 1
+			consumer_goods = 0.1
 		}
 	}
 	weight = {
@@ -158,9 +178,45 @@ tiwei_soldier = {
 }
 yaliluo_maintenance_worker = {
 	category = worker
-	condition_string = SPECIALIST_JOB_TRIGGER
-	building_icon = building_chemical_plant
-	clothes_texture_index = 3
+	swappable_data = {
+		default = {
+			icon = miner
+			condition_string = WORKER_JOB_TRIGGER
+			building_icon = building_mineral_purification_plant
+		}
+		swap_type = {
+			trigger = {
+				miner_is_scrap_miner_trigger = yes
+			}
+			name = scrap_miner
+			desc = scrap_miner
+			weight = 5
+		}
+		swap_type = {
+			trigger = {
+				miner_is_cave_cleaner_trigger = yes
+			}
+			name = cave_cleaner
+			desc = cave_cleaner
+			weight = 10
+		}
+		swap_type = {
+			trigger = {
+				miner_is_mineral_diver_trigger = yes
+			}
+			name = mineral_diver
+			desc = mineral_diver
+			weight = 15
+		}
+		swap_type = {
+			trigger = {
+				miner_is_turtle_miner_trigger = yes
+			}
+			name = turtle_miner
+			desc = turtle_miner
+			weight = 20
+		}
+	}
 	possible_pre_triggers = {
 		has_owner = yes
 		is_enslaved = no
@@ -168,7 +224,7 @@ yaliluo_maintenance_worker = {
 		is_being_assimilated = no
 		is_sapient = yes
 	}
-
+	tags = { minerals }
 	possible_precalc = can_fill_worker_job
 	possible = {
 

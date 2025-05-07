@@ -1,0 +1,17 @@
+version="1.0"
+tags={
+	"Balance"
+	"Species"
+	"Leaders"
+	"Events"
+	"Spaceships"
+	"Technologies"
+	"Translation"
+	"Economy"
+	"Loading Screen"
+	"Sound"
+}
+name="Honkai: Star Rail | 崩坏：星穹铁道"
+supported_version="v4.*"
+path="C:/Users/Lenovo/Documents/Paradox Interactive/Stellaris/mod/Honkai-Star-Rail-Test-Version"
+remote_file_id="2982710154"
