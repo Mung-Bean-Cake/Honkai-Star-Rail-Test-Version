@@ -1,0 +1,37 @@
+#Holy_Dustbin
+
+Holy_Dustbin = {
+    entity = "Holy_Dustbin_entity"
+    construction_entity = "Holy_Dustbin_entity"
+    entity_offset = { x = 20 y = 20 }
+    portrait = "GFX_megastructure_construction_background"
+    build_time = 30
+    place_entity_on_planet_plane = no
+	build_outside_gravity_well = no
+    resources = {
+        category = megastructures
+        cost = {
+           alloys = 10
+           unity = 10
+        }
+    }
+    possible = { always = no }
+    upgrade_from = {  }
+    prerequisites = {  }
+    on_build_start = {  }
+    on_build_complete = {
+        From = { 
+    	change_variable = { which = NUM_Holy_Dustbin value = 1 } 
+        }
+    }
+    potential = {
+        check_variable = { which = NUM_Holy_Dustbin value < 3 }
+    } 
+    country_modifier = {
+		add_base_country_intel = 25
+		planet_amenities_mult = 0.25
+	}
+    ai_weight = {
+		factor = 0
+	}
+}
