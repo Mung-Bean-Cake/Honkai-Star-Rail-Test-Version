@@ -1,0 +1,306 @@
+namespace = hsr_ui
+country_event = {
+	id = hsr_ui.1
+	title = "hsr_ui.1.title"
+	desc = "hsr_ui.1.desc"
+	diplomatic = yes
+	custom_gui = honkai_star_rail_leader_show_main
+	custom_gui_option = hsr_leader_show_option
+	picture_event_data = {
+		portrait = daheita
+		room = hsr_leader_room
+	}
+	is_triggered_only = yes
+	option = {
+		name = hsr_ui.1.a
+		is_dialog_only = yes
+		response_text = hsr_ui.1.a.desc
+	}
+	option = {
+		name = hsr_ui.1.b
+		is_dialog_only = yes
+		custom_tooltip = hsr_ui.1.b.desc
+		allow = {
+			custom_tooltip = {
+				fail_text = yuzhousuipian_short_text
+				hidden_trigger = {
+					check_variable = {
+						which = yuzhousuipian
+						value >= 2000
+					}
+				}
+			}
+			custom_tooltip = {
+				fail_text = hsr_ui.1.fail
+				hidden_trigger = {
+					not ={
+						any_owned_leader = {
+							has_leader_flag = daheita
+						}
+					}
+				}
+			}
+		}
+		ui_hire_leader = { EVENT_NAME = hsr_paragon.1 }
+	}
+	option = {
+		name = hsr_ui.1.c
+		is_dialog_only = yes
+		response_text = hsr_ui.1.c.desc_tooltip
+		allow = {
+			custom_tooltip = {
+				fail_text = yuzhousuipian_short_1_text
+				hidden_trigger = {
+					check_variable = {
+						which = yuzhousuipian
+						value >= 500
+					}
+				}
+			}
+			custom_tooltip = {
+				fail_text = trait_has_learn_text
+				hidden_trigger = {
+					any_owned_leader = {
+						has_leader_flag = daheita
+						not = {has_trait = leader_daherta_t4}
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			ui_leader_get_trait = {LEADER_TARGET = daheita_leader TRAIT = leader_daherta_t4 }
+		}
+	}
+	option = {
+		name = hsr_ui.1.d
+		is_dialog_only = yes
+		response_text = hsr_ui.1.d.desc_tooltip
+		allow = {
+			custom_tooltip = {
+				fail_text = yuzhousuipian_short_1_text
+				hidden_trigger = {
+					check_variable = {
+						which = yuzhousuipian
+						value >= 500
+					}
+				}
+			}
+			custom_tooltip = {
+				fail_text = trait_has_learn_text
+				hidden_trigger = {
+					any_owned_leader = {
+						has_leader_flag = daheita
+						not = {has_trait = leader_daherta_t5}
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			ui_leader_get_trait = {LEADER_TARGET = daheita_leader TRAIT = leader_daherta_t5 }
+		}
+	}
+	option = {
+		name = hsr_ui.1.e
+		allow = {
+			custom_tooltip = {
+				fail_text = hsr_ui.1.e.fail
+				hidden_trigger = {
+					has_country_flag = daheita_set
+					not ={ any_owned_leader = { has_leader_flag = daheita }}
+				}
+			}
+		}
+		custom_tooltip = hsr_ui.1.e.desc
+		is_dialog_only = yes
+		response_text = hsr_ui.1.e.desc
+		hidden_effect = {
+			clone_leader = {
+				target = event_target:daheita_leader
+			}
+			last_created_leader = {
+				set_leader_flag = legendary_leader
+				save_global_event_target_as = daheita_leader
+				set_leader_flag = immune_to_negative_traits
+				set_leader_flag = daheita
+			}
+		}
+	}
+	option = {
+		name = hsr_ui.1.f
+		allow = {
+			custom_tooltip = {
+				fail_text = hsr_ui.1.fail
+				hidden_trigger = {
+					any_owned_leader = {
+						has_leader_flag = daheita
+					}
+				}
+			}
+			custom_tooltip = {
+				fail_text = yuzhousuipian_short_1_text
+				hidden_trigger = {
+					check_variable = {
+						which = yuzhousuipian
+						value >= 500
+					}
+				}
+			}
+			custom_tooltip = {
+				fail_text = hsr_ui.1.f.desc
+				hidden_trigger = {
+					any_owned_leader = {
+						has_leader_flag = daheita
+						has_trait = leader_daherta_t5
+					}
+				}
+			}
+		}
+		is_dialog_only = yes
+		response_text = hsr_ui.1.f.desc
+		ui_leader_get_other_skill = {LEADER_SKILL = num_daherta_other_skill}
+	}
+	option = {
+		name = CLOSE
+		default_hide_option = yes
+	}
+}
+#ui模块
+country_event = {
+	id = hsr_ui.10000
+	title = "hsr_ui.10000.title"
+	desc = "hsr_ui.10000.desc"
+	diplomatic = yes
+	custom_gui = honkai_star_rail_leader_show_main
+	custom_gui_option = hsr_leader_show_option
+	picture_event_data = {
+		portrait = shajin
+		room = hsr_leader_room
+	}
+	is_triggered_only = yes
+	option = {
+		name = hsr_ui.10000.a
+		is_dialog_only = yes
+		allow = {
+			resource_stockpile_compare = { resource = energy value >= 5000 }
+		}
+		hidden_effect = {
+			change_variable = {
+				which = yuzhousuipian
+				value = 750
+			}
+		}
+		add_resource = { energy = -5000 }
+		response_text = DOT_SR_money_show
+	}
+	option = {
+		name = hsr_ui.10000.b
+		is_dialog_only = yes
+		allow = {
+			resource_stockpile_compare = { resource = energy value >= 20000 }
+		}
+		hidden_effect = {
+			change_variable = {
+				which = yuzhousuipian
+				value = 3000
+			}
+		}
+		add_resource = { energy = -20000 }
+		response_text = DOT_SR_money_show
+	}
+	option = {
+		name = hsr_ui.10000.c
+		is_dialog_only = yes
+		allow = {
+			custom_tooltip = {
+				fail_text = yuzhousuipian_short_2_txt
+				hidden_trigger = {
+					check_variable = {
+						which = yuzhousuipian
+						value >= 150
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			change_variable = {
+				which = yuzhousuipian
+				value = -150
+			}
+		}
+		add_resource = { energy = 400 minerals = 400 food = 400 }
+		response_text = DOT_SR_money_show
+	}
+	option = {
+		name = hsr_ui.10000.d
+		is_dialog_only = yes
+		allow = {
+			custom_tooltip = {
+				fail_text = yuzhousuipian_short_2_txt
+				hidden_trigger = {
+					check_variable = {
+						which = yuzhousuipian
+						value >= 150
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			change_variable = {
+				which = yuzhousuipian
+				value = -150
+			}
+		}
+		add_resource = { alloys = 800 }
+		response_text = DOT_SR_money_show
+	}
+	option = {
+		name = hsr_ui.10000.e
+		is_dialog_only = yes
+		allow = {
+			custom_tooltip = {
+				fail_text = yuzhousuipian_short_2_txt
+				hidden_trigger = {
+					check_variable = {
+						which = yuzhousuipian
+						value >= 150
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			change_variable = {
+				which = yuzhousuipian
+				value = -150
+			}
+		}
+		add_resource = { consumer_goods = 800 }
+		response_text = DOT_SR_money_show
+	}
+	option = {
+		name = hsr_ui.10000.f
+		is_dialog_only = yes
+		allow = {
+			custom_tooltip = {
+				fail_text = yuzhousuipian_short_2_txt
+				hidden_trigger = {
+					check_variable = {
+						which = yuzhousuipian
+						value >= 150
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			change_variable = {
+				which = yuzhousuipian
+				value = -150
+			}
+		}
+		add_resource = { volatile_motes = 200 exotic_gases = 200  rare_crystals = 200 sr_dark_matter = 200 }
+		response_text = DOT_SR_money_show
+	}
+	option = {
+		name = CLOSE
+		default_hide_option = yes
+	}
+}

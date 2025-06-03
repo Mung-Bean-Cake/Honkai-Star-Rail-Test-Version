@@ -1,5 +1,6 @@
 SR_leader_creator = { 
 # 领袖生成脚本：本质上是创建一个新国家，物种，领袖，然后把这个领袖clone给玩家【原版】
+	optimize_memory
 	create_country = { # 创建一个新国家
 		name = "NAME_leader_country"
 		type = faction
@@ -89,6 +90,7 @@ SR_leader_creator = {
 	}
 }
 SR_hire_leader = { # 招募脚本
+	optimize_memory
 	event_target:$EVENT_TARGET$ = {
 		set_owner = root
 		remove_leader_flag = is_in_recruit_window
@@ -108,6 +110,53 @@ SR_hire_leader = { # 招募脚本
 		variable = {
 			key = "border"
 			value = "GFX_border_legendary"
+		}
+	}
+}
+ui_hire_leader = {
+	optimize_memory
+	hidden_effect = {
+		change_variable = {
+			which = yuzhousuipian
+			value = -2000
+		}
+		country_event = { id = $EVENT_NAME$}
+		if = {
+			limit = { has_specimen = faith_bond }
+			change_variable = {
+				which = yuzhousuipian
+				value = 600
+			}
+		}
+	}
+}
+ui_leader_get_trait = {
+	optimize_memory
+	event_target:$LEADER_TARGET$ = {
+		add_trait = $TRAIT$
+	}
+	change_variable = {
+		which = yuzhousuipian
+		value = -500
+	}
+	if = {
+		limit = { has_specimen = faith_bond }
+		change_variable = {
+			which = yuzhousuipian
+			value = 150
+		}
+	}
+}
+ui_leader_get_other_skill = {
+	optimize_memory
+	hidden_effect = {
+		change_variable = {
+			which = yuzhousuipian
+			value = -500
+		}
+		change_variable = {
+			which = $LEADER_SKILL$
+			value = 1
 		}
 	}
 }

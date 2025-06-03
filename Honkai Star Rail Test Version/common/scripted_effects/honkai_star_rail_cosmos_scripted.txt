@@ -1,0 +1,63 @@
+curiosity_get_effect = {
+    optimize_memory
+    if = {
+        limit = { has_specimen = $KEY_NAME$ }
+        change_variable = {
+            which = yuzhousuipian
+            value = $VALUE$
+        }
+    }
+    else = {
+        give_specimen = { key = $KEY_NAME$ origin = $KEY_ORIGIN$ }
+        change_variable = {
+            which = num_curiosity
+            value = 1
+        }
+    }
+    if = {
+        limit = { last_acquired_specimen = empty_candle_scissors }
+        change_variable = {
+            which = num_curiosity
+            value = 5
+        }
+    }
+}
+curiosity_lose_effect = {
+    optimize_memory
+    remove_specimen = $KEY_NAME$
+    change_variable = {
+        which = num_curiosity
+        value = -1
+    }
+}
+random_common_curiosity_get = {
+    optimize_memory
+    random_list = {
+        1 = {curiosity_get_effect = { KEY_NAME = chaotic_coriolus_versicolor KEY_ORIGIN = simulated_universe  VALUE = 100}}
+        1 = {curiosity_get_effect = { KEY_NAME = transitional_compound_eye KEY_ORIGIN = simulated_universe  VALUE = 100}}
+        1 = {curiosity_get_effect = { KEY_NAME = exotic_fruit KEY_ORIGIN = simulated_universe  VALUE = 100}}
+        1 = {curiosity_get_effect = { KEY_NAME = uncertainty_box KEY_ORIGIN = simulated_universe VALUE = 100}}
+        1 = {curiosity_get_effect = { KEY_NAME = fragrant_cheese KEY_ORIGIN = simulated_universe VALUE = 100}}
+        1 = {curiosity_get_effect = { KEY_NAME = sheepskin_scroll KEY_ORIGIN = simulated_universe VALUE = 100}}
+        1 = {curiosity_get_effect = { KEY_NAME = club_ticket KEY_ORIGIN = simulated_universe VALUE = 100}}
+        1 = {curiosity_get_effect = { KEY_NAME = heavy_sound_album KEY_ORIGIN = simulated_universe VALUE = 100}}
+        1 = {curiosity_get_effect = { KEY_NAME = broken_star_fragrant_bait KEY_ORIGIN = simulated_universe VALUE = 100}}
+    }
+}
+random_rare_curiosity_get = {
+    optimize_memory
+    random_list = {
+        1 = {curiosity_get_effect = { KEY_NAME = fuling_gum KEY_ORIGIN = simulated_universe  VALUE = 180}}
+        1 = {curiosity_get_effect = { KEY_NAME = dimensionality_reduction_dice KEY_ORIGIN = simulated_universe  VALUE = 180}}
+        1 = {curiosity_get_effect = { KEY_NAME = faith_bond KEY_ORIGIN = simulated_universe  VALUE = 180}}
+        1 = {curiosity_get_effect = { KEY_NAME = split_gold_coins KEY_ORIGIN = simulated_universe  VALUE = 180}}
+        1 = {curiosity_get_effect = { KEY_NAME = empty_candle_scissors KEY_ORIGIN = simulated_universe  VALUE = 180}}
+    }
+}
+random_epic_curiosity_get = {
+    optimize_memory
+    random_list = {
+        1 = {curiosity_get_effect = { KEY_NAME = annihilate_candle_scissors KEY_ORIGIN = simulated_universe  VALUE = 300}}
+        1 = {curiosity_get_effect = { KEY_NAME = beautiful_robe KEY_ORIGIN = simulated_universe  VALUE = 300}}
+    }
+}

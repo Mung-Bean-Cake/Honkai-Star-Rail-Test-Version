@@ -1,92 +1,3 @@
-
-###################################
-#电力中继T1
-###################################
-space_energy_core_t1 = {
-
-	icon = "GFX_space_energy_core_t1"
-	construction_days = 270
-
-	potential = {
-		exists = owner
-		owner = { 
-			has_technology = "tech_heita_t1" 
-			has_origin = origin_Herta_Space_Station
-		} 
-	}
-
-	possible = {
-		exists = owner
-		OR = {
-			owner = { is_ai = no }
-		}
-		
-	}
-	resources = {
-		category = starbase_buildings
-		cost = {
-			alloys = 250
-			influence = 4
-		}
-		upkeep = {
-			energy = 4
-		}
-		produces = {
-			energy = 20
-			minerals = 5
-		}
-	}
-	triggered_system_modifier = {
-        planet_jobs_physics_research_produces_mult = 0.01
-		planet_jobs_energy_produces_mult = 0.01
-    }
-	show_in_tech = "tech_heita_t1" #记得填
-}
-
-###################################
-#电力中继T2
-###################################
-space_energy_core_t2 = {
-
-	icon = "GFX_space_energy_core_t2"
-	construction_days = 360
-
-	potential = {
-		exists = owner
-		owner = { 
-			has_technology = "tech_heita_t2" 
-			has_origin = origin_Herta_Space_Station
-		} 
-	}
-
-	possible = {
-		exists = owner
-		OR = {
-			owner = { is_ai = no }
-		}
-	}
-	resources = {
-		category = starbase_buildings
-		cost = {
-			alloys = 700
-			influence = 8
-		}
-		produces = {
-			energy = 70
-			minerals = 20
-			physics_research = 5
-		}
-		upkeep = {
-			energy = 8
-		}
-	}
-	triggered_system_modifier = {
-        planet_jobs_physics_research_produces_mult = 0.025
-		planet_jobs_energy_produces_mult = 0.025
-    }
-	show_in_tech = "tech_heita_t2" #记得填
-}
-
 ###################################
 #电力中继T3
 ###################################
@@ -97,8 +8,8 @@ space_energy_core_t3 = {
 
 	potential = {
 		exists = owner
-		owner = { 
-			has_technology = "tech_heita_t3"
+		owner = {
+			has_civic = civic_herta_2
 			has_origin = origin_Herta_Space_Station
 		}  
 	}
@@ -106,7 +17,7 @@ space_energy_core_t3 = {
 	possible = {
 		exists = owner
 		OR = {
-			owner = { is_ai = no }
+			owner = { has_civic = civic_herta_2 }
 		}
 	}
 	resources = {
@@ -129,57 +40,7 @@ space_energy_core_t3 = {
         planet_jobs_physics_research_produces_mult = 0.05
 		planet_jobs_energy_produces_mult = 0.05
     }
-	show_in_tech = "tech_heita_t3" #记得填
 }
-
-###################################
-#轨道稀有资源凝聚T1
-###################################
-space_rare_resource_t1 = {
-
-	icon = "GFX_space_rare_resource_t1"
-	construction_days = 360
-
-	potential = {
-		exists = owner
-		owner = { 
-			has_technology = "tech_heita_t2"
-			has_origin = origin_Herta_Space_Station
-		} 
-	}
-
-	possible = {
-		exists = owner
-		OR = {
-			owner = { is_ai = no }
-		}
-	}
-	resources = {
-		category = starbase_buildings
-		cost = {
-			alloys = 500
-			influence = 18
-		}
-		produces = {
-			exotic_gases = 5
-			rare_crystals = 5
-			volatile_motes = 5
-			engineering_research = 5
-		}
-		upkeep = {
-			minerals = 12
-			energy = 12
-		}
-	}
-	triggered_system_modifier = {
-        planet_jobs_alloys_produces_mult = 0.05
-		planet_jobs_consumer_goods_produces_mult = 0.05
-    }
-	show_in_tech = "tech_heita_t2" #记得填
-}
-###################################
-#轨道稀有资源凝聚T2
-###################################
 space_rare_resource_t2 = {
 
 	icon = "GFX_space_rare_resource_2"
@@ -187,8 +48,8 @@ space_rare_resource_t2 = {
 
 	potential = {
 		exists = owner
-		owner = { 
-			has_technology = "tech_heita_t3"
+		owner = {
+			has_civic = civic_herta_2
 			has_origin = origin_Herta_Space_Station
 		}
 	}
@@ -196,7 +57,7 @@ space_rare_resource_t2 = {
 	possible = {
 		exists = owner
 		OR = {
-			owner = { is_ai = no }
+			owner = { has_civic = civic_herta_2 }
 		}
 	}
 	resources = {
@@ -220,7 +81,6 @@ space_rare_resource_t2 = {
         planet_jobs_alloys_produces_mult = 0.075
 		planet_jobs_consumer_goods_produces_mult = 0.075
     }
-	show_in_tech = "tech_heita_t3" #记得填
 }
 ###################################
 #大型锚地
@@ -232,8 +92,8 @@ space_anchorage_t1 = {
 
 	potential = {
 		exists = owner
-		owner = { 
-			has_technology = "tech_heita_t1"
+		owner = {
+			has_civic = civic_herta_2
 			has_origin = origin_Herta_Space_Station
 		} 
 	}
@@ -241,7 +101,7 @@ space_anchorage_t1 = {
 	possible = {
 		exists = owner
 		OR = {
-			owner = { is_ai = no }
+			owner = { has_civic = civic_herta_2 }
 		}
 	}
 	resources = {
@@ -261,8 +121,6 @@ space_anchorage_t1 = {
 		starbase_shipyard_build_speed_mult = 0.1
         starbase_shipyard_build_cost_mult = -0.05
 		ship_cloaking_detection_add = 2
-        starbase_trade_collection_range_add = 3
-        trade_value_add = 15
 	}
     ship_modifier = {
         ship_starting_experience_add = 500
@@ -270,47 +128,4 @@ space_anchorage_t1 = {
 	country_modifier = {
 		country_naval_cap_add = 50
 	}
-	show_in_tech = "tech_heita_t1" #记得填
-}
-###################################
-#轨道影响力产能T0
-###################################
-space_influence_t1 = {
-
-	icon = "GFX_space_influence_t1"
-	construction_days = 360
-
-	potential = {
-		exists = owner
-		owner = { 
-			has_technology = "tech_heita_t1"
-			has_origin = origin_Herta_Space_Station
-		} 
-	}
-
-	possible = {
-		exists = owner
-		OR = {
-			owner = { is_ai = no }
-		}
-	}
-	resources = {
-		category = starbase_buildings
-		cost = {
-			alloys = 300
-			influence = 12
-		}
-		produces = {
-			unity = 10
-			consumer_goods = 10
-			food = 10
-			influence = 0.4
-			society_research = 5
-		}
-		upkeep = {
-			minerals = 12
-			energy = 12
-		}
-	}
-	show_in_tech = "tech_heita_t1" #记得填
 }

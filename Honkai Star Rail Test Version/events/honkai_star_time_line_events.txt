@@ -1,0 +1,31 @@
+namespace = hsr_timeline
+event = {
+    id = hsr_timeline.1
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = {
+        ## Add Origins to Timeline ##
+        every_playable_country = {
+            limit = {
+                OR = {
+                    has_origin = origin_Xianzhou
+                    has_origin = origin_Herta_Space_Station
+                    has_origin = origin_belobog
+                    has_origin = origin_Penacony
+                }
+            }
+            switch = {
+                trigger = has_origin
+                origin_Herta_Space_Station = {
+                    add_timeline_event = {
+                        type = hsr_timeline_origin
+                        override_tooltip = "origin_Herta_Space_Station_desc"
+                        override_text = { "text:origin_Herta_Space_Station" }
+                        override_texture = { "background:GFX_origin_Herta_Space_Station" }
+                        override_id = timeline_origin_Herta_Space_Station
+                    }
+                }
+            }
+        }
+    }
+}

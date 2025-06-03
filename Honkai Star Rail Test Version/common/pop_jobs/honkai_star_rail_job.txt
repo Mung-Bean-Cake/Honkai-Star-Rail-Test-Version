@@ -1,0 +1,76 @@
+museum_clerk = {
+    category = specialist
+
+    swappable_data = {
+        default = {
+            condition_string = SPECIALIST_JOB_TRIGGER
+            building_icon = herta_holomuseum_1
+        }
+    }
+
+    tags = { unity research }
+
+    possible_pre_triggers = {
+        has_owner = yes
+        is_being_purged = no
+        is_being_assimilated = no
+        is_sapient = yes
+    }
+
+    possible_precalc = can_fill_specialist_job
+    possible = {
+        complex_specialist_job_check_trigger = yes
+    }
+    planet_modifier = {
+        planet_amenities_add = 5
+    }
+    resources = {
+        category = planet_researchers
+        produces = {
+            unity = 2
+            engineering_research = 3.5
+            physics_research = 3.5
+            society_research = 3.5
+            minor_artifacts = 0.5
+        }
+        upkeep = {
+            minerals = 1
+            consumer_goods = 1.5
+        }
+    }
+
+    weight = {
+        weight = @specialist_job_weight
+        mult = value:job_weights_multiple_resources_modifier|JOB|museum_clerk|RESOURCE1|unity|WEIGHT1|0.5|RESOURCE2|engineering_research|WEIGHT2|0.5|
+        modifier = {
+            factor = 0.2
+            has_citizenship_rights = no
+            NOT = { has_trait = trait_mechanical }
+        }
+        modifier = {
+            factor = 2
+            has_living_standard = { type = living_standard_academic_privilege }
+        }
+        modifier = {
+            factor = 0.1
+            can_take_servant_job = yes
+        }
+        modifier = {
+            factor = 0.8
+            is_enslaved = yes
+            has_slavery_type = { type = slavery_indentured }
+        }
+    }
+
+    inline_script = "jobs/automodding_priority_research"
+
+    promotion = {
+        time = @standard_promotion_time
+        effect = {
+            pop_amount_change_category = {
+                CATEGORY = specialist
+                AMOUNT = local_pop_amount
+            }
+        }
+    }
+}

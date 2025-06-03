@@ -1,0 +1,84 @@
+namespace = hsr_paragon
+country_event = {#大黑塔
+	id = hsr_paragon.1
+	title = "hsr_paragon.1.name"
+	desc = "daheita_catch_phrase"
+	is_triggered_only = yes
+
+	picture = GFX_leader_recruitment_bg_legendary_beholder
+	event_window_type = leader_recruit
+
+	picture_event_data = {
+		portrait = event_target:daheita_leader
+		room = paragon_keides_room
+	}
+	immediate = {
+		hidden_effect = {
+			SR_leader_creator = {
+				SPECIES_NAME = star_rail_leader
+				SPECIES_CLASS = Star_Rail
+				LEADER_PORTRAIT = daheita
+				SKILL = 1
+				CLASS = scientist
+				NAME = NAME_daheita
+				GENDER = female
+				HIDEAGE = yes
+				ETHIC = ethic_materialist
+				CATCH_PHRASE = daheita_catch_phrase
+				DESC = daheita_backstory
+				EVENT_TARGET = daheita_leader
+			}
+			last_created_leader = {
+				remove_all_positive_traits = yes
+				add_trait = leader_daherta_t1
+				add_trait = leader_daherta_t2
+				add_trait = leader_daherta_t3
+				change_background_job = event_fake_job_1
+			}
+		}
+	}
+	option = {
+		trigger = { }
+		name = hsr_paragon.1.a
+		is_dialog_only = yes
+		response_text = hsr_paragon.1.a.response
+	}
+	option = {
+		trigger = { }
+		name = hsr_paragon.1.b
+		is_dialog_only = yes
+		response_text = hsr_paragon.1.b.response
+	}
+	option = {
+		name = hsr_paragon.1.c
+		response_text = hsr_paragon.1.c.response
+		is_dialog_only = yes
+	}
+	option = {
+		name = HIRE
+		tag = hire_leader
+		hidden_effect = {
+			SR_hire_leader = {
+				EVENT_TARGET = daheita_leader
+			}
+			set_country_flag = daheita_set
+			last_created_leader = {
+				set_leader_flag = legendary_leader
+				save_global_event_target_as = daheita_leader
+				set_leader_flag = immune_to_negative_traits
+				set_leader_flag = daheita
+			}
+		}
+	}
+	option = {
+		# DISMISS
+		name = DISMISS
+		tag = dismiss_leader
+		hidden_effect = {
+			event_target:daheita_leader = {
+				kill_leader = { show_notification = no }
+			}
+		}
+	}
+	after = {hidden_effect = {country_event = { id = hsr_ui.1}}}
+}

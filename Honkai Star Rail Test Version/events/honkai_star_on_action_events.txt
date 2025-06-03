@@ -1,0 +1,277 @@
+namespace = hsr_on
+country_event = {	#奇物福灵胶被动效果
+    id = hsr_on.1
+    is_triggered_only = yes
+    hide_window = yes
+
+    trigger = {
+        this = {
+            has_specimen = fuling_gum
+        }
+        fromfromfrom = {
+            is_ship_class = shipclass_military
+        }
+    }
+
+    immediate = {
+        this = {
+            if = {
+                limit = {
+                   has_specimen = fuling_gum
+                }
+                change_variable = {
+                    which = yuzhousuipian
+                    value = 50
+                }
+            }
+        }
+    }
+}
+country_event = {	#奇物香涎干酪被动效果
+    id = hsr_on.2
+    is_triggered_only = yes
+    hide_window = yes
+
+    trigger = {
+        this= {
+            root = {has_specimen = fragrant_cheese}
+        }
+        fromfromfrom = {
+            is_ship_class = shipclass_military
+        }
+    }
+
+    immediate = {
+        fromfrom = {
+            repair_percentage = 0.3
+        }
+        this = {
+            change_variable = {
+                which = fragrant_cheese_use
+                value = 1
+            }
+            if = {
+                limit = { check_variable = { which = fragrant_cheese_use  value = 3} }
+                curiosity_lose_effect = {KEY_NAME = fragrant_cheese}
+                curiosity_get_effect = { KEY_NAME = sponge_king KEY_ORIGIN = simulated_universe  VALUE = 180}
+            }
+        }
+    }
+}
+country_event = {#奇物永不停嘴的羊皮卷被动效果
+    id = hsr_on.3
+    is_triggered_only = yes
+    hide_window = yes
+
+    trigger = {
+        OR = {
+            this = {
+                has_specimen = sheepskin_scroll
+            }
+            from = {
+                has_specimen = sheepskin_scroll
+            }
+        }
+    }
+
+    immediate = {
+        if = {
+            limit = {
+                from = {
+                    has_specimen = sheepskin_scroll
+                }
+            }
+            fromfrom = {
+                repair_percentage = -0.3
+            }
+        }
+        else_if = {
+            limit = {
+                this = {
+                    has_specimen = sheepskin_scroll
+                }
+            }
+            fromfromfrom = {
+                repair_percentage = -0.3
+            }
+        }
+    }
+}
+country_event = {#奇物俱乐部券被动效果
+    id = hsr_on.4
+    is_triggered_only = yes
+    hide_window = yes
+
+    trigger = {
+       has_specimen = club_ticket
+    }
+
+    immediate = {
+        change_variable = {
+            which = yuzhousuipian
+            value = 75
+        }
+    }
+}
+country_event = {#奇物分裂金币被动效果
+    id = hsr_on.5
+    is_triggered_only = yes
+    hide_window = yes
+
+    trigger = {
+        has_specimen = split_gold_coins
+    }
+    immediate = {
+        change_variable = {
+            which = yuzhousuipian
+            value = yuzhousuipian_add
+        }
+    }
+}
+country_event = {#奇物天外重声大碟被动效果
+    id = hsr_on.6
+    is_triggered_only = yes
+    hide_window = yes
+
+    trigger = {
+        OR = {
+            this = {
+                has_specimen = heavy_sound_album
+            }
+            from = {
+                has_specimen = heavy_sound_album
+            }
+        }
+    }
+
+    immediate = {
+        if  = {
+            limit = { this = { has_specimen = heavy_sound_album } }
+            fromfrom = {
+                add_modifier = {
+                    modifier = heavy_sound_album
+                    days = 10
+                }
+            }
+        }
+        if  = {
+            limit = { from = { has_specimen = heavy_sound_album } }
+            fromfromfrom = {
+                add_modifier = {
+                    modifier = heavy_sound_album
+                    days = 10
+                }
+            }
+        }
+    }
+}
+#领袖特属效果
+country_event = {	#大黑塔
+    id = hsr_on.1000
+    is_triggered_only = yes
+    hide_window = yes
+    trigger = {}
+    immediate = {
+        if = {
+            limit = {
+                any_owned_leader = {
+                    is_councilor = yes
+                    has_trait = leader_daherta_t2
+                }
+            }
+            owner = {
+                add_random_research_option = {
+                    add_progress = 0.1
+                    ignore_prereqs = no
+                    fail_effects = {
+                        add_monthly_resource_mult = {
+                            resource = physics_research
+                            value = @tier2researchreward
+                            min = @tier2researchmin
+                            max = @tier2researchmax
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+country_event = {
+    id = hsr_on.1001
+    hide_window = yes
+    is_triggered_only = yes
+    trigger = {
+        FROMFROM = {
+            exists = owner
+            owner = {
+                any_owned_leader = {
+                    is_councilor = yes
+                    has_trait = leader_daherta_t3
+                }
+            }
+        }
+    }
+    immediate = {
+        if = {
+            limit = {
+                has_country_resource = {
+                    type = alloys
+                    amount >= 90
+                }
+                has_country_resource = {
+                    type = influence
+                    amount >= 45
+                }
+                NOT = {
+                    from = {
+                        any_system = {
+                            distance = {
+                                source = from
+                                min_jumps = 1
+                                max_jumps = 1
+                                type = hyperlane
+                                use_bypasses = no
+                            }
+                            exists = owner
+                            owner = {
+                                OR = {
+                                    is_country_type = fallen_empire
+                                    is_country_type = awakened_fallen_empire
+                                }
+                                has_ethic = ethic_fanatic_xenophobe
+                            }
+                        }
+                    }
+                }
+            }
+            add_resource = { alloys = -90 }
+            add_resource = { influence = -45 }
+            from = {
+                create_starbase = {
+                    size = starbase_outpost
+                    owner = root
+                }
+                every_system_planet = {
+                    if = {
+                        limit = {
+                            has_deposit_for = shipclass_mining_station
+                            has_mining_station = no
+                        }
+                        create_mining_station = {
+                            owner = root
+                        }
+                    }
+                    if = {
+                        limit = {
+                            has_deposit_for = shipclass_research_station
+                            has_research_station = no
+                        }
+                        create_research_station = {
+                            owner = root
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

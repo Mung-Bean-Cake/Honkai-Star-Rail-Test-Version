@@ -12,5 +12,5 @@ tags={
 	"Translation"
 }
 name="Honkai: Star Rail | Test Version"
-supported_version="3.9.*"
+supported_version="v4.*"
 path="mod/Honkai Star Rail Test Version"

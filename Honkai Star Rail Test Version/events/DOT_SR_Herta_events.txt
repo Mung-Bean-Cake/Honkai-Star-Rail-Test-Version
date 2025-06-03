@@ -2,26 +2,219 @@
 namespace = DOT_SR_Herta
 
 country_event = {
-	id = DOT_SR_Herta.001
-	title = "DOT_SR_Herta.001.name"
-	desc = "DOT_SR_Herta.001.desc"
-	picture = GFX_evt_DOT_SR_001
-	show_sound = event_psionic
-	location = root
-	fire_only_once = yes
-	#is_triggered_only = yes
+	id = DOT_SR_Herta.1
+	is_triggered_only = yes
+	hide_window = yes
+
 	trigger = {
-		OR = { 
-			has_origin = origin_Herta_Space_Station
-		}	
+		has_civic = civic_herta_1
+		has_origin = origin_Herta_Space_Station
 	}
 	immediate = {
-	}
-	option = {
-		name = DOT_SR_Herta.001.a
-		add_tech_progress = {
-			tech = tech_heita_t1
-			progress = 0.75
+		from = {
+			if = {
+				limit = {
+					leader_class = scientist
+				}
+				add_trait_no_notify = leader_herta_common
+			}
 		}
 	}
+}
+country_event = {#初试化设置
+	id = DOT_SR_Herta.2
+	is_triggered_only = yes
+	hide_window = yes
+
+	trigger = {
+		has_origin = origin_Herta_Space_Station
 	}
+	immediate = {
+		create_species = {
+			name = star_rail_leader # 物种名称
+			class = Star_Rail # 物种类别
+			portrait = daheita # 肖像
+			traits = {
+				trait = "trait_enduring" # 物种特质
+			}
+			immortal = yes
+			allow_negative_traits = no
+			effect = {
+				save_event_target_as = leader_species
+			}
+		}
+		ruler = {
+			remove_all_positive_traits = yes
+			set_name = NAME_daheita
+			change_species = event_target:leader_species
+			change_leader_class = scientist
+			change_leader_portrait = daheita
+			change_background_ethic = ethic_materialist
+			change_background_job = event_fake_job_1
+			add_skill_without_trait_selection = 6
+			add_trait = leader_daherta_t1
+			add_trait = leader_daherta_t2
+			add_trait = leader_daherta_t3
+			set_gender = female
+			set_age = 16
+			set_leader_flag = legendary_leader
+			set_leader_flag = immune_to_negative_traits
+			set_leader_flag = daheita
+			set_leader_flag = leader_death_events_blocked  # 阻止原版葬礼事件
+			save_global_event_target_as = daheita_leader
+		}
+		set_country_flag = daheita_set
+		#奇物，额外的宇宙碎片
+		while = {
+			count = 2
+			random_common_curiosity_get = yes
+		}
+		random_rare_curiosity_get =yes
+		random_epic_curiosity_get = yes
+		change_variable = {
+			which = yuzhousuipian
+			value = 2000
+		}
+		#额外科技
+		give_technology = { tech = tech_robotic_workers message = no }
+		give_technology = { tech = tech_powered_exoskeletons message = no }
+		give_technology = { tech = tech_robomodding message = no }
+		give_technology = { tech = tech_habitat_1 message = no }
+		give_technology = { tech = tech_droid_workers message = no }
+		give_technology = { tech = tech_synthetic_workers message = no }
+		give_technology = { tech = tech_integrated_cybernetics message = no }
+		give_technology = { tech = tech_robomodding_points_1 message = no }
+		give_technology = { tech = tech_robot_assembly_complex message = no }
+		give_technology = { tech = tech_robomodding_points_2 message = no }
+		give_technology = { tech = tech_positronic_implants message = no }
+		give_technology = { tech = tech_frontier_health message = no }
+		give_technology = { tech = tech_genome_mapping message = no }
+		give_technology = { tech = tech_vitality_boosters message = no }
+		give_technology = { tech = tech_epigenetic_triggers message = no }
+		give_technology = { tech = tech_cloning message = no }
+		give_technology = { tech = tech_gene_banks message = no }
+		give_technology = { tech = tech_gene_seed_purification message = no }
+		give_technology = { tech = tech_morphogenetic_field_mastery message = no }
+		give_technology = { tech = tech_gene_tailoring message = no }
+		give_technology = { tech = tech_glandular_acclimation message = no }
+		give_technology = { tech = tech_gene_expressions message = no }
+		give_technology = { tech = tech_habitat_1 message = no }
+		give_technology = { tech = tech_habitat_2 message = no }
+		give_technology = { tech = tech_habitat_3 message = no }
+		give_technology = { tech = tech_mega_engineering message = no }
+		add_research_option = tech_galactic_archivism
+		set_policy = {
+			policy = artificial_intelligence_policy
+			option = ai_full_rights
+		}
+		create_species = {
+			class = "ROBOT"
+			portrait = "heita"
+			name = "NAME_heita_robot"
+			plural = "NAME_heita_robot"
+			adjective = "NAME_heita_robot"
+			name_list = "MACHINE1"
+			traits = {
+				trait = trait_mechanical
+				trait = trait_wet_planet_preference
+				trait = trait_herta_robot_pop_1
+			}
+			effect = {
+				save_global_event_target_as = heita_robot_species
+			}
+		}
+		save_event_target_as = herta_origin_target
+		random_planet_within_border = {
+			limit = { has_planet_flag = zhanlanxing }
+			save_event_target_as = herta_zhanlanxing
+			remove_building = building_colony_shelter
+			remove_building = building_commercial_zone
+			add_building = herta_holomuseum_1
+			add_building = building_holo_theatres
+			add_building = building_robot_assembly_plant
+			add_district = district_city
+			add_district = district_city
+			while = {
+				count = 4
+				add_deposit = d_rushing_waterfalls
+				add_deposit = d_ore_rich_caverns
+				add_district = district_mining
+				add_district = district_generator
+			}
+			add_zone = {
+				district = district_city
+				zone = zone_research
+			}
+			add_zone = {
+				district = district_city
+				zone = zone_industrial
+			}
+			add_building = {
+				zone = zone_research
+				building = building_research_lab_1
+			}
+			add_building = {
+				zone = zone_industrial
+				building = building_factory_1
+			}
+			add_building = {
+				zone = zone_industrial
+				building = building_foundry_1
+			}
+			while = {
+				count = 22
+				create_pop_group = {
+					size = 100
+					species = owner_main_species
+				}
+				create_pop_group = {
+					size = 1
+					species = event_target:heita_robot_species
+				}
+			}
+		}
+		random_planet_within_border = {
+			limit = { has_planet_flag = herta_habitat }
+			set_owner = event_target:herta_origin_target
+			set_planet_flag = habitat_level_1
+			set_planet_flag = habitat
+			set_planet_entity = {
+				entity = "habitat_phase_03_entity"
+				graphical_culture = owner
+			}
+			remove_district = district_city
+			add_district = district_hab_housing
+			add_district = district_hab_housing
+			add_district = district_hab_science
+			add_district = district_hab_energy
+			add_district = district_hab_mining
+			add_district = district_hab_energy
+			add_district = district_hab_mining
+			remove_building = building_hydroponics_farm
+			add_building = herta_holomuseum_1
+			add_building = building_holo_theatres
+			add_deposit = d_herta_1
+			add_deposit = d_herta_2
+			add_building = building_robot_assembly_plant
+			add_zone = {
+				district = district_hab_housing
+				zone = zone_research_unity
+			}
+			add_zone = {
+				district = district_hab_housing
+				zone = zone_unity
+			}
+			while = {
+				count = 14
+				create_pop_group = {
+					size = 100
+					species = owner_main_species
+				}
+				create_pop_group = {
+					size = 2
+					species = event_target:heita_robot_species
+				}
+			}
+		}
+	}
+}

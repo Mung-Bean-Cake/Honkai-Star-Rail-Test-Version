@@ -315,7 +315,7 @@ leader_trait_love_heal_and_choose = {
 		planet_stability_add = 0.5
 		pop_job_amenities_mult = 0.025
 		planet_jobs_unity_produces_mult = 0.020
-		mult = trigger:has_skill
+		mult = trigger:has_base_skill
 	}
 	triggered_sector_modifier = {
 		potential = {
@@ -324,7 +324,7 @@ leader_trait_love_heal_and_choose = {
 		planet_stability_add = 0.25
 		pop_job_amenities_mult = 0.0125
 		planet_jobs_unity_produces_mult = 0.010
-		mult = trigger:has_skill
+		mult = trigger:has_base_skill
 	}
 	leader_class = { official }
 	initial = no
@@ -344,18 +344,18 @@ leader_trait_gift_of_rebirth = {
 			always = yes
 		}
 		planet_crime_add = -5
-		pop_growth_speed = 0.025
+		bonus_pop_growth_mult = 0.015
 		planet_pops_upkeep_mult = -0.025
-		mult = trigger:has_skill
+		mult = trigger:has_base_skill
 	}
 	triggered_sector_modifier = {
 		potential = {
 			always = yes
 		}
 		planet_crime_add = -2.5
-		pop_growth_speed = 0.0125
+		bonus_pop_growth_mult = 0.0125
 		planet_pops_upkeep_mult = -0.0125
-		mult = trigger:has_skill
+		mult = trigger:has_base_skill
 	}
 	leader_class = { official }
 	initial = no
@@ -754,7 +754,7 @@ leader_trait_svarog_watches_over_you = {
 		ship_hull_mult = 0.025
 		ship_armor_mult = 0.025
 		ship_shield_mult = 0.025
-		mult = trigger:has_skill
+		mult = trigger:has_base_skill
 	}
 	councilor_modifier = {
 		ship_accuracy_mult = 0.25
@@ -777,11 +777,10 @@ leader_trait_promise_not_command = {
 		planet_pop_assembly_mult = 0.025
 		planet_pop_assemblers_upkeep_mult = -0.025
 		planet_pops_robotics_upkeep_mult = -0.025
-		mult = trigger:has_skill
+		mult = trigger:has_base_skill
 	}
 	councilor_modifier = {
 		country_starbase_influence_cost_mult = -0.15
-		colony_start_num_pops_add = 1
 		ship_colonizer_cost_mult = -0.15
 		planet_colony_development_speed_mult = 0.15
 	}
@@ -899,6 +898,141 @@ leader_trait_xier_4 = {
 		ship_speed_mult = 0.35
 	}
 	leader_class = { commander }
+	initial = no
+	randomized = no
+}
+#黑塔空间站
+#通用
+leader_herta_common = {
+	inline_script = {
+		script = trait/hsr_icons
+		ICON = "GFX_leader_herta_common"
+		CLASS = scientist
+		RARITY = paragon
+		COUNCIL = no
+		TIER = 1
+	}
+	modifier = {
+		ship_speed_mult = 0.15
+		ship_archaeological_site_clues_add = 1
+		ship_archaeological_site_excavation_speed_mult = 0.15
+		science_ship_survey_speed = 0.2
+		ship_anomaly_generation_chance_mult = 0.05
+	}
+	leader_class = { scientist }
+	initial = no
+	randomized = no
+}
+leader_daherta_t1 = {
+	inline_script = {
+		script = trait/hsr_icons
+		ICON = "GFX_leader_daherta_1"
+		CLASS = scientist
+		RARITY = paragon
+		COUNCIL = yes
+		TIER = 1
+	}
+	councilor_modifier = {
+		councilor_exp_gain = 0.25
+		council_agenda_progress_speed = 0.25
+		leader_skill_add = 3
+	}
+	triggered_councilor_modifier = {
+		country_physics_research_produces_mult = 0.01
+		country_society_research_produces_mult = 0.01
+		country_engineering_research_produces_mult = 0.01
+		mult = this.owner.num_curiosity
+	}
+	leader_class = { scientist }
+	initial = no
+	randomized = no
+}
+leader_daherta_t2 = {#奇物给予额外的加成，每月给额外的科技进展
+	inline_script = {
+		script = trait/hsr_icons
+		ICON = "GFX_leader_daherta_2"
+		CLASS = scientist
+		RARITY = paragon
+		COUNCIL = yes
+		TIER = 1
+	}
+	councilor_modifier = {
+		all_technology_research_speed = 0.5
+		specimens_produces_mult = 0.5
+	}
+	triggered_councilor_modifier = {
+		all_technology_research_speed = 0.01
+		mult = this.owner.num_curiosity
+	}
+	leader_class = { scientist }
+	initial = no
+	randomized = no
+}
+leader_daherta_t3 = {#花费一定资源直接拿地
+	inline_script = {
+		script = trait/hsr_icons
+		ICON = "GFX_leader_daherta_3"
+		CLASS = scientist
+		RARITY = paragon
+		COUNCIL = yes
+		TIER = 1
+	}
+	councilor_modifier = {
+		country_border_friction_mult = -0.5
+		country_trust_growth = 0.5
+		diplo_action_acceptance_add = 25
+	}
+	modifier = {
+		science_ship_survey_speed = 0.5
+		ship_anomaly_generation_chance_mult = 0.5
+		ship_anomaly_research_speed_mult = 0.5
+	}
+	leader_class = { scientist }
+	initial = no
+	randomized = no
+}
+leader_daherta_t4 = {
+	inline_script = {
+		script = trait/hsr_icons
+		ICON = "GFX_leader_daherta_4"
+		CLASS = scientist
+		RARITY = paragon
+		COUNCIL = no
+		TIER = 1
+	}
+	modifier = {
+		ship_astral_rift_clues_add = 2
+		ship_astral_rift_speed_mult = 0.25
+		ship_archaeological_site_clues_add = 2
+		ship_archaeological_site_excavation_speed_mult = 0.25
+	}
+	self_modifier = {
+		leader_scientists_physics_research_produces_add = 150
+		leader_scientists_society_research_produces_add = 150
+		leader_scientists_engineering_research_produces_add = 150
+	}
+	leader_class = { scientist }
+	initial = no
+	randomized = no
+}
+leader_daherta_t5 = {
+	inline_script = {
+		script = trait/hsr_icons
+		ICON = "GFX_leader_daherta_5"
+		CLASS = scientist
+		RARITY = paragon
+		COUNCIL = no
+		TIER = 1
+	}
+	self_modifier = {
+		leaders_upkeep_mult = -0.5
+		leader_lifespan_add = 100
+	}
+	triggered_self_modifier = {
+		leader_skill_add = 1
+		mult = this.owner.num_daherta_other_skill
+	}
+	leader_class = { scientist }
 	initial = no
 	randomized = no
 }

@@ -5,16 +5,6 @@ tiwei_soldier = {
 			condition_string = SOLDIER_JOB_TRIGGER
 			building_icon = building_stronghold
 		}
-		swap_type = {
-			trigger = {
-				soldier_is_necromancer = yes
-			}
-			name = necromancer
-			desc = necromancer
-			icon = necromancer
-			building_icon = building_dread_encampment
-			weight = 50
-		}
 	}
 	possible_pre_triggers = {
 		has_owner = yes
@@ -184,38 +174,6 @@ yaliluo_maintenance_worker = {
 			condition_string = WORKER_JOB_TRIGGER
 			building_icon = building_mineral_purification_plant
 		}
-		swap_type = {
-			trigger = {
-				miner_is_scrap_miner_trigger = yes
-			}
-			name = scrap_miner
-			desc = scrap_miner
-			weight = 5
-		}
-		swap_type = {
-			trigger = {
-				miner_is_cave_cleaner_trigger = yes
-			}
-			name = cave_cleaner
-			desc = cave_cleaner
-			weight = 10
-		}
-		swap_type = {
-			trigger = {
-				miner_is_mineral_diver_trigger = yes
-			}
-			name = mineral_diver
-			desc = mineral_diver
-			weight = 15
-		}
-		swap_type = {
-			trigger = {
-				miner_is_turtle_miner_trigger = yes
-			}
-			name = turtle_miner
-			desc = turtle_miner
-			weight = 20
-		}
 	}
 	possible_pre_triggers = {
 		has_owner = yes
@@ -232,8 +190,11 @@ yaliluo_maintenance_worker = {
 	planet_modifier = {
 		planet_amenities_add = 1
 	}
+	country_modifier = {
+		maintenance_progress_add = 0.05
+	}
 	resources = {
-		category = planet_researchers
+		category = planet_miners
 		produces = {
 			unity = 1
 			minerals = 2
@@ -260,4 +221,5 @@ yaliluo_maintenance_worker = {
 			}
 		}
 	}
+	inline_script = "jobs/automodding_priority_unity"
 }

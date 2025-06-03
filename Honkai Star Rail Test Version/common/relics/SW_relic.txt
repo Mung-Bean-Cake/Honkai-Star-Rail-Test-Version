@@ -1,0 +1,46 @@
+@example_yz_one_cost = 3000
+@example_yz_two_cost = 2000
+@example_yz_three_cost = 1000
+@example_yz_four_cost = 500
+
+r_ev_fleet_bingyangzhang = { #ID,这个遗珍的唯一ID
+    activation_duration = 30   #冷却时间
+    portrait = "GFX_r_ev_fleet_bingyangzhang" #图标，动态，需要定义
+    sound = "relic_activation_the_rubricator" #点击的声音
+    resources = { #经济系统
+        category = relics
+        # Activation cost
+        cost = {
+            unity = 10
+        }
+    }
+    ai_weight = { #AI权重
+        weight = 0
+    }
+    triggered_country_modifier = { #选择性的国家修正，满足条件的时候才生效
+    }
+    score = @example_yz_four_cost #获得这个遗珍计算多少分，用于游戏内比分
+    active_effect = { #启动的时候的效果
+        custom_tooltip = SW_change.28_effect
+        hidden_effect = {
+            country_event = {
+                id = SW_change.100
+            }
+        }
+        custom_tooltip = relic_triumph_cooldown_veryveryshort
+        hidden_effect = {
+            add_modifier = {
+                modifier = "relic_activation_cooldown"
+                days = 30
+            }
+        }
+    }
+    possible = { #检测是否能被启动
+        custom_tooltip = {
+            fail_text = "requires_relic_no_cooldown"
+            NOT = {
+                has_modifier = relic_activation_cooldown
+            }
+        }
+    }
+}

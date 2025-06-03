@@ -1,240 +1,336 @@
-namespace = honkai_anomaly
+namespace = honkai_cosmos
 ship_event = {
-	id = honkai_anomaly.1
-	title = "honkai_anomaly.1.name"
-	desc = "honkai_anomaly.1.desc"
-	picture = GFX_evt_mysterious_signal
-	show_sound = event_ship_bridge
-	location = FROM
-
+	id = honkai_cosmos.1
+	title = "honkai_cosmos.1.name"
+	desc = "honkai_cosmos.1.desc"
 	is_triggered_only = yes
+	diplomatic = yes
+	custom_gui = honkai_star_rail_event
+	picture_event_data = {   room = cosmos_1_room }
+	immediate = {
+		root.owner = {set_variable = { which = hsr_evt_moni value = 4 }}#1战斗2事件4奖励5商店
+	}
+	option = {
+		name = honkai_cosmos.1.a
+		custom_tooltip = honkai_cosmos.1.a.txt
+		owner = {
+			hidden_effect = {
+				change_variable = {
+					which = yuzhousuipian
+					value = 300
+				}
+			}
+		}
+	}
+	option = {
+		name = honkai_cosmos.1.b
+		custom_tooltip = honkai_cosmos.1.b.txt
+		owner = {
+			hidden_effect = {
+				random_rare_curiosity_get = yes
+			}
+		}
+	}
+	option = {
+		name = honkai_cosmos.1.c
+		custom_tooltip = honkai_cosmos.1.c.txt
+		owner = {
+			hidden_effect = {
+				random_list = {
+					1 = {change_variable = { which = yuzhousuipian value = 100 } random_common_curiosity_get = yes}
+					1 = {change_variable = { which = yuzhousuipian value = 300 } random_rare_curiosity_get = yes}
+					1 = {change_variable = { which = yuzhousuipian value = 600 } random_epic_curiosity_get = yes}
+				}
+			}
+		}
+	}
+	option = {
+		name = honkai_cosmos.1.d
+		custom_tooltip = honkai_cosmos.1.d.txt
+		trigger = {
+			root.owner = {
+				has_origin = origin_Herta_Space_Station
+			}
+		}
+		icon = {
+			icon = GFX_origin_Herta_Space_Station_small
+			text = origin_Herta_Space_Station
+		}
+		ai_chance = {
+			factor = 100
+		}
+		owner = {
+			hidden_effect = {
+				change_variable = {
+					which = yuzhousuipian
+					value = 1000
+				}
+				random_common_curiosity_get = yes
+				random_rare_curiosity_get = yes
+				random_epic_curiosity_get = yes
+			}
+		}
 
+	}
 	option = {
-		name = honkai_anomaly.1.a
-		hidden_effect = {
-			locked_random_list = {
-				7={ship_event = { id = honkai_anomaly.3 }}
-				3={ship_event = { id = honkai_anomaly.2 }}
-			}
-		}
-	}
-    option = {
-		name = honkai_anomaly.1.b
-		hidden_effect = {
-			locked_random_list = {
-				3={ship_event = { id = honkai_anomaly.3 }}
-				7={ship_event = { id = honkai_anomaly.2 }}
-			}
-		}
+		name = honkai_cosmos.1.e
+		custom_tooltip = honkai_cosmos.1.e.txt
+		default_hide_option = yes
 	}
 }
 ship_event = {
-    id = honkai_anomaly.2
-	title = "honkai_anomaly.2.name"
-	desc = "honkai_anomaly.2.desc"
-	picture = GFX_evt_mysterious_signal
-    is_triggered_only = yes
-    option = {
-		name = honkai_anomaly.2.a
-		event_target:global_event_country = {
-			change_variable = { which = yuzhousuipian value = 2 }
-		}
+	id = honkai_cosmos.2
+	title = "honkai_cosmos.2.name"
+	desc = "honkai_cosmos.2.desc"
+	is_triggered_only = yes
+	diplomatic = yes
+	custom_gui = honkai_star_rail_event
+	picture_event_data = {   room = cosmos_1_room }
+	immediate = {
+		root.owner = {set_variable = { which = hsr_evt_moni value = 2 }}#1战斗2事件4奖励5商店
+	}
+	option = {
+		name = honkai_cosmos.2.a
 		owner = {
-			add_resource = { yuzhousuipian = 400 }
-            add_monthly_resource_mult = {
-                        resource = unity
-                        value = 3
-            }
-        }
-	}
-}
-ship_event = {
-    id = honkai_anomaly.3
-	title = "honkai_anomaly.3.name"
-	desc = "honkai_anomaly.3.desc"
-	picture = GFX_evt_mysterious_signal
-    is_triggered_only = yes
-    option = {
-		name = honkai_anomaly.3.a
-	}
-}
-ship_event = {
-    id = honkai_anomaly.4
-	title = "honkai_anomaly.4.name"
-	desc = "honkai_anomaly.4.desc"
-	picture = GFX_evt_astral_rift_interdimensional_circus
-    is_triggered_only = yes
-    option = {
-		name = honkai_anomaly.4.a
-		hidden_effect = {
-			ship_event = { id = honkai_anomaly.5 }
+			add_modifier = {
+				modifier = honkai_cosmos.2_sm
+				months = 12
+			}
 		}
 	}
 	option = {
-		name = honkai_anomaly.4.b
-		hidden_effect = {
-			ship_event = { id = honkai_anomaly.5 }
-		}
-	}
-}
-ship_event = {
-    id = honkai_anomaly.5
-	title = "honkai_anomaly.5.name"
-	desc = "honkai_anomaly.5.desc"
-	picture = GFX_evt_galactic_market
-    is_triggered_only = yes
-    option = {
-		name = honkai_anomaly.5.a
-		custom_tooltip = honkai_anomaly.5.a.desc
-		event_target:global_event_country = {
-			change_variable = { which = yuzhousuipian value = 2 }
-		}
-		allow = {
-			owner = {
-				resource_stockpile_compare = { resource = energy value >= 100 }
-			}
-		}
+		name = honkai_cosmos.2.b
+		custom_tooltip = honkai_cosmos.2.b.txt
 		owner = {
-			add_resource = { energy = -100 }
-			add_resource = { yuzhousuipian = 200 }
 			hidden_effect = {
-				owner = { set_global_flag = yinheshangren }
+				change_variable = {
+					which = yuzhousuipian
+					value = 80
+				}
 			}
 		}
 	}
 	option = {
-		name = honkai_anomaly.5.b
-		custom_tooltip = honkai_anomaly.5.b.desc
-		event_target:global_event_country = {
-			change_variable = { which = yuzhousuipian value = 2 }
-		}
-		allow = {
-			owner = {
-				resource_stockpile_compare = { resource = energy value >= 200 }
-			}
-		}
+		name = honkai_cosmos.2.c
+		custom_tooltip = honkai_cosmos.2.c.txt
+		default_hide_option = yes
+	}
+}
+ship_event = {
+	id = honkai_cosmos.3
+	title = "honkai_cosmos.3.name"
+	desc = "honkai_cosmos.3.desc"
+	is_triggered_only = yes
+	diplomatic = yes
+	custom_gui = honkai_star_rail_event
+	picture_event_data = {   room = cosmos_2_room }
+	immediate = {
+		root.owner = {set_variable = { which = hsr_evt_moni value = 2 }}#1战斗2事件4奖励5商店
+	}
+	option = {
+		name = honkai_cosmos.3.a
 		owner = {
-			add_resource = { energy = -200 }
-			random_list = {
-				1 = {add_modifier = { modifier = yinhehaoren days = 720 }}
-				1 = {add_modifier = { modifier = yinhehaoren_1 days = 720 }}
+			add_modifier = {
+				modifier = honkai_cosmos.3_sm
+				months = 12
 			}
+		}
+	}
+	option = {
+		name = honkai_cosmos.3.b
+		custom_tooltip = honkai_cosmos.3.b.txt
+		hidden_effect = {
+			fleet = {
+				kill_leader = { class = scientist show_notification = no}
+			}
+			set_disabled = yes
+		}
+	}
+	option = {
+		name = honkai_cosmos.3.c
+		custom_tooltip = honkai_cosmos.3.c.txt
+		owner = {
 			hidden_effect = {
-				owner = { set_global_flag = yinheshangren }
+				change_variable = {
+					which = yuzhousuipian
+					value = -1000
+				}
+				random_common_curiosity_get = yes
 			}
-		}
-	}
-	option = {
-		name = honkai_anomaly.5.c
-	}
-}
-ship_event = {
-    id = honkai_anomaly.6
-	title = "honkai_anomaly.6.name"
-	desc = "honkai_anomaly.6.desc"
-	picture = GFX_evt_astral_rift_interdimensional_circus_2
-    is_triggered_only = yes
-    option = {
-		custom_tooltip = honkai_anomaly.6.a.desc
-		event_target:global_event_country = {
-			change_variable = { which = yuzhousuipian value = 2 }
-		}
-		allow = {
-			owner = {
-				resource_stockpile_compare = { resource = energy value >= 100 }
-			}
-		}
-		name = honkai_anomaly.6.a
-		owner = {
-			add_resource = { energy = -100 }
-			random_list = {
-				1= {add_resource = { yuzhousuipian = 200 }}
-				1= {add_resource = { yuzhousuipian = 400 }}
-			}
-			hidden_effect = { owner = { set_global_flag = yinheshangren2 } }
-		}
-	}
-	option = {
-		custom_tooltip = honkai_anomaly.6.b.desc
-		event_target:global_event_country = {
-			change_variable = { which = yuzhousuipian value = 2 }
-		}
-		allow = {
-			owner = {
-				resource_stockpile_compare = { resource = energy value >= 100 }
-			}
-		}
-		name = honkai_anomaly.6.b
-		owner = {
-			add_resource = { energy = -100 }
-			random_list = {
-				1= {add_resource = { energy = -200 }}
-				1= {add_resource = { alloys = 400 }}
-				1= {add_resource = { consumer_goods = 200 }}
-				1= {add_resource = { minerals = -200 }}
-			}
-			hidden_effect = { owner = { set_global_flag = yinheshangren2 } }
-		}
-	}
-	option = {
-		name = honkai_anomaly.6.c
-		custom_tooltip = honkai_anomaly.6.c.desc
-		event_target:global_event_country = {
-			change_variable = { which = yuzhousuipian value = 2 }
 		}
 	}
 }
 ship_event = {
-    id = honkai_anomaly.7
-	title = "honkai_anomaly.7.name"
-	desc = "honkai_anomaly.7.desc"
-	picture = GFX_evt_black_market
-    is_triggered_only = yes
-    option = {
-		custom_tooltip = honkai_anomaly.7.a.desc
-		event_target:global_event_country = {
-			change_variable = { which = yuzhousuipian value = 2 }
-		}
-		allow = {
+	id = honkai_cosmos.4
+	title = "honkai_cosmos.4.name"
+	desc = "honkai_cosmos.4.desc"
+	is_triggered_only = yes
+	diplomatic = yes
+	custom_gui = honkai_star_rail_event
+	picture_event_data = {   room = cosmos_2_room }
+	immediate = {
+		root.owner = {set_variable = { which = hsr_evt_moni value = 2 }}#1战斗2事件4奖励5商店
+	}
+	option = {
+		name = honkai_cosmos.4.a
+		custom_tooltip = honkai_cosmos.4.a.txt
+		hidden_effect = {
 			owner = {
-				resource_stockpile_compare = { resource = energy value >= 10 }
-			}
-		}
-		name = honkai_anomaly.7.a
-		owner = {
-			add_resource = { energy = -10 }
-			random_list = {
-				1= {add_resource = { yuzhousuipian = 750 }}
-				1= {add_resource = { yuzhousuipian = 1500 }}
+				change_variable = {
+					which = yuzhousuipian
+					value = 150
+				}
 			}
 		}
 	}
 	option = {
-		custom_tooltip = honkai_anomaly.7.b.desc
-		event_target:global_event_country = {
-			change_variable = { which = yuzhousuipian value = 2 }
-		}
-		allow = {
+		name = honkai_cosmos.4.b
+		custom_tooltip = honkai_cosmos.4.b.txt
+		hidden_effect = {
 			owner = {
-				resource_stockpile_compare = { resource = energy value >= 10 }
-			}
-		}
-		name = honkai_anomaly.7.b
-		owner = {
-			add_resource = { energy = -10 }
-			random_list = {
-				1= {add_resource = { energy = 2000 }}
-				1= {add_resource = { alloys = 300 }}
-				1= {add_resource = { consumer_goods = 300 }}
-				1= {add_resource = { minerals = 2000 }}
+				random_list = {
+					3 = {random_common_curiosity_get = yes}
+					2 = {random_rare_curiosity_get = yes}
+					1 = {random_epic_curiosity_get = yes}
+				}
 			}
 		}
 	}
 	option = {
-		name = honkai_anomaly.7.c
-		custom_tooltip = honkai_anomaly.7.c.desc
-		event_target:global_event_country = {
-			change_variable = { which = yuzhousuipian value = 2 }
+		name = honkai_cosmos.4.c
+		custom_tooltip = honkai_cosmos.4.c.txt
+		default_hide_option = yes
+	}
+}
+ship_event = {
+	id = honkai_cosmos.5
+	title = "honkai_cosmos.5.name"
+	desc = "honkai_cosmos.5.desc"
+	is_triggered_only = yes
+	diplomatic = yes
+	custom_gui = honkai_star_rail_event
+	picture_event_data = {   room = cosmos_2_room }
+	immediate = {
+		root.owner = {set_variable = { which = hsr_evt_moni value = 2 }}#1战斗2事件4奖励5商店
+	}
+	option = {
+		name = honkai_cosmos.5.a
+		custom_tooltip = honkai_cosmos.5.a.txt
+		hidden_effect = {
+			owner = {
+				change_variable = {
+					which = yuzhousuipian
+					value = 400
+				}
+			}
+			unassign_leader = this
+			destroy_ship = this
 		}
+	}
+	option = {
+		name = honkai_cosmos.5.b
+		custom_tooltip = honkai_cosmos.5.b.txt
+		hidden_effect = {
+			owner = {
+				random_list = {
+					3 = {random_common_curiosity_get = yes}
+					2 = {random_rare_curiosity_get = yes}
+					1 = {random_epic_curiosity_get = yes}
+				}
+			}
+		}
+	}
+	option = {
+		name = honkai_cosmos.5.c
+		custom_tooltip = honkai_cosmos.5.c.txt
+		trigger = {
+			root.owner = {
+				has_origin = origin_Herta_Space_Station
+			}
+		}
+		icon = {
+			icon = GFX_origin_Herta_Space_Station_small
+			text = origin_Herta_Space_Station
+		}
+		ai_chance = {
+			factor = 100
+		}
+		hidden_effect = {
+			owner = {
+				add_resource = { energy = 1000 }
+			}
+			leader = {add_experience = 300}
+		}
+	}
+	option = {
+		name = honkai_cosmos.5.d
+		custom_tooltip = honkai_cosmos.5.d.txt
+		default_hide_option = yes
+	}
+}
+ship_event = {
+	id = honkai_cosmos.6
+	title = "honkai_cosmos.6.name"
+	desc = "honkai_cosmos.6.desc"
+	is_triggered_only = yes
+	diplomatic = yes
+	custom_gui = honkai_star_rail_event
+	picture_event_data = {   room = cosmos_2_room }
+	immediate = {
+		root.owner = {set_variable = { which = hsr_evt_moni value = 2 }}#1战斗2事件4奖励5商店
+	}
+	option = {
+		name = honkai_cosmos.6.a
+		custom_tooltip = honkai_cosmos.6.a.txt
+		hidden_effect = {
+			owner = {
+				change_variable = {
+					which = yuzhousuipian
+					value = 400
+				}
+			}
+		}
+	}
+	option = {
+		name = honkai_cosmos.6.b
+		owner = {
+			add_modifier = {
+				modifier = honkai_cosmos.4_sm
+			}
+		}
+	}
+	option = {
+		name = honkai_cosmos.6.c
+		custom_tooltip = honkai_cosmos.6.c.txt
+		trigger = {
+			root.owner = {
+				has_origin = origin_Herta_Space_Station
+			}
+		}
+		icon = {
+			icon = GFX_origin_Herta_Space_Station_small
+			text = origin_Herta_Space_Station
+		}
+		ai_chance = {
+			factor = 100
+		}
+		owner = {
+			add_modifier = {
+				modifier = honkai_cosmos.4_sm
+			}
+		}
+		hidden_effect = {
+			owner = {
+				change_variable = {
+					which = yuzhousuipian
+					value = 400
+				}
+			}
+		}
+	}
+	option = {
+		name = honkai_cosmos.6.d
+		custom_tooltip = honkai_cosmos.6.d.txt
+		default_hide_option = yes
 	}
 }
