@@ -1,0 +1,287 @@
+tr_herta_discuss_adopt = { #采用巧思（黑塔）传统树效果
+    possible = {
+        has_ascension_perk = ap_herta_premote
+        has_origin = origin_Herta_Space_Station
+    }
+    modifier = {
+        planet_jobs_society_research_produces_add = 1
+        planet_jobs_physics_research_produces_add = 1
+        planet_jobs_engineering_research_produces_add = 1
+    }
+    on_enabled = {
+
+    }
+    unlocks_agenda = agenda_herta_discuss
+    custom_tooltip = tr_herta_discuss_adopt_desc
+}
+tr_herta_discuss_finish = { #w完成黑塔传统树
+    custom_tooltip = tr_herta_discuss_finish_desc
+    modifier = {
+        empire_size_penalty_mult = -0.10
+        tech_cost_empire_size_mult = -0.25
+        country_physics_research_produces_mult = 0.1
+        country_society_research_produces_mult = 0.1
+        country_engineering_research_produces_mult = 0.1
+        ascension_perks_add = 1
+    }
+}
+tr_herta_discuss_1 = {
+    possible = {
+        has_tradition = tr_herta_discuss_adopt
+    }
+    modifier = {
+        physics_tech_cost_mult = -0.1
+        num_tech_alternatives_add = 1
+        country_scientist_cap_add = 1
+        scientist_initial_skill = 1
+    }
+    tradition_swap = {
+        name = tr_herta_discuss_1_1
+        inherit_effects = no
+        inherit_icon = no
+        trigger = {
+            has_country_flag = tr_herta_select_ruamei_1
+        }
+        modifier = {
+            society_tech_cost_mult = -0.1
+            num_tech_alternatives_add = 1
+            country_scientist_cap_add = 1
+            scientist_initial_skill = 1
+        }
+        weight = {
+            factor = 1
+        }
+    }
+    tradition_swap = {
+        name = tr_herta_discuss_1_2
+        inherit_effects = no
+        inherit_icon = no
+        trigger = {
+            has_country_flag = tr_herta_select_luosi_1
+        }
+        modifier = {
+            engineering_tech_cost_mult = -0.1
+            num_tech_alternatives_add = 1
+            country_scientist_cap_add = 1
+            scientist_initial_skill = 1
+        }
+        weight = {
+            factor = 1
+        }
+    }
+    ai_weight = {
+        factor = 1000
+    }
+}
+#二：种族改造和同化
+tr_herta_discuss_2 = {
+    possible = {
+        has_tradition = tr_herta_discuss_1
+    }
+    custom_tooltip_with_modifiers = tr_cybernetics_modular_cybernetics_tt
+    modifier = {
+        modify_species_cost_mult = -0.50
+        BIOLOGICAL_species_trait_points_add = 3
+        BIOLOGICAL_species_trait_picks_add = 3
+    }
+    triggered_modifier = {
+        potential = { always = yes }
+        BIOLOGICAL_species_trait_points_add = 1
+        mult = modifier:ROBOT_species_trait_points_add
+    }
+    triggered_modifier = {
+        potential = { always = yes }
+        BIOLOGICAL_species_trait_picks_add = 1
+        mult = modifier:ROBOT_species_trait_picks_add
+    }
+    on_enabled = {
+        hidden_effect = {
+            country_event = { id = DOT_SR_Herta.100  days = 10}
+        }
+    }
+    tradition_swap = {
+        name = tr_herta_discuss_2_1
+        inherit_effects = no
+        inherit_icon =yes
+        trigger = {
+            has_country_flag = tr_herta_select_ruamei_2
+        }
+        modifier = {
+            modify_species_cost_mult = -0.50
+            BIOLOGICAL_species_trait_points_add = 7
+            BIOLOGICAL_species_trait_picks_add = 7
+        }
+        on_enabled = {
+
+        }
+        weight = {
+            factor = 1
+        }
+    }
+    tradition_swap = {
+        name = tr_herta_discuss_2_2
+        inherit_effects = no
+        inherit_icon = yes
+        trigger = {
+            has_country_flag = tr_herta_select_luosi_2
+        }
+        modifier = {
+            modify_species_cost_mult = -0.50
+            ROBOT_species_trait_picks_add = 7
+            ROBOT_species_trait_points_add = 7
+        }
+        weight = {
+            factor = 1
+        }
+    }
+    ai_weight = {
+        factor = 1000
+    }
+}
+tr_herta_discuss_3 = {
+    possible = {
+        has_tradition = tr_herta_discuss_1
+    }
+    modifier = {
+        physics_tech_cost_mult = -0.1
+        num_tech_alternatives_add = 1
+        country_scientist_cap_add = 1
+        scientist_initial_skill = 1
+    }
+    tradition_swap = {
+        name = tr_herta_discuss_3_1
+        inherit_effects = no
+        inherit_icon = no
+        trigger = {
+            has_country_flag = tr_herta_select_ruamei_1
+        }
+        modifier = {
+            society_tech_cost_mult = -0.1
+            num_tech_alternatives_add = 1
+            country_scientist_cap_add = 1
+            scientist_initial_skill = 1
+        }
+        weight = {
+            factor = 1
+        }
+    }
+    tradition_swap = {
+        name = tr_herta_discuss_3_2
+        inherit_effects = no
+        inherit_icon = no
+        trigger = {
+            has_country_flag = tr_herta_select_luosi_1
+        }
+        modifier = {
+            engineering_tech_cost_mult = -0.1
+            num_tech_alternatives_add = 1
+            country_scientist_cap_add = 1
+            scientist_initial_skill = 1
+        }
+        weight = {
+            factor = 1
+        }
+    }
+    ai_weight = {
+        factor = 1000
+    }
+}
+tr_herta_discuss_4 = {
+    possible = {
+        has_tradition = tr_herta_discuss_adopt
+    }
+    modifier = {
+        physics_tech_cost_mult = -0.1
+        num_tech_alternatives_add = 1
+        country_scientist_cap_add = 1
+        scientist_initial_skill = 1
+    }
+    tradition_swap = {
+        name = tr_herta_discuss_4_1
+        inherit_effects = no
+        inherit_icon = no
+        trigger = {
+            has_country_flag = tr_herta_select_ruamei_1
+        }
+        modifier = {
+            society_tech_cost_mult = -0.1
+            num_tech_alternatives_add = 1
+            country_scientist_cap_add = 1
+            scientist_initial_skill = 1
+        }
+        weight = {
+            factor = 1
+        }
+    }
+    tradition_swap = {
+        name = tr_herta_discuss_4_2
+        inherit_effects = no
+        inherit_icon = no
+        trigger = {
+            has_country_flag = tr_herta_select_luosi_1
+        }
+        modifier = {
+            engineering_tech_cost_mult = -0.1
+            num_tech_alternatives_add = 1
+            country_scientist_cap_add = 1
+            scientist_initial_skill = 1
+        }
+        weight = {
+            factor = 1
+        }
+    }
+    ai_weight = {
+        factor = 1000
+    }
+}
+tr_herta_discuss_5 = {
+    possible = {
+        has_tradition = tr_herta_discuss_adopt
+    }
+    modifier = {
+        physics_tech_cost_mult = -0.1
+        num_tech_alternatives_add = 1
+        country_scientist_cap_add = 1
+        scientist_initial_skill = 1
+    }
+    tradition_swap = {
+        name = tr_herta_discuss_5_1
+        inherit_effects = no
+        inherit_icon = no
+        trigger = {
+            has_country_flag = tr_herta_select_ruamei_1
+        }
+        modifier = {
+            society_tech_cost_mult = -0.1
+            num_tech_alternatives_add = 1
+            country_scientist_cap_add = 1
+            scientist_initial_skill = 1
+        }
+        weight = {
+            factor = 1
+        }
+    }
+    tradition_swap = {
+        name = tr_herta_discuss_5_2
+        inherit_effects = no
+        inherit_icon = no
+        trigger = {
+            has_country_flag = tr_herta_select_luosi_1
+        }
+        modifier = {
+            engineering_tech_cost_mult = -0.1
+            num_tech_alternatives_add = 1
+            country_scientist_cap_add = 1
+            scientist_initial_skill = 1
+        }
+        weight = {
+            factor = 1
+        }
+    }
+    ai_weight = {
+        factor = 1000
+    }
+}
+#三：星球建造
+#四：专属特质
+#五：专属建筑

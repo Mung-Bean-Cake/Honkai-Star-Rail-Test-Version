@@ -161,3 +161,61 @@ create_xianzhou_npc_effect = {
 		owner_species = { set_species_homeworld = prevprev }
 	}
 }
+create_herta_cybernetic_species_mod = {
+    species = {
+        modify_species = {
+            effect = {
+                create_species = {
+                    is_mod = yes
+                    name = this
+                    plural = this
+                    class = this
+                    portrait = this
+                    traits = this
+                    can_be_modified = this
+                    homeworld = this
+                    namelist = this
+                    gender = this
+                    traits = {
+                        ideal_planet_class = this
+                        trait = trait_herta_pop_up_t1
+                    }
+                }
+            }
+        }
+        save_event_target_as = changing_species
+    }
+
+    owner = {
+        every_owned_pop_group = {
+            limit = { is_exact_same_species = event_target:changing_species }
+            change_species = last_created_species
+        }
+        every_owned_leader = {
+            limit = { is_exact_same_species = event_target:changing_species }
+            change_species = last_created_species
+        }
+        every_pool_leader = {
+            limit = { is_exact_same_species = event_target:changing_species }
+            change_species = last_created_species
+        }
+        every_envoy = {
+            limit = { is_exact_same_species = event_target:changing_species }
+            change_species = last_created_species
+        }
+        every_owned_army = {
+            limit = {
+                exists = species
+                is_exact_same_species = event_target:changing_species
+            }
+            change_species = last_created_species
+        }
+        every_controlled_ship = {
+            limit = {
+                is_ship_class = shipclass_colonizer
+                is_exact_same_species = event_target:changing_species
+            }
+            change_species = last_created_species
+        }
+    }
+}

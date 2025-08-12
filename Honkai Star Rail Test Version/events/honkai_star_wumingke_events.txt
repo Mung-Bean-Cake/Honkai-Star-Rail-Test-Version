@@ -1,0 +1,329 @@
+namespace = hsr_wmk
+#这组事件是制作飞地的核心事件，各位也是从这里延申出各自的内容的
+#为了参考这个制作出新的飞地，建议是复制该文件，更改*文件名*及*namespace*，然后在*on_action*内添加对应的事件。
+#请无比测试确保内容成功运行再投稿，因为......不想坑害新管理（）
+
+####################################################################################
+#飞地的生成：开局随机在整个银河生成
+####################################################################################
+event = {
+    id = hsr_wmk.1
+    hide_window = yes
+    is_triggered_only = yes	#在开局事件的*触发器*触发，即on_game_start
+    immediate = {
+        ##################################################
+        #在创建国家前需要先创建种族
+        ##################################################
+        create_species = {
+            name = "NAME_wmk_species"			#种族名字
+            plural = NAME_wmk_species_plural			#种族复数
+            class = random_non_machine			#种族小类：即爬行，鸟类，软体...
+            portrait = jizi			#肖像
+            traits = {
+                #特质
+                ideal_planet_class = pc_habitat
+            }
+        }
+        ##################################################
+        #创建国家
+        ##################################################
+        create_country = {
+            name = "NAME_wmk_country"			#国家名称，很重要
+            type = wmk_enclave			#指定country_type，不会的就不要动了
+            authority = "auth_democratic"			#政体
+            civics = {
+                #民政
+            }
+            origin = "origin_default"			#默认起源，这个不用管，玩家根本看不到飞地起源是啥
+            species = last_created_species			#设定种族，上面已经写好了，这一行不要动。
+            flag = {
+                #设定飞地旗帜，下边的自己搞吧
+                icon = {
+                    category = "enclaves"
+                    file = "DOT_SR_01.dds"
+                }
+                background = {
+                    category = "backgrounds"
+                    file = "double_hemispheres.dds"
+                }
+                colors = {
+                    "blue"
+                    "dark_blue"
+                    "null"
+                    "null"
+                }
+            }
+            ethos = {
+                #思潮
+                ethic = ethic_xenophile
+                ethic = ethic_materialist
+                ethic = ethic_egalitarian
+            }
+            ignore_initial_colony_error = yes
+            effect = {
+                ############################################################################
+                #重要！！！！这个flag⭐国家标签⭐决定了你这个国家到底是谁，一定要改！
+                set_country_flag = wmk_default_enclave_country
+                save_global_event_target_as = wmk_country
+                ############################################################################
+                set_graphical_culture = npf_01					#默认的graphical_culture，不太需要动
+            }
+        }
+        ##################################################
+        #生成所有的空间站
+        ##################################################
+        spawn_system = {
+            initializer = kaituo_system_initializer
+        }
+        while = {
+            count = 1	#总生成的个数
+            random_system = {
+                #随机某个星系
+                limit = {
+                    #要求
+                    NOR = {
+                        exists = owner					#未被占据
+                        has_star_flag = hostile_system					#避免原版的利维坦
+                        has_star_flag = wmk_enclave_system			#避免多个空间站生成在同一个星系
+                    }
+                }
+                spawn_system = {
+                    initializer = kaituo_system_initializer
+                    min_distance = 5
+                    max_distance = 10
+                    max_jumps = 0
+                    effect = {
+                        set_star_flag = wmk_enclave_system
+                        random_system_planet = {
+                            #星系内随机星球
+                            set_planet_flag = wmk_enclave_planet				#一个标记，暂时没有实际作用，但别删
+                            change_pc = pc_city
+                            set_owner = event_target:wmk_country
+                            ##################################################
+                            #生成空间站
+                            ##################################################
+                            last_created_country = {
+                                #以下为生成空间站
+                                create_fleet = {
+                                    name = "NAME_wmk_enclave_Station"						#空间站舰队名称
+                                    settings = {
+                                        spawn_debris = no							#舰船是否生成残骸可供逆向
+                                    }
+                                    effect = {
+                                        set_owner = prev
+                                        create_ship = {
+                                            name = random
+                                            ############################################################################
+                                            design = NAME_wmk_Enclave_Station								#空间站舰船设计，这里为默认，如果你想添加新的，自己参考着写。
+                                            ############################################################################
+                                            graphical_culture = npf_01
+                                        }
+                                        set_location = {
+                                            #设定空间站位置，不要改
+                                            target = prevprev
+                                            distance = 90
+                                        }
+                                        save_event_target_as = wmk_CustomCapital
+                                        prev = {
+                                            set_custom_capital_location = event_target:wmk_CustomCapital
+                                        }
+                                        set_fleet_flag = wmk_enclave_station							#通用标记，不要改
+                                        ############################################################################
+                                        set_fleet_flag = wmk_default_enclave_station							#标记出这是你的策展人空间站，你可以更改标记来方便调用
+                                        ############################################################################
+                                    }
+                                }
+                                create_fleet = {
+                                    name = "NAME_wmk_Enclave_fleet"
+                                    settings = {
+                                        spawn_debris = no							#舰船是否生成残骸可供逆向
+                                    }
+                                    effect = {
+                                        set_owner = prev
+                                        create_ship = {
+                                            name = NAME_wmk_Enclave_fleet
+                                            ############################################################################
+                                            design = NAME_wmk_Enclave_fleet								#空间站舰船设计，这里为默认，如果你想添加新的，自己参考着写。
+                                            ############################################################################
+                                            graphical_culture = npf_01
+                                        }
+                                        set_location = {
+                                            #设定空间站位置，不要改
+                                            target = prevprev
+                                            distance = 140
+                                        }
+                                        save_event_target_as = wmk_Enclave_fleet
+                                        prev = {
+                                            set_custom_capital_location = event_target:wmk_Enclave_fleet
+                                        }
+                                        set_fleet_flag = wmk_Enclave_fleet							#通用标记，不要改
+                                        ############################################################################
+                                        set_fleet_flag = wmk_default_Enclave_fleetn							#标记出这是你的策展人空间站，你可以更改标记来方便调用
+                                        ############################################################################
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        ##################################################
+        #创建领袖，ruler
+        ##################################################
+        last_created_country = {
+            create_leader = {
+                #生成领袖
+                class = scientist
+                species = this				#领袖种族
+                name = jizi				#领袖名字（当前为随机）
+                skill = 5
+            }
+            set_leader = last_created_leader			#使刚刚创建的领袖成为统治者
+        }
+    }
+}
+
+####################################################################################
+#飞地和我们建立通讯————在飞地进入我方探测器范围内时
+####################################################################################
+country_event = {
+    id = hsr_wmk.2
+    title = hsr_wmk.2.title	#事件标题
+    desc = hsr_wmk.2.desc		#事件文本
+    diplomatic = yes
+    picture_event_data = {
+        portrait = from.owner
+        room = enclave_curator_room
+    }
+
+
+    is_triggered_only = yes	#在舰队被探测到的*触发器*触发，即on_fleet_detected，from即探测到的舰队
+    trigger = {
+        from = {
+            owner = {
+                has_country_flag = hsr_wmk_default_enclave_country	#判断探测到的舰队所属国家，通过之前设立的country_flag
+                NOT = {
+                    has_communications = root	#尚未和我方建立联系
+                }
+            }
+        }
+    }
+    immediate = {
+        establish_communications_no_message = from.owner	#与探测到的舰队所有者建交
+    }
+    option = {
+        name = hsr_wmk.2.a	#选项
+        from= {
+            owner = {
+                add_monthly_resource_mult = {
+                    resource = unity
+                    value = @tier1materialreward
+                    min = @tier1materialmin
+                    max = @tier1materialmax
+                }
+            }
+        }
+    }
+}
+
+####################################################################################
+#在通讯界面打开飞地菜单
+####################################################################################
+#引入事件：在点击国家图标时触发
+country_event = {
+    id = hsr_wmk.3
+    is_triggered_only = yes		#在点击国家图标的*触发器*触发，即on_custom_diplomacy，from即图标对应国家
+    hide_window = yes
+
+
+    trigger = {
+        from = {
+            has_country_flag = hsr_wmk_default_enclave_country	#判断对应国家，通过之前设立的country_flag⭐国家标签⭐
+        }
+    }
+
+    immediate = {
+        from = {
+            save_event_target_as = hsr_wmk_contacting_country	#将from存为event_target
+        }
+        country_event = {
+            id = hsr_wmk.300	#触发正式的菜单事件
+        }
+    }
+}
+##################################################
+#飞地菜单
+#算是核心事件，通过该事件开始，实现你想要实现的各种乱七八糟的功能
+##################################################
+country_event = {
+    id = hsr_wmk.300
+    title = hsr_wmk.300.title	#事件标题
+    #多个desc可以是该事件文本随机挑一个显示，更生动（可选）
+    desc = hsr_wmk.300.desc	#事件文本
+    desc = hsr_wmk.300.desc2	#事件文本2
+    desc = hsr_wmk.300.desc3	#事件文本3
+    is_triggered_only = yes		#通过引入事件触发
+    diplomatic = yes
+
+    picture_event_data = {
+        portrait = event_target:hsr_wmk_contacting_country
+        room = enclave_curator_room
+    }
+
+
+    immediate = {
+
+    }
+
+    option = {
+        name = hsr_wmk.300.a	#选项1
+    }
+    option = {
+        name = hsr_wmk.300.b	#选项2
+        #关于提升好感
+        #对于country_type中定义custom_opinion = yes的国家，可以用add_trust来调整国家好感。
+        event_target:hsr_wmk_contacting_country = {	#刚刚存的target
+            add_trust = {	#提高信任（在此处则代表好感）
+                amount = 22	#提高数值
+                who = root	#目标：root即查看菜单中的国家，即玩家。
+            }
+        }
+    }
+}
+
+
+####################################################################################
+#飞地空间站被消灭
+#这个事件并没有做什么敌对减少信任的事件，所以，嗯，你们自学罢
+#这个事件在飞地空间站被消灭时触发
+####################################################################################
+country_event = {
+    id = hsr_wmk.4
+    title = hsr_wmk.4.title	#事件标题
+    desc = hsr_wmk.4.desc		#事件文本
+    picture = GFX_evt_small_space_battle	#事件插图
+
+    is_triggered_only = yes		#通过舰队被摧毁的*触发器*触发，即on_fleet_destroyed_perp，from即被摧毁舰队的所有者，fromfromfrom即被摧毁舰队
+    trigger = {
+        from = {	#遇害舰队的所有者
+            has_country_flag = hsr_wmk_default_enclave_country	#拥有你的⭐国家标签⭐
+        }
+        fromfromfrom = {	#遇害舰队
+            has_fleet_flag = hsr_wmk_default_enclave_station	#拥有你的飞地空间站标签
+        }
+    }
+
+    option = {
+        name = hsr_wmk.4.a	#事件选项
+    }
+}
+
+##################################################################################################################
+
+##################################################################################################################
+#其它小贴士
+#政府（government）可以随着⭐国家标签⭐改变，这一点请参考common的government文件夹
+#乱七八糟的政体，民政都对这个政府没啥影响，而特质完全就是做着好看，除非你需要刷出人口
+#建立联系也可以使用别的方式————比如使用进入星系的触发器，自己改罢
+#没了。

@@ -67,9 +67,15 @@ country_event = {#奇物永不停嘴的羊皮卷被动效果
         OR = {
             this = {
                 has_specimen = sheepskin_scroll
+                NOT = {
+                    has_country_flag = sheepskin_scroll_work
+                }
             }
             from = {
                 has_specimen = sheepskin_scroll
+                NOT = {
+                    has_country_flag = sheepskin_scroll_work
+                }
             }
         }
     }
@@ -79,20 +85,38 @@ country_event = {#奇物永不停嘴的羊皮卷被动效果
             limit = {
                 from = {
                     has_specimen = sheepskin_scroll
+                    NOT = {
+                        has_country_flag = sheepskin_scroll_work
+                    }
                 }
             }
             fromfrom = {
                 repair_percentage = -0.3
+            }
+            from = {
+                set_timed_country_flag = {
+                    flag = sheepskin_scroll_work
+                    days = 60
+                }
             }
         }
         else_if = {
             limit = {
                 this = {
                     has_specimen = sheepskin_scroll
+                    NOT = {
+                        has_country_flag = sheepskin_scroll_work
+                    }
                 }
             }
             fromfromfrom = {
                 repair_percentage = -0.3
+            }
+            this = {
+                set_timed_country_flag = {
+                    flag = sheepskin_scroll_work
+                    days = 60
+                }
             }
         }
     }
@@ -204,6 +228,7 @@ country_event = {
         FROMFROM = {
             exists = owner
             owner = {
+                is_ai = no
                 any_owned_leader = {
                     is_councilor = yes
                     has_trait = leader_daherta_t3
@@ -272,6 +297,246 @@ country_event = {
                     }
                 }
             }
+        }
+    }
+}
+country_event = {	#黑塔
+    id = hsr_on.1002
+    is_triggered_only = yes
+    hide_window = yes
+    trigger = {}
+    immediate = {
+        if = {
+            limit = {
+                any_owned_leader = {
+                    is_councilor = yes
+                    has_trait = leader_herta_t2
+                }
+            }
+            owner = {
+                if = {
+                    limit = {
+                        any_owned_leader = {
+                            is_councilor = yes
+                            has_leader_flag = daheita
+                        }
+                    }
+                    random_owned_planet = {
+                        limit = {
+                            is_colony = yes
+                            NOT = {
+                                is_planet_class = pc_cosmogenesis_world
+                            }
+                        }
+                        create_pop_group = {
+                            size = 20
+                            species = event_target:heita_robot_species
+                        }
+                    }
+                }
+                else = {
+                    random_owned_planet = {
+                        limit = {
+                            is_colony = yes
+                            NOT = {
+                                is_planet_class = pc_cosmogenesis_world
+                            }
+                        }
+                        create_pop_group = {
+                            size = 10
+                            species = event_target:heita_robot_species
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+ship_event = {	#艾丝妲,星系探索计数器
+    id = hsr_on.1003
+    is_triggered_only = yes
+    hide_window = yes
+    trigger = {
+        exists = owner
+        owner = {
+            any_owned_leader = {
+                has_trait = leader_aisida_t1
+            }
+        }
+    }
+    immediate = {
+        owner = {
+            change_variable = {
+                which = meteor_storm
+                value = 1
+            }
+        }
+    }
+}
+fleet_event = {	#艾丝妲,遗址探索计数器
+    id = hsr_on.1004
+    is_triggered_only = yes
+    hide_window = yes
+    trigger = {
+        exists = owner
+        owner = {
+            any_owned_leader = {
+                has_trait = leader_aisida_t1
+            }
+        }
+    }
+    immediate = {
+        owner = {
+            change_variable = {
+                which = meteor_storm
+                value = 1
+            }
+        }
+    }
+}
+country_event = {	#艾丝妲,裂隙探索计数器
+    id = hsr_on.1005
+    is_triggered_only = yes
+    hide_window = yes
+    trigger = {
+        any_owned_leader = {
+            has_trait = leader_aisida_t1
+        }
+    }
+    immediate = {
+        change_variable = {
+            which = meteor_storm
+            value = 1
+        }
+    }
+}
+country_event = {#阿兰
+    id = hsr_on.1006
+    is_triggered_only = yes
+    hide_window = yes
+
+    trigger = {
+        OR = {
+            fromfrom = {
+                exists = leader
+                leader = {
+                    has_leader_flag = alan
+                }
+                NOT = {
+                    has_fleet_flag = leader_trait_alan_fleet_flag
+                }
+            }
+            fromfromfrom = {
+                exists = leader
+                leader = {
+                    has_leader_flag = alan
+                }
+                NOT = {
+                    has_fleet_flag = leader_trait_alan_fleet_flag
+                }
+            }
+        }
+    }
+
+    immediate = {
+        if = {
+            limit = {
+                fromfrom = {
+                    exists = leader
+                    leader = {
+                        has_leader_flag = alan
+                    }
+                }
+            }
+            fromfrom = {
+                if = {
+                    limit = {
+                        leader = {
+                            has_leader_flag = alan
+                        }
+                    }
+                    reduce_hp_percent = 0.2
+                    add_modifier = {
+                        modifier = alan_battle
+                        days = 20
+                    }
+                    set_timed_fleet_flag = {
+                        flag = leader_trait_alan_fleet_flag
+                        days = 60
+                    }
+                }
+            }
+            fromfromfrom = {
+                reduce_shield = 1000000
+                reduce_hp_percent = 0.2
+            }
+        }
+        else_if = {
+            limit = {
+                fromfromfrom = {
+                    exists = leader
+                    leader = {
+                        has_leader_flag = alan
+                    }
+                }
+            }
+            fromfromfrom = {
+                if = {
+                    limit = {
+                        leader = {
+                            has_leader_flag = alan
+                        }
+                    }
+                    reduce_hp_percent = 0.2
+                    add_modifier = {
+                        modifier = alan_battle
+                        days = 20
+                    }
+                    set_timed_fleet_flag = {
+                        flag = leader_trait_alan_fleet_flag
+                        days = 60
+                    }
+                }
+            }
+            fromfrom= {
+                reduce_shield = 1000000
+                reduce_hp_percent = 0.2
+            }
+
+        }
+    }
+}
+ship_event = {#阮梅
+    id = hsr_on.1007
+    is_triggered_only = yes
+    hide_window = yes
+
+    trigger = {
+        OR = {
+            exists = from
+            from.leader = {
+                has_trait = leader_ruanmei_t2
+            }
+        }
+    }
+
+    immediate = {
+        ruanmei_capture_effect = yes
+    }
+}
+planet_event = {#阮梅
+    id = hsr_on.1008
+    title = hsr_on.1008.title
+    desc = hsr_on.1008.desc
+    picture = GFX_evt_circuitry_modification
+    is_triggered_only = yes
+    trigger = {
+
+    }
+    option = {
+        name = INTERESTING
+        hidden_effect = {
+            ruanmei_planet_effect = yes
         }
     }
 }

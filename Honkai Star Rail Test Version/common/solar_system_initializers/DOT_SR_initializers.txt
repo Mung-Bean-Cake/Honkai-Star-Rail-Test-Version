@@ -82,23 +82,7 @@ DOT_SR_system_02 = {
 		}
 		change_orbit = @base_moon_distance
 
-		moon = {
-			name = "NAME_herta"
-			class = "pc_habitat"
-			size = 6
-			orbit_distance = 20
-			orbit_angle = 70
-			flags = { herta_habitat megastructure habitat }
-			deposit_blockers = none
-			init_effect = {
-				set_planet_flag = habitat
-				set_planet_flag = habitat_level_1
-				set_planet_entity = {
-					entity = "habitat_phase_01_entity"
-					graphical_culture = owner
-				}
-			}
-		}
+
 	}
 	asteroid_belt = {
 		type = rocky_asteroid_belt
@@ -1037,5 +1021,181 @@ yaliluo_system_initializer = {
 		  initializer = "neighbor_t1_first_colony"
 	  }
   }
+kaituo_system_initializer = {
+	name = "NAME_kaituo_core"
+	class = "sc_g"
+	init_effect = {
+
+	}
+	flags = {
+
+	}
+	usage = misc_system_init
+	planet = {
+		name = "NAME_kaituo_core"
+		class = "pc_g_star"
+		orbit_distance = 0
+		orbit_angle = 1
+		size = 30
+		has_ring = no
+		init_effect = {
+			clear_deposits = yes
+			add_deposit = d_energy_2
+		}
+	}
+	change_orbit = 50
+	planet = {
+		count = { min = 1 max = 3 }
+		class = pc_asteroid
+		orbit_distance = 0
+		orbit_angle = { min = 40 max = 100 }
+		init_effect = {
+			clear_deposits = yes
+			add_deposit = d_minerals_1
+		}
+	}
+	planet = {
+		count = { min = 0 max = 2 }
+		orbit_distance = 20
+		class = pc_crystal_asteroid
+		orbit_angle = { min = 90 max = 270 }
+
+		change_orbit = @base_moon_distance
+
+		moon = {
+			count = { min = 0 max = 1 }
+			class = pc_rare_crystal_asteroid
+			orbit_angle = { min = 90 max = 270 }
+			orbit_distance = 5
+		}
+	}
+	planet = {
+		orbit_distance = 70
+		home_planet = yes
+		name = "NAME_kaituo_1"
+		class = "pc_gaia"
+		orbit_angle = { min = 90 max = 270 }
+		size = 18
+		deposit_blockers = none
+		modifiers = none
+		has_ring = no
+		flags = {
+			kaituo
+		}
+		init_effect = {
+
+		}
+		change_orbit = @base_moon_distance
+
+		moon = {
+			name = "NAME_kaituo_2"
+			class = "pc_barren_cold"
+			size = 5
+			orbit_distance = 12
+			orbit_angle = 40
+			has_ring = no
+			entity = "cold_barren_planet_luna_entity"
+		}
+	}
+	asteroid_belt = {
+		type = rocky_asteroid_belt
+		radius = 220
+	}
+	planet = {
+		name = "NAME_kaituo_3"
+		orbit_distance = 30
+		size = 30
+		class = pc_gas_giant
+		has_ring = yes
+		orbit_angle = {
+			min = 90
+			max = 270
+		}
+		flags = {
+
+		}
+		init_effect = {
+			clear_deposits = yes
+			add_deposit = d_physics_2
+		}
+		change_orbit = @base_moon_distance
+	}
+	planet = {
+		name = "NAME_kaituo_4"
+		orbit_distance = 40
+		size = 15
+		class = pc_barren_cold
+		has_ring = yes
+		orbit_angle = {
+			min = 90
+			max = 270
+		}
+		flags = {
+
+		}
+		init_effect = {
+			clear_deposits = yes
+			add_deposit = d_energy_2
+		}
+		change_orbit = @base_moon_distance
+	}
+	planet = {
+		name = "NAME_kaituo_5"
+		orbit_distance = 47
+		size = 23
+		class = pc_frozen
+		has_ring = no
+		orbit_angle = {
+			min = 90
+			max = 270
+		}
+		flags = {
+
+		}
+		init_effect = {
+			clear_deposits = yes
+			add_deposit = d_engineering_2
+		}
+		change_orbit = @base_moon_distance
+	}
+	planet = {#天璇星
+		name = "NAME_kaituo_6"
+		orbit_distance = 23
+		size = 23
+		class = pc_barren_cold
+		has_ring = no
+		orbit_angle = {
+			min = 90
+			max = 270
+		}
+		flags = {
+
+		}
+		init_effect = {
+			clear_deposits = yes
+			add_deposit = d_engineering_1
+		}
+		change_orbit = @base_moon_distance
+	}
+	planet = {
+		name = "NAME_kaituo_7"
+		orbit_distance = 65
+		size = 15
+		class = pc_frozen
+		has_ring = no
+		orbit_angle = {
+			min = 90
+			max = 270
+		}
+		flags = {
+
+		}
+		init_effect = {
+			clear_deposits = yes
+			add_deposit = d_minerals_2
+		}
+		change_orbit = @base_moon_distance
+	}
+}
 
 

@@ -1,0 +1,95 @@
+#这是我们飞地的默认使用舰船种类，不要动，动了也没用
+wmk_enclave_station = {
+	is_space_object = yes
+	graphical_culture = { npf_01 }
+	graphical_culture = yes
+	max_speed = 0.0
+	acceleration = 0.0
+	rotation_speed = 0.10
+	modifier = {
+		ship_evasion_mult = -1
+		ship_armor_mult = 1.5
+		ship_shield_mult = 1.5
+		ship_fire_rate_mult = 1.5
+	}
+	max_hitpoints = 70000
+	combat_size_multiplier = 20
+	size_multiplier = 8
+	fleet_slot_size = 4
+	section_slots = { "mid" = { locator = root } }
+	num_target_locators = 8
+	is_space_station = yes
+	build_block_radius = @build_block_radius_civilian
+	icon = ship_size_military_station
+
+	class = shipclass_military_station
+	is_designable = no
+}
+wmk_fleet = {
+	entity = Astral_Express_fleet_entity
+	is_space_object = yes
+	graphical_culture = no
+	max_speed = 100
+	acceleration = 0.55
+	rotation_speed = 0.1
+	collision_radius = 32
+	formation_priority = 32
+	max_hitpoints = 50000
+	modifier = {
+		ship_evasion_add = 100
+		ship_armor_add = 50000
+		ship_shield_add = 50000
+		ship_accuracy_add = 100
+	}
+	auto_upgrade = yes
+	ship_modifier ={
+		ship_hull_damage_mult = 0.1
+		weapon_type_energy_weapon_damage_mult = 0.1
+		weapon_type_energy_weapon_fire_rate_mult = 0.1
+		weapon_type_point_defense_weapon_fire_rate_mult = 0.1
+		weapon_role_point_defense_weapon_damage_mult = 0.1
+		weapon_type_kinetic_weapon_fire_rate_mult = 0.1
+		weapon_type_kinetic_weapon_damage_mult = 0.1
+		ship_damage_reduction_mult = 0.9
+	}
+	potential_country = {
+		always = yes
+	}
+	combat_size_multiplier = 20
+	size_multiplier = 20
+	fleet_slot_size = 20
+	section_slots = {
+		#"bow" = { locator = "part1" }
+		"west" = { locator = "Root" }
+		#"stern" =	{ locator = "part1" }
+	}
+	ship_roles = { screen brawler gunship artillery explosive energy_torpedoes }
+	num_target_locators = 0
+	combat_disengage_chance = 0.0
+	base_buildtime = 10
+	construction_type = starbase_shipyard
+	possible_construction = { always = no }
+	is_space_station = no
+	icon = ship_size_military_32
+
+	required_component_set = "power_core"
+	required_component_set = "thruster_components"
+	required_component_set = "ftl_components"
+	required_component_set = "sensor_components"
+	required_component_set = combat_computers
+
+	#class = shipclass_starbase
+	class = shipclass_military
+	is_designable = no
+	enable_default_design = no
+
+	resources = {
+		category = ships
+		cost = {
+			alloys = 3
+		}
+		upkeep = {
+			energy = 10
+		}
+	}
+}

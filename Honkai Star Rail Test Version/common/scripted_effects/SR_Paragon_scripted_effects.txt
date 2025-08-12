@@ -137,13 +137,13 @@ ui_leader_get_trait = {
 	}
 	change_variable = {
 		which = yuzhousuipian
-		value = -500
+		value = -1500
 	}
 	if = {
 		limit = { has_specimen = faith_bond }
 		change_variable = {
 			which = yuzhousuipian
-			value = 150
+			value = 250
 		}
 	}
 }
@@ -157,6 +157,259 @@ ui_leader_get_other_skill = {
 		change_variable = {
 			which = $LEADER_SKILL$
 			value = 1
+		}
+	}
+}
+ruanmei_capture_effect = {
+	optimize_memory
+	random_list = {
+		400 = {
+			from = {
+				controller = {
+					every_owned_leader = {
+						limit = { leader_class = scientist }
+						add_experience = 100 }
+				}
+			}
+		}
+		300 = {
+			from.owner = {
+				create_fleet = {
+					name = "NAME_Space_Amoeba_plural"
+					effect = {
+						random_list = {
+							1 = { create_ship = { name = "NAME_Space_Amoeba_plural" design = "NAME_Great_Space_Organism" } }
+							1 = { create_ship = { name = "NAME_Space_Amoeba_plural" design = "NAME_Large_Space_Organism_Blue" } }
+							1 = { create_ship = { name = "NAME_Space_Amoeba_plural" design = "NAME_Large_Space_Organism_Teal" } }
+							1 = { create_ship = { name = "NAME_Space_Amoeba_plural" design = "NAME_Large_Space_Organism_Orange" } }
+							1 = { create_ship = { name = "NAME_Space_Amoeba_plural" design = "NAME_Large_Space_Organism_Zebra" } }
+						}
+						set_owner = from.owner
+						set_location = from.owner.capital_star
+						set_fleet_stance = aggressive
+						set_aggro_range_measure_from = return_point
+						set_aggro_range = 20
+
+					}
+				}
+			}
+		}
+		20 = {
+			from.owner = {
+				create_fleet = {
+					name = "NAME_CHARGER_1"
+					effect = {
+						random_list = {
+							1 = { create_ship = { name = "NAME_HIVE_FE_Small_Weaver_War" design = "NAME_HIVE_FE_Small_Weaver_War" } }
+							1 = { create_ship = { name = "NAME_HIVE_FE_Small_Weaver_Growth" design = "NAME_HIVE_FE_Small_Weaver_Growth" } }
+							1 = { create_ship = { name = "NAME_HIVE_FE_Small_Weaver_Control" design = "NAME_HIVE_FE_Small_Weaver_Control" } }
+							1 = { create_ship = { name = "NAME_HIVE_FE_Large_Mauler_Swarm" design = "NAME_HIVE_FE_Large_Mauler_Swarm" } }
+							1 = { create_ship = { name = "NAME_HIVE_FE_Large_Mauler_Picket" design = "NAME_HIVE_FE_Large_Mauler_Picket" } }
+							1 = { create_ship = { name = "NAME_HIVE_FE_Large_Weaver_Control" design = "NAME_HIVE_FE_Large_Weaver_Control" } }
+							1 = { create_ship = { name = "NAME_HIVE_FE_Large_Stinger" design = "NAME_HIVE_FE_Large_Stinger" } }
+							1 = { create_ship = { name = "NAME_HIVE_FE_Large_Mauler_Picket" design = "NAME_HIVE_FE_Large_Mauler_Picket" } }
+							1 = { create_ship = { name = "NAME_HIVE_FE_Large_Mauler_Picket" design = "NAME_HIVE_FE_Large_Mauler_Picket" } }
+							1 = { create_ship = { name = "NAME_HIVE_FE_Large_Mauler_Picket" design = "NAME_HIVE_FE_Large_Mauler_Picket" } }
+						}
+						set_owner = from.owner
+						set_location = from.owner.capital_star
+						set_fleet_stance = aggressive
+						set_aggro_range_measure_from = return_point
+						set_aggro_range = 20
+					}
+				}
+			}
+		}
+		5 = {
+			from.owner = {
+				create_fleet = {
+					name = "NAME_Grand_Dragon"
+					effect = {
+						random_list = {
+							1 = { create_ship = { name = "NAME_Shard_Dragon" design = "NAME_Shard_Dragon" } }
+							1 = { create_ship = { name = "NAME_Sky_Dragon" design = "NAME_Sky_Dragon" } }
+							1 = { create_ship = { name = "NAME_Grand_Dragon" design = "NAME_Grand_Dragon" } }
+						}
+						set_owner = from.owner
+						set_location = from.owner.capital_star
+						set_fleet_stance = aggressive
+						set_aggro_range_measure_from = return_point
+						set_aggro_range = 20
+					}
+				}
+			}
+		}
+		100 = {
+			from.owner = {
+				create_fleet = {
+					name = "NAME_Tiyanki_Ox_Clonable"
+					effect = {
+						create_ship = { name = "NAME_Tiyanki_Ox_Clonable" design = "NAME_Tiyanki_Ox_Clonable" }
+						set_owner = from.owner
+						set_location = from.owner.capital_star
+						set_fleet_stance = aggressive
+						set_aggro_range_measure_from = return_point
+						set_aggro_range = 20
+					}
+				}
+			}
+		}
+		1 = {
+			from.owner = {
+				create_fleet = {
+					name = "NAME_Behemoth_ship"
+					effect = {
+						create_ship = { name = "NAME_Behemoth_04_cloaking" design = "NAME_Behemoth_04_cloaking" }
+						set_owner = from.owner
+						set_location = from.owner.capital_star
+						set_fleet_stance = aggressive
+						set_aggro_range_measure_from = return_point
+						set_aggro_range = 20
+					}
+				}
+			}
+		}
+	}
+}
+ruanmei_planet_effect = {
+	optimize_memory
+	random_list = {
+		400 = {
+			root.owner = {
+				every_owned_leader = {
+					remove_all_negative_traits = yes
+					add_experience = 700
+				}
+			}
+		}
+		400 = {
+			root = {
+				add_modifier = {
+					modifier = ruanmei_effect_t1
+					days = -1
+				}
+			}
+			root.owner = {
+				add_monthly_resource_mult = {
+					resource = society_research
+					value = @tier3researchreward
+					min = @tier3researchmin
+					max = @tier3researchmax
+				}
+			}
+		}
+		400 = {
+			root = {
+				add_modifier = {
+					modifier = ruanmei_effect_t2
+					days = -1
+				}
+			}
+			root.owner = {
+				add_monthly_resource_mult = {
+					resource = society_research
+					value = @tier3researchreward
+					min = @tier3researchmin
+					max = @tier3researchmax
+				}
+			}
+		}
+		300 = {
+			root.owner = {
+				create_fleet = {
+					name = "NAME_Space_Amoeba_plural"
+					effect = {
+						random_list = {
+							1 = { create_ship = { name = "NAME_Space_Amoeba_plural" design = "NAME_Great_Space_Organism" } }
+							1 = { create_ship = { name = "NAME_Space_Amoeba_plural" design = "NAME_Large_Space_Organism_Blue" } }
+							1 = { create_ship = { name = "NAME_Space_Amoeba_plural" design = "NAME_Large_Space_Organism_Teal" } }
+							1 = { create_ship = { name = "NAME_Space_Amoeba_plural" design = "NAME_Large_Space_Organism_Orange" } }
+							1 = { create_ship = { name = "NAME_Space_Amoeba_plural" design = "NAME_Large_Space_Organism_Zebra" } }
+						}
+						set_owner = root.owner
+						set_location = root
+						set_fleet_stance = aggressive
+						set_aggro_range_measure_from = return_point
+						set_aggro_range = 20
+
+					}
+				}
+			}
+		}
+		20 = {
+			root.owner = {
+				create_fleet = {
+					name = "NAME_CHARGER_1"
+					effect = {
+						random_list = {
+							1 = { create_ship = { name = "NAME_HIVE_FE_Small_Weaver_War" design = "NAME_HIVE_FE_Small_Weaver_War" } }
+							1 = { create_ship = { name = "NAME_HIVE_FE_Small_Weaver_Growth" design = "NAME_HIVE_FE_Small_Weaver_Growth" } }
+							1 = { create_ship = { name = "NAME_HIVE_FE_Small_Weaver_Control" design = "NAME_HIVE_FE_Small_Weaver_Control" } }
+							1 = { create_ship = { name = "NAME_HIVE_FE_Large_Mauler_Swarm" design = "NAME_HIVE_FE_Large_Mauler_Swarm" } }
+							1 = { create_ship = { name = "NAME_HIVE_FE_Large_Mauler_Picket" design = "NAME_HIVE_FE_Large_Mauler_Picket" } }
+							1 = { create_ship = { name = "NAME_HIVE_FE_Large_Weaver_Control" design = "NAME_HIVE_FE_Large_Weaver_Control" } }
+							1 = { create_ship = { name = "NAME_HIVE_FE_Large_Stinger" design = "NAME_HIVE_FE_Large_Stinger" } }
+							1 = { create_ship = { name = "NAME_HIVE_FE_Large_Mauler_Picket" design = "NAME_HIVE_FE_Large_Mauler_Picket" } }
+							1 = { create_ship = { name = "NAME_HIVE_FE_Large_Mauler_Picket" design = "NAME_HIVE_FE_Large_Mauler_Picket" } }
+							1 = { create_ship = { name = "NAME_HIVE_FE_Large_Mauler_Picket" design = "NAME_HIVE_FE_Large_Mauler_Picket" } }
+						}
+						set_owner = root.owner
+						set_location = root
+						set_fleet_stance = aggressive
+						set_aggro_range_measure_from = return_point
+						set_aggro_range = 20
+					}
+				}
+			}
+		}
+		5 = {
+			root.owner = {
+				create_fleet = {
+					name = "NAME_Grand_Dragon"
+					effect = {
+						random_list = {
+							1 = { create_ship = { name = "NAME_Shard_Dragon" design = "NAME_Shard_Dragon" } }
+							1 = { create_ship = { name = "NAME_Sky_Dragon" design = "NAME_Sky_Dragon" } }
+							1 = { create_ship = { name = "NAME_Grand_Dragon" design = "NAME_Grand_Dragon" } }
+						}
+						set_owner = root.owner
+						set_location = root
+						set_fleet_stance = aggressive
+						set_aggro_range_measure_from = return_point
+						set_aggro_range = 20
+					}
+				}
+			}
+		}
+		100 = {
+			root.owner = {
+				create_fleet = {
+					name = "NAME_Tiyanki_Ox_Clonable"
+					effect = {
+						create_ship = { name = "NAME_Tiyanki_Ox_Clonable" design = "NAME_Tiyanki_Ox_Clonable" }
+						set_owner = root.owner
+						set_location = root
+						set_fleet_stance = aggressive
+						set_aggro_range_measure_from = return_point
+						set_aggro_range = 20
+					}
+				}
+			}
+		}
+		1 = {
+			root.owner = {
+				create_fleet = {
+					name = "NAME_Behemoth_ship"
+					effect = {
+						create_ship = { name = "NAME_Behemoth_04_cloaking" design = "NAME_Behemoth_04_cloaking" }
+						set_owner = root.owner
+						set_location = root
+						set_fleet_stance = aggressive
+						set_aggro_range_measure_from = return_point
+						set_aggro_range = 20
+					}
+				}
+			}
 		}
 	}
 }

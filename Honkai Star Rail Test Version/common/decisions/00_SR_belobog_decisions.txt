@@ -275,3 +275,164 @@ decision_more_zaowuyinqing = {
 		weight = 0
 	}
 }
+decision_herta_remove_debuff = {
+	owned_planets_only = yes
+	icon = decision_divine_algorithm
+	enactment_time = 1000
+	resources = {
+		category = decisions
+		cost = {
+			energy = 500
+		}
+	}
+
+	potential = {
+		custom_tooltip = {
+			fail_text = d_herta_debuff_remove
+			has_planet_flag = herta_habitat
+			has_deposit = d_herta_debuff
+			from = {
+				has_country_flag = remove_herta_debuff_b
+			}
+		}
+	}
+
+	allow = {
+		custom_tooltip = {
+			fail_text = d_herta_debuff_remove
+			has_planet_flag = herta_habitat
+			has_deposit = d_herta_debuff
+			from = {
+				has_country_flag = remove_herta_debuff_b
+			}
+		}
+	}
+
+	effect = {
+		add_deposit = d_herta_3
+		hidden_effect = {
+			while = {
+				count = 5
+				remove_deposit = d_herta_debuff
+			}
+			this.owner = {
+				country_event = { id = DOT_SR_Herta.12 }
+			}
+		}
+	}
+
+	ai_weight = {
+		weight = 100
+	}
+}
+decision_herta_get_buff = {
+	owned_planets_only = yes
+	icon = decision_engineering_research
+	enactment_time = 1800
+	resources = {
+		category = decisions
+		cost = {
+			energy = 1000
+			alloys = 500
+		}
+	}
+
+	potential = {
+		custom_tooltip = {
+			fail_text = d_herta_debuff_remove
+			has_planet_flag = herta_habitat
+			from = {
+				has_country_flag = herta_up
+			}
+		}
+	}
+
+	allow = {
+		custom_tooltip = {
+			fail_text = d_herta_debuff_remove
+			has_planet_flag = herta_habitat
+			from = {
+				has_country_flag = herta_up
+			}
+		}
+	}
+
+	effect = {
+		add_deposit = d_herta_1
+		add_deposit = d_herta_2
+	}
+
+	ai_weight = {
+		weight = 100
+	}
+}
+decision_ruanmei_get_buff = {
+	owned_planets_only = yes
+	icon = decision_ruanmei_get_buff
+	enactment_time = 1200
+	resources = {
+		category = decisions
+		cost = {
+			food = 10000
+		}
+	}
+
+	potential = {
+		custom_tooltip = {
+			fail_text = d_herta_debuff_remove
+			or = {
+				is_colonizable = yes
+				is_colony = yes
+				is_planet_class = pc_barren_cold
+				is_planet_class = pc_barren
+			}
+			is_artificial = no
+			from = {
+				any_owned_leader = {
+					has_leader_flag = ruanmei
+				}
+				not = {
+					has_country_flag = ruanmei_studying
+				}
+			}
+		}
+	}
+
+	allow = {
+		custom_tooltip = {
+			fail_text = d_herta_debuff_remove
+			or = {
+				is_colonizable = yes
+				is_colony = yes
+				is_planet_class = pc_barren_cold
+				is_planet_class = pc_barren
+			}
+			is_artificial = no
+			from = {
+				any_owned_leader = {
+					has_leader_flag = ruanmei
+				}
+				not = {
+					has_country_flag = ruanmei_studying
+				}
+			}
+		}
+	}
+	effect = {
+		custom_tooltip = decision_ruanmei_get_buff_tt
+		hidden_effect = {
+			planet_event = { id = hsr_on.1008 }
+			from = {
+				set_timed_country_flag = {
+					flag = ruanmei_studying
+					days = 1800
+				}
+			}
+		}
+
+	}
+
+	ai_weight = {
+		weight = 100
+	}
+}
