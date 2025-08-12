@@ -1,8 +1,8 @@
 
 @distance = 50
 @jumps = 3
-@planet_min_size = 10
-@planet_max_size = 25
+@planet_min_size = 5
+@planet_max_size = 50
 @base_moon_distance = 10
 @moon_min_size = 6
 @moon_max_size = 10
@@ -11,11 +11,11 @@
 # 星穹列车：万象系统
 DOT_SR_system_01 = {
 	name = "Star_Rail_Union" 
-	class = "sc_f"
+	class = "sc_g"
 	max_instances = 1
-	asteroid_belt = {
+	asteroid_belt = { # 小行星带
 		type = rocky_asteroid_belt
-		radius = 125
+		radius = 150
 	}
 	usage = origin
 	flags = { Zrocursor precursor_system }
@@ -27,7 +27,7 @@ DOT_SR_system_01 = {
 	planet = {
 		name = "Akivili" 
 		class = "pc_shrouded"
-		orbit_distance = 35
+		orbit_distance = 30
 		orbit_angle = 40
 		size = 18
 		has_ring = yes
@@ -49,8 +49,8 @@ DOT_SR_system_01 = {
 		has_ring = yes
 		flags = { planet_earth }
 		init_effect = {
-			add_deposit = d_society_3
-			set_deposit = d_rare_crystals_3
+			set_deposit = d_rare_crystals_5
+			create_archaeological_site = site_the_library
 		}
 		moon = {
 			name = "Astral_Express"
@@ -67,56 +67,6 @@ DOT_SR_system_01 = {
 			}
 			deposit_blockers = none
 		}
-		init_effect = {
-			create_ambient_object = {
-				type = "large_debris_object"
-				entity_offset_height = { min = -0 max = -25 }
-				location = this
-			}
-			last_created_ambient_object = {
-				set_location = {
-					target = prev
-					distance = 15
-					angle = random
-				}
-			}
-			create_ambient_object = {
-				type = "medium_debris_01_object"
-				entity_offset_height = { min = -0 max = -25 }
-				location = this
-			}
-			last_created_ambient_object = {
-				set_location = {
-					target = prev
-					distance = 15
-					angle = random
-				}
-			}
-			create_ambient_object = {
-				type = "medium_debris_02_object"
-				entity_offset_height = { min = -0 max = -25 }
-				location = this
-			}
-			last_created_ambient_object = {
-				set_location = {
-					target = prev
-					distance = 15
-					angle = random
-				}
-			}
-			create_ambient_object = {
-				type = "small_debris_object"
-				entity_offset_height = { min = -0 max = -25 }
-				location = this
-			}
-			last_created_ambient_object = {
-				set_location = {
-					target = prev
-					distance = 15
-					angle = random
-				}
-			}
-		}
 	}
 
 	planet = {
@@ -126,6 +76,8 @@ DOT_SR_system_01 = {
 		size = 20
 		has_ring = yes
 		init_effect = {
+			add_deposit = d_zro_deposit_5
+			create_archaeological_site = site_benign_cover_up
 			create_ambient_object = {
 				type = "large_debris_object"
 				entity_offset_height = { min = -0 max = -25 }
@@ -179,7 +131,7 @@ DOT_SR_system_01 = {
 				name = "Express_Welt"
 				class = pc_astral_express
 				orbit_angle = { min = 90 max = 270 }
-				orbit_distance = 18
+				orbit_distance = 20
 				size = 15
 				flags = { planet_earth }
 				init_effect = { 
@@ -190,170 +142,135 @@ DOT_SR_system_01 = {
 	}
 
 	planet = {
-		class = pc_shielded
+		class = pc_frozen
 		orbit_distance = 20
 		orbit_angle = 120
 		size = 15
 		has_ring = yes
 		init_effect = {
 			add_deposit = d_energy_5
-		}
-		init_effect = {
-			create_ambient_object = {
-				type = "large_debris_object"
-				entity_offset_height = { min = -0 max = -25 }
-				location = this
-			}
-			last_created_ambient_object = {
-				set_location = {
-					target = prev
-					distance = 15
-					angle = random
-				}
-			}
-			create_ambient_object = {
-				type = "medium_debris_01_object"
-				entity_offset_height = { min = -0 max = -25 }
-				location = this
-			}
-			last_created_ambient_object = {
-				set_location = {
-					target = prev
-					distance = 15
-					angle = random
-				}
-			}
-			create_ambient_object = {
-				type = "medium_debris_02_object"
-				entity_offset_height = { min = -0 max = -25 }
-				location = this
-			}
-			last_created_ambient_object = {
-				set_location = {
-					target = prev
-					distance = 15
-					angle = random
-				}
-			}
-			create_ambient_object = {
-				type = "small_debris_object"
-				entity_offset_height = { min = -0 max = -25 }
-				location = this
-			}
-			last_created_ambient_object = {
-				set_location = {
-					target = prev
-					distance = 15
-					angle = random
-				}
-			}
+			create_archaeological_site = site_polaris_seed_vault
 		}
 		moon = {
-				name = "Express_March_7th"
-				class = pc_astral_express
-				orbit_angle = { min = 90 max = 270 }
-				orbit_distance = 15
-				size = 15
-				flags = { planet_earth }
-				init_effect = { 
+			name = "Express_March_7th"
+			class = pc_astral_express
+			orbit_angle = { min = 90 max = 270 }
+			orbit_distance = 15
+			size = 15
+			flags = { planet_earth }
+			init_effect = { 
 				set_planet_entity = { entity = "Astral_Express_planet_duan_entity" }	
-				}
-				deposit_blockers = none
 			}
+			deposit_blockers = none
+		}
 	}
 
 	planet = {
+		class = "pc_gray_goo"
+		orbit_distance = 30
+		orbit_angle = 145
+		size = 40
+		has_ring = no
+		flags = { Zrocursor_homeworld }
+		init_effect = {
+			prevent_anomaly = yes
+			clear_deposits = yes
+			create_archaeological_site = endless_expanse_digsite
+			add_deposit = d_zro_deposit_5
+		}
+		moon = {
+			name = "Express_Himeko"
+			class = pc_astral_express
+			orbit_angle = 300
+			orbit_distance = 20
+			size = 15
+			flags = { planet_earth }
+			init_effect = { 
+				set_planet_entity = { entity = "Astral_Express_planet_duan_entity" }	
+			}
+			deposit_blockers = none
+		}
+	}
+
+	#小行星
+	planet = {
+		name = "S"
 		class = "pc_asteroid"
 		orbit_distance = 30
 		orbit_angle = -210
 		size = 5
 		has_ring = no
 		init_effect = {
-			add_deposit = d_energy_5
-			set_deposit = d_minerals_5
+			set_deposit = d_energy_5
 		}
 	}
 
 	planet = {
+		name = "W"
 		class = "pc_asteroid"
 		orbit_distance = 0
 		orbit_angle = -95
 		size = 5
 		has_ring = no
 		init_effect = {
-			add_deposit = d_energy_5
-			set_deposit = d_rare_crystals_3
+			set_deposit = d_rare_crystals_5
 		}
 	}
 
 	planet = {
+		name = "E"
 		class = "pc_asteroid"
 		orbit_distance = 0
 		orbit_angle = -150
 		size = 5
 		has_ring = no
 		init_effect = {
-			set_deposit = d_volatile_motes_5
-			set_deposit = d_rare_crystals_3
+			set_deposit = d_rare_crystals_5
 		}
 	}
 
 	planet = {
+		name = "N"
 		class = "pc_asteroid"
 		orbit_distance = 0
 		orbit_angle = -320
 		size = 5
 		has_ring = no
 		init_effect = {
-			add_deposit = d_energy_5
-			set_deposit = d_minerals_5
+			set_deposit = d_volatile_motes_5
 		}
 	}
 
 	planet = {
-		class = "pc_barren"
+		class = "pc_hive"
 		orbit_distance = 30
 		orbit_angle = 45
-		size = 20
-		has_ring = no
-		init_effect = {
-			add_deposit = d_energy_5
-		}
-		moon = {
-				name = "Express_Himeko"
-				class = pc_astral_express
-				orbit_angle = { min = 90 max = 270 }
-				orbit_distance = 15
-				size = 15
-				flags = { planet_earth }
-				init_effect = { 
-				set_planet_entity = { entity = "Astral_Express_planet_duan_entity" }	
-				}
-				deposit_blockers = none
-			}
-	}
-
-	planet = {
-		class = "pc_nuked"
-		orbit_distance = 50
-		orbit_angle = 145
 		size = 35
 		has_ring = no
-		flags = { Zrocursor_homeworld }
 		init_effect = {
-			prevent_anomaly = yes
-			clear_deposits = yes
-			create_archaeological_site = zroni_digsite_6
-			add_deposit = d_zro_deposit_5
-			set_deposit = d_minerals_5
+			set_deposit = d_rare_crystals_5
+		}
+		moon = {
+			class = "pc_machine"
+			size = 15
+			orbit_distance = 10
+			orbit_angle = 150
+			has_ring = no
+			init_effect = {
+			    save_event_target_as = observation_terminal
+			    create_archaeological_site = site_ancient_robot_world
+		    }
+			init_effect = {
+				set_deposit = d_volatile_motes_5
+			}
 		}
 	}
 
 	planet = {
-		class = pc_relic # class = "pc_gas_giant"
-		orbit_distance = 20
+		class = pc_relic
+		orbit_distance = 30
 		orbit_angle = 145
-		size = 20
+		size = 35
 		has_ring = no
 		flags = { hive_planet_larion }
 		init_effect = {
@@ -364,50 +281,30 @@ DOT_SR_system_01 = {
 			add_deposit = d_prosperous_mesa
 			add_deposit = d_submerged_ore_veins
 		}
-
 		moon = {
-			class = "pc_frozen"
-			size = 10
-			orbit_distance = 12
+			class = "pc_ai"
+			size = 15
+			orbit_distance = 15
 			orbit_angle = 320
 			has_ring = no
 			init_effect = {
-				add_deposit = d_energy_5
-				set_deposit = d_exotic_gases_3
-			}
-		}
-
-		moon = {
-			class = "pc_machine"
-			size = 10
-			orbit_distance = 4
-			orbit_angle = 150
-			has_ring = no
-			init_effect = {
-			    save_event_target_as = observation_terminal
-			    create_archaeological_site = site_ancient_robot_world
-		    }
-			init_effect = {
-				set_deposit = d_volatile_motes_5
-				set_deposit = d_engineering_4
+				set_deposit = d_exotic_gases_5
 			}
 		}
 	}
 
 	planet = {
-		class = pc_g_star
+		class = pc_f_star
 		orbit_distance = 20
 		orbit_angle = 100
-		size = 20
+		size = 10
 		has_ring = yes
 		init_effect = {
-			prevent_anomaly = yes
-		}
-		init_effect = {
 			set_deposit = d_volatile_motes_5
+			create_archaeological_site = site_lost_moments
 		}
 		moon = {
-			name = "Express_Danheng"
+			name = "Express_Looking"
 			class = pc_habitat
 			orbit_angle = { min = 90 max = 270 }
 			orbit_distance = 15
@@ -486,8 +383,8 @@ DOT_SR_system_01 = {
 	planet = {
 		class = "pc_black_hole"
 		orbit_distance = 20
-		orbit_angle = 300
-		size = 10
+		orbit_angle = 200
+		size = 5
 		has_ring = no
 		init_effect = {
 			    create_archaeological_site = larion_digsite
@@ -498,8 +395,7 @@ DOT_SR_system_01 = {
 			    add_deposit = d_tempestous_mountain
 			    add_deposit = d_prosperous_mesa
 			    add_deposit = d_submerged_ore_veins
-				set_deposit = d_energy_6
-				set_deposit = d_engineering_4
+				set_deposit = d_exotic_gases_3
 			}
 		init_effect = {
 			create_ambient_object = {
@@ -1018,7 +914,6 @@ DOT_SR_system_03 = {
 		size = 5
 		has_ring = no
 		init_effect = {
-			add_deposit = d_energy_5
 			set_deposit = d_rare_crystals_3
 		}
 		init_effect = {
