@@ -2,6 +2,10 @@ tr_herta_discuss_adopt = { #采用巧思（黑塔）传统树效果
     possible = {
         has_ascension_perk = ap_herta_premote
         has_origin = origin_Herta_Space_Station
+        custom_tooltip = {
+            fail_text = tr_herta_discuss_adopt_tt
+            has_country_flag = tr_herta_discuss_adopt
+        }
     }
     modifier = {
         planet_jobs_society_research_produces_add = 1
@@ -28,6 +32,7 @@ tr_herta_discuss_finish = { #w完成黑塔传统树
 tr_herta_discuss_1 = {
     possible = {
         has_tradition = tr_herta_discuss_adopt
+        has_country_flag = tr_herta_discuss_adopt
     }
     modifier = {
         physics_tech_cost_mult = -0.1
@@ -76,27 +81,41 @@ tr_herta_discuss_1 = {
 #二：种族改造和同化
 tr_herta_discuss_2 = {
     possible = {
-        has_tradition = tr_herta_discuss_1
+        OR = {
+            has_tradition = tr_herta_discuss_1
+            has_tradition = tr_herta_discuss_1_1
+            has_tradition = tr_herta_discuss_1_2
+        }
     }
     custom_tooltip_with_modifiers = tr_cybernetics_modular_cybernetics_tt
     modifier = {
         modify_species_cost_mult = -0.50
         BIOLOGICAL_species_trait_points_add = 3
         BIOLOGICAL_species_trait_picks_add = 3
+        Star_Rail_species_trait_picks_add = 5
+        Star_Rail_species_trait_points_add = 5
     }
     triggered_modifier = {
         potential = { always = yes }
         BIOLOGICAL_species_trait_points_add = 1
+        Star_Rail_species_trait_points_add = 1
         mult = modifier:ROBOT_species_trait_points_add
     }
     triggered_modifier = {
         potential = { always = yes }
         BIOLOGICAL_species_trait_picks_add = 1
+        Star_Rail_species_trait_picks_add = 1
         mult = modifier:ROBOT_species_trait_picks_add
     }
     on_enabled = {
         hidden_effect = {
-            country_event = { id = DOT_SR_Herta.100  days = 10}
+            capital_scope = {
+                enable_special_project = {
+                    name = "herta_discuss_pop_up_1"
+                    location = this
+                    owner = root
+                }
+            }
         }
     }
     tradition_swap = {
@@ -110,9 +129,19 @@ tr_herta_discuss_2 = {
             modify_species_cost_mult = -0.50
             BIOLOGICAL_species_trait_points_add = 7
             BIOLOGICAL_species_trait_picks_add = 7
+            Star_Rail_species_trait_picks_add = 12
+            Star_Rail_species_trait_points_add = 12
         }
         on_enabled = {
-
+            hidden_effect = {
+                capital_scope = {
+                    enable_special_project = {
+                        name = "herta_discuss_pop_up_2"
+                        location = this
+                        owner = root
+                    }
+                }
+            }
         }
         weight = {
             factor = 1
@@ -127,8 +156,21 @@ tr_herta_discuss_2 = {
         }
         modifier = {
             modify_species_cost_mult = -0.50
-            ROBOT_species_trait_picks_add = 7
-            ROBOT_species_trait_points_add = 7
+            ROBOT_species_trait_picks_add = 12
+            ROBOT_species_trait_points_add = 12
+            Star_Rail_species_trait_picks_add = 12
+            Star_Rail_species_trait_points_add = 12
+        }
+        on_enabled = {
+            hidden_effect = {
+                capital_scope = {
+                    enable_special_project = {
+                        name = "herta_discuss_pop_up_3"
+                        location = this
+                        owner = root
+                    }
+                }
+            }
         }
         weight = {
             factor = 1
@@ -140,48 +182,19 @@ tr_herta_discuss_2 = {
 }
 tr_herta_discuss_3 = {
     possible = {
-        has_tradition = tr_herta_discuss_1
+        OR = {
+            has_tradition = tr_herta_discuss_1
+            has_tradition = tr_herta_discuss_1_1
+            has_tradition = tr_herta_discuss_1_2
+        }
     }
     modifier = {
-        physics_tech_cost_mult = -0.1
-        num_tech_alternatives_add = 1
-        country_scientist_cap_add = 1
-        scientist_initial_skill = 1
+        divided_patrongage_max_subjects = 2
+        country_subject_trust_cap_add = 50
+        country_subject_acceptance_add = 25
+        subject_integration_influence_cost_mult = -0.5
     }
-    tradition_swap = {
-        name = tr_herta_discuss_3_1
-        inherit_effects = no
-        inherit_icon = no
-        trigger = {
-            has_country_flag = tr_herta_select_ruamei_1
-        }
-        modifier = {
-            society_tech_cost_mult = -0.1
-            num_tech_alternatives_add = 1
-            country_scientist_cap_add = 1
-            scientist_initial_skill = 1
-        }
-        weight = {
-            factor = 1
-        }
-    }
-    tradition_swap = {
-        name = tr_herta_discuss_3_2
-        inherit_effects = no
-        inherit_icon = no
-        trigger = {
-            has_country_flag = tr_herta_select_luosi_1
-        }
-        modifier = {
-            engineering_tech_cost_mult = -0.1
-            num_tech_alternatives_add = 1
-            country_scientist_cap_add = 1
-            scientist_initial_skill = 1
-        }
-        weight = {
-            factor = 1
-        }
-    }
+    custom_tooltip_with_modifiers = tr_herta_discuss_3_tt
     ai_weight = {
         factor = 1000
     }
@@ -189,25 +202,42 @@ tr_herta_discuss_3 = {
 tr_herta_discuss_4 = {
     possible = {
         has_tradition = tr_herta_discuss_adopt
+        OR = {
+            has_tradition = tr_herta_discuss_2
+            has_tradition = tr_herta_discuss_2_1
+            has_tradition = tr_herta_discuss_2_2
+        }
     }
     modifier = {
-        physics_tech_cost_mult = -0.1
-        num_tech_alternatives_add = 1
-        country_scientist_cap_add = 1
-        scientist_initial_skill = 1
+        starbase_building_capacity_add = 5
+        starbase_building_build_speed_mult = 0.25
+        starbase_module_build_speed_mult = 0.25
+        planet_structures_cost_mult = -0.10
+        planet_building_build_speed_mult = 0.25
+    }
+    on_enabled = {
+        hidden_effect = {
+            add_research_option = tech_herta_choose_2
+        }
     }
     tradition_swap = {
         name = tr_herta_discuss_4_1
         inherit_effects = no
-        inherit_icon = no
+        inherit_icon = yes
         trigger = {
-            has_country_flag = tr_herta_select_ruamei_1
+            has_country_flag = tr_herta_select_ruamei_4
         }
         modifier = {
-            society_tech_cost_mult = -0.1
-            num_tech_alternatives_add = 1
-            country_scientist_cap_add = 1
-            scientist_initial_skill = 1
+            starbase_building_capacity_add = 5
+            starbase_building_build_speed_mult = 0.25
+            starbase_module_build_speed_mult = 0.25
+            planet_structures_cost_mult = -0.10
+            planet_building_build_speed_mult = 0.25
+        }
+        on_enabled = {
+            hidden_effect = {
+                add_research_option = tech_ruanmei_choose_2
+            }
         }
         weight = {
             factor = 1
@@ -216,20 +246,27 @@ tr_herta_discuss_4 = {
     tradition_swap = {
         name = tr_herta_discuss_4_2
         inherit_effects = no
-        inherit_icon = no
+        inherit_icon = yes
         trigger = {
-            has_country_flag = tr_herta_select_luosi_1
+            has_country_flag = tr_herta_select_luosi_4
         }
         modifier = {
-            engineering_tech_cost_mult = -0.1
-            num_tech_alternatives_add = 1
-            country_scientist_cap_add = 1
-            scientist_initial_skill = 1
+            starbase_building_capacity_add = 5
+            starbase_building_build_speed_mult = 0.25
+            starbase_module_build_speed_mult = 0.25
+            planet_structures_cost_mult = -0.10
+            planet_building_build_speed_mult = 0.25
+        }
+        on_enabled = {
+            hidden_effect = {
+                add_research_option = tech_luosi_choose_2
+            }
         }
         weight = {
             factor = 1
         }
     }
+    custom_tooltip_with_modifiers = tr_herta_discuss_4_tt
     ai_weight = {
         factor = 1000
     }
@@ -237,47 +274,15 @@ tr_herta_discuss_4 = {
 tr_herta_discuss_5 = {
     possible = {
         has_tradition = tr_herta_discuss_adopt
+        has_tradition = tr_herta_discuss_3
     }
     modifier = {
-        physics_tech_cost_mult = -0.1
-        num_tech_alternatives_add = 1
-        country_scientist_cap_add = 1
-        scientist_initial_skill = 1
+        envoys_add = 2
+        federation_experience_add = 2
+        federation_naval_cap_contribution_mult = 1.00
+        country_border_friction_mult = -0.25
     }
-    tradition_swap = {
-        name = tr_herta_discuss_5_1
-        inherit_effects = no
-        inherit_icon = no
-        trigger = {
-            has_country_flag = tr_herta_select_ruamei_1
-        }
-        modifier = {
-            society_tech_cost_mult = -0.1
-            num_tech_alternatives_add = 1
-            country_scientist_cap_add = 1
-            scientist_initial_skill = 1
-        }
-        weight = {
-            factor = 1
-        }
-    }
-    tradition_swap = {
-        name = tr_herta_discuss_5_2
-        inherit_effects = no
-        inherit_icon = no
-        trigger = {
-            has_country_flag = tr_herta_select_luosi_1
-        }
-        modifier = {
-            engineering_tech_cost_mult = -0.1
-            num_tech_alternatives_add = 1
-            country_scientist_cap_add = 1
-            scientist_initial_skill = 1
-        }
-        weight = {
-            factor = 1
-        }
-    }
+    custom_tooltip_with_modifiers = tr_herta_discuss_5_tt
     ai_weight = {
         factor = 1000
     }

@@ -32,7 +32,19 @@ space_energy_core_t3 = {
 			minerals = 25
 			physics_research = 30
 			sr_dark_matter = 1
+
 		}
+        produces = {
+            trigger = {
+                exists = owner
+                owner = { has_tradition = tr_herta_discuss_4 }
+            }
+            energy = 50
+            minerals = 15
+            physics_research = 10
+            sr_dark_matter = 1
+            exotic_gases = 1
+        }
 		upkeep = {
 			energy = 15
 		}
@@ -40,6 +52,21 @@ space_energy_core_t3 = {
 	triggered_system_modifier = {
         planet_jobs_physics_research_produces_mult = 0.05
 		planet_jobs_energy_produces_mult = 0.1
+    }
+    triggered_system_modifier = {
+        potential = {
+            exists = owner
+            owner = {
+                has_tradition = tr_herta_discuss_4
+            }
+        }
+        ship_shield_mult = 0.25
+        ship_shield_regen_add_static = 5
+        ship_shield_hardening_add = 2
+        ship_shield_penetration_add = 2
+    }
+    ai_weight = {
+        weight = 1000
     }
 }
 space_rare_resource_t2 = {
@@ -77,10 +104,31 @@ space_rare_resource_t2 = {
 			minerals = 20
 			energy = 20
 		}
+        produces = {
+            trigger = {
+                exists = owner
+                owner = { has_tradition = tr_herta_discuss_4 }
+            }
+            exotic_gases = 10
+            rare_crystals = 10
+            volatile_motes = 10
+            engineering_research = 10
+        }
 	}
 	triggered_system_modifier = {
         planet_jobs_alloys_produces_mult = 0.075
 		planet_jobs_consumer_goods_produces_mult = 0.075
+    }
+    triggered_system_modifier = {
+        potential = {
+            exists = owner
+            owner = {
+                has_tradition = tr_herta_discuss_4
+            }
+        }
+        ship_speed_mult = 0.15
+        ship_ftl_jumpdrive_range_mult = 0.15
+        ship_jumpdrive_cooldown_mult = -0.15
     }
 }
 ###################################
@@ -131,4 +179,42 @@ space_anchorage_t1 = {
 	country_modifier = {
 		country_naval_cap_add = 50
 	}
+    triggered_orbit_modifier = {
+        potential = {
+            exists = owner
+            owner = {
+                has_tradition = tr_herta_discuss_4
+            }
+        }
+        ship_orbit_upkeep_mult = -0.1
+    }
+    triggered_station_modifier = {
+        potential = {
+            exists = owner
+            owner = {
+                has_tradition = tr_herta_discuss_4
+            }
+        }
+        starbase_shipyard_build_speed_mult = 0.1
+        starbase_shipyard_build_cost_mult = -0.05
+        ship_cloaking_detection_add = 2
+    }
+    triggered_ship_modifier = {
+        potential = {
+            exists = owner
+            owner = {
+                has_tradition = tr_herta_discuss_4
+            }
+        }
+        ship_starting_experience_add = 500
+    }
+    triggered_country_modifier = {
+        potential = {
+            exists = owner
+            owner = {
+                has_tradition = tr_herta_discuss_4
+            }
+        }
+        country_naval_cap_add = 50
+    }
 }

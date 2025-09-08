@@ -538,6 +538,143 @@ country_event = {
 }
 #飞升
 country_event = {
+    id = DOT_SR_Herta.50
+    title = DOT_SR_Herta.50.tittle
+    desc = DOT_SR_Herta.50.desc
+    picture = GFX_evt_timeworm_transcriptions
+    is_triggered_only = yes
+    trigger = {
+        has_origin = origin_Herta_Space_Station
+    }
+    option = {
+        name = DOT_SR_Herta.50.a
+        custom_tooltip = DOT_SR_Herta.50.tt
+        hidden_effect = {
+            country_event = { id = DOT_SR_Herta.51 days = 90 }
+        }
+    }
+}
+country_event = {
+    id = DOT_SR_Herta.51
+    title = DOT_SR_Herta.51.tittle
+    desc = DOT_SR_Herta.51.desc
+    picture = GFX_evt_three_sided_deal
+    is_triggered_only = yes
+    trigger = {
+        has_origin = origin_Herta_Space_Station
+    }
+    option = {
+        name = DOT_SR_Herta.51.a
+        hidden_effect = {
+            country_event = { id = DOT_SR_Herta.52 days = 90 }
+        }
+        ai_chance = {
+            weight = 100
+        }
+    }
+    option = {
+        name = DOT_SR_Herta.51.b
+        hidden_effect = {
+            set_country_flag = tr_herta_select_ruamei_1
+            country_event = { id = DOT_SR_Herta.52 days = 90 }
+        }
+        ai_chance = {
+            weight = 100
+        }
+    }
+    option = {
+        name = DOT_SR_Herta.51.c
+        hidden_effect = {
+            set_country_flag = tr_herta_select_luosi_1
+            country_event = { id = DOT_SR_Herta.52 days = 90 }
+        }
+        ai_chance = {
+            weight = 100
+        }
+    }
+}
+country_event = {
+    id = DOT_SR_Herta.52
+    title = DOT_SR_Herta.52.tittle
+    desc = DOT_SR_Herta.52.desc
+    picture = GFX_evt_circuitry_modification
+    is_triggered_only = yes
+    trigger = {
+        has_origin = origin_Herta_Space_Station
+    }
+    option = {
+        name = DOT_SR_Herta.52.a
+        hidden_effect = {
+            country_event = { id = DOT_SR_Herta.53 days = 90 }
+        }
+        ai_chance = {
+            weight = 100
+        }
+    }
+    option = {
+        name = DOT_SR_Herta.52.b
+        hidden_effect = {
+            set_country_flag = tr_herta_select_ruamei_2
+            country_event = { id = DOT_SR_Herta.53 days = 90 }
+        }
+        ai_chance = {
+            weight = 100
+        }
+    }
+    option = {
+        name = DOT_SR_Herta.52.c
+        hidden_effect = {
+            set_country_flag = tr_herta_select_luosi_2
+            country_event = { id = DOT_SR_Herta.53 days = 90 }
+        }
+        ai_chance = {
+            weight = 100
+        }
+    }
+}
+country_event = {
+    id = DOT_SR_Herta.53
+    title = DOT_SR_Herta.53.tittle
+    desc = DOT_SR_Herta.53.desc
+    picture = GFX_evt_cyberization_2
+    is_triggered_only = yes
+    trigger = {
+        has_origin = origin_Herta_Space_Station
+    }
+    option = {
+        name = DOT_SR_Herta.53.a
+        custom_tooltip = DOT_SR_Herta.53.tt
+        hidden_effect = {
+            set_country_flag = tr_herta_discuss_adopt
+        }
+        ai_chance = {
+            weight = 100
+        }
+    }
+    option = {
+        name = DOT_SR_Herta.53.b
+        custom_tooltip = DOT_SR_Herta.53.tt
+        hidden_effect = {
+            set_country_flag = tr_herta_select_ruamei_4
+            set_country_flag = tr_herta_discuss_adopt
+        }
+        ai_chance = {
+            weight = 100
+        }
+    }
+    option = {
+        name = DOT_SR_Herta.53.c
+        custom_tooltip = DOT_SR_Herta.53.tt
+        hidden_effect = {
+            set_country_flag = tr_herta_select_luosi_4
+            set_country_flag = tr_herta_discuss_adopt
+        }
+        ai_chance = {
+            weight = 100
+        }
+    }
+}
+country_event = {
     id = DOT_SR_Herta.100
     title = "DOT_SR_Herta.100.name"
     desc = "DOT_SR_Herta.100.desc"
@@ -610,10 +747,12 @@ country_event = {
                 show_message = no
             }
         }
+        set_country_flag = tr_herta_select_herta_2_success
     }
 
     option = {
         name = "utopia.2501.a"
+        add_research_option = tech_herta_choose_1
     }
 }
 country_event = {
@@ -635,7 +774,7 @@ country_event = {
         }
     }
 }
-country_event = {
+country_event = {#同化
     id = DOT_SR_Herta.102
     is_triggered_only = yes
     hide_window = yes
@@ -650,49 +789,568 @@ country_event = {
     }
     immediate = {
         if = {
-            limit = {
-                any_owned_species = {
-                    has_citizenship_type = {
-                        country = root
-                        type = citizenship_herta_assimilation
+            limit = { has_tradition = tr_herta_discuss_2 }
+            if = {
+                limit = {
+                    any_owned_species = {
+                        has_citizenship_type = {
+                            country = root
+                            type = citizenship_herta_assimilation
+                        }
                     }
+                }
+                weighted_random_owned_pop_group = {
+                    #limit = { is_exact_same_species = root }
+                    create_herta_cybernetic_species_mod = yes
+                    species = { save_event_target_as = new_main_species }
+                }
+            }
+            else = {
+                weighted_random_owned_pop_group = {
+                    #limit = { is_same_species = root }
+                    create_herta_cybernetic_species_mod = yes
+                    species = { save_event_target_as = new_main_species }
+                }
+            }
+            change_dominant_species = { species = event_target:new_main_species }
+            every_owned_leader = {
+                limit = {
+                    species = { has_trait = trait_herta_pop_up_t1 }
+                    NOR = {
+                        has_trait = leader_trait_herta_pop_up_t1
+                        has_leader_flag = renowned_leader
+                        has_leader_flag = legendary_leader
+                    }
+                }
+                add_trait = {
+                    trait = leader_trait_herta_pop_up_t1
+                    show_message = no
+                }
+            }
+            every_pool_leader = {
+                limit = {
+                    species = { has_trait = trait_herta_pop_up_t1 }
+                    NOT = { has_trait = leader_trait_herta_pop_up_t1 }
+                }
+                add_trait = {
+                    trait = leader_trait_herta_pop_up_t1
+                    show_message = no
+                }
+            }
+        }
+        else_if = {
+            limit = { has_tradition = tr_herta_discuss_2_2 }
+            if = {
+                limit = {
+                    any_owned_species = {
+                        has_citizenship_type = {
+                            country = root
+                            type = citizenship_herta_assimilation
+                        }
+                    }
+                }
+                weighted_random_owned_pop_group = {
+                    #limit = { is_exact_same_species = root }
+                    create_luosi_synth_species_effect = yes
+                    species = { save_event_target_as = new_main_species }
+                }
+            }
+            else = {
+                weighted_random_owned_pop_group = {
+                    #limit = { is_same_species = root }
+                    create_luosi_synth_species_effect = yes
+                    species = { save_event_target_as = new_main_species }
+                }
+            }
+            change_dominant_species = { species = event_target:new_main_species }
+            every_owned_leader = {
+                limit = {
+                    species = { has_trait = trait_luosi_pop_up_t1 }
+                    NOR = {
+                        has_trait = leader_trait_luosi_pop_up_t1
+                        has_leader_flag = renowned_leader
+                        has_leader_flag = legendary_leader
+                    }
+                }
+                add_trait = {
+                    trait = leader_trait_luosi_pop_up_t1
+                    show_message = no
+                }
+            }
+            every_pool_leader = {
+                limit = {
+                    species = { has_trait = trait_luosi_pop_up_t1 }
+                    NOT = { has_trait = leader_trait_luosi_pop_up_t1 }
+                }
+                add_trait = {
+                    trait = leader_trait_luosi_pop_up_t1
+                    show_message = no
+                }
+            }
+        }
+    }
+}
+country_event = {
+    id = DOT_SR_Herta.103
+    title = "DOT_SR_Herta.103.name"
+    desc = "DOT_SR_Herta.103.desc"
+    picture = GFX_evt_cybernetics
+
+    is_triggered_only = yes
+
+    immediate = {
+
+    }
+
+    option = {
+        name = "DOT_SR_Herta.103.a"
+        add_monthly_resource_mult = {
+            resource = engineering_research
+            value = @tier2unityreward
+            min = @tier2unitymin
+            max = @tier2unitymax
+        }
+    }
+}
+country_event = {
+    id = DOT_SR_Herta.104
+    title = "DOT_SR_Herta.104.name"
+    desc = "DOT_SR_Herta.104.desc"
+    picture = GFX_evt_cyberization_2
+
+    is_triggered_only = yes
+
+    immediate = {
+
+    }
+
+    option = {
+        name = "DOT_SR_Herta.104.a"
+    }
+}
+country_event = {
+    id = DOT_SR_Herta.105
+    title = "DOT_SR_Herta.105.name"
+    desc = "DOT_SR_Herta.105.desc"
+    picture = GFX_evt_engineering_research
+
+    is_triggered_only = yes
+
+    immediate = {
+
+    }
+
+    option = {
+        name = "DOT_SR_Herta.105.a"
+        add_research_option = tech_neuro_quantum_links
+    }
+}
+country_event = {
+    id = DOT_SR_Herta.106
+    title = "DOT_SR_Herta.106.name"
+    desc = "DOT_SR_Herta.106.desc"
+    picture = GFX_evt_cyberization_2
+
+    is_triggered_only = yes
+
+    immediate = {
+
+    }
+
+    option = {
+        name = "DOT_SR_Herta.106.a"
+
+    }
+}
+country_event = {
+    id = DOT_SR_Herta.200
+    title = "DOT_SR_Herta.200.name"
+    desc = "DOT_SR_Herta.200.desc"
+    picture = GFX_evt_circuitry_modification
+
+    is_triggered_only = yes
+
+    immediate = {
+
+    }
+
+    option = {
+        name = "DOT_SR_Herta.200.a"
+        add_monthly_resource_mult = {
+            resource = society_research
+            value = @tier2unityreward
+            min = @tier2unitymin
+            max = @tier2unitymax
+        }
+    }
+}
+country_event = {
+    id = DOT_SR_Herta.201
+    title = "DOT_SR_Herta.201.name"
+    desc = "DOT_SR_Herta.201.desc"
+    picture = GFX_evt_scientific_experiments
+
+    is_triggered_only = yes
+
+    immediate = {
+
+    }
+
+    option = {
+        name = "DOT_SR_Herta.201.a"
+        add_research_option = tech_gene_seed_purification
+        add_research_option = tech_gene_tailoring
+        add_research_option = tech_glandular_acclimation
+        add_research_option = tech_gene_expressions
+    }
+}
+country_event = {
+    id = DOT_SR_Herta.202
+    title = "DOT_SR_Herta.202.name"
+    desc = "DOT_SR_Herta.202.desc"
+    picture = GFX_evt_genetic_modification
+
+    is_triggered_only = yes
+
+    immediate = {
+        if = {
+            limit = {
+                any_owned_pop_group = {
+                    is_exact_same_species = root
                 }
             }
             weighted_random_owned_pop_group = {
-                #limit = { is_exact_same_species = root }
-                create_herta_cybernetic_species_mod = yes
+                limit = { is_exact_same_species = root }
+                create_ruanmei_gene_species_mod = yes
                 species = { save_event_target_as = new_main_species }
             }
         }
         else = {
             weighted_random_owned_pop_group = {
-                #limit = { is_same_species = root }
-                create_herta_cybernetic_species_mod = yes
+                limit = { is_same_species = root }
+                create_ruanmei_gene_species_mod = yes
                 species = { save_event_target_as = new_main_species }
             }
         }
         change_dominant_species = { species = event_target:new_main_species }
         every_owned_leader = {
             limit = {
-                species = { has_trait = trait_herta_pop_up_t1 }
+                species = { has_trait = trait_ruanmei_pop_up_t1 }
                 NOR = {
-                    has_trait = leader_trait_herta_pop_up_t1
+                    has_trait = leader_trait_ruanmei_pop_up_t1
                     has_leader_flag = renowned_leader
                     has_leader_flag = legendary_leader
                 }
             }
             add_trait = {
-                trait = leader_trait_herta_pop_up_t1
+                trait = leader_trait_ruanmei_pop_up_t1
                 show_message = no
             }
         }
+
+        create_message = {
+            type = MESSAGE_ALL_GAINED_TRAIT
+            localization = MESSAGE_ALL_GAINED_TRAIT_DESC
+            days = @toast_message_days
+            variable = {
+                type = key
+                value = leader_trait_ruanmei_pop_up_t1
+                localization = TRAIT
+            }
+            variable = {
+                key = TRAIT_KEY
+                value = leader_trait_ruanmei_pop_up_t1
+            }
+            variable = {
+                key = "border"
+                value = "GFX_invisible"
+            }
+        }
+
         every_pool_leader = {
             limit = {
-                species = { has_trait = trait_herta_pop_up_t1 }
-                NOT = { has_trait = leader_trait_herta_pop_up_t1 }
+                species = { has_trait = trait_ruanmei_pop_up_t1 }
+                NOT = { has_trait = leader_trait_ruanmei_pop_up_t1 }
             }
             add_trait = {
-                trait = leader_trait_herta_pop_up_t1
+                trait = leader_trait_ruanmei_pop_up_t1
+                show_message = no
+            }
+        }
+        set_country_flag = tr_herta_select_ruanmei_2_success
+    }
+
+    option = {
+        name = "DOT_SR_Herta.202.a"
+        add_research_option = tech_ruanmei_choose_1
+    }
+}
+country_event = {
+    id = DOT_SR_Herta.203
+    is_triggered_only = yes
+    hide_window = yes
+
+    trigger = {
+        from = {
+            species = { has_trait = trait_ruanmei_pop_up_t1 }
+        }
+    }
+    immediate = {
+        from = {
+            add_trait = {
+                trait = leader_trait_ruanmei_pop_up_t1
+                show_message = no
+            }
+        }
+    }
+}
+country_event = {
+    id = DOT_SR_Herta.300
+    title = "DOT_SR_Herta.300.name"
+    desc = "DOT_SR_Herta.300.desc"
+    picture = GFX_evt_synth_fertility
+
+    is_triggered_only = yes
+
+    immediate = {
+        set_country_flag = synthetic_empire
+        if = {
+            limit = {
+                has_policy_flag = robots_outlawed
+            }
+            set_policy = {
+                policy = robot_pop_policy
+                option = robot_pops_allowed
+                cooldown = yes
+            }
+        }
+        if = {
+            limit = {
+                OR = {
+                    has_policy_flag = ai_servitude
+                    has_policy_flag = ai_outlawed
+                }
+            }
+            set_policy = {
+                policy = artificial_intelligence_policy
+                option = ai_full_rights
+                cooldown = yes
+            }
+        }
+        if = {
+            limit = {
+                OR = {
+                    is_active_resolution = "resolution_divinity_silence_the_soulless"
+                    is_active_resolution = "resolution_divinity_a_defined_purpose"
+                }
+            }
+            owner = {
+                set_timed_country_flag = { flag = resolution_breached_synthetic_evolution days = 3600 }
+            }
+        }
+        give_technology = { tech = tech_bio_reactor message = no }
+        create_luosi_synth_species_effect = yes
+        every_owned_pop_group = {
+            limit = {
+                is_being_purged = no
+                species = {
+                    is_robotic = no
+                    is_livestock = no
+                }
+            }
+            change_species = event_target:luosi_synthspecies@root.owner
+        }
+
+        every_controlled_ship = {
+            limit = {
+                is_ship_class = shipclass_colonizer
+                species = {
+                    is_robotic = no
+                    is_livestock = no
+                }
+            }
+            change_species = event_target:luosi_synthspecies@root.owner
+        }
+
+        every_owned_army = {
+            limit = {
+                exists = species
+                #exists = planet
+                species = {
+                    is_robotic = no
+                    is_livestock = no
+                }
+                army_type = assault_army
+            }
+            modify_army = {
+                name = random
+                type = "robotic_army"
+                species = event_target:luosi_synthspecies@root.owner
+            }
+        }
+
+        every_owned_army = {
+            limit = {
+                exists = species
+                exists = planet
+                species = {
+                    is_robotic = no
+                    is_livestock = no
+                }
+                army_type = defense_army
+            }
+            modify_army = {
+                name = random
+                type = "robotic_defense_army"
+                species = event_target:luosi_synthspecies@root.owner
+            }
+        }
+
+        every_owned_leader = {
+            limit = {
+                OR = {
+                    species = {
+                        is_robotic = no
+                        is_livestock = no
+                    }
+                    has_trait = leader_trait_luosi_pop_up_t1
+                }
+                NOR = {
+                    has_leader_flag = renowned_leader
+                    has_leader_flag = legendary_leader
+                }
+            }
+            change_species = event_target:luosi_synthspecies@root.owner
+            change_leader_portrait = species
+        }
+        every_pool_leader = {
+            limit = {
+                OR = {
+                    species = {
+                        is_robotic = no
+                        is_livestock = no
+                    }
+                    has_trait = leader_trait_luosi_pop_up_t1
+                }
+            }
+            change_species = event_target:luosi_synthspecies@root.owner
+            change_leader_portrait = species
+        }
+        change_dominant_species = { species = event_target:luosi_synthspecies@root.owner }
+
+        every_owned_leader = {
+            limit = {
+                species = { has_trait = trait_mechanical }
+                NOR = {
+                    has_trait = leader_trait_luosi_pop_up_t1
+                    has_leader_flag = renowned_leader
+                    has_leader_flag = legendary_leader
+                }
+            }
+            add_trait = {
+                trait = leader_trait_luosi_pop_up_t1
+                show_message = no
+            }
+            remove_trait = leader_trait_cyborg
+        }
+
+        create_message = {
+            type = MESSAGE_ALL_GAINED_TRAIT
+            localization = MESSAGE_ALL_GAINED_TRAIT_DESC
+            days = @toast_message_days
+            variable = {
+                type = key
+                value = leader_trait_luosi_pop_up_t1
+                localization = TRAIT
+            }
+            variable = {
+                key = TRAIT_KEY
+                value = leader_trait_luosi_pop_up_t1
+            }
+            variable = {
+                key = "border"
+                value = "GFX_invisible"
+            }
+        }
+
+        every_envoy = {
+            limit = {
+                species = {
+                    is_robotic = no
+                    is_livestock = no
+                }
+            }
+            change_species = event_target:luosi_synthspecies@root.owner
+            change_leader_portrait = species
+        }
+        every_pool_leader = {
+            limit = {
+                species = { has_trait = trait_mechanical }
+                NOT = { has_trait = leader_trait_luosi_pop_up_t1 }
+            }
+            add_trait = {
+                trait = leader_trait_luosi_pop_up_t1
+                show_message = no
+            }
+            remove_trait = leader_trait_cyborg
+        }
+        set_country_flag = tr_herta_select_luosi_2_success
+    }
+
+    option = {
+        name = "utopia.2501.a"
+        add_research_option = tech_luosi_choose_1
+    }
+}
+country_event = {
+    id = DOT_SR_Herta.301
+    title = "DOT_SR_Herta.301.name"
+    desc = "DOT_SR_Herta.301.desc"
+    picture = GFX_evt_scientific_experiments
+
+    is_triggered_only = yes
+
+    immediate = {
+
+    }
+
+    option = {
+        name = "DOT_SR_Herta.301.a"
+    }
+}
+country_event = {
+    id = DOT_SR_Herta.302
+    title = "DOT_SR_Herta.302.name"
+    desc = "DOT_SR_Herta.302.desc"
+    picture = GFX_evt_genetic_modification
+
+    is_triggered_only = yes
+
+    immediate = {
+
+    }
+
+    option = {
+        name = "DOT_SR_Herta.302.a"
+        add_research_option = tech_identity_copy
+        add_research_option = tech_identity_fusion
+        add_research_option = tech_identity_initialization
+    }
+}
+country_event = {
+    id = DOT_SR_Herta.303
+    is_triggered_only = yes
+    hide_window = yes
+
+    trigger = {
+        from = {
+            species = { has_trait = trait_luosi_pop_up_t1 }
+        }
+    }
+    immediate = {
+        from = {
+            add_trait = {
+                trait = leader_trait_luosi_pop_up_t1
                 show_message = no
             }
         }

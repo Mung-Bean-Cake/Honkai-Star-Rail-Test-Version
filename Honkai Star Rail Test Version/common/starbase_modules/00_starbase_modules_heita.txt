@@ -34,12 +34,42 @@ space_mining_station_t3 = {
 			volatile_motes = 10
 			engineering_research = 10
 		}
+        produces = {
+            trigger = {
+                exists = owner
+                owner = { has_tradition = tr_herta_discuss_4 }
+            }
+            minerals = 100
+            exotic_gases = 10
+            volatile_motes = 10
+            engineering_research = 10
+        }
 		upkeep = {
 			energy = 20
 		}
 	}
 	triggered_system_modifier = {
         planet_jobs_minerals_produces_mult = 0.1
+    }
+    triggered_orbit_modifier = {
+        potential = {
+            exists = owner
+            owner = {
+                has_tradition = tr_herta_discuss_4
+            }
+        }
+        ship_orbit_upkeep_mult = -0.2
+        ship_repair_hull_mult = 0.3
+        ship_repair_armor_mult = 0.3
+    }
+    triggered_system_modifier = {
+        potential = {
+            exists = owner
+            owner = {
+                has_tradition = tr_herta_discuss_4
+            }
+        }
+        miner_jobs_bonus_workforce_mult = 0.15
     }
 }
 ###################################
@@ -79,12 +109,44 @@ space_science_station_t3 = {
 			astral_threads = 10
 			minor_artifacts = 10
 		}
+        produces = {
+            trigger = {
+                exists = owner
+                owner = { has_tradition = tr_herta_discuss_4 }
+            }
+            physics_research = 100
+            society_research = 100
+            engineering_research = 100
+            astral_threads = 10
+            minor_artifacts = 10
+        }
 		upkeep = {
 			energy = 12
 			consumer_goods = 12
 			exotic_gases = 6
 		}
 	}
+    triggered_system_modifier = {
+        potential = {
+            exists = owner
+            owner = {
+                has_tradition = tr_herta_discuss_4
+            }
+        }
+        researcher_jobs_bonus_workforce_mult = 0.10
+        planet_researchers_upkeep_mult = -0.1
+    }
+    triggered_country_modifier = {
+        potential = {
+            exists = owner
+            owner = {
+                has_tradition = tr_herta_discuss_4
+            }
+        }
+        sector_max_jumps_add = 1
+        new_cyborg_pop_bonus_workforce_mult = 0.1
+        country_starbase_capacity_add = 1
+    }
 }
 ###################################
 #轨道合金合成站T3
@@ -123,5 +185,33 @@ space_alloys_construction_t3 = {
 			energy = 20
 			minerals = 80
 		}
+        produces = {
+            trigger = {
+                exists = owner
+                owner = { has_tradition = tr_herta_discuss_4 }
+            }
+            alloys = 120
+            consumer_goods = 10
+            exotic_gases = 1
+        }
 	}#记得填
+    triggered_system_modifier = {
+        potential = {
+            exists = owner
+            owner = {
+                has_tradition = tr_herta_discuss_4
+            }
+        }
+        station_gatherers_produces_mult = 1.5
+    }
+    triggered_station_modifier = {
+        potential = {
+            exists = owner
+            owner = {
+                has_tradition = tr_herta_discuss_4
+            }
+        }
+        ship_sensor_range_add = 10
+        ship_hyperlane_range_add = 20
+    }
 }

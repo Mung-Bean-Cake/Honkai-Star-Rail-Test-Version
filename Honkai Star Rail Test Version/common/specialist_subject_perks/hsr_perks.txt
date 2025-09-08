@@ -6,14 +6,17 @@ herta_arc_1_modifier = {
         country_physics_research_produces_mult = 0.2
         country_engineering_research_produces_mult = 0.2
         all_technology_research_speed = 0.05
-        planet_stability_add = 25
+        planet_stability_add = 10
         planet_crime_add = -5
-        num_tech_alternatives_add = 2
+        num_tech_alternatives_add = 1
     }
     overlord_modifier = {
-        all_technology_research_speed = 0.05
+        all_technology_research_speed = 0.1
         job_max_workforce_mult = 0.1
         pop_bonus_workforce_mult = 0.1
+        country_society_research_produces_mult = 0.1
+        country_physics_research_produces_mult = 0.1
+        country_engineering_research_produces_mult = 0.1
     }
     activate_effect = {
         target = {
@@ -45,10 +48,9 @@ herta_arc_1_modifier_debuff = {
     }
 }
 herta_arc_1_modifier_1 = {
-    icon = "GFX_specialist_perk_scholarium_2_leaders"
+    icon = "GFX_specialist_perk_scholarium_1_discovery"
     subject_modifier = {
         trader_jobs_bonus_workforce_mult = 0.25
-        country_base_energy_produces_add = 25
         planet_jobs_energy_produces_mult = 0.1
     }
 
@@ -60,22 +62,20 @@ herta_arc_1_modifier_2 = {
     }
 }
 herta_arc_1_modifier_3 = {
-    icon = "GFX_specialist_perk_scholarium_2_leaders"
+    icon = "GFX_specialist_perk_scholarium_1_planetary_sensors"
     subject_modifier = {
-        planet_building_build_speed_mult = 0.2
-        planet_buildings_cost_mult = -0.2
-        planet_districts_cost_mult = -0.2
-        planet_max_buildings_add = 5
-        #megastructure_build_speed_mult = 0.25
+        planet_building_build_speed_mult = 0.1
+        planet_buildings_cost_mult = -0.1
+        planet_districts_cost_mult = -0.1
     }
-
 }
 herta_arc_1_modifier_4 = {
-    icon = "GFX_specialist_perk_scholarium_2_leaders"
+    icon = "GFX_specialist_perk_scholarium_1_discovery"
     subject_modifier = {
         country_society_research_produces_mult = 0.1
         country_physics_research_produces_mult = 0.1
         country_engineering_research_produces_mult = 0.1
+        planet_researchers_upkeep_mult = -0.25
     }
     subject_modifier={
         planet_researchers_upkeep_mult = -0.25
@@ -86,29 +86,36 @@ herta_arc_2_modifier = {
     #中级加成
     main_perk = yes
     subject_modifier = {
-        country_produces_mult = 0.15
-        planet_stability_add = 40
+        country_society_research_produces_mult = 0.4
+        country_physics_research_produces_mult = 0.4
+        country_engineering_research_produces_mult = 0.4
+        all_technology_research_speed = 0.15
+        planet_stability_add = 30
         planet_crime_add = -20
-        num_tech_alternatives_add = 4
+        num_tech_alternatives_add = 2
     }
     overlord_modifier = {
         all_technology_research_speed = 0.1
-        planet_jobs_produces_mult = 0.1
+        job_max_workforce_mult = 0.25
+        pop_bonus_workforce_mult = 0.25
+        country_society_research_produces_mult = 0.2
+        country_physics_research_produces_mult = 0.2
+        country_engineering_research_produces_mult = 0.2
     }
 }
 herta_arc_2_modifier_debuff = {
     main_perk = yes
     subject_modifier = {
-        pop_amenities_usage_mult = 0.4
-        planet_pops_consumer_goods_upkeep_mult = 0.4
+        pop_amenities_usage_mult = 0.2
+        planet_pops_consumer_goods_upkeep_mult = 0.2
         pop_happiness = -0.2
-        country_naval_cap_mult = -0.4
-        ship_military_cost_mult = 0.4
-        ship_military_upkeep_mult = 0.4
+        country_naval_cap_mult = -0.5
+        ship_military_cost_mult = 0.5
+        ship_military_upkeep_mult = 0.5
     }
 }
 herta_arc_2_modifier_1 = {
-    icon = "GFX_specialist_perk_scholarium_2_leaders"
+    icon = "GFX_specialist_perk_scholarium_2_traits"
     subject_modifier = {
         science_ship_survey_speed = 1
         ship_archaeological_site_excavation_speed_mult = 1
@@ -120,15 +127,15 @@ herta_arc_2_modifier_1 = {
 herta_arc_2_modifier_2 = {
     icon = "GFX_specialist_perk_scholarium_2_leaders"
     subject_modifier = {
-        country_base_energy_produces_add = 100
-        country_base_minerals_produces_add = 100
-        country_base_food_produces_add = 100
-        country_base_consumer_goods_produces_add = 20
-        country_base_alloys_produces_add = 20
+        country_base_energy_produces_add = 50
+        country_base_minerals_produces_add = 50
+        country_base_food_produces_add = 50
+        country_base_consumer_goods_produces_add = 10
+        country_base_alloys_produces_add = 10
         monthly_loyalty = 2
     }
     overlord_relay_network_modifier = {
-        herta_arc_specialist_prospectorium_neighbor_1 = 1
+        herta_subject_country_buff = 1
     }
 
 }
@@ -143,19 +150,46 @@ herta_arc_2_modifier_3 = {
         country_society_research_produces_mult = 0.2
         country_physics_research_produces_mult = 0.2
         country_engineering_research_produces_mult = 0.2
+        physics_tech_cost_mult = -0.05
+        society_tech_cost_mult = -0.05
+        engineering_tech_cost_mult = -0.05
     }
 
 }
 herta_arc_2_modifier_4 = {
     icon = "GFX_specialist_perk_scholarium_2_leaders"
     subject_modifier = {
-        pop_growth_from_immigration = -0.2
-        pop_growth_speed = -0.1
+        country_scientist_cap_add = 1
+        scientist_initial_skill = 1
+    }
+
+    desc = {
+        description = scholarium_3_arctrellis_desc
+    }
+
+    activate_effect = {
+        target = {
+            create_ship_design = { design = "NAME_Scholarium_Arctrellis" }
+            last_created_design = {
+                set_design_flag = scholarium_arctrellis
+            }
+            add_ship_design = last_created_design
+        }
+    }
+
+    deactivate_effect = {
+        target = {
+            every_owned_design = {
+                limit = { has_design_flag = scholarium_arctrellis }
+                save_event_target_as = remove_this_design
+            }
+            remove_ship_design = event_target:remove_this_design
+        }
     }
     overlord_modifier = {
         building_time_mult = -0.2
-        planet_building_build_speed_mult = 0.5
-        planet_clear_blocker_time_mult  = -0.5
+        planet_building_build_speed_mult = 0.25
+        planet_clear_blocker_time_mult  = -0.25
     }
 
 }
@@ -163,14 +197,21 @@ herta_arc_3_modifier = {
     #高级加成
     main_perk = yes
     subject_modifier = {
-        country_produces_mult = 0.25
-        planet_stability_add = 100
-        planet_crime_add = -100
-        num_tech_alternatives_add = 8
+        country_society_research_produces_mult = 0.6
+        country_physics_research_produces_mult = 0.6
+        country_engineering_research_produces_mult = 0.6
+        all_technology_research_speed = 0.1
+        planet_stability_add = 40
+        planet_crime_add = -20
+        num_tech_alternatives_add = 4
     }
     overlord_modifier = {
-        all_technology_research_speed = 0.25
-        planet_jobs_produces_mult = 0.25
+        all_technology_research_speed = 0.1
+        job_max_workforce_mult = 0.3
+        pop_bonus_workforce_mult = 0.3
+        country_society_research_produces_mult = 0.3
+        country_physics_research_produces_mult = 0.3
+        country_engineering_research_produces_mult = 0.3
     }
 }
 herta_arc_3_modifier_debuff = {
@@ -179,23 +220,23 @@ herta_arc_3_modifier_debuff = {
         pop_amenities_usage_mult = 0.6
         planet_pops_consumer_goods_upkeep_mult = 0.6
         pop_happiness = -0.3
-        country_naval_cap_mult = -0.5
-        ship_military_cost_mult = 0.5
-        ship_military_upkeep_mult = 0.5
+        country_naval_cap_mult = -0.6
+        ship_military_cost_mult = 0.6
+        ship_military_upkeep_mult = 0.6
     }
 }
 herta_arc_3_modifier_1 = {
-    icon = "GFX_specialist_perk_scholarium_2_leaders"
+    icon = "GFX_specialist_perk_scholarium_3_discovery"
     subject_modifier = {
-        megastructure_build_speed_mult = 0.5
-        country_megastructure_build_cap_add = 2
-        country_starbase_capacity_add = 10
-        starbase_defense_platform_capacity_add = 20
-        starbase_upgrade_cost_mult = -0.5
+        megastructure_build_speed_mult = 0.1
+        country_megastructure_build_cap_add = 1
+        country_starbase_capacity_add = 5
+        starbase_defense_platform_capacity_add = 5
+        starbase_upgrade_cost_mult = -0.25
     }
     overlord_modifier = {
         megastructure_build_speed_mult = 0.2
-        country_megastructure_build_cap_add = 5
+        country_megastructure_build_cap_add = 1
         country_starbase_capacity_add = 5
     }
 
@@ -203,26 +244,27 @@ herta_arc_3_modifier_1 = {
 herta_arc_3_modifier_2 = {
     icon = "GFX_specialist_perk_scholarium_2_leaders"
     subject_modifier = {
-        physics_tech_cost_mult = -0.25
-        society_tech_cost_mult = -0.25
-        engineering_tech_cost_mult = -0.25
+        physics_tech_cost_mult = -0.1
+        society_tech_cost_mult = -0.1
+        engineering_tech_cost_mult = -0.1
     }
     overlord_modifier = {
-        physics_tech_cost_mult = -0.15
-        society_tech_cost_mult = -0.15
-        engineering_tech_cost_mult = -0.15
+        country_energy_produces_mult = 0.1
+        country_minerals_produces_mult = 0.1
+        country_alloys_produces_mult = 0.1
+        country_exotic_gases_produces_mult = 0.1
+        country_rare_crystals_produces_mult = 0.1
+        country_volatile_motes_produces_mult = 0.1
     }
 
 }
 herta_arc_3_modifier_3 = {
     icon = "GFX_specialist_perk_scholarium_2_leaders"
     subject_modifier = {
-        empire_size_pops_mult = -0.5
-        empire_size_districts_mult = -0.5
-        planet_researchers_physics_research_produces_mult = 1
-        planet_researchers_society_research_produces_mult = 1
-        planet_researchers_engineering_research_produces_mult = 1
-        #planet_researchers_consumer_goods_upkeep_mult = -0.2
+        empire_size_pops_mult = -0.25
+        empire_size_districts_mult = -0.25
+        pop_amenities_usage_mult = -0.25
+        planet_amenities_mult = 0.25
     }
     overlord_modifier = {
         empire_size_pops_mult = -0.15
@@ -232,15 +274,14 @@ herta_arc_3_modifier_3 = {
     }
 }
 herta_arc_3_modifier_4 = {
-    icon = "GFX_specialist_perk_scholarium_2_leaders"
+    icon = "GFX_specialist_perk_scholarium_3_arctrellis"
     subject_modifier = {
         command_limit_add = -20
         country_commander_cap_add = -5
     }
     overlord_modifier = {
-        #country_naval_cap_mult = 0.25
-        #command_limit_add = 100
-        #starbase_shipyard_build_speed_mult = 1
+        country_naval_cap_add = 500
+        command_limit_add = 10
     }
     overlord_relay_network_modifier = {
         herta_arc_specialist_prospectorium_neighbor_3 = 1

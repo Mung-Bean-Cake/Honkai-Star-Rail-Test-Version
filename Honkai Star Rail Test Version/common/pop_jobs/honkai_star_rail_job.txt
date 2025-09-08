@@ -74,3 +74,419 @@ museum_clerk = {
         }
     }
 }
+clone_robot_up = {
+    category = specialist
+
+    swappable_data = {
+        default = {
+            condition_string = SPECIALIST_JOB_TRIGGER
+            building_icon = building_robot_assembly_plant
+        }
+    }
+
+    tags = { pop_assembly  }
+
+    possible = {
+        complex_specialist_job_check_trigger = yes
+    }
+    possible_pre_triggers = {
+        has_owner = yes
+        is_being_purged = no
+        is_being_assimilated = no
+        is_sapient = yes
+    }
+
+    possible_precalc = can_fill_specialist_job
+
+    resources = {
+        category = planet_pop_assemblers
+        produces = {
+            engineering_research = 1
+            physics_research = 1
+        }
+        upkeep = {
+            alloys = 2
+        }
+        upkeep = {
+            trigger = {
+                exists = owner
+                owner = {
+                    has_country_flag = synth_unscheduled_updates
+                }
+            }
+            alloys = 1
+        }
+        upkeep = {
+            trigger = {
+                exists = planet
+                planet = {
+                    roboticist_is_bath_attendant_individual_machine = yes
+                }
+            }
+            alloys = 0.5
+        }
+    }
+
+    triggered_planet_modifier = {
+        planet_pop_assembly_add = 3
+        bonus_pop_growth = 3
+        planet_pop_assembly_mult = 0.15
+        logistic_growth_mult = 0.15
+    }
+    triggered_planet_modifier = {
+        potential = {
+            roboticist_is_bath_attendant_individual_machine = yes
+        }
+        planet_pop_assembly_mult = 0.0075
+        pop_amenities_usage_mult = 0.03
+        mult = planet.value:toxic_attendant_growth
+    }
+
+    triggered_planet_modifier = {
+        potential = {
+            exists = owner
+            owner = {
+                exists = ruler
+                ruler = {
+                    has_trait = leader_trait_legendary_great_inventor
+                }
+            }
+        }
+        planet_amenities_add = 100
+        mult = value:scripted_modifier_mult|MODIFIER|pop_job_amenities_mult|
+    }
+
+    triggered_planet_modifier = {
+        potential = {
+            exists = owner
+            owner = {
+                exists = ruler
+                ruler = {
+                    has_trait = leader_trait_legendary_great_inventor_2
+                }
+            }
+        }
+        planet_amenities_add = 200
+        mult = value:scripted_modifier_mult|MODIFIER|pop_job_amenities_mult|
+    }
+
+    triggered_planet_modifier = {
+        potential = {
+            exists = owner
+            owner = {
+                exists = ruler
+                ruler = {
+                    has_trait = leader_trait_legendary_great_inventor_3
+                }
+            }
+        }
+        planet_amenities_add = 300
+        mult = value:scripted_modifier_mult|MODIFIER|pop_job_amenities_mult|
+    }
+
+    triggered_planet_modifier = {
+        potential = {
+            exists = owner
+            owner = {
+                has_tradition = tr_modularity_2
+            }
+        }
+        planet_pop_assembly_add = 1 #If this changes, update tr_modularity_2_modifier_desc
+    }
+
+    triggered_planet_modifier = {
+        potential = {
+            exists = owner
+            owner = {
+                has_active_tradition = tr_synthetics_prefabricated_components
+            }
+        }
+        planet_amenities_add = 200
+        mult = value:scripted_modifier_mult|MODIFIER|pop_job_amenities_mult|
+    }
+
+    triggered_planet_modifier = {
+        potential = {
+            check_modifier_value = {
+                modifier = job_roboticist_branch_office_value_mult
+                value > 0
+            }
+        }
+        # Actual value determined in the script value below
+        branch_office_value_mult = 1
+        mult = value:roboticist_branch_office_value_mult
+    }
+    weight = {
+        weight = 500
+        modifier = {
+            factor = 10
+            owner = { is_synthetic_empire = yes }
+        }
+    }
+
+    promotion = {
+        time = @standard_promotion_time
+        effect = {
+            pop_amount_change_category = {
+                CATEGORY = specialist
+                AMOUNT = local_pop_amount
+            }
+        }
+    }
+}
+herta_up_researcher = {
+    category = specialist
+
+    swappable_data = {
+        default = {
+            condition_string = SPECIALIST_JOB_TRIGGER
+            building_icon = herta_herta_discuss
+        }
+    }
+
+    tags = {  research }
+
+    possible_pre_triggers = {
+        has_owner = yes
+        is_being_purged = no
+        is_being_assimilated = no
+        is_sapient = yes
+    }
+
+    possible_precalc = can_fill_specialist_job
+    possible = {
+        complex_specialist_job_check_trigger = yes
+    }
+    triggered_planet_modifier = {
+        potential = {
+            owner = { has_tradition = tr_herta_discuss_2 }
+        }
+        logistic_growth_mult = 0.1
+        planet_pop_assembly_add = 2
+    }
+    triggered_planet_modifier = {
+        potential = {
+            owner = { has_tradition = tr_herta_discuss_2_1 }
+        }
+        logistic_growth_mult = 0.25
+        planet_jobs_upkeep_mult = -0.25
+    }
+    triggered_planet_modifier = {
+        potential = {
+            owner = { has_tradition = tr_herta_discuss_2_2 }
+        }
+        planet_pop_assembly_mult = 0.25
+        planet_pop_assembly_add = 2
+    }
+    resources = {
+        category = planet_researchers
+        produces = {
+            unity = 2
+            engineering_research = 7.5
+            physics_research = 7.5
+            society_research = 7.5
+            sr_dark_matter = 0.5
+            astral_threads = 0.5
+            minor_artifacts = 0.5
+        }
+        upkeep = {
+            energy = 1
+            consumer_goods = 2
+        }
+    }
+
+    weight = {
+        weight = @specialist_job_weight
+        mult = value:job_weights_multiple_resources_modifier|JOB|herta_up_researcher|RESOURCE1|engineering_research|WEIGHT1|0.5|RESOURCE2|physics_research|WEIGHT2|0.5|
+        modifier = {
+            factor = 0.2
+            has_citizenship_rights = no
+            NOT = { has_trait = trait_mechanical }
+        }
+        modifier = {
+            factor = 2
+            has_living_standard = { type = living_standard_academic_privilege }
+        }
+        modifier = {
+            factor = 0.1
+            can_take_servant_job = yes
+        }
+        modifier = {
+            factor = 0.8
+            is_enslaved = yes
+            has_slavery_type = { type = slavery_indentured }
+        }
+    }
+
+    inline_script = "jobs/automodding_priority_research"
+
+    promotion = {
+        time = @standard_promotion_time
+        effect = {
+            pop_amount_change_category = {
+                CATEGORY = specialist
+                AMOUNT = local_pop_amount
+            }
+        }
+    }
+}
+herta_up_ruanmei_1 = {
+    category = specialist
+
+    swappable_data = {
+        default = {
+            condition_string = SPECIALIST_JOB_TRIGGER
+            building_icon = building_machine_major_capital
+        }
+    }
+
+    tags = {  minerals energy }
+
+    possible_pre_triggers = {
+        has_owner = yes
+        is_being_purged = no
+        is_being_assimilated = no
+        is_sapient = yes
+    }
+
+    possible_precalc = can_fill_specialist_job
+    possible = {
+        complex_specialist_job_check_trigger = yes
+    }
+    resources = {
+        category = planet_jobs_specialist
+        produces = {
+            unity = 2
+            energy = 8
+            minerals = 8
+        }
+        produces = {
+            trigger = {
+                is_planet_class = pc_hsr_gaia
+            }
+            food = 8
+        }
+        produces = {
+            trigger = {
+                is_planet_class = pc_hsr_robot_planet
+            }
+            energy = 8
+        }
+        upkeep = {
+            energy = 2
+            consumer_goods = 2
+        }
+    }
+
+    weight = {
+        weight = @specialist_job_weight
+        mult = value:job_weights_multiple_resources_modifier|JOB|herta_up_ruanmei_1|RESOURCE1|minerals|WEIGHT1|0.5|RESOURCE2|energy|WEIGHT2|0.5|
+        modifier = {
+            factor = 0.2
+            has_citizenship_rights = no
+            NOT = { has_trait = trait_mechanical }
+        }
+        modifier = {
+            factor = 2
+            has_living_standard = { type = living_standard_academic_privilege }
+        }
+        modifier = {
+            factor = 0.1
+            can_take_servant_job = yes
+        }
+        modifier = {
+            factor = 0.8
+            is_enslaved = yes
+            has_slavery_type = { type = slavery_indentured }
+        }
+    }
+
+    inline_script = "jobs/automodding_priority_minerals"
+
+    promotion = {
+        time = @standard_promotion_time
+        effect = {
+            pop_amount_change_category = {
+                CATEGORY = specialist
+                AMOUNT = local_pop_amount
+            }
+        }
+    }
+}
+herta_up_ruanmei_2 = {
+    category = specialist
+
+    swappable_data = {
+        default = {
+            condition_string = SPECIALIST_JOB_TRIGGER
+            building_icon = building_machine_major_capital
+        }
+    }
+
+    tags = {  alloys consumer_goods }
+
+    possible_pre_triggers = {
+        has_owner = yes
+        is_being_purged = no
+        is_being_assimilated = no
+        is_sapient = yes
+    }
+
+    possible_precalc = can_fill_specialist_job
+    possible = {
+        complex_specialist_job_check_trigger = yes
+    }
+    resources = {
+        category = planet_jobs_specialist
+        produces = {
+            alloys = 8
+            consumer_goods = 8
+            exotic_gases = 1
+            volatile_motes = 1
+            rare_crystals = 1
+            sr_dark_matter = 0.2
+            sr_living_metal = 0.2
+            astral_threads = 0.2
+
+        }
+        upkeep = {
+            energy = 3
+            consumer_goods = 3
+        }
+    }
+
+    weight = {
+        weight = @specialist_job_weight
+        mult = value:job_weights_multiple_resources_modifier|JOB|herta_up_ruanmei_2|RESOURCE1|alloys|WEIGHT1|0.5|RESOURCE2|exotic_gases|WEIGHT2|0.5|
+        modifier = {
+            factor = 0.2
+            has_citizenship_rights = no
+            NOT = { has_trait = trait_mechanical }
+        }
+        modifier = {
+            factor = 2
+            has_living_standard = { type = living_standard_academic_privilege }
+        }
+        modifier = {
+            factor = 0.1
+            can_take_servant_job = yes
+        }
+        modifier = {
+            factor = 0.8
+            is_enslaved = yes
+            has_slavery_type = { type = slavery_indentured }
+        }
+    }
+
+    inline_script = "jobs/automodding_priority_alloys"
+
+    promotion = {
+        time = @standard_promotion_time
+        effect = {
+            pop_amount_change_category = {
+                CATEGORY = specialist
+                AMOUNT = local_pop_amount
+            }
+        }
+    }
+}

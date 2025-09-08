@@ -219,3 +219,118 @@ create_herta_cybernetic_species_mod = {
         }
     }
 }
+create_ruanmei_gene_species_mod = {
+    species = {
+        modify_species = {
+            effect = {
+                create_species = {
+                    is_mod = yes
+                    name = this
+                    plural = this
+                    class = this
+                    portrait = this
+                    traits = this
+                    can_be_modified = this
+                    homeworld = this
+                    namelist = this
+                    gender = this
+                    traits = {
+                        ideal_planet_class = this
+                        trait = trait_ruanmei_pop_up_t1
+                    }
+                }
+            }
+        }
+        save_event_target_as = changing_species
+    }
+
+    owner = {
+        every_owned_pop_group = {
+            limit = { is_exact_same_species = event_target:changing_species }
+            change_species = last_created_species
+        }
+        every_owned_leader = {
+            limit = { is_exact_same_species = event_target:changing_species }
+            change_species = last_created_species
+        }
+        every_pool_leader = {
+            limit = { is_exact_same_species = event_target:changing_species }
+            change_species = last_created_species
+        }
+        every_envoy = {
+            limit = { is_exact_same_species = event_target:changing_species }
+            change_species = last_created_species
+        }
+        every_owned_army = {
+            limit = {
+                exists = species
+                is_exact_same_species = event_target:changing_species
+            }
+            change_species = last_created_species
+        }
+        every_controlled_ship = {
+            limit = {
+                is_ship_class = shipclass_colonizer
+                is_exact_same_species = event_target:changing_species
+            }
+            change_species = last_created_species
+        }
+    }
+}
+create_luosi_synth_species_effect = {
+    if = {
+        limit = {
+            NOT = {
+                exists = event_target:luosi_synthspecies@root.owner
+            }
+        }
+        owner_main_species = {
+            create_species = {
+                is_mod = yes
+                name = this
+                plural = this
+                class = "ROBOT"
+                portrait = this
+                traits = {
+                    trait = trait_mechanical
+                    trait = trait_luosi_pop_up_t1
+                }
+                can_be_modified = this
+                homeworld = this
+                namelist = this
+                gender = this
+
+                effect = {
+                    set_synth_origin_traits_effect = yes
+                    set_synth_or_robot_portrait_effect = yes
+                    save_global_event_target_as = luosi_synthspecies@root.owner
+                }
+            }
+        }
+        owner = {
+            if = {
+                limit = {
+                    has_policy_flag = robots_outlawed
+                }
+                set_policy = {
+                    policy = robot_pop_policy
+                    option = robot_pops_allowed
+                    cooldown = yes
+                }
+            }
+            if = {
+                limit = {
+                    OR = {
+                        has_policy_flag = ai_servitude
+                        has_policy_flag = ai_outlawed
+                    }
+                }
+                set_policy = {
+                    policy = artificial_intelligence_policy
+                    option = ai_full_rights
+                    cooldown = yes
+                }
+            }
+        }
+    }
+}

@@ -156,7 +156,7 @@ trait_herta_pop_up_t1  ={
             }
         }
         pop_bonus_workforce_mult = 0.75
-        pop_workforce_mult = 0.5
+        job_max_workforce_mult = 0.75
         mult = value:new_cyborg_pop_bonus_workforce_mult_value
     }
     triggered_species_modifier = {
@@ -167,7 +167,7 @@ trait_herta_pop_up_t1  ={
             }
         }
         pop_bonus_workforce_mult = 1
-        pop_workforce_mult = 0.75
+        job_max_workforce_mult = 1
         pop_amenities_usage_mult = 0.25
         pop_housing_usage_mult = 0.25
         planet_jobs_upkeep_mult = 0.25
@@ -192,14 +192,15 @@ trait_herta_pop_up_t2  ={
     randomized=no
     advanced_trait=no
     icon="gfx/interface/icons/traits/trait_herta_pop_up_t2.dds"
+    prerequisites = { tech_herta_choose_1 }
     species_potential_add = {
         from = {
-            has_tradition = tr_herta_discuss_2
+            has_technology = tech_herta_choose_1
         }
     }
     species_possible_remove = {
         from = {
-            has_tradition = tr_herta_discuss_2
+            has_technology = tech_herta_choose_1
         }
     }
     species_possible_merge_add = {
@@ -231,14 +232,15 @@ trait_herta_pop_up_t3  ={
     randomized=no
     advanced_trait=no
     icon="gfx/interface/icons/traits/trait_herta_pop_up_t3.dds"
+    prerequisites = { tech_herta_choose_1 }
     species_potential_add = {
         from = {
-            has_tradition = tr_herta_discuss_2
+            has_technology = tech_herta_choose_1
         }
     }
     species_possible_remove = {
         from = {
-            has_tradition = tr_herta_discuss_2
+            has_technology = tech_herta_choose_1
         }
     }
     species_possible_merge_add = {
@@ -260,14 +262,15 @@ trait_herta_pop_up_t4  ={
     randomized=no
     advanced_trait=no
     icon="gfx/interface/icons/traits/trait_herta_pop_up_t4.dds"
+    prerequisites = { tech_herta_choose_1 }
     species_potential_add = {
         from = {
-            has_tradition = tr_herta_discuss_2
+            has_technology = tech_herta_choose_1
         }
     }
     species_possible_remove = {
         from = {
-            has_tradition = tr_herta_discuss_2
+            has_technology = tech_herta_choose_1
         }
     }
     species_possible_merge_add = {
@@ -289,14 +292,15 @@ trait_herta_pop_up_t5  ={
     randomized=no
     advanced_trait=no
     icon="gfx/interface/icons/traits/trait_herta_pop_up_t5.dds"
+    prerequisites = { tech_herta_choose_1 }
     species_potential_add = {
         from = {
-            has_tradition = tr_herta_discuss_2
+            has_technology = tech_herta_choose_1
         }
     }
     species_possible_remove = {
         from = {
-            has_tradition = tr_herta_discuss_2
+            has_technology = tech_herta_choose_1
         }
     }
     species_possible_merge_add = {
@@ -322,14 +326,15 @@ trait_herta_pop_up_t6  ={
     randomized=no
     advanced_trait=no
     icon="gfx/interface/icons/traits/trait_herta_pop_up_t6.dds"
+    prerequisites = { tech_herta_choose_1 }
     species_potential_add = {
         from = {
-            has_tradition = tr_herta_discuss_2
+            has_technology = tech_herta_choose_1
         }
     }
     species_possible_remove = {
         from = {
-            has_tradition = tr_herta_discuss_2
+            has_technology = tech_herta_choose_1
         }
     }
     species_possible_merge_add = {
@@ -355,6 +360,622 @@ leader_trait_herta_pop_up_t1 = {
         CLASS = leader
         ICON = "GFX_leader_trait_herta_pop_up_t1"
         RARITY = rare
+        COUNCIL = triggered
+        TIER = none
+    }
+    # 统治者
+    triggered_councilor_modifier = {
+        potential = {
+            is_ruler = yes
+        }
+        num_tech_alternatives_add = 2
+        all_technology_research_speed = 0.2
+        specimens_produces_mult = 0.2
+    }
+    # 指挥官
+    triggered_fleet_modifier = {
+        potential = {
+            is_ruler = no
+            leader_class = commander
+        }
+        ship_fire_rate_mult = 0.2
+        ship_evasion_mult = 0.2
+        ship_disengage_chance_mult = 0.2
+    }
+    triggered_army_modifier = {
+        potential = {
+            is_ruler = no
+            leader_class = commander
+        }
+        army_damage_taken_mult = -0.2
+        army_disengage_chance_mult = 0.2
+    }
+    # 科学官
+    triggered_modifier = {
+        potential = {
+            is_ruler = no
+            leader_class = scientist
+        }
+        science_ship_survey_speed = 0.2
+        ship_capture_chance_add = 0.2
+        ship_anomaly_research_speed_mult = 0.2
+    }
+    # 行政官
+    triggered_galcom_modifier = {
+        potential = {
+            is_ruler = no
+            leader_class = official
+        }
+        diplo_weight_pops_mult = 0.2
+        country_trust_growth = 0.2
+    }
+    triggered_federation_modifier = {
+        potential = {
+            is_ruler = no
+            leader_class = official
+        }
+        cohesion_add = 2
+    }
+    # 通用
+    triggered_planet_modifier = {
+        potential = {
+            is_ruler = no
+        }
+        organic_pop_bonus_workforce_mult = 0.2
+        planet_jobs_upkeep_mult = -0.2
+    }
+    triggered_sector_modifier = {
+        potential = {
+            is_ruler = no
+        }
+        organic_pop_bonus_workforce_mult = 0.1
+        planet_jobs_upkeep_mult = -0.1
+    }
+    self_modifier = {
+        leader_skill_add = 1
+    }
+    leader_class = all
+    initial = no
+    randomized = no
+}
+#基因耦合率初始为1，每增加一段会减去一点
+trait_ruanmei_pop_up_t1  ={
+    cost = 3
+    allowed_archetypes = { BIOLOGICAL LITHOID }
+    immortal_leaders = no
+    improves_leaders = no
+    randomized=no
+    advanced_trait=no
+    icon="gfx/interface/icons/traits/trait_ruanmei_pop_up_t1.dds"
+    prerequisites = { tech_ruanmei_choose_1 }
+    species_potential_add = {
+        from = {
+            has_technology = tech_ruanmei_choose_1
+        }
+    }
+    species_possible_remove = {
+        from = {
+            has_technology = tech_ruanmei_choose_1
+        }
+    }
+    tags = { organic positive habitability army leader  }
+    modifier = {
+        pop_environment_tolerance = 0.20
+        logistic_growth_mult = 0.2
+        leader_lifespan_add = 100
+        new_gene_synergy_mult = 1
+    }
+    triggered_species_modifier = {
+        pop_bonus_workforce_mult = 1
+        job_max_workforce_mult = 1
+        pop_amenities_usage_mult = -0.75
+        planet_jobs_upkeep_mult = -0.75
+        mult = value:new_gene_synergy_mult
+    }
+    custom_tooltip_with_modifiers = TRAIT_RUANMEI_POP_UP_T1_EXCRETIONS_EFFECT
+    resources = {
+        category = planet_pops
+        produces = {
+            unity = 0.1
+        }
+    }
+}
+trait_ruanmei_pop_up_t2  ={
+    cost = 2
+    allowed_archetypes = { BIOLOGICAL LITHOID }
+    immortal_leaders = no
+    improves_leaders = no
+    randomized=no
+    advanced_trait=no
+    icon="gfx/interface/icons/traits/trait_ruanmei_pop_up_t2.dds"
+    prerequisites = { tech_ruanmei_choose_1 }
+    species_potential_add = {
+        from = {
+            has_technology = tech_ruanmei_choose_1
+        }
+    }
+    species_possible_remove = {
+        from = {
+            has_technology = tech_ruanmei_choose_1
+        }
+    }
+    species_possible_merge_add = {
+        always = no
+    }
+    tags = { organic positive   leader  }
+    modifier = {
+        researcher_jobs_bonus_workforce_mult = 0.5
+        specialist_and_complex_drone_cat_bonus_workforce_mult = 0.5
+        leader_initial_skill = 1
+        species_leader_exp_gain = 0.25
+        new_gene_synergy_mult = -0.25
+    }
+    custom_tooltip_with_modifiers = TRAIT_HERTA_POP_UP_T2_EXCRETIONS_EFFECT
+    resources = {
+        category = planet_pops
+        produces = {
+            physics_research = 0.03
+            engineering_research = 0.03
+            society_research = 0.03
+        }
+    }
+}
+trait_ruanmei_pop_up_t3  ={
+    cost = 2
+    allowed_archetypes = { BIOLOGICAL LITHOID }
+    immortal_leaders = no
+    improves_leaders = no
+    randomized=no
+    advanced_trait=no
+    icon="gfx/interface/icons/traits/trait_ruanmei_pop_up_t3.dds"
+    prerequisites = { tech_ruanmei_choose_1 }
+    species_potential_add = {
+        from = {
+            has_technology = tech_ruanmei_choose_1
+        }
+    }
+    species_possible_remove = {
+        from = {
+            has_technology = tech_ruanmei_choose_1
+        }
+    }
+    species_possible_merge_add = {
+        always = no
+    }
+    tags = { organic positive     }
+    modifier = {
+        foundry_jobs_bonus_workforce_mult = 0.25
+        artisan_jobs_bonus_workforce_mult = 0.25
+        worker_and_simple_drone_cat_bonus_workforce_mult = 0.5
+        logistic_growth_mult = 0.1
+        new_gene_synergy_mult = -0.25
+    }
+}
+trait_ruanmei_pop_up_t4  ={
+    cost = 2
+    allowed_archetypes = { BIOLOGICAL LITHOID }
+    immortal_leaders = no
+    improves_leaders = no
+    randomized=no
+    advanced_trait=no
+    icon="gfx/interface/icons/traits/trait_ruanmei_pop_up_t4.dds"
+    prerequisites = { tech_ruanmei_choose_1 }
+    species_potential_add = {
+        from = {
+            has_technology = tech_ruanmei_choose_1
+        }
+    }
+    species_possible_remove = {
+        from = {
+            has_technology = tech_ruanmei_choose_1
+        }
+    }
+    species_possible_merge_add = {
+        always = no
+    }
+    tags = { organic positive    }
+    modifier = {
+        army_damage_mult = 1
+        army_health = 1
+        army_morale = 1
+        army_collateral_damage_mult = -0.5
+        new_gene_synergy_mult = -0.15
+    }
+}
+trait_ruanmei_pop_up_t5  ={
+    cost = 3
+    allowed_archetypes = { BIOLOGICAL LITHOID }
+    immortal_leaders = no
+    improves_leaders = no
+    randomized=no
+    advanced_trait=no
+    icon="gfx/interface/icons/traits/trait_ruanmei_pop_up_t5.dds"
+    prerequisites = { tech_ruanmei_choose_1 }
+    species_potential_add = {
+        from = {
+            has_technology = tech_ruanmei_choose_1
+        }
+    }
+    species_possible_remove = {
+        from = {
+            has_technology = tech_ruanmei_choose_1
+        }
+    }
+    species_possible_merge_add = {
+        always = no
+    }
+    tags = { organic positive    }
+    modifier = {
+        new_gene_synergy_mult = 0.4
+        pop_happiness = 0.1
+    }
+    custom_tooltip_with_modifiers = TRAIT_RUANMEI_POP_UP_T5_EXCRETIONS_EFFECT
+    resources = {
+        category = planet_pops
+        upkeep = {
+            food = 0.035
+        }
+    }
+}
+trait_ruanmei_pop_up_t6  ={
+    cost = 2
+    allowed_archetypes = { BIOLOGICAL LITHOID }
+    immortal_leaders = no
+    improves_leaders = no
+    randomized=no
+    advanced_trait=no
+    icon="gfx/interface/icons/traits/trait_ruanmei_pop_up_t6.dds"
+    prerequisites = { tech_ruanmei_choose_1 }
+    species_potential_add = {
+        from = {
+            has_technology = tech_ruanmei_choose_1
+        }
+    }
+    species_possible_remove = {
+        from = {
+            has_technology = tech_ruanmei_choose_1
+        }
+    }
+    species_possible_merge_add = {
+        always = no
+    }
+    tags = { organic positive   }
+    modifier = {
+        bureaucrat_jobs_bonus_workforce_mult = 1
+        trader_jobs_bonus_workforce_mult = 1
+        negative_leader_traits_species = -1
+        new_gene_synergy_mult = -0.25
+    }
+    custom_tooltip_with_modifiers = TRAIT_HERTA_POP_UP_T6_EXCRETIONS_EFFECT
+    resources = {
+        category = planet_pops
+        upkeep = {
+            consumer_goods = 0.025
+        }
+    }
+}
+leader_trait_ruanmei_pop_up_t1 = {
+    inline_script = {
+        script = trait/icon
+        CLASS = leader
+        ICON = "GFX_leader_trait_herta_pop_up_t1"
+        RARITY = common
+        COUNCIL = triggered
+        TIER = none
+    }
+    # 统治者
+    triggered_councilor_modifier = {
+        potential = {
+            is_ruler = yes
+        }
+        num_tech_alternatives_add = 2
+        all_technology_research_speed = 0.2
+        specimens_produces_mult = 0.2
+    }
+    # 指挥官
+    triggered_fleet_modifier = {
+        potential = {
+            is_ruler = no
+            leader_class = commander
+        }
+        ship_fire_rate_mult = 0.2
+        ship_evasion_mult = 0.2
+        ship_disengage_chance_mult = 0.2
+    }
+    triggered_army_modifier = {
+        potential = {
+            is_ruler = no
+            leader_class = commander
+        }
+        army_damage_taken_mult = -0.2
+        army_disengage_chance_mult = 0.2
+    }
+    # 科学官
+    triggered_modifier = {
+        potential = {
+            is_ruler = no
+            leader_class = scientist
+        }
+        science_ship_survey_speed = 0.2
+        ship_capture_chance_add = 0.2
+        ship_anomaly_research_speed_mult = 0.2
+    }
+    # 行政官
+    triggered_galcom_modifier = {
+        potential = {
+            is_ruler = no
+            leader_class = official
+        }
+        diplo_weight_pops_mult = 0.2
+        country_trust_growth = 0.2
+    }
+    triggered_federation_modifier = {
+        potential = {
+            is_ruler = no
+            leader_class = official
+        }
+        cohesion_add = 2
+    }
+    # 通用
+    triggered_planet_modifier = {
+        potential = {
+            is_ruler = no
+        }
+        organic_pop_bonus_workforce_mult = 0.2
+        planet_jobs_upkeep_mult = -0.2
+    }
+    triggered_sector_modifier = {
+        potential = {
+            is_ruler = no
+        }
+        organic_pop_bonus_workforce_mult = 0.1
+        planet_jobs_upkeep_mult = -0.1
+    }
+    self_modifier = {
+        leader_skill_add = 1
+    }
+    leader_class = all
+    initial = no
+    randomized = no
+}
+#智械
+trait_luosi_pop_up_t1  ={
+    cost = 4
+    allowed_archetypes = { ROBOT MACHINE }
+    immortal_leaders = no
+    improves_leaders = no
+    randomized=no
+    advanced_trait=no
+    icon="gfx/interface/icons/traits/trait_luosi_pop_up_t1.dds"
+    prerequisites = { tech_luosi_choose_1 }
+    species_potential_add = {
+        from = {
+            has_technology = tech_luosi_choose_1
+        }
+    }
+    species_possible_remove = {
+        from = {
+            has_technology = tech_luosi_choose_1
+        }
+    }
+    tags = { machine positive habitability army  }
+    modifier = {
+        habitability_floor_add = 0.25
+        planet_pop_assembly_mult = 0.5
+        planet_pop_assembly_add = 1
+        leader_lifespan_add = 100
+        new_robot_humanity_mult = 0.5
+        new_robot_mechanization_mult = 0.5
+    }
+    triggered_species_modifier = {
+        pop_bonus_workforce_mult = 0.5
+        job_max_workforce_mult = 0.75
+        species_empire_size_mult = -0.75
+        pop_happiness = 0.75
+        planet_pops_robotics_upkeep_mult = -0.75
+        mult = value:new_robot_humanity_mult
+    }
+    triggered_species_modifier = {
+        pop_bonus_workforce_mult = 0.75
+        job_max_workforce_mult = 0.5
+        pop_housing_usage_mult = -0.75
+        pop_amenities_usage_mult = -0.75
+        mult = value:new_robot_mechanization_mult
+    }
+    custom_tooltip_with_modifiers = TRAIT_LUOSI_POP_UP_T1_EXCRETIONS_EFFECT
+    resources = {
+        category = planet_pops
+        upkeep = {
+            energy = 0.25
+        }
+    }
+}
+trait_luosi_pop_up_t2  ={
+    cost = 3
+    allowed_archetypes = { ROBOT MACHINE }
+    immortal_leaders = no
+    improves_leaders = no
+    randomized=no
+    advanced_trait=no
+    icon="gfx/interface/icons/traits/trait_luosi_pop_up_t2.dds"
+    prerequisites = { tech_luosi_choose_1 }
+    species_potential_add = {
+        from = {
+            has_technology = tech_luosi_choose_1
+        }
+    }
+    species_possible_remove = {
+        from = {
+            has_technology = tech_luosi_choose_1
+        }
+    }
+    species_possible_merge_add = {
+        always = no
+    }
+    tags = { organic positive   leader  }
+    modifier = {
+        researcher_jobs_bonus_workforce_mult = 0.5
+        specialist_and_complex_drone_cat_bonus_workforce_mult = 0.5
+        leader_initial_skill = 1
+        species_leader_exp_gain = 0.25
+        new_robot_humanity_mult = -0.1
+        new_robot_mechanization_mult = 0.1
+    }
+    custom_tooltip_with_modifiers = TRAIT_LUOSI_POP_UP_T2_EXCRETIONS_EFFECT
+    resources = {
+        category = planet_pops
+        produces = {
+            physics_research = 0.03
+            engineering_research = 0.03
+            society_research = 0.03
+        }
+    }
+}
+trait_luosi_pop_up_t3  ={
+    cost = 2
+    allowed_archetypes = { ROBOT MACHINE }
+    immortal_leaders = no
+    improves_leaders = no
+    randomized=no
+    advanced_trait=no
+    icon="gfx/interface/icons/traits/trait_luosi_pop_up_t3.dds"
+    prerequisites = { tech_luosi_choose_1 }
+    species_potential_add = {
+        from = {
+            has_technology = tech_luosi_choose_1
+        }
+    }
+    species_possible_remove = {
+        from = {
+            has_technology = tech_luosi_choose_1
+        }
+    }
+    species_possible_merge_add = {
+        always = no
+    }
+    tags = { organic positive     }
+    modifier = {
+        foundry_jobs_bonus_workforce_mult = 0.25
+        artisan_jobs_bonus_workforce_mult = 0.25
+        worker_and_simple_drone_cat_bonus_workforce_mult = 0.5
+        planet_pop_assembly_mult = 0.25
+    }
+}
+trait_luosi_pop_up_t4  ={
+    cost = 2
+    allowed_archetypes = { ROBOT MACHINE }
+    immortal_leaders = no
+    improves_leaders = no
+    randomized=no
+    advanced_trait=no
+    icon="gfx/interface/icons/traits/trait_luosi_pop_up_t4.dds"
+    prerequisites = { tech_luosi_choose_1 }
+    species_potential_add = {
+        from = {
+            has_technology = tech_luosi_choose_1
+        }
+    }
+    species_possible_remove = {
+        from = {
+            has_technology = tech_luosi_choose_1
+        }
+    }
+    species_possible_merge_add = {
+        always = no
+    }
+    tags = { organic positive    }
+    modifier = {
+        army_damage_mult = 1
+        army_health = 1
+        army_morale = 1
+    }
+}
+trait_luosi_pop_up_t5  ={
+    cost = 3
+    allowed_archetypes = { ROBOT MACHINE }
+    opposites = {
+        trait_luosi_pop_up_t6
+    }
+    immortal_leaders = no
+    improves_leaders = no
+    randomized=no
+    advanced_trait=no
+    icon="gfx/interface/icons/traits/trait_luosi_pop_up_t5.dds"
+    prerequisites = { tech_luosi_choose_1 }
+    species_potential_add = {
+        from = {
+            has_technology = tech_luosi_choose_1
+        }
+    }
+    species_possible_remove = {
+        from = {
+            has_technology = tech_luosi_choose_1
+        }
+    }
+    species_possible_merge_add = {
+        always = no
+    }
+    tags = { organic positive    }
+    modifier = {
+        new_robot_humanity_mult = 0.4
+        new_robot_mechanization_mult = -0.4
+        pop_happiness = 0.2
+        enforcer_jobs_bonus_workforce_mult = 0.20
+    }
+    custom_tooltip_with_modifiers = TRAIT_LUOSI_POP_UP_T5_EXCRETIONS_EFFECT
+    resources = {
+        category = planet_pops
+        upkeep = {
+            food = 0.01
+        }
+    }
+}
+trait_luosi_pop_up_t6  ={
+    cost = 3
+    allowed_archetypes = { ROBOT MACHINE }
+    immortal_leaders = no
+    improves_leaders = no
+    randomized=no
+    advanced_trait=no
+    icon="gfx/interface/icons/traits/trait_luosi_pop_up_t6.dds"
+    opposites = {
+        trait_luosi_pop_up_t5
+    }
+    prerequisites = { tech_luosi_choose_1 }
+    species_potential_add = {
+        from = {
+            has_technology = tech_luosi_choose_1
+        }
+    }
+    species_possible_remove = {
+        from = {
+            has_technology = tech_luosi_choose_1
+        }
+    }
+    species_possible_merge_add = {
+        always = no
+    }
+    tags = { organic positive   }
+    modifier = {
+        new_robot_humanity_mult = -0.4
+        new_robot_mechanization_mult = 0.4
+        planet_pop_assembly_mult = 0.25
+        robotic_pop_bonus_workforce_mult = 0.1
+    }
+    custom_tooltip_with_modifiers = TRAIT_LUOSI_POP_UP_T6_EXCRETIONS_EFFECT
+    resources = {
+        category = planet_pops
+        upkeep = {
+            energy = 0.025
+        }
+    }
+}
+leader_trait_luosi_pop_up_t1 = {
+    inline_script = {
+        script = trait/icon
+        CLASS = leader
+        ICON = "GFX_leader_trait_herta_pop_up_t1"
+        RARITY = veteran
         COUNCIL = triggered
         TIER = none
     }

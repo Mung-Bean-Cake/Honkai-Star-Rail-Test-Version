@@ -436,3 +436,116 @@ decision_ruanmei_get_buff = {
 		weight = 100
 	}
 }
+decision_herta_ruanmei = {
+    owned_planets_only = yes
+    icon = decision_cultivated_worldscaping
+    enactment_time = 1200
+    resources = {
+        category = decisions
+        cost = {
+            food = 5000
+            energy = 5000
+        }
+    }
+
+    potential = {
+        NOR = {
+            is_planet_class = pc_city
+            is_planet_class = pc_relic
+            has_modifier = resort_colony
+            has_modifier = penal_colony
+            has_modifier = slave_colony
+            has_modifier = pm_wenkwort_custodian
+        }
+        is_artificial = no
+        exists = owner
+        owner = {
+            has_technology = tech_ruanmei_choose_2
+        }
+        NOT = {  }
+    }
+
+    allow = {
+        num_uncleared_blockers < 1
+    }
+    effect = {
+        custom_tooltip = decision_herta_ruanmei_tt
+        hidden_effect = {
+            save_deposits = yes
+            clear_deposits = yes
+            restore_saved_deposits = yes
+            change_pc = pc_hsr_gaia
+            while = {
+                add_district = district_ruanmei_1
+                count = 3
+            }
+            set_planet_entity = {
+                entity = "hsr_gaia_01_entity"
+                graphical_culture = owner
+            }
+            owner = {
+                country_event = { id = distar.201 } # port for living planet distar.197, triggers in event
+            }
+        }
+    }
+
+    ai_weight = {
+        weight = 100
+    }
+}
+decision_herta_luosi = {
+    owned_planets_only = yes
+    icon = decision_divine_algorithm
+    enactment_time = 1200
+    resources = {
+        category = decisions
+        cost = {
+            energy = 10000
+        }
+    }
+
+    potential = {
+        NOR = {
+            is_planet_class = pc_city
+            is_planet_class = pc_relic
+            has_modifier = resort_colony
+            has_modifier = penal_colony
+            has_modifier = slave_colony
+            has_modifier = pm_wenkwort_custodian
+        }
+        is_artificial = no
+        exists = owner
+        owner = {
+            has_technology = tech_luosi_choose_2
+        }
+        NOT = {  }
+    }
+
+    allow = {
+        num_uncleared_blockers < 1
+    }
+    effect = {
+        custom_tooltip = decision_herta_luosi_tt
+        hidden_effect = {
+            save_deposits = yes
+            clear_deposits = yes
+            restore_saved_deposits = yes
+            change_pc = pc_hsr_robot_planet
+            while = {
+                add_district = district_luosi_1
+                count = 3
+            }
+            set_planet_entity = {
+                entity = "hsr_robot_planet_01_entity"
+                graphical_culture = owner
+            }
+            owner = {
+                country_event = { id = distar.201 } # port for living planet distar.197, triggers in event
+            }
+        }
+    }
+
+    ai_weight = {
+        weight = 100
+    }
+}

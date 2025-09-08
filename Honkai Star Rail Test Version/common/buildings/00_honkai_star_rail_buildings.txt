@@ -6,6 +6,7 @@ herta_holomuseum_1 = {
     building_sets = {
         government
         urban
+        research
     }
 
     potential = {
@@ -51,5 +52,130 @@ herta_holomuseum_1 = {
             }
         }
         text = job_museum_clerk_effect_desc
+    }
+}
+herta_herta_discuss = {
+    base_buildtime = 600
+    planet_limit = {
+        base = 1
+        modifier = {
+            exists = owner
+            owner = {
+                has_tradition = tr_herta_discuss_finish
+            }
+            has_upgraded_capital = yes
+            add = 1
+        }
+    }
+    category = research
+
+    building_sets = {
+        research
+        urban
+    }
+    potential = {
+        owner = {
+            has_origin = origin_Herta_Space_Station
+        }
+    }
+
+    resources = {
+        category = planet_buildings
+        cost = {
+            minerals = 2000
+        }
+        upkeep = {
+            energy = 4
+        }
+    }
+    triggered_country_modifier = {
+        potential = {
+            owner = {
+                OR = {
+                    has_tradition = tr_herta_discuss_2
+                    has_tradition = tr_herta_discuss_2_1
+                }
+            }
+        }
+        BIOLOGICAL_species_trait_points_add = 1
+        BIOLOGICAL_species_trait_picks_add = 1
+        Star_Rail_species_trait_picks_add = 1
+        Star_Rail_species_trait_points_add = 1
+    }
+    triggered_country_modifier = {
+        potential = {
+            owner = {
+                OR = {
+                    has_tradition = tr_herta_discuss_2_2
+                }
+            }
+        }
+        ROBOT_species_trait_picks_add = 1
+        ROBOT_species_trait_points_add = 1
+        Star_Rail_species_trait_picks_add = 1
+        Star_Rail_species_trait_points_add = 1
+    }
+    planet_modifier = {
+        job_herta_up_researcher_add = 200
+        job_head_researcher_add = 200
+        job_clone_robot_up_add = 200
+    }
+    triggered_planet_modifier = {
+        potential = {
+            exists = owner
+            owner = {
+                has_tradition = tr_herta_discuss_finish
+            }
+        }
+        modifier = {
+            job_herta_up_researcher_add = 200
+            job_head_researcher_add = 200
+        }
+    }
+}
+herta_herta_discuss_1 = {
+    base_buildtime = 600
+    district_limit = 1
+    category = pop_assembly
+
+    building_sets = {
+        automation
+        government
+        urban_automation
+        urban
+        farming
+        farming_automation
+        mining
+        mining_automation
+        generator
+        generator_automation
+        research
+        fortress
+        factory
+        foundry
+        industrial
+    }
+    prerequisites = { tech_herta_choose_2 }
+    potential = {
+        owner = {
+            has_technology = tech_herta_choose_2
+        }
+    }
+
+    resources = {
+        category = planet_buildings
+        cost = {
+            minerals = 1000
+        }
+        upkeep = {
+            energy = 4
+        }
+    }
+    planet_modifier = {
+        district_automated_workforce = 0.75
+    }
+    triggered_planet_modifier = {
+        planet_jobs_produces_mult = 0.25
+        mult = value:new_cyborg_pop_bonus_workforce_mult_value
     }
 }
