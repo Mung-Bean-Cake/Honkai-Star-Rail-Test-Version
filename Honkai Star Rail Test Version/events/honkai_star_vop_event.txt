@@ -1,0 +1,16 @@
+namespace = VOP_evt_FRAMEWORK
+###	VOP国家		#########################################################################################################
+
+#	VOP_on_yearly_pulse_country
+country_event = {
+    id = VOP_evt_FRAMEWORK.9
+    hide_window = yes
+    is_triggered_only = yes
+    trigger = { NOT = { has_country_flag = VOP_CD_on_yearly_pulse_country } }
+    immediate = {
+        set_timed_country_flag = { flag = VOP_CD_on_yearly_pulse_country days = 1 }
+        set_update_modifiers_batch = begin
+        fire_on_action = { on_action = VOP_on_yearly_pulse_country }
+        set_update_modifiers_batch = end
+    }
+}

@@ -540,3 +540,125 @@ planet_event = {#阮梅
         }
     }
 }
+country_event = {
+    id = hsr_on.10000
+    title = hsr_on.10000.tittle
+    desc = hsr_on.10000.desc
+    picture = GFX_evt_circuitry_modification
+    is_triggered_only = yes
+    trigger = {
+        has_origin = origin_Herta_Space_Station
+    }
+    option = {
+        name = hsr_on.10000.a
+        trigger = {
+            not = {
+                has_country_flag = hsr_monthly_join_us
+            }
+        }
+        hidden_effect = {
+            set_country_flag = hsr_monthly_join_us
+            country_event = { id = hsr_on.10001 }
+        }
+    }
+    option = {
+        name = hsr_on.10000.b
+        trigger = {
+
+        }
+        hidden_effect = {
+            every_owned_pop_group = {
+                limit = {
+                    NOR = {
+                        is_same_species = ROOT.owner_main_species
+                        has_trait = trait_herta_robot_pop_1
+                    }
+                }
+                planet = { create_pop_group = { size = prev.trigger:pop_group_size species = ROOT.owner_main_species }}
+                kill_pop_group = { pop_group = this percentage = 1 }
+            }
+        }
+    }
+    option = {
+        name = hsr_on.10000.c
+        trigger = {
+            has_country_flag = hsr_monthly_join_us
+        }
+        hidden_effect = {
+            remove_country_flag = hsr_monthly_join_us
+        }
+    }
+    option = {
+        name = hsr_on.10000.d
+    }
+}
+country_event = {
+    id = hsr_on.10001
+    hide_window = yes
+    is_triggered_only = yes
+
+    trigger = {
+        has_country_flag = hsr_monthly_join_us
+    }
+
+    immediate = {
+        if = {
+            limit = { any_owned_species = {
+                NOR = {
+                    is_same_species = ROOT.owner_main_species
+                    has_trait = trait_herta_robot_pop_1
+                }
+            }}
+            # 限制每天只改造一个人口
+            if = {
+                limit = { NOT = { has_country_flag = hsr_monthly_us_enabled }}
+                random_owned_pop_group = {
+                    limit = {
+                        NOR = {
+                            is_same_species = ROOT.owner_main_species
+                            has_trait = trait_herta_robot_pop_1
+                        }
+                    }
+                    planet = { create_pop_group = { size = prev.trigger:pop_group_size species = ROOT.owner_main_species }}
+                    kill_pop_group = { pop_group = this percentage = 1 }
+                }
+                set_timed_country_flag = { flag = hsr_monthly_us_enabled days = 1 }
+                country_event = { id = hsr_on.10001 days = 1 }
+            } else = {
+                remove_country_flag = hsr_monthly_us_enabled
+            }
+        }
+    }
+}
+country_event = {
+    id = hsr_on.10002
+    title = hsr_on.10002.tittle
+    desc = {
+        trigger = {
+            has_origin = origin_Herta_Space_Station
+        }
+        text = hsr_on.10002.a.desc
+    }
+    desc = {
+        trigger = {
+            has_origin = origin_belobog
+        }
+        text = hsr_on.10002.b.desc
+    }
+    desc = {
+        trigger = {
+            NOR = {
+                has_origin = origin_Herta_Space_Station
+                has_origin = origin_belobog
+            }
+        }
+        text = hsr_on.10002.c.desc
+    }
+    picture = GFX_evt_astral_rift_advisor_nice
+    is_triggered_only = yes
+    trigger = {
+    }
+    option = {
+        name = OK
+    }
+}

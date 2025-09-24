@@ -780,6 +780,7 @@ country_event = {#同化
     hide_window = yes
 
     trigger = {
+        has_technology = tech_herta_choose_1
         any_owned_species = {
             has_citizenship_type = {
                 country = root
@@ -788,8 +789,6 @@ country_event = {#同化
         }
     }
     immediate = {
-        if = {
-            limit = { has_tradition = tr_herta_discuss_2 }
             if = {
                 limit = {
                     any_owned_species = {
@@ -837,9 +836,23 @@ country_event = {#同化
                     show_message = no
                 }
             }
+    }
+}
+country_event = {#同化
+    id = DOT_SR_Herta.1021
+    is_triggered_only = yes
+    hide_window = yes
+
+    trigger = {
+        has_technology = tech_luosi_choose_1
+        any_owned_species = {
+            has_citizenship_type = {
+                country = root
+                type = citizenship_herta_assimilation
+            }
         }
-        else_if = {
-            limit = { has_tradition = tr_herta_discuss_2_2 }
+    }
+    immediate = {
             if = {
                 limit = {
                     any_owned_species = {
@@ -889,7 +902,6 @@ country_event = {#同化
             }
         }
     }
-}
 country_event = {
     id = DOT_SR_Herta.103
     title = "DOT_SR_Herta.103.name"
