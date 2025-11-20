@@ -1,0 +1,2211 @@
+@research_station = 13
+@mining_station = 13
+#######################################
+######          实例|通用          ######
+#######################################
+entity = {
+    name = "DSC_00_mining_station_entity"
+    pdxmesh = "DSC_00_mining_station_frame_mesh"
+
+    locator = { name = "part1" 			position = { 0 	0 	0 } }
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+    }
+    state = { name = "death" animation = "idle" looping = no
+        event = { time = 16.3 particle = "lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    scale = 1.5
+    game_data = {
+        size = @mining_station
+        emissive_recolor_crunch = 2.0
+    }
+}
+entity = {
+    name = "DSC_00_mining_station_section_entity"
+    pdxmesh = "DSC_00_mining_station_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_mining_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "idle" looping = no
+        event = { time = 0.0 node = "station_explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "station_explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 1.5 node = "station_explosion_locator_03" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 2.0 node = "station_explosion_locator_04" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 3.0 node = "station_explosion_locator_05" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 4.0 node = "station_explosion_locator_06" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+}
+
+entity = {
+    name = "DSC_00_research_station_entity"
+    pdxmesh = "DSC_00_research_station_frame_mesh"
+
+    locator = { name = "part1" 			position = { 0 	0 	0 } }
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+    }
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 25.0 particle = "lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+    scale = 1.4
+
+    game_data = {
+        size = @research_station
+        emissive_recolor_crunch = 2.0
+    }
+}
+entity = {
+    name = "DSC_00_research_station_section_entity"
+    pdxmesh = "DSC_00_research_station_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_research_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "effect" particle = "lithoid_01_research_core_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+}
+
+entity = {
+    name = "DSC_00_wormhole_station_entity"
+    pdxmesh = "DSC_00_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_wormhole_station_idle" } }
+
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+
+        event = { time = 0.9 particle = "lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    scale = 1.4
+    game_data = {
+        size = @research_station
+        emissive_recolor_crunch = 2.0
+    }
+}
+
+entity = {
+    name = "DSC_00_observation_station_entity"
+    pdxmesh = "DSC_00_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_research_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.9 particle = "lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    scale = 1.4
+    game_data = {
+        size = @research_station
+        emissive_recolor_crunch = 2.0
+    }
+}
+
+entity = {
+    name = "DSC_00_military_station_small_construction_entity"
+    pdxmesh = "DSC_00_military_station_small_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+
+    scale = 1.2
+
+}
+entity = {
+    name = "DSC_00_mining_station_construction_entity"
+    pdxmesh = "DSC_00_mining_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.5
+}
+entity = {
+    name = "DSC_00_research_station_construction_entity"
+    pdxmesh = "DSC_00_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+entity = {
+    name = "DSC_00_wormhole_station_construction_entity"
+    pdxmesh = "DSC_00_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+entity = {
+    name = "DSC_00_observation_station_construction_entity"
+    pdxmesh = "DSC_00_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+
+
+
+
+
+
+#######################################
+######        并列图形文化        ######
+#######################################
+
+
+
+
+entity = {
+    name = "DSC_01_mining_station_section_entity"
+    pdxmesh = "DSC_01_mining_station_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_mining_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "idle" looping = no
+        event = { time = 0.0 node = "station_explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "station_explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 1.5 node = "station_explosion_locator_03" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 2.0 node = "station_explosion_locator_04" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 3.0 node = "station_explosion_locator_05" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 4.0 node = "station_explosion_locator_06" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+}
+entity = {
+    name = "DSC_01_research_station_section_entity"
+    pdxmesh = "DSC_01_research_station_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_research_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "effect" particle = "lithoid_01_research_core_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+}
+
+entity = {
+    name = "DSC_01_wormhole_station_entity"
+    pdxmesh = "DSC_01_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_wormhole_station_idle" } }
+
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+
+        event = { time = 0.9 particle = "lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    scale = 1.4
+    game_data = {
+        size = @research_station
+        emissive_recolor_crunch = 2.0
+    }
+}
+
+entity = {
+    name = "DSC_01_observation_station_entity"
+    pdxmesh = "DSC_01_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_research_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.9 particle = "lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    scale = 1.4
+    game_data = {
+        size = @research_station
+        emissive_recolor_crunch = 2.0
+    }
+}
+
+entity = {
+    name = "DSC_01_military_station_small_construction_entity"
+    pdxmesh = "DSC_01_military_station_small_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+
+    scale = 1.2
+
+}
+entity = {
+    name = "DSC_01_mining_station_construction_entity"
+    pdxmesh = "DSC_01_mining_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.5
+}
+entity = {
+    name = "DSC_01_research_station_construction_entity"
+    pdxmesh = "DSC_01_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+entity = {
+    name = "DSC_01_wormhole_station_construction_entity"
+    pdxmesh = "DSC_01_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+entity = {
+    name = "DSC_01_observation_station_construction_entity"
+    pdxmesh = "DSC_01_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+
+
+entity = {
+    name = "DSC_02_mining_station_section_entity"
+    pdxmesh = "DSC_02_mining_station_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_mining_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "idle" looping = no
+        event = { time = 0.0 node = "station_explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "station_explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 1.5 node = "station_explosion_locator_03" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 2.0 node = "station_explosion_locator_04" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 3.0 node = "station_explosion_locator_05" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 4.0 node = "station_explosion_locator_06" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+}
+entity = {
+    name = "DSC_02_research_station_section_entity"
+    pdxmesh = "DSC_02_research_station_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_research_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "effect" particle = "lithoid_01_research_core_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+}
+
+entity = {
+    name = "DSC_02_wormhole_station_entity"
+    pdxmesh = "DSC_02_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_wormhole_station_idle" } }
+
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+
+        event = { time = 0.9 particle = "lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    scale = 1.4
+    game_data = {
+        size = @research_station
+        emissive_recolor_crunch = 2.0
+    }
+}
+
+entity = {
+    name = "DSC_02_observation_station_entity"
+    pdxmesh = "DSC_02_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_research_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.9 particle = "lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    scale = 1.4
+    game_data = {
+        size = @research_station
+        emissive_recolor_crunch = 2.0
+    }
+}
+
+entity = {
+    name = "DSC_02_military_station_small_construction_entity"
+    pdxmesh = "DSC_02_military_station_small_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+
+    scale = 1.2
+
+}
+entity = {
+    name = "DSC_02_mining_station_construction_entity"
+    pdxmesh = "DSC_02_mining_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.5
+}
+entity = {
+    name = "DSC_02_research_station_construction_entity"
+    pdxmesh = "DSC_02_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+entity = {
+    name = "DSC_02_wormhole_station_construction_entity"
+    pdxmesh = "DSC_02_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+entity = {
+    name = "DSC_02_observation_station_construction_entity"
+    pdxmesh = "DSC_02_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+
+
+entity = {
+    name = "DSC_03_mining_station_section_entity"
+    pdxmesh = "DSC_03_mining_station_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_mining_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "idle" looping = no
+        event = { time = 0.0 node = "station_explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "station_explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 1.5 node = "station_explosion_locator_03" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 2.0 node = "station_explosion_locator_04" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 3.0 node = "station_explosion_locator_05" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 4.0 node = "station_explosion_locator_06" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+}
+entity = {
+    name = "DSC_03_research_station_section_entity"
+    pdxmesh = "DSC_03_research_station_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_research_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "effect" particle = "lithoid_01_research_core_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+}
+
+entity = {
+    name = "DSC_03_wormhole_station_entity"
+    pdxmesh = "DSC_03_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_wormhole_station_idle" } }
+
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+
+        event = { time = 0.9 particle = "lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    scale = 1.4
+    game_data = {
+        size = @research_station
+        emissive_recolor_crunch = 2.0
+    }
+}
+
+entity = {
+    name = "DSC_03_observation_station_entity"
+    pdxmesh = "DSC_03_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_research_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.9 particle = "lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    scale = 1.4
+    game_data = {
+        size = @research_station
+        emissive_recolor_crunch = 2.0
+    }
+}
+
+entity = {
+    name = "DSC_03_military_station_small_construction_entity"
+    pdxmesh = "DSC_03_military_station_small_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+
+    scale = 1.2
+
+}
+entity = {
+    name = "DSC_03_mining_station_construction_entity"
+    pdxmesh = "DSC_03_mining_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.5
+}
+entity = {
+    name = "DSC_03_research_station_construction_entity"
+    pdxmesh = "DSC_03_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+entity = {
+    name = "DSC_03_wormhole_station_construction_entity"
+    pdxmesh = "DSC_03_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+entity = {
+    name = "DSC_03_observation_station_construction_entity"
+    pdxmesh = "DSC_03_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+
+
+
+entity = {
+    name = "DSC_04_mining_station_section_entity"
+    pdxmesh = "DSC_04_mining_station_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_mining_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "idle" looping = no
+        event = { time = 0.0 node = "station_explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "station_explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 1.5 node = "station_explosion_locator_03" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 2.0 node = "station_explosion_locator_04" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 3.0 node = "station_explosion_locator_05" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 4.0 node = "station_explosion_locator_06" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+}
+entity = {
+    name = "DSC_04_research_station_section_entity"
+    pdxmesh = "DSC_04_research_station_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_research_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "effect" particle = "lithoid_01_research_core_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+}
+
+entity = {
+    name = "DSC_04_wormhole_station_entity"
+    pdxmesh = "DSC_04_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_wormhole_station_idle" } }
+
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+
+        event = { time = 0.9 particle = "lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    scale = 1.4
+    game_data = {
+        size = @research_station
+        emissive_recolor_crunch = 2.0
+    }
+}
+
+entity = {
+    name = "DSC_04_observation_station_entity"
+    pdxmesh = "DSC_04_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_research_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.9 particle = "lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    scale = 1.4
+    game_data = {
+        size = @research_station
+        emissive_recolor_crunch = 2.0
+    }
+}
+
+entity = {
+    name = "DSC_04_military_station_small_construction_entity"
+    pdxmesh = "DSC_04_military_station_small_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+
+    scale = 1.2
+
+}
+entity = {
+    name = "DSC_04_mining_station_construction_entity"
+    pdxmesh = "DSC_04_mining_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.5
+}
+entity = {
+    name = "DSC_04_research_station_construction_entity"
+    pdxmesh = "DSC_04_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+entity = {
+    name = "DSC_04_wormhole_station_construction_entity"
+    pdxmesh = "DSC_04_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+entity = {
+    name = "DSC_04_observation_station_construction_entity"
+    pdxmesh = "DSC_04_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+
+entity = {
+    name = "DSC_05_mining_station_section_entity"
+    pdxmesh = "DSC_05_mining_station_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_mining_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "idle" looping = no
+        event = { time = 0.0 node = "station_explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "station_explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 1.5 node = "station_explosion_locator_03" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 2.0 node = "station_explosion_locator_04" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 3.0 node = "station_explosion_locator_05" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 4.0 node = "station_explosion_locator_06" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+}
+entity = {
+    name = "DSC_05_research_station_section_entity"
+    pdxmesh = "DSC_05_research_station_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_research_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "effect" particle = "lithoid_01_research_core_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+}
+
+entity = {
+    name = "DSC_05_wormhole_station_entity"
+    pdxmesh = "DSC_05_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_wormhole_station_idle" } }
+
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+
+        event = { time = 0.9 particle = "lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    scale = 1.4
+    game_data = {
+        size = @research_station
+        emissive_recolor_crunch = 2.0
+    }
+}
+
+entity = {
+    name = "DSC_05_observation_station_entity"
+    pdxmesh = "DSC_05_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_research_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.9 particle = "lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    scale = 1.4
+    game_data = {
+        size = @research_station
+        emissive_recolor_crunch = 2.0
+    }
+}
+
+entity = {
+    name = "DSC_05_military_station_small_construction_entity"
+    pdxmesh = "DSC_05_military_station_small_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+
+    scale = 1.2
+
+}
+entity = {
+    name = "DSC_05_mining_station_construction_entity"
+    pdxmesh = "DSC_05_mining_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.5
+}
+entity = {
+    name = "DSC_05_research_station_construction_entity"
+    pdxmesh = "DSC_05_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+entity = {
+    name = "DSC_05_wormhole_station_construction_entity"
+    pdxmesh = "DSC_05_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+entity = {
+    name = "DSC_05_observation_station_construction_entity"
+    pdxmesh = "DSC_05_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+
+
+entity = {
+    name = "DSC_06_mining_station_section_entity"
+    pdxmesh = "DSC_06_mining_station_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_mining_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "idle" looping = no
+        event = { time = 0.0 node = "station_explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "station_explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 1.5 node = "station_explosion_locator_03" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 2.0 node = "station_explosion_locator_04" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 3.0 node = "station_explosion_locator_05" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 4.0 node = "station_explosion_locator_06" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+}
+entity = {
+    name = "DSC_06_research_station_section_entity"
+    pdxmesh = "DSC_06_research_station_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_research_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "effect" particle = "lithoid_01_research_core_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+}
+
+entity = {
+    name = "DSC_06_wormhole_station_entity"
+    pdxmesh = "DSC_06_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_wormhole_station_idle" } }
+
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+
+        event = { time = 0.9 particle = "lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    scale = 1.4
+    game_data = {
+        size = @research_station
+        emissive_recolor_crunch = 2.0
+    }
+}
+
+entity = {
+    name = "DSC_06_observation_station_entity"
+    pdxmesh = "DSC_06_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_research_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.9 particle = "lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    scale = 1.4
+    game_data = {
+        size = @research_station
+        emissive_recolor_crunch = 2.0
+    }
+}
+
+entity = {
+    name = "DSC_06_military_station_small_construction_entity"
+    pdxmesh = "DSC_06_military_station_small_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+
+    scale = 1.2
+
+}
+entity = {
+    name = "DSC_06_mining_station_construction_entity"
+    pdxmesh = "DSC_06_mining_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.5
+}
+entity = {
+    name = "DSC_06_research_station_construction_entity"
+    pdxmesh = "DSC_06_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+entity = {
+    name = "DSC_06_wormhole_station_construction_entity"
+    pdxmesh = "DSC_06_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+entity = {
+    name = "DSC_06_observation_station_construction_entity"
+    pdxmesh = "DSC_06_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+
+
+entity = {
+    name = "DSC_07_mining_station_section_entity"
+    pdxmesh = "DSC_07_mining_station_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_mining_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "idle" looping = no
+        event = { time = 0.0 node = "station_explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "station_explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 1.5 node = "station_explosion_locator_03" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 2.0 node = "station_explosion_locator_04" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 3.0 node = "station_explosion_locator_05" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 4.0 node = "station_explosion_locator_06" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+}
+entity = {
+    name = "DSC_07_research_station_section_entity"
+    pdxmesh = "DSC_07_research_station_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_research_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "effect" particle = "lithoid_01_research_core_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+}
+
+entity = {
+    name = "DSC_07_wormhole_station_entity"
+    pdxmesh = "DSC_07_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_wormhole_station_idle" } }
+
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+
+        event = { time = 0.9 particle = "lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    scale = 1.4
+    game_data = {
+        size = @research_station
+        emissive_recolor_crunch = 2.0
+    }
+}
+
+entity = {
+    name = "DSC_07_observation_station_entity"
+    pdxmesh = "DSC_07_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_research_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.9 particle = "lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    scale = 1.4
+    game_data = {
+        size = @research_station
+        emissive_recolor_crunch = 2.0
+    }
+}
+
+entity = {
+    name = "DSC_07_military_station_small_construction_entity"
+    pdxmesh = "DSC_07_military_station_small_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+
+    scale = 1.2
+
+}
+entity = {
+    name = "DSC_07_mining_station_construction_entity"
+    pdxmesh = "DSC_07_mining_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.5
+}
+entity = {
+    name = "DSC_07_research_station_construction_entity"
+    pdxmesh = "DSC_07_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+entity = {
+    name = "DSC_07_wormhole_station_construction_entity"
+    pdxmesh = "DSC_07_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+entity = {
+    name = "DSC_07_observation_station_construction_entity"
+    pdxmesh = "DSC_07_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+
+
+entity = {
+    name = "DSC_08_mining_station_section_entity"
+    pdxmesh = "DSC_08_mining_station_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_mining_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "idle" looping = no
+        event = { time = 0.0 node = "station_explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "station_explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 1.5 node = "station_explosion_locator_03" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 2.0 node = "station_explosion_locator_04" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 3.0 node = "station_explosion_locator_05" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 4.0 node = "station_explosion_locator_06" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+}
+entity = {
+    name = "DSC_08_research_station_section_entity"
+    pdxmesh = "DSC_08_research_station_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_research_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "effect" particle = "lithoid_01_research_core_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+}
+
+entity = {
+    name = "DSC_08_wormhole_station_entity"
+    pdxmesh = "DSC_08_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_wormhole_station_idle" } }
+
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+
+        event = { time = 0.9 particle = "lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    scale = 1.4
+    game_data = {
+        size = @research_station
+        emissive_recolor_crunch = 2.0
+    }
+}
+
+entity = {
+    name = "DSC_08_observation_station_entity"
+    pdxmesh = "DSC_08_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_research_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.9 particle = "lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    scale = 1.4
+    game_data = {
+        size = @research_station
+        emissive_recolor_crunch = 2.0
+    }
+}
+
+entity = {
+    name = "DSC_08_military_station_small_construction_entity"
+    pdxmesh = "DSC_08_military_station_small_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+
+    scale = 1.2
+
+}
+entity = {
+    name = "DSC_08_mining_station_construction_entity"
+    pdxmesh = "DSC_08_mining_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.5
+}
+entity = {
+    name = "DSC_08_research_station_construction_entity"
+    pdxmesh = "DSC_08_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+entity = {
+    name = "DSC_08_wormhole_station_construction_entity"
+    pdxmesh = "DSC_08_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+entity = {
+    name = "DSC_08_observation_station_construction_entity"
+    pdxmesh = "DSC_08_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+
+
+entity = {
+    name = "DSC_08_mining_station_section_entity"
+    pdxmesh = "DSC_08_mining_station_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_mining_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "idle" looping = no
+        event = { time = 0.0 node = "station_explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "station_explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 1.5 node = "station_explosion_locator_03" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 2.0 node = "station_explosion_locator_04" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 3.0 node = "station_explosion_locator_05" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 4.0 node = "station_explosion_locator_06" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+}
+entity = {
+    name = "DSC_08_research_station_section_entity"
+    pdxmesh = "DSC_08_research_station_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_research_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "effect" particle = "lithoid_01_research_core_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+}
+
+entity = {
+    name = "DSC_08_wormhole_station_entity"
+    pdxmesh = "DSC_08_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_wormhole_station_idle" } }
+
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+
+        event = { time = 0.9 particle = "lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    scale = 1.4
+    game_data = {
+        size = @research_station
+        emissive_recolor_crunch = 2.0
+    }
+}
+
+entity = {
+    name = "DSC_08_observation_station_entity"
+    pdxmesh = "DSC_08_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_research_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.9 particle = "lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    scale = 1.4
+    game_data = {
+        size = @research_station
+        emissive_recolor_crunch = 2.0
+    }
+}
+
+entity = {
+    name = "DSC_08_military_station_small_construction_entity"
+    pdxmesh = "DSC_08_military_station_small_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+
+    scale = 1.2
+
+}
+entity = {
+    name = "DSC_08_mining_station_construction_entity"
+    pdxmesh = "DSC_08_mining_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.5
+}
+entity = {
+    name = "DSC_08_research_station_construction_entity"
+    pdxmesh = "DSC_08_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+entity = {
+    name = "DSC_08_wormhole_station_construction_entity"
+    pdxmesh = "DSC_08_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+entity = {
+    name = "DSC_08_observation_station_construction_entity"
+    pdxmesh = "DSC_08_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+
+
+entity = {
+    name = "DSC_09_mining_station_section_entity"
+    pdxmesh = "DSC_09_mining_station_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_mining_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "idle" looping = no
+        event = { time = 0.0 node = "station_explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "station_explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 1.5 node = "station_explosion_locator_03" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 2.0 node = "station_explosion_locator_04" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 3.0 node = "station_explosion_locator_05" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 4.0 node = "station_explosion_locator_06" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+}
+entity = {
+    name = "DSC_09_research_station_section_entity"
+    pdxmesh = "DSC_09_research_station_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_research_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "effect" particle = "lithoid_01_research_core_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+}
+
+entity = {
+    name = "DSC_09_wormhole_station_entity"
+    pdxmesh = "DSC_09_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_wormhole_station_idle" } }
+
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+
+        event = { time = 0.9 particle = "lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    scale = 1.4
+    game_data = {
+        size = @research_station
+        emissive_recolor_crunch = 2.0
+    }
+}
+
+entity = {
+    name = "DSC_09_observation_station_entity"
+    pdxmesh = "DSC_09_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_research_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.9 particle = "lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    scale = 1.4
+    game_data = {
+        size = @research_station
+        emissive_recolor_crunch = 2.0
+    }
+}
+
+entity = {
+    name = "DSC_09_military_station_small_construction_entity"
+    pdxmesh = "DSC_09_military_station_small_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+
+    scale = 1.2
+
+}
+entity = {
+    name = "DSC_09_mining_station_construction_entity"
+    pdxmesh = "DSC_09_mining_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.5
+}
+entity = {
+    name = "DSC_09_research_station_construction_entity"
+    pdxmesh = "DSC_09_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+entity = {
+    name = "DSC_09_wormhole_station_construction_entity"
+    pdxmesh = "DSC_09_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+entity = {
+    name = "DSC_09_observation_station_construction_entity"
+    pdxmesh = "DSC_09_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+
+
+entity = {
+    name = "DSC_10_mining_station_section_entity"
+    pdxmesh = "DSC_10_mining_station_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_mining_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "idle" looping = no
+        event = { time = 0.0 node = "station_explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "station_explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 1.5 node = "station_explosion_locator_03" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 2.0 node = "station_explosion_locator_04" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 3.0 node = "station_explosion_locator_05" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 4.0 node = "station_explosion_locator_06" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+}
+entity = {
+    name = "DSC_10_research_station_section_entity"
+    pdxmesh = "DSC_10_research_station_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_research_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "effect" particle = "lithoid_01_research_core_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+}
+
+entity = {
+    name = "DSC_10_wormhole_station_entity"
+    pdxmesh = "DSC_10_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_wormhole_station_idle" } }
+
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+
+        event = { time = 0.9 particle = "lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    scale = 1.4
+    game_data = {
+        size = @research_station
+        emissive_recolor_crunch = 2.0
+    }
+}
+
+entity = {
+    name = "DSC_10_observation_station_entity"
+    pdxmesh = "DSC_10_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_research_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.9 particle = "lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    scale = 1.4
+    game_data = {
+        size = @research_station
+        emissive_recolor_crunch = 2.0
+    }
+}
+
+entity = {
+    name = "DSC_10_military_station_small_construction_entity"
+    pdxmesh = "DSC_10_military_station_small_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+
+    scale = 1.2
+
+}
+entity = {
+    name = "DSC_10_mining_station_construction_entity"
+    pdxmesh = "DSC_10_mining_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.5
+}
+entity = {
+    name = "DSC_10_research_station_construction_entity"
+    pdxmesh = "DSC_10_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+entity = {
+    name = "DSC_10_wormhole_station_construction_entity"
+    pdxmesh = "DSC_10_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+entity = {
+    name = "DSC_10_observation_station_construction_entity"
+    pdxmesh = "DSC_10_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+
+entity = {
+    name = "DSC_11_mining_station_section_entity"
+    pdxmesh = "DSC_11_mining_station_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_mining_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "idle" looping = no
+        event = { time = 0.0 node = "station_explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "station_explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 1.5 node = "station_explosion_locator_03" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 2.0 node = "station_explosion_locator_04" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 3.0 node = "station_explosion_locator_05" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 4.0 node = "station_explosion_locator_06" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+}
+entity = {
+    name = "DSC_11_research_station_section_entity"
+    pdxmesh = "DSC_11_research_station_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_research_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "effect" particle = "lithoid_01_research_core_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+}
+
+entity = {
+    name = "DSC_11_wormhole_station_entity"
+    pdxmesh = "DSC_11_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_wormhole_station_idle" } }
+
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+
+        event = { time = 0.9 particle = "lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    scale = 1.4
+    game_data = {
+        size = @research_station
+        emissive_recolor_crunch = 2.0
+    }
+}
+
+entity = {
+    name = "DSC_11_observation_station_entity"
+    pdxmesh = "DSC_11_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_research_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.9 particle = "lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    scale = 1.4
+    game_data = {
+        size = @research_station
+        emissive_recolor_crunch = 2.0
+    }
+}
+
+entity = {
+    name = "DSC_11_military_station_small_construction_entity"
+    pdxmesh = "DSC_11_military_station_small_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+
+    scale = 1.2
+
+}
+entity = {
+    name = "DSC_11_mining_station_construction_entity"
+    pdxmesh = "DSC_11_mining_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.5
+}
+entity = {
+    name = "DSC_11_research_station_construction_entity"
+    pdxmesh = "DSC_11_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+entity = {
+    name = "DSC_11_wormhole_station_construction_entity"
+    pdxmesh = "DSC_11_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+entity = {
+    name = "DSC_11_observation_station_construction_entity"
+    pdxmesh = "DSC_11_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+
+entity = {
+    name = "DSC_12_mining_station_section_entity"
+    pdxmesh = "DSC_12_mining_station_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_mining_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "idle" looping = no
+        event = { time = 0.0 node = "station_explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "station_explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 1.5 node = "station_explosion_locator_03" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 2.0 node = "station_explosion_locator_04" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 3.0 node = "station_explosion_locator_05" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 4.0 node = "station_explosion_locator_06" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+}
+entity = {
+    name = "DSC_12_research_station_section_entity"
+    pdxmesh = "DSC_12_research_station_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_research_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "effect" particle = "lithoid_01_research_core_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+}
+
+entity = {
+    name = "DSC_12_wormhole_station_entity"
+    pdxmesh = "DSC_12_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_wormhole_station_idle" } }
+
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+
+        event = { time = 0.9 particle = "lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    scale = 1.4
+    game_data = {
+        size = @research_station
+        emissive_recolor_crunch = 2.0
+    }
+}
+
+entity = {
+    name = "DSC_12_observation_station_entity"
+    pdxmesh = "DSC_12_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_research_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.9 particle = "lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    scale = 1.4
+    game_data = {
+        size = @research_station
+        emissive_recolor_crunch = 2.0
+    }
+}
+
+entity = {
+    name = "DSC_12_military_station_small_construction_entity"
+    pdxmesh = "DSC_12_military_station_small_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+
+    scale = 1.2
+
+}
+entity = {
+    name = "DSC_12_mining_station_construction_entity"
+    pdxmesh = "DSC_12_mining_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.5
+}
+entity = {
+    name = "DSC_12_research_station_construction_entity"
+    pdxmesh = "DSC_12_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+entity = {
+    name = "DSC_12_wormhole_station_construction_entity"
+    pdxmesh = "DSC_12_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+entity = {
+    name = "DSC_12_observation_station_construction_entity"
+    pdxmesh = "DSC_12_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+
+
+entity = {
+    name = "DSC_13_mining_station_section_entity"
+    pdxmesh = "DSC_13_mining_station_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_mining_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "idle" looping = no
+        event = { time = 0.0 node = "station_explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "station_explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 1.5 node = "station_explosion_locator_03" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 2.0 node = "station_explosion_locator_04" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 3.0 node = "station_explosion_locator_05" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 4.0 node = "station_explosion_locator_06" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+}
+entity = {
+    name = "DSC_13_research_station_section_entity"
+    pdxmesh = "DSC_13_research_station_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_research_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "effect" particle = "lithoid_01_research_core_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+}
+
+entity = {
+    name = "DSC_13_wormhole_station_entity"
+    pdxmesh = "DSC_13_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_wormhole_station_idle" } }
+
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+
+        event = { time = 0.9 particle = "lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    scale = 1.4
+    game_data = {
+        size = @research_station
+        emissive_recolor_crunch = 2.0
+    }
+}
+
+entity = {
+    name = "DSC_13_observation_station_entity"
+    pdxmesh = "DSC_13_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_research_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.9 particle = "lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    scale = 1.4
+    game_data = {
+        size = @research_station
+        emissive_recolor_crunch = 2.0
+    }
+}
+
+entity = {
+    name = "DSC_13_military_station_small_construction_entity"
+    pdxmesh = "DSC_13_military_station_small_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+
+    scale = 1.2
+
+}
+entity = {
+    name = "DSC_13_mining_station_construction_entity"
+    pdxmesh = "DSC_13_mining_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.5
+}
+entity = {
+    name = "DSC_13_research_station_construction_entity"
+    pdxmesh = "DSC_13_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+entity = {
+    name = "DSC_13_wormhole_station_construction_entity"
+    pdxmesh = "DSC_13_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+entity = {
+    name = "DSC_13_observation_station_construction_entity"
+    pdxmesh = "DSC_13_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+
+
+entity = {
+    name = "DSC_14_mining_station_section_entity"
+    pdxmesh = "DSC_14_mining_station_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_mining_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "idle" looping = no
+        event = { time = 0.0 node = "station_explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "station_explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 1.5 node = "station_explosion_locator_03" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 2.0 node = "station_explosion_locator_04" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 3.0 node = "station_explosion_locator_05" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 4.0 node = "station_explosion_locator_06" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+}
+entity = {
+    name = "DSC_14_research_station_section_entity"
+    pdxmesh = "DSC_14_research_station_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_research_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "effect" particle = "lithoid_01_research_core_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+}
+
+entity = {
+    name = "DSC_14_wormhole_station_entity"
+    pdxmesh = "DSC_14_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_wormhole_station_idle" } }
+
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+
+        event = { time = 0.9 particle = "lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    scale = 1.4
+    game_data = {
+        size = @research_station
+        emissive_recolor_crunch = 2.0
+    }
+}
+
+entity = {
+    name = "DSC_14_observation_station_entity"
+    pdxmesh = "DSC_14_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "lithoid_amb_research_station_signals" } }
+        event = { time = 0.0 node = "light_locator_01" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_02" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.0 node = "light_locator_03" particle = "lithoid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+    }
+    state = { name = "death" animation = "death" looping = no
+        event = { time = 0.0 node = "explosion_locator_01" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.5 node = "explosion_locator_02" particle = "small_lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0.9 particle = "lithoid_station_explosion_2_effect" keep_particle = yes trigger_once = yes }
+    }
+
+    scale = 1.4
+    game_data = {
+        size = @research_station
+        emissive_recolor_crunch = 2.0
+    }
+}
+
+entity = {
+    name = "DSC_14_military_station_small_construction_entity"
+    pdxmesh = "DSC_14_military_station_small_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+
+    scale = 1.2
+
+}
+entity = {
+    name = "DSC_14_mining_station_construction_entity"
+    pdxmesh = "DSC_14_mining_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = "idle"
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.5
+}
+entity = {
+    name = "DSC_14_research_station_construction_entity"
+    pdxmesh = "DSC_14_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+entity = {
+    name = "DSC_14_wormhole_station_construction_entity"
+    pdxmesh = "DSC_14_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}
+entity = {
+    name = "DSC_14_observation_station_construction_entity"
+    pdxmesh = "DSC_14_research_station_mesh"
+    default_state = "idle"
+    state = { name = "idle" animation = idle animation_speed = 0
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.4
+}

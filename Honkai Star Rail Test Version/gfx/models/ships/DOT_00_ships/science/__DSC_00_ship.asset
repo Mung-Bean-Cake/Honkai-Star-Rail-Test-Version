@@ -1,0 +1,665 @@
+@DSC_science_entity_scale = 0.9
+@DSC_science_game_data_scale = 10
+@DSC_science_ship_entity_scale = 3
+@small_trail_W = 1
+@small_trail_L = 4
+
+#######################################
+######          实例|通用          ######
+#######################################
+
+animation = {
+    name = DSC_00_science_anim
+    file = DSC_00_science.anim
+}
+
+entity = {
+    name = "DSC_00_science_entity"
+    pdxmesh = "molluscoid_01_corvette_frame_mesh"
+    scale = @DSC_science_entity_scale
+
+    default_state = "idle"
+    state = { name = "idle"	 animation = "idle" animation_blend_time = 4 }
+    state = { name = "moving"	animation = "idle" animation_blend_time = 2 }
+    state = { name = "death" animation = "death3" animation_blend_time = 0.0 chance = 1 looping = no
+        event = { time = 4.63 node = "ship_main" particle = "avian_01_large_ship_explosion_particle" }
+    }
+
+    game_data = {
+        size = @DSC_science_game_data_scale
+        emissive_recolor_crunch = 5.0
+    }
+}
+
+entity = {
+    name = "DSC_00_science_ship_entity"
+    pdxmesh = "DSC_00_science_mesh"
+    scale = @DSC_science_ship_entity_scale
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle" state_time = 5
+        #发光很强，感觉不太需要粒子效果“能量球”了
+        # event = { time = 0.0 node = "engine_small_01" particle = "generic_05_exhaust_line_idle" keep_particle = yes trigger_once = yes }
+        # event = { time = 0.0 node = "engine_small_02" particle = "generic_05_exhaust_line_idle" keep_particle = yes trigger_once = yes }
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_science_ship_hum" } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "moving" animation = "moving" state_time = 5
+        event = { time = 0.0 node = "engine_small_01" particle = "DSC_generic_04_exhaust_circle_moving" keep_particle = yes trigger_once = yes  }
+        event = { time = 0.0 node = "engine_small_02" particle = "DSC_generic_04_exhaust_circle_moving" keep_particle = yes trigger_once = yes  }
+        event = { trigger_once = yes sound = { soundeffect = moving_out_science } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "death" chance = 1 looping = no state_time = 10
+        event = { time = 0.0 node = "science_explosion_locator1" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.4 node = "science_explosion_locator7" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.6 node = "science_explosion_locator2" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 2.1 node = "science_explosion_locator8" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 2.83 node = "science_explosion_locator3" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.26 node = "science_explosion_locator4" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.9 node = "science_explosion_locator5" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 4.1 node = "science_explosion_locator6" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    game_data = {
+        trail_locators = {
+            "engine_small_01" = 		{ width = @small_trail_W 	lenght = @small_trail_L   	}
+            "engine_small_02" = 		{ width = @small_trail_W 	lenght = @small_trail_L   	}
+        }
+    }
+}
+
+#######################################
+######        并列图形文化        ######
+#######################################
+entity = {
+    name = "DSC_01_science_ship_entity"
+    pdxmesh = "DSC_01_science_mesh"
+    scale = @DSC_science_ship_entity_scale
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle" state_time = 5
+        #发光很强，感觉不太需要粒子效果“能量球”了
+        # event = { time = 0.0 node = "engine_small_01" particle = "generic_05_exhaust_line_idle" keep_particle = yes trigger_once = yes }
+        # event = { time = 0.0 node = "engine_small_02" particle = "generic_05_exhaust_line_idle" keep_particle = yes trigger_once = yes }
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_science_ship_hum" } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "moving" animation = "moving" state_time = 5
+        event = { time = 0.0 node = "engine_small_01" particle = "DSC_generic_04_exhaust_circle_moving" keep_particle = yes trigger_once = yes  }
+        event = { time = 0.0 node = "engine_small_02" particle = "DSC_generic_04_exhaust_circle_moving" keep_particle = yes trigger_once = yes  }
+        event = { trigger_once = yes sound = { soundeffect = moving_out_science } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "death" chance = 1 looping = no state_time = 10
+        event = { time = 0.0 node = "science_explosion_locator1" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.4 node = "science_explosion_locator7" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.6 node = "science_explosion_locator2" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 2.1 node = "science_explosion_locator8" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 2.83 node = "science_explosion_locator3" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.26 node = "science_explosion_locator4" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.9 node = "science_explosion_locator5" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 4.1 node = "science_explosion_locator6" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    game_data = {
+        trail_locators = {
+            "engine_small_01" = 		{ width = @small_trail_W 	lenght = @small_trail_L   	}
+            "engine_small_02" = 		{ width = @small_trail_W 	lenght = @small_trail_L   	}
+        }
+    }
+}
+
+entity = {
+    name = "DSC_02_science_ship_entity"
+    pdxmesh = "DSC_02_science_mesh"
+    scale = @DSC_science_ship_entity_scale
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle" state_time = 5
+        #发光很强，感觉不太需要粒子效果“能量球”了
+        # event = { time = 0.0 node = "engine_small_01" particle = "generic_05_exhaust_line_idle" keep_particle = yes trigger_once = yes }
+        # event = { time = 0.0 node = "engine_small_02" particle = "generic_05_exhaust_line_idle" keep_particle = yes trigger_once = yes }
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_science_ship_hum" } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "moving" animation = "moving" state_time = 5
+        event = { time = 0.0 node = "engine_small_01" particle = "DSC_generic_04_exhaust_circle_moving" keep_particle = yes trigger_once = yes  }
+        event = { time = 0.0 node = "engine_small_02" particle = "DSC_generic_04_exhaust_circle_moving" keep_particle = yes trigger_once = yes  }
+        event = { trigger_once = yes sound = { soundeffect = moving_out_science } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "death" chance = 1 looping = no state_time = 10
+        event = { time = 0.0 node = "science_explosion_locator1" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.4 node = "science_explosion_locator7" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.6 node = "science_explosion_locator2" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 2.1 node = "science_explosion_locator8" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 2.83 node = "science_explosion_locator3" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.26 node = "science_explosion_locator4" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.9 node = "science_explosion_locator5" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 4.1 node = "science_explosion_locator6" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    game_data = {
+        trail_locators = {
+            "engine_small_01" = 		{ width = @small_trail_W 	lenght = @small_trail_L   	}
+            "engine_small_02" = 		{ width = @small_trail_W 	lenght = @small_trail_L   	}
+        }
+    }
+}
+
+entity = {
+    name = "DSC_03_science_ship_entity"
+    pdxmesh = "DSC_03_science_mesh"
+    scale = @DSC_science_ship_entity_scale
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle" state_time = 5
+        #发光很强，感觉不太需要粒子效果“能量球”了
+        # event = { time = 0.0 node = "engine_small_01" particle = "generic_05_exhaust_line_idle" keep_particle = yes trigger_once = yes }
+        # event = { time = 0.0 node = "engine_small_02" particle = "generic_05_exhaust_line_idle" keep_particle = yes trigger_once = yes }
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_science_ship_hum" } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "moving" animation = "moving" state_time = 5
+        event = { time = 0.0 node = "engine_small_01" particle = "DSC_generic_04_exhaust_circle_moving" keep_particle = yes trigger_once = yes  }
+        event = { time = 0.0 node = "engine_small_02" particle = "DSC_generic_04_exhaust_circle_moving" keep_particle = yes trigger_once = yes  }
+        event = { trigger_once = yes sound = { soundeffect = moving_out_science } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "death" chance = 1 looping = no state_time = 10
+        event = { time = 0.0 node = "science_explosion_locator1" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.4 node = "science_explosion_locator7" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.6 node = "science_explosion_locator2" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 2.1 node = "science_explosion_locator8" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 2.83 node = "science_explosion_locator3" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.26 node = "science_explosion_locator4" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.9 node = "science_explosion_locator5" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 4.1 node = "science_explosion_locator6" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    game_data = {
+        trail_locators = {
+            "engine_small_01" = 		{ width = @small_trail_W 	lenght = @small_trail_L   	}
+            "engine_small_02" = 		{ width = @small_trail_W 	lenght = @small_trail_L   	}
+        }
+    }
+}
+
+entity = {
+    name = "DSC_04_science_ship_entity"
+    pdxmesh = "DSC_04_science_mesh"
+    scale = @DSC_science_ship_entity_scale
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle" state_time = 5
+        #发光很强，感觉不太需要粒子效果“能量球”了
+        # event = { time = 0.0 node = "engine_small_01" particle = "generic_05_exhaust_line_idle" keep_particle = yes trigger_once = yes }
+        # event = { time = 0.0 node = "engine_small_02" particle = "generic_05_exhaust_line_idle" keep_particle = yes trigger_once = yes }
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_science_ship_hum" } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "moving" animation = "moving" state_time = 5
+        event = { time = 0.0 node = "engine_small_01" particle = "DSC_generic_04_exhaust_circle_moving" keep_particle = yes trigger_once = yes  }
+        event = { time = 0.0 node = "engine_small_02" particle = "DSC_generic_04_exhaust_circle_moving" keep_particle = yes trigger_once = yes  }
+        event = { trigger_once = yes sound = { soundeffect = moving_out_science } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "death" chance = 1 looping = no state_time = 10
+        event = { time = 0.0 node = "science_explosion_locator1" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.4 node = "science_explosion_locator7" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.6 node = "science_explosion_locator2" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 2.1 node = "science_explosion_locator8" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 2.83 node = "science_explosion_locator3" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.26 node = "science_explosion_locator4" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.9 node = "science_explosion_locator5" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 4.1 node = "science_explosion_locator6" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    game_data = {
+        trail_locators = {
+            "engine_small_01" = 		{ width = @small_trail_W 	lenght = @small_trail_L   	}
+            "engine_small_02" = 		{ width = @small_trail_W 	lenght = @small_trail_L   	}
+        }
+    }
+}
+
+entity = {
+    name = "DSC_05_science_ship_entity"
+    pdxmesh = "DSC_05_science_mesh"
+    scale = @DSC_science_ship_entity_scale
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle" state_time = 5
+        #发光很强，感觉不太需要粒子效果“能量球”了
+        # event = { time = 0.0 node = "engine_small_01" particle = "generic_05_exhaust_line_idle" keep_particle = yes trigger_once = yes }
+        # event = { time = 0.0 node = "engine_small_02" particle = "generic_05_exhaust_line_idle" keep_particle = yes trigger_once = yes }
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_science_ship_hum" } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "moving" animation = "moving" state_time = 5
+        event = { time = 0.0 node = "engine_small_01" particle = "DSC_generic_04_exhaust_circle_moving" keep_particle = yes trigger_once = yes  }
+        event = { time = 0.0 node = "engine_small_02" particle = "DSC_generic_04_exhaust_circle_moving" keep_particle = yes trigger_once = yes  }
+        event = { trigger_once = yes sound = { soundeffect = moving_out_science } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "death" chance = 1 looping = no state_time = 10
+        event = { time = 0.0 node = "science_explosion_locator1" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.4 node = "science_explosion_locator7" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.6 node = "science_explosion_locator2" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 2.1 node = "science_explosion_locator8" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 2.83 node = "science_explosion_locator3" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.26 node = "science_explosion_locator4" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.9 node = "science_explosion_locator5" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 4.1 node = "science_explosion_locator6" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    game_data = {
+        trail_locators = {
+            "engine_small_01" = 		{ width = @small_trail_W 	lenght = @small_trail_L   	}
+            "engine_small_02" = 		{ width = @small_trail_W 	lenght = @small_trail_L   	}
+        }
+    }
+}
+
+entity = {
+    name = "DSC_06_science_ship_entity"
+    pdxmesh = "DSC_06_science_mesh"
+    scale = @DSC_science_ship_entity_scale
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle" state_time = 5
+        #发光很强，感觉不太需要粒子效果“能量球”了
+        # event = { time = 0.0 node = "engine_small_01" particle = "generic_05_exhaust_line_idle" keep_particle = yes trigger_once = yes }
+        # event = { time = 0.0 node = "engine_small_02" particle = "generic_05_exhaust_line_idle" keep_particle = yes trigger_once = yes }
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_science_ship_hum" } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "moving" animation = "moving" state_time = 5
+        event = { time = 0.0 node = "engine_small_01" particle = "DSC_generic_04_exhaust_circle_moving" keep_particle = yes trigger_once = yes  }
+        event = { time = 0.0 node = "engine_small_02" particle = "DSC_generic_04_exhaust_circle_moving" keep_particle = yes trigger_once = yes  }
+        event = { trigger_once = yes sound = { soundeffect = moving_out_science } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "death" chance = 1 looping = no state_time = 10
+        event = { time = 0.0 node = "science_explosion_locator1" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.4 node = "science_explosion_locator7" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.6 node = "science_explosion_locator2" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 2.1 node = "science_explosion_locator8" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 2.83 node = "science_explosion_locator3" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.26 node = "science_explosion_locator4" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.9 node = "science_explosion_locator5" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 4.1 node = "science_explosion_locator6" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    game_data = {
+        trail_locators = {
+            "engine_small_01" = 		{ width = @small_trail_W 	lenght = @small_trail_L   	}
+            "engine_small_02" = 		{ width = @small_trail_W 	lenght = @small_trail_L   	}
+        }
+    }
+}
+
+entity = {
+    name = "DSC_07_science_ship_entity"
+    pdxmesh = "DSC_07_science_mesh"
+    scale = @DSC_science_ship_entity_scale
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle" state_time = 5
+        #发光很强，感觉不太需要粒子效果“能量球”了
+        # event = { time = 0.0 node = "engine_small_01" particle = "generic_05_exhaust_line_idle" keep_particle = yes trigger_once = yes }
+        # event = { time = 0.0 node = "engine_small_02" particle = "generic_05_exhaust_line_idle" keep_particle = yes trigger_once = yes }
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_science_ship_hum" } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "moving" animation = "moving" state_time = 5
+        event = { time = 0.0 node = "engine_small_01" particle = "DSC_generic_04_exhaust_circle_moving" keep_particle = yes trigger_once = yes  }
+        event = { time = 0.0 node = "engine_small_02" particle = "DSC_generic_04_exhaust_circle_moving" keep_particle = yes trigger_once = yes  }
+        event = { trigger_once = yes sound = { soundeffect = moving_out_science } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "death" chance = 1 looping = no state_time = 10
+        event = { time = 0.0 node = "science_explosion_locator1" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.4 node = "science_explosion_locator7" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.6 node = "science_explosion_locator2" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 2.1 node = "science_explosion_locator8" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 2.83 node = "science_explosion_locator3" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.26 node = "science_explosion_locator4" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.9 node = "science_explosion_locator5" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 4.1 node = "science_explosion_locator6" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    game_data = {
+        trail_locators = {
+            "engine_small_01" = 		{ width = @small_trail_W 	lenght = @small_trail_L   	}
+            "engine_small_02" = 		{ width = @small_trail_W 	lenght = @small_trail_L   	}
+        }
+    }
+}
+
+entity = {
+    name = "DSC_08_science_ship_entity"
+    pdxmesh = "DSC_08_science_mesh"
+    scale = @DSC_science_ship_entity_scale
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle" state_time = 5
+        #发光很强，感觉不太需要粒子效果“能量球”了
+        # event = { time = 0.0 node = "engine_small_01" particle = "generic_05_exhaust_line_idle" keep_particle = yes trigger_once = yes }
+        # event = { time = 0.0 node = "engine_small_02" particle = "generic_05_exhaust_line_idle" keep_particle = yes trigger_once = yes }
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_science_ship_hum" } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "moving" animation = "moving" state_time = 5
+        event = { time = 0.0 node = "engine_small_01" particle = "DSC_generic_04_exhaust_circle_moving" keep_particle = yes trigger_once = yes  }
+        event = { time = 0.0 node = "engine_small_02" particle = "DSC_generic_04_exhaust_circle_moving" keep_particle = yes trigger_once = yes  }
+        event = { trigger_once = yes sound = { soundeffect = moving_out_science } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "death" chance = 1 looping = no state_time = 10
+        event = { time = 0.0 node = "science_explosion_locator1" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.4 node = "science_explosion_locator7" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.6 node = "science_explosion_locator2" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 2.1 node = "science_explosion_locator8" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 2.83 node = "science_explosion_locator3" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.26 node = "science_explosion_locator4" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.9 node = "science_explosion_locator5" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 4.1 node = "science_explosion_locator6" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    game_data = {
+        trail_locators = {
+            "engine_small_01" = 		{ width = @small_trail_W 	lenght = @small_trail_L   	}
+            "engine_small_02" = 		{ width = @small_trail_W 	lenght = @small_trail_L   	}
+        }
+    }
+}
+
+entity = {
+    name = "DSC_09_science_ship_entity"
+    pdxmesh = "DSC_09_science_mesh"
+    scale = @DSC_science_ship_entity_scale
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle" state_time = 5
+        #发光很强，感觉不太需要粒子效果“能量球”了
+        # event = { time = 0.0 node = "engine_small_01" particle = "generic_05_exhaust_line_idle" keep_particle = yes trigger_once = yes }
+        # event = { time = 0.0 node = "engine_small_02" particle = "generic_05_exhaust_line_idle" keep_particle = yes trigger_once = yes }
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_science_ship_hum" } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "moving" animation = "moving" state_time = 5
+        event = { time = 0.0 node = "engine_small_01" particle = "DSC_generic_04_exhaust_circle_moving" keep_particle = yes trigger_once = yes  }
+        event = { time = 0.0 node = "engine_small_02" particle = "DSC_generic_04_exhaust_circle_moving" keep_particle = yes trigger_once = yes  }
+        event = { trigger_once = yes sound = { soundeffect = moving_out_science } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "death" chance = 1 looping = no state_time = 10
+        event = { time = 0.0 node = "science_explosion_locator1" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.4 node = "science_explosion_locator7" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.6 node = "science_explosion_locator2" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 2.1 node = "science_explosion_locator8" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 2.83 node = "science_explosion_locator3" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.26 node = "science_explosion_locator4" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.9 node = "science_explosion_locator5" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 4.1 node = "science_explosion_locator6" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    game_data = {
+        trail_locators = {
+            "engine_small_01" = 		{ width = @small_trail_W 	lenght = @small_trail_L   	}
+            "engine_small_02" = 		{ width = @small_trail_W 	lenght = @small_trail_L   	}
+        }
+    }
+}
+
+entity = {
+    name = "DSC_10_science_ship_entity"
+    pdxmesh = "DSC_10_science_mesh"
+    scale = @DSC_science_ship_entity_scale
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle" state_time = 5
+        #发光很强，感觉不太需要粒子效果“能量球”了
+        # event = { time = 0.0 node = "engine_small_01" particle = "generic_05_exhaust_line_idle" keep_particle = yes trigger_once = yes }
+        # event = { time = 0.0 node = "engine_small_02" particle = "generic_05_exhaust_line_idle" keep_particle = yes trigger_once = yes }
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_science_ship_hum" } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "moving" animation = "moving" state_time = 5
+        event = { time = 0.0 node = "engine_small_01" particle = "DSC_generic_04_exhaust_circle_moving" keep_particle = yes trigger_once = yes  }
+        event = { time = 0.0 node = "engine_small_02" particle = "DSC_generic_04_exhaust_circle_moving" keep_particle = yes trigger_once = yes  }
+        event = { trigger_once = yes sound = { soundeffect = moving_out_science } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "death" chance = 1 looping = no state_time = 10
+        event = { time = 0.0 node = "science_explosion_locator1" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.4 node = "science_explosion_locator7" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.6 node = "science_explosion_locator2" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 2.1 node = "science_explosion_locator8" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 2.83 node = "science_explosion_locator3" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.26 node = "science_explosion_locator4" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.9 node = "science_explosion_locator5" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 4.1 node = "science_explosion_locator6" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    game_data = {
+        trail_locators = {
+            "engine_small_01" = 		{ width = @small_trail_W 	lenght = @small_trail_L   	}
+            "engine_small_02" = 		{ width = @small_trail_W 	lenght = @small_trail_L   	}
+        }
+    }
+}
+
+entity = {
+    name = "DSC_11_science_ship_entity"
+    pdxmesh = "DSC_11_science_mesh"
+    scale = @DSC_science_ship_entity_scale
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle" state_time = 5
+        #发光很强，感觉不太需要粒子效果“能量球”了
+        # event = { time = 0.0 node = "engine_small_01" particle = "generic_05_exhaust_line_idle" keep_particle = yes trigger_once = yes }
+        # event = { time = 0.0 node = "engine_small_02" particle = "generic_05_exhaust_line_idle" keep_particle = yes trigger_once = yes }
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_science_ship_hum" } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "moving" animation = "moving" state_time = 5
+        event = { time = 0.0 node = "engine_small_01" particle = "DSC_generic_04_exhaust_circle_moving" keep_particle = yes trigger_once = yes  }
+        event = { time = 0.0 node = "engine_small_02" particle = "DSC_generic_04_exhaust_circle_moving" keep_particle = yes trigger_once = yes  }
+        event = { trigger_once = yes sound = { soundeffect = moving_out_science } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "death" chance = 1 looping = no state_time = 10
+        event = { time = 0.0 node = "science_explosion_locator1" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.4 node = "science_explosion_locator7" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.6 node = "science_explosion_locator2" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 2.1 node = "science_explosion_locator8" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 2.83 node = "science_explosion_locator3" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.26 node = "science_explosion_locator4" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.9 node = "science_explosion_locator5" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 4.1 node = "science_explosion_locator6" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    game_data = {
+        trail_locators = {
+            "engine_small_01" = 		{ width = @small_trail_W 	lenght = @small_trail_L   	}
+            "engine_small_02" = 		{ width = @small_trail_W 	lenght = @small_trail_L   	}
+        }
+    }
+}
+
+entity = {
+    name = "DSC_12_science_ship_entity"
+    pdxmesh = "DSC_12_science_mesh"
+    scale = @DSC_science_ship_entity_scale
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle" state_time = 5
+        #发光很强，感觉不太需要粒子效果“能量球”了
+        # event = { time = 0.0 node = "engine_small_01" particle = "generic_05_exhaust_line_idle" keep_particle = yes trigger_once = yes }
+        # event = { time = 0.0 node = "engine_small_02" particle = "generic_05_exhaust_line_idle" keep_particle = yes trigger_once = yes }
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_science_ship_hum" } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "moving" animation = "moving" state_time = 5
+        event = { time = 0.0 node = "engine_small_01" particle = "DSC_generic_04_exhaust_circle_moving" keep_particle = yes trigger_once = yes  }
+        event = { time = 0.0 node = "engine_small_02" particle = "DSC_generic_04_exhaust_circle_moving" keep_particle = yes trigger_once = yes  }
+        event = { trigger_once = yes sound = { soundeffect = moving_out_science } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "death" chance = 1 looping = no state_time = 10
+        event = { time = 0.0 node = "science_explosion_locator1" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.4 node = "science_explosion_locator7" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.6 node = "science_explosion_locator2" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 2.1 node = "science_explosion_locator8" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 2.83 node = "science_explosion_locator3" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.26 node = "science_explosion_locator4" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.9 node = "science_explosion_locator5" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 4.1 node = "science_explosion_locator6" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    game_data = {
+        trail_locators = {
+            "engine_small_01" = 		{ width = @small_trail_W 	lenght = @small_trail_L   	}
+            "engine_small_02" = 		{ width = @small_trail_W 	lenght = @small_trail_L   	}
+        }
+    }
+}
+
+entity = {
+    name = "DSC_13_science_ship_entity"
+    pdxmesh = "DSC_13_science_mesh"
+    scale = @DSC_science_ship_entity_scale
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle" state_time = 5
+        #发光很强，感觉不太需要粒子效果“能量球”了
+        # event = { time = 0.0 node = "engine_small_01" particle = "generic_05_exhaust_line_idle" keep_particle = yes trigger_once = yes }
+        # event = { time = 0.0 node = "engine_small_02" particle = "generic_05_exhaust_line_idle" keep_particle = yes trigger_once = yes }
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_science_ship_hum" } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "moving" animation = "moving" state_time = 5
+        event = { time = 0.0 node = "engine_small_01" particle = "DSC_generic_04_exhaust_circle_moving" keep_particle = yes trigger_once = yes  }
+        event = { time = 0.0 node = "engine_small_02" particle = "DSC_generic_04_exhaust_circle_moving" keep_particle = yes trigger_once = yes  }
+        event = { trigger_once = yes sound = { soundeffect = moving_out_science } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "death" chance = 1 looping = no state_time = 10
+        event = { time = 0.0 node = "science_explosion_locator1" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.4 node = "science_explosion_locator7" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.6 node = "science_explosion_locator2" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 2.1 node = "science_explosion_locator8" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 2.83 node = "science_explosion_locator3" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.26 node = "science_explosion_locator4" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.9 node = "science_explosion_locator5" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 4.1 node = "science_explosion_locator6" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    game_data = {
+        trail_locators = {
+            "engine_small_01" = 		{ width = @small_trail_W 	lenght = @small_trail_L   	}
+            "engine_small_02" = 		{ width = @small_trail_W 	lenght = @small_trail_L   	}
+        }
+    }
+}
+
+entity = {
+    name = "DSC_14_science_ship_entity"
+    pdxmesh = "DSC_14_science_mesh"
+    scale = @DSC_science_ship_entity_scale
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle" state_time = 5
+        #发光很强，感觉不太需要粒子效果“能量球”了
+        # event = { time = 0.0 node = "engine_small_01" particle = "generic_05_exhaust_line_idle" keep_particle = yes trigger_once = yes }
+        # event = { time = 0.0 node = "engine_small_02" particle = "generic_05_exhaust_line_idle" keep_particle = yes trigger_once = yes }
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_science_ship_hum" } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "moving" animation = "moving" state_time = 5
+        event = { time = 0.0 node = "engine_small_01" particle = "DSC_generic_04_exhaust_circle_moving" keep_particle = yes trigger_once = yes  }
+        event = { time = 0.0 node = "engine_small_02" particle = "DSC_generic_04_exhaust_circle_moving" keep_particle = yes trigger_once = yes  }
+        event = { trigger_once = yes sound = { soundeffect = moving_out_science } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "death" chance = 1 looping = no state_time = 10
+        event = { time = 0.0 node = "science_explosion_locator1" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.4 node = "science_explosion_locator7" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.6 node = "science_explosion_locator2" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 2.1 node = "science_explosion_locator8" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 2.83 node = "science_explosion_locator3" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.26 node = "science_explosion_locator4" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.9 node = "science_explosion_locator5" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 4.1 node = "science_explosion_locator6" particle = "avian_tiny_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    game_data = {
+        trail_locators = {
+            "engine_small_01" = 		{ width = @small_trail_W 	lenght = @small_trail_L   	}
+            "engine_small_02" = 		{ width = @small_trail_W 	lenght = @small_trail_L   	}
+        }
+    }
+}

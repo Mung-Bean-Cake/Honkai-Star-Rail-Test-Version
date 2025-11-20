@@ -1,0 +1,2352 @@
+
+entity = {
+    name = "DSC_01_starbase_outpost_section_entity"
+    pdxmesh = "DSC_01_outpost_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+    }
+}
+entity = {
+    name = "DSC_01_starbase_starport_section_entity"
+    pdxmesh = "DSC_01_starport_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+    }
+}
+entity = {
+    name = "DSC_01_starbase_starhold_section_entity"
+    pdxmesh = "DSC_01_starhold_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_02" } }
+    }
+}
+entity = {
+    name = "DSC_01_starbase_starfortress_section_entity"
+    pdxmesh = "DSC_01_starfort_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_02" } }
+    }
+}
+entity = {
+    name = "DSC_01_starbase_citadel_section_entity"
+    pdxmesh = "DSC_01_citadel_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_02" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_03" } }
+    }
+}
+
+entity = {
+    name = "DSC_01_starbase_outpost_phase_01_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_01_starbase_outpost_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_01_starbase_starport_phase_02_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_01_starbase_starport_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_01_starbase_starhold_phase_03_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_01_starbase_starhold_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_01_starbase_starfortress_phase_04_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_01_starbase_starfortress_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_01_starbase_citadel_phase_05_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_01_starbase_citadel_section_entity" }
+    cull_radius = 500
+}
+
+entity = {
+    name = "DSC_01_starbases_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    locator = { name = "slot2"				position = { 50	0  0 } }
+    locator = { name = "slot3"				position = { 100	0  0 } }
+    locator = { name = "slot4"				position = { 175	0  0 } }
+    locator = { name = "slot5"				position = { 250	0  0 } }
+    attach = { "slot1" = "DSC_01_starbase_outpost_phase_01_entity" }
+    attach = { "slot2" = "DSC_01_starbase_starport_phase_02_entity" }
+    attach = { "slot3" = "DSC_01_starbase_starhold_phase_03_entity" }
+    attach = { "slot4" = "DSC_01_starbase_starfortress_phase_04_entity" }
+    attach = { "slot5" = "DSC_01_starbase_citadel_phase_05_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_01_starbase_outpost_construction_entity"
+    pdxmesh = "DSC_01_outpost_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_01_starbase_starport_construction_entity"
+    pdxmesh = "DSC_01_starport_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_01_starbase_starhold_construction_entity"
+    pdxmesh = "DSC_01_starhold_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_01_starbase_starfortress_construction_entity"
+    pdxmesh = "DSC_01_starhold_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_01_starbase_citadel_construction_entity"
+    pdxmesh = "DSC_01_citadel_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+
+
+
+
+
+
+
+
+
+
+entity = {
+    name = "DSC_02_starbase_outpost_section_entity"
+    pdxmesh = "DSC_02_outpost_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+    }
+}
+entity = {
+    name = "DSC_02_starbase_starport_section_entity"
+    pdxmesh = "DSC_02_starport_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+    }
+}
+entity = {
+    name = "DSC_02_starbase_starhold_section_entity"
+    pdxmesh = "DSC_02_starhold_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_02" } }
+    }
+}
+entity = {
+    name = "DSC_02_starbase_starfortress_section_entity"
+    pdxmesh = "DSC_02_starfort_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_02" } }
+    }
+}
+entity = {
+    name = "DSC_02_starbase_citadel_section_entity"
+    pdxmesh = "DSC_02_citadel_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_02" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_03" } }
+    }
+}
+
+entity = {
+    name = "DSC_02_starbase_outpost_phase_01_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_02_starbase_outpost_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_02_starbase_starport_phase_02_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_02_starbase_starport_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_02_starbase_starhold_phase_03_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_02_starbase_starhold_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_02_starbase_starfortress_phase_04_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_02_starbase_starfortress_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_02_starbase_citadel_phase_05_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_02_starbase_citadel_section_entity" }
+    cull_radius = 500
+}
+
+entity = {
+    name = "DSC_02_starbases_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    locator = { name = "slot2"				position = { 50	0  0 } }
+    locator = { name = "slot3"				position = { 100	0  0 } }
+    locator = { name = "slot4"				position = { 175	0  0 } }
+    locator = { name = "slot5"				position = { 250	0  0 } }
+    attach = { "slot1" = "DSC_02_starbase_outpost_phase_01_entity" }
+    attach = { "slot2" = "DSC_02_starbase_starport_phase_02_entity" }
+    attach = { "slot3" = "DSC_02_starbase_starhold_phase_03_entity" }
+    attach = { "slot4" = "DSC_02_starbase_starfortress_phase_04_entity" }
+    attach = { "slot5" = "DSC_02_starbase_citadel_phase_05_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_02_starbase_outpost_construction_entity"
+    pdxmesh = "DSC_02_outpost_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_02_starbase_starport_construction_entity"
+    pdxmesh = "DSC_02_starport_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_02_starbase_starhold_construction_entity"
+    pdxmesh = "DSC_02_starhold_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_02_starbase_starfortress_construction_entity"
+    pdxmesh = "DSC_02_starhold_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_02_starbase_citadel_construction_entity"
+    pdxmesh = "DSC_02_citadel_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+
+
+
+
+
+
+
+
+
+
+
+entity = {
+    name = "DSC_03_starbase_outpost_section_entity"
+    pdxmesh = "DSC_03_outpost_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+    }
+}
+entity = {
+    name = "DSC_03_starbase_starport_section_entity"
+    pdxmesh = "DSC_03_starport_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+    }
+}
+entity = {
+    name = "DSC_03_starbase_starhold_section_entity"
+    pdxmesh = "DSC_03_starhold_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_02" } }
+    }
+}
+entity = {
+    name = "DSC_03_starbase_starfortress_section_entity"
+    pdxmesh = "DSC_03_starfort_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_02" } }
+    }
+}
+entity = {
+    name = "DSC_03_starbase_citadel_section_entity"
+    pdxmesh = "DSC_03_citadel_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_02" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_03" } }
+    }
+}
+
+entity = {
+    name = "DSC_03_starbase_outpost_phase_01_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_03_starbase_outpost_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_03_starbase_starport_phase_02_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_03_starbase_starport_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_03_starbase_starhold_phase_03_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_03_starbase_starhold_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_03_starbase_starfortress_phase_04_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_03_starbase_starfortress_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_03_starbase_citadel_phase_05_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_03_starbase_citadel_section_entity" }
+    cull_radius = 500
+}
+
+entity = {
+    name = "DSC_03_starbases_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    locator = { name = "slot2"				position = { 50	0  0 } }
+    locator = { name = "slot3"				position = { 100	0  0 } }
+    locator = { name = "slot4"				position = { 175	0  0 } }
+    locator = { name = "slot5"				position = { 250	0  0 } }
+    attach = { "slot1" = "DSC_03_starbase_outpost_phase_01_entity" }
+    attach = { "slot2" = "DSC_03_starbase_starport_phase_02_entity" }
+    attach = { "slot3" = "DSC_03_starbase_starhold_phase_03_entity" }
+    attach = { "slot4" = "DSC_03_starbase_starfortress_phase_04_entity" }
+    attach = { "slot5" = "DSC_03_starbase_citadel_phase_05_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_03_starbase_outpost_construction_entity"
+    pdxmesh = "DSC_03_outpost_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_03_starbase_starport_construction_entity"
+    pdxmesh = "DSC_03_starport_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_03_starbase_starhold_construction_entity"
+    pdxmesh = "DSC_03_starhold_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_03_starbase_starfortress_construction_entity"
+    pdxmesh = "DSC_03_starhold_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_03_starbase_citadel_construction_entity"
+    pdxmesh = "DSC_03_citadel_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+entity = {
+    name = "DSC_04_starbase_outpost_section_entity"
+    pdxmesh = "DSC_04_outpost_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+    }
+}
+entity = {
+    name = "DSC_04_starbase_starport_section_entity"
+    pdxmesh = "DSC_04_starport_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+    }
+}
+entity = {
+    name = "DSC_04_starbase_starhold_section_entity"
+    pdxmesh = "DSC_04_starhold_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_02" } }
+    }
+}
+entity = {
+    name = "DSC_04_starbase_starfortress_section_entity"
+    pdxmesh = "DSC_04_starfort_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_02" } }
+    }
+}
+entity = {
+    name = "DSC_04_starbase_citadel_section_entity"
+    pdxmesh = "DSC_04_citadel_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_02" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_03" } }
+    }
+}
+
+entity = {
+    name = "DSC_04_starbase_outpost_phase_01_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_04_starbase_outpost_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_04_starbase_starport_phase_02_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_04_starbase_starport_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_04_starbase_starhold_phase_03_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_04_starbase_starhold_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_04_starbase_starfortress_phase_04_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_04_starbase_starfortress_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_04_starbase_citadel_phase_05_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_04_starbase_citadel_section_entity" }
+    cull_radius = 500
+}
+
+entity = {
+    name = "DSC_04_starbases_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    locator = { name = "slot2"				position = { 50	0  0 } }
+    locator = { name = "slot3"				position = { 100	0  0 } }
+    locator = { name = "slot4"				position = { 175	0  0 } }
+    locator = { name = "slot5"				position = { 250	0  0 } }
+    attach = { "slot1" = "DSC_04_starbase_outpost_phase_01_entity" }
+    attach = { "slot2" = "DSC_04_starbase_starport_phase_02_entity" }
+    attach = { "slot3" = "DSC_04_starbase_starhold_phase_03_entity" }
+    attach = { "slot4" = "DSC_04_starbase_starfortress_phase_04_entity" }
+    attach = { "slot5" = "DSC_04_starbase_citadel_phase_05_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_04_starbase_outpost_construction_entity"
+    pdxmesh = "DSC_04_outpost_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_04_starbase_starport_construction_entity"
+    pdxmesh = "DSC_04_starport_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_04_starbase_starhold_construction_entity"
+    pdxmesh = "DSC_04_starhold_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_04_starbase_starfortress_construction_entity"
+    pdxmesh = "DSC_04_starhold_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_04_starbase_citadel_construction_entity"
+    pdxmesh = "DSC_04_citadel_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+
+
+
+
+
+
+
+
+
+
+
+
+entity = {
+    name = "DSC_05_starbase_outpost_section_entity"
+    pdxmesh = "DSC_05_outpost_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+    }
+}
+entity = {
+    name = "DSC_05_starbase_starport_section_entity"
+    pdxmesh = "DSC_05_starport_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+    }
+}
+entity = {
+    name = "DSC_05_starbase_starhold_section_entity"
+    pdxmesh = "DSC_05_starhold_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_02" } }
+    }
+}
+entity = {
+    name = "DSC_05_starbase_starfortress_section_entity"
+    pdxmesh = "DSC_05_starfort_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_02" } }
+    }
+}
+entity = {
+    name = "DSC_05_starbase_citadel_section_entity"
+    pdxmesh = "DSC_05_citadel_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_02" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_03" } }
+    }
+}
+
+entity = {
+    name = "DSC_05_starbase_outpost_phase_01_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_05_starbase_outpost_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_05_starbase_starport_phase_02_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_05_starbase_starport_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_05_starbase_starhold_phase_03_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_05_starbase_starhold_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_05_starbase_starfortress_phase_04_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_05_starbase_starfortress_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_05_starbase_citadel_phase_05_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_05_starbase_citadel_section_entity" }
+    cull_radius = 500
+}
+
+entity = {
+    name = "DSC_05_starbases_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    locator = { name = "slot2"				position = { 50	0  0 } }
+    locator = { name = "slot3"				position = { 100	0  0 } }
+    locator = { name = "slot4"				position = { 175	0  0 } }
+    locator = { name = "slot5"				position = { 250	0  0 } }
+    attach = { "slot1" = "DSC_05_starbase_outpost_phase_01_entity" }
+    attach = { "slot2" = "DSC_05_starbase_starport_phase_02_entity" }
+    attach = { "slot3" = "DSC_05_starbase_starhold_phase_03_entity" }
+    attach = { "slot4" = "DSC_05_starbase_starfortress_phase_04_entity" }
+    attach = { "slot5" = "DSC_05_starbase_citadel_phase_05_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_05_starbase_outpost_construction_entity"
+    pdxmesh = "DSC_05_outpost_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_05_starbase_starport_construction_entity"
+    pdxmesh = "DSC_05_starport_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_05_starbase_starhold_construction_entity"
+    pdxmesh = "DSC_05_starhold_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_05_starbase_starfortress_construction_entity"
+    pdxmesh = "DSC_05_starhold_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_05_starbase_citadel_construction_entity"
+    pdxmesh = "DSC_05_citadel_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+entity = {
+    name = "DSC_06_starbase_outpost_section_entity"
+    pdxmesh = "DSC_06_outpost_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+    }
+}
+entity = {
+    name = "DSC_06_starbase_starport_section_entity"
+    pdxmesh = "DSC_06_starport_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+    }
+}
+entity = {
+    name = "DSC_06_starbase_starhold_section_entity"
+    pdxmesh = "DSC_06_starhold_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_02" } }
+    }
+}
+entity = {
+    name = "DSC_06_starbase_starfortress_section_entity"
+    pdxmesh = "DSC_06_starfort_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_02" } }
+    }
+}
+entity = {
+    name = "DSC_06_starbase_citadel_section_entity"
+    pdxmesh = "DSC_06_citadel_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_02" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_03" } }
+    }
+}
+
+entity = {
+    name = "DSC_06_starbase_outpost_phase_01_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_06_starbase_outpost_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_06_starbase_starport_phase_02_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_06_starbase_starport_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_06_starbase_starhold_phase_03_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_06_starbase_starhold_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_06_starbase_starfortress_phase_04_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_06_starbase_starfortress_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_06_starbase_citadel_phase_05_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_06_starbase_citadel_section_entity" }
+    cull_radius = 500
+}
+
+entity = {
+    name = "DSC_06_starbases_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    locator = { name = "slot2"				position = { 50	0  0 } }
+    locator = { name = "slot3"				position = { 100	0  0 } }
+    locator = { name = "slot4"				position = { 175	0  0 } }
+    locator = { name = "slot5"				position = { 250	0  0 } }
+    attach = { "slot1" = "DSC_06_starbase_outpost_phase_01_entity" }
+    attach = { "slot2" = "DSC_06_starbase_starport_phase_02_entity" }
+    attach = { "slot3" = "DSC_06_starbase_starhold_phase_03_entity" }
+    attach = { "slot4" = "DSC_06_starbase_starfortress_phase_04_entity" }
+    attach = { "slot5" = "DSC_06_starbase_citadel_phase_05_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_06_starbase_outpost_construction_entity"
+    pdxmesh = "DSC_06_outpost_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_06_starbase_starport_construction_entity"
+    pdxmesh = "DSC_06_starport_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_06_starbase_starhold_construction_entity"
+    pdxmesh = "DSC_06_starhold_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_06_starbase_starfortress_construction_entity"
+    pdxmesh = "DSC_06_starhold_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_06_starbase_citadel_construction_entity"
+    pdxmesh = "DSC_06_citadel_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+entity = {
+    name = "DSC_07_starbase_outpost_section_entity"
+    pdxmesh = "DSC_07_outpost_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+    }
+}
+entity = {
+    name = "DSC_07_starbase_starport_section_entity"
+    pdxmesh = "DSC_07_starport_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+    }
+}
+entity = {
+    name = "DSC_07_starbase_starhold_section_entity"
+    pdxmesh = "DSC_07_starhold_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_02" } }
+    }
+}
+entity = {
+    name = "DSC_07_starbase_starfortress_section_entity"
+    pdxmesh = "DSC_07_starfort_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_02" } }
+    }
+}
+entity = {
+    name = "DSC_07_starbase_citadel_section_entity"
+    pdxmesh = "DSC_07_citadel_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_02" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_03" } }
+    }
+}
+
+entity = {
+    name = "DSC_07_starbase_outpost_phase_01_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_07_starbase_outpost_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_07_starbase_starport_phase_02_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_07_starbase_starport_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_07_starbase_starhold_phase_03_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_07_starbase_starhold_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_07_starbase_starfortress_phase_04_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_07_starbase_starfortress_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_07_starbase_citadel_phase_05_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_07_starbase_citadel_section_entity" }
+    cull_radius = 500
+}
+
+entity = {
+    name = "DSC_07_starbases_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    locator = { name = "slot2"				position = { 50	0  0 } }
+    locator = { name = "slot3"				position = { 100	0  0 } }
+    locator = { name = "slot4"				position = { 175	0  0 } }
+    locator = { name = "slot5"				position = { 250	0  0 } }
+    attach = { "slot1" = "DSC_07_starbase_outpost_phase_01_entity" }
+    attach = { "slot2" = "DSC_07_starbase_starport_phase_02_entity" }
+    attach = { "slot3" = "DSC_07_starbase_starhold_phase_03_entity" }
+    attach = { "slot4" = "DSC_07_starbase_starfortress_phase_04_entity" }
+    attach = { "slot5" = "DSC_07_starbase_citadel_phase_05_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_07_starbase_outpost_construction_entity"
+    pdxmesh = "DSC_07_outpost_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_07_starbase_starport_construction_entity"
+    pdxmesh = "DSC_07_starport_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_07_starbase_starhold_construction_entity"
+    pdxmesh = "DSC_07_starhold_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_07_starbase_starfortress_construction_entity"
+    pdxmesh = "DSC_07_starhold_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_07_starbase_citadel_construction_entity"
+    pdxmesh = "DSC_07_citadel_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+entity = {
+    name = "DSC_08_starbase_outpost_section_entity"
+    pdxmesh = "DSC_08_outpost_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+    }
+}
+entity = {
+    name = "DSC_08_starbase_starport_section_entity"
+    pdxmesh = "DSC_08_starport_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+    }
+}
+entity = {
+    name = "DSC_08_starbase_starhold_section_entity"
+    pdxmesh = "DSC_08_starhold_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_02" } }
+    }
+}
+entity = {
+    name = "DSC_08_starbase_starfortress_section_entity"
+    pdxmesh = "DSC_08_starfort_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_02" } }
+    }
+}
+entity = {
+    name = "DSC_08_starbase_citadel_section_entity"
+    pdxmesh = "DSC_08_citadel_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_02" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_03" } }
+    }
+}
+
+entity = {
+    name = "DSC_08_starbase_outpost_phase_01_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_08_starbase_outpost_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_08_starbase_starport_phase_02_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_08_starbase_starport_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_08_starbase_starhold_phase_03_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_08_starbase_starhold_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_08_starbase_starfortress_phase_04_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_08_starbase_starfortress_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_08_starbase_citadel_phase_05_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_08_starbase_citadel_section_entity" }
+    cull_radius = 500
+}
+
+entity = {
+    name = "DSC_08_starbases_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    locator = { name = "slot2"				position = { 50	0  0 } }
+    locator = { name = "slot3"				position = { 100	0  0 } }
+    locator = { name = "slot4"				position = { 175	0  0 } }
+    locator = { name = "slot5"				position = { 250	0  0 } }
+    attach = { "slot1" = "DSC_08_starbase_outpost_phase_01_entity" }
+    attach = { "slot2" = "DSC_08_starbase_starport_phase_02_entity" }
+    attach = { "slot3" = "DSC_08_starbase_starhold_phase_03_entity" }
+    attach = { "slot4" = "DSC_08_starbase_starfortress_phase_04_entity" }
+    attach = { "slot5" = "DSC_08_starbase_citadel_phase_05_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_08_starbase_outpost_construction_entity"
+    pdxmesh = "DSC_08_outpost_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_08_starbase_starport_construction_entity"
+    pdxmesh = "DSC_08_starport_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_08_starbase_starhold_construction_entity"
+    pdxmesh = "DSC_08_starhold_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_08_starbase_starfortress_construction_entity"
+    pdxmesh = "DSC_08_starhold_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_08_starbase_citadel_construction_entity"
+    pdxmesh = "DSC_08_citadel_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+
+
+
+
+
+
+
+
+
+
+
+entity = {
+    name = "DSC_09_starbase_outpost_section_entity"
+    pdxmesh = "DSC_09_outpost_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+    }
+}
+entity = {
+    name = "DSC_09_starbase_starport_section_entity"
+    pdxmesh = "DSC_09_starport_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+    }
+}
+entity = {
+    name = "DSC_09_starbase_starhold_section_entity"
+    pdxmesh = "DSC_09_starhold_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_02" } }
+    }
+}
+entity = {
+    name = "DSC_09_starbase_starfortress_section_entity"
+    pdxmesh = "DSC_09_starfort_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_02" } }
+    }
+}
+entity = {
+    name = "DSC_09_starbase_citadel_section_entity"
+    pdxmesh = "DSC_09_citadel_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_02" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_03" } }
+    }
+}
+
+entity = {
+    name = "DSC_09_starbase_outpost_phase_01_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_09_starbase_outpost_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_09_starbase_starport_phase_02_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_09_starbase_starport_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_09_starbase_starhold_phase_03_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_09_starbase_starhold_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_09_starbase_starfortress_phase_04_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_09_starbase_starfortress_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_09_starbase_citadel_phase_05_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_09_starbase_citadel_section_entity" }
+    cull_radius = 500
+}
+
+entity = {
+    name = "DSC_09_starbases_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    locator = { name = "slot2"				position = { 50	0  0 } }
+    locator = { name = "slot3"				position = { 100	0  0 } }
+    locator = { name = "slot4"				position = { 175	0  0 } }
+    locator = { name = "slot5"				position = { 250	0  0 } }
+    attach = { "slot1" = "DSC_09_starbase_outpost_phase_01_entity" }
+    attach = { "slot2" = "DSC_09_starbase_starport_phase_02_entity" }
+    attach = { "slot3" = "DSC_09_starbase_starhold_phase_03_entity" }
+    attach = { "slot4" = "DSC_09_starbase_starfortress_phase_04_entity" }
+    attach = { "slot5" = "DSC_09_starbase_citadel_phase_05_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_09_starbase_outpost_construction_entity"
+    pdxmesh = "DSC_09_outpost_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_09_starbase_starport_construction_entity"
+    pdxmesh = "DSC_09_starport_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_09_starbase_starhold_construction_entity"
+    pdxmesh = "DSC_09_starhold_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_09_starbase_starfortress_construction_entity"
+    pdxmesh = "DSC_09_starhold_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_09_starbase_citadel_construction_entity"
+    pdxmesh = "DSC_09_citadel_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+
+
+
+
+
+
+
+
+
+
+
+entity = {
+    name = "DSC_10_starbase_outpost_section_entity"
+    pdxmesh = "DSC_10_outpost_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+    }
+}
+entity = {
+    name = "DSC_10_starbase_starport_section_entity"
+    pdxmesh = "DSC_10_starport_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+    }
+}
+entity = {
+    name = "DSC_10_starbase_starhold_section_entity"
+    pdxmesh = "DSC_10_starhold_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_02" } }
+    }
+}
+entity = {
+    name = "DSC_10_starbase_starfortress_section_entity"
+    pdxmesh = "DSC_10_starfort_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_02" } }
+    }
+}
+entity = {
+    name = "DSC_10_starbase_citadel_section_entity"
+    pdxmesh = "DSC_10_citadel_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_02" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_03" } }
+    }
+}
+
+entity = {
+    name = "DSC_10_starbase_outpost_phase_01_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_10_starbase_outpost_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_10_starbase_starport_phase_02_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_10_starbase_starport_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_10_starbase_starhold_phase_03_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_10_starbase_starhold_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_10_starbase_starfortress_phase_04_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_10_starbase_starfortress_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_10_starbase_citadel_phase_05_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_10_starbase_citadel_section_entity" }
+    cull_radius = 500
+}
+
+entity = {
+    name = "DSC_10_starbases_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    locator = { name = "slot2"				position = { 50	0  0 } }
+    locator = { name = "slot3"				position = { 100	0  0 } }
+    locator = { name = "slot4"				position = { 175	0  0 } }
+    locator = { name = "slot5"				position = { 250	0  0 } }
+    attach = { "slot1" = "DSC_10_starbase_outpost_phase_01_entity" }
+    attach = { "slot2" = "DSC_10_starbase_starport_phase_02_entity" }
+    attach = { "slot3" = "DSC_10_starbase_starhold_phase_03_entity" }
+    attach = { "slot4" = "DSC_10_starbase_starfortress_phase_04_entity" }
+    attach = { "slot5" = "DSC_10_starbase_citadel_phase_05_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_10_starbase_outpost_construction_entity"
+    pdxmesh = "DSC_10_outpost_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_10_starbase_starport_construction_entity"
+    pdxmesh = "DSC_10_starport_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_10_starbase_starhold_construction_entity"
+    pdxmesh = "DSC_10_starhold_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_10_starbase_starfortress_construction_entity"
+    pdxmesh = "DSC_10_starhold_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_10_starbase_citadel_construction_entity"
+    pdxmesh = "DSC_10_citadel_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+
+
+
+
+
+
+
+
+
+
+
+entity = {
+    name = "DSC_11_starbase_outpost_section_entity"
+    pdxmesh = "DSC_11_outpost_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+    }
+}
+entity = {
+    name = "DSC_11_starbase_starport_section_entity"
+    pdxmesh = "DSC_11_starport_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+    }
+}
+entity = {
+    name = "DSC_11_starbase_starhold_section_entity"
+    pdxmesh = "DSC_11_starhold_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_02" } }
+    }
+}
+entity = {
+    name = "DSC_11_starbase_starfortress_section_entity"
+    pdxmesh = "DSC_11_starfort_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_02" } }
+    }
+}
+entity = {
+    name = "DSC_11_starbase_citadel_section_entity"
+    pdxmesh = "DSC_11_citadel_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_02" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_03" } }
+    }
+}
+
+entity = {
+    name = "DSC_11_starbase_outpost_phase_01_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_11_starbase_outpost_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_11_starbase_starport_phase_02_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_11_starbase_starport_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_11_starbase_starhold_phase_03_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_11_starbase_starhold_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_11_starbase_starfortress_phase_04_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_11_starbase_starfortress_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_11_starbase_citadel_phase_05_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_11_starbase_citadel_section_entity" }
+    cull_radius = 500
+}
+
+entity = {
+    name = "DSC_11_starbases_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    locator = { name = "slot2"				position = { 50	0  0 } }
+    locator = { name = "slot3"				position = { 100	0  0 } }
+    locator = { name = "slot4"				position = { 175	0  0 } }
+    locator = { name = "slot5"				position = { 250	0  0 } }
+    attach = { "slot1" = "DSC_11_starbase_outpost_phase_01_entity" }
+    attach = { "slot2" = "DSC_11_starbase_starport_phase_02_entity" }
+    attach = { "slot3" = "DSC_11_starbase_starhold_phase_03_entity" }
+    attach = { "slot4" = "DSC_11_starbase_starfortress_phase_04_entity" }
+    attach = { "slot5" = "DSC_11_starbase_citadel_phase_05_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_11_starbase_outpost_construction_entity"
+    pdxmesh = "DSC_11_outpost_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_11_starbase_starport_construction_entity"
+    pdxmesh = "DSC_11_starport_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_11_starbase_starhold_construction_entity"
+    pdxmesh = "DSC_11_starhold_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_11_starbase_starfortress_construction_entity"
+    pdxmesh = "DSC_11_starhold_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_11_starbase_citadel_construction_entity"
+    pdxmesh = "DSC_11_citadel_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+
+
+
+
+
+
+
+
+
+
+entity = {
+    name = "DSC_12_starbase_outpost_section_entity"
+    pdxmesh = "DSC_12_outpost_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+    }
+}
+entity = {
+    name = "DSC_12_starbase_starport_section_entity"
+    pdxmesh = "DSC_12_starport_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+    }
+}
+entity = {
+    name = "DSC_12_starbase_starhold_section_entity"
+    pdxmesh = "DSC_12_starhold_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_02" } }
+    }
+}
+entity = {
+    name = "DSC_12_starbase_starfortress_section_entity"
+    pdxmesh = "DSC_12_starfort_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_02" } }
+    }
+}
+entity = {
+    name = "DSC_12_starbase_citadel_section_entity"
+    pdxmesh = "DSC_12_citadel_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_02" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_03" } }
+    }
+}
+
+entity = {
+    name = "DSC_12_starbase_outpost_phase_01_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_12_starbase_outpost_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_12_starbase_starport_phase_02_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_12_starbase_starport_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_12_starbase_starhold_phase_03_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_12_starbase_starhold_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_12_starbase_starfortress_phase_04_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_12_starbase_starfortress_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_12_starbase_citadel_phase_05_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_12_starbase_citadel_section_entity" }
+    cull_radius = 500
+}
+
+entity = {
+    name = "DSC_12_starbases_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    locator = { name = "slot2"				position = { 50	0  0 } }
+    locator = { name = "slot3"				position = { 100	0  0 } }
+    locator = { name = "slot4"				position = { 175	0  0 } }
+    locator = { name = "slot5"				position = { 250	0  0 } }
+    attach = { "slot1" = "DSC_12_starbase_outpost_phase_01_entity" }
+    attach = { "slot2" = "DSC_12_starbase_starport_phase_02_entity" }
+    attach = { "slot3" = "DSC_12_starbase_starhold_phase_03_entity" }
+    attach = { "slot4" = "DSC_12_starbase_starfortress_phase_04_entity" }
+    attach = { "slot5" = "DSC_12_starbase_citadel_phase_05_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_12_starbase_outpost_construction_entity"
+    pdxmesh = "DSC_12_outpost_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_12_starbase_starport_construction_entity"
+    pdxmesh = "DSC_12_starport_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_12_starbase_starhold_construction_entity"
+    pdxmesh = "DSC_12_starhold_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_12_starbase_starfortress_construction_entity"
+    pdxmesh = "DSC_12_starhold_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_12_starbase_citadel_construction_entity"
+    pdxmesh = "DSC_12_citadel_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+
+
+
+
+
+
+
+
+
+
+
+
+entity = {
+    name = "DSC_13_starbase_outpost_section_entity"
+    pdxmesh = "DSC_13_outpost_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+    }
+}
+entity = {
+    name = "DSC_13_starbase_starport_section_entity"
+    pdxmesh = "DSC_13_starport_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+    }
+}
+entity = {
+    name = "DSC_13_starbase_starhold_section_entity"
+    pdxmesh = "DSC_13_starhold_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_02" } }
+    }
+}
+entity = {
+    name = "DSC_13_starbase_starfortress_section_entity"
+    pdxmesh = "DSC_13_starfort_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_02" } }
+    }
+}
+entity = {
+    name = "DSC_13_starbase_citadel_section_entity"
+    pdxmesh = "DSC_13_citadel_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_02" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_03" } }
+    }
+}
+
+entity = {
+    name = "DSC_13_starbase_outpost_phase_01_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_13_starbase_outpost_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_13_starbase_starport_phase_02_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_13_starbase_starport_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_13_starbase_starhold_phase_03_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_13_starbase_starhold_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_13_starbase_starfortress_phase_04_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_13_starbase_starfortress_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_13_starbase_citadel_phase_05_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_13_starbase_citadel_section_entity" }
+    cull_radius = 500
+}
+
+entity = {
+    name = "DSC_13_starbases_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    locator = { name = "slot2"				position = { 50	0  0 } }
+    locator = { name = "slot3"				position = { 100	0  0 } }
+    locator = { name = "slot4"				position = { 175	0  0 } }
+    locator = { name = "slot5"				position = { 250	0  0 } }
+    attach = { "slot1" = "DSC_13_starbase_outpost_phase_01_entity" }
+    attach = { "slot2" = "DSC_13_starbase_starport_phase_02_entity" }
+    attach = { "slot3" = "DSC_13_starbase_starhold_phase_03_entity" }
+    attach = { "slot4" = "DSC_13_starbase_starfortress_phase_04_entity" }
+    attach = { "slot5" = "DSC_13_starbase_citadel_phase_05_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_13_starbase_outpost_construction_entity"
+    pdxmesh = "DSC_13_outpost_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_13_starbase_starport_construction_entity"
+    pdxmesh = "DSC_13_starport_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_13_starbase_starhold_construction_entity"
+    pdxmesh = "DSC_13_starhold_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_13_starbase_starfortress_construction_entity"
+    pdxmesh = "DSC_13_starhold_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_13_starbase_citadel_construction_entity"
+    pdxmesh = "DSC_13_citadel_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+
+
+
+
+
+
+
+
+
+
+
+
+entity = {
+    name = "DSC_14_starbase_outpost_section_entity"
+    pdxmesh = "DSC_14_outpost_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+    }
+}
+entity = {
+    name = "DSC_14_starbase_starport_section_entity"
+    pdxmesh = "DSC_14_starport_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+    }
+}
+entity = {
+    name = "DSC_14_starbase_starhold_section_entity"
+    pdxmesh = "DSC_14_starhold_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_02" } }
+    }
+}
+entity = {
+    name = "DSC_14_starbase_starfortress_section_entity"
+    pdxmesh = "DSC_14_starfort_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_02" } }
+    }
+}
+entity = {
+    name = "DSC_14_starbase_citadel_section_entity"
+    pdxmesh = "DSC_14_citadel_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_01" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_02" } }
+        start_event = { trigger_once = yes sound = { soundeffect = "starbase_hum_stage_03" } }
+    }
+}
+
+entity = {
+    name = "DSC_14_starbase_outpost_phase_01_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_14_starbase_outpost_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_14_starbase_starport_phase_02_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_14_starbase_starport_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_14_starbase_starhold_phase_03_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_14_starbase_starhold_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_14_starbase_starfortress_phase_04_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_14_starbase_starfortress_section_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_14_starbase_citadel_phase_05_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    default_state = "idle"
+    state = { name = "idle"
+        start_event = { trigger_once = yes sound = { soundeffect = "ringworld_construction_ambient" } }
+    }
+    attach = { "slot1" = "DSC_14_starbase_citadel_section_entity" }
+    cull_radius = 500
+}
+
+entity = {
+    name = "DSC_14_starbases_entity"
+    locator = { name = "slot1"				position = { 0	0  0 } }
+    locator = { name = "slot2"				position = { 50	0  0 } }
+    locator = { name = "slot3"				position = { 100	0  0 } }
+    locator = { name = "slot4"				position = { 175	0  0 } }
+    locator = { name = "slot5"				position = { 250	0  0 } }
+    attach = { "slot1" = "DSC_14_starbase_outpost_phase_01_entity" }
+    attach = { "slot2" = "DSC_14_starbase_starport_phase_02_entity" }
+    attach = { "slot3" = "DSC_14_starbase_starhold_phase_03_entity" }
+    attach = { "slot4" = "DSC_14_starbase_starfortress_phase_04_entity" }
+    attach = { "slot5" = "DSC_14_starbase_citadel_phase_05_entity" }
+    cull_radius = 500
+}
+entity = {
+    name = "DSC_14_starbase_outpost_construction_entity"
+    pdxmesh = "DSC_14_outpost_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_14_starbase_starport_construction_entity"
+    pdxmesh = "DSC_14_starport_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_14_starbase_starhold_construction_entity"
+    pdxmesh = "DSC_14_starhold_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_14_starbase_starfortress_construction_entity"
+    pdxmesh = "DSC_14_starhold_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}
+entity = {
+    name = "DSC_14_starbase_citadel_construction_entity"
+    pdxmesh = "DSC_14_citadel_mesh"
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { trigger_once = yes sound = { soundeffect = "place_construction" } }
+    }
+    scale = 1.0
+}

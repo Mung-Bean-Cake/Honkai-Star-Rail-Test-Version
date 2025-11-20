@@ -1,0 +1,901 @@
+@DSC_battleship_entity_scale = 1
+@DSC_battleship_ship_entity_scale = 1
+@DSC_battleship_entity_game_data_scale = 16.0
+#######################################
+######          实例|通用          ######
+#######################################
+entity = {
+    name = "DSC_00_battleship_entity"
+    pdxmesh = "DSC_00_battleship_frame_mesh"
+
+    default_state = "idle"
+    state = {
+        name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_battleship_bass" } }
+
+        event = { time = 0 node = "engine_medium_01" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_03" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_04" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+    }
+    state = {
+        name = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_03" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_04" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = "moving_out_battleship" } }
+    }
+    state = {
+        name = "death" state_time = 5
+        event = { time = 1.0 node = "explosion_locator1" particle = "ship_burn_particle" }
+        event = { time = 1.0 node = "explosion_locator1" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 1.7 node = "explosion_locator2" particle = "ship_burn_particle" }
+        event = { time = 1.7 node = "explosion_locator2" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 3.7 node = "explosion_locator3" particle = "ship_burn_particle" }
+        event = { time = 3.7 node = "explosion_locator3" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 6.0 node = "explosion_locator4" particle = "ship_burn_particle" }
+        event = { time = 6.0 node = "explosion_locator4" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 7.3 node = "explosion_locator5" particle = "ship_burn_particle" }
+        event = { time = 7.3 node = "explosion_locator5" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+
+        event = { time = 15.9 node = "part2" particle = "large_player_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    scale = @DSC_battleship_entity_scale
+
+    game_data = {
+        size = @DSC_battleship_entity_game_data_scale
+        emissive_recolor_crunch = 5.0
+        trail_locators = {
+            "engine_medium_01" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_02" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_03" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_04" = { width = @medium_trail_W lenght = @medium_trail_L }
+        }
+    }
+}
+
+# BOW
+entity = {
+    name = "DSC_00_battleship_bow_L1M1S2_entity"
+    pdxmesh = "DSC_00_battleship_bow_L1M1S2_mesh"
+}
+
+entity = {
+    name = "DSC_00_battleship_bow_L1S4_entity"
+    pdxmesh = "DSC_00_battleship_bow_L1S4_mesh"
+}
+
+entity = {
+    name = "DSC_00_battleship_bow_L2_entity"
+    pdxmesh = "DSC_00_battleship_bow_L2_mesh"
+}
+
+entity = {
+    name = "DSC_00_battleship_bow_M1S2SHB_entity"
+    pdxmesh = "DSC_00_battleship_bow_M1S2SHB_mesh"
+
+    #TEMP LOCATOR REPLACE IN SCENE
+    locator = {
+        name = "strike_craft_locator_01"
+        rotation = { -90 0 0 }
+    }
+}
+
+entity = {
+    name = "DSC_00_battleship_bow_M2S4_entity"
+    pdxmesh = "DSC_00_battleship_bow_M2S4_mesh"
+}
+
+entity = {
+    name = "DSC_00_battleship_bow_M3S2_entity"
+    pdxmesh = "DSC_00_battleship_bow_M3S2_mesh"
+}
+
+entity = {
+    name = "DSC_00_battleship_bow_XL1_entity"
+    pdxmesh = "DSC_00_battleship_bow_XL1_mesh"
+}
+
+#MID
+entity = {
+    name = "DSC_00_battleship_mid_L2S4_entity"
+    pdxmesh = "DSC_00_battleship_mid_L2S4_mesh"
+}
+
+entity = {
+    name = "DSC_00_battleship_mid_L1M4_entity"
+    pdxmesh = "DSC_00_battleship_mid_L1M4_mesh"
+}
+
+entity = {
+    name = "DSC_00_battleship_mid_L2M2_entity"
+    pdxmesh = "DSC_00_battleship_mid_L2M2_mesh"
+}
+
+entity = {
+    name = "DSC_00_battleship_mid_L3_entity"
+    pdxmesh = "DSC_00_battleship_mid_L3_mesh"
+}
+
+entity = {
+    name = "DSC_00_battleship_mid_M4SHB_entity"
+    pdxmesh = "DSC_00_battleship_mid_M4SHB_mesh"
+
+    #TEMP LOCATOR REPLACE IN SCENE
+    locator = {
+        name = "strike_craft_locator_01"
+        rotation = { -90 0 0 }
+    }
+}
+
+entity = {
+    name = "DSC_00_battleship_mid_S4LHB_entity"
+    pdxmesh = "DSC_00_battleship_mid_S4LHB_mesh"
+
+    #TEMP LOCATOR REPLACE IN SCENE
+    locator = {
+        name = "strike_craft_locator_01"
+        rotation = { -90 0 0 }
+    }
+    #TEMP LOCATOR REPLACE IN SCENE
+    locator = {
+        name = "strike_craft_locator_02"
+        rotation = { -90 0 0 }
+    }
+}
+
+# STERN
+
+entity = {
+    name = "DSC_00_battleship_stern_L1_entity"
+    pdxmesh = "DSC_00_battleship_stern_L1_mesh"
+}
+
+entity = {
+    name = "DSC_00_battleship_stern_M1S2_entity"
+    pdxmesh = "DSC_00_battleship_stern_M1S2_mesh"
+}
+
+entity = {
+    name = "DSC_00_battleship_stern_M2_entity"
+    pdxmesh = "DSC_00_battleship_stern_M2_mesh"
+}
+
+entity = {
+    name = "DSC_00_battleship_stern_S4_entity"
+    pdxmesh = "DSC_00_battleship_stern_S4_mesh"
+}
+#######################################
+######        并列图形文化        ######
+#######################################
+entity = {
+    name = "DSC_01_battleship_entity"
+    pdxmesh = "DSC_01_battleship_frame_mesh"
+
+    default_state = "idle"
+    state = {
+        name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_battleship_bass" } }
+
+        event = { time = 0 node = "engine_medium_01" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_03" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_04" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+    }
+    state = {
+        name = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_03" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_04" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = "moving_out_battleship" } }
+    }
+    state = {
+        name = "death" state_time = 5
+        event = { time = 1.0 node = "explosion_locator1" particle = "ship_burn_particle" }
+        event = { time = 1.0 node = "explosion_locator1" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 1.7 node = "explosion_locator2" particle = "ship_burn_particle" }
+        event = { time = 1.7 node = "explosion_locator2" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 3.7 node = "explosion_locator3" particle = "ship_burn_particle" }
+        event = { time = 3.7 node = "explosion_locator3" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 6.0 node = "explosion_locator4" particle = "ship_burn_particle" }
+        event = { time = 6.0 node = "explosion_locator4" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 7.3 node = "explosion_locator5" particle = "ship_burn_particle" }
+        event = { time = 7.3 node = "explosion_locator5" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+
+        event = { time = 15.9 node = "part2" particle = "large_player_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    scale = @DSC_battleship_entity_scale
+
+    game_data = {
+        size = @DSC_battleship_entity_game_data_scale
+        emissive_recolor_crunch = 5.0
+        trail_locators = {
+            "engine_medium_01" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_02" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_03" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_04" = { width = @medium_trail_W lenght = @medium_trail_L }
+        }
+    }
+}
+entity = {
+    name = "DSC_02_battleship_entity"
+    pdxmesh = "DSC_02_battleship_frame_mesh"
+
+    default_state = "idle"
+    state = {
+        name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_battleship_bass" } }
+
+        event = { time = 0 node = "engine_medium_01" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_03" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_04" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+    }
+    state = {
+        name = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_03" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_04" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = "moving_out_battleship" } }
+    }
+    state = {
+        name = "death" state_time = 5
+        event = { time = 1.0 node = "explosion_locator1" particle = "ship_burn_particle" }
+        event = { time = 1.0 node = "explosion_locator1" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 1.7 node = "explosion_locator2" particle = "ship_burn_particle" }
+        event = { time = 1.7 node = "explosion_locator2" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 3.7 node = "explosion_locator3" particle = "ship_burn_particle" }
+        event = { time = 3.7 node = "explosion_locator3" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 6.0 node = "explosion_locator4" particle = "ship_burn_particle" }
+        event = { time = 6.0 node = "explosion_locator4" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 7.3 node = "explosion_locator5" particle = "ship_burn_particle" }
+        event = { time = 7.3 node = "explosion_locator5" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+
+        event = { time = 15.9 node = "part2" particle = "large_player_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    scale = @DSC_battleship_entity_scale
+
+    game_data = {
+        size = @DSC_battleship_entity_game_data_scale
+        emissive_recolor_crunch = 5.0
+        trail_locators = {
+            "engine_medium_01" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_02" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_03" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_04" = { width = @medium_trail_W lenght = @medium_trail_L }
+        }
+    }
+}
+entity = {
+    name = "DSC_03_battleship_entity"
+    pdxmesh = "DSC_03_battleship_frame_mesh"
+
+    default_state = "idle"
+    state = {
+        name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_battleship_bass" } }
+
+        event = { time = 0 node = "engine_medium_01" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_03" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_04" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+    }
+    state = {
+        name = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_03" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_04" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = "moving_out_battleship" } }
+    }
+    state = {
+        name = "death" state_time = 5
+        event = { time = 1.0 node = "explosion_locator1" particle = "ship_burn_particle" }
+        event = { time = 1.0 node = "explosion_locator1" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 1.7 node = "explosion_locator2" particle = "ship_burn_particle" }
+        event = { time = 1.7 node = "explosion_locator2" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 3.7 node = "explosion_locator3" particle = "ship_burn_particle" }
+        event = { time = 3.7 node = "explosion_locator3" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 6.0 node = "explosion_locator4" particle = "ship_burn_particle" }
+        event = { time = 6.0 node = "explosion_locator4" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 7.3 node = "explosion_locator5" particle = "ship_burn_particle" }
+        event = { time = 7.3 node = "explosion_locator5" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+
+        event = { time = 15.9 node = "part2" particle = "large_player_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    scale = @DSC_battleship_entity_scale
+
+    game_data = {
+        size = @DSC_battleship_entity_game_data_scale
+        emissive_recolor_crunch = 5.0
+        trail_locators = {
+            "engine_medium_01" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_02" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_03" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_04" = { width = @medium_trail_W lenght = @medium_trail_L }
+        }
+    }
+}
+entity = {
+    name = "DSC_04_battleship_entity"
+    pdxmesh = "DSC_04_battleship_frame_mesh"
+
+    default_state = "idle"
+    state = {
+        name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_battleship_bass" } }
+
+        event = { time = 0 node = "engine_medium_01" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_03" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_04" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+    }
+    state = {
+        name = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_03" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_04" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = "moving_out_battleship" } }
+    }
+    state = {
+        name = "death" state_time = 5
+        event = { time = 1.0 node = "explosion_locator1" particle = "ship_burn_particle" }
+        event = { time = 1.0 node = "explosion_locator1" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 1.7 node = "explosion_locator2" particle = "ship_burn_particle" }
+        event = { time = 1.7 node = "explosion_locator2" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 3.7 node = "explosion_locator3" particle = "ship_burn_particle" }
+        event = { time = 3.7 node = "explosion_locator3" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 6.0 node = "explosion_locator4" particle = "ship_burn_particle" }
+        event = { time = 6.0 node = "explosion_locator4" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 7.3 node = "explosion_locator5" particle = "ship_burn_particle" }
+        event = { time = 7.3 node = "explosion_locator5" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+
+        event = { time = 15.9 node = "part2" particle = "large_player_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    scale = @DSC_battleship_entity_scale
+
+    game_data = {
+        size = @DSC_battleship_entity_game_data_scale
+        emissive_recolor_crunch = 5.0
+        trail_locators = {
+            "engine_medium_01" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_02" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_03" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_04" = { width = @medium_trail_W lenght = @medium_trail_L }
+        }
+    }
+}
+entity = {
+    name = "DSC_05_battleship_entity"
+    pdxmesh = "DSC_05_battleship_frame_mesh"
+
+    default_state = "idle"
+    state = {
+        name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_battleship_bass" } }
+
+        event = { time = 0 node = "engine_medium_01" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_03" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_04" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+    }
+    state = {
+        name = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_03" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_04" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = "moving_out_battleship" } }
+    }
+    state = {
+        name = "death" state_time = 5
+        event = { time = 1.0 node = "explosion_locator1" particle = "ship_burn_particle" }
+        event = { time = 1.0 node = "explosion_locator1" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 1.7 node = "explosion_locator2" particle = "ship_burn_particle" }
+        event = { time = 1.7 node = "explosion_locator2" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 3.7 node = "explosion_locator3" particle = "ship_burn_particle" }
+        event = { time = 3.7 node = "explosion_locator3" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 6.0 node = "explosion_locator4" particle = "ship_burn_particle" }
+        event = { time = 6.0 node = "explosion_locator4" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 7.3 node = "explosion_locator5" particle = "ship_burn_particle" }
+        event = { time = 7.3 node = "explosion_locator5" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+
+        event = { time = 15.9 node = "part2" particle = "large_player_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    scale = @DSC_battleship_entity_scale
+
+    game_data = {
+        size = @DSC_battleship_entity_game_data_scale
+        emissive_recolor_crunch = 5.0
+        trail_locators = {
+            "engine_medium_01" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_02" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_03" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_04" = { width = @medium_trail_W lenght = @medium_trail_L }
+        }
+    }
+}
+entity = {
+    name = "DSC_06_battleship_entity"
+    pdxmesh = "DSC_06_battleship_frame_mesh"
+
+    default_state = "idle"
+    state = {
+        name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_battleship_bass" } }
+
+        event = { time = 0 node = "engine_medium_01" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_03" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_04" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+    }
+    state = {
+        name = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_03" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_04" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = "moving_out_battleship" } }
+    }
+    state = {
+        name = "death" state_time = 5
+        event = { time = 1.0 node = "explosion_locator1" particle = "ship_burn_particle" }
+        event = { time = 1.0 node = "explosion_locator1" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 1.7 node = "explosion_locator2" particle = "ship_burn_particle" }
+        event = { time = 1.7 node = "explosion_locator2" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 3.7 node = "explosion_locator3" particle = "ship_burn_particle" }
+        event = { time = 3.7 node = "explosion_locator3" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 6.0 node = "explosion_locator4" particle = "ship_burn_particle" }
+        event = { time = 6.0 node = "explosion_locator4" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 7.3 node = "explosion_locator5" particle = "ship_burn_particle" }
+        event = { time = 7.3 node = "explosion_locator5" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+
+        event = { time = 15.9 node = "part2" particle = "large_player_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    scale = @DSC_battleship_entity_scale
+
+    game_data = {
+        size = @DSC_battleship_entity_game_data_scale
+        emissive_recolor_crunch = 5.0
+        trail_locators = {
+            "engine_medium_01" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_02" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_03" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_04" = { width = @medium_trail_W lenght = @medium_trail_L }
+        }
+    }
+}
+entity = {
+    name = "DSC_07_battleship_entity"
+    pdxmesh = "DSC_07_battleship_frame_mesh"
+
+    default_state = "idle"
+    state = {
+        name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_battleship_bass" } }
+
+        event = { time = 0 node = "engine_medium_01" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_03" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_04" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+    }
+    state = {
+        name = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_03" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_04" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = "moving_out_battleship" } }
+    }
+    state = {
+        name = "death" state_time = 5
+        event = { time = 1.0 node = "explosion_locator1" particle = "ship_burn_particle" }
+        event = { time = 1.0 node = "explosion_locator1" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 1.7 node = "explosion_locator2" particle = "ship_burn_particle" }
+        event = { time = 1.7 node = "explosion_locator2" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 3.7 node = "explosion_locator3" particle = "ship_burn_particle" }
+        event = { time = 3.7 node = "explosion_locator3" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 6.0 node = "explosion_locator4" particle = "ship_burn_particle" }
+        event = { time = 6.0 node = "explosion_locator4" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 7.3 node = "explosion_locator5" particle = "ship_burn_particle" }
+        event = { time = 7.3 node = "explosion_locator5" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+
+        event = { time = 15.9 node = "part2" particle = "large_player_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    scale = @DSC_battleship_entity_scale
+
+    game_data = {
+        size = @DSC_battleship_entity_game_data_scale
+        emissive_recolor_crunch = 5.0
+        trail_locators = {
+            "engine_medium_01" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_02" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_03" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_04" = { width = @medium_trail_W lenght = @medium_trail_L }
+        }
+    }
+}
+entity = {
+    name = "DSC_08_battleship_entity"
+    pdxmesh = "DSC_08_battleship_frame_mesh"
+
+    default_state = "idle"
+    state = {
+        name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_battleship_bass" } }
+
+        event = { time = 0 node = "engine_medium_01" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_03" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_04" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+    }
+    state = {
+        name = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_03" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_04" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = "moving_out_battleship" } }
+    }
+    state = {
+        name = "death" state_time = 5
+        event = { time = 1.0 node = "explosion_locator1" particle = "ship_burn_particle" }
+        event = { time = 1.0 node = "explosion_locator1" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 1.7 node = "explosion_locator2" particle = "ship_burn_particle" }
+        event = { time = 1.7 node = "explosion_locator2" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 3.7 node = "explosion_locator3" particle = "ship_burn_particle" }
+        event = { time = 3.7 node = "explosion_locator3" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 6.0 node = "explosion_locator4" particle = "ship_burn_particle" }
+        event = { time = 6.0 node = "explosion_locator4" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 7.3 node = "explosion_locator5" particle = "ship_burn_particle" }
+        event = { time = 7.3 node = "explosion_locator5" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+
+        event = { time = 15.9 node = "part2" particle = "large_player_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    scale = @DSC_battleship_entity_scale
+
+    game_data = {
+        size = @DSC_battleship_entity_game_data_scale
+        emissive_recolor_crunch = 5.0
+        trail_locators = {
+            "engine_medium_01" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_02" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_03" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_04" = { width = @medium_trail_W lenght = @medium_trail_L }
+        }
+    }
+}
+entity = {
+    name = "DSC_09_battleship_entity"
+    pdxmesh = "DSC_09_battleship_frame_mesh"
+
+    default_state = "idle"
+    state = {
+        name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_battleship_bass" } }
+
+        event = { time = 0 node = "engine_medium_01" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_03" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_04" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+    }
+    state = {
+        name = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_03" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_04" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = "moving_out_battleship" } }
+    }
+    state = {
+        name = "death" state_time = 5
+        event = { time = 1.0 node = "explosion_locator1" particle = "ship_burn_particle" }
+        event = { time = 1.0 node = "explosion_locator1" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 1.7 node = "explosion_locator2" particle = "ship_burn_particle" }
+        event = { time = 1.7 node = "explosion_locator2" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 3.7 node = "explosion_locator3" particle = "ship_burn_particle" }
+        event = { time = 3.7 node = "explosion_locator3" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 6.0 node = "explosion_locator4" particle = "ship_burn_particle" }
+        event = { time = 6.0 node = "explosion_locator4" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 7.3 node = "explosion_locator5" particle = "ship_burn_particle" }
+        event = { time = 7.3 node = "explosion_locator5" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+
+        event = { time = 15.9 node = "part2" particle = "large_player_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    scale = @DSC_battleship_entity_scale
+
+    game_data = {
+        size = @DSC_battleship_entity_game_data_scale
+        emissive_recolor_crunch = 5.0
+        trail_locators = {
+            "engine_medium_01" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_02" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_03" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_04" = { width = @medium_trail_W lenght = @medium_trail_L }
+        }
+    }
+}
+entity = {
+    name = "DSC_10_battleship_entity"
+    pdxmesh = "DSC_10_battleship_frame_mesh"
+
+    default_state = "idle"
+    state = {
+        name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_battleship_bass" } }
+
+        event = { time = 0 node = "engine_medium_01" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_03" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_04" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+    }
+    state = {
+        name = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_03" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_04" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = "moving_out_battleship" } }
+    }
+    state = {
+        name = "death" state_time = 5
+        event = { time = 1.0 node = "explosion_locator1" particle = "ship_burn_particle" }
+        event = { time = 1.0 node = "explosion_locator1" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 1.7 node = "explosion_locator2" particle = "ship_burn_particle" }
+        event = { time = 1.7 node = "explosion_locator2" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 3.7 node = "explosion_locator3" particle = "ship_burn_particle" }
+        event = { time = 3.7 node = "explosion_locator3" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 6.0 node = "explosion_locator4" particle = "ship_burn_particle" }
+        event = { time = 6.0 node = "explosion_locator4" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 7.3 node = "explosion_locator5" particle = "ship_burn_particle" }
+        event = { time = 7.3 node = "explosion_locator5" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+
+        event = { time = 15.9 node = "part2" particle = "large_player_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    scale = @DSC_battleship_entity_scale
+
+    game_data = {
+        size = @DSC_battleship_entity_game_data_scale
+        emissive_recolor_crunch = 5.0
+        trail_locators = {
+            "engine_medium_01" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_02" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_03" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_04" = { width = @medium_trail_W lenght = @medium_trail_L }
+        }
+    }
+}
+entity = {
+    name = "DSC_11_battleship_entity"
+    pdxmesh = "DSC_11_battleship_frame_mesh"
+
+    default_state = "idle"
+    state = {
+        name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_battleship_bass" } }
+
+        event = { time = 0 node = "engine_medium_01" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_03" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_04" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+    }
+    state = {
+        name = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_03" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_04" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = "moving_out_battleship" } }
+    }
+    state = {
+        name = "death" state_time = 5
+        event = { time = 1.0 node = "explosion_locator1" particle = "ship_burn_particle" }
+        event = { time = 1.0 node = "explosion_locator1" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 1.7 node = "explosion_locator2" particle = "ship_burn_particle" }
+        event = { time = 1.7 node = "explosion_locator2" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 3.7 node = "explosion_locator3" particle = "ship_burn_particle" }
+        event = { time = 3.7 node = "explosion_locator3" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 6.0 node = "explosion_locator4" particle = "ship_burn_particle" }
+        event = { time = 6.0 node = "explosion_locator4" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 7.3 node = "explosion_locator5" particle = "ship_burn_particle" }
+        event = { time = 7.3 node = "explosion_locator5" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+
+        event = { time = 15.9 node = "part2" particle = "large_player_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    scale = @DSC_battleship_entity_scale
+
+    game_data = {
+        size = @DSC_battleship_entity_game_data_scale
+        emissive_recolor_crunch = 5.0
+        trail_locators = {
+            "engine_medium_01" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_02" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_03" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_04" = { width = @medium_trail_W lenght = @medium_trail_L }
+        }
+    }
+}
+entity = {
+    name = "DSC_12_battleship_entity"
+    pdxmesh = "DSC_12_battleship_frame_mesh"
+
+    default_state = "idle"
+    state = {
+        name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_battleship_bass" } }
+
+        event = { time = 0 node = "engine_medium_01" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_03" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_04" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+    }
+    state = {
+        name = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_03" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_04" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = "moving_out_battleship" } }
+    }
+    state = {
+        name = "death" state_time = 5
+        event = { time = 1.0 node = "explosion_locator1" particle = "ship_burn_particle" }
+        event = { time = 1.0 node = "explosion_locator1" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 1.7 node = "explosion_locator2" particle = "ship_burn_particle" }
+        event = { time = 1.7 node = "explosion_locator2" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 3.7 node = "explosion_locator3" particle = "ship_burn_particle" }
+        event = { time = 3.7 node = "explosion_locator3" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 6.0 node = "explosion_locator4" particle = "ship_burn_particle" }
+        event = { time = 6.0 node = "explosion_locator4" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 7.3 node = "explosion_locator5" particle = "ship_burn_particle" }
+        event = { time = 7.3 node = "explosion_locator5" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+
+        event = { time = 15.9 node = "part2" particle = "large_player_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    scale = @DSC_battleship_entity_scale
+
+    game_data = {
+        size = @DSC_battleship_entity_game_data_scale
+        emissive_recolor_crunch = 5.0
+        trail_locators = {
+            "engine_medium_01" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_02" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_03" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_04" = { width = @medium_trail_W lenght = @medium_trail_L }
+        }
+    }
+}
+entity = {
+    name = "DSC_13_battleship_entity"
+    pdxmesh = "DSC_13_battleship_frame_mesh"
+
+    default_state = "idle"
+    state = {
+        name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_battleship_bass" } }
+
+        event = { time = 0 node = "engine_medium_01" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_03" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_04" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+    }
+    state = {
+        name = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_03" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_04" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = "moving_out_battleship" } }
+    }
+    state = {
+        name = "death" state_time = 5
+        event = { time = 1.0 node = "explosion_locator1" particle = "ship_burn_particle" }
+        event = { time = 1.0 node = "explosion_locator1" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 1.7 node = "explosion_locator2" particle = "ship_burn_particle" }
+        event = { time = 1.7 node = "explosion_locator2" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 3.7 node = "explosion_locator3" particle = "ship_burn_particle" }
+        event = { time = 3.7 node = "explosion_locator3" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 6.0 node = "explosion_locator4" particle = "ship_burn_particle" }
+        event = { time = 6.0 node = "explosion_locator4" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 7.3 node = "explosion_locator5" particle = "ship_burn_particle" }
+        event = { time = 7.3 node = "explosion_locator5" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+
+        event = { time = 15.9 node = "part2" particle = "large_player_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    scale = @DSC_battleship_entity_scale
+
+    game_data = {
+        size = @DSC_battleship_entity_game_data_scale
+        emissive_recolor_crunch = 5.0
+        trail_locators = {
+            "engine_medium_01" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_02" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_03" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_04" = { width = @medium_trail_W lenght = @medium_trail_L }
+        }
+    }
+}
+entity = {
+    name = "DSC_14_battleship_entity"
+    pdxmesh = "DSC_14_battleship_frame_mesh"
+
+    default_state = "idle"
+    state = {
+        name = "idle" state_time = 5
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_battleship_bass" } }
+
+        event = { time = 0 node = "engine_medium_01" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_03" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_04" particle = "generic_075_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+    }
+    state = {
+        name = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_03" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_04" particle = "generic_1_exhaust_line_moving" trigger_once = yes keep_particle = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = "moving_out_battleship" } }
+    }
+    state = {
+        name = "death" state_time = 5
+        event = { time = 1.0 node = "explosion_locator1" particle = "ship_burn_particle" }
+        event = { time = 1.0 node = "explosion_locator1" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 1.7 node = "explosion_locator2" particle = "ship_burn_particle" }
+        event = { time = 1.7 node = "explosion_locator2" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 3.7 node = "explosion_locator3" particle = "ship_burn_particle" }
+        event = { time = 3.7 node = "explosion_locator3" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 6.0 node = "explosion_locator4" particle = "ship_burn_particle" }
+        event = { time = 6.0 node = "explosion_locator4" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+        event = { time = 7.3 node = "explosion_locator5" particle = "ship_burn_particle" }
+        event = { time = 7.3 node = "explosion_locator5" particle = "ship_explosion_particle" sound = { soundeffect = "ship_explosion" } }
+
+        event = { time = 15.9 node = "part2" particle = "large_player_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    scale = @DSC_battleship_entity_scale
+
+    game_data = {
+        size = @DSC_battleship_entity_game_data_scale
+        emissive_recolor_crunch = 5.0
+        trail_locators = {
+            "engine_medium_01" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_02" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_03" = { width = @medium_trail_W lenght = @medium_trail_L }
+            "engine_medium_04" = { width = @medium_trail_W lenght = @medium_trail_L }
+        }
+    }
+}

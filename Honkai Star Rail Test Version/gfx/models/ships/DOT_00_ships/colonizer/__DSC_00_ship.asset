@@ -1,0 +1,708 @@
+@DSC_colonizer_entity_scale = 1
+@DSC_colonizer_ship_entity_scale = 1.25
+@DSC_colonizer_entity_game_data_scale = 13.0
+
+#######################################
+######          实例|通用          ######
+#######################################
+animation = {
+    name = DSC_00_colonizer_anim
+    file = DSC_00_colonizer.anim
+}
+
+entity = {
+    name = "DSC_00_colonizer_entity"
+    pdxmesh = "molluscoid_01_corvette_frame_mesh"
+    scale = @DSC_colonizer_entity_scale
+    #locator = { name = "part1" 		position = { 0  0  0 } }
+
+    default_state = "idle"
+    state = { name = "idle"	 animation = "idle" animation_blend_time = 4 }
+    state = { name = "moving"	animation = "idle" animation_blend_time = 2 }
+    state = { name = "death" animation = "death3" animation_blend_time = 0.0 chance = 1 looping = no
+        event = { time = 4.63 node = "ship_main" particle = "large_ship_explosion_particle" }
+    }
+    game_data = {
+        size = @DSC_colonizer_entity_game_data_scale
+        emissive_recolor_crunch = 5.0
+    }
+}
+entity = { name = "DSC_00_sponsored_colonizer_entity" clone = "DSC_00_colonizer_entity" }
+entity = { name = "DSC_00_guided_sapience_colonizer_entity" clone = "DSC_00_colonizer_entity" }
+entity = {
+    name = "DSC_00_colony_ship_entity"
+    pdxmesh = "DSC_00_colonizer_mesh"
+    scale = @DSC_colonizer_ship_entity_scale
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle" state_time = 5
+        #发光很强，感觉不太需要粒子效果“能量球”了
+        #event = { time = 0 node = "engine_medium_01" particle = "generic_1_5_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_colony_ship_hum" } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "moving" animation = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { trigger_once = yes sound = { soundeffect = moving_out_colony_ship } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "death" chance = 1 looping = no state_time = 10
+
+        event = { time = 0.1 node = "colony_explosion_locator1" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.4 node = "colony_explosion_locator7" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.7 node = "colony_explosion_locator2" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.95 node = "colony_explosion_locator8" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.7 node = "colony_explosion_locator3" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.26 node = "colony_explosion_locator4" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.9 node = "colony_explosion_locator5" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 4.1 node = "colony_explosion_locator6" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+    }
+
+    game_data = {
+        trail_locators = {
+            "engine_medium_01" = 		{ width = 5				 	lenght = @small_trail_L  height = 15 	}
+        }
+    }
+}
+
+#######################################
+######        并列图形文化        ######
+#######################################
+entity = {
+    name = "DSC_01_colony_ship_entity"
+    pdxmesh = "DSC_01_colonizer_mesh"
+    scale = @DSC_colonizer_ship_entity_scale
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle" state_time = 5
+        #发光很强，感觉不太需要粒子效果“能量球”了
+        #event = { time = 0 node = "engine_medium_01" particle = "generic_1_5_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_colony_ship_hum" } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "moving" animation = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { trigger_once = yes sound = { soundeffect = moving_out_colony_ship } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "death" chance = 1 looping = no state_time = 10
+
+        event = { time = 0.1 node = "colony_explosion_locator1" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.4 node = "colony_explosion_locator7" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.7 node = "colony_explosion_locator2" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.95 node = "colony_explosion_locator8" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.7 node = "colony_explosion_locator3" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.26 node = "colony_explosion_locator4" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.9 node = "colony_explosion_locator5" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 4.1 node = "colony_explosion_locator6" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+    }
+
+    game_data = {
+        trail_locators = {
+            "engine_medium_01" = 		{ width = 5				 	lenght = @small_trail_L  height = 15 	}
+        }
+    }
+}
+
+entity = {
+    name = "DSC_02_colony_ship_entity"
+    pdxmesh = "DSC_02_colonizer_mesh"
+    scale = @DSC_colonizer_ship_entity_scale
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle" state_time = 5
+        #发光很强，感觉不太需要粒子效果“能量球”了
+        #event = { time = 0 node = "engine_medium_01" particle = "generic_1_5_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_colony_ship_hum" } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "moving" animation = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { trigger_once = yes sound = { soundeffect = moving_out_colony_ship } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "death" chance = 1 looping = no state_time = 10
+
+        event = { time = 0.1 node = "colony_explosion_locator1" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.4 node = "colony_explosion_locator7" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.7 node = "colony_explosion_locator2" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.95 node = "colony_explosion_locator8" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.7 node = "colony_explosion_locator3" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.26 node = "colony_explosion_locator4" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.9 node = "colony_explosion_locator5" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 4.1 node = "colony_explosion_locator6" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+    }
+
+    game_data = {
+        trail_locators = {
+            "engine_medium_01" = 		{ width = 5				 	lenght = @small_trail_L  height = 15 	}
+        }
+    }
+}
+
+entity = {
+    name = "DSC_03_colony_ship_entity"
+    pdxmesh = "DSC_03_colonizer_mesh"
+    scale = @DSC_colonizer_ship_entity_scale
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle" state_time = 5
+        #发光很强，感觉不太需要粒子效果“能量球”了
+        #event = { time = 0 node = "engine_medium_01" particle = "generic_1_5_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_colony_ship_hum" } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "moving" animation = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { trigger_once = yes sound = { soundeffect = moving_out_colony_ship } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "death" chance = 1 looping = no state_time = 10
+
+        event = { time = 0.1 node = "colony_explosion_locator1" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.4 node = "colony_explosion_locator7" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.7 node = "colony_explosion_locator2" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.95 node = "colony_explosion_locator8" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.7 node = "colony_explosion_locator3" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.26 node = "colony_explosion_locator4" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.9 node = "colony_explosion_locator5" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 4.1 node = "colony_explosion_locator6" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+    }
+
+    game_data = {
+        trail_locators = {
+            "engine_medium_01" = 		{ width = 5				 	lenght = @small_trail_L  height = 15 	}
+        }
+    }
+}
+
+entity = {
+    name = "DSC_04_colony_ship_entity"
+    pdxmesh = "DSC_04_colonizer_mesh"
+    scale = @DSC_colonizer_ship_entity_scale
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle" state_time = 5
+        #发光很强，感觉不太需要粒子效果“能量球”了
+        #event = { time = 0 node = "engine_medium_01" particle = "generic_1_5_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_colony_ship_hum" } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "moving" animation = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { trigger_once = yes sound = { soundeffect = moving_out_colony_ship } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "death" chance = 1 looping = no state_time = 10
+
+        event = { time = 0.1 node = "colony_explosion_locator1" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.4 node = "colony_explosion_locator7" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.7 node = "colony_explosion_locator2" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.95 node = "colony_explosion_locator8" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.7 node = "colony_explosion_locator3" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.26 node = "colony_explosion_locator4" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.9 node = "colony_explosion_locator5" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 4.1 node = "colony_explosion_locator6" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+    }
+
+    game_data = {
+        trail_locators = {
+            "engine_medium_01" = 		{ width = 5				 	lenght = @small_trail_L  height = 15 	}
+        }
+    }
+}
+
+entity = {
+    name = "DSC_05_colony_ship_entity"
+    pdxmesh = "DSC_05_colonizer_mesh"
+    scale = @DSC_colonizer_ship_entity_scale
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle" state_time = 5
+        #发光很强，感觉不太需要粒子效果“能量球”了
+        #event = { time = 0 node = "engine_medium_01" particle = "generic_1_5_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_colony_ship_hum" } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "moving" animation = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { trigger_once = yes sound = { soundeffect = moving_out_colony_ship } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "death" chance = 1 looping = no state_time = 10
+
+        event = { time = 0.1 node = "colony_explosion_locator1" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.4 node = "colony_explosion_locator7" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.7 node = "colony_explosion_locator2" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.95 node = "colony_explosion_locator8" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.7 node = "colony_explosion_locator3" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.26 node = "colony_explosion_locator4" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.9 node = "colony_explosion_locator5" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 4.1 node = "colony_explosion_locator6" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+    }
+
+    game_data = {
+        trail_locators = {
+            "engine_medium_01" = 		{ width = 5				 	lenght = @small_trail_L  height = 15 	}
+        }
+    }
+}
+
+entity = {
+    name = "DSC_06_colony_ship_entity"
+    pdxmesh = "DSC_06_colonizer_mesh"
+    scale = @DSC_colonizer_ship_entity_scale
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle" state_time = 5
+        #发光很强，感觉不太需要粒子效果“能量球”了
+        #event = { time = 0 node = "engine_medium_01" particle = "generic_1_5_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_colony_ship_hum" } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "moving" animation = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { trigger_once = yes sound = { soundeffect = moving_out_colony_ship } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "death" chance = 1 looping = no state_time = 10
+
+        event = { time = 0.1 node = "colony_explosion_locator1" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.4 node = "colony_explosion_locator7" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.7 node = "colony_explosion_locator2" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.95 node = "colony_explosion_locator8" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.7 node = "colony_explosion_locator3" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.26 node = "colony_explosion_locator4" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.9 node = "colony_explosion_locator5" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 4.1 node = "colony_explosion_locator6" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+    }
+
+    game_data = {
+        trail_locators = {
+            "engine_medium_01" = 		{ width = 5				 	lenght = @small_trail_L  height = 15 	}
+        }
+    }
+}
+
+entity = {
+    name = "DSC_07_colony_ship_entity"
+    pdxmesh = "DSC_07_colonizer_mesh"
+    scale = @DSC_colonizer_ship_entity_scale
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle" state_time = 5
+        #发光很强，感觉不太需要粒子效果“能量球”了
+        #event = { time = 0 node = "engine_medium_01" particle = "generic_1_5_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_colony_ship_hum" } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "moving" animation = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { trigger_once = yes sound = { soundeffect = moving_out_colony_ship } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "death" chance = 1 looping = no state_time = 10
+
+        event = { time = 0.1 node = "colony_explosion_locator1" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.4 node = "colony_explosion_locator7" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.7 node = "colony_explosion_locator2" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.95 node = "colony_explosion_locator8" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.7 node = "colony_explosion_locator3" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.26 node = "colony_explosion_locator4" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.9 node = "colony_explosion_locator5" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 4.1 node = "colony_explosion_locator6" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+    }
+
+    game_data = {
+        trail_locators = {
+            "engine_medium_01" = 		{ width = 5				 	lenght = @small_trail_L  height = 15 	}
+        }
+    }
+}
+
+entity = {
+    name = "DSC_08_colony_ship_entity"
+    pdxmesh = "DSC_08_colonizer_mesh"
+    scale = @DSC_colonizer_ship_entity_scale
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle" state_time = 5
+        #发光很强，感觉不太需要粒子效果“能量球”了
+        #event = { time = 0 node = "engine_medium_01" particle = "generic_1_5_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_colony_ship_hum" } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "moving" animation = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { trigger_once = yes sound = { soundeffect = moving_out_colony_ship } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "death" chance = 1 looping = no state_time = 10
+
+        event = { time = 0.1 node = "colony_explosion_locator1" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.4 node = "colony_explosion_locator7" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.7 node = "colony_explosion_locator2" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.95 node = "colony_explosion_locator8" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.7 node = "colony_explosion_locator3" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.26 node = "colony_explosion_locator4" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.9 node = "colony_explosion_locator5" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 4.1 node = "colony_explosion_locator6" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+    }
+
+    game_data = {
+        trail_locators = {
+            "engine_medium_01" = 		{ width = 5				 	lenght = @small_trail_L  height = 15 	}
+        }
+    }
+}
+
+entity = {
+    name = "DSC_09_colony_ship_entity"
+    pdxmesh = "DSC_09_colonizer_mesh"
+    scale = @DSC_colonizer_ship_entity_scale
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle" state_time = 5
+        #发光很强，感觉不太需要粒子效果“能量球”了
+        #event = { time = 0 node = "engine_medium_01" particle = "generic_1_5_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_colony_ship_hum" } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "moving" animation = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { trigger_once = yes sound = { soundeffect = moving_out_colony_ship } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "death" chance = 1 looping = no state_time = 10
+
+        event = { time = 0.1 node = "colony_explosion_locator1" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.4 node = "colony_explosion_locator7" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.7 node = "colony_explosion_locator2" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.95 node = "colony_explosion_locator8" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.7 node = "colony_explosion_locator3" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.26 node = "colony_explosion_locator4" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.9 node = "colony_explosion_locator5" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 4.1 node = "colony_explosion_locator6" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+    }
+
+    game_data = {
+        trail_locators = {
+            "engine_medium_01" = 		{ width = 5				 	lenght = @small_trail_L  height = 15 	}
+        }
+    }
+}
+
+entity = {
+    name = "DSC_10_colony_ship_entity"
+    pdxmesh = "DSC_10_colonizer_mesh"
+    scale = @DSC_colonizer_ship_entity_scale
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle" state_time = 5
+        #发光很强，感觉不太需要粒子效果“能量球”了
+        #event = { time = 0 node = "engine_medium_01" particle = "generic_1_5_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_colony_ship_hum" } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "moving" animation = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { trigger_once = yes sound = { soundeffect = moving_out_colony_ship } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "death" chance = 1 looping = no state_time = 10
+
+        event = { time = 0.1 node = "colony_explosion_locator1" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.4 node = "colony_explosion_locator7" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.7 node = "colony_explosion_locator2" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.95 node = "colony_explosion_locator8" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.7 node = "colony_explosion_locator3" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.26 node = "colony_explosion_locator4" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.9 node = "colony_explosion_locator5" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 4.1 node = "colony_explosion_locator6" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+    }
+
+    game_data = {
+        trail_locators = {
+            "engine_medium_01" = 		{ width = 5				 	lenght = @small_trail_L  height = 15 	}
+        }
+    }
+}
+
+entity = {
+    name = "DSC_11_colony_ship_entity"
+    pdxmesh = "DSC_11_colonizer_mesh"
+    scale = @DSC_colonizer_ship_entity_scale
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle" state_time = 5
+        #发光很强，感觉不太需要粒子效果“能量球”了
+        #event = { time = 0 node = "engine_medium_01" particle = "generic_1_5_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_colony_ship_hum" } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "moving" animation = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { trigger_once = yes sound = { soundeffect = moving_out_colony_ship } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "death" chance = 1 looping = no state_time = 10
+
+        event = { time = 0.1 node = "colony_explosion_locator1" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.4 node = "colony_explosion_locator7" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.7 node = "colony_explosion_locator2" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.95 node = "colony_explosion_locator8" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.7 node = "colony_explosion_locator3" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.26 node = "colony_explosion_locator4" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.9 node = "colony_explosion_locator5" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 4.1 node = "colony_explosion_locator6" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+    }
+
+    game_data = {
+        trail_locators = {
+            "engine_medium_01" = 		{ width = 5				 	lenght = @small_trail_L  height = 15 	}
+        }
+    }
+}
+
+entity = {
+    name = "DSC_12_colony_ship_entity"
+    pdxmesh = "DSC_12_colonizer_mesh"
+    scale = @DSC_colonizer_ship_entity_scale
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle" state_time = 5
+        #发光很强，感觉不太需要粒子效果“能量球”了
+        #event = { time = 0 node = "engine_medium_01" particle = "generic_1_5_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_colony_ship_hum" } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "moving" animation = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { trigger_once = yes sound = { soundeffect = moving_out_colony_ship } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "death" chance = 1 looping = no state_time = 10
+
+        event = { time = 0.1 node = "colony_explosion_locator1" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.4 node = "colony_explosion_locator7" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.7 node = "colony_explosion_locator2" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.95 node = "colony_explosion_locator8" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.7 node = "colony_explosion_locator3" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.26 node = "colony_explosion_locator4" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.9 node = "colony_explosion_locator5" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 4.1 node = "colony_explosion_locator6" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+    }
+
+    game_data = {
+        trail_locators = {
+            "engine_medium_01" = 		{ width = 5				 	lenght = @small_trail_L  height = 15 	}
+        }
+    }
+}
+
+entity = {
+    name = "DSC_13_colony_ship_entity"
+    pdxmesh = "DSC_13_colonizer_mesh"
+    scale = @DSC_colonizer_ship_entity_scale
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle" state_time = 5
+        #发光很强，感觉不太需要粒子效果“能量球”了
+        #event = { time = 0 node = "engine_medium_01" particle = "generic_1_5_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_colony_ship_hum" } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "moving" animation = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { trigger_once = yes sound = { soundeffect = moving_out_colony_ship } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "death" chance = 1 looping = no state_time = 10
+
+        event = { time = 0.1 node = "colony_explosion_locator1" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.4 node = "colony_explosion_locator7" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.7 node = "colony_explosion_locator2" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.95 node = "colony_explosion_locator8" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.7 node = "colony_explosion_locator3" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.26 node = "colony_explosion_locator4" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.9 node = "colony_explosion_locator5" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 4.1 node = "colony_explosion_locator6" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+    }
+
+    game_data = {
+        trail_locators = {
+            "engine_medium_01" = 		{ width = 5				 	lenght = @small_trail_L  height = 15 	}
+        }
+    }
+}
+
+entity = {
+    name = "DSC_14_colony_ship_entity"
+    pdxmesh = "DSC_14_colonizer_mesh"
+    scale = @DSC_colonizer_ship_entity_scale
+
+    default_state = "idle"
+    state = { name = "idle" animation = "idle" state_time = 5
+        #发光很强，感觉不太需要粒子效果“能量球”了
+        #event = { time = 0 node = "engine_medium_01" particle = "generic_1_5_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_colony_ship_hum" } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "moving" animation = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { trigger_once = yes sound = { soundeffect = moving_out_colony_ship } }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "death" chance = 1 looping = no state_time = 10
+
+        event = { time = 0.1 node = "colony_explosion_locator1" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.4 node = "colony_explosion_locator7" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.7 node = "colony_explosion_locator2" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.95 node = "colony_explosion_locator8" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.7 node = "colony_explosion_locator3" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.26 node = "colony_explosion_locator4" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.9 node = "colony_explosion_locator5" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+        event = { time = 4.1 node = "colony_explosion_locator6" particle = "nemesis_0125_ship_explosion_effect" sound = { soundeffect = ship_destroyed } }
+    }
+
+    game_data = {
+        trail_locators = {
+            "engine_medium_01" = 		{ width = 5				 	lenght = @small_trail_L  height = 15 	}
+        }
+    }
+}

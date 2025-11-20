@@ -1,0 +1,915 @@
+@DSC_cruiser_entity_scale = 1
+@DSC_cruiser_game_data_scale = 10.5
+@DSC_cruiser_ship_entity_scale = 1
+#######################################
+######          实例|通用          ######
+#######################################
+entity = {
+    name = "DSC_00_cruiser_entity"
+    pdxmesh = "DSC_00_cruiser_frame_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_01" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_02" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_03" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_04" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_05_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_05_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_cruiser_hum" } }
+    }
+    state = { name = "moving" state_time = 5
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_01" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_02" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_03" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_04" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = "moving_out_cruiser" } }
+    }
+    state = { name = "death" state_time = 5
+        event = { time = 1.05 node = "local_explosion_locator" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.6 node = "local_explosion_locator1" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.4 node = "local_explosion_locator2" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 6.6 node = "local_explosion_locator3" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 6.83 node = "local_explosion_locator4" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.1 node = "local_explosion_locator5" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.5 node = "local_explosion_locator6" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+       event = { time = 7.93 node = "explosion_locator" particle = "large_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+
+        event = { time = 12.83 node = "part1" particle = "large_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    scale = @DSC_cruiser_entity_scale
+
+    game_data = {
+        size = @DSC_cruiser_game_data_scale
+        emissive_recolor_crunch = 3.0
+        trail_locators = {
+            "engine_large_01" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_large_02" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_01" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_02" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_03" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_04" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+        }
+    }
+}
+
+
+# BOW
+entity = {
+    name = "DSC_00_cruiser_bow_L1_entity"
+    pdxmesh = "DSC_00_cruiser_bow_L1_mesh"
+}
+
+entity = {
+    name = "DSC_00_cruiser_bow_M1S2_entity"
+    pdxmesh = "DSC_00_cruiser_bow_M1S2_mesh"
+}
+
+entity = {
+    name = "DSC_00_cruiser_bow_M2_entity"
+    pdxmesh = "DSC_00_cruiser_bow_M2_mesh"
+}
+
+# MID
+
+entity = {
+    name = "DSC_00_cruiser_mid_S2HB_entity"
+    pdxmesh = "DSC_00_cruiser_mid_S2HB_mesh"
+}
+
+entity = {
+    name = "DSC_00_cruiser_mid_L1M1_entity"
+    pdxmesh = "DSC_00_cruiser_mid_L1M1_mesh"
+}
+
+entity = {
+    name = "DSC_00_cruiser_mid_M3_entity"
+    pdxmesh = "DSC_00_cruiser_mid_M3_mesh"
+}
+
+entity = {
+    name = "DSC_00_cruiser_mid_M2S2_entity"
+    pdxmesh = "DSC_00_cruiser_mid_M2S2_mesh"
+}
+
+# STERN
+entity = {
+    name = "DSC_00_cruiser_stern_M1_entity"
+    pdxmesh = "DSC_00_cruiser_stern_M1_mesh"
+}
+
+entity = {
+    name = "DSC_00_cruiser_stern_S2_entity"
+    pdxmesh = "DSC_00_cruiser_stern_S2_mesh"
+}
+#######################################
+######        并列图形文化        ######
+#######################################
+entity = {
+    name = "DSC_01_cruiser_entity"
+    pdxmesh = "DSC_01_cruiser_frame_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_01" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_02" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_03" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_04" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_05_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_05_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_cruiser_hum" } }
+    }
+    state = { name = "moving" state_time = 5
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_01" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_02" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_03" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_04" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = "moving_out_cruiser" } }
+    }
+    state = { name = "death" state_time = 5
+        event = { time = 1.05 node = "local_explosion_locator" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.6 node = "local_explosion_locator1" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.4 node = "local_explosion_locator2" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 6.6 node = "local_explosion_locator3" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 6.83 node = "local_explosion_locator4" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.1 node = "local_explosion_locator5" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.5 node = "local_explosion_locator6" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.93 node = "explosion_locator" particle = "large_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+
+        event = { time = 12.83 node = "part1" particle = "large_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    scale = @DSC_cruiser_entity_scale
+
+    game_data = {
+        size = @DSC_cruiser_game_data_scale
+        emissive_recolor_crunch = 3.0
+        trail_locators = {
+            "engine_large_01" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_large_02" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_01" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_02" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_03" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_04" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+        }
+    }
+}
+entity = {
+    name = "DSC_02_cruiser_entity"
+    pdxmesh = "DSC_02_cruiser_frame_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_01" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_02" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_03" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_04" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_05_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_05_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_cruiser_hum" } }
+    }
+    state = { name = "moving" state_time = 5
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_01" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_02" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_03" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_04" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = "moving_out_cruiser" } }
+    }
+    state = { name = "death" state_time = 5
+        event = { time = 1.05 node = "local_explosion_locator" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.6 node = "local_explosion_locator1" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.4 node = "local_explosion_locator2" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 6.6 node = "local_explosion_locator3" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 6.83 node = "local_explosion_locator4" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.1 node = "local_explosion_locator5" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.5 node = "local_explosion_locator6" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.93 node = "explosion_locator" particle = "large_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+
+        event = { time = 12.83 node = "part1" particle = "large_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    scale = @DSC_cruiser_entity_scale
+
+    game_data = {
+        size = @DSC_cruiser_game_data_scale
+        emissive_recolor_crunch = 3.0
+        trail_locators = {
+            "engine_large_01" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_large_02" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_01" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_02" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_03" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_04" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+        }
+    }
+}
+entity = {
+    name = "DSC_03_cruiser_entity"
+    pdxmesh = "DSC_03_cruiser_frame_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_01" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_02" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_03" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_04" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_05_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_05_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_cruiser_hum" } }
+    }
+    state = { name = "moving" state_time = 5
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_01" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_02" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_03" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_04" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = "moving_out_cruiser" } }
+    }
+    state = { name = "death" state_time = 5
+        event = { time = 1.05 node = "local_explosion_locator" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.6 node = "local_explosion_locator1" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.4 node = "local_explosion_locator2" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 6.6 node = "local_explosion_locator3" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 6.83 node = "local_explosion_locator4" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.1 node = "local_explosion_locator5" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.5 node = "local_explosion_locator6" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.93 node = "explosion_locator" particle = "large_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+
+        event = { time = 12.83 node = "part1" particle = "large_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    scale = @DSC_cruiser_entity_scale
+
+    game_data = {
+        size = @DSC_cruiser_game_data_scale
+        emissive_recolor_crunch = 3.0
+        trail_locators = {
+            "engine_large_01" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_large_02" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_01" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_02" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_03" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_04" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+        }
+    }
+}
+entity = {
+    name = "DSC_04_cruiser_entity"
+    pdxmesh = "DSC_04_cruiser_frame_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_01" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_02" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_03" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_04" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_05_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_05_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_cruiser_hum" } }
+    }
+    state = { name = "moving" state_time = 5
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_01" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_02" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_03" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_04" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = "moving_out_cruiser" } }
+    }
+    state = { name = "death" state_time = 5
+        event = { time = 1.05 node = "local_explosion_locator" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.6 node = "local_explosion_locator1" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.4 node = "local_explosion_locator2" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 6.6 node = "local_explosion_locator3" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 6.83 node = "local_explosion_locator4" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.1 node = "local_explosion_locator5" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.5 node = "local_explosion_locator6" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.93 node = "explosion_locator" particle = "large_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+
+        event = { time = 12.83 node = "part1" particle = "large_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    scale = @DSC_cruiser_entity_scale
+
+    game_data = {
+        size = @DSC_cruiser_game_data_scale
+        emissive_recolor_crunch = 3.0
+        trail_locators = {
+            "engine_large_01" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_large_02" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_01" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_02" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_03" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_04" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+        }
+    }
+}
+entity = {
+    name = "DSC_05_cruiser_entity"
+    pdxmesh = "DSC_05_cruiser_frame_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_01" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_02" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_03" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_04" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_05_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_05_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_cruiser_hum" } }
+    }
+    state = { name = "moving" state_time = 5
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_01" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_02" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_03" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_04" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = "moving_out_cruiser" } }
+    }
+    state = { name = "death" state_time = 5
+        event = { time = 1.05 node = "local_explosion_locator" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.6 node = "local_explosion_locator1" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.4 node = "local_explosion_locator2" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 6.6 node = "local_explosion_locator3" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 6.83 node = "local_explosion_locator4" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.1 node = "local_explosion_locator5" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.5 node = "local_explosion_locator6" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.93 node = "explosion_locator" particle = "large_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+
+        event = { time = 12.83 node = "part1" particle = "large_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    scale = @DSC_cruiser_entity_scale
+
+    game_data = {
+        size = @DSC_cruiser_game_data_scale
+        emissive_recolor_crunch = 3.0
+        trail_locators = {
+            "engine_large_01" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_large_02" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_01" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_02" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_03" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_04" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+        }
+    }
+}
+entity = {
+    name = "DSC_06_cruiser_entity"
+    pdxmesh = "DSC_06_cruiser_frame_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_01" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_02" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_03" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_04" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_05_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_05_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_cruiser_hum" } }
+    }
+    state = { name = "moving" state_time = 5
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_01" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_02" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_03" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_04" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = "moving_out_cruiser" } }
+    }
+    state = { name = "death" state_time = 5
+        event = { time = 1.05 node = "local_explosion_locator" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.6 node = "local_explosion_locator1" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.4 node = "local_explosion_locator2" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 6.6 node = "local_explosion_locator3" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 6.83 node = "local_explosion_locator4" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.1 node = "local_explosion_locator5" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.5 node = "local_explosion_locator6" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.93 node = "explosion_locator" particle = "large_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+
+        event = { time = 12.83 node = "part1" particle = "large_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    scale = @DSC_cruiser_entity_scale
+
+    game_data = {
+        size = @DSC_cruiser_game_data_scale
+        emissive_recolor_crunch = 3.0
+        trail_locators = {
+            "engine_large_01" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_large_02" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_01" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_02" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_03" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_04" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+        }
+    }
+}
+entity = {
+    name = "DSC_07_cruiser_entity"
+    pdxmesh = "DSC_07_cruiser_frame_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_01" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_02" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_03" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_04" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_05_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_05_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_cruiser_hum" } }
+    }
+    state = { name = "moving" state_time = 5
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_01" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_02" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_03" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_04" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = "moving_out_cruiser" } }
+    }
+    state = { name = "death" state_time = 5
+        event = { time = 1.05 node = "local_explosion_locator" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.6 node = "local_explosion_locator1" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.4 node = "local_explosion_locator2" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 6.6 node = "local_explosion_locator3" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 6.83 node = "local_explosion_locator4" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.1 node = "local_explosion_locator5" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.5 node = "local_explosion_locator6" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.93 node = "explosion_locator" particle = "large_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+
+        event = { time = 12.83 node = "part1" particle = "large_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    scale = @DSC_cruiser_entity_scale
+
+    game_data = {
+        size = @DSC_cruiser_game_data_scale
+        emissive_recolor_crunch = 3.0
+        trail_locators = {
+            "engine_large_01" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_large_02" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_01" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_02" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_03" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_04" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+        }
+    }
+}
+entity = {
+    name = "DSC_08_cruiser_entity"
+    pdxmesh = "DSC_08_cruiser_frame_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_01" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_02" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_03" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_04" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_05_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_05_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_cruiser_hum" } }
+    }
+    state = { name = "moving" state_time = 5
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_01" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_02" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_03" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_04" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = "moving_out_cruiser" } }
+    }
+    state = { name = "death" state_time = 5
+        event = { time = 1.05 node = "local_explosion_locator" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.6 node = "local_explosion_locator1" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.4 node = "local_explosion_locator2" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 6.6 node = "local_explosion_locator3" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 6.83 node = "local_explosion_locator4" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.1 node = "local_explosion_locator5" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.5 node = "local_explosion_locator6" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.93 node = "explosion_locator" particle = "large_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+
+        event = { time = 12.83 node = "part1" particle = "large_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    scale = @DSC_cruiser_entity_scale
+
+    game_data = {
+        size = @DSC_cruiser_game_data_scale
+        emissive_recolor_crunch = 3.0
+        trail_locators = {
+            "engine_large_01" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_large_02" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_01" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_02" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_03" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_04" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+        }
+    }
+}
+entity = {
+    name = "DSC_09_cruiser_entity"
+    pdxmesh = "DSC_09_cruiser_frame_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_01" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_02" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_03" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_04" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_05_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_05_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_cruiser_hum" } }
+    }
+    state = { name = "moving" state_time = 5
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_01" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_02" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_03" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_04" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = "moving_out_cruiser" } }
+    }
+    state = { name = "death" state_time = 5
+        event = { time = 1.05 node = "local_explosion_locator" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.6 node = "local_explosion_locator1" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.4 node = "local_explosion_locator2" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 6.6 node = "local_explosion_locator3" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 6.83 node = "local_explosion_locator4" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.1 node = "local_explosion_locator5" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.5 node = "local_explosion_locator6" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.93 node = "explosion_locator" particle = "large_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+
+        event = { time = 12.83 node = "part1" particle = "large_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    scale = @DSC_cruiser_entity_scale
+
+    game_data = {
+        size = @DSC_cruiser_game_data_scale
+        emissive_recolor_crunch = 3.0
+        trail_locators = {
+            "engine_large_01" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_large_02" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_01" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_02" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_03" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_04" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+        }
+    }
+}
+entity = {
+    name = "DSC_10_cruiser_entity"
+    pdxmesh = "DSC_10_cruiser_frame_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_01" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_02" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_03" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_04" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_05_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_05_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_cruiser_hum" } }
+    }
+    state = { name = "moving" state_time = 5
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_01" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_02" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_03" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_04" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = "moving_out_cruiser" } }
+    }
+    state = { name = "death" state_time = 5
+        event = { time = 1.05 node = "local_explosion_locator" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.6 node = "local_explosion_locator1" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.4 node = "local_explosion_locator2" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 6.6 node = "local_explosion_locator3" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 6.83 node = "local_explosion_locator4" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.1 node = "local_explosion_locator5" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.5 node = "local_explosion_locator6" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.93 node = "explosion_locator" particle = "large_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+
+        event = { time = 12.83 node = "part1" particle = "large_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    scale = @DSC_cruiser_entity_scale
+
+    game_data = {
+        size = @DSC_cruiser_game_data_scale
+        emissive_recolor_crunch = 3.0
+        trail_locators = {
+            "engine_large_01" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_large_02" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_01" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_02" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_03" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_04" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+        }
+    }
+}
+entity = {
+    name = "DSC_11_cruiser_entity"
+    pdxmesh = "DSC_11_cruiser_frame_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_01" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_02" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_03" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_04" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_05_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_05_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_cruiser_hum" } }
+    }
+    state = { name = "moving" state_time = 5
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_01" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_02" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_03" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_04" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = "moving_out_cruiser" } }
+    }
+    state = { name = "death" state_time = 5
+        event = { time = 1.05 node = "local_explosion_locator" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.6 node = "local_explosion_locator1" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.4 node = "local_explosion_locator2" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 6.6 node = "local_explosion_locator3" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 6.83 node = "local_explosion_locator4" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.1 node = "local_explosion_locator5" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.5 node = "local_explosion_locator6" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.93 node = "explosion_locator" particle = "large_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+
+        event = { time = 12.83 node = "part1" particle = "large_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    scale = @DSC_cruiser_entity_scale
+
+    game_data = {
+        size = @DSC_cruiser_game_data_scale
+        emissive_recolor_crunch = 3.0
+        trail_locators = {
+            "engine_large_01" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_large_02" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_01" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_02" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_03" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_04" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+        }
+    }
+}
+entity = {
+    name = "DSC_12_cruiser_entity"
+    pdxmesh = "DSC_12_cruiser_frame_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_01" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_02" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_03" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_04" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_05_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_05_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_cruiser_hum" } }
+    }
+    state = { name = "moving" state_time = 5
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_01" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_02" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_03" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_04" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = "moving_out_cruiser" } }
+    }
+    state = { name = "death" state_time = 5
+        event = { time = 1.05 node = "local_explosion_locator" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.6 node = "local_explosion_locator1" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.4 node = "local_explosion_locator2" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 6.6 node = "local_explosion_locator3" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 6.83 node = "local_explosion_locator4" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.1 node = "local_explosion_locator5" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.5 node = "local_explosion_locator6" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.93 node = "explosion_locator" particle = "large_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+
+        event = { time = 12.83 node = "part1" particle = "large_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    scale = @DSC_cruiser_entity_scale
+
+    game_data = {
+        size = @DSC_cruiser_game_data_scale
+        emissive_recolor_crunch = 3.0
+        trail_locators = {
+            "engine_large_01" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_large_02" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_01" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_02" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_03" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_04" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+        }
+    }
+}
+entity = {
+    name = "DSC_13_cruiser_entity"
+    pdxmesh = "DSC_13_cruiser_frame_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_01" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_02" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_03" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_04" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_05_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_05_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_cruiser_hum" } }
+    }
+    state = { name = "moving" state_time = 5
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_01" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_02" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_03" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_04" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = "moving_out_cruiser" } }
+    }
+    state = { name = "death" state_time = 5
+        event = { time = 1.05 node = "local_explosion_locator" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.6 node = "local_explosion_locator1" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.4 node = "local_explosion_locator2" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 6.6 node = "local_explosion_locator3" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 6.83 node = "local_explosion_locator4" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.1 node = "local_explosion_locator5" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.5 node = "local_explosion_locator6" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.93 node = "explosion_locator" particle = "large_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+
+        event = { time = 12.83 node = "part1" particle = "large_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    scale = @DSC_cruiser_entity_scale
+
+    game_data = {
+        size = @DSC_cruiser_game_data_scale
+        emissive_recolor_crunch = 3.0
+        trail_locators = {
+            "engine_large_01" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_large_02" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_01" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_02" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_03" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_04" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+        }
+    }
+}
+entity = {
+    name = "DSC_14_cruiser_entity"
+    pdxmesh = "DSC_14_cruiser_frame_mesh"
+
+    default_state = "idle"
+    state = { name = "idle" state_time = 5
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_01" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_02" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_03" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_04" particle = "generic_035_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_05_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_05_exhaust_circle_idle" trigger_once = yes keep_particle = yes }
+
+        start_event = { trigger_once = yes sound = { soundeffect = "amb_cruiser_hum" } }
+    }
+    state = { name = "moving" state_time = 5
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_01" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_02" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_03" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_small_04" particle = "generic_05_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_large_01" particle = "generic_075_exhaust_circle_moving" trigger_once = yes keep_particle = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = "moving_out_cruiser" } }
+    }
+    state = { name = "death" state_time = 5
+        event = { time = 1.05 node = "local_explosion_locator" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 1.6 node = "local_explosion_locator1" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 3.4 node = "local_explosion_locator2" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 6.6 node = "local_explosion_locator3" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 6.83 node = "local_explosion_locator4" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.1 node = "local_explosion_locator5" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.5 node = "local_explosion_locator6" particle = "ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+        event = { time = 7.93 node = "explosion_locator" particle = "large_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+
+        event = { time = 12.83 node = "part1" particle = "large_ship_explosion_particle" sound = { soundeffect = ship_destroyed } }
+    }
+
+    scale = @DSC_cruiser_entity_scale
+
+    game_data = {
+        size = @DSC_cruiser_game_data_scale
+        emissive_recolor_crunch = 3.0
+        trail_locators = {
+            "engine_large_01" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_large_02" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_01" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_02" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_03" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+            "engine_small_04" = 		{ width = @medium_trail_W 	lenght = @medium_trail_L   	}
+        }
+    }
+}
+

@@ -1,0 +1,756 @@
+@DSC_juggernaut_entity_scale = 1
+@DSC_juggernaut_ship_entity_scale = 2
+@DSC_juggernaut_entity_game_data_scale = 35
+
+#######################################
+######          实例|通用          ######
+#######################################
+entity = {
+    name = "DSC_00_juggernaut_entity"
+
+    scale = @DSC_juggernaut_entity_scale
+    game_data = {
+        size = @DSC_juggernaut_entity_game_data_scale
+        emissive_recolor_crunch = 5.0
+    }
+}
+entity = {
+    name = "DSC_00_juggernaut_core_section_entity"
+    pdxmesh = "DSC_00_juggernaut_mesh"
+    scale = @DSC_juggernaut_ship_entity_scale
+
+    default_state = "idle"
+    state = {
+        name = "idle" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "juggernaut_mam_exhaust_idle_m" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "juggernaut_mam_exhaust_idle_m" trigger_once = yes keep_particle = yes }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_05" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_06" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = juggernaut_mammalian_idle } }
+    }
+    state = {
+        name = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "juggernaut_mam_exhaust_moving_m" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "juggernaut_mam_exhaust_moving_m" trigger_once = yes keep_particle = yes }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_05" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_06" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+
+        event = { sound = { soundeffect = juggernaut_mammalian_move } }
+    }
+    state = {
+        name = "death" state_time = 5
+        event = { time = 1.1 node = "explosion_locator_01" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 1.8 node = "explosion_locator_02" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 3.1 node = "explosion_locator_03" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 4.4 node = "explosion_locator_04" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 4.7 node = "explosion_locator_05" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 5.2 node = "explosion_locator_06" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 6.5 node = "explosion_locator_07" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 6.9 node = "explosion_locator_08" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+
+        event = { time = 6.96 node = "big_explosion_locator" particle = "small_2_player_ship_explosion_particle" keep_particle = yes trigger_once = no }
+        event = { time = 6.96 node = "big_explosion_locator" particle = "juggernaut_burn_effect" keep_particle = yes trigger_once = no }
+    }
+}
+
+
+#######################################
+######        并列图形文化        ######
+#######################################
+entity = {
+    name = "DSC_01_juggernaut_core_section_entity"
+    pdxmesh = "DSC_01_juggernaut_mesh"
+    scale = @DSC_juggernaut_ship_entity_scale
+
+    default_state = "idle"
+    state = {
+        name = "idle" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "juggernaut_mam_exhaust_idle_m" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "juggernaut_mam_exhaust_idle_m" trigger_once = yes keep_particle = yes }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_05" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_06" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = juggernaut_mammalian_idle } }
+    }
+    state = {
+        name = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "juggernaut_mam_exhaust_moving_m" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "juggernaut_mam_exhaust_moving_m" trigger_once = yes keep_particle = yes }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_05" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_06" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+
+        event = { sound = { soundeffect = juggernaut_mammalian_move } }
+    }
+    state = {
+        name = "death" state_time = 5
+        event = { time = 1.1 node = "explosion_locator_01" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 1.8 node = "explosion_locator_02" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 3.1 node = "explosion_locator_03" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 4.4 node = "explosion_locator_04" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 4.7 node = "explosion_locator_05" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 5.2 node = "explosion_locator_06" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 6.5 node = "explosion_locator_07" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 6.9 node = "explosion_locator_08" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+
+        event = { time = 6.96 node = "big_explosion_locator" particle = "small_2_player_ship_explosion_particle" keep_particle = yes trigger_once = no }
+        event = { time = 6.96 node = "big_explosion_locator" particle = "juggernaut_burn_effect" keep_particle = yes trigger_once = no }
+    }
+}
+entity = {
+    name = "DSC_02_juggernaut_core_section_entity"
+    pdxmesh = "DSC_02_juggernaut_mesh"
+    scale = @DSC_juggernaut_ship_entity_scale
+
+    default_state = "idle"
+    state = {
+        name = "idle" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "juggernaut_mam_exhaust_idle_m" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "juggernaut_mam_exhaust_idle_m" trigger_once = yes keep_particle = yes }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_05" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_06" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = juggernaut_mammalian_idle } }
+    }
+    state = {
+        name = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "juggernaut_mam_exhaust_moving_m" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "juggernaut_mam_exhaust_moving_m" trigger_once = yes keep_particle = yes }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_05" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_06" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+
+        event = { sound = { soundeffect = juggernaut_mammalian_move } }
+    }
+    state = {
+        name = "death" state_time = 5
+        event = { time = 1.1 node = "explosion_locator_01" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 1.8 node = "explosion_locator_02" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 3.1 node = "explosion_locator_03" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 4.4 node = "explosion_locator_04" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 4.7 node = "explosion_locator_05" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 5.2 node = "explosion_locator_06" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 6.5 node = "explosion_locator_07" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 6.9 node = "explosion_locator_08" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+
+        event = { time = 6.96 node = "big_explosion_locator" particle = "small_2_player_ship_explosion_particle" keep_particle = yes trigger_once = no }
+        event = { time = 6.96 node = "big_explosion_locator" particle = "juggernaut_burn_effect" keep_particle = yes trigger_once = no }
+    }
+}
+entity = {
+    name = "DSC_03_juggernaut_core_section_entity"
+    pdxmesh = "DSC_03_juggernaut_mesh"
+    scale = @DSC_juggernaut_ship_entity_scale
+
+    default_state = "idle"
+    state = {
+        name = "idle" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "juggernaut_mam_exhaust_idle_m" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "juggernaut_mam_exhaust_idle_m" trigger_once = yes keep_particle = yes }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_05" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_06" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = juggernaut_mammalian_idle } }
+    }
+    state = {
+        name = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "juggernaut_mam_exhaust_moving_m" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "juggernaut_mam_exhaust_moving_m" trigger_once = yes keep_particle = yes }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_05" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_06" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+
+        event = { sound = { soundeffect = juggernaut_mammalian_move } }
+    }
+    state = {
+        name = "death" state_time = 5
+        event = { time = 1.1 node = "explosion_locator_01" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 1.8 node = "explosion_locator_02" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 3.1 node = "explosion_locator_03" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 4.4 node = "explosion_locator_04" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 4.7 node = "explosion_locator_05" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 5.2 node = "explosion_locator_06" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 6.5 node = "explosion_locator_07" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 6.9 node = "explosion_locator_08" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+
+        event = { time = 6.96 node = "big_explosion_locator" particle = "small_2_player_ship_explosion_particle" keep_particle = yes trigger_once = no }
+        event = { time = 6.96 node = "big_explosion_locator" particle = "juggernaut_burn_effect" keep_particle = yes trigger_once = no }
+    }
+}
+entity = {
+    name = "DSC_04_juggernaut_core_section_entity"
+    pdxmesh = "DSC_04_juggernaut_mesh"
+    scale = @DSC_juggernaut_ship_entity_scale
+
+    default_state = "idle"
+    state = {
+        name = "idle" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "juggernaut_mam_exhaust_idle_m" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "juggernaut_mam_exhaust_idle_m" trigger_once = yes keep_particle = yes }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_05" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_06" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = juggernaut_mammalian_idle } }
+    }
+    state = {
+        name = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "juggernaut_mam_exhaust_moving_m" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "juggernaut_mam_exhaust_moving_m" trigger_once = yes keep_particle = yes }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_05" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_06" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+
+        event = { sound = { soundeffect = juggernaut_mammalian_move } }
+    }
+    state = {
+        name = "death" state_time = 5
+        event = { time = 1.1 node = "explosion_locator_01" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 1.8 node = "explosion_locator_02" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 3.1 node = "explosion_locator_03" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 4.4 node = "explosion_locator_04" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 4.7 node = "explosion_locator_05" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 5.2 node = "explosion_locator_06" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 6.5 node = "explosion_locator_07" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 6.9 node = "explosion_locator_08" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+
+        event = { time = 6.96 node = "big_explosion_locator" particle = "small_2_player_ship_explosion_particle" keep_particle = yes trigger_once = no }
+        event = { time = 6.96 node = "big_explosion_locator" particle = "juggernaut_burn_effect" keep_particle = yes trigger_once = no }
+    }
+}
+entity = {
+    name = "DSC_05_juggernaut_core_section_entity"
+    pdxmesh = "DSC_05_juggernaut_mesh"
+    scale = @DSC_juggernaut_ship_entity_scale
+
+    default_state = "idle"
+    state = {
+        name = "idle" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "juggernaut_mam_exhaust_idle_m" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "juggernaut_mam_exhaust_idle_m" trigger_once = yes keep_particle = yes }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_05" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_06" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = juggernaut_mammalian_idle } }
+    }
+    state = {
+        name = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "juggernaut_mam_exhaust_moving_m" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "juggernaut_mam_exhaust_moving_m" trigger_once = yes keep_particle = yes }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_05" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_06" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+
+        event = { sound = { soundeffect = juggernaut_mammalian_move } }
+    }
+    state = {
+        name = "death" state_time = 5
+        event = { time = 1.1 node = "explosion_locator_01" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 1.8 node = "explosion_locator_02" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 3.1 node = "explosion_locator_03" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 4.4 node = "explosion_locator_04" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 4.7 node = "explosion_locator_05" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 5.2 node = "explosion_locator_06" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 6.5 node = "explosion_locator_07" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 6.9 node = "explosion_locator_08" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+
+        event = { time = 6.96 node = "big_explosion_locator" particle = "small_2_player_ship_explosion_particle" keep_particle = yes trigger_once = no }
+        event = { time = 6.96 node = "big_explosion_locator" particle = "juggernaut_burn_effect" keep_particle = yes trigger_once = no }
+    }
+}
+entity = {
+    name = "DSC_06_juggernaut_core_section_entity"
+    pdxmesh = "DSC_06_juggernaut_mesh"
+    scale = @DSC_juggernaut_ship_entity_scale
+
+    default_state = "idle"
+    state = {
+        name = "idle" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "juggernaut_mam_exhaust_idle_m" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "juggernaut_mam_exhaust_idle_m" trigger_once = yes keep_particle = yes }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_05" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_06" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = juggernaut_mammalian_idle } }
+    }
+    state = {
+        name = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "juggernaut_mam_exhaust_moving_m" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "juggernaut_mam_exhaust_moving_m" trigger_once = yes keep_particle = yes }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_05" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_06" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+
+        event = { sound = { soundeffect = juggernaut_mammalian_move } }
+    }
+    state = {
+        name = "death" state_time = 5
+        event = { time = 1.1 node = "explosion_locator_01" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 1.8 node = "explosion_locator_02" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 3.1 node = "explosion_locator_03" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 4.4 node = "explosion_locator_04" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 4.7 node = "explosion_locator_05" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 5.2 node = "explosion_locator_06" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 6.5 node = "explosion_locator_07" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 6.9 node = "explosion_locator_08" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+
+        event = { time = 6.96 node = "big_explosion_locator" particle = "small_2_player_ship_explosion_particle" keep_particle = yes trigger_once = no }
+        event = { time = 6.96 node = "big_explosion_locator" particle = "juggernaut_burn_effect" keep_particle = yes trigger_once = no }
+    }
+}
+entity = {
+    name = "DSC_07_juggernaut_core_section_entity"
+    pdxmesh = "DSC_07_juggernaut_mesh"
+    scale = @DSC_juggernaut_ship_entity_scale
+
+    default_state = "idle"
+    state = {
+        name = "idle" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "juggernaut_mam_exhaust_idle_m" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "juggernaut_mam_exhaust_idle_m" trigger_once = yes keep_particle = yes }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_05" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_06" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = juggernaut_mammalian_idle } }
+    }
+    state = {
+        name = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "juggernaut_mam_exhaust_moving_m" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "juggernaut_mam_exhaust_moving_m" trigger_once = yes keep_particle = yes }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_05" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_06" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+
+        event = { sound = { soundeffect = juggernaut_mammalian_move } }
+    }
+    state = {
+        name = "death" state_time = 5
+        event = { time = 1.1 node = "explosion_locator_01" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 1.8 node = "explosion_locator_02" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 3.1 node = "explosion_locator_03" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 4.4 node = "explosion_locator_04" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 4.7 node = "explosion_locator_05" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 5.2 node = "explosion_locator_06" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 6.5 node = "explosion_locator_07" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 6.9 node = "explosion_locator_08" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+
+        event = { time = 6.96 node = "big_explosion_locator" particle = "small_2_player_ship_explosion_particle" keep_particle = yes trigger_once = no }
+        event = { time = 6.96 node = "big_explosion_locator" particle = "juggernaut_burn_effect" keep_particle = yes trigger_once = no }
+    }
+}
+entity = {
+    name = "DSC_08_juggernaut_core_section_entity"
+    pdxmesh = "DSC_08_juggernaut_mesh"
+    scale = @DSC_juggernaut_ship_entity_scale
+
+    default_state = "idle"
+    state = {
+        name = "idle" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "juggernaut_mam_exhaust_idle_m" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "juggernaut_mam_exhaust_idle_m" trigger_once = yes keep_particle = yes }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_05" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_06" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = juggernaut_mammalian_idle } }
+    }
+    state = {
+        name = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "juggernaut_mam_exhaust_moving_m" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "juggernaut_mam_exhaust_moving_m" trigger_once = yes keep_particle = yes }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_05" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_06" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+
+        event = { sound = { soundeffect = juggernaut_mammalian_move } }
+    }
+    state = {
+        name = "death" state_time = 5
+        event = { time = 1.1 node = "explosion_locator_01" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 1.8 node = "explosion_locator_02" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 3.1 node = "explosion_locator_03" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 4.4 node = "explosion_locator_04" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 4.7 node = "explosion_locator_05" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 5.2 node = "explosion_locator_06" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 6.5 node = "explosion_locator_07" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 6.9 node = "explosion_locator_08" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+
+        event = { time = 6.96 node = "big_explosion_locator" particle = "small_2_player_ship_explosion_particle" keep_particle = yes trigger_once = no }
+        event = { time = 6.96 node = "big_explosion_locator" particle = "juggernaut_burn_effect" keep_particle = yes trigger_once = no }
+    }
+}
+entity = {
+    name = "DSC_09_juggernaut_core_section_entity"
+    pdxmesh = "DSC_09_juggernaut_mesh"
+    scale = @DSC_juggernaut_ship_entity_scale
+
+    default_state = "idle"
+    state = {
+        name = "idle" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "juggernaut_mam_exhaust_idle_m" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "juggernaut_mam_exhaust_idle_m" trigger_once = yes keep_particle = yes }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_05" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_06" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = juggernaut_mammalian_idle } }
+    }
+    state = {
+        name = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "juggernaut_mam_exhaust_moving_m" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "juggernaut_mam_exhaust_moving_m" trigger_once = yes keep_particle = yes }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_05" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_06" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+
+        event = { sound = { soundeffect = juggernaut_mammalian_move } }
+    }
+    state = {
+        name = "death" state_time = 5
+        event = { time = 1.1 node = "explosion_locator_01" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 1.8 node = "explosion_locator_02" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 3.1 node = "explosion_locator_03" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 4.4 node = "explosion_locator_04" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 4.7 node = "explosion_locator_05" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 5.2 node = "explosion_locator_06" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 6.5 node = "explosion_locator_07" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 6.9 node = "explosion_locator_08" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+
+        event = { time = 6.96 node = "big_explosion_locator" particle = "small_2_player_ship_explosion_particle" keep_particle = yes trigger_once = no }
+        event = { time = 6.96 node = "big_explosion_locator" particle = "juggernaut_burn_effect" keep_particle = yes trigger_once = no }
+    }
+}
+entity = {
+    name = "DSC_10_juggernaut_core_section_entity"
+    pdxmesh = "DSC_10_juggernaut_mesh"
+    scale = @DSC_juggernaut_ship_entity_scale
+
+    default_state = "idle"
+    state = {
+        name = "idle" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "juggernaut_mam_exhaust_idle_m" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "juggernaut_mam_exhaust_idle_m" trigger_once = yes keep_particle = yes }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_05" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_06" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = juggernaut_mammalian_idle } }
+    }
+    state = {
+        name = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "juggernaut_mam_exhaust_moving_m" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "juggernaut_mam_exhaust_moving_m" trigger_once = yes keep_particle = yes }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_05" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_06" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+
+        event = { sound = { soundeffect = juggernaut_mammalian_move } }
+    }
+    state = {
+        name = "death" state_time = 5
+        event = { time = 1.1 node = "explosion_locator_01" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 1.8 node = "explosion_locator_02" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 3.1 node = "explosion_locator_03" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 4.4 node = "explosion_locator_04" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 4.7 node = "explosion_locator_05" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 5.2 node = "explosion_locator_06" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 6.5 node = "explosion_locator_07" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 6.9 node = "explosion_locator_08" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+
+        event = { time = 6.96 node = "big_explosion_locator" particle = "small_2_player_ship_explosion_particle" keep_particle = yes trigger_once = no }
+        event = { time = 6.96 node = "big_explosion_locator" particle = "juggernaut_burn_effect" keep_particle = yes trigger_once = no }
+    }
+}
+entity = {
+    name = "DSC_11_juggernaut_core_section_entity"
+    pdxmesh = "DSC_11_juggernaut_mesh"
+    scale = @DSC_juggernaut_ship_entity_scale
+
+    default_state = "idle"
+    state = {
+        name = "idle" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "juggernaut_mam_exhaust_idle_m" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "juggernaut_mam_exhaust_idle_m" trigger_once = yes keep_particle = yes }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_05" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_06" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = juggernaut_mammalian_idle } }
+    }
+    state = {
+        name = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "juggernaut_mam_exhaust_moving_m" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "juggernaut_mam_exhaust_moving_m" trigger_once = yes keep_particle = yes }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_05" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_06" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+
+        event = { sound = { soundeffect = juggernaut_mammalian_move } }
+    }
+    state = {
+        name = "death" state_time = 5
+        event = { time = 1.1 node = "explosion_locator_01" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 1.8 node = "explosion_locator_02" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 3.1 node = "explosion_locator_03" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 4.4 node = "explosion_locator_04" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 4.7 node = "explosion_locator_05" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 5.2 node = "explosion_locator_06" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 6.5 node = "explosion_locator_07" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 6.9 node = "explosion_locator_08" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+
+        event = { time = 6.96 node = "big_explosion_locator" particle = "small_2_player_ship_explosion_particle" keep_particle = yes trigger_once = no }
+        event = { time = 6.96 node = "big_explosion_locator" particle = "juggernaut_burn_effect" keep_particle = yes trigger_once = no }
+    }
+}
+entity = {
+    name = "DSC_12_juggernaut_core_section_entity"
+    pdxmesh = "DSC_12_juggernaut_mesh"
+    scale = @DSC_juggernaut_ship_entity_scale
+
+    default_state = "idle"
+    state = {
+        name = "idle" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "juggernaut_mam_exhaust_idle_m" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "juggernaut_mam_exhaust_idle_m" trigger_once = yes keep_particle = yes }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_05" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_06" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = juggernaut_mammalian_idle } }
+    }
+    state = {
+        name = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "juggernaut_mam_exhaust_moving_m" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "juggernaut_mam_exhaust_moving_m" trigger_once = yes keep_particle = yes }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_05" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_06" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+
+        event = { sound = { soundeffect = juggernaut_mammalian_move } }
+    }
+    state = {
+        name = "death" state_time = 5
+        event = { time = 1.1 node = "explosion_locator_01" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 1.8 node = "explosion_locator_02" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 3.1 node = "explosion_locator_03" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 4.4 node = "explosion_locator_04" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 4.7 node = "explosion_locator_05" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 5.2 node = "explosion_locator_06" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 6.5 node = "explosion_locator_07" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 6.9 node = "explosion_locator_08" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+
+        event = { time = 6.96 node = "big_explosion_locator" particle = "small_2_player_ship_explosion_particle" keep_particle = yes trigger_once = no }
+        event = { time = 6.96 node = "big_explosion_locator" particle = "juggernaut_burn_effect" keep_particle = yes trigger_once = no }
+    }
+}
+entity = {
+    name = "DSC_13_juggernaut_core_section_entity"
+    pdxmesh = "DSC_13_juggernaut_mesh"
+    scale = @DSC_juggernaut_ship_entity_scale
+
+    default_state = "idle"
+    state = {
+        name = "idle" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "juggernaut_mam_exhaust_idle_m" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "juggernaut_mam_exhaust_idle_m" trigger_once = yes keep_particle = yes }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_05" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_06" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = juggernaut_mammalian_idle } }
+    }
+    state = {
+        name = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "juggernaut_mam_exhaust_moving_m" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "juggernaut_mam_exhaust_moving_m" trigger_once = yes keep_particle = yes }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_05" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_06" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+
+        event = { sound = { soundeffect = juggernaut_mammalian_move } }
+    }
+    state = {
+        name = "death" state_time = 5
+        event = { time = 1.1 node = "explosion_locator_01" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 1.8 node = "explosion_locator_02" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 3.1 node = "explosion_locator_03" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 4.4 node = "explosion_locator_04" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 4.7 node = "explosion_locator_05" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 5.2 node = "explosion_locator_06" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 6.5 node = "explosion_locator_07" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 6.9 node = "explosion_locator_08" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+
+        event = { time = 6.96 node = "big_explosion_locator" particle = "small_2_player_ship_explosion_particle" keep_particle = yes trigger_once = no }
+        event = { time = 6.96 node = "big_explosion_locator" particle = "juggernaut_burn_effect" keep_particle = yes trigger_once = no }
+    }
+}
+entity = {
+    name = "DSC_14_juggernaut_core_section_entity"
+    pdxmesh = "DSC_14_juggernaut_mesh"
+    scale = @DSC_juggernaut_ship_entity_scale
+
+    default_state = "idle"
+    state = {
+        name = "idle" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "juggernaut_mam_exhaust_idle_m" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "juggernaut_mam_exhaust_idle_m" trigger_once = yes keep_particle = yes }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_05" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_06" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+
+        event = { trigger_once = yes sound = { soundeffect = juggernaut_mammalian_idle } }
+    }
+    state = {
+        name = "moving" state_time = 5
+        event = { time = 0 node = "engine_medium_01" particle = "juggernaut_mam_exhaust_moving_m" trigger_once = yes keep_particle = yes }
+        event = { time = 0 node = "engine_medium_02" particle = "juggernaut_mam_exhaust_moving_m" trigger_once = yes keep_particle = yes }
+
+        event = { time = 0 node = "light_locator_01" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_02" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_03" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_04" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_05" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+        event = { time = 0 node = "light_locator_06" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+
+        event = { sound = { soundeffect = juggernaut_mammalian_move } }
+    }
+    state = {
+        name = "death" state_time = 5
+        event = { time = 1.1 node = "explosion_locator_01" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 1.8 node = "explosion_locator_02" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 3.1 node = "explosion_locator_03" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 4.4 node = "explosion_locator_04" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 4.7 node = "explosion_locator_05" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 5.2 node = "explosion_locator_06" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 6.5 node = "explosion_locator_07" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+        event = { time = 6.9 node = "explosion_locator_08" particle = "juggernaut_hull_explosion_effect" keep_particle = yes trigger_once = no }
+
+        event = { time = 6.96 node = "big_explosion_locator" particle = "small_2_player_ship_explosion_particle" keep_particle = yes trigger_once = no }
+        event = { time = 6.96 node = "big_explosion_locator" particle = "juggernaut_burn_effect" keep_particle = yes trigger_once = no }
+    }
+}
