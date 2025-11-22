@@ -1,2 +1,123 @@
-# situation_DOT_SR = { }
+#黑塔空间站修复进程
+situation_herta_station_fleet = {
+    picture = GFX_evt_herta_station_fleet
+    complete_icon_frame = GFX_situation_outcome_frame_blue
+    complete_icon = GFX_situation_outcome_positive
+    on_progress_complete = {
+        custom_tooltip = situation_herta_station_fleet_outcome
+        hidden_effect = {
+            situation_event = { id = DOT_SR_Herta.13 }
+        }
+        set_situation_locked = yes
+    }
+    stages = {
+        stage_1 = {
+            icon = GFX_situation_stage_1
+            icon_background = GFX_situation_stage_frame_blue
+            end = 20
+            custom_tooltip = stage_herta_station_fleet_effects
+        }
+        stage_2 = {
+            icon = GFX_situation_stage_2
+            icon_background = GFX_situation_stage_frame_blue
+            end = 40
+            on_first_enter = {
+                situation_event = { id = DOT_SR_Herta.10 }#舰体修复（去除debuff）
+            }
+            custom_tooltip = stage_herta_station_fleet_effects
+        }
+        stage_3 = {
+            icon = GFX_situation_stage_3
+            icon_background = GFX_situation_stage_frame_blue
+            end = 60
+            on_first_enter = {
+                situation_event = { id = DOT_SR_Herta.11 }#根除裂隙，引擎修复
+            }
+            custom_tooltip = stage_herta_station_fleet_effects
+        }
+        stage_4 = {
+            icon = GFX_situation_stage_4
+            icon_background = GFX_situation_stage_frame_blue
+            end = 80
+            on_first_enter = {
+                situation_event = { id = DOT_SR_Herta.12 }#防备调整
+            }
+            custom_tooltip = stage_herta_station_fleet_effects
+        }
+    }
+    approach = {
+        name = situation_herta_station_fleet_regular
+        icon = GFX_situation_approach_balance_sheet
+        icon_background = GFX_situation_approach_bg_yellow
+        on_select = {
+            custom_tooltip = approach_herta_station_fleet_regular_tt
+        }
+        resources = {
+            upkeep = {
+                alloys = 10
+                energy = 20
+                minerals = 20
+            }
+            produces = {
+                unity = 5
+                physics_research = 15
+                engineering_research = 15
+            }
+        }
+    }
+    approach = {
+        name = situation_herta_station_fleet_generous
+        icon = GFX_situation_approach_balance_sheet
+        icon_background = GFX_situation_approach_bg_green
+        on_select = {
+            custom_tooltip = approach_herta_station_fleet_generous_tt
+        }
+        default = yes
+        resources = {
+            upkeep = {
+                alloys = 20
+                energy = 40
+                minerals = 40
+            }
+            produces = {
+                unity = 10
+                physics_research = 30
+                engineering_research = 30
+            }
+        }
+    }
+    approach = {
+        name = situation_herta_station_fleet_frugal
+        icon = GFX_situation_approach_balance_sheet
+        icon_background = GFX_situation_approach_bg_red
+        on_select = {
+            custom_tooltip = approach_herta_station_fleet_frugal_tt
+        }
+        resources = {
+            upkeep = {
+                alloys = 5
+                energy = 10
+                minerals = 10
+            }
+            produces = {
+                unity = 2
+                physics_research = 7.5
+                engineering_research = 7.5
+            }
+        }
+    }
+    monthly_progress = {
+        base = 1
+        modifier = {
+            add = 0.25
+            desc = situation_herta_station_fleet_generous
+            current_situation_approach = situation_herta_station_fleet_generous
+        }
+        modifier = {
+            add = -0.25
+            desc = situation_herta_station_fleet_frugal
+            current_situation_approach = situation_herta_station_fleet_frugal
+        }
+    }
+}
 

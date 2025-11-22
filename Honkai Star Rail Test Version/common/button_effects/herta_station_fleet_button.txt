@@ -1,0 +1,2923 @@
+herta_district_introduce_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        always = yes
+    }
+
+    effect = {
+        custom_tooltip = herta_district_type_w
+        #custom_tooltip = concept_ark_district_desc
+    }
+}
+#区划1
+herta_fleet_district_1_show_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = herta_fleet_district_1_show_effect_text
+    }
+}
+herta_fleet_district_1_build_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        custom_tooltip = {
+            fail_text = need_less_limit
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_station_district_1_num
+                        value <= event_target:herta_fleet.herta_station_district_1_num_max
+                    }
+                    check_variable = {
+                        which = herta_station_district_1_num_max
+                        value < 10
+                    }
+                }
+            }
+        }
+        from = {
+            resource_stockpile_compare = { resource = energy value >= 1000 }
+            resource_stockpile_compare = { resource = minerals value >= 1000 }
+            resource_stockpile_compare = { resource = alloys value >= 500 }
+        }
+    }
+    effect = {
+        custom_tooltip = herta_fleet_district_1_build_effect_txt
+        hidden_effect = {
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_station_district_1_num_max
+                    value = 1
+                }
+                change_variable = {
+                    which = herta_station_district_1_num
+                    value = 1
+                }
+            }
+            from = {
+                add_resource = {
+                    energy = -1000
+                    minerals = -1000
+                    alloys = -500
+                }
+            }
+        }
+    }
+}
+herta_fleet_district_1_level_up_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        custom_tooltip = {
+            fail_text = need_less_limit
+            event_target:herta_fleet = {
+                check_variable = {
+                    which = herta_station_district_1_level
+                    value < event_target:herta_fleet.herta_station_district_1_level_max
+                }
+            }
+        }
+        from = {
+            resource_stockpile_compare = { resource = energy value >= 500 }
+            resource_stockpile_compare = { resource = minerals value >= 500 }
+        }
+    }
+    effect = {
+        custom_tooltip = herta_fleet_district_1_level_up_effect_text
+        hidden_effect = {
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_station_district_1_level
+                    value = 1
+                }
+            }
+            from = {
+                add_resource = {
+                    energy = -500
+                    minerals = -500
+                }
+            }
+        }
+    }
+}
+herta_station_district_1_num_count_sub_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        custom_tooltip = {
+            fail_text = need_more_zero
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_station_district_1_num
+                        value > 0
+                    }
+                }
+            }
+        }
+    }
+    effect = {
+        hidden_effect = {
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_station_district_1_num
+                    value = -1
+                }
+                if = {
+                    limit = {
+                        check_variable = {
+                            which = herta_station_district_1_workforce
+                            value > value:herta_station_district_1_pop_max
+                        }
+                    }
+                    set_variable = {
+                        which = herta_station_district_1_workforce
+                        value = value:herta_station_district_1_pop_max
+                    }
+                }
+            }
+        }
+    }
+}
+herta_station_district_1_num_count_add_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        custom_tooltip = {
+            fail_text = need_less_limit
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_station_district_1_num
+                        value < event_target:herta_fleet.herta_station_district_1_num_max
+                    }
+                    check_variable_arithmetic = {
+                        which = value:herta_station_district_unuse_value
+                        value > 0
+                    }
+                }
+            }
+        }
+    }
+    effect = {
+        hidden_effect = {
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_station_district_1_num
+                    value = 1
+                }
+            }
+        }
+    }
+}
+herta_station_district_1_num_pop_count_sub_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        custom_tooltip = {
+            fail_text = need_pop_more_zero
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_station_district_1_workforce
+                        value > 0
+                    }
+                }
+            }
+        }
+    }
+    effect = {
+        hidden_effect = {
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_station_district_1_workforce
+                    value = -100
+                }
+            }
+        }
+    }
+}
+herta_station_district_1_num_pop_count_add_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        custom_tooltip = {
+            fail_text = need_pop_less_limit
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable_arithmetic = {
+                        which = herta_station_district_1_workforce
+                        value <value:herta_station_district_1_pop_max
+                    }
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = need_pop_more_unuse
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable_arithmetic = {
+                        which = value:herta_station_pop_unuse_value
+                        value > 0
+                    }
+                }
+            }
+        }
+    }
+    effect = {
+        hidden_effect = {
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_station_district_1_workforce
+                    value = 100
+                }
+            }
+        }
+    }
+}
+hsr_district_1_level_1_effect = {
+    allow = {
+
+    }
+    potential = {
+        herta_fleet_level_show = {
+            VALUE = herta_station_district_1_level
+            LEVEL = 1
+        }
+    }
+    effect = {
+        #custom_tooltip = hsr_evt_shop_effect_txt
+    }
+}
+hsr_district_1_level_2_effect = {
+    allow = {
+
+    }
+    potential = {
+        herta_fleet_level_show = {
+            VALUE = herta_station_district_1_level
+            LEVEL = 2
+        }
+    }
+    effect = {
+        #custom_tooltip = hsr_evt_shop_effect_txt
+    }
+}
+hsr_district_1_level_3_effect = {
+    allow = {
+
+    }
+    potential = {
+        herta_fleet_level_show = {
+            VALUE = herta_station_district_1_level
+            LEVEL = 3
+        }
+    }
+    effect = {
+        #custom_tooltip = hsr_evt_shop_effect_txt
+    }
+}
+hsr_district_1_level_4_effect = {
+    allow = {
+
+    }
+    potential = {
+        herta_fleet_level_show = {
+            VALUE = herta_station_district_1_level
+            LEVEL = 4
+        }
+    }
+    effect = {
+        #custom_tooltip = hsr_evt_shop_effect_txt
+    }
+}
+hsr_district_1_level_5_effect = {
+    allow = {
+
+    }
+    potential = {
+        herta_fleet_level_show = {
+            VALUE = herta_station_district_1_level
+            LEVEL = 5
+        }
+    }
+    effect = {
+        #custom_tooltip = hsr_evt_shop_effect_txt
+    }
+}
+#区划2
+herta_fleet_district_2_show_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = herta_fleet_district_2_show_effect_text
+    }
+}
+herta_fleet_district_2_build_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        custom_tooltip = {
+            fail_text = need_less_limit
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_station_district_2_num
+                        value <= event_target:herta_fleet.herta_station_district_2_num_max
+                    }
+                    check_variable = {
+                        which = herta_station_district_2_num_max
+                        value < 10
+                    }
+                }
+            }
+        }
+        from = {
+            resource_stockpile_compare = { resource = energy value >= 1000 }
+            resource_stockpile_compare = { resource = minerals value >= 1000 }
+            resource_stockpile_compare = { resource = alloys value >= 500 }
+        }
+    }
+    effect = {
+        custom_tooltip = herta_fleet_district_1_build_effect_txt
+        hidden_effect = {
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_station_district_2_num_max
+                    value = 1
+                }
+                change_variable = {
+                    which = herta_station_district_2_num
+                    value = 1
+                }
+            }
+            from = {
+                add_resource = {
+                    energy = -1000
+                    minerals = -1000
+                    alloys = -500
+                }
+            }
+        }
+    }
+}
+herta_fleet_district_2_level_up_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        custom_tooltip = {
+            fail_text = need_less_limit
+            event_target:herta_fleet = {
+                check_variable = {
+                    which = herta_station_district_2_level
+                    value < event_target:herta_fleet.herta_station_district_2_level_max
+                }
+            }
+        }
+        from = {
+            resource_stockpile_compare = { resource = energy value >= 500 }
+            resource_stockpile_compare = { resource = minerals value >= 500 }
+        }
+    }
+    effect = {
+        custom_tooltip = herta_fleet_district_1_level_up_effect_text
+        hidden_effect = {
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_station_district_2_level
+                    value = 1
+                }
+            }
+        }
+    }
+}
+herta_station_district_2_num_count_sub_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        custom_tooltip = {
+            fail_text = need_more_zero
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_station_district_2_num
+                        value > 0
+                    }
+                }
+            }
+        }
+    }
+    effect = {
+        hidden_effect = {
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_station_district_2_num
+                    value = -1
+                }
+                if = {
+                    limit = {
+                        check_variable = {
+                            which = herta_station_district_2_workforce
+                            value > value:herta_station_district_2_pop_max
+                        }
+                    }
+                    set_variable = {
+                        which = herta_station_district_2_workforce
+                        value = value:herta_station_district_2_pop_max
+                    }
+                }
+            }
+        }
+    }
+}
+herta_station_district_2_num_count_add_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        custom_tooltip = {
+            fail_text = need_less_limit
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_station_district_2_num
+                        value < event_target:herta_fleet.herta_station_district_2_num_max
+                    }
+                    check_variable_arithmetic = {
+                        which = value:herta_station_district_unuse_value
+                        value > 0
+                    }
+                }
+            }
+        }
+    }
+    effect = {
+        hidden_effect = {
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_station_district_2_num
+                    value = 1
+                }
+            }
+        }
+    }
+}
+herta_station_district_2_num_pop_count_sub_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        custom_tooltip = {
+            fail_text = need_pop_more_zero
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_station_district_2_workforce
+                        value > 0
+                    }
+                }
+            }
+        }
+    }
+    effect = {
+        hidden_effect = {
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_station_district_2_workforce
+                    value = -100
+                }
+            }
+        }
+    }
+}
+herta_station_district_2_num_pop_count_add_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        custom_tooltip = {
+            fail_text = need_pop_less_limit
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable_arithmetic = {
+                        which = herta_station_district_2_workforce
+                        value <value:herta_station_district_2_pop_max
+                    }
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = need_pop_more_unuse
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable_arithmetic = {
+                        which = value:herta_station_pop_unuse_value
+                        value > 0
+                    }
+                }
+            }
+        }
+    }
+    effect = {
+        hidden_effect = {
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_station_district_2_workforce
+                    value = 100
+                }
+            }
+        }
+    }
+}
+hsr_district_2_level_1_effect = {
+    allow = {
+
+    }
+    potential = {
+        herta_fleet_level_show = {
+            VALUE = herta_station_district_2_level
+            LEVEL = 1
+        }
+    }
+    effect = {
+        #custom_tooltip = hsr_evt_shop_effect_txt
+    }
+}
+hsr_district_2_level_2_effect = {
+    allow = {
+
+    }
+    potential = {
+        herta_fleet_level_show = {
+            VALUE = herta_station_district_2_level
+            LEVEL = 2
+        }
+    }
+    effect = {
+        #custom_tooltip = hsr_evt_shop_effect_txt
+    }
+}
+hsr_district_2_level_3_effect = {
+    allow = {
+
+    }
+    potential = {
+        herta_fleet_level_show = {
+            VALUE = herta_station_district_2_level
+            LEVEL = 3
+        }
+    }
+    effect = {
+        #custom_tooltip = hsr_evt_shop_effect_txt
+    }
+}
+hsr_district_2_level_4_effect = {
+    allow = {
+
+    }
+    potential = {
+        herta_fleet_level_show = {
+            VALUE = herta_station_district_2_level
+            LEVEL = 4
+        }
+    }
+    effect = {
+        #custom_tooltip = hsr_evt_shop_effect_txt
+    }
+}
+hsr_district_2_level_5_effect = {
+    allow = {
+
+    }
+    potential = {
+        herta_fleet_level_show = {
+            VALUE = herta_station_district_2_level
+            LEVEL = 5
+        }
+    }
+    effect = {
+        #custom_tooltip = hsr_evt_shop_effect_txt
+    }
+}
+#区划3
+herta_fleet_district_3_show_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = herta_fleet_district_3_show_effect_text
+    }
+}
+herta_fleet_district_3_build_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        custom_tooltip = {
+            fail_text = need_less_limit
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_station_district_3_num
+                        value <= event_target:herta_fleet.herta_station_district_3_num_max
+                    }
+                    check_variable = {
+                        which = herta_station_district_3_num_max
+                        value < 10
+                    }
+                }
+            }
+        }
+        from = {
+            resource_stockpile_compare = { resource = energy value >= 1000 }
+            resource_stockpile_compare = { resource = minerals value >= 1000 }
+            resource_stockpile_compare = { resource = alloys value >= 500 }
+        }
+    }
+    effect = {
+        custom_tooltip = herta_fleet_district_1_build_effect_txt
+        hidden_effect = {
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_station_district_3_num_max
+                    value = 1
+                }
+                change_variable = {
+                    which = herta_station_district_3_num
+                    value = 1
+                }
+            }
+            from = {
+                add_resource = {
+                    energy = -1000
+                    minerals = -1000
+                    alloys = -500
+                }
+            }
+        }
+    }
+}
+herta_fleet_district_3_level_up_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        custom_tooltip = {
+            fail_text = need_less_limit
+            event_target:herta_fleet = {
+                check_variable = {
+                    which = herta_station_district_3_level
+                    value < event_target:herta_fleet.herta_station_district_3_level_max
+                }
+            }
+        }
+        from = {
+            resource_stockpile_compare = { resource = energy value >= 500 }
+            resource_stockpile_compare = { resource = minerals value >= 500 }
+        }
+    }
+    effect = {
+        custom_tooltip = herta_fleet_district_1_level_up_effect_text
+        hidden_effect = {
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_station_district_3_level
+                    value = 1
+                }
+            }
+            from = {
+                add_resource = {
+                    energy = -500
+                    minerals = -500
+                }
+            }
+        }
+    }
+}
+herta_station_district_3_num_count_sub_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        custom_tooltip = {
+            fail_text = need_more_zero
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_station_district_3_num
+                        value > 0
+                    }
+                }
+            }
+        }
+    }
+    effect = {
+        hidden_effect = {
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_station_district_3_num
+                    value = -1
+                }
+                if = {
+                    limit = {
+                        check_variable = {
+                            which = herta_station_district_3_workforce
+                            value > value:herta_station_district_3_pop_max
+                        }
+                    }
+                    set_variable = {
+                        which = herta_station_district_3_workforce
+                        value = value:herta_station_district_3_pop_max
+                    }
+                }
+            }
+        }
+    }
+}
+herta_station_district_3_num_count_add_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        custom_tooltip = {
+            fail_text = need_less_limit
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_station_district_3_num
+                        value < event_target:herta_fleet.herta_station_district_3_num_max
+                    }
+                    check_variable_arithmetic = {
+                        which = value:herta_station_district_unuse_value
+                        value > 0
+                    }
+                }
+            }
+        }
+    }
+    effect = {
+        hidden_effect = {
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_station_district_3_num
+                    value = 1
+                }
+            }
+        }
+    }
+}
+herta_station_district_3_num_pop_count_sub_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        custom_tooltip = {
+            fail_text = need_pop_more_zero
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_station_district_3_workforce
+                        value > 0
+                    }
+                }
+            }
+        }
+    }
+    effect = {
+        hidden_effect = {
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_station_district_3_workforce
+                    value = -100
+                }
+            }
+        }
+    }
+}
+herta_station_district_3_num_pop_count_add_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        custom_tooltip = {
+            fail_text = need_pop_less_limit
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable_arithmetic = {
+                        which = herta_station_district_3_workforce
+                        value <value:herta_station_district_3_pop_max
+                    }
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = need_pop_more_unuse
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable_arithmetic = {
+                        which = value:herta_station_pop_unuse_value
+                        value > 0
+                    }
+                }
+            }
+        }
+    }
+    effect = {
+        hidden_effect = {
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_station_district_3_workforce
+                    value = 100
+                }
+            }
+        }
+    }
+}
+hsr_district_3_level_1_effect = {
+    allow = {
+
+    }
+    potential = {
+        herta_fleet_level_show = {
+            VALUE = herta_station_district_3_level
+            LEVEL = 1
+        }
+    }
+    effect = {
+        #custom_tooltip = hsr_evt_shop_effect_txt
+    }
+}
+hsr_district_3_level_2_effect = {
+    allow = {
+
+    }
+    potential = {
+        herta_fleet_level_show = {
+            VALUE = herta_station_district_3_level
+            LEVEL = 2
+        }
+    }
+    effect = {
+        #custom_tooltip = hsr_evt_shop_effect_txt
+    }
+}
+hsr_district_3_level_3_effect = {
+    allow = {
+
+    }
+    potential = {
+        herta_fleet_level_show = {
+            VALUE = herta_station_district_3_level
+            LEVEL = 3
+        }
+    }
+    effect = {
+        #custom_tooltip = hsr_evt_shop_effect_txt
+    }
+}
+hsr_district_3_level_4_effect = {
+    allow = {
+
+    }
+    potential = {
+        herta_fleet_level_show = {
+            VALUE = herta_station_district_3_level
+            LEVEL = 4
+        }
+    }
+    effect = {
+        #custom_tooltip = hsr_evt_shop_effect_txt
+    }
+}
+hsr_district_3_level_5_effect = {
+    allow = {
+
+    }
+    potential = {
+        herta_fleet_level_show = {
+            VALUE = herta_station_district_3_level
+            LEVEL = 5
+        }
+    }
+    effect = {
+        #custom_tooltip = hsr_evt_shop_effect_txt
+    }
+}
+#区划4
+herta_fleet_district_4_show_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = herta_fleet_district_4_show_effect_text
+    }
+}
+herta_fleet_district_4_build_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        custom_tooltip = {
+            fail_text = need_less_limit
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_station_district_4_num
+                        value <= event_target:herta_fleet.herta_station_district_4_num_max
+                    }
+                    check_variable = {
+                        which = herta_station_district_4_num_max
+                        value < 10
+                    }
+                }
+            }
+        }
+        from = {
+            resource_stockpile_compare = { resource = energy value >= 1000 }
+            resource_stockpile_compare = { resource = minerals value >= 1000 }
+            resource_stockpile_compare = { resource = alloys value >= 500 }
+        }
+    }
+    effect = {
+        custom_tooltip = herta_fleet_district_1_build_effect_txt
+        hidden_effect = {
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_station_district_4_num_max
+                    value = 1
+                }
+                change_variable = {
+                    which = herta_station_district_4_num
+                    value = 1
+                }
+            }
+            from = {
+                add_resource = {
+                    energy = -1000
+                    minerals = -1000
+                    alloys = -500
+                }
+            }
+        }
+    }
+}
+herta_fleet_district_4_level_up_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        custom_tooltip = {
+            fail_text = need_less_limit
+            event_target:herta_fleet = {
+                check_variable = {
+                    which = herta_station_district_4_level
+                    value < event_target:herta_fleet.herta_station_district_4_level_max
+                }
+            }
+        }
+        from = {
+            resource_stockpile_compare = { resource = energy value >= 500 }
+            resource_stockpile_compare = { resource = minerals value >= 500 }
+        }
+    }
+    effect = {
+        custom_tooltip = herta_fleet_district_1_level_up_effect_text
+        hidden_effect = {
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_station_district_4_level
+                    value = 1
+                }
+            }
+            from = {
+                add_resource = {
+                    energy = -500
+                    minerals = -500
+                }
+            }
+        }
+    }
+}
+herta_station_district_4_num_count_sub_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        custom_tooltip = {
+            fail_text = need_more_zero
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_station_district_4_num
+                        value > 0
+                    }
+                }
+            }
+        }
+    }
+    effect = {
+        hidden_effect = {
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_station_district_4_num
+                    value = -1
+                }
+                if = {
+                    limit = {
+                        check_variable = {
+                            which = herta_station_district_4_workforce
+                            value > value:herta_station_district_4_pop_max
+                        }
+                    }
+                    set_variable = {
+                        which = herta_station_district_4_workforce
+                        value = value:herta_station_district_4_pop_max
+                    }
+                }
+            }
+        }
+    }
+}
+herta_station_district_4_num_count_add_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        custom_tooltip = {
+            fail_text = need_less_limit
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_station_district_4_num
+                        value < event_target:herta_fleet.herta_station_district_4_num_max
+                    }
+                    check_variable_arithmetic = {
+                        which = value:herta_station_district_unuse_value
+                        value > 0
+                    }
+                }
+            }
+        }
+    }
+    effect = {
+        hidden_effect = {
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_station_district_4_num
+                    value = 1
+                }
+            }
+        }
+    }
+}
+herta_station_district_4_num_pop_count_sub_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        custom_tooltip = {
+            fail_text = need_pop_more_zero
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_station_district_4_workforce
+                        value > 0
+                    }
+                }
+            }
+        }
+    }
+    effect = {
+        hidden_effect = {
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_station_district_4_workforce
+                    value = -100
+                }
+            }
+        }
+    }
+}
+herta_station_district_4_num_pop_count_add_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        custom_tooltip = {
+            fail_text = need_pop_less_limit
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable_arithmetic = {
+                        which = herta_station_district_4_workforce
+                        value <value:herta_station_district_4_pop_max
+                    }
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = need_pop_more_unuse
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable_arithmetic = {
+                        which = value:herta_station_pop_unuse_value
+                        value > 0
+                    }
+                }
+            }
+        }
+    }
+    effect = {
+        hidden_effect = {
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_station_district_4_workforce
+                    value = 100
+                }
+            }
+        }
+    }
+}
+hsr_district_4_level_1_effect = {
+    allow = {
+
+    }
+    potential = {
+        herta_fleet_level_show = {
+            VALUE = herta_station_district_4_level
+            LEVEL = 1
+        }
+    }
+    effect = {
+        #custom_tooltip = hsr_evt_shop_effect_txt
+    }
+}
+hsr_district_4_level_2_effect = {
+    allow = {
+
+    }
+    potential = {
+        herta_fleet_level_show = {
+            VALUE = herta_station_district_4_level
+            LEVEL = 2
+        }
+    }
+    effect = {
+        #custom_tooltip = hsr_evt_shop_effect_txt
+    }
+}
+hsr_district_4_level_3_effect = {
+    allow = {
+
+    }
+    potential = {
+        herta_fleet_level_show = {
+            VALUE = herta_station_district_4_level
+            LEVEL = 3
+        }
+    }
+    effect = {
+        #custom_tooltip = hsr_evt_shop_effect_txt
+    }
+}
+hsr_district_4_level_4_effect = {
+    allow = {
+
+    }
+    potential = {
+        herta_fleet_level_show = {
+            VALUE = herta_station_district_4_level
+            LEVEL = 4
+        }
+    }
+    effect = {
+        #custom_tooltip = hsr_evt_shop_effect_txt
+    }
+}
+hsr_district_4_level_5_effect = {
+    allow = {
+
+    }
+    potential = {
+        herta_fleet_level_show = {
+            VALUE = herta_station_district_4_level
+            LEVEL = 5
+        }
+    }
+    effect = {
+        #custom_tooltip = hsr_evt_shop_effect_txt
+    }
+}
+#武器1
+herta_fleet_station_weapon_1_show_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = herta_fleet_station_weapon_1_show_effect_text
+    }
+}
+herta_fleet_station_weapon_1_level_up_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        custom_tooltip = {
+            fail_text = need_less_limit_1
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_fleet_station_weapon_1_level
+                        value < 5
+                    }
+                }
+            }
+        }
+        from = {
+            resource_stockpile_compare = { resource = energy value >= 500 }
+            resource_stockpile_compare = { resource = alloys value >= 1000 }
+        }
+    }
+    effect = {
+        hidden_effect = {
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_fleet_station_weapon_1_level
+                    value = 1
+                }
+            }
+            from = {
+                add_resource = {
+                    energy = -500
+                    alloys = -1000
+                }
+            }
+        }
+    }
+}
+herta_fleet_station_weapon_1_level_1_effect = {
+    allow = {
+
+    }
+    potential = {
+        herta_fleet_level_show = {
+            VALUE = herta_fleet_station_weapon_1_level
+            LEVEL = 1
+        }
+    }
+    effect = {
+        #custom_tooltip = hsr_evt_shop_effect_txt
+    }
+}
+herta_fleet_station_weapon_1_level_2_effect = {
+    allow = {
+
+    }
+    potential = {
+        herta_fleet_level_show = {
+            VALUE = herta_fleet_station_weapon_1_level
+            LEVEL = 2
+        }
+    }
+    effect = {
+        #custom_tooltip = hsr_evt_shop_effect_txt
+    }
+}
+herta_fleet_station_weapon_1_level_3_effect = {
+    allow = {
+
+    }
+    potential = {
+        herta_fleet_level_show = {
+            VALUE = herta_fleet_station_weapon_1_level
+            LEVEL = 3
+        }
+    }
+    effect = {
+        #custom_tooltip = hsr_evt_shop_effect_txt
+    }
+}
+herta_fleet_station_weapon_1_level_4_effect = {
+    allow = {
+
+    }
+    potential = {
+        herta_fleet_level_show = {
+            VALUE = herta_fleet_station_weapon_1_level
+            LEVEL = 4
+        }
+    }
+    effect = {
+        #custom_tooltip = hsr_evt_shop_effect_txt
+    }
+}
+herta_fleet_station_weapon_1_level_5_effect = {
+    allow = {
+
+    }
+    potential = {
+        herta_fleet_level_show = {
+            VALUE = herta_fleet_station_weapon_1_level
+            LEVEL = 5
+        }
+    }
+    effect = {
+        #custom_tooltip = hsr_evt_shop_effect_txt
+    }
+}
+#武器2
+herta_fleet_station_weapon_2_show_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = herta_fleet_station_weapon_2_show_effect_text
+    }
+}
+herta_fleet_station_weapon_2_level_up_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        custom_tooltip = {
+            fail_text = need_less_limit_1
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_fleet_station_weapon_2_level
+                        value < 5
+                    }
+                }
+            }
+        }
+        from = {
+            resource_stockpile_compare = { resource = energy value >= 500 }
+            resource_stockpile_compare = { resource = alloys value >= 1000 }
+        }
+    }
+    effect = {
+        hidden_effect = {
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_fleet_station_weapon_2_level
+                    value = 1
+                }
+            }
+            from = {
+                add_resource = {
+                    energy = -500
+                    alloys = -1000
+                }
+            }
+        }
+    }
+}
+herta_fleet_station_weapon_2_level_1_effect = {
+    allow = {
+
+    }
+    potential = {
+        herta_fleet_level_show = {
+            VALUE = herta_fleet_station_weapon_2_level
+            LEVEL = 1
+        }
+    }
+    effect = {
+        #custom_tooltip = hsr_evt_shop_effect_txt
+    }
+}
+herta_fleet_station_weapon_2_level_2_effect = {
+    allow = {
+
+    }
+    potential = {
+        herta_fleet_level_show = {
+            VALUE = herta_fleet_station_weapon_2_level
+            LEVEL = 2
+        }
+    }
+    effect = {
+        #custom_tooltip = hsr_evt_shop_effect_txt
+    }
+}
+herta_fleet_station_weapon_2_level_3_effect = {
+    allow = {
+
+    }
+    potential = {
+        herta_fleet_level_show = {
+            VALUE = herta_fleet_station_weapon_2_level
+            LEVEL = 3
+        }
+    }
+    effect = {
+        #custom_tooltip = hsr_evt_shop_effect_txt
+    }
+}
+herta_fleet_station_weapon_2_level_4_effect = {
+    allow = {
+
+    }
+    potential = {
+        herta_fleet_level_show = {
+            VALUE = herta_fleet_station_weapon_2_level
+            LEVEL = 4
+        }
+    }
+    effect = {
+        #custom_tooltip = hsr_evt_shop_effect_txt
+    }
+}
+herta_fleet_station_weapon_2_level_5_effect = {
+    allow = {
+
+    }
+    potential = {
+        herta_fleet_level_show = {
+            VALUE = herta_fleet_station_weapon_2_level
+            LEVEL = 5
+        }
+    }
+    effect = {
+        #custom_tooltip = hsr_evt_shop_effect_txt
+    }
+}
+#武器3
+herta_fleet_station_weapon_3_show_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = herta_fleet_station_weapon_3_show_effect_text
+    }
+}
+herta_fleet_station_weapon_3_level_up_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        custom_tooltip = {
+            fail_text = need_less_limit_1
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_fleet_station_weapon_2_level
+                        value < 5
+                    }
+                }
+            }
+        }
+        from = {
+            resource_stockpile_compare = { resource = energy value >= 500 }
+            resource_stockpile_compare = { resource = alloys value >= 1000 }
+        }
+    }
+    effect = {
+        hidden_effect = {
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_fleet_station_weapon_3_level
+                    value = 1
+                }
+            }
+            from = {
+                add_resource = {
+                    energy = -500
+                    alloys = -1000
+                }
+            }
+        }
+    }
+}
+herta_fleet_station_weapon_3_level_1_effect = {
+    allow = {
+
+    }
+    potential = {
+        herta_fleet_level_show = {
+            VALUE = herta_fleet_station_weapon_3_level
+            LEVEL = 1
+        }
+    }
+    effect = {
+        #custom_tooltip = hsr_evt_shop_effect_txt
+    }
+}
+herta_fleet_station_weapon_3_level_2_effect = {
+    allow = {
+
+    }
+    potential = {
+        herta_fleet_level_show = {
+            VALUE = herta_fleet_station_weapon_3_level
+            LEVEL = 2
+        }
+    }
+    effect = {
+        #custom_tooltip = hsr_evt_shop_effect_txt
+    }
+}
+herta_fleet_station_weapon_3_level_3_effect = {
+    allow = {
+
+    }
+    potential = {
+        herta_fleet_level_show = {
+            VALUE = herta_fleet_station_weapon_3_level
+            LEVEL = 3
+        }
+    }
+    effect = {
+        #custom_tooltip = hsr_evt_shop_effect_txt
+    }
+}
+herta_fleet_station_weapon_3_level_4_effect = {
+    allow = {
+
+    }
+    potential = {
+        herta_fleet_level_show = {
+            VALUE = herta_fleet_station_weapon_3_level
+            LEVEL = 4
+        }
+    }
+    effect = {
+        #custom_tooltip = hsr_evt_shop_effect_txt
+    }
+}
+herta_fleet_station_weapon_3_level_5_effect = {
+    allow = {
+
+    }
+    potential = {
+        herta_fleet_level_show = {
+            VALUE = herta_fleet_station_weapon_3_level
+            LEVEL = 5
+        }
+    }
+    effect = {
+        #custom_tooltip = hsr_evt_shop_effect_txt
+    }
+}
+herta_fleet_assist_1_show_effect = {
+    allow = {
+        always = yes
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = herta_fleet_assist_1_show_effect_text
+    }
+}
+herta_fleet_assist_1_level_up_effect = {
+    allow = {
+        custom_tooltip = {
+            fail_text = need_less_limit_1
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_fleet_station_assist_1_use_level
+                        value < 5
+                    }
+                }
+            }
+        }
+        from = {
+            resource_stockpile_compare = { resource = energy value >= 500 }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = herta_fleet_assist_1_level_up_effect_text
+        hidden_effect = {
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_fleet_station_assist_1_use_level
+                    value = 1
+                }
+            }
+        }
+        from = {
+            add_resource = {
+                energy = -500
+            }
+        }
+    }
+}
+herta_fleet_assist_1_use_effect = {
+    allow = {
+        custom_tooltip = {
+            fail_text = not_use
+            hidden_trigger = {
+                not = {
+                    has_country_flag = assist_1_use
+                }
+            }
+        }
+        from = {
+            resource_stockpile_compare = { resource = energy value >= 600 }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = herta_fleet_assist_1_show_effect_text
+        hidden_effect = {
+            create_fleet = {
+                name = "NAME_Robot"
+                effect = {
+                    set_owner = root
+                    while = {
+                        count = event_target:herta_fleet.value:herta_assist_1_use_value
+                        create_army_transport = {
+                            ship_name = "army_rank_elite"
+                            #graphical_culture = "root"
+                            army_name = "robotic_army"
+                            army_type = "robotic_army"
+                        }
+                    }
+                    set_location = {
+                        target = event_target:herta_fleet
+                        distance = 0
+                        angle = random
+                    }
+                }
+            }
+            event_target:herta_fleet = {
+                set_timed_country_flag = { flag = assist_1_use days = event_target:herta_fleet.value:herta_assist_1_use_days_value }
+            }
+            from = {
+                add_resource = {
+                    energy = -600
+                }
+            }
+        }
+    }
+}
+herta_fleet_assist_2_show_effect = {
+    allow = {
+        always = yes
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = herta_fleet_assist_2_show_effect_text
+    }
+}
+herta_fleet_assist_2_level_up_effect = {
+    allow = {
+        custom_tooltip = {
+            fail_text = need_less_limit_1
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_fleet_station_assist_2_use_level
+                        value < 5
+                    }
+                }
+            }
+        }
+        from = {
+            resource_stockpile_compare = { resource = energy value >= 500 }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = herta_fleet_assist_2_level_up_effect_text
+        hidden_effect = {
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_fleet_station_assist_2_use_level
+                    value = 1
+                }
+            }
+        }
+        from = {
+            add_resource = {
+                energy = -500
+            }
+        }
+    }
+}
+herta_fleet_assist_2_use_effect = {
+    allow = {
+        custom_tooltip = {
+            fail_text = not_use
+            hidden_trigger = {
+                not = {
+                    has_country_flag = assist_2_use
+                }
+            }
+        }
+        from = {
+            resource_stockpile_compare = { resource = energy value >= 600 }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = herta_fleet_assist_2_show_effect_text
+        hidden_effect = {
+            create_fleet = {
+                effect = {
+                    set_owner = root
+                    create_ship = {
+                        name = random
+                        random_existing_design = constructor
+                    }
+                    set_fleet_stance = evasive
+                    set_location = event_target:herta_fleet
+                }
+            }
+            create_fleet = {
+                effect = {
+                    set_owner = root
+                    create_ship = {
+                        name = random
+                        random_existing_design = science
+                    }
+                    set_fleet_stance = evasive
+                    set_location = event_target:herta_fleet
+                }
+            }
+            event_target:herta_fleet = {
+                set_timed_country_flag = { flag = assist_2_use days = event_target:herta_fleet.value:herta_assist_2_use_days_value }
+            }
+            from = {
+                add_resource = {
+                    energy = -600
+                }
+            }
+        }
+    }
+}
+herta_fleet_assist_3_show_effect = {
+    allow = {
+        always = yes
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = herta_fleet_assist_3_show_effect_text
+    }
+}
+herta_fleet_assist_3_level_up_effect = {
+    allow = {
+        custom_tooltip = {
+            fail_text = need_less_limit_1
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_fleet_station_assist_3_use_level
+                        value < 5
+                    }
+                }
+            }
+        }
+        from = {
+            resource_stockpile_compare = { resource = energy value >= 500 }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = herta_fleet_assist_3_level_up_effect_text
+        hidden_effect = {
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_fleet_station_assist_3_use_level
+                    value = 1
+                }
+            }
+        }
+        from = {
+            add_resource = {
+                energy = -500
+            }
+        }
+    }
+}
+herta_fleet_assist_3_use_effect = {
+    allow = {
+        custom_tooltip = {
+            fail_text = not_use
+            hidden_trigger = {
+                not = {
+                    has_country_flag = assist_3_use
+                }
+            }
+        }
+        from = {
+            resource_stockpile_compare = { resource = energy value >= 600 }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = herta_fleet_assist_3_show_effect_text
+        hidden_effect = {
+            create_fleet = {
+                name = "NAME_huwei"
+                effect = {
+                    set_owner = root
+                    while = {
+                        count = event_target:herta_fleet.value:herta_assist_3_use_value
+                        create_ship = {
+                            name = random
+                            random_existing_design = corvette
+                        }
+                    }
+                    while = {
+                        count = event_target:herta_fleet.herta_fleet_station_leader_assist_4_level
+                        create_ship = {
+                            name = random
+                            design = NAME_Large_Space_Organism_Blue
+                        }
+                    }
+                    set_fleet_stance = aggressive
+                    set_location = {
+                        target = event_target:herta_fleet
+                        distance = 0
+                        angle = random
+                    }
+                }
+            }
+            event_target:herta_fleet = {
+                set_timed_country_flag = { flag = assist_3_use days = event_target:herta_fleet.value:herta_assist_3_use_days_value }
+            }
+            from = {
+                add_resource = {
+                    energy = -600
+                }
+            }
+        }
+    }
+}
+herta_station_produce_text_effect = {
+    allow = {
+        always = yes
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = herta_station_produce_text
+    }
+}
+herta_fleet_leader_use_num_show_effect = {
+    allow = {
+        always = yes
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = herta_fleet_leader_use_num_show_text
+    }
+}
+herta_fleet_leader_1_show_effect = {
+    allow = {
+        always = yes
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = herta_fleet_leader_1_show_text
+    }
+}
+herta_fleet_leader_1_get_effect = {
+    allow = {
+        custom_tooltip = {
+            fail_text = use_leader
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_fleet_station_leader_assist_1_level
+                        value < 1
+                    }
+                }
+            }
+        }
+        from = {
+            resource_stockpile_compare = { resource = energy value >= 1000 }
+            resource_stockpile_compare = { resource = unity value >= 1000 }
+            resource_stockpile_compare = { resource = influence value >= 100 }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        hidden_effect = {
+            set_country_flag = assist_leader_1
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_fleet_station_leader_assist_1_level
+                    value = 1
+                }
+            }
+            from = {
+                add_resource = {
+                    energy = -1000
+                    unity = -1000
+                    influence = -100
+                }
+            }
+        }
+    }
+}
+herta_fleet_leader_1_about_effect = {
+    allow = {
+        custom_tooltip = {
+            fail_text = need_less_limit_1
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_fleet_station_leader_assist_1_level
+                        value < 5
+                    }
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = need_assign
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_fleet_station_leader_assist_1_level
+                        value > 0
+                    }
+                }
+            }
+        }
+        from = {
+            resource_stockpile_compare = { resource = unity value >= 500 }
+            resource_stockpile_compare = { resource = influence value >= 50 }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        hidden_effect = {
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_fleet_station_leader_assist_1_level
+                    value = 1
+                }
+            }
+            from = {
+                add_resource = {
+                    unity = -500
+                    influence = -50
+                }
+            }
+        }
+    }
+}
+herta_fleet_leader_2_show_effect = {
+    allow = {
+        always = yes
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = herta_fleet_leader_2_show_text
+    }
+}
+herta_fleet_leader_2_get_effect = {
+    allow = {
+        custom_tooltip = {
+            fail_text = use_leader
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_fleet_station_leader_assist_2_level
+                        value < 1
+                    }
+                }
+            }
+        }
+        from = {
+            resource_stockpile_compare = { resource = energy value >= 1000 }
+            resource_stockpile_compare = { resource = unity value >= 1000 }
+            resource_stockpile_compare = { resource = influence value >= 100 }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        hidden_effect = {
+            set_country_flag = assist_leader_2
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_fleet_station_leader_assist_2_level
+                    value = 1
+                }
+            }
+            from = {
+                add_resource = {
+                    energy = -1000
+                    unity = -1000
+                    influence = -100
+                }
+            }
+        }
+    }
+}
+herta_fleet_leader_2_about_effect = {
+    allow = {
+        custom_tooltip = {
+            fail_text = need_less_limit_1
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_fleet_station_leader_assist_2_level
+                        value < 5
+                    }
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = need_assign
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_fleet_station_leader_assist_2_level
+                        value > 0
+                    }
+                }
+            }
+        }
+        from = {
+            resource_stockpile_compare = { resource = unity value >= 500 }
+            resource_stockpile_compare = { resource = influence value >= 50 }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        hidden_effect = {
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_fleet_station_leader_assist_2_level
+                    value = 1
+                }
+            }
+            from = {
+                add_resource = {
+                    unity = -500
+                    influence = -50
+                }
+            }
+        }
+    }
+}
+herta_fleet_leader_3_show_effect = {
+    allow = {
+        always = yes
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = herta_fleet_leader_3_show_text
+    }
+}
+herta_fleet_leader_3_get_effect = {
+    allow = {
+        custom_tooltip = {
+            fail_text = use_leader
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_fleet_station_leader_assist_3_level
+                        value < 1
+                    }
+                }
+            }
+        }
+        from = {
+            resource_stockpile_compare = { resource = energy value >= 1000 }
+            resource_stockpile_compare = { resource = unity value >= 1000 }
+            resource_stockpile_compare = { resource = influence value >= 100 }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        hidden_effect = {
+            set_country_flag = assist_leader_3
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_fleet_station_leader_assist_3_level
+                    value = 1
+                }
+            }
+            from = {
+                add_resource = {
+                    energy = -1000
+                    unity = -1000
+                    influence = -100
+                }
+            }
+        }
+    }
+}
+herta_fleet_leader_3_about_effect = {
+    allow = {
+        custom_tooltip = {
+            fail_text = need_less_limit_1
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_fleet_station_leader_assist_3_level
+                        value < 5
+                    }
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = need_assign
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_fleet_station_leader_assist_3_level
+                        value > 0
+                    }
+                }
+            }
+        }
+        from = {
+            resource_stockpile_compare = { resource = unity value >= 500 }
+            resource_stockpile_compare = { resource = influence value >= 50 }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        hidden_effect = {
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_fleet_station_leader_assist_3_level
+                    value = 1
+                }
+            }
+            from = {
+                add_resource = {
+                    unity = -500
+                    influence = -50
+                }
+            }
+        }
+    }
+}
+herta_fleet_leader_4_show_effect = {
+    allow = {
+        always = yes
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = herta_fleet_leader_4_show_text
+    }
+}
+herta_fleet_leader_4_get_effect = {
+    allow = {
+        custom_tooltip = {
+            fail_text = use_leader
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_fleet_station_leader_assist_4_level
+                        value < 1
+                    }
+                }
+            }
+        }
+        from = {
+            resource_stockpile_compare = { resource = energy value >= 1000 }
+            resource_stockpile_compare = { resource = unity value >= 1000 }
+            resource_stockpile_compare = { resource = influence value >= 100 }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        hidden_effect = {
+            set_country_flag = assist_leader_4
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_fleet_station_leader_assist_4_level
+                    value = 1
+                }
+            }
+            from = {
+                add_resource = {
+                    energy = -1000
+                    unity = -1000
+                    influence = -100
+                }
+            }
+        }
+    }
+}
+herta_fleet_leader_4_about_effect = {
+    allow = {
+        custom_tooltip = {
+            fail_text = need_less_limit_1
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_fleet_station_leader_assist_4_level
+                        value < 5
+                    }
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = need_assign
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_fleet_station_leader_assist_4_level
+                        value > 0
+                    }
+                }
+            }
+        }
+        from = {
+            resource_stockpile_compare = { resource = unity value >= 500 }
+            resource_stockpile_compare = { resource = influence value >= 50 }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        hidden_effect = {
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_fleet_station_leader_assist_4_level
+                    value = 1
+                }
+            }
+            from = {
+                add_resource = {
+                    unity = -500
+                    influence = -50
+                }
+            }
+        }
+    }
+}
+herta_fleet_leader_5_show_effect = {
+    allow = {
+        always = yes
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = herta_fleet_leader_5_show_text
+    }
+}
+herta_fleet_leader_5_get_effect = {
+    allow = {
+        custom_tooltip = {
+            fail_text = use_leader
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_fleet_station_leader_assist_5_level
+                        value < 1
+                    }
+                }
+            }
+        }
+        from = {
+            resource_stockpile_compare = { resource = energy value >= 1000 }
+            resource_stockpile_compare = { resource = unity value >= 1000 }
+            resource_stockpile_compare = { resource = influence value >= 100 }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        hidden_effect = {
+            set_country_flag = assist_leader_5
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_fleet_station_leader_assist_5_level
+                    value = 1
+                }
+            }
+            from = {
+                add_resource = {
+                    energy = -1000
+                    unity = -1000
+                    influence = -100
+                }
+            }
+        }
+    }
+}
+herta_fleet_leader_5_about_effect = {
+    allow = {
+        custom_tooltip = {
+            fail_text = need_less_limit_1
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_fleet_station_leader_assist_5_level
+                        value < 5
+                    }
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = need_assign
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_fleet_station_leader_assist_5_level
+                        value > 0
+                    }
+                }
+            }
+        }
+        from = {
+            resource_stockpile_compare = { resource = unity value >= 500 }
+            resource_stockpile_compare = { resource = influence value >= 50 }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        hidden_effect = {
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_fleet_station_leader_assist_5_level
+                    value = 1
+                }
+            }
+            from = {
+                add_resource = {
+                    unity = -500
+                    influence = -50
+                }
+            }
+        }
+    }
+}
+herta_fleet_leader_6_show_effect = {
+    allow = {
+        always = yes
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = herta_fleet_leader_6_show_text
+    }
+}
+herta_fleet_leader_6_get_effect = {
+    allow = {
+        custom_tooltip = {
+            fail_text = use_leader
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_fleet_station_leader_assist_6_level
+                        value < 1
+                    }
+                }
+            }
+        }
+        from = {
+            resource_stockpile_compare = { resource = energy value >= 1000 }
+            resource_stockpile_compare = { resource = unity value >= 1000 }
+            resource_stockpile_compare = { resource = influence value >= 100 }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        hidden_effect = {
+            set_country_flag = assist_leader_6
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_fleet_station_leader_assist_6_level
+                    value = 1
+                }
+            }
+            from = {
+                add_resource = {
+                    energy = -1000
+                    unity = -1000
+                    influence = -100
+                }
+            }
+        }
+    }
+}
+herta_fleet_leader_6_about_effect = {
+    allow = {
+        custom_tooltip = {
+            fail_text = need_less_limit_1
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_fleet_station_leader_assist_6_level
+                        value < 5
+                    }
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = need_assign
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_fleet_station_leader_assist_6_level
+                        value > 0
+                    }
+                }
+            }
+        }
+        from = {
+            resource_stockpile_compare = { resource = unity value >= 500 }
+            resource_stockpile_compare = { resource = influence value >= 50 }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        hidden_effect = {
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_fleet_station_leader_assist_6_level
+                    value = 1
+                }
+            }
+            from = {
+                add_resource = {
+                    unity = -500
+                    influence = -50
+                }
+            }
+        }
+    }
+}
+herta_fleet_leader_6_show_effect = {
+    allow = {
+        always = yes
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = herta_fleet_leader_6_show_text
+    }
+}
+herta_fleet_leader_7_show_effect = {
+    allow = {
+        always = yes
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = herta_fleet_leader_7_show_text
+    }
+}
+herta_fleet_leader_7_get_effect = {
+    allow = {
+        custom_tooltip = {
+            fail_text = use_leader
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_fleet_station_leader_assist_7_level
+                        value < 1
+                    }
+                }
+            }
+        }
+        from = {
+            resource_stockpile_compare = { resource = energy value >= 1000 }
+            resource_stockpile_compare = { resource = unity value >= 1000 }
+            resource_stockpile_compare = { resource = influence value >= 100 }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        hidden_effect = {
+            set_country_flag = assist_leader_7
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_fleet_station_leader_assist_7_level
+                    value = 1
+                }
+            }
+            from = {
+                add_resource = {
+                    energy = -1000
+                    unity = -1000
+                    influence = -100
+                }
+            }
+        }
+    }
+}
+herta_fleet_leader_7_about_effect = {
+    allow = {
+        custom_tooltip = {
+            fail_text = need_less_limit_1
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_fleet_station_leader_assist_7_level
+                        value < 5
+                    }
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = need_assign
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_fleet_station_leader_assist_7_level
+                        value > 0
+                    }
+                }
+            }
+        }
+        from = {
+            resource_stockpile_compare = { resource = unity value >= 500 }
+            resource_stockpile_compare = { resource = influence value >= 50 }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        hidden_effect = {
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_fleet_station_leader_assist_7_level
+                    value = 1
+                }
+            }
+            from = {
+                add_resource = {
+                    unity = -500
+                    influence = -50
+                }
+            }
+        }
+    }
+}
+herta_fleet_leader_8_show_effect = {
+    allow = {
+        always = yes
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = herta_fleet_leader_8_show_text
+    }
+}
+herta_fleet_leader_8_get_effect = {
+    allow = {
+        custom_tooltip = {
+            fail_text = use_leader
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_fleet_station_leader_assist_8_level
+                        value < 1
+                    }
+                }
+            }
+        }
+        from = {
+            resource_stockpile_compare = { resource = energy value >= 1000 }
+            resource_stockpile_compare = { resource = unity value >= 1000 }
+            resource_stockpile_compare = { resource = influence value >= 100 }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        hidden_effect = {
+            set_country_flag = assist_leader_8
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_fleet_station_leader_assist_8_level
+                    value = 1
+                }
+            }
+            from = {
+                add_resource = {
+                    energy = -1000
+                    unity = -1000
+                    influence = -100
+                }
+            }
+        }
+    }
+}
+herta_fleet_leader_8_about_effect = {
+    allow = {
+        custom_tooltip = {
+            fail_text = need_less_limit_1
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_fleet_station_leader_assist_8_level
+                        value < 5
+                    }
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = need_assign
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_fleet_station_leader_assist_8_level
+                        value > 0
+                    }
+                }
+            }
+        }
+        from = {
+            resource_stockpile_compare = { resource = unity value >= 500 }
+            resource_stockpile_compare = { resource = influence value >= 50 }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        hidden_effect = {
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_fleet_station_leader_assist_8_level
+                    value = 1
+                }
+            }
+            from = {
+                add_resource = {
+                    unity = -500
+                    influence = -50
+                }
+            }
+        }
+    }
+}
+herta_fleet_set_effect = {
+    allow = {
+
+        custom_tooltip = {
+            fail_text = herta_fleet_set_tt
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable = {
+                        which = herta_station_district_1_num
+                        value = 0
+                    }
+                    check_variable = {
+                        which = herta_station_district_2_num
+                        value = 0
+                    }
+                    check_variable = {
+                        which = herta_station_district_3_num
+                        value = 0
+                    }
+                    check_variable = {
+                        which = herta_station_district_4_num
+                        value = 0
+                    }
+                }
+            }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = herta_fleet_set_text
+        hidden_effect = {
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_station_district_1_num
+                    value = 1
+                }
+                change_variable = {
+                    which = herta_station_district_2_num
+                    value = 1
+                }
+                change_variable = {
+                    which = herta_station_district_3_num
+                    value = 1
+                }
+                change_variable = {
+                    which = herta_station_district_4_num
+                    value = 1
+                }
+            }
+        }
+    }
+}
+herta_fleet_about_effect = {
+    allow = {
+        always = yes
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = herta_fleet_about_text
+    }
+}
+herta_fleet_pop_effect = {
+    allow = {
+        custom_tooltip = {
+            fail_text = pop_is_adequate
+            hidden_trigger = {
+                event_target:herta_fleet = {
+                    check_variable_arithmetic = {
+                        which = event_target:herta_fleet.herta_station_district_workforce
+                        value <  event_target:herta_fleet.value:herta_station_pop_num_value_max
+                    }
+                }
+            }
+        }
+        from = {
+            resource_stockpile_compare = { resource = unity value >= 1000 }
+            resource_stockpile_compare = { resource = energy value >= 2000 }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = herta_fleet_pop_text
+        hidden_effect = {
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_station_district_workforce
+                    value = 500
+                }
+            }
+            if = {
+                limit = {
+                    event_target:herta_fleet = {
+                        check_variable_arithmetic = {
+                            which = event_target:herta_fleet.herta_station_district_workforce
+                            value >  event_target:herta_fleet.value:herta_station_pop_num_value_max
+                        }
+                    }
+                }
+                event_target:herta_fleet = {
+                    set_variable = {
+                        which = herta_station_district_workforce
+                        value = event_target:herta_fleet.value:herta_station_pop_num_value_max
+                    }
+                }
+            }
+            add_resource = {
+                energy = 2000
+                unity = 1000
+            }
+        }
+    }
+}
+herta_fleet_auto_pop_up_effect = {
+    allow = {
+        custom_tooltip = {
+            fail_text = auto_pop_up_set_open
+            hidden_trigger = {
+                from = {
+                    NOT = {
+                        has_country_flag = auto_pop_up_set
+                    }
+                }
+            }
+        }
+    }
+    potential = {
+        custom_tooltip = {
+            fail_text = auto_pop_up_set_open
+            hidden_trigger = {
+                from = {
+                    NOT = {
+                        has_country_flag = auto_pop_up_set
+                    }
+                }
+            }
+        }
+    }
+    effect = {
+        custom_tooltip = auto_pop_up_set_open_text
+        hidden_effect = {
+            from = {
+                set_country_flag = auto_pop_up_set
+            }
+        }
+    }
+}
+herta_fleet_auto_pop_up_close_effect= {
+    allow = {
+        custom_tooltip = {
+            fail_text = auto_pop_up_set_close
+            hidden_trigger = {
+                from = {
+                    has_country_flag = auto_pop_up_set
+                }
+            }
+        }
+    }
+    potential = {
+        custom_tooltip = {
+            fail_text = auto_pop_up_set_close
+            hidden_trigger = {
+                from = {
+                    has_country_flag = auto_pop_up_set
+                }
+            }
+        }
+    }
+    effect = {
+        custom_tooltip = auto_pop_up_set_close_text
+        hidden_effect = {
+            from = {
+                remove_country_flag = auto_pop_up_set
+            }
+        }
+    }
+}

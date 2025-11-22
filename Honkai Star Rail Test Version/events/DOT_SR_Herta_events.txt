@@ -224,11 +224,52 @@ country_event = {#初试化设置
 		give_technology = { tech = tech_habitat_2 message = no }
 		give_technology = { tech = tech_habitat_3 message = no }
 		give_technology = { tech = tech_mega_engineering message = no }
+        give_technology = { tech = tech_honkai_star_rail_aux_t1 message = no }
+        give_technology = { tech = tech_honkai_star_rail_weapon_t1 message = no }
+        give_technology = { tech = tech_honkai_star_rail_hull_t1 message = no }
+        give_technology = { tech = tech_honkai_star_rail_power_t1 message = no }
 		add_research_option = tech_galactic_archivism
 		set_policy = {
 			policy = artificial_intelligence_policy
 			option = ai_full_rights
 		}
+        #模拟宇宙项目
+        set_variable = {
+            which = station_herta_help
+            value = 40
+        }
+        set_variable = {
+            which = station_ruanmei_help
+            value = 30
+        }
+        set_variable = {
+            which = station_luosi_help
+            value = 30
+        }
+        set_variable = {
+            which = station_sidifen_help
+            value = 10
+        }
+        add_modifier = {
+            modifier = herta_station_fleet_country_buff_1
+            days = -1
+            multiplier = station_herta_help
+        }
+        add_modifier = {
+            modifier = herta_station_fleet_country_buff_2
+            days = -1
+            multiplier = station_ruanmei_help
+        }
+        add_modifier = {
+            modifier = herta_station_fleet_country_buff_3
+            days = -1
+            multiplier = station_luosi_help
+        }
+        add_modifier = {
+            modifier = herta_station_fleet_country_buff_4
+            days = -1
+            multiplier = station_sidifen_help
+        }
 		create_species = {
 			class = "ROBOT"
 			portrait = "heita"
@@ -284,257 +325,249 @@ country_event = {#初试化设置
 				building = building_foundry_1
 			}
 			while = {
-				count = 22
+				count = 10
 				create_pop_group = {
 					size = 100
 					species = owner_main_species
 				}
 				create_pop_group = {
-					size = 1
+					size = 5
 					species = event_target:heita_robot_species
 				}
 			}
 		}
-		solar_system = {
-			spawn_planet = {
-				class = "pc_herta_station"
-				location = event_target:herta_zhanlanxing
-				orbit_location = yes
-				orbit_angle_offset = 135
-				orbit_distance_offset = 20
-				size = 12
-				has_ring = no
-				init_effect = {
-					set_owner = root
-					set_name = {
-						key = pc_herta_station
-						variable_string = "\\[FROM.from.solar_system.GetName]"
-					}
-					set_planet_entity = {
-						entity = skyislend_entity
-					}
-					set_surveyed = {
-						surveyed = yes
-						surveyor = FROM
-					}
-					set_all_comms_surveyed = yes
-					clear_blockers = yes
-					set_planet_flag = megastructure
-					set_planet_flag = herta_habitat
-					set_planet_flag = habitat
-					set_planet_flag = colony_event #防止出现原版殖民地的各种奇怪事件
-					remove_district = district_city
-					add_district = district_herta_1
-					add_district = district_herta_1
-					add_district = district_herta_2
-					add_district = district_herta_2
-					add_district = district_herta_3
-					add_district = district_herta_3
-					add_district = district_herta_4
-					add_district = district_herta_4
-					remove_building = building_hydroponics_farm
-					add_building = herta_holomuseum_1
-					add_building = building_holo_theatres
-					add_building = building_robot_assembly_plant
-					add_zone = {
-						district = district_herta_1
-						zone = zone_unity
-					}
-					add_zone = {
-						district = district_herta_1
-						zone = zone_pc_herta_research
-					}
-					while = {
-						count = 5
-						add_deposit = d_herta_debuff
-					}
-					while = {
-						count = 14
-						create_pop_group = {
-							size = 100
-							species = owner_main_species
-						}
-						create_pop_group = {
-							size = 2
-							species = event_target:heita_robot_species
-						}
-					}
-				}
-			}
-		}
-		country_event = { id = DOT_SR_Herta.10 days = 180 }
+        begin_event_chain = {
+            event_chain = "herta_start_situation_chain"
+            target = ROOT
+        }
+        capital_scope = {
+            enable_special_project = {
+                name = "herta_start_situation_1"
+                location = this
+                owner = root
+            }
+            enable_special_project = {
+                name = "herta_start_situation_2"
+                location = this
+                owner = root
+            }
+            enable_special_project = {
+                name = "herta_start_situation_3"
+                location = this
+                owner = root
+            }
+            enable_special_project = {
+                name = "herta_start_situation_4"
+                location = this
+                owner = root
+            }
+            create_fleet = {
+                name = "NAME_HERTA_FLEET"
+                settings = {
+                    #can_upgrade = no
+                    #can_change_composition = no
+                    uses_naval_capacity = no
+                    can_disband = no
+                    spawn_debris = no
+                    is_ultra_boss = yes
+                }
+                effect = {
+                    set_owner = root
+                    create_ship = {
+                        name = "NAME_herta"
+                        design = "herta_fleet"
+                        prefix = no
+                        upgradable = no
+                        graphical_culture = owner
+                        effect = {
+                            set_ship_flag = immune_to_confuse
+                            set_ship_flag = immune_to_terrify
+                            set_ship_flag = herta_fleet
+                        }
+                    }
+                    set_fleet_flag = immune_to_confuse
+                    set_fleet_flag = immune_to_terrify
+                    set_fleet_flag = herta_fleet
+                    save_global_event_target_as = herta_fleet
+                    herta_fleet_station_set_effect = yes
+                    set_location = prev
+                    set_fleet_stance = passive
+                    set_aggro_range_measure_from = return_point
+                    set_aggro_range = 0
+                    queue_actions = {
+                        wait = {
+                            duration = 320
+                            random = 80
+                        }
+                    }
+                    add_modifier = {
+                        modifier = herta_station_fleet_debuff_1
+                    }
+                }
+            }
+        }
+        start_situation = { type = situation_herta_station_fleet }
 	}
 }
-#通用黑塔主线，双分支，加强防御/增加外太空作战能力
-country_event = {
-	id = DOT_SR_Herta.10
-	title = DOT_SR_Herta.10.tittle
-	desc = DOT_SR_Herta.10.desc
-	picture = GFX_evt_hsr_herta_10
-	is_triggered_only = yes
-	trigger = {
-		has_origin = origin_Herta_Space_Station
-	}
-	option = {
-		name = DOT_SR_Herta.10.a
-		hidden_effect = { country_event = { id = DOT_SR_Herta.11 days = 90 } }
-	}
+#通用黑塔主线,局势修复空间站
+situation_event = {
+    id = DOT_SR_Herta.10
+    title = DOT_SR_Herta.10.tittle
+    desc = DOT_SR_Herta.10.desc
+    picture = GFX_evt_deep_space_citadel
+    is_triggered_only = yes
+    option = {
+        name = DOT_SR_Herta.10.a
+        custom_tooltip = DOT_SR_Herta.10.a.desc
+        owner = {
+            add_monthly_resource_mult = {
+                resource = engineering_research
+                value = @tier5unityreward
+                min = @tier5unitymin
+                max = @tier5unitymax
+            }
+            hidden_effect = {
+                event_target:herta_fleet = {
+                    remove_modifier = herta_station_fleet_debuff_1
+                }
+            }
+        }
+    }
 }
-country_event = {
-	id = DOT_SR_Herta.11
-	title = DOT_SR_Herta.11.tittle
-	desc = DOT_SR_Herta.11.desc
-	picture = GFX_evt_cosmic_storms_broadcast_hacking
-	is_triggered_only = yes
-	trigger = {
-		has_origin = origin_Herta_Space_Station
-	}
-	option = {
-		name = DOT_SR_Herta.11.a
-		custom_tooltip = DOT_SR_Herta.11.a.desc
-		hidden_effect = {
-			set_country_flag = remove_herta_debuff
-			country_event = { id = DOT_SR_Herta.13 days = 90 }
-		}
-		ai_chance = {
-			weight = 5
-		}
-	}
-	option = {
-		name = DOT_SR_Herta.11.b
-		custom_tooltip = DOT_SR_Herta.11.b.desc
-		hidden_effect = {
-			set_country_flag = remove_herta_debuff_b
-			country_event = { id = DOT_SR_Herta.13 days = 90 }
-		}
-		ai_chance = {
-			weight = 5
-		}
-	}
+situation_event = {
+    id = DOT_SR_Herta.11
+    title = DOT_SR_Herta.11.tittle
+    desc = DOT_SR_Herta.11.desc
+    picture = GFX_evt_deep_space_citadel
+    is_triggered_only = yes
+    option = {
+        name = DOT_SR_Herta.11.a
+        owner = {
+            add_monthly_resource_mult = {
+                resource = energy
+                value = @tier5unityreward
+                min = @tier5unitymin
+                max = @tier5unitymax
+            }
+        }
+    }
+    option = {
+        name = DOT_SR_Herta.11.b
+        custom_tooltip = DOT_SR_Herta.11.b.desc
+        owner = {
+            add_monthly_resource_mult = {
+                resource = energy
+                value = @tier3unityreward
+                min = @tier3unitymin
+                max = @tier3unitymax
+            }
+            hidden_effect = {
+                event_target:herta_fleet = {
+                    add_modifier = {
+                        modifier = herta_station_fleet_buff_1
+                    }
+                }
+            }
+        }
+    }
 }
-country_event = {
-	id = DOT_SR_Herta.12
-	title = DOT_SR_Herta.12.tittle
-	desc = {
-		trigger = {
-			has_country_flag = remove_herta_debuff
-		}
-		text = DOT_SR_Herta.12.desc.a
-
-	}
-	desc = {
-		trigger = {
-			has_country_flag = remove_herta_debuff_b
-		}
-		text = DOT_SR_Herta.12.desc.b
-	}
-	picture = GFX_evt_tradestation_interior
-	is_triggered_only = yes
-	trigger = {
-		has_origin = origin_Herta_Space_Station
-	}
-	option = {
-		name = GOOD
-		add_monthly_resource_mult = {
-			resource = unity
-			value = @tier3unityreward
-			min = @tier3unitymin
-			max = @tier3unitymax
-		}
-	}
+situation_event = {
+    id = DOT_SR_Herta.11
+    title = DOT_SR_Herta.11.tittle
+    desc = DOT_SR_Herta.11.desc
+    picture = GFX_evt_deep_space_citadel
+    is_triggered_only = yes
+    option = {
+        name = DOT_SR_Herta.11.a
+        owner = {
+            add_monthly_resource_mult = {
+                resource = energy
+                value = @tier5unityreward
+                min = @tier5unitymin
+                max = @tier5unitymax
+            }
+        }
+    }
+    option = {
+        name = DOT_SR_Herta.11.b
+        custom_tooltip = DOT_SR_Herta.11.b.desc
+        owner = {
+            add_monthly_resource_mult = {
+                resource = energy
+                value = @tier3unityreward
+                min = @tier3unitymin
+                max = @tier3unitymax
+            }
+            hidden_effect = {
+                event_target:herta_fleet = {
+                    add_modifier = {
+                        modifier = herta_station_fleet_buff_1
+                    }
+                }
+            }
+        }
+    }
 }
-country_event = {
-	id = DOT_SR_Herta.13
-	title = DOT_SR_Herta.13.tittle
-	desc = DOT_SR_Herta.13.desc
-	picture = GFX_evt_voting
-	is_triggered_only = yes
-	trigger = {
-		has_origin = origin_Herta_Space_Station
-	}
-	option = {
-		name = DOT_SR_Herta.13.a
-		allow = { resource_stockpile_compare = { resource = energy value >= 1500 } }
-		add_resource = { energy = -1500 }
-		add_research_option = tech_deep_space_citadel
-		random_owned_planet = {
-			while = {
-				count = 5
-				create_army = {
-					name = "defense_army"
-					owner = this.owner
-					type = robotic_army
-				}
-			}
-		}
-		hidden_effect = {
-			country_event = { id = DOT_SR_Herta.14 days = 360 }
-		}
-		ai_chance = {
-			weight = 5
-		}
-	}
-	option = {
-		name = DOT_SR_Herta.13.b
-		allow = { resource_stockpile_compare = { resource = energy value >= 1500 } }
-		add_resource = { energy = -1500 }
-		add_research_option = tech_cruisers
-		capital_scope = {
-			create_fleet = {
-				name = "NAME_Herta_Space_Station"
-				effect = {
-					set_owner = root
-					while = {
-						count = 20
-						create_ship = {
-							name = "NAME_Payback_Digsite_Drone"
-							design = "NAME_Payback_Digsite_Drone"
-							graphical_culture = "DOT_SR_humanoid_01"
-						}
-					}
-					set_location = prev
-					set_fleet_stance = aggressive
-					set_aggro_range_measure_from = return_point
-					set_aggro_range = 0
-					queue_actions = {
-						wait = {
-							duration = 320
-							random = 80
-						}
-					}
-				}
-			}
-		}
-		hidden_effect = {
-			country_event = { id = DOT_SR_Herta.14 days = 360 }
-		}
-		ai_chance = {
-			weight = 5
-		}
-	}
-	option = {
-		name = DOT_SR_Herta.13.c
-		hidden_effect = {
-			country_event = { id = DOT_SR_Herta.14 days = 360 }
-		}
-	}
+situation_event = {
+    id = DOT_SR_Herta.12
+    title = DOT_SR_Herta.12.tittle
+    desc = DOT_SR_Herta.12.desc
+    picture = GFX_evt_partition
+    is_triggered_only = yes
+    option = {
+        name = DOT_SR_Herta.12.a
+        owner = {
+            hidden_effect = {
+                event_target:alan_leader = {
+                    add_experience = 1000
+                }
+                event_target:aisida_leader = {
+                    add_experience = 1000
+                }
+            }
+        }
+    }
 }
-country_event = {
-	id = DOT_SR_Herta.14
-	title = DOT_SR_Herta.14.tittle
-	desc = DOT_SR_Herta.14.desc
-	picture = GFX_evt_hsr_herta_14
-	is_triggered_only = yes
-	trigger = {
-		has_origin = origin_Herta_Space_Station
-	}
-	option = {
-		name = DOT_SR_Herta.14.a
-		custom_tooltip = DOT_SR_Herta.14.a.desc
-		hidden_effect = {
-			set_country_flag = herta_up
-		}
-	}
+situation_event = {
+    id = DOT_SR_Herta.13
+    title = DOT_SR_Herta.13.tittle
+    desc = DOT_SR_Herta.13.desc
+    picture = GFX_evt_space_hangar
+    is_triggered_only = yes
+    immediate = {
+        owner = {
+            random_owned_ship = {
+                limit = {
+                    has_ship_flag = herta_fleet
+                }
+                save_event_target_as = spawn_location
+                # Unassign the leader so they won't get accidentally killed once we recreate the warship
+                fleet = {
+                    if = {
+                        limit = {
+                            exists = leader
+                        }
+                        leader = {
+                            save_event_target_as = flagship_leader
+                            unassign_leader = this
+                        }
+                    }
+                }
+            }
+        }
+    }
+    option = {
+        name = DOT_SR_Herta.13.a
+        hidden_effect = {
+            owner = {
+                event_target:herta_fleet = {
+                    set_ship_design = {
+                        design = herta_fleet_1
+                    }
+                }
+            }
+        }
+    }
 }
 #飞升
 country_event = {
@@ -565,6 +598,14 @@ country_event = {
     }
     option = {
         name = DOT_SR_Herta.51.a
+        allow = {
+            hidden_trigger = {
+                check_variable = {
+                    which = station_herta_help
+                    value = 100
+                }
+            }
+        }
         hidden_effect = {
             country_event = { id = DOT_SR_Herta.52 days = 90 }
         }
@@ -574,6 +615,14 @@ country_event = {
     }
     option = {
         name = DOT_SR_Herta.51.b
+        allow = {
+            hidden_trigger = {
+                check_variable = {
+                    which = station_ruanmei_help
+                    value = 100
+                }
+            }
+        }
         hidden_effect = {
             set_country_flag = tr_herta_select_ruamei_1
             country_event = { id = DOT_SR_Herta.52 days = 90 }
@@ -584,6 +633,14 @@ country_event = {
     }
     option = {
         name = DOT_SR_Herta.51.c
+        allow = {
+            hidden_trigger = {
+                check_variable = {
+                    which = station_luosi_help
+                    value = 100
+                }
+            }
+        }
         hidden_effect = {
             set_country_flag = tr_herta_select_luosi_1
             country_event = { id = DOT_SR_Herta.52 days = 90 }
@@ -604,6 +661,14 @@ country_event = {
     }
     option = {
         name = DOT_SR_Herta.52.a
+        allow = {
+            hidden_trigger = {
+                check_variable = {
+                    which = station_herta_help
+                    value = 100
+                }
+            }
+        }
         hidden_effect = {
             country_event = { id = DOT_SR_Herta.53 days = 90 }
         }
@@ -613,6 +678,14 @@ country_event = {
     }
     option = {
         name = DOT_SR_Herta.52.b
+        allow = {
+            hidden_trigger = {
+                check_variable = {
+                    which = station_ruanmei_help
+                    value = 100
+                }
+            }
+        }
         hidden_effect = {
             set_country_flag = tr_herta_select_ruamei_2
             country_event = { id = DOT_SR_Herta.53 days = 90 }
@@ -623,6 +696,14 @@ country_event = {
     }
     option = {
         name = DOT_SR_Herta.52.c
+        allow = {
+            hidden_trigger = {
+                check_variable = {
+                    which = station_luosi_help
+                    value = 100
+                }
+            }
+        }
         hidden_effect = {
             set_country_flag = tr_herta_select_luosi_2
             country_event = { id = DOT_SR_Herta.53 days = 90 }
@@ -644,6 +725,14 @@ country_event = {
     option = {
         name = DOT_SR_Herta.53.a
         custom_tooltip = DOT_SR_Herta.53.tt
+        allow = {
+            hidden_trigger = {
+                check_variable = {
+                    which = station_herta_help
+                    value = 100
+                }
+            }
+        }
         hidden_effect = {
             set_country_flag = tr_herta_discuss_adopt
         }
@@ -654,6 +743,14 @@ country_event = {
     option = {
         name = DOT_SR_Herta.53.b
         custom_tooltip = DOT_SR_Herta.53.tt
+        allow = {
+            hidden_trigger = {
+                check_variable = {
+                    which = station_ruanmei_help
+                    value = 100
+                }
+            }
+        }
         hidden_effect = {
             set_country_flag = tr_herta_select_ruamei_4
             set_country_flag = tr_herta_discuss_adopt
@@ -665,6 +762,14 @@ country_event = {
     option = {
         name = DOT_SR_Herta.53.c
         custom_tooltip = DOT_SR_Herta.53.tt
+        allow = {
+            hidden_trigger = {
+                check_variable = {
+                    which = station_luosi_help
+                    value = 100
+                }
+            }
+        }
         hidden_effect = {
             set_country_flag = tr_herta_select_luosi_4
             set_country_flag = tr_herta_discuss_adopt
@@ -774,134 +879,6 @@ country_event = {
         }
     }
 }
-country_event = {#同化
-    id = DOT_SR_Herta.102
-    is_triggered_only = yes
-    hide_window = yes
-
-    trigger = {
-        has_technology = tech_herta_choose_1
-        any_owned_species = {
-            has_citizenship_type = {
-                country = root
-                type = citizenship_herta_assimilation
-            }
-        }
-    }
-    immediate = {
-            if = {
-                limit = {
-                    any_owned_species = {
-                        has_citizenship_type = {
-                            country = root
-                            type = citizenship_herta_assimilation
-                        }
-                    }
-                }
-                weighted_random_owned_pop_group = {
-                    #limit = { is_exact_same_species = root }
-                    create_herta_cybernetic_species_mod = yes
-                    species = { save_event_target_as = new_main_species }
-                }
-            }
-            else = {
-                weighted_random_owned_pop_group = {
-                    #limit = { is_same_species = root }
-                    create_herta_cybernetic_species_mod = yes
-                    species = { save_event_target_as = new_main_species }
-                }
-            }
-            change_dominant_species = { species = event_target:new_main_species }
-            every_owned_leader = {
-                limit = {
-                    species = { has_trait = trait_herta_pop_up_t1 }
-                    NOR = {
-                        has_trait = leader_trait_herta_pop_up_t1
-                        has_leader_flag = renowned_leader
-                        has_leader_flag = legendary_leader
-                    }
-                }
-                add_trait = {
-                    trait = leader_trait_herta_pop_up_t1
-                    show_message = no
-                }
-            }
-            every_pool_leader = {
-                limit = {
-                    species = { has_trait = trait_herta_pop_up_t1 }
-                    NOT = { has_trait = leader_trait_herta_pop_up_t1 }
-                }
-                add_trait = {
-                    trait = leader_trait_herta_pop_up_t1
-                    show_message = no
-                }
-            }
-    }
-}
-country_event = {#同化
-    id = DOT_SR_Herta.1021
-    is_triggered_only = yes
-    hide_window = yes
-
-    trigger = {
-        has_technology = tech_luosi_choose_1
-        any_owned_species = {
-            has_citizenship_type = {
-                country = root
-                type = citizenship_herta_assimilation
-            }
-        }
-    }
-    immediate = {
-            if = {
-                limit = {
-                    any_owned_species = {
-                        has_citizenship_type = {
-                            country = root
-                            type = citizenship_herta_assimilation
-                        }
-                    }
-                }
-                weighted_random_owned_pop_group = {
-                    #limit = { is_exact_same_species = root }
-                    create_luosi_synth_species_effect = yes
-                    species = { save_event_target_as = new_main_species }
-                }
-            }
-            else = {
-                weighted_random_owned_pop_group = {
-                    #limit = { is_same_species = root }
-                    create_luosi_synth_species_effect = yes
-                    species = { save_event_target_as = new_main_species }
-                }
-            }
-            change_dominant_species = { species = event_target:new_main_species }
-            every_owned_leader = {
-                limit = {
-                    species = { has_trait = trait_luosi_pop_up_t1 }
-                    NOR = {
-                        has_trait = leader_trait_luosi_pop_up_t1
-                        has_leader_flag = renowned_leader
-                        has_leader_flag = legendary_leader
-                    }
-                }
-                add_trait = {
-                    trait = leader_trait_luosi_pop_up_t1
-                    show_message = no
-                }
-            }
-            every_pool_leader = {
-                limit = {
-                    species = { has_trait = trait_luosi_pop_up_t1 }
-                    NOT = { has_trait = leader_trait_luosi_pop_up_t1 }
-                }
-                add_trait = {
-                    trait = leader_trait_luosi_pop_up_t1
-                    show_message = no
-                }
-            }
-        }
-    }
 country_event = {
     id = DOT_SR_Herta.103
     title = "DOT_SR_Herta.103.name"
@@ -1364,6 +1341,178 @@ country_event = {
             add_trait = {
                 trait = leader_trait_luosi_pop_up_t1
                 show_message = no
+            }
+        }
+    }
+}
+country_event = {
+    id = DOT_SR_Herta.1000
+    is_triggered_only = yes
+    hide_window = yes
+
+    trigger = {
+
+    }
+    immediate = {
+        refresh_herta_modifier_effect = {
+            modifier = herta_station_fleet_country_buff_1
+            value = station_herta_help
+            project = herta_start_situation_1
+        }
+    }
+}
+country_event = {
+    id = DOT_SR_Herta.1001
+    is_triggered_only = yes
+    hide_window = yes
+
+    trigger = {
+
+    }
+    immediate = {
+        refresh_herta_modifier_effect = {
+            modifier = herta_station_fleet_country_buff_2
+            value = station_ruanmei_help
+            project = herta_start_situation_2
+        }
+    }
+}
+country_event = {
+    id = DOT_SR_Herta.1002
+    is_triggered_only = yes
+    hide_window = yes
+
+    trigger = {
+
+    }
+    immediate = {
+        refresh_herta_modifier_effect = {
+            modifier = herta_station_fleet_country_buff_3
+            value = station_luosi_help
+            project = herta_start_situation_3
+        }
+    }
+}
+country_event = {
+    id = DOT_SR_Herta.1003
+    is_triggered_only = yes
+    hide_window = yes
+
+    trigger = {
+
+    }
+    immediate = {
+        refresh_herta_modifier_effect = {
+            modifier = herta_station_fleet_country_buff_4
+            value = station_sidifen_help
+            project = herta_start_situation_4
+        }
+    }
+}
+#黑塔空间站相关，9999为测试事件
+country_event = {
+    id = DOT_SR_Herta.9999
+    title = test
+    desc = test
+    picture = GFX_evt_wormhole
+    is_triggered_only = yes
+
+    option = {
+        name = "test"
+        capital_scope = {
+            create_fleet = {
+                name = "NAME_HERTA_FLEET"
+                settings = {
+                    can_upgrade = no
+                    can_change_composition = no
+                    uses_naval_capacity = no
+                    can_disband = no
+                    spawn_debris = no
+                    is_ultra_boss = yes
+                }
+                effect = {
+                    set_owner = root
+                    create_ship = {
+                        name = "NAME_herta"
+                        design = "herta_fleet"
+                        prefix = no
+                        upgradable = no
+                        graphical_culture = owner
+                        effect = {
+                            set_ship_flag = immune_to_confuse
+                            set_ship_flag = immune_to_terrify
+                        }
+
+                    }
+                    set_fleet_flag = immune_to_confuse
+                    set_fleet_flag = immune_to_terrify
+                    save_global_event_target_as = herta_fleet
+                    herta_fleet_station_set_effect = yes
+                    set_location = prev
+                    set_fleet_stance = aggressive
+                    set_aggro_range_measure_from = return_point
+                    set_aggro_range = 0
+                    queue_actions = {
+                        wait = {
+                            duration = 320
+                            random = 80
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+#打开面板事件
+fleet_event = {
+    id = DOT_SR_Herta.10000
+    title = ""
+    desc = ""
+    location = event_target:herta_fleet
+    picture_event_data = { room = astral_express_1_room }
+    is_triggered_only = yes
+
+    diplomatic_title = herta_ship_ui
+    diplomatic = yes
+    force_open = yes
+    custom_gui = "herta_ship_ui"
+    option = {
+        name = ""
+        default_hide_option = yes
+    }
+}
+#自动人力招募
+country_event = {
+    id = DOT_SR_Herta.10001
+    is_triggered_only = yes
+    hide_window = yes
+
+    trigger = {
+        has_country_flag = auto_pop_up_set
+    }
+    immediate = {
+        event_target:herta_fleet = {
+            event_target:herta_fleet = {
+                change_variable = {
+                    which = herta_station_district_workforce
+                    value = 500
+                }
+            }
+            if = {
+                limit = {
+                    event_target:herta_fleet = {
+                        check_variable_arithmetic = {
+                            which = event_target:herta_fleet.herta_station_district_workforce
+                            value >  event_target:herta_fleet.value:herta_station_pop_num_value_max
+                        }
+                    }
+                }
+                event_target:herta_fleet = {
+                    change_variable = {
+                        which = herta_station_district_workforce
+                        value = event_target:herta_fleet.value:herta_station_pop_num_value_max
+                    }
+                }
             }
         }
     }

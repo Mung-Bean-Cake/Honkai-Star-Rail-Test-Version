@@ -1,0 +1,1574 @@
+#reload honkai_star_rail_herta_ship.gui
+guiTypes = {
+    containerWindowType = {
+        name = "herta_ship_ui"
+        orientation = center
+        origo = center
+        moveable = yes
+        size = { width = 1200 height = 670 }
+
+        background = {
+            name = "background"
+            quadTextureSprite = "GFX_herta_station_fleet_bg"
+            size = {width = 1200 height = 700}
+        }
+        #图片区
+        containerWindowType = {
+            name = "portrait"
+            size = { width = 550 height = 620 }
+            position = { x = 30 y = -65 }
+            clipping = yes
+            iconType = {
+                name = "portrait"
+                position = { x = 0 y = 105 }
+                spriteType = "GFX_portrait_gamesetup_mask"
+                alwaysTransparent = yes
+                scale = 0.5
+            }
+            iconType = {
+                name = "black_frame"
+                spriteType = "GFX_diplomacy_portrait_frame"
+                orientation = center_up
+                centerPosition = yes
+                position = { x = -35 y = 190 }
+                alwaystransparent = yes
+                scale = 0.5
+            }
+            ####################### HIDDEN ########################
+            iconType = {
+                name = "city_frame"
+                spriteType = "GFX_diplomacy_portrait_frame"
+                position = { x = 0 y = 23333 }
+                alwaysTransparent = yes
+            }
+        }
+        #类似区划,500*500大小，单个组件包括：图片，等级，总数，当前区划数;在fleet域下面set value
+        effectButtonType = {
+            name = "district_herta_station_text"
+            font = "malgun_goth_24"
+            position = { x = 22 y = 220 }
+            size = { width = 135 height = 30 }
+            format = center
+            text = "$herta_district_type_w$"
+            effect = the_star_rail_null_effect
+        }
+        #区划
+        containerWindowType = {
+            name = "herta_fleet_station_district_1_window"
+            position = { x = 30 y = 250 }
+            size = { width = 480 height = 70 }
+            moveable = no
+
+            background = {
+                name = "background"
+                quadTextureSprite ="GFX_tiles_dark_area_cut_8"
+            }
+            effectButtonType = {
+                name = "herta_fleet_district_1"
+                spriteType = "GFX_herta_fleet_district_1"
+                position = { x = 0 y = 0 }
+                format = center
+                effect = herta_fleet_district_1_show_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_district_1_build"
+                spriteType = "GFX_herta_station_district_build"
+                position = { x = 70 y = 0 }
+                format = center
+                effect = herta_fleet_district_1_build_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_district_1_level_up"
+                spriteType = "GFX_herta_station_district_level_up"
+                position = { x = 70 y = 40 }
+                format = center
+                effect = herta_fleet_district_1_level_up_effect
+            }
+            effectButtonType = {
+                name = "district_herta_station_district_1_level_1"
+                quadTextureSprite ="GFX_hsr1"
+                position = { x = 45 y = 42 }
+                size = { width = 35 height = 30 }
+                effect = hsr_district_1_level_1_effect
+            }
+            effectButtonType = {
+                name = "district_herta_station_district_1_level_2"
+                quadTextureSprite ="GFX_hsr2"
+                position = { x = 45 y = 42 }
+                size = { width = 35 height = 30 }
+                effect = hsr_district_1_level_2_effect
+            }
+            effectButtonType = {
+                name = "district_herta_station_district_1_level_3"
+                quadTextureSprite ="GFX_hsr3"
+                position = { x = 45 y = 42 }
+                size = { width = 35 height = 30 }
+                effect = hsr_district_1_level_3_effect
+            }
+            effectButtonType = {
+                name = "district_herta_station_district_1_level_4"
+                quadTextureSprite ="GFX_hsr4"
+                position = { x = 45 y = 42 }
+                size = { width = 35 height = 30 }
+                effect = hsr_district_1_level_4_effect
+            }
+            effectButtonType = {
+                name = "district_herta_station_district_1_level_5"
+                quadTextureSprite ="GFX_hsr4"
+                position = { x = 45 y = 42 }
+                size = { width = 35 height = 30 }
+                effect = hsr_district_1_level_5_effect
+            }
+            #区划相关
+            effectButtonType = {
+                name = "district_herta_station_district_text"
+                font = "cg_16b"
+                position = { x = 90 y = 0 }
+                size = { width = 90 height = 30 }
+                format = center
+                text = "$district_herta_station_district$"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "herta_station_district_1_num"
+                quadTextureSprite ="GFX_glow_tile_orange"
+                size = { width = 70 height = 30 }
+                position = { x= 189 y= 0 }
+                effect = the_star_rail_null_effect
+                font = "cg_16b"
+                text = "herta_station_district_1_num_text"
+            }
+            effectButtonType = {
+                name = "herta_station_district_1_num_count_sub"
+                quadTextureSprite ="GFX_district_hsr_count_sub"
+                size = { width = 30 height = 30 }
+                position = { x= 170 y= 0 }
+                effect = herta_station_district_1_num_count_sub_effect
+                font = "cg_16b"
+            }
+            effectButtonType = {
+                name = "herta_station_district_1_num_count_add"
+                quadTextureSprite ="GFX_district_hsr_count_add"
+                size = { width = 30 height = 30 }
+                position = { x= 249 y= 0 }
+                effect = herta_station_district_1_num_count_add_effect
+                font = "cg_16b"
+            }
+            effectButtonType = {
+                name = "district_herta_station_district_1_num_max_text"
+                font = "cg_16b"
+                position = { x = 270 y = 0 }
+                size = { width = 90 height = 30 }
+                format = center
+                text = "$district_herta_station_district_1_num_max_text$"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "herta_station_district_1_num_max"
+                quadTextureSprite ="GFX_glow_tile_orange"
+                size = { width = 70 height = 30 }
+                position = { x= 349 y= 0 }
+                effect = the_star_rail_null_effect
+                font = "cg_16b"
+                text = "herta_station_district_1_num_max_text"
+            }
+            #劳动力相关
+            effectButtonType = {
+                name = "district_herta_station_district_pop_text"
+                font = "cg_16b"
+                position = { x = 94 y = 33 }
+                size = { width = 90 height = 30 }
+                format = center
+                text = "$district_herta_station_district_pop$"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "herta_station_district_1_pop_num"
+                quadTextureSprite ="GFX_glow_tile_orange"
+                size = { width = 70 height = 30 }
+                position = { x= 189 y= 33 }
+                effect = the_star_rail_null_effect
+                font = "cg_16b"
+                text = "herta_station_district_1_num_pop_text"
+            }
+            effectButtonType = {
+                name = "herta_station_district_1_num_pop_count_sub"
+                quadTextureSprite ="GFX_district_hsr_count_sub"
+                size = { width = 30 height = 30 }
+                position = { x= 170 y= 33 }
+                effect = herta_station_district_1_num_pop_count_sub_effect
+                font = "cg_16b"
+            }
+            effectButtonType = {
+                name = "herta_station_district_1_num_pop_count_add"
+                quadTextureSprite ="GFX_district_hsr_count_add"
+                size = { width = 30 height = 30 }
+                position = { x= 249 y= 33 }
+                effect = herta_station_district_1_num_pop_count_add_effect
+                font = "cg_16b"
+            }
+            effectButtonType = {
+                name = "district_herta_station_district_pop_max_text"
+                font = "cg_16b"
+                position = { x = 274 y = 33 }
+                size = { width = 90 height = 30 }
+                format = center
+                text = "$district_herta_station_district_pop_max_text$"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "herta_station_district_1_pop_max"
+                quadTextureSprite ="GFX_glow_tile_orange"
+                size = { width = 70 height = 30 }
+                position = { x= 349 y= 33 }
+                effect = the_star_rail_null_effect
+                font = "cg_16b"
+                text = "herta_station_district_1_num_pop_max_text"
+            }
+        }
+        containerWindowType = {
+            name = "herta_fleet_station_district_2_window"
+            position = { x = 30 y = 330 }
+            size = { width = 480 height = 70 }
+            moveable = no
+
+            background = {
+                name = "background"
+                quadTextureSprite ="GFX_tiles_dark_area_cut_8"
+            }
+            effectButtonType = {
+                name = "herta_fleet_district_2"
+                spriteType = "GFX_herta_fleet_district_2"
+                position = { x = 0 y = 0 }
+                format = center
+                effect = herta_fleet_district_2_show_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_district_2_build"
+                spriteType = "GFX_herta_station_district_build"
+                position = { x = 70 y = 0 }
+                format = center
+                effect = herta_fleet_district_2_build_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_district_2_level_up"
+                spriteType = "GFX_herta_station_district_level_up"
+                position = { x = 70 y = 40 }
+                format = center
+                effect = herta_fleet_district_2_level_up_effect
+            }
+            effectButtonType = {
+                name = "district_herta_station_district_2_level_1"
+                quadTextureSprite ="GFX_hsr1"
+                position = { x = 45 y = 42 }
+                size = { width = 35 height = 30 }
+                effect = hsr_district_2_level_1_effect
+            }
+            effectButtonType = {
+                name = "district_herta_station_district_2_level_2"
+                quadTextureSprite ="GFX_hsr2"
+                position = { x = 45 y = 42 }
+                size = { width = 35 height = 30 }
+                effect = hsr_district_2_level_2_effect
+            }
+            effectButtonType = {
+                name = "district_herta_station_district_2_level_3"
+                quadTextureSprite ="GFX_hsr3"
+                position = { x = 45 y = 42 }
+                size = { width = 35 height = 30 }
+                effect = hsr_district_2_level_3_effect
+            }
+            effectButtonType = {
+                name = "district_herta_station_district_2_level_4"
+                quadTextureSprite ="GFX_hsr4"
+                position = { x = 45 y = 42 }
+                size = { width = 35 height = 30 }
+                effect = hsr_district_2_level_4_effect
+            }
+            effectButtonType = {
+                name = "district_herta_station_district_2_level_5"
+                quadTextureSprite ="GFX_hsr4"
+                position = { x = 45 y = 42 }
+                size = { width = 35 height = 30 }
+                effect = hsr_district_2_level_5_effect
+            }
+            #区划相关
+            effectButtonType = {
+                name = "district_herta_station_district_text"
+                font = "cg_16b"
+                position = { x = 90 y = 0 }
+                size = { width = 90 height = 30 }
+                format = center
+                text = "$district_herta_station_district$"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "herta_station_district_2_num"
+                quadTextureSprite ="GFX_glow_tile_orange"
+                size = { width = 70 height = 30 }
+                position = { x= 189 y= 0 }
+                effect = the_star_rail_null_effect
+                font = "cg_16b"
+                text = "herta_station_district_2_num_text"
+            }
+            effectButtonType = {
+                name = "herta_station_district_2_num_count_sub"
+                quadTextureSprite ="GFX_district_hsr_count_sub"
+                size = { width = 30 height = 30 }
+                position = { x= 170 y= 0 }
+                effect = herta_station_district_2_num_count_sub_effect
+                font = "cg_16b"
+            }
+            effectButtonType = {
+                name = "herta_station_district_2_num_count_add"
+                quadTextureSprite ="GFX_district_hsr_count_add"
+                size = { width = 30 height = 30 }
+                position = { x= 249 y= 0 }
+                effect = herta_station_district_2_num_count_add_effect
+                font = "cg_16b"
+            }
+            effectButtonType = {
+                name = "district_herta_station_district_2_num_max_text"
+                font = "cg_16b"
+                position = { x = 270 y = 0 }
+                size = { width = 90 height = 30 }
+                format = center
+                text = "$district_herta_station_district_1_num_max_text$"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "herta_station_district_2_num_max"
+                quadTextureSprite ="GFX_glow_tile_orange"
+                size = { width = 70 height = 30 }
+                position = { x= 349 y= 0 }
+                effect = the_star_rail_null_effect
+                font = "cg_16b"
+                text = "herta_station_district_2_num_max_text"
+            }
+            #劳动力相关
+            effectButtonType = {
+                name = "district_herta_station_district_pop_text"
+                font = "cg_16b"
+                position = { x = 94 y = 33 }
+                size = { width = 90 height = 30 }
+                format = center
+                text = "$district_herta_station_district_pop$"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "herta_station_district_2_pop_num"
+                quadTextureSprite ="GFX_glow_tile_orange"
+                size = { width = 70 height = 30 }
+                position = { x= 189 y= 33 }
+                effect = the_star_rail_null_effect
+                font = "cg_16b"
+                text = "herta_station_district_2_num_pop_text"
+            }
+            effectButtonType = {
+                name = "herta_station_district_2_num_pop_count_sub"
+                quadTextureSprite ="GFX_district_hsr_count_sub"
+                size = { width = 30 height = 30 }
+                position = { x= 170 y= 33 }
+                effect = herta_station_district_2_num_pop_count_sub_effect
+                font = "cg_16b"
+            }
+            effectButtonType = {
+                name = "herta_station_district_2_num_pop_count_add"
+                quadTextureSprite ="GFX_district_hsr_count_add"
+                size = { width = 30 height = 30 }
+                position = { x= 249 y= 33 }
+                effect = herta_station_district_2_num_pop_count_add_effect
+                font = "cg_16b"
+            }
+            effectButtonType = {
+                name = "district_herta_station_district_pop_max_text"
+                font = "cg_16b"
+                position = { x = 274 y = 33 }
+                size = { width = 90 height = 30 }
+                format = center
+                text = "$district_herta_station_district_pop_max_text$"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "herta_station_district_2_pop_max"
+                quadTextureSprite ="GFX_glow_tile_orange"
+                size = { width = 70 height = 30 }
+                position = { x= 349 y= 33 }
+                effect = the_star_rail_null_effect
+                font = "cg_16b"
+                text = "herta_station_district_2_num_pop_max_text"
+            }
+        }
+        containerWindowType = {
+            name = "herta_fleet_station_district_3_window"
+            position = { x = 30 y = 410 }
+            size = { width = 480 height = 70 }
+            moveable = no
+
+            background = {
+                name = "background"
+                quadTextureSprite ="GFX_tiles_dark_area_cut_8"
+            }
+            effectButtonType = {
+                name = "herta_fleet_district_3"
+                spriteType = "GFX_herta_fleet_district_3"
+                position = { x = 0 y = 0 }
+                format = center
+                effect = herta_fleet_district_3_show_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_district_3_build"
+                spriteType = "GFX_herta_station_district_build"
+                position = { x = 70 y = 0 }
+                format = center
+                effect = herta_fleet_district_3_build_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_district_3_level_up"
+                spriteType = "GFX_herta_station_district_level_up"
+                position = { x = 70 y = 40 }
+                format = center
+                effect = herta_fleet_district_3_level_up_effect
+            }
+            effectButtonType = {
+                name = "district_herta_station_district_3_level_1"
+                quadTextureSprite ="GFX_hsr1"
+                position = { x = 45 y = 42 }
+                size = { width = 35 height = 30 }
+                effect = hsr_district_3_level_1_effect
+            }
+            effectButtonType = {
+                name = "district_herta_station_district_3_level_2"
+                quadTextureSprite ="GFX_hsr2"
+                position = { x = 45 y = 42 }
+                size = { width = 35 height = 30 }
+                effect = hsr_district_3_level_2_effect
+            }
+            effectButtonType = {
+                name = "district_herta_station_district_3_level_3"
+                quadTextureSprite ="GFX_hsr3"
+                position = { x = 45 y = 42 }
+                size = { width = 35 height = 30 }
+                effect = hsr_district_3_level_3_effect
+            }
+            effectButtonType = {
+                name = "district_herta_station_district_3_level_4"
+                quadTextureSprite ="GFX_hsr4"
+                position = { x = 45 y = 42 }
+                size = { width = 35 height = 30 }
+                effect = hsr_district_3_level_4_effect
+            }
+            effectButtonType = {
+                name = "district_herta_station_district_3_level_5"
+                quadTextureSprite ="GFX_hsr4"
+                position = { x = 45 y = 42 }
+                size = { width = 35 height = 30 }
+                effect = hsr_district_3_level_5_effect
+            }
+            #区划相关
+            effectButtonType = {
+                name = "district_herta_station_district_text"
+                font = "cg_16b"
+                position = { x = 90 y = 0 }
+                size = { width = 90 height = 30 }
+                format = center
+                text = "$district_herta_station_district$"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "herta_station_district_3_num"
+                quadTextureSprite ="GFX_glow_tile_orange"
+                size = { width = 70 height = 30 }
+                position = { x= 189 y= 0 }
+                effect = the_star_rail_null_effect
+                font = "cg_16b"
+                text = "herta_station_district_3_num_text"
+            }
+            effectButtonType = {
+                name = "herta_station_district_3_num_count_sub"
+                quadTextureSprite ="GFX_district_hsr_count_sub"
+                size = { width = 30 height = 30 }
+                position = { x= 170 y= 0 }
+                effect = herta_station_district_3_num_count_sub_effect
+                font = "cg_16b"
+            }
+            effectButtonType = {
+                name = "herta_station_district_3_num_count_add"
+                quadTextureSprite ="GFX_district_hsr_count_add"
+                size = { width = 30 height = 30 }
+                position = { x= 249 y= 0 }
+                effect = herta_station_district_3_num_count_add_effect
+                font = "cg_16b"
+            }
+            effectButtonType = {
+                name = "district_herta_station_district_3_num_max_text"
+                font = "cg_16b"
+                position = { x = 270 y = 0 }
+                size = { width = 90 height = 30 }
+                format = center
+                text = "$district_herta_station_district_1_num_max_text$"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "herta_station_district_3_num_max"
+                quadTextureSprite ="GFX_glow_tile_orange"
+                size = { width = 70 height = 30 }
+                position = { x= 349 y= 0 }
+                effect = the_star_rail_null_effect
+                font = "cg_16b"
+                text = "herta_station_district_3_num_max_text"
+            }
+            #劳动力相关
+            effectButtonType = {
+                name = "district_herta_station_district_pop_text"
+                font = "cg_16b"
+                position = { x = 94 y = 33 }
+                size = { width = 90 height = 30 }
+                format = center
+                text = "$district_herta_station_district_pop$"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "herta_station_district_3_pop_num"
+                quadTextureSprite ="GFX_glow_tile_orange"
+                size = { width = 70 height = 30 }
+                position = { x= 189 y= 33 }
+                effect = the_star_rail_null_effect
+                font = "cg_16b"
+                text = "herta_station_district_3_num_pop_text"
+            }
+            effectButtonType = {
+                name = "herta_station_district_3_num_pop_count_sub"
+                quadTextureSprite ="GFX_district_hsr_count_sub"
+                size = { width = 30 height = 30 }
+                position = { x= 170 y= 33 }
+                effect = herta_station_district_3_num_pop_count_sub_effect
+                font = "cg_16b"
+            }
+            effectButtonType = {
+                name = "herta_station_district_3_num_pop_count_add"
+                quadTextureSprite ="GFX_district_hsr_count_add"
+                size = { width = 30 height = 30 }
+                position = { x= 249 y= 33 }
+                effect = herta_station_district_3_num_pop_count_add_effect
+                font = "cg_16b"
+            }
+            effectButtonType = {
+                name = "district_herta_station_district_pop_max_text"
+                font = "cg_16b"
+                position = { x = 274 y = 33 }
+                size = { width = 90 height = 30 }
+                format = center
+                text = "$district_herta_station_district_pop_max_text$"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "herta_station_district_3_pop_max"
+                quadTextureSprite ="GFX_glow_tile_orange"
+                size = { width = 70 height = 30 }
+                position = { x= 349 y= 33 }
+                effect = the_star_rail_null_effect
+                font = "cg_16b"
+                text = "herta_station_district_3_num_pop_max_text"
+            }
+        }
+        containerWindowType = {
+            name = "herta_fleet_station_district_4_window"
+            position = { x = 30 y = 490 }
+            size = { width = 480 height = 70 }
+            moveable = no
+
+            background = {
+                name = "background"
+                quadTextureSprite ="GFX_tiles_dark_area_cut_8"
+            }
+            effectButtonType = {
+                name = "herta_fleet_district_4"
+                spriteType = "GFX_herta_fleet_district_4"
+                position = { x = 0 y = 0 }
+                format = center
+                effect = herta_fleet_district_4_show_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_district_4_build"
+                spriteType = "GFX_herta_station_district_build"
+                position = { x = 70 y = 0 }
+                format = center
+                effect = herta_fleet_district_4_build_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_district_4_level_up"
+                spriteType = "GFX_herta_station_district_level_up"
+                position = { x = 70 y = 40 }
+                format = center
+                effect = herta_fleet_district_4_level_up_effect
+            }
+            effectButtonType = {
+                name = "district_herta_station_district_4_level_1"
+                quadTextureSprite ="GFX_hsr1"
+                position = { x = 45 y = 42 }
+                size = { width = 35 height = 30 }
+                effect = hsr_district_4_level_1_effect
+            }
+            effectButtonType = {
+                name = "district_herta_station_district_4_level_2"
+                quadTextureSprite ="GFX_hsr2"
+                position = { x = 45 y = 42 }
+                size = { width = 35 height = 30 }
+                effect = hsr_district_4_level_2_effect
+            }
+            effectButtonType = {
+                name = "district_herta_station_district_4_level_3"
+                quadTextureSprite ="GFX_hsr3"
+                position = { x = 45 y = 42 }
+                size = { width = 35 height = 30 }
+                effect = hsr_district_4_level_3_effect
+            }
+            effectButtonType = {
+                name = "district_herta_station_district_4_level_4"
+                quadTextureSprite ="GFX_hsr4"
+                position = { x = 45 y = 42 }
+                size = { width = 35 height = 30 }
+                effect = hsr_district_4_level_4_effect
+            }
+            effectButtonType = {
+                name = "district_herta_station_district_4_level_5"
+                quadTextureSprite ="GFX_hsr4"
+                position = { x = 45 y = 42 }
+                size = { width = 35 height = 30 }
+                effect = hsr_district_4_level_5_effect
+            }
+            #区划相关
+            effectButtonType = {
+                name = "district_herta_station_district_text"
+                font = "cg_16b"
+                position = { x = 90 y = 0 }
+                size = { width = 90 height = 30 }
+                format = center
+                text = "$district_herta_station_district$"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "herta_station_district_4_num"
+                quadTextureSprite ="GFX_glow_tile_orange"
+                size = { width = 70 height = 30 }
+                position = { x= 189 y= 0 }
+                effect = the_star_rail_null_effect
+                font = "cg_16b"
+                text = "herta_station_district_4_num_text"
+            }
+            effectButtonType = {
+                name = "herta_station_district_4_num_count_sub"
+                quadTextureSprite ="GFX_district_hsr_count_sub"
+                size = { width = 30 height = 30 }
+                position = { x= 170 y= 0 }
+                effect = herta_station_district_4_num_count_sub_effect
+                font = "cg_16b"
+            }
+            effectButtonType = {
+                name = "herta_station_district_4_num_count_add"
+                quadTextureSprite ="GFX_district_hsr_count_add"
+                size = { width = 30 height = 30 }
+                position = { x= 249 y= 0 }
+                effect = herta_station_district_4_num_count_add_effect
+                font = "cg_16b"
+            }
+            effectButtonType = {
+                name = "district_herta_station_district_4_num_max_text"
+                font = "cg_16b"
+                position = { x = 270 y = 0 }
+                size = { width = 90 height = 30 }
+                format = center
+                text = "$district_herta_station_district_1_num_max_text$"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "herta_station_district_4_num_max"
+                quadTextureSprite ="GFX_glow_tile_orange"
+                size = { width = 70 height = 30 }
+                position = { x= 349 y= 0 }
+                effect = the_star_rail_null_effect
+                font = "cg_16b"
+                text = "herta_station_district_4_num_max_text"
+            }
+            #劳动力相关
+            effectButtonType = {
+                name = "district_herta_station_district_pop_text"
+                font = "cg_16b"
+                position = { x = 94 y = 33 }
+                size = { width = 90 height = 30 }
+                format = center
+                text = "$district_herta_station_district_pop$"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "herta_station_district_4_pop_num"
+                quadTextureSprite ="GFX_glow_tile_orange"
+                size = { width = 70 height = 30 }
+                position = { x= 189 y= 33 }
+                effect = the_star_rail_null_effect
+                font = "cg_16b"
+                text = "herta_station_district_4_num_pop_text"
+            }
+            effectButtonType = {
+                name = "herta_station_district_4_num_pop_count_sub"
+                quadTextureSprite ="GFX_district_hsr_count_sub"
+                size = { width = 30 height = 30 }
+                position = { x= 170 y= 33 }
+                effect = herta_station_district_4_num_pop_count_sub_effect
+                font = "cg_16b"
+            }
+            effectButtonType = {
+                name = "herta_station_district_4_num_pop_count_add"
+                quadTextureSprite ="GFX_district_hsr_count_add"
+                size = { width = 30 height = 30 }
+                position = { x= 249 y= 33 }
+                effect = herta_station_district_4_num_pop_count_add_effect
+                font = "cg_16b"
+            }
+            effectButtonType = {
+                name = "district_herta_station_district_pop_max_text"
+                font = "cg_16b"
+                position = { x = 274 y = 33 }
+                size = { width = 90 height = 30 }
+                format = center
+                text = "$district_herta_station_district_pop_max_text$"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "herta_station_district_4_pop_max"
+                quadTextureSprite ="GFX_glow_tile_orange"
+                size = { width = 70 height = 30 }
+                position = { x= 349 y= 33 }
+                effect = the_star_rail_null_effect
+                font = "cg_16b"
+                text = "herta_station_district_4_num_pop_max_text"
+            }
+        }
+        containerWindowType = {
+            name = "herta_fleet_station_district_5_window"
+            position = { x = 30 y = 570 }
+            size = { width = 480 height = 70 }
+            moveable = no
+
+            background = {
+                name = "background"
+                quadTextureSprite ="GFX_tiles_dark_area_cut_8"
+            }
+
+        }
+        #武器和特殊的区划
+        containerWindowType = {
+            name = "herta_fleet_station_weapon_window"
+            position = { x = 950 y = 50 }
+            size = { width = 240 height = 600 }
+            moveable = no
+
+            background = {
+                name = "background"
+                quadTextureSprite ="GFX_tiles_dark_area_cut_8"
+            }
+            effectButtonType = {
+                name = "weapon_herta_station_text"
+                font = "malgun_goth_24"
+                position = { x = 0 y = 0 }
+                size = { width = 135 height = 30 }
+                format = center
+                text = "$herta_district_type_weapon$"
+                effect = the_star_rail_null_effect
+            }
+            #武器1
+            effectButtonType = {
+                name = "herta_fleet_station_weapon_1"
+                quadTextureSprite ="GFX_herta_fleet_station_weapon_1"
+                position = { x = 10 y = 40 }
+                size = { width = 180 height = 60 }
+                format = center
+                effect = herta_fleet_station_weapon_1_show_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_station_weapon_1_level_1"
+                quadTextureSprite ="GFX_hsr1"
+                position = { x = 165 y = 70 }
+                size = { width = 35 height = 30 }
+                effect = herta_fleet_station_weapon_1_level_1_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_station_weapon_1_level_2"
+                quadTextureSprite ="GFX_hsr2"
+                position = { x = 165 y = 70 }
+                size = { width = 35 height = 30 }
+                effect = herta_fleet_station_weapon_1_level_2_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_station_weapon_1_level_3"
+                quadTextureSprite ="GFX_hsr3"
+                position = { x = 165 y = 70 }
+                size = { width = 35 height = 30 }
+                effect = herta_fleet_station_weapon_1_level_3_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_station_weapon_1_level_4"
+                quadTextureSprite ="GFX_hsr4"
+                position = { x = 165 y = 70 }
+                size = { width = 35 height = 30 }
+                effect = herta_fleet_station_weapon_1_level_4_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_station_weapon_1_level_5"
+                quadTextureSprite ="GFX_hsr5"
+                position = { x = 165 y = 70 }
+                size = { width = 35 height = 30 }
+                effect = herta_fleet_station_weapon_1_level_5_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_station_weapon_1_level_up"
+                quadTextureSprite ="GFX_herta_fleet_station_weapon_level_up"
+                position = { x = 200 y = 40 }
+                size = { width = 180 height = 60 }
+                format = center
+                effect = herta_fleet_station_weapon_1_level_up_effect
+            }
+            #武器2
+            effectButtonType = {
+                name = "herta_fleet_station_weapon_2"
+                quadTextureSprite ="GFX_herta_fleet_station_weapon_2"
+                position = { x = 10 y = 120 }
+                size = { width = 180 height = 60 }
+                format = center
+                effect = herta_fleet_station_weapon_2_show_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_station_weapon_2_level_1"
+                quadTextureSprite ="GFX_hsr1"
+                position = { x = 165 y = 150 }
+                size = { width = 35 height = 30 }
+                effect = herta_fleet_station_weapon_2_level_1_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_station_weapon_2_level_2"
+                quadTextureSprite ="GFX_hsr2"
+                position = { x = 165 y = 150 }
+                size = { width = 35 height = 30 }
+                effect = herta_fleet_station_weapon_2_level_2_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_station_weapon_2_level_3"
+                quadTextureSprite ="GFX_hsr3"
+                position = { x = 165 y = 150 }
+                size = { width = 35 height = 30 }
+                effect = herta_fleet_station_weapon_2_level_3_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_station_weapon_2_level_4"
+                quadTextureSprite ="GFX_hsr4"
+                position = { x = 165 y = 150 }
+                size = { width = 35 height = 30 }
+                effect = herta_fleet_station_weapon_2_level_4_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_station_weapon_2_level_5"
+                quadTextureSprite ="GFX_hsr5"
+                position = { x = 165 y = 150 }
+                size = { width = 35 height = 30 }
+                effect = herta_fleet_station_weapon_2_level_5_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_station_weapon_2_level_up"
+                quadTextureSprite ="GFX_herta_fleet_station_weapon_level_up"
+                position = { x = 200 y = 120 }
+                size = { width = 180 height = 60 }
+                format = center
+                effect = herta_fleet_station_weapon_2_level_up_effect
+            }
+            #武器3
+            effectButtonType = {
+                name = "herta_fleet_station_weapon_3"
+                quadTextureSprite ="GFX_herta_fleet_station_weapon_3"
+                position = { x = 10 y = 200 }
+                size = { width = 180 height = 60 }
+                format = center
+                effect = herta_fleet_station_weapon_3_show_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_station_weapon_3_level_1"
+                quadTextureSprite ="GFX_hsr1"
+                position = { x = 165 y = 230 }
+                size = { width = 35 height = 30 }
+                effect = herta_fleet_station_weapon_3_level_1_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_station_weapon_3_level_2"
+                quadTextureSprite ="GFX_hsr2"
+                position = { x = 165 y = 230 }
+                size = { width = 35 height = 30 }
+                effect = herta_fleet_station_weapon_3_level_2_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_station_weapon_3_level_3"
+                quadTextureSprite ="GFX_hsr3"
+                position = { x = 165 y = 230 }
+                size = { width = 35 height = 30 }
+                effect = herta_fleet_station_weapon_3_level_3_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_station_weapon_3_level_4"
+                quadTextureSprite ="GFX_hsr4"
+                position = { x = 165 y = 230 }
+                size = { width = 35 height = 30 }
+                effect = herta_fleet_station_weapon_3_level_4_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_station_weapon_3_level_5"
+                quadTextureSprite ="GFX_hsr5"
+                position = { x = 165 y = 230 }
+                size = { width = 35 height = 30 }
+                effect = herta_fleet_station_weapon_3_level_5_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_station_weapon_3_level_up"
+                quadTextureSprite ="GFX_herta_fleet_station_weapon_level_up"
+                position = { x = 200 y = 200 }
+                size = { width = 180 height = 60 }
+                format = center
+                effect = herta_fleet_station_weapon_3_level_up_effect
+            }
+            #辅助功能
+            effectButtonType = {
+                name = "assist_herta_station_text"
+                font = "malgun_goth_24"
+                position = { x = 0 y = 260 }
+                size = { width = 135 height = 30 }
+                format = center
+                text = "$assist_herta_station_text$"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_assist_1"
+                quadTextureSprite ="GFX_herta_fleet_assist_1"
+                position = { x = 10 y = 300 }
+                size = { width = 180 height = 60 }
+                format = center
+                effect = herta_fleet_assist_1_show_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_assist_1_level_up"
+                quadTextureSprite ="GFX_herta_fleet_assist_level"
+                position = { x = 190 y = 300 }
+                size = { width = 180 height = 60 }
+                format = center
+                effect = herta_fleet_assist_1_level_up_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_assist_1_use"
+                quadTextureSprite ="GFX_herta_fleet_assist_use"
+                position = { x = 190 y = 330 }
+                size = { width = 180 height = 60 }
+                format = center
+                effect = herta_fleet_assist_1_use_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_assist_2"
+                quadTextureSprite ="GFX_herta_fleet_assist_2"
+                position = { x = 10 y = 380 }
+                size = { width = 180 height = 60 }
+                format = center
+                effect = herta_fleet_assist_2_show_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_assist_2_level_up"
+                quadTextureSprite ="GFX_herta_fleet_assist_level"
+                position = { x = 190 y = 380 }
+                size = { width = 180 height = 60 }
+                format = center
+                effect = herta_fleet_assist_2_level_up_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_assist_2_use"
+                quadTextureSprite ="GFX_herta_fleet_assist_use"
+                position = { x = 190 y = 410 }
+                size = { width = 180 height = 60 }
+                format = center
+                effect = herta_fleet_assist_2_use_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_assist_3"
+                quadTextureSprite ="GFX_herta_fleet_assist_3"
+                position = { x = 10 y = 460 }
+                size = { width = 180 height = 60 }
+                format = center
+                effect = herta_fleet_assist_3_show_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_assist_3_level_up"
+                quadTextureSprite ="GFX_herta_fleet_assist_level"
+                position = { x = 190 y = 460 }
+                size = { width = 180 height = 60 }
+                format = center
+                effect = herta_fleet_assist_3_level_up_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_assist_3_use"
+                quadTextureSprite ="GFX_herta_fleet_assist_use"
+                position = { x = 190 y = 490 }
+                size = { width = 180 height = 60 }
+                format = center
+                effect = herta_fleet_assist_3_use_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_assist_txt_1_use"
+                font = "cg_16b"
+                position = { x = 0 y = 500 }
+                size = { width = 240 height = 60 }
+                format = center
+                text = "$herta_fleet_assist_txt_use_1_text$"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_assist_txt_2_use"
+                font = "cg_16b"
+                position = { x = 0 y = 520 }
+                size = { width = 240 height = 60 }
+                format = center
+                text = "$herta_fleet_assist_txt_use_2_text$"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_assist_txt_3_use"
+                font = "cg_16b"
+                position = { x = 0 y = 540 }
+                size = { width = 240 height = 60 }
+                format = center
+                text = "$herta_fleet_assist_txt_use_3_text$"
+                effect = the_star_rail_null_effect
+            }
+        }
+        #文本区域
+        containerWindowType = {
+            name = "herta_fleet_station_text_window"
+            position = { x = 520 y = 50 }
+            size = { width = 420 height = 300 }
+            moveable = no
+
+            background = {
+                name = "background"
+                quadTextureSprite ="GFX_tiles_dark_area_cut_8"
+            }
+            effectButtonType = {
+                name = "herta_fleet_station_resource_text"
+                font = "malgun_goth_24"
+                position = { x = 150 y = 0 }
+                size = { width = 135 height = 30 }
+                format = center
+                text = "$herta_station_show_text$"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_station_resource_1_text"
+                font = "malgun_goth_24"
+                position = { x = 0 y = 20 }
+                size = { width = 135 height = 30 }
+                format = left
+                text = herta_station_show_1_text
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_station_produce_show_1_text"
+                font = "cg_16b"
+                position = { x = 0 y = 40 }
+                size = { width = 420 height = 30 }
+                format = left
+                text = "$herta_station_produce_1_text$"
+                buttonFont = "cg_16b"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_station_produce_show_2_text"
+                font = "cg_16b"
+                position = { x = 0 y = 60 }
+                size = { width = 420 height = 30 }
+                format = left
+                text = "$herta_station_produce_2_text$"
+                buttonFont = "cg_16b"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_station_produce_show_3_text"
+                font = "cg_16b"
+                position = { x = 0 y = 80 }
+                size = { width = 420 height = 30 }
+                format = left
+                text = "$herta_station_produce_3_text$"
+                buttonFont = "cg_16b"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_station_produce_show_4_text"
+                font = "cg_16b"
+                position = { x = 0 y = 100 }
+                size = { width = 420 height = 30 }
+                format = left
+                text = "$herta_station_produce_4_text$"
+                buttonFont = "cg_16b"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_station_produce_show_5_text"
+                font = "cg_16b"
+                position = { x = 0 y = 120 }
+                size = { width = 420 height = 30 }
+                format = left
+                text = "$herta_station_produce_5_text$"
+                buttonFont = "cg_16b"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_station_upkeep_text"
+                font = "malgun_goth_24"
+                position = { x = 0 y = 150 }
+                size = { width = 420 height = 30 }
+                format = left
+                text = "$herta_fleet_station_upkeep_text$"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_station_upkeep_show_text"
+                font = "cg_16b"
+                position = { x = 0 y = 170 }
+                size = { width = 420 height = 30 }
+                format = left
+                text = "$herta_fleet_station_upkeep_show_text$"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_station_workforce_text"
+                font = "malgun_goth_24"
+                position = { x = 0 y = 200 }
+                size = { width = 420 height = 30 }
+                format = left
+                text = "$herta_fleet_station_workforce_text$"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_station_workforce_show_text"
+                font = "cg_16b"
+                position = { x = 0 y = 220 }
+                size = { width = 420 height = 30 }
+                format = left
+                text = "$herta_fleet_station_workforce_show_text$"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_station_district_text"
+                font = "malgun_goth_24"
+                position = { x = 0 y = 250 }
+                size = { width = 420 height = 30 }
+                format = left
+                text = "$herta_fleet_station_district_text$"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_station_district_show_text"
+                font = "cg_16b"
+                position = { x = 0 y = 270 }
+                size = { width = 420 height = 30 }
+                format = left
+                text = "$herta_fleet_station_district_show_text$"
+                effect = the_star_rail_null_effect
+            }
+        }
+        containerWindowType = {#吸引更多人，使用默认区划人力设置，加强对停靠行星的帮助
+            name = "herta_fleet_station_policy_window"
+            position = { x = 520 y = 355 }
+            size = { width = 420 height = 295 }
+            moveable = no
+
+            background = {
+                name = "background"
+                quadTextureSprite ="GFX_tiles_dark_area_cut_8"
+            }
+            effectButtonType = {
+                name = "herta_fleet_station_policy_text"
+                font = "malgun_goth_24"
+                position = { x = 150 y = 0 }
+                size = { width = 135 height = 30 }
+                format = center
+                text = "$herta_station_policy_text$"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_leader_use_num"
+                quadTextureSprite ="GFX_agenda_frame"
+                position = { x = 150 y = 100 }
+                size = { width = 180 height = 120 }
+                format = center
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_leader_use_num_show"
+                quadTextureSprite ="GFX_agenda_hover_bg"
+                position = { x = 172 y = 120 }
+                size = { width = 180 height = 60 }
+                font = "malgun_goth_24"
+                format = center
+                text = "$herta_fleet_leader_use_num_show$"
+                effect = herta_fleet_leader_use_num_show_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_leader_1"
+                quadTextureSprite ="GFX_leader_1"
+                position = { x = 42 y = 70 }
+                size = { width = 180 height = 120 }
+                format = center
+                effect = herta_fleet_leader_1_show_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_leader_1_get"
+                quadTextureSprite ="GFX_leader_get"
+                position = { x = 10 y = 110 }
+                size = { width = 180 height = 120 }
+                format = center
+                effect = herta_fleet_leader_1_get_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_leader_1_about"
+                quadTextureSprite ="GFX_leader_about"
+                position = { x = 70 y = 110 }
+                size = { width = 180 height = 120 }
+                format = center
+                effect = herta_fleet_leader_1_about_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_leader_2"
+                quadTextureSprite ="GFX_leader_2"
+                position = { x = 42 y = 145 }
+                size = { width = 180 height = 120 }
+                format = center
+                effect = herta_fleet_leader_2_show_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_leader_2_get"
+                quadTextureSprite ="GFX_leader_get"
+                position = { x = 10 y = 185 }
+                size = { width = 180 height = 120 }
+                format = center
+                effect = herta_fleet_leader_2_get_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_leader_2_about"
+                quadTextureSprite ="GFX_leader_about"
+                position = { x = 70 y = 185 }
+                size = { width = 180 height = 120 }
+                format = center
+                effect = herta_fleet_leader_2_about_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_leader_3"
+                quadTextureSprite ="GFX_leader_3"
+                position = { x = 334 y = 70 }
+                size = { width = 180 height = 120 }
+                format = center
+                effect = herta_fleet_leader_3_show_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_leader_3_get"
+                quadTextureSprite ="GFX_leader_get"
+                position = { x = 300 y = 110 }
+                size = { width = 180 height = 120 }
+                format = center
+                effect = herta_fleet_leader_3_get_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_leader_3_about"
+                quadTextureSprite ="GFX_leader_about"
+                position = { x = 360 y = 110 }
+                size = { width = 180 height = 120 }
+                format = center
+                effect = herta_fleet_leader_3_about_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_leader_4"
+                quadTextureSprite ="GFX_leader_4"
+                position = { x = 334 y = 145 }
+                size = { width = 180 height = 120 }
+                format = center
+                effect = herta_fleet_leader_4_show_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_leader_4_get"
+                quadTextureSprite ="GFX_leader_get"
+                position = { x = 300 y = 185 }
+                size = { width = 180 height = 120 }
+                format = center
+                effect = herta_fleet_leader_4_get_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_leader_4_about"
+                quadTextureSprite ="GFX_leader_about"
+                position = { x = 360 y = 185 }
+                size = { width = 180 height = 120 }
+                format = center
+                effect = herta_fleet_leader_4_about_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_leader_5"
+                quadTextureSprite ="GFX_leader_5"
+                position = { x = 184 y = 30 }
+                size = { width = 180 height = 120 }
+                format = center
+                effect = herta_fleet_leader_5_show_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_leader_5_get"
+                quadTextureSprite ="GFX_leader_get"
+                position = { x = 150 y = 70 }
+                size = { width = 180 height = 120 }
+                format = center
+                effect = herta_fleet_leader_5_get_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_leader_5_about"
+                quadTextureSprite ="GFX_leader_about"
+                position = { x = 210 y = 70 }
+                size = { width = 180 height = 120 }
+                format = center
+                effect = herta_fleet_leader_5_about_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_leader_6"
+                quadTextureSprite ="GFX_leader_6"
+                position = { x = 184 y = 220 }
+                size = { width = 180 height = 120 }
+                format = center
+                effect = herta_fleet_leader_6_show_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_leader_6_get"
+                quadTextureSprite ="GFX_leader_get"
+                position = { x = 150 y = 260 }
+                size = { width = 180 height = 120 }
+                format = center
+                effect = herta_fleet_leader_6_get_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_leader_6_about"
+                quadTextureSprite ="GFX_leader_about"
+                position = { x = 210 y = 260 }
+                size = { width = 180 height = 120 }
+                format = center
+                effect = herta_fleet_leader_6_about_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_leader_7"
+                quadTextureSprite ="GFX_leader_7"
+                position = { x = 42 y = 220 }
+                size = { width = 180 height = 120 }
+                format = center
+                effect = herta_fleet_leader_7_show_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_leader_7_get"
+                quadTextureSprite ="GFX_leader_get"
+                position = { x = 10 y = 260 }
+                size = { width = 180 height = 120 }
+                format = center
+                effect = herta_fleet_leader_7_get_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_leader_7_about"
+                quadTextureSprite ="GFX_leader_about"
+                position = { x = 70 y = 260 }
+                size = { width = 180 height = 120 }
+                format = center
+                effect = herta_fleet_leader_7_about_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_leader_8"
+                quadTextureSprite ="GFX_leader_8"
+                position = { x = 334 y = 220 }
+                size = { width = 180 height = 120 }
+                format = center
+                effect = herta_fleet_leader_8_show_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_leader_8_get"
+                quadTextureSprite ="GFX_leader_get"
+                position = { x = 300 y = 260 }
+                size = { width = 180 height = 120 }
+                format = center
+                effect = herta_fleet_leader_8_get_effect
+            }
+            effectButtonType = {
+                name = "herta_fleet_leader_8_about"
+                quadTextureSprite ="GFX_leader_about"
+                position = { x = 360 y = 260 }
+                size = { width = 180 height = 120 }
+                format = center
+                effect = herta_fleet_leader_8_about_effect
+            }
+        }
+        effectButtonType = {
+            name = "herta_fleet_about"
+            quadTextureSprite ="GFX_button_copy_to_clipboard"#
+            position = { x = 960 y = 12 }
+            size = { width = 180 height = 120 }
+            format = center
+            effect = herta_fleet_about_effect
+        }
+        effectButtonType = {
+            name = "herta_fleet_set"
+            quadTextureSprite ="GFX_button_manual"#进行初始设置防死机
+            position = { x = 1000 y = 12 }
+            size = { width = 180 height = 120 }
+            format = center
+            effect = herta_fleet_set_effect
+        }
+        effectButtonType = {
+            name = "herta_fleet_pop"
+            quadTextureSprite ="GFX_button_update"#一次性吸收人员
+            position = { x = 1040 y = 12 }
+            size = { width = 180 height = 120 }
+            format = center
+            effect = herta_fleet_pop_effect
+        }
+        effectButtonType = {
+            name = "herta_fleet_auto_pop_up"
+            quadTextureSprite ="GFX_button_automate"#自动人员增长
+            position = { x = 1080 y = 12 }
+            size = { width = 180 height = 120 }
+            format = center
+            effect = herta_fleet_auto_pop_up_effect
+        }
+        effectButtonType = {
+            name = "herta_fleet_auto_pop_up_close"
+            quadTextureSprite ="GFX_button_automate_selected"#自动人员增长关闭
+            position = { x = 1080 y = 12 }
+            size = { width = 180 height = 120 }
+            format = center
+            effect = herta_fleet_auto_pop_up_close_effect
+        }
+        buttonType = {
+            name = "focus_button"
+            position = { x = 1120 y = 12 }
+            orientation = "upper_left"
+            spriteType = "GFX_fleetview_focus"
+            buttonFont = "cg_16b"
+            shortcut = "q"
+        }
+        buttonType = {
+            name = "close"
+            quadTextureSprite = "GFX_close"
+            position = { x= -42 y = 12 }
+            orientation = "UPPER_RIGHT"
+            shortcut = "ESCAPE"
+            clicksound = "back_click"
+        }
+        # Custom header
+        instantTextBoxType = {
+            name = "irm_some_header"
+            font = "malgun_goth_24"
+            text = "黑塔空间站" 	# header text
+            position = { x = 200 y = 5 }
+            maxWidth = 543
+            maxHeight = 22
+            fixedSize = yes
+            alwaysTransparent = yes
+        }
+
+        ### ALL OF THIS IS HIDDEN OR DISPLACED ! ###
+
+        iconType = {
+            name = "hex_bg"
+            spriteType = "GFX_hex_bg"
+            position = { x = -10000 y = -14 }
+            alwaysTransparent = yes
+        }
+        iconType = {
+            name = "empire_header_line"
+            quadTextureSprite = "GFX_line_long"
+            position = { x = 60000 y = 22 }
+            alwaysTransparent = yes
+        }
+        buttonType = { name = "focus_button" position = { x = -1180 y = -1112 } spriteType = "GFX_fleetview_focus" } # hidden
+        instantTextBoxType = { name = "heading" font = "malgun_goth_24" position = { x = -1120 y = -115 } } # hidden
+        buttonType = { name = "alien_message_background" size = { x = 0 y = 0 } position = { x = -1110 y = -11430 } spriteType = "GFX_tiles_dark_area_cut_8" } # hidden
+        buttonType = { name = "confirm_button" quadTextureSprite = "GFX_standard_button_142_34_button" } # hidden
+        containerWindowType = {
+            name = "portrait_background"
+            position = { x = -1117 y = -1145 }
+            size = { width = 0 height = 0 } 	# hide portrait window
+            iconType = { name = "event_picture" spriteType = "GFX_diplomacy_portrait_frame" } # hidden
+            iconType = { name = "portrait" spriteType = "GFX_portrait_character" } # hidden
+        }
+        containerWindowType = {
+            name = "portrait"
+            position = { x = -1117 y = -1145 }
+            size = { width = 0 height = 0 } # hide portrait window
+            iconType = { name = "portrait" spriteType = "GFX_portrait_gamesetup_mask" } # hidden
+            iconType = { name = "black_frame" spriteType = "GFX_diplomacy_portrait_shadow_frame" } # hidden
+            iconType = { name = "stripes_1" spriteType = "GFX_diplomacy_stripes_2" } # hidden
+            iconType = { name = "city_frame" spriteType = "GFX_diplomacy_portrait_frame" } # hidden
+        }
+        iconType = { name = "empire_info_bg" spriteType = "GFX_diplomacy_dark_fade_bg" } # hidden
+        instantTextBoxType = { name = "empire_name" font = "malgun_goth_24" } # hidden
+        instantTextBoxType = { name = "empire_government_type" font = "cg_16b" } # hidden
+        instantTextBoxType = { name = "empire_personality_type" font = "cg_16b" } # hidden
+        overlappingElementsBoxType = { name = "empire_ethics_icons" position = { x = -1145 y = -11138 } } # hidden
+        iconType = { name = "empire_flag" spriteType = "GFX_empire_flag_128" position = { x = -1125 y = -11235 } } # hidden
+        containerWindowType = {
+            name = "leader_details"
+            position = { x = -1125 y = -1175 }
+            containerWindowType = { name = "empire_traits_box" } # hidden
+            instantTextBoxType = { name = "empire_traits_label" font = "cg_16b" } # hidden
+            overlappingElementsBoxType = { name = "leader_traits" } # hidden
+            instantTextBoxType = { name = "leader_name" font = "cg_16b" } # hidden
+            instantTextBoxType = { name = "leader_species" font = "cg_16b" } # hidden
+        }
+        containerWindowType = {
+            name = "opinion_window"
+            position = { x = -1127 y = -11110 }
+            size = { width = 94 height = 30 }
+            iconType = { name = "their_opinion_icon" spriteType = "GFX_diplomacy_opinion" } # hidden
+            instantTextBoxType = { name = "their_opinion" font = "cg_16b" }
+        }
+
+        ### EVENT DIPLO ###
+
+        containerWindowType = {
+            name = "EVENT_DIPLO"
+            position = { x = 2 y = 50 }
+            #size = { width = 563 height = 220 }
+            moveable = no
+
+            instantTextBoxType = {
+                name = "action_title"
+                font = "malgun_goth_24"
+                position = { x = 20 y = 0 }
+                maxWidth = 200
+                alwaysTransparent = yes
+            }
+            instantTextBoxType = {
+                name = "action_desc"
+                font = "malgun_goth_24"
+                position = { x = 490 y = 0 }
+                maxWidth = 500
+                maxHeight = 180
+                orientation = "UPPER_LEFT"
+                format = center
+                alwaysTransparent = yes
+                text_color_code = "H"
+            }
+            listboxType = { name = "option_list" position = { x = -11500 y = -1130 } } # hidden option list
+        }
+        # Description Section
+        instantTextBoxType = {
+            name = "alien_message"
+            font = "cg_16b"
+            position = { x = 20 y = 100 }
+            maxWidth = 465
+            maxHeight = 220
+            format = left
+            scrollbartype = "standardtext_slider"
+        }
+    }
+}
