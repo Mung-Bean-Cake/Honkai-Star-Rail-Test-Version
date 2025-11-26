@@ -1,6 +1,6 @@
-#Ship_Astral_Express
+#Pom-Pom
 
-Ship_Astral_Express = {
+Pom-Pom_I = {
 	entity = "Astral_Express_fleet_entity"
 	construction_entity = "Astral_Express_fleet_entity"
 	entity_offset = { x = -30 y = -30 }
@@ -24,9 +24,11 @@ Ship_Astral_Express = {
 		give_technology = { tech = tech_wormhole_stabilization message = yes }
 		give_technology = { tech = tech_gateway_activation message = yes }
 		give_technology = { tech = tech_jump_drive_1 message = yes }
+		From = { 
+			change_variable = { which = NUM_Pom-Pom_I value = 1 } 
+        }
 	}
 	possible = {
-		always = no
 		from = {
 			or = {
 				# has_origin = origin_Xianzhou
@@ -34,16 +36,7 @@ Ship_Astral_Express = {
 			}
 		}
 		exists = starbase
-		from = {
-			num_starbases >= 1
-			used_starbase_capacity_percent >= 0.1
-			# num_gateways > 0
-		}
-		custom_tooltip = {
-			fail_text = "requires_no_existing_megastructure"
-			# NOT = { has_any_megastructure = yes }
-			has_no_non_gate_megastructure = yes
-		}
+		check_variable = { which = NUM_Pom-Pom_I value < 1 }
 	}
 	country_modifier = {
 		planet_colony_development_speed_mult = 1.37
@@ -59,7 +52,7 @@ Ship_Astral_Express = {
 	}
 }
 
-Ship_Astral_Express_II = {
+Pom-Pom_II = {
 	entity = "Astral_Express_fleet_entity"
 	construction_entity = "Astral_Express_fleet_entity"
 	entity_offset = { x = -30 y = -30 }
@@ -74,7 +67,7 @@ Ship_Astral_Express_II = {
 			unity = 3700
 		}
 	}
-	upgrade_from = { Ship_Astral_Express }
+	upgrade_from = { Pom-Pom_I }
 	prerequisites = {  }
 	on_build_start = {  }
 	on_build_complete = { 
@@ -115,7 +108,7 @@ Ship_Astral_Express_II = {
 	}
 }
 
-Ship_Astral_Express_III = {
+Pom-Pom_III = {
 	entity = "Astral_Express_fleet_entity"
 	construction_entity = "Astral_Express_fleet_entity"
 	entity_offset = { x = -30 y = -30 }
@@ -130,7 +123,7 @@ Ship_Astral_Express_III = {
 			unity = 37000
 		}
 	}
-	upgrade_from = { Ship_Astral_Express_II }
+	upgrade_from = { Pom-Pom_II }
 	prerequisites = {  }
 	on_build_start = {  }
 	on_build_complete = { }
