@@ -1,6 +1,6 @@
 
 Death_of_Akivili = { #坟头的 ID
-	picture = GFX_evt_archaeological_dig #图片，跟事件类似，需要注册路径
+	picture = GFX_evt_DOT_SR_002 #图片，跟事件类似，需要注册路径
 	desc = Death_of_Akivili_desc
 	max_instances = 2 #决定最大生成数目。只有在使用“ create_archemical_site = random”时，才可以检查该类型星系的最大实例数
 	weight = 2 #权重为随机权重，仅在使用“ create_archemical_site = random”时使用。
@@ -53,7 +53,7 @@ Death_of_Akivili = { #坟头的 ID
 }
 
 Aeons = { #坟头的 ID
-	picture = GFX_evt_archaeological_dig #图片，跟事件类似，需要注册路径
+	picture = GFX_evt_DOT_SR_002 #图片，跟事件类似，需要注册路径
 	desc = Aeons_desc
 	max_instances = 2 #决定最大生成数目。只有在使用“ create_archemical_site = random”时，才可以检查该类型星系的最大实例数
 	weight = 2 #权重为随机权重，仅在使用“ create_archemical_site = random”时使用。
@@ -93,6 +93,59 @@ Aeons = { #坟头的 ID
 		difficulty = 4 #难度，应该为正整数
 		icon = GFX_archaeology_runes_C5 # 此阶段的小图标
 		event = Aeons.505
+	}
+	on_roll_failed = {
+		from = {
+			standard_archaeological_site_on_roll_failed = { RANDOM_EVENTS = all_random_events }
+		}
+	}
+	# on_roll_failed = <effect> #掷骰失败时的随机效果，范围 this =舰队， from =坟头，这些效果一般写在 scripted_effects
+	# on_create = <effect> #当这个坟头被创造时，触发的效果，范围同上
+	# on_visible = <effect> #当做个坟头被看见，触发的效果，范围同上
+}
+
+
+Aeons_II = { #坟头的 ID
+	picture = GFX_evt_DOT_SR_002 #图片，跟事件类似，需要注册路径
+	desc = Aeons_II_desc
+	max_instances = 2 #决定最大生成数目。只有在使用“ create_archemical_site = random”时，才可以检查该类型星系的最大实例数
+	weight = 2 #权重为随机权重，仅在使用“ create_archemical_site = random”时使用。
+	stages = 6 #有多少个阶段，一般最大为 6
+	allow = { #是否允许，范围同上
+		always = yes
+	} 
+	visible = { #检查具有 this =国家的范围是否可以看到 from =坟头
+		always = yes
+	}
+	stage = {
+		difficulty = 1
+		icon = GFX_archaeology_runes_C1
+		event = Aeons_II.500
+	}
+	stage = {
+		difficulty = 1
+		icon = GFX_archaeology_runes_C2
+		event = Aeons_II.501
+	}
+	stage = {
+		difficulty = 2
+		icon = GFX_archaeology_runes_C3
+		event = Aeons_II.502
+	}
+	stage = {
+		difficulty = 2
+		icon = GFX_archaeology_runes_C4
+		event = Aeons_II.503
+	}
+	stage = {
+		difficulty = 3
+		icon = GFX_archaeology_runes_C5
+		event = Aeons_II.504
+	}
+	stage = { #有关于阶段的定义，取决于你写代码的顺序。
+		difficulty = 4 #难度，应该为正整数
+		icon = GFX_archaeology_runes_C5 # 此阶段的小图标
+		event = Aeons_II.505
 	}
 	on_roll_failed = {
 		from = {
