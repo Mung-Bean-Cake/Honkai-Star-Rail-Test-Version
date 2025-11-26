@@ -1,56 +1,103 @@
 #Ship_Astral_Express
 
 Ship_Astral_Express = {
-    entity = "Astral_Express_fleet_entity"
-    construction_entity = "Astral_Express_fleet_entity"
-    entity_offset = { x = -30 y = -30 }
-    portrait = "GFX_megastructure_construction_background"
-    build_time = 30
-    place_entity_on_planet_plane = no
-	build_outside_gravity_well = no
-    resources = {
-        category = megastructures
-        cost = {
-           alloys = 10
-           unity = 10
-        }
-    }
-    upgrade_from = {  }
-    prerequisites = {  }
-    on_build_start = {  }
-    on_build_complete = {
-        From = {  
-    	change_variable = { which = NUM_Ship_Astral_Express value = 1 } 
-        }
-    }
-    potential = {
-        always = no
-    }
-    country_modifier = {
-		country_trade_attractiveness = 0.25
-		planet_colony_development_speed_mult = 0.25
-	}
-    ai_weight = {
-		factor = 0
-        modifier = {
-           add = 1.5
-           From = {
-               owner_main_species = {
-                   is_species_class = Astral_Express
-               }
-           }
-        }
-        modifier = {
-            add = 1.5
-            From = {
-                has_resource = { type = alloys amount > 2500 }
-            }
-        }
-        modifier = {
-           add = -4.5
-           From = {
-               check_variable = { which = NUM_Ship_Astral_Express value > 0 }
-           }
-        }
+	entity = "Astral_Express_fleet_entity"
+	construction_entity = "Astral_Express_fleet_entity"
+	entity_offset = { x = -30 y = -30 }
+	portrait = "GFX_megastructure_construction_background"
+	build_time = 30
+	# place_entity_on_planet_plane = no
+	# build_outside_gravity_well = no
+	resources = {
+		category = megastructures
+		cost = {
+			alloys = 3700
+			unity = 3700
 		}
+	}
+	upgrade_from = {  }
+	prerequisites = {  }
+	on_build_start = {  }
+	on_build_complete = { }
+	possible = {
+		from = {
+			or = {
+				# has_origin = origin_Xianzhou
+				has_origin = origin_Astral_Express
+			}
+		}
+		exists = starbase
+		# 下面的变量检测不知道为什么不生效
+		check_variable = { which = num_starbases value > 10 }
+		check_variable = { which = used_starbase_capacity_percent value > 0.5 }
+		# check_variable = { which = num_gateways value > 0 }
+		custom_tooltip = {
+			fail_text = "requires_no_existing_megastructure"
+			# NOT = { has_any_megastructure = yes }
+			has_no_non_gate_megastructure = yes
+		}
+	}
+	country_modifier = {
+		planet_colony_development_speed_mult = 1.37
+		all_technology_research_speed = 1.37
+		country_naval_cap_add = 37
+		add_base_country_intel = 37
+		planet_amenities_mult = 0.37
+		starbase_shipyard_build_speed_mult = 1.37
+		ship_military_alloys_upkeep_mult = -0.37
+	}	
+	ai_weight = {
+		factor = 1
+	}
+}
+
+Ship_Astral_Express_II = {
+	entity = "Astral_Express_fleet_entity"
+	construction_entity = "Astral_Express_fleet_entity"
+	entity_offset = { x = -30 y = -30 }
+	portrait = "GFX_megastructure_construction_background"
+	build_time = 30
+	# place_entity_on_planet_plane = no
+	# build_outside_gravity_well = no
+	resources = {
+		category = megastructures
+		cost = {
+			alloys = 13700
+			unity = 13700
+		}
+	}
+	upgrade_from = { Ship_Astral_Express }
+	prerequisites = {  }
+	on_build_start = {  }
+	on_build_complete = { }
+	possible = {
+		from = {
+			or = {
+				# has_origin = origin_Xianzhou
+				has_origin = origin_Astral_Express
+			}
+		}
+		exists = starbase
+		# 下面的变量检测不知道为什么不生效
+		check_variable = { which = num_starbases value > 20 }
+		check_variable = { which = used_starbase_capacity_percent value > 0.5 }
+		# check_variable = { which = num_gateways value > 0 }
+		custom_tooltip = {
+			fail_text = "requires_no_existing_megastructure"
+			# NOT = { has_any_megastructure = yes }
+			has_no_non_gate_megastructure = yes
+		}
+	}
+	country_modifier = {
+		planet_colony_development_speed_mult = 2.37
+		all_technology_research_speed = 2.37
+		country_naval_cap_add = 137
+		add_base_country_intel = 137
+		planet_amenities_mult = 1.37
+		starbase_shipyard_build_speed_mult = 13.7
+		ship_military_alloys_upkeep_mult = -1.37
+	}	
+	ai_weight = {
+		factor = 1
+	}
 }
