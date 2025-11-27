@@ -3,29 +3,343 @@ namespace = Aeons
 namespace = Aeons_II
 namespace = Astral_Express
 
-#生成殖民地好难啊
+#生成殖民地：星穹列车
+event = {
+	id = Astral_Express.01
+	hide_window = yes
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		every_playable_country = {
+			limit = { has_origin = origin_Astral_Express }
+			every_system_within_border = {
+				every_system_planet = {
+					limit = { has_planet_flag = Create_Express_Welt }
+					planet_event = { id = Astral_Express.02 }
+				}
+				every_system_planet = {
+					limit = { has_planet_flag = Create_March_7th }
+					planet_event = { id = Astral_Express.03 }
+				}
+				every_system_planet = {
+					limit = { has_planet_flag = Create_Express_Himeko }
+					planet_event = { id = Astral_Express.04 }
+				}
+				every_system_planet = {
+					limit = { has_planet_flag = Create_Express_Danheng }
+					planet_event = { id = Astral_Express.05 }
+				}
+			}
+		}
+	}
+}
+
 planet_event = {
-    id = Astral_Express.01
-    title = Astral_Express.01
-    # desc = "一股神秘的力量瞬间将这颗星球纳入我们的版图。"
-    picture = GFX_evt_robot_assembly
-    show_sound = event_ship_landing
-    location = from
-	# hide_window = yes
-    is_triggered_only = yes
-    immediate = {
+	id = Astral_Express.02
+	title = Death_of_Akivili.500.name
+	desc = Death_of_Akivili.500.desc
+	picture = GFX_evt_robot_assembly
+	show_sound = event_ship_landing
+	location = this
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		limit = { has_planet_flag = Create_Express_Welt }
 		create_colony = {
 			owner = solar_system.owner
 			species = solar_system.owner.owner_main_species
+		}		
+		while = {
+			count = 8
+			create_pop_group = {
+				size = 100
+				species = owner_main_species
+			}
+			remove_district = district_city
+			set_name = Express_Welt
 		}
-        while = {
-            count = 8
-            create_pop_group = {
-                size = 100
-                species = owner_main_species
-            }
-        }
-    }
+		while = {
+			count = 10
+			remove_district = district_city
+		}
+	}
+}
+planet_event = {
+	id = Astral_Express.03
+	title = Death_of_Akivili.500.name
+	desc = Death_of_Akivili.500.desc
+	picture = GFX_evt_robot_assembly
+	show_sound = event_ship_landing
+	location = this
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		limit = { has_planet_flag = Create_Express_March_7th }
+		create_colony = {
+			owner = solar_system.owner
+			species = solar_system.owner.owner_main_species
+		}		
+		while = {
+			count = 8
+			create_pop_group = {
+				size = 100
+				species = owner_main_species
+			}
+			remove_district = district_city
+			set_name = Express_March_7th
+		}
+		while = {
+			count = 10
+			remove_district = district_city
+		}
+	}
+}
+planet_event = {
+	id = Astral_Express.04
+	title = Death_of_Akivili.500.name
+	desc = Death_of_Akivili.500.desc
+	picture = GFX_evt_robot_assembly
+	show_sound = event_ship_landing
+	location = this
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		limit = { has_planet_flag = Create_Express_Himeko }
+		create_colony = {
+			owner = solar_system.owner
+			species = solar_system.owner.owner_main_species
+		}		
+		while = {
+			count = 8
+			create_pop_group = {
+				size = 100
+				species = owner_main_species
+			}
+			remove_district = district_city
+			set_name = Express_Himeko
+		}
+		while = {
+			count = 10
+			remove_district = district_city
+		}
+	}
+}
+planet_event = {
+	id = Astral_Express.05
+	title = Death_of_Akivili.500.name
+	desc = Death_of_Akivili.500.desc
+	picture = GFX_evt_robot_assembly
+	show_sound = event_ship_landing
+	location = this
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		limit = { has_planet_flag = Create_Express_Danheng }
+		create_colony = {
+			owner = solar_system.owner
+			species = solar_system.owner.owner_main_species
+		}		
+		while = {
+			count = 8
+			create_pop_group = {
+				size = 100
+				species = owner_main_species
+			}
+			remove_district = district_city
+			set_name = Express_Danheng
+		}
+		while = {
+			count = 10
+			remove_district = district_city
+		}
+	}
+}
+
+
+#生成殖民地：仙舟联盟
+event = {
+	id = Astral_Express.11
+	hide_window = yes
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		every_playable_country = {
+			limit = { has_origin = origin_Xianzhou }
+			every_system_within_border = {
+				every_system_planet = {
+					limit = { has_planet_flag = Create_The_Xianzhou_Fanghu }
+					planet_event = { id = Astral_Express.12 }
+				}
+				every_system_planet = {
+					limit = { has_planet_flag = Create_The_Xianzhou_Yaoqing }
+					planet_event = { id = Astral_Express.13 }
+				}
+				every_system_planet = {
+					limit = { has_planet_flag = Create_The_Xianzhou_Yuque }
+					planet_event = { id = Astral_Express.14 }
+				}
+				every_system_planet = {
+					limit = { has_planet_flag = Create_The_Xianzhou_Xvling }
+					planet_event = { id = Astral_Express.15 }
+				}
+				every_system_planet = {
+					limit = { has_planet_flag = Create_The_Xianzhou_Zhuming }
+					planet_event = { id = Astral_Express.16 }
+				}
+			}
+		}
+	}
+}
+
+planet_event = {
+	id = Astral_Express.12
+	title = Death_of_Akivili.500.name
+	desc = Death_of_Akivili.500.desc
+	picture = GFX_evt_robot_assembly
+	show_sound = event_ship_landing
+	location = this
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		limit = { has_planet_flag = Create_The_Xianzhou_Fanghu }
+		create_colony = {
+			owner = solar_system.owner
+			species = solar_system.owner.owner_main_species
+		}		
+		while = {
+			count = 8
+			create_pop_group = {
+				size = 100
+				species = owner_main_species
+			}
+			remove_district = district_city
+			set_name = The_Xianzhou_Fanghu
+		}
+		while = {
+			count = 10
+			remove_district = district_city
+		}
+	}
+}
+planet_event = {
+	id = Astral_Express.13
+	title = Death_of_Akivili.500.name
+	desc = Death_of_Akivili.500.desc
+	picture = GFX_evt_robot_assembly
+	show_sound = event_ship_landing
+	location = this
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		limit = { has_planet_flag = Create_The_Xianzhou_Yaoqing }
+		create_colony = {
+			owner = solar_system.owner
+			species = solar_system.owner.owner_main_species
+		}		
+		while = {
+			count = 8
+			create_pop_group = {
+				size = 100
+				species = owner_main_species
+			}
+			remove_district = district_city
+			set_name = The_Xianzhou_Yaoqing
+		}
+		while = {
+			count = 10
+			remove_district = district_city
+		}
+	}
+}
+planet_event = {
+	id = Astral_Express.14
+	title = Death_of_Akivili.500.name
+	desc = Death_of_Akivili.500.desc
+	picture = GFX_evt_robot_assembly
+	show_sound = event_ship_landing
+	location = this
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		limit = { has_planet_flag = Create_The_Xianzhou_Yuque }
+		create_colony = {
+			owner = solar_system.owner
+			species = solar_system.owner.owner_main_species
+		}		
+		while = {
+			count = 8
+			create_pop_group = {
+				size = 100
+				species = owner_main_species
+			}
+			remove_district = district_city
+			set_name = The_Xianzhou_Yuque
+		}
+		while = {
+			count = 10
+			remove_district = district_city
+		}
+	}
+}
+planet_event = {
+	id = Astral_Express.15
+	title = Death_of_Akivili.500.name
+	desc = Death_of_Akivili.500.desc
+	picture = GFX_evt_robot_assembly
+	show_sound = event_ship_landing
+	location = this
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		limit = { has_planet_flag = Create_The_Xianzhou_Xvling }
+		create_colony = {
+			owner = solar_system.owner
+			species = solar_system.owner.owner_main_species
+		}		
+		while = {
+			count = 8
+			create_pop_group = {
+				size = 100
+				species = owner_main_species
+			}
+			remove_district = district_city
+			set_name = The_Xianzhou_Xvling
+		}
+		while = {
+			count = 10
+			remove_district = district_city
+		}
+	}
+}
+planet_event = {
+	id = Astral_Express.16
+	title = Death_of_Akivili.500.name
+	desc = Death_of_Akivili.500.desc
+	picture = GFX_evt_robot_assembly
+	show_sound = event_ship_landing
+	location = this
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		limit = { has_planet_flag = Create_The_Xianzhou_Zhuming }
+		create_colony = {
+			owner = solar_system.owner
+			species = solar_system.owner.owner_main_species
+		}		
+		while = {
+			count = 8
+			create_pop_group = {
+				size = 100
+				species = owner_main_species
+			}
+			remove_district = district_city
+			set_name = The_Xianzhou_Zhuming
+		}
+		while = {
+			count = 10
+			remove_district = district_city
+		}
+	}
 }
 
 #阿基维利 
