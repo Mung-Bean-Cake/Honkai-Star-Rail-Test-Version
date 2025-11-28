@@ -1,8 +1,10 @@
-#Ship_Astral_Express
+#Pom-Pom
 
-Ship_Astral_Express = {
-	entity = "Astral_Express_fleet_entity"
-	construction_entity = "Astral_Express_fleet_entity"
+Pom-Pom_I = {
+	# entity = "Astral_Express_fleet_entity"
+	# construction_entity = "Astral_Express_fleet_entity"
+	entity = "Holy_Dustbin_entity"
+	construction_entity = "Holy_Dustbin_entity"
 	entity_offset = { x = -30 y = -30 }
 	portrait = "GFX_megastructure_construction_background"
 	build_time = 30
@@ -24,9 +26,12 @@ Ship_Astral_Express = {
 		give_technology = { tech = tech_wormhole_stabilization message = yes }
 		give_technology = { tech = tech_gateway_activation message = yes }
 		give_technology = { tech = tech_jump_drive_1 message = yes }
+		From = { 
+			change_variable = { which = NUM_Pom-Pom_I value = 1 } 
+			add_modifier = { modifier = galactic_community_diplo_corps_respected }
+        }
 	}
 	possible = {
-		always = no
 		from = {
 			or = {
 				# has_origin = origin_Xianzhou
@@ -34,15 +39,9 @@ Ship_Astral_Express = {
 			}
 		}
 		exists = starbase
-		from = {
-			num_starbases >= 1
-			used_starbase_capacity_percent >= 0.1
-			# num_gateways > 0
-		}
-		custom_tooltip = {
-			fail_text = "requires_no_existing_megastructure"
-			# NOT = { has_any_megastructure = yes }
-			has_no_non_gate_megastructure = yes
+		From = { 
+			check_variable = { which = NUM_Pom-Pom_I value < 1 }
+			NOT = { has_any_megastructure = yes }
 		}
 	}
 	country_modifier = {
@@ -53,15 +52,25 @@ Ship_Astral_Express = {
 		planet_amenities_mult = 0.37
 		starbase_shipyard_build_speed_mult = 1.37
 		ship_military_alloys_upkeep_mult = -0.37
+		army_damage_mult = 3.70
+		army_starting_experience_add = 370
+		country_base_minerals_produces_add = 370
+		diplo_action_acceptance_add = 370
+		
+		diplo_weight_mult = 3.7
+		ship_speed_mult = 3.7
+		shipclass_starbase_damage_mult = 3.70
+		shipclass_starbase_hull_mult = 3.70
+		ship_sensor_range_add = 37
 	}	
 	ai_weight = {
 		factor = 1
 	}
 }
 
-Ship_Astral_Express_II = {
-	entity = "Astral_Express_fleet_entity"
-	construction_entity = "Astral_Express_fleet_entity"
+Pom-Pom_II = {
+	entity = "Holy_Dustbin_entity"
+	construction_entity = "Holy_Dustbin_entity"
 	entity_offset = { x = -30 y = -30 }
 	portrait = "GFX_megastructure_construction_background"
 	build_time = 30
@@ -74,7 +83,7 @@ Ship_Astral_Express_II = {
 			unity = 3700
 		}
 	}
-	upgrade_from = { Ship_Astral_Express }
+	upgrade_from = { Pom-Pom_I }
 	prerequisites = {  }
 	on_build_start = {  }
 	on_build_complete = { 
@@ -98,7 +107,7 @@ Ship_Astral_Express_II = {
 		custom_tooltip = {
 			fail_text = "requires_no_existing_megastructure"
 			# NOT = { has_any_megastructure = yes }
-			has_no_non_gate_megastructure = yes
+			# has_no_non_gate_megastructure = yes
 		}
 	}
 	country_modifier = {
@@ -109,15 +118,25 @@ Ship_Astral_Express_II = {
 		planet_amenities_mult = 1.37
 		starbase_shipyard_build_speed_mult = 13.7
 		ship_military_alloys_upkeep_mult = -1.37
+		army_damage_mult = 3.70
+		army_starting_experience_add = 370
+		country_base_minerals_produces_add = 370
+		diplo_action_acceptance_add = 370
+		
+		diplo_weight_mult = 3.7
+		ship_speed_mult = 3.7
+		shipclass_starbase_damage_mult = 3.70
+		shipclass_starbase_hull_mult = 3.70
+		ship_sensor_range_add = 37
 	}	
 	ai_weight = {
 		factor = 1
 	}
 }
 
-Ship_Astral_Express_III = {
-	entity = "Astral_Express_fleet_entity"
-	construction_entity = "Astral_Express_fleet_entity"
+Pom-Pom_III = {
+	entity = "Holy_Dustbin_entity"
+	construction_entity = "Holy_Dustbin_entity"
 	entity_offset = { x = -30 y = -30 }
 	portrait = "GFX_megastructure_construction_background"
 	build_time = 30
@@ -130,7 +149,7 @@ Ship_Astral_Express_III = {
 			unity = 37000
 		}
 	}
-	upgrade_from = { Ship_Astral_Express_II }
+	upgrade_from = { Pom-Pom_II }
 	prerequisites = {  }
 	on_build_start = {  }
 	on_build_complete = { }
@@ -150,7 +169,7 @@ Ship_Astral_Express_III = {
 		custom_tooltip = {
 			fail_text = "requires_no_existing_megastructure"
 			# NOT = { has_any_megastructure = yes }
-			has_no_non_gate_megastructure = yes
+			# has_no_non_gate_megastructure = yes
 		}
 	}
 	country_modifier = {
@@ -161,6 +180,16 @@ Ship_Astral_Express_III = {
 		planet_amenities_mult = 5.37
 		starbase_shipyard_build_speed_mult = 53.7
 		ship_military_alloys_upkeep_mult = -5.37
+		army_damage_mult = 3.70
+		army_starting_experience_add = 370
+		country_base_minerals_produces_add = 370
+		diplo_action_acceptance_add = 370
+		
+		diplo_weight_mult = 13.7
+		ship_speed_mult = 13.7
+		shipclass_starbase_damage_mult = 3.70
+		shipclass_starbase_hull_mult = 3.70
+		ship_sensor_range_add = 37
 	}	
 	ai_weight = {
 		factor = 1
