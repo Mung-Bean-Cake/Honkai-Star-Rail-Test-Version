@@ -13,6 +13,27 @@ country_event = {#初试化设置
             which = yuzhousuipian
             value = 5000
         }
+        #领袖
+        ruler = {
+            remove_all_positive_traits = yes
+            set_name = NAME_luosi
+            change_species = event_target:luosi_leader_species
+            change_leader_class = scientist
+            change_leader_portrait = luosi
+            change_background_ethic = ethic_materialist
+            change_background_job = event_fake_job_1
+            add_skill_without_trait_selection = 6
+            add_trait = {trait = leader_luosi_t1 show_message = no}
+            add_trait = {trait = leader_luosi_t2 show_message = no}
+            add_trait = {trait = leader_luosi_t3 show_message = no}
+            set_gender = male
+            set_age = 30
+            set_leader_flag = legendary_leader
+            set_leader_flag = immune_to_negative_traits
+            set_leader_flag = luosi
+            set_leader_flag = leader_death_events_blocked  # 阻止原版葬礼事件
+            save_global_event_target_as = luosi_leader
+        }
         #额外科技
         give_technology = { tech = tech_robotic_workers message = no }
         give_technology = { tech = tech_powered_exoskeletons message = no }
@@ -25,17 +46,6 @@ country_event = {#初试化设置
         give_technology = { tech = tech_robot_assembly_complex message = no }
         give_technology = { tech = tech_robomodding_points_2 message = no }
         give_technology = { tech = tech_positronic_implants message = no }
-        give_technology = { tech = tech_frontier_health message = no }
-        give_technology = { tech = tech_genome_mapping message = no }
-        give_technology = { tech = tech_vitality_boosters message = no }
-        give_technology = { tech = tech_epigenetic_triggers message = no }
-        give_technology = { tech = tech_cloning message = no }
-        give_technology = { tech = tech_gene_banks message = no }
-        give_technology = { tech = tech_gene_seed_purification message = no }
-        give_technology = { tech = tech_morphogenetic_field_mastery message = no }
-        give_technology = { tech = tech_gene_tailoring message = no }
-        give_technology = { tech = tech_glandular_acclimation message = no }
-        give_technology = { tech = tech_gene_expressions message = no }
         give_technology = { tech = tech_habitat_1 message = no }
         give_technology = { tech = tech_habitat_2 message = no }
         give_technology = { tech = tech_habitat_3 message = no }
@@ -53,31 +63,747 @@ country_event = {#初试化设置
             change_pc = pc_luosi
             set_planet_entity = {
                 entity = "luosi_artifacts_palace_1_entity"
-                graphical_culture = owner
             }
             set_all_comms_surveyed = yes
+            change_variable = {
+                which = luosi_planet_hashrate
+                value = 0
+            }
+            change_variable = {
+                which = luosi_planet_hashrate_max
+                value = 5
+            }
+            change_variable = {
+                which = function_unuse
+                value = 3
+            }
             clear_blockers = yes
+            clear_deposits = yes
+            clear_planet_modifiers = yes
             set_planet_flag = megastructure
-            set_planet_flag = herta_habitat
             set_planet_flag = habitat
             set_planet_flag = colony_event #防止出现原版殖民地的各种奇怪事件
             remove_district = district_city
-            add_district = district_herta_1
-            add_district = district_herta_1
-            add_district = district_herta_2
-            add_district = district_herta_2
-            add_district = district_herta_3
-            add_district = district_herta_3
-            add_district = district_herta_4
-            add_district = district_herta_4
+            add_district = district_luosi_planet_1
+            add_district = district_luosi_planet_1
+            add_district = district_luosi_planet_2
+            add_district = district_luosi_planet_2
+            add_district = district_luosi_planet_3
+            add_district = district_luosi_planet_3
+            add_district = district_luosi_planet_4
+            add_district = district_luosi_planet_4
+            add_district = district_luosi_planet_5
+            add_district = district_luosi_planet_5
+            add_district = district_luosi_planet_6
             remove_building = building_hydroponics_farm
-            add_building = herta_holomuseum_1
+            remove_building = building_colony_shelter
+            add_building = building_capital
             add_building = building_holo_theatres
             add_building = building_robot_assembly_plant
+            add_building = building_bureaucratic_1
             add_zone = {
-                district = district_herta_1
+                district = district_luosi_planet_1
                 zone = zone_unity
             }
+            #create_fleet = {
+                #name = "NAME_Grand_Herald"
+                #settings = {
+                    #spawn_debris = no
+                #}
+                #effect = {
+                    #set_owner = root.owner
+                    #create_ship_design = {
+                        #design = "NAME_Herald"
+                    #}
+                    #create_ship_with_random_graphical_culture = {
+                        #EFFECT_NAME = create_grand_herald_ship
+                    #}
+                    #set_location = prev
+                #}
+            #}
         }
+    }
+}
+country_event = {
+    id = luosi.2
+    hide_window = yes
+
+    is_triggered_only = yes
+
+    trigger = {
+        OR = {
+            has_origin = origin_luosi_star
+            from = {
+                has_origin = origin_luosi_star
+            }
+        }
+    }
+
+    immediate = {
+        if = {
+            limit = {
+                has_origin = origin_luosi_star
+            }
+            add_monthly_resource_mult = {
+                resource = unity
+                value = @tier2unityreward
+                min = @tier2unitymin
+                max = @tier2unitymax
+            }
+        }
+        else_if = {
+            limit = {
+                from = {
+                    has_origin = origin_luosi_star
+                }
+            }
+            add_monthly_resource_mult = {
+                resource = unity
+                value = @tier2unityreward
+                min = @tier2unitymin
+                max = @tier2unitymax
+            }
+        }
+    }
+}
+country_event = {
+    id = luosi.100
+    title = "luosi.100.name"
+    desc = "luosi.100.desc"
+    picture = GFX_evt_virtual_world
+    is_triggered_only = yes
+    fire_only_once = yes
+    trigger = {
+        or = {
+            has_tradition = tr_virtuality_finish
+            has_tradition = tr_nanotech_finish
+            has_tradition = tr_modularity_finish
+            has_tradition = tr_psionics_shroud_finish
+            has_tradition = tr_psionics_finish
+        }
+    }
+
+    option = {
+        name = "luosi.100.a"
+        custom_tooltip = luosi.100.tt
+    }
+}
+planet_event = {
+    id = luosi.101
+    title = "luosi.101.name"
+    desc = "luosi.101.desc"
+    picture = GFX_evt_hive_cyberization
+    is_triggered_only = yes
+    immediate = {
+
+    }
+    option = {
+        name = luosi.101.a
+        hidden_effect = {
+            planet_event = { id = luosi.102 days = 3 }
+        }
+    }
+    option = {
+        name = luosi.101.b
+        allow = { has_deposit = d_luosi_industry_slot }
+        hidden_effect = {
+            planet_event = { id = luosi.103 days = 3 }
+        }
+    }
+    option = {
+        name = luosi.101.c
+        allow = {
+            count_owned_pop_amount = {
+                count >= 1000
+                limit = {
+                    is_robot_pop_group = yes
+                }
+            }
+        }
+        hidden_effect = {
+            planet_event = { id = luosi.104 days = 3 }
+        }
+    }
+    option = {
+        name = luosi.101.d
+        allow = {
+            count_owned_pop_amount = {
+                count >= 100
+                limit = {
+                    is_robot_pop_group = yes
+                }
+            }
+        }
+        hidden_effect = {
+            planet_event = { id = luosi.105 days = 3 }
+        }
+    }
+    option = {
+        name = luosi.102.a
+    }
+}
+planet_event = {
+    id = luosi.102
+    title = "luosi.102.name"
+    desc = "luosi.102.desc"
+    picture = GFX_evt_virtual_world
+    is_triggered_only = yes
+    immediate = {
+        this.solar_system = {
+            save_event_target_as = luosi_pop_target_system
+        }
+        event_target:luosi_pop_target_system = {
+            ordered_fleet_in_system = {
+                limit = {
+                    is_fleet_can_be_scrapped = yes
+                    NAND = {
+                        exists = event_target:scrappable_fleet_1
+                        is_same_value = event_target:scrappable_fleet_1
+                    }
+                }
+                order_by = trigger:fleet_power
+                inverse = yes
+                position = 0
+                save_event_target_as = scrappable_fleet_1
+                event_target:scrappable_fleet_1 = {
+                    if = {
+                        limit = {
+                            is_ship_class = shipclass_science_ship
+                            is_ship_class = shipclass_colonizer
+                            is_ship_class = shipclass_constructor
+                        }
+                        set_variable = {
+                            which = scrap_value_1
+                            value = 1
+                        }
+                    }
+                    else = {
+                        export_trigger_value_to_variable = {
+                            trigger = fleet_size
+                            variable = scrap_value_1
+                        }
+                    }
+                }
+            }
+            ordered_fleet_in_system = {
+                limit = {
+                    is_fleet_can_be_scrapped = yes
+                    NOR = {
+                        AND = {
+                            exists = event_target:scrappable_fleet_1
+                            is_same_value = event_target:scrappable_fleet_1
+                        }
+                        exists = event_target:scrappable_fleet_2
+                    }
+                }
+                order_by = trigger:fleet_power
+                inverse = no
+                position = 0
+                save_event_target_as = scrappable_fleet_2
+                event_target:scrappable_fleet_2 = {
+                    if = {
+                        limit = {
+                            is_ship_class = shipclass_science_ship
+                            is_ship_class = shipclass_colonizer
+                            is_ship_class = shipclass_constructor
+                        }
+                        set_variable = {
+                            which = scrap_value_2
+                            value = 1
+                        }
+                    }
+                    else = {
+                        export_trigger_value_to_variable = {
+                            trigger = fleet_size
+                            variable = scrap_value_2
+                        }
+                    }
+                }
+            }
+            random_fleet_in_system = {
+                limit = {
+                    is_fleet_can_be_scrapped = yes
+                    NOR = {
+                        AND = {
+                            exists = event_target:scrappable_fleet_1
+                            is_same_value = event_target:scrappable_fleet_1
+                        }
+                        AND = {
+                            exists = event_target:scrappable_fleet_2
+                            is_same_value = event_target:scrappable_fleet_2
+                        }
+                        exists = event_target:scrappable_fleet_3
+                    }
+                }
+                save_event_target_as = scrappable_fleet_3
+                event_target:scrappable_fleet_3 = {
+                    if = {
+                        limit = {
+                            is_ship_class = shipclass_science_ship
+                            is_ship_class = shipclass_colonizer
+                            is_ship_class = shipclass_constructor
+                        }
+                        set_variable = {
+                            which = scrap_value_3
+                            value = 1
+                        }
+                    }
+                    else = {
+                        export_trigger_value_to_variable = {
+                            trigger = fleet_size
+                            variable = scrap_value_3
+                        }
+                    }
+                }
+            }
+            random_fleet_in_system = {
+                limit = {
+                    is_fleet_can_be_scrapped = yes
+                    NOR = {
+                        AND = {
+                            exists = event_target:scrappable_fleet_1
+                            is_same_value = event_target:scrappable_fleet_1
+                        }
+                        AND = {
+                            exists = event_target:scrappable_fleet_2
+                            is_same_value = event_target:scrappable_fleet_2
+                        }
+                        AND = {
+                            exists = event_target:scrappable_fleet_3
+                            is_same_value = event_target:scrappable_fleet_3
+                        }
+                        exists = event_target:scrappable_fleet_4
+                    }
+                }
+                save_event_target_as = scrappable_fleet_4
+                event_target:scrappable_fleet_4 = {
+                    if = {
+                        limit = {
+                            is_ship_class = shipclass_science_ship
+                            is_ship_class = shipclass_colonizer
+                            is_ship_class = shipclass_constructor
+                        }
+                        set_variable = {
+                            which = scrap_value_4
+                            value = 1
+                        }
+                    }
+                    else = {
+                        export_trigger_value_to_variable = {
+                            trigger = fleet_size
+                            variable = scrap_value_4
+                        }
+                    }
+                }
+            }
+        }
+    }
+    option = {
+        name = enclave.310.b
+        trigger = {
+            exists = event_target:scrappable_fleet_1
+        }
+        allow = {
+            custom_tooltip = {
+                fail_text = IS_NOT_CLOAKED
+                event_target:scrappable_fleet_1 = {
+                    is_cloaked = no
+                }
+            }
+        }
+        hidden_effect = {
+            event_target:luosi_pop_target_system = {
+                event_target:scrappable_fleet_1 = {
+                    if = {
+                        limit = {
+                            exists = leader
+                        }
+                        unassign_leader = this
+                    }
+                }
+                destroy_fleet = event_target:scrappable_fleet_1
+                destroy_ship = event_target:scrappable_fleet_1
+            }
+            while = {
+                count = event_target:scrappable_fleet_1.scrap_value_1
+                create_pop_group = {
+                    size = 100
+                    species = this.owner.owner_main_species
+                }
+            }
+        }
+    }
+    option = {
+        name = enclave.310.c
+        trigger = {
+            exists = event_target:scrappable_fleet_2
+        }
+        allow = {
+            custom_tooltip = {
+                fail_text = IS_NOT_CLOAKED
+                event_target:scrappable_fleet_2 = {
+                    is_cloaked = no
+                }
+            }
+        }
+        hidden_effect = {
+            event_target:luosi_pop_target_system = {
+                event_target:scrappable_fleet_2 = {
+                    if = {
+                        limit = {
+                            exists = leader
+                        }
+                        unassign_leader = this
+                    }
+                }
+                destroy_fleet = event_target:scrappable_fleet_2
+                destroy_ship = event_target:scrappable_fleet_2
+            }
+            while = {
+                count = event_target:scrappable_fleet_2.scrap_value_2
+                create_pop_group = {
+                    size = 100
+                    species = this.owner.owner_main_species
+                }
+            }
+        }
+    }
+    option = {
+        name = enclave.310.d
+        trigger = {
+            exists = event_target:scrappable_fleet_3
+        }
+        allow = {
+            custom_tooltip = {
+                fail_text = IS_NOT_CLOAKED
+                event_target:scrappable_fleet_3 = {
+                    is_cloaked = no
+                }
+            }
+        }
+        hidden_effect = {
+            event_target:luosi_pop_target_system = {
+                event_target:scrappable_fleet_3 = {
+                    if = {
+                        limit = {
+                            exists = leader
+                        }
+                        unassign_leader = this
+                    }
+                }
+                destroy_fleet = event_target:scrappable_fleet_3
+                destroy_ship = event_target:scrappable_fleet_3
+            }
+            while = {
+                count = event_target:scrappable_fleet_3.scrap_value_3
+                create_pop_group = {
+                    size = 100
+                    species = this.owner.owner_main_species
+                }
+            }
+        }
+    }
+    option = {
+        name = enclave.310.e
+        trigger = {
+            exists = event_target:scrappable_fleet_4
+        }
+        allow = {
+            custom_tooltip = {
+                fail_text = IS_NOT_CLOAKED
+                event_target:scrappable_fleet_4 = {
+                    is_cloaked = no
+                }
+            }
+        }
+        hidden_effect = {
+            event_target:luosi_pop_target_system = {
+                event_target:scrappable_fleet_4 = {
+                    if = {
+                        limit = {
+                            exists = leader
+                        }
+                        unassign_leader = this
+                    }
+                }
+                destroy_fleet = event_target:scrappable_fleet_4
+                destroy_ship = event_target:scrappable_fleet_4
+            }
+            while = {
+                count = event_target:scrappable_fleet_4.scrap_value_4
+                create_pop_group = {
+                    size = 100
+                    species = this.owner.owner_main_species
+                }
+            }
+        }
+    }
+    option = {
+        name = luosi.102.a
+    }
+}
+planet_event = {
+    id = luosi.103
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = {
+        remove_deposit = d_luosi_industry_slot
+        create_pop_group = {
+            size = 100
+            species = this.owner.owner_main_species
+        }
+    }
+}
+planet_event = {
+    id = luosi.104
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = {
+        random_owned_pop_group = {
+            limit = {
+                is_robot_pop_group = yes
+            }
+            kill_pop_group = {
+                pop_group = this
+                amount = 500
+            }
+        }
+
+        create_fleet = {
+            effect = {
+                set_owner = root.owner
+                while = {
+                    count = 10
+                    random_list = {
+                        10 = { create_ship = { name = random random_existing_design = corvette } }
+                        9 = { create_ship = { name = random random_existing_design = frigate } }
+                        8 = { create_ship = { name = random random_existing_design = destroyer } }
+                        7 = { create_ship = { name = random random_existing_design = cruiser } }
+                        2 = { create_ship = { name = random random_existing_design = battleship } }
+                        1 = { create_ship = { name = random random_existing_design = titan } }
+                    }
+                }
+                set_fleet_stance = evasive
+                set_location = root
+            }
+        }
+    }
+}
+planet_event = {
+    id = luosi.105
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = {
+        random_owned_pop_group = {
+            limit = {
+                is_robot_pop_group = yes
+            }
+            kill_pop_group = {
+                pop_group = this
+                amount = 100
+            }
+        }
+        add_deposit = d_luosi_industry_slot
+    }
+}
+planet_event = {
+    id = luosi.106
+    title = luosi.106.a
+    desc = luosi.106.desc
+    picture = GFX_evt_alien_city
+    diplomatic = yes
+    custom_gui = luosi_planet_modifer_reset
+    is_triggered_only = yes
+    option = {
+        name = ok
+    }
+}
+country_event = {
+    id = luosi.107
+    title = "luosi.107.name"
+    desc = "luosi.107.desc"
+    picture = GFX_evt_hyper_relay_conjunction
+    is_triggered_only = yes
+    immediate = {
+        save_global_event_target_as = luosi_target_country
+        ordered_country = {
+            limit = {
+                OR = {
+                    species = {
+                        or = {
+                            is_archetype = MACHINE
+                            is_archetype = ROBOT
+                        }
+                    }
+                    has_authority = auth_machine_intelligence
+                    has_civic = civic_machine_remnants
+                }
+                opinion = {
+                    who = event_target:luosi_target_country
+                    value > 0
+                }
+                NOT = {
+                    has_origin = origin_luosi_star
+                }
+            }
+            position = 0
+            order_by = trigger:opinion
+            save_event_target_as = target_country_dipio_1
+        }
+        ordered_country = {
+            limit = {
+                OR = {
+                    species = {
+                        or = {
+                            is_archetype = MACHINE
+                            is_archetype = ROBOT
+                        }
+                    }
+                    has_authority = auth_machine_intelligence
+                    has_civic = civic_machine_remnants
+                }
+                opinion = {
+                    who = event_target:luosi_target_country
+                    value > 0
+                }
+                not = {
+                    has_origin = origin_luosi_star
+                }
+                NOR = {
+                    AND = {
+                        exists = event_target:target_country_dipio_1
+                        is_same_value = event_target:target_country_dipio_1
+                    }
+                    exists = event_target:target_country_dipio_2
+                }
+            }
+            position = 0
+            order_by = trigger:opinion
+            save_event_target_as = target_country_dipio_2
+        }
+        ordered_country = {
+            limit = {
+                OR = {
+                    species = {
+                        or = {
+                            is_archetype = MACHINE
+                            is_archetype = ROBOT
+                        }
+                    }
+                    has_authority = auth_machine_intelligence
+                    has_civic = civic_machine_remnants
+                }
+                opinion = {
+                    who = event_target:luosi_target_country
+                    value > 0
+                }
+                not = {
+                    has_origin = origin_luosi_star
+                }
+                NOR = {
+                    AND = {
+                        exists = event_target:target_country_dipio_1
+                        is_same_value = event_target:target_country_dipio_1
+                    }
+                    AND = {
+                        exists = event_target:target_country_dipio_2
+                        is_same_value = event_target:target_country_dipio_2
+                    }
+                    exists = event_target:target_country_dipio_3
+                }
+            }
+            position = 0
+            order_by = trigger:opinion
+            save_event_target_as = target_country_dipio_3
+        }
+        random_country = {
+            limit = {
+                OR = {
+                    species = {
+                        or = {
+                            is_archetype = MACHINE
+                            is_archetype = ROBOT
+                        }
+                    }
+                    has_authority = auth_machine_intelligence
+                    has_civic = civic_machine_remnants
+                }
+                opinion = {
+                    who = event_target:luosi_target_country
+                    value > 0
+                }
+                not = {
+                    has_origin = origin_luosi_star
+                }
+                NOR = {
+                    AND = {
+                        exists = event_target:target_country_dipio_1
+                        is_same_value = event_target:target_country_dipio_1
+                    }
+                    AND = {
+                        exists = event_target:target_country_dipio_2
+                        is_same_value = event_target:target_country_dipio_2
+                    }
+                    AND = {
+                        exists = event_target:target_country_dipio_3
+                        is_same_value = event_target:target_country_dipio_3
+                    }
+                    exists = event_target:target_country_dipio_4
+                }
+            }
+            save_event_target_as = target_country_dipio_4
+        }
+    }
+    option = {
+        name = luosi.107.a
+        trigger = {
+            exists = event_target:target_country_dipio_1
+        }
+        hidden_effect = {
+            event_target:target_country_dipio_1 = {
+                integrate_country_effect = { OWNER = event_target:luosi_target_country }
+            }
+        }
+    }
+    option = {
+        name = luosi.107.b
+        trigger = {
+            exists = event_target:target_country_dipio_2
+        }
+        hidden_effect = {
+            event_target:target_country_dipio_2 = {
+                integrate_country_effect = { OWNER = event_target:luosi_target_country }
+
+            }
+        }
+    }
+    option = {
+        name = luosi.107.a
+        trigger = {
+            exists = event_target:target_country_dipio_3
+        }
+        hidden_effect = {
+            event_target:target_country_dipio_3 = {
+                integrate_country_effect = {
+                    OWNER = event_target:luosi_target_country
+                }
+            }
+        }
+    }
+    option = {
+        name = luosi.107.d
+        trigger = {
+            exists = event_target:target_country_dipio_4
+        }
+        hidden_effect = {
+            event_target:target_country_dipio_4 = {
+                integrate_country_effect = {
+                    OWNER = event_target:luosi_target_country
+                }
+            }
+        }
+    }
+    option = {
+        name = luosi.102.a
     }
 }

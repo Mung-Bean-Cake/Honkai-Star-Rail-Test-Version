@@ -905,7 +905,7 @@ leader_trait_luosi_pop_up_t1 = {
 }
 #螺丝星
 trait_luosi_pop_1  ={
-    cost = 0
+    cost = 1
     allowed_archetypes = { MACHINE ROBOT }
     immortal_leaders = no
     improves_leaders = no
@@ -932,7 +932,7 @@ trait_luosi_pop_1  ={
     }
 }
 trait_luosi_pop_2  ={
-    cost = 0
+    cost = 1
     allowed_archetypes = { MACHINE ROBOT }
     immortal_leaders = no
     improves_leaders = no
@@ -951,7 +951,7 @@ trait_luosi_pop_2  ={
         pop_happiness = 0.15
         species_empire_size_mult = -0.10
     }
-    custom_tooltip = TRAIT_LUOSI_POP_2_EXCRETIONS_EFFECT
+    custom_tooltip_with_modifiers = TRAIT_LUOSI_POP_2_EXCRETIONS_EFFECT
     resources = {
         category = planet_pops
         produces = {
@@ -960,7 +960,7 @@ trait_luosi_pop_2  ={
     }
 }
 trait_luosi_pop_3  ={
-    cost = 0
+    cost = 1
     allowed_archetypes = { MACHINE ROBOT }
     immortal_leaders = yes
     improves_leaders = yes
@@ -977,7 +977,65 @@ trait_luosi_pop_3  ={
     tags = { machine positive  }
     modifier = {
         pop_environment_tolerance = 0.25
-        leaders_upkeep_mult = -0.15
+        planet_pop_assembly_mult = 0.15
     }
 
+}
+trait_luosi_pop_4  ={
+    cost = 2
+    allowed_archetypes = { MACHINE ROBOT }
+    immortal_leaders = yes
+    improves_leaders = yes
+    randomized=no
+    advanced_trait=no
+    icon="gfx/interface/icons/traits/trait_luosi_pop_4.dds"
+    species_potential_add = {
+        exists = from
+        from = {
+            has_origin = origin_luosi_star
+            has_tradition = tr_luosi_1
+        }
+    }
+    allowed_origins = { origin_luosi_star }
+    tags = { machine positive  }
+    modifier = {
+        species_empire_size_mult = -0.10
+        pop_bonus_workforce_mult = 0.1
+        pop_environment_tolerance = 0.25
+        planet_pop_assembly_mult = 0.25
+    }
+}
+trait_luosi_pop_5  ={
+    cost = 2
+    allowed_archetypes = { MACHINE ROBOT }
+    immortal_leaders = yes
+    improves_leaders = yes
+    randomized=no
+    advanced_trait=no
+    icon="gfx/interface/icons/traits/trait_luosi_pop_5.dds"
+    species_potential_add = {
+        exists = from
+        from = {
+            has_origin = origin_luosi_star
+            has_tradition = tr_luosi_1
+        }
+    }
+    allowed_origins = { origin_luosi_star }
+    tags = { machine positive  }
+    modifier = {
+        pop_government_ethic_attraction = 0.50
+        pop_happiness = 0.1
+        researcher_jobs_bonus_workforce_mult = 0.2
+    }
+    triggered_pop_group_modifier = {
+        potential = {
+            exists = planet
+            planet = {
+                is_planet_class = pc_luosi
+            }
+        }
+        pop_bonus_workforce_mult = 0.15
+        pop_amenities_usage_mult = -0.15
+        pop_housing_usage_mult = -0.15
+    }
 }

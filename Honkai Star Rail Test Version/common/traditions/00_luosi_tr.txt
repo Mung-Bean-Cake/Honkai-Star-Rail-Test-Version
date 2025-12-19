@@ -1,0 +1,119 @@
+tr_luosi_adopt = {
+    possible = {
+        has_origin = origin_luosi_star
+        or = {
+            has_tradition = tr_virtuality_finish
+            has_tradition = tr_nanotech_finish
+            has_tradition = tr_modularity_finish
+            has_tradition = tr_psionics_shroud_finish
+            has_tradition = tr_psionics_finish
+        }
+    }
+    modifier = {
+        planet_building_capacity_add = 2
+        planet_building_refund_mult = 0.75
+    }
+    on_enabled = {
+
+    }
+    unlocks_agenda = agenda_luosi
+    custom_tooltip = tr_luosi_adopt_desc
+}
+tr_luosi_finish = {
+    custom_tooltip = tr_luosi_finish_desc
+    modifier = {
+        empire_size_penalty_mult = -0.10
+        planet_jobs_upkeep_mult = -0.15
+        ROBOT_species_trait_picks_add = 3
+        ROBOT_species_trait_points_add = 3
+        ascension_perks_add = 1
+    }
+}
+tr_luosi_1 = {
+    possible = {
+        has_tradition = tr_luosi_adopt
+    }
+    modifier = {
+        ROBOT_species_trait_picks_add = 3
+        ROBOT_species_trait_points_add = 3
+    }
+    custom_tooltip_with_modifiers = tr_luosi_1_tt
+    ai_weight = {
+        factor = 1000
+    }
+}
+#二：种族改造和同化
+tr_luosi_2 = {
+    possible = {
+        has_tradition = tr_luosi_1
+    }
+    custom_tooltip_with_modifiers = tr_luosi_2_tt
+    modifier = {
+        planet_jobs_produces_mult = 0.1
+        planet_jobs_upkeep_mult = -0.15
+    }
+    on_enabled = {
+
+    }
+    ai_weight = {
+        factor = 1000
+    }
+}
+tr_luosi_3 = {
+    possible = {
+        OR = {
+            has_tradition = tr_luosi_1
+        }
+    }
+    modifier = {
+        planet_max_districts_add = 2
+        planet_structures_cost_mult = -0.10
+        planet_building_build_speed_mult = 0.25
+        planet_building_refund_mult = 0.25
+    }
+    custom_tooltip_with_modifiers = tr_luosi_3_tt
+    ai_weight = {
+        factor = 1000
+    }
+}
+tr_luosi_4 = {
+    possible = {
+        has_tradition = tr_luosi_1
+    }
+    modifier = {
+        planet_decision_enact_speed_mult = 0.25
+        planetary_ascension_cost_mult = -0.1
+        planetary_ascension_effect_mult = 0.25
+    }
+    on_enabled = {
+
+    }
+    custom_tooltip_with_modifiers = tr_luosi_4_tt
+    ai_weight = {
+        factor = 1000
+    }
+}
+tr_luosi_5 = {
+    possible = {
+        has_tradition = tr_luosi_4
+        has_tradition = tr_luosi_3
+        has_tradition = tr_luosi_2
+        has_tradition = tr_luosi_1
+    }
+    modifier = {
+        envoys_add = 2
+    }
+    triggered_modifier = {
+        planet_jobs_produces_mult = 0.05
+        pop_happiness = 0.05
+        pop_bonus_workforce_mult = 0.05
+        mult = this.value:num_relation_country
+    }
+    on_enabled = {
+        set_empire_name = LUOSI_REUNION
+    }
+    custom_tooltip_with_modifiers = tr_luosi_5_tt
+    ai_weight = {
+        factor = 1000
+    }
+}

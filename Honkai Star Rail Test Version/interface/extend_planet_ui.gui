@@ -260,44 +260,52 @@ guiTypes = {
             text_color_code = "Y"
             alwaysTransparent = yes
         }
-        instantTextboxType = {
-            name = "touhou_move_in_pop_step"
+        #reload extend_planet_ui.gui
+        effectButtonType = {
+            name = "luosi_function_level"
             font = "cg_16b"
             text_color_code = "H"
-            text = "步长"
-            tooltipText = "district_gensokyo_barrier_move_in_pop_tt"
-            textureFile = "gfx/interface/tiles/tooltip.dds"
-            position = { x = -85 y = 95 }
-            maxWidth = 360
-            maxHeight = 40
-            fixedSize = yes
+            text = "luosi_function_level_text"
+            quadTextureSprite ="GFX_glow_tile_orange"
+            effect = the_star_rail_null_effect
+            position = { x = -130 y = 60 }
+            size = { width = 100 height = 30 }
             orientation = upper_right
         }
         effectButtonType = {
-            name = "touhou_move_in_pop_step_add"
-            position = { x = -53 y = 81 }
+            name = "luosi_function_add"
+            font = "cg_16b"
+            text_color_code = "H"
+            text = "luosi_function_add_text"
+            quadTextureSprite ="GFX_glow_tile_orange"
+            effect = luosi_function_add_effect
+            position = { x = -130 y = 90 }
+            size = { width = 100 height = 30 }
             orientation = upper_right
-            spriteType = "GFX_button_35_24"
-            buttonFont = "cg_16b"
-            buttonText = ""
-            borderSize = { x = 8 y = 0 }
-            oversound = "mouse_over"
-            clicksound = "increment_click"
-            effect = the_star_rail_null_effect
         }
         effectButtonType = {
-            name = "touhou_move_in_pop_step_minus"
-            position = { x = -143 y = 81 }
-            orientation = upper_right
-            spriteType = "GFX_button_35_24"
-            buttonFont = "cg_16b"
-            buttonText = ""
-            borderSize = { x = 8 y = 0 }
-            oversound = "mouse_over"
-            clicksound = "decrement_click"
-            effect = the_star_rail_null_effect
+            name = "luosi_function_level_up"
+            spriteType = "GFX_hsr_level_up"
+            position = { x = 460 y = 7 }
+            format = center
+            effect = luosi_planet_hashrate_level_up_effect
         }
-
+        effectButtonType = {
+            name = "luosi_planet_hashrate_sub"
+            quadTextureSprite ="GFX_district_hsr_count_sub"
+            size = { width = 30 height = 30 }
+            position = { x= 420 y= 60 }
+            effect = luosi_planet_hashrate_sub_effect
+            font = "cg_16b"
+        }
+        effectButtonType = {
+            name = "luosi_planet_hashrate_add"
+            quadTextureSprite ="GFX_district_hsr_count_add"
+            size = { width = 30 height = 30 }
+            position = { x= 530 y= 60 }
+            effect = luosi_planet_hashrate_add_effect
+            font = "cg_16b"
+        }
         buttonType = {
             name = "build_district"
             position = { x = -93 y = -6 }
@@ -457,6 +465,232 @@ guiTypes = {
                 vertical_alignment = center
                 alwaysTransparent = yes
             }
+        }
+    }
+}
+guiTypes = {
+
+    ### FACTION OVERVIEW GUI ###
+    #reload extend_planet_ui.gui
+    containerWindowType = {
+        name = "luosi_planet_modifer_reset"
+        orientation = center
+        origo = center
+        moveable = yes
+        size = { width = 469 height = 279 }
+
+        background = {
+            name = "background"
+            quadTextureSprite = "GFX_discovery_view_bottom"
+        }
+
+        buttonType = {
+            name = "close"
+            quadTextureSprite = "GFX_close"
+            position = { x= -38 y = 0 }
+            orientation = "UPPER_RIGHT"
+            shortcut = "ESCAPE"
+            clicksound = "back_click"
+        }
+        # Custom header
+        instantTextBoxType = {
+            name = "irm_some_header"
+            font = "malgun_goth_24"
+            text = "luosi_planet_modifer_header" 	# header text
+            position = { x = 140 y = 5 }
+            maxWidth = 543
+            maxHeight = 22
+            fixedSize = yes
+            alwaysTransparent = yes
+        }
+        effectButtonType = {
+            name = "luosi_modifer_background_1"
+            quadTextureSprite ="GFX_glow_tile_orange"
+            size = { width = 330 height = 200 }
+            position = { x= 20 y= 40 }
+            effect = the_star_rail_null_effect
+            font = "cg_16b"
+        }
+        effectButtonType = {
+            name = "luosi_modifer_background_2"
+            quadTextureSprite ="GFX_glow_tile_orange"
+            size = { width = 100 height = 200 }
+            position = { x= 360 y= 40 }
+            effect = the_star_rail_null_effect
+            font = "cg_16b"
+        }
+        effectButtonType = {
+            name = "luosi_modifer_show_count"
+            #quadTextureSprite ="GFX_glow_tile_orange"
+            size = { width = 100 height = 60 }
+            position = { x= 360 y= 40 }
+            effect = the_star_rail_null_effect
+            text = "luosi_modifer_background_2_text"
+            font = "cg_16b"
+        }
+        effectButtonType = {
+            name = "luosi_modifer_reset"
+            quadTextureSprite ="GFX_glow_tile_cyan"
+            size = { width = 70 height = 40 }
+            position = { x= 375 y= 160 }
+            effect = luosi_modifer_reset
+            text = "luosi_modifer_reset_text"
+            font = "cg_16b"
+        }
+        effectButtonType = {
+            name = "luosi_modifer_1"
+            quadTextureSprite ="GFX_astral_action_hyper_relay_insight"
+            size = { width = 400 height = 200 }
+            scale = 0.5
+            position = { x= 20 y= 50 }
+            effect = luosi_function_1_add_effect
+            font = "cg_16b"
+        }
+        effectButtonType = {
+            name = "luosi_modifer_2"
+            quadTextureSprite ="GFX_astral_action_gain_physics_insight"
+            size = { width = 400 height = 200 }
+            scale = 0.5
+            position = { x= 100 y= 50 }
+            effect = luosi_function_2_add_effect
+            font = "cg_16b"
+        }
+        effectButtonType = {
+            name = "luosi_modifer_3"
+            quadTextureSprite ="GFX_astral_action_quantum_catapult_insight"
+            size = { width = 400 height = 200 }
+            scale = 0.5
+            position = { x= 180 y= 50 }
+            effect = luosi_function_3_add_effect
+            font = "cg_16b"
+        }
+        effectButtonType = {
+            name = "luosi_modifer_4"
+            quadTextureSprite ="GFX_astral_action_astral_splitting"
+            size = { width = 400 height = 200 }
+            scale = 0.5
+            position = { x= 260 y= 50 }
+            effect = luosi_function_4_add_effect
+            font = "cg_16b"
+        }
+        effectButtonType = {
+            name = "luosi_modifer_5"
+            quadTextureSprite ="GFX_astral_action_astral_siphon"
+            size = { width = 400 height = 200 }
+            scale = 0.5
+            position = { x= 20 y= 140 }
+            effect = luosi_function_5_add_effect
+            font = "cg_16b"
+        }
+        effectButtonType = {
+            name = "luosi_modifer_6"
+            quadTextureSprite ="GFX_astral_action_folding_hyperspace"
+            size = { width = 400 height = 200 }
+            scale = 0.5
+            position = { x= 100 y= 140 }
+            effect = luosi_function_6_add_effect
+            font = "cg_16b"
+        }
+        effectButtonType = {
+            name = "luosi_modifer_7"
+            quadTextureSprite ="GFX_astral_action_planar_mastery"
+            size = { width = 400 height = 200 }
+            scale = 0.5
+            position = { x= 180 y= 140 }
+            effect = luosi_function_7_add_effect
+            font = "cg_16b"
+        }
+        effectButtonType = {
+            name = "luosi_modifer_8"
+            quadTextureSprite ="GFX_astral_action_summon_dimensional_fleet"
+            size = { width = 400 height = 200 }
+            scale = 0.5
+            position = { x= 260 y= 140 }
+            effect = luosi_function_8_add_effect
+            font = "cg_16b"
+        }
+        ### ALL OF THIS IS HIDDEN OR DISPLACED ! ###
+
+        buttonType = { name = "focus_button" position = { x = -1180 y = -1112 } spriteType = "GFX_fleetview_focus" } # hidden
+        instantTextBoxType = { name = "heading" font = "malgun_goth_24" position = { x = -1120 y = -115 } } # hidden
+        buttonType = { name = "alien_message_background" size = { x = 0 y = 0 } position = { x = -1110 y = -11430 } spriteType = "GFX_tiles_dark_area_cut_8" } # hidden
+        buttonType = { name = "confirm_button" quadTextureSprite = "GFX_standard_button_142_34_button" } # hidden
+        containerWindowType = {
+            name = "portrait_background"
+            position = { x = -1117 y = -1145 }
+            size = { width = 0 height = 0 } 	# hide portrait window
+            iconType = { name = "event_picture" spriteType = "GFX_diplomacy_portrait_frame" } # hidden
+            iconType = { name = "portrait" spriteType = "GFX_portrait_character" } # hidden
+        }
+        containerWindowType = {
+            name = "portrait"
+            position = { x = -1117 y = -1145 }
+            size = { width = 0 height = 0 } # hide portrait window
+            iconType = { name = "portrait" spriteType = "GFX_portrait_gamesetup_mask" } # hidden
+            iconType = { name = "black_frame" spriteType = "GFX_diplomacy_portrait_shadow_frame" } # hidden
+            iconType = { name = "stripes_1" spriteType = "GFX_diplomacy_stripes_2" } # hidden
+            iconType = { name = "city_frame" spriteType = "GFX_diplomacy_portrait_frame" } # hidden
+        }
+        iconType = { name = "empire_info_bg" spriteType = "GFX_diplomacy_dark_fade_bg" } # hidden
+        instantTextBoxType = { name = "empire_name" font = "malgun_goth_24" } # hidden
+        instantTextBoxType = { name = "empire_government_type" font = "cg_16b" } # hidden
+        instantTextBoxType = { name = "empire_personality_type" font = "cg_16b" } # hidden
+        overlappingElementsBoxType = { name = "empire_ethics_icons" position = { x = -1145 y = -11138 } } # hidden
+        iconType = { name = "empire_flag" spriteType = "GFX_empire_flag_128" position = { x = -1125 y = -11235 } } # hidden
+        containerWindowType = {
+            name = "leader_details"
+            position = { x = -1125 y = -1175 }
+            containerWindowType = { name = "empire_traits_box" } # hidden
+            instantTextBoxType = { name = "empire_traits_label" font = "cg_16b" } # hidden
+            overlappingElementsBoxType = { name = "leader_traits" } # hidden
+            instantTextBoxType = { name = "leader_name" font = "cg_16b" } # hidden
+            instantTextBoxType = { name = "leader_species" font = "cg_16b" } # hidden
+        }
+        containerWindowType = {
+            name = "opinion_window"
+            position = { x = -1127 y = -11110 }
+            size = { width = 94 height = 30 }
+            iconType = { name = "their_opinion_icon" spriteType = "GFX_diplomacy_opinion" } # hidden
+            instantTextBoxType = { name = "their_opinion" font = "cg_16b" }
+        }
+
+        ### EVENT DIPLO ###
+
+        containerWindowType = {
+            name = "EVENT_DIPLO"
+            position = { x = 2 y = 50000 }
+            #size = { width = 563 height = 220 }
+            moveable = no
+
+            instantTextBoxType = {
+                name = "action_title"
+                font = "malgun_goth_24"
+                position = { x = 20 y = 0 }
+                maxWidth = 200
+                alwaysTransparent = yes
+            }
+            instantTextBoxType = {
+                name = "action_desc"
+                font = "malgun_goth_24"
+                position = { x = 490 y = 0 }
+                maxWidth = 500
+                maxHeight = 180
+                orientation = "UPPER_LEFT"
+                format = center
+                alwaysTransparent = yes
+                text_color_code = "H"
+            }
+            listboxType = { name = "option_list" position = { x = -11500 y = -1130 } } # hidden option list
+        }
+        # Description Section
+        instantTextBoxType = {
+            name = "alien_message"
+            font = "cg_16b"
+            position = { x = 20 y = 100000 }
+            maxWidth = 465
+            maxHeight = 220
+            format = left
+            scrollbartype = "standardtext_slider"
         }
     }
 }

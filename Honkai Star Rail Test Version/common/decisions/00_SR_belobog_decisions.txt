@@ -458,3 +458,119 @@ decision_herta_luosi = {
         weight = 100
     }
 }
+#螺丝
+decision_luosi_pop_change = {
+    owned_planets_only = yes
+    icon = decision_luosi_pop_change
+    enactment_time = 180
+    resources = {
+        category = decisions
+        cost = {
+            energy = 1000
+        }
+    }
+
+    potential = {
+        is_colony = yes
+        exists = owner
+        owner = {
+            has_tradition = tr_luosi_1
+        }
+    }
+
+    allow = {
+        is_colony = yes
+        exists = owner
+        owner = {
+            has_tradition = tr_luosi_1
+        }
+    }
+    effect = {
+        custom_tooltip = decision_luosi_pop_change_tt
+        hidden_effect = {
+            planet_event = { id = luosi.101 }
+        }
+    }
+
+    ai_weight = {
+        weight = 100
+    }
+}
+decision_luosi_build = {
+    owned_planets_only = yes
+    icon = decision_dreamscaping
+    enactment_time = 1200
+    resources = {
+        category = decisions
+        cost = {
+            energy = 10000
+        }
+    }
+
+    potential = {
+        NOR = {
+            is_planet_class = pc_city
+            is_planet_class = pc_relic
+            has_modifier = resort_colony
+            has_modifier = penal_colony
+            has_modifier = slave_colony
+            has_modifier = pm_wenkwort_custodian
+        }
+        is_artificial = no
+        exists = owner
+        owner = {
+            has_tradition = tr_luosi_4
+        }
+        NOT = {  }
+    }
+
+    allow = {
+        num_uncleared_blockers < 1
+    }
+    effect = {
+        custom_tooltip = decision_herta_luosi_tt
+        hidden_effect = {
+            change_variable = {
+                which = luosi_planet_hashrate
+                value = 0
+            }
+            change_variable = {
+                which = luosi_planet_hashrate_max
+                value = 5
+            }
+            change_variable = {
+                which = function_unuse
+                value = 3
+            }
+            clear_blockers = yes
+            clear_deposits = yes
+            set_planet_flag = megastructure
+            set_planet_flag = habitat
+            set_planet_flag = colony_event #防止出现原版殖民地的各种奇怪事件
+            change_pc = pc_luosi
+            set_planet_entity = {
+                entity = "luosi_artifacts_palace_1_entity"
+            }
+            while = {
+                add_district = district_luosi_planet_1
+                count = 3
+            }
+            add_district = district_luosi_planet_2
+            add_district = district_luosi_planet_2
+            add_district = district_luosi_planet_3
+            add_district = district_luosi_planet_3
+            add_district = district_luosi_planet_4
+            add_district = district_luosi_planet_4
+            add_district = district_luosi_planet_5
+            add_district = district_luosi_planet_5
+            add_district = district_luosi_planet_6
+            owner = {
+                country_event = { id = distar.201 } # port for living planet distar.197, triggers in event
+            }
+        }
+    }
+
+    ai_weight = {
+        weight = 100
+    }
+}

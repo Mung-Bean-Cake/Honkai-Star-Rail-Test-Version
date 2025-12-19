@@ -299,29 +299,29 @@ district_honkai_farming = {
 
 	triggered_desc = { text = job_farmer_effect_desc }
 }
-district_herta_1 = {
+district_luosi_planet_1 = {
 	base_buildtime = 480
 	is_capped_by_modifier = no
-	icon = district_herta_1
+	icon = district_luosi_1
 	show_on_uncolonized = {
 		exists = from
 		from = {
 			OR = {
-				has_origin = origin_Herta_Space_Station
+				has_origin = origin_luosi_star
 				has_authority = auth_herta
 			}
 		}
-		uses_district_set = pc_herta_set
+		uses_district_set = pc_luosi_planet_set
 	}
 	potential = {
 		exists = owner
 		owner = {
 			OR = {
-				has_origin = origin_Herta_Space_Station
+				has_origin = origin_luosi_star
 				has_authority = auth_herta
 			}
 		}
-		uses_district_set = pc_herta_set
+		uses_district_set = pc_luosi_planet_set
 	}
 	zone_slots = {
 		slot_city_government
@@ -330,12 +330,20 @@ district_herta_1 = {
 	}
 	resources = {
 		category = planet_districts
+        produces = {
+            physics_research = 1
+            society_research = 1
+            engineering_research = 1
+            mult = luosi_planet_hashrate
+        }
 		cost = {
-			alloys = 200
+			minerals = 800
+            alloys = 50
 		}
 		upkeep = {
 			energy = 2
 			alloys = 0.1
+            mult = luosi_planet_hashrate
 		}
 	}
 	triggered_planet_modifier = {
@@ -349,164 +357,335 @@ district_herta_1 = {
 	}
 	planet_modifier = {
 		planet_housing_add = 1200
-		job_politician_add = 100
-		job_head_researcher_add = 100
-		job_soldier_add = 100
+		job_clerk_add = 500
+        job_luosi_clerk_add = 100
 	}
+    triggered_planet_modifier = {
+        planet_housing_add = 200
+        job_luosi_clerk_add = 100
+        mult = luosi_planet_hashrate
+    }
     ai_weight = {
-        weight = 100
+        weight = 10000
     }
 }
-district_herta_2 = {
+district_luosi_planet_2 = {
+    base_buildtime = 480
+    is_capped_by_modifier = no
+    icon = district_luosi_3
+    custom_gui = extend_planet_district_entry_1
+    show_on_uncolonized = {
+        exists = from
+        from = {
+            OR = {
+                has_origin = origin_luosi_star
+                has_authority = auth_herta
+            }
+        }
+        uses_district_set = pc_luosi_planet_set
+    }
+    potential = {
+        exists = owner
+        owner = {
+            OR = {
+                has_origin = origin_luosi_star
+                has_authority = auth_herta
+            }
+        }
+        uses_district_set = pc_luosi_planet_set
+    }
+    zone_slots = {
+        slot_city_government
+    }
+    resources = {
+        category = planet_districts
+        produces = {
+            physics_research = 2
+            society_research = 2
+            engineering_research = 2
+            mult = luosi_planet_hashrate
+        }
+        cost = {
+            minerals = 800
+            alloys = 50
+        }
+        upkeep = {
+            energy = 2
+            alloys = 0.1
+            mult = luosi_planet_hashrate
+        }
+    }
+    triggered_planet_modifier = {
+        potential = {
+            exists = owner
+            owner = { has_active_tradition = tr_prosperity_void_works }
+        }
+        modifier = {
+            planet_housing_add = 100
+        }
+    }
+    planet_modifier = {
+        planet_housing_add = 1000
+        job_herta_up_researcher_add = 50
+        job_physicist_add = 200
+        job_biologist_add = 200
+        job_engineer_add = 200
+    }
+    triggered_planet_modifier = {
+        job_physicist_add = 50
+        job_biologist_add = 50
+        job_engineer_add = 50
+        mult = luosi_planet_hashrate
+    }
+    ai_weight = {
+        weight = 10000
+    }
+}
+district_luosi_planet_3 = {
 	base_buildtime = 480
 	is_capped_by_modifier = no
-	icon = district_herta_2
+	icon = district_mindlink
+    custom_gui = extend_planet_district_entry_1
 	show_on_uncolonized = {
 		exists = from
 		from = {
 			OR = {
-				has_origin = origin_Herta_Space_Station
+				has_origin = origin_luosi_star
 				has_authority = auth_herta
 			}
 		}
-		uses_district_set = pc_herta_set
+		uses_district_set = pc_luosi_planet_set
 	}
 	potential = {
 		exists = owner
 		owner = {
 			OR = {
-				has_origin = origin_Herta_Space_Station
+				has_origin = origin_luosi_star
 				has_authority = auth_herta
 			}
 		}
-		uses_district_set = pc_herta_set
+		uses_district_set = pc_luosi_planet_set
 	}
 	zone_slots = {
-        slot_pc_herta
+		slot_minerals
+        slot_energy
+        slot_food
 	}
 	resources = {
 		category = planet_districts
-		cost = {
-			alloys = 200
-		}
-		upkeep = {
-			energy = 2
-			alloys = 0.1
-		}
-	}
-	triggered_planet_modifier = {
-		potential = {
-			exists = owner
-			owner = { has_active_tradition = tr_prosperity_void_works }
-		}
-		modifier = {
-			planet_housing_add = 100
-		}
+        produces = {
+            volatile_motes = 1
+            exotic_gases = 1
+            rare_crystals = 1
+            mult = luosi_planet_hashrate
+        }
+        cost = {
+            minerals = 800
+            alloys = 100
+        }
+        upkeep = {
+            energy = 2
+            alloys = 0.1
+            mult = luosi_planet_hashrate
+        }
 	}
 	planet_modifier = {
-		planet_housing_add = 1500
-		job_bureaucrat_add = 200
-		job_enforcer_add = 200
-		job_museum_clerk_add = 200
+		planet_housing_add = 800
+		job_luosi_worker_add = 300
 	}
+    triggered_planet_modifier = {
+        job_luosi_worker_add = 50
+        mult = luosi_planet_hashrate
+    }
     ai_weight = {
-        weight = 100
+        weight = 10000
     }
 }
-district_herta_3 = {
-	base_buildtime = 360
+district_luosi_planet_4 = {
+	base_buildtime = 480
 	is_capped_by_modifier = no
-	icon = district_herta_3
+	icon = district_geothermal
+    custom_gui = extend_planet_district_entry_1
 	show_on_uncolonized = {
 		exists = from
 		from = {
 			OR = {
-				has_origin = origin_Herta_Space_Station
+				has_origin = origin_luosi_star
 				has_authority = auth_herta
 			}
 		}
-		uses_district_set = pc_herta_set
+		uses_district_set = pc_luosi_planet_set
 	}
 	potential = {
 		exists = owner
 		owner = {
 			OR = {
-				has_origin = origin_Herta_Space_Station
+				has_origin = origin_luosi_star
 				has_authority = auth_herta
 			}
 		}
-		uses_district_set = pc_herta_set
+		uses_district_set = pc_luosi_planet_set
 	}
 	zone_slots = {
-		slot_habitat_research
+		slot_city_government
+        slot_pc_hsr_robot_planet
 	}
-	resources = {
-		category = planet_districts
-		cost = {
-			alloys = 300
-		}
-		upkeep = {
-			energy = 2
-			alloys = 0.1
-		}
-	}
+    resources = {
+        category = planet_districts
+        produces = {
+            sr_dark_matter = 0.2
+            sr_living_metal = 0.2
+            astral_threads = 0.2
+            mult = luosi_planet_hashrate
+        }
+        cost = {
+            minerals = 800
+            alloys = 100
+        }
+        upkeep = {
+            energy = 2
+            alloys = 0.1
+            physics_research = 0.01
+            society_research = 0.01
+            engineering_research = 0.01
+            mult = luosi_planet_hashrate
+        }
+    }
 	planet_modifier = {
-		planet_housing_add = 300
-		job_physicist_add = 100
-		job_biologist_add = 100
-		job_engineer_add = 100
+		planet_housing_add = 800
+		job_herta_up_ruanmei_2_add = 200
+        job_clone_robot_up_add = 100
 	}
+    triggered_planet_modifier = {
+        job_clone_robot_up_add = 10
+        job_herta_up_ruanmei_2_add = 10
+        mult = luosi_planet_hashrate
+    }
     ai_weight = {
-        weight = 100
+        weight = 10000
     }
 }
-district_herta_4 = {
-	base_buildtime = 360
-	is_capped_by_modifier = no
-	icon = district_herta_4
+district_luosi_planet_5 = {
+    base_buildtime = 480
+    is_capped_by_modifier = no
+    icon = district_luosi_2
+    district_width = 2
+    expansion_planner = yes
+    has_primary_zone = yes
     custom_gui = luosi_planet_district
-	show_on_uncolonized = {
-		exists = from
-		from = {
-			OR = {
-				has_origin = origin_Herta_Space_Station
-				has_authority = auth_herta
-			}
-		}
-		uses_district_set = pc_herta_set
-	}
-	potential = {
-		exists = owner
-		owner = {
-			OR = {
-				has_origin = origin_Herta_Space_Station
-				has_authority = auth_herta
-			}
-		}
-		uses_district_set = pc_herta_set
-	}
-	zone_slots = {
-		slot_habitat_energy
-		slot_habitat_minerals
-	}
-	resources = {
-		category = planet_districts
-		cost = {
-			alloys = 300
-		}
-		upkeep = {
-			energy = 2
-			alloys = 0.1
-		}
-	}
-	planet_modifier = {
-		planet_housing_add = 300
-		job_miner_add = 150
-		job_technician_add = 150
-		job_trader_add = 100
-	}
+    show_on_uncolonized = {
+        exists = from
+        from = {
+            OR = {
+                has_origin = origin_luosi_star
+                has_authority = auth_herta
+            }
+        }
+        uses_district_set = pc_luosi_planet_set
+    }
+    potential = {
+        exists = owner
+        owner = {
+            OR = {
+                has_origin = origin_luosi_star
+                has_authority = auth_herta
+            }
+        }
+        uses_district_set = pc_luosi_planet_set
+    }
+    zone_slots = {
+        slot_city_government
+        slot_pc_hsr_robot_planet
+    }
+    resources = {
+        category = planet_districts
+        produces = {
+            physics_research = 5
+            society_research = 5
+            engineering_research = 5
+            mult = luosi_planet_hashrate
+        }
+        cost = {
+            minerals = 800
+            alloys = 100
+        }
+        upkeep = {
+            energy = 2
+            alloys = 0.1
+            physics_research = 0.01
+            society_research = 0.01
+            engineering_research = 0.01
+            mult = luosi_planet_hashrate
+        }
+    }
+    planet_modifier = {
+        planet_housing_add = 1200
+        pop_bonus_workforce_mult = 0.01
+    }
+    triggered_planet_modifier = {
+        pop_bonus_workforce_mult = 0.01
+        mult = luosi_planet_hashrate
+    }
     ai_weight = {
-        weight = 100
+        weight = 10000
+    }
+}
+district_luosi_planet_6 = {
+    base_buildtime = 480
+    is_capped_by_modifier = no
+    icon = district_resort_museum
+    custom_gui = extend_planet_district_entry_1
+    show_on_uncolonized = {
+        exists = from
+        from = {
+            OR = {
+                has_origin = origin_luosi_star
+                has_authority = auth_herta
+            }
+        }
+        uses_district_set = pc_luosi_planet_set
+    }
+    potential = {
+        exists = owner
+        owner = {
+            OR = {
+                has_origin = origin_luosi_star
+                has_authority = auth_herta
+            }
+        }
+        uses_district_set = pc_luosi_planet_set
+    }
+    zone_slots = {
+        slot_city_government
+        slot_pc_hsr_robot_planet
+    }
+    resources = {
+        category = planet_districts
+        produces = {
+            unity = 1
+            mult = luosi_planet_hashrate
+        }
+        cost = {
+            minerals = 800
+            alloys = 100
+        }
+        upkeep = {
+            energy = 2
+            alloys = 0.1
+            mult = luosi_planet_hashrate
+        }
+    }
+    planet_modifier = {
+        planet_housing_add = 800
+        job_culture_worker_add = 200
+        job_museum_clerk_add = 100
+    }
+    triggered_planet_modifier = {
+        job_museum_clerk_add = 50
+        mult = luosi_planet_hashrate
+    }
+    ai_weight = {
+        weight = 10000
     }
 }
 district_ruanmei_1 = {
@@ -585,7 +764,7 @@ district_ruanmei_1 = {
         job_enforcer_add = 400
     }
     ai_weight = {
-        weight = 100
+        weight = 10000
     }
 }
 district_ruanmei_2 = {
