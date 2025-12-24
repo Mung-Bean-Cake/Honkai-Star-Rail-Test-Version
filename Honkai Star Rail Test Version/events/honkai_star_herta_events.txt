@@ -229,47 +229,14 @@ country_event = {#初试化设置
         give_technology = { tech = tech_honkai_star_rail_hull_t1 message = no }
         give_technology = { tech = tech_honkai_star_rail_power_t1 message = no }
 		add_research_option = tech_galactic_archivism
+        add_research_option = tech_herta_help
+        add_research_option = tech_ruanmei_help
+        add_research_option = tech_luosi_help
+        add_research_option = tech_sidifen_help
 		set_policy = {
 			policy = artificial_intelligence_policy
 			option = ai_full_rights
 		}
-        #模拟宇宙项目
-        set_variable = {
-            which = station_herta_help
-            value = 40
-        }
-        set_variable = {
-            which = station_ruanmei_help
-            value = 30
-        }
-        set_variable = {
-            which = station_luosi_help
-            value = 30
-        }
-        set_variable = {
-            which = station_sidifen_help
-            value = 10
-        }
-        add_modifier = {
-            modifier = herta_station_fleet_country_buff_1
-            days = -1
-            multiplier = station_herta_help
-        }
-        add_modifier = {
-            modifier = herta_station_fleet_country_buff_2
-            days = -1
-            multiplier = station_ruanmei_help
-        }
-        add_modifier = {
-            modifier = herta_station_fleet_country_buff_3
-            days = -1
-            multiplier = station_luosi_help
-        }
-        add_modifier = {
-            modifier = herta_station_fleet_country_buff_4
-            days = -1
-            multiplier = station_sidifen_help
-        }
 		create_species = {
 			class = "ROBOT"
 			portrait = "heita"
@@ -336,31 +303,12 @@ country_event = {#初试化设置
 				}
 			}
 		}
+        #模拟宇宙项目
         begin_event_chain = {
             event_chain = "herta_start_situation_chain"
             target = ROOT
         }
         capital_scope = {
-            enable_special_project = {
-                name = "herta_start_situation_1"
-                location = this
-                owner = root
-            }
-            enable_special_project = {
-                name = "herta_start_situation_2"
-                location = this
-                owner = root
-            }
-            enable_special_project = {
-                name = "herta_start_situation_3"
-                location = this
-                owner = root
-            }
-            enable_special_project = {
-                name = "herta_start_situation_4"
-                location = this
-                owner = root
-            }
             create_fleet = {
                 name = "NAME_HERTA_FLEET"
                 settings = {
@@ -1354,62 +1302,164 @@ country_event = {
     hide_window = yes
 
     trigger = {
-
+        or = {
+            last_increased_tech = tech_herta_help
+            last_increased_tech = tech_ruanmei_help
+            last_increased_tech = tech_luosi_help
+            last_increased_tech = tech_sidifen_help
+        }
     }
     immediate = {
-        refresh_herta_modifier_effect = {
-            modifier = herta_station_fleet_country_buff_1
-            value = station_herta_help
-            project = herta_start_situation_1
+        if = {
+            limit = { 
+                last_increased_tech = tech_herta_help
+            }
+            change_variable = {
+                which = station_herta_help
+                value = 10
+            }
+            if = {
+                limit = {
+                    check_variable = {
+                        which = station_herta_help
+                        value < 100
+                    }
+                }
+                add_research_option = tech_herta_help
+            }
+            else_if = {
+                limit = {
+                    check_variable = {
+                        which = station_herta_help
+                        value >= 100
+                    }
+                }
+                set_variable = {
+                    which = station_herta_help
+                    value = 100
+                }
+            }
+        }
+        else_if = {
+            limit = { last_increased_tech = tech_ruanmei_help }
+            change_variable = {
+                which = station_ruanmei_help
+                value = 10
+            }
+            if = {
+                limit = {
+                    check_variable = {
+                        which = station_ruanmei_help
+                        value < 100
+                    }
+                }
+                add_research_option = tech_ruanmei_help
+            }
+            if = {
+                limit = {
+                    check_variable = {
+                        which = station_ruanmei_help
+                        value >= 100
+                    }
+                }
+                set_variable = {
+                    which = station_ruanmei_help
+                    value = 100
+                }
+            }
+        }
+        else_if = {
+            limit = { last_increased_tech = tech_luosi_help }
+            change_variable = {
+                which = station_luosi_help
+                value = 10
+            }
+            if = {
+                limit = {
+                    check_variable = {
+                        which = station_luosi_help
+                        value < 100
+                    }
+                }
+                add_research_option = tech_luosi_help
+            }
+            if = {
+                limit = {
+                    check_variable = {
+                        which = station_luosi_help
+                        value >= 100
+                    }
+                }
+                set_variable = {
+                    which = station_luosi_help
+                    value = 100
+                }
+            }
+        }
+        else_if = {
+            limit = { last_increased_tech = tech_sidifen_help }
+            change_variable = {
+                which = station_sidifen_help
+                value = 10
+            }
+            if = {
+                limit = {
+                    check_variable = {
+                        which = station_sidifen_help
+                        value < 100
+                    }
+                }
+                add_research_option = tech_sidifen_help
+            }
+            if = {
+                limit = {
+                    check_variable = {
+                        which = station_sidifen_help
+                        value >= 100
+                    }
+                }
+                set_variable = {
+                    which = station_sidifen_help
+                    value = 100
+                }
+            }
+        }
+        else_if = {
+            limit = {
+                check_variable = {
+                    which = station_luosi_help
+                    value = 100
+                }
+                check_variable = {
+                    which = station_herta_help
+                    value = 100
+                }
+                check_variable = {
+                    which = station_ruanmei_help
+                    value = 100
+                }
+                check_variable = {
+                    which = station_sidifen_help
+                    value = 100
+                }
+            }
+            end_event_chain = herta_start_situation_chain
+            country_event = { id = DOT_SR_Herta.1001  days = 3 }
         }
     }
 }
 country_event = {
     id = DOT_SR_Herta.1001
     is_triggered_only = yes
-    hide_window = yes
-
+    title = DOT_SR_Herta.1001.title
+    desc = DOT_SR_Herta.1001.desc
+    picture = GFX_evt_friendly_enlightenment
     trigger = {
 
     }
-    immediate = {
-        refresh_herta_modifier_effect = {
-            modifier = herta_station_fleet_country_buff_2
-            value = station_ruanmei_help
-            project = herta_start_situation_2
-        }
-    }
-}
-country_event = {
-    id = DOT_SR_Herta.1002
-    is_triggered_only = yes
-    hide_window = yes
-
-    trigger = {
-
-    }
-    immediate = {
-        refresh_herta_modifier_effect = {
-            modifier = herta_station_fleet_country_buff_3
-            value = station_luosi_help
-            project = herta_start_situation_3
-        }
-    }
-}
-country_event = {
-    id = DOT_SR_Herta.1003
-    is_triggered_only = yes
-    hide_window = yes
-
-    trigger = {
-
-    }
-    immediate = {
-        refresh_herta_modifier_effect = {
-            modifier = herta_station_fleet_country_buff_4
-            value = station_sidifen_help
-            project = herta_start_situation_4
-        }
+    option = {
+        name = DOT_SR_Herta.1001.a
+        custom_tooltip = DOT_SR_Herta.1001.tt
     }
 }
 #黑塔空间站相关，9999为测试事件

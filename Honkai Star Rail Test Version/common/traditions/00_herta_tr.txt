@@ -19,7 +19,7 @@ tr_herta_discuss_adopt = { #采用巧思（黑塔）传统树效果
     custom_tooltip = tr_herta_discuss_adopt_desc
 }
 tr_herta_discuss_finish = { #w完成黑塔传统树
-    custom_tooltip = tr_herta_discuss_finish_desc
+    custom_tooltip_with_modifiers = tr_herta_discuss_finish_tt
     modifier = {
         empire_size_penalty_mult = -0.10
         tech_cost_empire_size_mult = -0.25
@@ -27,6 +27,9 @@ tr_herta_discuss_finish = { #w完成黑塔传统树
         country_society_research_produces_mult = 0.1
         country_engineering_research_produces_mult = 0.1
         ascension_perks_add = 1
+    }
+    on_enabled = {
+        give_specimen = { key = galaxy_scholar_star_badge origin = tr_herta_discuss_finish }
     }
 }
 tr_herta_discuss_1 = {
@@ -43,7 +46,7 @@ tr_herta_discuss_1 = {
     tradition_swap = {
         name = tr_herta_discuss_1_1
         inherit_effects = no
-        inherit_icon = no
+        inherit_icon = yes
         trigger = {
             has_country_flag = tr_herta_select_ruamei_1
         }
@@ -60,7 +63,7 @@ tr_herta_discuss_1 = {
     tradition_swap = {
         name = tr_herta_discuss_1_2
         inherit_effects = no
-        inherit_icon = no
+        inherit_icon = yes
         trigger = {
             has_country_flag = tr_herta_select_luosi_1
         }
@@ -89,7 +92,7 @@ tr_herta_discuss_2 = {
     }
     custom_tooltip_with_modifiers = tr_cybernetics_modular_cybernetics_tt
     modifier = {
-        modify_species_cost_mult = -0.50
+        modify_species_cost_mult = -0.25
         BIOLOGICAL_species_trait_points_add = 3
         BIOLOGICAL_species_trait_picks_add = 3
         Star_Rail_species_trait_picks_add = 5
@@ -126,12 +129,13 @@ tr_herta_discuss_2 = {
             has_country_flag = tr_herta_select_ruamei_2
         }
         modifier = {
-            modify_species_cost_mult = -0.50
+            modify_species_cost_mult = -0.25
             BIOLOGICAL_species_trait_points_add = 7
             BIOLOGICAL_species_trait_picks_add = 7
             Star_Rail_species_trait_picks_add = 12
             Star_Rail_species_trait_points_add = 12
         }
+        custom_tooltip_with_modifiers = tr_herta_discuss_2_1_tt
         on_enabled = {
             hidden_effect = {
                 capital_scope = {
@@ -154,12 +158,11 @@ tr_herta_discuss_2 = {
         trigger = {
             has_country_flag = tr_herta_select_luosi_2
         }
+        custom_tooltip_with_modifiers = tr_herta_discuss_2_2_tt
         modifier = {
-            modify_species_cost_mult = -0.50
-            ROBOT_species_trait_picks_add = 12
-            ROBOT_species_trait_points_add = 12
-            Star_Rail_species_trait_picks_add = 12
-            Star_Rail_species_trait_points_add = 12
+            modify_species_cost_mult = -0.25
+            ROBOT_species_trait_picks_add = 14
+            ROBOT_species_trait_points_add = 14
         }
         on_enabled = {
             hidden_effect = {
@@ -210,11 +213,12 @@ tr_herta_discuss_4 = {
     }
     modifier = {
         starbase_building_capacity_add = 5
-        starbase_building_build_speed_mult = 0.25
-        starbase_module_build_speed_mult = 0.25
+        starbase_building_build_speed_mult = 0.2
+        starbase_module_build_speed_mult = 0.2
         planet_structures_cost_mult = -0.10
-        planet_building_build_speed_mult = 0.25
+        planet_building_build_speed_mult = 0.2
     }
+    custom_tooltip_with_modifiers = tr_herta_discuss_4_tt
     on_enabled = {
         hidden_effect = {
             add_research_option = tech_herta_choose_2
@@ -222,17 +226,10 @@ tr_herta_discuss_4 = {
     }
     tradition_swap = {
         name = tr_herta_discuss_4_1
-        inherit_effects = no
+        inherit_effects = yes
         inherit_icon = yes
         trigger = {
             has_country_flag = tr_herta_select_ruamei_4
-        }
-        modifier = {
-            starbase_building_capacity_add = 5
-            starbase_building_build_speed_mult = 0.25
-            starbase_module_build_speed_mult = 0.25
-            planet_structures_cost_mult = -0.10
-            planet_building_build_speed_mult = 0.25
         }
         on_enabled = {
             hidden_effect = {
@@ -245,17 +242,10 @@ tr_herta_discuss_4 = {
     }
     tradition_swap = {
         name = tr_herta_discuss_4_2
-        inherit_effects = no
+        inherit_effects = yes
         inherit_icon = yes
         trigger = {
             has_country_flag = tr_herta_select_luosi_4
-        }
-        modifier = {
-            starbase_building_capacity_add = 5
-            starbase_building_build_speed_mult = 0.25
-            starbase_module_build_speed_mult = 0.25
-            planet_structures_cost_mult = -0.10
-            planet_building_build_speed_mult = 0.25
         }
         on_enabled = {
             hidden_effect = {
@@ -287,6 +277,3 @@ tr_herta_discuss_5 = {
         factor = 1000
     }
 }
-#三：星球建造
-#四：专属特质
-#五：专属建筑

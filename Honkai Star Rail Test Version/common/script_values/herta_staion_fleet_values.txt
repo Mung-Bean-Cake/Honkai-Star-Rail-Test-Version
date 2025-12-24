@@ -78,7 +78,6 @@ herta_station_district_num_max_value = {#总区划数上限
     add = fleet.herta_station_district_2_num_max
     add = fleet.herta_station_district_3_num_max
     add = fleet.herta_station_district_4_num_max
-    add = fleet.herta_station_district_5_num_max
 }
 herta_station_district_num_value = {#使用总区划数
     base = 0
@@ -86,7 +85,6 @@ herta_station_district_num_value = {#使用总区划数
     add = fleet.herta_station_district_2_num
     add = fleet.herta_station_district_3_num
     add = fleet.herta_station_district_4_num
-    add = fleet.herta_station_district_5_num
 }
 herta_station_district_unuse_value = {#剩余区划数
     base = 0
@@ -107,12 +105,35 @@ herta_station_pop_num_value = {#当前使用人力
     add = fleet.herta_station_district_2_workforce
     add = fleet.herta_station_district_3_workforce
     add = fleet.herta_station_district_4_workforce
-    add = fleet.herta_station_district_5_workforce
+}
+herta_station_district_1_pop_value = {
+    base = 0
+    add = fleet.herta_station_district_1_workforce
+    multiply = fleet.value:herta_station_district_5_level_charge
+}
+herta_station_district_2_pop_value = {
+    base = 0
+    add = fleet.herta_station_district_2_workforce
+    multiply = fleet.value:herta_station_district_5_level_charge
+}
+herta_station_district_3_pop_value = {
+    base = 0
+    add = fleet.herta_station_district_3_workforce
+    multiply = fleet.value:herta_station_district_5_level_charge
+}
+herta_station_district_4_pop_value = {
+    base = 0
+    add = fleet.herta_station_district_4_workforce
+    multiply = fleet.value:herta_station_district_5_level_charge
 }
 herta_station_pop_unuse_value = {#剩余人力
     base = 0
     add = fleet.herta_station_district_workforce
     subtract = value:herta_station_pop_num_value
+}
+herta_station_district_5_level_charge = {
+    base = 1
+    add = fleet.value:hsr_add_mult_value|BASEVAR|fleet.herta_station_district_5_level|VAR2|0.2|
 }
 herta_fleet_station_leader_assist_level_value = {#当前领袖支援等级
     base = 0
@@ -124,15 +145,16 @@ herta_fleet_station_leader_assist_level_value = {#当前领袖支援等级
     add = fleet.herta_fleet_station_leader_assist_6_level
     add = fleet.value:hsr_add_mult_value|BASEVAR|fleet.herta_fleet_station_leader_assist_7_level|VAR2|3|
     add = fleet.herta_fleet_station_leader_assist_8_level
+    add = fleet.herta_station_district_5_level
 }
 herta_energy_produce = {
     base = 0
     modifier = {
-        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_1_workforce|VAR2|0.25|
+        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_1_workforce|VAR2|0.25|VAR3|herta_station_district_5_level_charge|
         exists = event_target:herta_fleet
     }
     modifier = {
-        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_4_workforce|VAR2|1.5|
+        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_4_workforce|VAR2|1.5|VAR3|herta_station_district_5_level_charge|
         exists = event_target:herta_fleet
     }
     modifier = {
@@ -143,22 +165,22 @@ herta_energy_produce = {
 herta_minerals_produce = {
     base = 0
     modifier = {
-        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_1_workforce|VAR2|0.25|
+        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_1_workforce|VAR2|0.25|VAR3|herta_station_district_5_level_charge|
         exists = event_target:herta_fleet
     }
     modifier = {
-        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_4_workforce|VAR2|1.5|
+        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_4_workforce|VAR2|1.5|VAR3|herta_station_district_5_level_charge|
         exists = event_target:herta_fleet
     }
 }
 herta_food_produce = {
     base = 0
     modifier = {
-        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_1_workforce|VAR2|0.25|
+        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_1_workforce|VAR2|0.25|VAR3|herta_station_district_5_level_charge|
         exists = event_target:herta_fleet
     }
     modifier = {
-        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_4_workforce|VAR2|1.5|
+        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_4_workforce|VAR2|1.5|VAR3|herta_station_district_5_level_charge|
         exists = event_target:herta_fleet
     }
     modifier = {
@@ -169,15 +191,15 @@ herta_food_produce = {
 herta_consumer_goods_produce = {
     base = 0
     modifier = {
-        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_1_workforce|VAR2|0.1|
+        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_1_workforce|VAR2|0.1|VAR3|herta_station_district_5_level_charge|
         exists = event_target:herta_fleet
     }
     modifier = {
-        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_2_workforce|VAR2|0.1|
+        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_2_workforce|VAR2|0.1|VAR3|herta_station_district_5_level_charge|
         exists = event_target:herta_fleet
     }
     modifier = {
-        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_4_workforce|VAR2|0.5|
+        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_4_workforce|VAR2|0.5|VAR3|herta_station_district_5_level_charge|
         exists = event_target:herta_fleet
     }
     modifier = {
@@ -188,15 +210,15 @@ herta_consumer_goods_produce = {
 herta_society_research_produce = {
     base = 0
     modifier = {
-        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_1_workforce|VAR2|0.5|
+        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_1_workforce|VAR2|0.5|VAR3|herta_station_district_5_level_charge|
         exists = event_target:herta_fleet
     }
     modifier = {
-        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_2_workforce|VAR2|0.75|
+        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_2_workforce|VAR2|0.75|VAR3|herta_station_district_5_level_charge|
         exists = event_target:herta_fleet
     }
     modifier = {
-        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_3_workforce|VAR2|1.5|
+        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_3_workforce|VAR2|1.5|VAR3|herta_station_district_5_level_charge|
         exists = event_target:herta_fleet
     }
     modifier = {
@@ -215,15 +237,15 @@ herta_society_research_produce = {
 herta_physics_research_produce = {
     base = 0
     modifier = {
-        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_1_workforce|VAR2|0.5|
+        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_1_workforce|VAR2|0.5|VAR3|herta_station_district_5_level_charge|
         exists = event_target:herta_fleet
     }
     modifier = {
-        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_2_workforce|VAR2|0.75|
+        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_2_workforce|VAR2|0.75|VAR3|herta_station_district_5_level_charge|
         exists = event_target:herta_fleet
     }
     modifier = {
-        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_3_workforce|VAR2|1.5|
+        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_3_workforce|VAR2|1.5|VAR3|herta_station_district_5_level_charge|
         exists = event_target:herta_fleet
     }
     modifier = {
@@ -238,15 +260,15 @@ herta_physics_research_produce = {
 herta_engineering_research_produce = {
     base = 0
     modifier = {
-        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_1_workforce|VAR2|0.5|
+        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_1_workforce|VAR2|0.5|VAR3|herta_station_district_5_level_charge|
         exists = event_target:herta_fleet
     }
     modifier = {
-        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_2_workforce|VAR2|0.75|
+        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_2_workforce|VAR2|0.75|VAR3|herta_station_district_5_level_charge|
         exists = event_target:herta_fleet
     }
     modifier = {
-        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_3_workforce|VAR2|1.5|
+        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_3_workforce|VAR2|1.5|VAR3|herta_station_district_5_level_charge|
         exists = event_target:herta_fleet
     }
     modifier = {
@@ -261,7 +283,7 @@ herta_engineering_research_produce = {
 herta_unity_produce = {
     base = 0
     modifier = {
-        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_2_workforce|VAR2|0.5|
+        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_2_workforce|VAR2|0.5|VAR3|herta_station_district_5_level_charge|
         exists = event_target:herta_fleet
     }
     modifier = {
@@ -276,11 +298,11 @@ herta_unity_produce = {
 herta_trade_produce = {
     base = 0
     modifier = {
-        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_2_workforce|VAR2|0.25|
+        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_2_workforce|VAR2|0.25|VAR3|herta_station_district_5_level_charge|
         exists = event_target:herta_fleet
     }
     modifier = {
-        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_4_workforce|VAR2|1|
+        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_4_workforce|VAR2|1|VAR3|herta_station_district_5_level_charge|
         exists = event_target:herta_fleet
     }
     modifier = {
@@ -291,7 +313,7 @@ herta_trade_produce = {
 herta_influence_produce = {
     base = 0
     modifier = {
-        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_2_workforce|VAR2|0.005|
+        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_2_workforce|VAR2|0.005|VAR3|herta_station_district_5_level_charge|
         exists = event_target:herta_fleet
     }
     modifier = {
@@ -302,63 +324,63 @@ herta_influence_produce = {
 herta_minor_artifacts_produce = {
     base = 0
     modifier = {
-        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_3_workforce|VAR2|0.05|
+        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_3_workforce|VAR2|0.05|VAR3|herta_station_district_5_level_charge|
         exists = event_target:herta_fleet
     }
 }
 herta_astral_threads_produce = {
     base = 0
     modifier = {
-        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_3_workforce|VAR2|0.05|
+        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_3_workforce|VAR2|0.05|VAR3|herta_station_district_5_level_charge|
         exists = event_target:herta_fleet
     }
 }
 herta_sr_dark_matter_produce = {
     base = 0
     modifier = {
-        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_3_workforce|VAR2|0.05|
+        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_3_workforce|VAR2|0.05|VAR3|herta_station_district_5_level_charge|
         exists = event_target:herta_fleet
     }
 }
 herta_sr_living_metal_produce = {
     base = 0
     modifier = {
-        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_3_workforce|VAR2|0.05|
+        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_3_workforce|VAR2|0.05|VAR3|herta_station_district_5_level_charge|
         exists = event_target:herta_fleet
     }
 }
 herta_sr_zro_produce = {
     base = 0
     modifier = {
-        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_3_workforce|VAR2|0.05|
+        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_3_workforce|VAR2|0.05|VAR3|herta_station_district_5_level_charge|
         exists = event_target:herta_fleet
     }
 }
 herta_nanites_produce = {
     base = 0
     modifier = {
-        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_3_workforce|VAR2|0.05|
+        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_3_workforce|VAR2|0.05|VAR3|herta_station_district_5_level_charge|
         exists = event_target:herta_fleet
     }
 }
 herta_rare_crystals_produce = {
     base = 0
     modifier = {
-        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_4_workforce|VAR2|0.1|
+        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_4_workforce|VAR2|0.1|VAR3|herta_station_district_5_level_charge|
         exists = event_target:herta_fleet
     }
 }
 herta_exotic_gases_produce = {
     base = 0
     modifier = {
-        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_4_workforce|VAR2|0.1|
+        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_4_workforce|VAR2|0.1|VAR3|herta_station_district_5_level_charge|
         exists = event_target:herta_fleet
     }
 }
 herta_volatile_motes_produce = {
     base = 0
     modifier = {
-        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_4_workforce|VAR2|0.1|
+        add = fleet.value:hsr_add_mult_value|BASEVAR|herta_station_district_4_workforce|VAR2|0.1|VAR3|herta_station_district_5_level_charge|
         exists = event_target:herta_fleet
     }
 }
