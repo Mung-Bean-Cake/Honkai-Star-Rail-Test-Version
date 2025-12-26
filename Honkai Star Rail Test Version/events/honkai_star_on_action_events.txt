@@ -90,10 +90,33 @@ country_event = {#奇物永不停嘴的羊皮卷被动效果
                     }
                 }
             }
-            fromfrom = {
-                repair_percentage = -0.3
-            }
-            from = {
+            fromfromfrom = {
+                save_event_target_as = target_fleet
+                create_fleet = {
+                    name = hsr_ship_bomb
+                    settings = {
+
+                    }
+                    effect = {
+                        set_event_locked = yes
+                        set_owner = event_target:target_fleet.owner
+                        create_ship = {
+                            design = NAME_HSR_BOMB_1
+                            effect = {
+                                set_name = NAME_HSR_BOMB_1
+                                set_ship_flag = NAME_HSR_BOMB_1
+                                save_event_target_as = hsr_bomb
+                                ship_event = { id = hsr_on.301 days = 2 }
+                            }
+                        }
+                        set_location = {
+                            target = event_target:target_fleet
+                            distance = 0
+                            angle = random
+                        }
+                        fleet_event = { id = hsr_on.300 days = 2 }
+                    }
+                }
                 set_timed_country_flag = {
                     flag = sheepskin_scroll_work
                     days = 60
@@ -109,16 +132,59 @@ country_event = {#奇物永不停嘴的羊皮卷被动效果
                     }
                 }
             }
-            fromfromfrom = {
-                repair_percentage = -0.3
-            }
-            this = {
+            fromfrom = {
+                save_event_target_as = target_fleet
+                create_fleet = {
+                    name = hsr_ship_bomb
+                    settings = {
+
+                    }
+                    effect = {
+                        set_event_locked = yes
+                        set_owner = event_target:target_fleet.owner
+                        create_ship = {
+                            design = NAME_HSR_BOMB_1
+                            effect = {
+                                set_name = NAME_HSR_BOMB_1
+                                set_ship_flag = NAME_HSR_BOMB_1
+                                save_event_target_as = hsr_bomb
+                                ship_event = { id = hsr_on.301 days = 2 }
+                            }
+                        }
+                        set_location = {
+                            target = event_target:target_fleet
+                            distance = 0
+                            angle = random
+                        }
+                        fleet_event = { id = hsr_on.300 days = 2 }
+                    }
+                }
                 set_timed_country_flag = {
                     flag = sheepskin_scroll_work
                     days = 60
                 }
             }
         }
+    }
+}
+fleet_event = {
+    id = hsr_on.300
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = {
+        destroy_fleet = {
+            target = event_target:hsr_bomb
+            destroy_template = yes
+            kill_leader = no
+        }
+    }
+}
+ship_event = {
+    id = hsr_on.301
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = {
+        delete_ship = event_target:hsr_bomb
     }
 }
 country_event = {#奇物俱乐部券被动效果

@@ -296,3 +296,48 @@ utility_component_template = {
         }
     }
 }
+utility_component_template = {
+    key = "HSR_BOMB"
+    size = medium
+    icon = "GFX_ship_part_computer_artillery_advanced"
+    icon_frame = 1
+    power = 0
+    component_set = "ship_aura_components"
+
+
+    hidden = yes
+    hostile_aura = {
+        name = "hsr_bomb_1"
+        system_wide = yes
+        apply_on = ships
+
+        limit = {
+            is_in_combat = yes
+            is_disabled = no
+        }
+        stack_info = {
+            id = hsr_bomb_1
+            priority = 200
+        }
+
+        damage_per_day = {
+            accuracy = 1000
+            damage = { min = 5000 max = 5000 }
+            shield_penetration = 1
+            armor_penetration = 1
+        }
+        graphics = {
+            area_effect = {
+                entity = "circle_area_entity"
+                dynamic_scale = yes
+            }
+            ship_effect = {
+                entity = "ship_aura_negative_entity"
+                dynamic_scale = no
+            }
+        }
+    }
+    ai_weight = {
+        weight = 0
+    }
+}

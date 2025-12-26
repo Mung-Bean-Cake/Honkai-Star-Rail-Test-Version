@@ -193,6 +193,28 @@ country_event = {#初试化设置
 			random_rare_curiosity_get =yes
 			random_epic_curiosity_get = yes
 		}
+        capital_star.solar_system = {
+            every_system_planet = {
+                if = {
+                    limit = {
+                        has_deposit_for = shipclass_mining_station
+                        has_mining_station = no
+                    }
+                    create_mining_station = {
+                        owner = root
+                    }
+                }
+                if = {
+                    limit = {
+                        has_deposit_for = shipclass_research_station
+                        has_research_station = no
+                    }
+                    create_research_station = {
+                        owner = root
+                    }
+                }
+            }
+        }
 		change_variable = {
 			which = yuzhousuipian
 			value = 5000
@@ -228,7 +250,7 @@ country_event = {#初试化设置
         give_technology = { tech = tech_honkai_star_rail_weapon_t1 message = no }
         give_technology = { tech = tech_honkai_star_rail_hull_t1 message = no }
         give_technology = { tech = tech_honkai_star_rail_power_t1 message = no }
-		add_research_option = tech_galactic_archivism
+        give_technology = { tech = tech_galactic_archivism message = no }
         add_research_option = tech_herta_help
         add_research_option = tech_ruanmei_help
         add_research_option = tech_luosi_help
@@ -351,6 +373,28 @@ country_event = {#初试化设置
                     add_modifier = {
                         modifier = herta_station_fleet_debuff_1
                     }
+                }
+            }
+            create_fleet = {
+                effect = {
+                    set_owner = root
+                    create_ship = {
+                        name = random
+                        random_existing_design = constructor
+                    }
+                    set_fleet_stance = evasive
+                    set_location = event_target:herta_fleet
+                }
+            }
+            create_fleet = {
+                effect = {
+                    set_owner = root
+                    create_ship = {
+                        name = random
+                        random_existing_design = science
+                    }
+                    set_fleet_stance = evasive
+                    set_location = event_target:herta_fleet
                 }
             }
         }
