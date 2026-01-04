@@ -1,0 +1,162 @@
+xinghe_small_storm = {
+    inline_script = {
+        script = cosmic_storms/hsr_storm_config
+        type = xinghe_small
+        min_radius = 25
+        max_radius = 50
+        storm_speed = 0
+        storm_activation_period_in_months = 12
+        storm_monthly_added_devastation = 0.2
+        spawn_weight = 0
+    }
+    affect_hp_regen = no
+    affect_armor_regen = no
+    affect_shield_regen = yes
+
+    cosmic_storm_texture_path = "gfx/map/storms/NebulaOpacity.dds"
+    cosmic_storm_texture_color_path = "gfx/map/storms/electric_storm_color.dds"
+    cosmic_storm_event_sprite = "GFX_evt_xinghe_small_storm"
+    icon = GFX_planetview_xinghe_storm_modifier_frame
+    ### negative effects ###
+
+    triggered_fleet_modifier = {
+        potential = {
+            always = yes
+        }
+        modifier = {
+            ship_speed_mult = -0.25
+            ship_sensor_range_add = -5
+            ship_hyperlane_range_add = -5
+            custom_tooltip = xinghe_small_storm_fleet_tt
+        }
+    }
+    triggered_planet_modifier = {
+        potential = {
+            is_colony = yes
+        }
+        planet_stability_mult = -0.15
+        planet_jobs_produces_mult = -0.15
+        planet_jobs_upkeep_mult = 0.15
+    }
+    ###
+
+    on_start = {
+        every_system_within_storm = {
+            added_to_storm_base_effect = yes
+            electric_storm_add = yes
+        }
+    }
+
+    on_moved = {
+        every_system_added_to_storm = {
+            added_to_storm_base_effect = yes
+            xinghe_storm_add = yes
+        }
+
+        every_system_removed_from_storm = {
+            removed_from_storm_base_effect = yes
+            xinghe_storm_remove = yes
+        }
+    }
+
+    on_finished = {
+        every_system_within_storm = {
+            removed_from_storm_base_effect = yes
+            xinghe_storm_remove = yes
+        }
+    }
+    cosmic_storm_texture_lightning_paths = {
+        "gfx/map/storms/lightning/lightning_big_storm_01.dds"
+        "gfx/map/storms/lightning/lightning_big_storm_02.dds"
+        "gfx/map/storms/lightning/lightning_mid_storm_01.dds"
+        "gfx/map/storms/lightning/lightning_mid_storm_02.dds"
+    }
+
+    cosmic_storm_galaxy_lightning_time = 5.0
+    cosmic_storm_galaxy_max_opacity = 0.4
+}
+xinghe_big_storm = {
+    inline_script = {
+        script = cosmic_storms/hsr_storm_config
+        type = xinghe_big
+        min_radius = 25
+        max_radius = 50
+        storm_speed = 0
+        storm_activation_period_in_months = 12
+        storm_monthly_added_devastation = 0.2
+        spawn_weight = 0
+    }
+    affect_hp_regen = yes
+    affect_armor_regen = yes
+    affect_shield_regen = yes
+
+    cosmic_storm_texture_path = "gfx/map/storms/NebulaOpacity.dds"
+    cosmic_storm_texture_color_path = "gfx/map/storms/nexus_storm_color.dds"
+    cosmic_storm_event_sprite = "GFX_evt_xinghe_big_storm"
+    icon = GFX_planetview_xinghe_big_storm_modifier_frame
+    ### negative effects ###
+
+    triggered_fleet_modifier = {
+        potential = {
+            always = yes
+        }
+        modifier = {
+            ship_speed_mult = -0.5
+            ship_sensor_range_add = -5
+            ship_hyperlane_range_add = -5
+            ship_ftl_jumpdrive_range_mult = -0.5
+            ship_jumpdrive_cooldown_mult = 0.5
+            ship_cloaking_strength_add = -5
+            ship_evasion_mult = -0.5
+            fleet_mia_time_mult = 0.5
+            ship_weapon_damage = -0.5
+            ship_fire_rate_mult = -0.5
+            ships_upkeep_mult = 0.5
+            custom_tooltip = xinghe_big_storm_fleet_tt
+        }
+    }
+    triggered_planet_modifier = {
+        potential = {
+            is_colony = yes
+        }
+        planet_stability_mult = -0.25
+        planet_jobs_produces_mult = -0.25
+        planet_jobs_upkeep_mult = 0.25
+    }
+    ###
+
+    on_start = {
+        every_system_within_storm = {
+            added_to_storm_base_effect = yes
+            xinghe_big_storm_add = yes
+        }
+    }
+
+    on_moved = {
+        every_system_added_to_storm = {
+            added_to_storm_base_effect = yes
+            xinghe_big_storm_add = yes
+        }
+
+        every_system_removed_from_storm = {
+            removed_from_storm_base_effect = yes
+            xinghe_storm_remove = yes
+        }
+    }
+
+    on_finished = {
+        every_system_within_storm = {
+            removed_from_storm_base_effect = yes
+            xinghe_storm_remove = yes
+        }
+    }
+    cosmic_storm_texture_lightning_paths = {
+        "gfx/map/storms/lightning/lightning_big_storm_01.dds"
+        "gfx/map/storms/lightning/lightning_big_storm_02.dds"
+        "gfx/map/storms/lightning/lightning_mid_storm_01.dds"
+        "gfx/map/storms/lightning/lightning_mid_storm_02.dds"
+    }
+
+    cosmic_storm_galaxy_lightning_time = 5.0
+    cosmic_storm_galaxy_max_opacity = 0.4
+}

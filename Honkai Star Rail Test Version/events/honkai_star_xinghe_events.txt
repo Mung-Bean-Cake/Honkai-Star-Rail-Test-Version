@@ -1,0 +1,1622 @@
+namespace = xinghe
+# Cosmic Storms monthly affects
+event = {
+    id = xinghe.1
+    hide_window = yes
+    is_triggered_only = yes
+
+    trigger = {
+        has_global_flag = cosmic_storm_has_occurred
+    }
+
+    immediate = {
+        every_cosmic_storm = {
+            if = {
+                limit = {
+                    OR = {
+                        is_storm_type = xinghe_small_storm
+                        is_storm_type = xinghe_big_storm
+                    }
+                }
+                every_system_within_storm = {
+                    every_ship_in_system = {
+                        limit = { has_shield_hp > 0 }
+                        reduce_shield = 50
+                    }
+                }
+            }
+        }
+    }
+}
+#星核刷新，刷舰队
+event = {
+    id = xinghe.2
+    hide_window = yes
+    is_triggered_only = yes
+
+    trigger = {
+
+    }
+
+    immediate = {
+        every_system = {
+            every_system_planet = {
+                limit = {
+                    OR = {
+                        is_planet_class = pc_shielded_white
+                        is_planet_class = pc_shielded_yellow
+                        is_planet_class = pc_shielded_red
+                    }
+                }
+                if = {
+                    limit = { is_planet_class = pc_shielded_white }
+                    change_pc = pc_shielded_yellow
+                    this.solar_system = {
+                        spawn_random_storm = {
+                            type = xinghe_small_storm
+                            cosmic_storm_start_position = this
+                            immediate = yes
+                        }
+                    }
+                }
+                else_if = {
+                    limit = { is_planet_class = pc_shielded_yellow }
+                    change_pc = pc_shielded_red
+                    this.solar_system = {
+                        spawn_random_storm = {
+                            type = xinghe_big_storm
+                            cosmic_storm_start_position = this
+                            immediate = yes
+                        }
+                    }
+                }
+                else_if = {
+                    limit = { is_planet_class = pc_shielded_red }
+                    create_species = {
+                        name = "NAME_Unbidden"
+                        class = EXD
+                        namelist = Extradimensional
+                        portrait = exd1_leader
+                        traits = random
+                        effect = { save_event_target_as = SW_extradimensional_species }
+                    }
+                    create_country = {
+                        name = "NAME_Unbidden_small"
+                        type = "extradimensional_special"
+                        species = event_target:SW_extradimensional_species
+                        name_list = "Extradimensional"
+                        flag = {
+                            icon = {
+                                category = "special"
+                                file = "extradimensional_01.dds"
+                            }
+                            background = {
+                                category = "backgrounds"
+                                file = "circle.dds"
+                            }
+                            colors = {
+                                "indigo"
+                                "blue"
+                                "null"
+                                "null"
+                            }
+                        }
+                        effect = {
+                            create_ship_design = { design = "NAME_Void_Shaper" }
+                            add_ship_design = last_created_design
+                            create_ship_design = { design = "NAME_Unbidden_Anchor" }
+                            add_ship_design = last_created_design
+                            create_ship_design = { design = "NAME_Unbidden_Starbase" }
+                            add_ship_design = last_created_design
+                            save_global_event_target_as = SW_extradimensionals
+
+                            set_graphical_culture = extra_dimensional_01
+                            save_event_target_as = SW_extradimensionals
+                        }
+                    }
+                    this.solar_system = {
+                        if = {
+                            limit = { exists = starbase }
+                            starbase = {
+                                fleet = {
+                                    destroy_fleet = this
+                                }
+                            }
+                        }
+                        create_starbase = {
+                            size = starbase_exd_0
+                            owner = event_target:SW_extradimensionals
+                        }
+                        create_fleet = {
+                            effect = {
+                                set_owner = event_target:SW_extradimensionals
+                                create_ship = {
+                                    name = random
+                                    design = "NAME_Revenant"
+                                    graphical_culture = "extra_dimensional_01"
+                                }
+                                while = {
+                                    count = 5
+                                    create_ship = {
+                                        name = random
+                                        design = "NAME_Revenant"
+                                        graphical_culture = "extra_dimensional_01"
+                                    }
+                                }
+                                while = {
+                                    count = 15
+                                    create_ship = {
+                                        name = random
+                                        design = "NAME_Phantom"
+                                        graphical_culture = "extra_dimensional_01"
+                                    }
+                                }
+                                while = {
+                                    count = 5
+                                    create_ship = {
+                                        name = random
+                                        design = "NAME_Wraith"
+                                        graphical_culture = "extra_dimensional_01"
+                                    }
+                                }
+                                set_location = {
+                                    target = prev
+                                    distance = 5
+                                    angle = random
+                                }
+                                set_fleet_stance = aggressive
+                                set_aggro_range = 500
+                                set_aggro_range_measure_from = self
+                                set_fleet_bombardment_stance = armageddon
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+ship_event = {
+    id = xinghe.10
+    hide_window = yes
+    trigger = {
+        from = {
+            any_system_planet = {
+                NOR = {
+                    is_colonizable = yes
+                    is_colony = yes
+                    is_star = yes
+                    is_artificial = yes
+                    is_planet_class = pc_crystal_asteroid
+                    is_planet_class = pc_ice_asteroid
+                    is_planet_class = pc_rare_crystal_asteroid
+                    is_planet_class = pc_shielded_white
+                    is_planet_class = pc_shielded_red
+                    is_planet_class = pc_shielded_yellow
+                    is_planet_class = pc_astral_scar
+                }
+            }
+        }
+        from.solar_system = {
+            has_owner = no
+        }
+        fromfrom = {
+            is_ai = no
+            NOT = {
+                has_global_flag = no_use_hsr_cosmos
+            }
+        }
+    }
+    is_triggered_only = yes
+    immediate = {
+        random_list = {
+            1 = {
+                modifier = {
+                    factor = 50
+                    fromfrom = {has_global_flag = allow_change_pc_shield_stage5}#极大量
+                }
+                modifier = {
+                    factor = 75
+                    fromfrom = {has_global_flag = allow_change_pc_shield_stage4}
+                }
+                modifier = {
+                    factor = 100
+                    fromfrom = {has_global_flag = allow_change_pc_shield_stage3}
+                }
+                modifier = {
+                    factor = 125
+                    fromfrom = {has_global_flag = allow_change_pc_shield_stage2}
+                }
+                modifier = {
+                    factor = 150
+                    fromfrom = {has_global_flag = allow_change_pc_shield_stage1}#极少量
+                }
+            }
+            25 = {
+                xinghe_create_effect = yes
+                from = {
+                    save_event_target_as = system_xinghe
+                }
+                if = {
+                    limit = {
+                        fromfrom = {
+                            not = {
+                                has_country_flag = first_time_visit_xinghe
+                            }
+                        }
+                    }
+                    fromfrom = {
+                        country_event = { id = xinghe.11 }
+                        create_message = {
+                            type = MESSAGE_MONIYUZHOU_BATTLE_XINGHE
+                            localization = MESSAGE_MONIYUZHOU_BATTLE_XINGHE_DESC
+                            days = 30
+                            target = prev.From
+                            variable = {
+                                type = name
+                                localization = SYSTEM
+                                scope = prev.From
+                            }
+                        }
+                    }
+                }
+                else_if = {
+                    limit = {
+                        fromfrom = {
+                            has_country_flag = first_time_visit_xinghe
+                        }
+                    }
+                    fromfrom = {
+                        create_message = {
+                            type = MESSAGE_MONIYUZHOU_BATTLE_XINGHE
+                            localization = MESSAGE_MONIYUZHOU_BATTLE_XINGHE_DESC
+                            days = 30
+                            target = prev.From
+                            variable = {
+                                type = name
+                                localization = SYSTEM
+                                scope = prev.From
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+country_event = {
+    id = xinghe.11
+    title = "xinghe.11.title"
+    desc = xinghe.11.desc
+    trigger = {
+
+    }
+    picture = GFX_evt_xinghe_big_storm
+    show_sound = sw_evn_thunderstorm
+    is_triggered_only = yes
+    immediate = {
+        set_country_flag = first_time_visit_xinghe
+    }
+    option = {
+        name = xinghe.11.a
+        add_research_option = tech_seal_star_core
+    }
+}
+#星球事件
+#奖励
+planet_event = {
+    id = xinghe.100
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = {
+        xinghe_remove_effect = yes
+        random_list = {
+            1 = { change_pc = pc_continental }
+            1 = { change_pc = pc_desert }
+            1 = { change_pc = pc_arid }
+            1 = { change_pc = pc_savannah }
+            1 = { change_pc = pc_tropical }
+            1 = { change_pc = pc_ocean }
+            1 = { change_pc = pc_tundra }
+            1 = { change_pc = pc_arctic }
+            1 = { change_pc = pc_alpine }
+            1 = { change_pc = pc_volcanic }
+            1 = { change_pc = pc_gaia}
+        }
+        hsr_generate_start_deposits = yes
+        add_random_non_blocker_deposit = yes
+        This.solar_system.starbase.owner = {
+            country_event = { id = xinghe.101 }
+        }
+    }
+}
+country_event = {
+    id = xinghe.101
+    title = xinghe.101.title
+    desc = xinghe.101.desc
+    picture = GFX_evt_mineralized_lava_tube
+    is_triggered_only = yes
+    immediate = {
+        if = {
+            limit = { has_origin = origin_Herta_Space_Station }
+            random_common_curiosity_get = yes
+            random_rare_curiosity_get = yes
+        }
+        else_if = {
+            limit = {
+
+            }
+            random_common_curiosity_get = yes
+        }
+    }
+    option = {
+        name = xinghe.101.a
+    }
+}
+planet_event = {
+    id = xinghe.110
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = {
+        xinghe_remove_effect = yes
+        random_list = {
+            1 = { change_pc = pc_relic }
+            1 = { change_pc = pc_nuked }
+            1 = { change_pc = pc_machine }
+        }
+        hsr_generate_start_deposits = yes
+        add_random_non_blocker_deposit = yes
+        random_list = {
+            1 = { add_deposit = d_metal_boneyard }
+            1 = { add_deposit = d_junk_wastes }
+            1 = { add_deposit = d_junk_canals }
+            1 = { add_deposit = d_junk_hollows }
+            1 = { add_deposit = d_ancient_battlefield }
+            1 = { add_deposit = d_irradiated_ruins }
+        }
+        This.solar_system.starbase.owner = {
+            country_event = { id = xinghe.111 }
+        }
+    }
+}
+country_event = {
+    id = xinghe.111
+    title = xinghe.111.title
+    desc = xinghe.111.desc
+    picture = GFX_evt_city_ruins
+    is_triggered_only = yes
+    immediate = {
+        if = {
+            limit = { has_origin = origin_Herta_Space_Station }
+            random_common_curiosity_get = yes
+            random_rare_curiosity_get = yes
+        }
+        else_if = {
+            limit = {
+
+            }
+            random_common_curiosity_get = yes
+        }
+    }
+    option = {
+        name = xinghe.111.a
+    }
+}
+planet_event = {
+    id = xinghe.120
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = {
+        xinghe_remove_effect = yes
+        random_list = {
+            1 = { change_pc = pc_continental }
+            1 = { change_pc = pc_desert }
+            1 = { change_pc = pc_arid }
+            1 = { change_pc = pc_savannah }
+            1 = { change_pc = pc_tropical }
+            1 = { change_pc = pc_ocean }
+            1 = { change_pc = pc_tundra }
+            1 = { change_pc = pc_arctic }
+            1 = { change_pc = pc_alpine }
+            1 = { change_pc = pc_volcanic }
+            1 = { change_pc = pc_gaia}
+            1 = { change_pc = pc_nuked}
+        }
+        hsr_generate_start_deposits = yes
+        add_random_non_blocker_deposit = yes
+        hsr_generate_start_deposits = yes
+        add_random_non_blocker_deposit = yes
+        random_list = {
+            1 = { add_deposit = d_metal_boneyard }
+            1 = { add_deposit = d_junk_wastes }
+            1 = { add_deposit = d_junk_canals }
+            1 = { add_deposit = d_junk_hollows }
+            1 = { add_deposit = d_ancient_battlefield }
+            1 = { add_deposit = d_irradiated_ruins }
+        }
+        save_global_event_target_as = the_life_saved_planet
+        This.solar_system.starbase.owner = {
+            country_event = { id = xinghe.121 }
+        }
+    }
+}
+country_event = {
+    id = xinghe.121
+    title = xinghe.121.title
+    desc = xinghe.121.desc
+    picture = GFX_evt_discovered_hidden_door
+    is_triggered_only = yes
+    immediate = {
+        if = {
+            limit = { has_origin = origin_Herta_Space_Station }
+            random_common_curiosity_get = yes
+            random_rare_curiosity_get = yes
+        }
+        else_if = {
+            limit = {
+
+            }
+            random_common_curiosity_get = yes
+        }
+        create_species = {
+            name = RANDOM
+            plural = RANDOM
+            class = RANDOM
+            portrait = RANDOM
+            homeworld = event_target:the_life_saved_planet
+            traits = {
+                trait = "trait_adaptive"
+                trait = "trait_nomadic"
+                trait = "trait_strong"
+            }
+            effect = {
+                save_event_target_as = vault_survivor_species
+            }
+        }
+        save_event_target_as = our_country
+    }
+    option = {
+        name = xinghe.121.a
+        hidden_effect = {
+            event_target:the_life_saved_planet = {
+                set_owner = event_target:our_country
+                while = {
+                    count = 3
+                    create_pop_group = {
+                        species = event_target:vault_survivor_species
+                    }
+                }
+            }
+        }
+    }
+    option = {
+        name = xinghe.121.b
+        hidden_effect = {
+            save_global_event_target_as = player_country_SW
+            event_target:the_life_saved_planet = {
+                change_pc = rl_habitable_normal
+                create_species = {
+                    class = random_non_machine
+                    pop_ethics = random
+                }
+                create_country = {
+                    name = random
+                    name_list = random
+                    species = last_created_species
+                    type = default
+                    effect = {
+                        save_global_event_target_as = SW_good_country_to_player
+                        add_resource = {
+                            energy = 10000
+                            alloys = 10000
+                            minerals = 10000
+                            consumer_goods = 10000
+                        }
+                    }
+                }
+                while = {
+                    count = 3
+                    create_pop_group = {
+                        species = event_target:SW_good_country_to_player.owner_main_species
+                    }
+                }
+                while = {
+                    count = 10
+                    add_district = district_city
+                }
+                while = {
+                    count = 10
+                    add_district = district_city
+                }
+                while = {
+                    count = 5
+                    add_district = district_generator
+                }
+                while = {
+                    count = 5
+                    add_district = district_farming
+                }
+                while = {
+                    count = 5
+                    add_district = district_mining
+                }
+                while = {
+                    count = 2
+                    add_deposit = d_ancient_mining_site
+                }
+                while = {
+                    count = 1
+                    add_deposit = d_hyperfertile_valley
+                }
+                while = {
+                    count = 5
+                    add_deposit = d_irradiated_valley
+                }
+                add_building = building_capital
+                solar_system = {
+                    if = {
+                        limit = { exists = starbase }
+                        starbase = {
+                            fleet = {
+                                destroy_fleet = this
+                            }
+                        }
+                    }
+                    create_starbase = {
+                        size = starbase_marauder
+                        owner = event_target:SW_good_country_to_player
+                    }
+                }
+                event_target:player_country_SW = {
+                    establish_communications_no_message = event_target:SW_good_country_to_player
+                    add_opinion_modifier = {
+                        who = event_target:SW_good_country_to_player
+                        modifier = opinion_scion
+                    }
+                }
+                event_target:SW_good_country_to_player = {
+                    set_subject_of = {
+                        who = event_target:player_country_SW
+                        preset = preset_vassal
+                    }
+                    add_opinion_modifier = {
+                        who = event_target:player_country_SW
+                        modifier = opinion_scion
+                    }
+                }
+            }
+        }
+    }
+    option = {
+        name = xinghe.121.c
+        trigger = {
+            owner = {
+                OR = { is_xenophobe = yes is_authoritarian = yes }
+            }
+        }
+        hidden_effect = {
+            event_target:the_life_saved_planet = {
+                set_owner = event_target:our_country
+                add_deposit = d_underground_vault_2
+                create_pop_group = {
+                    species = event_target:vault_survivor_species
+                }
+                create_pop_group = {
+                    species = event_target:vault_survivor_species
+                }
+                create_pop_group = {
+                    species = event_target:vault_survivor_species
+                    effect = { save_event_target_as = vault_survivor_species_pop_group }
+                }
+                custom_tooltip = colony.152.b.tooltip
+                hidden_effect = {
+                    event_target:vault_survivor_species_pop_group = {
+                        set_citizenship_type = { type = citizenship_slavery cooldown = yes }
+                    }
+                }
+            }
+        }
+    }
+}
+planet_event = {
+    id = xinghe.130
+    hide_window = yes
+    is_triggered_only = yes
+    fire_only_once = yes
+    immediate = {
+        xinghe_remove_effect = yes
+        change_pc = pc_nanotech
+        This.solar_system.starbase.owner = {
+            country_event = { id = xinghe.131 }
+        }
+    }
+}
+country_event = {
+    id = xinghe.131
+    title = xinghe.131.title
+    desc = xinghe.131.desc
+    picture = GFX_evt_ship_in_orbit_2
+    is_triggered_only = yes
+    immediate = {
+        if = {
+            limit = { has_origin = origin_Herta_Space_Station }
+            random_common_curiosity_get = yes
+            random_rare_curiosity_get = yes
+        }
+        else_if = {
+            limit = {
+
+            }
+            random_common_curiosity_get = yes
+        }
+    }
+    option = {
+        name = xinghe.131.a
+        hidden_effect = {
+            country_event = { id = graygoo.401 days = 3 }
+        }
+    }
+}
+planet_event = {
+    id = xinghe.140
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = {
+        xinghe_remove_effect = yes
+        random_list = {
+            1 = {change_pc = rl_unhabitable_planets}
+            1 = {change_pc = rl_habitable_normal}
+            1 = {change_pc = rl_habitable_special}
+        }
+        solar_system.starbase.owner.capital_scope = {
+            create_fleet = {
+                name = random
+                effect = {
+                    while = {
+                        count = 3
+                        create_ship = {
+                            name = random
+                            design = "NAME_Surplus_Beta"
+                            graphical_culture = fallen_machine_empire_01
+                            upgradable = no
+                        }
+                        create_ship = {
+                            name = random
+                            random_existing_design = corvette
+                        }
+                    }
+                    set_owner = Prev.owner
+                    set_location = PrevPrev
+                }
+            }
+        }
+        This.solar_system.starbase.owner = {
+            country_event = { id = xinghe.141 }
+        }
+    }
+}
+country_event = {
+    id = xinghe.141
+    title = xinghe.141.title
+    desc = xinghe.141.desc
+    picture = GFX_evt_fleet_neutral
+    is_triggered_only = yes
+    immediate = {
+        if = {
+            limit = { has_origin = origin_Herta_Space_Station }
+            random_common_curiosity_get = yes
+            random_rare_curiosity_get = yes
+        }
+        else_if = {
+            limit = {
+
+            }
+            random_common_curiosity_get = yes
+        }
+    }
+    option = {
+        name = xinghe.141.a
+    }
+}
+planet_event = {
+    id = xinghe.150
+    title = xinghe.150_title
+    desc = xinghe.150_desc
+    picture = GFX_evt_ghost_ship
+    is_triggered_only = yes
+    immediate = {
+        xinghe_remove_effect = yes
+        change_pc = rl_unhabitable_planets
+        This.solar_system.starbase.owner = {
+            random_list = {
+                1 = { random_common_curiosity_get = yes }
+                1 = { random_rare_curiosity_get = yes }
+                1 = { random_epic_curiosity_get = yes }
+            }
+            if = {
+                limit = { has_origin = origin_Herta_Space_Station }
+                random_common_curiosity_get = yes
+                random_rare_curiosity_get = yes
+            }
+            else_if = {
+                limit = {
+
+                }
+                random_common_curiosity_get = yes
+            }
+        }
+    }
+    option = {
+        name = xinghe.101.a
+    }
+}
+planet_event = {
+    id = xinghe.160
+    title = xinghe.160_title
+    desc = xinghe.160_desc
+    picture = GFX_evt_generator_powerup
+    is_triggered_only = yes
+    immediate = {
+        xinghe_remove_effect = yes
+        change_pc = rl_unhabitable_planets
+        This.solar_system.starbase.owner = {
+            if = {
+                limit = { has_origin = origin_Herta_Space_Station }
+                random_common_curiosity_get = yes
+                random_rare_curiosity_get = yes
+            }
+            else_if = {
+                limit = {
+
+                }
+                random_common_curiosity_get = yes
+            }
+            add_resource = { energy = 100000 }
+        }
+    }
+    option = {
+        name = xinghe.101.a
+    }
+}
+planet_event = {
+    id = xinghe.170
+    title = xinghe.170_title
+    desc = xinghe.170_desc
+    picture = GFX_evt_astral_scar
+    is_triggered_only = yes
+    immediate = {
+        xinghe_remove_effect = yes
+        change_pc = pc_astral_scar
+        This.solar_system.starbase.owner = {
+            if = {
+                limit = { has_origin = origin_Herta_Space_Station }
+                random_common_curiosity_get = yes
+                random_rare_curiosity_get = yes
+            }
+            else_if = {
+                limit = {
+
+                }
+                random_common_curiosity_get = yes
+            }
+            add_resource = { energy = 100000 }
+        }
+    }
+    option = {
+        name = INTERESTING
+    }
+}
+planet_event = {
+    id = xinghe.180
+    title = xinghe.180_title
+    desc = xinghe.180_desc
+    picture = GFX_evt_wormhole
+    is_triggered_only = yes
+    immediate = {
+        xinghe_remove_effect = yes
+        solar_system = {
+            spawn_natural_wormhole = {
+                bypass_type = wormhole
+                orbit_distance = 150
+            }
+            random_system = {
+                spawn_natural_wormhole = {
+                    bypass_type = wormhole
+                    orbit_distance = 150
+                }
+                link_wormholes = Prev
+            }
+        }
+        solar_system = { save_event_target_as = wormhole_system }
+        This.solar_system.starbase.owner = {
+            set_country_flag = encountered_first_wormhole
+            add_seen_bypass_type = wormhole
+        }
+        remove_planet = yes
+        This.solar_system.starbase.owner = {
+            if = {
+                limit = { has_origin = origin_Herta_Space_Station }
+                random_common_curiosity_get = yes
+                random_rare_curiosity_get = yes
+            }
+            else_if = {
+                limit = {
+
+                }
+                random_common_curiosity_get = yes
+            }
+            add_tech_progress = { tech = tech_wormhole_stabilization progress = 0.5 }
+        }
+    }
+    option = {
+        name = INTERESTING
+    }
+}
+###事件，裂界，用模拟宇宙事件（这部分暂时只有mod国家可以触发）##xinghe.200-1000
+###事件，坏事件
+planet_event = {
+    id = xinghe.1000
+    title = xinghe.1000_title
+    desc = xinghe.1000_desc
+    picture = GFX_evt_fleet_evil
+    is_triggered_only = yes
+    immediate = {
+        create_species = {
+            name = "NAME_Prethoryn"
+            class = SWARM
+            namelist = Prethoryn
+            portrait = random
+            traits = random
+            immortal = yes
+            effect = { save_event_target_as = SW_bad_country_of_prethoryn_species }
+        }
+        create_country = {
+            name = "NAME_Prethoryn_Scourge_small"
+            type = "swarm_special"
+            species = event_target:SW_bad_country_of_prethoryn_species
+            name_list = "Prethoryn"
+            flag = {
+                icon = {
+                    category = "special"
+                    file = "the_swarm.dds"
+                }
+                background = {
+                    category = "backgrounds"
+                    file = "new_dawn.dds"
+                }
+                colors = {
+                    "orange"
+                    "grey"
+                    "null"
+                    "null"
+                }
+            }
+            effect = {
+                save_event_target_as = SW_bad_country_of_prethoryn
+                save_event_target_as = SW_bad_country_of_prethoryn_vgrd
+                create_ship_design = { design = "NAME_Swarm_Transport" }
+                add_ship_design = last_created_design
+                create_ship_design = { design = "NAME_Swarm_Colonizer" }
+                add_ship_design = last_created_design
+                create_ship_design = { design = "NAME_Swarm_Constructor" }
+                add_ship_design = last_created_design
+                create_ship_design = { design = "NAME_Swarm_Starbase" }
+                add_ship_design = last_created_design
+            }
+        }
+        solar_system = {
+            if = {
+                limit = {
+                    any_fleet_in_system = {
+                        is_ship_class = shipclass_starbase
+                    }
+                }
+                random_fleet_in_system = {
+                    limit = {
+                        any_controlled_ship = {
+                            is_ship_class = shipclass_starbase
+                        }
+                    }
+                    destroy_fleet = this
+                }
+            }
+            create_starbase = {
+                size = starbase_swarm
+                owner = event_target:SW_bad_country_of_prethoryn_vgrd
+            }
+        }
+        event_target:SW_bad_country_of_prethoryn = {
+
+            ### FIRST SYSTEM
+
+            swarm_vanguard = yes
+
+            # Constructor
+            create_fleet = {
+                name = "NAME_Prethoryn_Constructor"
+                effect = {
+                    set_owner = PREV
+                    create_ship = {
+                        name = random
+                        design = "NAME_Swarm_Constructor"
+                        graphical_culture = "swarm_01"
+                    }
+                    set_location = {
+                        target = PREVPREV
+                        distance = 10
+                        angle = random
+                    }
+                }
+            }
+        }
+        xinghe_remove_effect = yes
+        change_pc = rl_unhabitable_planets
+    }
+    option = {
+        name = xinghe.1000.a
+    }
+}
+planet_event = {
+    id = xinghe.1010
+    title = xinghe.1010_title
+    desc = xinghe.1010_desc
+    picture = GFX_evt_ai_planet
+    is_triggered_only = yes
+    immediate = {
+        create_species = {
+            name = "NAME_Custodian_Bot"
+            class = "ROBOT"
+            namelist = "AI"
+            portrait = "hum_robot_red"
+            traits = {
+                trait = "trait_mechanical"
+            }
+            effect = { save_global_event_target_as = SW_bad_country_of_custodian_bot }
+        }
+        create_species = {
+            name = "NAME_Contingency_small"
+            class = "ROBOT"
+            namelist = "AI"
+            portrait = "ai_crisis_1"
+            immortal = yes
+            traits = {
+                trait = "trait_mechanical"
+            }
+            effect = { save_global_event_target_as = SW_bad_country_of_contingency_bot }
+        }
+        create_country = {
+            name = NAME_Contingency_small
+            species = event_target:SW_bad_country_of_custodian_bot # for pops
+            #species = ROBOT_POP_SPECIES_3
+            authority = auth_ancient_machine_intelligence
+            ethos = {
+                ethic = ethic_gestalt_consciousness
+            }
+            civics = {
+                civic = civic_machine_terminator
+                civic = civic_machine_warbots
+            }
+            type = "ai_empire_special"
+            name_list = "AI"
+            flag = {
+                icon = {
+                    category = "special"
+                    file = "ai_01.dds"
+                }
+                background = {
+                    category = "backgrounds"
+                    file = "circle.dds"
+                }
+                colors = {
+                    "black"
+                    "red"
+                    "null"
+                    "null"
+                }
+            }
+            effect = {
+                set_graphical_culture = ai_01
+                create_leader = {
+                    class = commander
+                    species = event_target:SW_bad_country_of_contingency_bot
+                    name = random
+                    effect = {
+                        save_event_target_as = SW_bad_country_of_contingency_ruler
+                    }
+                }
+                set_leader = event_target:SW_bad_country_of_contingency_ruler
+                create_ship_design = { design = "NAME_AI_Transport" }
+                add_ship_design = last_created_design
+                create_ship_design = { design = "NAME_AI_Constructor" }
+                add_ship_design = last_created_design
+                create_ship_design = { design = "NAME_AI_1" }
+                add_ship_design = last_created_design
+                create_ship_design = { design = "NAME_AI_2" }
+                add_ship_design = last_created_design
+                create_ship_design = { design = "NAME_AI_STARBASE" }
+                add_ship_design = last_created_design
+                save_event_target_as = SW_bad_country_of_AI_crisis
+            }
+        }
+        event_target:SW_bad_country_of_AI_crisis = {
+            create_leader = {
+                class = commander
+                species = event_target:SW_bad_country_of_contingency_bot
+                name = random
+                skill = 3
+                effect = {
+                    set_age = 0
+                    save_event_target_as = SW_bad_country_of_contingency_fleet_leader
+                }
+            }
+        }
+        create_fleet = {
+            effect = {
+                set_owner = event_target:SW_bad_country_of_AI_crisis
+                while = {
+                    count = 10
+                    create_ship = {
+                        name = random
+                        design = "NAME_Euthanizer"
+                        graphical_culture = "ai_01"
+                    }
+                }
+                assign_leader = event_target:SW_bad_country_of_contingency_fleet_leader
+                while = {
+                    count = 10
+                    create_ship = {
+                        name = random
+                        design = "NAME_Sterilizer"
+                        graphical_culture = "ai_01"
+                    }
+                }
+                set_location = {
+                    target = root
+                    distance = 45
+                    angle = random
+                }
+                set_fleet_bombardment_stance = armageddon
+            }
+        }
+
+        solar_system = {
+            if = {
+                limit = { exists = starbase }
+                starbase = {
+                    fleet = {
+                        destroy_fleet = this
+                    }
+                }
+            }
+            create_starbase = {
+                size = starbase_ai
+                owner = event_target:SW_bad_country_of_AI_crisis
+            }
+        }
+        xinghe_remove_effect = yes
+        change_pc = rl_unhabitable_planets
+    }
+    option = {
+        name = xinghe.1000.a
+    }
+}
+planet_event = {
+    id = xinghe.1020
+    title = xinghe.1020_title
+    desc = xinghe.1020_desc
+    picture = GFX_evt_small_space_battle
+    is_triggered_only = yes
+    immediate = {
+        create_species = {
+            name = "NAME_Unbidden"
+            class = EXD
+            namelist = Extradimensional
+            portrait = exd1_leader
+            traits = random
+            effect = { save_event_target_as = SW_extradimensional_species }
+        }
+        create_country = {
+            name = "NAME_Unbidden_small"
+            type = "extradimensional_special"
+            species = event_target:SW_extradimensional_species
+            name_list = "Extradimensional"
+            flag = {
+                icon = {
+                    category = "special"
+                    file = "extradimensional_01.dds"
+                }
+                background = {
+                    category = "backgrounds"
+                    file = "circle.dds"
+                }
+                colors = {
+                    "indigo"
+                    "blue"
+                    "null"
+                    "null"
+                }
+            }
+            effect = {
+                create_ship_design = { design = "NAME_Void_Shaper" }
+                add_ship_design = last_created_design
+                create_ship_design = { design = "NAME_Unbidden_Anchor" }
+                add_ship_design = last_created_design
+                create_ship_design = { design = "NAME_Unbidden_Starbase" }
+                add_ship_design = last_created_design
+                save_global_event_target_as = SW_extradimensionals
+
+                set_graphical_culture = extra_dimensional_01
+                save_event_target_as = SW_extradimensionals
+            }
+        }
+        solar_system = {
+            if = {
+                limit = { exists = starbase }
+                starbase = {
+                    fleet = {
+                        destroy_fleet = this
+                    }
+                }
+            }
+            create_starbase = {
+                size = starbase_exd_0
+                owner = event_target:SW_extradimensionals
+            }
+        }
+        event_target:SW_extradimensionals = {
+            create_fleet = {
+                name = "NAME_Dimensional_Portal"
+                effect = {
+                    set_owner = PREV
+                    create_ship = {
+                        name = random
+                        design = "NAME_Unbidden_Portal"
+                        graphical_culture = "extra_dimensional_01"
+                        effect = { set_ship_flag = SW_unbidden_portal }
+                    }
+                    set_location = {
+                        target = Root.solar_system
+                        distance = 40
+                        angle = random
+                    }
+                    save_event_target_as = SW_dimensional_portal
+                }
+            }
+            create_leader = {
+                class = commander
+                species = event_target:SW_extradimensional_species
+                name = random
+                skill = 3
+                traits = {
+                    trait = leader_trait_ethereal
+                }
+            }
+            create_fleet = {
+                effect = {
+                    set_owner = PREV
+                    create_ship = {
+                        name = random
+                        design = "NAME_Revenant"
+                        graphical_culture = "extra_dimensional_01"
+                    }
+                    assign_leader = last_created_leader
+                    while = {
+                        count = 5
+                        create_ship = {
+                            name = random
+                            design = "NAME_Revenant"
+                            graphical_culture = "extra_dimensional_01"
+                        }
+                    }
+                    while = {
+                        count = 15
+                        create_ship = {
+                            name = random
+                            design = "NAME_Phantom"
+                            graphical_culture = "extra_dimensional_01"
+                        }
+                    }
+                    while = {
+                        count = 5
+                        create_ship = {
+                            name = random
+                            design = "NAME_Wraith"
+                            graphical_culture = "extra_dimensional_01"
+                        }
+                    }
+                    set_location = {
+                        target = event_target:SW_dimensional_portal
+                        distance = 5
+                        angle = random
+                    }
+                    set_fleet_stance = aggressive
+                    set_aggro_range = 500
+                    set_aggro_range_measure_from = self
+                    set_fleet_bombardment_stance = armageddon
+                }
+            }
+        }
+        xinghe_remove_effect = yes
+        change_pc = rl_unhabitable_planets
+    }
+    option = {
+        name = xinghe.1000.a
+    }
+}
+planet_event = {
+    id = xinghe.1030
+    title = xinghe.1030_title
+    desc = xinghe.1030_desc
+    picture = GFX_evt_galactic_empire
+    is_triggered_only = yes
+    immediate = {
+        xinghe_remove_effect = yes
+        solar_system.starbase.owner = {
+            save_global_event_target_as = player_country_SW_bad
+        }
+        change_pc = pc_gaia
+        create_species = {
+            class = random_non_machine
+            pop_ethics = random
+        }
+        create_country = {
+            name = precious_moon
+            name_list = random
+            species = last_created_species
+            type = default
+            civics = {
+                civic = civic_fanatic_purifiers
+                civic = civic_barbaric_despoilers
+            }
+            effect = {
+                save_global_event_target_as = SW_good_country_to_player_bad
+                add_resource = {
+                    energy = 100000
+                    alloys = 100000
+                    minerals = 100000
+                    consumer_goods = 100000
+                }
+                #country_event = { id = SW_change.28 days = 30 }
+            }
+        }
+        while = {
+            count = 15
+            create_pop = {
+                species = event_target:SW_good_country_to_player_bad.owner_main_species
+            }
+        }
+        while = {
+            count = 10
+            add_district = district_city
+        }
+        while = {
+            count = 5
+            add_district = district_generator
+        }
+        while = {
+            count = 5
+            add_district = district_farming
+        }
+        while = {
+            count = 5
+            add_district = district_mining
+        }
+        while = {
+            count = 2
+            add_deposit = d_ancient_mining_site
+        }
+        while = {
+            count = 1
+            add_deposit = d_hyperfertile_valley
+        }
+        while = {
+            count = 5
+            add_deposit = d_irradiated_valley
+        }
+        add_building = building_capital
+        add_building = building_artist_patron
+        add_building = building_ministry_production
+        solar_system = {
+            if = {
+                limit = { exists = starbase }
+                starbase = {
+                    fleet = {
+                        destroy_fleet = this
+                    }
+                }
+            }
+            create_starbase = {
+                size = starbase_outpost
+                owner = event_target:SW_good_country_to_player_bad
+            }
+        }
+        event_target:player_country_SW_bad = {
+            establish_communications_no_message = event_target:SW_good_country_to_player_bad
+        }
+        event_target:SW_good_country_to_player_bad = {
+            establish_communications_no_message = event_target:player_country_SW_bad
+        }
+        event_target:SW_good_country_to_player_bad = {
+            declare_war = {
+                target = event_target:player_country_SW_bad
+                attacker_war_goal = wg_plunder
+            }
+            while = {
+                count = 10
+                create_fleet = {
+                    effect = {
+                        while = {
+                            count = 20
+                            create_ship = {
+                                design = "NAME_R44"
+                                graphical_culture = pirate_01
+                            }
+                        }
+                        set_owner = event_target:SW_good_country_to_player_bad
+                        set_location = event_target:SW_good_country_to_player_bad.capital_scope
+                    }
+                }
+            }
+        }
+
+    }
+    option = {
+        name = xinghe.1030.a
+    }
+}
+planet_event = {
+    id = xinghe.1040
+    title = xinghe.1040_title
+    desc = xinghe.1040_desc
+    picture = GFX_evt_space_dragon
+    is_triggered_only = yes
+    immediate = {
+        xinghe_remove_effect = yes
+        save_event_target_as = SW_empire_with_dragon
+        save_event_target_as = SW_here_be_dragons_planet
+        solar_system = {
+            set_star_flag = SW_here_be_dragons_system
+        }
+        create_country = {
+            name = "NAME_Sky_Dragon"
+            type = origin_dragon
+            auto_delete = no
+            use_hostilities_from = root.solar_system.starbase.owner
+            flag = {
+                icon = {
+                    category = "spherical"
+                    file = "flag_spherical_6.dds"
+                }
+                background = {
+                    category = "backgrounds"
+                    file = "00_solid.dds"
+                }
+                colors = {
+                    "dark_blue"
+                    "dark_blue"
+                    "null"
+                    "null"
+                }
+            }
+            effect = {
+                root.solar_system.starbase.owner = {
+                    save_global_event_target_as = SW_change26_for_player
+                }
+                establish_communications_no_message = root.solar_system.starbase.owner
+                set_faction_hostility = {
+                    target = root.solar_system.starbase.owner
+                    set_hostile = yes
+                    set_neutral = no
+                    set_friendly = no
+                }
+                save_event_target_as = SW_here_be_the_dragon_country
+                set_country_flag = SW_here_be_the_dragon
+                set_country_flag = SW_here_be_the_dragon@root
+                create_fleet = {
+                    name = "NAME_Sky_Dragon"
+                    settings = {
+                        spawn_debris = no
+                        is_boss = yes
+                        can_change_leader = no
+                    }
+                    effect = {
+                        set_fleet_flag = SW_here_be_the_dragon_ship
+                        set_owner = event_target:SW_here_be_the_dragon_country
+                        create_ship = {
+                            name = "NAME_Sky_Dragon"
+                            design = "NAME_Sky_Dragon"
+                            effect = {
+                                set_ship_flag = SW_here_be_the_dragon_ship
+                                save_event_target_as = SW_here_be_the_dragon_ship
+                                add_modifier = { modifier = dragon_add_modifier }
+                            }
+                        }
+                        set_location = {
+                            target = event_target:SW_here_be_dragons_planet
+                            distance = 10
+                            angle = 90
+                            #direction = in_system
+                        }
+                        set_fleet_stance = passive
+                        set_aggro_range_measure_from = self
+                        set_aggro_range = 350
+
+                        queue_actions = {
+                            repeat = {
+                                find_random_system = {
+                                    trigger = {
+                                        id = wraith.1.trigger.1
+                                        any_system_planet = {
+                                            is_owned_by = event_target:SW_change26_for_player
+                                        }
+                                    }
+                                    found_system = {
+                                        move_to = this
+                                        find_closest_planet = {
+                                            trigger = {
+                                                id = wraith.1.trigger.2
+                                                is_owned_by = event_target:SW_change26_for_player
+                                            }
+                                            found_planet = {
+                                                move_to = this
+                                                orbit_planet = this
+                                                wait = {
+                                                    duration = 100
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        change_pc = rl_unhabitable_planets
+    }
+    option = {
+        name = xinghe.1000.a
+    }
+}
+planet_event = {
+    id = xinghe.1050
+    title = xinghe.1050_title
+    desc = xinghe.1050_desc
+    picture = GFX_evt_small_space_battle
+    is_triggered_only = yes
+    immediate = {
+        create_species = {
+            name = "NAME_Unbidden"
+            class = EXD
+            namelist = Extradimensional
+            portrait = exd1_leader
+            traits = random
+            effect = { save_event_target_as = SW_extradimensional_species }
+        }
+        create_country = {
+            name = "NAME_Unbidden_small"
+            type = "extradimensional_special"
+            species = event_target:SW_extradimensional_species
+            name_list = "Extradimensional"
+            flag = {
+                icon = {
+                    category = "special"
+                    file = "extradimensional_01.dds"
+                }
+                background = {
+                    category = "backgrounds"
+                    file = "circle.dds"
+                }
+                colors = {
+                    "indigo"
+                    "blue"
+                    "null"
+                    "null"
+                }
+            }
+            effect = {
+                create_ship_design = { design = "NAME_Void_Shaper" }
+                add_ship_design = last_created_design
+                create_ship_design = { design = "NAME_Unbidden_Anchor" }
+                add_ship_design = last_created_design
+                create_ship_design = { design = "NAME_Unbidden_Starbase" }
+                add_ship_design = last_created_design
+                save_global_event_target_as = SW_extradimensionals
+
+                set_graphical_culture = extra_dimensional_01
+                save_event_target_as = SW_extradimensionals
+            }
+        }
+        solar_system = {
+            if = {
+                limit = { exists = starbase }
+                starbase = {
+                    fleet = {
+                        destroy_fleet = this
+                    }
+                }
+            }
+            create_starbase = {
+                size = starbase_exd_0
+                owner = event_target:SW_extradimensionals
+            }
+        }
+        event_target:SW_extradimensionals = {
+            create_fleet = {
+                name = "NAME_Dimensional_Portal"
+                effect = {
+                    set_owner = PREV
+                    create_ship = {
+                        name = random
+                        design = "NAME_Unbidden_Portal"
+                        graphical_culture = "extra_dimensional_01"
+                        effect = { set_ship_flag = SW_unbidden_portal }
+                    }
+                    set_location = {
+                        target = Root.solar_system
+                        distance = 40
+                        angle = random
+                    }
+                    save_event_target_as = SW_dimensional_portal
+                }
+            }
+            create_leader = {
+                class = commander
+                species = event_target:SW_extradimensional_species
+                name = random
+                skill = 3
+                traits = {
+                    trait = leader_trait_ethereal
+                }
+            }
+            create_fleet = {
+                effect = {
+                    set_owner = PREV
+                    create_ship = {
+                        name = random
+                        design = "NAME_Revenant"
+                        graphical_culture = "extra_dimensional_01"
+                    }
+                    assign_leader = last_created_leader
+                    while = {
+                        count = 5
+                        create_ship = {
+                            name = random
+                            design = "NAME_Revenant"
+                            graphical_culture = "extra_dimensional_01"
+                        }
+                    }
+                    while = {
+                        count = 15
+                        create_ship = {
+                            name = random
+                            design = "NAME_Phantom"
+                            graphical_culture = "extra_dimensional_01"
+                        }
+                    }
+                    while = {
+                        count = 5
+                        create_ship = {
+                            name = random
+                            design = "NAME_Wraith"
+                            graphical_culture = "extra_dimensional_01"
+                        }
+                    }
+                    set_location = {
+                        target = event_target:SW_dimensional_portal
+                        distance = 5
+                        angle = random
+                    }
+                    set_fleet_stance = aggressive
+                    set_aggro_range = 500
+                    set_aggro_range_measure_from = self
+                    set_fleet_bombardment_stance = armageddon
+                }
+            }
+        }
+    }
+    option = {
+        name = xinghe.1050.a
+    }
+}

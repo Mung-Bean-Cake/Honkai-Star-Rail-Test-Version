@@ -1,17 +1,16 @@
-decision_SW = {
+decision_seal_star_core = {
     owned_planets_only = no
-    icon = decision_arcology_project
+    icon = decision_seal_star_core
 
     enactment_time = 150
     resources = {
         category = decisions
         cost = {
-            influence = 10
-            minerals = 500
-            alloys = 150
+            alloys = 500
+            energy = 5000
         }
     }
-
+    prerequisites = { tech_seal_star_core }
     potential = {
         From = {
             is_ai = no
@@ -32,23 +31,83 @@ decision_SW = {
     }
 
     effect = {
-        custom_tooltip = decision_SW_desc
+        custom_tooltip = decision_seal_star_core_tt
         hidden_effect = {
-            planet_event = { id = SW_change.1 }
-            planet_event = { id = SW_change.11 }
-            planet_event = { id = SW_change.12 }
-            planet_event = { id = SW_change.13 }
-            planet_event = { id = SW_change.14 }
-            planet_event = { id = SW_change.15 }
-            planet_event = { id = SW_change.16 }
-            planet_event = { id = SW_change.21 }
-            planet_event = { id = SW_change.22 }
-            planet_event = { id = SW_change.23 }
-            planet_event = { id = SW_change.24 }
-            planet_event = { id = SW_change.25 }
-            planet_event = { id = SW_change.26 }
-            event_target:global_event_country = {
-                change_variable = { which = yuzhousuipian value = 1 }
+            if = {
+                limit = { is_planet_class = pc_shielded_white }
+                random_list = {
+                    1 = { planet_event = { id = xinghe.100 } }
+                    1 = { planet_event = { id = xinghe.110 } }
+                    1 = { planet_event = { id = xinghe.120 } }
+                    1 = { planet_event = { id = xinghe.130 } }
+                    1 = { planet_event = { id = xinghe.140 } }
+                    1 = { planet_event = { id = xinghe.150 } }
+                    1 = { planet_event = { id = xinghe.160 } }
+                    1 = { planet_event = { id = xinghe.170 } }
+                    1 = { planet_event = { id = xinghe.180 } }
+                }
+            }
+            else_if = {
+                limit = { is_planet_class = pc_shielded_yellow }
+                random_list = {
+                    1 = { planet_event = { id = xinghe.100 } }
+                    1 = { planet_event = { id = xinghe.110 } }
+                    1 = { planet_event = { id = xinghe.120 } }
+                    1 = { planet_event = { id = xinghe.130 } }
+                    1 = { planet_event = { id = xinghe.140 } }
+                    1 = { planet_event = { id = xinghe.150 } }
+                    1 = { planet_event = { id = xinghe.160 } }
+                    1 = { planet_event = { id = xinghe.170 } }
+                    1 = { planet_event = { id = xinghe.180 } }
+                }
+            }
+            else_if = {
+                limit = { is_planet_class = pc_shielded_red }
+                random_list = {
+                    1= {
+                        random_list = {
+                            1 = { planet_event = { id = xinghe.100 } }
+                            1 = { planet_event = { id = xinghe.110 } }
+                            1 = { planet_event = { id = xinghe.120 } }
+                            1 = { planet_event = { id = xinghe.130 } }
+                            1 = { planet_event = { id = xinghe.140 } }
+                            1 = { planet_event = { id = xinghe.150 } }
+                            1 = { planet_event = { id = xinghe.160 } }
+                            1 = { planet_event = { id = xinghe.170 } }
+                            1 = { planet_event = { id = xinghe.180 } }
+                        }
+                    }
+                    1 = {
+                        random_list = {
+                            1 = { planet_event = { id = xinghe.1000 } }
+                            1 = { planet_event = { id = xinghe.1010 } }
+                            1 = { planet_event = { id = xinghe.1020 } }
+                            1 = { planet_event = { id = xinghe.1030 } }
+                            1 = { planet_event = { id = xinghe.1040 } }
+                            1 = { planet_event = { id = xinghe.1050 } }
+                        }
+                    }
+                }
+            }
+            This.solar_system.starbase.owner = {
+                add_monthly_resource_mult = {
+                    resource = physics_research
+                    value = @tier5unityreward
+                    min = @tier5unitymin
+                    max = @tier5unitymax
+                }
+                add_monthly_resource_mult = {
+                    resource = society_research
+                    value = @tier5unityreward
+                    min = @tier5unitymin
+                    max = @tier5unitymax
+                }
+                add_monthly_resource_mult = {
+                    resource = engineering_research
+                    value = @tier5unityreward
+                    min = @tier5unitymin
+                    max = @tier5unitymax
+                }
             }
         }
     }
