@@ -1360,112 +1360,82 @@ country_event = {
             }
             change_variable = {
                 which = station_herta_help
-                value = 10
+                value = 100
             }
             if = {
                 limit = {
                     check_variable = {
-                        which = station_herta_help
-                        value < 100
+                        which = station_luosi_help
+                        value = 100
                     }
-                }
-                add_research_option = tech_herta_help
-            }
-            else_if = {
-                limit = {
                     check_variable = {
                         which = station_herta_help
-                        value >= 100
+                        value = 100
+                    }
+                    check_variable = {
+                        which = station_ruanmei_help
+                        value = 100
                     }
                 }
-                set_variable = {
-                    which = station_herta_help
-                    value = 100
-                }
+                #end_event_chain = herta_start_situation_chain
+                country_event = { id = DOT_SR_Herta.1001  days = 3 }
             }
         }
         else_if = {
             limit = { last_increased_tech = tech_ruanmei_help }
             change_variable = {
                 which = station_ruanmei_help
-                value = 10
+                value = 100
             }
             if = {
                 limit = {
                     check_variable = {
-                        which = station_ruanmei_help
-                        value < 100
+                        which = station_luosi_help
+                        value = 100
                     }
-                }
-                add_research_option = tech_ruanmei_help
-            }
-            if = {
-                limit = {
+                    check_variable = {
+                        which = station_herta_help
+                        value = 100
+                    }
                     check_variable = {
                         which = station_ruanmei_help
-                        value >= 100
+                        value = 100
                     }
                 }
-                set_variable = {
-                    which = station_ruanmei_help
-                    value = 100
-                }
+                #end_event_chain = herta_start_situation_chain
+                country_event = { id = DOT_SR_Herta.1001  days = 3 }
             }
         }
         else_if = {
             limit = { last_increased_tech = tech_luosi_help }
             change_variable = {
                 which = station_luosi_help
-                value = 10
+                value = 100
             }
             if = {
                 limit = {
                     check_variable = {
                         which = station_luosi_help
-                        value < 100
+                        value = 100
                     }
-                }
-                add_research_option = tech_luosi_help
-            }
-            if = {
-                limit = {
                     check_variable = {
-                        which = station_luosi_help
-                        value >= 100
+                        which = station_herta_help
+                        value = 100
+                    }
+                    check_variable = {
+                        which = station_ruanmei_help
+                        value = 100
                     }
                 }
-                set_variable = {
-                    which = station_luosi_help
-                    value = 100
-                }
+                #end_event_chain = herta_start_situation_chain
+                country_event = { id = DOT_SR_Herta.1001  days = 3 }
             }
         }
         else_if = {
             limit = { last_increased_tech = tech_sidifen_help }
             change_variable = {
                 which = station_sidifen_help
-                value = 10
-            }
-            if = {
-                limit = {
-                    check_variable = {
-                        which = station_sidifen_help
-                        value < 100
-                    }
-                }
-                add_research_option = tech_sidifen_help
-            }
-            if = {
-                limit = {
-                    check_variable = {
-                        which = station_sidifen_help
-                        value >= 100
-                    }
-                }
-                set_variable = {
-                    which = station_sidifen_help
-                    value = 100
-                }
+                value = 100
             }
         }
         else_if = {
@@ -1482,12 +1452,8 @@ country_event = {
                     which = station_ruanmei_help
                     value = 100
                 }
-                check_variable = {
-                    which = station_sidifen_help
-                    value = 100
-                }
             }
-            end_event_chain = herta_start_situation_chain
+            #end_event_chain = herta_start_situation_chain
             country_event = { id = DOT_SR_Herta.1001  days = 3 }
         }
     }
