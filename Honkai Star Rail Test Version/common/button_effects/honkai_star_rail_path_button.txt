@@ -1,0 +1,845 @@
+hsr_path_cunhu_name_effect = {
+    allow = {
+        always = yes
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_path_cunhu_name_tt
+    }
+}
+hsr_path_cunhu_set_primary_effect = {
+    allow = {
+        custom_tooltip = hsr_path_cunhu_set_primary_effect
+        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        custom_tooltip = {
+            fail_text = hsr_cunhu_primary_tt
+            hidden_trigger = {
+                from = {
+                    not = {
+                        has_country_flag = hsr_cunhu_primary
+                    }
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = hsr_cunhu_secondary_tt
+            hidden_trigger = {
+                from = {
+                    not = {
+                        has_country_flag = hsr_cunhu_secondary
+                    }
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = hsr_cunhu_has_tt
+            hidden_trigger = {
+                from = {
+                    has_tradition = tr_cunhu
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = hsr_cunhu_primary_need_tt
+            hidden_trigger = {
+                from = {
+                    check_variable_arithmetic = {
+                        which = value:country_path_cunhu_value
+                        value > 80
+                    }
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = hsr_cunhu_primary_count_need_tt
+            hidden_trigger = {
+                from = {
+                    check_variable_arithmetic = {
+                        which = path_primary_count
+                        value < path_primary_count_max
+                    }
+                }
+            }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_path_cunhu_set_primary_effect
+        hidden_effect = {
+            from = {
+                set_country_flag = hsr_cunhu_primary
+                change_variable = {
+                    which = path_primary_count
+                    value = 1
+                }
+                add_resource = { unity = -10000 }
+            }
+        }
+    }
+}
+hsr_path_cunhu_set_secondary_effect = {
+    allow = {
+        custom_tooltip = hsr_path_cunhu_set_secondary_effect
+        from = {resource_stockpile_compare = { resource = unity value >= 5000 }}
+        custom_tooltip = {
+            fail_text = hsr_cunhu_secondary_tt
+            hidden_trigger = {
+                from = {
+                    not = {
+                        has_country_flag = hsr_cunhu_secondary
+                    }
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = hsr_cunhu_secondary_tt
+            hidden_trigger = {
+                from = {
+                    not = {
+                        has_country_flag = hsr_cunhu_secondary
+                    }
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = hsr_cunhu_has_tt
+            hidden_trigger = {
+                from = {
+                    has_tradition = tr_cunhu
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = hsr_cunhu_secondary_need_tt
+            hidden_trigger = {
+                from = {
+                    check_variable_arithmetic = {
+                        which = value:country_path_cunhu_value
+                        value > 40
+                    }
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = hsr_cunhu_secondary_count_need_tt
+            hidden_trigger = {
+                from = {
+                    check_variable_arithmetic = {
+                        which = path_secondary_count
+                        value < path_secondary_count_max
+                    }
+                }
+            }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_path_cunhu_set_secondary_effect
+        hidden_effect = {
+            from = {
+                set_country_flag = hsr_cunhu_secondary
+                change_variable = {
+                    which = path_secondary_count
+                    value = 1
+                }
+                add_resource = { unity =-5000 }
+            }
+        }
+    }
+}
+hsr_path_cunhu_reset_effect = {
+    allow = {
+        custom_tooltip = hsr_path_cunhu_reset_effect
+        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_path_cunhu_reset_effect
+        hidden_effect = {
+            from = {
+                if = {
+                    limit = {
+                        has_country_flag = hsr_cunhu_secondary
+                    }
+                    remove_country_flag = hsr_cunhu_secondary
+                    change_variable = {
+                        which = path_secondary_count
+                        value = 1
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = hsr_cunhu_primary
+                    }
+                    remove_country_flag = hsr_cunhu_primary
+                    change_variable = {
+                        which = path_primary_count
+                        value = 1
+                    }
+                }
+                add_resource = { unity = -10000 }
+            }
+        }
+    }
+}
+hsr_path_cunhu_up_effect = {
+    allow = {
+        custom_tooltip = hsr_path_cunhu_up_effect
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
+        custom_tooltip = {
+            fail_text = hsr_cunhu_cunhu_up_tt
+            hidden_trigger = {
+                from = {
+                    not = {
+                        has_modifier = hsr_path_cunhu_up
+                        has_modifier = hsr_path_cunhu_down
+                    }
+                }
+            }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_path_cunhu_up_effect
+        hidden_effect = {
+            from = {
+                add_modifier = {
+                    modifier = hsr_path_cunhu_up
+                    years = 5
+                }
+                add_resource = { unity = -1000 }
+            }
+        }
+    }
+}
+hsr_path_cunhu_down_effect = {
+    allow = {
+        custom_tooltip = hsr_path_cunhu_down_effect
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
+        custom_tooltip = {
+            fail_text = hsr_cunhu_cunhu_up_tt
+            hidden_trigger = {
+                from = {
+                    not = {
+                        has_modifier = hsr_path_cunhu_up
+                        has_modifier = hsr_path_cunhu_down
+                    }
+                }
+            }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_path_cunhu_down_effect
+        hidden_effect = {
+            from = {
+                add_modifier = {
+                    modifier = hsr_path_cunhu_down
+                    years = 5
+                }
+                add_resource = { unity = -1000 }
+            }
+        }
+    }
+}
+hsr_path_cunhu_setting_effect = {
+    allow = {
+        always = yes
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_path_cunhu_setting_effect
+    }
+}
+hsr_cunhu_path_start_effect = {
+    allow = {
+        custom_tooltip = hsr_cunhu_path_start_effect
+        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        custom_tooltip = {
+            fail_text = cunhu_path_start_tt
+            hidden_trigger = {
+                from = {
+                    not = {
+                        has_tradition = tr_cunhu
+                    }
+                }
+            }
+        }
+    }
+    potential = {
+        custom_tooltip = {
+            fail_text = cunhu_path_start_tt
+            hidden_trigger = {
+                from= {
+                    not = {
+                        has_tradition = tr_cunhu
+                    }
+                }
+            }
+        }
+        from = {
+            not = {
+                has_country_flag = path_cunhu_level_up
+            }
+        }
+    }
+    effect = {
+        custom_tooltip = hsr_cunhu_path_start_effect
+        hidden_effect = {
+            from = {
+                add_tradition = tr_cunhu
+                remove_modifier = hsr_path_cunhu_end
+                add_resource = { unity = -10000 }
+            }
+        }
+    }
+}
+hsr_cunhu_path_end_effect = {
+    allow = {
+        custom_tooltip = hsr_cunhu_path_end_effect
+        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        custom_tooltip = {
+            fail_text = cunhu_path_end_tt
+            hidden_trigger = {
+                from = {
+                    has_tradition = tr_cunhu
+                }
+            }
+        }
+    }
+    potential = {
+        custom_tooltip = {
+            fail_text = cunhu_path_end_tt
+            hidden_trigger = {
+                from = {
+                    has_tradition = tr_cunhu
+                }
+            }
+        }
+        from = {
+            not = {
+                has_country_flag = path_cunhu_level_up
+            }
+        }
+    }
+    effect = {
+        custom_tooltip = hsr_cunhu_path_end_effect
+        hidden_effect = {
+            from = {
+                remove_tradition = tr_cunhu
+                add_modifier = {
+                    modifier = hsr_path_cunhu_end
+                    days = -1
+                }
+                add_resource = { unity = -10000 }
+            }
+        }
+    }
+}
+hsr_path_cunhu_show_effect = {
+    allow = {
+        always = yes
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_path_cunhu_show_effect
+    }
+}
+hsr_path_cunhu_level_up_effect = {
+    allow = {
+        custom_tooltip = hsr_path_cunhu_level_up_effect
+        from = {resource_stockpile_compare = { resource = unity value >= 50000 }}
+        custom_tooltip = {
+            fail_text = cunhu_path_need_tt
+            hidden_trigger = {
+                from = {
+                    check_variable_arithmetic = {
+                        which = from.value:country_path_cunhu_value
+                        value >80
+                    }
+                }
+            }
+        }
+    }
+    potential = {
+        from = {
+            not = {
+                has_country_flag = path_cunhu_level_up
+            }
+        }
+    }
+    effect = {
+        custom_tooltip = hsr_path_cunhu_level_up_effect
+        hidden_effect = {
+            from = {
+                set_country_flag = path_cunhu_level_up
+                add_resource = { unity = -50000 }
+            }
+        }
+    }
+}
+hsr_path_cunhu_start_level_up_effect = {
+    allow = {
+        custom_tooltip = hsr_path_cunhu_start_level_up_effect
+        custom_tooltip = {
+            fail_text = cunhu_path_need_tt
+            hidden_trigger = {
+                from = {
+                    has_country_flag = path_cunhu_level_up
+                }
+            }
+        }
+    }
+    potential = {
+        from = {
+            has_country_flag = path_cunhu_level_up
+        }
+    }
+    effect = {
+        custom_tooltip = hsr_path_cunhu_start_level_up_effect
+        hidden_effect = {
+            from = {
+
+            }
+        }
+    }
+}
+#繁育
+hsr_path_fanyu_name_effect = {
+    allow = {
+        always = yes
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_path_fanyu_name_tt
+    }
+}
+hsr_path_fanyu_set_primary_effect = {
+    allow = {
+        custom_tooltip = hsr_path_fanyu_set_primary_effect
+        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        custom_tooltip = {
+            fail_text = hsr_fanyu_primary_tt
+            hidden_trigger = {
+                from = {
+                    not = {
+                        has_country_flag = hsr_fanyu_primary
+                    }
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = hsr_fanyu_secondary_tt
+            hidden_trigger = {
+                from = {
+                    not = {
+                        has_country_flag = hsr_fanyu_secondary
+                    }
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = hsr_fanyu_has_tt
+            hidden_trigger = {
+                from = {
+                    has_tradition = tr_fanyu
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = hsr_fanyu_primary_need_tt
+            hidden_trigger = {
+                from = {
+                    check_variable_arithmetic = {
+                        which = value:country_path_fanyu_value
+                        value > 80
+                    }
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = hsr_fanyu_primary_count_need_tt
+            hidden_trigger = {
+                from = {
+                    check_variable_arithmetic = {
+                        which = path_primary_count
+                        value < path_primary_count_max
+                    }
+                }
+            }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_path_fanyu_set_primary_effect
+        hidden_effect = {
+            from = {
+                set_country_flag = hsr_fanyu_primary
+                change_variable = {
+                    which = path_primary_count
+                    value = 1
+                }
+                add_resource = { unity = -10000 }
+            }
+        }
+    }
+}
+hsr_path_fanyu_set_secondary_effect = {
+    allow = {
+        custom_tooltip = hsr_path_fanyu_set_secondary_effect
+        from = {resource_stockpile_compare = { resource = unity value >= 5000 }}
+        custom_tooltip = {
+            fail_text = hsr_fanyu_secondary_tt
+            hidden_trigger = {
+                from = {
+                    not = {
+                        has_country_flag = hsr_fanyu_secondary
+                    }
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = hsr_fanyu_secondary_tt
+            hidden_trigger = {
+                from = {
+                    not = {
+                        has_country_flag = hsr_fanyu_secondary
+                    }
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = hsr_fanyu_has_tt
+            hidden_trigger = {
+                from = {
+                    has_tradition = tr_fanyu
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = hsr_fanyu_secondary_need_tt
+            hidden_trigger = {
+                from = {
+                    check_variable_arithmetic = {
+                        which = value:country_path_fanyu_value
+                        value > 40
+                    }
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = hsr_fanyu_secondary_count_need_tt
+            hidden_trigger = {
+                from = {
+                    check_variable_arithmetic = {
+                        which = path_secondary_count
+                        value < path_secondary_count_max
+                    }
+                }
+            }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_path_fanyu_set_secondary_effect
+        hidden_effect = {
+            from = {
+                set_country_flag = hsr_fanyu_secondary
+                change_variable = {
+                    which = path_secondary_count
+                    value = 1
+                }
+                add_resource = { unity =-5000 }
+            }
+        }
+    }
+}
+hsr_path_fanyu_reset_effect = {
+    allow = {
+        custom_tooltip = hsr_path_fanyu_reset_effect
+        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_path_fanyu_reset_effect
+        hidden_effect = {
+            from = {
+                if = {
+                    limit = {
+                        has_country_flag = hsr_fanyu_secondary
+                    }
+                    remove_country_flag = hsr_fanyu_secondary
+                    change_variable = {
+                        which = path_secondary_count
+                        value = 1
+                    }
+                }
+                if = {
+                    limit = {
+                        has_country_flag = hsr_fanyu_primary
+                    }
+                    remove_country_flag = hsr_fanyu_primary
+                    change_variable = {
+                        which = path_primary_count
+                        value = 1
+                    }
+                }
+                add_resource = { unity = -10000 }
+            }
+        }
+    }
+}
+hsr_path_fanyu_up_effect = {
+    allow = {
+        custom_tooltip = hsr_path_fanyu_up_effect
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
+        custom_tooltip = {
+            fail_text = hsr_fanyu_fanyu_up_tt
+            hidden_trigger = {
+                from = {
+                    not = {
+                        has_modifier = hsr_path_fanyu_up
+                        has_modifier = hsr_path_fanyu_down
+                    }
+                }
+            }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_path_fanyu_up_effect
+        hidden_effect = {
+            from = {
+                add_modifier = {
+                    modifier = hsr_path_fanyu_up
+                    years = 5
+                }
+                add_resource = { unity = -1000 }
+            }
+        }
+    }
+}
+hsr_path_fanyu_down_effect = {
+    allow = {
+        custom_tooltip = hsr_path_fanyu_down_effect
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
+        custom_tooltip = {
+            fail_text = hsr_fanyu_fanyu_up_tt
+            hidden_trigger = {
+                from = {
+                    not = {
+                        has_modifier = hsr_path_fanyu_up
+                        has_modifier = hsr_path_fanyu_down
+                    }
+                }
+            }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_path_fanyu_down_effect
+        hidden_effect = {
+            from = {
+                add_modifier = {
+                    modifier = hsr_path_fanyu_down
+                    years = 5
+                }
+                add_resource = { unity = -1000 }
+            }
+        }
+    }
+}
+hsr_path_fanyu_setting_effect = {
+    allow = {
+        always = yes
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_path_setting_effect
+    }
+}
+hsr_fanyu_path_start_effect = {
+    allow = {
+        custom_tooltip = hsr_fanyu_path_start_effect
+        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        custom_tooltip = {
+            fail_text = fanyu_path_start_tt
+            hidden_trigger = {
+                from = {
+                    not = {
+                        has_tradition = tr_fanyu
+                    }
+                }
+            }
+        }
+    }
+    potential = {
+        custom_tooltip = {
+            fail_text = fanyu_path_start_tt
+            hidden_trigger = {
+                from= {
+                    not = {
+                        has_tradition = tr_fanyu
+                    }
+                }
+            }
+        }
+        from = {
+            not = {
+                has_country_flag = path_fanyu_level_up
+            }
+        }
+    }
+    effect = {
+        custom_tooltip = hsr_fanyu_path_start_effect
+        hidden_effect = {
+            from = {
+                add_tradition = tr_fanyu
+                remove_modifier = hsr_path_fanyu_end
+                add_resource = { unity = -10000 }
+            }
+        }
+    }
+}
+hsr_fanyu_path_end_effect = {
+    allow = {
+        custom_tooltip = hsr_fanyu_path_end_effect
+        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        custom_tooltip = {
+            fail_text = fanyu_path_end_tt
+            hidden_trigger = {
+                from = {
+                    has_tradition = tr_fanyu
+                }
+            }
+        }
+    }
+    potential = {
+        custom_tooltip = {
+            fail_text = fanyu_path_end_tt
+            hidden_trigger = {
+                from = {
+                    has_tradition = tr_fanyu
+                }
+            }
+        }
+        from = {
+            not = {
+                has_country_flag = path_fanyu_level_up
+            }
+        }
+    }
+    effect = {
+        custom_tooltip = hsr_fanyu_path_end_effect
+        hidden_effect = {
+            from = {
+                remove_tradition = tr_fanyu
+                add_modifier = {
+                    modifier = hsr_path_fanyu_end
+                    days = -1
+                }
+                add_resource = { unity = -10000 }
+            }
+        }
+    }
+}
+hsr_path_fanyu_show_effect = {
+    allow = {
+        always = yes
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_path_fanyu_show_effect
+    }
+}
+hsr_path_fanyu_level_up_effect = {
+    allow = {
+        custom_tooltip = hsr_path_fanyu_level_up_effect
+        from = {resource_stockpile_compare = { resource = unity value >= 50000 }}
+        custom_tooltip = {
+            fail_text = fanyu_path_need_tt
+            hidden_trigger = {
+                from = {
+                    check_variable_arithmetic = {
+                        which = from.value:country_path_fanyu_value
+                        value >80
+                    }
+                }
+            }
+        }
+    }
+    potential = {
+        from = {
+            not = {
+                has_country_flag = path_fanyu_level_up
+            }
+        }
+    }
+    effect = {
+        custom_tooltip = hsr_path_fanyu_level_up_effect
+        hidden_effect = {
+            from = {
+                set_country_flag = path_fanyu_level_up
+                add_resource = { unity = -50000 }
+            }
+        }
+    }
+}
+hsr_path_fanyu_start_level_up_effect = {
+    allow = {
+        custom_tooltip = hsr_path_fanyu_start_level_up_effect
+        custom_tooltip = {
+            fail_text = fanyu_path_need_tt
+            hidden_trigger = {
+                from = {
+                    has_country_flag = path_fanyu_level_up
+                }
+            }
+        }
+    }
+    potential = {
+        from = {
+            has_country_flag = path_fanyu_level_up
+        }
+    }
+    effect = {
+        custom_tooltip = hsr_path_fanyu_start_level_up_effect
+        hidden_effect = {
+            from = {
+
+            }
+        }
+    }
+}
