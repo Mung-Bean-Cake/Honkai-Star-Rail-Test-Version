@@ -251,10 +251,6 @@ country_event = {#初试化设置
         give_technology = { tech = tech_honkai_star_rail_hull_t1 message = no }
         give_technology = { tech = tech_honkai_star_rail_power_t1 message = no }
         give_technology = { tech = tech_galactic_archivism message = no }
-        add_research_option = tech_herta_help
-        add_research_option = tech_ruanmei_help
-        add_research_option = tech_luosi_help
-        add_research_option = tech_sidifen_help
 		set_policy = {
 			policy = artificial_intelligence_policy
 			option = ai_full_rights
@@ -331,6 +327,26 @@ country_event = {#初试化设置
             target = ROOT
         }
         capital_scope = {
+			enable_special_project = {
+				name = "herta_start_situation_1"
+				location = this
+				owner = root
+			}
+			enable_special_project = {
+				name = "herta_start_situation_2"
+				location = this
+				owner = root
+			}
+			enable_special_project = {
+				name = "herta_start_situation_3"
+				location = this
+				owner = root
+			}
+			enable_special_project = {
+				name = "herta_start_situation_4"
+				location = this
+				owner = root
+			}
             create_fleet = {
                 name = "NAME_HERTA_FLEET"
                 settings = {
@@ -421,43 +437,6 @@ situation_event = {
             hidden_effect = {
                 event_target:herta_fleet = {
                     remove_modifier = herta_station_fleet_debuff_1
-                }
-            }
-        }
-    }
-}
-situation_event = {
-    id = DOT_SR_Herta.11
-    title = DOT_SR_Herta.11.tittle
-    desc = DOT_SR_Herta.11.desc
-    picture = GFX_evt_deep_space_citadel
-    is_triggered_only = yes
-    option = {
-        name = DOT_SR_Herta.11.a
-        owner = {
-            add_monthly_resource_mult = {
-                resource = energy
-                value = @tier5unityreward
-                min = @tier5unitymin
-                max = @tier5unitymax
-            }
-        }
-    }
-    option = {
-        name = DOT_SR_Herta.11.b
-        custom_tooltip = DOT_SR_Herta.11.b.desc
-        owner = {
-            add_monthly_resource_mult = {
-                resource = energy
-                value = @tier3unityreward
-                min = @tier3unitymin
-                max = @tier3unitymax
-            }
-            hidden_effect = {
-                event_target:herta_fleet = {
-                    add_modifier = {
-                        modifier = herta_station_fleet_buff_1
-                    }
                 }
             }
         }
@@ -1337,124 +1316,6 @@ country_event = {
                 trait = leader_trait_luosi_pop_up_t1
                 show_message = no
             }
-        }
-    }
-}
-country_event = {
-    id = DOT_SR_Herta.1000
-    is_triggered_only = yes
-    hide_window = yes
-
-    trigger = {
-        or = {
-            last_increased_tech = tech_herta_help
-            last_increased_tech = tech_ruanmei_help
-            last_increased_tech = tech_luosi_help
-            last_increased_tech = tech_sidifen_help
-        }
-    }
-    immediate = {
-        if = {
-            limit = { 
-                last_increased_tech = tech_herta_help
-            }
-            change_variable = {
-                which = station_herta_help
-                value = 100
-            }
-            if = {
-                limit = {
-                    check_variable = {
-                        which = station_luosi_help
-                        value = 100
-                    }
-                    check_variable = {
-                        which = station_herta_help
-                        value = 100
-                    }
-                    check_variable = {
-                        which = station_ruanmei_help
-                        value = 100
-                    }
-                }
-                #end_event_chain = herta_start_situation_chain
-                country_event = { id = DOT_SR_Herta.1001  days = 3 }
-            }
-        }
-        else_if = {
-            limit = { last_increased_tech = tech_ruanmei_help }
-            change_variable = {
-                which = station_ruanmei_help
-                value = 100
-            }
-            if = {
-                limit = {
-                    check_variable = {
-                        which = station_luosi_help
-                        value = 100
-                    }
-                    check_variable = {
-                        which = station_herta_help
-                        value = 100
-                    }
-                    check_variable = {
-                        which = station_ruanmei_help
-                        value = 100
-                    }
-                }
-                #end_event_chain = herta_start_situation_chain
-                country_event = { id = DOT_SR_Herta.1001  days = 3 }
-            }
-        }
-        else_if = {
-            limit = { last_increased_tech = tech_luosi_help }
-            change_variable = {
-                which = station_luosi_help
-                value = 100
-            }
-            if = {
-                limit = {
-                    check_variable = {
-                        which = station_luosi_help
-                        value = 100
-                    }
-                    check_variable = {
-                        which = station_herta_help
-                        value = 100
-                    }
-                    check_variable = {
-                        which = station_ruanmei_help
-                        value = 100
-                    }
-                }
-                #end_event_chain = herta_start_situation_chain
-                country_event = { id = DOT_SR_Herta.1001  days = 3 }
-            }
-        }
-        else_if = {
-            limit = { last_increased_tech = tech_sidifen_help }
-            change_variable = {
-                which = station_sidifen_help
-                value = 100
-            }
-        }
-        else_if = {
-            limit = {
-                check_variable = {
-                    which = station_luosi_help
-                    value = 100
-                }
-                check_variable = {
-                    which = station_herta_help
-                    value = 100
-                }
-                check_variable = {
-                    which = station_ruanmei_help
-                    value = 100
-                }
-            }
-            #end_event_chain = herta_start_situation_chain
-            country_event = { id = DOT_SR_Herta.1001  days = 3 }
         }
     }
 }
