@@ -1,0 +1,1070 @@
+namespace = hsr_path
+#信仰值相关1-100
+#1.战争：毁灭（进攻），欢愉（概率）,虚无（概率），巡猎，存护（防御，解放）
+country_event = {
+    id = hsr_path.1
+    hide_window = yes
+    is_triggered_only = yes
+
+    trigger = {
+
+    }
+
+    immediate = {
+        from = {
+            if = {
+                limit = {
+                    is_war_participant = { who = root side = defenders }
+                }
+                change_variable = {
+                    which = country_path_cunhu
+                    value = 0.25
+                }
+                change_variable = {
+                    which = country_path_xunlie
+                    value = 0.25
+                }
+                random_list = {
+                    1 = {}
+                    1 = {change_variable = { which = country_path_huanyu value = 0.1 }}
+                }
+                random_list = {
+                    1 = {}
+                    1 = {change_variable = { which = country_path_xuwu value = 0.1 }}
+                }
+            }
+            if = {
+                limit = {
+                    is_war_participant = { who = root side = attackers }
+                    NOR = {
+                        using_war_goal = {
+                            type = wg_independence
+                            owner = root
+                        }
+                        using_war_goal = {
+                            type = wg_end_threat
+                            owner = root
+                        }
+                        using_war_goal = {
+                            type = wg_force_ideology
+                            owner = root
+                        }
+                    }
+                }
+                change_variable = {
+                    which = country_path_huimie
+                    value = 0.35
+                }
+                random_list = {
+                    1 = {}
+                    1 = {change_variable = { which = country_path_huanyu value = 0.1 }}
+                }
+                random_list = {
+                    1 = {}
+                    1 = {change_variable = { which = country_path_xuwu value = 0.1 }}
+                }
+            }
+            if = {
+                limit = {
+                    is_war_participant = { who = root side = attackers }
+                    OR = {
+                        using_war_goal = {
+                            type = wg_independence
+                            owner = root
+                        }
+                        using_war_goal = {
+                            type = wg_end_threat
+                            owner = root
+                        }
+                        using_war_goal = {
+                            type = wg_force_ideology
+                            owner = root
+                        }
+                    }
+                }
+                change_variable = {
+                    which = country_path_cunhu
+                    value = 0.25
+                }
+                change_variable = {
+                    which = country_path_xunlie
+                    value = 0.25
+                }
+                random_list = {
+                    1 = {}
+                    1 = {change_variable = { which = country_path_huanyu value = 0.1 }}
+                }
+                random_list = {
+                    1 = {}
+                    1 = {change_variable = { which = country_path_xuwu value = 0.1 }}
+                }
+            }
+        }
+    }
+}
+#征服：毁灭，记忆，同协，欢愉（概率），虚无（概率）
+planet_event = {
+    id = hsr_path.2
+    hide_window = yes
+    is_triggered_only = yes
+
+    trigger = {
+
+    }
+
+    immediate = {
+        from = {
+            change_variable = {
+                which = country_path_huimie
+                value = 0.2
+            }
+            change_variable = {
+                which = country_path_jiyi
+                value = 0.1
+            }
+            change_variable = {
+                which = country_path_tongxie
+                value = 0.1
+            }
+            random_list = {
+                1 = {}
+                1 = {change_variable = { which = country_path_huanyu value = 0.1 }}
+            }
+            random_list = {
+                1 = {}
+                1 = {change_variable = { which = country_path_xuwu value = 0.1 }}
+            }
+        }
+    }
+}
+#屠戮，毁灭，繁育，丰饶
+country_event = {
+    id = hsr_path.3
+    hide_window = yes
+    is_triggered_only = yes
+
+    trigger = {
+
+    }
+
+    immediate = {
+        fromfrom = {
+            change_variable = {
+                which = country_path_huimie
+                value = 0.02
+            }
+            change_variable = {
+                which = country_path_fanyu
+                value = 0.01
+            }
+            change_variable = {
+                which = country_path_fengrao
+                value = 0.01
+            }
+            random_list = {
+                1 = {}
+                1 = {change_variable = { which = country_path_huanyu value = 0.01 }}
+            }
+            random_list = {
+                1 = {}
+                1 = {change_variable = { which = country_path_xuwu value = 0.01 }}
+            }
+        }
+    }
+}
+#摧毁舰船，毁灭，巡猎
+country_event = {
+    id = hsr_path.4
+    hide_window = yes
+    is_triggered_only = yes
+
+    trigger = {
+        exists = fromfromfrom
+    }
+
+    immediate = {
+        change_variable = {
+            which = country_path_huimie
+            value = 0.01
+        }
+        change_variable = {
+            which = country_path_xunlie
+            value = 0.005
+        }
+        random_list = {
+            1 = {}
+            1 = {change_variable = { which = country_path_huanyu value = 0.005 }}
+        }
+        random_list = {
+            1 = {}
+            1 = {change_variable = { which = country_path_xuwu value = 0.005 }}
+        }
+    }
+}
+#摧毁人口：繁育，丰饶，毁灭
+planet_event = {
+    id = hsr_path.5
+    hide_window = yes
+    is_triggered_only = yes
+
+    trigger = {
+        exists = from
+    }
+
+    immediate = {
+        from = {
+            change_variable = {
+                which = country_path_huimie
+                value = 0.001
+            }
+            change_variable = {
+                which = country_path_fanyu
+                value = 0.0005
+            }
+            random_list = {
+                1 = {}
+                1 = {change_variable = { which = country_path_huanyu value = 0.0005 }}
+            }
+            random_list = {
+                1 = {}
+                1 = {change_variable = { which = country_path_xuwu value = 0.0005 }}
+            }
+        }
+    }
+}
+
+pop_group_event = {
+    id = hsr_path.6
+    hide_window = yes
+    is_triggered_only = yes
+
+    trigger = {
+        exists = fromfrom
+    }
+
+    immediate = {
+        fromfrom = {
+            change_variable = {
+                which = country_path_huimie
+                value = 0.001
+            }
+            change_variable = {
+                which = country_path_fanyu
+                value = 0.0005
+            }
+            random_list = {
+                1 = {}
+                1 = {change_variable = { which = country_path_huanyu value = 0.0005 }}
+            }
+            random_list = {
+                1 = {}
+                1 = {change_variable = { which = country_path_xuwu value = 0.0005 }}
+            }
+        }
+    }
+}
+#夺取星系 毁灭，巡猎
+system_event = {
+    id = hsr_path.7
+    hide_window = yes
+    is_triggered_only = yes
+
+    trigger = {
+        exists = from
+        exists = starbase
+        NOT = { has_star_flag = conquered_by_@from }
+        from = {
+
+        }
+    }
+
+    immediate = {
+        set_star_flag = conquered_by_@from
+        from = {
+            change_variable = {
+                which = country_path_huimie
+                value = 0.35
+            }
+            change_variable = {
+                which = country_path_xunlie
+                value = 0.25
+            }
+            random_list = {
+                1 = {}
+                1 = {change_variable = { which = country_path_huanyu value = 0.1 }}
+            }
+            random_list = {
+                1 = {}
+                1 = {change_variable = { which = country_path_xuwu value = 0.1 }}
+            }
+        }
+    }
+}
+#召集，记忆，同协，记忆，巡猎，智识,繁育，丰饶
+country_event = {
+    id = hsr_path.8
+    hide_window = yes
+    is_triggered_only = yes
+
+    trigger = {
+        has_federation = yes
+        is_federation_leader = yes
+        exists = federation
+        federation = {
+            num_members = 1
+        }
+    }
+
+    immediate = {
+        change_variable = {
+            which = country_path_cunhu
+            value = 0.25
+        }
+        change_variable = {
+            which = country_path_jiyi
+            value = 0.25
+        }
+        change_variable = {
+            which = country_path_tongxie
+            value = 0.25
+        }
+        change_variable = {
+            which = country_path_xunlie
+            value = 0.25
+        }
+        change_variable = {
+            which = country_path_zhishi
+            value = 0.25
+        }
+        change_variable = {
+            which = country_path_fanyu
+            value = 0.25
+        }
+        change_variable = {
+            which = country_path_fengrao
+            value = 0.25
+        }
+        random_list = {
+            1 = {}
+            1 = {change_variable = { which = country_path_huanyu value = 0.1 }}
+        }
+        random_list = {
+            1 = {}
+            1 = {change_variable = { which = country_path_xuwu value = 0.1 }}
+        }
+    }
+}
+
+country_event = {
+    id = hsr_path.9
+    hide_window = yes
+    is_triggered_only = yes
+
+    trigger = {
+        exists = federation
+    }
+
+    immediate = {
+        federation = {
+            every_member = {
+                limit = {
+
+                }
+                change_variable = {
+                    which = country_path_cunhu
+                    value = 0.25
+                }
+                change_variable = {
+                    which = country_path_jiyi
+                    value = 0.25
+                }
+                change_variable = {
+                    which = country_path_tongxie
+                    value = 0.25
+                }
+                change_variable = {
+                    which = country_path_xunlie
+                    value = 0.25
+                }
+                change_variable = {
+                    which = country_path_zhishi
+                    value = 0.25
+                }
+                change_variable = {
+                    which = country_path_fanyu
+                    value = 0.25
+                }
+                change_variable = {
+                    which = country_path_fengrao
+                    value = 0.25
+                }
+                random_list = {
+                    1 = {}
+                    1 = {change_variable = { which = country_path_huanyu value = 0.1 }}
+                }
+                random_list = {
+                    1 = {}
+                    1 = {change_variable = { which = country_path_xuwu value = 0.1 }}
+                }
+            }
+        }
+    }
+}
+country_event = {
+    id = hsr_path.10
+    hide_window = yes
+    is_triggered_only = yes
+
+    trigger = {
+
+    }
+
+    immediate = {
+        change_variable = {
+            which = country_path_cunhu
+            value = 0.25
+        }
+        change_variable = {
+            which = country_path_jiyi
+            value = 0.25
+        }
+        change_variable = {
+            which = country_path_tongxie
+            value = 0.25
+        }
+        change_variable = {
+            which = country_path_xunlie
+            value = 0.25
+        }
+        change_variable = {
+            which = country_path_zhishi
+            value = 0.25
+        }
+        change_variable = {
+            which = country_path_fanyu
+            value = 0.25
+        }
+        change_variable = {
+            which = country_path_fengrao
+            value = 0.25
+        }
+        random_list = {
+            1 = {}
+            1 = {change_variable = { which = country_path_huanyu value = 0.1 }}
+        }
+        random_list = {
+            1 = {}
+            1 = {change_variable = { which = country_path_xuwu value = 0.1 }}
+        }
+    }
+}
+country_event = {
+    id = hsr_path.11
+    hide_window = yes
+    is_triggered_only = yes
+
+    trigger = {
+        exists = from
+        from = { is_ai = yes }
+    }
+
+    immediate = {
+        change_variable = {
+            which = country_path_cunhu
+            value = 0.25
+        }
+        change_variable = {
+            which = country_path_jiyi
+            value = 0.25
+        }
+        change_variable = {
+            which = country_path_tongxie
+            value = 0.25
+        }
+        change_variable = {
+            which = country_path_xunlie
+            value = 0.25
+        }
+        change_variable = {
+            which = country_path_zhishi
+            value = 0.25
+        }
+        change_variable = {
+            which = country_path_fanyu
+            value = 0.25
+        }
+        change_variable = {
+            which = country_path_fengrao
+            value = 0.25
+        }
+        random_list = {
+            1 = {}
+            1 = {change_variable = { which = country_path_huanyu value = 0.1 }}
+        }
+        random_list = {
+            1 = {}
+            1 = {change_variable = { which = country_path_xuwu value = 0.1 }}
+        }
+    }
+}
+espionage_operation_event = {
+    id = hsr_path.12
+    hide_window = yes
+    is_triggered_only = yes
+
+    trigger = {
+        exists = owner
+        owner = {
+
+        }
+    }
+
+    immediate = {
+        owner = {
+            change_variable = {
+                which = country_path_jiyi
+                value = 0.15
+            }
+            change_variable = {
+                which = country_path_tongxie
+                value = 0.15
+            }
+            change_variable = {
+                which = country_path_zhishi
+                value = 0.15
+            }
+            change_variable = {
+                which = country_path_fanyu
+                value = 0.15
+            }
+            change_variable = {
+                which = country_path_fengrao
+                value = 0.15
+            }
+            random_list = {
+                1 = {}
+                1 = {change_variable = { which = country_path_huanyu value = 0.05 }}
+            }
+            random_list = {
+                1 = {}
+                1 = {change_variable = { which = country_path_xuwu value = 0.05 }}
+            }
+        }
+    }
+}
+ship_event = {
+    id = hsr_path.13
+    hide_window = yes
+    is_triggered_only = yes
+
+    trigger = {
+        is_ship_size = military_station_small
+        exists = controller
+        controller = {
+
+        }
+    }
+
+    immediate = {
+        controller = {
+            change_variable = {
+                which = country_path_cunhu
+                value = 0.05
+            }
+            random_list = {
+                1 = {}
+                1 = {change_variable = { which = country_path_huanyu value = 0.005 }}
+            }
+            random_list = {
+                1 = {}
+                1 = {change_variable = { which = country_path_xuwu value = 0.005 }}
+            }
+        }
+    }
+}
+
+country_event = {
+    id = hsr_path.14
+    hide_window = yes
+    is_triggered_only = yes
+
+    trigger = {
+        can_access_shroud = yes
+        fromfromfrom = {
+            is_ship_size = military_station_small
+        }
+    }
+
+    immediate = {
+        change_variable = {
+            which = country_path_cunhu
+            value = 0.05
+        }
+        random_list = {
+            1 = {}
+            1 = {change_variable = { which = country_path_huanyu value = 0.005 }}
+        }
+        random_list = {
+            1 = {}
+            1 = {change_variable = { which = country_path_xuwu value = 0.005 }}
+        }
+    }
+}
+#改造
+planet_event = {
+    id = hsr_path.15
+    hide_window = yes
+    is_triggered_only = yes
+
+    trigger = {
+        exists = from
+        NOT = { has_planet_flag = terraformed_by@from }
+        from = {
+        }
+    }
+
+    immediate = {
+        set_planet_flag = terraformed_by@from
+        from = {
+            change_variable = {
+                which = country_path_fanyu
+                value = 0.15
+            }
+            change_variable = {
+                which = country_path_fengrao
+                value = 0.15
+            }
+            change_variable = {
+                which = country_path_jiyi
+                value = 0.15
+            }
+            change_variable = {
+                which = country_path_tongxie
+                value = 0.15
+            }
+            change_variable = {
+                which = country_path_zhishi
+                value = 0.15
+            }
+            random_list = {
+                1 = {}
+                1 = {change_variable = { which = country_path_huanyu value = 0.01 }}
+            }
+            random_list = {
+                1 = {}
+                1 = {change_variable = { which = country_path_xuwu value = 0.01 }}
+            }
+        }
+    }
+}
+#繁育
+ship_event = {
+    id = hsr_path.16
+    hide_window = yes
+    is_triggered_only = yes
+
+    trigger = {
+        is_space_fauna = yes
+        exists = controller
+        controller = {
+
+        }
+    }
+
+    immediate = {
+        controller = {
+            change_variable = {
+                which = country_path_fanyu
+                value = 0.15
+            }
+            change_variable = {
+                which = country_path_fengrao
+                value = 0.15
+            }
+            change_variable = {
+                which = country_path_jiyi
+                value = 0.15
+            }
+            change_variable = {
+                which = country_path_tongxie
+                value = 0.15
+            }
+            change_variable = {
+                which = country_path_zhishi
+                value = 0.15
+            }
+            random_list = {
+                1 = {}
+                1 = {change_variable = { which = country_path_huanyu value = 0.01 }}
+            }
+            random_list = {
+                1 = {}
+                1 = {change_variable = { which = country_path_xuwu value = 0.01 }}
+            }
+        }
+    }
+}
+planet_event = {
+    id = hsr_path.17
+    hide_window = yes
+    is_triggered_only = yes
+
+    trigger = {
+        exists = owner
+        owner = {
+
+        }
+    }
+
+    immediate = {
+        owner = {
+            change_variable = {
+                which = country_path_fanyu
+                value = 0.15
+            }
+            change_variable = {
+                which = country_path_fengrao
+                value = 0.15
+            }
+            change_variable = {
+                which = country_path_jiyi
+                value = 0.15
+            }
+            change_variable = {
+                which = country_path_tongxie
+                value = 0.15
+            }
+            change_variable = {
+                which = country_path_zhishi
+                value = 0.15
+            }
+            change_variable = {
+                which = country_path_cunhu
+                value = 0.15
+            }
+            change_variable = {
+                which = country_path_xuinlie
+                value = 0.15
+            }
+            random_list = {
+                1 = {}
+                1 = {change_variable = { which = country_path_huanyu value = 0.01 }}
+            }
+            random_list = {
+                1 = {}
+                1 = {change_variable = { which = country_path_xuwu value = 0.01 }}
+            }
+        }
+    }
+}
+planet_event = {
+    id = hsr_path.18
+    hide_window = yes
+    is_triggered_only = yes
+
+    trigger = {
+        exists = owner
+        owner = {
+
+        }
+    }
+
+    immediate = {
+        owner = {
+            change_variable = {
+                which = country_path_fanyu
+                value = 0.15
+            }
+            change_variable = {
+                which = country_path_fengrao
+                value = 0.15
+            }
+            change_variable = {
+                which = country_path_jiyi
+                value = 0.15
+            }
+            change_variable = {
+                which = country_path_tongxie
+                value = 0.15
+            }
+            change_variable = {
+                which = country_path_zhishi
+                value = 0.15
+            }
+            change_variable = {
+                which = country_path_cunhu
+                value = 0.15
+            }
+            random_list = {
+                1 = {}
+                1 = {change_variable = { which = country_path_huanyu value = 0.01 }}
+            }
+            random_list = {
+                1 = {}
+                1 = {change_variable = { which = country_path_xuwu value = 0.01 }}
+            }
+        }
+    }
+}
+country_event = {
+    id = hsr_path.19
+    hide_window = yes
+    is_triggered_only = yes
+
+    trigger = {
+        exists = from
+        from = { is_pirate = yes }
+        exists = fromfromfrom
+    }
+
+    immediate = {
+        change_variable = {
+            which = country_path_cunhu
+            value = 0.15
+        }
+        change_variable = {
+            which = country_path_xunlie
+            value = 0.15
+        }
+        random_list = {
+            1 = {}
+            1 = {change_variable = { which = country_path_huanyu value = 0.01 }}
+        }
+        random_list = {
+            1 = {}
+            1 = {change_variable = { which = country_path_xuwu value = 0.01 }}
+        }
+    }
+}
+country_event = {
+    id = hsr_path.19
+    hide_window = yes
+    is_triggered_only = yes
+
+    trigger = {
+
+    }
+
+    immediate = {
+        change_variable = {
+            which = country_path_zhishi
+            value = 0.15
+        }
+        random_list = {
+            1 = {}
+            1 = {change_variable = { which = country_path_huanyu value = 0.01 }}
+        }
+        random_list = {
+            1 = {}
+            1 = {change_variable = { which = country_path_xuwu value = 0.01 }}
+        }
+    }
+}
+fleet_event = {
+    id = hsr_path.20
+    hide_window = yes
+    is_triggered_only = yes
+
+    trigger = {
+        owner = {  }
+    }
+
+    immediate = {
+        owner = {
+            change_variable = {
+                which = country_path_zhishi
+                value = 0.15
+            }
+            change_variable = {
+                which = country_path_jiyi
+                value = 0.15
+            }
+            random_list = {
+                1 = {}
+                1 = {change_variable = { which = country_path_huanyu value = 0.01 }}
+            }
+            random_list = {
+                1 = {}
+                1 = {change_variable = { which = country_path_xuwu value = 0.01 }}
+            }
+        }
+    }
+}
+country_event = {
+    id = hsr_path.21
+    hide_window = yes
+    is_triggered_only = yes
+
+    trigger = {
+
+    }
+
+    immediate = {
+        change_variable = {
+            which = country_path_zhishi
+            value = 0.15
+        }
+        change_variable = {
+            which = country_path_jiyi
+            value = 0.15
+        }
+        random_list = {
+            1 = {}
+            1 = {change_variable = { which = country_path_huanyu value = 0.01 }}
+        }
+        random_list = {
+            1 = {}
+            1 = {change_variable = { which = country_path_xuwu value = 0.01 }}
+        }
+    }
+}
+country_event = {
+    id = hsr_path.22
+    hide_window = yes
+    is_triggered_only = yes
+
+    trigger = {
+
+    }
+
+    immediate = {
+        if = {
+            limit = { is_last_increased_tech_repeatable = yes }
+            change_variable = {
+                which = country_path_zhishi
+                value = 0.05
+            }
+            random_list = {
+                1 = {}
+                1 = {change_variable = { which = country_path_huanyu value = 0.005 }}
+            }
+            random_list = {
+                1 = {}
+                1 = {change_variable = { which = country_path_xuwu value = 0.05 }}
+            }
+        }
+        if = {
+            limit = { is_last_increased_tech_rare = yes }
+            change_variable = {
+                which = country_path_zhishi
+                value = 0.05
+            }
+            random_list = {
+                1 = {}
+                1 = {change_variable = { which = country_path_huanyu value = 0.005 }}
+            }
+            random_list = {
+                1 = {}
+                1 = {change_variable = { which = country_path_xuwu value = 0.05 }}
+            }
+        }
+    }
+}
+#参数更新/年
+country_event = {
+    id = hsr_path.100
+    hide_window = yes
+    is_triggered_only = yes
+
+    trigger = {
+
+    }
+
+    immediate = {
+        change_variable = { 
+            which = country_path_cunhu
+            value = value:country_path_cunhu_year_mult
+        }
+        change_variable = {
+            which = country_path_fanyu
+            value = value:country_path_fanyu_year_mult
+        }
+        change_variable = {
+            which = country_path_fengrao
+            value = value:country_path_fengrao_year_mult
+        }
+        change_variable = {
+            which = country_path_huanyu
+            value = value:country_path_huanyu_year_mult
+        }
+        change_variable = {
+            which = country_path_huimie
+            value = value:country_path_huimie_year_mult
+        }
+        change_variable = {
+            which = country_path_jiyi
+            value = value:country_path_jiyi_year_mult
+        }
+        change_variable = {
+            which = country_path_tongxie
+            value = value:country_path_tongxie_year_mult
+        }
+        change_variable = {
+            which = country_path_xunlie
+            value = value:country_path_xunlie_year_mult
+        }
+        change_variable = {
+            which = country_path_xuwu
+            value = value:country_path_xuwu_year_mult
+        }
+        change_variable = {
+            which = country_path_zhishi
+            value = value:country_path_zhishi_year_mult
+        }
+        hsr_path_year_reset = {path = cunhu }
+        hsr_path_year_reset = {path = fanyu }
+        hsr_path_year_reset = {path = fengrao }
+        hsr_path_year_reset = {path = huanyu }
+        hsr_path_year_reset = {path = huimie }
+        hsr_path_year_reset = {path = jiyi }
+        hsr_path_year_reset = {path = tongxie }
+        hsr_path_year_reset = {path = xunlie }
+        hsr_path_year_reset = {path = xuwu }
+        hsr_path_year_reset = {path = zhishi }
+    }
+}
+country_event = {
+    id = hsr_path.200
+    title = "DOT_SR.1.name"
+    desc = DOT_SR.11.desc
+    is_triggered_only = yes
+    diplomatic = yes
+    custom_gui = hsr_star_path_ui
+    option = {
+        name = OK
+        default_hide_option = yes
+    }
+}
+country_event = {
+    id = hsr_path.201
+    title = "DOT_SR.1.name"
+    desc = DOT_SR.11.desc
+    is_triggered_only = yes
+    diplomatic = yes
+    custom_gui = hsr_path_civic_select
+    option = {
+        name = OK
+        default_hide_option = yes
+    }
+}
+#杂项#1000
+planet_event = {
+    id = hsr_path.1000
+    title = "hsr_path.1000.name"
+    desc = "hsr_path.1000.desc"
+    picture = GFX_evt_wilderness_colonizer
+    is_triggered_only = yes
+    option = {
+        name = hsr_path.1000.a
+        hidden_effect = {
+            remove_deposit = d_fengrao_cunhu_slot
+            change_pc = pc_gaia
+        }
+    }
+    option = {
+        name = hsr_path.1000.b
+        hidden_effect = {
+            add_deposit = d_fengrao_cunhu_slot
+        }
+    }
+}

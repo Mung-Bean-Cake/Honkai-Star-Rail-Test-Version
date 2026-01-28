@@ -521,3 +521,45 @@ decision_luosi_build = {
         weight = 100
     }
 }
+#命途理念
+decision_cunhu_fengrao_1 = {
+	owned_planets_only = yes
+	icon = decision_cultivated_worldscaping
+	enactment_time = 100
+	resources = {
+		category = decisions
+		cost = {
+			energy = 1000
+		}
+	}
+
+	potential = {
+		NOR = {
+			is_planet_class = pc_city
+			is_planet_class = pc_relic
+		}
+		is_artificial = no
+		exists = owner
+		owner = {
+			has_tradition = tr_cunhu_fengrao_1
+		}
+		NOT = {
+			has_deposit = d_fengrao_cunhu_slot
+		}
+	}
+
+	allow = {
+
+	}
+	effect = {
+		custom_tooltip = decision_cunhu_fengrao_1_tt
+		hidden_effect = {
+			add_deposit = d_fengrao_cunhu_slot
+			planet_event = { id = hsr_path.1000 days = 300 random = 300 }
+		}
+	}
+
+	ai_weight = {
+		weight = 100
+	}
+}

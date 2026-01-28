@@ -5,12 +5,83 @@ hsr_path_first_set = {
         value = $cunhu_value$
     }
     change_variable = {
+        which = country_path_fanyu
+        value = $fanyu_value$
+    }
+    change_variable = {
+        which = country_path_fengrao
+        value = $fengrao_value$
+    }
+    change_variable = {
+        which = country_path_huanyu
+        value = $huanyu_value$
+    }
+    change_variable = {
+        which = country_path_huimie
+        value = $huimie_value$
+    }
+    change_variable = {
+        which = country_path_jiyi
+        value = $jiyi_value$
+    }
+    change_variable = {
+        which = country_path_tongxie
+        value = $tongxie_value$
+    }
+    change_variable = {
+        which = country_path_xunlie
+        value = $xunlie_value$
+    }
+    change_variable = {
+        which = country_path_xuwu
+        value = $xuwu_value$
+    }
+    change_variable = {
+        which = country_path_zhishi
+        value = $zhishi_value$
+    }
+    change_variable = {
         which = path_primary_count_max
         value = 1
     }
     change_variable = {
         which = path_secondary_count_max
         value = 2
+    }
+}
+hsr_path_year_reset = {
+    optimize_memory
+    if = {
+        limit = {
+            check_variable_arithmetic = {
+                which = from.value:country_path_$path$_value
+                value < 40
+            }
+            has_country_flag = hsr_$path$_secondary
+        }
+        remove_country_flag = hsr_$path$_secondary
+        change_variable = {
+            which = path_secondary_count
+            value = -1
+        }
+    }
+    if = {
+        limit = {
+            check_variable_arithmetic = {
+                which = from.value:country_path_$path$_value
+                value > 40
+            }
+            check_variable_arithmetic = {
+                which = from.value:country_path_$path$_value
+                value < 60
+            }
+            has_country_flag = hsr_$path$_primary
+        }
+        remove_country_flag = hsr_$path$_primary
+        change_variable = {
+            which = path_primary_count
+            value = -1
+        }
     }
 }
 curiosity_get_effect = {

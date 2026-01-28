@@ -28,7 +28,7 @@ event = {
         }
     }
 }
-#星核刷新，刷舰队
+#星核刷新，刷舰队,暂时移除疑似有问题，我本地运行没问题
 event = {
     id = xinghe.2
     hide_window = yes
@@ -46,6 +46,9 @@ event = {
                         is_planet_class = pc_shielded_white
                         is_planet_class = pc_shielded_yellow
                         is_planet_class = pc_shielded_red
+                    }
+                    not = {
+                        has_modifier = xinghe_cleaning_modifier
                     }
                 }
                 if = {
@@ -144,7 +147,7 @@ event = {
                                     }
                                 }
                                 while = {
-                                    count = 15
+                                    count = 5
                                     create_ship = {
                                         name = random
                                         design = "NAME_Phantom"
@@ -173,6 +176,28 @@ event = {
                     }
                 }
             }
+        }
+    }
+}
+#加屏蔽，防止引发崩溃
+planet_event = {
+    id = xinghe.3
+    hide_window = yes
+
+    is_triggered_only = yes
+
+    trigger = {
+        or = {
+            is_planet_class = pc_shielded_white
+            is_planet_class = pc_shielded_yellow
+            is_planet_class = pc_shielded_red
+        }
+    }
+
+    immediate = {
+        add_modifier = {
+            modifier = xinghe_cleaning_modifier
+            days = -1
         }
     }
 }
@@ -720,14 +745,23 @@ country_event = {
 }
 planet_event = {
     id = xinghe.150
-    title = xinghe.150_title
-    desc = xinghe.150_desc
-    picture = GFX_evt_ghost_ship
+    hide_window = yes
     is_triggered_only = yes
     immediate = {
         xinghe_remove_effect = yes
         change_pc = rl_unhabitable_planets
         This.solar_system.starbase.owner = {
+            country_event = { id = xinghe.151  }
+        }
+    }
+}
+country_event = {
+    id = xinghe.151
+    title = xinghe.150_title
+    desc = xinghe.150_desc
+    picture = GFX_evt_ghost_ship
+    is_triggered_only = yes
+    immediate = {
             random_list = {
                 1 = { random_common_curiosity_get = yes }
                 1 = { random_rare_curiosity_get = yes }
@@ -744,7 +778,6 @@ planet_event = {
                 }
                 random_common_curiosity_get = yes
             }
-        }
     }
     option = {
         name = xinghe.101.a
@@ -752,10 +785,8 @@ planet_event = {
 }
 planet_event = {
     id = xinghe.160
-    title = xinghe.160_title
-    desc = xinghe.160_desc
-    picture = GFX_evt_generator_powerup
     is_triggered_only = yes
+    hide_window = yes
     immediate = {
         xinghe_remove_effect = yes
         change_pc = rl_unhabitable_planets
@@ -772,7 +803,19 @@ planet_event = {
                 random_common_curiosity_get = yes
             }
             add_resource = { energy = 100000 }
+            country_event = { id = xinghe.161 }
         }
+    }
+}
+country_event = {
+    id = xinghe.161
+    title = xinghe.160_title
+    desc = xinghe.160_desc
+    picture = GFX_evt_generator_powerup
+    location = from.from.from
+    is_triggered_only = yes
+    immediate = {
+
     }
     option = {
         name = xinghe.101.a
@@ -800,7 +843,22 @@ planet_event = {
                 random_common_curiosity_get = yes
             }
             add_resource = { energy = 100000 }
+            country_event = { id = xinghe.171 }
         }
+    }
+    option = {
+        name = INTERESTING
+    }
+}
+country_event = {
+    id = xinghe.171
+    title = xinghe.170_title
+    desc = xinghe.170_desc
+    picture = GFX_evt_astral_scar
+    location = from.from.from
+    is_triggered_only = yes
+    immediate = {
+
     }
     option = {
         name = INTERESTING
@@ -846,7 +904,22 @@ planet_event = {
                 random_common_curiosity_get = yes
             }
             add_tech_progress = { tech = tech_wormhole_stabilization progress = 0.5 }
+            country_event = { id = xinghe.181 }
         }
+    }
+    option = {
+        name = INTERESTING
+    }
+}
+country_event = {
+    id = xinghe.181
+    title = xinghe.180_title
+    desc = xinghe.180_desc
+    picture = GFX_evt_wormhole
+    is_triggered_only = yes
+    location = from.from.from
+    immediate = {
+
     }
     option = {
         name = INTERESTING
@@ -861,6 +934,9 @@ planet_event = {
     picture = GFX_evt_fleet_evil
     is_triggered_only = yes
     immediate = {
+        This.solar_system.starbase.owner = {
+            country_event = { id = xinghe.1001 }
+        }
         create_species = {
             name = "NAME_Prethoryn"
             class = SWARM
@@ -951,6 +1027,21 @@ planet_event = {
         }
         xinghe_remove_effect = yes
         change_pc = rl_unhabitable_planets
+
+    }
+    option = {
+        name = xinghe.1000.a
+    }
+}
+country_event = {
+    id = xinghe.1001
+    title = xinghe.1000_title
+    desc = xinghe.1000_desc
+    picture = GFX_evt_fleet_evil
+    is_triggered_only = yes
+    location = from.from.from
+    immediate = {
+
     }
     option = {
         name = xinghe.1000.a
@@ -963,6 +1054,9 @@ planet_event = {
     picture = GFX_evt_ai_planet
     is_triggered_only = yes
     immediate = {
+        This.solar_system.starbase.owner = {
+            country_event = { id = xinghe.1011 }
+        }
         create_species = {
             name = "NAME_Custodian_Bot"
             class = "ROBOT"
@@ -1095,6 +1189,20 @@ planet_event = {
         }
         xinghe_remove_effect = yes
         change_pc = rl_unhabitable_planets
+
+    }
+    option = {
+        name = xinghe.1000.a
+    }
+}
+country_event = {
+    id = xinghe.1011
+    title = xinghe.1010_title
+    desc = xinghe.1010_desc
+    picture = GFX_evt_ai_planet
+    is_triggered_only = yes
+    immediate = {
+
     }
     option = {
         name = xinghe.1000.a
@@ -1107,6 +1215,9 @@ planet_event = {
     picture = GFX_evt_small_space_battle
     is_triggered_only = yes
     immediate = {
+        This.solar_system.starbase.owner = {
+            country_event = { id = xinghe.1021 }
+        }
         create_species = {
             name = "NAME_Unbidden"
             class = EXD
@@ -1238,6 +1349,20 @@ planet_event = {
         }
         xinghe_remove_effect = yes
         change_pc = rl_unhabitable_planets
+
+    }
+    option = {
+        name = xinghe.1000.a
+    }
+}
+country_event = {
+    id = xinghe.1021
+    title = xinghe.1020_title
+    desc = xinghe.1020_desc
+    picture = GFX_evt_small_space_battle
+    is_triggered_only = yes
+    immediate = {
+
     }
     option = {
         name = xinghe.1000.a
@@ -1250,6 +1375,9 @@ planet_event = {
     picture = GFX_evt_galactic_empire
     is_triggered_only = yes
     immediate = {
+        This.solar_system.starbase.owner = {
+            country_event = { id = xinghe.1031 }
+        }
         xinghe_remove_effect = yes
         solar_system.starbase.owner = {
             save_global_event_target_as = player_country_SW_bad
@@ -1364,6 +1492,19 @@ planet_event = {
         name = xinghe.1030.a
     }
 }
+country_event = {
+    id = xinghe.1031
+    title = xinghe.1030_title
+    desc = xinghe.1030_desc
+    picture = GFX_evt_galactic_empire
+    is_triggered_only = yes
+    immediate = {
+
+    }
+    option = {
+        name = xinghe.1030.a
+    }
+}
 planet_event = {
     id = xinghe.1040
     title = xinghe.1040_title
@@ -1371,6 +1512,9 @@ planet_event = {
     picture = GFX_evt_space_dragon
     is_triggered_only = yes
     immediate = {
+        This.solar_system.starbase.owner = {
+            country_event = { id = xinghe.1041 }
+        }
         xinghe_remove_effect = yes
         save_event_target_as = SW_empire_with_dragon
         save_event_target_as = SW_here_be_dragons_planet
@@ -1473,7 +1617,21 @@ planet_event = {
                 }
             }
         }
+
         change_pc = rl_unhabitable_planets
+    }
+    option = {
+        name = xinghe.1000.a
+    }
+}
+country_event = {
+    id = xinghe.1041
+    title = xinghe.1040_title
+    desc = xinghe.1040_desc
+    picture = GFX_evt_space_dragon
+    is_triggered_only = yes
+    immediate = {
+
     }
     option = {
         name = xinghe.1000.a
@@ -1486,6 +1644,9 @@ planet_event = {
     picture = GFX_evt_small_space_battle
     is_triggered_only = yes
     immediate = {
+        This.solar_system.starbase.owner = {
+            country_event = { id = xinghe.1051 }
+        }
         create_species = {
             name = "NAME_Unbidden"
             class = EXD
@@ -1615,6 +1776,20 @@ planet_event = {
                 }
             }
         }
+
+    }
+    option = {
+        name = xinghe.1050.a
+    }
+}
+country_event = {
+    id = xinghe.1051
+    title = xinghe.1050_title
+    desc = xinghe.1050_desc
+    picture = GFX_evt_small_space_battle
+    is_triggered_only = yes
+    immediate = {
+
     }
     option = {
         name = xinghe.1050.a

@@ -49,7 +49,7 @@ guiTypes = {
         }
         containerWindowType = {
             name = "hsr_star_simulated_cosmos"
-            position = { x = 10 y = 10 }
+            position = { x = 10 y = 5 }
             size = { width = 350 height = 150 }
             moveable = no
             background = {
@@ -67,6 +67,16 @@ guiTypes = {
                 effect = the_star_rail_null_effect
             }
             effectButtonType = {
+                name = "simulated_cosmos_flag_change"
+                spriteType = "GFX_icon_randomize"
+                position = { x = 5 y = 5 }
+                format = center
+                #text = simulated_cosmos_flag
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = simulated_cosmos_flag_change_effect
+            }
+            effectButtonType = {
                 name = "simulated_cosmos_titlie"
                 #spriteType = "GFX_glow_tile_cyan"
                 size = { width = 200 height = 50 }
@@ -78,12 +88,23 @@ guiTypes = {
                 effect = the_star_rail_null_effect
             }
             effectButtonType = {
+                name = "simulated_cosmos_titlie_can_change"
+                spriteType = "GFX_icon_update"
+                size = { width = 200 height = 50 }
+                position = { x = 5 y = 120 }
+                format = center
+                #text = simulated_cosmos_name
+                buttonFont = "malgun_goth_24"
+                font = "large_title_font_28"
+                effect = simulated_cosmos_titlie_can_change_effect
+            }
+            effectButtonType = {
                 name = "simulated_cosmos_titlie_change"
                 #spriteType = "GFX_glow_tile_cyan"
                 size = { width = 200 height = 50 }
                 position = { x = 150 y = 35 }
                 format = center
-                text = simulated_cosmos_name
+                text = simulated_cosmos_name_change
                 buttonFont = "malgun_goth_24"
                 font = "load_screen"
                 effect = the_star_rail_null_effect
@@ -100,21 +121,530 @@ guiTypes = {
                 effect = the_star_rail_null_effect
             }
         }
+        #reload honkai_star_rail_path.gui DOT_SR.11
         containerWindowType = {
             name = "hsr_star_path_country_show"
-            position = { x = 10 y = 170 }
-            size = { width = 350 height = 620 }
+            position = { x = 10 y = 160 }
+            size = { width = 350 height = 630 }
             moveable = no
             background = {
                 name = "background"
                 quadTextureSprite = "GFX_tiles_dark_area_cut_8"
             }
+            effectButtonType = {
+                name = "hsr_star_path_cosmos_titlie"
+                #spriteType = "GFX_glow_tile_cyan"
+                size = { width = 200 height = 50 }
+                position = { x = 80 y = 0 }
+                format = center
+                text = hsr_star_path_cosmos_titlie
+                buttonFont = "malgun_goth_24"
+                font = "large_title_font_28"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_primary_titlie"
+                #spriteType = "GFX_glow_tile_cyan"
+                size = { width = 200 height = 40 }
+                position = { x = 5 y = 40 }
+                format = left
+                text = hsr_star_path_primary_titlie
+                buttonFont = "malgun_goth_24"
+                font = "malgun_goth_24"
+                effect = hsr_star_path_primary_titlie_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_prmiary_show"
+                spriteType = "GFX_glow_tile_cyan"
+                size = { width = 100 height = 35 }
+                position = { x = 70 y = 45 }
+                format = center
+                text = hsr_star_path_primary_show
+                buttonFont = "malgun_goth_24"
+                font = "malgun_goth_24"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_secondary_titlie"
+                #spriteType = "GFX_glow_tile_cyan"
+                size = { width = 200 height = 40 }
+                position = { x = 180 y = 40 }
+                format = left
+                text = hsr_star_path_secondary_titlie
+                buttonFont = "malgun_goth_24"
+                font = "malgun_goth_24"
+                effect = hsr_star_path_secondary_titlie_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_secondary_show"
+                spriteType = "GFX_glow_tile_cyan"
+                size = { width = 100 height = 35 }
+                position = { x = 240 y = 45 }
+                format = center
+                text = hsr_star_path_secondary_show
+                buttonFont = "malgun_goth_24"
+                font = "malgun_goth_24"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_cunhu_titlie"
+                #spriteType = "GFX_glow_tile_cyan"
+                size = { width = 200 height = 40 }
+                position = { x = 5 y = 80 }
+                format = left
+                text = hsr_star_path_cunhu_titlie
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_cunhu_show"
+                spriteType = "GFX_glow_tile_cyan"
+                size = { width = 70 height = 30 }
+                position = { x = 30 y = 85 }
+                format = center
+                text = hsr_star_path_cunhu_show
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_fengrao_titlie"
+                #spriteType = "GFX_glow_tile_cyan"
+                size = { width = 120 height = 40 }
+                position = { x = 125 y = 80 }
+                format = left
+                text = hsr_star_path_fengrao_titlie
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_fengrao_show"
+                spriteType = "GFX_glow_tile_cyan"
+                size = { width = 70 height = 30 }
+                position = { x = 150 y = 85 }
+                format = center
+                text = hsr_star_path_fengrao_show
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_fanyu_titlie"
+                #spriteType = "GFX_glow_tile_cyan"
+                size = { width = 120 height = 40 }
+                position = { x = 250 y = 80 }
+                format = left
+                text = hsr_star_path_fanyu_titlie
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_fanyu_show"
+                spriteType = "GFX_glow_tile_cyan"
+                size = { width = 70 height = 30 }
+                position = { x = 280 y = 85 }
+                format = center
+                text = hsr_star_path_fanyu_show
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_huanyu_titlie"
+                #spriteType = "GFX_glow_tile_cyan"
+                size = { width = 200 height = 40 }
+                position = { x = 5 y = 120 }
+                format = left
+                text = hsr_star_path_huanyu_titlie
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_huanyu_show"
+                spriteType = "GFX_glow_tile_cyan"
+                size = { width = 70 height = 30 }
+                position = { x = 30 y = 125 }
+                format = center
+                text = hsr_star_path_huanyu_show
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_huimie_titlie"
+                #spriteType = "GFX_glow_tile_cyan"
+                size = { width = 120 height = 40 }
+                position = { x = 125 y = 120 }
+                format = left
+                text = hsr_star_path_huimie_titlie
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_huimie_show"
+                spriteType = "GFX_glow_tile_cyan"
+                size = { width = 70 height = 30 }
+                position = { x = 150 y = 125 }
+                format = center
+                text = hsr_star_path_huimie_show
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_jiyi_titlie"
+                #spriteType = "GFX_glow_tile_cyan"
+                size = { width = 120 height = 40 }
+                position = { x = 250 y = 120 }
+                format = left
+                text = hsr_star_path_jiyi_titlie
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_jiyi_show"
+                spriteType = "GFX_glow_tile_cyan"
+                size = { width = 70 height = 30 }
+                position = { x = 280 y = 125 }
+                format = center
+                text = hsr_star_path_jiyi_show
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_tongxie_titlie"
+                #spriteType = "GFX_glow_tile_cyan"
+                size = { width = 200 height = 40 }
+                position = { x = 5 y = 160 }
+                format = left
+                text = hsr_star_path_tongxie_titlie
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_tongxie_show"
+                spriteType = "GFX_glow_tile_cyan"
+                size = { width = 70 height = 30 }
+                position = { x = 30 y = 165 }
+                format = center
+                text = hsr_star_path_tongxie_show
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_xunlie_titlie"
+                #spriteType = "GFX_glow_tile_cyan"
+                size = { width = 120 height = 40 }
+                position = { x = 125 y = 160 }
+                format = left
+                text = hsr_star_path_xunlie_titlie
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_xunlie_show"
+                spriteType = "GFX_glow_tile_cyan"
+                size = { width = 70 height = 30 }
+                position = { x = 150 y = 165 }
+                format = center
+                text = hsr_star_path_xunlie_show
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_xuwu_titlie"
+                #spriteType = "GFX_glow_tile_cyan"
+                size = { width = 120 height = 40 }
+                position = { x = 250 y = 160 }
+                format = left
+                text = hsr_star_path_xuwu_titlie
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_xuwu_show"
+                spriteType = "GFX_glow_tile_cyan"
+                size = { width = 70 height = 30 }
+                position = { x = 280 y = 165 }
+                format = center
+                text = hsr_star_path_xuwu_show
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_zhishi_titlie"
+                #spriteType = "GFX_glow_tile_cyan"
+                size = { width = 200 height = 40 }
+                position = { x = 5 y = 200 }
+                format = left
+                text = hsr_star_path_zhishi_titlie
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_zhishi_show"
+                spriteType = "GFX_glow_tile_cyan"
+                size = { width = 70 height = 30 }
+                position = { x = 30 y = 205 }
+                format = center
+                text = hsr_star_path_zhishi_show
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = the_star_rail_null_effect
+            }
+            #y=325开始
+            effectButtonType = {
+                name = "hsr_star_path_civic_titlie"
+                #spriteType = "GFX_glow_tile_cyan"
+                size = { width = 200 height = 50 }
+                position = { x = 80 y = 340 }
+                format = center
+                text = hsr_star_path_civic_titlie
+                buttonFont = "malgun_goth_24"
+                font = "large_title_font_28"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_civic_1_show"
+                #spriteType = "GFX_glow_tile_cyan"
+                size = { width = 50 height = 50 }
+                position = { x = 20 y = 380 }
+                format = center
+                text = hsr_star_path_civic_1_show
+                buttonFont = "malgun_goth_24"
+                font = "large_title_font_28"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_civic_1_text"
+                spriteType = "GFX_glow_tile_cyan"
+                size = { width = 180 height = 40 }
+                position = { x = 80 y = 385 }
+                format = center
+                text = hsr_star_path_civic_1_text
+                buttonFont = "malgun_goth_24"
+                font = "malgun_goth_24"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_civic_1_start"
+                spriteType = "GFX_button_no_gender"
+                size = { width = 70 height = 70 }
+                position = { x = 270 y = 386 }
+                format = center
+                #text = hsr_star_path_civic_1_text
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_civic_1_set"
+                spriteType = "GFX_button_manual"
+                size = { width = 70 height = 70 }
+                position = { x = 270 y = 386 }
+                format = center
+                #text = hsr_star_path_civic_1_text
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_civic_2_show"
+                #spriteType = "GFX_glow_tile_cyan"
+                size = { width = 50 height = 50 }
+                position = { x = 20 y = 430 }
+                format = center
+                text = hsr_star_path_civic_2_show
+                buttonFont = "malgun_goth_24"
+                font = "large_title_font_28"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_civic_2_text"
+                spriteType = "GFX_glow_tile_cyan"
+                size = { width = 180 height = 40 }
+                position = { x = 80 y = 435 }
+                format = center
+                text = hsr_star_path_civic_2_text
+                buttonFont = "malgun_goth_24"
+                font = "malgun_goth_24"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_civic_2_start"
+                spriteType = "GFX_button_no_gender"
+                size = { width = 70 height = 70 }
+                position = { x = 270 y = 436 }
+                format = center
+                #text = hsr_star_path_civic_1_text
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_civic_2_set"
+                spriteType = "GFX_button_manual"
+                size = { width = 70 height = 70 }
+                position = { x = 270 y = 436 }
+                format = center
+                #text = hsr_star_path_civic_1_text
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_civic_3_show"
+                #spriteType = "GFX_glow_tile_cyan"
+                size = { width = 50 height = 50 }
+                position = { x = 20 y = 480 }
+                format = center
+                text = hsr_star_path_civic_3_show
+                buttonFont = "malgun_goth_24"
+                font = "large_title_font_28"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_civic_3_text"
+                spriteType = "GFX_glow_tile_cyan"
+                size = { width = 180 height = 40 }
+                position = { x = 80 y = 485 }
+                format = center
+                text = hsr_star_path_civic_3_text
+                buttonFont = "malgun_goth_24"
+                font = "malgun_goth_24"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_civic_3_start"
+                spriteType = "GFX_button_no_gender"
+                size = { width = 70 height = 70 }
+                position = { x = 270 y = 486 }
+                format = center
+                #text = hsr_star_path_civic_1_text
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_civic_3_set"
+                spriteType = "GFX_button_manual"
+                size = { width = 70 height = 70 }
+                position = { x = 270 y = 486 }
+                format = center
+                #text = hsr_star_path_civic_1_text
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_civic_4_show"
+                #spriteType = "GFX_glow_tile_cyan"
+                size = { width = 50 height = 50 }
+                position = { x = 20 y = 530 }
+                format = center
+                text = hsr_star_path_civic_4_show
+                buttonFont = "malgun_goth_24"
+                font = "large_title_font_28"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_civic_4_text"
+                spriteType = "GFX_glow_tile_cyan"
+                size = { width = 180 height = 40 }
+                position = { x = 80 y = 535 }
+                format = center
+                text = hsr_star_path_civic_4_text
+                buttonFont = "malgun_goth_24"
+                font = "malgun_goth_24"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_civic_4_start"
+                spriteType = "GFX_button_no_gender"
+                size = { width = 70 height = 70 }
+                position = { x = 270 y = 536 }
+                format = center
+                #text = hsr_star_path_civic_1_text
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_civic_4_set"
+                spriteType = "GFX_button_manual"
+                size = { width = 70 height = 70 }
+                position = { x = 270 y = 536 }
+                format = center
+                #text = hsr_star_path_civic_1_text
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_civic_5_show"
+                #spriteType = "GFX_glow_tile_cyan"
+                size = { width = 50 height = 50 }
+                position = { x = 20 y = 580 }
+                format = center
+                text = hsr_star_path_civic_5_show
+                buttonFont = "malgun_goth_24"
+                font = "large_title_font_28"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_civic_5_text"
+                spriteType = "GFX_glow_tile_cyan"
+                size = { width = 180 height = 40 }
+                position = { x = 80 y = 585 }
+                format = center
+                text = hsr_star_path_civic_5_text
+                buttonFont = "malgun_goth_24"
+                font = "malgun_goth_24"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_civic_5_start"
+                spriteType = "GFX_button_no_gender"
+                size = { width = 70 height = 70 }
+                position = { x = 270 y = 586 }
+                format = center
+                #text = hsr_star_path_civic_1_text
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_civic_5_set"
+                spriteType = "GFX_button_manual"
+                size = { width = 70 height = 70 }
+                position = { x = 270 y = 586 }
+                format = center
+                #text = hsr_star_path_civic_1_text
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = the_star_rail_null_effect
+            }
+
         }
         containerWindowType = {
             name = "hsr_star_path_main_window"
             #size = { width = 825 height = -10 }
             size = { width = -30 height = -5 }
-            position = { x = 370 y = 10 }
+            position = { x = 375 y = 5 }
             background = { name = "background" spriteType = "GFX_glow_tile_cyan" }
             verticalScrollbar = "right_vertical_slider"
             smooth_scrolling = yes
@@ -298,7 +828,7 @@ guiTypes = {
             }
             containerWindowType = {
                 name = "hsr_star_path_fanyu"
-                position = { x = 10 y = 10 }
+                position = { x = 480 y = 10 }
                 size = { width = 440 height = 170 }
                 moveable = no
                 background = {
@@ -473,6 +1003,1422 @@ guiTypes = {
                     effect = hsr_path_fanyu_start_level_up_effect
                 }
             }
+            containerWindowType = {
+                name = "hsr_star_path_fengrao"
+                position = { x = 10 y = 210 }
+                size = { width = 440 height = 170 }
+                moveable = no
+                background = {
+                    name = "background"
+                    quadTextureSprite = "GFX_tiles_dark_area_cut_8"
+                }
+                effectButtonType = {
+                    name = "hsr_path_bg"
+                    quadTextureSprite ="GFX_agenda_frame"
+                    position = { x = -10 y = 10 }
+                    size = { width = 180 height = 150 }
+                    format = center
+                    scale = 1.25
+                    effect = the_star_rail_null_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_bg_mask"
+                    quadTextureSprite ="GFX_agenda_hover_bg"
+                    position = { x = 17 y = 35 }
+                    size = { width = 180 height = 60 }
+                    font = "malgun_goth_24"
+                    format = center
+                    scale = 1.25
+                    effect = the_star_rail_null_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_bg_show"
+                    quadTextureSprite ="GFX_mingtufengrao"
+                    position = { x = 35 y = 50 }
+                    size = { width = 180 height = 60 }
+                    scale = 1
+                    font = "malgun_goth_24"
+                    format = center
+                    effect = hsr_path_fengrao_name_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_fengrao_name"
+                    #spriteType = "GFX_glow_tile_cyan"
+                    size = { width = 120 height = 50 }
+                    position = { x = 90 y = 5 }
+                    format = center
+                    text = hsr_path_fengrao_name
+                    buttonFont = "cg_16b"
+                    font = "large_title_font_28"
+                    effect = the_star_rail_null_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_fengrao_set_primary"
+                    spriteType = "GFX_button_automate"
+                    size = { width = 120 height = 50 }
+                    position = { x = 210 y = 10 }
+                    format = center
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_fengrao_set_primary_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_fengrao_set_secondary"
+                    spriteType = "GFX_button_automate_construction"
+                    size = { width = 120 height = 50 }
+                    position = { x = 250 y = 10 }
+                    format = center
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_fengrao_set_primary_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_fengrao_reset"
+                    spriteType = "GFX_button_manual"
+                    size = { width = 120 height = 50 }
+                    position = { x = 290 y = 10 }
+                    format = center
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_fengrao_reset_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_fengrao_setting"
+                    spriteType = "GFX_button_copy_to_clipboard"
+                    size = { width = 120 height = 90 }
+                    position = { x = 330 y = 10 }
+                    format = center
+                    #text = simulated_cosmos_name
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_fengrao_setting_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_fengrao_up"
+                    spriteType = "GFX_button_up"
+                    size = { width = 120 height = 50 }
+                    position = { x = 370 y = 15 }
+                    format = center
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_fengrao_up_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_fengrao_down"
+                    spriteType = "GFX_button_down"
+                    size = { width = 120 height = 50 }
+                    position = { x = 400 y = 15 }
+                    format = center
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_fengrao_down_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_fengraon_data_detial"
+                    spriteType = "GFX_glow_tile_cyan"
+                    size = { width = 200 height = 35 }
+                    position = { x = 130 y = 70 }
+                    format = center
+                    text = hsr_path_fengraon_data_detial
+                    buttonFont = "cg_16b"
+                    font = "cg_16b"
+                    effect = the_star_rail_null_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_fengrao_start"
+                    spriteType = "GFX_button_no_gender"
+                    size = { width = 120 height = 90 }
+                    position = { x = 330 y = 68 }
+                    format = center
+                    #text = simulated_cosmos_name
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_fengrao_path_start_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_fengrao_end"
+                    spriteType = "GFX_close_button"
+                    size = { width = 120 height = 90 }
+                    position = { x = 330 y = 68 }
+                    format = center
+                    #text = simulated_cosmos_name
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_fengrao_path_end_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_fengrao_line_show"
+                    #quadTextureSprite ="GFX_text_hsr_path_progress_0"
+                    position = { x = 85 y = 115 }
+                    size = { width = 360 height = 60 }
+                    text = hsr_path_fengrao_line_show
+                    scale = 1
+                    font = "malgun_goth_24"
+                    format = center
+                    effect = hsr_path_fengrao_show_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_fengrao_level_up"
+                    quadTextureSprite ="GFX_button_upgrade_ascension_tier"
+                    position = { x = 370 y = 68 }
+                    size = { width = 390 height = 68 }
+                    #text = hsr_path_fengrao_line_show
+                    scale = 1
+                    font = "malgun_goth_24"
+                    format = center
+                    effect = hsr_path_fengrao_level_up_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_fengrao_start_level_up"
+                    quadTextureSprite ="GFX_zoom_level_3_empire_frame"
+                    position = { x = 350 y = 60 }
+                    size = { width = 390 height = 68 }
+                    #text = hsr_path_fengrao_line_show
+                    scale = 1
+                    font = "malgun_goth_24"
+                    format = center
+                    effect = hsr_path_fengrao_start_level_up_effect
+                }
+            }
+            containerWindowType = {
+                name = "hsr_star_path_huanyu"
+                position = { x = 480 y = 210 }
+                size = { width = 440 height = 170 }
+                moveable = no
+                background = {
+                    name = "background"
+                    quadTextureSprite = "GFX_tiles_dark_area_cut_8"
+                }
+                effectButtonType = {
+                    name = "hsr_path_bg"
+                    quadTextureSprite ="GFX_agenda_frame"
+                    position = { x = -10 y = 10 }
+                    size = { width = 180 height = 150 }
+                    format = center
+                    scale = 1.25
+                    effect = the_star_rail_null_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_bg_mask"
+                    quadTextureSprite ="GFX_agenda_hover_bg"
+                    position = { x = 17 y = 35 }
+                    size = { width = 180 height = 60 }
+                    font = "malgun_goth_24"
+                    format = center
+                    scale = 1.25
+                    effect = the_star_rail_null_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_bg_show"
+                    quadTextureSprite ="GFX_mingtuhuanyu"
+                    position = { x = 35 y = 50 }
+                    size = { width = 180 height = 60 }
+                    scale = 1
+                    font = "malgun_goth_24"
+                    format = center
+                    effect = hsr_path_huanyu_name_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_huanyu_name"
+                    #spriteType = "GFX_glow_tile_cyan"
+                    size = { width = 120 height = 50 }
+                    position = { x = 90 y = 5 }
+                    format = center
+                    text = hsr_path_huanyu_name
+                    buttonFont = "cg_16b"
+                    font = "large_title_font_28"
+                    effect = the_star_rail_null_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_huanyu_set_primary"
+                    spriteType = "GFX_button_automate"
+                    size = { width = 120 height = 50 }
+                    position = { x = 210 y = 10 }
+                    format = center
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_huanyu_set_primary_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_huanyu_set_secondary"
+                    spriteType = "GFX_button_automate_construction"
+                    size = { width = 120 height = 50 }
+                    position = { x = 250 y = 10 }
+                    format = center
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_huanyu_set_primary_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_huanyu_reset"
+                    spriteType = "GFX_button_manual"
+                    size = { width = 120 height = 50 }
+                    position = { x = 290 y = 10 }
+                    format = center
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_huanyu_reset_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_huanyu_setting"
+                    spriteType = "GFX_button_copy_to_clipboard"
+                    size = { width = 120 height = 90 }
+                    position = { x = 330 y = 10 }
+                    format = center
+                    #text = simulated_cosmos_name
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_huanyu_setting_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_huanyu_up"
+                    spriteType = "GFX_button_up"
+                    size = { width = 120 height = 50 }
+                    position = { x = 370 y = 15 }
+                    format = center
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_huanyu_up_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_huanyu_down"
+                    spriteType = "GFX_button_down"
+                    size = { width = 120 height = 50 }
+                    position = { x = 400 y = 15 }
+                    format = center
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_huanyu_down_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_huanyun_data_detial"
+                    spriteType = "GFX_glow_tile_cyan"
+                    size = { width = 200 height = 35 }
+                    position = { x = 130 y = 70 }
+                    format = center
+                    text = hsr_path_huanyun_data_detial
+                    buttonFont = "cg_16b"
+                    font = "cg_16b"
+                    effect = the_star_rail_null_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_huanyu_start"
+                    spriteType = "GFX_button_no_gender"
+                    size = { width = 120 height = 90 }
+                    position = { x = 330 y = 68 }
+                    format = center
+                    #text = simulated_cosmos_name
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_huanyu_path_start_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_huanyu_end"
+                    spriteType = "GFX_close_button"
+                    size = { width = 120 height = 90 }
+                    position = { x = 330 y = 68 }
+                    format = center
+                    #text = simulated_cosmos_name
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_huanyu_path_end_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_huanyu_line_show"
+                    #quadTextureSprite ="GFX_text_hsr_path_progress_0"
+                    position = { x = 85 y = 115 }
+                    size = { width = 360 height = 60 }
+                    text = hsr_path_huanyu_line_show
+                    scale = 1
+                    font = "malgun_goth_24"
+                    format = center
+                    effect = hsr_path_huanyu_show_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_huanyu_level_up"
+                    quadTextureSprite ="GFX_button_upgrade_ascension_tier"
+                    position = { x = 370 y = 68 }
+                    size = { width = 390 height = 68 }
+                    #text = hsr_path_huanyu_line_show
+                    scale = 1
+                    font = "malgun_goth_24"
+                    format = center
+                    effect = hsr_path_huanyu_level_up_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_huanyu_start_level_up"
+                    quadTextureSprite ="GFX_zoom_level_3_empire_frame"
+                    position = { x = 350 y = 60 }
+                    size = { width = 390 height = 68 }
+                    #text = hsr_path_huanyu_line_show
+                    scale = 1
+                    font = "malgun_goth_24"
+                    format = center
+                    effect = hsr_path_huanyu_start_level_up_effect
+                }
+            }
+            containerWindowType = {
+                name = "hsr_star_path_huimie"
+                position = { x = 10 y = 410 }
+                size = { width = 440 height = 170 }
+                moveable = no
+                background = {
+                    name = "background"
+                    quadTextureSprite = "GFX_tiles_dark_area_cut_8"
+                }
+                effectButtonType = {
+                    name = "hsr_path_bg"
+                    quadTextureSprite ="GFX_agenda_frame"
+                    position = { x = -10 y = 10 }
+                    size = { width = 180 height = 150 }
+                    format = center
+                    scale = 1.25
+                    effect = the_star_rail_null_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_bg_mask"
+                    quadTextureSprite ="GFX_agenda_hover_bg"
+                    position = { x = 17 y = 35 }
+                    size = { width = 180 height = 60 }
+                    font = "malgun_goth_24"
+                    format = center
+                    scale = 1.25
+                    effect = the_star_rail_null_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_bg_show"
+                    quadTextureSprite ="GFX_mingtuhuimie"
+                    position = { x = 35 y = 50 }
+                    size = { width = 180 height = 60 }
+                    scale = 1
+                    font = "malgun_goth_24"
+                    format = center
+                    effect = hsr_path_huimie_name_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_huimie_name"
+                    #spriteType = "GFX_glow_tile_cyan"
+                    size = { width = 120 height = 50 }
+                    position = { x = 90 y = 5 }
+                    format = center
+                    text = hsr_path_huimie_name
+                    buttonFont = "cg_16b"
+                    font = "large_title_font_28"
+                    effect = the_star_rail_null_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_huimie_set_primary"
+                    spriteType = "GFX_button_automate"
+                    size = { width = 120 height = 50 }
+                    position = { x = 210 y = 10 }
+                    format = center
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_huimie_set_primary_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_huimie_set_secondary"
+                    spriteType = "GFX_button_automate_construction"
+                    size = { width = 120 height = 50 }
+                    position = { x = 250 y = 10 }
+                    format = center
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_huimie_set_primary_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_huimie_reset"
+                    spriteType = "GFX_button_manual"
+                    size = { width = 120 height = 50 }
+                    position = { x = 290 y = 10 }
+                    format = center
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_huimie_reset_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_huimie_setting"
+                    spriteType = "GFX_button_copy_to_clipboard"
+                    size = { width = 120 height = 90 }
+                    position = { x = 330 y = 10 }
+                    format = center
+                    #text = simulated_cosmos_name
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_huimie_setting_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_huimie_up"
+                    spriteType = "GFX_button_up"
+                    size = { width = 120 height = 50 }
+                    position = { x = 370 y = 15 }
+                    format = center
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_huimie_up_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_huimie_down"
+                    spriteType = "GFX_button_down"
+                    size = { width = 120 height = 50 }
+                    position = { x = 400 y = 15 }
+                    format = center
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_huimie_down_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_huimien_data_detial"
+                    spriteType = "GFX_glow_tile_cyan"
+                    size = { width = 200 height = 35 }
+                    position = { x = 130 y = 70 }
+                    format = center
+                    text = hsr_path_huimien_data_detial
+                    buttonFont = "cg_16b"
+                    font = "cg_16b"
+                    effect = the_star_rail_null_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_huimie_start"
+                    spriteType = "GFX_button_no_gender"
+                    size = { width = 120 height = 90 }
+                    position = { x = 330 y = 68 }
+                    format = center
+                    #text = simulated_cosmos_name
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_huimie_path_start_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_huimie_end"
+                    spriteType = "GFX_close_button"
+                    size = { width = 120 height = 90 }
+                    position = { x = 330 y = 68 }
+                    format = center
+                    #text = simulated_cosmos_name
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_huimie_path_end_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_huimie_line_show"
+                    #quadTextureSprite ="GFX_text_hsr_path_progress_0"
+                    position = { x = 85 y = 115 }
+                    size = { width = 360 height = 60 }
+                    text = hsr_path_huimie_line_show
+                    scale = 1
+                    font = "malgun_goth_24"
+                    format = center
+                    effect = hsr_path_huimie_show_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_huimie_level_up"
+                    quadTextureSprite ="GFX_button_upgrade_ascension_tier"
+                    position = { x = 370 y = 68 }
+                    size = { width = 390 height = 68 }
+                    #text = hsr_path_huimie_line_show
+                    scale = 1
+                    font = "malgun_goth_24"
+                    format = center
+                    effect = hsr_path_huimie_level_up_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_huimie_start_level_up"
+                    quadTextureSprite ="GFX_zoom_level_3_empire_frame"
+                    position = { x = 350 y = 60 }
+                    size = { width = 390 height = 68 }
+                    #text = hsr_path_huimie_line_show
+                    scale = 1
+                    font = "malgun_goth_24"
+                    format = center
+                    effect = hsr_path_huimie_start_level_up_effect
+                }
+            }
+            containerWindowType = {
+                name = "hsr_star_path_jiyi"
+                position = { x = 480 y = 410 }
+                size = { width = 440 height = 170 }
+                moveable = no
+                background = {
+                    name = "background"
+                    quadTextureSprite = "GFX_tiles_dark_area_cut_8"
+                }
+                effectButtonType = {
+                    name = "hsr_path_bg"
+                    quadTextureSprite ="GFX_agenda_frame"
+                    position = { x = -10 y = 10 }
+                    size = { width = 180 height = 150 }
+                    format = center
+                    scale = 1.25
+                    effect = the_star_rail_null_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_bg_mask"
+                    quadTextureSprite ="GFX_agenda_hover_bg"
+                    position = { x = 17 y = 35 }
+                    size = { width = 180 height = 60 }
+                    font = "malgun_goth_24"
+                    format = center
+                    scale = 1.25
+                    effect = the_star_rail_null_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_bg_show"
+                    quadTextureSprite ="GFX_mingtujiyi"
+                    position = { x = 35 y = 50 }
+                    size = { width = 180 height = 60 }
+                    scale = 1
+                    font = "malgun_goth_24"
+                    format = center
+                    effect = hsr_path_jiyi_name_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_jiyi_name"
+                    #spriteType = "GFX_glow_tile_cyan"
+                    size = { width = 120 height = 50 }
+                    position = { x = 90 y = 5 }
+                    format = center
+                    text = hsr_path_jiyi_name
+                    buttonFont = "cg_16b"
+                    font = "large_title_font_28"
+                    effect = the_star_rail_null_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_jiyi_set_primary"
+                    spriteType = "GFX_button_automate"
+                    size = { width = 120 height = 50 }
+                    position = { x = 210 y = 10 }
+                    format = center
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_jiyi_set_primary_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_jiyi_set_secondary"
+                    spriteType = "GFX_button_automate_construction"
+                    size = { width = 120 height = 50 }
+                    position = { x = 250 y = 10 }
+                    format = center
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_jiyi_set_primary_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_jiyi_reset"
+                    spriteType = "GFX_button_manual"
+                    size = { width = 120 height = 50 }
+                    position = { x = 290 y = 10 }
+                    format = center
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_jiyi_reset_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_jiyi_setting"
+                    spriteType = "GFX_button_copy_to_clipboard"
+                    size = { width = 120 height = 90 }
+                    position = { x = 330 y = 10 }
+                    format = center
+                    #text = simulated_cosmos_name
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_jiyi_setting_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_jiyi_up"
+                    spriteType = "GFX_button_up"
+                    size = { width = 120 height = 50 }
+                    position = { x = 370 y = 15 }
+                    format = center
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_jiyi_up_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_jiyi_down"
+                    spriteType = "GFX_button_down"
+                    size = { width = 120 height = 50 }
+                    position = { x = 400 y = 15 }
+                    format = center
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_jiyi_down_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_jiyin_data_detial"
+                    spriteType = "GFX_glow_tile_cyan"
+                    size = { width = 200 height = 35 }
+                    position = { x = 130 y = 70 }
+                    format = center
+                    text = hsr_path_jiyin_data_detial
+                    buttonFont = "cg_16b"
+                    font = "cg_16b"
+                    effect = the_star_rail_null_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_jiyi_start"
+                    spriteType = "GFX_button_no_gender"
+                    size = { width = 120 height = 90 }
+                    position = { x = 330 y = 68 }
+                    format = center
+                    #text = simulated_cosmos_name
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_jiyi_path_start_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_jiyi_end"
+                    spriteType = "GFX_close_button"
+                    size = { width = 120 height = 90 }
+                    position = { x = 330 y = 68 }
+                    format = center
+                    #text = simulated_cosmos_name
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_jiyi_path_end_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_jiyi_line_show"
+                    #quadTextureSprite ="GFX_text_hsr_path_progress_0"
+                    position = { x = 85 y = 115 }
+                    size = { width = 360 height = 60 }
+                    text = hsr_path_jiyi_line_show
+                    scale = 1
+                    font = "malgun_goth_24"
+                    format = center
+                    effect = hsr_path_jiyi_show_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_jiyi_level_up"
+                    quadTextureSprite ="GFX_button_upgrade_ascension_tier"
+                    position = { x = 370 y = 68 }
+                    size = { width = 390 height = 68 }
+                    #text = hsr_path_jiyi_line_show
+                    scale = 1
+                    font = "malgun_goth_24"
+                    format = center
+                    effect = hsr_path_jiyi_level_up_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_jiyi_start_level_up"
+                    quadTextureSprite ="GFX_zoom_level_3_empire_frame"
+                    position = { x = 350 y = 60 }
+                    size = { width = 390 height = 68 }
+                    #text = hsr_path_jiyi_line_show
+                    scale = 1
+                    font = "malgun_goth_24"
+                    format = center
+                    effect = hsr_path_jiyi_start_level_up_effect
+                }
+            }
+            containerWindowType = {
+                name = "hsr_star_path_tongxie"
+                position = { x = 10 y = 610 }
+                size = { width = 440 height = 170 }
+                moveable = no
+                background = {
+                    name = "background"
+                    quadTextureSprite = "GFX_tiles_dark_area_cut_8"
+                }
+                effectButtonType = {
+                    name = "hsr_path_bg"
+                    quadTextureSprite ="GFX_agenda_frame"
+                    position = { x = -10 y = 10 }
+                    size = { width = 180 height = 150 }
+                    format = center
+                    scale = 1.25
+                    effect = the_star_rail_null_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_bg_mask"
+                    quadTextureSprite ="GFX_agenda_hover_bg"
+                    position = { x = 17 y = 35 }
+                    size = { width = 180 height = 60 }
+                    font = "malgun_goth_24"
+                    format = center
+                    scale = 1.25
+                    effect = the_star_rail_null_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_bg_show"
+                    quadTextureSprite ="GFX_mingtutongxie"
+                    position = { x = 35 y = 50 }
+                    size = { width = 180 height = 60 }
+                    scale = 1
+                    font = "malgun_goth_24"
+                    format = center
+                    effect = hsr_path_tongxie_name_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_tongxie_name"
+                    #spriteType = "GFX_glow_tile_cyan"
+                    size = { width = 120 height = 50 }
+                    position = { x = 90 y = 5 }
+                    format = center
+                    text = hsr_path_tongxie_name
+                    buttonFont = "cg_16b"
+                    font = "large_title_font_28"
+                    effect = the_star_rail_null_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_tongxie_set_primary"
+                    spriteType = "GFX_button_automate"
+                    size = { width = 120 height = 50 }
+                    position = { x = 210 y = 10 }
+                    format = center
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_tongxie_set_primary_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_tongxie_set_secondary"
+                    spriteType = "GFX_button_automate_construction"
+                    size = { width = 120 height = 50 }
+                    position = { x = 250 y = 10 }
+                    format = center
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_tongxie_set_primary_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_tongxie_reset"
+                    spriteType = "GFX_button_manual"
+                    size = { width = 120 height = 50 }
+                    position = { x = 290 y = 10 }
+                    format = center
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_tongxie_reset_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_tongxie_setting"
+                    spriteType = "GFX_button_copy_to_clipboard"
+                    size = { width = 120 height = 90 }
+                    position = { x = 330 y = 10 }
+                    format = center
+                    #text = simulated_cosmos_name
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_tongxie_setting_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_tongxie_up"
+                    spriteType = "GFX_button_up"
+                    size = { width = 120 height = 50 }
+                    position = { x = 370 y = 15 }
+                    format = center
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_tongxie_up_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_tongxie_down"
+                    spriteType = "GFX_button_down"
+                    size = { width = 120 height = 50 }
+                    position = { x = 400 y = 15 }
+                    format = center
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_tongxie_down_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_tongxien_data_detial"
+                    spriteType = "GFX_glow_tile_cyan"
+                    size = { width = 200 height = 35 }
+                    position = { x = 130 y = 70 }
+                    format = center
+                    text = hsr_path_tongxien_data_detial
+                    buttonFont = "cg_16b"
+                    font = "cg_16b"
+                    effect = the_star_rail_null_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_tongxie_start"
+                    spriteType = "GFX_button_no_gender"
+                    size = { width = 120 height = 90 }
+                    position = { x = 330 y = 68 }
+                    format = center
+                    #text = simulated_cosmos_name
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_tongxie_path_start_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_tongxie_end"
+                    spriteType = "GFX_close_button"
+                    size = { width = 120 height = 90 }
+                    position = { x = 330 y = 68 }
+                    format = center
+                    #text = simulated_cosmos_name
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_tongxie_path_end_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_tongxie_line_show"
+                    #quadTextureSprite ="GFX_text_hsr_path_progress_0"
+                    position = { x = 85 y = 115 }
+                    size = { width = 360 height = 60 }
+                    text = hsr_path_tongxie_line_show
+                    scale = 1
+                    font = "malgun_goth_24"
+                    format = center
+                    effect = hsr_path_tongxie_show_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_tongxie_level_up"
+                    quadTextureSprite ="GFX_button_upgrade_ascension_tier"
+                    position = { x = 370 y = 68 }
+                    size = { width = 390 height = 68 }
+                    #text = hsr_path_tongxie_line_show
+                    scale = 1
+                    font = "malgun_goth_24"
+                    format = center
+                    effect = hsr_path_tongxie_level_up_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_tongxie_start_level_up"
+                    quadTextureSprite ="GFX_zoom_level_3_empire_frame"
+                    position = { x = 350 y = 60 }
+                    size = { width = 390 height = 68 }
+                    #text = hsr_path_tongxie_line_show
+                    scale = 1
+                    font = "malgun_goth_24"
+                    format = center
+                    effect = hsr_path_tongxie_start_level_up_effect
+                }
+            }
+            containerWindowType = {
+                name = "hsr_star_path_xunlie"
+                position = { x = 480 y = 610 }
+                size = { width = 440 height = 170 }
+                moveable = no
+                background = {
+                    name = "background"
+                    quadTextureSprite = "GFX_tiles_dark_area_cut_8"
+                }
+                effectButtonType = {
+                    name = "hsr_path_bg"
+                    quadTextureSprite ="GFX_agenda_frame"
+                    position = { x = -10 y = 10 }
+                    size = { width = 180 height = 150 }
+                    format = center
+                    scale = 1.25
+                    effect = the_star_rail_null_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_bg_mask"
+                    quadTextureSprite ="GFX_agenda_hover_bg"
+                    position = { x = 17 y = 35 }
+                    size = { width = 180 height = 60 }
+                    font = "malgun_goth_24"
+                    format = center
+                    scale = 1.25
+                    effect = the_star_rail_null_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_bg_show"
+                    quadTextureSprite ="GFX_mingtuxunlie"
+                    position = { x = 35 y = 50 }
+                    size = { width = 180 height = 60 }
+                    scale = 1
+                    font = "malgun_goth_24"
+                    format = center
+                    effect = hsr_path_xunlie_name_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_xunlie_name"
+                    #spriteType = "GFX_glow_tile_cyan"
+                    size = { width = 120 height = 50 }
+                    position = { x = 90 y = 5 }
+                    format = center
+                    text = hsr_path_xunlie_name
+                    buttonFont = "cg_16b"
+                    font = "large_title_font_28"
+                    effect = the_star_rail_null_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_xunlie_set_primary"
+                    spriteType = "GFX_button_automate"
+                    size = { width = 120 height = 50 }
+                    position = { x = 210 y = 10 }
+                    format = center
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_xunlie_set_primary_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_xunlie_set_secondary"
+                    spriteType = "GFX_button_automate_construction"
+                    size = { width = 120 height = 50 }
+                    position = { x = 250 y = 10 }
+                    format = center
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_xunlie_set_primary_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_xunlie_reset"
+                    spriteType = "GFX_button_manual"
+                    size = { width = 120 height = 50 }
+                    position = { x = 290 y = 10 }
+                    format = center
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_xunlie_reset_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_xunlie_setting"
+                    spriteType = "GFX_button_copy_to_clipboard"
+                    size = { width = 120 height = 90 }
+                    position = { x = 330 y = 10 }
+                    format = center
+                    #text = simulated_cosmos_name
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_xunlie_setting_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_xunlie_up"
+                    spriteType = "GFX_button_up"
+                    size = { width = 120 height = 50 }
+                    position = { x = 370 y = 15 }
+                    format = center
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_xunlie_up_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_xunlie_down"
+                    spriteType = "GFX_button_down"
+                    size = { width = 120 height = 50 }
+                    position = { x = 400 y = 15 }
+                    format = center
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_xunlie_down_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_xunlien_data_detial"
+                    spriteType = "GFX_glow_tile_cyan"
+                    size = { width = 200 height = 35 }
+                    position = { x = 130 y = 70 }
+                    format = center
+                    text = hsr_path_xunlien_data_detial
+                    buttonFont = "cg_16b"
+                    font = "cg_16b"
+                    effect = the_star_rail_null_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_xunlie_start"
+                    spriteType = "GFX_button_no_gender"
+                    size = { width = 120 height = 90 }
+                    position = { x = 330 y = 68 }
+                    format = center
+                    #text = simulated_cosmos_name
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_xunlie_path_start_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_xunlie_end"
+                    spriteType = "GFX_close_button"
+                    size = { width = 120 height = 90 }
+                    position = { x = 330 y = 68 }
+                    format = center
+                    #text = simulated_cosmos_name
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_xunlie_path_end_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_xunlie_line_show"
+                    #quadTextureSprite ="GFX_text_hsr_path_progress_0"
+                    position = { x = 85 y = 115 }
+                    size = { width = 360 height = 60 }
+                    text = hsr_path_xunlie_line_show
+                    scale = 1
+                    font = "malgun_goth_24"
+                    format = center
+                    effect = hsr_path_xunlie_show_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_xunlie_level_up"
+                    quadTextureSprite ="GFX_button_upgrade_ascension_tier"
+                    position = { x = 370 y = 68 }
+                    size = { width = 390 height = 68 }
+                    #text = hsr_path_xunlie_line_show
+                    scale = 1
+                    font = "malgun_goth_24"
+                    format = center
+                    effect = hsr_path_xunlie_level_up_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_xunlie_start_level_up"
+                    quadTextureSprite ="GFX_zoom_level_3_empire_frame"
+                    position = { x = 350 y = 60 }
+                    size = { width = 390 height = 68 }
+                    #text = hsr_path_xunlie_line_show
+                    scale = 1
+                    font = "malgun_goth_24"
+                    format = center
+                    effect = hsr_path_xunlie_start_level_up_effect
+                }
+            }
+            containerWindowType = {
+                name = "hsr_star_path_xuwu"
+                position = { x = 10 y = 810 }
+                size = { width = 440 height = 170 }
+                moveable = no
+                background = {
+                    name = "background"
+                    quadTextureSprite = "GFX_tiles_dark_area_cut_8"
+                }
+                effectButtonType = {
+                    name = "hsr_path_bg"
+                    quadTextureSprite ="GFX_agenda_frame"
+                    position = { x = -10 y = 10 }
+                    size = { width = 180 height = 150 }
+                    format = center
+                    scale = 1.25
+                    effect = the_star_rail_null_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_bg_mask"
+                    quadTextureSprite ="GFX_agenda_hover_bg"
+                    position = { x = 17 y = 35 }
+                    size = { width = 180 height = 60 }
+                    font = "malgun_goth_24"
+                    format = center
+                    scale = 1.25
+                    effect = the_star_rail_null_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_bg_show"
+                    quadTextureSprite ="GFX_mingtuxuwu"
+                    position = { x = 35 y = 50 }
+                    size = { width = 180 height = 60 }
+                    scale = 1
+                    font = "malgun_goth_24"
+                    format = center
+                    effect = hsr_path_xuwu_name_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_xuwu_name"
+                    #spriteType = "GFX_glow_tile_cyan"
+                    size = { width = 120 height = 50 }
+                    position = { x = 90 y = 5 }
+                    format = center
+                    text = hsr_path_xuwu_name
+                    buttonFont = "cg_16b"
+                    font = "large_title_font_28"
+                    effect = the_star_rail_null_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_xuwu_set_primary"
+                    spriteType = "GFX_button_automate"
+                    size = { width = 120 height = 50 }
+                    position = { x = 210 y = 10 }
+                    format = center
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_xuwu_set_primary_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_xuwu_set_secondary"
+                    spriteType = "GFX_button_automate_construction"
+                    size = { width = 120 height = 50 }
+                    position = { x = 250 y = 10 }
+                    format = center
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_xuwu_set_primary_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_xuwu_reset"
+                    spriteType = "GFX_button_manual"
+                    size = { width = 120 height = 50 }
+                    position = { x = 290 y = 10 }
+                    format = center
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_xuwu_reset_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_xuwu_setting"
+                    spriteType = "GFX_button_copy_to_clipboard"
+                    size = { width = 120 height = 90 }
+                    position = { x = 330 y = 10 }
+                    format = center
+                    #text = simulated_cosmos_name
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_xuwu_setting_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_xuwu_up"
+                    spriteType = "GFX_button_up"
+                    size = { width = 120 height = 50 }
+                    position = { x = 370 y = 15 }
+                    format = center
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_xuwu_up_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_xuwu_down"
+                    spriteType = "GFX_button_down"
+                    size = { width = 120 height = 50 }
+                    position = { x = 400 y = 15 }
+                    format = center
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_xuwu_down_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_xuwun_data_detial"
+                    spriteType = "GFX_glow_tile_cyan"
+                    size = { width = 200 height = 35 }
+                    position = { x = 130 y = 70 }
+                    format = center
+                    text = hsr_path_xuwun_data_detial
+                    buttonFont = "cg_16b"
+                    font = "cg_16b"
+                    effect = the_star_rail_null_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_xuwu_start"
+                    spriteType = "GFX_button_no_gender"
+                    size = { width = 120 height = 90 }
+                    position = { x = 330 y = 68 }
+                    format = center
+                    #text = simulated_cosmos_name
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_xuwu_path_start_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_xuwu_end"
+                    spriteType = "GFX_close_button"
+                    size = { width = 120 height = 90 }
+                    position = { x = 330 y = 68 }
+                    format = center
+                    #text = simulated_cosmos_name
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_xuwu_path_end_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_xuwu_line_show"
+                    #quadTextureSprite ="GFX_text_hsr_path_progress_0"
+                    position = { x = 85 y = 115 }
+                    size = { width = 360 height = 60 }
+                    text = hsr_path_xuwu_line_show
+                    scale = 1
+                    font = "malgun_goth_24"
+                    format = center
+                    effect = hsr_path_xuwu_show_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_xuwu_level_up"
+                    quadTextureSprite ="GFX_button_upgrade_ascension_tier"
+                    position = { x = 370 y = 68 }
+                    size = { width = 390 height = 68 }
+                    #text = hsr_path_xuwu_line_show
+                    scale = 1
+                    font = "malgun_goth_24"
+                    format = center
+                    effect = hsr_path_xuwu_level_up_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_xuwu_start_level_up"
+                    quadTextureSprite ="GFX_zoom_level_3_empire_frame"
+                    position = { x = 350 y = 60 }
+                    size = { width = 390 height = 68 }
+                    #text = hsr_path_xuwu_line_show
+                    scale = 1
+                    font = "malgun_goth_24"
+                    format = center
+                    effect = hsr_path_xuwu_start_level_up_effect
+                }
+            }
+            containerWindowType = {
+                name = "hsr_star_path_zhishi"
+                position = { x = 480 y = 810 }
+                size = { width = 440 height = 170 }
+                moveable = no
+                background = {
+                    name = "background"
+                    quadTextureSprite = "GFX_tiles_dark_area_cut_8"
+                }
+                effectButtonType = {
+                    name = "hsr_path_bg"
+                    quadTextureSprite ="GFX_agenda_frame"
+                    position = { x = -10 y = 10 }
+                    size = { width = 180 height = 150 }
+                    format = center
+                    scale = 1.25
+                    effect = the_star_rail_null_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_bg_mask"
+                    quadTextureSprite ="GFX_agenda_hover_bg"
+                    position = { x = 17 y = 35 }
+                    size = { width = 180 height = 60 }
+                    font = "malgun_goth_24"
+                    format = center
+                    scale = 1.25
+                    effect = the_star_rail_null_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_bg_show"
+                    quadTextureSprite ="GFX_mingtuzhishi"
+                    position = { x = 35 y = 50 }
+                    size = { width = 180 height = 60 }
+                    scale = 1
+                    font = "malgun_goth_24"
+                    format = center
+                    effect = hsr_path_zhishi_name_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_zhishi_name"
+                    #spriteType = "GFX_glow_tile_cyan"
+                    size = { width = 120 height = 50 }
+                    position = { x = 90 y = 5 }
+                    format = center
+                    text = hsr_path_zhishi_name
+                    buttonFont = "cg_16b"
+                    font = "large_title_font_28"
+                    effect = the_star_rail_null_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_zhishi_set_primary"
+                    spriteType = "GFX_button_automate"
+                    size = { width = 120 height = 50 }
+                    position = { x = 210 y = 10 }
+                    format = center
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_zhishi_set_primary_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_zhishi_set_secondary"
+                    spriteType = "GFX_button_automate_construction"
+                    size = { width = 120 height = 50 }
+                    position = { x = 250 y = 10 }
+                    format = center
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_zhishi_set_primary_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_zhishi_reset"
+                    spriteType = "GFX_button_manual"
+                    size = { width = 120 height = 50 }
+                    position = { x = 290 y = 10 }
+                    format = center
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_zhishi_reset_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_zhishi_setting"
+                    spriteType = "GFX_button_copy_to_clipboard"
+                    size = { width = 120 height = 90 }
+                    position = { x = 330 y = 10 }
+                    format = center
+                    #text = simulated_cosmos_name
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_zhishi_setting_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_zhishi_up"
+                    spriteType = "GFX_button_up"
+                    size = { width = 120 height = 50 }
+                    position = { x = 370 y = 15 }
+                    format = center
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_zhishi_up_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_zhishi_down"
+                    spriteType = "GFX_button_down"
+                    size = { width = 120 height = 50 }
+                    position = { x = 400 y = 15 }
+                    format = center
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_path_zhishi_down_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_zhishin_data_detial"
+                    spriteType = "GFX_glow_tile_cyan"
+                    size = { width = 200 height = 35 }
+                    position = { x = 130 y = 70 }
+                    format = center
+                    text = hsr_path_zhishin_data_detial
+                    buttonFont = "cg_16b"
+                    font = "cg_16b"
+                    effect = the_star_rail_null_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_zhishi_start"
+                    spriteType = "GFX_button_no_gender"
+                    size = { width = 120 height = 90 }
+                    position = { x = 330 y = 68 }
+                    format = center
+                    #text = simulated_cosmos_name
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_zhishi_path_start_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_zhishi_end"
+                    spriteType = "GFX_close_button"
+                    size = { width = 120 height = 90 }
+                    position = { x = 330 y = 68 }
+                    format = center
+                    #text = simulated_cosmos_name
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_zhishi_path_end_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_zhishi_line_show"
+                    #quadTextureSprite ="GFX_text_hsr_path_progress_0"
+                    position = { x = 85 y = 115 }
+                    size = { width = 360 height = 60 }
+                    text = hsr_path_zhishi_line_show
+                    scale = 1
+                    font = "malgun_goth_24"
+                    format = center
+                    effect = hsr_path_zhishi_show_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_zhishi_level_up"
+                    quadTextureSprite ="GFX_button_upgrade_ascension_tier"
+                    position = { x = 370 y = 68 }
+                    size = { width = 390 height = 68 }
+                    #text = hsr_path_zhishi_line_show
+                    scale = 1
+                    font = "malgun_goth_24"
+                    format = center
+                    effect = hsr_path_zhishi_level_up_effect
+                }
+                effectButtonType = {
+                    name = "hsr_path_zhishi_start_level_up"
+                    quadTextureSprite ="GFX_zoom_level_3_empire_frame"
+                    position = { x = 350 y = 60 }
+                    size = { width = 390 height = 68 }
+                    #text = hsr_path_zhishi_line_show
+                    scale = 1
+                    font = "malgun_goth_24"
+                    format = center
+                    effect = hsr_path_zhishi_start_level_up_effect
+                }
+            }
         }
         ### ALL OF THIS IS HIDDEN OR DISPLACED ! ###
 
@@ -552,6 +2498,188 @@ guiTypes = {
             name = "alien_message"
             font = "cg_16b"
             position = { x = 2000000 y = 100 }
+            maxWidth = 465
+            maxHeight = 220
+            format = left
+            scrollbartype = "standardtext_slider"
+        }
+    }
+}
+guiTypes = {
+    ### FACTION OVERVIEW GUI ###
+    #reload honkai_star_extend_planet_ui.gui
+    containerWindowType = {
+        name = "hsr_path_civic_select"
+        orientation = center
+        origo = center
+        moveable = yes
+        size = { width = 1000 height = 600 }
+
+        background = {
+            name = "background"
+            quadTextureSprite = "GFX_hsr_path_select_ui_bg_main"
+        }
+
+        buttonType = {
+            name = "close"
+            quadTextureSprite = "GFX_close"
+            position = { x= -38 y = 0 }
+            orientation = "UPPER_RIGHT"
+            shortcut = "ESCAPE"
+            clicksound = "back_click"
+        }
+        # Custom header
+        instantTextBoxType = {
+            name = "irm_some_header"
+            font = "large_title_font_28"
+            text = "hsr_path_civic_select" 	# header text
+            position = { x = 430 y = 5 }
+            maxWidth = 543
+            maxHeight = 22
+            fixedSize = yes
+            alwaysTransparent = yes
+        }
+        containerWindowType = {
+            name = "hsr_star_path_show_bg_main_window"
+            #size = { width = 825 height = -10 }
+            size = { width = 990 height = 570 }
+            position = { x = 5 y = 30 }
+            background = { name = "background" spriteType = "GFX_glow_tile_cyan" }
+            verticalScrollbar = "right_vertical_slider"
+            smooth_scrolling = yes
+            clipping = yes
+            containerWindowType = {
+                name = "hsr_star_civic_1"
+                position = { x = 10 y = 10 }
+                size = { width = 250 height = 100 }
+                moveable = no
+                background = {
+                    name = "background"
+                    quadTextureSprite = "GFX_tiles_dark_area_cut_8"
+                }
+                effectButtonType = {
+                    name = "hsr_star_civic_1_detial"
+                    spriteType = "GFX_tr_cunhu_fengrao_1"
+                    size = { width = 120 height = 50 }
+                    position = { x = 5 y = 5 }
+                    format = center
+                    scale = 2
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = the_star_rail_null_effect
+                }
+                effectButtonType = {
+                    name = "hsr_star_civic_1_name"
+                    #spriteType = "GFX_glow_tile_cyan"
+                    size = { width = 120 height = 50 }
+                    position = { x = 85 y = 5 }
+                    format = center
+                    text = hsr_star_civic_1_name
+                    buttonFont = "malgun_goth_24"
+                    font = "malgun_goth_24"
+                    effect = the_star_rail_null_effect
+                }
+                effectButtonType = {
+                    name = "hsr_star_civic_1_reset"
+                    spriteType = "GFX_button_manual"
+                    size = { width = 120 height = 50 }
+                    position = { x = 100 y = 60 }
+                    format = center
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = the_star_rail_null_effect
+                }
+                effectButtonType = {
+                    name = "hsr_star_civic_1_start"
+                    spriteType = "GFX_button_no_gender"
+                    size = { width = 120 height = 50 }
+                    position = { x = 160 y = 60 }
+                    format = center
+                    #text = simulated_cosmos_name
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = the_star_rail_null_effect
+                }
+            }
+        }
+        ### ALL OF THIS IS HIDDEN OR DISPLACED ! ###
+
+        buttonType = { name = "focus_button" position = { x = -1180 y = -1112 } spriteType = "GFX_fleetview_focus" } # hidden
+        instantTextBoxType = { name = "heading" font = "malgun_goth_24" position = { x = -1120 y = -115 } } # hidden
+        buttonType = { name = "alien_message_background" size = { x = 0 y = 0 } position = { x = -1110 y = -11430 } spriteType = "GFX_tiles_dark_area_cut_8" } # hidden
+        buttonType = { name = "confirm_button" quadTextureSprite = "GFX_standard_button_142_34_button" } # hidden
+        containerWindowType = {
+            name = "portrait_background"
+            position = { x = -1117 y = -1145 }
+            size = { width = 0 height = 0 } 	# hide portrait window
+            iconType = { name = "event_picture" spriteType = "GFX_diplomacy_portrait_frame" } # hidden
+            iconType = { name = "portrait" spriteType = "GFX_portrait_character" } # hidden
+        }
+        containerWindowType = {
+            name = "portrait"
+            position = { x = -1117 y = -1145 }
+            size = { width = 0 height = 0 } # hide portrait window
+            iconType = { name = "portrait" spriteType = "GFX_portrait_gamesetup_mask" } # hidden
+            iconType = { name = "black_frame" spriteType = "GFX_diplomacy_portrait_shadow_frame" } # hidden
+            iconType = { name = "stripes_1" spriteType = "GFX_diplomacy_stripes_2" } # hidden
+            iconType = { name = "city_frame" spriteType = "GFX_diplomacy_portrait_frame" } # hidden
+        }
+        iconType = { name = "empire_info_bg" spriteType = "GFX_diplomacy_dark_fade_bg" } # hidden
+        instantTextBoxType = { name = "empire_name" font = "malgun_goth_24" } # hidden
+        instantTextBoxType = { name = "empire_government_type" font = "cg_16b" } # hidden
+        instantTextBoxType = { name = "empire_personality_type" font = "cg_16b" } # hidden
+        overlappingElementsBoxType = { name = "empire_ethics_icons" position = { x = -1145 y = -11138 } } # hidden
+        iconType = { name = "empire_flag" spriteType = "GFX_empire_flag_128" position = { x = -1125 y = -11235 } } # hidden
+        containerWindowType = {
+            name = "leader_details"
+            position = { x = -1125 y = -1175 }
+            containerWindowType = { name = "empire_traits_box" } # hidden
+            instantTextBoxType = { name = "empire_traits_label" font = "cg_16b" } # hidden
+            overlappingElementsBoxType = { name = "leader_traits" } # hidden
+            instantTextBoxType = { name = "leader_name" font = "cg_16b" } # hidden
+            instantTextBoxType = { name = "leader_species" font = "cg_16b" } # hidden
+        }
+        containerWindowType = {
+            name = "opinion_window"
+            position = { x = -1127 y = -11110 }
+            size = { width = 94 height = 30 }
+            iconType = { name = "their_opinion_icon" spriteType = "GFX_diplomacy_opinion" } # hidden
+            instantTextBoxType = { name = "their_opinion" font = "cg_16b" }
+        }
+
+        ### EVENT DIPLO ###
+
+        containerWindowType = {
+            name = "EVENT_DIPLO"
+            position = { x = 2 y = 50000 }
+            #size = { width = 563 height = 220 }
+            moveable = no
+
+            instantTextBoxType = {
+                name = "action_title"
+                font = "malgun_goth_24"
+                position = { x = 20 y = 0 }
+                maxWidth = 200
+                alwaysTransparent = yes
+            }
+            instantTextBoxType = {
+                name = "action_desc"
+                font = "malgun_goth_24"
+                position = { x = 490 y = 0 }
+                maxWidth = 500
+                maxHeight = 180
+                orientation = "UPPER_LEFT"
+                format = center
+                alwaysTransparent = yes
+                text_color_code = "H"
+            }
+            listboxType = { name = "option_list" position = { x = -11500 y = -1130 } } # hidden option list
+        }
+        # Description Section
+        instantTextBoxType = {
+            name = "alien_message"
+            font = "cg_16b"
+            position = { x = 20 y = 100000 }
             maxWidth = 465
             maxHeight = 220
             format = left
