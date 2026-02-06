@@ -11,5 +11,5 @@ tags={
 	"Loading Screen"
 	"Sound"
 }
-name="Honkai: Star Rail | Test Version"
+name="崩坏：星穹铁道 | Test Version"
 supported_version="v4.*"
