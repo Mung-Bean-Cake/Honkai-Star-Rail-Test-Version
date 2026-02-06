@@ -1,734 +1,138 @@
 
 namespace = DOT_SR
 country_event = {
+	id = DOT_SR.10000
+	title = "DOT_SR.1.name"
+	desc = DOT_SR.1.desc
+	is_triggered_only = yes
+	diplomatic = yes
+	custom_gui = honkai_star_rail_leader_ui
+	#picture_event_data = { room = astral_express_1_room }
+	immediate = {
+		set_variable = {
+			which = hsr_star_leader_change
+			value = 1
+		}
+	}
+	option = {
+		name = OK
+		default_hide_option = yes
+	}
+}
+#reload honkai_star_rail_main.gui
+country_event = {
 	id = DOT_SR.1
 	title = "DOT_SR.1.name"
 	desc = DOT_SR.1.desc
 	is_triggered_only = yes
 	diplomatic = yes
-	custom_gui = honkai_star_rail_main
+	custom_gui = honkai_star_rail_main_ui
+	custom_gui_option = honkai_star_rail_main_ui_option
 	picture_event_data = { room = astral_express_1_room }
-	immediate = { set_global_flag = allow_change_pc_shield_stage3 }
+	immediate = {
+		set_global_flag = allow_change_pc_shield_stage3
+	}
 	option = {
-		name = OK
+		name = hsr_star_ui_select_1
+		is_dialog_only = yes
+		response_text = DOT_SR.1.desc
+	}
+	option = {
+		name = hsr_star_ui_select_2
+		trigger = {
+			hidden_trigger = {
+				has_origin = origin_Astral_Express
+			}
+		}
+		is_dialog_only = yes
+		response_text = hsr_star_ui_select_2_lieche
+	}
+	option = {
+		name = hsr_star_ui_select_2
+		trigger = {
+			hidden_trigger = {
+				has_origin = origin_Herta_Space_Station
+			}
+		}
+		is_dialog_only = yes
+		response_text = hsr_star_ui_select_2_heita
+	}
+	option = {
+		name = hsr_star_ui_select_2
+		trigger = {
+			hidden_trigger = {
+				has_origin = origin_luosi_star
+			}
+		}
+		is_dialog_only = yes
+		response_text = hsr_star_ui_select_2_luosi
+	}
+	option = {
+		name = hsr_star_ui_select_2
+		trigger = {
+			hidden_trigger = {
+				has_origin = origin_Xianzhou
+			}
+		}
+		is_dialog_only = yes
+		response_text = hsr_star_ui_select_2_xianzhou
+	}
+	option = {
+		name = hsr_star_ui_select_2
+		trigger = {
+			hidden_trigger = {
+				has_origin = origin_Penacony
+			}
+		}
+		is_dialog_only = yes
+		response_text = hsr_star_ui_select_2_piluokangni
+	}
+	option = {
+		name = hsr_star_ui_select_2
+		trigger = {
+			hidden_trigger = {
+				not = {
+					is_honkai_star_mod = yes
+				}
+			}
+		}
+		is_dialog_only = yes
+		response_text = hsr_star_ui_select_2_null
+	}
+	option = {
+		name = hsr_star_ui_select_3
+		is_dialog_only = yes
+		response_text = hsr_star_ui_select_3_tt
+	}
+	option = {
+		name = hsr_star_ui_select_4
+		is_dialog_only = yes
+		response_text = concept_path_effect_desc
+	}
+	option = {
+		name = tuichu
 		default_hide_option = yes
 	}
 }
 country_event = {
 	id = DOT_SR.2
-	title = DOT_SR.1.name
-	desc = DOT_SR.2.desc
-	is_triggered_only = yes
-	diplomatic = yes
-	custom_gui = honkai_star_rail_leader
-	option = {
-		name = "DOT_SR.2.a"
-		custom_gui = hsr_heita_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.2
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.b
-		custom_gui = hsr_yaliluo_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.3
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.c
-		custom_gui = hsr_xianzhou_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.4
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.d
-		custom_gui = hsr_pinuokangni_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.5
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.e
-		custom_gui = hsr_wenfaluosi_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.6
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.f
-		custom_gui = hsr_xinghelieshou_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.7
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.g
-		custom_gui = hsr_xingjiheiping_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.8
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.h
-		custom_gui = hsr_xinghaiother_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.9
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.i
-		custom_gui = hsr_goback_select_option
-		default_hide_option = yes
-	}
-}
-country_event = {
-	id = DOT_SR.3
 	title = "DOT_SR.1.name"
-	desc = DOT_SR.3.desc
+	desc = DOT_SR.1.desc
 	is_triggered_only = yes
 	diplomatic = yes
-	custom_gui = honkai_star_rail_leader_1
-	option = {
-		name = "DOT_SR.2.a"
-		custom_gui = hsr_heita_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.2
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.b
-		custom_gui = hsr_yaliluo_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.3
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.c
-		custom_gui = hsr_xianzhou_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.4
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.d
-		custom_gui = hsr_pinuokangni_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.5
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.e
-		custom_gui = hsr_wenfaluosi_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.6
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.f
-		custom_gui = hsr_xinghelieshou_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.7
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.g
-		custom_gui = hsr_xingjiheiping_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.8
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.h
-		custom_gui = hsr_xinghaiother_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.9
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.i
-		custom_gui = hsr_goback_select_option
-		default_hide_option = yes
-	}
-}
-country_event = {
-	id = DOT_SR.4
-	title = "DOT_SR.1.name"
-	desc = DOT_SR.4.desc
-	is_triggered_only = yes
-	diplomatic = yes
-	custom_gui = honkai_star_rail_leader_2
+	custom_gui = honkai_star_rail_leader_ui
+	#picture_event_data = { room = astral_express_1_room }
 	immediate = {
 		set_variable = {
-			which = xianzhou_leader_page
+			which = hsr_star_leader_change
 			value = 1
 		}
 	}
 	option = {
-		name = "DOT_SR.2.a"
-		custom_gui = hsr_heita_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.2
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.b
-		custom_gui = hsr_yaliluo_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.3
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.c
-		custom_gui = hsr_xianzhou_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.4
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.d
-		custom_gui = hsr_pinuokangni_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.5
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.e
-		custom_gui = hsr_wenfaluosi_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.6
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.f
-		custom_gui = hsr_xinghelieshou_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.7
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.g
-		custom_gui = hsr_xingjiheiping_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.8
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.h
-		custom_gui = hsr_xinghaiother_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.9
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.i
-		custom_gui = hsr_goback_select_option
-		default_hide_option = yes
-	}
-}
-country_event = {
-	id = DOT_SR.5
-	title = "DOT_SR.1.name"
-	desc = DOT_SR.5.desc
-	is_triggered_only = yes
-	diplomatic = yes
-	custom_gui = honkai_star_rail_leader_3
-	option = {
-		name = "DOT_SR.2.a"
-		custom_gui = hsr_heita_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.2
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.b
-		custom_gui = hsr_yaliluo_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.3
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.c
-		custom_gui = hsr_xianzhou_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.4
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.d
-		custom_gui = hsr_pinuokangni_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.5
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.e
-		custom_gui = hsr_wenfaluosi_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.6
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.f
-		custom_gui = hsr_xinghelieshou_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.7
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.g
-		custom_gui = hsr_xingjiheiping_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.8
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.h
-		custom_gui = hsr_xinghaiother_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.9
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.i
-		custom_gui = hsr_goback_select_option
-		default_hide_option = yes
-	}
-}
-country_event = {
-	id = DOT_SR.6
-	title = "DOT_SR.1.name"
-	desc = DOT_SR.6.desc
-	is_triggered_only = yes
-	diplomatic = yes
-	custom_gui = honkai_star_rail_leader_4
-	option = {
-		name = "DOT_SR.2.a"
-		custom_gui = hsr_heita_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.2
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.b
-		custom_gui = hsr_yaliluo_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.3
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.c
-		custom_gui = hsr_xianzhou_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.4
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.d
-		custom_gui = hsr_pinuokangni_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.5
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.e
-		custom_gui = hsr_wenfaluosi_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.6
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.f
-		custom_gui = hsr_xinghelieshou_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.7
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.g
-		custom_gui = hsr_xingjiheiping_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.8
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.h
-		custom_gui = hsr_xinghaiother_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.9
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.i
-		custom_gui = hsr_goback_select_option
-		default_hide_option = yes
-	}
-}
-country_event = {
-	id = DOT_SR.7
-	title = "DOT_SR.1.name"
-	desc = DOT_SR.7.desc
-	is_triggered_only = yes
-	diplomatic = yes
-	custom_gui = honkai_star_rail_leader_5
-	option = {
-		name = "DOT_SR.2.a"
-		custom_gui = hsr_heita_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.2
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.b
-		custom_gui = hsr_yaliluo_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.3
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.c
-		custom_gui = hsr_xianzhou_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.4
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.d
-		custom_gui = hsr_pinuokangni_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.5
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.e
-		custom_gui = hsr_wenfaluosi_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.6
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.f
-		custom_gui = hsr_xinghelieshou_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.7
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.g
-		custom_gui = hsr_xingjiheiping_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.8
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.h
-		custom_gui = hsr_xinghaiother_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.9
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.i
-		custom_gui = hsr_goback_select_option
-		default_hide_option = yes
-	}
-}
-country_event = {
-	id = DOT_SR.8
-	title = "DOT_SR.1.name"
-	desc = DOT_SR.8.desc
-	is_triggered_only = yes
-	diplomatic = yes
-	custom_gui = honkai_star_rail_leader_6
-	option = {
-		name = "DOT_SR.2.a"
-		custom_gui = hsr_heita_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.2
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.b
-		custom_gui = hsr_yaliluo_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.3
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.c
-		custom_gui = hsr_xianzhou_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.4
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.d
-		custom_gui = hsr_pinuokangni_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.5
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.e
-		custom_gui = hsr_wenfaluosi_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.6
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.f
-		custom_gui = hsr_xinghelieshou_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.7
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.g
-		custom_gui = hsr_xingjiheiping_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.8
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.h
-		custom_gui = hsr_xinghaiother_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.9
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.i
-		custom_gui = hsr_goback_select_option
-		default_hide_option = yes
-	}
-}
-country_event = {
-	id = DOT_SR.9
-	title = "DOT_SR.1.name"
-	desc = DOT_SR.9.desc
-	is_triggered_only = yes
-	diplomatic = yes
-	custom_gui = honkai_star_rail_leader_7
-	option = {
-		name = "DOT_SR.2.a"
-		custom_gui = hsr_heita_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.2
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.b
-		custom_gui = hsr_yaliluo_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.3
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.c
-		custom_gui = hsr_xianzhou_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.4
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.d
-		custom_gui = hsr_pinuokangni_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.5
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.e
-		custom_gui = hsr_wenfaluosi_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.6
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.f
-		custom_gui = hsr_xinghelieshou_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.7
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.g
-		custom_gui = hsr_xingjiheiping_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.8
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.h
-		custom_gui = hsr_xinghaiother_select_option
-		hidden_effect = {
-			country_event = {
-				id = DOT_SR.9
-			}
-		}
-	}
-	option = {
-		name = DOT_SR.2.i
-		custom_gui = hsr_goback_select_option
-		default_hide_option = yes
-	}
-}
-country_event = {
-	id = DOT_SR.10
-	title = "DOT_SR.10.name"
-	desc = DOT_SR.1.desc
-	is_triggered_only = yes
-	diplomatic = yes
-	custom_gui = honkai_star_rail_event
-	picture_event_data = {   room = evt_moniyuzhou_room }
-	immediate = {
-		set_variable = { which = hsr_evt_moni value = 4 }
-	}
-	option = {
 		name = OK
 		default_hide_option = yes
 	}
 }
-country_event = {
-	id = DOT_SR.11
-	title = "DOT_SR.1.name"
-	desc = DOT_SR.11.desc
-	is_triggered_only = yes
-	diplomatic = yes
-	custom_gui = hsr_star_path_ui
-	option = {
-		name = OK
-		default_hide_option = yes
-	}
-}
-
 #################101
 ############200
 country_event = {
@@ -749,7 +153,6 @@ country_event = {
             }
             while = {
                 count = 2
-                remove_district = district_industrial
                 remove_district = district_generator
                 remove_district = district_mining
                 remove_district = district_farming
@@ -772,24 +175,6 @@ country_event = {
 			add_building = xz_building_amenities_and_unity
 			add_building = building_research_lab_1
 			add_building = building_research_lab_1
-
-            while = {
-                count = 70
-                create_pop = {
-                    species = Root
-                    effect = {
-                        set_pop_flag = xianzhou_capital
-                    }
-                }
-            }
-            every_owned_pop = {
-                limit = {
-                    NOT = { 
-                        has_pop_flag = xianzhou_capital
-                    }
-                }
-                kill_pop = yes
-            }
         }
 		give_technology = { tech = tech_robotic_workers message = no }
 		give_technology = { tech = tech_powered_exoskeletons message = no }

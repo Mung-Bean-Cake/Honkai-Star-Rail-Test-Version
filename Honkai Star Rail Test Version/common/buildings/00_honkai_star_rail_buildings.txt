@@ -227,3 +227,93 @@ herta_luosi_automated_1 = {
         mult = trigger:has_planetary_ascension_tier
     }
 }
+#命途
+building_cunhu_jiyi_1 = {
+    base_buildtime = @b1_time
+    planet_limit = 1
+    category = unity
+
+    building_sets = {
+        government
+        unity
+    }
+    potential = {
+        owner = {
+            has_country_flag = tr_cunhu_jiyi_1
+        }
+    }
+
+    resources = {
+        category = planet_buildings
+        produces = {
+            trigger = { exists = owner }
+            unity = 1
+            multiplier = owner.trigger:num_ascension_perks
+        }
+        cost = {
+            minerals = @b1_minerals
+        }
+        upkeep = {
+            minerals = @b1_upkeep
+        }
+    }
+    planet_modifier = {
+        pop_government_ethic_attraction = 0.20
+        planet_jobs_unity_produces_mult = 0.1
+        pop_bonus_workforce_mult = 0.1
+        planet_jobs_upkeep_mult = -0.1
+        planet_stability_add = 2
+        planet_crime_add = -50
+    }
+    triggered_desc = {
+        text = building_autochthon_monument_effect
+    }
+    country_modifier = {
+        country_resource_max_add = 10000
+    }
+}
+building_zhishi_jiyi_1 = {
+    base_buildtime = @b1_time
+    planet_limit = 1
+    category = unity
+
+    building_sets = {
+        government
+        unity
+    }
+    potential = {
+        owner = {
+            has_country_flag = tr_zhishi_jiyi_1
+        }
+    }
+
+    resources = {
+        category = planet_buildings
+        produces = {
+            trigger = { exists = owner }
+            physics_research = 3
+            society_research = 3
+            engineering_research = 3
+            multiplier = owner.trigger:num_ascension_perks
+        }
+        cost = {
+            minerals = @b1_minerals
+        }
+        upkeep = {
+            minerals = @b1_upkeep
+        }
+    }
+    planet_modifier = {
+        planet_housing_add = 2500
+        planet_amenities_add = 2500
+        planet_jobs_produces_mult = 0.05
+        planet_stability_add = 2
+        planet_crime_add = -50
+    }
+    triggered_desc = {
+        text =  building_zhishi_jiyi_1_effect
+    }
+    country_modifier = {
+        country_leader_cap_add = 1
+    }
+}

@@ -1,3 +1,14 @@
+the_star_rail_null_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+
+    }
+}
 but_add_xt_effect = {
     potential = {
         event_target:global_event_country = {
@@ -191,124 +202,44 @@ XQTD_crisis1_set_add_effect = {
         }
     }
 }
-#进度条
-XQTD_crisis1_set_show1_effect = {
-    potential = { always = yes }
-    allow = { always = yes }
+hsr_huimie_set_add_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        always = yes
+    }
     effect = {
-        custom_tooltip = XQTD_crisis1_set_show1_effect_custom_tooltip
         hidden_effect = {
             event_target:global_event_country = {
-                set_variable = { which = XQTD_crisis_stage value = 1}
+                change_variable = { which = XQTD_crisis_stage value = 1 }
+                if = {
+                    limit = { check_variable = { which = XQTD_crisis_stage value > 5} }
+                    set_variable = { which = XQTD_crisis_stage value = 1 }
+                }
             }
         }
     }
 }
-XQTD_crisis1_set_show2_effect = {
-    potential = { always = yes }
-    allow = { always = yes }
+hsr_huimie_set_sub_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        always = yes
+    }
     effect = {
-        custom_tooltip = XQTD_crisis1_set_show2_effect_custom_tooltip
         hidden_effect = {
             event_target:global_event_country = {
-                set_variable = { which = XQTD_crisis_stage value = 2}
-            }
-        }
-    }
-}
-XQTD_crisis1_set_show3_effect= {
-    potential = { always = yes }
-    allow = { always = yes }
-    effect = {
-        custom_tooltip = XQTD_crisis1_set_show3_effect_custom_tooltip
-        hidden_effect = {
-            event_target:global_event_country = {
-                set_variable = { which = XQTD_crisis_stage value = 3}
-            }
-        }
-    }
-}
-XQTD_crisis1_set_show4_effect= {
-    potential = { always = yes }
-    allow = { always = yes }
-    effect = {
-        custom_tooltip = XQTD_crisis1_set_show4_effect_custom_tooltip
-        hidden_effect = {
-            event_target:global_event_country = {
-                set_variable = { which = XQTD_crisis_stage value = 4}
-            }
-        }
-    }
-}
-XQTD_crisis1_set_show5_effect= {
-    potential = { always = yes }
-    allow = { always = yes }
-    effect = {
-        custom_tooltip = XQTD_crisis1_set_show5_effect_custom_tooltip
-        hidden_effect = {
-            event_target:global_event_country = {
-                set_variable = { which = XQTD_crisis_stage value = 5}
-            }
-        }
-    }
-}
-#进度标记
-XQTD_crisis1_set_show6_effect = {
-    allow = {  }
-    potential = {
-        event_target:global_event_country = {
-            OR = {
-                check_variable = { which = XQTD_crisis_stage value = 0}
-            }
-        }
-    }
-}
-XQTD_crisis1_set_show7_effect = {
-    allow = {  }
-    potential = {
-        event_target:global_event_country = {
-            OR = {
-                check_variable = { which = XQTD_crisis_stage value = 1}
-            }
-        }
-    }
-}
-XQTD_crisis1_set_show8_effect = {
-    allow = {  }
-    potential = {
-        event_target:global_event_country = {
-            OR = {
-                check_variable = { which = XQTD_crisis_stage value = 2}
-            }
-        }
-    }
-}
-XQTD_crisis1_set_show9_effect = {
-    allow = {  }
-    potential = {
-        event_target:global_event_country = {
-            OR = {
-                check_variable = { which = XQTD_crisis_stage value = 3}
-            }
-        }
-    }
-}
-XQTD_crisis1_set_show10_effect = {
-    allow = {  }
-    potential = {
-        event_target:global_event_country = {
-            OR = {
-                check_variable = { which = XQTD_crisis_stage value = 4}
-            }
-        }
-    }
-}
-XQTD_crisis1_set_show11_effect = {
-    allow = {  }
-    potential = {
-        event_target:global_event_country = {
-            OR = {
-                check_variable = { which = XQTD_crisis_stage value = 5}
+                change_variable = { which = XQTD_crisis_stage value = -1 }
+                if = {
+                    limit = { check_variable = { which = XQTD_crisis_stage value < 1} }
+                    set_variable = { which = XQTD_crisis_stage value = 1 }
+                }
+                if = {
+                    limit = { check_variable = { which = XQTD_crisis_stage value > 5} }
+                    set_variable = { which = XQTD_crisis_stage value = 1 }
+                }
             }
         }
     }
@@ -395,6 +326,249 @@ hsr_cosmos_set_add_effect = {
                 }
             }
         }
+    }
+}
+hsr_cosmos_set_sub_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                if = {
+                    limit = { has_global_flag = allow_change_pc_shield_stage5 }
+                    remove_global_flag = allow_change_pc_shield_stage5
+                    set_global_flag = allow_change_pc_shield_stage4
+                }
+                else_if = {
+                    limit = { has_global_flag = allow_change_pc_shield_stage4 }
+                    remove_global_flag = allow_change_pc_shield_stage4
+                    set_global_flag = allow_change_pc_shield_stage3
+                }
+                else_if = {
+                    limit = { has_global_flag = allow_change_pc_shield_stage3 }
+                    remove_global_flag = allow_change_pc_shield_stage3
+                    set_global_flag = allow_change_pc_shield_stage2
+                }
+                else_if = {
+                    limit = { has_global_flag = allow_change_pc_shield_stage2 }
+                    remove_global_flag = allow_change_pc_shield_stage2
+                    set_global_flag = allow_change_pc_shield_stage1
+                }
+                else_if = {
+                    limit = { has_global_flag = allow_change_pc_shield_stage1 }
+                    remove_global_flag = allow_change_pc_shield_stage1
+                    set_global_flag = allow_change_pc_shield_stage5
+                }
+                else_if = {
+                    limit = { has_global_flag = no_use_hsr_cosmos }
+                    remove_global_flag = no_use_hsr_cosmos
+                    set_global_flag = allow_change_pc_shield_stage1
+                }
+            }
+        }
+    }
+}
+hsr_cosmos_red_set_add_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                if = {
+                    limit = { has_global_flag = pc_shielded_red_3 }
+                    remove_global_flag = pc_shielded_red_3
+                    set_global_flag = pc_shielded_red_2
+                }
+                else_if = {
+                    limit = { has_global_flag = pc_shielded_red_2 }
+                    remove_global_flag = pc_shielded_red_2
+                    set_global_flag = pc_shielded_red_1
+                }
+                else_if = {
+                    limit = { has_global_flag = pc_shielded_red_1 }
+                    remove_global_flag = pc_shielded_red_1
+                }
+                else_if = {
+                    limit = {  }
+                    set_global_flag = pc_shielded_red_3
+                }
+            }
+        }
+    }
+}
+hsr_cosmos_red_set_sub_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                if = {
+                    limit = { has_global_flag = pc_shielded_red_1 }
+                    remove_global_flag = pc_shielded_red_1
+                    set_global_flag = pc_shielded_red_2
+                }
+                else_if = {
+                    limit = { has_global_flag = pc_shielded_red_2 }
+                    remove_global_flag = pc_shielded_red_2
+                    set_global_flag = pc_shielded_red_3
+                }
+                else_if = {
+                    limit = { has_global_flag = pc_shielded_red_3 }
+                    remove_global_flag = pc_shielded_red_3
+                }
+                else_if = {
+                    limit = {  }
+                    set_global_flag = pc_shielded_red_1
+                }
+            }
+        }
+    }
+}
+hsr_huimie_red_set_show_null_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_huimie_red_set_show_null
+    }
+}
+hsr_path_set_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        custom_tooltip = {
+            fail_text = use_path
+            hidden_trigger = {
+                from = {
+                    not = {has_country_flag = use_path}
+                }
+            }
+        }
+    }
+    effect = {
+        custom_tooltip = hsr_path_set_effect
+        hidden_effect = {
+            from = {
+                set_country_flag = use_path
+            }
+            if = {
+                limit = {
+                    from = {
+                        not = {has_technology = tech_path_civic_1}
+                    }
+                }
+                from = { add_research_option = tech_path_civic_1}
+            }
+        }
+    }
+}
+hsr_path_reset_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        custom_tooltip = {
+            fail_text = use_path
+            hidden_trigger = {
+                from = {
+                    has_country_flag = use_path
+                }
+            }
+        }
+    }
+    effect = {
+        custom_tooltip = hsr_path_set_effect
+        hidden_effect = {
+            from = {
+                remove_country_flag = use_path
+            }
+        }
+    }
+}
+hsr_pop_set_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                country_event = { id = hsr_on.10000 }
+            }
+        }
+    }
+}
+hsr_path_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        custom_tooltip = {
+            fail_text = use_path
+            hidden_trigger = {
+                from = {
+                    has_country_flag = use_path
+                }
+            }
+        }
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                country_event = { id = hsr_path.200 }
+            }
+        }
+    }
+}
+hsr_small_leader_show_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_thank_you_list_custom_tooltip
+    }
+}
+hsr_module_recommendation1_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = XQTT_right_side_bar2_custom_tooltip
+    }
+}
+hsr_module_recommendation2_effect = {
+    potential = {
+        always = yes
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = XQTT_right_side_bar1_custom_tooltip
     }
 }
 #进度条
@@ -548,19 +722,6 @@ hsr_cosmos_set_momo_effect= {
                 remove_global_flag = allow_change_pc_shield_stage5
                 remove_global_flag = allow_change_pc_shield_stage4
                 remove_global_flag = no_use_hsr_cosmos
-            }
-        }
-    }
-}
-hsr_xingshen_effect = {
-    potential = { always = yes }
-    allow = { always = yes }
-    effect = {
-        from = {
-            hidden_effect = {
-                country_event = {
-                    id = DOT_SR.11
-                }
             }
         }
     }

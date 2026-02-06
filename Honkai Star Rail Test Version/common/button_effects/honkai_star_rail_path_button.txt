@@ -82,6 +82,122 @@ hsr_star_path_secondary_titlie_effect = {
         custom_tooltip = hsr_star_path_secondary_titlie_effect
     }
 }
+hsr_star_path_civic_titlie_effect = {
+    allow = {
+        always = yes
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_star_path_civic_titlie_effect
+    }
+}
+hsr_star_path_civic_1_use_effect = {
+    allow = {
+        custom_tooltip = {
+            fail_text = need_tech_path_civic_1_tt
+            hidden_trigger = {
+                from = {
+                    has_technology = tech_path_civic_1
+                }
+            }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = can_select
+        hidden_effect = {
+            country_event = { id = hsr_path.201 }
+        }
+    }
+}
+hsr_star_path_civic_2_use_effect = {
+    allow = {
+        custom_tooltip = {
+            fail_text = need_tech_path_civic_2_tt
+            hidden_trigger = {
+                from = {
+                    has_technology = tech_path_civic_2
+                }
+            }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = can_select
+        hidden_effect = {
+            country_event = { id = hsr_path.201 }
+        }
+    }
+}
+hsr_star_path_civic_3_use_effect = {
+    allow = {
+        custom_tooltip = {
+            fail_text = need_tech_path_civic_3_tt
+            hidden_trigger = {
+                from = {
+                    has_technology = tech_path_civic_3
+                }
+            }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = can_select
+        hidden_effect = {
+            country_event = { id = hsr_path.201 }
+        }
+    }
+}
+hsr_star_path_civic_4_use_effect = {
+    allow = {
+        custom_tooltip = {
+            fail_text = need_tech_path_civic_4_tt
+            hidden_trigger = {
+                from = {
+                    has_technology = tech_path_civic_4
+                }
+            }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = can_select
+        hidden_effect = {
+            country_event = { id = hsr_path.201 }
+        }
+    }
+}
+hsr_star_path_civic_5_use_effect = {
+    allow = {
+        custom_tooltip = {
+            fail_text = need_tech_path_civic_5_tt
+            hidden_trigger = {
+                from = {
+                    has_technology = tech_path_civic_5
+                }
+            }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = can_select
+        hidden_effect = {
+            country_event = { id = hsr_path.201 }
+        }
+    }
+}
 hsr_path_cunhu_name_effect = {
     allow = {
         always = yes
@@ -96,7 +212,7 @@ hsr_path_cunhu_name_effect = {
 hsr_path_cunhu_set_primary_effect = {
     allow = {
         custom_tooltip = hsr_path_cunhu_set_primary_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
         custom_tooltip = {
             fail_text = hsr_cunhu_primary_tt
             hidden_trigger = {
@@ -160,7 +276,7 @@ hsr_path_cunhu_set_primary_effect = {
                     which = path_primary_count
                     value = 1
                 }
-                add_resource = { unity = -10000 }
+                add_resource = { unity = -1000 }
             }
         }
     }
@@ -168,7 +284,7 @@ hsr_path_cunhu_set_primary_effect = {
 hsr_path_cunhu_set_secondary_effect = {
     allow = {
         custom_tooltip = hsr_path_cunhu_set_secondary_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 5000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
         custom_tooltip = {
             fail_text = hsr_cunhu_secondary_tt
             hidden_trigger = {
@@ -180,11 +296,11 @@ hsr_path_cunhu_set_secondary_effect = {
             }
         }
         custom_tooltip = {
-            fail_text = hsr_cunhu_secondary_tt
+            fail_text = hsr_cunhu_primary_tt
             hidden_trigger = {
                 from = {
                     not = {
-                        has_country_flag = hsr_cunhu_secondary
+                        has_country_flag = hsr_cunhu_primary
                     }
                 }
             }
@@ -232,7 +348,7 @@ hsr_path_cunhu_set_secondary_effect = {
                     which = path_secondary_count
                     value = 1
                 }
-                add_resource = { unity =-5000 }
+                add_resource = { unity =-1000 }
             }
         }
     }
@@ -240,7 +356,7 @@ hsr_path_cunhu_set_secondary_effect = {
 hsr_path_cunhu_reset_effect = {
     allow = {
         custom_tooltip = hsr_path_cunhu_reset_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
     }
     potential = {
         always = yes
@@ -256,7 +372,7 @@ hsr_path_cunhu_reset_effect = {
                     remove_country_flag = hsr_cunhu_secondary
                     change_variable = {
                         which = path_secondary_count
-                        value = 1
+                        value = -1
                     }
                 }
                 if = {
@@ -266,10 +382,10 @@ hsr_path_cunhu_reset_effect = {
                     remove_country_flag = hsr_cunhu_primary
                     change_variable = {
                         which = path_primary_count
-                        value = 1
+                        value = -1
                     }
                 }
-                add_resource = { unity = -10000 }
+                add_resource = { unity = -1000 }
             }
         }
     }
@@ -277,7 +393,7 @@ hsr_path_cunhu_reset_effect = {
 hsr_path_cunhu_up_effect = {
     allow = {
         custom_tooltip = hsr_path_cunhu_up_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 500 }}
         custom_tooltip = {
             fail_text = hsr_cunhu_cunhu_up_tt
             hidden_trigger = {
@@ -301,7 +417,7 @@ hsr_path_cunhu_up_effect = {
                     modifier = hsr_path_cunhu_up
                     years = 5
                 }
-                add_resource = { unity = -1000 }
+                add_resource = { unity = -500 }
             }
         }
     }
@@ -309,7 +425,7 @@ hsr_path_cunhu_up_effect = {
 hsr_path_cunhu_down_effect = {
     allow = {
         custom_tooltip = hsr_path_cunhu_down_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 500 }}
         custom_tooltip = {
             fail_text = hsr_cunhu_cunhu_up_tt
             hidden_trigger = {
@@ -333,7 +449,7 @@ hsr_path_cunhu_down_effect = {
                     modifier = hsr_path_cunhu_down
                     years = 5
                 }
-                add_resource = { unity = -1000 }
+                add_resource = { unity = -500 }
             }
         }
     }
@@ -352,7 +468,7 @@ hsr_path_cunhu_setting_effect = {
 hsr_cunhu_path_start_effect = {
     allow = {
         custom_tooltip = hsr_cunhu_path_start_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
         custom_tooltip = {
             fail_text = cunhu_path_start_tt
             hidden_trigger = {
@@ -387,7 +503,7 @@ hsr_cunhu_path_start_effect = {
             from = {
                 add_tradition = tr_cunhu
                 remove_modifier = hsr_path_cunhu_end
-                add_resource = { unity = -10000 }
+                add_resource = { unity = -1000 }
             }
         }
     }
@@ -395,7 +511,7 @@ hsr_cunhu_path_start_effect = {
 hsr_cunhu_path_end_effect = {
     allow = {
         custom_tooltip = hsr_cunhu_path_end_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
         custom_tooltip = {
             fail_text = cunhu_path_end_tt
             hidden_trigger = {
@@ -429,7 +545,7 @@ hsr_cunhu_path_end_effect = {
                     modifier = hsr_path_cunhu_end
                     days = -1
                 }
-                add_resource = { unity = -10000 }
+                add_resource = { unity = -1000 }
             }
         }
     }
@@ -448,7 +564,7 @@ hsr_path_cunhu_show_effect = {
 hsr_path_cunhu_level_up_effect = {
     allow = {
         custom_tooltip = hsr_path_cunhu_level_up_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 50000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
         custom_tooltip = {
             fail_text = cunhu_path_need_tt
             hidden_trigger = {
@@ -460,6 +576,7 @@ hsr_path_cunhu_level_up_effect = {
                 }
             }
         }
+        always = no
     }
     potential = {
         from = {
@@ -473,7 +590,7 @@ hsr_path_cunhu_level_up_effect = {
         hidden_effect = {
             from = {
                 set_country_flag = path_cunhu_level_up
-                add_resource = { unity = -50000 }
+                add_resource = { unity = -10000 }
             }
         }
     }
@@ -519,7 +636,7 @@ hsr_path_fanyu_name_effect = {
 hsr_path_fanyu_set_primary_effect = {
     allow = {
         custom_tooltip = hsr_path_fanyu_set_primary_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
         custom_tooltip = {
             fail_text = hsr_fanyu_primary_tt
             hidden_trigger = {
@@ -583,7 +700,7 @@ hsr_path_fanyu_set_primary_effect = {
                     which = path_primary_count
                     value = 1
                 }
-                add_resource = { unity = -10000 }
+                add_resource = { unity = -1000 }
             }
         }
     }
@@ -591,13 +708,13 @@ hsr_path_fanyu_set_primary_effect = {
 hsr_path_fanyu_set_secondary_effect = {
     allow = {
         custom_tooltip = hsr_path_fanyu_set_secondary_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 5000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
         custom_tooltip = {
-            fail_text = hsr_fanyu_secondary_tt
+            fail_text = hsr_fanyu_primary_tt
             hidden_trigger = {
                 from = {
                     not = {
-                        has_country_flag = hsr_fanyu_secondary
+                        has_country_flag = hsr_fanyu_primary
                     }
                 }
             }
@@ -655,7 +772,7 @@ hsr_path_fanyu_set_secondary_effect = {
                     which = path_secondary_count
                     value = 1
                 }
-                add_resource = { unity =-5000 }
+                add_resource = { unity =-1000 }
             }
         }
     }
@@ -663,7 +780,7 @@ hsr_path_fanyu_set_secondary_effect = {
 hsr_path_fanyu_reset_effect = {
     allow = {
         custom_tooltip = hsr_path_fanyu_reset_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
     }
     potential = {
         always = yes
@@ -679,7 +796,7 @@ hsr_path_fanyu_reset_effect = {
                     remove_country_flag = hsr_fanyu_secondary
                     change_variable = {
                         which = path_secondary_count
-                        value = 1
+                        value = -1
                     }
                 }
                 if = {
@@ -689,10 +806,10 @@ hsr_path_fanyu_reset_effect = {
                     remove_country_flag = hsr_fanyu_primary
                     change_variable = {
                         which = path_primary_count
-                        value = 1
+                        value = -1
                     }
                 }
-                add_resource = { unity = -10000 }
+                add_resource = { unity = -1000 }
             }
         }
     }
@@ -700,7 +817,7 @@ hsr_path_fanyu_reset_effect = {
 hsr_path_fanyu_up_effect = {
     allow = {
         custom_tooltip = hsr_path_fanyu_up_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 500 }}
         custom_tooltip = {
             fail_text = hsr_fanyu_fanyu_up_tt
             hidden_trigger = {
@@ -724,7 +841,7 @@ hsr_path_fanyu_up_effect = {
                     modifier = hsr_path_fanyu_up
                     years = 5
                 }
-                add_resource = { unity = -1000 }
+                add_resource = { unity = -500 }
             }
         }
     }
@@ -732,7 +849,7 @@ hsr_path_fanyu_up_effect = {
 hsr_path_fanyu_down_effect = {
     allow = {
         custom_tooltip = hsr_path_fanyu_down_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 500 }}
         custom_tooltip = {
             fail_text = hsr_fanyu_fanyu_up_tt
             hidden_trigger = {
@@ -756,7 +873,7 @@ hsr_path_fanyu_down_effect = {
                     modifier = hsr_path_fanyu_down
                     years = 5
                 }
-                add_resource = { unity = -1000 }
+                add_resource = { unity = -500 }
             }
         }
     }
@@ -775,7 +892,7 @@ hsr_path_fanyu_setting_effect = {
 hsr_fanyu_path_start_effect = {
     allow = {
         custom_tooltip = hsr_fanyu_path_start_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
         custom_tooltip = {
             fail_text = fanyu_path_start_tt
             hidden_trigger = {
@@ -810,7 +927,7 @@ hsr_fanyu_path_start_effect = {
             from = {
                 add_tradition = tr_fanyu
                 remove_modifier = hsr_path_fanyu_end
-                add_resource = { unity = -10000 }
+                add_resource = { unity = -1000 }
             }
         }
     }
@@ -818,7 +935,7 @@ hsr_fanyu_path_start_effect = {
 hsr_fanyu_path_end_effect = {
     allow = {
         custom_tooltip = hsr_fanyu_path_end_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
         custom_tooltip = {
             fail_text = fanyu_path_end_tt
             hidden_trigger = {
@@ -852,7 +969,7 @@ hsr_fanyu_path_end_effect = {
                     modifier = hsr_path_fanyu_end
                     days = -1
                 }
-                add_resource = { unity = -10000 }
+                add_resource = { unity = -1000 }
             }
         }
     }
@@ -871,7 +988,7 @@ hsr_path_fanyu_show_effect = {
 hsr_path_fanyu_level_up_effect = {
     allow = {
         custom_tooltip = hsr_path_fanyu_level_up_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 50000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
         custom_tooltip = {
             fail_text = fanyu_path_need_tt
             hidden_trigger = {
@@ -883,6 +1000,7 @@ hsr_path_fanyu_level_up_effect = {
                 }
             }
         }
+        always = no
     }
     potential = {
         from = {
@@ -896,7 +1014,7 @@ hsr_path_fanyu_level_up_effect = {
         hidden_effect = {
             from = {
                 set_country_flag = path_fanyu_level_up
-                add_resource = { unity = -50000 }
+                add_resource = { unity = -10000 }
             }
         }
     }
@@ -942,7 +1060,7 @@ hsr_path_fengrao_name_effect = {
 hsr_path_fengrao_set_primary_effect = {
     allow = {
         custom_tooltip = hsr_path_fengrao_set_primary_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
         custom_tooltip = {
             fail_text = hsr_fengrao_primary_tt
             hidden_trigger = {
@@ -1006,7 +1124,7 @@ hsr_path_fengrao_set_primary_effect = {
                     which = path_primary_count
                     value = 1
                 }
-                add_resource = { unity = -10000 }
+                add_resource = { unity = -1000 }
             }
         }
     }
@@ -1014,13 +1132,13 @@ hsr_path_fengrao_set_primary_effect = {
 hsr_path_fengrao_set_secondary_effect = {
     allow = {
         custom_tooltip = hsr_path_fengrao_set_secondary_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 5000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
         custom_tooltip = {
-            fail_text = hsr_fengrao_secondary_tt
+            fail_text = hsr_fengrao_primary_tt
             hidden_trigger = {
                 from = {
                     not = {
-                        has_country_flag = hsr_fengrao_secondary
+                        has_country_flag = hsr_fengrao_primary
                     }
                 }
             }
@@ -1078,7 +1196,7 @@ hsr_path_fengrao_set_secondary_effect = {
                     which = path_secondary_count
                     value = 1
                 }
-                add_resource = { unity =-5000 }
+                add_resource = { unity =-1000 }
             }
         }
     }
@@ -1086,7 +1204,7 @@ hsr_path_fengrao_set_secondary_effect = {
 hsr_path_fengrao_reset_effect = {
     allow = {
         custom_tooltip = hsr_path_fengrao_reset_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
     }
     potential = {
         always = yes
@@ -1102,7 +1220,7 @@ hsr_path_fengrao_reset_effect = {
                     remove_country_flag = hsr_fengrao_secondary
                     change_variable = {
                         which = path_secondary_count
-                        value = 1
+                        value = -1
                     }
                 }
                 if = {
@@ -1112,10 +1230,10 @@ hsr_path_fengrao_reset_effect = {
                     remove_country_flag = hsr_fengrao_primary
                     change_variable = {
                         which = path_primary_count
-                        value = 1
+                        value = -1
                     }
                 }
-                add_resource = { unity = -10000 }
+                add_resource = { unity = -1000 }
             }
         }
     }
@@ -1123,7 +1241,7 @@ hsr_path_fengrao_reset_effect = {
 hsr_path_fengrao_up_effect = {
     allow = {
         custom_tooltip = hsr_path_fengrao_up_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 500 }}
         custom_tooltip = {
             fail_text = hsr_fengrao_fengrao_up_tt
             hidden_trigger = {
@@ -1147,7 +1265,7 @@ hsr_path_fengrao_up_effect = {
                     modifier = hsr_path_fengrao_up
                     years = 5
                 }
-                add_resource = { unity = -1000 }
+                add_resource = { unity = -500 }
             }
         }
     }
@@ -1155,7 +1273,7 @@ hsr_path_fengrao_up_effect = {
 hsr_path_fengrao_down_effect = {
     allow = {
         custom_tooltip = hsr_path_fengrao_down_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 500 }}
         custom_tooltip = {
             fail_text = hsr_fengrao_fengrao_up_tt
             hidden_trigger = {
@@ -1179,7 +1297,7 @@ hsr_path_fengrao_down_effect = {
                     modifier = hsr_path_fengrao_down
                     years = 5
                 }
-                add_resource = { unity = -1000 }
+                add_resource = { unity = -500 }
             }
         }
     }
@@ -1198,7 +1316,7 @@ hsr_path_fengrao_setting_effect = {
 hsr_fengrao_path_start_effect = {
     allow = {
         custom_tooltip = hsr_fengrao_path_start_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
         custom_tooltip = {
             fail_text = fengrao_path_start_tt
             hidden_trigger = {
@@ -1233,7 +1351,7 @@ hsr_fengrao_path_start_effect = {
             from = {
                 add_tradition = tr_fengrao
                 remove_modifier = hsr_path_fengrao_end
-                add_resource = { unity = -10000 }
+                add_resource = { unity = -1000 }
             }
         }
     }
@@ -1241,7 +1359,7 @@ hsr_fengrao_path_start_effect = {
 hsr_fengrao_path_end_effect = {
     allow = {
         custom_tooltip = hsr_fengrao_path_end_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
         custom_tooltip = {
             fail_text = fengrao_path_end_tt
             hidden_trigger = {
@@ -1275,7 +1393,7 @@ hsr_fengrao_path_end_effect = {
                     modifier = hsr_path_fengrao_end
                     days = -1
                 }
-                add_resource = { unity = -10000 }
+                add_resource = { unity = -1000 }
             }
         }
     }
@@ -1294,7 +1412,7 @@ hsr_path_fengrao_show_effect = {
 hsr_path_fengrao_level_up_effect = {
     allow = {
         custom_tooltip = hsr_path_fengrao_level_up_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 50000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
         custom_tooltip = {
             fail_text = fengrao_path_need_tt
             hidden_trigger = {
@@ -1306,6 +1424,7 @@ hsr_path_fengrao_level_up_effect = {
                 }
             }
         }
+        always = no
     }
     potential = {
         from = {
@@ -1319,7 +1438,7 @@ hsr_path_fengrao_level_up_effect = {
         hidden_effect = {
             from = {
                 set_country_flag = path_fengrao_level_up
-                add_resource = { unity = -50000 }
+                add_resource = { unity = -10000 }
             }
         }
     }
@@ -1365,7 +1484,7 @@ hsr_path_huanyu_name_effect = {
 hsr_path_huanyu_set_primary_effect = {
     allow = {
         custom_tooltip = hsr_path_huanyu_set_primary_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
         custom_tooltip = {
             fail_text = hsr_huanyu_primary_tt
             hidden_trigger = {
@@ -1429,7 +1548,7 @@ hsr_path_huanyu_set_primary_effect = {
                     which = path_primary_count
                     value = 1
                 }
-                add_resource = { unity = -10000 }
+                add_resource = { unity = -1000 }
             }
         }
     }
@@ -1437,13 +1556,13 @@ hsr_path_huanyu_set_primary_effect = {
 hsr_path_huanyu_set_secondary_effect = {
     allow = {
         custom_tooltip = hsr_path_huanyu_set_secondary_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 5000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
         custom_tooltip = {
-            fail_text = hsr_huanyu_secondary_tt
+            fail_text = hsr_huanyu_primary_tt
             hidden_trigger = {
                 from = {
                     not = {
-                        has_country_flag = hsr_huanyu_secondary
+                        has_country_flag = hsr_huanyu_primary
                     }
                 }
             }
@@ -1501,7 +1620,7 @@ hsr_path_huanyu_set_secondary_effect = {
                     which = path_secondary_count
                     value = 1
                 }
-                add_resource = { unity =-5000 }
+                add_resource = { unity =-1000 }
             }
         }
     }
@@ -1509,7 +1628,7 @@ hsr_path_huanyu_set_secondary_effect = {
 hsr_path_huanyu_reset_effect = {
     allow = {
         custom_tooltip = hsr_path_huanyu_reset_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
     }
     potential = {
         always = yes
@@ -1525,7 +1644,7 @@ hsr_path_huanyu_reset_effect = {
                     remove_country_flag = hsr_huanyu_secondary
                     change_variable = {
                         which = path_secondary_count
-                        value = 1
+                        value = -1
                     }
                 }
                 if = {
@@ -1535,10 +1654,10 @@ hsr_path_huanyu_reset_effect = {
                     remove_country_flag = hsr_huanyu_primary
                     change_variable = {
                         which = path_primary_count
-                        value = 1
+                        value = -1
                     }
                 }
-                add_resource = { unity = -10000 }
+                add_resource = { unity = -1000 }
             }
         }
     }
@@ -1546,7 +1665,7 @@ hsr_path_huanyu_reset_effect = {
 hsr_path_huanyu_up_effect = {
     allow = {
         custom_tooltip = hsr_path_huanyu_up_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 500 }}
         custom_tooltip = {
             fail_text = hsr_huanyu_huanyu_up_tt
             hidden_trigger = {
@@ -1570,7 +1689,7 @@ hsr_path_huanyu_up_effect = {
                     modifier = hsr_path_huanyu_up
                     years = 5
                 }
-                add_resource = { unity = -1000 }
+                add_resource = { unity = -500 }
             }
         }
     }
@@ -1578,7 +1697,7 @@ hsr_path_huanyu_up_effect = {
 hsr_path_huanyu_down_effect = {
     allow = {
         custom_tooltip = hsr_path_huanyu_down_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 500 }}
         custom_tooltip = {
             fail_text = hsr_huanyu_huanyu_up_tt
             hidden_trigger = {
@@ -1602,7 +1721,7 @@ hsr_path_huanyu_down_effect = {
                     modifier = hsr_path_huanyu_down
                     years = 5
                 }
-                add_resource = { unity = -1000 }
+                add_resource = { unity = -500 }
             }
         }
     }
@@ -1621,7 +1740,7 @@ hsr_path_huanyu_setting_effect = {
 hsr_huanyu_path_start_effect = {
     allow = {
         custom_tooltip = hsr_huanyu_path_start_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
         custom_tooltip = {
             fail_text = huanyu_path_start_tt
             hidden_trigger = {
@@ -1656,7 +1775,7 @@ hsr_huanyu_path_start_effect = {
             from = {
                 add_tradition = tr_huanyu
                 remove_modifier = hsr_path_huanyu_end
-                add_resource = { unity = -10000 }
+                add_resource = { unity = -1000 }
             }
         }
     }
@@ -1664,7 +1783,7 @@ hsr_huanyu_path_start_effect = {
 hsr_huanyu_path_end_effect = {
     allow = {
         custom_tooltip = hsr_huanyu_path_end_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
         custom_tooltip = {
             fail_text = huanyu_path_end_tt
             hidden_trigger = {
@@ -1698,7 +1817,7 @@ hsr_huanyu_path_end_effect = {
                     modifier = hsr_path_huanyu_end
                     days = -1
                 }
-                add_resource = { unity = -10000 }
+                add_resource = { unity = -1000 }
             }
         }
     }
@@ -1717,7 +1836,7 @@ hsr_path_huanyu_show_effect = {
 hsr_path_huanyu_level_up_effect = {
     allow = {
         custom_tooltip = hsr_path_huanyu_level_up_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 50000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
         custom_tooltip = {
             fail_text = huanyu_path_need_tt
             hidden_trigger = {
@@ -1729,6 +1848,7 @@ hsr_path_huanyu_level_up_effect = {
                 }
             }
         }
+        always = no
     }
     potential = {
         from = {
@@ -1742,7 +1862,7 @@ hsr_path_huanyu_level_up_effect = {
         hidden_effect = {
             from = {
                 set_country_flag = path_huanyu_level_up
-                add_resource = { unity = -50000 }
+                add_resource = { unity = -10000 }
             }
         }
     }
@@ -1788,7 +1908,7 @@ hsr_path_huimie_name_effect = {
 hsr_path_huimie_set_primary_effect = {
     allow = {
         custom_tooltip = hsr_path_huimie_set_primary_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
         custom_tooltip = {
             fail_text = hsr_huimie_primary_tt
             hidden_trigger = {
@@ -1852,7 +1972,7 @@ hsr_path_huimie_set_primary_effect = {
                     which = path_primary_count
                     value = 1
                 }
-                add_resource = { unity = -10000 }
+                add_resource = { unity = -1000 }
             }
         }
     }
@@ -1860,13 +1980,13 @@ hsr_path_huimie_set_primary_effect = {
 hsr_path_huimie_set_secondary_effect = {
     allow = {
         custom_tooltip = hsr_path_huimie_set_secondary_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 5000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
         custom_tooltip = {
-            fail_text = hsr_huimie_secondary_tt
+            fail_text = hsr_huimie_primary_tt
             hidden_trigger = {
                 from = {
                     not = {
-                        has_country_flag = hsr_huimie_secondary
+                        has_country_flag = hsr_huimie_primary
                     }
                 }
             }
@@ -1924,7 +2044,7 @@ hsr_path_huimie_set_secondary_effect = {
                     which = path_secondary_count
                     value = 1
                 }
-                add_resource = { unity =-5000 }
+                add_resource = { unity =-1000 }
             }
         }
     }
@@ -1932,7 +2052,7 @@ hsr_path_huimie_set_secondary_effect = {
 hsr_path_huimie_reset_effect = {
     allow = {
         custom_tooltip = hsr_path_huimie_reset_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
     }
     potential = {
         always = yes
@@ -1948,7 +2068,7 @@ hsr_path_huimie_reset_effect = {
                     remove_country_flag = hsr_huimie_secondary
                     change_variable = {
                         which = path_secondary_count
-                        value = 1
+                        value = -1
                     }
                 }
                 if = {
@@ -1958,10 +2078,10 @@ hsr_path_huimie_reset_effect = {
                     remove_country_flag = hsr_huimie_primary
                     change_variable = {
                         which = path_primary_count
-                        value = 1
+                        value = -1
                     }
                 }
-                add_resource = { unity = -10000 }
+                add_resource = { unity = -1000 }
             }
         }
     }
@@ -1969,7 +2089,7 @@ hsr_path_huimie_reset_effect = {
 hsr_path_huimie_up_effect = {
     allow = {
         custom_tooltip = hsr_path_huimie_up_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 500 }}
         custom_tooltip = {
             fail_text = hsr_huimie_huimie_up_tt
             hidden_trigger = {
@@ -1993,7 +2113,7 @@ hsr_path_huimie_up_effect = {
                     modifier = hsr_path_huimie_up
                     years = 5
                 }
-                add_resource = { unity = -1000 }
+                add_resource = { unity = -500 }
             }
         }
     }
@@ -2001,7 +2121,7 @@ hsr_path_huimie_up_effect = {
 hsr_path_huimie_down_effect = {
     allow = {
         custom_tooltip = hsr_path_huimie_down_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 500 }}
         custom_tooltip = {
             fail_text = hsr_huimie_huimie_up_tt
             hidden_trigger = {
@@ -2025,7 +2145,7 @@ hsr_path_huimie_down_effect = {
                     modifier = hsr_path_huimie_down
                     years = 5
                 }
-                add_resource = { unity = -1000 }
+                add_resource = { unity = -500 }
             }
         }
     }
@@ -2044,7 +2164,7 @@ hsr_path_huimie_setting_effect = {
 hsr_huimie_path_start_effect = {
     allow = {
         custom_tooltip = hsr_huimie_path_start_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
         custom_tooltip = {
             fail_text = huimie_path_start_tt
             hidden_trigger = {
@@ -2079,7 +2199,7 @@ hsr_huimie_path_start_effect = {
             from = {
                 add_tradition = tr_huimie
                 remove_modifier = hsr_path_huimie_end
-                add_resource = { unity = -10000 }
+                add_resource = { unity = -1000 }
             }
         }
     }
@@ -2087,7 +2207,7 @@ hsr_huimie_path_start_effect = {
 hsr_huimie_path_end_effect = {
     allow = {
         custom_tooltip = hsr_huimie_path_end_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
         custom_tooltip = {
             fail_text = huimie_path_end_tt
             hidden_trigger = {
@@ -2121,7 +2241,7 @@ hsr_huimie_path_end_effect = {
                     modifier = hsr_path_huimie_end
                     days = -1
                 }
-                add_resource = { unity = -10000 }
+                add_resource = { unity = -1000 }
             }
         }
     }
@@ -2140,7 +2260,7 @@ hsr_path_huimie_show_effect = {
 hsr_path_huimie_level_up_effect = {
     allow = {
         custom_tooltip = hsr_path_huimie_level_up_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 50000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
         custom_tooltip = {
             fail_text = huimie_path_need_tt
             hidden_trigger = {
@@ -2152,6 +2272,7 @@ hsr_path_huimie_level_up_effect = {
                 }
             }
         }
+        always = no
     }
     potential = {
         from = {
@@ -2165,7 +2286,7 @@ hsr_path_huimie_level_up_effect = {
         hidden_effect = {
             from = {
                 set_country_flag = path_huimie_level_up
-                add_resource = { unity = -50000 }
+                add_resource = { unity = -10000 }
             }
         }
     }
@@ -2211,7 +2332,7 @@ hsr_path_jiyi_name_effect = {
 hsr_path_jiyi_set_primary_effect = {
     allow = {
         custom_tooltip = hsr_path_jiyi_set_primary_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
         custom_tooltip = {
             fail_text = hsr_jiyi_primary_tt
             hidden_trigger = {
@@ -2275,7 +2396,7 @@ hsr_path_jiyi_set_primary_effect = {
                     which = path_primary_count
                     value = 1
                 }
-                add_resource = { unity = -10000 }
+                add_resource = { unity = -1000 }
             }
         }
     }
@@ -2283,13 +2404,13 @@ hsr_path_jiyi_set_primary_effect = {
 hsr_path_jiyi_set_secondary_effect = {
     allow = {
         custom_tooltip = hsr_path_jiyi_set_secondary_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 5000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
         custom_tooltip = {
-            fail_text = hsr_jiyi_secondary_tt
+            fail_text = hsr_jiyi_primary_tt
             hidden_trigger = {
                 from = {
                     not = {
-                        has_country_flag = hsr_jiyi_secondary
+                        has_country_flag = hsr_jiyi_primary
                     }
                 }
             }
@@ -2347,7 +2468,7 @@ hsr_path_jiyi_set_secondary_effect = {
                     which = path_secondary_count
                     value = 1
                 }
-                add_resource = { unity =-5000 }
+                add_resource = { unity =-1000 }
             }
         }
     }
@@ -2355,7 +2476,7 @@ hsr_path_jiyi_set_secondary_effect = {
 hsr_path_jiyi_reset_effect = {
     allow = {
         custom_tooltip = hsr_path_jiyi_reset_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
     }
     potential = {
         always = yes
@@ -2371,7 +2492,7 @@ hsr_path_jiyi_reset_effect = {
                     remove_country_flag = hsr_jiyi_secondary
                     change_variable = {
                         which = path_secondary_count
-                        value = 1
+                        value = -1
                     }
                 }
                 if = {
@@ -2381,10 +2502,10 @@ hsr_path_jiyi_reset_effect = {
                     remove_country_flag = hsr_jiyi_primary
                     change_variable = {
                         which = path_primary_count
-                        value = 1
+                        value = -1
                     }
                 }
-                add_resource = { unity = -10000 }
+                add_resource = { unity = -1000 }
             }
         }
     }
@@ -2392,7 +2513,7 @@ hsr_path_jiyi_reset_effect = {
 hsr_path_jiyi_up_effect = {
     allow = {
         custom_tooltip = hsr_path_jiyi_up_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 500 }}
         custom_tooltip = {
             fail_text = hsr_jiyi_jiyi_up_tt
             hidden_trigger = {
@@ -2416,7 +2537,7 @@ hsr_path_jiyi_up_effect = {
                     modifier = hsr_path_jiyi_up
                     years = 5
                 }
-                add_resource = { unity = -1000 }
+                add_resource = { unity = -500 }
             }
         }
     }
@@ -2424,7 +2545,7 @@ hsr_path_jiyi_up_effect = {
 hsr_path_jiyi_down_effect = {
     allow = {
         custom_tooltip = hsr_path_jiyi_down_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 500 }}
         custom_tooltip = {
             fail_text = hsr_jiyi_jiyi_up_tt
             hidden_trigger = {
@@ -2448,7 +2569,7 @@ hsr_path_jiyi_down_effect = {
                     modifier = hsr_path_jiyi_down
                     years = 5
                 }
-                add_resource = { unity = -1000 }
+                add_resource = { unity = -500 }
             }
         }
     }
@@ -2467,7 +2588,7 @@ hsr_path_jiyi_setting_effect = {
 hsr_jiyi_path_start_effect = {
     allow = {
         custom_tooltip = hsr_jiyi_path_start_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
         custom_tooltip = {
             fail_text = jiyi_path_start_tt
             hidden_trigger = {
@@ -2502,7 +2623,7 @@ hsr_jiyi_path_start_effect = {
             from = {
                 add_tradition = tr_jiyi
                 remove_modifier = hsr_path_jiyi_end
-                add_resource = { unity = -10000 }
+                add_resource = { unity = -1000 }
             }
         }
     }
@@ -2510,7 +2631,7 @@ hsr_jiyi_path_start_effect = {
 hsr_jiyi_path_end_effect = {
     allow = {
         custom_tooltip = hsr_jiyi_path_end_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
         custom_tooltip = {
             fail_text = jiyi_path_end_tt
             hidden_trigger = {
@@ -2544,7 +2665,7 @@ hsr_jiyi_path_end_effect = {
                     modifier = hsr_path_jiyi_end
                     days = -1
                 }
-                add_resource = { unity = -10000 }
+                add_resource = { unity = -1000 }
             }
         }
     }
@@ -2563,7 +2684,7 @@ hsr_path_jiyi_show_effect = {
 hsr_path_jiyi_level_up_effect = {
     allow = {
         custom_tooltip = hsr_path_jiyi_level_up_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 50000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
         custom_tooltip = {
             fail_text = jiyi_path_need_tt
             hidden_trigger = {
@@ -2575,6 +2696,7 @@ hsr_path_jiyi_level_up_effect = {
                 }
             }
         }
+        always = no
     }
     potential = {
         from = {
@@ -2588,7 +2710,7 @@ hsr_path_jiyi_level_up_effect = {
         hidden_effect = {
             from = {
                 set_country_flag = path_jiyi_level_up
-                add_resource = { unity = -50000 }
+                add_resource = { unity = -10000 }
             }
         }
     }
@@ -2634,7 +2756,7 @@ hsr_path_tongxie_name_effect = {
 hsr_path_tongxie_set_primary_effect = {
     allow = {
         custom_tooltip = hsr_path_tongxie_set_primary_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
         custom_tooltip = {
             fail_text = hsr_tongxie_primary_tt
             hidden_trigger = {
@@ -2698,7 +2820,7 @@ hsr_path_tongxie_set_primary_effect = {
                     which = path_primary_count
                     value = 1
                 }
-                add_resource = { unity = -10000 }
+                add_resource = { unity = -1000 }
             }
         }
     }
@@ -2706,13 +2828,13 @@ hsr_path_tongxie_set_primary_effect = {
 hsr_path_tongxie_set_secondary_effect = {
     allow = {
         custom_tooltip = hsr_path_tongxie_set_secondary_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 5000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
         custom_tooltip = {
-            fail_text = hsr_tongxie_secondary_tt
+            fail_text = hsr_tongxie_primary_tt
             hidden_trigger = {
                 from = {
                     not = {
-                        has_country_flag = hsr_tongxie_secondary
+                        has_country_flag = hsr_tongxie_primary
                     }
                 }
             }
@@ -2770,7 +2892,7 @@ hsr_path_tongxie_set_secondary_effect = {
                     which = path_secondary_count
                     value = 1
                 }
-                add_resource = { unity =-5000 }
+                add_resource = { unity =-1000 }
             }
         }
     }
@@ -2778,7 +2900,7 @@ hsr_path_tongxie_set_secondary_effect = {
 hsr_path_tongxie_reset_effect = {
     allow = {
         custom_tooltip = hsr_path_tongxie_reset_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
     }
     potential = {
         always = yes
@@ -2794,7 +2916,7 @@ hsr_path_tongxie_reset_effect = {
                     remove_country_flag = hsr_tongxie_secondary
                     change_variable = {
                         which = path_secondary_count
-                        value = 1
+                        value = -1
                     }
                 }
                 if = {
@@ -2804,10 +2926,10 @@ hsr_path_tongxie_reset_effect = {
                     remove_country_flag = hsr_tongxie_primary
                     change_variable = {
                         which = path_primary_count
-                        value = 1
+                        value = -1
                     }
                 }
-                add_resource = { unity = -10000 }
+                add_resource = { unity = -1000 }
             }
         }
     }
@@ -2815,7 +2937,7 @@ hsr_path_tongxie_reset_effect = {
 hsr_path_tongxie_up_effect = {
     allow = {
         custom_tooltip = hsr_path_tongxie_up_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 500 }}
         custom_tooltip = {
             fail_text = hsr_tongxie_tongxie_up_tt
             hidden_trigger = {
@@ -2839,7 +2961,7 @@ hsr_path_tongxie_up_effect = {
                     modifier = hsr_path_tongxie_up
                     years = 5
                 }
-                add_resource = { unity = -1000 }
+                add_resource = { unity = -500 }
             }
         }
     }
@@ -2847,7 +2969,7 @@ hsr_path_tongxie_up_effect = {
 hsr_path_tongxie_down_effect = {
     allow = {
         custom_tooltip = hsr_path_tongxie_down_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 500 }}
         custom_tooltip = {
             fail_text = hsr_tongxie_tongxie_up_tt
             hidden_trigger = {
@@ -2871,7 +2993,7 @@ hsr_path_tongxie_down_effect = {
                     modifier = hsr_path_tongxie_down
                     years = 5
                 }
-                add_resource = { unity = -1000 }
+                add_resource = { unity = -500 }
             }
         }
     }
@@ -2890,7 +3012,7 @@ hsr_path_tongxie_setting_effect = {
 hsr_tongxie_path_start_effect = {
     allow = {
         custom_tooltip = hsr_tongxie_path_start_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
         custom_tooltip = {
             fail_text = tongxie_path_start_tt
             hidden_trigger = {
@@ -2925,7 +3047,7 @@ hsr_tongxie_path_start_effect = {
             from = {
                 add_tradition = tr_tongxie
                 remove_modifier = hsr_path_tongxie_end
-                add_resource = { unity = -10000 }
+                add_resource = { unity = -1000 }
             }
         }
     }
@@ -2933,7 +3055,7 @@ hsr_tongxie_path_start_effect = {
 hsr_tongxie_path_end_effect = {
     allow = {
         custom_tooltip = hsr_tongxie_path_end_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
         custom_tooltip = {
             fail_text = tongxie_path_end_tt
             hidden_trigger = {
@@ -2967,7 +3089,7 @@ hsr_tongxie_path_end_effect = {
                     modifier = hsr_path_tongxie_end
                     days = -1
                 }
-                add_resource = { unity = -10000 }
+                add_resource = { unity = -1000 }
             }
         }
     }
@@ -2986,7 +3108,7 @@ hsr_path_tongxie_show_effect = {
 hsr_path_tongxie_level_up_effect = {
     allow = {
         custom_tooltip = hsr_path_tongxie_level_up_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 50000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
         custom_tooltip = {
             fail_text = tongxie_path_need_tt
             hidden_trigger = {
@@ -2998,6 +3120,7 @@ hsr_path_tongxie_level_up_effect = {
                 }
             }
         }
+        always = no
     }
     potential = {
         from = {
@@ -3011,7 +3134,7 @@ hsr_path_tongxie_level_up_effect = {
         hidden_effect = {
             from = {
                 set_country_flag = path_tongxie_level_up
-                add_resource = { unity = -50000 }
+                add_resource = { unity = -10000 }
             }
         }
     }
@@ -3057,7 +3180,7 @@ hsr_path_xunlie_name_effect = {
 hsr_path_xunlie_set_primary_effect = {
     allow = {
         custom_tooltip = hsr_path_xunlie_set_primary_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
         custom_tooltip = {
             fail_text = hsr_xunlie_primary_tt
             hidden_trigger = {
@@ -3121,7 +3244,7 @@ hsr_path_xunlie_set_primary_effect = {
                     which = path_primary_count
                     value = 1
                 }
-                add_resource = { unity = -10000 }
+                add_resource = { unity = -1000 }
             }
         }
     }
@@ -3129,13 +3252,13 @@ hsr_path_xunlie_set_primary_effect = {
 hsr_path_xunlie_set_secondary_effect = {
     allow = {
         custom_tooltip = hsr_path_xunlie_set_secondary_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 5000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
         custom_tooltip = {
-            fail_text = hsr_xunlie_secondary_tt
+            fail_text = hsr_xunlie_primary_tt
             hidden_trigger = {
                 from = {
                     not = {
-                        has_country_flag = hsr_xunlie_secondary
+                        has_country_flag = hsr_xunlie_primary
                     }
                 }
             }
@@ -3193,7 +3316,7 @@ hsr_path_xunlie_set_secondary_effect = {
                     which = path_secondary_count
                     value = 1
                 }
-                add_resource = { unity =-5000 }
+                add_resource = { unity =-1000 }
             }
         }
     }
@@ -3201,7 +3324,7 @@ hsr_path_xunlie_set_secondary_effect = {
 hsr_path_xunlie_reset_effect = {
     allow = {
         custom_tooltip = hsr_path_xunlie_reset_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
     }
     potential = {
         always = yes
@@ -3217,7 +3340,7 @@ hsr_path_xunlie_reset_effect = {
                     remove_country_flag = hsr_xunlie_secondary
                     change_variable = {
                         which = path_secondary_count
-                        value = 1
+                        value = -1
                     }
                 }
                 if = {
@@ -3227,10 +3350,10 @@ hsr_path_xunlie_reset_effect = {
                     remove_country_flag = hsr_xunlie_primary
                     change_variable = {
                         which = path_primary_count
-                        value = 1
+                        value = -1
                     }
                 }
-                add_resource = { unity = -10000 }
+                add_resource = { unity = -1000 }
             }
         }
     }
@@ -3238,7 +3361,7 @@ hsr_path_xunlie_reset_effect = {
 hsr_path_xunlie_up_effect = {
     allow = {
         custom_tooltip = hsr_path_xunlie_up_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 500 }}
         custom_tooltip = {
             fail_text = hsr_xunlie_xunlie_up_tt
             hidden_trigger = {
@@ -3262,7 +3385,7 @@ hsr_path_xunlie_up_effect = {
                     modifier = hsr_path_xunlie_up
                     years = 5
                 }
-                add_resource = { unity = -1000 }
+                add_resource = { unity = -500 }
             }
         }
     }
@@ -3270,7 +3393,7 @@ hsr_path_xunlie_up_effect = {
 hsr_path_xunlie_down_effect = {
     allow = {
         custom_tooltip = hsr_path_xunlie_down_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 500 }}
         custom_tooltip = {
             fail_text = hsr_xunlie_xunlie_up_tt
             hidden_trigger = {
@@ -3294,7 +3417,7 @@ hsr_path_xunlie_down_effect = {
                     modifier = hsr_path_xunlie_down
                     years = 5
                 }
-                add_resource = { unity = -1000 }
+                add_resource = { unity = -500 }
             }
         }
     }
@@ -3313,7 +3436,7 @@ hsr_path_xunlie_setting_effect = {
 hsr_xunlie_path_start_effect = {
     allow = {
         custom_tooltip = hsr_xunlie_path_start_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
         custom_tooltip = {
             fail_text = xunlie_path_start_tt
             hidden_trigger = {
@@ -3348,7 +3471,7 @@ hsr_xunlie_path_start_effect = {
             from = {
                 add_tradition = tr_xunlie
                 remove_modifier = hsr_path_xunlie_end
-                add_resource = { unity = -10000 }
+                add_resource = { unity = -1000 }
             }
         }
     }
@@ -3356,7 +3479,7 @@ hsr_xunlie_path_start_effect = {
 hsr_xunlie_path_end_effect = {
     allow = {
         custom_tooltip = hsr_xunlie_path_end_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
         custom_tooltip = {
             fail_text = xunlie_path_end_tt
             hidden_trigger = {
@@ -3390,7 +3513,7 @@ hsr_xunlie_path_end_effect = {
                     modifier = hsr_path_xunlie_end
                     days = -1
                 }
-                add_resource = { unity = -10000 }
+                add_resource = { unity = -1000 }
             }
         }
     }
@@ -3409,7 +3532,7 @@ hsr_path_xunlie_show_effect = {
 hsr_path_xunlie_level_up_effect = {
     allow = {
         custom_tooltip = hsr_path_xunlie_level_up_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 50000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
         custom_tooltip = {
             fail_text = xunlie_path_need_tt
             hidden_trigger = {
@@ -3421,6 +3544,7 @@ hsr_path_xunlie_level_up_effect = {
                 }
             }
         }
+        always = no
     }
     potential = {
         from = {
@@ -3434,7 +3558,7 @@ hsr_path_xunlie_level_up_effect = {
         hidden_effect = {
             from = {
                 set_country_flag = path_xunlie_level_up
-                add_resource = { unity = -50000 }
+                add_resource = { unity = -10000 }
             }
         }
     }
@@ -3480,7 +3604,7 @@ hsr_path_xuwu_name_effect = {
 hsr_path_xuwu_set_primary_effect = {
     allow = {
         custom_tooltip = hsr_path_xuwu_set_primary_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
         custom_tooltip = {
             fail_text = hsr_xuwu_primary_tt
             hidden_trigger = {
@@ -3544,7 +3668,7 @@ hsr_path_xuwu_set_primary_effect = {
                     which = path_primary_count
                     value = 1
                 }
-                add_resource = { unity = -10000 }
+                add_resource = { unity = -1000 }
             }
         }
     }
@@ -3552,13 +3676,13 @@ hsr_path_xuwu_set_primary_effect = {
 hsr_path_xuwu_set_secondary_effect = {
     allow = {
         custom_tooltip = hsr_path_xuwu_set_secondary_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 5000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
         custom_tooltip = {
-            fail_text = hsr_xuwu_secondary_tt
+            fail_text = hsr_xuwu_primary_tt
             hidden_trigger = {
                 from = {
                     not = {
-                        has_country_flag = hsr_xuwu_secondary
+                        has_country_flag = hsr_xuwu_primary
                     }
                 }
             }
@@ -3616,7 +3740,7 @@ hsr_path_xuwu_set_secondary_effect = {
                     which = path_secondary_count
                     value = 1
                 }
-                add_resource = { unity =-5000 }
+                add_resource = { unity =-1000 }
             }
         }
     }
@@ -3624,7 +3748,7 @@ hsr_path_xuwu_set_secondary_effect = {
 hsr_path_xuwu_reset_effect = {
     allow = {
         custom_tooltip = hsr_path_xuwu_reset_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
     }
     potential = {
         always = yes
@@ -3640,7 +3764,7 @@ hsr_path_xuwu_reset_effect = {
                     remove_country_flag = hsr_xuwu_secondary
                     change_variable = {
                         which = path_secondary_count
-                        value = 1
+                        value = -1
                     }
                 }
                 if = {
@@ -3650,10 +3774,10 @@ hsr_path_xuwu_reset_effect = {
                     remove_country_flag = hsr_xuwu_primary
                     change_variable = {
                         which = path_primary_count
-                        value = 1
+                        value = -1
                     }
                 }
-                add_resource = { unity = -10000 }
+                add_resource = { unity = -1000 }
             }
         }
     }
@@ -3661,7 +3785,7 @@ hsr_path_xuwu_reset_effect = {
 hsr_path_xuwu_up_effect = {
     allow = {
         custom_tooltip = hsr_path_xuwu_up_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 500 }}
         custom_tooltip = {
             fail_text = hsr_xuwu_xuwu_up_tt
             hidden_trigger = {
@@ -3685,7 +3809,7 @@ hsr_path_xuwu_up_effect = {
                     modifier = hsr_path_xuwu_up
                     years = 5
                 }
-                add_resource = { unity = -1000 }
+                add_resource = { unity = -500 }
             }
         }
     }
@@ -3693,7 +3817,7 @@ hsr_path_xuwu_up_effect = {
 hsr_path_xuwu_down_effect = {
     allow = {
         custom_tooltip = hsr_path_xuwu_down_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 500 }}
         custom_tooltip = {
             fail_text = hsr_xuwu_xuwu_up_tt
             hidden_trigger = {
@@ -3717,7 +3841,7 @@ hsr_path_xuwu_down_effect = {
                     modifier = hsr_path_xuwu_down
                     years = 5
                 }
-                add_resource = { unity = -1000 }
+                add_resource = { unity = -500 }
             }
         }
     }
@@ -3736,7 +3860,7 @@ hsr_path_xuwu_setting_effect = {
 hsr_xuwu_path_start_effect = {
     allow = {
         custom_tooltip = hsr_xuwu_path_start_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
         custom_tooltip = {
             fail_text = xuwu_path_start_tt
             hidden_trigger = {
@@ -3771,7 +3895,7 @@ hsr_xuwu_path_start_effect = {
             from = {
                 add_tradition = tr_xuwu
                 remove_modifier = hsr_path_xuwu_end
-                add_resource = { unity = -10000 }
+                add_resource = { unity = -1000 }
             }
         }
     }
@@ -3779,7 +3903,7 @@ hsr_xuwu_path_start_effect = {
 hsr_xuwu_path_end_effect = {
     allow = {
         custom_tooltip = hsr_xuwu_path_end_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
         custom_tooltip = {
             fail_text = xuwu_path_end_tt
             hidden_trigger = {
@@ -3813,7 +3937,7 @@ hsr_xuwu_path_end_effect = {
                     modifier = hsr_path_xuwu_end
                     days = -1
                 }
-                add_resource = { unity = -10000 }
+                add_resource = { unity = -1000 }
             }
         }
     }
@@ -3832,7 +3956,7 @@ hsr_path_xuwu_show_effect = {
 hsr_path_xuwu_level_up_effect = {
     allow = {
         custom_tooltip = hsr_path_xuwu_level_up_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 50000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
         custom_tooltip = {
             fail_text = xuwu_path_need_tt
             hidden_trigger = {
@@ -3844,6 +3968,7 @@ hsr_path_xuwu_level_up_effect = {
                 }
             }
         }
+        always = no
     }
     potential = {
         from = {
@@ -3857,7 +3982,7 @@ hsr_path_xuwu_level_up_effect = {
         hidden_effect = {
             from = {
                 set_country_flag = path_xuwu_level_up
-                add_resource = { unity = -50000 }
+                add_resource = { unity = -10000 }
             }
         }
     }
@@ -3903,7 +4028,7 @@ hsr_path_zhishi_name_effect = {
 hsr_path_zhishi_set_primary_effect = {
     allow = {
         custom_tooltip = hsr_path_zhishi_set_primary_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
         custom_tooltip = {
             fail_text = hsr_zhishi_primary_tt
             hidden_trigger = {
@@ -3967,7 +4092,7 @@ hsr_path_zhishi_set_primary_effect = {
                     which = path_primary_count
                     value = 1
                 }
-                add_resource = { unity = -10000 }
+                add_resource = { unity = -1000 }
             }
         }
     }
@@ -3975,13 +4100,13 @@ hsr_path_zhishi_set_primary_effect = {
 hsr_path_zhishi_set_secondary_effect = {
     allow = {
         custom_tooltip = hsr_path_zhishi_set_secondary_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 5000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
         custom_tooltip = {
-            fail_text = hsr_zhishi_secondary_tt
+            fail_text = hsr_zhishi_primary_tt
             hidden_trigger = {
                 from = {
                     not = {
-                        has_country_flag = hsr_zhishi_secondary
+                        has_country_flag = hsr_zhishi_primary
                     }
                 }
             }
@@ -4039,7 +4164,7 @@ hsr_path_zhishi_set_secondary_effect = {
                     which = path_secondary_count
                     value = 1
                 }
-                add_resource = { unity =-5000 }
+                add_resource = { unity =-1000 }
             }
         }
     }
@@ -4047,7 +4172,7 @@ hsr_path_zhishi_set_secondary_effect = {
 hsr_path_zhishi_reset_effect = {
     allow = {
         custom_tooltip = hsr_path_zhishi_reset_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
     }
     potential = {
         always = yes
@@ -4063,7 +4188,7 @@ hsr_path_zhishi_reset_effect = {
                     remove_country_flag = hsr_zhishi_secondary
                     change_variable = {
                         which = path_secondary_count
-                        value = 1
+                        value = -1
                     }
                 }
                 if = {
@@ -4073,10 +4198,10 @@ hsr_path_zhishi_reset_effect = {
                     remove_country_flag = hsr_zhishi_primary
                     change_variable = {
                         which = path_primary_count
-                        value = 1
+                        value = -1
                     }
                 }
-                add_resource = { unity = -10000 }
+                add_resource = { unity = -1000 }
             }
         }
     }
@@ -4084,7 +4209,7 @@ hsr_path_zhishi_reset_effect = {
 hsr_path_zhishi_up_effect = {
     allow = {
         custom_tooltip = hsr_path_zhishi_up_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 500 }}
         custom_tooltip = {
             fail_text = hsr_zhishi_zhishi_up_tt
             hidden_trigger = {
@@ -4108,7 +4233,7 @@ hsr_path_zhishi_up_effect = {
                     modifier = hsr_path_zhishi_up
                     years = 5
                 }
-                add_resource = { unity = -1000 }
+                add_resource = { unity = -500 }
             }
         }
     }
@@ -4116,7 +4241,7 @@ hsr_path_zhishi_up_effect = {
 hsr_path_zhishi_down_effect = {
     allow = {
         custom_tooltip = hsr_path_zhishi_down_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 500 }}
         custom_tooltip = {
             fail_text = hsr_zhishi_zhishi_up_tt
             hidden_trigger = {
@@ -4140,7 +4265,7 @@ hsr_path_zhishi_down_effect = {
                     modifier = hsr_path_zhishi_down
                     years = 5
                 }
-                add_resource = { unity = -1000 }
+                add_resource = { unity = -500 }
             }
         }
     }
@@ -4159,7 +4284,7 @@ hsr_path_zhishi_setting_effect = {
 hsr_zhishi_path_start_effect = {
     allow = {
         custom_tooltip = hsr_zhishi_path_start_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
         custom_tooltip = {
             fail_text = zhishi_path_start_tt
             hidden_trigger = {
@@ -4194,7 +4319,7 @@ hsr_zhishi_path_start_effect = {
             from = {
                 add_tradition = tr_zhishi
                 remove_modifier = hsr_path_zhishi_end
-                add_resource = { unity = -10000 }
+                add_resource = { unity = -1000 }
             }
         }
     }
@@ -4202,7 +4327,7 @@ hsr_zhishi_path_start_effect = {
 hsr_zhishi_path_end_effect = {
     allow = {
         custom_tooltip = hsr_zhishi_path_end_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 1000 }}
         custom_tooltip = {
             fail_text = zhishi_path_end_tt
             hidden_trigger = {
@@ -4236,7 +4361,7 @@ hsr_zhishi_path_end_effect = {
                     modifier = hsr_path_zhishi_end
                     days = -1
                 }
-                add_resource = { unity = -10000 }
+                add_resource = { unity = -1000 }
             }
         }
     }
@@ -4255,7 +4380,7 @@ hsr_path_zhishi_show_effect = {
 hsr_path_zhishi_level_up_effect = {
     allow = {
         custom_tooltip = hsr_path_zhishi_level_up_effect
-        from = {resource_stockpile_compare = { resource = unity value >= 50000 }}
+        from = {resource_stockpile_compare = { resource = unity value >= 10000 }}
         custom_tooltip = {
             fail_text = zhishi_path_need_tt
             hidden_trigger = {
@@ -4267,6 +4392,7 @@ hsr_path_zhishi_level_up_effect = {
                 }
             }
         }
+        always = no
     }
     potential = {
         from = {
@@ -4280,7 +4406,7 @@ hsr_path_zhishi_level_up_effect = {
         hidden_effect = {
             from = {
                 set_country_flag = path_zhishi_level_up
-                add_resource = { unity = -50000 }
+                add_resource = { unity = -10000 }
             }
         }
     }
@@ -4310,4 +4436,262 @@ hsr_path_zhishi_start_level_up_effect = {
             }
         }
     }
+}
+#命途理念
+hsr_star_path_civic_1_set_effect = {
+    allow = {
+        custom_tooltip = {
+            fail_text = you_have_selected
+            hidden_trigger = {
+                from = {
+                    not = {
+                        has_country_flag = hsr_star_path_civic_1_set
+                    }
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = need_tech_path_civic_1_tt
+            hidden_trigger = {
+                from = {
+                    has_technology = tech_path_civic_1
+                }
+            }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                set_country_flag = hsr_star_path_civic_1_set
+                remove_country_flag = hsr_star_path_civic_2_set
+                remove_country_flag = hsr_star_path_civic_3_set
+                remove_country_flag = hsr_star_path_civic_4_set
+                remove_country_flag = hsr_star_path_civic_5_set
+            }
+        }
+    }
+}
+hsr_star_path_civic_2_set_effect = {
+    allow = {
+        custom_tooltip = {
+            fail_text = you_have_selected
+            hidden_trigger = {
+                from = {
+                    not = {
+                        has_country_flag = hsr_star_path_civic_2_set
+                    }
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = need_tech_path_civic_2_tt
+            hidden_trigger = {
+                from = {
+                    has_technology = tech_path_civic_2
+                }
+            }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                set_country_flag = hsr_star_path_civic_2_set
+                remove_country_flag = hsr_star_path_civic_1_set
+                remove_country_flag = hsr_star_path_civic_3_set
+                remove_country_flag = hsr_star_path_civic_4_set
+                remove_country_flag = hsr_star_path_civic_5_set
+            }
+        }
+    }
+}
+hsr_star_path_civic_3_set_effect = {
+    allow = {
+        custom_tooltip = {
+            fail_text = you_have_selected
+            hidden_trigger = {
+                from = {
+                    not = {
+                        has_country_flag = hsr_star_path_civic_3_set
+                    }
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = need_tech_path_civic_4_tt
+            hidden_trigger = {
+                from = {
+                    has_technology = tech_path_civic_4
+                }
+            }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                set_country_flag = hsr_star_path_civic_3_set
+                remove_country_flag = hsr_star_path_civic_2_set
+                remove_country_flag = hsr_star_path_civic_1_set
+                remove_country_flag = hsr_star_path_civic_4_set
+                remove_country_flag = hsr_star_path_civic_5_set
+            }
+        }
+    }
+}
+hsr_star_path_civic_4_set_effect = {
+    allow = {
+        custom_tooltip = {
+            fail_text = you_have_selected
+            hidden_trigger = {
+                from = {
+                    not = {
+                        has_country_flag = hsr_star_path_civic_4_set
+                    }
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = need_tech_path_civic_4_tt
+            hidden_trigger = {
+                from = {
+                    has_technology = tech_path_civic_4
+                }
+            }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                set_country_flag = hsr_star_path_civic_4_set
+                remove_country_flag = hsr_star_path_civic_2_set
+                remove_country_flag = hsr_star_path_civic_3_set
+                remove_country_flag = hsr_star_path_civic_1_set
+                remove_country_flag = hsr_star_path_civic_5_set
+            }
+        }
+    }
+}
+hsr_star_path_civic_5_set_effect = {
+    allow = {
+        custom_tooltip = {
+            fail_text = you_have_selected
+            hidden_trigger = {
+                from = {
+                    not = {
+                        has_country_flag = hsr_star_path_civic_5_set
+                    }
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = need_tech_path_civic_5_tt
+            hidden_trigger = {
+                from = {
+                    has_technology = tech_path_civic_5
+                }
+            }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                set_country_flag = hsr_star_path_civic_5_set
+                remove_country_flag = hsr_star_path_civic_2_set
+                remove_country_flag = hsr_star_path_civic_3_set
+                remove_country_flag = hsr_star_path_civic_4_set
+                remove_country_flag = hsr_star_path_civic_1_set
+            }
+        }
+    }
+}
+inline_script = {
+    script = button_effect/hsr_civic_path
+    civic_name = tr_cunhu_fengrao_1
+    primary = cunhu
+    secondary = fengrao
+    value = 1
+}
+inline_script = {
+    script = button_effect/hsr_civic_path
+    civic_name = tr_cunhu_huanyu_1
+    primary = cunhu
+    secondary = huanyu
+    value = 2
+}
+inline_script = {
+    script = button_effect/hsr_civic_path
+    civic_name = tr_cunhu_huimie_1
+    primary = cunhu
+    secondary = huimie
+    value = 3
+}
+inline_script = {
+    script = button_effect/hsr_civic_path
+    civic_name = tr_cunhu_jiyi_1
+    primary = cunhu
+    secondary = jiyi
+    value = 4
+}
+inline_script = {
+    script = button_effect/hsr_civic_path
+    civic_name = tr_cunhu_xuwu_1
+    primary = cunhu
+    secondary = xuwu
+    value = 5
+}
+inline_script = {
+    script = button_effect/hsr_civic_path
+    civic_name = tr_xunlie_fanyu_1
+    primary = xunlie
+    secondary = fanyu
+    value = 6
+}
+inline_script = {
+    script = button_effect/hsr_civic_path
+    civic_name = tr_xunlie_zhishi_1
+    primary = xunlie
+    secondary = zhishi
+    value = 7
+}
+inline_script = {
+    script = button_effect/hsr_civic_path
+    civic_name = tr_xunlie_cunhu_1
+    primary = xunlie
+    secondary = cunhu
+    value = 8
+}
+inline_script = {
+    script = button_effect/hsr_civic_path
+    civic_name = tr_xunlie_jiyi_1
+    primary = xunlie
+    secondary = jiyi
+    value = 9
+}
+inline_script = {
+    script = button_effect/hsr_civic_path
+    civic_name = tr_xunlie_fengrao_1
+    primary = xunlie
+    secondary = fengrao
+    value = 10
+}
+inline_script = {
+    script = button_effect/hsr_civic_path
+    civic_name = tr_zhishi_jiyi_1
+    primary = zhishi
+    secondary = jiyi
+    value = 11
 }

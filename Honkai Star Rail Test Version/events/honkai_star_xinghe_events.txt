@@ -139,7 +139,7 @@ event = {
                                     graphical_culture = "extra_dimensional_01"
                                 }
                                 while = {
-                                    count = 5
+                                    count = 3
                                     create_ship = {
                                         name = random
                                         design = "NAME_Revenant"
@@ -155,7 +155,7 @@ event = {
                                     }
                                 }
                                 while = {
-                                    count = 5
+                                    count = 3
                                     create_ship = {
                                         name = random
                                         design = "NAME_Wraith"
@@ -201,6 +201,48 @@ planet_event = {
         }
     }
 }
+country_event = {
+    id = xinghe.4
+    hide_window = yes
+    is_triggered_only = yes
+    trigger = {
+        is_ai = no
+    }
+    immediate = {
+        every_planet_within_border = {
+            if = {
+                limit = {
+                    is_planet_class = pc_shielded_red
+                }
+                enable_special_project = {
+                    name = pc_shielded_red
+                    location = This
+                    owner = Root
+                }
+            }
+            if = {
+                limit = {
+                    is_planet_class = pc_shielded_white
+                }
+                enable_special_project = {
+                    name = pc_shielded_white
+                    location = This
+                    owner = Root
+                }
+            }
+            if = {
+                limit = {
+                    is_planet_class = pc_shielded_yellow
+                }
+                enable_special_project = {
+                    name = pc_shielded_yellow
+                    location = This
+                    owner = Root
+                }
+            }
+        }
+    }
+}
 ship_event = {
     id = xinghe.10
     hide_window = yes
@@ -237,23 +279,23 @@ ship_event = {
         random_list = {
             1 = {
                 modifier = {
-                    factor = 50
+                    factor = 25
                     fromfrom = {has_global_flag = allow_change_pc_shield_stage5}#极大量
                 }
                 modifier = {
-                    factor = 75
+                    factor = 37.5
                     fromfrom = {has_global_flag = allow_change_pc_shield_stage4}
                 }
                 modifier = {
-                    factor = 100
+                    factor = 58
                     fromfrom = {has_global_flag = allow_change_pc_shield_stage3}
                 }
                 modifier = {
-                    factor = 125
+                    factor = 100
                     fromfrom = {has_global_flag = allow_change_pc_shield_stage2}
                 }
                 modifier = {
-                    factor = 150
+                    factor = 225
                     fromfrom = {has_global_flag = allow_change_pc_shield_stage1}#极少量
                 }
             }
@@ -325,6 +367,11 @@ country_event = {
     option = {
         name = xinghe.11.a
         add_research_option = tech_seal_star_core
+        #add_relic = r_ev_fleet_bingyangzhang
+        begin_event_chain = {
+            event_chain = xinghe_test_chain
+            target = this
+        }
     }
 }
 #星球事件
@@ -926,6 +973,1154 @@ country_event = {
     }
 }
 ###事件，裂界，用模拟宇宙事件（这部分暂时只有mod国家可以触发）##xinghe.200-1000
+planet_event = {
+    id = xinghe.199
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = {
+        This.solar_system.starbase.owner = {
+            random_list = {
+                1 = {country_event = { id = xinghe.200 }}
+                1 = {country_event = { id = xinghe.201 }}
+                1 = {country_event = { id = xinghe.202 }}
+                1 = {country_event = { id = xinghe.203 }}
+                1 = {country_event = { id = xinghe.204 }}
+                1 = {country_event = { id = xinghe.205 }}
+                1 = {country_event = { id = xinghe.206 }}
+                1 = {country_event = { id = xinghe.207 }}
+                1 = {country_event = { id = xinghe.208 }}
+                1 = {country_event = { id = xinghe.209 }}
+                1 = {country_event = { id = xinghe.210 }}
+                1 = {country_event = { id = xinghe.211 }}
+                1 = {country_event = { id = xinghe.212 }}
+                1 = {country_event = { id = xinghe.213 }}
+                1 = {country_event = { id = xinghe.214 }}
+            }
+        }
+        xinghe_remove_effect = yes
+        change_pc = rl_unhabitable_planets
+
+    }
+}
+country_event = {
+    id = xinghe.200
+    title = xinghe.200_title
+    desc = xinghe.200_desc
+    picture = GFX_evt_three_pig
+    is_triggered_only = yes
+    location = root
+    immediate = {
+
+    }
+    option = {
+        name = xinghe.200.a
+        custom_tooltip = xinghe.200.a.tt
+        xinghe_reward = yes
+        hidden_effect = {
+            change_variable = {
+                which = country_path_cunhu
+                value = 5
+            }
+        }
+    }
+    option = {
+        name = xinghe.200.b
+        custom_tooltip = xinghe.200.b.tt
+        xinghe_reward = yes
+        hidden_effect = {
+            change_variable = {
+                which = country_path_xunlie
+                value = 5
+            }
+        }
+    }
+    option = {
+        name = xinghe.200.c
+        custom_tooltip = xinghe.200.c.tt
+        xinghe_reward = yes
+        hidden_effect = {
+            while = {
+                count = 3
+                random_list = {
+                    1 = {change_variable = { which = country_path_cunhu value = 2 }}
+                    1 = {change_variable = { which = country_path_fanyu value = 2 }}
+                    1 = {change_variable = { which = country_path_fengrao value = 2 }}
+                    1 = {change_variable = { which = country_path_huanyu value = 2 }}
+                    1 = {change_variable = { which = country_path_huimie value = 2 }}
+                    1 = {change_variable = { which = country_path_jiyi value = 2 }}
+                    1 = {change_variable = { which = country_path_tongxie value = 2 }}
+                    1 = {change_variable = { which = country_path_xunlie value = 2 }}
+                    1 = {change_variable = { which = country_path_xuwu value = 2 }}
+                    1 = {change_variable = { which = country_path_zhishi value = 2 }}
+                }
+            }
+        }
+    }
+    option = {
+        name = xinghe.200.d
+        custom_tooltip = xinghe.200.d.tt
+        xinghe_reward = yes
+    }
+}
+country_event = {
+    id = xinghe.201
+    title = xinghe.201_title
+    desc = xinghe.201_desc
+    picture = GFX_evt_hsr_null
+    is_triggered_only = yes
+    location = root
+    immediate = {
+
+    }
+    option = {
+        name = xinghe.201.a
+        xinghe_reward = yes
+        add_resource = { energy = -5000 }
+    }
+    option = {
+        name = xinghe.201.b
+    }
+    option = {
+        name = xinghe.201.c
+        trigger = { has_tradition = tr_zhishi }
+        custom_tooltip = xinghe.201.c.tt
+        xinghe_reward = yes
+        add_resource = { energy = -5000 }
+        hidden_effect = {
+            while = {
+                count = 2
+                random_list = {
+                    1 = {change_variable = { which = country_path_cunhu value = 1 }}
+                    1 = {change_variable = { which = country_path_fanyu value = 1 }}
+                    1 = {change_variable = { which = country_path_fengrao value = 1 }}
+                    1 = {change_variable = { which = country_path_huanyu value = 1 }}
+                    1 = {change_variable = { which = country_path_huimie value = 1 }}
+                    1 = {change_variable = { which = country_path_jiyi value = 1 }}
+                    1 = {change_variable = { which = country_path_tongxie value = 1 }}
+                    1 = {change_variable = { which = country_path_xunlie value = 1 }}
+                    1 = {change_variable = { which = country_path_xuwu value = 1 }}
+                    1 = {change_variable = { which = country_path_zhishi value = 1 }}
+                }
+            }
+        }
+    }
+}
+country_event = {
+    id = xinghe.202
+    title = xinghe.202_title
+    desc = xinghe.202_desc
+    picture = GFX_evt_hsr_null
+    is_triggered_only = yes
+    location = root
+    immediate = {
+
+    }
+    option = {
+        name = xinghe.202.a
+        custom_tooltip = xinghe.202.a.tt
+        xinghe_reward = yes
+        hidden_effect = {
+            random_list = {
+                1 = {change_variable = { which = country_path_cunhu value = 2 }}
+                1 = {change_variable = { which = country_path_fanyu value = 2 }}
+                1 = {change_variable = { which = country_path_fengrao value = 2 }}
+                1 = {change_variable = { which = country_path_huanyu value = 2 }}
+                1 = {change_variable = { which = country_path_huimie value = 2 }}
+                1 = {change_variable = { which = country_path_jiyi value = 2 }}
+                1 = {change_variable = { which = country_path_tongxie value = 2 }}
+                1 = {change_variable = { which = country_path_xunlie value = 2 }}
+                1 = {change_variable = { which = country_path_xuwu value = 2 }}
+                1 = {change_variable = { which = country_path_zhishi value = 2 }}
+            }
+        }
+    }
+    option = {
+        name = xinghe.202.b
+        custom_tooltip = xinghe.202.b.tt
+        xinghe_reward = yes
+        hidden_effect = {
+            change_variable = {
+                which = yuzhousuipian
+                value = 100
+            }
+        }
+    }
+    option = {
+        name = xinghe.202.c
+        trigger = { has_tradition = tr_fengrao }
+        custom_tooltip = xinghe.202.c.tt
+        xinghe_reward = yes
+        add_resource = { energy = -1000 }
+        hidden_effect = {
+            change_variable = { which = country_path_fengrao value = 4 }
+        }
+    }
+    option = {
+        name = xinghe.202.d
+        trigger = { has_tradition = tr_cunhu }
+        custom_tooltip = xinghe.202.d.tt
+        xinghe_reward = yes
+        hidden_effect = {
+            curiosity_get_effect = { KEY_NAME = hundunlinyao KEY_ORIGIN = simulated_universe  VALUE = 100}
+            change_variable = {
+                which = yuzhousuipian
+                value = 100
+            }
+        }
+    }
+}
+country_event = {
+    id = xinghe.203
+    title = xinghe.203_title
+    desc = xinghe.203_desc
+    picture = GFX_evt_hsr_null
+    is_triggered_only = yes
+    location = root
+    immediate = {
+
+    }
+    option = {
+        name = xinghe.203.a
+        custom_tooltip = xinghe.203.a.tt
+        xinghe_reward = yes
+        hidden_effect = {
+            change_variable = {
+                which = yuzhousuipian
+                value = 150
+            }
+        }
+    }
+    option = {
+        name = xinghe.203.b
+        custom_tooltip = xinghe.203.b.tt
+        xinghe_reward = yes
+        hidden_effect = {
+            random_list = {
+                1 = {change_variable = { which = country_path_cunhu value = 3 }}
+                1 = {change_variable = { which = country_path_fanyu value = 3 }}
+                1 = {change_variable = { which = country_path_fengrao value = 3 }}
+                1 = {change_variable = { which = country_path_huanyu value = 3 }}
+                1 = {change_variable = { which = country_path_huimie value = 3 }}
+                1 = {change_variable = { which = country_path_jiyi value = 3 }}
+                1 = {change_variable = { which = country_path_tongxie value = 3 }}
+                1 = {change_variable = { which = country_path_xunlie value = 3 }}
+                1 = {change_variable = { which = country_path_xuwu value = 3 }}
+                1 = {change_variable = { which = country_path_zhishi value = 3 }}
+            }
+        }
+
+    }
+    option = {
+        name = xinghe.203.c
+        trigger = { has_tradition = tr_fengrao }
+        xinghe_reward = yes
+    }
+}
+country_event = {
+    id = xinghe.204
+    title = xinghe.204_title
+    desc = xinghe.204_desc
+    picture = GFX_evt_hsr_null
+    is_triggered_only = yes
+    location = root
+    immediate = {
+
+    }
+    option = {
+        name = xinghe.204.a
+        custom_tooltip = xinghe.204.a.tt
+        xinghe_reward = yes
+        hidden_effect = {
+            while = {
+                count = 2
+                random_list = {
+                    1 = {change_variable = { which = country_path_cunhu value = 1 }}
+                    1 = {change_variable = { which = country_path_fanyu value = 1 }}
+                    1 = {change_variable = { which = country_path_fengrao value = 1 }}
+                    1 = {change_variable = { which = country_path_huanyu value = 1 }}
+                    1 = {change_variable = { which = country_path_huimie value = 1 }}
+                    1 = {change_variable = { which = country_path_jiyi value = 1 }}
+                    1 = {change_variable = { which = country_path_tongxie value = 1 }}
+                    1 = {change_variable = { which = country_path_xunlie value = 1 }}
+                    1 = {change_variable = { which = country_path_xuwu value = 1 }}
+                    1 = {change_variable = { which = country_path_zhishi value = 1 }}
+                }
+            }
+        }
+    }
+    option = {
+        name = xinghe.204.b
+        custom_tooltip = xinghe.204.b.tt
+        xinghe_reward = yes
+        hidden_effect = {
+            while = {
+                count = 1
+                random_list = {
+                    1 = {change_variable = { which = country_path_cunhu value = 2 }}
+                    1 = {change_variable = { which = country_path_fanyu value = 2 }}
+                    1 = {change_variable = { which = country_path_fengrao value = 2 }}
+                    1 = {change_variable = { which = country_path_huanyu value = 2 }}
+                    1 = {change_variable = { which = country_path_huimie value = 2 }}
+                    1 = {change_variable = { which = country_path_jiyi value = 2 }}
+                    1 = {change_variable = { which = country_path_tongxie value = 2 }}
+                    1 = {change_variable = { which = country_path_xunlie value = 2 }}
+                    1 = {change_variable = { which = country_path_xuwu value = 2 }}
+                    1 = {change_variable = { which = country_path_zhishi value = 2 }}
+                }
+            }
+        }
+    }
+    option = {
+        name = xinghe.204.c
+        trigger = {
+            has_tradition = tr_cunhu
+        }
+        custom_tooltip = xinghe.204.c.tt
+        xinghe_reward = yes
+        hidden_effect = {
+            change_variable = { which = country_path_cunhu value = 3 }
+        }
+    }
+    option = {
+        name = xinghe.204.d
+        trigger = {
+            has_tradition = tr_huimie
+        }
+        custom_tooltip = xinghe.204.d.tt
+        xinghe_reward = yes
+        hidden_effect = {
+            change_variable = { which = country_path_huimie value = 3 }
+        }
+    }
+}
+country_event = {
+    id = xinghe.205
+    title = xinghe.205_title
+    desc = xinghe.205_desc
+    picture = GFX_evt_hsr_null
+    is_triggered_only = yes
+    location = root
+    immediate = {
+
+    }
+    option = {
+        name = xinghe.205.a
+        custom_tooltip = xinghe.205.a.tt
+        xinghe_reward = yes
+        hidden_effect = {
+            random_common_curiosity_get = yes
+            while = {
+                count = 1
+                random_list = {
+                    1 = {change_variable = { which = country_path_cunhu value = -1 }}
+                    1 = {change_variable = { which = country_path_fanyu value = -1 }}
+                    1 = {change_variable = { which = country_path_fengrao value = -1 }}
+                    1 = {change_variable = { which = country_path_huanyu value = -1 }}
+                    1 = {change_variable = { which = country_path_huimie value = -1 }}
+                    1 = {change_variable = { which = country_path_jiyi value = -1 }}
+                    1 = {change_variable = { which = country_path_tongxie value = -1 }}
+                    1 = {change_variable = { which = country_path_xunlie value = -1 }}
+                    1 = {change_variable = { which = country_path_xuwu value = -1 }}
+                    1 = {change_variable = { which = country_path_zhishi value = -1 }}
+                }
+            }
+        }
+    }
+    option = {
+        name = xinghe.205.b
+        xinghe_reward = yes
+    }
+    option = {
+        name = xinghe.205.c
+        trigger = {
+            has_tradition = tr_huanyu
+        }
+        custom_tooltip = xinghe.205.c.tt
+        xinghe_reward = yes
+        hidden_effect = {
+            while = {
+                count = 2
+                random_common_curiosity_get = yes
+                random_list = {
+                    1 = {change_variable = { which = country_path_cunhu value = -1 }}
+                    1 = {change_variable = { which = country_path_fanyu value = -1 }}
+                    1 = {change_variable = { which = country_path_fengrao value = -1 }}
+                    1 = {change_variable = { which = country_path_huanyu value = -1 }}
+                    1 = {change_variable = { which = country_path_huimie value = -1 }}
+                    1 = {change_variable = { which = country_path_jiyi value = -1 }}
+                    1 = {change_variable = { which = country_path_tongxie value = -1 }}
+                    1 = {change_variable = { which = country_path_xunlie value = -1 }}
+                    1 = {change_variable = { which = country_path_xuwu value = -1 }}
+                    1 = {change_variable = { which = country_path_zhishi value = -1 }}
+                }
+            }
+        }
+    }
+    option = {
+        name = xinghe.205.d
+        trigger = {
+            has_tradition = tr_jiyi
+        }
+        custom_tooltip = xinghe.205.d.tt
+        xinghe_reward = yes
+        hidden_effect = {
+            random_common_curiosity_get = yes
+        }
+    }
+}
+country_event = {
+    id = xinghe.206
+    title = xinghe.206_title
+    desc = xinghe.206_desc
+    picture = GFX_evt_hsr_null
+    is_triggered_only = yes
+    location = root
+    immediate = {
+
+    }
+    option = {
+        name = xinghe.206.a
+        custom_tooltip = xinghe.206.a.tt
+        xinghe_reward = yes
+        hidden_effect = {
+            change_variable = {
+                which = yuzhousuipian
+                value = -150
+            }
+            while = {
+                count = 1
+                random_list = {
+                    1 = {change_variable = { which = country_path_cunhu value = 4 }}
+                    1 = {change_variable = { which = country_path_fanyu value = 4 }}
+                    1 = {change_variable = { which = country_path_fengrao value = 4 }}
+                    1 = {change_variable = { which = country_path_huanyu value = 4 }}
+                    1 = {change_variable = { which = country_path_huimie value = 4 }}
+                    1 = {change_variable = { which = country_path_jiyi value = 4 }}
+                    1 = {change_variable = { which = country_path_tongxie value = 4 }}
+                    1 = {change_variable = { which = country_path_xunlie value = 4 }}
+                    1 = {change_variable = { which = country_path_xuwu value = 4 }}
+                    1 = {change_variable = { which = country_path_zhishi value = 4 }}
+                }
+            }
+        }
+    }
+    option = {
+        name = xinghe.206.b
+        custom_tooltip = xinghe.206.b.tt
+        xinghe_reward = yes
+        hidden_effect = {
+            change_variable = {
+                which = yuzhousuipian
+                value = 100
+            }
+        }
+    }
+    option = {
+        name = xinghe.206.c
+        trigger = {
+            has_tradition = tr_xunlie
+        }
+        custom_tooltip = xinghe.206.c.tt
+        xinghe_reward = yes
+        hidden_effect = {
+            change_variable = { which = country_path_xunlie value = 4 }
+        }
+    }
+    option = {
+        name = xinghe.206.d
+        trigger = {
+            has_tradition = tr_zhishi
+        }
+        custom_tooltip = xinghe.206.d.tt
+        xinghe_reward = yes
+        hidden_effect = {
+            change_variable = {
+                which = yuzhousuipian
+                value = -150
+            }
+            while = {
+                count = 3
+                random_list = {
+                    1 = {change_variable = { which = country_path_cunhu value = 1 }}
+                    1 = {change_variable = { which = country_path_fanyu value = 1 }}
+                    1 = {change_variable = { which = country_path_fengrao value = 1 }}
+                    1 = {change_variable = { which = country_path_huanyu value = 1 }}
+                    1 = {change_variable = { which = country_path_huimie value = 1 }}
+                    1 = {change_variable = { which = country_path_jiyi value = 1 }}
+                    1 = {change_variable = { which = country_path_tongxie value = 1 }}
+                    1 = {change_variable = { which = country_path_xunlie value = 1 }}
+                    1 = {change_variable = { which = country_path_xuwu value = 1 }}
+                    1 = {change_variable = { which = country_path_zhishi value = 1 }}
+                }
+            }
+        }
+    }
+}
+country_event = {
+    id = xinghe.207
+    title = xinghe.207_title
+    desc = xinghe.207_desc
+    picture = GFX_evt_hsr_null
+    is_triggered_only = yes
+    location = root
+    immediate = {
+
+    }
+    option = {
+        name = xinghe.207.a
+        custom_tooltip = xinghe.207.a.tt
+        xinghe_reward = yes
+        hidden_effect = {
+            change_variable = { which = country_path_huanyu value = 4 }
+        }
+    }
+    option = {
+        name = xinghe.207.b
+        custom_tooltip = xinghe.207.b.tt
+        xinghe_reward = yes
+        hidden_effect = {
+            change_variable = { which = country_path_xunlie value = 4 }
+        }
+    }
+    option = {
+        name = xinghe.207.c
+        xinghe_reward = yes
+    }
+    option = {
+        name = xinghe.207.d
+        trigger = {
+            has_tradition = tr_xunlie
+        }
+        custom_tooltip = xinghe.207.d.tt
+        xinghe_reward = yes
+        hidden_effect = {
+            change_variable = { which = country_path_xunlie value = 6 }
+        }
+    }
+    option = {
+        name = xinghe.207.e
+        trigger = {
+            has_tradition = tr_fengrao
+        }
+        custom_tooltip = xinghe.207.e.tt
+        xinghe_reward = yes
+        hidden_effect = {
+            change_variable = { which = country_path_fengrao value = 6 }
+        }
+    }
+    option = {
+        name = xinghe.207.f
+        trigger = {
+            has_tradition = tr_zhishi
+        }
+        custom_tooltip = xinghe.207.f.tt
+        xinghe_reward = yes
+        hidden_effect = {
+            change_variable = { which = country_path_zhishi value = 6 }
+        }
+    }
+}
+country_event = {
+    id = xinghe.208
+    title = xinghe.208_title
+    desc = xinghe.208_desc
+    picture = GFX_evt_hsr_null
+    is_triggered_only = yes
+    location = root
+    immediate = {
+
+    }
+    option = {
+        name = xinghe.208.a
+        custom_tooltip = xinghe.208.a.tt
+        xinghe_reward = yes
+        hidden_effect = {
+            change_variable = {
+                which = yuzhousuipian
+                value = 300
+            }
+            while = {
+                count = 1
+                random_list = {
+                    1 = {change_variable = { which = country_path_cunhu value = -3 }}
+                    1 = {change_variable = { which = country_path_fanyu value = -3 }}
+                    1 = {change_variable = { which = country_path_fengrao value = -3 }}
+                    1 = {change_variable = { which = country_path_huanyu value = -3 }}
+                    1 = {change_variable = { which = country_path_huimie value = -3 }}
+                    1 = {change_variable = { which = country_path_jiyi value = -3 }}
+                    1 = {change_variable = { which = country_path_tongxie value = -3 }}
+                    1 = {change_variable = { which = country_path_xunlie value = -3 }}
+                    1 = {change_variable = { which = country_path_xuwu value = -3 }}
+                    1 = {change_variable = { which = country_path_zhishi value = -3 }}
+                }
+            }
+        }
+    }
+    option = {
+        name = xinghe.208.b
+        custom_tooltip = xinghe.208.b.tt
+        xinghe_reward = yes
+        hidden_effect = {
+            change_variable = {
+                which = yuzhousuipian
+                value = 100
+            }
+        }
+    }
+    option = {
+        name = xinghe.208.c
+        trigger = {
+            has_tradition = tr_fengrao
+        }
+        custom_tooltip = xinghe.208.c.tt
+        xinghe_reward = yes
+        hidden_effect = {
+            change_variable = {
+                which = yuzhousuipian
+                value = 500
+            }
+            while = {
+                count = 2
+                random_list = {
+                    1 = {change_variable = { which = country_path_cunhu value = -3 }}
+                    1 = {change_variable = { which = country_path_fanyu value = -3 }}
+                    1 = {change_variable = { which = country_path_fengrao value = -3 }}
+                    1 = {change_variable = { which = country_path_huanyu value = -3 }}
+                    1 = {change_variable = { which = country_path_huimie value = -3 }}
+                    1 = {change_variable = { which = country_path_jiyi value = -3 }}
+                    1 = {change_variable = { which = country_path_tongxie value = -3 }}
+                    1 = {change_variable = { which = country_path_xunlie value = -3 }}
+                    1 = {change_variable = { which = country_path_xuwu value = -3 }}
+                    1 = {change_variable = { which = country_path_zhishi value = -3 }}
+                }
+            }
+        }
+    }
+    option = {
+        name = xinghe.208.d
+        trigger = {
+            has_tradition = tr_xuwu
+        }
+        custom_tooltip = xinghe.208.d.tt
+        xinghe_reward = yes
+        hidden_effect = {
+            change_variable = { which = country_path_xuwu value = 3 }
+        }
+    }
+    option = {
+        name = xinghe.208.e
+        trigger = {
+            has_tradition = tr_zhishi
+        }
+        custom_tooltip = xinghe.208.e.tt
+        xinghe_reward = yes
+        hidden_effect = {
+            change_variable = {
+                which = yuzhousuipian
+                value = 400
+            }
+            while = {
+                count = 1
+                random_list = {
+                    1 = {change_variable = { which = country_path_cunhu value = -1 }}
+                    1 = {change_variable = { which = country_path_fanyu value = -1 }}
+                    1 = {change_variable = { which = country_path_fengrao value = -1 }}
+                    1 = {change_variable = { which = country_path_huanyu value = -1 }}
+                    1 = {change_variable = { which = country_path_huimie value = -1 }}
+                    1 = {change_variable = { which = country_path_jiyi value = -1 }}
+                    1 = {change_variable = { which = country_path_tongxie value = -1 }}
+                    1 = {change_variable = { which = country_path_xunlie value = -1 }}
+                    1 = {change_variable = { which = country_path_xuwu value = -1 }}
+                    1 = {change_variable = { which = country_path_zhishi value = -1 }}
+                }
+            }
+        }
+    }
+}
+country_event = {
+    id = xinghe.209
+    title = xinghe.209_title
+    desc = xinghe.209_desc
+    picture = GFX_evt_hsr_null
+    is_triggered_only = yes
+    location = root
+    immediate = {
+
+    }
+    option = {
+        name = xinghe.209.a
+        custom_tooltip = xinghe.209.a.tt
+        xinghe_reward = yes
+        hidden_effect = {
+            while = {
+                count = 1
+                random_list = {
+                    1 = {change_variable = { which = country_path_cunhu value = -1 }}
+                    1 = {change_variable = { which = country_path_fanyu value = -1 }}
+                    1 = {change_variable = { which = country_path_fengrao value = -1 }}
+                    1 = {change_variable = { which = country_path_huanyu value = -1 }}
+                    1 = {change_variable = { which = country_path_huimie value = -1 }}
+                    1 = {change_variable = { which = country_path_jiyi value = -1 }}
+                    1 = {change_variable = { which = country_path_tongxie value = -1 }}
+                    1 = {change_variable = { which = country_path_xunlie value = -1 }}
+                    1 = {change_variable = { which = country_path_xuwu value = -1 }}
+                    1 = {change_variable = { which = country_path_zhishi value = -1 }}
+                }
+                random_list = {
+                    1 = {change_variable = { which = country_path_cunhu value = 3 }}
+                    1 = {change_variable = { which = country_path_fanyu value = 3 }}
+                    1 = {change_variable = { which = country_path_fengrao value = 3 }}
+                    1 = {change_variable = { which = country_path_huanyu value = 3 }}
+                    1 = {change_variable = { which = country_path_huimie value = 3 }}
+                    1 = {change_variable = { which = country_path_jiyi value = 3 }}
+                    1 = {change_variable = { which = country_path_tongxie value = 3 }}
+                    1 = {change_variable = { which = country_path_xunlie value = 3 }}
+                    1 = {change_variable = { which = country_path_xuwu value = 3 }}
+                    1 = {change_variable = { which = country_path_zhishi value = 3 }}
+                }
+            }
+        }
+    }
+    option = {
+        name = xinghe.209.b
+        custom_tooltip = xinghe.209.b.tt
+        xinghe_reward = yes
+        hidden_effect = {
+            change_variable = {
+                which = yuzhousuipian
+                value = 80
+            }
+        }
+    }
+    option = {
+        name = xinghe.209.c
+        trigger = {
+            has_tradition = tr_xuwu
+        }
+        custom_tooltip = xinghe.209.c.tt
+        xinghe_reward = yes
+        hidden_effect = {
+            change_variable = { which = country_path_xuwu value = 3 }
+        }
+    }
+    option = {
+        name = xinghe.209.d
+        trigger = {
+            has_tradition = tr_jiyi
+        }
+        custom_tooltip = xinghe.209.d.tt
+        xinghe_reward = yes
+        hidden_effect = {
+            change_variable = { which = country_path_jiyi value = 3 }
+        }
+    }
+    option = {
+        name = xinghe.209.e
+        trigger = {
+            has_tradition = tr_zhishi
+        }
+        custom_tooltip = xinghe.209.e.tt
+        xinghe_reward = yes
+        hidden_effect = {
+            change_variable = {
+                which = country_path_jiyi
+                value = -100
+            }
+            while = {
+                count = 20
+                random_list = {
+                    1 = {change_variable = { which = country_path_cunhu value = 5 }}
+                    1 = {change_variable = { which = country_path_fanyu value = 5 }}
+                    1 = {change_variable = { which = country_path_fengrao value = 5 }}
+                    1 = {change_variable = { which = country_path_huanyu value = 5 }}
+                    1 = {change_variable = { which = country_path_huimie value = 5 }}
+                    1 = {change_variable = { which = country_path_jiyi value = 5 }}
+                    1 = {change_variable = { which = country_path_tongxie value = 5 }}
+                    1 = {change_variable = { which = country_path_xunlie value = 5 }}
+                    1 = {change_variable = { which = country_path_xuwu value = 5 }}
+                    1 = {change_variable = { which = country_path_zhishi value = 5 }}
+                }
+            }
+        }
+    }
+}
+country_event = {
+    id = xinghe.210
+    title = xinghe.210_title
+    desc = xinghe.210_desc
+    picture = GFX_evt_hsr_null
+    is_triggered_only = yes
+    location = root
+    immediate = {
+
+    }
+    option = {
+        name = xinghe.210.a
+        custom_tooltip = xinghe.210.a.tt
+        xinghe_reward = yes
+        add_resource = { energy = -2000 }
+        hidden_effect = {
+            change_variable = {
+                which = country_path_jiyi
+                value = 200
+            }
+        }
+    }
+    option = {
+        name = xinghe.210.b
+        xinghe_reward = yes
+    }
+    option = {
+        name = xinghe.210.c
+        trigger = {
+            has_tradition = tr_huanyu
+        }
+        custom_tooltip = xinghe.210.c.tt
+        xinghe_reward = yes
+        random_common_curiosity_get = yes
+    }
+    option = {
+        name = xinghe.210.d
+        trigger = {
+            has_tradition = tr_xunlie
+        }
+        custom_tooltip = xinghe.210.d.tt
+        xinghe_reward = yes
+        hidden_effect = {
+            change_variable = { which = country_path_xunlie value = 3 }
+        }
+    }
+    option = {
+        name = xinghe.210.e
+        trigger = {
+            has_tradition = tr_zhishi
+        }
+        custom_tooltip = xinghe.210.e.tt
+        xinghe_reward = yes
+        while = {
+            count = 4
+            random_common_curiosity_get = yes
+        }
+    }
+}
+country_event = {
+    id = xinghe.211
+    title = xinghe.211_title
+    desc = xinghe.211_desc
+    picture = GFX_evt_hsr_null
+    is_triggered_only = yes
+    location = root
+    immediate = {
+
+    }
+    option = {
+        name = xinghe.211.a
+        custom_tooltip = xinghe.211.a.tt
+        xinghe_reward = yes
+        add_resource = { energy = -100 }
+        hidden_effect = {
+            random_list = {
+                1 = {change_variable = { which = country_path_cunhu value = 2 }}
+                1 = {change_variable = { which = country_path_fanyu value = 2 }}
+                1 = {change_variable = { which = country_path_fengrao value = 2 }}
+                1 = {change_variable = { which = country_path_huanyu value = 2 }}
+                1 = {change_variable = { which = country_path_huimie value = 2 }}
+                1 = {change_variable = { which = country_path_jiyi value = 2 }}
+                1 = {change_variable = { which = country_path_tongxie value = 2 }}
+                1 = {change_variable = { which = country_path_xunlie value = 2 }}
+                1 = {change_variable = { which = country_path_xuwu value = 2 }}
+                1 = {change_variable = { which = country_path_zhishi value = 2 }}
+                30 = {}
+            }
+        }
+    }
+    option = {
+        name = xinghe.211.b
+        xinghe_reward = yes
+    }
+    option = {
+        name = xinghe.211.c
+        trigger = {
+            has_tradition = tr_huanyu
+        }
+        custom_tooltip = xinghe.211.c.tt
+        xinghe_reward = yes
+        while = {
+            count = 2
+            random_list = {
+                1 = {change_variable = { which = country_path_cunhu value = 2 }}
+                1 = {change_variable = { which = country_path_fanyu value = 2 }}
+                1 = {change_variable = { which = country_path_fengrao value = 2 }}
+                1 = {change_variable = { which = country_path_huanyu value = 2 }}
+                1 = {change_variable = { which = country_path_huimie value = 2 }}
+                1 = {change_variable = { which = country_path_jiyi value = 2 }}
+                1 = {change_variable = { which = country_path_tongxie value = 2 }}
+                1 = {change_variable = { which = country_path_xunlie value = 2 }}
+                1 = {change_variable = { which = country_path_xuwu value = 2 }}
+                1 = {change_variable = { which = country_path_zhishi value = 2 }}
+            }
+        }
+    }
+    option = {
+        name = xinghe.211.d
+        trigger = {
+            has_tradition = tr_jiyi
+        }
+        custom_tooltip = xinghe.211.d.tt
+        xinghe_reward = yes
+        hidden_effect = {
+            change_variable = { which = country_path_jiyi value = 3 }
+        }
+    }
+}
+country_event = {
+    id = xinghe.212
+    title = xinghe.212_title
+    desc = xinghe.212_desc
+    picture = GFX_evt_shop
+    is_triggered_only = yes
+    location = root
+    immediate = {
+
+    }
+    option = {
+        name = xinghe.212.a
+        custom_tooltip = xinghe.212.a.tt
+        xinghe_reward = yes
+        hidden_effect = {
+            while = {
+                count = 2
+                random_list = {
+                    1 = {change_variable = { which = country_path_cunhu value = 2 }}
+                    1 = {change_variable = { which = country_path_fanyu value = 2 }}
+                    1 = {change_variable = { which = country_path_fengrao value = 2 }}
+                    1 = {change_variable = { which = country_path_huanyu value = 2 }}
+                    1 = {change_variable = { which = country_path_huimie value = 2 }}
+                    1 = {change_variable = { which = country_path_jiyi value = 2 }}
+                    1 = {change_variable = { which = country_path_tongxie value = 2 }}
+                    1 = {change_variable = { which = country_path_xunlie value = 2 }}
+                    1 = {change_variable = { which = country_path_xuwu value = 2 }}
+                    1 = {change_variable = { which = country_path_zhishi value = 2 }}
+                }
+            }
+        }
+    }
+    option = {
+        name = xinghe.212.b
+        xinghe_reward = yes
+    }
+    option = {
+        name = xinghe.212.c
+        trigger = {
+            has_tradition = tr_fengrao
+        }
+        custom_tooltip = xinghe.212.c.tt
+        add_resource = { energy = -1000 }
+        xinghe_reward = yes
+        while = {
+            count = 2
+            random_list = {
+                1 = {change_variable = { which = country_path_cunhu value = 5 }}
+                1 = {change_variable = { which = country_path_fanyu value = 5 }}
+                1 = {change_variable = { which = country_path_fengrao value = 5 }}
+                1 = {change_variable = { which = country_path_huanyu value = 5 }}
+                1 = {change_variable = { which = country_path_huimie value = 5 }}
+                1 = {change_variable = { which = country_path_jiyi value = 5 }}
+                1 = {change_variable = { which = country_path_tongxie value = 5 }}
+                1 = {change_variable = { which = country_path_xunlie value = 5 }}
+                1 = {change_variable = { which = country_path_xuwu value = 5 }}
+                1 = {change_variable = { which = country_path_zhishi value = 5 }}
+            }
+        }
+    }
+    option = {
+        name = xinghe.212.d
+        trigger = {
+            has_tradition = tr_zhishi
+        }
+        custom_tooltip = xinghe.212.d.tt
+        xinghe_reward = yes
+        hidden_effect = {
+            random_owned_leader = {
+                add_experience = 1000
+            }
+        }
+    }
+}
+country_event = {
+    id = xinghe.213
+    title = xinghe.213_title
+    desc = xinghe.213_desc
+    picture = GFX_evt_shop
+    is_triggered_only = yes
+    location = root
+    immediate = {
+
+    }
+    option = {
+        name = xinghe.213.a
+        custom_tooltip = xinghe.213.a.tt
+        xinghe_reward = yes
+        hidden_effect = {
+            while = {
+                count = 1
+                random_list = {
+                    1 = {change_variable = { which = country_path_cunhu value = -1 }}
+                    1 = {change_variable = { which = country_path_fanyu value = -1 }}
+                    1 = {change_variable = { which = country_path_fengrao value = -1 }}
+                    1 = {change_variable = { which = country_path_huanyu value = -1 }}
+                    1 = {change_variable = { which = country_path_huimie value = -1 }}
+                    1 = {change_variable = { which = country_path_jiyi value = -1 }}
+                    1 = {change_variable = { which = country_path_tongxie value = -1 }}
+                    1 = {change_variable = { which = country_path_xunlie value = -1 }}
+                    1 = {change_variable = { which = country_path_xuwu value = -1 }}
+                    1 = {change_variable = { which = country_path_zhishi value = -1 }}
+                }
+                random_list = {
+                    1 = {change_variable = { which = country_path_cunhu value = 3 }}
+                    1 = {change_variable = { which = country_path_fanyu value = 3 }}
+                    1 = {change_variable = { which = country_path_fengrao value = 3 }}
+                    1 = {change_variable = { which = country_path_huanyu value = 3 }}
+                    1 = {change_variable = { which = country_path_huimie value = 3 }}
+                    1 = {change_variable = { which = country_path_jiyi value = 3 }}
+                    1 = {change_variable = { which = country_path_tongxie value = 3 }}
+                    1 = {change_variable = { which = country_path_xunlie value = 3 }}
+                    1 = {change_variable = { which = country_path_xuwu value = 3 }}
+                    1 = {change_variable = { which = country_path_zhishi value = 3 }}
+                }
+            }
+        }
+    }
+    option = {
+        name = xinghe.213.b
+        xinghe_reward = yes
+    }
+    option = {
+        name = xinghe.213.c
+        trigger = {
+            has_tradition = tr_jiyi
+        }
+        custom_tooltip = xinghe.213.c.tt
+        add_resource = { energy = -1000 }
+        xinghe_reward = yes
+        hidden_effect = {
+            while = {
+                count = 1
+                random_list = {
+                    1 = {change_variable = { which = country_path_cunhu value = -1 }}
+                    1 = {change_variable = { which = country_path_fanyu value = -1 }}
+                    1 = {change_variable = { which = country_path_fengrao value = -1 }}
+                    1 = {change_variable = { which = country_path_huanyu value = -1 }}
+                    1 = {change_variable = { which = country_path_huimie value = -1 }}
+                    1 = {change_variable = { which = country_path_jiyi value = -1 }}
+                    1 = {change_variable = { which = country_path_tongxie value = -1 }}
+                    1 = {change_variable = { which = country_path_xunlie value = -1 }}
+                    1 = {change_variable = { which = country_path_xuwu value = -1 }}
+                    1 = {change_variable = { which = country_path_zhishi value = -1 }}
+                }
+                random_list = {
+                    1 = {change_variable = { which = country_path_cunhu value = 4 }}
+                    1 = {change_variable = { which = country_path_fanyu value = 4 }}
+                    1 = {change_variable = { which = country_path_fengrao value = 4 }}
+                    1 = {change_variable = { which = country_path_huanyu value = 4 }}
+                    1 = {change_variable = { which = country_path_huimie value = 4 }}
+                    1 = {change_variable = { which = country_path_jiyi value = 4 }}
+                    1 = {change_variable = { which = country_path_tongxie value = 4 }}
+                    1 = {change_variable = { which = country_path_xunlie value = 4 }}
+                    1 = {change_variable = { which = country_path_xuwu value = 4 }}
+                    1 = {change_variable = { which = country_path_zhishi value = 4 }}
+                }
+            }
+        }
+    }
+    option = {
+        name = xinghe.213.d
+        trigger = {
+            has_tradition = tr_xunlie
+        }
+        custom_tooltip = xinghe.213.d.tt
+        xinghe_reward = yes
+        hidden_effect = {
+            change_variable = { which = country_path_xunlie value = 4}
+        }
+    }
+}
+country_event = {
+    id = xinghe.214
+    title = xinghe.214_title
+    desc = xinghe.214_desc
+    picture = GFX_evt_shop
+    is_triggered_only = yes
+    location = root
+    immediate = {
+
+    }
+    option = {
+        name = xinghe.214.a
+        custom_tooltip = xinghe.214.a.tt
+        xinghe_reward = yes
+        hidden_effect = {
+            change_variable = { which = yuzhousuipian value = -50 }
+            while = {
+                count = 1
+                random_list = {
+                    1 = {change_variable = { which = country_path_cunhu value = 3 }}
+                    1 = {change_variable = { which = country_path_fanyu value = 3 }}
+                    1 = {change_variable = { which = country_path_fengrao value = 3 }}
+                    1 = {change_variable = { which = country_path_huanyu value = 3 }}
+                    1 = {change_variable = { which = country_path_huimie value = 3 }}
+                    1 = {change_variable = { which = country_path_jiyi value = 3 }}
+                    1 = {change_variable = { which = country_path_tongxie value = 3 }}
+                    1 = {change_variable = { which = country_path_xunlie value = 3 }}
+                    1 = {change_variable = { which = country_path_xuwu value = 3 }}
+                    1 = {change_variable = { which = country_path_zhishi value = 3 }}
+                }
+            }
+        }
+    }
+    option = {
+        name = xinghe.214.b
+        xinghe_reward = yes
+    }
+    option = {
+        name = xinghe.214.c
+        trigger = {
+            has_tradition = tr_xuwu
+        }
+        custom_tooltip = xinghe.214.c.tt
+        add_resource = { energy = -500 }
+        xinghe_reward = yes
+        hidden_effect = {
+            while = {
+                count = 1
+                random_list = {
+                    1 = {change_variable = { which = country_path_cunhu value = 3 }}
+                    1 = {change_variable = { which = country_path_fanyu value = 3 }}
+                    1 = {change_variable = { which = country_path_fengrao value = 3 }}
+                    1 = {change_variable = { which = country_path_huanyu value = 3 }}
+                    1 = {change_variable = { which = country_path_huimie value = 3 }}
+                    1 = {change_variable = { which = country_path_jiyi value = 3 }}
+                    1 = {change_variable = { which = country_path_tongxie value = 3 }}
+                    1 = {change_variable = { which = country_path_xunlie value = 3 }}
+                    1 = {change_variable = { which = country_path_xuwu value = 3 }}
+                    1 = {change_variable = { which = country_path_zhishi value = 3 }}
+                }
+            }
+        }
+    }
+    option = {
+        name = xinghe.214.d
+        trigger = {
+            has_tradition = tr_jiyi
+        }
+        custom_tooltip = xinghe.214.d.tt
+        xinghe_reward = yes
+        hidden_effect = {
+            change_variable = { which = yuzhousuipian value = -50 }
+            random_common_curiosity_get = yes
+        }
+    }
+}
 ###事件，坏事件
 planet_event = {
     id = xinghe.1000
@@ -1148,7 +2343,7 @@ planet_event = {
             effect = {
                 set_owner = event_target:SW_bad_country_of_AI_crisis
                 while = {
-                    count = 10
+                    count = 5
                     create_ship = {
                         name = random
                         design = "NAME_Euthanizer"
@@ -1157,7 +2352,7 @@ planet_event = {
                 }
                 assign_leader = event_target:SW_bad_country_of_contingency_fleet_leader
                 while = {
-                    count = 10
+                    count = 5
                     create_ship = {
                         name = random
                         design = "NAME_Sterilizer"
@@ -1312,7 +2507,7 @@ planet_event = {
                     }
                     assign_leader = last_created_leader
                     while = {
-                        count = 5
+                        count = 3
                         create_ship = {
                             name = random
                             design = "NAME_Revenant"
@@ -1320,7 +2515,7 @@ planet_event = {
                         }
                     }
                     while = {
-                        count = 15
+                        count = 7
                         create_ship = {
                             name = random
                             design = "NAME_Phantom"
@@ -1328,7 +2523,7 @@ planet_event = {
                         }
                     }
                     while = {
-                        count = 5
+                        count = 3
                         create_ship = {
                             name = random
                             design = "NAME_Wraith"
@@ -1470,11 +2665,11 @@ planet_event = {
                 attacker_war_goal = wg_plunder
             }
             while = {
-                count = 10
+                count = 5
                 create_fleet = {
                     effect = {
                         while = {
-                            count = 20
+                            count = 10
                             create_ship = {
                                 design = "NAME_R44"
                                 graphical_culture = pirate_01
@@ -1741,7 +2936,7 @@ planet_event = {
                     }
                     assign_leader = last_created_leader
                     while = {
-                        count = 5
+                        count = 3
                         create_ship = {
                             name = random
                             design = "NAME_Revenant"
@@ -1749,7 +2944,7 @@ planet_event = {
                         }
                     }
                     while = {
-                        count = 15
+                        count = 7
                         create_ship = {
                             name = random
                             design = "NAME_Phantom"
@@ -1757,7 +2952,7 @@ planet_event = {
                         }
                     }
                     while = {
-                        count = 5
+                        count = 3
                         create_ship = {
                             name = random
                             design = "NAME_Wraith"

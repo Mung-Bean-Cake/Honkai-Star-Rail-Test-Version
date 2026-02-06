@@ -1,0 +1,1618 @@
+guiTypes = {
+    ### FACTION OVERVIEW GUI ###
+    containerWindowType = {
+        name = "honkai_star_rail_main_ui_option"
+        position = { x=0 y=0 }
+        size = { width = 100 height = 40 }
+        moveable = no
+
+        buttonType = {
+            name = "option_button"
+            quadTextureSprite = "GFX_glow_tile_cyan"
+            size = { width = 100 height = 40 }
+            position = { x=0 y=0 }
+            font = "cg_16b"
+            text = "OPTION_TEXT"
+            oversound = "mouse_over"
+        }
+
+        OverlappingElementsBoxType = {
+            name = "trigger_icons"
+            position = { x = 0  y = 10 }
+            size = { x=65 y= 28 }
+        }
+    }
+    #reload honkai_star_rail_main.gui
+    containerWindowType = {
+        name = "honkai_star_rail_main_ui"
+        orientation = center
+        origo = center
+        moveable = yes
+        size = { width = 1000 height = 600 }
+
+        background = {
+            name = "background"
+            quadTextureSprite = "GFX_hsr_path_select_ui_bg_main"
+        }
+
+        buttonType = {
+            name = "close"
+            quadTextureSprite = "GFX_close"
+            position = { x= -38 y = 0 }
+            orientation = "UPPER_RIGHT"
+            shortcut = "ESCAPE"
+            clicksound = "back_click"
+        }
+        effectButtonType = {
+            name = "hsr_small_leader_show"
+            text = hsr_small_leader_show
+            quadTextureSprite = "GFX_glow_tile_orange"
+            format = center
+            size = { width = 38 height = 38 }
+            position = { x= 962 y = 40 }
+            effect = hsr_small_leader_show_effect
+            font = "cg_16b"
+        }
+        effectButtonType = {
+            name = "hsr_module_recommendation1"
+            text = hsr_small_other_show
+            quadTextureSprite = "GFX_glow_tile_orange"
+            format = center
+            size = { width = 38 height = 38 }
+            position = { x= 962 y = 80 }
+            effect = hsr_module_recommendation1_effect
+            font = "cg_16b"
+        }
+        effectButtonType = {
+            name = "hsr_module_recommendation2"
+            text = hsr_small_qq_show
+            quadTextureSprite = "GFX_glow_tile_orange"
+            format = center
+            size = { width = 38 height = 38 }
+            position = { x= 962 y = 120 }
+            effect = hsr_module_recommendation2_effect
+            font = "cg_16b"
+        }
+        # Custom header
+        instantTextBoxType = {
+            name = "irm_some_header"
+            font = "large_title_font_28"
+            #text = "hsr_path_civic_select" 	# header text
+            position = { x = 43000 y = 5 }
+            maxWidth = 543
+            maxHeight = 22
+            fixedSize = yes
+            alwaysTransparent = yes
+        }
+        containerWindowType = {
+            name = "EVENT_DIPLO"
+            position = { x = 0 y = 180 }
+            size = { x=100 y=400 }
+            moveable = no
+            instantTextBoxType= {
+                name = "action_title"
+                font = "malgun_goth_24"
+                position = { x = 20000 y = 0 }
+                maxWidth = 200
+                alwaysTransparent = yes
+            }
+            instantTextBoxType= {
+                name = "action_desc"
+                font = "malgun_goth_24"
+                position = { x = 490 y = 0 }
+                maxWidth = 500
+                maxHeight = 180
+                Orientation = "UPPER_LEFT"
+                format = center
+                alwaysTransparent = yes
+                text_color_code = "H"
+            }
+            listboxType = {
+                name = "option_list"
+                position = { x = 5 y = 0 }
+                size = {x=100 y=400 }
+            }
+        }
+        buttonType = {#背景
+            name = "hsr_alien_message_background"
+            size = { x = 380 y = 415 }
+            position = { x = 100 y = 180 }
+            spriteType = "GFX_tiles_dark_area_cut_8_hover"
+            alwaysTransparent = yes
+        }
+        instantTextBoxType = {#文本
+            name = "alien_message"
+            font = "cg_16b"
+            textureFile = "gfx/interface/tiles/diplomacy_textbox_positive.dds"
+            position = { x = 100 y = 180 }
+            maxWidth = 370
+            maxHeight = 415
+            format = left
+            scrollbartype = "standardtext_slider"
+            text_color_code = "B"
+        }
+        #图像区域
+        containerWindowType = {
+            name = "portrait"
+            size = { width = 550 height = 420 }
+            position = { x = 5 y = -120 }
+            clipping = yes
+            iconType = {
+                name = "portrait"
+                position = { x = 0 y = 125 }
+                spriteType = "GFX_portrait_gamesetup_mask"
+                alwaysTransparent = yes
+                scale = 0.5
+            }
+            iconType = {
+                name = "black_frame"
+                spriteType = "GFX_diplomacy_portrait_frame"
+                orientation = center_up
+                centerPosition = yes
+                position = { x = -37 y = 210 }
+                alwaystransparent = yes
+                scale = 0.5
+            }
+            ####################### HIDDEN ########################
+            iconType = {
+                name = "city_frame"
+                spriteType = "GFX_diplomacy_portrait_frame"
+                position = { x = 0 y = 23333 }
+                alwaysTransparent = yes
+            }
+        }
+        containerWindowType = {
+            name = "hsr_set_show"
+            position = { x = 490 y = 5 }
+            size = { width = 470 height = 390 }
+            moveable = no
+            background = {
+                name = "background"
+                quadTextureSprite = "GFX_glow_tile_cyan"
+            }
+            effectButtonType = {
+                name = "hsr_setting_titlie"
+                size = { width = 180 height = 40 }
+                position = { x = 160 y = 0 }
+                format = center
+                text = hsr_setting_titlie
+                buttonFont = "large_title_font_28"
+                font = "large_title_font_28"
+                effect = the_star_rail_null_effect
+            }
+            containerWindowType = {
+                name = "hsr_huimie_set_show"
+                position = { x = 10 y = 40 }
+                size = { width = 450 height = 50 }
+                moveable = no
+                background = {
+                    name = "background"
+                    quadTextureSprite = "GFX_tiles_dark_area_cut_8"
+                }
+                effectButtonType = {
+                    name = "hsr_huimie_set_titlie"
+                    text = hsr_huimie_set_titlie
+                    size = { width = 140 height = 30 }
+                    position = { x= 5 y= 10 }
+                    effect = the_star_rail_null_effect
+                    font = "malgun_goth_24"
+                }
+                effectButtonType = {
+                    name = "hsr_huimie_set_sub"
+                    quadTextureSprite ="GFX_district_hsr_count_sub"
+                    size = { width = 30 height = 30 }
+                    position = { x= 180 y= 10 }
+                    effect = hsr_huimie_set_sub_effect
+                    font = "cg_16b"
+                }
+                effectButtonType = {
+                    name = "hsr_huimie_set_show"
+                    text = hsr_huimie_set_show
+                    quadTextureSprite = "GFX_glow_tile_orange"
+                    size = { width = 80 height = 30 }
+                    position = { x= 199 y= 10 }
+                    effect = the_star_rail_null_effect
+                    font = "cg_16b"
+                }
+                effectButtonType = {
+                    name = "hsr_huimie_set_add"
+                    quadTextureSprite ="GFX_district_hsr_count_add"
+                    size = { width = 30 height = 30 }
+                    position = { x= 270 y= 10 }
+                    effect = hsr_huimie_set_add_effect
+                    font = "cg_16b"
+                }
+                effectButtonType = {
+                    name = "hsr_huimie_set_start"
+                    quadTextureSprite ="GFX_close_button"
+                    size = { width = 30 height = 30 }
+                    position = { x= 300 y= 10 }
+                    scale = 0.8
+                    effect =XQTD_crisis1_set1_effect
+                    font = "cg_16b"
+                }
+                effectButtonType = {
+                    name = "hsr_huimie_set_end"
+                    quadTextureSprite ="GFX_button_no_gender"
+                    size = { width = 30 height = 30 }
+                    position = { x= 300 y= 10 }
+                    scale = 0.8
+                    effect = XQTD_crisis1_set2_effect
+                    font = "cg_16b"
+                }
+                effectButtonType = {
+                    name = "hsr_huimie_set_show_null"
+                    quadTextureSprite ="GFX_button_copy_to_clipboard"
+                    size = { width = 30 height = 30 }
+                    position = { x= 330 y= 10 }
+                    scale = 0.8
+                    effect = hsr_huimie_text_effect
+                    font = "cg_16b"
+                }
+            }
+            containerWindowType = {
+                name = "hsr_xinghe_set_show"
+                position = { x = 10 y = 100 }
+                size = { width = 450 height = 100 }
+                moveable = no
+                background = {
+                    name = "background"
+                    quadTextureSprite = "GFX_tiles_dark_area_cut_8"
+                }
+                effectButtonType = {
+                    name = "hsr_xinghe_set_titlie"
+                    text = hsr_xinghe_set_titlie
+                    size = { width = 100 height = 30 }
+                    position = { x= 5 y= 40 }
+                    effect = the_star_rail_null_effect
+                    font = "malgun_goth_24"
+                }
+                effectButtonType = {
+                    name = "hsr_xinghe_sum_set_titlie"
+                    text = hsr_xinghe_sum_set_titlie
+                    size = { width = 100 height = 30 }
+                    position = { x= 90 y= 10 }
+                    effect = the_star_rail_null_effect
+                    font = "cg_16b"
+                }
+                effectButtonType = {
+                    name = "hsr_xinghe_set_sub"
+                    quadTextureSprite ="GFX_district_hsr_count_sub"
+                    size = { width = 30 height = 30 }
+                    position = { x= 180 y= 10 }
+                    effect = hsr_cosmos_set_sub_effect
+                    font = "cg_16b"
+                }
+                effectButtonType = {
+                    name = "hsr_xinghe_set_show"
+                    text = hsr_xinghe_set_show
+                    quadTextureSprite = "GFX_glow_tile_orange"
+                    size = { width = 80 height = 30 }
+                    position = { x= 199 y= 10 }
+                    effect = the_star_rail_null_effect
+                    font = "cg_16b"
+                }
+                effectButtonType = {
+                    name = "hsr_xinghe_set_add"
+                    quadTextureSprite ="GFX_district_hsr_count_add"
+                    size = { width = 30 height = 30 }
+                    position = { x= 270 y= 10 }
+                    effect = hsr_cosmos_set_add_effect
+                    font = "cg_16b"
+                }
+                effectButtonType = {
+                    name = "hsr_xinghe_set_start"
+                    quadTextureSprite ="GFX_close_button"
+                    size = { width = 30 height = 30 }
+                    position = { x= 300 y= 10 }
+                    scale = 0.8
+                    effect =hsr_cosmos_set1_effect
+                    font = "cg_16b"
+                }
+                effectButtonType = {
+                    name = "hsr_huimie_set_end"
+                    quadTextureSprite ="GFX_button_no_gender"
+                    size = { width = 30 height = 30 }
+                    position = { x= 300 y= 10 }
+                    scale = 0.8
+                    effect = hsr_cosmos_set2_effect
+                    font = "cg_16b"
+                }
+                effectButtonType = {
+                    name = "hsr_huimie_set_show_null"
+                    quadTextureSprite ="GFX_button_copy_to_clipboard"
+                    size = { width = 30 height = 30 }
+                    position = { x= 330 y= 10 }
+                    scale = 0.8
+                    effect = hsr_cosmos_text_effect
+                    font = "cg_16b"
+                }
+                effectButtonType = {
+                    name = "hsr_xinghe_red_set_titlie"
+                    text = hsr_xinghe_red_set_titlie
+                    size = { width = 100 height = 30 }
+                    position = { x= 90 y= 50 }
+                    effect = the_star_rail_null_effect
+                    font = "cg_16b"
+                }
+                effectButtonType = {
+                    name = "hsr_xinghe_red_set_sub"
+                    quadTextureSprite ="GFX_district_hsr_count_sub"
+                    size = { width = 30 height = 30 }
+                    position = { x= 180 y= 50 }
+                    effect = hsr_cosmos_red_set_sub_effect
+                    font = "cg_16b"
+                }
+                effectButtonType = {
+                    name = "hsr_xinghe_red_show"
+                    text = hsr_xinghe_red_show
+                    quadTextureSprite = "GFX_glow_tile_orange"
+                    size = { width = 80 height = 30 }
+                    position = { x= 199 y= 50 }
+                    effect = the_star_rail_null_effect
+                    font = "cg_16b"
+                }
+                effectButtonType = {
+                    name = "hsr_xinghe_red_set_add"
+                    quadTextureSprite ="GFX_district_hsr_count_add"
+                    size = { width = 30 height = 30 }
+                    position = { x= 270 y= 50 }
+                    effect = hsr_cosmos_red_set_add_effect
+                    font = "cg_16b"
+                }
+
+                effectButtonType = {
+                    name = "hsr_huimie_red_set_show_null"
+                    quadTextureSprite ="GFX_button_copy_to_clipboard"
+                    size = { width = 30 height = 30 }
+                    position = { x= 330 y= 50 }
+                    scale = 0.8
+                    effect = hsr_huimie_red_set_show_null_effect
+                    font = "cg_16b"
+                }
+            }
+            containerWindowType = {
+                name = "hsr_path_set_show"
+                position = { x = 10 y = 210 }
+                size = { width = 450 height = 50 }
+                moveable = no
+                background = {
+                    name = "background"
+                    quadTextureSprite = "GFX_tiles_dark_area_cut_8"
+                }
+                effectButtonType = {
+                    name = "hsr_path_set_titlie"
+                    text = hsr_path_set_titlie
+                    size = { width = 100 height = 30 }
+                    position = { x= 5 y= 10 }
+                    effect = the_star_rail_null_effect
+                    font = "malgun_goth_24"
+                }
+                effectButtonType = {
+                    name = "hsr_path_set"
+                    text = hsr_path_set
+                    quadTextureSprite = "GFX_glow_tile_orange"
+                    size = { width = 80 height = 30 }
+                    position = { x= 100 y= 10 }
+                    effect = hsr_path_set_effect
+                    font = "cg_16b"
+                }
+                effectButtonType = {
+                    name = "hsr_path_reset"
+                    text = hsr_path_reset
+                    quadTextureSprite = "GFX_glow_tile_orange"
+                    size = { width = 80 height = 30 }
+                    position = { x= 180 y= 10 }
+                    effect = hsr_path_reset_effect
+                    font = "cg_16b"
+                }
+            }
+            containerWindowType = {
+                name = "hsr_pop_set_show"
+                position = { x = 10 y = 270 }
+                size = { width = 450 height = 50 }
+                moveable = no
+                background = {
+                    name = "background"
+                    quadTextureSprite = "GFX_tiles_dark_area_cut_8"
+                }
+                effectButtonType = {
+                    name = "hsr_pop_set_titlie"
+                    text = hsr_pop_set_titlie
+                    size = { width = 120 height = 30 }
+                    position = { x= 5 y= 10 }
+                    effect = the_star_rail_null_effect
+                    font = "malgun_goth_24"
+                }
+                effectButtonType = {
+                    name = "hsr_pop_set"
+                    quadTextureSprite = "GFX_button_automate_construction"
+                    size = { width = 80 height = 30 }
+                    position = { x= 140 y= 10 }
+                    scale = 0.8
+                    effect = hsr_pop_set_effect
+                    font = "cg_16b"
+                }
+            }
+        }
+        containerWindowType = {
+            name = "hsr_use_show"
+            position = { x = 490 y = 390 }
+            size = { width = 470 height = 210 }
+            moveable = no
+            background = {
+                name = "background"
+                quadTextureSprite = "GFX_glow_tile_cyan"
+            }
+            effectButtonType = {
+                name = "hsr_use_show_titlie"
+                size = { width = 180 height = 40 }
+                position = { x = 160 y = 0 }
+                format = center
+                text = hsr_use_show_titlie
+                buttonFont = "large_title_font_28"
+                font = "large_title_font_28"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_ruler"
+                size = { width = 100 height = 100 }
+                position = { x = 10 y = 40 }
+                format = center
+                quadTextureSprite = "GFX_hsr_ruler"
+                effect = hsr_leader_effect
+            }
+            effectButtonType = {
+                name = "hsr_path"
+                size = { width = 100 height = 100 }
+                position = { x = 90 y = 40 }
+                format = center
+                quadTextureSprite = "GFX_hsr_path"
+                effect = hsr_path_effect
+            }
+            effectButtonType = {
+                name = "hsr_shop"
+                size = { width = 100 height = 100 }
+                position = { x = 170 y = 40 }
+                format = center
+                quadTextureSprite = "GFX_hsr_shop"
+                effect = hsr_shop_effect
+            }
+        }
+        ### ALL OF THIS IS HIDDEN OR DISPLACED ! ###
+
+        buttonType = { name = "focus_button" position = { x = -1180 y = -1112 } spriteType = "GFX_fleetview_focus" } # hidden
+        instantTextBoxType = { name = "heading" font = "malgun_goth_24" position = { x = -1120 y = -115 } } # hidden
+        buttonType = { name = "alien_message_background" size = { x = 0 y = 0 } position = { x = -1110 y = -11430 } spriteType = "GFX_tiles_dark_area_cut_8" } # hidden
+        buttonType = { name = "confirm_button" quadTextureSprite = "GFX_standard_button_142_34_button" } # hidden
+        containerWindowType = {
+            name = "portrait_background"
+            position = { x = -1117 y = -1145 }
+            size = { width = 0 height = 0 } 	# hide portrait window
+            iconType = { name = "event_picture" spriteType = "GFX_diplomacy_portrait_frame" } # hidden
+            iconType = { name = "portrait" spriteType = "GFX_portrait_character" } # hidden
+        }
+        containerWindowType = {
+            name = "portrait"
+            position = { x = -1117 y = -1145 }
+            size = { width = 0 height = 0 } # hide portrait window
+            iconType = { name = "portrait" spriteType = "GFX_portrait_gamesetup_mask" } # hidden
+            iconType = { name = "black_frame" spriteType = "GFX_diplomacy_portrait_shadow_frame" } # hidden
+            iconType = { name = "stripes_1" spriteType = "GFX_diplomacy_stripes_2" } # hidden
+            iconType = { name = "city_frame" spriteType = "GFX_diplomacy_portrait_frame" } # hidden
+        }
+        iconType = { name = "empire_info_bg" spriteType = "GFX_diplomacy_dark_fade_bg" } # hidden
+        instantTextBoxType = { name = "empire_name" font = "malgun_goth_24" } # hidden
+        instantTextBoxType = { name = "empire_government_type" font = "cg_16b" } # hidden
+        instantTextBoxType = { name = "empire_personality_type" font = "cg_16b" } # hidden
+        overlappingElementsBoxType = { name = "empire_ethics_icons" position = { x = -1145 y = -11138 } } # hidden
+        iconType = { name = "empire_flag" spriteType = "GFX_empire_flag_128" position = { x = -1125 y = -11235 } } # hidden
+        containerWindowType = {
+            name = "leader_details"
+            position = { x = -1125 y = -1175 }
+            containerWindowType = { name = "empire_traits_box" } # hidden
+            instantTextBoxType = { name = "empire_traits_label" font = "cg_16b" } # hidden
+            overlappingElementsBoxType = { name = "leader_traits" } # hidden
+            instantTextBoxType = { name = "leader_name" font = "cg_16b" } # hidden
+            instantTextBoxType = { name = "leader_species" font = "cg_16b" } # hidden
+        }
+        containerWindowType = {
+            name = "opinion_window"
+            position = { x = -1127 y = -11110 }
+            size = { width = 94 height = 30 }
+            iconType = { name = "their_opinion_icon" spriteType = "GFX_diplomacy_opinion" } # hidden
+            instantTextBoxType = { name = "their_opinion" font = "cg_16b" }
+        }
+
+        ### EVENT DIPLO ###
+
+        containerWindowType = {
+            name = "EVENT_DIPLO"
+            position = { x = 2 y = 50000 }
+            #size = { width = 563 height = 220 }
+            moveable = no
+
+            instantTextBoxType = {
+                name = "action_title"
+                font = "malgun_goth_24"
+                position = { x = 20 y = 0 }
+                maxWidth = 200
+                alwaysTransparent = yes
+            }
+            instantTextBoxType = {
+                name = "action_desc"
+                font = "malgun_goth_24"
+                position = { x = 490 y = 0 }
+                maxWidth = 500
+                maxHeight = 180
+                orientation = "UPPER_LEFT"
+                format = center
+                alwaysTransparent = yes
+                text_color_code = "H"
+            }
+            listboxType = { name = "option_list" position = { x = -11500 y = -1130 } } # hidden option list
+        }
+        # Description Section
+        instantTextBoxType = {
+            name = "alien_message"
+            font = "cg_16b"
+            position = { x = 20 y = 100000 }
+            maxWidth = 465
+            maxHeight = 220
+            format = left
+            scrollbartype = "standardtext_slider"
+        }
+    }
+    containerWindowType = {
+        name = "honkai_star_rail_leader_ui"
+        orientation = center
+        origo = center
+        moveable = yes
+        size = { width = 1000 height = 600 }
+
+        background = {
+            name = "background"
+            quadTextureSprite = "GFX_hsr_path_select_ui_bg_main"
+        }
+
+        buttonType = {
+            name = "close"
+            quadTextureSprite = "GFX_close"
+            position = { x= -38 y = 0 }
+            orientation = "UPPER_RIGHT"
+            shortcut = "ESCAPE"
+            clicksound = "back_click"
+        }
+        # Custom header
+        instantTextBoxType = {
+            name = "irm_some_header"
+            font = "large_title_font_28"
+            text = "honkai_star_rail_leader" 	# header text
+            position = { x = 430 y = 5 }
+            maxWidth = 543
+            maxHeight = 22
+            fixedSize = yes
+            alwaysTransparent = yes
+        }
+        containerWindowType = {
+            name = "hsr_star_leader_select_window"
+            size = { width = 200 height = 560 }
+            position = { x = 5 y = 35 }
+            background = { name = "background" spriteType = "GFX_glow_tile_cyan" }
+            verticalScrollbar = "right_vertical_slider"
+            smooth_scrolling = yes
+            clipping = yes
+            effectButtonType = {
+                name = "hsr_star_leader_select"
+                #quadTextureSprite = "GFX_glow_tile_cyan"
+                text = hsr_star_leader_select
+                position = { x = 0 y = 5 }
+                size = { width = 150 height = 50 }
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                format = center
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_shop"
+                quadTextureSprite = "GFX_glow_tile_orange"
+                text = hsr_small_shop_show
+                position = { x = 140 y = 8 }
+                size = { width = 38 height = 38 }
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                format = center
+                effect = hsr_shop_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_change"
+                text = hsr_star_leader_change
+                position = { x = 60 y = 40 }
+                size = { width = 80 height = 50 }
+                buttonFont = "malgun_goth_24"
+                font = "malgun_goth_24"
+                format = center
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_change_1"
+                spriteType = "GFX_glow_tile_orange"
+                size = { width = 100 height = 40 }
+                position = { x = 50 y = 80 }
+                format = center
+                text = hsr_star_leader_change_1
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_star_leader_change_1_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_change_2"
+                spriteType = "GFX_glow_tile_orange"
+                size = { width = 100 height = 40 }
+                position = { x = 50 y = 130 }
+                format = center
+                text = hsr_star_leader_change_2
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_star_leader_change_2_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_change_3"
+                spriteType = "GFX_glow_tile_orange"
+                size = { width = 100 height = 40 }
+                position = { x = 50 y = 180 }
+                format = center
+                text = hsr_star_leader_change_3
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_star_leader_change_3_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_change_4"
+                spriteType = "GFX_glow_tile_orange"
+                size = { width = 100 height = 40 }
+                position = { x = 50 y = 230 }
+                format = center
+                text = hsr_star_leader_change_4
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_star_leader_change_4_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_change_5"
+                spriteType = "GFX_glow_tile_orange"
+                size = { width = 100 height = 40 }
+                position = { x = 50 y = 280 }
+                format = center
+                text = hsr_star_leader_change_5
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_star_leader_change_5_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_change_6"
+                spriteType = "GFX_glow_tile_orange"
+                size = { width = 100 height = 40 }
+                position = { x = 50 y = 330 }
+                format = center
+                text = hsr_star_leader_change_6
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_star_leader_change_6_effect
+            }
+        }
+        containerWindowType = {
+            name = "hsr_star_leader_main_window"
+            size = { width = 790 height = 560 }
+            position = { x = 205 y = 35 }
+            background = { name = "background" spriteType = "GFX_glow_tile_cyan" }
+            verticalScrollbar = "right_vertical_slider"
+            smooth_scrolling = yes
+            clipping = yes
+            #####################黑塔空间站
+            effectButtonType = {
+                name = "hsr_star_leader_heita_1"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 20 y = 10 }
+                format = center
+                text = hsr_star_leader_heita_1
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_heita_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_heita_2"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 130 y = 10 }
+                format = center
+                text = hsr_star_leader_heita_2
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_daheita_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_heita_3"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 240 y = 10 }
+                format = center
+                text = hsr_star_leader_heita_3
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_aisida_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_heita_4"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 350 y = 10 }
+                format = center
+                text = hsr_star_leader_heita_4
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_alan_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_heita_5"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 460 y = 10 }
+                format = center
+                text = hsr_star_leader_heita_5
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_ruanmei_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_heita_6"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 570 y = 10 }
+                format = center
+                text = hsr_star_leader_heita_6
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_luosi_effect
+            }
+            #####################黑塔空间站
+            effectButtonType = {
+                name = "hsr_star_leader_beiluoboge_1"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 20 y = 10 }
+                format = center
+                text = hsr_star_leader_beiluoboge_1
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_xilvwa_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_beiluoboge_2"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 130 y = 10 }
+                format = center
+                text = hsr_star_leader_beiluoboge_2
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_natasha_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_beiluoboge_3"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 240 y = 10 }
+                format = center
+                text = hsr_star_leader_beiluoboge_3
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_peila_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_beiluoboge_4"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 350 y = 10 }
+                format = center
+                text = hsr_star_leader_beiluoboge_4
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_sangbo_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_beiluoboge_5"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 460 y = 10 }
+                format = center
+                text = hsr_star_leader_beiluoboge_5
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_huke_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_beiluoboge_6"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 570 y = 10 }
+                format = center
+                text = hsr_star_leader_beiluoboge_6
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_bronya_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_beiluoboge_7"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 680 y = 10 }
+                format = center
+                text = hsr_star_leader_beiluoboge_7
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_jiepade_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_beiluoboge_8"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 20 y = 120 }
+                format = center
+                text = hsr_star_leader_beiluoboge_8
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_kelala_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_beiluoboge_9"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 130 y = 120 }
+                format = center
+                text = hsr_star_leader_beiluoboge_9
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_xier_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_beiluoboge_10"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 240 y = 120 }
+                format = center
+                text = hsr_star_leader_beiluoboge_10
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_luka_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_beiluoboge_11"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 350 y = 120 }
+                format = center
+                text = hsr_star_leader_beiluoboge_11
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_lingke_effect
+            }
+            #####################仙舟
+            effectButtonType = {
+                name = "hsr_star_leader_xianzhou_1"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 20 y = 10 }
+                format = center
+                text = hsr_star_leader_xianzhou_1
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_qingque_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_xianzhou_2"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 130 y = 10 }
+                format = center
+                text = hsr_star_leader_xianzhou_2
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_tingyun_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_xianzhou_3"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 240 y = 10 }
+                format = center
+                text = hsr_star_leader_xianzhou_3
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_sushang_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_xianzhou_4"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 350 y = 10 }
+                format = center
+                text = hsr_star_leader_xianzhou_4
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_yanqing_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_xianzhou_5"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 460 y = 10 }
+                format = center
+                text = hsr_star_leader_xianzhou_5
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_bailu_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_xianzhou_6"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 570 y = 10 }
+                format = center
+                text = hsr_star_leader_xianzhou_6
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_jingyuan_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_xianzhou_7"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 680 y = 10 }
+                format = center
+                text = hsr_star_leader_xianzhou_7
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_yukong_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_xianzhou_8"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 20 y = 120 }
+                format = center
+                text = hsr_star_leader_xianzhou_8
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_luocha_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_xianzhou_9"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 130 y = 120 }
+                format = center
+                text = hsr_star_leader_xianzhou_9
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_fuxuan_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_xianzhou_10"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 240 y = 120 }
+                format = center
+                text = hsr_star_leader_xianzhou_10
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_jingliu_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_xianzhou_11"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 350 y = 120 }
+                format = center
+                text = hsr_star_leader_xianzhou_11
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_guinaifen_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_xianzhou_12"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 460 y = 120 }
+                format = center
+                text = hsr_star_leader_xianzhou_12
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_huohuo_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_xianzhou_13"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 570 y = 120 }
+                format = center
+                text = hsr_star_leader_xianzhou_13
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_hanya_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_xianzhou_14"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 680 y = 120 }
+                format = center
+                text = hsr_star_leader_xianzhou_14
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_xueyi_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_xianzhou_15"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 20 y = 230 }
+                format = center
+                text = hsr_star_leader_xianzhou_15
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_yunli_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_xianzhou_16"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 130 y = 230 }
+                format = center
+                text = hsr_star_leader_xianzhou_16
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_jiaoqiu_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_xianzhou_17"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 240 y = 230 }
+                format = center
+                text = hsr_star_leader_xianzhou_17
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_moze_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_xianzhou_18"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 350 y = 230 }
+                format = center
+                text = hsr_star_leader_xianzhou_18
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_feixiao_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_xianzhou_19"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 460 y = 230 }
+                format = center
+                text = hsr_star_leader_xianzhou_19
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_lingsha_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_xianzhou_20"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 570 y = 230 }
+                format = center
+                text = hsr_star_leader_xianzhou_20
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_yaoguang_effect
+            }
+            #####################匹洛康尼
+            effectButtonType = {
+                name = "hsr_star_leader_piluokangni_1"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 20 y = 10 }
+                format = center
+                text = hsr_star_leader_piluokangni_1
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_misha_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_piluokangni_2"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 130 y = 10 }
+                format = center
+                text = hsr_star_leader_piluokangni_2
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_heitiane_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_piluokangni_3"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 240 y = 10 }
+                format = center
+                text = hsr_star_leader_piluokangni_3
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_huahuo_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_piluokangni_4"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 350 y = 10 }
+                format = center
+                text = hsr_star_leader_piluokangni_4
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_jialahe_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_piluokangni_5"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 460 y = 10 }
+                format = center
+                text = hsr_star_leader_piluokangni_5
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_zhigengniao_effect
+            }
+            #####################翁
+            effectButtonType = {
+                name = "hsr_star_leader_wengfaluosi_1"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 20 y = 10 }
+                format = center
+                text = hsr_star_leader_wengfaluosi_1
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_agelaiya_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_wengfaluosi_2"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 130 y = 10 }
+                format = center
+                text = hsr_star_leader_wengfaluosi_2
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_tibao_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_wengfaluosi_3"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 240 y = 10 }
+                format = center
+                text = hsr_star_leader_wengfaluosi_3
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_wandi_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_wengfaluosi_4"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 350 y = 10 }
+                format = center
+                text = hsr_star_leader_wengfaluosi_4
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_xiadie_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_wengfaluosi_5"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 460 y = 10 }
+                format = center
+                text = hsr_star_leader_wengfaluosi_5
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_nakexia_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_wengfaluosi_6"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 570 y = 10 }
+                format = center
+                text = hsr_star_leader_wengfaluosi_6
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_fengjin_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_wengfaluosi_7"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 680 y = 10 }
+                format = center
+                text = hsr_star_leader_wengfaluosi_7
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_saifeier_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_wengfaluosi_8"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 20 y = 120 }
+                format = center
+                text = hsr_star_leader_wengfaluosi_8
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_baie_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_wengfaluosi_9"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 130 y = 120 }
+                format = center
+                text = hsr_star_leader_wengfaluosi_9
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_haiseyin_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_wengfaluosi_10"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 240 y = 120 }
+                format = center
+                text = hsr_star_leader_wengfaluosi_10
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_kedelvla_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_wengfaluosi_11"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 350 y = 120 }
+                format = center
+                text = hsr_star_leader_wengfaluosi_11
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_xilian_effect
+            }
+            #####################银河
+            effectButtonType = {
+                name = "hsr_star_leader_yinhe_1"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 20 y = 10 }
+                format = center
+                text = hsr_star_leader_yinhe_1
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_sanyueqi_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_yinhe_2"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 130 y = 10 }
+                format = center
+                text = hsr_star_leader_yinhe_2
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_danheng_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_yinhe_3"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 240 y = 10 }
+                format = center
+                text = hsr_star_leader_yinhe_3
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_jizi_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_yinhe_4"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 350 y = 10 }
+                format = center
+                text = hsr_star_leader_yinhe_4
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_waerte_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_yinhe_5"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 460 y = 10 }
+                format = center
+                text = hsr_star_leader_yinhe_5
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_kaituozhe_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_yinhe_6"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 570 y = 10 }
+                format = center
+                text = hsr_star_leader_yinhe_6
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_yinlang_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_yinhe_7"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 680 y = 10 }
+                format = center
+                text = hsr_star_leader_yinhe_7
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_ren_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_yinhe_8"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 20 y = 120 }
+                format = center
+                text = hsr_star_leader_yinhe_8
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_kafuka_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_yinhe_9"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 130 y = 120 }
+                format = center
+                text = hsr_star_leader_yinhe_9
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_tuopa_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_yinhe_10"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 240 y = 120 }
+                format = center
+                text = hsr_star_leader_yinhe_10
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_yinzhi_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_yinhe_11"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 350 y = 120 }
+                format = center
+                text = hsr_star_leader_yinhe_11
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_zhenli_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_yinhe_12"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 460 y = 120 }
+                format = center
+                text = hsr_star_leader_yinhe_12
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_huangquan_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_yinhe_13"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 570 y = 120 }
+                format = center
+                text = hsr_star_leader_yinhe_13
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_shajin_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_yinhe_14"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 680 y = 120 }
+                format = center
+                text = hsr_star_leader_yinhe_14
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_botio_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_yinhe_15"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 20 y = 230 }
+                format = center
+                text = hsr_star_leader_yinhe_15
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_liuying_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_yinhe_16"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 130 y = 230 }
+                format = center
+                text = hsr_star_leader_yinhe_16
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_feicui_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_yinhe_17"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 240 y = 230 }
+                format = center
+                text = hsr_star_leader_yinhe_17
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_luanpo_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_yinhe_18"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 350 y = 230 }
+                format = center
+                text = hsr_star_leader_yinhe_18
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_xingqiri_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_yinhe_19"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 460 y = 230 }
+                format = center
+                text = hsr_star_leader_yinhe_19
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_saber_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_yinhe_20"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 570 y = 230 }
+                format = center
+                text = hsr_star_leader_yinhe_20
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_archer_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_leader_yinhe_21"
+                spriteType = "GFX_hsr_leader_bg"
+                size = { width = 90 height = 90 }
+                position = { x = 680 y = 230 }
+                format = center
+                text = hsr_star_leader_yinhe_21
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_leader_dalihua_effect
+            }
+        }
+        
+        ### ALL OF THIS IS HIDDEN OR DISPLACED ! ###
+
+        buttonType = { name = "focus_button" position = { x = -1180 y = -1112 } spriteType = "GFX_fleetview_focus" } # hidden
+        instantTextBoxType = { name = "heading" font = "malgun_goth_24" position = { x = -1120 y = -115 } } # hidden
+        buttonType = { name = "alien_message_background" size = { x = 0 y = 0 } position = { x = -1110 y = -11430 } spriteType = "GFX_tiles_dark_area_cut_8" } # hidden
+        buttonType = { name = "confirm_button" quadTextureSprite = "GFX_standard_button_142_34_button" } # hidden
+        containerWindowType = {
+            name = "portrait_background"
+            position = { x = -1117 y = -1145 }
+            size = { width = 0 height = 0 } 	# hide portrait window
+            iconType = { name = "event_picture" spriteType = "GFX_diplomacy_portrait_frame" } # hidden
+            iconType = { name = "portrait" spriteType = "GFX_portrait_character" } # hidden
+        }
+        containerWindowType = {
+            name = "portrait"
+            position = { x = -1117 y = -1145 }
+            size = { width = 0 height = 0 } # hide portrait window
+            iconType = { name = "portrait" spriteType = "GFX_portrait_gamesetup_mask" } # hidden
+            iconType = { name = "black_frame" spriteType = "GFX_diplomacy_portrait_shadow_frame" } # hidden
+            iconType = { name = "stripes_1" spriteType = "GFX_diplomacy_stripes_2" } # hidden
+            iconType = { name = "city_frame" spriteType = "GFX_diplomacy_portrait_frame" } # hidden
+        }
+        iconType = { name = "empire_info_bg" spriteType = "GFX_diplomacy_dark_fade_bg" } # hidden
+        instantTextBoxType = { name = "empire_name" font = "malgun_goth_24" } # hidden
+        instantTextBoxType = { name = "empire_government_type" font = "cg_16b" } # hidden
+        instantTextBoxType = { name = "empire_personality_type" font = "cg_16b" } # hidden
+        overlappingElementsBoxType = { name = "empire_ethics_icons" position = { x = -1145 y = -11138 } } # hidden
+        iconType = { name = "empire_flag" spriteType = "GFX_empire_flag_128" position = { x = -1125 y = -11235 } } # hidden
+        containerWindowType = {
+            name = "leader_details"
+            position = { x = -1125 y = -1175 }
+            containerWindowType = { name = "empire_traits_box" } # hidden
+            instantTextBoxType = { name = "empire_traits_label" font = "cg_16b" } # hidden
+            overlappingElementsBoxType = { name = "leader_traits" } # hidden
+            instantTextBoxType = { name = "leader_name" font = "cg_16b" } # hidden
+            instantTextBoxType = { name = "leader_species" font = "cg_16b" } # hidden
+        }
+        containerWindowType = {
+            name = "opinion_window"
+            position = { x = -1127 y = -11110 }
+            size = { width = 94 height = 30 }
+            iconType = { name = "their_opinion_icon" spriteType = "GFX_diplomacy_opinion" } # hidden
+            instantTextBoxType = { name = "their_opinion" font = "cg_16b" }
+        }
+
+        ### EVENT DIPLO ###
+
+        containerWindowType = {
+            name = "EVENT_DIPLO"
+            position = { x = 2 y = 50000 }
+            #size = { width = 563 height = 220 }
+            moveable = no
+
+            instantTextBoxType = {
+                name = "action_title"
+                font = "malgun_goth_24"
+                position = { x = 20 y = 0 }
+                maxWidth = 200
+                alwaysTransparent = yes
+            }
+            instantTextBoxType = {
+                name = "action_desc"
+                font = "malgun_goth_24"
+                position = { x = 490 y = 0 }
+                maxWidth = 500
+                maxHeight = 180
+                orientation = "UPPER_LEFT"
+                format = center
+                alwaysTransparent = yes
+                text_color_code = "H"
+            }
+            listboxType = { name = "option_list" position = { x = -11500 y = -1130 } } # hidden option list
+        }
+        # Description Section
+        instantTextBoxType = {
+            name = "alien_message"
+            font = "cg_16b"
+            position = { x = 20 y = 100000 }
+            maxWidth = 465
+            maxHeight = 220
+            format = left
+            scrollbartype = "standardtext_slider"
+        }
+    }
+}
