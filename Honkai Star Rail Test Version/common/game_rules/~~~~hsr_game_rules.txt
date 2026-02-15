@@ -1,0 +1,239 @@
+#Tooltips will be generated from these rules when they fail. Use of custom_tooltip is recommended
+#There are still multiple hard-coded rules that apply in addition to these.
+#If rules here evaluate to true, there might still be other rules that make the action unavailable.
+#If a rule here evaluates to false the action will become unavailable
+################
+##########################
+#Root = country
+#This = planet
+can_colonize_planet = {
+	hidden_trigger = {
+		exists = root
+	}
+	custom_tooltip = {
+		fail_text = "EV_FORBIDDEN_COLONIZE"
+		ROOT = {
+			OR = {
+				NOT = { is_default_ev_country_type = yes }
+				AND = {
+					is_default_ev_country_type = yes
+					OR = {
+						has_origin = origin_ev_both_choosen
+						has_origin = origin_ev_adf
+						has_civic = civic_ev_and_other_mods
+						has_country_flag = has_ev_to_planets
+						#has_civic = civic_ev_planet_and_fleet
+					}
+				}
+				not = {has_origin = origin_xianzhou_union}
+			}
+		}
+	}
+
+	custom_tooltip = {
+		fail_text = "COLONIZATION_IMPOSSIBLE_UNDER_INVESTIGATION"
+		NOT = { has_planet_flag = planet_under_investigation }
+	}
+	custom_tooltip = {
+		fail_text = "COLONIZATION_IMPOSSIBLE_DYSON_SPHERE"
+		if = {
+			limit = {
+				is_artificial = no	# Colonizing habitats is fine
+			}
+			system_has_dyson_sphere = no
+		}
+	}
+	custom_tooltip = {
+		fail_text = "COLONIZATION_IMPOSSIBLE_DYSON_SPHERE_CONSTRUCTION"
+		if = {
+			limit = {
+				system_has_dyson_sphere = no
+				is_artificial = no	# Colonizing habitats is fine
+			}
+			NOT = {
+				solar_system = {
+					has_star_flag = dyson_sphere_construction
+				}
+			}
+		}
+	}
+
+	custom_tooltip = {
+		fail_text = "COLONIZATION_IMPOSSIBLE_COSMOGENESIS_EXODUS"
+		exists = root
+		root = {
+			NOT = { owner = { has_event_chain = cosmogenesis_planet_pickup_chain } }
+		}
+	}
+
+	custom_tooltip = {
+		fail_text = "COLONIZATION_IMPOSSIBLE_CRIMSON_CRAWLERS"
+
+		if = {
+			limit = {
+				has_modifier = crimson_crawlers
+			}
+			root = {
+				cares_for_crimson_crawlers = yes
+			}
+		}
+	}
+
+	custom_tooltip = {
+		fail_text = "BLANK_STRING"
+		if = {
+			limit = {
+				exists = root
+				root = {
+					is_country_type = swarm
+				}
+			}
+			is_artificial = no
+		}
+	}
+
+	custom_tooltip = {
+		fail_text = "COLONIZATION_IMPOSSIBLE_DEFENDED_PLANET"
+		NOT = { has_planet_flag = planet_defended_forbid_colonization }
+	}
+
+	custom_tooltip = {
+		fail_text = "COLONIZATION_IMPOSSIBLE_SMEEGIBB_PLANET"
+		NOT = { has_planet_flag = cannot_colonize_smeegibb_shelter }
+	}
+}
+###########################
+###########################
+
+#Root = country
+#This = species
+can_colonize_with_species = {
+	ROOT = {
+		OR = {
+			NOT = { is_default_ev_country_type = yes }
+			AND = {
+				is_default_ev_country_type = yes
+				OR = {
+					has_origin = origin_ev_both_choosen
+					has_origin = origin_ev_adf
+					has_civic = civic_ev_and_other_mods
+					has_country_flag = has_ev_to_planets
+					#has_civic = civic_ev_planet_and_fleet
+				}
+			}
+			not = {has_origin = origin_xianzhou_union}
+		}
+	}
+	has_colonization_control = {
+		type = colonization_control_no
+		country = root
+	}
+	OR = {
+		NOT = { has_trait = trait_self_modified }
+		is_same_species = root
+	}
+	NOR = {
+		has_trait = trait_pathogenic_genes
+		has_trait = trait_limited_cybernetic
+	}
+	if = {
+		limit = {
+			OR = {
+				is_sapient = no
+				has_trait = trait_zombie
+			}
+		}
+		custom_tooltip = {
+			always = no
+		}
+	}
+	else_if = {
+		limit = { has_trait = trait_hive_mind }
+		root = { is_hive_empire = yes }
+	}
+	else = {
+		always = yes
+	}
+}
+can_colonize_with_pop = {
+	ROOT = {
+		OR = {
+			NOT = { is_default_ev_country_type = yes }
+			AND = {
+				is_default_ev_country_type = yes
+				OR = {
+					has_origin = origin_ev_both_choosen
+					has_origin = origin_ev_adf
+					has_civic = civic_ev_and_other_mods
+					has_country_flag = has_ev_to_planets
+					#has_civic = civic_ev_planet_and_fleet
+				}
+			}
+			not = {has_origin = origin_xianzhou_union}
+		}
+	}
+	has_colonization_control = { type = colonization_control_no country = root }
+	OR = { NOT = { has_trait = trait_self_modified } is_same_species = root }
+	has_cybernetic_creed_trait = no
+	NOR = { has_trait = trait_pathogenic_genes has_trait = trait_limited_cybernetic }
+	if = {
+		limit = { OR = { is_sapient = no has_trait = trait_zombie } }
+		custom_tooltip = { always = no }
+	}
+	else = {
+		always = yes
+	}
+}
+###########################
+###########################
+
+#Root = country
+#This = species
+can_colonize_with_species = {
+	ROOT = {
+		OR = {
+			NOT = { is_default_ev_country_type = yes }
+			AND = {
+				is_default_ev_country_type = yes
+				OR = {
+					has_origin = origin_ev_both_choosen
+					has_origin = origin_ev_adf
+					has_civic = civic_ev_and_other_mods
+					has_country_flag = has_ev_to_planets
+					#has_civic = civic_ev_planet_and_fleet
+				}
+			}
+			not = {has_origin = origin_xianzhou_union}
+		}
+	}
+	has_colonization_control = {
+		type = colonization_control_no
+		country = root
+	}
+	OR = {
+		NOT = { has_trait = trait_self_modified }
+		is_same_species = root
+	}
+	NOR = {
+		has_trait = trait_pathogenic_genes
+		has_trait = trait_limited_cybernetic
+	}
+	if = {
+		limit = {
+			OR = {
+				is_sapient = no
+				has_trait = trait_zombie
+			}
+		}
+		custom_tooltip = {
+			always = no
+		}
+	}
+	else_if = {
+		limit = { has_trait = trait_hive_mind }
+		root = { is_hive_empire = yes }
+	}
+	else = {
+		always = yes
+	}
+}

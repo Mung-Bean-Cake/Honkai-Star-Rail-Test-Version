@@ -1,0 +1,133 @@
+namespace = xianzhou
+country_event = {
+    id = xianzhou.1
+    hide_window = yes
+    is_triggered_only = yes
+    fire_only_once = yes
+    immediate = {
+        set_country_flag = can_become_sg_crisis
+        country_event = {
+            #id = xianzhou.2
+        }
+        country_event = {
+            id = xianzhou.3
+        }
+    }
+}
+country_event = {
+    id = xianzhou.2
+    hide_window = yes
+    is_triggered_only = yes
+    fire_only_once = yes
+    immediate = {
+        every_country = {
+            limit = {
+                OR = {
+                    is_country_type = default
+                    is_country_type = fallen_empire
+                }
+            }
+            set_closed_borders = {
+                who = prev
+                status = no
+                forced = 10
+            }
+        }
+        country_event = {
+            id = xianzhou.2
+            days = 30
+        }
+    }
+}
+country_event = {
+    id = xianzhou.3
+    hide_window = yes
+    is_triggered_only = yes
+    #fire_only_once = yes
+    trigger = {
+        has_origin = origin_xianzhou_union
+    }
+    immediate = {
+        if = {
+            limit = {
+                NOT = {
+                    any_owned_planet = {
+                        is_colony = yes
+                    }
+                }
+            }
+            save_event_target_as = destroyed_xz_country
+            fire_on_action = {
+                on_action = on_country_destroyed
+                scopes = {
+                    from = event_target:destroyed_xz_country
+                }
+            }
+            destroy_country = yes
+        }
+        #}
+        country_event = {
+            id = xianzhou.3
+            days = 2
+        }
+    }
+}
+country_event = {
+    id = xianzhou.4
+    hide_window = yes
+    is_triggered_only = yes
+    #fire_only_once = yes
+    trigger = {
+        has_origin = origin_xianzhou_union
+    }
+    immediate = {
+        country_event = { id = xianzhou.2 }
+        create_fleet = {
+            name = "NAME_HERTA_FLEET"
+            settings = {
+                #can_upgrade = no
+                #can_change_composition = no
+                uses_naval_capacity = no
+                can_disband = no
+                spawn_debris = no
+                is_ultra_boss = yes
+            }
+            effect = {
+                set_owner = root
+                create_ship = {
+                    name = "NAME_herta"
+                    design = "herta_fleet"
+                    prefix = no
+                    upgradable = no
+                    graphical_culture = owner
+                    effect = {
+                        set_ship_flag = immune_to_confuse
+                        set_ship_flag = immune_to_terrify
+                        set_ship_flag = herta_fleet
+                    }
+                }
+                set_fleet_flag = immune_to_confuse
+                set_fleet_flag = immune_to_terrify
+                set_fleet_flag = herta_fleet
+                save_global_event_target_as = herta_fleet
+                herta_fleet_station_set_effect = yes
+                set_location = prev.capital_star
+                set_fleet_stance = passive
+                set_aggro_range_measure_from = return_point
+                set_aggro_range = 0
+                queue_actions = {
+                    wait = {
+                        duration = 320
+                        random = 80
+                    }
+                }
+            }
+        }
+        capital_scope = {
+            every_owned_pop_group = {
+                kill_all_pop = yes
+            }
+            destroy_colony = yes
+        }
+    }
+}
