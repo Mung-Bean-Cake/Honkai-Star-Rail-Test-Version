@@ -1,0 +1,43 @@
+# 注册如下静态修正：
+# begin_modifier_updated_batch_modifier = {
+#    begin_modifier_updated_batch = 1
+# }
+# 注册如下script modifier：
+# begin_modifier_updated_batch = { icon = mod_ship_hull_mult good = yes hidden = yes category = ship }
+#  不要更改事件内容，保证只有一个触发
+
+namespace = VOP_evt_ModifierUpdated
+
+# on_entering_battle 触发
+country_event = {
+	id = VOP_evt_ModifierUpdated.1
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = { NAND = { is_ai = yes is_country_type = default } }
+	immediate = {
+		fromfrom = { if = {
+			limit = { NOT = { has_fleet_flag = VOP_begin_modifier_updated_batch_modifier } }
+			add_modifier = { modifier = begin_modifier_updated_batch_modifier days = 2 }
+			set_fleet_flag = VOP_begin_modifier_updated_batch_modifier
+			fleet_event = { id = VOP_evt_ModifierUpdated.2 days = 2 }
+		} }
+	}
+}
+
+fleet_event = {
+	id = VOP_evt_ModifierUpdated.2
+	hide_window = yes
+	is_triggered_only = yes
+	trigger = { has_fleet_flag = VOP_begin_modifier_updated_batch_modifier }
+	immediate = {
+		if = {
+			limit = { is_in_combat = yes }
+			add_modifier = { modifier = begin_modifier_updated_batch_modifier days = 2 }
+			fleet_event = { id = VOP_evt_ModifierUpdated.2 days = 2 }
+		}
+		else = { 
+			remove_modifier = begin_modifier_updated_batch_modifier 
+			remove_fleet_flag = VOP_begin_modifier_updated_batch_modifier
+		}
+	}
+}

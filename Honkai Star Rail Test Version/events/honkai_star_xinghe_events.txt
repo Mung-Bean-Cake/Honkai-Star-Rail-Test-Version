@@ -28,157 +28,6 @@ event = {
         }
     }
 }
-#星核刷新，刷舰队,暂时移除疑似有问题，我本地运行没问题
-event = {
-    id = xinghe.2
-    hide_window = yes
-    is_triggered_only = yes
-
-    trigger = {
-
-    }
-
-    immediate = {
-        every_system = {
-            every_system_planet = {
-                limit = {
-                    OR = {
-                        is_planet_class = pc_shielded_white
-                        is_planet_class = pc_shielded_yellow
-                        is_planet_class = pc_shielded_red
-                    }
-                    not = {
-                        has_modifier = xinghe_cleaning_modifier
-                    }
-                }
-                if = {
-                    limit = { is_planet_class = pc_shielded_white }
-                    change_pc = pc_shielded_yellow
-                    this.solar_system = {
-                        spawn_random_storm = {
-                            type = xinghe_small_storm
-                            cosmic_storm_start_position = this
-                            immediate = yes
-                        }
-                    }
-                }
-                else_if = {
-                    limit = { is_planet_class = pc_shielded_yellow }
-                    change_pc = pc_shielded_red
-                    this.solar_system = {
-                        spawn_random_storm = {
-                            type = xinghe_big_storm
-                            cosmic_storm_start_position = this
-                            immediate = yes
-                        }
-                    }
-                }
-                else_if = {
-                    limit = { is_planet_class = pc_shielded_red }
-                    create_species = {
-                        name = "NAME_Unbidden"
-                        class = EXD
-                        namelist = Extradimensional
-                        portrait = exd1_leader
-                        traits = random
-                        effect = { save_event_target_as = SW_extradimensional_species }
-                    }
-                    create_country = {
-                        name = "NAME_Unbidden_small"
-                        type = "extradimensional_special"
-                        species = event_target:SW_extradimensional_species
-                        name_list = "Extradimensional"
-                        flag = {
-                            icon = {
-                                category = "special"
-                                file = "extradimensional_01.dds"
-                            }
-                            background = {
-                                category = "backgrounds"
-                                file = "circle.dds"
-                            }
-                            colors = {
-                                "indigo"
-                                "blue"
-                                "null"
-                                "null"
-                            }
-                        }
-                        effect = {
-                            create_ship_design = { design = "NAME_Void_Shaper" }
-                            add_ship_design = last_created_design
-                            create_ship_design = { design = "NAME_Unbidden_Anchor" }
-                            add_ship_design = last_created_design
-                            create_ship_design = { design = "NAME_Unbidden_Starbase" }
-                            add_ship_design = last_created_design
-                            save_global_event_target_as = SW_extradimensionals
-
-                            set_graphical_culture = extra_dimensional_01
-                            save_event_target_as = SW_extradimensionals
-                        }
-                    }
-                    this.solar_system = {
-                        if = {
-                            limit = { exists = starbase }
-                            starbase = {
-                                fleet = {
-                                    destroy_fleet = this
-                                }
-                            }
-                        }
-                        create_starbase = {
-                            size = starbase_exd_0
-                            owner = event_target:SW_extradimensionals
-                        }
-                        create_fleet = {
-                            effect = {
-                                set_owner = event_target:SW_extradimensionals
-                                create_ship = {
-                                    name = random
-                                    design = "NAME_Revenant"
-                                    graphical_culture = "extra_dimensional_01"
-                                }
-                                while = {
-                                    count = 3
-                                    create_ship = {
-                                        name = random
-                                        design = "NAME_Revenant"
-                                        graphical_culture = "extra_dimensional_01"
-                                    }
-                                }
-                                while = {
-                                    count = 5
-                                    create_ship = {
-                                        name = random
-                                        design = "NAME_Phantom"
-                                        graphical_culture = "extra_dimensional_01"
-                                    }
-                                }
-                                while = {
-                                    count = 3
-                                    create_ship = {
-                                        name = random
-                                        design = "NAME_Wraith"
-                                        graphical_culture = "extra_dimensional_01"
-                                    }
-                                }
-                                set_location = {
-                                    target = prev
-                                    distance = 5
-                                    angle = random
-                                }
-                                set_fleet_stance = aggressive
-                                set_aggro_range = 500
-                                set_aggro_range_measure_from = self
-                                set_fleet_bombardment_stance = armageddon
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
 #加屏蔽，防止引发崩溃
 planet_event = {
     id = xinghe.3
@@ -207,6 +56,7 @@ country_event = {
     is_triggered_only = yes
     trigger = {
         is_ai = no
+        has_edict = xinghe_edict
     }
     immediate = {
         every_planet_within_border = {
@@ -240,6 +90,177 @@ country_event = {
                     owner = Root
                 }
             }
+        }
+    }
+}
+planet_event = {
+    id = xinghe.5
+    hide_window = yes
+
+    is_triggered_only = yes
+
+    trigger = {
+        or = {
+            is_planet_class = pc_shielded_white
+            is_planet_class = pc_shielded_yellow
+            is_planet_class = pc_shielded_red
+        }
+        not = {
+            has_modifier = xinghe_cleaning_modifier
+        }
+    }
+
+    immediate = {
+        switch = {
+            trigger =  is_planet_class
+            pc_shielded_white = {
+                This.solar_system.starbase.owner = {
+                    #complete_special_project = { type = pc_shielded_white  location = root  }
+                    abort_special_project = { type = pc_shielded_white  location = root }
+                }
+                change_pc = pc_shielded_yellow
+                enable_special_project = {
+                    name = pc_shielded_yellow
+                    location = This
+                    owner = Root.fromfrom
+                }
+                planet_event = { id = xinghe.5 years = 10 }
+                this.solar_system = {
+                    random_list = {
+                        1 = {}
+                        1 = {
+                            spawn_random_storm = {
+                                type = xinghe_small_storm
+                                cosmic_storm_start_position = this
+                                immediate = yes
+                            }
+                        }
+                    }
+                }
+            }
+            pc_shielded_yellow = {
+                This.solar_system.starbase.owner = {
+                    #complete_special_project = { type = pc_shielded_white  location = root  }
+                    abort_special_project = { type = pc_shielded_yellow  location = root }
+                }
+                change_pc = pc_shielded_red
+                enable_special_project = {
+                    name = pc_shielded_red
+                    location = This
+                    owner = Root.fromfrom
+                }
+                planet_event = { id = xinghe.5 years = 10 }
+                this.solar_system = {
+                    spawn_random_storm = {
+                        type = xinghe_big_storm
+                        cosmic_storm_start_position = this
+                        immediate = yes
+                    }
+                }
+            }
+            pc_shielded_red = {
+                planet_event = { id = xinghe.5 years = 10 }
+                create_species = {
+                    name = "NAME_Unbidden"
+                    class = EXD
+                    namelist = Extradimensional
+                    portrait = exd1_leader
+                    traits = random
+                    effect = { save_event_target_as = SW_extradimensional_species }
+                }
+                create_country = {
+                    name = "NAME_Unbidden_small"
+                    type = "extradimensional_special"
+                    species = event_target:SW_extradimensional_species
+                    name_list = "Extradimensional"
+                    flag = {
+                        icon = {
+                            category = "special"
+                            file = "extradimensional_01.dds"
+                        }
+                        background = {
+                            category = "backgrounds"
+                            file = "circle.dds"
+                        }
+                        colors = {
+                            "indigo"
+                            "blue"
+                            "null"
+                            "null"
+                        }
+                    }
+                    effect = {
+                        create_ship_design = { design = "NAME_Void_Shaper" }
+                        add_ship_design = last_created_design
+                        create_ship_design = { design = "NAME_Unbidden_Anchor" }
+                        add_ship_design = last_created_design
+                        create_ship_design = { design = "NAME_Unbidden_Starbase" }
+                        add_ship_design = last_created_design
+                        save_global_event_target_as = SW_extradimensionals
+
+                        set_graphical_culture = extra_dimensional_01
+                        save_event_target_as = SW_extradimensionals
+                    }
+                }
+                this.solar_system = {
+                    if = {
+                        limit = { exists = starbase }
+                        starbase = {
+                            fleet = {
+                                destroy_fleet = this
+                            }
+                        }
+                    }
+                    create_starbase = {
+                        size = starbase_exd_0
+                        owner = event_target:SW_extradimensionals
+                    }
+                    create_fleet = {
+                        effect = {
+                            set_owner = event_target:SW_extradimensionals
+                            create_ship = {
+                                name = random
+                                design = "NAME_Revenant"
+                                graphical_culture = "extra_dimensional_01"
+                            }
+                            while = {
+                                count = 2
+                                create_ship = {
+                                    name = random
+                                    design = "NAME_Revenant"
+                                    graphical_culture = "extra_dimensional_01"
+                                }
+                            }
+                            while = {
+                                count = 5
+                                create_ship = {
+                                    name = random
+                                    design = "NAME_Phantom"
+                                    graphical_culture = "extra_dimensional_01"
+                                }
+                            }
+                            while = {
+                                count = 8
+                                create_ship = {
+                                    name = random
+                                    design = "NAME_Wraith"
+                                    graphical_culture = "extra_dimensional_01"
+                                }
+                            }
+                            set_location = {
+                                target = prev
+                                distance = 5
+                                angle = random
+                            }
+                            set_fleet_stance = aggressive
+                            set_aggro_range = 500
+                            set_aggro_range_measure_from = self
+                            set_fleet_bombardment_stance = armageddon
+                        }
+                    }
+                }
+            }
+            default =  {}
         }
     }
 }

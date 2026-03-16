@@ -83,20 +83,20 @@ country_event = {
     immediate = {
         country_event = { id = xianzhou.2 }
         create_fleet = {
-            name = "NAME_HERTA_FLEET"
+            name = "NAME_XIANZHOU_LUOFU"
             settings = {
-                #can_upgrade = no
-                #can_change_composition = no
-                uses_naval_capacity = no
+                can_upgrade = yes
+                can_change_composition = yes
+                uses_naval_capacity = yes
                 can_disband = no
                 spawn_debris = no
-                is_ultra_boss = yes
+                is_ultra_boss = no
             }
             effect = {
                 set_owner = root
                 create_ship = {
-                    name = "NAME_herta"
-                    design = "herta_fleet"
+                    name = "NAME_XIANZHOU_LUOFU"
+                    design = "xianzhou_fleet"
                     prefix = no
                     upgradable = no
                     graphical_culture = owner
@@ -108,9 +108,20 @@ country_event = {
                 }
                 set_fleet_flag = immune_to_confuse
                 set_fleet_flag = immune_to_terrify
-                set_fleet_flag = herta_fleet
-                save_global_event_target_as = herta_fleet
-                herta_fleet_station_set_effect = yes
+                set_fleet_flag = xianzhou_luofu
+                save_global_event_target_as = xianzhou_luofu
+                change_variable = {
+                    which = xianzhou_test_value
+                    value = 10
+                }
+                change_variable = {
+                    which = xianzhou_district_1_level
+                    value = 1
+                }
+                change_variable = {
+                    which = xianzhou_district_1_num
+                    value = 1
+                }
                 set_location = prev.capital_star
                 set_fleet_stance = passive
                 set_aggro_range_measure_from = return_point
@@ -128,6 +139,72 @@ country_event = {
                 kill_all_pop = yes
             }
             destroy_colony = yes
+        }
+    }
+}
+#20-100仙舟舰船配置事件
+fleet_event = {
+    id = xianzhou.20
+    title = ""
+    desc = ""
+    location = event_target:xianzhou_luofu
+    picture_event_data = { room = herta_3_room }
+    is_triggered_only = yes
+
+    diplomatic_title = herta_ship_ui
+    diplomatic = yes
+    force_open = yes
+    custom_gui = "xianzhou_ui"
+    option = {
+        name = ""
+        default_hide_option = yes
+    }
+}
+fleet_event = {
+    id = xianzhou.30
+    hide_window = yes
+    is_triggered_only = yes
+
+    immediate = {
+        if = {
+            limit = {
+                has_fleet_flag = xianzhou_district_1_build_ongoing
+                check_variable = {
+                    which = xianzhou_district_1_build_sequence
+                    value > 0
+                }
+            }
+            change_variable = {
+                which = xianzhou_district_1_build_progress
+                value = -1
+            }
+            if = {
+                limit = {
+                    check_variable = {
+                        which = xianzhou_district_1_build_progress
+                        value <= 0
+                    }
+                }
+                change_variable = {
+                    which = xianzhou_district_1_build_sequence
+                    value = -1
+                }
+                change_variable = {
+                    which = xianzhou_district_1_num
+                    value = 1
+                }
+                set_variable = {
+                    which = xianzhou_district_1_build_progress
+                    value = this.value:xianzhou_district_build_time
+                }
+            }
+            fleet_event = {
+                id = xianzhou.30
+                days = 1
+            }
+        }
+        else = {
+            remove_fleet_flag = xianzhou_district_1_build_ongoing
         }
     }
 }

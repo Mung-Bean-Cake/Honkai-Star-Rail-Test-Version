@@ -1,0 +1,71 @@
+xianzhou_show_effect = {
+    allow = {
+        always = yes
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        switch = {
+            trigger = has_fleet_flag
+            xianzhou_luofu = {
+                custom_tooltip = xianzhou_luofu_text
+            }
+            xianzhou_fanghu = {
+                custom_tooltip = xianzhou_fanghu_text
+            }
+            xianzhou_yaoqing = {
+                custom_tooltip = xianzhou_yaoqing_text
+            }
+            xianzhou_zhuming = {
+                custom_tooltip = xianzhou_zhuming_text
+            }
+            xianzhou_yuque = {
+                custom_tooltip = xianzhou_yuque_text
+            }
+            xianzhou_xuling = {
+                custom_tooltip = xianzhou_xuling_text
+            }
+            default = { custom_tooltip = xianzhou_name }
+        }
+    }
+}
+xianzhou_district_1_build_effect = {
+    allow = {
+        always = yes
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        hidden_effect = {
+            if = {
+                limit = {
+                    not = { has_fleet_flag = xianzhou_district_1_build_ongoing }
+                }
+                set_fleet_flag = xianzhou_district_1_build_ongoing
+                set_variable = {
+                    which = xianzhou_district_1_build_progress
+                    value = this.value:xianzhou_district_build_time
+                }
+                change_variable = {
+                    which = xianzhou_district_1_build_sequence
+                    value = 1
+                }
+                fleet_event = {
+                    id = xianzhou.30
+                    days = 1
+                }
+            }
+            else_if = {
+                limit = {
+                    has_fleet_flag = xianzhou_district_1_build_ongoing
+                }
+                change_variable = {
+                    which = xianzhou_district_1_build_sequence
+                    value = 1
+                }
+            }
+        }
+    }
+}

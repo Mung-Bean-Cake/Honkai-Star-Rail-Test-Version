@@ -1,0 +1,466 @@
+#reload honkai_star_rail_xianzhou.gui
+guiTypes = {
+    containerWindowType = {
+        name = "xianzhou_ui"
+        orientation = center
+        origo = center
+        moveable = yes
+        size = { width = 1200 height = 700 }
+        clipping = no
+        # 这个关闭按钮是个超大的遮罩层
+        ButtonType = {
+            name = "close"
+            quadTextureSprite = "GFX_tiles_dark_area_cut_8"
+            position = { x= -1000 y = -1000  }
+            size = { width = 3000 height = 3000 }
+            Orientation = "upper_left"
+            clicksound = "back_click"
+            shortcut = "ESCAPE"
+            moveable = no
+        }
+
+        background = {
+            name = "background"
+            quadTextureSprite = "GFX_herta_station_fleet_bg"
+            position = { x= 0 y = 0 }
+            size = {width = 1200 height = 700}
+            Orientation = "left"
+        }
+
+        iconType = {
+            name = "xianzhou_background"
+            spriteType = "GFX_herta_station_fleet_bg"
+            position = { x= 0 y = 0 }
+            size = {width = 1200 height = 700}
+            Orientation = "left"
+        }
+        #图片区
+        containerWindowType = {
+            name = "portrait"
+            size = { width = 550 height = 290 }
+            position = { x = 10 y = -75 }
+            clipping = yes
+            iconType = {
+                name = "portrait"
+                position = { x = 5 y = 95 }
+                spriteType = "GFX_portrait_gamesetup_mask"
+                alwaysTransparent = yes
+                scale = 0.55
+            }
+            iconType = {
+                name = "black_frame"
+                spriteType = "GFX_diplomacy_portrait_frame"
+                orientation = center_up
+                centerPosition = yes
+                position = { x = -5 y = 190 }
+                alwaystransparent = yes
+                scale = 0.55
+            }
+            ####################### HIDDEN ########################
+            iconType = {
+                name = "city_frame"
+                spriteType = "GFX_diplomacy_portrait_frame"
+                position = { x = 0 y = 23333 }
+                alwaysTransparent = yes
+            }
+        }
+        effectButtonType = {
+            name = "xianzhou_name"
+            spriteType = "GFX_glow_tile_orange"
+            size = { width = 530 height = 50 }
+            position = { x = 15 y = 225 }
+            format = center
+            text = xianzhou_name
+            buttonFont = "malgun_goth_24"
+            font = "malgun_goth_24"
+            effect = xianzhou_show_effect
+        }
+        #素材库E:\Program Files (x86)\Steam\steamapps\common\Stellaris\gfx\interface\planetview
+        containerWindowType = {
+            name = "xianzhou_district_show"
+            position = { x = 10 y = 275 }
+            size = { width = 700 height = 420 }
+            verticalScrollbar = "right_vertical_slider"
+            smooth_scrolling = yes
+            clipping = yes
+            moveable = no
+            background = {
+                name = "background"
+                quadTextureSprite = "GFX_glow_tile_orange"
+            }
+            containerWindowType = {
+                name = "xianzhou_district_1_window"
+                position = { x = 10 y = 10 }
+                size = { width = 600 height = 100 }
+                moveable = no
+                background = {
+                    name = "background"
+                    quadTextureSprite = "GFX_tiles_dark_area_cut_8"
+                }
+                effectButtonType = {
+                    name = "xianzhou_district_1_show"
+                    spriteType = "GFX_xianzhou_district_bg"
+                    size = { width = 100 height = 100 }
+                    position = { x = 0 y = 0 }
+                    format = center
+                    text = xianzhou_yunqi_text
+                    buttonFont = "malgun_goth_24"
+                    font = "malgun_goth_24"
+                    effect = the_star_rail_null_effect
+                }
+                effectButtonType = {
+                    name = "xianzhou_district_1_star"
+                    spriteType = "GFX_hsr_star"
+                    scale = 0.8
+                    size = { width = 19 height = 21 }
+                    position = { x = 10 y = 10 }
+                    format = center
+                    #text = xianzhou_yunqi_text
+                    buttonFont = "malgun_goth_24"
+                    font = "malgun_goth_24"
+                    effect = the_star_rail_null_effect
+                }
+                effectButtonType = {
+                    name = "xianzhou_district_1_level_show"
+                    spriteType = "GFX_text_hsr1"
+                    size = { width = 32 height = 32 }
+                    position = { x = 70 y = 65 }
+                    format = center
+                    #text = xianzhou_yunqi_text
+                    buttonFont = "malgun_goth_24"
+                    font = "malgun_goth_24"
+                    effect = the_star_rail_null_effect
+                }
+                effectButtonType = {
+                    name = "xianzhou_district_1_build"
+                    spriteType = "GFX_xianzhou_build"
+                    size = { width = 30 height = 30 }
+                    position = { x = 95 y = 0 }
+                    format = center
+                    #text = xianzhou_yunqi_text
+                    buttonFont = "malgun_goth_24"
+                    font = "malgun_goth_24"
+                    effect = xianzhou_district_1_build_effect
+                }
+                effectButtonType = {
+                    name = "xianzhou_district_1_level_up"
+                    spriteType = "GFX_xianzhou_level_up"
+                    size = { width = 30 height = 30 }
+                    position = { x = 95 y = 35 }
+                    format = center
+                    #text = xianzhou_yunqi_text
+                    buttonFont = "malgun_goth_24"
+                    font = "malgun_goth_24"
+                    effect = the_star_rail_null_effect
+                }
+                effectButtonType = {
+                    name = "xianzhou_district_1_dismantle"
+                    spriteType = "GFX_xianzhou_dismantle"
+                    size = { width = 30 height = 30 }
+                    position = { x = 95 y = 70 }
+                    format = center
+                    #text = xianzhou_yunqi_text
+                    buttonFont = "malgun_goth_24"
+                    font = "malgun_goth_24"
+                    effect = the_star_rail_null_effect
+                }
+                containerWindowType = {
+                    name = "xianzhou_district_1_build_show"
+                    position = { x = 130 y = 5 }
+                    size = { width = 100 height = 90 }
+                    verticalScrollbar = "right_vertical_slider"
+                    smooth_scrolling = yes
+                    clipping = yes
+                    moveable = no
+                    background = {
+                        name = "background"
+                        quadTextureSprite = "GFX_tiles_dark_area_cut_8"
+                    }
+                    effectButtonType = {
+                        name = "xianzhou_district_1_num"
+                        size = { width = 100 height = 30 }
+                        position = { x = 0 y = 5 }
+                        format = center
+                        text = xianzhou_district_1_num
+                        buttonFont = "cg_16b"
+                        font = "cg_16b"
+                        effect = the_star_rail_null_effect
+                    }
+                    effectButtonType = {
+                        name = "xianzhou_district_1_build_sequence"
+                        size = { width = 100 height = 30 }
+                        position = { x = 0 y = 25 }
+                        format = center
+                        text = xianzhou_district_1_build_sequence
+                        buttonFont = "cg_16b"
+                        font = "cg_16b"
+                        effect = the_star_rail_null_effect
+                    }
+                    effectButtonType = {
+                        name = "xianzhou_district_1_build_progress"
+                        size = { width = 100 height = 30 }
+                        position = { x = 0 y = 45 }
+                        format = center
+                        text = xianzhou_district_1_build_progress
+                        buttonFont = "cg_16b"
+                        font = "cg_16b"
+                        effect = the_star_rail_null_effect
+                    }
+                }
+                containerWindowType = {
+                    name = "xianzhou_district_1_building_show"
+                    position = { x = 240 y = 0 }
+                    size = { width = 300 height = 100 }
+                    moveable = no
+                    background = {
+                        name = "background"
+                        quadTextureSprite = "GFX_tiles_dark_area_cut_8"
+                    }
+                    effectButtonType = {
+                        name = "xianzhou_district_1_building_1"
+                        #spriteType = "GFX_xianzhou_level_up"
+                        size = { width = 40 height = 40 }
+                        position = { x = 5 y = 5 }
+                        format = center
+                        text = xianzhou_building_slot_bg
+                        buttonFont = "malgun_goth_24"
+                        font = "malgun_goth_24"
+                        effect = the_star_rail_null_effect
+                    }
+                    effectButtonType = {
+                        name = "xianzhou_district_1_building_2"
+                        #spriteType = "GFX_xianzhou_level_up"
+                        size = { width = 40 height = 40 }
+                        position = { x = 50 y = 5 }
+                        format = center
+                        text = xianzhou_building_slot_bg
+                        buttonFont = "malgun_goth_24"
+                        font = "malgun_goth_24"
+                        effect = the_star_rail_null_effect
+                    }
+                    effectButtonType = {
+                        name = "xianzhou_district_1_building_3"
+                        #spriteType = "GFX_xianzhou_level_up"
+                        size = { width = 40 height = 40 }
+                        position = { x = 95 y = 5 }
+                        format = center
+                        text = xianzhou_building_slot_bg
+                        buttonFont = "malgun_goth_24"
+                        font = "malgun_goth_24"
+                        effect = the_star_rail_null_effect
+                    }
+                    effectButtonType = {
+                        name = "xianzhou_district_1_building_4"
+                        #spriteType = "GFX_xianzhou_level_up"
+                        size = { width = 40 height = 40 }
+                        position = { x = 140 y = 5 }
+                        format = center
+                        text = xianzhou_building_slot_bg
+                        buttonFont = "malgun_goth_24"
+                        font = "malgun_goth_24"
+                        effect = the_star_rail_null_effect
+                    }
+                    effectButtonType = {
+                        name = "xianzhou_district_1_building_5"
+                        #spriteType = "GFX_xianzhou_level_up"
+                        size = { width = 40 height = 40 }
+                        position = { x = 185 y = 5 }
+                        format = center
+                        text = xianzhou_building_slot_bg
+                        buttonFont = "malgun_goth_24"
+                        font = "malgun_goth_24"
+                        effect = the_star_rail_null_effect
+                    }
+                    effectButtonType = {
+                        name = "xianzhou_district_1_building_6"
+                        #spriteType = "GFX_xianzhou_level_up"
+                        size = { width = 40 height = 40 }
+                        position = { x = 5 y = 50 }
+                        format = center
+                        text = xianzhou_building_slot_bg
+                        buttonFont = "malgun_goth_24"
+                        font = "malgun_goth_24"
+                        effect = the_star_rail_null_effect
+                    }
+                    effectButtonType = {
+                        name = "xianzhou_district_1_building_7"
+                        #spriteType = "GFX_xianzhou_level_up"
+                        size = { width = 40 height = 40 }
+                        position = { x = 50 y = 50 }
+                        format = center
+                        text = xianzhou_building_slot_bg
+                        buttonFont = "malgun_goth_24"
+                        font = "malgun_goth_24"
+                        effect = the_star_rail_null_effect
+                    }
+                    effectButtonType = {
+                        name = "xianzhou_district_1_building_8"
+                        #spriteType = "GFX_xianzhou_level_up"
+                        size = { width = 40 height = 40 }
+                        position = { x = 95 y = 50 }
+                        format = center
+                        text = xianzhou_building_slot_bg
+                        buttonFont = "malgun_goth_24"
+                        font = "malgun_goth_24"
+                        effect = the_star_rail_null_effect
+                    }
+                    effectButtonType = {
+                        name = "xianzhou_district_1_building_9"
+                        #spriteType = "GFX_xianzhou_level_up"
+                        size = { width = 40 height = 40 }
+                        position = { x = 140 y = 50 }
+                        format = center
+                        text = xianzhou_building_slot_bg
+                        buttonFont = "malgun_goth_24"
+                        font = "malgun_goth_24"
+                        effect = the_star_rail_null_effect
+                    }
+                    effectButtonType = {
+                        name = "xianzhou_district_1_building_10"
+                        #spriteType = "GFX_xianzhou_level_up"
+                        size = { width = 40 height = 40 }
+                        position = { x = 185 y = 50 }
+                        format = center
+                        text = xianzhou_building_slot_bg
+                        buttonFont = "malgun_goth_24"
+                        font = "malgun_goth_24"
+                        effect = the_star_rail_null_effect
+                    }
+                }
+            }
+        }
+        containerWindowType = {
+            name = "xianzhou_data_show"
+            position = { x = 550 y = 45 }
+            size = { width = 500 height = 230 }
+            moveable = no
+            background = {
+                name = "background"
+                quadTextureSprite = "GFX_glow_tile_orange"
+            }
+        }
+        buttonType = {
+            name = "focus_button"
+            position = { x = 600 y = 12 }
+            orientation = "upper_left"
+            spriteType = "GFX_fleetview_focus"
+            buttonFont = "cg_16b"
+            shortcut = "q"
+        }
+        buttonType = {
+            name = "xianzhou_close"
+            quadTextureSprite = "GFX_close"
+            position = { x= -42 y = 12 }
+            orientation = "UPPER_RIGHT"
+            shortcut = "ESCAPE"
+            clicksound = "back_click"
+        }
+        # Custom header
+        instantTextBoxType = {
+            name = "irm_some_header"
+            font = "malgun_goth_24"
+            text = "仙舟" 	# header text
+            position = { x = 600 y = 55 }
+            maxWidth = 543
+            maxHeight = 22
+            fixedSize = yes
+            alwaysTransparent = yes
+        }
+##################
+        ### ALL OF THIS IS HIDDEN OR DISPLACED ! ###
+
+        iconType = {
+            name = "hex_bg"
+            spriteType = "GFX_hex_bg"
+            position = { x = -10000 y = -14 }
+            alwaysTransparent = yes
+        }
+        iconType = {
+            name = "empire_header_line"
+            quadTextureSprite = "GFX_line_long"
+            position = { x = 60000 y = 22 }
+            alwaysTransparent = yes
+        }
+        buttonType = { name = "focus_button" position = { x = -1180 y = -1112 } spriteType = "GFX_fleetview_focus" } # hidden
+        instantTextBoxType = { name = "heading" font = "malgun_goth_24" position = { x = -1120 y = -115 } } # hidden
+        buttonType = { name = "alien_message_background" size = { x = 0 y = 0 } position = { x = -1110 y = -11430 } spriteType = "GFX_tiles_dark_area_cut_8" } # hidden
+        buttonType = { name = "confirm_button" quadTextureSprite = "GFX_standard_button_142_34_button" } # hidden
+        containerWindowType = {
+            name = "portrait_background"
+            position = { x = -1117 y = -1145 }
+            size = { width = 0 height = 0 } 	# hide portrait window
+            iconType = { name = "event_picture" spriteType = "GFX_diplomacy_portrait_frame" } # hidden
+            iconType = { name = "portrait" spriteType = "GFX_portrait_character" } # hidden
+        }
+        containerWindowType = {
+            name = "portrait"
+            position = { x = -1117 y = -1145 }
+            size = { width = 0 height = 0 } # hide portrait window
+            iconType = { name = "portrait" spriteType = "GFX_portrait_gamesetup_mask" } # hidden
+            iconType = { name = "black_frame" spriteType = "GFX_diplomacy_portrait_shadow_frame" } # hidden
+            iconType = { name = "stripes_1" spriteType = "GFX_diplomacy_stripes_2" } # hidden
+            iconType = { name = "city_frame" spriteType = "GFX_diplomacy_portrait_frame" } # hidden
+        }
+        iconType = { name = "empire_info_bg" spriteType = "GFX_diplomacy_dark_fade_bg" } # hidden
+        instantTextBoxType = { name = "empire_name" font = "malgun_goth_24" } # hidden
+        instantTextBoxType = { name = "empire_government_type" font = "cg_16b" } # hidden
+        instantTextBoxType = { name = "empire_personality_type" font = "cg_16b" } # hidden
+        overlappingElementsBoxType = { name = "empire_ethics_icons" position = { x = -1145 y = -11138 } } # hidden
+        iconType = { name = "empire_flag" spriteType = "GFX_empire_flag_128" position = { x = -1125 y = -11235 } } # hidden
+        containerWindowType = {
+            name = "leader_details"
+            position = { x = -1125 y = -1175 }
+            containerWindowType = { name = "empire_traits_box" } # hidden
+            instantTextBoxType = { name = "empire_traits_label" font = "cg_16b" } # hidden
+            overlappingElementsBoxType = { name = "leader_traits" } # hidden
+            instantTextBoxType = { name = "leader_name" font = "cg_16b" } # hidden
+            instantTextBoxType = { name = "leader_species" font = "cg_16b" } # hidden
+        }
+        containerWindowType = {
+            name = "opinion_window"
+            position = { x = -1127 y = -11110 }
+            size = { width = 94 height = 30 }
+            iconType = { name = "their_opinion_icon" spriteType = "GFX_diplomacy_opinion" } # hidden
+            instantTextBoxType = { name = "their_opinion" font = "cg_16b" }
+        }
+
+        ### EVENT DIPLO ###
+
+        containerWindowType = {
+            name = "EVENT_DIPLO"
+            position = { x = 2 y = 50 }
+            #size = { width = 563 height = 220 }
+            moveable = no
+
+            instantTextBoxType = {
+                name = "action_title"
+                font = "malgun_goth_24"
+                position = { x = 20 y = 0 }
+                maxWidth = 200
+                alwaysTransparent = yes
+            }
+            instantTextBoxType = {
+                name = "action_desc"
+                font = "malgun_goth_24"
+                position = { x = 490 y = 0 }
+                maxWidth = 500
+                maxHeight = 180
+                orientation = "UPPER_LEFT"
+                format = center
+                alwaysTransparent = yes
+                text_color_code = "H"
+            }
+            listboxType = { name = "option_list" position = { x = -11500 y = -1130 } } # hidden option list
+        }
+        # Description Section
+        instantTextBoxType = {
+            name = "alien_message"
+            font = "cg_16b"
+            position = { x = 20000 y = 100 }
+            maxWidth = 465
+            maxHeight = 220
+            format = left
+            scrollbartype = "standardtext_slider"
+        }
+    }
+}

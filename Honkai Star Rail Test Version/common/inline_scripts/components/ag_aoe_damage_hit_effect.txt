@@ -1,0 +1,107 @@
+# inline_script = {
+	# script = "components/ag_aoe_damage_hit_effect"
+	# ag_damage = 伤害
+	# ag_range = 半径
+	# ag_size = 槽位缩写
+	# ag_energy = yes-有能量tag no-无能量tag
+	# ag_kinetic = yes-有tag no-无tag
+	# ag_explosive = yes-有tag no-无tag
+	# ag_strike_craft = yes-有tag no-无tag
+	# ag_gravity = yes-有tag no-无tag
+	# ag_anti_psionic = yes-有tag no-无tag
+	# ag_point_defense = yes-有tag no-无tag
+	# ag_archaeotech = yes-有tag no-无tag
+	# ag_space_fauna = yes-有tag no-无tag
+	# ag_mandible = yes-有tag no-无tag
+	# ag_artillery = yes-有tag no-无tag
+# }
+# T slot AOE is an extremely stupid idea, Paradox must get their brain fucked.
+custom_tooltip_with_params = {
+    description = "ag_weapon_aoe_hit_effect"
+    description_parameters = { ag_damage = $ag_damage$ ag_range = $ag_range$ }
+}
+hidden_effect = { solar_system = {
+    every_ship_in_system = {
+        limit = {
+            NOT = { has_ship_flag = ag_ship_aoe_effect_mutex }
+            check_modifier_value = { modifier = ag_ship_aoe_damage_reduction value < 1.0 }
+            exists = controller
+            controller = { is_hostile = from.controller }
+            root = { from = { prevprev = { NOT = { has_ship_flag = ag_aoe_damaged_@prev } } } }
+            distance = { source = root min_distance >= 0 max_distance <= $ag_range$ same_solar_system = yes }
+        }
+        set_ship_flag = ag_ship_aoe_effect_mutex
+        root = { from = { prevprev = { set_timed_ship_flag = { flag = ag_aoe_damaged_@prev days = @ag_weapon_aoe_effect_cooldown } } } }
+        set_variable = { which = ag_weapon_aoe_ship_total_damage_temp value = value:ag_weapon_aoe_damage|ag_base_value|$ag_damage$|ag_size|$ag_size$|ag_energy|$ag_energy$|ag_kinetic|$ag_kinetic$|ag_explosive|$ag_explosive$|ag_strike_craft|$ag_strike_craft$|ag_gravity|$ag_gravity$|ag_anti_psionic|$ag_anti_psionic$|ag_psionic|$ag_psionic$|ag_point_defense|$ag_point_defense$|ag_archaeotech|$ag_archaeotech$|ag_space_fauna|$ag_space_fauna$|ag_mandible|$ag_mandible$|ag_artillery|$ag_artillery$|ag_size|$ag_size$| }
+        multiply_variable = { which = ag_weapon_aoe_ship_total_damage_temp value = value:ag_modifier_mult_multiplier|ag_modifier|ship_damage_reduction_mult|ag_min|0|ag_invert|yes| }
+        subtract_variable = { which = ag_weapon_aoe_ship_total_damage_temp value = modifier:ship_damage_reduction_add }
+        multiply_variable = { which = ag_weapon_aoe_ship_total_damage_temp value = value:ag_modifier_mult_multiplier|ag_modifier|ag_ship_aoe_damage_reduction|ag_max|1|ag_invert|yes| }
+        if = {
+            limit = { has_shield_hp > 0 }
+            set_variable = { which = ag_weapon_aoe_ship_shield_damage_temp value = ag_weapon_aoe_ship_total_damage_temp }
+            multiply_variable = { which = ag_weapon_aoe_ship_shield_damage_temp value = from.value:ag_modifier_mult_multiplier|ag_modifier|ship_shield_damage_mult| }
+            if = {
+                limit = { has_shield_hp >= ag_weapon_aoe_ship_shield_damage_temp }
+                reduce_shield = ag_weapon_aoe_ship_shield_damage_temp
+            }
+            else = {
+                set_variable = { which = ag_weapon_aoe_ship_shield_damage_temp value = trigger:has_shield_hp }
+                divide_variable = { which = ag_weapon_aoe_ship_shield_damage_temp value = from.value:ag_modifier_mult_multiplier|ag_modifier|ship_shield_damage_mult| }
+                reduce_shield = trigger:has_shield_hp
+            }
+            subtract_variable = { which = ag_weapon_aoe_ship_total_damage_temp value = ag_weapon_aoe_ship_shield_damage_temp }
+            clear_variable = ag_weapon_aoe_ship_shield_damage_temp
+        }
+        else_if = { limit = { check_variable = { which = ag_weapon_aoe_ship_total_damage_temp value <= 0 } } clear_variable = ag_weapon_aoe_ship_total_damage_temp }
+        if = {
+            limit = { check_variable = { which = ag_weapon_aoe_ship_total_damage_temp value > 0 } has_armor_percentage > 0 }
+            set_variable = { which = ag_ship_current_armor value = trigger:has_max_armor_hp }
+            multiply_variable = { which = ag_ship_current_armor value = trigger:has_armor_percentage }
+            set_variable = { which = ag_weapon_aoe_ship_armor_damage_temp value = ag_weapon_aoe_ship_total_damage_temp }
+            multiply_variable = { which = ag_weapon_aoe_ship_armor_damage_temp value = from.value:ag_modifier_mult_multiplier|ag_modifier|ship_armor_damage_mult| }
+            if = {
+                limit = { check_variable = { which = ag_ship_current_armor value >= ag_weapon_aoe_ship_armor_damage_temp } }
+                multiply_variable = { which = ag_weapon_aoe_ship_armor_damage_temp value = -1 }
+                repair_armor_amount = ag_weapon_aoe_ship_armor_damage_temp
+            }
+            else = {
+                set_variable = { which = ag_weapon_aoe_ship_armor_damage_temp value = ag_ship_current_armor }
+                multiply_variable = { which = ag_weapon_aoe_ship_armor_damage_temp value = -1 }
+                repair_armor_amount = ag_weapon_aoe_ship_armor_damage_temp
+                set_variable = { which = ag_weapon_aoe_ship_armor_damage_temp value = ag_ship_current_armor }
+                divide_variable = { which = ag_weapon_aoe_ship_armor_damage_temp value = from.value:ag_modifier_mult_multiplier|ag_modifier|ship_armor_damage_mult| }
+                multiply_variable = { which = ag_weapon_aoe_ship_armor_damage_temp value = -1 }
+            }
+            change_variable = { which = ag_weapon_aoe_ship_total_damage_temp value = ag_weapon_aoe_ship_armor_damage_temp }
+            clear_variable = ag_ship_current_armor
+            clear_variable = ag_weapon_aoe_ship_armor_damage_temp
+            clear_variable = ag_weapon_aoe_ship_armor_damage_temp_alt
+        }
+        else_if = { limit = { check_variable = { which = ag_weapon_aoe_ship_total_damage_temp value <= 0 } } clear_variable = ag_weapon_aoe_ship_total_damage_temp }
+        if = {
+            limit = { check_variable = { which = ag_weapon_aoe_ship_total_damage_temp value > 0 } }
+            multiply_variable = { which = ag_weapon_aoe_ship_total_damage_temp value = from.value:ag_modifier_mult_multiplier|ag_modifier|ship_hull_damage_mult| }
+            change_variable = { which = ag_weapon_aoe_ship_total_damage_temp value = modifier:ag_weapon_aoe_ship_hull_damage_add }
+            if = { limit = { has_modifier = "ag_weapon_aoe_ship_hull_damage_counter" } remove_modifier = "ag_weapon_aoe_ship_hull_damage_counter" }
+            add_modifier = { modifier = "ag_weapon_aoe_ship_hull_damage_counter" days = 1 multiplier = ag_weapon_aoe_ship_total_damage_temp }
+            if = {
+                limit = { OR = {
+                    has_ship_flag = ag_weapon_aoe_ship_hull_damage_1
+                    check_modifier_value = { modifier = ag_weapon_aoe_ship_hull_damage_add_1 value = 0 }
+                } }
+                set_timed_ship_flag = { flag = ag_weapon_aoe_ship_hull_damage_1 days = 1 }
+                add_modifier = { modifier = "ag_weapon_aoe_ship_hull_damage_1" days = 2 multiplier = ag_weapon_aoe_ship_total_damage_temp }
+            }
+            else_if = {
+                limit = { OR = {
+                    has_ship_flag = ag_weapon_aoe_ship_hull_damage_2
+                    check_modifier_value = { modifier = ag_weapon_aoe_ship_hull_damage_add_2 value = 0 }
+                } }
+                set_timed_ship_flag = { flag = ag_weapon_aoe_ship_hull_damage_2 days = 1 }
+                add_modifier = { modifier = "ag_weapon_aoe_ship_hull_damage_2" days = 2 multiplier = ag_weapon_aoe_ship_total_damage_temp }
+            }
+        }
+        clear_variable = ag_weapon_aoe_ship_total_damage_temp
+        remove_ship_flag = ag_ship_aoe_effect_mutex
+    }
+} }
