@@ -23,6 +23,8 @@ event = {
 			}
 			set_country_flag = use_path
 			give_technology = { tech = tech_path_civic_1 message = no }
+			country_event = { id = Astral_Express.17 } # 生成移动空间站
+			country_event = { id = Astral_Express.18 } # 生成附庸
 			every_system_within_border = {
 				every_system_planet = {
 					limit = { has_planet_flag = Create_Express_Welt }
@@ -423,6 +425,209 @@ planet_event = {
 		while = {
 			count = 10
 			remove_district = district_city
+		}
+	}
+}
+
+# 生成移动空间站
+country_event = {
+	id = Astral_Express.17
+	is_triggered_only = yes
+	fire_only_once = yes
+	hide_window = yes
+
+	trigger = {
+		has_origin = origin_Astral_Express
+	}
+	immediate = {
+		add_tradition = tr_zhishi
+		add_tradition = tr_cunhu
+		give_technology = { tech = tech_path_civic_1 message = no }
+		random_owned_leader = {
+			limit = {
+				is_ruler = no
+				leader_class = scientist
+			}
+			remove_all_positive_traits = yes
+			set_name = NAME_daheita
+			change_species = event_target:daheita_leader_species
+			change_leader_class = scientist
+			change_leader_portrait = daheita
+			change_background_ethic = ethic_materialist
+			change_background_job = event_fake_job_1
+			add_skill_without_trait_selection = 6
+			add_trait = {trait = leader_daherta_t1 show_message = no}
+			add_trait = {trait = leader_daherta_t2 show_message = no}
+			add_trait = {trait = leader_daherta_t3 show_message = no}
+			set_gender = female
+			set_age = 16
+			set_leader_flag = legendary_leader
+			set_leader_flag = immune_to_negative_traits
+			set_leader_flag = daheita
+			set_leader_flag = leader_death_events_blocked  # 阻止原版葬礼事件
+			save_global_event_target_as = daheita_leader
+		}
+		#宇宙碎片
+		change_variable = {
+			which = yuzhousuipian
+			value = 5000
+		}
+		#额外科技
+		give_technology = { tech = tech_gene_banks message = no }
+		give_technology = { tech = tech_gene_seed_purification message = no }
+		give_technology = { tech = tech_morphogenetic_field_mastery message = no }
+		give_technology = { tech = tech_gene_tailoring message = no }
+		give_technology = { tech = tech_glandular_acclimation message = no }
+		give_technology = { tech = tech_gene_expressions message = no }
+		give_technology = { tech = tech_habitat_1 message = no }
+		give_technology = { tech = tech_habitat_2 message = no }
+		give_technology = { tech = tech_habitat_3 message = no }
+		give_technology = { tech = tech_mega_engineering message = no }
+		give_technology = { tech = tech_honkai_star_rail_aux_t1 message = no }
+		give_technology = { tech = tech_honkai_star_rail_weapon_t1 message = no }
+		give_technology = { tech = tech_honkai_star_rail_hull_t1 message = no }
+		give_technology = { tech = tech_honkai_star_rail_power_t1 message = no }
+		give_technology = { tech = tech_galactic_archivism message = no }
+		random_planet_within_border = {
+			limit = { has_planet_flag = zhanlanxing }
+			save_event_target_as = herta_zhanlanxing
+			remove_building = building_colony_shelter
+			remove_building = building_commercial_zone
+			add_building = herta_holomuseum_1
+			add_building = building_holo_theatres
+			add_building = building_robot_assembly_plant
+			add_district = district_city
+			add_district = district_city
+			while = {
+				count = 4
+				add_deposit = d_rushing_waterfalls
+				add_deposit = d_ore_rich_caverns
+				add_district = district_mining
+				add_district = district_generator
+			}
+			add_zone = {
+				district = district_city
+				zone = zone_research
+			}
+			add_zone = {
+				district = district_city
+				zone = zone_industrial
+			}
+			add_building = {
+				zone = zone_research
+				building = building_research_lab_1
+			}
+			add_building = {
+				zone = zone_industrial
+				building = building_factory_1
+			}
+			add_building = {
+				zone = zone_industrial
+				building = building_foundry_1
+			}
+			while = {
+				count = 10
+				create_pop_group = {
+					size = 100
+					species = owner_main_species
+				}
+				create_pop_group = {
+					size = 5
+					species = event_target:heita_robot_species
+				}
+			}
+		}
+		#模拟宇宙项目
+		begin_event_chain = {
+			event_chain = "herta_start_situation_chain"
+			target = ROOT
+		}
+		capital_scope = {
+			enable_special_project = {
+				name = "herta_start_situation_1"
+				location = this
+				owner = root
+			}
+			enable_special_project = {
+				name = "herta_start_situation_2"
+				location = this
+				owner = root
+			}
+			enable_special_project = {
+				name = "herta_start_situation_3"
+				location = this
+				owner = root
+			}
+			enable_special_project = {
+				name = "herta_start_situation_4"
+				location = this
+				owner = root
+			}
+			create_fleet = {
+				name = "NAME_Station_AE"
+				settings = {
+					#can_upgrade = no
+					#can_change_composition = no
+					uses_naval_capacity = no
+					can_disband = no
+					spawn_debris = no
+					is_ultra_boss = yes
+				}
+				effect = {
+					set_owner = root
+					create_ship = {
+						name = "NAME_Station_AE"
+						design = "herta_fleet"
+						prefix = no
+						upgradable = no
+						graphical_culture = owner
+						effect = {
+							set_ship_flag = immune_to_confuse
+							set_ship_flag = immune_to_terrify
+							set_ship_flag = herta_fleet
+						}
+					}
+					set_fleet_flag = immune_to_confuse
+					set_fleet_flag = immune_to_terrify
+					set_fleet_flag = herta_fleet
+					save_global_event_target_as = herta_fleet
+					herta_fleet_station_set_effect = yes
+					set_location = ROOT.capital_scope
+					set_fleet_stance = passive
+					set_aggro_range_measure_from = return_point
+					set_aggro_range = 0
+					queue_actions = {
+						wait = {
+							duration = 320
+							random = 80
+						}
+					}
+					add_modifier = {
+						modifier = herta_station_fleet_debuff_1
+					}
+				}
+			}
+		}
+		start_situation = { type = situation_herta_station_fleet }
+	}
+}
+# 附庸 似乎没效果
+country_event = {
+	id = Astral_Express.18
+	is_triggered_only = yes
+	fire_only_once = yes
+	hide_window = yes
+	trigger = {
+		has_origin = origin_Astral_Express
+		ROOT = { exists = yes }
+		# target 是行商国家
+		target = { is_gigacorp = yes }
+		NOT = { target = { is_subject = yes } }
+	}
+	immediate = {
+		target = {
+			add_subject = ROOT
+			set_subject_type = subsidized_company
 		}
 	}
 }
