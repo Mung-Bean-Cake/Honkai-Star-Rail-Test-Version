@@ -1,0 +1,645 @@
+decision_hsr_credit_fund = {
+    owned_planets_only = yes
+    icon = decision_hsr_credit_fund
+    potential = {
+        custom_tooltip = {
+            fail_text = need_hsr_credit_open
+            hidden_trigger = {
+                from = {
+                    has_country_flag = hsr_credit_open
+                }
+            }
+        }
+        hidden_trigger = {
+            not = {
+                has_planet_flag = start_credit_fund
+            }
+        }
+    }
+
+    allow = {
+        custom_tooltip = {
+            fail_text = need_hsr_credit_open
+            hidden_trigger = {
+                from = {
+                    has_country_flag = hsr_credit_open
+                }
+            }
+        }
+        hidden_trigger = {
+            not = {
+                has_planet_flag = start_credit_fund
+            }
+        }
+    }
+    effect = {
+        custom_tooltip = start_credit_fund
+        hidden_effect = {
+            set_planet_flag = start_credit_fund
+        }
+    }
+}
+decision_hsr_stop_credit_fund = {
+    owned_planets_only = yes
+    icon = decision_hsr_stop_credit_fund
+    potential = {
+        custom_tooltip = {
+            fail_text = need_hsr_credit_open
+            hidden_trigger = {
+                from = {
+                    has_country_flag = hsr_credit_open
+                }
+            }
+        }
+        hidden_trigger = {
+            has_planet_flag = start_credit_fund
+        }
+    }
+
+    allow = {
+        custom_tooltip = {
+            fail_text = need_hsr_credit_open
+            hidden_trigger = {
+                from = {
+                    has_country_flag = hsr_credit_open
+                }
+            }
+        }
+        hidden_trigger = {
+            has_planet_flag = start_credit_fund
+        }
+    }
+    effect = {
+        custom_tooltip = stop_credit_fund
+        hidden_effect = {
+            remove_planet_flag = start_credit_fund
+        }
+    }
+}
+decision_hsr_basics_credit_fund = {
+    owned_planets_only = yes
+    icon = decision_divine_algorithm
+    potential = {
+        custom_tooltip = {
+            fail_text = need_hsr_credit_open
+            hidden_trigger = {
+                from = {
+                    has_country_flag = hsr_credit_open
+                }
+            }
+        }
+        hidden_trigger = {
+            has_planet_flag = start_credit_fund
+        }
+        not = {
+            has_modifier = hsr_basics_credit_fund
+        }
+    }
+
+    allow = {
+        custom_tooltip = {
+            fail_text = need_hsr_credit_open
+            hidden_trigger = {
+                from = {
+                    has_country_flag = hsr_credit_open
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = need_more_credit
+            hidden_trigger = {
+                from = {
+                    check_variable_arithmetic = {
+                        which = hsr_credit_eco_storage
+                        value >= root.value:hsr_add_mult_value|BASEVAR|75|VAR3|mod_planet_size|
+                    }
+                }
+            }
+        }
+        hidden_trigger = {
+            has_planet_flag = start_credit_fund
+        }
+        not = {
+            has_modifier = hsr_basics_credit_fund
+        }
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                change_variable = {
+                    which = hsr_credit_eco_storage
+                    value = root.value:hsr_add_mult_value|BASEVAR|-75|VAR3|mod_planet_size|
+                }
+            }
+        }
+        add_modifier = {
+            modifier = hsr_basics_credit_fund
+            mult = trigger:planet_size
+            days = 1800
+        }
+    }
+}
+decision_hsr_advanced_credit_fund = {
+    owned_planets_only = yes
+    icon = decision_hsr_advanced_credit_fund
+    potential = {
+        custom_tooltip = {
+            fail_text = need_hsr_credit_open
+            hidden_trigger = {
+                from = {
+                    has_country_flag = hsr_credit_open
+                }
+            }
+        }
+        hidden_trigger = {
+            has_planet_flag = start_credit_fund
+        }
+        not = {
+            has_modifier = hsr_advanced_credit_fund
+        }
+    }
+
+    allow = {
+        custom_tooltip = {
+            fail_text = need_hsr_credit_open
+            hidden_trigger = {
+                from = {
+                    has_country_flag = hsr_credit_open
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = need_more_credit
+            hidden_trigger = {
+                from = {
+                    check_variable_arithmetic = {
+                        which = hsr_credit_eco_storage
+                        value >= root.value:hsr_add_mult_value|BASEVAR|100|VAR3|mod_planet_size|
+                    }
+                }
+            }
+        }
+        hidden_trigger = {
+            has_planet_flag = start_credit_fund
+        }
+        not = {
+            has_modifier = hsr_advanced_credit_fund
+        }
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                change_variable = {
+                    which = hsr_credit_eco_storage
+                    value = root.value:hsr_add_mult_value|BASEVAR|-100|VAR3|mod_planet_size|
+                }
+            }
+        }
+        add_modifier = {
+            modifier = hsr_advanced_credit_fund
+            mult = trigger:planet_size
+            days = 1800
+        }
+    }
+}
+decision_hsr_strategy_credit_fund = {
+    owned_planets_only = yes
+    icon = decision_drilling_for_gas
+    potential = {
+        custom_tooltip = {
+            fail_text = need_hsr_credit_open
+            hidden_trigger = {
+                from = {
+                    has_country_flag = hsr_credit_open
+                }
+            }
+        }
+        hidden_trigger = {
+            has_planet_flag = start_credit_fund
+        }
+        not = {
+            has_modifier = hsr_strategy_credit_fund
+        }
+    }
+
+    allow = {
+        custom_tooltip = {
+            fail_text = need_hsr_credit_open
+            hidden_trigger = {
+                from = {
+                    has_country_flag = hsr_credit_open
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = need_more_credit
+            hidden_trigger = {
+                from = {
+                    check_variable_arithmetic = {
+                        which = hsr_credit_eco_storage
+                        value >= root.value:hsr_add_mult_value|BASEVAR|100|VAR3|mod_planet_size|
+                    }
+                }
+            }
+        }
+        hidden_trigger = {
+            has_planet_flag = start_credit_fund
+        }
+        not = {
+            has_modifier = hsr_strategy_credit_fund
+        }
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                change_variable = {
+                    which = hsr_credit_eco_storage
+                    value = root.value:hsr_add_mult_value|BASEVAR|-100|VAR3|mod_planet_size|
+                }
+            }
+        }
+        add_modifier = {
+            modifier = hsr_strategy_credit_fund
+            mult = trigger:planet_size
+            days = 1800
+        }
+    }
+}
+decision_hsr_rare_credit_fund = {
+    owned_planets_only = yes
+    icon = decision_strategic_resources
+    potential = {
+        custom_tooltip = {
+            fail_text = need_hsr_credit_open
+            hidden_trigger = {
+                from = {
+                    has_country_flag = hsr_credit_open
+                }
+            }
+        }
+        hidden_trigger = {
+            has_planet_flag = start_credit_fund
+        }
+        not = {
+            has_modifier = hsr_rare_credit_fund
+        }
+    }
+
+    allow = {
+        custom_tooltip = {
+            fail_text = need_hsr_credit_open
+            hidden_trigger = {
+                from = {
+                    has_country_flag = hsr_credit_open
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = need_more_credit
+            hidden_trigger = {
+                from = {
+                    check_variable_arithmetic = {
+                        which = hsr_credit_eco_storage
+                        value >= root.value:hsr_add_mult_value|BASEVAR|150|VAR3|mod_planet_size|
+                    }
+                }
+            }
+        }
+        hidden_trigger = {
+            has_planet_flag = start_credit_fund
+        }
+        not = {
+            has_modifier = hsr_rare_credit_fund
+        }
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                change_variable = {
+                    which = hsr_credit_eco_storage
+                    value = root.value:hsr_add_mult_value|BASEVAR|-150|VAR3|mod_planet_size|
+                }
+            }
+        }
+        add_modifier = {
+            modifier = hsr_rare_credit_fund
+            mult = trigger:planet_size
+            days = 1800
+        }
+    }
+}
+decision_hsr_research_credit_fund = {
+    owned_planets_only = yes
+    icon = decision_satellite_in_orbit
+    potential = {
+        custom_tooltip = {
+            fail_text = need_hsr_credit_open
+            hidden_trigger = {
+                from = {
+                    has_country_flag = hsr_credit_open
+                }
+            }
+        }
+        hidden_trigger = {
+            has_planet_flag = start_credit_fund
+        }
+        not = {
+            has_modifier = hsr_research_credit_fund
+        }
+    }
+
+    allow = {
+        custom_tooltip = {
+            fail_text = need_hsr_credit_open
+            hidden_trigger = {
+                from = {
+                    has_country_flag = hsr_credit_open
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = need_more_credit
+            hidden_trigger = {
+                from = {
+                    check_variable_arithmetic = {
+                        which = hsr_credit_eco_storage
+                        value >= root.value:hsr_add_mult_value|BASEVAR|150|VAR3|mod_planet_size|
+                    }
+                }
+            }
+        }
+        hidden_trigger = {
+            has_planet_flag = start_credit_fund
+        }
+        not = {
+            has_modifier = hsr_research_credit_fund
+        }
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                change_variable = {
+                    which = hsr_credit_eco_storage
+                    value = root.value:hsr_add_mult_value|BASEVAR|-150|VAR3|mod_planet_size|
+                }
+            }
+        }
+        add_modifier = {
+            modifier = hsr_research_credit_fund
+            mult = trigger:planet_size
+            days = 1800
+        }
+    }
+}
+decision_hsr_unity_credit_fund = {
+    owned_planets_only = yes
+    icon = decision_strategic_resources
+    potential = {
+        custom_tooltip = {
+            fail_text = need_hsr_credit_open
+            hidden_trigger = {
+                from = {
+                    has_country_flag = hsr_credit_open
+                }
+            }
+        }
+        hidden_trigger = {
+            has_planet_flag = start_credit_fund
+        }
+        not = {
+            has_modifier = hsr_unity_credit_fund
+        }
+    }
+
+    allow = {
+        custom_tooltip = {
+            fail_text = need_hsr_credit_open
+            hidden_trigger = {
+                from = {
+                    has_country_flag = hsr_credit_open
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = need_more_credit
+            hidden_trigger = {
+                from = {
+                    check_variable_arithmetic = {
+                        which = hsr_credit_eco_storage
+                        value >= root.value:hsr_add_mult_value|BASEVAR|100|VAR3|mod_planet_size|
+                    }
+                }
+            }
+        }
+        hidden_trigger = {
+            has_planet_flag = start_credit_fund
+        }
+        not = {
+            has_modifier = hsr_unity_credit_fund
+        }
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                change_variable = {
+                    which = hsr_credit_eco_storage
+                    value = root.value:hsr_add_mult_value|BASEVAR|-100|VAR3|mod_planet_size|
+                }
+            }
+        }
+        add_modifier = {
+            modifier = hsr_unity_credit_fund
+            mult = trigger:planet_size
+            days = 1800
+        }
+    }
+}
+decision_hsr_trade_credit_fund = {
+    owned_planets_only = yes
+    icon = decision_prospect
+    potential = {
+        custom_tooltip = {
+            fail_text = need_hsr_credit_open
+            hidden_trigger = {
+                from = {
+                    has_country_flag = hsr_credit_open
+                }
+            }
+        }
+        hidden_trigger = {
+            has_planet_flag = start_credit_fund
+        }
+        not = {
+            has_modifier = hsr_trade_credit_fund
+        }
+    }
+
+    allow = {
+        custom_tooltip = {
+            fail_text = need_hsr_credit_open
+            hidden_trigger = {
+                from = {
+                    has_country_flag = hsr_credit_open
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = need_more_credit
+            hidden_trigger = {
+                from = {
+                    check_variable_arithmetic = {
+                        which = hsr_credit_eco_storage
+                        value >= root.value:hsr_add_mult_value|BASEVAR|100|VAR3|mod_planet_size|
+                    }
+                }
+            }
+        }
+        hidden_trigger = {
+            has_planet_flag = start_credit_fund
+        }
+        not = {
+            has_modifier = hsr_trade_credit_fund
+        }
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                change_variable = {
+                    which = hsr_credit_eco_storage
+                    value = root.value:hsr_add_mult_value|BASEVAR|-100|VAR3|mod_planet_size|
+                }
+            }
+        }
+        add_modifier = {
+            modifier = hsr_trade_credit_fund
+            mult = trigger:planet_size
+            days = 1800
+        }
+    }
+}
+decision_hsr_build_credit_fund = {
+    owned_planets_only = yes
+    icon = decision_prismatic_ice_exhibit
+    potential = {
+        custom_tooltip = {
+            fail_text = need_hsr_credit_open
+            hidden_trigger = {
+                from = {
+                    has_country_flag = hsr_credit_open
+                }
+            }
+        }
+        hidden_trigger = {
+            has_planet_flag = start_credit_fund
+        }
+        not = {
+            has_modifier = hsr_build_credit_fund
+        }
+    }
+
+    allow = {
+        custom_tooltip = {
+            fail_text = need_hsr_credit_open
+            hidden_trigger = {
+                from = {
+                    has_country_flag = hsr_credit_open
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = need_more_credit
+            hidden_trigger = {
+                from = {
+                    check_variable_arithmetic = {
+                        which = hsr_credit_eco_storage
+                        value >= root.value:hsr_add_mult_value|BASEVAR|100|VAR3|mod_planet_size|
+                    }
+                }
+            }
+        }
+        hidden_trigger = {
+            has_planet_flag = start_credit_fund
+        }
+        not = {
+            has_modifier = hsr_build_credit_fund
+        }
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                change_variable = {
+                    which = hsr_credit_eco_storage
+                    value = root.value:hsr_add_mult_value|BASEVAR|-100|VAR3|mod_planet_size|
+                }
+            }
+        }
+        add_modifier = {
+            modifier = hsr_build_credit_fund
+            mult = trigger:planet_size
+            days = 1800
+        }
+    }
+}
+decision_hsr_army_credit_fund = {
+    owned_planets_only = yes
+    icon = decision_engineering_research
+    potential = {
+        custom_tooltip = {
+            fail_text = need_hsr_credit_open
+            hidden_trigger = {
+                from = {
+                    has_country_flag = hsr_credit_open
+                }
+            }
+        }
+        hidden_trigger = {
+            has_planet_flag = start_credit_fund
+        }
+        not = {
+            has_modifier = hsr_army_credit_fund
+        }
+    }
+
+    allow = {
+        custom_tooltip = {
+            fail_text = need_hsr_credit_open
+            hidden_trigger = {
+                from = {
+                    has_country_flag = hsr_credit_open
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = need_more_credit
+            hidden_trigger = {
+                from = {
+                    check_variable_arithmetic = {
+                        which = hsr_credit_eco_storage
+                        value >= root.value:hsr_add_mult_value|BASEVAR|150|VAR3|mod_planet_size|
+                    }
+                }
+            }
+        }
+        hidden_trigger = {
+            has_planet_flag = start_credit_fund
+        }
+        not = {
+            has_modifier = hsr_army_credit_fund
+        }
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                change_variable = {
+                    which = hsr_credit_eco_storage
+                    value = root.value:hsr_add_mult_value|BASEVAR|-150|VAR3|mod_planet_size|
+                }
+            }
+        }
+        add_modifier = {
+            modifier = hsr_army_credit_fund
+            mult = trigger:planet_size
+            days = 1800
+        }
+    }
+}

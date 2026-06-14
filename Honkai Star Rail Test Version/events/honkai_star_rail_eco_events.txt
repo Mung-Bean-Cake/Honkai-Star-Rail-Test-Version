@@ -1,0 +1,64 @@
+namespace = hsr_eco
+country_event = {#reload honkai_star_rail_eco.gui
+    id = hsr_eco.1
+    title = "DOT_SR.1.name"
+    desc = DOT_SR.1.desc
+    is_triggered_only = yes
+    diplomatic = yes
+    custom_gui = honkai_star_rail_eco_ui
+    immediate = {
+
+    }
+    option = {
+        name = OK
+        default_hide_option = yes
+    }
+}
+country_event = {#reload honkai_star_rail_eco.gui
+    id = hsr_eco.100
+    is_triggered_only = yes
+    hide_window = yes
+    trigger = {
+        has_country_flag = hsr_credit_open
+    }
+    immediate = {
+        #总项目值：存储值（流动资金），负债值
+        set_variable = {
+            which = hsr_credit_eco_debate
+            value = 0
+        }
+        set_variable = {
+            which = hsr_credit_eco_storage
+            value = 0
+        }
+    }
+}
+country_event = {#reload honkai_star_rail_eco.gui
+    id = hsr_eco.101
+    is_triggered_only = yes
+    hide_window = yes
+    trigger = {
+        has_country_flag = hsr_credit_open
+    }
+    immediate = {
+        #总项目值：存储值（流动资金），负债值
+        if = {
+            limit = {
+                check_variable_arithmetic = {
+                    which = value:hsr_credit_moth
+                    value < 0
+                }
+            }
+            change_variable = {
+                which = hsr_credit_eco_debate
+                value = value:hsr_credit_moth
+            }
+        }
+        else = {
+            change_variable = {
+                which = hsr_credit_eco_storage
+                value = value:hsr_credit_moth
+            }
+        }
+    }
+}

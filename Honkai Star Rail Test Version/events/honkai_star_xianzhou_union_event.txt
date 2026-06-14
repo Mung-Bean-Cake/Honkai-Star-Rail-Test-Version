@@ -82,6 +82,30 @@ country_event = {
     }
     immediate = {
         country_event = { id = xianzhou.2 }
+        owner = {
+            create_leader = {
+                class = xianzhou_ark_main_species
+                species = $OWNER$.species
+                can_see_in_list = no
+                can_manually_change_location = no
+                immortal = yes
+                hide_age = yes
+                hide_leader = yes
+                can_assign_to_council = no
+                event_leader = yes
+                randomize_traits = no
+                skill = 1
+
+                traits = {
+                    trait = leader_trait_xianzhou_fleet_main
+                }
+
+                effect = {
+                    add_skill_without_trait_selection = 10
+                    set_leader_flag = leader_death_events_blocked
+                }
+            }
+        }
         create_fleet = {
             name = "NAME_XIANZHOU_LUOFU"
             settings = {
@@ -110,18 +134,83 @@ country_event = {
                 set_fleet_flag = immune_to_terrify
                 set_fleet_flag = xianzhou_luofu
                 save_global_event_target_as = xianzhou_luofu
-                change_variable = {
-                    which = xianzhou_test_value
-                    value = 10
+                set_fleet_flag = xianzhou_scale_100
+                set_xianzhou_base_value = {
+                    xianzhou_district_1_level = 1
+                    xianzhou_district_1_num = 2
+                    xianzhou_district_1_num_max = 10
+                    xianzhou_district_1_pop = 500
+                    xianzhou_district_1_pop_1 = 500
+                    xianzhou_district_1_pop_2 = 10
+                    xianzhou_district_1_pop_3 = 0
+                    xianzhou_district_1_pop_4 = 300
+                    xianzhou_district_1_pop_5 = 0
+                    xianzhou_district_2_level = 1
+                    xianzhou_district_2_num = 4
+                    xianzhou_district_2_num_max = 10
+                    xianzhou_district_2_pop = 1500
+                    xianzhou_district_2_pop_1 = 1000
+                    xianzhou_district_2_pop_2 = 250
+                    xianzhou_district_2_pop_3 = 500
+                    xianzhou_district_2_pop_4 = 300
+                    xianzhou_district_2_pop_5 = 0.1
+                    xianzhou_district_3_level = 3
+                    xianzhou_district_3_num = 5
+                    xianzhou_district_3_num_max = 10
+                    xianzhou_district_3_pop = 2500
+                    xianzhou_district_3_pop_1 = 1500
+                    xianzhou_district_3_pop_2 = 500
+                    xianzhou_district_3_pop_3 = 1000
+                    xianzhou_district_3_pop_4 = 500
+                    xianzhou_district_3_pop_5 = 0.1
+                    xianzhou_district_4_level = 1
+                    xianzhou_district_4_num = 2
+                    xianzhou_district_4_num_max = 10
+                    xianzhou_district_4_pop = 1500
+                    xianzhou_district_4_pop_1 = 500
+                    xianzhou_district_4_pop_2 = 300
+                    xianzhou_district_4_pop_3 = 100
+                    xianzhou_district_4_pop_4 = 0
+                    xianzhou_district_4_pop_5 = 0.1
+                    xianzhou_district_5_level = 4
+                    xianzhou_district_5_num = 5
+                    xianzhou_district_5_num_max = 10
+                    xianzhou_district_5_pop = 3000
+                    xianzhou_district_5_pop_1 = 2000
+                    xianzhou_district_5_pop_2 = 100
+                    xianzhou_district_5_pop_3 = 500
+                    xianzhou_district_5_pop_4 = 1000
+                    xianzhou_district_5_pop_5 = 0.1
+                    xianzhou_district_6_level = 2
+                    xianzhou_district_6_num = 3
+                    xianzhou_district_6_num_max = 10
+                    xianzhou_district_6_pop = 1500
+                    xianzhou_district_6_pop_1 = 1500
+                    xianzhou_district_6_pop_2 = 100
+                    xianzhou_district_6_pop_3 = 0
+                    xianzhou_district_6_pop_4 = 300
+                    xianzhou_district_6_pop_5 = 0
+                    xianzhou_district_7_level = 1
+                    xianzhou_district_7_num = 2
+                    xianzhou_district_7_num_max = 10
+                    xianzhou_district_7_pop = 500
+                    xianzhou_district_7_pop_1 = 500
+                    xianzhou_district_7_pop_2 = 100
+                    xianzhou_district_7_pop_3 = 0
+                    xianzhou_district_7_pop_4 = 500
+                    xianzhou_district_7_pop_5 = 0
+                    xianzhou_pop = 30000
+                    xianzhou_pop_1 = 20000
+                    xianzhou_pop_2 = 2000
+                    xianzhou_pop_3 = 3000
+                    xianzhou_pop_4 = 5000
                 }
-                change_variable = {
-                    which = xianzhou_district_1_level
-                    value = 1
+                set_variable = {
+                    which = xianzhou_fleet_level
+                    value = 3
                 }
-                change_variable = {
-                    which = xianzhou_district_1_num
-                    value = 1
-                }
+                set_fleet_flag = xianzhou_leader_jingyuan
+                set_leader = last_created_leader
                 set_location = prev.capital_star
                 set_fleet_stance = passive
                 set_aggro_range_measure_from = return_point
@@ -147,7 +236,7 @@ fleet_event = {
     id = xianzhou.20
     title = ""
     desc = ""
-    location = event_target:xianzhou_luofu
+    location = this
     picture_event_data = { room = herta_3_room }
     is_triggered_only = yes
 
@@ -205,6 +294,552 @@ fleet_event = {
         }
         else = {
             remove_fleet_flag = xianzhou_district_1_build_ongoing
+        }
+    }
+}
+fleet_event = {
+    id = xianzhou.31
+    hide_window = yes
+    is_triggered_only = yes
+
+    immediate = {
+        if = {
+            limit = {
+                has_fleet_flag = xianzhou_district_2_build_ongoing
+                check_variable = {
+                    which = xianzhou_district_2_build_sequence
+                    value > 0
+                }
+            }
+            change_variable = {
+                which = xianzhou_district_2_build_progress
+                value = -1
+            }
+            if = {
+                limit = {
+                    check_variable = {
+                        which = xianzhou_district_2_build_progress
+                        value <= 0
+                    }
+                }
+                change_variable = {
+                    which = xianzhou_district_2_build_sequence
+                    value = -1
+                }
+                change_variable = {
+                    which = xianzhou_district_2_num
+                    value = 1
+                }
+                set_variable = {
+                    which = xianzhou_district_2_build_progress
+                    value = this.value:xianzhou_district_build_time
+                }
+            }
+            fleet_event = {
+                id = xianzhou.31
+                days = 1
+            }
+        }
+        else = {
+            remove_fleet_flag = xianzhou_district_2_build_ongoing
+        }
+    }
+}
+fleet_event = {
+    id = xianzhou.32
+    hide_window = yes
+    is_triggered_only = yes
+
+    immediate = {
+        if = {
+            limit = {
+                has_fleet_flag = xianzhou_district_3_build_ongoing
+                check_variable = {
+                    which = xianzhou_district_3_build_sequence
+                    value > 0
+                }
+            }
+            change_variable = {
+                which = xianzhou_district_3_build_progress
+                value = -1
+            }
+            if = {
+                limit = {
+                    check_variable = {
+                        which = xianzhou_district_3_build_progress
+                        value <= 0
+                    }
+                }
+                change_variable = {
+                    which = xianzhou_district_3_build_sequence
+                    value = -1
+                }
+                change_variable = {
+                    which = xianzhou_district_3_num
+                    value = 1
+                }
+                set_variable = {
+                    which = xianzhou_district_3_build_progress
+                    value = this.value:xianzhou_district_build_time
+                }
+            }
+            fleet_event = {
+                id = xianzhou.32
+                days = 1
+            }
+        }
+        else = {
+            remove_fleet_flag = xianzhou_district_3_build_ongoing
+        }
+    }
+}
+fleet_event = {
+    id = xianzhou.33
+    hide_window = yes
+    is_triggered_only = yes
+
+    immediate = {
+        if = {
+            limit = {
+                has_fleet_flag = xianzhou_district_4_build_ongoing
+                check_variable = {
+                    which = xianzhou_district_4_build_sequence
+                    value > 0
+                }
+            }
+            change_variable = {
+                which = xianzhou_district_4_build_progress
+                value = -1
+            }
+            if = {
+                limit = {
+                    check_variable = {
+                        which = xianzhou_district_4_build_progress
+                        value <= 0
+                    }
+                }
+                change_variable = {
+                    which = xianzhou_district_4_build_sequence
+                    value = -1
+                }
+                change_variable = {
+                    which = xianzhou_district_4_num
+                    value = 1
+                }
+                set_variable = {
+                    which = xianzhou_district_4_build_progress
+                    value = this.value:xianzhou_district_build_time
+                }
+            }
+            fleet_event = {
+                id = xianzhou.33
+                days = 1
+            }
+        }
+        else = {
+            remove_fleet_flag = xianzhou_district_4_build_ongoing
+        }
+    }
+}
+fleet_event = {
+    id = xianzhou.34
+    hide_window = yes
+    is_triggered_only = yes
+
+    immediate = {
+        if = {
+            limit = {
+                has_fleet_flag = xianzhou_district_5_build_ongoing
+                check_variable = {
+                    which = xianzhou_district_5_build_sequence
+                    value > 0
+                }
+            }
+            change_variable = {
+                which = xianzhou_district_5_build_progress
+                value = -1
+            }
+            if = {
+                limit = {
+                    check_variable = {
+                        which = xianzhou_district_5_build_progress
+                        value <= 0
+                    }
+                }
+                change_variable = {
+                    which = xianzhou_district_5_build_sequence
+                    value = -1
+                }
+                change_variable = {
+                    which = xianzhou_district_5_num
+                    value = 1
+                }
+                set_variable = {
+                    which = xianzhou_district_5_build_progress
+                    value = this.value:xianzhou_district_build_time
+                }
+            }
+            fleet_event = {
+                id = xianzhou.34
+                days = 1
+            }
+        }
+        else = {
+            remove_fleet_flag = xianzhou_district_5_build_ongoing
+        }
+    }
+}
+fleet_event = {
+    id = xianzhou.35
+    hide_window = yes
+    is_triggered_only = yes
+
+    immediate = {
+        if = {
+            limit = {
+                has_fleet_flag = xianzhou_district_6_build_ongoing
+                check_variable = {
+                    which = xianzhou_district_6_build_sequence
+                    value > 0
+                }
+            }
+            change_variable = {
+                which = xianzhou_district_6_build_progress
+                value = -1
+            }
+            if = {
+                limit = {
+                    check_variable = {
+                        which = xianzhou_district_6_build_progress
+                        value <= 0
+                    }
+                }
+                change_variable = {
+                    which = xianzhou_district_6_build_sequence
+                    value = -1
+                }
+                change_variable = {
+                    which = xianzhou_district_6_num
+                    value = 1
+                }
+                set_variable = {
+                    which = xianzhou_district_6_build_progress
+                    value = this.value:xianzhou_district_build_time
+                }
+            }
+            fleet_event = {
+                id = xianzhou.35
+                days = 1
+            }
+        }
+        else = {
+            remove_fleet_flag = xianzhou_district_6_build_ongoing
+        }
+    }
+}
+fleet_event = {
+    id = xianzhou.36
+    hide_window = yes
+    is_triggered_only = yes
+
+    immediate = {
+        if = {
+            limit = {
+                has_fleet_flag = xianzhou_district_7_build_ongoing
+                check_variable = {
+                    which = xianzhou_district_7_build_sequence
+                    value > 0
+                }
+            }
+            change_variable = {
+                which = xianzhou_district_7_build_progress
+                value = -1
+            }
+            if = {
+                limit = {
+                    check_variable = {
+                        which = xianzhou_district_7_build_progress
+                        value <= 0
+                    }
+                }
+                change_variable = {
+                    which = xianzhou_district_7_build_sequence
+                    value = -1
+                }
+                change_variable = {
+                    which = xianzhou_district_7_num
+                    value = 1
+                }
+                set_variable = {
+                    which = xianzhou_district_7_build_progress
+                    value = this.value:xianzhou_district_build_time
+                }
+            }
+            fleet_event = {
+                id = xianzhou.36
+                days = 1
+            }
+        }
+        else = {
+            remove_fleet_flag = xianzhou_district_7_build_ongoing
+        }
+    }
+}
+#
+fleet_event = {
+    id = xianzhou.50
+    title = xianzhou.50.tittle
+    desc = xianzhou.50.desc
+    diplomatic = yes
+    is_triggered_only = yes
+    location = root
+    custom_gui = xianzhou_district_build_list_window
+    custom_gui_option = xianzhou_district_build_list_window_option
+    option = {
+        name = xianzhou.50.a
+        hidden_effect = {
+            switch = {
+                trigger = has_fleet_flag
+                xianzhou_district_1_building_1_set = {
+                    set_fleet_flag = xianzhou_district_1_building_1_class_1
+                    change_variable = {
+                        which = xianzhou_district_1_building_1_class_1
+                        value = 1
+                    }
+                }
+            }
+        }
+    }
+    option = {
+        name = ""
+        hidden_effect = {
+            switch = {
+                trigger = has_fleet_flag
+                xianzhou_district_1_building_1_set = {
+                    remove_fleet_flag = xianzhou_district_1_building_1_set
+                }
+            }
+        }
+        default_hide_option = yes
+    }
+}
+fleet_event = {
+    id = xianzhou.51
+    title = xianzhou.50.tittle
+    desc = xianzhou.50.desc
+    diplomatic = yes
+    is_triggered_only = yes
+    location = root
+
+    custom_gui = xianzhou_district_build_list_window
+    custom_gui_option = xianzhou_district_build_list_window_option
+    option = {
+        name = xianzhou.50.a
+        hidden_effect = {
+            switch = {
+                trigger = has_fleet_flag
+                xianzhou_district_1_building_1_set = {
+
+                }
+            }
+        }
+    }
+    option = {
+        name = ""
+        default_hide_option = yes
+    }
+}
+fleet_event = {
+    id = xianzhou.52
+    title = xianzhou.50.tittle
+    desc = xianzhou.50.desc
+    diplomatic = yes
+    is_triggered_only = yes
+    location = root
+
+    custom_gui = xianzhou_district_build_list_window
+    custom_gui_option = xianzhou_district_build_list_window_option
+    option = {
+        name = xianzhou.50.a
+        hidden_effect = {
+            switch = {
+                trigger = has_fleet_flag
+                xianzhou_district_1_building_1_set = {
+
+                }
+            }
+        }
+    }
+    option = {
+        name = ""
+        default_hide_option = yes
+    }
+}
+fleet_event = {
+    id = xianzhou.53
+    title = xianzhou.50.tittle
+    desc = xianzhou.50.desc
+    diplomatic = yes
+    is_triggered_only = yes
+    location = root
+
+    custom_gui = xianzhou_district_build_list_window
+    custom_gui_option = xianzhou_district_build_list_window_option
+    option = {
+        name = xianzhou.50.a
+        hidden_effect = {
+            switch = {
+                trigger = has_fleet_flag
+                xianzhou_district_1_building_1_set = {
+
+                }
+            }
+        }
+    }
+    option = {
+        name = ""
+        default_hide_option = yes
+    }
+}
+fleet_event = {
+    id = xianzhou.54
+    title = xianzhou.50.tittle
+    desc = xianzhou.50.desc
+    diplomatic = yes
+    is_triggered_only = yes
+    location = root
+
+    custom_gui = xianzhou_district_build_list_window
+    custom_gui_option = xianzhou_district_build_list_window_option
+    option = {
+        name = xianzhou.50.a
+        hidden_effect = {
+            switch = {
+                trigger = has_fleet_flag
+                xianzhou_district_1_building_1_set = {
+
+                }
+            }
+        }
+    }
+    option = {
+        name = ""
+        default_hide_option = yes
+    }
+}
+fleet_event = {
+    id = xianzhou.55
+    title = xianzhou.50.tittle
+    desc = xianzhou.50.desc
+    diplomatic = yes
+    is_triggered_only = yes
+    location = root
+
+    custom_gui = xianzhou_district_build_list_window
+    custom_gui_option = xianzhou_district_build_list_window_option
+    option = {
+        name = xianzhou.50.a
+        hidden_effect = {
+            switch = {
+                trigger = has_fleet_flag
+                xianzhou_district_1_building_1_set = {
+
+                }
+            }
+        }
+    }
+    option = {
+        name = ""
+        hidden_effect = {
+            switch = {
+                trigger = has_fleet_flag
+                xianzhou_district_1_building_1_set = {
+                    remove_fleet_flag = xianzhou_district_1_building_1_set
+                }
+            }
+        }
+        default_hide_option = yes
+    }
+}
+fleet_event = {
+    id = xianzhou.56
+    title = xianzhou.50.tittle
+    desc = xianzhou.50.desc
+    diplomatic = yes
+    is_triggered_only = yes
+    location = root
+
+    custom_gui = xianzhou_district_build_list_window
+    custom_gui_option = xianzhou_district_build_list_window_option
+    option = {
+        name = xianzhou.50.a
+        hidden_effect = {
+            switch = {
+                trigger = has_fleet_flag
+                xianzhou_district_1_building_1_set = {
+
+                }
+            }
+        }
+    }
+    option = {
+        name = ""
+        default_hide_option = yes
+    }
+}
+fleet_event = {
+    id = xianzhou.100
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = {
+        set_update_modifiers_batch = begin
+
+        root.owner = {
+            set_variable = {
+                which = xianzhou_naval_cap
+                value = prev.value:xianzhou_all_naval_cap
+            }
+        }
+        set_update_modifiers_batch = end
+    }
+}
+country_event = {
+    id = xianzhou.101
+    hide_window = yes
+    is_triggered_only = yes
+
+    trigger = {
+
+    }
+    immediate = {
+        set_variable = {
+            which = xianzhou_naval_cap
+            value = value:xianzhou_all_naval_cap
+        }
+        set_variable = {
+            which = xianzhou_empire_sprawl
+            value = value:xianzhou_all_empire_sprawl
+        }
+        # every_owned_fleet = {
+        #     limit = {
+        #         or = {
+        #             has_fleet_flag = xianzhou_luofu
+        #
+        #         }
+        #     }
+        #     fleet_event = {
+        #         id = xianzhou.100
+        #     }
+        # }
+        update_modifier_amount_if_needed = {
+            MODIFIER = xianzhou_navy_size_effect
+            PREV_MULT_VAR = xianzhou_naval_cap_prev_month
+            MULT_VAR = xianzhou_naval_cap
+        }
+        update_modifier_amount_if_needed = {
+            MODIFIER = xianzhou_empire_size_country_scope_effect
+            PREV_MULT_VAR = xianzhou_empire_sprawlp_prev_month
+            MULT_VAR = xianzhou_empire_sprawl
         }
     }
 }
