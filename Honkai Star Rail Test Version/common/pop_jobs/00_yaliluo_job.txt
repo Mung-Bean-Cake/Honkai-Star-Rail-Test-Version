@@ -1,21 +1,22 @@
 tiwei_soldier = {
-	category = worker
+	category = specialist
 	swappable_data = {
 		default = {
 			condition_string = SOLDIER_JOB_TRIGGER
 			building_icon = building_stronghold
 		}
+		swap_type = {
+			trigger = {
+				soldier_is_necromancer = yes
+			}
+			name = necromancer
+			desc = necromancer
+			icon = necromancer
+			building_icon = building_dread_encampment
+			weight = 50
+		}
 	}
-	possible_pre_triggers = {
-		has_owner = yes
-		is_being_purged = no
-		is_being_assimilated = no
-		is_sapient = yes
-	}
-	possible = {
-		soldier_job_check_trigger = yes
-		owner = { is_gestalt = no }
-	}
+
 	tags = { soldier }
 	triggered_country_modifier = {
 		potential = {
@@ -47,32 +48,53 @@ tiwei_soldier = {
 	country_modifier = {
 		country_naval_cap_add = 4
 	}
-	inline_script = "output/soldier_triggered_modifiers"
+	#inline_script = "output/soldier_triggered_modifiers"
 
 	resources = {
 		category = planet_soldiers
-		inline_script = "output/soldier_output"
 		produces = {
 			trigger = {
 				soldier_is_necromancer = yes
 			}
-			physics_research = 2
-			society_research = 2
+			society_research = 0.5
+			engineering_research = 0.5
 		}
 		upkeep = {
 			trigger = {
 				soldier_is_necromancer = yes
 			}
-			food = 1
-			consumer_goods = 0.1
+			consumer_goods = 0.5
+		}
+		upkeep = {
+			alloys = 0.5
 		}
 	}
+
+	inline_script = "output/soldier_triggered_modifiers"
+
+	possible_pre_triggers = {
+		has_owner = yes
+		is_being_purged = no
+		is_being_assimilated = no
+		is_sapient = yes
+	}
+
+	possible = {
+		soldier_job_check_trigger = yes
+		owner = { is_gestalt = no }
+	}
+
 	weight = {
 		weight = @soldier_job_weight
 		modifier = {
 			factor = 10
 			exists = planet
-			planet = { has_modifier = martial_law }
+			planet = {
+				exists = leader
+				leader = {
+					leader_class = commander
+				}
+			}
 		}
 		modifier = {
 			factor = 2
@@ -91,18 +113,9 @@ tiwei_soldier = {
 			has_trait = trait_weak
 		}
 		modifier = {
-			factor = 0.1
-			is_enslaved = yes
-			NOT = { has_slavery_type = { type = slavery_military } }
-		}
-		modifier = {
 			factor = 10
 			is_enslaved = yes
 			has_slavery_type = { type = slavery_military }
-		}
-		modifier = {
-			factor = 0.1
-			can_take_servant_job = yes
 		}
 		modifier = {
 			factor = 1.1
@@ -117,52 +130,16 @@ tiwei_soldier = {
 			has_trait = trait_limited_regeneration
 		}
 		modifier = {
-			factor = 1.1
-			has_trait = trait_presapient_proles
-		}
-		modifier = {
-			factor = 1.1
-			has_trait = trait_brainslug
-		}
-		modifier = {
-			factor = 1.05
-			has_trait = trait_presapient_natural_intellectuals
-		}
-		modifier = {
-			factor = 1.05
-			OR = {
-				has_trait = trait_robust
-				has_trait = trait_robot_efficient_processors
-			}
-		}
-		modifier = {
-			factor = 1.05
-			has_trait = trait_nerve_stapled
-		}
-		modifier = {
-			factor = 1.1
-			OR = {
-				has_trait = trait_robot_propaganda_machines
-				has_trait = trait_traditional
-			}
-		}
-		modifier = {
-			factor = 0.9
-			has_trait = trait_quarrelsome
-		}
-		modifier = {
 			factor = 0
-			can_be_soldier = no
+			species = { can_be_soldier = no }
 		}
 		modifier = {
 			factor = 2
 			has_trait = trait_lithoid
 		}
 		modifier = {
-			factor = 1.5
-			OR = {
-				has_trait = trait_robust
-			}
+			factor = 5
+			has_trait = trait_cyborg_creed_of_war
 		}
 	}
 }
@@ -206,7 +183,7 @@ yaliluo_maintenance_worker = {
 		}
 	}
 	weight = {
-		weight = 5
+		weight = 100
 		modifier = {
 			factor = 0.2
 			has_citizenship_rights = no
@@ -221,5 +198,4 @@ yaliluo_maintenance_worker = {
 			}
 		}
 	}
-	inline_script = "jobs/automodding_priority_unity"
 }

@@ -333,7 +333,7 @@ country_event = {#初试化设置
 					species = owner_main_species
 				}
 				create_pop_group = {
-					size = 5
+					size = 10
 					species = event_target:heita_robot_species
 				}
 			}
@@ -364,74 +364,7 @@ country_event = {#初试化设置
 				location = this
 				owner = root
 			}
-            create_fleet = {
-                name = "NAME_HERTA_FLEET"
-                settings = {
-                    #can_upgrade = no
-                    #can_change_composition = no
-                    uses_naval_capacity = no
-                    can_disband = no
-                    spawn_debris = no
-                    is_ultra_boss = yes
-                }
-                effect = {
-                    set_owner = root
-                    create_ship = {
-                        name = "NAME_herta"
-                        design = "herta_fleet"
-                        prefix = no
-                        upgradable = no
-                        graphical_culture = owner
-                        effect = {
-                            set_ship_flag = immune_to_confuse
-                            set_ship_flag = immune_to_terrify
-                            set_ship_flag = herta_fleet
-                        }
-                    }
-                    set_fleet_flag = immune_to_confuse
-                    set_fleet_flag = immune_to_terrify
-                    set_fleet_flag = herta_fleet
-                    save_global_event_target_as = herta_fleet
-                    herta_fleet_station_set_effect = yes
-                    set_location = prev
-                    set_fleet_stance = passive
-                    set_aggro_range_measure_from = return_point
-                    set_aggro_range = 0
-                    queue_actions = {
-                        wait = {
-                            duration = 320
-                            random = 80
-                        }
-                    }
-                    add_modifier = {
-                        modifier = herta_station_fleet_debuff_1
-                    }
-                }
-            }
-            create_fleet = {
-                effect = {
-                    set_owner = root
-                    create_ship = {
-                        name = random
-                        random_existing_design = constructor
-                    }
-                    set_fleet_stance = evasive
-                    set_location = event_target:herta_fleet
-                }
-            }
-            create_fleet = {
-                effect = {
-                    set_owner = root
-                    create_ship = {
-                        name = random
-                        random_existing_design = science
-                    }
-                    set_fleet_stance = evasive
-                    set_location = event_target:herta_fleet
-                }
-            }
         }
-        start_situation = { type = situation_herta_station_fleet }
 	}
 }
 #通用黑塔主线,局势修复空间站

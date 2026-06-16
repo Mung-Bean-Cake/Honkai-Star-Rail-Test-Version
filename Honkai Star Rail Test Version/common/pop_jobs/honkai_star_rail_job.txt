@@ -40,8 +40,7 @@ museum_clerk = {
     }
 
     weight = {
-        weight = @specialist_job_weight
-        mult = value:job_weights_multiple_resources_modifier|JOB|museum_clerk|RESOURCE1|unity|WEIGHT1|0.5|RESOURCE2|engineering_research|WEIGHT2|0.5|
+        weight = 100
         modifier = {
             factor = 0.2
             has_citizenship_rights = no
@@ -64,15 +63,6 @@ museum_clerk = {
 
     inline_script = "jobs/automodding_priority_research"
 
-    promotion = {
-        time = @standard_promotion_time
-        effect = {
-            pop_amount_change_category = {
-                CATEGORY = specialist
-                AMOUNT = local_pop_amount
-            }
-        }
-    }
 }
 clone_robot_up = {
     category = specialist
@@ -116,15 +106,6 @@ clone_robot_up = {
             }
             alloys = 1
         }
-        upkeep = {
-            trigger = {
-                exists = planet
-                planet = {
-                    roboticist_is_bath_attendant_individual_machine = yes
-                }
-            }
-            alloys = 0.5
-        }
     }
 
     triggered_planet_modifier = {
@@ -132,14 +113,6 @@ clone_robot_up = {
         bonus_pop_growth = 3
         planet_pop_assembly_mult = 0.15
         logistic_growth_mult = 0.15
-    }
-    triggered_planet_modifier = {
-        potential = {
-            roboticist_is_bath_attendant_individual_machine = yes
-        }
-        planet_pop_assembly_mult = 0.0075
-        pop_amenities_usage_mult = 0.03
-        mult = planet.value:toxic_attendant_growth
     }
 
     triggered_planet_modifier = {
@@ -223,16 +196,6 @@ clone_robot_up = {
             owner = { is_synthetic_empire = yes }
         }
     }
-
-    promotion = {
-        time = @standard_promotion_time
-        effect = {
-            pop_amount_change_category = {
-                CATEGORY = specialist
-                AMOUNT = local_pop_amount
-            }
-        }
-    }
 }
 herta_up_researcher = {
     category = specialist
@@ -296,8 +259,7 @@ herta_up_researcher = {
     }
 
     weight = {
-        weight = @specialist_job_weight
-        mult = value:job_weights_multiple_resources_modifier|JOB|herta_up_researcher|RESOURCE1|engineering_research|WEIGHT1|0.5|RESOURCE2|physics_research|WEIGHT2|0.5|
+        weight = 500
         modifier = {
             factor = 0.2
             has_citizenship_rights = no
@@ -319,16 +281,6 @@ herta_up_researcher = {
     }
 
     inline_script = "jobs/automodding_priority_research"
-
-    promotion = {
-        time = @standard_promotion_time
-        effect = {
-            pop_amount_change_category = {
-                CATEGORY = specialist
-                AMOUNT = local_pop_amount
-            }
-        }
-    }
 }
 herta_up_ruanmei_1 = {
     category = specialist
@@ -379,8 +331,7 @@ herta_up_ruanmei_1 = {
     }
 
     weight = {
-        weight = @specialist_job_weight
-        mult = value:job_weights_multiple_resources_modifier|JOB|herta_up_ruanmei_1|RESOURCE1|minerals|WEIGHT1|0.5|RESOURCE2|energy|WEIGHT2|0.5|
+        weight = 100
         modifier = {
             factor = 0.2
             has_citizenship_rights = no
@@ -402,16 +353,6 @@ herta_up_ruanmei_1 = {
     }
 
     inline_script = "jobs/automodding_priority_minerals"
-
-    promotion = {
-        time = @standard_promotion_time
-        effect = {
-            pop_amount_change_category = {
-                CATEGORY = specialist
-                AMOUNT = local_pop_amount
-            }
-        }
-    }
 }
 herta_up_ruanmei_2 = {
     category = specialist
@@ -456,8 +397,7 @@ herta_up_ruanmei_2 = {
     }
 
     weight = {
-        weight = @specialist_job_weight
-        mult = value:job_weights_multiple_resources_modifier|JOB|herta_up_ruanmei_2|RESOURCE1|alloys|WEIGHT1|0.5|RESOURCE2|exotic_gases|WEIGHT2|0.5|
+        weight = 1000
         modifier = {
             factor = 0.2
             has_citizenship_rights = no
@@ -479,16 +419,6 @@ herta_up_ruanmei_2 = {
     }
 
     inline_script = "jobs/automodding_priority_alloys"
-
-    promotion = {
-        time = @standard_promotion_time
-        effect = {
-            pop_amount_change_category = {
-                CATEGORY = specialist
-                AMOUNT = local_pop_amount
-            }
-        }
-    }
 }
 #螺丝星区划建筑
 luosi_clerk = {
@@ -533,7 +463,6 @@ luosi_clerk = {
 
     weight = {
         weight = @clerk_job_weight
-        mult = value:job_weights_modifier|JOB|clerk|RESOURCE|trade|
         mult = value:scripted_modifier_job_weight_mult|MODIFIER|pop_job_amenities_mult|
         modifier = {
             factor = 0.25
@@ -575,15 +504,6 @@ luosi_clerk = {
 
     inline_script = "jobs/automodding_priority_trade"
 
-    promotion = {
-        time = @standard_promotion_time
-        effect = {
-            pop_amount_change_category = {
-                CATEGORY = worker
-                AMOUNT = local_pop_amount
-            }
-        }
-    }
 }
 luosi_worker = {
     category = worker
@@ -621,7 +541,6 @@ luosi_worker = {
 
     weight = {
         weight = @clerk_job_weight
-        mult = value:job_weights_modifier|JOB|clerk|RESOURCE|trade|
         mult = value:scripted_modifier_job_weight_mult|MODIFIER|pop_job_amenities_mult|
         modifier = {
             factor = 0.25
@@ -662,14 +581,4 @@ luosi_worker = {
     }
 
     inline_script = "jobs/automodding_priority_trade"
-
-    promotion = {
-        time = @standard_promotion_time
-        effect = {
-            pop_amount_change_category = {
-                CATEGORY = worker
-                AMOUNT = local_pop_amount
-            }
-        }
-    }
 }
