@@ -2,7 +2,7 @@
 #电力中继T3
 ###################################
 space_energy_core_t3 = {
-	icon = "GFX_space_energy_core_t1"
+	icon = "GFX_space_energy_core_t2"
 	construction_days = 240
 
 	potential = {
@@ -18,7 +18,9 @@ space_energy_core_t3 = {
 	possible = {
 		exists = owner
 		OR = {
-			owner = { has_civic = civic_herta_2 }
+			owner = {
+				has_civic = civic_herta_2
+			}
 		}
 	}
 	resources = {
@@ -34,17 +36,6 @@ space_energy_core_t3 = {
 			sr_dark_matter = 1
 
 		}
-        produces = {
-            trigger = {
-                exists = owner
-                owner = { has_tradition = tr_herta_discuss_4 }
-            }
-            energy = 50
-            minerals = 15
-            physics_research = 10
-            sr_dark_matter = 1
-            exotic_gases = 1
-        }
 		upkeep = {
 			energy = 15
 		}
@@ -53,18 +44,18 @@ space_energy_core_t3 = {
         planet_jobs_physics_research_produces_mult = 0.05
 		planet_jobs_energy_produces_mult = 0.1
     }
-    triggered_system_modifier = {
-        potential = {
-            exists = owner
-            owner = {
-                has_tradition = tr_herta_discuss_4
-            }
-        }
-        ship_shield_mult = 0.25
-        ship_shield_regen_add_static = 5
-        ship_shield_hardening_add = 2
-        ship_shield_penetration_add = 2
-    }
+	triggered_system_modifier = {
+		potential = {
+			exists = owner
+			owner = {
+				has_civic = civic_herta_2
+			}
+		}
+		ship_shield_mult = 0.25
+		ship_shield_regen_add_static = 5
+		ship_shield_hardening_add = 2
+		ship_shield_penetration_add = 2
+	}
     ai_weight = {
         weight = 1000
     }
@@ -104,32 +95,22 @@ space_rare_resource_t2 = {
 			minerals = 20
 			energy = 20
 		}
-        produces = {
-            trigger = {
-                exists = owner
-                owner = { has_tradition = tr_herta_discuss_4 }
-            }
-            exotic_gases = 10
-            rare_crystals = 10
-            volatile_motes = 10
-            engineering_research = 10
-        }
 	}
 	triggered_system_modifier = {
         planet_jobs_alloys_produces_mult = 0.075
 		planet_jobs_consumer_goods_produces_mult = 0.075
     }
-    triggered_system_modifier = {
-        potential = {
-            exists = owner
-            owner = {
-                has_tradition = tr_herta_discuss_4
-            }
-        }
-        ship_speed_mult = 0.15
-        ship_ftl_jumpdrive_range_mult = 0.15
-        ship_jumpdrive_cooldown_mult = -0.15
-    }
+	triggered_system_modifier = {
+		potential = {
+			exists = owner
+			owner = {
+				has_civic = civic_herta_2
+			}
+		}
+		ship_speed_mult = 0.15
+		ship_ftl_jumpdrive_range_mult = 0.15
+		ship_jumpdrive_cooldown_mult = -0.15
+	}
 }
 ###################################
 #大型锚地
@@ -179,42 +160,554 @@ space_anchorage_t1 = {
 	country_modifier = {
 		country_naval_cap_add = 50
 	}
-    triggered_orbit_modifier = {
-        potential = {
-            exists = owner
-            owner = {
-                has_tradition = tr_herta_discuss_4
-            }
-        }
-        ship_orbit_upkeep_mult = -0.1
-    }
-    triggered_station_modifier = {
-        potential = {
-            exists = owner
-            owner = {
-                has_tradition = tr_herta_discuss_4
-            }
-        }
-        starbase_shipyard_build_speed_mult = 0.1
-        starbase_shipyard_build_cost_mult = -0.05
-        ship_cloaking_detection_add = 2
-    }
-    triggered_ship_modifier = {
-        potential = {
-            exists = owner
-            owner = {
-                has_tradition = tr_herta_discuss_4
-            }
-        }
-        ship_starting_experience_add = 500
-    }
-    triggered_country_modifier = {
-        potential = {
-            exists = owner
-            owner = {
-                has_tradition = tr_herta_discuss_4
-            }
-        }
-        country_naval_cap_add = 50
-    }
+}
+#黑塔空间站
+arkship_hsr_base_hub = {
+	icon = "GFX_space_energy_core_t1"
+	starbase_type = arkship
+	construction_days = 360
+	category = sm_colony_cat
+
+	starbase_limit = {
+		base = 1
+	}
+
+	potential = {
+		or = {
+			is_arkship_starbase = yes
+			is_hsr_arkship_starbase = yes
+		}
+		owner? = {
+			has_technology = tech_honkai_star_rail_aux_t1
+		}
+	}
+
+	resources = {
+		category = starbase_arkship_upgrades
+		cost = {
+			alloys = 600
+		}
+		upkeep = {
+			energy = 3
+			alloys = 2
+		}
+	}
+
+	planet_modifier = {
+		planet_jobs_energy_produces_mult = 0.15
+		planet_jobs_minerals_produces_mult = 0.15
+		planet_jobs_food_produces_mult = 0.15
+	}
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = {
+				has_civic = civic_herta_2
+			}
+		}
+		planet_jobs_energy_produces_mult = 0.15
+		planet_jobs_minerals_produces_mult = 0.15
+		planet_jobs_food_produces_mult = 0.15
+	}
+	ai_weight = {
+		weight = 100
+	}
+}
+arkship_hsr_advanced_hub = {
+	icon = "GFX_space_alloys_construction_t2"
+	starbase_type = arkship
+	construction_days = 360
+	category = sm_colony_cat
+
+	starbase_limit = {
+		base = 1
+	}
+
+	potential = {
+		or = {
+			is_arkship_starbase = yes
+			is_hsr_arkship_starbase = yes
+		}
+		owner? = {
+			has_technology = tech_honkai_star_rail_aux_t1
+		}
+	}
+
+	resources = {
+		category = starbase_arkship_upgrades
+		cost = {
+			alloys = 600
+		}
+		upkeep = {
+			energy = 3
+			alloys = 2
+		}
+	}
+
+	planet_modifier = {
+		planet_jobs_alloys_produces_mult = 0.15
+		planet_jobs_consumer_goods_produces_mult = 0.15
+	}
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = {
+				has_civic = civic_herta_2
+			}
+		}
+		planet_jobs_alloys_produces_mult = 0.15
+		planet_jobs_consumer_goods_produces_mult = 0.15
+	}
+	ai_weight = {
+		weight = 100
+	}
+}
+arkship_hsr_unity_hub = {
+	icon = "GFX_space_science_station_t3"
+	starbase_type = arkship
+	construction_days = 360
+	category = sm_colony_cat
+
+	starbase_limit = {
+		base = 1
+	}
+
+	potential = {
+		or = {
+			is_arkship_starbase = yes
+			is_hsr_arkship_starbase = yes
+		}
+		owner? = {
+			has_technology = tech_honkai_star_rail_aux_t1
+		}
+	}
+
+	resources = {
+		category = starbase_arkship_upgrades
+		cost = {
+			alloys = 600
+		}
+		upkeep = {
+			energy = 3
+			alloys = 2
+		}
+	}
+
+	planet_modifier = {
+		planet_stability_add = 2
+		planet_jobs_unity_produces_mult = 0.15
+		planet_jobs_trade_produces_mult = 0.15
+	}
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = {
+				has_civic = civic_herta_2
+			}
+		}
+		planet_stability_add = 2
+		planet_jobs_unity_produces_mult = 0.15
+		planet_jobs_trade_produces_mult = 0.15
+	}
+	ai_weight = {
+		weight = 100
+	}
+}
+arkship_hsr_shield_generator = {
+	icon = "GFX_space_arkship_hsr_shield_generator"
+	starbase_type = arkship
+	construction_days = 360
+	category = sm_colony_cat
+
+	starbase_limit = {
+		base = 1
+	}
+
+	potential = {
+		or = {
+			is_arkship_starbase = yes
+			is_hsr_arkship_starbase = yes
+		}
+		owner? = {
+			has_technology = tech_honkai_star_rail_aux_t1
+		}
+	}
+
+	resources = {
+		category = starbase_arkship_upgrades
+		cost = {
+			alloys = 600
+		}
+		upkeep = {
+			energy = 3
+			alloys = 2
+		}
+	}
+
+	show_in_tech = "tech_planetary_shield_generator"
+
+	show_tech_unlock_if = {
+		is_nomadic = yes
+	}
+
+	resources = {
+		category = starbase_arkship_upgrades
+		cost = {
+			alloys = 600
+		}
+		upkeep = {
+			energy = 3
+			alloys = 2
+		}
+	}
+	station_modifier = {
+		ship_shield_mult = 0.25
+		ship_armor_mult = 0.25
+		ship_hull_mult = 0.25
+		ship_shield_hardening_add = 0.25
+		ship_shield_regen_add_static = 3
+		ship_armor_regen_add_static = 3
+		ship_hull_regen_add_static = 3
+	}
+	planet_modifier = {
+		planet_building_build_speed_mult = 0.15
+		planet_building_build_speed_mult = 0.15
+		planet_clear_blocker_speed_mult = 0.15
+		planet_building_capacity_add = 1
+	}
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = {
+				has_civic = civic_herta_2
+			}
+		}
+		planet_building_build_speed_mult = 0.15
+		planet_building_build_speed_mult = 0.15
+		planet_clear_blocker_speed_mult = 0.15
+		planet_building_capacity_add = 1
+	}
+	ai_weight = {
+		weight = 100
+	}
+}
+#武器模块
+arkship_hsr_hull_shield = {
+	icon = "GFX_space_arkship_hsr_hull_shield"
+	starbase_type = arkship
+	construction_days = 180
+	category = sm_defense_cat
+
+	starbase_limit = {
+		base = -1		# Uncapped
+	}
+
+	potential = {
+		or = {
+			is_arkship_starbase = yes
+			is_hsr_arkship_starbase = yes
+		}
+		owner? = {
+			has_technology = tech_honkai_star_rail_aux_t1
+		}
+	}
+
+	resources = {
+		category = starbase_arkship_upgrades
+		cost = {
+			alloys = 100
+			alloys = @arkship_cost_alloys_65
+		}
+	}
+
+	equipped_component = tiwate_pingzhang_dun3_l
+	equipped_component = tiwate_pingzhang_dun3_l
+	equipped_component = tiwate_pingzhang_dun3_l
+	show_component_tooltips = yes
+	custom_tooltip = sm_arkship_shield_tt
+
+	ai_weight = {
+		weight = 100 #use same weight here - ai weighting is done in starbase_types.txt
+		modifier = {
+			factor = 2
+			ai_owner_prefers_shields = yes
+		}
+	}
+}
+
+arkship_hsr_quantum_destabilizer = {
+	icon = "GFX_arkship_quantum_destabilizer"
+	starbase_type = arkship
+	construction_days = 180
+	category = sm_aura_cat
+
+	starbase_limit = {
+		base = 1
+	}
+
+	potential = {
+		or = {
+			#is_arkship_starbase = yes
+			is_hsr_arkship_starbase = yes
+		}
+	}
+
+	# show_in_tech = "tech_titans"	# Deliberately not shown in the tech
+	# see TECH_UNLOCK_ARKSHIP_TITAN_AURAS_CONSTRUCTION_TITLE
+
+
+	resources = {
+		category = starbase_arkship_upgrades
+		cost = {
+			alloys = @arkship_cost_alloys_500
+		}
+	}
+
+	equipped_component = SHIP_AURA_QUANTUM_DESTABILIZER
+
+	ai_weight = {
+		weight = 100 #use same weight here - ai weighting is done in starbase_types.txt
+	}
+}
+
+arkship_hsr_subspace_snare = {
+	icon = "GFX_arkship_subspace_snare"
+	starbase_type = arkship
+	construction_days = 180
+	category = sm_aura_cat
+
+	starbase_limit = {
+		base = 1
+	}
+
+	potential = {
+		or = {
+			#is_arkship_starbase = yes
+			is_hsr_arkship_starbase = yes
+		}
+	}
+
+	# show_in_tech = "tech_titans"	# Deliberately not shown in the tech
+	# see TECH_UNLOCK_ARKSHIP_TITAN_AURAS_CONSTRUCTION_TITLE
+
+
+	resources = {
+		category = starbase_arkship_upgrades
+		cost = {
+			alloys = @arkship_cost_alloys_500
+		}
+	}
+
+	equipped_component = SHIP_AURA_SUBSPACE_SNARE
+
+	ai_weight = {
+		weight = 100 #use same weight here - ai weighting is done in starbase_types.txt
+	}
+}
+
+arkship_hsr_shield_dampener = {
+	icon = "GFX_arkship_shield_dampener"
+	starbase_type = arkship
+	construction_days = 180
+	category = sm_aura_cat
+
+	starbase_limit = {
+		base = 1
+	}
+
+	potential = {
+		or = {
+			#is_arkship_starbase = yes
+			is_hsr_arkship_starbase = yes
+		}
+	}
+
+	# show_in_tech = "tech_titans"	# Deliberately not shown in the tech
+	# see TECH_UNLOCK_ARKSHIP_TITAN_AURAS_CONSTRUCTION_TITLE
+
+
+	resources = {
+		category = starbase_arkship_upgrades
+		cost = {
+			alloys = @arkship_cost_alloys_500
+		}
+	}
+
+	equipped_component = SHIP_AURA_SHIELD_DAMPENER
+
+	ai_weight = {
+		weight = 100 #use same weight here - ai weighting is done in starbase_types.txt
+	}
+}
+
+arkship_hsr_aura_strike_craft = {
+	icon = "GFX_arkship_aura_strike_craft"
+	starbase_type = arkship
+	construction_days = 180
+	category = sm_aura_cat
+
+	starbase_limit = {
+		base = 1
+	}
+
+	potential = {
+		or = {
+			#is_arkship_starbase = yes
+			is_hsr_arkship_starbase = yes
+		}
+	}
+
+	# show_in_tech = "tech_juggernaut"	# Deliberately not shown in the tech
+	# see TECH_UNLOCK_ARKSHIP_JUGGERNAUT_AURAS_CONSTRUCTION_TITLE
+
+
+	resources = {
+		category = starbase_arkship_upgrades
+		cost = {
+			alloys = @arkship_cost_alloys_500
+		}
+	}
+
+	equipped_component = SHIP_AURA_STRIKE_CRAFT
+
+	ai_weight = {
+		weight = 100 #use same weight here - ai weighting is done in starbase_types.txt
+	}
+}
+
+arkship_hsr_aura_hyperlane = {
+	icon = "GFX_arkship_aura_hyperlane"
+	starbase_type = arkship
+	construction_days = 180
+	category = sm_aura_cat
+
+	starbase_limit = {
+		base = 1
+	}
+
+	potential = {
+		or = {
+			#is_arkship_starbase = yes
+			is_hsr_arkship_starbase = yes
+		}
+	}
+
+	# show_in_tech = "tech_juggernaut"	# Deliberately not shown in the tech
+	# see TECH_UNLOCK_ARKSHIP_JUGGERNAUT_AURAS_CONSTRUCTION_TITLE
+
+
+	resources = {
+		category = starbase_arkship_upgrades
+		cost = {
+			alloys = @arkship_cost_alloys_500
+		}
+	}
+
+	equipped_component = SHIP_AURA_HYPERLANE
+
+	ai_weight = {
+		weight = 100 #use same weight here - ai weighting is done in starbase_types.txt
+	}
+}
+
+arkship_hsr_aura_pd_penetration = {
+	icon = "GFX_arkship_aura_pd_penetration"
+	starbase_type = arkship
+	construction_days = 180
+	category = sm_aura_cat
+
+	starbase_limit = {
+		base = 1
+	}
+
+	potential = {
+		or = {
+			#is_arkship_starbase = yes
+			is_hsr_arkship_starbase = yes
+		}
+	}
+
+	# show_in_tech = "tech_juggernaut"	# Deliberately not shown in the tech
+	# see TECH_UNLOCK_ARKSHIP_JUGGERNAUT_AURAS_CONSTRUCTION_TITLE
+
+	resources = {
+		category = starbase_arkship_upgrades
+		cost = {
+			alloys = @arkship_cost_alloys_500
+		}
+	}
+
+	equipped_component = SHIP_AURA_PD_PENETRATION
+
+	ai_weight = {
+		weight = 100 #use same weight here - ai weighting is done in starbase_types.txt
+	}
+}
+
+arkship_hsr_aura_bombardment = {
+	icon = "GFX_arkship_aura_bombardment"
+	starbase_type = arkship
+	construction_days = 180
+	category = sm_aura_cat
+
+	starbase_limit = {
+		base = 1
+	}
+
+	potential = {
+		or = {
+			#is_arkship_starbase = yes
+			is_hsr_arkship_starbase = yes
+		}
+	}
+
+	# show_in_tech = "tech_juggernaut"	# Deliberately not shown in the tech
+	# see TECH_UNLOCK_ARKSHIP_JUGGERNAUT_AURAS_CONSTRUCTION_TITLE
+
+	resources = {
+		category = starbase_arkship_upgrades
+		cost = {
+			alloys = @arkship_cost_alloys_500
+		}
+	}
+
+	equipped_component = SHIP_AURA_BOMBARDMENT
+
+	ai_weight = {
+		weight = 100 #use same weight here - ai weighting is done in starbase_types.txt
+	}
+}
+
+arkship_hsr_aura_range = {
+	icon = "GFX_arkship_aura_range"
+	starbase_type = arkship
+	construction_days = 180
+	category = sm_aura_cat
+
+	starbase_limit = {
+		base = 1
+	}
+
+	potential = {
+		or = {
+			#is_arkship_starbase = yes
+			is_hsr_arkship_starbase = yes
+		}
+	}
+
+	# show_in_tech = "tech_juggernaut"	# Deliberately not shown in the tech
+	# see TECH_UNLOCK_ARKSHIP_JUGGERNAUT_AURAS_CONSTRUCTION_TITLE
+
+	resources = {
+		category = starbase_arkship_upgrades
+		cost = {
+			alloys = @arkship_cost_alloys_500
+		}
+	}
+
+	equipped_component = SHIP_AURA_RANGE
+
+	ai_weight = {
+		weight = 100 #use same weight here - ai weighting is done in starbase_types.txt
+	}
 }

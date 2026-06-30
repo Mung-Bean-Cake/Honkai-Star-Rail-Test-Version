@@ -22,7 +22,7 @@ museum_clerk = {
         complex_specialist_job_check_trigger = yes
     }
     planet_modifier = {
-        planet_amenities_add = 5
+        planet_amenities_add = 100
     }
     resources = {
         category = planet_researchers
@@ -40,7 +40,7 @@ museum_clerk = {
     }
 
     weight = {
-        weight = 100
+        weight = 500
         modifier = {
             factor = 0.2
             has_citizenship_rights = no
@@ -60,8 +60,6 @@ museum_clerk = {
             has_slavery_type = { type = slavery_indentured }
         }
     }
-
-    inline_script = "jobs/automodding_priority_research"
 
 }
 clone_robot_up = {
@@ -178,17 +176,6 @@ clone_robot_up = {
         mult = value:scripted_modifier_mult|MODIFIER|pop_job_amenities_mult|
     }
 
-    triggered_planet_modifier = {
-        potential = {
-            check_modifier_value = {
-                modifier = job_roboticist_branch_office_value_mult
-                value > 0
-            }
-        }
-        # Actual value determined in the script value below
-        branch_office_value_mult = 1
-        mult = value:roboticist_branch_office_value_mult
-    }
     weight = {
         weight = 500
         modifier = {
@@ -219,27 +206,6 @@ herta_up_researcher = {
     possible_precalc = can_fill_specialist_job
     possible = {
         complex_specialist_job_check_trigger = yes
-    }
-    triggered_planet_modifier = {
-        potential = {
-            owner = { has_tradition = tr_herta_discuss_2 }
-        }
-        logistic_growth_mult = 0.1
-        planet_pop_assembly_add = 2
-    }
-    triggered_planet_modifier = {
-        potential = {
-            owner = { has_tradition = tr_herta_discuss_2_1 }
-        }
-        logistic_growth_mult = 0.25
-        planet_jobs_upkeep_mult = -0.25
-    }
-    triggered_planet_modifier = {
-        potential = {
-            owner = { has_tradition = tr_herta_discuss_2_2 }
-        }
-        planet_pop_assembly_mult = 0.25
-        planet_pop_assembly_add = 2
     }
     resources = {
         category = planet_researchers
@@ -579,6 +545,459 @@ luosi_worker = {
             owner = { is_fallen_empire = yes }
         }
     }
+}
+senior_department_head = {
+    category = ruler
+    swappable_data = {
+        default = {
+            condition_string = WORKER_JOB_TRIGGER
+            building_icon = building_research_lab_3
+        }
+    }
 
-    inline_script = "jobs/automodding_priority_trade"
+    tags = { research unity }
+
+    possible_pre_triggers = {
+        has_owner = yes
+        is_being_purged = no
+        is_being_assimilated = no
+        is_sapient = yes
+    }
+
+    possible_precalc = can_fill_ruler_job
+
+    resources = {
+        category = planet_researchers
+        produces = {
+            physics_research = 8
+            engineering_research = 8
+            society_research = 8
+            unity = 2
+            trade = 1
+        }
+        upkeep = {
+            food = 2
+            consumer_goods = 1
+        }
+    }
+    planet_modifier = {
+        planet_stability_add = 1
+        pop_bonus_workforce_mult = 0.01
+        planet_crime_add = -300
+    }
+    country_modifier = {
+        all_technology_research_speed = 0.01
+    }
+
+    weight = {
+        weight = 500
+    }
+}
+common_clerk = {
+    category = worker
+    swappable_data = {
+        default = {
+            condition_string = WORKER_JOB_TRIGGER
+            building_icon = building_colony_shelter
+        }
+        swap_type = {
+            trigger = {
+                exists = owner
+                owner = {
+                    has_origin = origin_Xianzhou
+                }
+            }
+            name = hsr_learner
+            desc = tourist_desc
+            building_icon = building_amusement_megaplex
+            weight = 6
+        }
+    }
+
+    tags = {  unity }
+
+    possible_pre_triggers = {
+        has_owner = yes
+        is_being_purged = no
+        is_being_assimilated = no
+        is_sapient = yes
+    }
+
+    possible_precalc = can_fill_worker_job
+
+    triggered_planet_modifier = {
+        potential = { always = yes }
+        planet_amenities_add = 200
+        mult = value:scripted_modifier_mult|MODIFIER|pop_job_amenities_mult|
+    }
+    resources = {
+        category = planet_jobs_worker
+        produces = {
+            trade = 1
+            physics_research = 0.5
+            engineering_research = 0.5
+            society_research = 0.5
+            unity = 1.5
+        }
+        upkeep = {
+            food = 1
+            consumer_goods = 0.01
+        }
+    }
+
+    weight = {
+        weight = 500
+    }
+}
+research_clerk = {
+    category = specialist
+    swappable_data = {
+        default = {
+            condition_string = WORKER_JOB_TRIGGER
+            building_icon = building_research_lab_3
+        }
+    }
+
+    tags = { research unity }
+
+    possible_pre_triggers = {
+        has_owner = yes
+        is_being_purged = no
+        is_being_assimilated = no
+        is_sapient = yes
+    }
+
+    possible_precalc = can_fill_specialist_job
+
+    resources = {
+        category = planet_researchers
+        produces = {
+            physics_research = 5
+            engineering_research = 5
+            society_research = 5
+            unity = 2
+            trade = 1
+            sr_dark_matter = 0.05
+            sr_living_metal = 0.05
+            sr_zro = 0.05
+        }
+        upkeep = {
+            food = 1.5
+            consumer_goods = 1.5
+        }
+    }
+    triggered_planet_modifier = {
+        planet_researchers_produces_mult = 0.005
+    }
+    weight = {
+        weight = 500
+    }
+}
+support_clerk = {
+    category = specialist
+    swappable_data = {
+        default = {
+            condition_string = WORKER_JOB_TRIGGER
+            building_icon = building_mineral_purification_hub
+        }
+    }
+
+    tags = { minerals energy }
+
+    possible_pre_triggers = {
+        has_owner = yes
+        is_being_purged = no
+        is_being_assimilated = no
+        is_sapient = yes
+    }
+
+    possible_precalc = can_fill_specialist_job
+
+    resources = {
+        category = planet_researchers
+        produces = {
+            minerals = 6
+            energy = 6
+            food = 6
+            trade = 6
+            alloys = 4
+            consumer_goods = 4
+            exotic_gases = 2
+            volatile_motes = 2
+            rare_crystals = 2
+        }
+        upkeep = {
+            food = 1
+            consumer_goods = 1
+        }
+    }
+    weight = {
+        weight = 500
+    }
+}
+heal_clerk = {
+    category = specialist
+    swappable_data = {
+        default = {
+            condition_string = WORKER_JOB_TRIGGER
+            building_icon = building_heritage_site
+        }
+    }
+
+    tags = { unity pop_growth }
+
+    possible_pre_triggers = {
+        has_owner = yes
+        is_being_purged = no
+        is_being_assimilated = no
+        is_sapient = yes
+    }
+
+    possible_precalc = can_fill_specialist_job
+
+    resources = {
+        category = planet_researchers
+        produces = {
+            society_research = 4
+            trade = 2
+            unity = 2
+        }
+        upkeep = {
+            food = 1.5
+            consumer_goods = 1.5
+        }
+    }
+    inline_script = "output/healthcare_triggered_modifiers"
+
+    inline_script = "output/genomic_triggered_modifiers"
+    triggered_planet_modifier = {
+        potential = { always = yes }
+        planet_amenities_add = 200
+        mult = value:scripted_modifier_mult|MODIFIER|pop_job_amenities_mult|
+    }
+    planet_modifier = {
+        planet_jobs_upkeep_mult = -0.01
+    }
+    weight = {
+        weight = 500
+    }
+}
+maintain_clerk = {
+    category = specialist
+    swappable_data = {
+        default = {
+            condition_string = WORKER_JOB_TRIGGER
+            building_icon = building_mineral_purification_hub
+        }
+    }
+
+    tags = { pop_growth }
+
+    possible_pre_triggers = {
+        has_owner = yes
+        is_being_purged = no
+        is_being_assimilated = no
+        is_sapient = yes
+    }
+
+    possible_precalc = can_fill_specialist_job
+
+    resources = {
+        category = planet_researchers
+        produces = {
+            engineering_research = 4
+        }
+        upkeep = {
+            food = 1.25
+            consumer_goods = 1.25
+            alloys = 0.5
+        }
+    }
+    triggered_planet_modifier = {
+        planet_pop_assembly_add = 2.5
+    }
+
+    triggered_planet_modifier = {
+        potential = {
+            owner? = {
+            exists = ruler
+            ruler = {
+            has_trait = leader_trait_legendary_great_inventor
+            }
+            NOT = {
+            has_valid_civic = civic_dystopian_society
+            }
+            }
+        }
+        planet_amenities_add = 100
+        mult = value:scripted_modifier_mult|MODIFIER|pop_job_amenities_mult|
+    }
+
+    triggered_planet_modifier = {
+        potential = {
+            owner? = {
+            exists = ruler
+            ruler = {
+            has_trait = leader_trait_legendary_great_inventor_2
+            }
+            NOT = {
+            has_valid_civic = civic_dystopian_society
+            }
+            }
+        }
+        planet_amenities_add = 200
+        mult = value:scripted_modifier_mult|MODIFIER|pop_job_amenities_mult|
+    }
+
+    triggered_planet_modifier = {
+        potential = {
+            owner? = {
+            exists = ruler
+            ruler = {
+            has_trait = leader_trait_legendary_great_inventor_3
+            }
+            NOT = {
+            has_valid_civic = civic_dystopian_society
+            }
+            }
+        }
+        planet_amenities_add = 300
+        mult = value:scripted_modifier_mult|MODIFIER|pop_job_amenities_mult|
+    }
+
+    triggered_planet_modifier = {
+        potential = {
+            owner? = { has_tradition = tr_modularity_2 }
+        }
+        planet_pop_assembly_add = 1 #If this changes, update tr_modularity_2_modifier_desc
+    }
+
+    triggered_planet_modifier = {
+        potential = {
+            owner? = {
+            has_active_tradition = tr_synthetics_prefabricated_components
+            NOT = {
+            has_valid_civic = civic_dystopian_society
+            }
+            }
+        }
+        planet_amenities_add = 200
+        mult = value:scripted_modifier_mult|MODIFIER|pop_job_amenities_mult|
+    }
+
+    triggered_planet_pop_group_modifier_for_all = {
+        potential = {
+            owner? = { has_active_tradition = tr_cybernetics_metabolic_reprocessing }
+        }
+        bonus_pop_growth = 0.5
+    }
+
+    triggered_planet_modifier = {
+        potential = {
+            owner? = { has_active_tradition = tr_cybernetics_metabolic_reprocessing }
+        }
+        fake_pop_growth_mod = 0.5
+    }
+
+
+    triggered_planet_modifier = {
+        potential = {
+            owner? = { has_policy_flag = computation_core_production }
+        }
+        foundry_jobs_bonus_workforce_mult = 0.025
+        artisan_jobs_bonus_workforce_mult = 0.025
+    }
+
+    triggered_planet_modifier = {
+        potential = {
+            owner? = { has_policy_flag = computation_core_stability }
+        }
+        bureaucrat_jobs_bonus_workforce_mult = 0.025
+    }
+
+    triggered_planet_modifier = {
+        potential = {
+            owner? = { has_policy_flag = computation_core_research }
+        }
+        physicist_jobs_bonus_workforce_mult = 0.025
+        biologist_jobs_bonus_workforce_mult = 0.025
+        engineer_jobs_bonus_workforce_mult = 0.025
+    }
+    planet_modifier = {
+        ship_hull_mult = 0.02
+        ship_armor_mult = 0.02
+        ship_shield_mult = 0.02 #move ship bonuses on technician jobs, add a custom tooltip here
+        ship_shield_regen_mult = 0.02
+        ship_armor_regen_mult = 0.02
+        ship_hull_regen_mult = 0.02
+    }
+    weight = {
+        weight = 500
+    }
+}
+soldier_clerk = {
+    category = specialist
+    swappable_data = {
+        default = {
+            condition_string = WORKER_JOB_TRIGGER
+            building_icon = building_solarpunk_gaiaseeder
+        }
+    }
+
+    tags = { soldier }
+
+    possible_pre_triggers = {
+        has_owner = yes
+        is_being_purged = no
+        is_being_assimilated = no
+        is_sapient = yes
+    }
+
+    possible_precalc = can_fill_specialist_job
+
+    resources = {
+        category = planet_researchers
+        produces = {
+            society_research = 0.5
+            engineering_research = 0.5
+        }
+        upkeep = {
+            food = 1
+            consumer_goods = 1
+            alloys = 0.5
+        }
+    }
+    country_modifier = {
+        country_naval_cap_add = 5
+    }
+    inline_script = "output/soldier_triggered_modifiers"
+    triggered_planet_modifier = {
+        potential = {
+            owner? = {
+            exists = ruler
+            ruler = {
+            has_trait = leader_trait_legendary_great_inventor
+            }
+            NOT = {
+            has_valid_civic = civic_dystopian_society
+            }
+            }
+        }
+        planet_amenities_add = 100
+        mult = value:scripted_modifier_mult|MODIFIER|pop_job_amenities_mult|
+    }
+    planet_modifier = {
+        planet_defense_armies_add = 1
+        planet_stability_add = 0.25
+        planet_crime_add = -500
+        ship_weapon_damage = 0.03
+        ship_weapon_range_mult = 0.03
+        weapon_type_explosive_weapon_damage_mult = 0.03
+        weapon_type_kinetic_weapon_damage_mult = 0.03
+        weapon_type_energy_weapon_damage_mult = 0.03
+        ship_fire_rate_mult = 0.03
+    }
+    weight = {
+        weight = 500
+    }
 }

@@ -26,23 +26,6 @@ is_honkai_star_mod = {
         }
     }
 }
-herta_station_fleet_level_about  = {
-    event_target:herta_fleet = {
-        check_variable = {
-            which = $VALUE$
-            value >= $LEVEL$
-        }
-    }
-}
-herta_fleet_level_show = {
-    optimize_memory
-    event_target:herta_fleet = {
-        check_variable = {
-            which = $VALUE$
-            value = $LEVEL$
-        }
-    }
-}
 has_simulation_cosmos_technology = {#暂定，后面写命途回来记得改
     optimize_memory
     exists = owner
@@ -55,94 +38,6 @@ has_simulation_cosmos_technology = {#暂定，后面写命途回来记得改
             has_origin = origin_luosi_star
             is_species_class = Star_Rail
         }
-    }
-}
-is_assimilation_white_list = {
-
-}
-can_add_negative_organic_traits = {
-    hidden_trigger = { exists = from }
-    from = {
-        if = {
-            limit = {
-                OR = {
-                    has_biogenesis_dlc = no
-                    has_tradition = tr_genetics_adopt
-                }
-            }
-            has_tradition = tr_genetics_resequencing
-        }
-        else = {
-            OR = {
-                has_tradition = tr_purity_genotype_regeneration
-                has_tradition = tr_mutation_unnatural_selection
-                has_tradition = tr_herta_discuss_2_1
-            }
-        }
-    }
-}
-can_remove_beneficial_genetic_traits = {
-    hidden_trigger = { exists = from }
-    from = {
-        if = {
-            limit = {
-                OR = {
-                    has_biogenesis_dlc = no
-                    has_tradition = tr_genetics_adopt
-                }
-            }
-            has_tradition = tr_genetics_resequencing
-        }
-        else = {
-            or = {
-                has_tradition = tr_purity_genotype_regeneration
-                has_tradition = tr_herta_discuss_2_1
-            }
-        }
-    }
-}
-can_add_negative_traits_organic = {
-    OR = {
-        has_utopia = yes
-        has_biogenesis_dlc = yes
-    }
-    OR = {
-        has_tradition = tr_herta_discuss_2_1
-        has_tradition = tr_genetics_resequencing
-        has_active_tradition = tr_cybernetics_integrated_anatomy
-        has_active_tradition = tr_cybernetics_assimilator_integrated_anatomy
-        has_active_tradition = tr_purity_genotype_regeneration
-        has_active_tradition = tr_purity_genotype_regeneration_wilderness
-        has_active_tradition = tr_mutation_unnatural_selection
-    }
-}
-
-#This, root = country
-can_remove_positive_traits_organic = {
-    OR = {
-        AND = {
-            OR = {
-                has_utopia = yes
-                has_biogenesis_dlc = yes
-            }
-            OR = {
-                has_tradition = tr_herta_discuss_2_1
-                has_tradition = tr_genetics_resequencing
-                has_active_tradition = tr_cybernetics_integrated_anatomy
-                has_active_tradition = tr_cybernetics_assimilator_integrated_anatomy
-                has_active_tradition = tr_purity_genotype_regeneration
-                has_active_tradition = tr_purity_genotype_regeneration_wilderness
-                has_active_tradition = tr_cloning_somatic_synthesization
-                has_active_tradition = tr_cloning_somatic_synthesization_clone_army
-                has_active_tradition = tr_mutation_unnatural_selection
-            }
-        }
-        AND = {
-            has_toxoids = yes
-            has_origin = origin_overtuned
-        }
-        has_technology = tech_gene_expressions
-        has_technology = tech_epigenetic_triggers
     }
 }
 is_fleet_can_be_scrapped = {
@@ -194,5 +89,13 @@ is_path_slot = {
         has_country_flag = hsr_star_path_civic_3_set
         has_country_flag = hsr_star_path_civic_4_set
         has_country_flag = hsr_star_path_civic_5_set
+    }
+}
+is_hsr_arkship_starbase = {
+    OR = {
+        has_starbase_size = herta_station_fleet
+        has_starbase_size = luosi_planet_fleet
+        has_starbase_size = train_planet_fleet
+        has_starbase_size = xianzhou_planet_fleet
     }
 }

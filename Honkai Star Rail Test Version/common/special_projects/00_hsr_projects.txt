@@ -1,90 +1,7 @@
 special_project = {
-    key = "herta_discuss_pop_up_1"
-    icon = "gfx/interface/icons/situation_log/situation_log_ai.dds"
-    cost = 50000
-    tech_department = physics_technology
-    picture = GFX_evt_cybernetics
-    event_scope = country_event
-    on_success = {
-        owner = {
-            country_event = { id = DOT_SR_Herta.100 }
-        }
-    }
-    on_start = {
-        owner = {
-            country_event = { id = DOT_SR_Herta.103 }
-        }
-    }
-    on_progress_25 = {
-        owner = {
-            country_event = { id = DOT_SR_Herta.104 }
-        }
-    }
-    on_progress_50 = {
-        owner = {
-            country_event = { id = DOT_SR_Herta.105 }
-        }
-    }
-    on_progress_75 = {
-        owner = {
-            country_event = { id = DOT_SR_Herta.106 }
-        }
-    }
-    on_fail = {}
-
-}
-special_project = {
-    key = "herta_discuss_pop_up_2"
-    icon = "gfx/interface/icons/situation_log/situation_log_debris.dds"
-    cost = 50000
-    tech_department = physics_technology
-    picture = GFX_evt_genetic_modification
-    event_scope = country_event
-    on_success = {
-        owner = {
-            country_event = { id = DOT_SR_Herta.202 }
-        }
-    }
-    on_start = {
-        owner = {
-            country_event = { id = DOT_SR_Herta.200 }
-        }
-    }
-    on_progress_50 = {
-        owner = {
-            country_event = { id = DOT_SR_Herta.201 }
-        }
-    }
-    on_fail = {}
-}
-special_project = {
-    key = "herta_discuss_pop_up_3"
-    icon = "gfx/interface/icons/situation_log/situation_log_engineering.dds"
-    cost = 50000
-    tech_department = engineering_technology
-    picture = GFX_evt_synth_situation
-    event_scope = country_event
-    on_success = {
-        owner = {
-            country_event = { id = DOT_SR_Herta.300 }
-        }
-    }
-    on_start = {
-        owner = {
-            country_event = { id = DOT_SR_Herta.301 }
-        }
-    }
-    on_progress_50 = {
-        owner = {
-            country_event = { id = DOT_SR_Herta.302 }
-        }
-    }
-    on_fail = {}
-}
-special_project = {
     key = "herta_start_situation_1"
     icon = "gfx/interface/icons/situation_log/situation_log_physics.dds"
-    cost = 80000
+    cost = 90000
     tech_department = physics_technology
     picture = GFX_evt_astral_rift_vortex
     event_scope = country_event
@@ -93,15 +10,9 @@ special_project = {
         owner = {
             give_technology = { tech = tech_herta_help }
             set_country_flag = get_tech_herta_help
-            if = {
-                limit = {
-                    has_country_flag = get_tech_herta_help
-                    has_country_flag = get_tech_ruanmei_help
-                    has_country_flag = get_tech_luosi_help
-                    has_country_flag = get_tech_sidifen_help
-                }
-                country_event = { id = DOT_SR_Herta.1001 days = 3 }
-            }
+            give_technology = { tech = tech_herta_choose_1 }
+            give_technology = { tech = tech_herta_choose_2 }
+            country_event = { id = DOT_SR_Herta.1000  }
         }
     }
     on_fail = {}
@@ -109,7 +20,7 @@ special_project = {
 special_project = {
     key = "herta_start_situation_2"
     icon = "gfx/interface/icons/situation_log/situation_log_society.dds"
-    cost = 80000
+    cost = 90000
     tech_department = society_technology
     picture = GFX_evt_astral_rift_research_lab
     event_scope = country_event
@@ -117,16 +28,9 @@ special_project = {
     on_success = {
         owner = {
             give_technology = { tech = tech_ruanmei_help }
+            give_technology = { tech = tech_ruanmei_choose_1 }
+            give_technology = { tech = tech_ruanmei_choose_2 }
             set_country_flag = get_tech_ruanmei_help
-            if = {
-                limit = {
-                    has_country_flag = get_tech_herta_help
-                    has_country_flag = get_tech_ruanmei_help
-                    has_country_flag = get_tech_luosi_help
-                    has_country_flag = get_tech_sidifen_help
-                }
-                country_event = { id = DOT_SR_Herta.1001 days = 3 }
-            }
         }
     }
     on_fail = {}
@@ -134,26 +38,17 @@ special_project = {
 special_project = {
     key = "herta_start_situation_3"
     icon = "gfx/interface/icons/situation_log/situation_log_engineering.dds"
-    cost = 80000
+    cost = 90000
     tech_department = engineering_technology
     picture = GFX_evt_astral_rift_genesis_3
     event_scope = country_event
     event_chain = herta_start_situation_chain
     on_success = {
-        give_technology = { tech = tech_luosi_help }
-        set_country_flag = tech_luosi_help
-        if = {
+        owner = {
             give_technology = { tech = tech_luosi_help }
-            set_country_flag = get_tech_luosi_help
-            if = {
-                limit = {
-                    has_country_flag = get_tech_herta_help
-                    has_country_flag = get_tech_ruanmei_help
-                    has_country_flag = get_tech_luosi_help
-                    has_country_flag = get_tech_sidifen_help
-                }
-                country_event = { id = DOT_SR_Herta.1001 days = 3 }
-            }
+            give_technology = { tech = tech_luosi_choose_2 }
+            give_technology = { tech = tech_luosi_choose_1 }
+            set_country_flag = tech_luosi_help
         }
     }
     on_fail = {}
@@ -161,7 +56,7 @@ special_project = {
 special_project = {
     key = "herta_start_situation_4"
     icon = "gfx/interface/icons/situation_log/situation_log_scanning_beam.dds"
-    cost = 80000
+    cost = 90000
     tech_department = physics_technology
     picture = GFX_evt_cosmogenesis_crisis
     event_scope = country_event
@@ -170,15 +65,6 @@ special_project = {
         owner = {
             give_technology = { tech = tech_sidifen_help }
             set_country_flag = get_tech_sidifen_help
-            if = {
-                limit = {
-                    has_country_flag = get_tech_herta_help
-                    has_country_flag = get_tech_ruanmei_help
-                    has_country_flag = get_tech_luosi_help
-                    has_country_flag = get_tech_sidifen_help
-                }
-                country_event = { id = DOT_SR_Herta.1001 days = 3 }
-            }
         }
     }
     on_fail = {}

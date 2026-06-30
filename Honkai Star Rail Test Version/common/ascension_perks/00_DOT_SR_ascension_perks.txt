@@ -1,65 +1,13 @@
-ap_xianzhou_world = {
-	potential = {
-		has_origin = origin_Xianzhou
-		NOT = {
-			has_ascension_perk = ap_xianzhou_world
-		}
-	}
-
-	possible = {
-		has_origin = origin_Xianzhou
-		custom_tooltip = {
-			fail_text = "requires_technology_housing_2"
-			has_technology = tech_housing_2
-		}
-	}
-
-	on_enabled = {
-		custom_tooltip = "allow_xianzhou_project"
-		custom_tooltip = "decision_xianzhou_project_effects"
-	}
-	
-	modifier = {
-		country_starbase_influence_cost_mult = -0.15
-		country_claim_influence_cost_mult = -0.25
-		planet_amenities_mult = 0.15
-	}
-
-	ai_weight = {
-		factor = 10
-		modifier = {
-			factor = 2
-			has_ethic = ethic_pacifist
-		}
-		modifier = {
-			factor = 3
-			has_ethic = ethic_fanatic_pacifist
-		}
-		modifier = {
-			factor = 2
-			has_ethic = ethic_materialist
-		}
-		modifier = {
-			factor = 3
-			has_ethic = ethic_fanatic_materialist
-		}
-	}
-}
 ap_herta_premote = {
 	potential = {
 		has_origin = origin_Herta_Space_Station
 		NOT = {
 			has_ascension_perk = ap_herta_premote
 		}
-        custom_tooltip = {
-            fail_text = "requires_has_any_point"
-            hidden_trigger = {
-				has_country_flag = get_tech_herta_help
-				has_country_flag = get_tech_ruanmei_help
-				has_country_flag = get_tech_luosi_help
-				has_country_flag = get_tech_sidifen_help
-			}
-        }
+        has_technology = tech_herta_help
+		has_technology = tech_ruanmei_help
+		has_technology = tech_luosi_help
+		has_technology = tech_sidifen_help
 	}
 
 	possible = {
@@ -67,10 +15,7 @@ ap_herta_premote = {
 	}
 
 	on_enabled = {
-		custom_tooltip = "ap_herta_premote_tt"
-        hidden_effect = {
-            country_event = { id = DOT_SR_Herta.50 days = 3 }
-        }
+		give_specimen = { key = galaxy_scholar_star_badge origin = ap_herta_premote }
 	}
 
 	modifier = {

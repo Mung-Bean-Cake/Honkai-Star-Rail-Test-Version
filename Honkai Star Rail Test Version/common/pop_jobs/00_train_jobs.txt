@@ -1,0 +1,355 @@
+train_common_clerk = {
+    category = worker
+    swappable_data = {
+        default = {
+            condition_string = WORKER_JOB_TRIGGER
+            building_icon = building_colony_shelter
+        }
+    }
+    can_be_automated = yes
+    tags = {  unity }
+
+    possible_pre_triggers = {
+        has_owner = yes
+        is_being_purged = no
+        is_being_assimilated = no
+        is_sapient = yes
+    }
+
+    possible_precalc = can_fill_worker_job
+
+    triggered_planet_modifier = {
+        potential = { always = yes }
+        planet_amenities_add = 200
+        mult = value:scripted_modifier_mult|MODIFIER|pop_job_amenities_mult|
+    }
+    resources = {
+        category = planet_jobs_worker
+        produces = {
+            energy = 1.5
+            minerals = 1.5
+            food = 1.5
+            trade = 1.5
+            alloys = 0.5
+            consumer_goods = 0.5
+            rare_crystals = 0.1
+            exotic_gases = 0.1
+            volatile_motes = 0.1
+            society_research = 0.1
+            physics_research = 0.1
+            engineering_research = 0.1
+            sr_zro = 0.01
+            sr_living_metal = 0.01
+            sr_dark_matter = 0.01
+            minor_artifacts = 0.01
+            nanites = 0.01
+        }
+        upkeep = {
+            energy = 1
+        }
+    }
+    weight = {
+        weight = 100
+    }
+}
+train_pilot = {
+    category = ruler
+    swappable_data = {
+        default = {
+            condition_string = RULER_JOB_TRIGGER
+            building_icon = building_capital
+        }
+    }
+    can_be_automated = no
+    tags = {  research }
+
+    possible_pre_triggers = {
+        has_owner = yes
+        is_being_purged = no
+        is_being_assimilated = no
+        is_sapient = yes
+    }
+
+    possible_precalc = can_fill_ruler_job
+    resources = {
+        category = planet_jobs_ruler
+        produces = {
+            society_research = 10
+            physics_research = 10
+            engineering_research = 10
+            unity = 8
+            trade = 2
+        }
+        upkeep = {
+            food = 1.5
+            consumer_goods = 1.5
+        }
+    }
+    planet_modifier = {
+        planet_stability_add = 0.02
+        planet_crime_add = -10
+        bonus_automated_workforce_mult = 0.01
+        planet_jobs_produces_mult = 0.005
+    }
+    weight = {
+        weight = 2000
+    }
+}
+train_escort = {
+    category = specialist
+    swappable_data = {
+        default = {
+            condition_string = RULER_JOB_TRIGGER
+            building_icon = building_capital
+        }
+    }
+    can_be_automated = no
+    tags = {  soldier }
+
+    possible_pre_triggers = {
+        has_owner = yes
+        is_being_purged = no
+        is_being_assimilated = no
+        is_sapient = yes
+    }
+
+    possible_precalc = can_fill_specialist_job
+    resources = {
+        category = planet_researchers
+        produces = {
+            society_research = 0.5
+            engineering_research = 0.5
+        }
+        upkeep = {
+            food = 1
+            consumer_goods = 1
+        }
+    }
+    country_modifier = {
+        country_naval_cap_add = 5
+    }
+    inline_script = "output/soldier_triggered_modifiers"
+    triggered_planet_modifier = {
+        potential = {
+            owner? = {
+                exists = ruler
+                ruler = {
+                    has_trait = leader_trait_legendary_great_inventor
+                }
+                NOT = {
+                    has_valid_civic = civic_dystopian_society
+                }
+            }
+        }
+        planet_amenities_add = 100
+        mult = value:scripted_modifier_mult|MODIFIER|pop_job_amenities_mult|
+    }
+    planet_modifier = {
+        planet_defense_armies_add = 1
+        planet_stability_add = 0.25
+        planet_crime_add = -2000
+        ship_weapon_damage = 0.03
+        ship_weapon_range_mult = 0.03
+        weapon_type_explosive_weapon_damage_mult = 0.03
+        weapon_type_kinetic_weapon_damage_mult = 0.03
+        weapon_type_energy_weapon_damage_mult = 0.03
+        ship_fire_rate_mult = 0.03
+    }
+    weight = {
+        weight = 2000
+    }
+}
+train_mechanic = {
+    category = specialist
+    swappable_data = {
+        default = {
+            condition_string = RULER_JOB_TRIGGER
+            building_icon = building_capital
+        }
+    }
+    can_be_automated = no
+    tags = {  soldier }
+
+    possible_pre_triggers = {
+        has_owner = yes
+        is_being_purged = no
+        is_being_assimilated = no
+        is_sapient = yes
+    }
+
+    possible_precalc = can_fill_specialist_job
+    resources = {
+        category = planet_researchers
+        produces = {
+            engineering_research = 4
+        }
+        upkeep = {
+            food = 1
+            consumer_goods = 1
+        }
+    }
+    triggered_planet_modifier = {
+        planet_pop_assembly_add = 2.5
+    }
+
+    triggered_planet_modifier = {
+        potential = {
+            owner? = {
+                exists = ruler
+                ruler = {
+                    has_trait = leader_trait_legendary_great_inventor
+                }
+                NOT = {
+                    has_valid_civic = civic_dystopian_society
+                }
+            }
+        }
+        planet_amenities_add = 100
+        mult = value:scripted_modifier_mult|MODIFIER|pop_job_amenities_mult|
+    }
+
+    triggered_planet_modifier = {
+        potential = {
+            owner? = {
+                exists = ruler
+                ruler = {
+                    has_trait = leader_trait_legendary_great_inventor_2
+                }
+                NOT = {
+                    has_valid_civic = civic_dystopian_society
+                }
+            }
+        }
+        planet_amenities_add = 200
+        mult = value:scripted_modifier_mult|MODIFIER|pop_job_amenities_mult|
+    }
+
+    triggered_planet_modifier = {
+        potential = {
+            owner? = {
+                exists = ruler
+                ruler = {
+                    has_trait = leader_trait_legendary_great_inventor_3
+                }
+                NOT = {
+                    has_valid_civic = civic_dystopian_society
+                }
+            }
+        }
+        planet_amenities_add = 300
+        mult = value:scripted_modifier_mult|MODIFIER|pop_job_amenities_mult|
+    }
+
+    triggered_planet_modifier = {
+        potential = {
+            owner? = { has_tradition = tr_modularity_2 }
+        }
+        planet_pop_assembly_add = 1 #If this changes, update tr_modularity_2_modifier_desc
+    }
+
+    triggered_planet_modifier = {
+        potential = {
+            owner? = {
+                has_active_tradition = tr_synthetics_prefabricated_components
+                NOT = {
+                    has_valid_civic = civic_dystopian_society
+                }
+            }
+        }
+        planet_amenities_add = 200
+        mult = value:scripted_modifier_mult|MODIFIER|pop_job_amenities_mult|
+    }
+
+    triggered_planet_pop_group_modifier_for_all = {
+        potential = {
+            owner? = { has_active_tradition = tr_cybernetics_metabolic_reprocessing }
+        }
+        bonus_pop_growth = 0.5
+    }
+
+    triggered_planet_modifier = {
+        potential = {
+            owner? = { has_active_tradition = tr_cybernetics_metabolic_reprocessing }
+        }
+        fake_pop_growth_mod = 0.5
+    }
+
+
+    triggered_planet_modifier = {
+        potential = {
+            owner? = { has_policy_flag = computation_core_production }
+        }
+        foundry_jobs_bonus_workforce_mult = 0.025
+        artisan_jobs_bonus_workforce_mult = 0.025
+    }
+
+    triggered_planet_modifier = {
+        potential = {
+            owner? = { has_policy_flag = computation_core_stability }
+        }
+        bureaucrat_jobs_bonus_workforce_mult = 0.025
+    }
+
+    triggered_planet_modifier = {
+        potential = {
+            owner? = { has_policy_flag = computation_core_research }
+        }
+        physicist_jobs_bonus_workforce_mult = 0.025
+        biologist_jobs_bonus_workforce_mult = 0.025
+        engineer_jobs_bonus_workforce_mult = 0.025
+    }
+    planet_modifier = {
+        ship_hull_mult = 0.02
+        ship_armor_mult = 0.02
+        ship_shield_mult = 0.02 #move ship bonuses on technician jobs, add a custom tooltip here
+        ship_shield_regen_mult = 0.02
+        ship_armor_regen_mult = 0.02
+        ship_hull_regen_mult = 0.02
+    }
+    weight = {
+        weight = 2000
+    }
+}
+train_surveyor = {
+    category = specialist
+    swappable_data = {
+        default = {
+            condition_string = RULER_JOB_TRIGGER
+            building_icon = building_capital
+        }
+    }
+    can_be_automated = no
+    tags = {  soldier }
+
+    possible_pre_triggers = {
+        has_owner = yes
+        is_being_purged = no
+        is_being_assimilated = no
+        is_sapient = yes
+    }
+
+    possible_precalc = can_fill_specialist_job
+    resources = {
+        category = planet_researchers
+        produces = {
+            physics_research = 5
+            engineering_research = 5
+            society_research = 5
+            unity = 2
+            trade = 1
+            sr_dark_matter = 0.05
+            sr_living_metal = 0.05
+            sr_zro = 0.05
+        }
+        upkeep = {
+            food = 1.5
+            consumer_goods = 1.5
+        }
+    }
+    triggered_planet_modifier = {
+        planet_researchers_produces_mult = 0.005
+    }
+    weight = {
+        weight = 2000
+    }
+}
