@@ -3164,6 +3164,7 @@ country_event = {
         default_hide_option = yes
     }
 }
+
 country_event = {
     id = hsr_ui.54
     title = "hsr_ui.54.title"
@@ -3172,7 +3173,7 @@ country_event = {
     custom_gui = honkai_star_rail_leader_show_main
     custom_gui_option = hsr_leader_show_option
     picture_event_data = {
-        portrait = sanyueqi
+        portrait = yinlang
         room = hsr_leader_room
     }
     is_triggered_only = yes
@@ -3200,7 +3201,7 @@ country_event = {
                 hidden_trigger = {
                     not ={
                         any_owned_leader = {
-                            has_leader_flag = sanyueqi
+                            has_leader_flag = yinlang
                         }
                     }
                 }
@@ -3210,1306 +3211,6 @@ country_event = {
     }
     option = {
         name = hsr_ui.54.c
-        is_dialog_only = yes
-        response_text = hsr_ui.5.c.desc_tooltip
-        allow = {
-            custom_tooltip = {
-                fail_text = yuzhousuipian_short_1_text
-                hidden_trigger = {
-                    check_variable = {
-                        which = yuzhousuipian
-                        value >= 500
-                    }
-                }
-            }
-            custom_tooltip = {
-                fail_text = trait_has_learn_text
-                hidden_trigger = {
-                    any_owned_leader = {
-                        has_leader_flag = sanyueqi
-                        not = {has_trait = leader_sanyueqi_t4}
-                    }
-                }
-            }
-        }
-        hidden_effect = {
-            ui_leader_get_trait = {LEADER_TARGET = sanyueqi_leader TRAIT = leader_sanyueqi_t4 }
-        }
-    }
-    option = {
-        name = hsr_ui.54.d
-        is_dialog_only = yes
-        response_text = hsr_ui.54.d.desc_tooltip
-        allow = {
-            custom_tooltip = {
-                fail_text = yuzhousuipian_short_1_text
-                hidden_trigger = {
-                    check_variable = {
-                        which = yuzhousuipian
-                        value >= 500
-                    }
-                }
-            }
-            custom_tooltip = {
-                fail_text = trait_has_learn_text
-                hidden_trigger = {
-                    any_owned_leader = {
-                        has_leader_flag = sanyueqi
-                        not = {has_trait = leader_sanyueqi_t5}
-                    }
-                }
-            }
-        }
-        hidden_effect = {
-            ui_leader_get_trait = {LEADER_TARGET = sanyueqi_leader TRAIT = leader_sanyueqi_t5 }
-        }
-    }
-    option = {
-        name = hsr_ui.54.e
-        allow = {
-            custom_tooltip = {
-                fail_text = hsr_ui.54.e.fail
-                hidden_trigger = {
-                    has_country_flag = sanyueqi_set
-                    not ={ any_owned_leader = { has_leader_flag = sanyueqi }}
-                }
-            }
-        }
-        custom_tooltip = hsr_ui.54.e.desc
-        is_dialog_only = yes
-        response_text = hsr_ui.54.e.desc
-        hidden_effect = {
-            clone_leader = {
-                target = event_target:sanyueqi_leader
-            }
-            last_created_leader = {
-                set_leader_flag = legendary_leader
-                save_global_event_target_as = sanyueqi_leader
-                set_leader_flag = immune_to_negative_traits
-                set_leader_flag = sanyueqi
-            }
-        }
-    }
-    option = {
-        name = hsr_ui.54.f
-        allow = {
-            custom_tooltip = {
-                fail_text = hsr_ui.54.fail
-                hidden_trigger = {
-                    any_owned_leader = {
-                        has_leader_flag = sanyueqi
-                    }
-                }
-            }
-            custom_tooltip = {
-                fail_text = yuzhousuipian_short_1_text
-                hidden_trigger = {
-                    check_variable = {
-                        which = yuzhousuipian
-                        value >= 500
-                    }
-                }
-            }
-			custom_tooltip = {
-				fail_text = skill_is_up
-				hidden_trigger = {
-					check_variable = {
-						which = num_sanyueqi_other_skill
-						value < 20
-					}
-				}
-			}
-            custom_tooltip = {
-                fail_text = hsr_ui.54.f.desc
-                hidden_trigger = {
-                    any_owned_leader = {
-                        has_leader_flag = sanyueqi
-                        has_trait = leader_sanyueqi_t5
-                    }
-                }
-            }
-        }
-        is_dialog_only = yes
-        response_text = hsr_ui.54.f.desc
-        ui_leader_get_other_skill = {LEADER_SKILL = num_sanyueqi_other_skill  SPEND_VALUE = -500  LEVEL_VALUE = 1}
-    }
-    option = {
-        name = hsr_ui.54.g
-        allow = {
-            custom_tooltip = {
-                fail_text = hsr_ui.54.fail
-                hidden_trigger = {
-                    any_owned_leader = {
-                        has_leader_flag = sanyueqi
-                    }
-                }
-            }
-            custom_tooltip = {
-                fail_text = yuzhousuipian_short_2_text
-                hidden_trigger = {
-                    check_variable = {
-                        which = yuzhousuipian
-                        value >= 2500
-                    }
-                }
-            }
-            custom_tooltip = {
-                fail_text = hsr_ui.54.f.desc
-                hidden_trigger = {
-                    any_owned_leader = {
-                        has_leader_flag = sanyueqi
-                        has_trait = leader_sanyueqi_t5
-                    }
-                }
-            }
-			custom_tooltip = {
-				fail_text = skill_is_up
-				hidden_trigger = {
-					check_variable = {
-						which = num_sanyueqi_other_skill
-						value < 20
-					}
-				}
-			}
-        }
-        is_dialog_only = yes
-        response_text = hsr_ui.54.f.desc
-        ui_leader_get_other_skill = {LEADER_SKILL = num_sanyueqi_other_skill  SPEND_VALUE = -2500  LEVEL_VALUE = 5}
-    }
-    option = {
-        name = hsr_ui.54.h
-        allow = {
-            custom_tooltip = {
-                fail_text = hsr_ui.54.fail
-                hidden_trigger = {
-                    any_owned_leader = {
-                        has_leader_flag = sanyueqi
-                    }
-                }
-            }
-            custom_tooltip = {
-                fail_text = yuzhousuipian_short_3_text
-                hidden_trigger = {
-                    check_variable = {
-                        which = yuzhousuipian
-                        value >= 5000
-                    }
-                }
-            }
-            custom_tooltip = {
-                fail_text = hsr_ui.54.f.desc
-                hidden_trigger = {
-                    any_owned_leader = {
-                        has_leader_flag = sanyueqi
-                        has_trait = leader_sanyueqi_t5
-                    }
-                }
-            }
-			custom_tooltip = {
-				fail_text = skill_is_up
-				hidden_trigger = {
-					check_variable = {
-						which = num_sanyueqi_other_skill
-						value < 20
-					}
-				}
-			}
-        }
-        is_dialog_only = yes
-        response_text = hsr_ui.54.f.desc
-        ui_leader_get_other_skill = {LEADER_SKILL = num_sanyueqi_other_skill  SPEND_VALUE = -5000  LEVEL_VALUE = 10}
-    }
-    option = {
-        name = CLOSE
-        default_hide_option = yes
-    }
-}
-country_event = {
-    id = hsr_ui.55
-    title = "hsr_ui.55.title"
-    desc = "hsr_ui.55.desc"
-    diplomatic = yes
-    custom_gui = honkai_star_rail_leader_show_main
-    custom_gui_option = hsr_leader_show_option
-    picture_event_data = {
-        portrait = danheng
-        room = hsr_leader_room
-    }
-    is_triggered_only = yes
-    option = {
-        name = hsr_ui.55.a
-        is_dialog_only = yes
-        response_text = hsr_ui.55.a.desc
-    }
-    option = {
-        name = hsr_ui.55.b
-        is_dialog_only = yes
-        custom_tooltip = hsr_ui.55.b.desc
-        allow = {
-            custom_tooltip = {
-                fail_text = yuzhousuipian_short_text
-                hidden_trigger = {
-                    check_variable = {
-                        which = yuzhousuipian
-                        value >= 2000
-                    }
-                }
-            }
-            custom_tooltip = {
-                fail_text = hsr_ui.55.fail
-                hidden_trigger = {
-                    not ={
-                        any_owned_leader = {
-                            has_leader_flag = danheng
-                        }
-                    }
-                }
-            }
-        }
-        ui_hire_leader = { EVENT_NAME = hsr_paragon.55 }
-    }
-    option = {
-        name = hsr_ui.55.c
-        is_dialog_only = yes
-        response_text = hsr_ui.5.c.desc_tooltip
-        allow = {
-            custom_tooltip = {
-                fail_text = yuzhousuipian_short_1_text
-                hidden_trigger = {
-                    check_variable = {
-                        which = yuzhousuipian
-                        value >= 500
-                    }
-                }
-            }
-            custom_tooltip = {
-                fail_text = trait_has_learn_text
-                hidden_trigger = {
-                    any_owned_leader = {
-                        has_leader_flag = danheng
-                        not = {has_trait = leader_danheng_t4}
-                    }
-                }
-            }
-        }
-        hidden_effect = {
-            ui_leader_get_trait = {LEADER_TARGET = danheng_leader TRAIT = leader_danheng_t4 }
-        }
-    }
-    option = {
-        name = hsr_ui.55.d
-        is_dialog_only = yes
-        response_text = hsr_ui.55.d.desc_tooltip
-        allow = {
-            custom_tooltip = {
-                fail_text = yuzhousuipian_short_1_text
-                hidden_trigger = {
-                    check_variable = {
-                        which = yuzhousuipian
-                        value >= 500
-                    }
-                }
-            }
-            custom_tooltip = {
-                fail_text = trait_has_learn_text
-                hidden_trigger = {
-                    any_owned_leader = {
-                        has_leader_flag = danheng
-                        not = {has_trait = leader_danheng_t5}
-                    }
-                }
-            }
-        }
-        hidden_effect = {
-            ui_leader_get_trait = {LEADER_TARGET = danheng_leader TRAIT = leader_danheng_t5 }
-        }
-    }
-    option = {
-        name = hsr_ui.55.e
-        allow = {
-            custom_tooltip = {
-                fail_text = hsr_ui.55.e.fail
-                hidden_trigger = {
-                    has_country_flag = danheng_set
-                    not ={ any_owned_leader = { has_leader_flag = danheng }}
-                }
-            }
-        }
-        custom_tooltip = hsr_ui.55.e.desc
-        is_dialog_only = yes
-        response_text = hsr_ui.55.e.desc
-        hidden_effect = {
-            clone_leader = {
-                target = event_target:danheng_leader
-            }
-            last_created_leader = {
-                set_leader_flag = legendary_leader
-                save_global_event_target_as = danheng_leader
-                set_leader_flag = immune_to_negative_traits
-                set_leader_flag = danheng
-            }
-        }
-    }
-    option = {
-        name = hsr_ui.55.f
-        allow = {
-            custom_tooltip = {
-                fail_text = hsr_ui.55.fail
-                hidden_trigger = {
-                    any_owned_leader = {
-                        has_leader_flag = danheng
-                    }
-                }
-            }
-            custom_tooltip = {
-                fail_text = yuzhousuipian_short_1_text
-                hidden_trigger = {
-                    check_variable = {
-                        which = yuzhousuipian
-                        value >= 500
-                    }
-                }
-            }
-			custom_tooltip = {
-				fail_text = skill_is_up
-				hidden_trigger = {
-					check_variable = {
-						which = num_danheng_other_skill
-						value < 20
-					}
-				}
-			}
-            custom_tooltip = {
-                fail_text = hsr_ui.55.f.desc
-                hidden_trigger = {
-                    any_owned_leader = {
-                        has_leader_flag = danheng
-                        has_trait = leader_danheng_t5
-                    }
-                }
-            }
-        }
-        is_dialog_only = yes
-        response_text = hsr_ui.55.f.desc
-        ui_leader_get_other_skill = {LEADER_SKILL = num_danheng_other_skill  SPEND_VALUE = -500  LEVEL_VALUE = 1}
-    }
-    option = {
-        name = hsr_ui.55.g
-        allow = {
-            custom_tooltip = {
-                fail_text = hsr_ui.55.fail
-                hidden_trigger = {
-                    any_owned_leader = {
-                        has_leader_flag = danheng
-                    }
-                }
-            }
-            custom_tooltip = {
-                fail_text = yuzhousuipian_short_2_text
-                hidden_trigger = {
-                    check_variable = {
-                        which = yuzhousuipian
-                        value >= 2500
-                    }
-                }
-            }
-            custom_tooltip = {
-                fail_text = hsr_ui.55.f.desc
-                hidden_trigger = {
-                    any_owned_leader = {
-                        has_leader_flag = danheng
-                        has_trait = leader_danheng_t5
-                    }
-                }
-            }
-			custom_tooltip = {
-				fail_text = skill_is_up
-				hidden_trigger = {
-					check_variable = {
-						which = num_danheng_other_skill
-						value < 20
-					}
-				}
-			}
-        }
-        is_dialog_only = yes
-        response_text = hsr_ui.55.f.desc
-        ui_leader_get_other_skill = {LEADER_SKILL = num_danheng_other_skill  SPEND_VALUE = -2500  LEVEL_VALUE = 5}
-    }
-    option = {
-        name = hsr_ui.55.h
-        allow = {
-            custom_tooltip = {
-                fail_text = hsr_ui.55.fail
-                hidden_trigger = {
-                    any_owned_leader = {
-                        has_leader_flag = danheng
-                    }
-                }
-            }
-            custom_tooltip = {
-                fail_text = yuzhousuipian_short_3_text
-                hidden_trigger = {
-                    check_variable = {
-                        which = yuzhousuipian
-                        value >= 5000
-                    }
-                }
-            }
-            custom_tooltip = {
-                fail_text = hsr_ui.55.f.desc
-                hidden_trigger = {
-                    any_owned_leader = {
-                        has_leader_flag = danheng
-                        has_trait = leader_danheng_t5
-                    }
-                }
-            }
-			custom_tooltip = {
-				fail_text = skill_is_up
-				hidden_trigger = {
-					check_variable = {
-						which = num_danheng_other_skill
-						value < 20
-					}
-				}
-			}
-        }
-        is_dialog_only = yes
-        response_text = hsr_ui.55.f.desc
-        ui_leader_get_other_skill = {LEADER_SKILL = num_danheng_other_skill  SPEND_VALUE = -5000  LEVEL_VALUE = 10}
-    }
-    option = {
-        name = CLOSE
-        default_hide_option = yes
-    }
-}
-country_event = {
-    id = hsr_ui.56
-    title = "hsr_ui.56.title"
-    desc = "hsr_ui.56.desc"
-    diplomatic = yes
-    custom_gui = honkai_star_rail_leader_show_main
-    custom_gui_option = hsr_leader_show_option
-    picture_event_data = {
-        portrait = jizi
-        room = hsr_leader_room
-    }
-    is_triggered_only = yes
-    option = {
-        name = hsr_ui.56.a
-        is_dialog_only = yes
-        response_text = hsr_ui.56.a.desc
-    }
-    option = {
-        name = hsr_ui.56.b
-        is_dialog_only = yes
-        custom_tooltip = hsr_ui.56.b.desc
-        allow = {
-            custom_tooltip = {
-                fail_text = yuzhousuipian_short_text
-                hidden_trigger = {
-                    check_variable = {
-                        which = yuzhousuipian
-                        value >= 2000
-                    }
-                }
-            }
-            custom_tooltip = {
-                fail_text = hsr_ui.56.fail
-                hidden_trigger = {
-                    not ={
-                        any_owned_leader = {
-                            has_leader_flag = jizi
-                        }
-                    }
-                }
-            }
-        }
-        ui_hire_leader = { EVENT_NAME = hsr_paragon.56 }
-    }
-    option = {
-        name = hsr_ui.56.c
-        is_dialog_only = yes
-        response_text = hsr_ui.5.c.desc_tooltip
-        allow = {
-            custom_tooltip = {
-                fail_text = yuzhousuipian_short_1_text
-                hidden_trigger = {
-                    check_variable = {
-                        which = yuzhousuipian
-                        value >= 500
-                    }
-                }
-            }
-            custom_tooltip = {
-                fail_text = trait_has_learn_text
-                hidden_trigger = {
-                    any_owned_leader = {
-                        has_leader_flag = jizi
-                        not = {has_trait = leader_jizi_t4}
-                    }
-                }
-            }
-        }
-        hidden_effect = {
-            ui_leader_get_trait = {LEADER_TARGET = jizi_leader TRAIT = leader_jizi_t4 }
-        }
-    }
-    option = {
-        name = hsr_ui.56.d
-        is_dialog_only = yes
-        response_text = hsr_ui.56.d.desc_tooltip
-        allow = {
-            custom_tooltip = {
-                fail_text = yuzhousuipian_short_1_text
-                hidden_trigger = {
-                    check_variable = {
-                        which = yuzhousuipian
-                        value >= 500
-                    }
-                }
-            }
-            custom_tooltip = {
-                fail_text = trait_has_learn_text
-                hidden_trigger = {
-                    any_owned_leader = {
-                        has_leader_flag = jizi
-                        not = {has_trait = leader_jizi_t5}
-                    }
-                }
-            }
-        }
-        hidden_effect = {
-            ui_leader_get_trait = {LEADER_TARGET = jizi_leader TRAIT = leader_jizi_t5 }
-        }
-    }
-    option = {
-        name = hsr_ui.56.e
-        allow = {
-            custom_tooltip = {
-                fail_text = hsr_ui.56.e.fail
-                hidden_trigger = {
-                    has_country_flag = jizi_set
-                    not ={ any_owned_leader = { has_leader_flag = jizi }}
-                }
-            }
-        }
-        custom_tooltip = hsr_ui.56.e.desc
-        is_dialog_only = yes
-        response_text = hsr_ui.56.e.desc
-        hidden_effect = {
-            clone_leader = {
-                target = event_target:jizi_leader
-            }
-            last_created_leader = {
-                set_leader_flag = legendary_leader
-                save_global_event_target_as = jizi_leader
-                set_leader_flag = immune_to_negative_traits
-                set_leader_flag = jizi
-            }
-        }
-    }
-    option = {
-        name = hsr_ui.56.f
-        allow = {
-            custom_tooltip = {
-                fail_text = hsr_ui.56.fail
-                hidden_trigger = {
-                    any_owned_leader = {
-                        has_leader_flag = jizi
-                    }
-                }
-            }
-            custom_tooltip = {
-                fail_text = yuzhousuipian_short_1_text
-                hidden_trigger = {
-                    check_variable = {
-                        which = yuzhousuipian
-                        value >= 500
-                    }
-                }
-            }
-			custom_tooltip = {
-				fail_text = skill_is_up
-				hidden_trigger = {
-					check_variable = {
-						which = num_jizi_other_skill
-						value < 20
-					}
-				}
-			}
-            custom_tooltip = {
-                fail_text = hsr_ui.56.f.desc
-                hidden_trigger = {
-                    any_owned_leader = {
-                        has_leader_flag = jizi
-                        has_trait = leader_jizi_t5
-                    }
-                }
-            }
-        }
-        is_dialog_only = yes
-        response_text = hsr_ui.56.f.desc
-        ui_leader_get_other_skill = {LEADER_SKILL = num_jizi_other_skill  SPEND_VALUE = -500  LEVEL_VALUE = 1}
-    }
-    option = {
-        name = hsr_ui.56.g
-        allow = {
-            custom_tooltip = {
-                fail_text = hsr_ui.56.fail
-                hidden_trigger = {
-                    any_owned_leader = {
-                        has_leader_flag = jizi
-                    }
-                }
-            }
-            custom_tooltip = {
-                fail_text = yuzhousuipian_short_2_text
-                hidden_trigger = {
-                    check_variable = {
-                        which = yuzhousuipian
-                        value >= 2500
-                    }
-                }
-            }
-            custom_tooltip = {
-                fail_text = hsr_ui.56.f.desc
-                hidden_trigger = {
-                    any_owned_leader = {
-                        has_leader_flag = jizi
-                        has_trait = leader_jizi_t5
-                    }
-                }
-            }
-			custom_tooltip = {
-				fail_text = skill_is_up
-				hidden_trigger = {
-					check_variable = {
-						which = num_jizi_other_skill
-						value < 20
-					}
-				}
-			}
-        }
-        is_dialog_only = yes
-        response_text = hsr_ui.56.f.desc
-        ui_leader_get_other_skill = {LEADER_SKILL = num_jizi_other_skill  SPEND_VALUE = -2500  LEVEL_VALUE = 5}
-    }
-    option = {
-        name = hsr_ui.56.h
-        allow = {
-            custom_tooltip = {
-                fail_text = hsr_ui.56.fail
-                hidden_trigger = {
-                    any_owned_leader = {
-                        has_leader_flag = jizi
-                    }
-                }
-            }
-            custom_tooltip = {
-                fail_text = yuzhousuipian_short_3_text
-                hidden_trigger = {
-                    check_variable = {
-                        which = yuzhousuipian
-                        value >= 5000
-                    }
-                }
-            }
-            custom_tooltip = {
-                fail_text = hsr_ui.56.f.desc
-                hidden_trigger = {
-                    any_owned_leader = {
-                        has_leader_flag = jizi
-                        has_trait = leader_jizi_t5
-                    }
-                }
-            }
-			custom_tooltip = {
-				fail_text = skill_is_up
-				hidden_trigger = {
-					check_variable = {
-						which = num_jizi_other_skill
-						value < 20
-					}
-				}
-			}
-        }
-        is_dialog_only = yes
-        response_text = hsr_ui.56.f.desc
-        ui_leader_get_other_skill = {LEADER_SKILL = num_jizi_other_skill  SPEND_VALUE = -5000  LEVEL_VALUE = 10}
-    }
-    option = {
-        name = CLOSE
-        default_hide_option = yes
-    }
-}
-country_event = {
-    id = hsr_ui.57
-    title = "hsr_ui.57.title"
-    desc = "hsr_ui.57.desc"
-    diplomatic = yes
-    custom_gui = honkai_star_rail_leader_show_main
-    custom_gui_option = hsr_leader_show_option
-    picture_event_data = {
-        portrait = waerte
-        room = hsr_leader_room
-    }
-    is_triggered_only = yes
-    option = {
-        name = hsr_ui.57.a
-        is_dialog_only = yes
-        response_text = hsr_ui.57.a.desc
-    }
-    option = {
-        name = hsr_ui.57.b
-        is_dialog_only = yes
-        custom_tooltip = hsr_ui.57.b.desc
-        allow = {
-            custom_tooltip = {
-                fail_text = yuzhousuipian_short_text
-                hidden_trigger = {
-                    check_variable = {
-                        which = yuzhousuipian
-                        value >= 2000
-                    }
-                }
-            }
-            custom_tooltip = {
-                fail_text = hsr_ui.57.fail
-                hidden_trigger = {
-                    not ={
-                        any_owned_leader = {
-                            has_leader_flag = waerte
-                        }
-                    }
-                }
-            }
-        }
-        ui_hire_leader = { EVENT_NAME = hsr_paragon.57 }
-    }
-    option = {
-        name = hsr_ui.57.c
-        is_dialog_only = yes
-        response_text = hsr_ui.5.c.desc_tooltip
-        allow = {
-            custom_tooltip = {
-                fail_text = yuzhousuipian_short_1_text
-                hidden_trigger = {
-                    check_variable = {
-                        which = yuzhousuipian
-                        value >= 500
-                    }
-                }
-            }
-            custom_tooltip = {
-                fail_text = trait_has_learn_text
-                hidden_trigger = {
-                    any_owned_leader = {
-                        has_leader_flag = waerte
-                        not = {has_trait = leader_waerte_t4}
-                    }
-                }
-            }
-        }
-        hidden_effect = {
-            ui_leader_get_trait = {LEADER_TARGET = waerte_leader TRAIT = leader_waerte_t4 }
-        }
-    }
-    option = {
-        name = hsr_ui.57.d
-        is_dialog_only = yes
-        response_text = hsr_ui.57.d.desc_tooltip
-        allow = {
-            custom_tooltip = {
-                fail_text = yuzhousuipian_short_1_text
-                hidden_trigger = {
-                    check_variable = {
-                        which = yuzhousuipian
-                        value >= 500
-                    }
-                }
-            }
-            custom_tooltip = {
-                fail_text = trait_has_learn_text
-                hidden_trigger = {
-                    any_owned_leader = {
-                        has_leader_flag = waerte
-                        not = {has_trait = leader_waerte_t5}
-                    }
-                }
-            }
-        }
-        hidden_effect = {
-            ui_leader_get_trait = {LEADER_TARGET = waerte_leader TRAIT = leader_waerte_t5 }
-        }
-    }
-    option = {
-        name = hsr_ui.57.e
-        allow = {
-            custom_tooltip = {
-                fail_text = hsr_ui.57.e.fail
-                hidden_trigger = {
-                    has_country_flag = waerte_set
-                    not ={ any_owned_leader = { has_leader_flag = waerte }}
-                }
-            }
-        }
-        custom_tooltip = hsr_ui.57.e.desc
-        is_dialog_only = yes
-        response_text = hsr_ui.57.e.desc
-        hidden_effect = {
-            clone_leader = {
-                target = event_target:waerte_leader
-            }
-            last_created_leader = {
-                set_leader_flag = legendary_leader
-                save_global_event_target_as = waerte_leader
-                set_leader_flag = immune_to_negative_traits
-                set_leader_flag = waerte
-            }
-        }
-    }
-    option = {
-        name = hsr_ui.57.f
-        allow = {
-            custom_tooltip = {
-                fail_text = hsr_ui.57.fail
-                hidden_trigger = {
-                    any_owned_leader = {
-                        has_leader_flag = waerte
-                    }
-                }
-            }
-            custom_tooltip = {
-                fail_text = yuzhousuipian_short_1_text
-                hidden_trigger = {
-                    check_variable = {
-                        which = yuzhousuipian
-                        value >= 500
-                    }
-                }
-            }
-			custom_tooltip = {
-				fail_text = skill_is_up
-				hidden_trigger = {
-					check_variable = {
-						which = num_waerte_other_skill
-						value < 20
-					}
-				}
-			}
-            custom_tooltip = {
-                fail_text = hsr_ui.57.f.desc
-                hidden_trigger = {
-                    any_owned_leader = {
-                        has_leader_flag = waerte
-                        has_trait = leader_waerte_t5
-                    }
-                }
-            }
-        }
-        is_dialog_only = yes
-        response_text = hsr_ui.57.f.desc
-        ui_leader_get_other_skill = {LEADER_SKILL = num_waerte_other_skill  SPEND_VALUE = -500  LEVEL_VALUE = 1}
-    }
-    option = {
-        name = hsr_ui.57.g
-        allow = {
-            custom_tooltip = {
-                fail_text = hsr_ui.57.fail
-                hidden_trigger = {
-                    any_owned_leader = {
-                        has_leader_flag = waerte
-                    }
-                }
-            }
-            custom_tooltip = {
-                fail_text = yuzhousuipian_short_2_text
-                hidden_trigger = {
-                    check_variable = {
-                        which = yuzhousuipian
-                        value >= 2500
-                    }
-                }
-            }
-            custom_tooltip = {
-                fail_text = hsr_ui.57.f.desc
-                hidden_trigger = {
-                    any_owned_leader = {
-                        has_leader_flag = waerte
-                        has_trait = leader_waerte_t5
-                    }
-                }
-            }
-			custom_tooltip = {
-				fail_text = skill_is_up
-				hidden_trigger = {
-					check_variable = {
-						which = num_waerte_other_skill
-						value < 20
-					}
-				}
-			}
-        }
-        is_dialog_only = yes
-        response_text = hsr_ui.57.f.desc
-        ui_leader_get_other_skill = {LEADER_SKILL = num_waerte_other_skill  SPEND_VALUE = -2500  LEVEL_VALUE = 5}
-    }
-    option = {
-        name = hsr_ui.57.h
-        allow = {
-            custom_tooltip = {
-                fail_text = hsr_ui.57.fail
-                hidden_trigger = {
-                    any_owned_leader = {
-                        has_leader_flag = waerte
-                    }
-                }
-            }
-            custom_tooltip = {
-                fail_text = yuzhousuipian_short_3_text
-                hidden_trigger = {
-                    check_variable = {
-                        which = yuzhousuipian
-                        value >= 5000
-                    }
-                }
-            }
-            custom_tooltip = {
-                fail_text = hsr_ui.57.f.desc
-                hidden_trigger = {
-                    any_owned_leader = {
-                        has_leader_flag = waerte
-                        has_trait = leader_waerte_t5
-                    }
-                }
-            }
-			custom_tooltip = {
-				fail_text = skill_is_up
-				hidden_trigger = {
-					check_variable = {
-						which = num_waerte_other_skill
-						value < 20
-					}
-				}
-			}
-        }
-        is_dialog_only = yes
-        response_text = hsr_ui.57.f.desc
-        ui_leader_get_other_skill = {LEADER_SKILL = num_waerte_other_skill  SPEND_VALUE = -5000  LEVEL_VALUE = 10}
-    }
-    option = {
-        name = CLOSE
-        default_hide_option = yes
-    }
-}
-country_event = {
-    id = hsr_ui.58
-    title = "hsr_ui.58.title"
-    desc = "hsr_ui.58.desc"
-    diplomatic = yes
-    custom_gui = honkai_star_rail_leader_show_main
-    custom_gui_option = hsr_leader_show_option
-    picture_event_data = {
-        portrait = kaituozhe
-        room = hsr_leader_room
-    }
-    is_triggered_only = yes
-    option = {
-        name = hsr_ui.58.a
-        is_dialog_only = yes
-        response_text = hsr_ui.58.a.desc
-    }
-    option = {
-        name = hsr_ui.58.b
-        is_dialog_only = yes
-        custom_tooltip = hsr_ui.58.b.desc
-        allow = {
-            custom_tooltip = {
-                fail_text = yuzhousuipian_short_text
-                hidden_trigger = {
-                    check_variable = {
-                        which = yuzhousuipian
-                        value >= 2000
-                    }
-                }
-            }
-            custom_tooltip = {
-                fail_text = hsr_ui.58.fail
-                hidden_trigger = {
-                    not ={
-                        any_owned_leader = {
-                            has_leader_flag = kaituozhe
-                        }
-                    }
-                }
-            }
-        }
-        ui_hire_leader = { EVENT_NAME = hsr_paragon.58 }
-    }
-    option = {
-        name = hsr_ui.58.c
-        is_dialog_only = yes
-        response_text = hsr_ui.5.c.desc_tooltip
-        allow = {
-            custom_tooltip = {
-                fail_text = yuzhousuipian_short_1_text
-                hidden_trigger = {
-                    check_variable = {
-                        which = yuzhousuipian
-                        value >= 500
-                    }
-                }
-            }
-            custom_tooltip = {
-                fail_text = trait_has_learn_text
-                hidden_trigger = {
-                    any_owned_leader = {
-                        has_leader_flag = kaituozhe
-                        not = {has_trait = leader_kaituozhe_t4}
-                    }
-                }
-            }
-        }
-        hidden_effect = {
-            ui_leader_get_trait = {LEADER_TARGET = kaituozhe_leader TRAIT = leader_kaituozhe_t4 }
-        }
-    }
-    option = {
-        name = hsr_ui.58.d
-        is_dialog_only = yes
-        response_text = hsr_ui.58.d.desc_tooltip
-        allow = {
-            custom_tooltip = {
-                fail_text = yuzhousuipian_short_1_text
-                hidden_trigger = {
-                    check_variable = {
-                        which = yuzhousuipian
-                        value >= 500
-                    }
-                }
-            }
-            custom_tooltip = {
-                fail_text = trait_has_learn_text
-                hidden_trigger = {
-                    any_owned_leader = {
-                        has_leader_flag = kaituozhe
-                        not = {has_trait = leader_kaituozhe_t5}
-                    }
-                }
-            }
-        }
-        hidden_effect = {
-            ui_leader_get_trait = {LEADER_TARGET = kaituozhe_leader TRAIT = leader_kaituozhe_t5 }
-        }
-    }
-    option = {
-        name = hsr_ui.58.e
-        allow = {
-            custom_tooltip = {
-                fail_text = hsr_ui.58.e.fail
-                hidden_trigger = {
-                    has_country_flag = kaituozhe_set
-                    not ={ any_owned_leader = { has_leader_flag = kaituozhe }}
-                }
-            }
-        }
-        custom_tooltip = hsr_ui.58.e.desc
-        is_dialog_only = yes
-        response_text = hsr_ui.58.e.desc
-        hidden_effect = {
-            clone_leader = {
-                target = event_target:kaituozhe_leader
-            }
-            last_created_leader = {
-                set_leader_flag = legendary_leader
-                save_global_event_target_as = kaituozhe_leader
-                set_leader_flag = immune_to_negative_traits
-                set_leader_flag = kaituozhe
-            }
-        }
-    }
-    option = {
-        name = hsr_ui.58.f
-        allow = {
-            custom_tooltip = {
-                fail_text = hsr_ui.58.fail
-                hidden_trigger = {
-                    any_owned_leader = {
-                        has_leader_flag = kaituozhe
-                    }
-                }
-            }
-            custom_tooltip = {
-                fail_text = yuzhousuipian_short_1_text
-                hidden_trigger = {
-                    check_variable = {
-                        which = yuzhousuipian
-                        value >= 500
-                    }
-                }
-            }
-			custom_tooltip = {
-				fail_text = skill_is_up
-				hidden_trigger = {
-					check_variable = {
-						which = num_kaituozhe_other_skill
-						value < 20
-					}
-				}
-			}
-            custom_tooltip = {
-                fail_text = hsr_ui.58.f.desc
-                hidden_trigger = {
-                    any_owned_leader = {
-                        has_leader_flag = kaituozhe
-                        has_trait = leader_kaituozhe_t5
-                    }
-                }
-            }
-        }
-        is_dialog_only = yes
-        response_text = hsr_ui.58.f.desc
-        ui_leader_get_other_skill = {LEADER_SKILL = num_kaituozhe_other_skill  SPEND_VALUE = -500  LEVEL_VALUE = 1}
-    }
-    option = {
-        name = hsr_ui.58.g
-        allow = {
-            custom_tooltip = {
-                fail_text = hsr_ui.58.fail
-                hidden_trigger = {
-                    any_owned_leader = {
-                        has_leader_flag = kaituozhe
-                    }
-                }
-            }
-            custom_tooltip = {
-                fail_text = yuzhousuipian_short_2_text
-                hidden_trigger = {
-                    check_variable = {
-                        which = yuzhousuipian
-                        value >= 2500
-                    }
-                }
-            }
-            custom_tooltip = {
-                fail_text = hsr_ui.58.f.desc
-                hidden_trigger = {
-                    any_owned_leader = {
-                        has_leader_flag = kaituozhe
-                        has_trait = leader_kaituozhe_t5
-                    }
-                }
-            }
-			custom_tooltip = {
-				fail_text = skill_is_up
-				hidden_trigger = {
-					check_variable = {
-						which = num_kaituozhe_other_skill
-						value < 20
-					}
-				}
-			}
-        }
-        is_dialog_only = yes
-        response_text = hsr_ui.58.f.desc
-        ui_leader_get_other_skill = {LEADER_SKILL = num_kaituozhe_other_skill  SPEND_VALUE = -2500  LEVEL_VALUE = 5}
-    }
-    option = {
-        name = hsr_ui.58.h
-        allow = {
-            custom_tooltip = {
-                fail_text = hsr_ui.58.fail
-                hidden_trigger = {
-                    any_owned_leader = {
-                        has_leader_flag = kaituozhe
-                    }
-                }
-            }
-            custom_tooltip = {
-                fail_text = yuzhousuipian_short_3_text
-                hidden_trigger = {
-                    check_variable = {
-                        which = yuzhousuipian
-                        value >= 5000
-                    }
-                }
-            }
-            custom_tooltip = {
-                fail_text = hsr_ui.58.f.desc
-                hidden_trigger = {
-                    any_owned_leader = {
-                        has_leader_flag = kaituozhe
-                        has_trait = leader_kaituozhe_t5
-                    }
-                }
-            }
-			custom_tooltip = {
-				fail_text = skill_is_up
-				hidden_trigger = {
-					check_variable = {
-						which = num_kaituozhe_other_skill
-						value < 20
-					}
-				}
-			}
-        }
-        is_dialog_only = yes
-        response_text = hsr_ui.58.f.desc
-        ui_leader_get_other_skill = {LEADER_SKILL = num_kaituozhe_other_skill  SPEND_VALUE = -5000  LEVEL_VALUE = 10}
-    }
-    option = {
-        name = CLOSE
-        default_hide_option = yes
-    }
-}
-country_event = {
-    id = hsr_ui.59
-    title = "hsr_ui.59.title"
-    desc = "hsr_ui.59.desc"
-    diplomatic = yes
-    custom_gui = honkai_star_rail_leader_show_main
-    custom_gui_option = hsr_leader_show_option
-    picture_event_data = {
-        portrait = yinlang
-        room = hsr_leader_room
-    }
-    is_triggered_only = yes
-    option = {
-        name = hsr_ui.59.a
-        is_dialog_only = yes
-        response_text = hsr_ui.59.a.desc
-    }
-    option = {
-        name = hsr_ui.59.b
-        is_dialog_only = yes
-        custom_tooltip = hsr_ui.59.b.desc
-        allow = {
-            custom_tooltip = {
-                fail_text = yuzhousuipian_short_text
-                hidden_trigger = {
-                    check_variable = {
-                        which = yuzhousuipian
-                        value >= 2000
-                    }
-                }
-            }
-            custom_tooltip = {
-                fail_text = hsr_ui.59.fail
-                hidden_trigger = {
-                    not ={
-                        any_owned_leader = {
-                            has_leader_flag = yinlang
-                        }
-                    }
-                }
-            }
-        }
-        ui_hire_leader = { EVENT_NAME = hsr_paragon.59 }
-    }
-    option = {
-        name = hsr_ui.59.c
         is_dialog_only = yes
         response_text = hsr_ui.5.c.desc_tooltip
         allow = {
@@ -4537,9 +3238,9 @@ country_event = {
         }
     }
     option = {
-        name = hsr_ui.59.d
+        name = hsr_ui.54.d
         is_dialog_only = yes
-        response_text = hsr_ui.59.d.desc_tooltip
+        response_text = hsr_ui.54.d.desc_tooltip
         allow = {
             custom_tooltip = {
                 fail_text = yuzhousuipian_short_1_text
@@ -4565,19 +3266,19 @@ country_event = {
         }
     }
     option = {
-        name = hsr_ui.59.e
+        name = hsr_ui.54.e
         allow = {
             custom_tooltip = {
-                fail_text = hsr_ui.59.e.fail
+                fail_text = hsr_ui.54.e.fail
                 hidden_trigger = {
                     has_country_flag = yinlang_set
                     not ={ any_owned_leader = { has_leader_flag = yinlang }}
                 }
             }
         }
-        custom_tooltip = hsr_ui.59.e.desc
+        custom_tooltip = hsr_ui.54.e.desc
         is_dialog_only = yes
-        response_text = hsr_ui.59.e.desc
+        response_text = hsr_ui.54.e.desc
         hidden_effect = {
             clone_leader = {
                 target = event_target:yinlang_leader
@@ -4591,10 +3292,10 @@ country_event = {
         }
     }
     option = {
-        name = hsr_ui.59.f
+        name = hsr_ui.54.f
         allow = {
             custom_tooltip = {
-                fail_text = hsr_ui.59.fail
+                fail_text = hsr_ui.54.fail
                 hidden_trigger = {
                     any_owned_leader = {
                         has_leader_flag = yinlang
@@ -4620,7 +3321,7 @@ country_event = {
 				}
 			}
             custom_tooltip = {
-                fail_text = hsr_ui.59.f.desc
+                fail_text = hsr_ui.54.f.desc
                 hidden_trigger = {
                     any_owned_leader = {
                         has_leader_flag = yinlang
@@ -4630,14 +3331,14 @@ country_event = {
             }
         }
         is_dialog_only = yes
-        response_text = hsr_ui.59.f.desc
+        response_text = hsr_ui.54.f.desc
         ui_leader_get_other_skill = {LEADER_SKILL = num_yinlang_other_skill  SPEND_VALUE = -500  LEVEL_VALUE = 1}
     }
     option = {
-        name = hsr_ui.59.g
+        name = hsr_ui.54.g
         allow = {
             custom_tooltip = {
-                fail_text = hsr_ui.59.fail
+                fail_text = hsr_ui.54.fail
                 hidden_trigger = {
                     any_owned_leader = {
                         has_leader_flag = yinlang
@@ -4654,7 +3355,7 @@ country_event = {
                 }
             }
             custom_tooltip = {
-                fail_text = hsr_ui.59.f.desc
+                fail_text = hsr_ui.54.f.desc
                 hidden_trigger = {
                     any_owned_leader = {
                         has_leader_flag = yinlang
@@ -4673,14 +3374,14 @@ country_event = {
 			}
         }
         is_dialog_only = yes
-        response_text = hsr_ui.59.f.desc
+        response_text = hsr_ui.54.f.desc
         ui_leader_get_other_skill = {LEADER_SKILL = num_yinlang_other_skill  SPEND_VALUE = -2500  LEVEL_VALUE = 5}
     }
     option = {
-        name = hsr_ui.59.h
+        name = hsr_ui.54.h
         allow = {
             custom_tooltip = {
-                fail_text = hsr_ui.59.fail
+                fail_text = hsr_ui.54.fail
                 hidden_trigger = {
                     any_owned_leader = {
                         has_leader_flag = yinlang
@@ -4697,7 +3398,7 @@ country_event = {
                 }
             }
             custom_tooltip = {
-                fail_text = hsr_ui.59.f.desc
+                fail_text = hsr_ui.54.f.desc
                 hidden_trigger = {
                     any_owned_leader = {
                         has_leader_flag = yinlang
@@ -4716,7 +3417,7 @@ country_event = {
 			}
         }
         is_dialog_only = yes
-        response_text = hsr_ui.59.f.desc
+        response_text = hsr_ui.54.f.desc
         ui_leader_get_other_skill = {LEADER_SKILL = num_yinlang_other_skill  SPEND_VALUE = -5000  LEVEL_VALUE = 10}
     }
     option = {
@@ -4725,9 +3426,9 @@ country_event = {
     }
 }
 country_event = {
-    id = hsr_ui.60
-    title = "hsr_ui.60.title"
-    desc = "hsr_ui.60.desc"
+    id = hsr_ui.55
+    title = "hsr_ui.55.title"
+    desc = "hsr_ui.55.desc"
     diplomatic = yes
     custom_gui = honkai_star_rail_leader_show_main
     custom_gui_option = hsr_leader_show_option
@@ -4737,14 +3438,14 @@ country_event = {
     }
     is_triggered_only = yes
     option = {
-        name = hsr_ui.60.a
+        name = hsr_ui.55.a
         is_dialog_only = yes
-        response_text = hsr_ui.60.a.desc
+        response_text = hsr_ui.55.a.desc
     }
     option = {
-        name = hsr_ui.60.b
+        name = hsr_ui.55.b
         is_dialog_only = yes
-        custom_tooltip = hsr_ui.60.b.desc
+        custom_tooltip = hsr_ui.55.b.desc
         allow = {
             custom_tooltip = {
                 fail_text = yuzhousuipian_short_text
@@ -4756,7 +3457,7 @@ country_event = {
                 }
             }
             custom_tooltip = {
-                fail_text = hsr_ui.60.fail
+                fail_text = hsr_ui.55.fail
                 hidden_trigger = {
                     not ={
                         any_owned_leader = {
@@ -4766,10 +3467,10 @@ country_event = {
                 }
             }
         }
-        ui_hire_leader = { EVENT_NAME = hsr_paragon.60 }
+        ui_hire_leader = { EVENT_NAME = hsr_paragon.55 }
     }
     option = {
-        name = hsr_ui.60.c
+        name = hsr_ui.55.c
         is_dialog_only = yes
         response_text = hsr_ui.5.c.desc_tooltip
         allow = {
@@ -4797,9 +3498,9 @@ country_event = {
         }
     }
     option = {
-        name = hsr_ui.60.d
+        name = hsr_ui.55.d
         is_dialog_only = yes
-        response_text = hsr_ui.60.d.desc_tooltip
+        response_text = hsr_ui.55.d.desc_tooltip
         allow = {
             custom_tooltip = {
                 fail_text = yuzhousuipian_short_1_text
@@ -4825,19 +3526,19 @@ country_event = {
         }
     }
     option = {
-        name = hsr_ui.60.e
+        name = hsr_ui.55.e
         allow = {
             custom_tooltip = {
-                fail_text = hsr_ui.60.e.fail
+                fail_text = hsr_ui.55.e.fail
                 hidden_trigger = {
                     has_country_flag = ren_set
                     not ={ any_owned_leader = { has_leader_flag = ren }}
                 }
             }
         }
-        custom_tooltip = hsr_ui.60.e.desc
+        custom_tooltip = hsr_ui.55.e.desc
         is_dialog_only = yes
-        response_text = hsr_ui.60.e.desc
+        response_text = hsr_ui.55.e.desc
         hidden_effect = {
             clone_leader = {
                 target = event_target:ren_leader
@@ -4851,10 +3552,10 @@ country_event = {
         }
     }
     option = {
-        name = hsr_ui.60.f
+        name = hsr_ui.55.f
         allow = {
             custom_tooltip = {
-                fail_text = hsr_ui.60.fail
+                fail_text = hsr_ui.55.fail
                 hidden_trigger = {
                     any_owned_leader = {
                         has_leader_flag = ren
@@ -4880,7 +3581,7 @@ country_event = {
 				}
 			}
             custom_tooltip = {
-                fail_text = hsr_ui.60.f.desc
+                fail_text = hsr_ui.55.f.desc
                 hidden_trigger = {
                     any_owned_leader = {
                         has_leader_flag = ren
@@ -4890,14 +3591,14 @@ country_event = {
             }
         }
         is_dialog_only = yes
-        response_text = hsr_ui.60.f.desc
+        response_text = hsr_ui.55.f.desc
         ui_leader_get_other_skill = {LEADER_SKILL = num_ren_other_skill  SPEND_VALUE = -500  LEVEL_VALUE = 1}
     }
     option = {
-        name = hsr_ui.60.g
+        name = hsr_ui.55.g
         allow = {
             custom_tooltip = {
-                fail_text = hsr_ui.60.fail
+                fail_text = hsr_ui.55.fail
                 hidden_trigger = {
                     any_owned_leader = {
                         has_leader_flag = ren
@@ -4914,7 +3615,7 @@ country_event = {
                 }
             }
             custom_tooltip = {
-                fail_text = hsr_ui.60.f.desc
+                fail_text = hsr_ui.55.f.desc
                 hidden_trigger = {
                     any_owned_leader = {
                         has_leader_flag = ren
@@ -4933,14 +3634,14 @@ country_event = {
 			}
         }
         is_dialog_only = yes
-        response_text = hsr_ui.60.f.desc
+        response_text = hsr_ui.55.f.desc
         ui_leader_get_other_skill = {LEADER_SKILL = num_ren_other_skill  SPEND_VALUE = -2500  LEVEL_VALUE = 5}
     }
     option = {
-        name = hsr_ui.60.h
+        name = hsr_ui.55.h
         allow = {
             custom_tooltip = {
-                fail_text = hsr_ui.60.fail
+                fail_text = hsr_ui.55.fail
                 hidden_trigger = {
                     any_owned_leader = {
                         has_leader_flag = ren
@@ -4957,7 +3658,7 @@ country_event = {
                 }
             }
             custom_tooltip = {
-                fail_text = hsr_ui.60.f.desc
+                fail_text = hsr_ui.55.f.desc
                 hidden_trigger = {
                     any_owned_leader = {
                         has_leader_flag = ren
@@ -4976,7 +3677,7 @@ country_event = {
 			}
         }
         is_dialog_only = yes
-        response_text = hsr_ui.60.f.desc
+        response_text = hsr_ui.55.f.desc
         ui_leader_get_other_skill = {LEADER_SKILL = num_ren_other_skill  SPEND_VALUE = -5000  LEVEL_VALUE = 10}
     }
     option = {
@@ -4985,9 +3686,9 @@ country_event = {
     }
 }
 country_event = {
-    id = hsr_ui.61
-    title = "hsr_ui.61.title"
-    desc = "hsr_ui.61.desc"
+    id = hsr_ui.56
+    title = "hsr_ui.56.title"
+    desc = "hsr_ui.56.desc"
     diplomatic = yes
     custom_gui = honkai_star_rail_leader_show_main
     custom_gui_option = hsr_leader_show_option
@@ -4997,14 +3698,14 @@ country_event = {
     }
     is_triggered_only = yes
     option = {
-        name = hsr_ui.61.a
+        name = hsr_ui.56.a
         is_dialog_only = yes
-        response_text = hsr_ui.61.a.desc
+        response_text = hsr_ui.56.a.desc
     }
     option = {
-        name = hsr_ui.61.b
+        name = hsr_ui.56.b
         is_dialog_only = yes
-        custom_tooltip = hsr_ui.61.b.desc
+        custom_tooltip = hsr_ui.56.b.desc
         allow = {
             custom_tooltip = {
                 fail_text = yuzhousuipian_short_text
@@ -5016,7 +3717,7 @@ country_event = {
                 }
             }
             custom_tooltip = {
-                fail_text = hsr_ui.61.fail
+                fail_text = hsr_ui.56.fail
                 hidden_trigger = {
                     not ={
                         any_owned_leader = {
@@ -5026,10 +3727,10 @@ country_event = {
                 }
             }
         }
-        ui_hire_leader = { EVENT_NAME = hsr_paragon.61 }
+        ui_hire_leader = { EVENT_NAME = hsr_paragon.56 }
     }
     option = {
-        name = hsr_ui.61.c
+        name = hsr_ui.56.c
         is_dialog_only = yes
         response_text = hsr_ui.5.c.desc_tooltip
         allow = {
@@ -5057,9 +3758,9 @@ country_event = {
         }
     }
     option = {
-        name = hsr_ui.61.d
+        name = hsr_ui.56.d
         is_dialog_only = yes
-        response_text = hsr_ui.61.d.desc_tooltip
+        response_text = hsr_ui.56.d.desc_tooltip
         allow = {
             custom_tooltip = {
                 fail_text = yuzhousuipian_short_1_text
@@ -5085,19 +3786,19 @@ country_event = {
         }
     }
     option = {
-        name = hsr_ui.61.e
+        name = hsr_ui.56.e
         allow = {
             custom_tooltip = {
-                fail_text = hsr_ui.61.e.fail
+                fail_text = hsr_ui.56.e.fail
                 hidden_trigger = {
                     has_country_flag = kafuka_set
                     not ={ any_owned_leader = { has_leader_flag = kafuka }}
                 }
             }
         }
-        custom_tooltip = hsr_ui.61.e.desc
+        custom_tooltip = hsr_ui.56.e.desc
         is_dialog_only = yes
-        response_text = hsr_ui.61.e.desc
+        response_text = hsr_ui.56.e.desc
         hidden_effect = {
             clone_leader = {
                 target = event_target:kafuka_leader
@@ -5111,10 +3812,10 @@ country_event = {
         }
     }
     option = {
-        name = hsr_ui.61.f
+        name = hsr_ui.56.f
         allow = {
             custom_tooltip = {
-                fail_text = hsr_ui.61.fail
+                fail_text = hsr_ui.56.fail
                 hidden_trigger = {
                     any_owned_leader = {
                         has_leader_flag = kafuka
@@ -5140,7 +3841,7 @@ country_event = {
 				}
 			}
             custom_tooltip = {
-                fail_text = hsr_ui.61.f.desc
+                fail_text = hsr_ui.56.f.desc
                 hidden_trigger = {
                     any_owned_leader = {
                         has_leader_flag = kafuka
@@ -5150,14 +3851,14 @@ country_event = {
             }
         }
         is_dialog_only = yes
-        response_text = hsr_ui.61.f.desc
+        response_text = hsr_ui.56.f.desc
         ui_leader_get_other_skill = {LEADER_SKILL = num_kafuka_other_skill  SPEND_VALUE = -500  LEVEL_VALUE = 1}
     }
     option = {
-        name = hsr_ui.61.g
+        name = hsr_ui.56.g
         allow = {
             custom_tooltip = {
-                fail_text = hsr_ui.61.fail
+                fail_text = hsr_ui.56.fail
                 hidden_trigger = {
                     any_owned_leader = {
                         has_leader_flag = kafuka
@@ -5174,7 +3875,7 @@ country_event = {
                 }
             }
             custom_tooltip = {
-                fail_text = hsr_ui.61.f.desc
+                fail_text = hsr_ui.56.f.desc
                 hidden_trigger = {
                     any_owned_leader = {
                         has_leader_flag = kafuka
@@ -5193,14 +3894,14 @@ country_event = {
 			}
         }
         is_dialog_only = yes
-        response_text = hsr_ui.61.f.desc
+        response_text = hsr_ui.56.f.desc
         ui_leader_get_other_skill = {LEADER_SKILL = num_kafuka_other_skill  SPEND_VALUE = -2500  LEVEL_VALUE = 5}
     }
     option = {
-        name = hsr_ui.61.h
+        name = hsr_ui.56.h
         allow = {
             custom_tooltip = {
-                fail_text = hsr_ui.61.fail
+                fail_text = hsr_ui.56.fail
                 hidden_trigger = {
                     any_owned_leader = {
                         has_leader_flag = kafuka
@@ -5217,7 +3918,7 @@ country_event = {
                 }
             }
             custom_tooltip = {
-                fail_text = hsr_ui.61.f.desc
+                fail_text = hsr_ui.56.f.desc
                 hidden_trigger = {
                     any_owned_leader = {
                         has_leader_flag = kafuka
@@ -5236,8 +3937,1048 @@ country_event = {
 			}
         }
         is_dialog_only = yes
-        response_text = hsr_ui.61.f.desc
+        response_text = hsr_ui.56.f.desc
         ui_leader_get_other_skill = {LEADER_SKILL = num_kafuka_other_skill  SPEND_VALUE = -5000  LEVEL_VALUE = 10}
+    }
+    option = {
+        name = CLOSE
+        default_hide_option = yes
+    }
+}
+country_event = {
+    id = hsr_ui.58
+    title = "hsr_ui.58.title"
+    desc = "hsr_ui.58.desc"
+    diplomatic = yes
+    custom_gui = honkai_star_rail_leader_show_main
+    custom_gui_option = hsr_leader_show_option
+    picture_event_data = {
+        portrait = sanyueqi
+        room = hsr_leader_room
+    }
+    is_triggered_only = yes
+    option = {
+        name = hsr_ui.58.a
+        is_dialog_only = yes
+        response_text = hsr_ui.58.a.desc
+    }
+    option = {
+        name = hsr_ui.58.b
+        is_dialog_only = yes
+        custom_tooltip = hsr_ui.58.b.desc
+        allow = {
+            custom_tooltip = {
+                fail_text = yuzhousuipian_short_text
+                hidden_trigger = {
+                    check_variable = {
+                        which = yuzhousuipian
+                        value >= 2000
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = hsr_ui.58.fail
+                hidden_trigger = {
+                    not ={
+                        any_owned_leader = {
+                            has_leader_flag = sanyueqi
+                        }
+                    }
+                }
+            }
+        }
+        ui_hire_leader = { EVENT_NAME = hsr_paragon.58 }
+    }
+    option = {
+        name = hsr_ui.58.c
+        is_dialog_only = yes
+        response_text = hsr_ui.5.c.desc_tooltip
+        allow = {
+            custom_tooltip = {
+                fail_text = yuzhousuipian_short_1_text
+                hidden_trigger = {
+                    check_variable = {
+                        which = yuzhousuipian
+                        value >= 500
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = trait_has_learn_text
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = sanyueqi
+                        not = {has_trait = leader_sanyueqi_t4}
+                    }
+                }
+            }
+        }
+        hidden_effect = {
+            ui_leader_get_trait = {LEADER_TARGET = sanyueqi_leader TRAIT = leader_sanyueqi_t4 }
+        }
+    }
+    option = {
+        name = hsr_ui.58.d
+        is_dialog_only = yes
+        response_text = hsr_ui.58.d.desc_tooltip
+        allow = {
+            custom_tooltip = {
+                fail_text = yuzhousuipian_short_1_text
+                hidden_trigger = {
+                    check_variable = {
+                        which = yuzhousuipian
+                        value >= 500
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = trait_has_learn_text
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = sanyueqi
+                        not = {has_trait = leader_sanyueqi_t5}
+                    }
+                }
+            }
+        }
+        hidden_effect = {
+            ui_leader_get_trait = {LEADER_TARGET = sanyueqi_leader TRAIT = leader_sanyueqi_t5 }
+        }
+    }
+    option = {
+        name = hsr_ui.58.e
+        allow = {
+            custom_tooltip = {
+                fail_text = hsr_ui.58.e.fail
+                hidden_trigger = {
+                    has_country_flag = sanyueqi_set
+                    not ={ any_owned_leader = { has_leader_flag = sanyueqi }}
+                }
+            }
+        }
+        custom_tooltip = hsr_ui.58.e.desc
+        is_dialog_only = yes
+        response_text = hsr_ui.58.e.desc
+        hidden_effect = {
+            clone_leader = {
+                target = event_target:sanyueqi_leader
+            }
+            last_created_leader = {
+                set_leader_flag = legendary_leader
+                save_global_event_target_as = sanyueqi_leader
+                set_leader_flag = immune_to_negative_traits
+                set_leader_flag = sanyueqi
+            }
+        }
+    }
+    option = {
+        name = hsr_ui.58.f
+        allow = {
+            custom_tooltip = {
+                fail_text = hsr_ui.58.fail
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = sanyueqi
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = yuzhousuipian_short_1_text
+                hidden_trigger = {
+                    check_variable = {
+                        which = yuzhousuipian
+                        value >= 500
+                    }
+                }
+            }
+			custom_tooltip = {
+				fail_text = skill_is_up
+				hidden_trigger = {
+					check_variable = {
+						which = num_sanyueqi_other_skill
+						value < 20
+					}
+				}
+			}
+            custom_tooltip = {
+                fail_text = hsr_ui.58.f.desc
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = sanyueqi
+                        has_trait = leader_sanyueqi_t5
+                    }
+                }
+            }
+        }
+        is_dialog_only = yes
+        response_text = hsr_ui.58.f.desc
+        ui_leader_get_other_skill = {LEADER_SKILL = num_sanyueqi_other_skill  SPEND_VALUE = -500  LEVEL_VALUE = 1}
+    }
+    option = {
+        name = hsr_ui.58.g
+        allow = {
+            custom_tooltip = {
+                fail_text = hsr_ui.58.fail
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = sanyueqi
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = yuzhousuipian_short_2_text
+                hidden_trigger = {
+                    check_variable = {
+                        which = yuzhousuipian
+                        value >= 2500
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = hsr_ui.58.f.desc
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = sanyueqi
+                        has_trait = leader_sanyueqi_t5
+                    }
+                }
+            }
+			custom_tooltip = {
+				fail_text = skill_is_up
+				hidden_trigger = {
+					check_variable = {
+						which = num_sanyueqi_other_skill
+						value < 20
+					}
+				}
+			}
+        }
+        is_dialog_only = yes
+        response_text = hsr_ui.58.f.desc
+        ui_leader_get_other_skill = {LEADER_SKILL = num_sanyueqi_other_skill  SPEND_VALUE = -2500  LEVEL_VALUE = 5}
+    }
+    option = {
+        name = hsr_ui.58.h
+        allow = {
+            custom_tooltip = {
+                fail_text = hsr_ui.58.fail
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = sanyueqi
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = yuzhousuipian_short_3_text
+                hidden_trigger = {
+                    check_variable = {
+                        which = yuzhousuipian
+                        value >= 5000
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = hsr_ui.58.f.desc
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = sanyueqi
+                        has_trait = leader_sanyueqi_t5
+                    }
+                }
+            }
+			custom_tooltip = {
+				fail_text = skill_is_up
+				hidden_trigger = {
+					check_variable = {
+						which = num_sanyueqi_other_skill
+						value < 20
+					}
+				}
+			}
+        }
+        is_dialog_only = yes
+        response_text = hsr_ui.58.f.desc
+        ui_leader_get_other_skill = {LEADER_SKILL = num_sanyueqi_other_skill  SPEND_VALUE = -5000  LEVEL_VALUE = 10}
+    }
+    option = {
+        name = CLOSE
+        default_hide_option = yes
+    }
+}
+country_event = {
+    id = hsr_ui.59
+    title = "hsr_ui.59.title"
+    desc = "hsr_ui.59.desc"
+    diplomatic = yes
+    custom_gui = honkai_star_rail_leader_show_main
+    custom_gui_option = hsr_leader_show_option
+    picture_event_data = {
+        portrait = danhen
+        room = hsr_leader_room
+    }
+    is_triggered_only = yes
+    option = {
+        name = hsr_ui.59.a
+        is_dialog_only = yes
+        response_text = hsr_ui.59.a.desc
+    }
+    option = {
+        name = hsr_ui.59.b
+        is_dialog_only = yes
+        custom_tooltip = hsr_ui.59.b.desc
+        allow = {
+            custom_tooltip = {
+                fail_text = yuzhousuipian_short_text
+                hidden_trigger = {
+                    check_variable = {
+                        which = yuzhousuipian
+                        value >= 2000
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = hsr_ui.59.fail
+                hidden_trigger = {
+                    not ={
+                        any_owned_leader = {
+                            has_leader_flag = danheng
+                        }
+                    }
+                }
+            }
+        }
+        ui_hire_leader = { EVENT_NAME = hsr_paragon.59 }
+    }
+    option = {
+        name = hsr_ui.59.c
+        is_dialog_only = yes
+        response_text = hsr_ui.5.c.desc_tooltip
+        allow = {
+            custom_tooltip = {
+                fail_text = yuzhousuipian_short_1_text
+                hidden_trigger = {
+                    check_variable = {
+                        which = yuzhousuipian
+                        value >= 500
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = trait_has_learn_text
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = danheng
+                        not = {has_trait = leader_danheng_t4}
+                    }
+                }
+            }
+        }
+        hidden_effect = {
+            ui_leader_get_trait = {LEADER_TARGET = danheng_leader TRAIT = leader_danheng_t4 }
+        }
+    }
+    option = {
+        name = hsr_ui.59.d
+        is_dialog_only = yes
+        response_text = hsr_ui.59.d.desc_tooltip
+        allow = {
+            custom_tooltip = {
+                fail_text = yuzhousuipian_short_1_text
+                hidden_trigger = {
+                    check_variable = {
+                        which = yuzhousuipian
+                        value >= 500
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = trait_has_learn_text
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = danheng
+                        not = {has_trait = leader_danheng_t5}
+                    }
+                }
+            }
+        }
+        hidden_effect = {
+            ui_leader_get_trait = {LEADER_TARGET = danheng_leader TRAIT = leader_danheng_t5 }
+        }
+    }
+    option = {
+        name = hsr_ui.59.e
+        allow = {
+            custom_tooltip = {
+                fail_text = hsr_ui.59.e.fail
+                hidden_trigger = {
+                    has_country_flag = danheng_set
+                    not ={ any_owned_leader = { has_leader_flag = danheng }}
+                }
+            }
+        }
+        custom_tooltip = hsr_ui.59.e.desc
+        is_dialog_only = yes
+        response_text = hsr_ui.59.e.desc
+        hidden_effect = {
+            clone_leader = {
+                target = event_target:danheng_leader
+            }
+            last_created_leader = {
+                set_leader_flag = legendary_leader
+                save_global_event_target_as = danheng_leader
+                set_leader_flag = immune_to_negative_traits
+                set_leader_flag = danheng
+            }
+        }
+    }
+    option = {
+        name = hsr_ui.59.f
+        allow = {
+            custom_tooltip = {
+                fail_text = hsr_ui.59.fail
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = danheng
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = yuzhousuipian_short_1_text
+                hidden_trigger = {
+                    check_variable = {
+                        which = yuzhousuipian
+                        value >= 500
+                    }
+                }
+            }
+			custom_tooltip = {
+				fail_text = skill_is_up
+				hidden_trigger = {
+					check_variable = {
+						which = num_danheng_other_skill
+						value < 20
+					}
+				}
+			}
+            custom_tooltip = {
+                fail_text = hsr_ui.59.f.desc
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = danheng
+                        has_trait = leader_danheng_t5
+                    }
+                }
+            }
+        }
+        is_dialog_only = yes
+        response_text = hsr_ui.59.f.desc
+        ui_leader_get_other_skill = {LEADER_SKILL = num_danheng_other_skill  SPEND_VALUE = -500  LEVEL_VALUE = 1}
+    }
+    option = {
+        name = hsr_ui.59.g
+        allow = {
+            custom_tooltip = {
+                fail_text = hsr_ui.59.fail
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = danheng
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = yuzhousuipian_short_2_text
+                hidden_trigger = {
+                    check_variable = {
+                        which = yuzhousuipian
+                        value >= 2500
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = hsr_ui.59.f.desc
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = danheng
+                        has_trait = leader_danheng_t5
+                    }
+                }
+            }
+			custom_tooltip = {
+				fail_text = skill_is_up
+				hidden_trigger = {
+					check_variable = {
+						which = num_danheng_other_skill
+						value < 20
+					}
+				}
+			}
+        }
+        is_dialog_only = yes
+        response_text = hsr_ui.59.f.desc
+        ui_leader_get_other_skill = {LEADER_SKILL = num_danheng_other_skill  SPEND_VALUE = -2500  LEVEL_VALUE = 5}
+    }
+    option = {
+        name = hsr_ui.59.h
+        allow = {
+            custom_tooltip = {
+                fail_text = hsr_ui.59.fail
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = danheng
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = yuzhousuipian_short_3_text
+                hidden_trigger = {
+                    check_variable = {
+                        which = yuzhousuipian
+                        value >= 5000
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = hsr_ui.59.f.desc
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = danheng
+                        has_trait = leader_danheng_t5
+                    }
+                }
+            }
+			custom_tooltip = {
+				fail_text = skill_is_up
+				hidden_trigger = {
+					check_variable = {
+						which = num_danheng_other_skill
+						value < 20
+					}
+				}
+			}
+        }
+        is_dialog_only = yes
+        response_text = hsr_ui.59.f.desc
+        ui_leader_get_other_skill = {LEADER_SKILL = num_danheng_other_skill  SPEND_VALUE = -5000  LEVEL_VALUE = 10}
+    }
+    option = {
+        name = CLOSE
+        default_hide_option = yes
+    }
+}
+country_event = {
+    id = hsr_ui.60
+    title = "hsr_ui.60.title"
+    desc = "hsr_ui.60.desc"
+    diplomatic = yes
+    custom_gui = honkai_star_rail_leader_show_main
+    custom_gui_option = hsr_leader_show_option
+    picture_event_data = {
+        portrait = jizi
+        room = hsr_leader_room
+    }
+    is_triggered_only = yes
+    option = {
+        name = hsr_ui.60.a
+        is_dialog_only = yes
+        response_text = hsr_ui.60.a.desc
+    }
+    option = {
+        name = hsr_ui.60.b
+        is_dialog_only = yes
+        custom_tooltip = hsr_ui.60.b.desc
+        allow = {
+            custom_tooltip = {
+                fail_text = yuzhousuipian_short_text
+                hidden_trigger = {
+                    check_variable = {
+                        which = yuzhousuipian
+                        value >= 2000
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = hsr_ui.60.fail
+                hidden_trigger = {
+                    not ={
+                        any_owned_leader = {
+                            has_leader_flag = jizi
+                        }
+                    }
+                }
+            }
+        }
+        ui_hire_leader = { EVENT_NAME = hsr_paragon.60 }
+    }
+    option = {
+        name = hsr_ui.60.c
+        is_dialog_only = yes
+        response_text = hsr_ui.5.c.desc_tooltip
+        allow = {
+            custom_tooltip = {
+                fail_text = yuzhousuipian_short_1_text
+                hidden_trigger = {
+                    check_variable = {
+                        which = yuzhousuipian
+                        value >= 500
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = trait_has_learn_text
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = jizi
+                        not = {has_trait = leader_jizi_t4}
+                    }
+                }
+            }
+        }
+        hidden_effect = {
+            ui_leader_get_trait = {LEADER_TARGET = jizi_leader TRAIT = leader_jizi_t4 }
+        }
+    }
+    option = {
+        name = hsr_ui.60.d
+        is_dialog_only = yes
+        response_text = hsr_ui.60.d.desc_tooltip
+        allow = {
+            custom_tooltip = {
+                fail_text = yuzhousuipian_short_1_text
+                hidden_trigger = {
+                    check_variable = {
+                        which = yuzhousuipian
+                        value >= 500
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = trait_has_learn_text
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = jizi
+                        not = {has_trait = leader_jizi_t5}
+                    }
+                }
+            }
+        }
+        hidden_effect = {
+            ui_leader_get_trait = {LEADER_TARGET = jizi_leader TRAIT = leader_jizi_t5 }
+        }
+    }
+    option = {
+        name = hsr_ui.60.e
+        allow = {
+            custom_tooltip = {
+                fail_text = hsr_ui.60.e.fail
+                hidden_trigger = {
+                    has_country_flag = jizi_set
+                    not ={ any_owned_leader = { has_leader_flag = jizi }}
+                }
+            }
+        }
+        custom_tooltip = hsr_ui.60.e.desc
+        is_dialog_only = yes
+        response_text = hsr_ui.60.e.desc
+        hidden_effect = {
+            clone_leader = {
+                target = event_target:jizi_leader
+            }
+            last_created_leader = {
+                set_leader_flag = legendary_leader
+                save_global_event_target_as = jizi_leader
+                set_leader_flag = immune_to_negative_traits
+                set_leader_flag = jizi
+            }
+        }
+    }
+    option = {
+        name = hsr_ui.60.f
+        allow = {
+            custom_tooltip = {
+                fail_text = hsr_ui.60.fail
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = jizi
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = yuzhousuipian_short_1_text
+                hidden_trigger = {
+                    check_variable = {
+                        which = yuzhousuipian
+                        value >= 500
+                    }
+                }
+            }
+			custom_tooltip = {
+				fail_text = skill_is_up
+				hidden_trigger = {
+					check_variable = {
+						which = num_jizi_other_skill
+						value < 20
+					}
+				}
+			}
+            custom_tooltip = {
+                fail_text = hsr_ui.60.f.desc
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = jizi
+                        has_trait = leader_jizi_t5
+                    }
+                }
+            }
+        }
+        is_dialog_only = yes
+        response_text = hsr_ui.60.f.desc
+        ui_leader_get_other_skill = {LEADER_SKILL = num_jizi_other_skill  SPEND_VALUE = -500  LEVEL_VALUE = 1}
+    }
+    option = {
+        name = hsr_ui.60.g
+        allow = {
+            custom_tooltip = {
+                fail_text = hsr_ui.60.fail
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = jizi
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = yuzhousuipian_short_2_text
+                hidden_trigger = {
+                    check_variable = {
+                        which = yuzhousuipian
+                        value >= 2500
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = hsr_ui.60.f.desc
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = jizi
+                        has_trait = leader_jizi_t5
+                    }
+                }
+            }
+			custom_tooltip = {
+				fail_text = skill_is_up
+				hidden_trigger = {
+					check_variable = {
+						which = num_jizi_other_skill
+						value < 20
+					}
+				}
+			}
+        }
+        is_dialog_only = yes
+        response_text = hsr_ui.60.f.desc
+        ui_leader_get_other_skill = {LEADER_SKILL = num_jizi_other_skill  SPEND_VALUE = -2500  LEVEL_VALUE = 5}
+    }
+    option = {
+        name = hsr_ui.60.h
+        allow = {
+            custom_tooltip = {
+                fail_text = hsr_ui.60.fail
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = jizi
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = yuzhousuipian_short_3_text
+                hidden_trigger = {
+                    check_variable = {
+                        which = yuzhousuipian
+                        value >= 5000
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = hsr_ui.60.f.desc
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = jizi
+                        has_trait = leader_jizi_t5
+                    }
+                }
+            }
+			custom_tooltip = {
+				fail_text = skill_is_up
+				hidden_trigger = {
+					check_variable = {
+						which = num_jizi_other_skill
+						value < 20
+					}
+				}
+			}
+        }
+        is_dialog_only = yes
+        response_text = hsr_ui.60.f.desc
+        ui_leader_get_other_skill = {LEADER_SKILL = num_jizi_other_skill  SPEND_VALUE = -5000  LEVEL_VALUE = 10}
+    }
+    option = {
+        name = CLOSE
+        default_hide_option = yes
+    }
+}
+country_event = {
+    id = hsr_ui.61
+    title = "hsr_ui.61.title"
+    desc = "hsr_ui.61.desc"
+    diplomatic = yes
+    custom_gui = honkai_star_rail_leader_show_main
+    custom_gui_option = hsr_leader_show_option
+    picture_event_data = {
+        portrait = waerte
+        room = hsr_leader_room
+    }
+    is_triggered_only = yes
+    option = {
+        name = hsr_ui.61.a
+        is_dialog_only = yes
+        response_text = hsr_ui.61.a.desc
+    }
+    option = {
+        name = hsr_ui.61.b
+        is_dialog_only = yes
+        custom_tooltip = hsr_ui.61.b.desc
+        allow = {
+            custom_tooltip = {
+                fail_text = yuzhousuipian_short_text
+                hidden_trigger = {
+                    check_variable = {
+                        which = yuzhousuipian
+                        value >= 2000
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = hsr_ui.61.fail
+                hidden_trigger = {
+                    not ={
+                        any_owned_leader = {
+                            has_leader_flag = waerte
+                        }
+                    }
+                }
+            }
+        }
+        ui_hire_leader = { EVENT_NAME = hsr_paragon.61 }
+    }
+    option = {
+        name = hsr_ui.61.c
+        is_dialog_only = yes
+        response_text = hsr_ui.5.c.desc_tooltip
+        allow = {
+            custom_tooltip = {
+                fail_text = yuzhousuipian_short_1_text
+                hidden_trigger = {
+                    check_variable = {
+                        which = yuzhousuipian
+                        value >= 500
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = trait_has_learn_text
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = waerte
+                        not = {has_trait = leader_waerte_t4}
+                    }
+                }
+            }
+        }
+        hidden_effect = {
+            ui_leader_get_trait = {LEADER_TARGET = waerte_leader TRAIT = leader_waerte_t4 }
+        }
+    }
+    option = {
+        name = hsr_ui.61.d
+        is_dialog_only = yes
+        response_text = hsr_ui.61.d.desc_tooltip
+        allow = {
+            custom_tooltip = {
+                fail_text = yuzhousuipian_short_1_text
+                hidden_trigger = {
+                    check_variable = {
+                        which = yuzhousuipian
+                        value >= 500
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = trait_has_learn_text
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = waerte
+                        not = {has_trait = leader_waerte_t5}
+                    }
+                }
+            }
+        }
+        hidden_effect = {
+            ui_leader_get_trait = {LEADER_TARGET = waerte_leader TRAIT = leader_waerte_t5 }
+        }
+    }
+    option = {
+        name = hsr_ui.61.e
+        allow = {
+            custom_tooltip = {
+                fail_text = hsr_ui.61.e.fail
+                hidden_trigger = {
+                    has_country_flag = waerte_set
+                    not ={ any_owned_leader = { has_leader_flag = waerte }}
+                }
+            }
+        }
+        custom_tooltip = hsr_ui.61.e.desc
+        is_dialog_only = yes
+        response_text = hsr_ui.61.e.desc
+        hidden_effect = {
+            clone_leader = {
+                target = event_target:waerte_leader
+            }
+            last_created_leader = {
+                set_leader_flag = legendary_leader
+                save_global_event_target_as = waerte_leader
+                set_leader_flag = immune_to_negative_traits
+                set_leader_flag = waerte
+            }
+        }
+    }
+    option = {
+        name = hsr_ui.61.f
+        allow = {
+            custom_tooltip = {
+                fail_text = hsr_ui.61.fail
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = waerte
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = yuzhousuipian_short_1_text
+                hidden_trigger = {
+                    check_variable = {
+                        which = yuzhousuipian
+                        value >= 500
+                    }
+                }
+            }
+			custom_tooltip = {
+				fail_text = skill_is_up
+				hidden_trigger = {
+					check_variable = {
+						which = num_waerte_other_skill
+						value < 20
+					}
+				}
+			}
+            custom_tooltip = {
+                fail_text = hsr_ui.61.f.desc
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = waerte
+                        has_trait = leader_waerte_t5
+                    }
+                }
+            }
+        }
+        is_dialog_only = yes
+        response_text = hsr_ui.61.f.desc
+        ui_leader_get_other_skill = {LEADER_SKILL = num_waerte_other_skill  SPEND_VALUE = -500  LEVEL_VALUE = 1}
+    }
+    option = {
+        name = hsr_ui.61.g
+        allow = {
+            custom_tooltip = {
+                fail_text = hsr_ui.61.fail
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = waerte
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = yuzhousuipian_short_2_text
+                hidden_trigger = {
+                    check_variable = {
+                        which = yuzhousuipian
+                        value >= 2500
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = hsr_ui.61.f.desc
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = waerte
+                        has_trait = leader_waerte_t5
+                    }
+                }
+            }
+			custom_tooltip = {
+				fail_text = skill_is_up
+				hidden_trigger = {
+					check_variable = {
+						which = num_waerte_other_skill
+						value < 20
+					}
+				}
+			}
+        }
+        is_dialog_only = yes
+        response_text = hsr_ui.61.f.desc
+        ui_leader_get_other_skill = {LEADER_SKILL = num_waerte_other_skill  SPEND_VALUE = -2500  LEVEL_VALUE = 5}
+    }
+    option = {
+        name = hsr_ui.61.h
+        allow = {
+            custom_tooltip = {
+                fail_text = hsr_ui.61.fail
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = waerte
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = yuzhousuipian_short_3_text
+                hidden_trigger = {
+                    check_variable = {
+                        which = yuzhousuipian
+                        value >= 5000
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = hsr_ui.61.f.desc
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = waerte
+                        has_trait = leader_waerte_t5
+                    }
+                }
+            }
+			custom_tooltip = {
+				fail_text = skill_is_up
+				hidden_trigger = {
+					check_variable = {
+						which = num_waerte_other_skill
+						value < 20
+					}
+				}
+			}
+        }
+        is_dialog_only = yes
+        response_text = hsr_ui.61.f.desc
+        ui_leader_get_other_skill = {LEADER_SKILL = num_waerte_other_skill  SPEND_VALUE = -5000  LEVEL_VALUE = 10}
     }
     option = {
         name = CLOSE
@@ -5252,7 +4993,7 @@ country_event = {
     custom_gui = honkai_star_rail_leader_show_main
     custom_gui_option = hsr_leader_show_option
     picture_event_data = {
-        portrait = tuopa
+        portrait = wulinv
         room = hsr_leader_room
     }
     is_triggered_only = yes
@@ -5280,7 +5021,7 @@ country_event = {
                 hidden_trigger = {
                     not ={
                         any_owned_leader = {
-                            has_leader_flag = tuopa
+                            has_leader_flag = kaituozhe
                         }
                     }
                 }
@@ -5306,14 +5047,14 @@ country_event = {
                 fail_text = trait_has_learn_text
                 hidden_trigger = {
                     any_owned_leader = {
-                        has_leader_flag = tuopa
-                        not = {has_trait = leader_tuopa_t4}
+                        has_leader_flag = kaituozhe
+                        not = {has_trait = leader_kaituozhe_t4}
                     }
                 }
             }
         }
         hidden_effect = {
-            ui_leader_get_trait = {LEADER_TARGET = tuopa_leader TRAIT = leader_tuopa_t4 }
+            ui_leader_get_trait = {LEADER_TARGET = kaituozhe_leader TRAIT = leader_kaituozhe_t4 }
         }
     }
     option = {
@@ -5334,14 +5075,14 @@ country_event = {
                 fail_text = trait_has_learn_text
                 hidden_trigger = {
                     any_owned_leader = {
-                        has_leader_flag = tuopa
-                        not = {has_trait = leader_tuopa_t5}
+                        has_leader_flag = kaituozhe
+                        not = {has_trait = leader_kaituozhe_t5}
                     }
                 }
             }
         }
         hidden_effect = {
-            ui_leader_get_trait = {LEADER_TARGET = tuopa_leader TRAIT = leader_tuopa_t5 }
+            ui_leader_get_trait = {LEADER_TARGET = kaituozhe_leader TRAIT = leader_kaituozhe_t5 }
         }
     }
     option = {
@@ -5350,8 +5091,8 @@ country_event = {
             custom_tooltip = {
                 fail_text = hsr_ui.62.e.fail
                 hidden_trigger = {
-                    has_country_flag = tuopa_set
-                    not ={ any_owned_leader = { has_leader_flag = tuopa }}
+                    has_country_flag = kaituozhe_set
+                    not ={ any_owned_leader = { has_leader_flag = kaituozhe }}
                 }
             }
         }
@@ -5360,13 +5101,13 @@ country_event = {
         response_text = hsr_ui.62.e.desc
         hidden_effect = {
             clone_leader = {
-                target = event_target:tuopa_leader
+                target = event_target:kaituozhe_leader
             }
             last_created_leader = {
                 set_leader_flag = legendary_leader
-                save_global_event_target_as = tuopa_leader
+                save_global_event_target_as = kaituozhe_leader
                 set_leader_flag = immune_to_negative_traits
-                set_leader_flag = tuopa
+                set_leader_flag = kaituozhe
             }
         }
     }
@@ -5377,7 +5118,7 @@ country_event = {
                 fail_text = hsr_ui.62.fail
                 hidden_trigger = {
                     any_owned_leader = {
-                        has_leader_flag = tuopa
+                        has_leader_flag = kaituozhe
                     }
                 }
             }
@@ -5394,7 +5135,7 @@ country_event = {
 				fail_text = skill_is_up
 				hidden_trigger = {
 					check_variable = {
-						which = num_tuopa_other_skill
+						which = num_kaituozhe_other_skill
 						value < 20
 					}
 				}
@@ -5403,15 +5144,15 @@ country_event = {
                 fail_text = hsr_ui.62.f.desc
                 hidden_trigger = {
                     any_owned_leader = {
-                        has_leader_flag = tuopa
-                        has_trait = leader_tuopa_t5
+                        has_leader_flag = kaituozhe
+                        has_trait = leader_kaituozhe_t5
                     }
                 }
             }
         }
         is_dialog_only = yes
         response_text = hsr_ui.62.f.desc
-        ui_leader_get_other_skill = {LEADER_SKILL = num_tuopa_other_skill  SPEND_VALUE = -500  LEVEL_VALUE = 1}
+        ui_leader_get_other_skill = {LEADER_SKILL = num_kaituozhe_other_skill  SPEND_VALUE = -500  LEVEL_VALUE = 1}
     }
     option = {
         name = hsr_ui.62.g
@@ -5420,7 +5161,7 @@ country_event = {
                 fail_text = hsr_ui.62.fail
                 hidden_trigger = {
                     any_owned_leader = {
-                        has_leader_flag = tuopa
+                        has_leader_flag = kaituozhe
                     }
                 }
             }
@@ -5437,8 +5178,8 @@ country_event = {
                 fail_text = hsr_ui.62.f.desc
                 hidden_trigger = {
                     any_owned_leader = {
-                        has_leader_flag = tuopa
-                        has_trait = leader_tuopa_t5
+                        has_leader_flag = kaituozhe
+                        has_trait = leader_kaituozhe_t5
                     }
                 }
             }
@@ -5446,7 +5187,7 @@ country_event = {
 				fail_text = skill_is_up
 				hidden_trigger = {
 					check_variable = {
-						which = num_tuopa_other_skill
+						which = num_kaituozhe_other_skill
 						value < 20
 					}
 				}
@@ -5454,7 +5195,7 @@ country_event = {
         }
         is_dialog_only = yes
         response_text = hsr_ui.62.f.desc
-        ui_leader_get_other_skill = {LEADER_SKILL = num_tuopa_other_skill  SPEND_VALUE = -2500  LEVEL_VALUE = 5}
+        ui_leader_get_other_skill = {LEADER_SKILL = num_kaituozhe_other_skill  SPEND_VALUE = -2500  LEVEL_VALUE = 5}
     }
     option = {
         name = hsr_ui.62.h
@@ -5463,7 +5204,7 @@ country_event = {
                 fail_text = hsr_ui.62.fail
                 hidden_trigger = {
                     any_owned_leader = {
-                        has_leader_flag = tuopa
+                        has_leader_flag = kaituozhe
                     }
                 }
             }
@@ -5480,8 +5221,8 @@ country_event = {
                 fail_text = hsr_ui.62.f.desc
                 hidden_trigger = {
                     any_owned_leader = {
-                        has_leader_flag = tuopa
-                        has_trait = leader_tuopa_t5
+                        has_leader_flag = kaituozhe
+                        has_trait = leader_kaituozhe_t5
                     }
                 }
             }
@@ -5489,7 +5230,7 @@ country_event = {
 				fail_text = skill_is_up
 				hidden_trigger = {
 					check_variable = {
-						which = num_tuopa_other_skill
+						which = num_kaituozhe_other_skill
 						value < 20
 					}
 				}
@@ -5497,13 +5238,14 @@ country_event = {
         }
         is_dialog_only = yes
         response_text = hsr_ui.62.f.desc
-        ui_leader_get_other_skill = {LEADER_SKILL = num_tuopa_other_skill  SPEND_VALUE = -5000  LEVEL_VALUE = 10}
+        ui_leader_get_other_skill = {LEADER_SKILL = num_kaituozhe_other_skill  SPEND_VALUE = -5000  LEVEL_VALUE = 10}
     }
     option = {
         name = CLOSE
         default_hide_option = yes
     }
 }
+
 country_event = {
     id = hsr_ui.63
     title = "hsr_ui.63.title"
@@ -5512,7 +5254,7 @@ country_event = {
     custom_gui = honkai_star_rail_leader_show_main
     custom_gui_option = hsr_leader_show_option
     picture_event_data = {
-        portrait = yinzhi
+        portrait = tuopa
         room = hsr_leader_room
     }
     is_triggered_only = yes
@@ -5540,7 +5282,7 @@ country_event = {
                 hidden_trigger = {
                     not ={
                         any_owned_leader = {
-                            has_leader_flag = yinzhi
+                            has_leader_flag = tuopa
                         }
                     }
                 }
@@ -5550,6 +5292,266 @@ country_event = {
     }
     option = {
         name = hsr_ui.63.c
+        is_dialog_only = yes
+        response_text = hsr_ui.5.c.desc_tooltip
+        allow = {
+            custom_tooltip = {
+                fail_text = yuzhousuipian_short_1_text
+                hidden_trigger = {
+                    check_variable = {
+                        which = yuzhousuipian
+                        value >= 500
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = trait_has_learn_text
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = tuopa
+                        not = {has_trait = leader_tuopa_t4}
+                    }
+                }
+            }
+        }
+        hidden_effect = {
+            ui_leader_get_trait = {LEADER_TARGET = tuopa_leader TRAIT = leader_tuopa_t4 }
+        }
+    }
+    option = {
+        name = hsr_ui.63.d
+        is_dialog_only = yes
+        response_text = hsr_ui.63.d.desc_tooltip
+        allow = {
+            custom_tooltip = {
+                fail_text = yuzhousuipian_short_1_text
+                hidden_trigger = {
+                    check_variable = {
+                        which = yuzhousuipian
+                        value >= 500
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = trait_has_learn_text
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = tuopa
+                        not = {has_trait = leader_tuopa_t5}
+                    }
+                }
+            }
+        }
+        hidden_effect = {
+            ui_leader_get_trait = {LEADER_TARGET = tuopa_leader TRAIT = leader_tuopa_t5 }
+        }
+    }
+    option = {
+        name = hsr_ui.63.e
+        allow = {
+            custom_tooltip = {
+                fail_text = hsr_ui.63.e.fail
+                hidden_trigger = {
+                    has_country_flag = tuopa_set
+                    not ={ any_owned_leader = { has_leader_flag = tuopa }}
+                }
+            }
+        }
+        custom_tooltip = hsr_ui.63.e.desc
+        is_dialog_only = yes
+        response_text = hsr_ui.63.e.desc
+        hidden_effect = {
+            clone_leader = {
+                target = event_target:tuopa_leader
+            }
+            last_created_leader = {
+                set_leader_flag = legendary_leader
+                save_global_event_target_as = tuopa_leader
+                set_leader_flag = immune_to_negative_traits
+                set_leader_flag = tuopa
+            }
+        }
+    }
+    option = {
+        name = hsr_ui.63.f
+        allow = {
+            custom_tooltip = {
+                fail_text = hsr_ui.63.fail
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = tuopa
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = yuzhousuipian_short_1_text
+                hidden_trigger = {
+                    check_variable = {
+                        which = yuzhousuipian
+                        value >= 500
+                    }
+                }
+            }
+			custom_tooltip = {
+				fail_text = skill_is_up
+				hidden_trigger = {
+					check_variable = {
+						which = num_tuopa_other_skill
+						value < 20
+					}
+				}
+			}
+            custom_tooltip = {
+                fail_text = hsr_ui.63.f.desc
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = tuopa
+                        has_trait = leader_tuopa_t5
+                    }
+                }
+            }
+        }
+        is_dialog_only = yes
+        response_text = hsr_ui.63.f.desc
+        ui_leader_get_other_skill = {LEADER_SKILL = num_tuopa_other_skill  SPEND_VALUE = -500  LEVEL_VALUE = 1}
+    }
+    option = {
+        name = hsr_ui.63.g
+        allow = {
+            custom_tooltip = {
+                fail_text = hsr_ui.63.fail
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = tuopa
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = yuzhousuipian_short_2_text
+                hidden_trigger = {
+                    check_variable = {
+                        which = yuzhousuipian
+                        value >= 2500
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = hsr_ui.63.f.desc
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = tuopa
+                        has_trait = leader_tuopa_t5
+                    }
+                }
+            }
+			custom_tooltip = {
+				fail_text = skill_is_up
+				hidden_trigger = {
+					check_variable = {
+						which = num_tuopa_other_skill
+						value < 20
+					}
+				}
+			}
+        }
+        is_dialog_only = yes
+        response_text = hsr_ui.63.f.desc
+        ui_leader_get_other_skill = {LEADER_SKILL = num_tuopa_other_skill  SPEND_VALUE = -2500  LEVEL_VALUE = 5}
+    }
+    option = {
+        name = hsr_ui.63.h
+        allow = {
+            custom_tooltip = {
+                fail_text = hsr_ui.63.fail
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = tuopa
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = yuzhousuipian_short_3_text
+                hidden_trigger = {
+                    check_variable = {
+                        which = yuzhousuipian
+                        value >= 5000
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = hsr_ui.63.f.desc
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = tuopa
+                        has_trait = leader_tuopa_t5
+                    }
+                }
+            }
+			custom_tooltip = {
+				fail_text = skill_is_up
+				hidden_trigger = {
+					check_variable = {
+						which = num_tuopa_other_skill
+						value < 20
+					}
+				}
+			}
+        }
+        is_dialog_only = yes
+        response_text = hsr_ui.63.f.desc
+        ui_leader_get_other_skill = {LEADER_SKILL = num_tuopa_other_skill  SPEND_VALUE = -5000  LEVEL_VALUE = 10}
+    }
+    option = {
+        name = CLOSE
+        default_hide_option = yes
+    }
+}
+country_event = {
+    id = hsr_ui.64
+    title = "hsr_ui.64.title"
+    desc = "hsr_ui.64.desc"
+    diplomatic = yes
+    custom_gui = honkai_star_rail_leader_show_main
+    custom_gui_option = hsr_leader_show_option
+    picture_event_data = {
+        portrait = yinzhi
+        room = hsr_leader_room
+    }
+    is_triggered_only = yes
+    option = {
+        name = hsr_ui.64.a
+        is_dialog_only = yes
+        response_text = hsr_ui.64.a.desc
+    }
+    option = {
+        name = hsr_ui.64.b
+        is_dialog_only = yes
+        custom_tooltip = hsr_ui.64.b.desc
+        allow = {
+            custom_tooltip = {
+                fail_text = yuzhousuipian_short_text
+                hidden_trigger = {
+                    check_variable = {
+                        which = yuzhousuipian
+                        value >= 2000
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = hsr_ui.64.fail
+                hidden_trigger = {
+                    not ={
+                        any_owned_leader = {
+                            has_leader_flag = yinzhi
+                        }
+                    }
+                }
+            }
+        }
+        ui_hire_leader = { EVENT_NAME = hsr_paragon.64 }
+    }
+    option = {
+        name = hsr_ui.64.c
         is_dialog_only = yes
         response_text = hsr_ui.5.c.desc_tooltip
         allow = {
@@ -5577,9 +5579,9 @@ country_event = {
         }
     }
     option = {
-        name = hsr_ui.63.d
+        name = hsr_ui.64.d
         is_dialog_only = yes
-        response_text = hsr_ui.63.d.desc_tooltip
+        response_text = hsr_ui.64.d.desc_tooltip
         allow = {
             custom_tooltip = {
                 fail_text = yuzhousuipian_short_1_text
@@ -5605,19 +5607,19 @@ country_event = {
         }
     }
     option = {
-        name = hsr_ui.63.e
+        name = hsr_ui.64.e
         allow = {
             custom_tooltip = {
-                fail_text = hsr_ui.63.e.fail
+                fail_text = hsr_ui.64.e.fail
                 hidden_trigger = {
                     has_country_flag = yinzhi_set
                     not ={ any_owned_leader = { has_leader_flag = yinzhi }}
                 }
             }
         }
-        custom_tooltip = hsr_ui.63.e.desc
+        custom_tooltip = hsr_ui.64.e.desc
         is_dialog_only = yes
-        response_text = hsr_ui.63.e.desc
+        response_text = hsr_ui.64.e.desc
         hidden_effect = {
             clone_leader = {
                 target = event_target:yinzhi_leader
@@ -5631,10 +5633,10 @@ country_event = {
         }
     }
     option = {
-        name = hsr_ui.63.f
+        name = hsr_ui.64.f
         allow = {
             custom_tooltip = {
-                fail_text = hsr_ui.63.fail
+                fail_text = hsr_ui.64.fail
                 hidden_trigger = {
                     any_owned_leader = {
                         has_leader_flag = yinzhi
@@ -5660,7 +5662,7 @@ country_event = {
 				}
 			}
             custom_tooltip = {
-                fail_text = hsr_ui.63.f.desc
+                fail_text = hsr_ui.64.f.desc
                 hidden_trigger = {
                     any_owned_leader = {
                         has_leader_flag = yinzhi
@@ -5670,14 +5672,14 @@ country_event = {
             }
         }
         is_dialog_only = yes
-        response_text = hsr_ui.63.f.desc
+        response_text = hsr_ui.64.f.desc
         ui_leader_get_other_skill = {LEADER_SKILL = num_yinzhi_other_skill  SPEND_VALUE = -500  LEVEL_VALUE = 1}
     }
     option = {
-        name = hsr_ui.63.g
+        name = hsr_ui.64.g
         allow = {
             custom_tooltip = {
-                fail_text = hsr_ui.63.fail
+                fail_text = hsr_ui.64.fail
                 hidden_trigger = {
                     any_owned_leader = {
                         has_leader_flag = yinzhi
@@ -5694,7 +5696,7 @@ country_event = {
                 }
             }
             custom_tooltip = {
-                fail_text = hsr_ui.63.f.desc
+                fail_text = hsr_ui.64.f.desc
                 hidden_trigger = {
                     any_owned_leader = {
                         has_leader_flag = yinzhi
@@ -5713,14 +5715,14 @@ country_event = {
 			}
         }
         is_dialog_only = yes
-        response_text = hsr_ui.63.f.desc
+        response_text = hsr_ui.64.f.desc
         ui_leader_get_other_skill = {LEADER_SKILL = num_yinzhi_other_skill  SPEND_VALUE = -2500  LEVEL_VALUE = 5}
     }
     option = {
-        name = hsr_ui.63.h
+        name = hsr_ui.64.h
         allow = {
             custom_tooltip = {
-                fail_text = hsr_ui.63.fail
+                fail_text = hsr_ui.64.fail
                 hidden_trigger = {
                     any_owned_leader = {
                         has_leader_flag = yinzhi
@@ -5737,7 +5739,7 @@ country_event = {
                 }
             }
             custom_tooltip = {
-                fail_text = hsr_ui.63.f.desc
+                fail_text = hsr_ui.64.f.desc
                 hidden_trigger = {
                     any_owned_leader = {
                         has_leader_flag = yinzhi
@@ -5756,7 +5758,7 @@ country_event = {
 			}
         }
         is_dialog_only = yes
-        response_text = hsr_ui.63.f.desc
+        response_text = hsr_ui.64.f.desc
         ui_leader_get_other_skill = {LEADER_SKILL = num_yinzhi_other_skill  SPEND_VALUE = -5000  LEVEL_VALUE = 10}
     }
     option = {
