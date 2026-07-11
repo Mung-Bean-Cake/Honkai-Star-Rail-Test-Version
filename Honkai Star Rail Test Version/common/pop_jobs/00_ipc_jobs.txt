@@ -1,0 +1,121 @@
+ipc_trader = {
+    category = specialist
+
+    swappable_data = {
+        default = {
+            condition_string = SPECIALIST_JOB_TRIGGER
+            building_icon = building_galactic_stock_exchange
+            icon = ipc_trader
+        }
+        # Subterranean Liaison Officer
+        swap_type = {
+            trigger = {
+                trader_is_subterranean = yes
+            }
+            name = underground_trade_worker
+            desc = underground_trade_worker
+            weight = 5
+        }
+    }
+
+    tags = { trade amenities }
+
+    possible_pre_triggers = {
+        has_owner = yes
+        is_being_purged = no
+        is_being_assimilated = no
+        is_sapient = yes
+    }
+
+    possible_precalc = can_fill_specialist_job
+    planet_modifier = {
+        planet_amenities_add = 200
+    }
+    country_modifier = {
+        country_edict_fund_add = 1
+    }
+    resources = {
+        category = planet_traders
+        produces = {
+            trade = 14
+        }
+        produces = {
+            trigger = {
+                trader_is_subterranean = yes
+            }
+            trade = 2
+        }
+        upkeep = {
+            consumer_goods = 1
+        }
+        upkeep = {
+            trigger = {
+                trader_is_subterranean = yes
+            }
+            consumer_goods = 1
+        }
+    }
+
+    overlord_resources = {
+        category = planet_corporate_franchising_meddling
+        produces = {
+            trigger = {
+                colony = {
+                    has_carrier_flag = has_franchise_headquarters
+                }
+            }
+            unity = 1
+        }
+    }
+
+    triggered_planet_modifier = {
+        potential = {
+            trader_is_subterranean = yes
+            owner? = { NOT = { has_valid_civic = civic_dystopian_society } }
+        }
+        planet_amenities_add = 300
+        mult = value:scripted_modifier_mult|MODIFIER|pop_job_amenities_mult|
+    }
+
+    triggered_planet_modifier = {
+        potential = {
+            owner? = {
+                has_tradition = tr_mercantile_commercial_enterprise
+                NOT = {
+                    has_valid_civic = civic_dystopian_society
+                }
+            }
+        }
+        planet_amenities_add = 200
+        mult = value:scripted_modifier_mult|MODIFIER|pop_job_amenities_mult|
+    }
+
+    triggered_planet_modifier = {
+        potential = {
+            colony.orbital_defence.starbase? = {
+                has_starbase_building = ring_trade_hub
+            }
+            owner? = { NOT = { has_valid_civic = civic_dystopian_society } }
+        }
+        planet_amenities_add = 100
+        mult = value:scripted_modifier_mult|MODIFIER|pop_job_amenities_mult|
+    }
+
+    triggered_planet_modifier = {
+        potential = {
+            starbase? = {
+                has_starbase_building = arkship_trade_hub
+            }
+            owner? = { NOT = { has_valid_civic = civic_dystopian_society } }
+        }
+        planet_amenities_add = 100
+        mult = value:scripted_modifier_mult|MODIFIER|pop_job_amenities_mult|
+    }
+
+    weight = {
+        weight = 500
+    }
+
+    inline_script = "jobs/automodding_priority_trade"
+
+}
