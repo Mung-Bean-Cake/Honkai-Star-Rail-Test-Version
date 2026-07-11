@@ -1,0 +1,212 @@
+namespace = hsr_ipc
+#1开头，机制类
+country_event = {
+    id = hsr_ipc.1001
+    hide_window = yes
+
+    is_triggered_only = yes
+
+    trigger = {
+        OR = {
+            this = {
+                has_civic = civic_marketing_expansion_department
+            }
+            from = {
+                has_civic = civic_marketing_expansion_department
+            }
+        }
+    }
+
+    immediate = {
+        if = {
+            limit = {
+                this = {
+                    has_civic = civic_marketing_expansion_department
+                }
+            }
+            this = {
+                add_monthly_resource_mult = {
+                    resource = unity
+                    value = @tier2unityreward
+                    min = @tier2unitymin
+                    max = @tier2unitymax
+                }
+                add_monthly_resource_mult = {
+                    resource = trade
+                    value = @tier2unityreward
+                    min = @tier2unitymin
+                    max = @tier2unitymax
+                }
+                remove_modifier = pan_galaxy_trade_system
+                add_modifier = {
+                    modifier = pan_galaxy_trade_system
+                    mult = this.value:num_has_commercial_pact_count
+                    days = -1
+                }
+            }
+            from = {
+                add_modifier = {
+                    modifier = pan_galaxy_trade_system_member
+                    days = -1
+                }
+            }
+        }
+        else_if = {
+            limit = {
+                from = {
+                    has_civic = civic_marketing_expansion_department
+                }
+            }
+            from = {
+                add_monthly_resource_mult = {
+                    resource = unity
+                    value = @tier2unityreward
+                    min = @tier2unitymin
+                    max = @tier2unitymax
+                }
+                add_monthly_resource_mult = {
+                    resource = trade
+                    value = @tier2unityreward
+                    min = @tier2unitymin
+                    max = @tier2unitymax
+                }
+                remove_modifier = pan_galaxy_trade_system
+                add_modifier = {
+                    modifier = pan_galaxy_trade_system
+                    mult = this.value:num_has_commercial_pact_count
+                    days = -1
+                }
+            }
+            this = {
+                add_modifier = {
+                    modifier = pan_galaxy_trade_system_member
+                    days = -1
+                }
+            }
+        }
+    }
+}
+carrier_event = {
+    id = hsr_ipc.1002
+    hide_window = yes
+
+    is_triggered_only = yes
+
+    trigger = {
+        has_branch_office = yes
+        this = {
+            not = {
+                has_carrier_flag = had_building_strategic_investment_department
+            }
+        }
+        branch_office_owner = { has_civic = civic_strategic_investment_department }
+        last_building_changed = building_strategic_investment_department
+    }
+
+    immediate = {
+        branch_office_owner = {
+            random_owned_colony = {
+                add_deposit = d_special_economic_zone
+            }
+        }
+        set_carrier_flag = had_building_strategic_investment_department
+    }
+}
+country_event = {
+    id = hsr_ipc.1003
+    hide_window = yes
+
+    is_triggered_only = yes
+
+    trigger = {
+        OR = {
+            this = {
+                has_civic = civic_techniques_developing_department
+            }
+            from = {
+                has_civic = civic_techniques_developing_department
+            }
+        }
+    }
+
+    immediate = {
+        if = {
+            limit = {
+                this = {
+                    has_civic = civic_techniques_developing_department
+                }
+            }
+            this = {
+                add_monthly_resource_mult = {
+                    resource = engineering_research
+                    value = @tier2unityreward
+                    min = @tier2unitymin
+                    max = @tier2unitymax
+                }
+                add_monthly_resource_mult = {
+                    resource = society_research
+                    value = @tier2unityreward
+                    min = @tier2unitymin
+                    max = @tier2unitymax
+                }
+                add_monthly_resource_mult = {
+                    resource = physics_research
+                    value = @tier2unityreward
+                    min = @tier2unitymin
+                    max = @tier2unitymax
+                }
+                remove_modifier = pan_galaxy_research_system
+                add_modifier = {
+                    modifier = pan_galaxy_research_system
+                    mult = this.value:num_has_research_agreement
+                    days = -1
+                }
+            }
+            from = {
+                add_modifier = {
+                    modifier = pan_galaxy_research_system_member
+                    days = -1
+                }
+            }
+        }
+        else_if = {
+            limit = {
+                from = {
+                    has_civic = civic_techniques_developing_department
+                }
+            }
+            from = {
+                add_monthly_resource_mult = {
+                    resource = engineering_research
+                    value = @tier2unityreward
+                    min = @tier2unitymin
+                    max = @tier2unitymax
+                }
+                add_monthly_resource_mult = {
+                    resource = society_research
+                    value = @tier2unityreward
+                    min = @tier2unitymin
+                    max = @tier2unitymax
+                }
+                add_monthly_resource_mult = {
+                    resource = physics_research
+                    value = @tier2unityreward
+                    min = @tier2unitymin
+                    max = @tier2unitymax
+                }
+                remove_modifier = pan_galaxy_research_system
+                add_modifier = {
+                    modifier = pan_galaxy_research_system
+                    mult = this.value:num_has_research_agreement
+                    days = -1
+                }
+            }
+            this = {
+                add_modifier = {
+                    modifier = pan_galaxy_research_system_member
+                    days = -1
+                }
+            }
+        }
+    }
+}
