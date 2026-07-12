@@ -210,3 +210,35 @@ country_event = {
         }
     }
 }
+country_event = {
+    id = hsr_ipc.1004
+    hide_window = yes
+
+    is_triggered_only = yes
+
+    trigger = {
+        has_civic = civic_human_resources_incentive_department
+    }
+
+    immediate = {
+        random_owned_leader = {
+            if = {
+                limit = { has_trait = leader_trait_human_resources }
+                change_variable = {
+                    which = hsr_ipc_rank
+                    value = 1
+                }
+                add_experience = 500
+            }
+            else_if = {
+                limit = { not = { has_trait = leader_trait_human_resources } }
+                add_trait = {trait = leader_trait_human_resources show_message = no}
+                change_variable = {
+                    which = hsr_ipc_rank
+                    value = 1
+                }
+                add_experience = 500
+            }
+        }
+    }
+}
