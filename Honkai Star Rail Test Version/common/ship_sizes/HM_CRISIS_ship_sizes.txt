@@ -1,4 +1,59 @@
+XQTD_CRISIS_star_eater = {
+    entity = "XQTD_star_eater_ship_entity"
+    is_space_object = yes
+    max_speed = @speed_default
+    acceleration = 0.2
+    rotation_speed = 0.15
+    collision_radius = 16
+    modifier = {
+        ship_evasion_add = 5
+        ship_armor_add = 20000
+        ships_upkeep_mult = -1
+    }
+    max_hitpoints = 20000
+    size_multiplier = 8
+    fleet_slot_size = 8
+    section_slots = { "mid" = { locator = "main_body" } }
+    num_target_locators = 0
+    is_space_station = no
+    icon_frame = 7
+    icon = ship_size_military_32
+    construction_type = starbase_shipyard
+    base_buildtime = 6000
+    can_have_federation_design = no
+    components_add_to_cost = no
 
+    class = shipclass_military
+    enable_default_design = yes
+    use_shipnames_from = colossus
+
+    ship_roles = { artillery gunship }
+
+    potential_country = {
+        has_crisis_level = crisis_level_5
+    }
+
+    potential_construction = {
+        always = no
+    }
+
+    possible_construction = {
+        always = no
+    }
+
+    required_component_set = "power_core"
+    required_component_set = "ftl_components"
+    required_component_set = "thruster_components"
+    required_component_set = "sensor_components"
+    required_component_set = "combat_computers"
+
+    resources = {
+        category = ships
+        cost = {
+            sr_dark_matter = 10000
+        }
+    }
+}
 HMTT = {
     entity = "ship_entity_instand"
     #entity = YONGHENGTIANTA_ship_design
@@ -147,5 +202,68 @@ HMTT2 = {
             society_research = 4500
             physics_research = 4500
         }
+    }
+}
+XQTD_neutronstar_war_ship = {
+    entity = "ship_entity_instand"
+    graphical_culture = no
+    max_speed = 60
+    acceleration = 0.15
+    rotation_speed = 0.05
+    collision_radius = 32
+    formation_priority = 32
+    modifier = {
+        ship_evasion_mult = -1
+        ship_armor_add = 1000000
+        ship_shield_add = 1000000
+        ship_accuracy_add = 1000
+    }
+    auto_upgrade = no
+    ship_modifier ={
+        ship_ftl_jumpdrive_range_mult = 1
+        ship_hyperlane_range_add = 10
+        ship_weapon_range_mult = 2
+    }
+    potential_country = {
+        is_country_type = antimatter_legion
+    }
+    max_hitpoints = 1000000
+    combat_size_multiplier = 120
+    size_multiplier = 120
+    fleet_slot_size = 1
+    section_slots = {
+        "tfa" = { locator = "part1" }
+        "cjb" = { locator = "part1" }
+        "bjc" = { locator = "part1" }
+        "bhd" = { locator = "part1" }
+        "bhe" = { locator = "part1" }
+        "jwf" = { locator = "part1" }
+    }
+    ship_roles = { screen brawler gunship artillery explosive energy_torpedoes }
+    num_target_locators = 0
+    combat_disengage_chance = 0.0
+
+    base_buildtime = 5000
+    construction_type = starbase_shipyard
+    possible_construction = {
+        always = no
+    }
+    is_space_station = no
+    icon = ship_size_military_32
+
+    required_component_set = "power_core"
+    required_component_set = "thruster_components"
+    required_component_set = "ftl_components"
+    required_component_set = "sensor_components"
+    required_component_set = "combat_computers"
+    required_component_set = "ship_aura_components"
+
+    #class = shipclass_starbase
+    class = shipclass_military_special
+    is_designable = no
+    #enable_default_design = yes
+
+    resources = {
+        category = ships
     }
 }
