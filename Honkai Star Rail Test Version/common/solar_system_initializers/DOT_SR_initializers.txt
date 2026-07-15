@@ -1123,6 +1123,27 @@ DOT_SR_system_05 = {
 		change_orbit = @base_moon_distance
 	}
 	planet = {
+		name = "NAME_geerkangda1"
+		class = "pc_ringworld_habitable"
+		size = 15
+		orbit_angle_offset = 0
+		change_orbit = @base_moon_distance
+	}
+	planet = {
+		name = "NAME_geerkangda2"
+		class = "pc_ringworld_habitable"
+		size = 15
+		orbit_angle_offset = 90
+		change_orbit = @base_moon_distance
+	}
+	planet = {
+		name = "NAME_geerkangda3"
+		class = "pc_nuked"
+		size = 20
+		orbit_angle_offset = 180
+		change_orbit = @base_moon_distance
+	}
+	planet = {
 		name = "NAME_shujuemo"
 		orbit_distance = 50
 		size = 15
@@ -1171,14 +1192,12 @@ DOT_SR_system_05 = {
 		change_orbit = @base_moon_distance
 	}
 	neighbor_system = {
-		trigger = {
-			num_guaranteed_colonies >= 2
-		}
-		hyperlane_jumps = {
-			min = 1
-			max = 3
-		}
-		initializer = "neighbor_t1"
+		initializer = "DOT_hunter_specific_system_1"
+		distance = { min = 10 max = 40}
+	}
+	neighbor_system = {
+		initializer = "DOT_hunter_specific_system_2"
+		distance = { min = 30 max = 50}
 	}
 	neighbor_system = {
 		trigger = {
@@ -1191,7 +1210,71 @@ DOT_SR_system_05 = {
 		initializer = "neighbor_t1_first_colony"
 	}
 }
-
+DOT_hunter_specific_system_1 = {
+	name = "NAME_yepeila_system"
+	class = "sc_a"
+	planet = {
+		name = "NAME_yepeila"
+		class = "pc_a_star"
+		orbit_distance = 0
+		orbit_angle = 1
+		size = 20
+		has_ring = no
+		init_effect = {
+			clear_deposits = yes
+			add_deposit = d_minerals_10
+		}
+	}
+	change_orbit = 30
+	planet = {
+		name = "NAME_yepeila_home"
+		orbit_distance = 0
+		size = 28
+		class = "pc_gaia"
+		has_ring = no
+		orbit_angle = {
+			min = 90
+			max = 270
+		}
+		init_effect = {
+			clear_deposits = yes
+			add_modifier = d_engineering_20 
+		}
+		change_orbit = @base_moon_distance
+	}
+	planet = {
+		name = "NAME_yepeila_planet1"
+		orbit_distance = 30
+		size = 10
+		class = "pc_asteroid"
+		has_ring = no
+		orbit_angle = {
+			min = 90
+			max = 270
+		}
+		init_effect = {
+			clear_deposits = yes
+			add_modifier = d_minerals_10 
+		}
+		change_orbit = @base_moon_distance
+	}
+	planet = {
+		name = "NAME_yepeila_planet2"
+		orbit_distance = 45
+		size = 24
+		class = "pc_gaia"
+		has_ring = no
+		orbit_angle = {
+			min = 90
+			max = 180
+		}
+		init_effect = {
+			clear_deposits = yes
+			add_modifier = d_society_20 
+		}
+		change_orbit = @base_moon_distance
+	}
+}
 #雅利洛—Ⅵ
 yaliluo_system_initializer = {
 	  name = "NAME_yaliluo_core"
