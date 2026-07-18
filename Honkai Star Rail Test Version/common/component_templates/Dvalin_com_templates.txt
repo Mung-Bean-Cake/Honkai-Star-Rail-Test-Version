@@ -1,0 +1,145 @@
+weapon_component_template = {
+    key = "FML_WEAPON"
+    size = titanic
+    type = instant
+    prio_projectile = yes
+
+    icon = "GFX_ship_part_perdition_beam"
+    icon_frame = 1
+
+    firing_arc = 180.0
+    use_ship_kill_target = no
+
+    tags = { weapon_type_energy weapon_role_artillery t_slot }
+
+    #prerequisites = {  }
+    component_set = "PERDITION_BEAM"
+    projectile_gfx = "perdition_beam"
+    size_restriction = { Dvalin_General }
+    resources = {
+        category = ship_components
+        cost = {
+            alloys = 100
+            # rare_crystals = @titanic_t6_rare
+        }
+        upkeep = {
+            # energy = @titanic_t6_upkeep_energy
+            # alloys = @titanic_t6_upkeep_alloys
+        }
+    }
+
+    power = 1000 #能耗，理论上应该为负数
+    damage = { min = 200 max = 200 }
+    hull_damage = 2
+    shield_damage = 2
+    shield_penetration = 1
+    windup = { max = 10 min = 10 } #冷却时间
+    range = 400 #射程
+    accuracy = 1.0 #命中
+    tracking = 1.0 #追踪
+
+    target_weights = {
+        # titan = 3
+        # battleship = 2
+    }
+
+    ai_weight = {
+        weight = 1
+        modifier = {
+            # factor = 0.0
+            # no_resource_for_component = { RESOURCE = rare_crystals }
+        }
+    }
+}
+
+@cost0 = 0
+@cost1 = 5
+@cost2 = 10
+@cost3 = 20
+@power0 = -5
+@power1 = -10
+@power2 = -15
+@power3 = -25
+
+utility_component_template = {
+    key = "FML_COMPUTER2"
+    size = small
+    icon ="GFX_ship_part_computer_artillery_precog"
+    icon_frame = 1
+    power = @power3
+    resources = {
+        category = ship_components
+        cost = {
+            alloys = @cost3
+        }
+    }
+    #class_restriction = { shipclass_military shipclass_military_station }
+    size_restriction = {
+        Dvalin_General
+    }
+    component_set = "combat_computers"
+    ship_behavior = "artillery"
+    prerequisites = { }
+    ai_tags = { artillery artillery_stealth energy_torpedoes energy_torpedoes_stealth }
+    ai_tag_weight = 0
+
+    ship_modifier = {
+        ship_fire_rate_mult = 0.20
+        ship_weapon_range_mult = 0.20
+        ship_tracking_add = 10
+    }
+
+    ai_weight = {
+        weight = 5
+    }
+}
+
+utility_component_template = {
+    key = "fml_ftl"
+    hidden = yes
+    size = small
+    icon = "GFX_ship_part_warp_drive_1"
+    icon_frame = 1
+    power = -200
+    ftl = yes
+    jumpdrive = no
+
+    ship_modifier = {
+    }
+    resources = {
+        category = ship_components
+        upkeep = {
+            energy = 10
+            alloys = 10
+        }
+    }
+    size_restriction = { Dvalin_General }
+    component_set = ftl_components
+}
+
+utility_component_template = {
+    key = "fml_tjq"
+    size = small
+    icon = "GFX_ship_part_thruster_5"
+    icon_frame = 1
+    power = -500
+    resources = {
+        category = ship_components
+        cost = {
+            energy = 50
+            alloys = 10
+        }
+    }
+
+    modifier = {
+        ship_base_speed_mult = 0.50
+    }
+
+    prerequisites = {  }
+    component_set = "thruster_components"
+    size_restriction = { Dvalin_General }
+
+    ai_weight = {
+        weight = 10
+    }
+}

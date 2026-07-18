@@ -50,10 +50,7 @@ country_event = {
 		give_technology = { tech = tech_honkai_star_rail_power_t1 message = no }
 		give_technology = { tech = tech_science_arkship message = no }
 		add_research_option = tech_galactic_archivism
-		set_policy = {
-			policy = artificial_intelligence_policy
-			option = ai_full_rights
-		}
+		# set_policy = {	}
 		random_owned_fleet = {
 			limit = { is_arkship_fleet = yes }
 			unassign_leader = this
@@ -65,8 +62,8 @@ country_event = {
 				effect = {
 					set_owner = root
 					create_ship = {
-						name = "Astral_Express"
-						design = "train_planet_fleet_1"
+						name = "Astral_Express" # 关键
+						design = "train_planet_fleet_1" # 关键
 						effect = {
 							starbase = {
 								set_starbase_building = {
@@ -453,7 +450,7 @@ country_event = {
 	fire_only_once = yes
 	# is_triggered_only = yes
 	trigger = {
-		years_passed > 5 # 10
+		years_passed > 10 # 10
 		or = {
 			is_ai = no
 			has_origin = origin_Xianzhou
@@ -472,15 +469,23 @@ country_event = {
 	}
 	option = {
 		name = DOT_SR_Dvalin.101.a
-		country_event = { id = DOT_SR_Dvalin.010 years = 5 }
+		country_event = { id = DOT_SR_Dvalin.012 years = 10 }
 	}
 	option = {
 		name = DOT_SR_Dvalin.101.b
-		country_event = { id = DOT_SR_Dvalin.011 years = 10 }
+		country_event = { id = DOT_SR_Dvalin.011 years = 20 }
 	}
 	option = {
 		name = DOT_SR_Dvalin.101.c
-		country_event = { id = DOT_SR_Dvalin.012 years = 20 }
+		country_event = { id = DOT_SR_Dvalin.010 years = 30 }
+	}
+	option = {
+		name = DOT_SR_Dvalin.101.d
+		country_event = { id = DOT_SR_Herta.2 years = 40 }
+	}
+	option = {
+		name = DOT_SR_Dvalin.101.e
+		country_event = { id = luosi.1 years = 40 }
 	}
 }
 
@@ -494,37 +499,104 @@ country_event = {
 	fire_only_once = yes
 	is_triggered_only = yes
 	immediate = {
-		create_fleet = {
-			name = "NAME_XIANZHOU_AE"
-			effect = {
-				set_owner = root
-				create_ship = {
-					name = "NAME_XIANZHOU_AE"
-					design = "XIANZHOU_AE_Ship"
-					effect = {
-						starbase = {
-						}
-						fleet = {
-						}
-						colony = {
-							while = {
-								count = 60
-								create_pop_group = {
-									size = 100
-									species = owner_main_species
+		hsr_path_first_set = {
+			cunhu_value = 20
+			fanyu_value = 20
+			fengrao_value = 20
+			huanyu_value = 20
+			huimie_value = 20
+			jiyi_value = 20
+			tongxie_value = 20
+			xunlie_value = 20
+			xuwu_value = 20
+			zhishi_value = 20
+		}
+		set_country_flag = use_path
+		give_technology = { tech = tech_path_civic_1 message = no }
+		give_technology = { tech = tech_robotic_workers message = no }
+		give_technology = { tech = tech_powered_exoskeletons message = no }
+		give_technology = { tech = tech_robomodding message = no }
+		give_technology = { tech = tech_habitat_1 message = no }
+		give_technology = { tech = tech_droid_workers message = no }
+		give_technology = { tech = tech_synthetic_workers message = no }
+		give_technology = { tech = tech_integrated_cybernetics message = no }
+		give_technology = { tech = tech_robomodding_points_1 message = no }
+		give_technology = { tech = tech_robot_assembly_complex message = no }
+		give_technology = { tech = tech_robomodding_points_2 message = no }
+		give_technology = { tech = tech_positronic_implants message = no }
+		give_technology = { tech = tech_habitat_1 message = no }
+		give_technology = { tech = tech_habitat_2 message = no }
+		give_technology = { tech = tech_habitat_3 message = no }
+		give_technology = { tech = tech_mega_engineering message = no }
+		give_technology = { tech = tech_honkai_star_rail_aux_t1 message = no }
+		give_technology = { tech = tech_honkai_star_rail_weapon_t1 message = no }
+		give_technology = { tech = tech_honkai_star_rail_hull_t1 message = no }
+		give_technology = { tech = tech_honkai_star_rail_power_t1 message = no }
+		# give_technology = { tech = tech_science_arkship message = no }
+		add_research_option = tech_galactic_archivism
+		# set_policy = { }
+		capital_scope = {
+			create_fleet = {
+				name = "NAME_XIANZHOU_AE"# 关键
+				effect = {
+					set_owner = root
+					create_ship = {
+						name = "NAME_XIANZHOU_AE"# 关键
+						design = "XIANZHOU_AE_Ship" # 关键
+						effect = {
+							starbase = {
+								set_starbase_building = {
+									slot = 1
+									building = arkship_hsr_base_hub
 								}
+								set_starbase_building = {
+									slot = 2
+									building = arkship_hsr_advanced_hub
+								}
+								set_starbase_building = {
+									slot = 3
+									building = arkship_hsr_unity_hub
+								}
+							}
+							fleet = {
+							}
+							colony = {
+								remove_building = building_colony_shelter
+								clear_blockers = yes
+								clear_deposits = yes
+								clear_planet_modifiers = yes#防止出现原版殖民地的各种奇怪事件
+								remove_district = district_city
+								add_district = district_xz_city
+								add_district = district_xz_city
+								add_district = district_xz_industrial
+								add_district = district_xz_science
+								add_district = district_xz_trade
+								add_district = district_xz_yunqi
+								add_district = district_xz_danding
+								remove_building = building_commercial_zone
+								add_building = building_capital
+								add_building = building_holo_theatres
+								while = {
+									count = 60
+									create_pop_group = {
+										size = 100
+										species = owner_main_species
+									}
+								}
+								# set_capital = yes
 							}
 						}
 					}
-				}
-				set_fleet_stance = evasive
-				set_fleet_flag = xianzhuo_zhuming_fleet
-				set_location = {
-					target = prev
-					distance = 80
-					angle = random
+					set_fleet_stance = evasive
+					set_fleet_flag = train_fleet
+					set_location = {
+						target = prev
+						distance = 80
+						angle = random
+					}
 				}
 			}
+			delete_ship = this
 		}
 	}
 	diplomatic = yes
@@ -551,37 +623,104 @@ country_event = {
 	fire_only_once = yes
 	is_triggered_only = yes
 	immediate = {
-		create_fleet = {
-			name = "Hyperion"
-			effect = {
-				set_owner = root
-				create_ship = {
-					name = "Hyperion"
-					design = "xianzhou_planet_fleet_1"
-					effect = {
-						starbase = {
-						}
-						fleet = {
-						}
-						colony = {
-							while = {
-								count = 60
-								create_pop_group = {
-									size = 100
-									species = owner_main_species
+		hsr_path_first_set = {
+			cunhu_value = 20
+			fanyu_value = 20
+			fengrao_value = 20
+			huanyu_value = 20
+			huimie_value = 20
+			jiyi_value = 20
+			tongxie_value = 20
+			xunlie_value = 20
+			xuwu_value = 20
+			zhishi_value = 20
+		}
+		set_country_flag = use_path
+		give_technology = { tech = tech_path_civic_1 message = no }
+		give_technology = { tech = tech_robotic_workers message = no }
+		give_technology = { tech = tech_powered_exoskeletons message = no }
+		give_technology = { tech = tech_robomodding message = no }
+		give_technology = { tech = tech_habitat_1 message = no }
+		give_technology = { tech = tech_droid_workers message = no }
+		give_technology = { tech = tech_synthetic_workers message = no }
+		give_technology = { tech = tech_integrated_cybernetics message = no }
+		give_technology = { tech = tech_robomodding_points_1 message = no }
+		give_technology = { tech = tech_robot_assembly_complex message = no }
+		give_technology = { tech = tech_robomodding_points_2 message = no }
+		give_technology = { tech = tech_positronic_implants message = no }
+		give_technology = { tech = tech_habitat_1 message = no }
+		give_technology = { tech = tech_habitat_2 message = no }
+		give_technology = { tech = tech_habitat_3 message = no }
+		give_technology = { tech = tech_mega_engineering message = no }
+		give_technology = { tech = tech_honkai_star_rail_aux_t1 message = no }
+		give_technology = { tech = tech_honkai_star_rail_weapon_t1 message = no }
+		give_technology = { tech = tech_honkai_star_rail_hull_t1 message = no }
+		give_technology = { tech = tech_honkai_star_rail_power_t1 message = no }
+		# give_technology = { tech = tech_science_arkship message = no }
+		add_research_option = tech_galactic_archivism
+		# set_policy = { }
+		capital_scope = {
+			create_fleet = {
+				name = "Hyperion"# 关键
+				effect = {
+					set_owner = root
+					create_ship = {
+						name = "Hyperion"# 关键
+						design = "xianzhou_planet_fleet_1" # 关键
+						effect = {
+							starbase = {
+								set_starbase_building = {
+									slot = 1
+									building = arkship_hsr_base_hub
 								}
+								set_starbase_building = {
+									slot = 2
+									building = arkship_hsr_advanced_hub
+								}
+								set_starbase_building = {
+									slot = 3
+									building = arkship_hsr_unity_hub
+								}
+							}
+							fleet = {
+							}
+							colony = {
+								remove_building = building_colony_shelter
+								clear_blockers = yes
+								clear_deposits = yes
+								clear_planet_modifiers = yes#防止出现原版殖民地的各种奇怪事件
+								remove_district = district_city
+								add_district = district_xz_city
+								add_district = district_xz_city
+								add_district = district_xz_industrial
+								add_district = district_xz_science
+								add_district = district_xz_trade
+								add_district = district_xz_yunqi
+								add_district = district_xz_danding
+								remove_building = building_commercial_zone
+								add_building = building_capital
+								add_building = building_holo_theatres
+								while = {
+									count = 60
+									create_pop_group = {
+										size = 100
+										species = owner_main_species
+									}
+								}
+								# set_capital = yes
 							}
 						}
 					}
-				}
-				set_fleet_stance = evasive
-				set_fleet_flag = xianzhuo_zhuming_fleet
-				set_location = {
-					target = prev
-					distance = 80
-					angle = random
+					set_fleet_stance = evasive
+					set_fleet_flag = train_fleet
+					set_location = {
+						target = prev
+						distance = 80
+						angle = random
+					}
 				}
 			}
+			delete_ship = this
 		}
 	}
 	diplomatic = yes
@@ -608,37 +747,109 @@ country_event = {
 	fire_only_once = yes
 	is_triggered_only = yes
 	immediate = {
-		create_fleet = {
-			name = "Astral_Express_WUM"
-			effect = {
-				set_owner = root
-				create_ship = {
-					name = "Astral_Express_WUM"
-					design = "train_planet_fleet_1"
-					effect = {
-						starbase = {
-						}
-						fleet = {
-						}
-						colony = {
-							while = {
-								count = 60
-								create_pop_group = {
-									size = 100
-									species = owner_main_species
+		hsr_path_first_set = {
+			cunhu_value = 20
+			fanyu_value = 20
+			fengrao_value = 20
+			huanyu_value = 20
+			huimie_value = 20
+			jiyi_value = 20
+			tongxie_value = 20
+			xunlie_value = 20
+			xuwu_value = 20
+			zhishi_value = 20
+		}
+		set_country_flag = use_path
+		give_technology = { tech = tech_path_civic_1 message = no }
+		give_technology = { tech = tech_robotic_workers message = no }
+		give_technology = { tech = tech_powered_exoskeletons message = no }
+		give_technology = { tech = tech_robomodding message = no }
+		give_technology = { tech = tech_habitat_1 message = no }
+		give_technology = { tech = tech_droid_workers message = no }
+		give_technology = { tech = tech_synthetic_workers message = no }
+		give_technology = { tech = tech_integrated_cybernetics message = no }
+		give_technology = { tech = tech_robomodding_points_1 message = no }
+		give_technology = { tech = tech_robot_assembly_complex message = no }
+		give_technology = { tech = tech_robomodding_points_2 message = no }
+		give_technology = { tech = tech_positronic_implants message = no }
+		give_technology = { tech = tech_habitat_1 message = no }
+		give_technology = { tech = tech_habitat_2 message = no }
+		give_technology = { tech = tech_habitat_3 message = no }
+		give_technology = { tech = tech_mega_engineering message = no }
+		give_technology = { tech = tech_honkai_star_rail_aux_t1 message = no }
+		give_technology = { tech = tech_honkai_star_rail_weapon_t1 message = no }
+		give_technology = { tech = tech_honkai_star_rail_hull_t1 message = no }
+		give_technology = { tech = tech_honkai_star_rail_power_t1 message = no }
+		# give_technology = { tech = tech_science_arkship message = no }
+		add_research_option = tech_galactic_archivism
+		# set_policy = { }
+		capital_scope = {
+			create_fleet = {
+				name = "Astral_Express_WUM"# 关键
+				effect = {
+					set_owner = root
+					create_ship = {
+						name = "Astral_Express_WUM"# 关键
+						design = "train_planet_fleet_1" # 关键
+						effect = {
+							starbase = {
+								set_starbase_building = {
+									slot = 1
+									building = arkship_hsr_base_hub
+								}
+								set_starbase_building = {
+									slot = 2
+									building = arkship_hsr_advanced_hub
+								}
+								set_starbase_building = {
+									slot = 3
+									building = arkship_hsr_unity_hub
+								}
+							}
+							fleet = {
+							}
+							colony = {
+								remove_building = building_colony_shelter
+								clear_blockers = yes
+								clear_deposits = yes
+								clear_planet_modifiers = yes#防止出现原版殖民地的各种奇怪事件
+								remove_district = district_city
+								add_district = district_train_planet_1
+								add_district = district_train_planet_1
+								add_district = district_train_planet_2
+								add_district = district_train_planet_2
+								add_district = district_train_planet_3
+								add_district = district_train_planet_3
+								add_district = district_train_planet_4
+								add_district = district_train_planet_4
+								add_district = district_train_planet_5
+								add_district = district_train_planet_5
+								add_district = district_train_planet_5
+								remove_building = building_commercial_zone
+								add_building = building_capital
+								add_building = building_holo_theatres
+								#generate_start_pops = yes
+								set_capital = yes
+								while = {
+									count = 2
+									create_pop_group = {
+										size = 100
+										species = owner_main_species
+									}
 								}
 							}
 						}
 					}
-				}
-				set_fleet_stance = evasive
-				set_fleet_flag = train_fleet
-				set_location = {
-					target = prev
-					distance = 80
-					angle = random
+					set_fleet_stance = evasive
+					set_fleet_flag = train_fleet
+					set_location = {
+						target = prev
+						distance = 80
+						angle = random
+					}
 				}
 			}
+			delete_ship = this
 		}
 	}
 	diplomatic = yes
