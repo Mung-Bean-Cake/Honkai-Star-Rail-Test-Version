@@ -2950,7 +2950,7 @@ leader_huanyunv_t1 = {
         ICON = "GFX_leader_huanyunv_t1"
         CLASS = commander
         RARITY = paragon
-        COUNCIL = yes
+        COUNCIL = no
         TIER = 1
     }
 	
@@ -2966,13 +2966,15 @@ leader_huanyunv_t2 = {
         ICON = "GFX_leader_huanyunv_t2"
         CLASS = commander
         RARITY = paragon
-        COUNCIL = yes
+        COUNCIL = no
         TIER = 1
     }
     councilor_modifier = {
-		SHIP_FIRE_RATE_MULT = 0.2
-		SHIP_MILITARY_SPEED_MULT = 0.1
-		SHIP_SPEED_MULT = 0.1
+		ship_hull_mult = 0.1
+		ship_armor_mult = 0.1
+		SHIP_SHIELD_MULT = 0.1
+		ARMY_DAMAGE_TAKEN_MULT = -0.1
+		SHIP_DAMAGE_REDUCTION_mult = 0.1
 	} 
     leader_class = { commander }
     initial = no
@@ -2985,13 +2987,16 @@ leader_huanyunv_t3 = {
         ICON = "GFX_leader_huanyunv_t3"
         CLASS = commander
         RARITY = paragon
-        COUNCIL = yes
+        COUNCIL = no
         TIER = 1
     }
     councilor_modifier = {
-		SHIP_STARTING_EXPERIENCE_ADD = 300
+		SHIP_ORBIT_UPKEEP_MULT = -0.2
+		ships_upkeep_mult = -0.2
+		ships_logistics_mult = -0.2
+		
     }
-	custom_tooltip_with_modifiers = leader_huanyunv_t3_add
+	
     leader_class = { commander }
     initial = no
     randomized = no
@@ -3003,18 +3008,18 @@ leader_huanyunv_t4 = {
         ICON = "GFX_leader_huanyunv_t4"
         CLASS = commander
         RARITY = paragon
-        COUNCIL = yes
+        COUNCIL = no
         TIER = 1
     }
 	councilor_modifier = {
-		SHIP_FIRE_RATE_MULT = 0.1
+		SHIP_STARTING_EXPERIENCE_ADD = 300
 	}
     triggered_councilor_modifier = {
-		SHIP_FIRE_RATE_MULT = 0.01
+		SHIP_FIRE_RATE_MULT = 100
 		mult = this.owner.num_huanyunv_other_skill
 		
 	} 
-   
+   custom_tooltip_with_modifiers = leader_huanyunv_t4_add
     leader_class = { commander }
     initial = no
     randomized = no
@@ -3026,14 +3031,14 @@ leader_huanyunv_t5 = {
         ICON = "GFX_leader_huanyunv_t5"
         CLASS = commander
         RARITY = paragon
-        COUNCIL = yes
+        COUNCIL = no
         TIER = 1
     }
 	councilor_modifier = {
-		STARBASE_SHIPYARD_BUILD_SPEED_MULT  = 0.1
+		STARBASE_SHIPYARD_BUILD_SPEED_MULT = 0.1
 	}
     triggered_councilor_modifier = {
-		STARBASE_SHIPYARD_BUILD_SPEED_MULT  = 0.01
+		STARBASE_SHIPYARD_BUILD_SPEED_MULT = 0.01
 		mult = this.owner.num_huanyunv_other_skill
     }
 	custom_tooltip_with_modifiers = leader_huanyunv_t5_add
@@ -3048,7 +3053,7 @@ leader_huanyunv_t6 = {
         ICON = "GFX_leader_huanyunv_t6"
         CLASS = commander
         RARITY = paragon
-        COUNCIL = yes
+        COUNCIL = no
         TIER = 1
     }
 	councilor_modifier = {
@@ -3070,11 +3075,12 @@ leader_huanyunv_t7 = {
         ICON = "GFX_leader_huanyunv_t7"
         CLASS = commander
         RARITY = paragon
-        COUNCIL = yes
+        COUNCIL = no
         TIER = 1
     }
 	councilor_modifier = {
-		country_naval_cap_mult = 0.4
+         SHIP_SHIELD_HARDENING_ADD = 0.2
+		 SHIP_ARMOR_HARDENING_ADD = 0.2
 	}
     leader_class = { commander }
     initial = no
@@ -3203,24 +3209,25 @@ leader_busitu_t6 = {
 }
 #欢愉技
 #赠君一卦，火树银花
+
+####
+#赠君一卦，火树银花
 leader_yaoguang_t1 = {
     inline_script = {
         script = trait/hsr_icons
         ICON = "GFX_leader_yaoguang_t1"
-        CLASS = official
+        CLASS = scientist
         RARITY = paragon
         COUNCIL = no
         TIER = 1
     }
-	
-	planet_modifier = {
-		job_aid_worker_add = 100
-		#非最终版本
+	triggered_councilor_modifier = {
+		all_technology_research_speed = 0.01
+		mult = this.owner.leader_yaoguang_t1
 	}
-
 	
 	custom_tooltip_with_modifiers = leader_yaoguang_t1_add
-	leader_class = { official }
+	leader_class = { scientist }
 	initial = no
 	randomized = no
 }
@@ -3229,27 +3236,17 @@ leader_yaoguang_t2 = {
     inline_script = {
         script = trait/hsr_icons
         ICON = "GFX_leader_yaoguang_t2"
-        CLASS = official
+        CLASS = scientist
         RARITY = paragon
         COUNCIL = no
         TIER = 1
     }
-    planet_modifier = {
-		POP_BONUS_WORKFORCE_MULT = 0.2
-		JOB_MAX_WORKFORCE_MULT = 0.2
-		planet_jobs_worker_produces_mult = 0.2
-		planet_jobs_specialist_produces_mult = 0.2
-		BONUS_POP_GROWTH = 0.2
-	}
-	sector_modifier = {
-		POP_BONUS_WORKFORCE_MULT = 0.1
-		JOB_MAX_WORKFORCE_MULT = 0.1
-		planet_jobs_worker_produces_mult = 0.1
-		planet_jobs_specialist_produces_mult = 0.1
-		BONUS_POP_GROWTH = 0.1
-	}
+    councilor_modifier = {
+		all_technology_research_speed= 0.1
+        rare_tech_research_speed_mult = 0.1	
+    }
 	custom_tooltip_with_modifiers = leader_yaoguang_t2_add
-    leader_class = { official }
+    leader_class = { scientist }
     initial = no
     randomized = no
 }
@@ -3258,22 +3255,19 @@ leader_yaoguang_t3 = {
     inline_script = {
         script = trait/hsr_icons
         ICON = "GFX_leader_yaoguang_t3"
-        CLASS = official
+        CLASS = scientist
         RARITY = paragon
         COUNCIL = no
         TIER = 1
     }
-    planet_modifier = {
-		LOGISTIC_GROWTH_MULT = 0.2
-		planet_pops_upkeep_mult = -0.2
-		country_produces_mult = 0.1
+    councilor_modifier = {
+		SHIP_ANOMALY_RESEARCH_SPEED_mult = 0.2
+		SHIP_ANOMALY_GENERATION_CHANCE_mult = 0.2
+		SHIP_ANOMALY_FAIL_RISK = -0.2
+		ship_science_speed_mult = 0.2
 	}
-	sector_modifier = {
-		LOGISTIC_GROWTH_MULT = 0.1
-		planet_pops_upkeep_mult = -0.1
-		country_produces_mult = 0.05
-	}
-    leader_class = { official }
+	
+    leader_class = { scientist }
     initial = no
     randomized = no
 }
@@ -3282,21 +3276,19 @@ leader_yaoguang_t4 = {
     inline_script = {
         script = trait/hsr_icons
         ICON = "GFX_leader_yaoguang_t4"
-        CLASS = official
+        CLASS = scientist
         RARITY = paragon
-        COUNCIL = yes
+        COUNCIL = no
         TIER = 1
     }
-	planet_modifier = {
-		planet_buildings_upkeep_mult = -0.5
-		planet_districts_upkeep_mult = -0.3
+	councilor_modifier = {
+		planet_jobs_society_research_produces_mult = 0.3
+		planet_jobs_physics_research_produces_mult = 0.3
+		planet_jobs_engineering_research_produces_mult = 0.3
 	}
-	sector_modifier = {
-		planet_buildings_upkeep_mult = -0.2
-		planet_districts_upkeep_mult = -0.15
-	}
+	
    
-    leader_class = { official }
+    leader_class = { scientist }
     initial = no
     randomized = no
 }
@@ -3305,20 +3297,20 @@ leader_yaoguang_t5 = {
     inline_script = {
         script = trait/hsr_icons
         ICON = "GFX_leader_yaoguang_t5"
-        CLASS = official
+        CLASS = scientist
         RARITY = paragon
-        COUNCIL = yes
+        COUNCIL = no
         TIER = 1
     }
-	planet_modifier = {
-		planet_jobs_energy_produces_mult = 0.1
+	councilor_modifier = {
+		COUNTRY_PHYSICS_TECH_RESEARCH_SPEED = 0.1
 	}
-	triggered_sector_modifier = {
-		planet_jobs_energy_produces_mult = 0.1
+	triggered_councilor_modifier = {
+		COUNTRY_PHYSICS_TECH_RESEARCH_SPEED = 0.01
 		mult = this.owner.num_yaoguang_other_skill
 	}
 	
-    leader_class = { official }
+    leader_class = { scientist }
     initial = no
     randomized = no
 }
@@ -3327,20 +3319,20 @@ leader_yaoguang_t6 = {
     inline_script = {
         script = trait/hsr_icons
         ICON = "GFX_leader_yaoguang_t6"
-        CLASS = official
+        CLASS = scientist
         RARITY = paragon
-        COUNCIL = yes
+        COUNCIL = no
         TIER = 1
     }
-	planet_modifier = {
-		planet_jobs_minerals_produces_mult = 0.1
+	councilor_modifier = {
+		COUNTRY_SOCIETY_TECH_RESEARCH_SPEED = 0.1
 	}
-	triggered_sector_modifier = {
-		planet_jobs_minerals_produces_mult = 0.1
+	triggered_councilor_modifier = {
+		COUNTRY_SOCIETY_TECH_RESEARCH_SPEED = 0.01
 		mult = this.owner.num_yaoguang_other_skill
 	}
 	
-    leader_class = { official }
+    leader_class = { scientist }
     initial = no
     randomized = no
 }
@@ -3349,18 +3341,210 @@ leader_yaoguang_t7 = {
     inline_script = {
         script = trait/hsr_icons
         ICON = "GFX_leader_yaoguang_t7"
+        CLASS = scientist
+        RARITY = paragon
+        COUNCIL = no
+        TIER = 1
+    }
+	councilor_modifier = {
+		COUNTRY_ENGINEERING_TECH_RESEARCH_SPEED = 0.1
+	}
+	triggered_councilor_modifier = {
+		COUNTRY_ENGINEERING_TECH_RESEARCH_SPEED = 0.1
+		mult = this.owner.num_yaoguang_other_skill
+	}
+    leader_class = { scientist }
+    initial = no
+    randomized = no
+}
+#欢愉技
+#信号溢出：好戏返场！
+leader_huohua_t1 = {
+    inline_script = {
+        script = trait/hsr_icons
+        ICON = "GFX_leader_huohua_t1"
         CLASS = official
         RARITY = paragon
-        COUNCIL = yes
+        COUNCIL = no
+        TIER = 1
+    }
+
+	planet_modifier = {
+		job_agri_drone_add = 100
+		#欢愉技
+	}
+	
+	custom_tooltip_with_modifiers = leader_huohua_t1_add
+	leader_class = { official }
+	initial = no
+	randomized = no
+}
+#万我狂欢，镜头不要停
+leader_huohua_t2 = {
+    inline_script = {
+        script = trait/hsr_icons
+        ICON = "GFX_leader_huohua_t2"
+        CLASS = official
+        RARITY = paragon
+        COUNCIL = no
+        TIER = 1
+    }
+    planet_modifier = {
+		POP_BONUS_WORKFORCE_MULT = 0.5
+		JOB_MAX_WORKFORCE_MULT = 1.0
+		planet_jobs_worker_produces_mult = 0.5
+		planet_jobs_specialist_produces_mult = 0.5
+	}
+	sector_modifier = {
+		POP_BONUS_WORKFORCE_MULT = 0.3
+		JOB_MAX_WORKFORCE_MULT = 1.0
+		planet_jobs_worker_produces_mult = 0.3
+		planet_jobs_specialist_produces_mult = 0.3	
+	}
+	custom_tooltip_with_modifiers = leader_huohua_t2_add
+    leader_class = { official }
+    initial = no
+    randomized = no
+}
+#尖叫！火花花连线中
+leader_huohua_t3 = {
+    inline_script = {
+        script = trait/hsr_icons
+        ICON = "GFX_leader_huohua_t3"
+        CLASS = official
+        RARITY = paragon
+        COUNCIL = no
+        TIER = 1
+    }
+    planet_modifier = {
+		planet_buildings_cost_mult = -0.3
+		planet_buildings_upkeep_mult = -0.3
+		planet_structures_cost_mult = -0.3
+		planet_structures_upkeep_mult = -0.3
+	}
+	sector_modifier = {
+		planet_buildings_cost_mult = -0.1
+		planet_buildings_upkeep_mult = -0.1
+		planet_structures_cost_mult = -0.1
+		planet_structures_upkeep_mult = -0.1
+	}
+	
+    leader_class = { official }
+    initial = no
+    randomized = no
+}
+#幕后花手
+leader_huohua_t4 = {
+    inline_script = {
+        script = trait/hsr_icons
+        ICON = "GFX_leader_huohua_t4"
+        CLASS = official
+        RARITY = paragon
+        COUNCIL = no
         TIER = 1
     }
 	planet_modifier = {
-		country_consumer_goods_produces_mult = 0.1
+		planet_districts_upkeep_mult = -0.3
+		planet_districts_cost_mult = -0.3
+		
+	}
+	sector_modifier = {
+		planet_districts_upkeep_mult = -0.1
+		planet_districts_cost_mult = -0.1
+		
+	}
+	
+   
+    leader_class = { official }
+    initial = no
+    randomized = no
+}
+#沸腾！真伪调色盘
+leader_huohua_t5 = {
+    inline_script = {
+        script = trait/hsr_icons
+        ICON = "GFX_leader_huohua_t5"
+        CLASS = official
+        RARITY = paragon
+        COUNCIL = no
+        TIER = 1
+    }
+	planet_modifier = {
+		LOGISTIC_GROWTH_MULT = 0.1
+	}
+	triggered_planet_modifier = {
+		LOGISTIC_GROWTH_MULT = 0.01
+		mult = this.owner.num_huohua_other_skill
 	}
 	triggered_sector_modifier = {
-		country_consumer_goods_produces_mult = 0.1
-		mult = this.owner.num_yaoguang_other_skill
+		LOGISTIC_GROWTH_MULT = 0.01
+		mult = this.owner.num_huohua_other_skill
 	}
+	custom_tooltip_with_modifiers = leader_huohua_t5_add
+    leader_class = { official }
+    initial = no
+    randomized = no
+}
+#甜蜜！笑点签售会
+leader_huohua_t6 = {
+    inline_script = {
+        script = trait/hsr_icons
+        ICON = "GFX_leader_huohua_t6"
+        CLASS = official
+        RARITY = paragon
+        COUNCIL = no
+        TIER = 1
+    }
+	planet_modifier = {
+		POP_HAPPINESS = 0.2
+		PLANET_AMENITIES_ADD = 0.2
+	}
+	triggered_planet_modifier = {
+		POP_HAPPINESS = 0.04
+		PLANET_AMENITIES_ADD = 0.04
+		mult = this.owner.num_huohua_other_skill
+	}
+	triggered_sector_modifier = {
+		POP_HAPPINESS = 0.02
+		PLANET_AMENITIES_ADD = 0.02
+		mult = this.owner.num_huohua_other_skill
+	}
+	custom_tooltip_with_modifiers = leader_huohua_t6_add
+    leader_class = { official }
+    initial = no
+    randomized = no
+}
+#炫目！人设万花筒
+leader_huohua_t7 = {
+    inline_script = {
+        script = trait/hsr_icons
+        ICON = "GFX_leader_huohua_t7"
+        CLASS = official
+        RARITY = paragon
+        COUNCIL = no
+        TIER = 1
+    }
+	planet_modifier = {
+		EMPIRE_SIZE_DISTRICTS_MULT = -0.1
+		EMPIRE_SIZE_SYSTEMS_MULT = -0.1
+		EMPIRE_SIZE_COLONIES_MULT = -0.1
+		EMPIRE_SIZE_POPS_MULT = -0.1
+	}
+	triggered_planet_modifier = {
+		EMPIRE_SIZE_DISTRICTS_MULT = -0.01
+		EMPIRE_SIZE_SYSTEMS_MULT = -0.01
+		EMPIRE_SIZE_COLONIES_MULT = -0.01
+		EMPIRE_SIZE_POPS_MULT = -0.01
+		mult = this.owner.num_huohua_other_skill
+	}
+	triggered_sector_modifier = {
+		EMPIRE_SIZE_DISTRICTS_MULT = -0.01
+		EMPIRE_SIZE_SYSTEMS_MULT = -0.01
+		EMPIRE_SIZE_COLONIES_MULT = -0.01
+		EMPIRE_SIZE_POPS_MULT = -0.01
+		mult = this.owner.num_huohua_other_skill
+	}
+	
     leader_class = { official }
     initial = no
     randomized = no
