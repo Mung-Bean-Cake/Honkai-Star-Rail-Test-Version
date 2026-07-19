@@ -6977,6 +6977,307 @@ country_event = {
         default_hide_option = yes
     }
 }
+country_event = {
+    id = hsr_ui.69
+    title = "hsr_ui.69.title"
+    desc = "hsr_ui.69.desc"
+    diplomatic = yes
+    custom_gui = honkai_star_rail_leader_show_main
+    custom_gui_option = hsr_leader_show_option
+    picture_event_data = {
+        portrait = feiying
+        room = hsr_leader_room
+    }
+    is_triggered_only = yes
+    option = {
+        name = hsr_ui.69.a
+        is_dialog_only = yes
+        response_text = hsr_ui.69.a.desc
+    }
+    option = {
+        name = hsr_ui.69.b
+        is_dialog_only = yes
+        custom_tooltip = hsr_ui.69.b.desc
+        allow = {
+            custom_tooltip = {
+                fail_text = yuzhousuipian_short_text
+                hidden_trigger = {
+                    check_variable = {
+                        which = yuzhousuipian
+                        value >= 2000
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = hsr_ui.69.fail
+                hidden_trigger = {
+                    not ={
+                        any_owned_leader = {
+                            has_leader_flag = feiying
+                        }
+                    }
+                }
+            }
+        }
+        ui_hire_leader = { EVENT_NAME = hsr_paragon.69 }
+        
+    }
+    option = {
+        name = hsr_ui.69.c
+        is_dialog_only = yes
+        response_text = hsr_ui.5.c.desc_tooltip
+        allow = {
+            custom_tooltip = {
+                fail_text = yuzhousuipian_short_1_text
+                hidden_trigger = {
+                    check_variable = {
+                        which = yuzhousuipian
+                        value >= 500
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = trait_has_learn_text
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = feiying
+                        not = {has_trait = leader_feiying_t5}
+                    }
+                }
+            }
+        }
+        hidden_effect = {
+            ui_leader_get_trait = {LEADER_TARGET = feiying_leader TRAIT = leader_feiying_t5 }
+        }
+    }
+    option = {
+        name = hsr_ui.69.d
+        is_dialog_only = yes
+        response_text = hsr_ui.69.d.desc_tooltip
+        allow = {
+            custom_tooltip = {
+                fail_text = yuzhousuipian_short_1_text
+                hidden_trigger = {
+                    check_variable = {
+                        which = yuzhousuipian
+                        value >= 500
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = trait_has_learn_text
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = feiying
+                        not = {has_trait = leader_feiying_t6}
+                    }
+                }
+            }
+        }
+        hidden_effect = {
+            ui_leader_get_trait = {LEADER_TARGET = feiying_leader TRAIT = leader_feiying_t6 }
+        }
+    }
+    option = {
+        name = hsr_ui.69.e
+        is_dialog_only = yes
+        response_text = hsr_ui.69.e.desc_tooltip
+        allow = {
+            custom_tooltip = {
+                fail_text = yuzhousuipian_short_1_text
+                hidden_trigger = {
+                    check_variable = {
+                        which = yuzhousuipian
+                        value >= 500
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = trait_has_learn_text
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = feiying
+                        not = {has_trait = leader_feiying_t7}
+                    }
+                }
+            }
+        }
+        hidden_effect = {
+            ui_leader_get_trait = {LEADER_TARGET = feiying_leader TRAIT = leader_feiying_t7 }
+        }
+    }
+    option = {
+        name = hsr_ui.69.f
+        allow = {
+            custom_tooltip = {
+                fail_text = hsr_ui.69.f.fail
+                hidden_trigger = {
+                    has_country_flag = feiying_set
+                    not ={ any_owned_leader = { has_leader_flag = feiying }}
+                }
+            }
+        }
+        custom_tooltip = hsr_ui.69.f.desc
+        is_dialog_only = yes
+        response_text = hsr_ui.69.f.desc
+        hidden_effect = {
+            clone_leader = {
+                target = event_target:feiying_leader
+            }
+            last_created_leader = {
+                set_leader_flag = legendary_leader
+                save_global_event_target_as = feiying_leader
+                set_leader_flag = immune_to_negative_traits
+                set_leader_flag = feiying
+            }
+        }
+    }
+    option = {
+        name = hsr_ui.69.g
+        allow = {
+            custom_tooltip = {
+                fail_text = hsr_ui.69.fail
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = feiying
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = yuzhousuipian_short_1_text
+                hidden_trigger = {
+                    check_variable = {
+                        which = yuzhousuipian
+                        value >= 500
+                    }
+                }
+            }
+			custom_tooltip = {
+				fail_text = skill_is_up
+				hidden_trigger = {
+					check_variable = {
+						which = num_feiying_other_skill
+						value < 20
+					}
+				}
+			}
+            custom_tooltip = {
+                fail_text = hsr_ui.69.fail.desc
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = feiying
+                        or = {
+                             has_trait = leader_feiying_t5
+                             has_trait = leader_feiying_t6
+                             has_trait = leader_feiying_t7
+                        }
+                    }
+                }
+            }
+        }
+        is_dialog_only = yes
+        response_text = hsr_ui.69.fail.desc
+        ui_leader_get_other_skill = {LEADER_SKILL = num_feiying_other_skill  SPEND_VALUE = -500  LEVEL_VALUE = 1}
+    }
+    option = {
+        name = hsr_ui.69.h
+        allow = {
+            custom_tooltip = {
+                fail_text = hsr_ui.69.fail
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = feiying
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = yuzhousuipian_short_2_text
+                hidden_trigger = {
+                    check_variable = {
+                        which = yuzhousuipian
+                        value >= 2500
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = hsr_ui.69.fail.desc
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = feiying
+                        or = {
+                             has_trait = leader_feiying_t5
+                             has_trait = leader_feiying_t6
+                             has_trait = leader_feiying_t7
+                        }
+                    }
+                }
+            }
+			custom_tooltip = {
+				fail_text = skill_is_up
+				hidden_trigger = {
+					check_variable = {
+						which = num_feiying_other_skill
+						value < 20
+					}
+				}
+			}
+        }
+        is_dialog_only = yes
+        response_text = hsr_ui.69.fail.desc
+        ui_leader_get_other_skill = {LEADER_SKILL = num_feiying_other_skill  SPEND_VALUE = -2500  LEVEL_VALUE = 5}
+    }
+    option = {
+        name = hsr_ui.69.i
+        allow = {
+            custom_tooltip = {
+                fail_text = hsr_ui.69.fail
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = feiying
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = yuzhousuipian_short_3_text
+                hidden_trigger = {
+                    check_variable = {
+                        which = yuzhousuipian
+                        value >= 5000
+                    }
+                }
+            }
+            custom_tooltip = {
+                fail_text = hsr_ui.69.fail.desc
+                hidden_trigger = {
+                    any_owned_leader = {
+                        has_leader_flag = feiying
+                        or = {
+                             has_trait = leader_feiying_t5
+                             has_trait = leader_feiying_t6
+                             has_trait = leader_feiying_t7
+                        }
+                    }
+                }
+            }
+			custom_tooltip = {
+				fail_text = skill_is_up
+				hidden_trigger = {
+					check_variable = {
+						which = num_feiying_other_skill
+						value < 20
+					}
+				}
+			}
+        }
+        is_dialog_only = yes
+        response_text = hsr_ui.69.fail.desc
+        ui_leader_get_other_skill = {LEADER_SKILL = num_feiying_other_skill  SPEND_VALUE = -5000  LEVEL_VALUE = 10}
+    }
+    option = {
+        name = CLOSE
+        default_hide_option = yes
+    }
+}
 
 
 

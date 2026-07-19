@@ -2083,4 +2083,89 @@ country_event = {
     }
     after = {hidden_effect = {country_event = { id = hsr_ui.68}}}
 }
+country_event = {
+    id = hsr_paragon.69
+    title = "hsr_paragon.69.name"
+    desc = "feiying_catch_phrase"
+    is_triggered_only = yes
+
+    picture = GFX_leader_recruitment_bg_legendary_beholder
+    event_window_type = leader_recruit
+
+    picture_event_data = {
+        portrait = event_target:feiying_leader
+        room = paragon_keides_room
+    }
+    immediate = {
+        hidden_effect = {
+            SR_leader_creator = {
+                SPECIES_NAME = star_rail_leader
+                SPECIES_CLASS = Star_Rail
+                LEADER_PORTRAIT = feiying
+                SKILL = 1
+                CLASS = commander
+                NAME = NAME_feiying
+                GENDER = female
+                HIDEAGE = yes
+                ETHIC = ethic_fanatic_egalitarian
+                CATCH_PHRASE = feiying_catch_phrase
+                DESC = feiying_backstory
+                EVENT_TARGET = feiying_leader
+            }
+            last_created_leader = {
+                remove_all_positive_traits = yes
+                add_trait = {trait = leader_feiying_t1 show_message = no}
+                add_trait = {trait = leader_feiying_t2 show_message = no}
+                add_trait = {trait = leader_feiying_t3 show_message = no}
+                add_trait = {trait = leader_feiying_t4 show_message = no}
+                
+                change_background_job = researcher
+            }
+        }
+    }
+    option = {
+        trigger = { }
+        name = hsr_paragon.69.a
+        is_dialog_only = yes
+        response_text = hsr_paragon.69.a.response
+    }
+    option = {
+        trigger = { }
+        name = hsr_paragon.69.b
+        is_dialog_only = yes
+        response_text = hsr_paragon.69.b.response
+    }
+    option = {
+        name = hsr_paragon.69.c
+        response_text = hsr_paragon.69.c.response
+        is_dialog_only = yes
+    }
+    option = {
+        name = HIRE
+        tag = hire_leader
+        hidden_effect = {
+            SR_hire_leader = {
+                EVENT_TARGET = feiying_leader
+            }
+            set_country_flag = feiying_set
+            last_created_leader = {
+                set_leader_flag = legendary_leader
+                save_global_event_target_as = feiying_leader
+                set_leader_flag = immune_to_negative_traits
+                set_leader_flag = feiying
+            }
+        }
+    }
+    option = {
+        # DISMISS
+        name = DISMISS
+        tag = dismiss_leader
+        hidden_effect = {
+            event_target:feiying_leader = {
+                kill_leader = { show_notification = no }
+            }
+        }
+    }
+    after = {hidden_effect = {country_event = { id = hsr_ui.69}}}
+}  
     
