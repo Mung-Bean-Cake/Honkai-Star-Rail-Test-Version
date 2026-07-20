@@ -2168,4 +2168,88 @@ country_event = {
     }
     after = {hidden_effect = {country_event = { id = hsr_ui.69}}}
 }  
+country_event = {
+    id = hsr_paragon.70
+    title = "hsr_paragon.70.name"
+    desc = "qianyeren_catch_phrase"
+    is_triggered_only = yes
+
+    picture = GFX_leader_recruitment_bg_legendary_beholder
+    event_window_type = leader_recruit
+
+    picture_event_data = {
+        portrait = event_target:qianyeren_leader
+        room = paragon_keides_room
+    }
+    immediate = {
+        hidden_effect = {
+            SR_leader_creator = {
+                SPECIES_NAME = star_rail_leader
+                SPECIES_CLASS = Star_Rail
+                LEADER_PORTRAIT = qianyeren
+                SKILL = 1
+                CLASS = commander
+                NAME = NAME_qianyeren
+                GENDER = male
+                HIDEAGE = yes
+                ETHIC = ethic_fanatic_egalitarian
+                CATCH_PHRASE = qianyeren_catch_phrase
+                DESC = qianyeren_backstory
+                EVENT_TARGET = qianyeren_leader
+            }
+            last_created_leader = {
+                remove_all_positive_traits = yes
+                add_trait = {trait = leader_qianyeren_t1 show_message = no}
+                add_trait = {trait = leader_qianyeren_t2 show_message = no}
+                add_trait = {trait = leader_qianyeren_t3 show_message = no}
+                
+                change_background_job = researcher
+            }
+        }
+    }
+    option = {
+        trigger = { }
+        name = hsr_paragon.70.a
+        is_dialog_only = yes
+        response_text = hsr_paragon.70.a.response
+    }
+    option = {
+        trigger = { }
+        name = hsr_paragon.70.b
+        is_dialog_only = yes
+        response_text = hsr_paragon.70.b.response
+    }
+    option = {
+        name = hsr_paragon.70.c
+        response_text = hsr_paragon.70.c.response
+        is_dialog_only = yes
+    }
+    option = {
+        name = HIRE
+        tag = hire_leader
+        hidden_effect = {
+            SR_hire_leader = {
+                EVENT_TARGET = qianyeren_leader
+            }
+            set_country_flag = qianyeren_set
+            last_created_leader = {
+                set_leader_flag = legendary_leader
+                save_global_event_target_as = qianyeren_leader
+                set_leader_flag = immune_to_negative_traits
+                set_leader_flag = qianyeren
+            }
+        }
+    }
+    option = {
+        # DISMISS
+        name = DISMISS
+        tag = dismiss_leader
+        hidden_effect = {
+            event_target:qianyeren_leader = {
+                kill_leader = { show_notification = no }
+            }
+        }
+    }
+    after = {hidden_effect = {country_event = { id = hsr_ui.70}}}
+}
     

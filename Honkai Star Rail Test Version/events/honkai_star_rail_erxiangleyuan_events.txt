@@ -20,9 +20,9 @@ country_event = {
 		}		
 	}
 }
-#爻光叠层——leader_yaoguang_t1_add
+#爻光叠层——leader_yaoguang_t1
 country_event = {
-	id = xiaoqiaosi.1
+	id = xiaoqiaosi.2
 	is_triggered_only = yes
 	hide_window = yes
 
@@ -38,6 +38,104 @@ country_event = {
 			which = num_leader_yaoguang_t1
 			value = 1
 		}		
+	}
+}
+#千冶刃——num_leader_qianyeren_t1_1
+leader_event = {
+	id = xiaoqiaosi.3
+	is_triggered_only = yes
+	hide_window = yes
+
+	trigger = {
+		leader_class = commander
+		has_trait = leader_qianyeren_t1	
+		exists = planet
+	}
+
+	immediate = {
+		change_variable = {
+			which = num_leader_qianyeren_t1_1
+			value = 1
+		}		
+	}
+}
+
+country_event = {
+	id = xiaoqiaosi.3
+	is_triggered_only = yes
+	hide_window = yes
+
+	trigger = {
+		any_owned_leader = {
+			has_leader_flag = qianyeren
+		}
+		check_variable = {
+			which = num_leader_qianyeren_t1_1
+			value >= 15
+		}
+		check_variable = {
+			which = num_leader_qianyeren_t1
+			value < 1
+		}
+	}
+
+	immediate = {
+		change_variable = {
+			which = num_leader_qianyeren_t1
+			value = 1
+		}
+		change_variable = {
+			which = num_leader_qianyeren_t1_1
+			value = -15
+		}
+		country_event = {
+			id = xiaoqiaosi.4
+			days = 360
+		}		
+	}
+}
+
+country_event = {
+	id = xiaoqiaosi.4
+	is_triggered_only = yes
+	hide_window = yes
+
+	trigger = {
+		any_owned_leader = {
+			has_leader_flag = qianyeren
+		}
+		check_variable = {
+			which = num_leader_qianyeren_t1
+			value = 1
+		}
+	}
+
+	immediate = {
+		change_variable = {
+			which = num_leader_qianyeren_t1
+			value = -1
+		}
+			
+	}
+}
+country_event = {
+	id = xiaoqiaosi.5
+	is_triggered_only = yes
+	hide_window = yes
+
+	trigger = {
+		any_owned_leader = {
+			has_leader_flag = qianyeren
+		}
+		
+	}
+
+	immediate = {
+		change_variable = {
+			which = num_leader_qianyeren_t1
+			value = 1
+		}
+			
 	}
 }
 
