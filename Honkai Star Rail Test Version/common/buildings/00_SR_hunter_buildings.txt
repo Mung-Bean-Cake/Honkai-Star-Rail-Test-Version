@@ -1,0 +1,130 @@
+building_hunter = {
+	capital = no
+	can_build = no
+	can_demolish = no
+	can_be_disabled = no
+	can_be_ruined = yes
+	icon = building_kelibobao
+	position_priority = 0
+	empire_limit = 1
+
+	category = government
+	potential = {
+		exists = owner
+		owner = { has_origin = origin_StellaronHunter }
+	}
+	building_sets = {
+		government
+	}
+	convert_to = {
+		building_hive_capital
+		building_machine_capital
+		building_resort_capital
+		building_slave_capital
+		building_ancient_control_center
+		building_ancient_palace
+	}
+
+	destroy_trigger = {}
+	ruined_trigger = {}
+
+	planet_modifier = {
+		job_enforcer_add = 500
+		job_politician_add = 200
+		job_physicist_add = 400
+		job_engineer_add = 400
+		job_biologist_add = 400
+		planet_housing_add = 1000
+		planet_amenities_add = 4500
+		planet_max_buildings_add = 150
+	}
+	resources = {
+		category = planet_buildings
+		produces = {
+			energy = 100
+			minerals = 50
+			alloys = 50
+			consumer_goods = 20
+		}
+		upkeep = {
+			energy = 5
+			minerals = 5
+		}
+		produces = {}
+	}
+
+	upgrades = {}
+}
+building_hunter_hacker = {
+	base_buildtime = 200
+	base_cap_amount = 1
+	category = resource
+	potential = {
+		exists = owner
+		owner = { has_origin = origin_StellaronHunter }
+	}
+	building_sets = {
+		government
+	}
+	destroy_trigger = {}
+	ruined_trigger = {}
+
+	planet_modifier = {
+		job_culture_worker_add = 200
+		planet_jobs_upkeep_mult = -0.1
+	}
+	country_modifier = {
+		pop_happiness = 0.2
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			alloys = 1000
+		}
+		upkeep = {
+			energy = 2
+			minerals = 2
+			consumer_goods = 2
+		}
+		produces = {
+			trade = 200
+			unity = 50
+		}
+	}
+
+	upgrades = {}
+}
+building_hunter_gelamo = {
+	base_buildtime = 200
+	empire_limit = 2
+	category = army
+	potential = {
+		exists = owner
+		owner = {
+			is_regular_empire = yes
+			has_civic = civic_StellaronHunter_1
+		}
+	}
+	building_sets = {
+		fortress
+	}
+	planet_modifier = {
+		job_soldier_add = 500
+	}
+	country_modifier = {
+		country_commander_cap_add = 2
+		country_naval_cap_mult = 0.1
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			minerals = 1000
+		}
+		upkeep = {
+			minerals = 5
+		}
+		produces = {}
+	}
+
+	upgrades = {}
+}

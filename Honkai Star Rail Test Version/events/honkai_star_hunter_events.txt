@@ -1,4 +1,171 @@
-namespace = DOT_SR_Hunter_primitives
+namespace = hunter_story
+country_event = {#星核猎手起源
+    id = hunter_story.1
+    is_triggered_only = yes
+    hide_window = yes
+
+    trigger = {
+        has_origin = origin_StellaronHunter
+        is_ai = no
+    }
+    immediate = {
+        hsr_path_first_set = {
+            cunhu_value = 10
+            fanyu_value = 30
+            fengrao_value = 30
+            huanyu_value = 30
+            huimie_value = 20
+            jiyi_value = 30
+            tongxie_value = 15
+            xunlie_value = 15
+            xuwu_value = 15
+            zhishi_value = 10
+        }
+        set_country_flag = use_path
+        give_technology = { tech = tech_path_civic_1 message = no }
+        change_variable = {
+            which = yuzhousuipian
+            value = 1000
+        }
+        every_controlled_fleet = {
+            if = {
+                limit = {
+                    exists = leader
+                    OR = {
+                        is_ship_class = shipclass_science_ship
+                        is_ship_class = shipclass_military
+                    }
+                }
+                unassign_leader = this
+                delete_fleet = this
+            }
+            else_if = {
+                limit = {
+                    OR = {
+                        is_ship_class = shipclass_constructor
+                    }
+                }
+                delete_fleet = this
+            }
+        }
+        set_country_flag = hunter_departure
+        change_variable = {
+            which = count_script
+            value = 5
+        }
+        add_modifier = {
+            modifier = necessary_preparations_for_salvation
+            days = -1
+        }
+        add_modifier = {
+            modifier = from_the_end
+            days = -1
+        }
+        add_modifier = {
+            modifier = a_strong_arms_race
+            days = -1
+        }
+        add_modifier = {
+            modifier = the_future_belongs_to_us
+            days = -1
+        }
+        begin_event_chain = {
+            event_chain = "expand_military_preparedness_chain"
+            target = ROOT
+        }
+        begin_event_chain = {
+            event_chain = "expel_the_tartar_invaders_chain"
+            target = ROOT
+        }
+        hidden_effect = {
+            ruler = {
+                set_name = hunter_kafuka
+                set_skill = 3
+                set_gender = female
+                change_leader_class = official
+                change_background_ethic = ethic_authoritarian
+                change_leader_portrait = trait_StellaronHunter_pop_4
+                change_background_job = researcher
+                remove_all_traits = yes
+                add_trait= {trait = leader_kafuka_t1 show_message = no}
+                add_trait = {trait = leader_kafuka_t2 show_message = no}
+                add_trait = {trait = leader_kafuka_t3 show_message = no}
+                add_trait = {trait = leader_kafuka_t4 show_message = no}
+                add_trait = {trait = leader_kafuka_t5 show_message = no}
+                set_leader_flag = legendary_leader
+                set_leader_flag = immune_to_negative_traits
+                set_leader_flag = belobog_bronya
+                save_global_event_target_as = hunter_kafuka_leader
+            }
+            random_owned_leader = {
+                limit = {
+                    is_ruler = no
+                    leader_class = commander
+                }
+                set_name = hunter_ren
+                set_skill = 1
+                set_gender = male
+                change_leader_class = commander
+                change_background_ethic = ethic_militarist
+                change_leader_portrait = soilder
+                change_background_job = soldier
+                remove_all_traits = yes
+                add_trait = {trait = leader_ren_t1 show_message = no}
+                add_trait = {trait = leader_ren_t2 show_message = no}
+                add_trait = {trait = leader_ren_t3 show_message = no}
+                set_leader_flag = legendary_leader
+                set_leader_flag = immune_to_negative_traits
+                set_leader_flag = belobog_gepard
+                save_global_event_target_as = hunter_ren_leader
+            }
+            random_owned_leader = {
+                limit = {
+                    is_ruler = no
+                    leader_class = commander
+                }
+                set_name = hunter_yinlang
+                set_skill = 1
+                set_gender = female
+                change_leader_class = commander
+                change_background_ethic = ethic_fanatic_xenophobe
+                change_leader_portrait = soilder
+                change_background_job = researcher
+                remove_all_traits = yes
+                add_trait = {trait = leader_yinlang_t1 show_message = no}
+                add_trait = {trait = leader_yinlang_t2 show_message = no}
+                add_trait = {trait = leader_yinlang_t3 show_message = no}
+                add_trait = {trait = leader_yinlang_t4 show_message = no}
+                set_leader_flag = legendary_leader
+                set_leader_flag = immune_to_negative_traits
+                set_leader_flag = belobog_natasha
+                save_global_event_target_as = hunter_yinlang_leader
+            }
+        }
+        capital_scope = {
+            add_district = district_city
+            remove_building = building_commercial_zone
+            remove_building = building_research_lab_1
+            remove_building = building_bureaucratic_1
+            remove_district = district_farming
+            remove_building = building_stronghold
+            add_zone = {
+                district = district_city
+                zone = zone_unity
+            }
+            add_zone = {
+                district = district_city
+                zone = zone_industrial
+            }
+            add_building = building_hunter
+            add_building = building_hunter_gelamo
+            add_building = building_hunter_hacker
+            add_planet_devastation = 5
+        }
+        give_technology = { tech = tech_robotic_workers message = no }
+        give_specimen = { key = biological_wave_exploration_instrument origin = NAME_yaliluo_core }
+        give_specimen = { key = yongdong_stele_stone origin = NAME_yaliluo_core }
+    }
+}
 event = {
     id = game_start.1
     hide_window = yes
