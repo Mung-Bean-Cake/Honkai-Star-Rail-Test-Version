@@ -2252,4 +2252,89 @@ country_event = {
     }
     after = {hidden_effect = {country_event = { id = hsr_ui.70}}}
 }
+country_event = {
+    id = hsr_paragon.71
+    title = "hsr_paragon.71.name"
+    desc = "langzun_catch_phrase"
+    is_triggered_only = yes
+
+    picture = GFX_leader_recruitment_bg_legendary_beholder
+    event_window_type = leader_recruit
+
+    picture_event_data = {
+        portrait = event_target:langzun_leader
+        room = paragon_keides_room
+    }
+    immediate = {
+        hidden_effect = {
+            SR_leader_creator = {
+                SPECIES_NAME = star_rail_leader
+                SPECIES_CLASS = Star_Rail
+                LEADER_PORTRAIT = langzun
+                SKILL = 1
+                CLASS = commander
+                NAME = NAME_langzun
+                GENDER = male
+                HIDEAGE = yes
+                ETHIC = ethic_fanatic_egalitarian
+                CATCH_PHRASE = langzun_catch_phrase
+                DESC = langzun_backstory
+                EVENT_TARGET = langzun_leader
+            }
+            last_created_leader = {
+                remove_all_positive_traits = yes
+                add_trait = {trait = leader_langzun_t1 show_message = no}
+                add_trait = {trait = leader_langzun_t2 show_message = no}
+                add_trait = {trait = leader_langzun_t3 show_message = no}
+                add_trait = {trait = leader_langzun_t4 show_message = no}
+                
+                change_background_job = researcher
+            }
+        }
+    }
+    option = {
+        trigger = { }
+        name = hsr_paragon.71.a
+        is_dialog_only = yes
+        response_text = hsr_paragon.71.a.response
+    }
+    option = {
+        trigger = { }
+        name = hsr_paragon.71.b
+        is_dialog_only = yes
+        response_text = hsr_paragon.71.b.response
+    }
+    option = {
+        name = hsr_paragon.71.c
+        response_text = hsr_paragon.71.c.response
+        is_dialog_only = yes
+    }
+    option = {
+        name = HIRE
+        tag = hire_leader
+        hidden_effect = {
+            SR_hire_leader = {
+                EVENT_TARGET = langzun_leader
+            }
+            set_country_flag = langzun_set
+            last_created_leader = {
+                set_leader_flag = legendary_leader
+                save_global_event_target_as = langzun_leader
+                set_leader_flag = immune_to_negative_traits
+                set_leader_flag = langzun
+            }
+        }
+    }
+    option = {
+        # DISMISS
+        name = DISMISS
+        tag = dismiss_leader
+        hidden_effect = {
+            event_target:langzun_leader = {
+                kill_leader = { show_notification = no }
+            }
+        }
+    }
+    after = {hidden_effect = {country_event = { id = hsr_ui.71}}}
+}
     
