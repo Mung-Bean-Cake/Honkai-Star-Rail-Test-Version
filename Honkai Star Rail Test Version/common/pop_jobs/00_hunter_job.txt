@@ -1,0 +1,176 @@
+ren_soldier = {
+	category = specialist
+	swappable_data = {
+		default = {
+			condition_string = SOLDIER_JOB_TRIGGER
+			building_icon = building_stronghold
+		}
+		swap_type = {
+			trigger = {
+				soldier_is_necromancer = yes
+			}
+			name = necromancer
+			desc = necromancer
+			icon = necromancer
+			building_icon = building_dread_encampment
+			weight = 20
+		}
+	}
+
+	tags = { soldier }
+	triggered_country_modifier = {
+		potential = {
+			exists = owner
+			owner = {
+				has_valid_civic = civic_StellaronHunter_1
+			}
+		}
+		modifier = {
+			country_naval_cap_mult = 0.1
+		}
+	}
+	triggered_country_modifier = {
+		potential = {
+			exists = owner
+			owner = {
+				has_valid_civic = civic_StellaronHunter_2
+			}
+		}
+		modifier = {
+			country_naval_cap_mult = 0.2
+		}
+	}
+
+	planet_modifier = {
+		planet_crime_add = -2
+	}
+
+	country_modifier = {
+		country_naval_cap_add = 5
+	}
+	icon = job_ren_soldier_icon
+	resources = {
+		category = planet_soldiers
+		produces = {
+			trigger = {
+				soldier_is_necromancer = yes
+			}
+			society_research = 1
+			engineering_research = 1
+			country_naval_cap_add = 1
+		}
+		upkeep = {
+			trigger = {
+				soldier_is_necromancer = yes
+			}
+			consumer_goods = 1
+		}
+		upkeep = {
+			alloys = 2
+		}
+	}
+
+	inline_script = "output/soldier_triggered_modifiers"
+
+	possible_pre_triggers = {
+		has_owner = yes
+		is_being_purged = no
+		is_being_assimilated = no
+		is_sapient = yes
+	}
+
+	possible = {
+		soldier_job_check_trigger = yes
+		owner = { is_gestalt = no }
+	}
+
+	weight = {
+		weight = @soldier_job_weight
+		modifier = {
+			factor = 10
+			exists = planet
+			planet = {
+				exists = leader
+				leader = {
+					leader_class = commander
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			has_trait = trait_StellaronHunter_pop_1
+		}
+		modifier = {
+			factor = 10
+			has_trait = trait_StellaronHunter_pop_2
+		}
+		modifier = {
+			factor = 1
+			has_trait = trait_StellaronHunter_pop_3
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = trait_weak
+		}
+		modifier = {
+			factor = 10
+			is_enslaved = yes
+			has_slavery_type = { type = slavery_military }
+		}
+		modifier = {
+			factor = 2
+			has_trait = trait_lithoid
+		}
+		modifier = {
+			factor = 5
+			has_trait = trait_cyborg_creed_of_war
+		}
+	}
+}
+job_wolf_hacker = {
+	category = specialist
+	swappable_data = {
+		default = {
+			icon = job_hacker
+		}
+	}
+	possible_pre_triggers = {
+		has_owner = yes
+		is_being_purged = no
+		is_being_assimilated = no
+		is_sapient = yes
+	}
+	tags = { trade amenities }
+	possible_precalc = can_fill_specialist_job
+	possible = {
+
+	}
+	planet_modifier = {
+		maintenance_progress_add = 0.05
+	}
+	resources = {
+		category = planet_miners
+		produces = {
+			unity = 2
+			trade_value = 5
+			society_research = 2
+		}
+		upkeep = {
+			energy = 0.5
+			food = 0.2
+			minerals = 0.5
+			alloys = 0.2
+		}
+	}
+	weight = {
+		weight = 100
+		modifier = {
+			factor = 0.8
+			has_trait = trait_StellaronHunter_pop_3
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = trait_StellaronHunter_pop_7
+		}
+	}
+}
