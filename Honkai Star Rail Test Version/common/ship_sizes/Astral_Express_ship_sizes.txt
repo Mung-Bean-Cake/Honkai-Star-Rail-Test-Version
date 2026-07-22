@@ -134,37 +134,32 @@ Xingcha_Ship = {
 }
 
 train_planet_fleet = {
-    graphical_culture = { "science_arkship" }
+    carries_colony = pc_train   # 关键 携带殖民地
+    entity = Astral_Express_fleet_entity    # 关键 模型
+    preserve_movement_animation_progress = yes
+    graphical_culture = { "civilian_arkship" }
     hero_ship = {						# Use the Hero Ship UI, not the Juggernaut's.
-        hero_ship_fleet_background = "GFX_arkship_fleetview_science"
-        custom_class_text_color = B
+        hero_ship_fleet_background = "GFX_arkship_fleetview_civilian"
+        custom_class_text_color = H
     }
-    class = shipclass_starbase			# Needs to be a Starbase to have starbase modules and buildings.
-    carries_colony = pc_train			# 关键 Enables Arkship custom UI.
+    base_ship_size = "civilian_arkship_tier_1"
+    class = shipclass_starbase
     display_attack_neutral_fleet_button = no
     automation_icon = GFX_fleet_order_auto_explore_arkship
-    arkship_picture = "arkship_science"
-    auto_upgrade = yes					# Arkships automatically upgrade their components.
-    can_disable = yes					# Arkships can be disabled.
-    stay_disabled = yes					# Arkships stay disabled until explicitly re-enabled from script.
+    arkship_picture = "arkship_civilian"
+    planet_view_header = "GFX_arkship_planetview_header_civilian"
+    can_disable = yes   # Arkships can be disabled.
+    stay_disabled = yes # Arkships stay disabled until explicitly re-enabled from script.
     never_lost = yes
-    collects_stockpile_from = {			# Arkships can collect resources from Waystations or Logistic Ships.
+    collects_stockpile_from = {
         shipclass_starbase
         shipclass_constructor
     }
     collects_stockpile_to_country = yes
     accepts_all_modifiers = yes
-    use_shipnames_from = science
-    potential_construction = {
-        always = no
-    }
-    possible_construction = {
-        always = no
-    }
-    # Audio
-    on_click_sound = "arkship_science_selection"
-    # 2D Art
-    icon = ship_size_science_arkship_tier_3
+    use_shipnames_from = colonizer
+    on_click_sound = "arkship_civilian_selection"
+    icon = ship_size_civilian_arkship_tier_3
     icon_frame = 16
     ship_class_icon_frame = 64
     map_icon_override = {
@@ -173,8 +168,6 @@ train_planet_fleet = {
         cloaked = GFX_ship_icons_type_arkship_cloaked
         encamped = GFX_ship_icons_type_arkship_encamped
     }
-    # 3D Art 模型
-    entity = Astral_Express_fleet_entity
     section_slots = {
         "mid" =	{ locator = "root" }
         "1" = { locator = "module_01" }
@@ -185,7 +178,6 @@ train_planet_fleet = {
         "6" = { locator = "module_06" }
         "spinal_mount_1"	= { locator = "spinal_mount" }
     }
-    # Ship setup
     formation_priority = @arkship_formation_priority_4
     max_speed = @arkship_max_speed_100
     acceleration = @arkship_acceleration_20_percent
@@ -201,13 +193,11 @@ train_planet_fleet = {
         starbase_module_capacity_add = @arkship_starbase_module_capacity_add_7
         starbase_building_capacity_add = @arkship_starbase_building_capacity_add_12
         planet_max_districts_add = @arkship_max_districts_add_18
-        # Ship Class-specific modifiers
-        ship_sensor_range_add = 4
-        ship_hyperlane_range_add = 3
+        ship_sensor_range_add = 1
     }
     ship_modifier = {
         ship_starbase_stockpile_collection_rate_add = @arkship_collection_rate_add_625
-        science_ship_survey_speed = @arkship_innate_mult_15_percent
+        arkship_harvest_resources_produces_mult = @arkship_innate_mult_15_percent
     }
     size_multiplier = @arkship_size_120
     fleet_slot_size = @arkship_slot_size_32
@@ -218,7 +208,8 @@ train_planet_fleet = {
     is_civilian = no
     components_add_to_cost = no
     available_to_everyone = yes
-    enable_default_design = yes	#if yes, countries will have an auto-generated design at start
+    enable_default_design = yes
+    prerequisites = { "tech_arkship_tier_3" }
     combat_disengage_chance = @arkship_disengage_chance_2
     construction_type = starbase_shipyard
     required_component_set = "power_core"
@@ -249,37 +240,32 @@ train_planet_fleet = {
 }
 
 XIANZHOU_AE_Ship = {
-    graphical_culture = { "science_arkship" }
+    carries_colony = pc_xianzhou   # 关键
+    entity = Xingcha_Ship_entity    # 关键
+    preserve_movement_animation_progress = yes
+    graphical_culture = { "civilian_arkship" }
     hero_ship = {						# Use the Hero Ship UI, not the Juggernaut's.
-        hero_ship_fleet_background = "GFX_arkship_fleetview_science"
-        custom_class_text_color = B
+        hero_ship_fleet_background = "GFX_arkship_fleetview_civilian"
+        custom_class_text_color = H
     }
-    class = shipclass_starbase			# Needs to be a Starbase to have starbase modules and buildings.
-    carries_colony = pc_xianzhou # 关键 Enables Arkship custom UI.
+    base_ship_size = "civilian_arkship_tier_1"
+    class = shipclass_starbase
     display_attack_neutral_fleet_button = no
     automation_icon = GFX_fleet_order_auto_explore_arkship
-    arkship_picture = "arkship_science"
-    auto_upgrade = yes					# Arkships automatically upgrade their components.
-    can_disable = yes					# Arkships can be disabled.
-    stay_disabled = yes					# Arkships stay disabled until explicitly re-enabled from script.
+    arkship_picture = "arkship_civilian"
+    planet_view_header = "GFX_arkship_planetview_header_civilian"
+    can_disable = yes   # Arkships can be disabled.
+    stay_disabled = yes # Arkships stay disabled until explicitly re-enabled from script.
     never_lost = yes
-    collects_stockpile_from = {			# Arkships can collect resources from Waystations or Logistic Ships.
+    collects_stockpile_from = {
         shipclass_starbase
         shipclass_constructor
     }
     collects_stockpile_to_country = yes
     accepts_all_modifiers = yes
-    use_shipnames_from = science
-    potential_construction = {
-        always = no
-    }
-    possible_construction = {
-        always = no
-    }
-    # Audio
-    on_click_sound = "arkship_science_selection"
-    # 2D Art
-    icon = ship_size_science_arkship_tier_3
+    use_shipnames_from = colonizer
+    on_click_sound = "arkship_civilian_selection"
+    icon = ship_size_civilian_arkship_tier_3
     icon_frame = 16
     ship_class_icon_frame = 64
     map_icon_override = {
@@ -288,8 +274,6 @@ XIANZHOU_AE_Ship = {
         cloaked = GFX_ship_icons_type_arkship_cloaked
         encamped = GFX_ship_icons_type_arkship_encamped
     }
-    # 3D Art 模型
-    entity = Xingcha_Ship_entity
     section_slots = {
         "mid" =	{ locator = "root" }
         "1" = { locator = "module_01" }
@@ -300,7 +284,6 @@ XIANZHOU_AE_Ship = {
         "6" = { locator = "module_06" }
         "spinal_mount_1"	= { locator = "spinal_mount" }
     }
-    # Ship setup
     formation_priority = @arkship_formation_priority_4
     max_speed = @arkship_max_speed_100
     acceleration = @arkship_acceleration_20_percent
@@ -316,13 +299,11 @@ XIANZHOU_AE_Ship = {
         starbase_module_capacity_add = @arkship_starbase_module_capacity_add_7
         starbase_building_capacity_add = @arkship_starbase_building_capacity_add_12
         planet_max_districts_add = @arkship_max_districts_add_18
-        # Ship Class-specific modifiers
-        ship_sensor_range_add = 4
-        ship_hyperlane_range_add = 3
+        ship_sensor_range_add = 1
     }
     ship_modifier = {
         ship_starbase_stockpile_collection_rate_add = @arkship_collection_rate_add_625
-        science_ship_survey_speed = @arkship_innate_mult_15_percent
+        arkship_harvest_resources_produces_mult = @arkship_innate_mult_15_percent
     }
     size_multiplier = @arkship_size_120
     fleet_slot_size = @arkship_slot_size_32
@@ -333,7 +314,8 @@ XIANZHOU_AE_Ship = {
     is_civilian = no
     components_add_to_cost = no
     available_to_everyone = yes
-    enable_default_design = yes	#if yes, countries will have an auto-generated design at start
+    enable_default_design = yes
+    prerequisites = { "tech_arkship_tier_3" }
     combat_disengage_chance = @arkship_disengage_chance_2
     construction_type = starbase_shipyard
     required_component_set = "power_core"

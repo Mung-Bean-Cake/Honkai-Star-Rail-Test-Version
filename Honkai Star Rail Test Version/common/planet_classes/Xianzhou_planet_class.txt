@@ -1,13 +1,15 @@
 
 pc_xianzhou = {
-	entity = "continental_planet"#luosi_artifacts_palace_1_entity
-	#preview_entity = "luosi_artifacts_palace_1_entity"
-	icon = GFX_pc_xianzhou
-	icon_large = GFX_pc_xianzhou_big
+	entity = "continental_planet"  # Ignored for arkships; the actual ship model is used instead
+	icon = GFX_planet_type_generic_arkship
+	icon_large = GFX_planet_type_generic_arkship_big
 	climate = "artificial"
 	initial = yes
-	ideal = yes
+	auto_trait_prio = {
+		trait_auto_pc_ark_preference
+	}
 	starting_planet = no
+	starting_district = district_ark_city
 	atmosphere_color		= hsv { 0.59 0.45 0.95 }
 	atmosphere_intensity	= 1.0
 	atmosphere_width		= 0.5
@@ -18,27 +20,21 @@ pc_xianzhou = {
 	extra_planet_count = 0
 	planet_size = { min = 9 max = 9 }
 	colonizable = yes
+	district_set = nomad
 	uses_alternative_skies_for_moons = no
 	uses_alternative_skies_if_has_orbital_ring = no
 	is_artificial_planet = yes
 	default_planet_selection = yes
-
-	carry_cap_per_free_district = @carry_cap_normal
-
-	single_build_queue = yes
-	district_set = pc_xianzhou_set
-	starting_district = district_xz_city
 	modifier = {
-		pop_environment_tolerance = 1.0
-		pop_bonus_workforce_mult = 0.15
-		job_max_workforce_mult = 0.15
+		pop_environment_tolerance = 1
+		pop_bonus_workforce_mult = 0.25
+		job_max_workforce_mult = 0.25
 		planet_pops_upkeep_mult = -0.15
-		planet_jobs_produces_mult = 0.15
-		planet_pop_assembly_mult = 0.15
-		bonus_pop_growth_mult = 0.15
-		planet_resettlement_unemployed_destination_mult = 0.5
+		pop_happiness = 0.15
 		planet_orbital_bombardment_damage = -1
 		planet_storm_devastation_mult = -1
-		planet_max_districts_add = 10
+		planet_max_districts_add = 35
 	}
+	carry_cap_per_free_district = @carry_cap_normal
+	single_build_queue = yes
 }

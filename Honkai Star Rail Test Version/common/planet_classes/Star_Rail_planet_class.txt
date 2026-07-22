@@ -2,14 +2,16 @@
 # 星穹铁道
 # ====================
 pc_luosi = {
-	entity = "continental_planet"#luosi_artifacts_palace_1_entity
-	#preview_entity = "luosi_artifacts_palace_1_entity"
-	icon = GFX_pc_luosi
-	icon_large = GFX_planet_type_machine_big
+	entity = "continental_planet"  # Ignored for arkships; the actual ship model is used instead
+	icon = GFX_planet_type_generic_arkship
+	icon_large = GFX_planet_type_generic_arkship_big
 	climate = "artificial"
 	initial = yes
-	ideal = yes
+	auto_trait_prio = {
+		trait_auto_pc_ark_preference
+	}
 	starting_planet = no
+	starting_district = district_ark_city
 	atmosphere_color		= hsv { 0.59 0.45 0.95 }
 	atmosphere_intensity	= 1.0
 	atmosphere_width		= 0.5
@@ -20,24 +22,23 @@ pc_luosi = {
 	extra_planet_count = 0
 	planet_size = { min = 9 max = 9 }
 	colonizable = yes
+	district_set = nomad
 	uses_alternative_skies_for_moons = no
 	uses_alternative_skies_if_has_orbital_ring = no
 	is_artificial_planet = yes
 	default_planet_selection = yes
-
-	carry_cap_per_free_district = @carry_cap_normal
-
-	single_build_queue = yes
-	district_set = pc_luosi_planet_set
-	starting_district = district_luosi_planet_1
 	modifier = {
 		pop_environment_tolerance = 1
 		pop_bonus_workforce_mult = 0.25
 		job_max_workforce_mult = 0.25
-		planet_pops_upkeep_mult = -0.25
-		planet_housing_add = 10000
-		planet_amenities_add = 10000
+		planet_pops_upkeep_mult = -0.15
+		pop_happiness = 0.15
+		planet_orbital_bombardment_damage = -1
+		planet_storm_devastation_mult = -1
+		planet_max_districts_add = 35
 	}
+	carry_cap_per_free_district = @carry_cap_normal
+	single_build_queue = yes
 }
 pc_hsr_gaia = {
 	entity = "hsr_gaia"
@@ -82,94 +83,81 @@ pc_hsr_gaia = {
 	carry_cap_per_free_district = @carry_cap_high
 }
 pc_hsr_robot_planet = {
-	entity = "hsr_robot_planet"
-	preview_entity = "hsr_robot_planet"
-	entity_scale = 11
-	icon = GFX_planet_type_machine
-	icon_large = GFX_planet_type_machine_big
-	enable_tilt = no
-	fixed_entity_scale = yes
-	place_entity_on_planet_plane = no
-	entity_face_object = no #disable rotation towards sun or planet we orbit around
-	atmosphere_color		= hsv { 0.734 0.829 0.941 }
+	entity = "continental_planet"  # Ignored for arkships; the actual ship model is used instead
+	icon = GFX_planet_type_generic_arkship
+	icon_large = GFX_planet_type_generic_arkship_big
+	climate = "artificial"
+	initial = yes
+	auto_trait_prio = {
+		trait_auto_pc_ark_preference
+	}
+	starting_planet = no
+	starting_district = district_ark_city
+	atmosphere_color		= hsv { 0.59 0.45 0.95 }
 	atmosphere_intensity	= 1.0
 	atmosphere_width		= 0.5
-	show_city = no
-	city_color_lut = "gfx/portraits/misc/colorcorrection_continental.dds"
+	min_distance_from_sun = @habitable_min_distance
+	max_distance_from_sun = @habitable_max_distance
+	spawn_odds = 0
 	extra_orbit_size = 0
 	extra_planet_count = 0
-	chance_of_ring = 0
-	planet_size = { min = @habitable_planet_min_size max = @habitable_planet_max_size }
-	moon_size = { min = @habitable_moon_min_size max = @habitable_moon_max_size }
+	planet_size = { min = 9 max = 9 }
 	colonizable = yes
-	district_set = pc_hsr_robot_planet_set
-	starting_planet = no
-	orbit_lines = no
-	has_colonization_influence_cost = no
+	district_set = nomad
+	uses_alternative_skies_for_moons = no
+	uses_alternative_skies_if_has_orbital_ring = no
+	is_artificial_planet = yes
 	default_planet_selection = yes
-	starting_district = district_luosi_1
 	modifier = {
 		pop_environment_tolerance = 1
 		pop_bonus_workforce_mult = 0.25
 		job_max_workforce_mult = 0.25
 		planet_pops_upkeep_mult = -0.15
 		pop_happiness = 0.15
-		robotic_pop_bonus_workforce_mult = 0.15
-		planet_pop_assembly_mult = 0.25
 		planet_orbital_bombardment_damage = -1
 		planet_storm_devastation_mult = -1
-		planet_max_districts_add = 15
+		planet_max_districts_add = 35
 	}
-	is_artificial_planet = yes
-	carry_cap_per_free_district = @carry_cap_high
+	carry_cap_per_free_district = @carry_cap_normal
+	single_build_queue = yes
 }
 pc_herta_fleet = {
 	entity = "continental_planet"  # Ignored for arkships; the actual ship model is used instead
 	icon = GFX_planet_type_generic_arkship
 	icon_large = GFX_planet_type_generic_arkship_big
-
 	climate = "artificial"
 	initial = yes
-	ideal = yes
-
-
+	auto_trait_prio = {
+		trait_auto_pc_ark_preference
+	}
 	starting_planet = no
-
-	starting_district = district_herta_fleet_1
-
+	starting_district = district_ark_city
 	atmosphere_color		= hsv { 0.59 0.45 0.95 }
 	atmosphere_intensity	= 1.0
 	atmosphere_width		= 0.5
-
 	min_distance_from_sun = @habitable_min_distance
 	max_distance_from_sun = @habitable_max_distance
 	spawn_odds = 0
-
 	extra_orbit_size = 0
 	extra_planet_count = 0
-
 	planet_size = { min = 9 max = 9 }
+	colonizable = yes
+	district_set = nomad
+	uses_alternative_skies_for_moons = no
+	uses_alternative_skies_if_has_orbital_ring = no
+	is_artificial_planet = yes
+	default_planet_selection = yes
 	modifier = {
 		pop_environment_tolerance = 1
 		pop_bonus_workforce_mult = 0.25
 		job_max_workforce_mult = 0.25
 		planet_pops_upkeep_mult = -0.15
 		pop_happiness = 0.15
-		robotic_pop_bonus_workforce_mult = 0.15
-		planet_pop_assembly_mult = 0.25
 		planet_orbital_bombardment_damage = -1
 		planet_storm_devastation_mult = -1
-		planet_max_districts_add = 15
+		planet_max_districts_add = 35
 	}
-	colonizable = yes
-	district_set = pc_herta_fleet_set
-	uses_alternative_skies_for_moons = no
-	uses_alternative_skies_if_has_orbital_ring = no
-	is_artificial_planet = yes
-	default_planet_selection = yes
-
 	carry_cap_per_free_district = @carry_cap_normal
-
 	single_build_queue = yes
 }
 pc_shielded_red = {
