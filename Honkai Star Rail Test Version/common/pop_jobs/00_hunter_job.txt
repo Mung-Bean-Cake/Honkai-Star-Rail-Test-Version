@@ -127,50 +127,278 @@ ren_soldier = {
 		}
 	}
 }
-job_wolf_hacker = {
+gelamo_soldier = {
 	category = specialist
 	swappable_data = {
 		default = {
-			icon = job_hacker
+			condition_string = SOLDIER_JOB_TRIGGER
+			building_icon = building_stronghold
+		}
+		swap_type = {
+			trigger = {
+				soldier_is_necromancer = yes
+			}
+			name = necromancer
+			desc = necromancer
+			icon = necromancer
+			building_icon = building_dread_encampment
+			weight = 20
 		}
 	}
+
+	tags = { soldier }
+	triggered_country_modifier = {
+		potential = {
+			exists = owner
+			owner = {
+				has_valid_civic = civic_StellaronHunter_1
+			}
+		}
+		modifier = {
+			country_naval_cap_mult = 0.1
+		}
+	}
+	triggered_country_modifier = {
+		potential = {
+			exists = owner
+			owner = {
+				has_valid_civic = civic_StellaronHunter_2
+			}
+		}
+		modifier = {
+			country_naval_cap_mult = 0.2
+		}
+	}
+
+	planet_modifier = {
+		POP_GOVERNMENT_ETHIC_ATTRACTION = 0.1
+		PLANET_POP_ASSEMBLY_ADD = 3
+	}
+
+	country_modifier = {
+		country_naval_cap_add = 5
+	}
+	icon = job_gelamo_soldier_icon
+	resources = {
+		category = planet_soldiers
+		produces = {
+		}
+		upkeep = {
+			trigger = {
+				soldier_is_necromancer = yes
+			}
+			consumer_goods = 1
+		}
+		upkeep = {
+			alloys = 5
+		}
+	}
+
+	inline_script = "output/soldier_triggered_modifiers"
+
 	possible_pre_triggers = {
 		has_owner = yes
 		is_being_purged = no
 		is_being_assimilated = no
 		is_sapient = yes
 	}
-	tags = { trade amenities }
-	possible_precalc = can_fill_specialist_job
-	possible = {
 
+	possible = {
+		soldier_job_check_trigger = yes
+		owner = { is_gestalt = no }
 	}
-	planet_modifier = {
-		maintenance_progress_add = 0.05
+
+	weight = {
+		weight = @soldier_job_weight
+		modifier = {
+			factor = 10
+			exists = planet
+			planet = {
+				exists = leader
+				leader = {
+					leader_class = commander
+				}
+			}
+		}
+		modifier = {
+			factor = 2
+			has_trait = trait_StellaronHunter_pop_1
+		}
+		modifier = {
+			factor = 10
+			has_trait = trait_StellaronHunter_pop_5
+		}
+		modifier = {
+			factor = 2
+			has_trait = trait_lithoid
+		}
+		modifier = {
+			factor = 5
+			has_trait = trait_cyborg_creed_of_war
+		}
+	}
+}
+wolf_hacker = {
+	category = specialist
+	swappable_data = {
+		default = {
+			condition_string = SOLDIER_JOB_TRIGGER
+			building_icon = building_stronghold
+		}
+	}
+	tags = { unity }
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = {
+				has_valid_civic = civic_StellaronHunter_1
+			}
+		}
+		planet_modifier = {
+			pop_happiness = 0.1
+		}
 	}
 	resources = {
-		category = planet_miners
+		category = planet_wolf_hacker
 		produces = {
 			unity = 2
-			trade_value = 5
+			trade = 5
 			society_research = 2
 		}
 		upkeep = {
-			energy = 0.5
-			food = 0.2
-			minerals = 0.5
-			alloys = 0.2
+			consumer_goods = 2
+			energy = 1.5
+			food = 1
+			minerals = 1.5
+			alloys = 0.5
+		}
+	}
+
+	inline_script = "output/soldier_triggered_modifiers"
+
+	possible_pre_triggers = {
+		has_owner = yes
+		is_being_purged = no
+		is_being_assimilated = no
+		is_sapient = yes
+	}
+	weight = {
+		weight = @soldier_job_weight
+		modifier = {
+			factor = 10
+			exists = planet
+			planet = {
+				exists = leader
+				leader = {
+					leader_class = commander
+				}
+			}
+		}
+		modifier = {
+			factor = 0.5
+			has_trait = trait_StellaronHunter_pop_7
+		}
+		modifier = {
+			factor = 0.8
+			has_trait = trait_StellaronHunter_pop_3
+		}
+		modifier = {
+			factor = 0.2
+			has_trait = trait_lithoid
+		}
+	}
+}
+cyber_miner = {
+	category = worker
+	swappable_data = {
+		default = {
+			condition_string = SOLDIER_JOB_TRIGGER
+			building_icon = building_stronghold
+		}
+	}
+	tags = { energy }
+	possible_pre_triggers = {
+		has_owner = yes
+		is_being_purged = no
+		is_being_assimilated = no
+		is_sapient = yes
+	}
+	possible_precalc = can_fill_worker_job
+	triggered_country_modifier = {
+		potential = {
+			exists = owner
+			owner = {
+				has_valid_civic = civic_StellaronHunter_1
+			}
+		}
+		modifier = {
+			COUNTRY_EDICT_LENGTH_MULT = 0.1
+		}
+	}
+	triggered_country_modifier = {
+		potential = {
+			exists = owner
+			owner = {
+				has_valid_civic = civic_StellaronHunter_2
+			}
+		}
+		modifier = {
+			COUNTRY_EDICT_FUND_ADD = 20
+		}
+	}
+
+	planet_modifier = {
+		POP_GOVERNMENT_ETHIC_ATTRACTION = 0.1
+		PLANET_POP_ASSEMBLY_ADD = 3
+	}
+
+	country_modifier = {
+		country_naval_cap_add = 5
+	}
+	icon = job_cyber_miner_icon
+	resources = {
+		category = worker
+		produces = {
+			energy = 10
+		}
+		upkeep = {
+			trigger = {
+				soldier_is_necromancer = yes
+			}
+			consumer_goods = 2
+		}
+		upkeep = {
+			minerals = 5
 		}
 	}
 	weight = {
-		weight = 100
+		weight = @soldier_job_weight
 		modifier = {
-			factor = 0.8
+			factor = 10
+			exists = planet
+			planet = {
+				exists = leader
+				leader = {
+					leader_class = commander
+				}
+			}
+		}
+		modifier = {
+			factor = 1.5
 			has_trait = trait_StellaronHunter_pop_3
 		}
 		modifier = {
 			factor = 1.5
 			has_trait = trait_StellaronHunter_pop_7
 		}
+		modifier = {
+			factor = 0.6
+			has_trait = trait_lithoid
+		}
+		modifier = {
+			factor = 0.4
+			has_trait = trait_cyborg_creed_of_war
+		}
 	}
+	inline_script = "jobs/automodding_priority_energy"
 }
