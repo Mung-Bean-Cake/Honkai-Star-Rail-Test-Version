@@ -1,5 +1,6 @@
 ren_soldier = {
-	category = specialist
+	icon = job_ren_soldier
+	category = StellaronHunter_class
 	swappable_data = {
 		default = {
 			condition_string = SOLDIER_JOB_TRIGGER
@@ -29,20 +30,9 @@ ren_soldier = {
 			country_naval_cap_mult = 0.1
 		}
 	}
-	triggered_country_modifier = {
-		potential = {
-			exists = owner
-			owner = {
-				has_valid_civic = civic_StellaronHunter_2
-			}
-		}
-		modifier = {
-			country_naval_cap_mult = 0.2
-		}
-	}
 
 	planet_modifier = {
-		planet_crime_add = -2
+		planet_crime_add = -2.5
 	}
 
 	country_modifier = {
@@ -50,7 +40,7 @@ ren_soldier = {
 	}
 	icon = job_ren_soldier_icon
 	resources = {
-		category = planet_soldiers
+		category = planet_StellaronHunter_job
 		produces = {
 			trigger = {
 				soldier_is_necromancer = yes
@@ -128,7 +118,7 @@ ren_soldier = {
 	}
 }
 gelamo_soldier = {
-	category = specialist
+	category = StellaronHunter_class
 	swappable_data = {
 		default = {
 			condition_string = SOLDIER_JOB_TRIGGER
@@ -172,7 +162,7 @@ gelamo_soldier = {
 
 	planet_modifier = {
 		POP_GOVERNMENT_ETHIC_ATTRACTION = 0.1
-		PLANET_POP_ASSEMBLY_ADD = 3
+		PLANET_POP_ASSEMBLY_ADD = 2
 	}
 
 	country_modifier = {
@@ -180,7 +170,7 @@ gelamo_soldier = {
 	}
 	icon = job_gelamo_soldier_icon
 	resources = {
-		category = planet_soldiers
+		category = planet_StellaronHunter_job
 		produces = {
 		}
 		upkeep = {
@@ -188,6 +178,7 @@ gelamo_soldier = {
 				soldier_is_necromancer = yes
 			}
 			consumer_goods = 1
+			energy = 2
 		}
 		upkeep = {
 			alloys = 5
@@ -209,17 +200,7 @@ gelamo_soldier = {
 	}
 
 	weight = {
-		weight = @soldier_job_weight
-		modifier = {
-			factor = 10
-			exists = planet
-			planet = {
-				exists = leader
-				leader = {
-					leader_class = commander
-				}
-			}
-		}
+		weight = 50
 		modifier = {
 			factor = 2
 			has_trait = trait_StellaronHunter_pop_1
@@ -238,43 +219,9 @@ gelamo_soldier = {
 		}
 	}
 }
-wolf_hacker = {
-	category = specialist
-	swappable_data = {
-		default = {
-			condition_string = SOLDIER_JOB_TRIGGER
-			building_icon = building_stronghold
-		}
-	}
-	tags = { unity }
-	triggered_planet_modifier = {
-		potential = {
-			exists = owner
-			owner = {
-				has_valid_civic = civic_StellaronHunter_1
-			}
-		}
-		planet_modifier = {
-			pop_happiness = 0.1
-		}
-	}
-	resources = {
-		category = planet_wolf_hacker
-		produces = {
-			unity = 2
-			trade = 5
-			society_research = 2
-		}
-		upkeep = {
-			consumer_goods = 2
-			energy = 1.5
-			food = 1
-			minerals = 1.5
-			alloys = 0.5
-		}
-	}
 
-	inline_script = "output/soldier_triggered_modifiers"
+wolf_hacker = {
+	category = StellaronHunter_class
 
 	possible_pre_triggers = {
 		has_owner = yes
@@ -282,34 +229,40 @@ wolf_hacker = {
 		is_being_assimilated = no
 		is_sapient = yes
 	}
-	weight = {
-		weight = @soldier_job_weight
-		modifier = {
-			factor = 10
-			exists = planet
-			planet = {
-				exists = leader
-				leader = {
-					leader_class = commander
-				}
-			}
-		}
-		modifier = {
-			factor = 0.5
-			has_trait = trait_StellaronHunter_pop_7
-		}
-		modifier = {
-			factor = 0.8
-			has_trait = trait_StellaronHunter_pop_3
-		}
-		modifier = {
-			factor = 0.2
-			has_trait = trait_lithoid
+
+	tags = { amenities trade unity }
+
+	swappable_data = {
+		default = {
+			condition_string = SPECIALIST_JOB_TRIGGER
+			building_icon = building_holo_theatres
 		}
 	}
+
+	possible_precalc = can_fill_specialist_job
+
+	resources = {
+		category = planet_StellaronHunter_job
+		produces = {
+			trade = 15
+		}
+		upkeep = {
+			consumer_goods = 3
+		}
+	}
+	triggered_planet_modifier = {
+		potential = {
+			always = yes
+		}
+		planet_amenities_add = 200
+	}
+	weight = {
+		weight = 100
+	}
 }
+
 cyber_miner = {
-	category = worker
+	category = StellaronHunter_class
 	swappable_data = {
 		default = {
 			condition_string = SOLDIER_JOB_TRIGGER
@@ -357,7 +310,7 @@ cyber_miner = {
 	}
 	icon = job_cyber_miner_icon
 	resources = {
-		category = worker
+		category = planet_StellaronHunter_job
 		produces = {
 			energy = 10
 		}
@@ -372,17 +325,7 @@ cyber_miner = {
 		}
 	}
 	weight = {
-		weight = @soldier_job_weight
-		modifier = {
-			factor = 10
-			exists = planet
-			planet = {
-				exists = leader
-				leader = {
-					leader_class = commander
-				}
-			}
-		}
+		weight = 30
 		modifier = {
 			factor = 1.5
 			has_trait = trait_StellaronHunter_pop_3

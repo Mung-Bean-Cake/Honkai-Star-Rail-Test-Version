@@ -55,77 +55,48 @@ building_hunter = {
 
 	upgrades = {}
 }
+
 building_hunter_hacker = {
-	category = planet_buildings
-    base_buildtime = 200
+	base_buildtime = 200
+	exempt_from_ai_planet_specialization = no
+	category = trade
+	icon = building_hacker
+	building_sets = {
+		urban
+		trade
+	}
+
 	potential = {
 		exists = owner
 		owner = { has_origin = origin_StellaronHunter }
 	}
-	swappable_data = {
-		default = {
-			condition_string = SPECIALIST_JOB_TRIGGER
-			building_icon = building_bureaucratic_1
-		}
-		swap_type = {
-			trigger = {
-				bureaucrat_is_manager = yes
-			}
-			name = manager
-			desc = manager
-			icon = manager
-			building_icon = building_bureaucratic_1
-			condition_string = SPECIALIST_JOB_TRIGGER
-			weight = 2
+	convert_to = {
+		building_hunter_hacker_2
+	}
+	destroy_trigger = {
+		exists = owner
+		OR = {
+			owner = { is_regular_empire = no }
+			has_modifier = slave_colony
+			has_modifier = penal_colony
 		}
 	}
+	allow = {
+	}
 	planet_modifier = {
-		job_wolf_hacker_add = 200
+		job_wolf_hacker_add = 100
 		planet_jobs_upkeep_mult = -0.1
 		pop_happiness = 0.2
 	}
-	tags = { resource }
-	triggered_tags = {
-		trigger = {
-			OR = {
-				bureaucrat_is_priest = yes
-				bureaucrat_is_death_priest = yes
-				bureaucrat_is_numistic_priest = yes
-				bureaucrat_is_preacher = yes
-				bureaucrat_is_haruspex = yes
-				bureaucrat_is_superstitious_beliefs_priest = yes
-				bureaucrat_is_superstitious_beliefs_priest_corporate = yes
-				bureaucrat_is_corpse_broker = yes
-				bureaucrat_is_corpse_reader = yes
-				bureaucrat_is_fire_dancer = yes
-				bureaucrat_is_pyromancer = yes
-				bureaucrat_is_fire_seer = yes
-				bureaucrat_is_cremator = yes
-				bureaucrat_is_sacred_path_specialist = yes
-			}
-		}
-	}
-	possible_pre_triggers = {
-		has_owner = yes
-		is_being_purged = no
-		is_being_assimilated = no
-		is_sapient = yes
-	}
-
-	possible_precalc = can_fill_specialist_job
-	possible = {
-		complex_specialist_job_check_trigger = yes
-	}
-
 	resources = {
-		category = planet_bureaucrats
+		category = planet_buildings
 		# PRODUCES
 		cost = {
-			alloys = 800
+			alloys = 400
 		}
 		produces = {
-			trade = 200
-			unity = 50
+			trade = 50
+			unity = 10
 		}
 		upkeep = {
 			consumer_goods = 10
@@ -134,10 +105,85 @@ building_hunter_hacker = {
 		}
 		inline_script = "jobs/ethic_job_resources_memorialist"
 	}
-}
+	inline_script = {
+		script = jobs/trader_add
+		AMOUNT = @building_static_jobs
+	}
 
-building_hunter_gelamo = {
-	base_buildtime = 200
+	prerequisites = {
+		"tech_interplanetary_commerce"
+	}
+
+	show_tech_unlock_if = {
+		is_regular_empire = yes
+	}
+	upgrades = {
+		building_hunter_hacker_2
+	}
+}
+building_hunter_hacker_2 = {
+	base_buildtime = 600
+	exempt_from_ai_planet_specialization = no
+	category = trade
+	icon = building_hacker_2
+	building_sets = {
+		urban
+		trade
+	}
+	potential = {
+		exists = owner
+		owner = { has_origin = origin_StellaronHunter }
+	}
+	destroy_trigger = {
+		exists = owner
+		OR = {
+			owner = { is_regular_empire = no }
+			has_modifier = slave_colony
+			has_modifier = penal_colony
+		}
+	}
+	allow = {
+	}
+	planet_modifier = {
+		job_wolf_hacker_add = 300
+		planet_jobs_upkeep_mult = -0.15
+		pop_happiness = 0.3
+	}
+	resources = {
+		category = planet_buildings
+		# PRODUCES
+		cost = {
+			alloys = 800
+		}
+		produces = {
+			trade = 100
+			unity = 30
+		}
+		upkeep = {
+			consumer_goods = 10
+			energy = 40
+			minerals = 20
+		}
+		inline_script = "jobs/ethic_job_resources_memorialist"
+	}
+	inline_script = {
+		script = jobs/trader_add
+		AMOUNT = @building_static_jobs
+	}
+
+	prerequisites = {
+		"tech_interplanetary_commerce"
+	}
+
+	show_tech_unlock_if = {
+		is_regular_empire = yes
+	}
+	#upgrades = {
+	#building_avb_commercial_2
+}
+}
+building_sets = {
+	base_buildtime = 600
 	empire_limit = 2
 	category = army
 	potential = {
@@ -154,13 +200,14 @@ building_hunter_gelamo = {
 		job_gelamo_soldier_add = 500
 	}
 	country_modifier = {
-		country_commander_cap_add = 2
+		country_commander_cap_add = 1
 		country_naval_cap_mult = 0.1
 	}
 	resources = {
 		category = planet_buildings
 		cost = {
 			minerals = 1000
+			alloys = 500
 		}
 		upkeep = {
 			minerals = 5
@@ -174,6 +221,7 @@ building_hunter_gelamo = {
 building_hunter_ren = {
 	base_buildtime = 200
 	category = army
+	icon = building_ren_defense_1
 	potential = {
 		exists = owner
 		owner = {
@@ -206,7 +254,9 @@ building_hunter_ren = {
 }
 building_cyber_miner= {
 	base_buildtime = 200
+    upgrades = { building_cyber_miner_2 }
 	category = planet_buildings
+	icon = building_cyber1
 	potential = {
 		exists = owner
 		owner = {
