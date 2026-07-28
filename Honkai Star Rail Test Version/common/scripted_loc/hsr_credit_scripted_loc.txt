@@ -1,4 +1,4 @@
-
+#信用点
 define_text = {
     name = Get_hsr_credit_eco_debate_value
     value = value:hsr_credit_eco_debate
@@ -75,4 +75,79 @@ define_text = {
     name = Get_country_credit_expenses_other_mult_value
     value = modifier:country_credit_expenses_other_mult
 }
-
+#ipc
+defined_text = {
+    name = Getcunhu_support_teamstatus
+    random = no
+    text = {
+        trigger = {
+            check_variable = {
+                which = cunhu_support_team_current_amount
+                value >= cunhu_support_team_once_again
+            }
+        }
+        localization_key = situation_paperclip_status_positive
+    }
+    text = {
+        trigger = {
+            check_variable = {
+                which = cunhu_support_team_current_amount
+                value < cunhu_support_team_once_again
+            }
+            check_variable_arithmetic = {
+                which = cunhu_support_team_once_again
+                subtract = cunhu_support_team_current_amount
+                divide = prev.trigger:situation_progress
+                value <= cunhu_support_team_current_income
+            }
+        }
+        localization_key = situation_paperclip_status_on_target
+    }
+    text = {
+        trigger = {
+            check_variable = {
+                which = cunhu_support_team_current_amount
+                value < cunhu_support_team_once_again
+            }
+            check_variable = {
+                which = cunhu_support_team_once_again
+                value > cunhu_support_team_max_capacity
+            }
+            days_passed > 30 # So that the game doesn't display insufficient capacity during the first month before calculations have settled
+        }
+        localization_key = situation_paperclip_status_low_capacity
+    }
+    text = {
+        trigger = {
+            check_variable = {
+                which = cunhu_support_team_current_amount
+                value < cunhu_support_team_once_again
+            }
+        }
+        localization_key = situation_paperclip_status_negative
+    }
+    default = payback_debt_collectors_chain_empty
+}
+defined_text = {
+    name = Getcunhu_support_team_use
+    random = no
+    text = {
+        trigger = {
+            has_country_flag = cunhu_support_team_use_minerals
+        }
+        localization_key = cunhu_support_team_use_minerals
+    }
+    text = {
+        trigger = {
+            has_country_flag = cunhu_support_team_use_alloys
+        }
+        localization_key = cunhu_support_team_use_alloys
+    }
+    text = {
+        trigger = {
+            has_country_flag = cunhu_support_team_use_consumer_goods
+        }
+        localization_key = cunhu_support_team_use_consumer_goods
+    }
+    default = payback_debt_collectors_chain_empty
+}

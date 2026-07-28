@@ -1,0 +1,88 @@
+situation_cunhu_support_team = {
+    picture = GFX_evt_cunhu_support_team
+    fail_icon_frame = GFX_situation_outcome_frame_blue
+    fail_icon = GFX_situation_outcome_unknown
+    category = neutral
+    situation_log_category = empire_concerns
+    initial_progress = 119
+    on_fail = {
+        custom_tooltip = situation_cunhu_support_team_outcome
+        hidden_effect = {
+            owner = {
+                country_event = { id = hsr_ipc.2011 } # Rewards
+            }
+            destroy_situation = this
+        }
+    }
+    on_abort = {
+        #custom_tooltip = situation_paperclips_abort
+        hidden_effect = {
+            owner = {
+                country_event = { id = hsr_ipc.2010 days = 30 }
+            }
+        }
+    }
+    stages = {
+        situation_cunhu_support_team_stage_1 = {
+            icon = GFX_situation_stage_1
+            icon_background = GFX_situation_stage_frame_blue
+            end = 120
+            on_first_enter = {
+            }
+            custom_tooltip = stage_cunhu_support_team_effects
+        }
+    }
+    approach = {
+        name = situation_fulfill_overdrive
+        icon = GFX_situation_approach_balance_sheet
+        icon_background = GFX_situation_approach_bg_green
+        modifier = {
+            country_unity_produces_mult = 0.1
+            pop_bonus_workforce_mult = 0.1
+            branch_office_value_mult = 0.5
+            commercial_pact_mult = 0.5
+        }
+        resources = {
+            category = situations
+            produces = {
+                influence = 1
+            }
+            upkeep = {
+                trade = 100
+            }
+        }
+        ai_weight = {
+            base = 0
+        }
+    }
+    approach = {
+        name = situation_fulfill_drive
+        icon = GFX_situation_approach_balance_sheet
+        icon_background = GFX_situation_approach_bg_yellow
+        default = yes
+        modifier = {
+            country_unity_produces_mult = 0.05
+            pop_bonus_workforce_mult = 0.05
+            branch_office_value_mult = 0.25
+            commercial_pact_mult = 0.25
+        }
+        ai_weight = {
+            base = 1
+        }
+    }
+    on_monthly = {
+        events = {
+            hsr_ipc.2014 	# Update variable
+        }
+    }
+    monthly_progress = {
+        base = -1
+    }
+
+    abort_trigger = {
+        OR = {
+            NOT = { exists = target.owner }
+            target.owner = { NOT = { is_same_value = root.owner } }
+        }
+    }
+}

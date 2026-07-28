@@ -1538,53 +1538,70 @@ DOT_SR_luosi_system = {
         initializer = "neighbor_t1_first_colony"
     }
 }
-
-# Chosen starting system
 ipc_home_initializer = {
 	class = sc_g
-
-	name = NAME_Aspharelle_2
-
+	name = NAME_ipc_home_initializer
 	flags = {
 		ipc_sysytem
 	}
-
-	usage = custom_empire
+	usage = origin
 	usage_odds = 0
-
 	prevent_anomalies = yes
-
 	planet = {
-		class = star
+		name = "NAME_ipc_home_initializer"
+		class = "pc_g_star"
 		orbit_distance = 0
+		orbit_angle = 1
+		size = 30
+		has_ring = no
+		init_effect = {
+			clear_deposits = yes
+			add_deposit = d_energy_2
+		}
 	}
-
-
-	#3 gaia worlds!
-
 	planet = {
 		class = pc_molten
-		orbit_distance = 42
+		orbit_distance = 30
 		orbit_angle = 42
 		size = 10
 		has_ring = no
+		init_effect = {
+			clear_deposits = yes
+			add_deposit = d_engineering_10
+		}
+	}
+	planet = {
+		class = pc_molten
+		orbit_distance = 15
+		orbit_angle = 40
+		size = 10
+		has_ring = no
+		init_effect = {
+			clear_deposits = yes
+			add_deposit = d_minerals_10
+		}
 	}
 
 	planet = {
 		class = pc_toxic
-		orbit_distance = 25
+		orbit_distance = 40
 		orbit_angle = 142
-		size = 18
+		size = 20
 		has_ring = no
+		init_effect = {
+			clear_deposits = yes
+			add_deposit = d_exotic_gases_5
+		}
 	}
 
 
 	planet = {
-		name = we
+		name = NAME_ipc_home
 		class = pc_gaia
-		orbit_distance = 32
+		orbit_distance = 55
 		orbit_angle = 142
-		size = 25
+		size = 30
+		home_planet = yes
 		has_ring = no
 		flags = { ipc_home }
 		init_effect = {
@@ -1592,129 +1609,47 @@ ipc_home_initializer = {
 		}
 	}
 
-
+	planet = {
+		class = pc_barren_cold
+		orbit_distance = 60
+		orbit_angle = 99
+		size = 10
+		has_ring = no
+		init_effect = {
+			clear_deposits = yes
+			add_deposit = d_volatile_motes_2
+		}
+		moon = {
+			class = pc_rare_crystal_asteroid
+			size = 5
+			orbit_distance = 12
+			orbit_angle = 40
+			has_ring = no
+			init_effect = {
+				clear_deposits = yes
+				add_deposit = d_alloys_1
+			}
+		}
+	}
 	planet = {
 		class = pc_barren_cold
 		orbit_distance = 87
 		orbit_angle = 99
 		size = 10
 		has_ring = no
+		init_effect = {
+			clear_deposits = yes
+			add_deposit = d_alloys_2
+		}
 		moon = {
 			class = pc_barren_cold
 			size = 5
 			orbit_distance = 12
 			orbit_angle = 40
 			has_ring = no
-		}
-	}
-
-	init_effect = {
-		set_spawn_system_batch = begin
-		spawn_system = {
-			min_distance >= 15
-			max_distance <= 30
-			initializer = ipc_resources_initializer
-			hyperlane = no
-
-			effect = {
-				add_hyperlane = {
-					from = this
-					to = prev
-				}
-				save_event_target_as = first_neighbor
-			}
-		}
-		while = {
-			count = 2
-			spawn_system = {
-				min_distance >= 8
-				max_distance <= 20
-				initializer = random
-				hyperlane = no
-				effect = {
-					set_star_flag = chosen_system
-					set_star_flag = crisis_spawn_exclude
-					add_hyperlane = {
-						from = this
-						to = prev
-					}
-					add_hyperlane = {
-						from = this
-						to = event_target:first_neighbor
-					}
-				}
-			}
-		}
-		set_spawn_system_batch = end
-
-	}
-}
-
-# Chosen resources system
-ipc_resources_initializer = {
-	class = rl_standard_stars
-
-	name = NAME_Taremes
-
-	flags = {
-		ipc_sysytem
-	}
-
-	usage = misc_system_init
-	usage_odds = 0
-
-	prevent_anomalies = yes
-
-	planet = {
-		class = star
-		orbit_distance = 0
-	}
-
-	asteroid_belt = {
-		type = rocky_asteroid_belt
-		radius = 125
-	}
-	asteroid_belt = {
-		type = icy_asteroid_belt
-		radius = 250
-	}
-
-	change_orbit = 125
-
-	planet = {
-		count = 5
-		class = pc_asteroid
-		orbit_angle = { min = 32 max = 72 }
-		orbit_distance = 0
-		size = 5
-		has_ring = no
-
-		init_effect = {
-			clear_deposits = yes
-			random_list = {
-				1 = { add_deposit = d_volatile_motes_3 }
-				1 = { add_deposit = d_minerals_4 }
-				1 = { add_deposit = d_minerals_6 }
-			}
-		}
-	}
-
-	change_orbit = 125
-
-	planet = {
-		count = 5
-		class = pc_ice_asteroid
-		orbit_angle = { min = 32 max = 72 }
-		orbit_distance = 0
-		size = 5
-		has_ring = no
-
-		init_effect = {
-			clear_deposits = yes
-			random_list = {
-				1 = { add_deposit = d_rare_crystals_3 }
-				1 = { add_deposit = d_energy_4 }
-				1 = { add_deposit = d_energy_6 }
+			init_effect = {
+				clear_deposits = yes
+				add_deposit = d_rare_crystals_2
 			}
 		}
 	}

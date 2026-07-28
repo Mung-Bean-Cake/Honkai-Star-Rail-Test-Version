@@ -1045,3 +1045,87 @@ building_human_resources_incentive_department = {
         factor = 10
     }
 }
+#首都建筑
+building_company_headquarters = {
+    base_buildtime = 600
+    planet_limit = 1
+    category = government
+    capital = yes
+    building_sets = {
+        government
+    }
+    potential = {
+        owner = {
+            has_origin = origin_hsr_ipc
+        }
+    }
+    planet_modifier = {
+        job_ipc_trader_add = 400
+        planet_housing_add = 2000
+        planet_amenities_add = 2000
+        planet_max_branch_office_buildings_add = 4
+        planet_defense_armies_add = 16
+        planet_crime_add = -100
+        planet_jobs_trade_produces_mult = 0.15
+    }
+    triggered_planet_modifier = {
+        job_trader_add = 1
+        mult = owner.modifier:job_capital_trader_add
+    }
+    upgrades = {  }
+    resources = {
+        category = planet_buildings
+        inline_script = {
+            script = buildings/nomadic_cost_switcher
+            REGULAR_RESOURCE = minerals
+            NOMADIC_RESOURCE = alloys
+            COST = @b4_minerals
+            NOMADIC_COST_MULT = @nomadic_minerals_to_strategic_ratio
+        }
+        upkeep = {
+            energy = @b4_upkeep
+        }
+    }
+}
+building_company_headquarters_1 = {
+    base_buildtime = 600
+    planet_limit = 1
+    category = government
+    capital = yes
+    building_sets = {
+        government
+    }
+    potential = {
+        owner = {
+            has_origin = origin_hsr_ipc
+        }
+    }
+    planet_modifier = {
+        job_ipc_trader_add = 800
+        planet_housing_add = 3000
+        planet_amenities_add = 3000
+        planet_max_branch_office_buildings_add = 4
+        planet_defense_armies_add = 20
+        planet_crime_add = -200
+        planet_jobs_trade_produces_mult = 0.15
+        planet_jobs_produces_mult = 0.05
+    }
+    triggered_planet_modifier = {
+        job_trader_add = 1
+        job_common_clerk_add = 1
+        mult = owner.modifier:job_capital_trader_add
+    }
+    resources = {
+        category = planet_buildings
+        inline_script = {
+            script = buildings/nomadic_cost_switcher
+            REGULAR_RESOURCE = minerals
+            NOMADIC_RESOURCE = alloys
+            COST = 3000
+            NOMADIC_COST_MULT = 0.1
+        }
+        upkeep = {
+            energy = 20
+        }
+    }
+}

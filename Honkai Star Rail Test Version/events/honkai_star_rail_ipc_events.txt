@@ -254,6 +254,529 @@ country_event = {
     }
 
     immediate = {
+        #初始科技
+        give_physics_tech_tier_1_effect = yes
+        give_physics_tech_tier_2_effect = yes
+        give_engineering_tech_tier_1_effect = yes
+        give_engineering_tech_tier_2_effect = yes
+        give_society_tech_tier_1_effect = yes
+        give_society_tech_tier_2_effect = yes
+        hsr_give_physics_tech_tier_3_effect = yes
+        hsr_give_society_tech_tier_3_effect = yes
+        hsr_give_engineering_tech_tier_3_effect = yes
+        give_technology = { tech = tech_mega_engineering message = no }
+        give_technology = { tech = tech_honkai_star_rail_aux_t1 message = no }
+        give_technology = { tech = tech_honkai_star_rail_weapon_t1 message = no }
+        #修改国名理念，内阁
+        force_add_civic = civic_strategic_investment_department
+        force_add_civic = civic_building_materials_logistics_department
+        force_add_civic = civic_techniques_developing_department
+        force_add_civic = civic_human_resources_incentive_department
+        force_add_civic = civic_traditional_project_department
+        unlock_council_slots = 3
+        set_council_position_to_council = councilor_marketing_expansion_department
+        set_council_position_to_council = councilor_techniques_developing_department
+        set_council_position_to_council = councilor_building_materials_logistics_department
+        set_council_position_to_council = councilor_business_consolidation_department
+        set_council_position_to_council = councilor_strategic_investment_department
+        #命途
+        hsr_path_first_set = {
+            cunhu_value = 95
+            fanyu_value = 10
+            fengrao_value = 10
+            huanyu_value = 10
+            huimie_value = 5
+            jiyi_value = 30
+            tongxie_value = 30
+            xunlie_value = 30
+            xuwu_value = 5
+            zhishi_value = 65
+        }
+        set_country_flag = use_path
+        add_tradition = tr_zhishi
+        add_tradition = tr_cunhu
+        add_tradition = tr_jiyi
+        give_technology = { tech = tech_path_civic_1 message = no }
+        #领袖
+        hsr_create_leader_species = {
+            name = star_rail_leader
+            class = Star_Rail
+            portrait = ipc_leader
+        }
+        ruler = {
+            remove_all_positive_traits = yes
+            set_name = ipc_leader
+            change_species = event_target:ipc_leader_leader_species
+            change_leader_class = official
+            change_leader_portrait = ipc_leader
+            change_background_ethic = ethic_spiritualist
+            change_background_job = event_fake_job_2
+            add_skill_without_trait_selection = 10
+            add_trait = {trait = leader_trait_popular_honorable_leader show_message = no}
+            add_trait = {trait = leader_ipc_creater show_message = no}
+            add_trait = {trait = leader_trait_jiyi_ipc_leader show_message = no}
+            set_gender = male
+            set_immortal = yes
+            set_age = 100
+            set_leader_flag = legendary_leader
+            set_leader_flag = immune_to_negative_traits
+            set_leader_flag = ipc_leader
+            set_leader_flag = leader_death_events_blocked  # 阻止原版葬礼事件
+            save_global_event_target_as = ipc_leader
+        }
+        #首都调整
+        capital_scope = {
+            change_pc = pc_hsr_ipc_planet
+            remove_building = building_colony_shelter
+            remove_building = building_commercial_zone
+            add_building = building_capital
+            add_building = building_holo_theatres
+            add_building = building_robot_assembly_plant
+            add_building = building_company_headquarters_1
+            add_district = district_ipc_1
+            add_district = district_ipc_1
+            add_district = district_ipc_1
+            add_district = district_ipc_2
+            add_district = district_ipc_2
+            add_district = district_ipc_3
+            add_district = district_ipc_3
+            add_district = district_ipc_4
+            add_district = district_ipc_4
+            add_district = district_ipc_5
+            add_district = district_ipc_5
+            add_district = district_ipc_5
+            add_district = district_ipc_6
+            add_district = district_ipc_6
+            while = {
+                count = 100
+                create_pop_group = {
+                    size = 100
+                    species = owner_main_species
+                }
+            }
+        }
+    }
+}
+country_event = {
+    id = hsr_ipc.2010
+    hide_window = yes
+    is_triggered_only = yes
 
+    trigger = {
+        has_valid_civic = civic_building_materials_logistics_department
+    }
+    immediate = {
+        hidden_effect = {
+            random_list = {
+                1 = {set_country_flag = cunhu_support_team_use_minerals }
+                1 = {set_country_flag = cunhu_support_team_use_alloys }
+                1 = {set_country_flag = cunhu_support_team_use_consumer_goods }
+            }
+            set_saved_date = {
+                key = situation_cunhu_support_team_timer
+                days_from_present = 3600
+                expires = 3601
+            }
+            if = {
+                limit = {
+                    NOT = {
+                        is_variable_set = cunhu_support_team_once_again
+                    }
+                }
+                switch = {
+                    trigger = is_difficulty
+                    0 = {	# Civilian
+                        set_variable = {
+                            which = cunhu_support_team_once_again
+                            value = 2000
+                        }
+                    }
+                    1 = {	# Cadet
+                        set_variable = {
+                            which = cunhu_support_team_once_again
+                            value = 4000
+                        }
+                    }
+                    2 = {	# Ensign
+                        set_variable = {
+                            which = cunhu_support_team_once_again
+                            value = 6000
+                        }
+                    }
+                    3 = {	# Captain
+                        set_variable = {
+                            which = cunhu_support_team_once_again
+                            value = 8000
+                        }
+                    }
+                    4 = {	# Commodore
+                        set_variable = {
+                            which = cunhu_support_team_once_again
+                            value = 10000
+                        }
+                    }
+                    5 = {	# Admiral
+                        set_variable = {
+                            which = cunhu_support_team_once_again
+                            value = 12000
+                        }
+                    }
+                    6 = {	# Grand Admiral
+                        set_variable = {
+                            which = cunhu_support_team_once_again
+                            value = 14000
+                        }
+                    }
+                }
+            }
+            set_variable = {
+                which = cunhu_support_team_current_amount
+                value = 0
+            }
+
+            set_variable = {
+                which = cunhu_support_team_max_capacity
+                value = 15000 # max of consumer_goods in 00_strategic_resources.txt
+            }
+
+            set_variable = {
+                which = cunhu_support_team_current_income
+                value = 0
+            }
+
+            switch = {
+                trigger = has_country_flag
+                cunhu_support_team_use_minerals = {
+                    export_resource_stockpile_to_variable = {
+                        resource = minerals
+                        variable = cunhu_support_team_current_amount
+                    }
+                }
+                cunhu_support_team_use_alloys = {
+                    export_resource_stockpile_to_variable = {
+                        resource = alloys
+                        variable = cunhu_support_team_current_amount
+                    }
+                }
+                cunhu_support_team_use_consumer_goods = {
+                    export_resource_stockpile_to_variable = {
+                        resource = consumer_goods
+                        variable = cunhu_support_team_current_amount
+                    }
+                }
+            }
+        }
+    }
+
+    after = {
+        start_situation = {
+            type = situation_cunhu_support_team
+            target = root
+        }
+    }
+}
+country_event = {
+    id = hsr_ipc.2011
+    hide_window = yes
+    is_triggered_only = yes
+
+    immediate = {
+        IF = {
+            limit = {
+                owner = {
+                    switch = {
+                        trigger = has_country_flag
+                        cunhu_support_team_use_minerals = {
+                            resource_stockpile_compare = {
+                                resource = minerals
+                                value > cunhu_support_team_once_again
+                            }
+                        }
+                        cunhu_support_team_use_alloys = {
+                            resource_stockpile_compare = {
+                                resource = alloys
+                                value > cunhu_support_team_once_again
+                            }
+                        }
+                        cunhu_support_team_use_consumer_goods = {
+                            resource_stockpile_compare = {
+                                resource = consumer_goods
+                                value > cunhu_support_team_once_again
+                            }
+                        }
+                    }
+                }
+            }
+            country_event = { id = hsr_ipc.2012 }
+            remove_modifier = cunhu_support_team_failure
+        }
+        else = {
+            country_event = { id = hsr_ipc.2013 }
+        }
+    }
+}
+country_event = { # choose your reward
+    id = hsr_ipc.2012
+    title = "hsr_ipc.2012.name"
+    desc =  hsr_ipc.2012.desc
+    picture = GFX_evt_cunhu_support_team
+
+    is_triggered_only = yes
+
+    immediate = {
+        switch = {
+            trigger = has_country_flag
+            cunhu_support_team_use_minerals = {
+                export_resource_stockpile_to_variable = {
+                    resource = minerals
+                    variable = cunhu_support_team_current_amount
+                }
+            }
+            cunhu_support_team_use_alloys = {
+                export_resource_stockpile_to_variable = {
+                    resource = alloys
+                    variable = cunhu_support_team_current_amount
+                }
+            }
+            cunhu_support_team_use_consumer_goods = {
+                export_resource_stockpile_to_variable = {
+                    resource = consumer_goods
+                    variable = cunhu_support_team_current_amount
+                }
+            }
+        }
+    }
+
+
+    option = {
+        name = hsr_ipc.2012.a
+        trigger = {
+            switch = {
+                trigger = has_country_flag
+                cunhu_support_team_use_minerals = {
+                    has_resource = {
+                        type = minerals
+                        amount > 0
+                    }
+                }
+                cunhu_support_team_use_alloys = {
+                    has_resource = {
+                        type = alloys
+                        amount > 0
+                    }
+                }
+                cunhu_support_team_use_consumer_goods = {
+                    has_resource = {
+                        type = consumer_goods
+                        amount > 0
+                    }
+                }
+            }
+        }
+        hidden_effect = {
+            switch = {
+                trigger = has_country_flag
+                cunhu_support_team_use_minerals = {
+                    add_resource = {
+                        minerals = -1
+                        mult = cunhu_support_team_current_amount
+                    }
+                    remove_country_flag = cunhu_support_team_use_minerals
+                }
+                cunhu_support_team_use_alloys = {
+                    add_resource = {
+                        alloys = -1
+                        mult = cunhu_support_team_current_amount
+                    }
+                    remove_country_flag = cunhu_support_team_use_alloys
+                }
+                cunhu_support_team_use_consumer_goods = {
+                    add_resource = {
+                        consumer_goods = -1
+                        mult = cunhu_support_team_current_amount
+                    }
+                    remove_country_flag = cunhu_support_team_use_consumer_goods
+                }
+            }
+        }
+        add_resource = {
+            unity = 1.5
+            mult = cunhu_support_team_current_amount
+        }
+        add_modifier = {
+            modifier = cunhu_support_team_success
+            years = 1
+        }
+    }
+    after = {
+        hidden_effect = {
+            set_variable = {
+                which = cunhu_support_team_current_amount
+                value = 0
+            }
+            country_event = { id = hsr_ipc.2015 } # Loop Variable
+            country_event = { id = hsr_ipc.2010 days = 30 }
+        }
+    }
+}
+country_event = { # choose your reward
+    id = hsr_ipc.2013
+    title = "hsr_ipc.2013.name"
+    desc =  hsr_ipc.2013.desc
+    picture = GFX_evt_civil_action
+
+    is_triggered_only = yes
+
+    immediate = {
+        switch = {
+            trigger = has_country_flag
+            cunhu_support_team_use_minerals = {
+                export_resource_stockpile_to_variable = {
+                    resource = minerals
+                    variable = cunhu_support_team_current_amount
+                }
+            }
+            cunhu_support_team_use_alloys = {
+                export_resource_stockpile_to_variable = {
+                    resource = alloys
+                    variable = cunhu_support_team_current_amount
+                }
+            }
+            cunhu_support_team_use_consumer_goods = {
+                export_resource_stockpile_to_variable = {
+                    resource = consumer_goods
+                    variable = cunhu_support_team_current_amount
+                }
+            }
+        }
+    }
+
+    option = {
+        name = cyber.5006.a
+        add_modifier = {
+            modifier = cunhu_support_team_failure
+            days = -1
+        }
+        hidden_effect = {
+            switch = {
+                trigger = has_country_flag
+                cunhu_support_team_use_minerals = {
+                    remove_country_flag = cunhu_support_team_use_minerals
+                }
+                cunhu_support_team_use_alloys = {
+                    remove_country_flag = cunhu_support_team_use_alloys
+                }
+                cunhu_support_team_use_consumer_goods = {
+                    remove_country_flag = cunhu_support_team_use_consumer_goods
+                }
+            }
+        }
+    }
+    after = {
+        hidden_effect = {
+            country_event = { id = hsr_ipc.2010 days = 30 }
+            divide_variable = {
+                which = cunhu_support_team_once_again
+                value = 1.2
+            }
+            set_saved_date = {
+                key = situation_cunhu_support_team_timer
+                days_from_present = 3600
+                expires = 3601
+            }
+            floor_variable = cunhu_support_team_once_again
+            set_variable = {
+                which = cunhu_support_team_current_amount
+                value = 0
+            }
+            set_variable = {
+                which = cunhu_support_team_current_income
+                value = 0
+            }
+            set_variable = {
+                which = cunhu_support_team_max_capacity
+                value = 15000 # max of consumer_goods in 00_strategic_resources.txt
+            }
+        }
+    }
+}
+situation_event = {
+    id = hsr_ipc.2014
+    hide_window = yes
+
+    is_triggered_only = yes
+
+    immediate = {
+        owner = {
+            switch = {
+                trigger = has_country_flag
+                cunhu_support_team_use_minerals = {
+                    export_resource_stockpile_to_variable = {
+                        resource = minerals
+                        variable = cunhu_support_team_current_amount
+                    }
+                }
+                cunhu_support_team_use_alloys = {
+                    export_resource_stockpile_to_variable = {
+                        resource = alloys
+                        variable = cunhu_support_team_current_amount
+                    }
+                }
+                cunhu_support_team_use_consumer_goods = {
+                    export_resource_stockpile_to_variable = {
+                        resource = consumer_goods
+                        variable = cunhu_support_team_current_amount
+                    }
+                }
+            }
+            floor_variable = cunhu_support_team_current_amount
+            switch = {
+                trigger = has_country_flag
+                cunhu_support_team_use_minerals = {
+                    export_trigger_value_to_variable = {
+                        trigger = resource_income_compare
+                        parameters = { resource = minerals }
+                        variable = cunhu_support_team_current_income
+                    }
+                }
+                cunhu_support_team_use_alloys = {
+                    export_trigger_value_to_variable = {
+                        trigger = resource_income_compare
+                        parameters = { resource = alloys }
+                        variable = cunhu_support_team_current_income
+                    }
+                }
+                cunhu_support_team_use_consumer_goods = {
+                    export_trigger_value_to_variable = {
+                        trigger = resource_income_compare
+                        parameters = { resource = consumer_goods }
+                        variable = cunhu_support_team_current_income
+                    }
+                }
+            }
+            set_variable = {
+                which = cunhu_support_team_max_capacity
+                value = value:max_paperclip_capacity
+            }
+        }
+    }
+}
+country_event = { # increase the loop
+    id = hsr_ipc.2015
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = {
+        hidden_effect = {
+            set_saved_date = {
+                key = situation_cunhu_support_team_timer
+                days_from_present = 3600
+                expires = 3601
+            }
+            multiply_variable = {
+                which = cunhu_support_team_once_again
+                value = @paperclip_scaling_factor
+            }
+            floor_variable = cunhu_support_team_once_again
+        }
     }
 }
