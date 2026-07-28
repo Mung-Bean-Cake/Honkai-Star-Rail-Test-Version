@@ -1,0 +1,243 @@
+building_hunter = {
+	capital = no
+	can_build = no
+	can_demolish = no
+	can_be_disabled = no
+	can_be_ruined = yes
+	icon = building_kelibobao
+	position_priority = 0
+	empire_limit = 1
+
+	category = government
+	potential = {
+		exists = owner
+		owner = { has_origin = origin_StellaronHunter }
+	}
+	building_sets = {
+		government
+	}
+	convert_to = {
+		building_hive_capital
+		building_machine_capital
+		building_resort_capital
+		building_slave_capital
+		building_ancient_control_center
+		building_ancient_palace
+	}
+
+	destroy_trigger = {}
+	ruined_trigger = {}
+
+	planet_modifier = {
+		job_enforcer_add = 500
+		job_politician_add = 200
+		job_physicist_add = 400
+		job_engineer_add = 400
+		job_biologist_add = 400
+		planet_housing_add = 1000
+		planet_amenities_add = 4500
+		planet_max_buildings_add = 150
+	}
+	resources = {
+		category = planet_buildings
+		produces = {
+			energy = 100
+			minerals = 50
+			alloys = 50
+			consumer_goods = 20
+		}
+		upkeep = {
+			energy = 5
+			minerals = 5
+		}
+		produces = {}
+	}
+
+	upgrades = {}
+}
+building_hunter_hacker = {
+	category = planet_buildings
+    base_buildtime = 200
+	potential = {
+		exists = owner
+		owner = { has_origin = origin_StellaronHunter }
+	}
+	swappable_data = {
+		default = {
+			condition_string = SPECIALIST_JOB_TRIGGER
+			building_icon = building_bureaucratic_1
+		}
+		swap_type = {
+			trigger = {
+				bureaucrat_is_manager = yes
+			}
+			name = manager
+			desc = manager
+			icon = manager
+			building_icon = building_bureaucratic_1
+			condition_string = SPECIALIST_JOB_TRIGGER
+			weight = 2
+		}
+	}
+	planet_modifier = {
+		job_wolf_hacker_add = 200
+		planet_jobs_upkeep_mult = -0.1
+		pop_happiness = 0.2
+	}
+	tags = { resource }
+	triggered_tags = {
+		trigger = {
+			OR = {
+				bureaucrat_is_priest = yes
+				bureaucrat_is_death_priest = yes
+				bureaucrat_is_numistic_priest = yes
+				bureaucrat_is_preacher = yes
+				bureaucrat_is_haruspex = yes
+				bureaucrat_is_superstitious_beliefs_priest = yes
+				bureaucrat_is_superstitious_beliefs_priest_corporate = yes
+				bureaucrat_is_corpse_broker = yes
+				bureaucrat_is_corpse_reader = yes
+				bureaucrat_is_fire_dancer = yes
+				bureaucrat_is_pyromancer = yes
+				bureaucrat_is_fire_seer = yes
+				bureaucrat_is_cremator = yes
+				bureaucrat_is_sacred_path_specialist = yes
+			}
+		}
+	}
+	possible_pre_triggers = {
+		has_owner = yes
+		is_being_purged = no
+		is_being_assimilated = no
+		is_sapient = yes
+	}
+
+	possible_precalc = can_fill_specialist_job
+	possible = {
+		complex_specialist_job_check_trigger = yes
+	}
+
+	resources = {
+		category = planet_bureaucrats
+		# PRODUCES
+		cost = {
+			alloys = 800
+		}
+		produces = {
+			trade = 200
+			unity = 50
+		}
+		upkeep = {
+			consumer_goods = 10
+			energy = 20
+			minerals = 10
+		}
+		inline_script = "jobs/ethic_job_resources_memorialist"
+	}
+}
+
+building_hunter_gelamo = {
+	base_buildtime = 200
+	empire_limit = 2
+	category = army
+	potential = {
+		exists = owner
+		owner = {
+			is_regular_empire = yes
+			has_civic = civic_StellaronHunter_1
+		}
+	}
+	building_sets = {
+		fortress
+	}
+	planet_modifier = {
+		job_gelamo_soldier_add = 500
+	}
+	country_modifier = {
+		country_commander_cap_add = 2
+		country_naval_cap_mult = 0.1
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			minerals = 1000
+		}
+		upkeep = {
+			minerals = 5
+		}
+		produces = {}
+	}
+
+	upgrades = {}
+}
+
+building_hunter_ren = {
+	base_buildtime = 200
+	category = army
+	potential = {
+		exists = owner
+		owner = {
+			is_regular_empire = yes
+			has_civic = civic_StellaronHunter_1
+		}
+	}
+	building_sets = {
+		fortress
+	}
+	planet_modifier = {
+		job_ren_soldier_add = 200
+		planet_crime_add = -5
+	}
+	country_modifier = {
+		country_commander_cap_add = 0.5
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			minerals = 500
+		}
+		upkeep = {
+			alloys = 5
+		}
+		produces = {}
+	}
+
+	upgrades = {}
+}
+building_cyber_miner= {
+	base_buildtime = 200
+	category = planet_buildings
+	potential = {
+		exists = owner
+		owner = {
+			is_regular_empire = yes
+			has_civic = civic_StellaronHunter_2
+		}
+	}
+	building_sets = {
+		fortress
+	}
+	planet_modifier = {
+		job_cyber_miner_add = 100
+		planet_crime_add = 5
+		energy = 200
+	}
+	country_modifier = {
+		POP_FOOD_REQ = 1
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			minerals = 800
+			alloys = 200
+		}
+		upkeep = {
+			alloys = 5
+		}
+		produces = {
+			energy = 30
+		}
+	}
+
+	upgrades = {}
+}
