@@ -1,0 +1,158 @@
+set_export_resource_value_to_variable = {
+    set_variable = {
+        which = hsr_credit_eco_$resource$_gross
+        value = $value1$
+    }
+    set_variable = {
+        which = hsr_credit_eco_$resource$_expenses
+        value = $value2$
+    }
+    export_trigger_value_to_variable = { trigger = resource_revenue_compare parameters = { resource = $resource$ } variable = hsr_credit_eco_$resource$_gross }
+    export_trigger_value_to_variable = { trigger = resource_expenses_compare parameters = { resource = $resource$ } variable = hsr_credit_eco_$resource$_expenses }
+}
+hsr_give_physics_tech_tier_3_effect = {
+    give_technology = { message = no tech = tech_physics_3 }
+    give_technology = { message = no tech = tech_space_science_5 }
+    give_technology = { message = no tech = tech_combat_computers_2 }
+    give_technology = { message = no tech = tech_encryption_3 }
+    give_technology = { message = no tech = tech_decryption_3 }
+    give_technology = { message = no tech = tech_antimatter_power }
+    give_technology = { message = no tech = tech_reactor_boosters_3 }
+    give_technology = { message = no tech = tech_shields_4 }
+    give_technology = { message = no tech = tech_planetary_shield_generator }
+    give_technology = { message = no tech = tech_power_plant_4 }
+    give_technology = { message = no tech = tech_mine_dark_matter }
+    give_technology = { message = no tech = tech_lasers_4 }
+}
+hsr_give_engineering_tech_tier_3_effect = {
+    if = {
+        limit = {
+            OR = {
+                is_machine_empire = no
+                has_civic = civic_machine_assimilator
+            }
+        }
+        give_technology = { message = no tech = tech_integrated_cybernetics }
+    }
+    if = {
+        limit = {
+            country_uses_bio_ships = no
+        }
+        give_technology = { message = no tech = tech_cruisers }
+        give_technology = { message = no tech = tech_destroyer_hull_2 }
+        give_technology = { message = no tech = tech_cruiser_build_speed }
+        give_technology = { message = no tech = tech_cruiser_hull_1 }
+    }
+    give_technology = { message = no tech = tech_engineering_3 }
+    if = {
+        limit = {
+            is_nomadic = no
+        }
+        give_technology = { message = no tech = tech_starbase_4 }
+    }
+    if = {
+        limit = {
+            is_wilderness_empire = no
+            is_nomadic = no
+        }
+        give_technology = { message = no tech = tech_habitat_1 }
+    }
+    give_technology = { message = no tech = tech_strike_craft_3 }
+    give_technology = { message = no tech = tech_ship_armor_4 }
+    give_technology = { message = no tech = tech_thrusters_3 }
+    give_technology = { message = no tech = tech_space_mining_5 }
+    give_technology = { message = no tech = tech_mining_3 }
+    give_technology = { message = no tech = tech_alloys_2 }
+    give_technology = { message = no tech = tech_luxuries_2 }
+    give_technology = { message = no tech = tech_afterburners_2 }
+    if = {
+        limit = {
+            is_wilderness_empire = no
+        }
+        give_technology = { message = no tech = tech_housing_2 }
+    }
+    give_technology = { message = no tech = tech_mine_living_metal }
+    give_technology = { message = no tech = tech_mass_drivers_4 }
+    give_technology = { message = no tech = tech_missiles_4 }
+    if = {
+        limit = {
+            is_nomadic = yes
+        }
+        give_technology = { message = no tech = tech_arkship_construction }
+        give_technology = { message = no tech = tech_arkship_tier_2 }
+        give_technology = { message = no tech = tech_civilian_arkship }
+        give_technology = { message = no tech = tech_science_arkship }
+        give_technology = { message = no tech = tech_military_arkship }
+        give_technology = { message = no tech = tech_waystation_3 }
+    }
+}
+hsr_give_society_tech_tier_3_effect = {
+    if = {
+        limit = {
+            country_uses_bio_ships = yes
+        }
+        give_technology = { message = no tech = tech_harbingers }
+        give_technology = { message = no tech = tech_harbinger_build_speed }
+        give_technology = { message = no tech = tech_harbinger_growth_1 }
+        give_technology = { message = no tech = tech_harbinger_growth_2 }
+        give_technology = { message = no tech = tech_mandibles_2 }
+        give_technology = { message = no tech = tech_weaver_bio_healing_3 }
+        give_technology = { message = no tech = tech_weaver_bio_evasion_3 }
+        give_technology = { message = no tech = tech_weaver_bio_fire_rate_3 }
+        give_technology = { message = no tech = tech_weaver_bio_confuser_3 }
+        give_technology = { message = no tech = tech_weaver_bio_anti_evasion_3 }
+        give_technology = { message = no tech = tech_weaver_bio_anti_fire_rate_3 }
+    }
+    if = {
+        limit = {
+            is_gestalt = no
+        }
+        give_technology = { message = no tech = tech_interstellar_economics }
+    }
+    give_technology = { message = no tech = tech_society_3 }
+    give_technology = { message = no tech = tech_nano_vitality_crops }
+    give_technology = { message = no tech = tech_food_processing_2 }
+    give_technology = { message = no tech = tech_gene_tailoring }
+    give_technology = { message = no tech = tech_refit_standards }
+    give_technology = { message = no tech = tech_combat_training }
+    give_technology = { message = no tech = tech_psionic_theory }
+    give_technology = { message = no tech = tech_galactic_bureaucracy }
+    give_technology = { message = no tech = tech_centralized_command }
+    if = {
+        limit = {
+            is_nomadic = no
+        }
+        give_technology = { message = no tech = tech_deep_space_citadel }
+    }
+    if = {
+        limit = {
+            has_authority = auth_machine_intelligence
+        }
+        give_technology = { message = no tech = tech_resource_processing_algorithms }
+    }
+    if = {
+        limit = {
+            OR = {
+                is_gestalt = no
+                has_valid_civic = civic_machine_servitor
+            }
+        }
+        give_technology = { message = no tech = tech_paradise_dome }
+    }
+    if = {
+        limit = {
+            NOR = {
+                has_ethic = ethic_spiritualist
+                has_ethic = ethic_fanatic_spiritualist
+                has_valid_civic = civic_machine_servitor
+            }
+        }
+        give_technology = { message = no tech = tech_autocurating_vault }
+    }
+    if = {
+        limit = {
+            has_valid_civic = civic_agrarian_idyll
+        }
+        give_technology = { message = no tech = tech_housing_agrarian_idyll }
+    }
+}

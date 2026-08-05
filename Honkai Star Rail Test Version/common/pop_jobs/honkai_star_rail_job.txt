@@ -192,6 +192,15 @@ herta_up_researcher = {
             condition_string = SPECIALIST_JOB_TRIGGER
             building_icon = herta_herta_discuss
         }
+        swap_type = {
+            trigger = {
+                exists = owner
+                owner = {has_origin = origin_hsr_ipc}
+            }
+            name = ipc_researcher
+            icon = extradimensional_research_unit
+            weight = 5
+        }
     }
 
     tags = {  research }
@@ -210,13 +219,31 @@ herta_up_researcher = {
     resources = {
         category = planet_researchers
         produces = {
-            unity = 2
             engineering_research = 7.5
             physics_research = 7.5
             society_research = 7.5
             sr_dark_matter = 0.5
             astral_threads = 0.5
             minor_artifacts = 0.5
+        }
+        produces = {
+            trigger = {
+                exists = owner
+                owner = {
+                    or = {
+                        has_origin = origin_Herta_Space_Station
+                        has_origin = origin_luosi_star
+                    }
+                }
+            }
+            unity = 2
+        }
+        produces = {
+            trigger = {
+                exists = owner
+                owner = {has_origin = origin_hsr_ipc}
+            }
+            trade = 4
         }
         upkeep = {
             energy = 1
@@ -274,9 +301,10 @@ herta_up_ruanmei_1 = {
     resources = {
         category = planet_jobs_specialist
         produces = {
-            unity = 2
-            energy = 8
-            minerals = 8
+            unity = 1
+            energy = 6
+            minerals = 6
+            food = 4
         }
         produces = {
             trigger = {
@@ -582,7 +610,6 @@ senior_department_head = {
     }
     planet_modifier = {
         planet_stability_add = 1
-        pop_bonus_workforce_mult = 0.01
         planet_crime_add = -300
     }
     country_modifier = {
@@ -612,6 +639,18 @@ common_clerk = {
             building_icon = building_amusement_megaplex
             weight = 6
         }
+        swap_type = {
+            trigger = {
+                exists = owner
+                owner = {
+                    has_origin = origin_hsr_ipc
+                }
+            }
+            name = common_clerk
+            desc = tourist_desc
+            building_icon = building_amusement_megaplex
+            weight = 6
+        }
     }
 
     tags = {  unity }
@@ -634,10 +673,19 @@ common_clerk = {
         category = planet_jobs_worker
         produces = {
             trade = 1
-            physics_research = 0.5
-            engineering_research = 0.5
-            society_research = 0.5
-            unity = 1.5
+            physics_research = 0.01
+            engineering_research = 0.01
+            society_research = 0.01
+            unity = 1
+        }
+        produces = {
+            trigger = {
+                exists = owner
+                owner = {
+                    has_origin = origin_hsr_ipc
+                }
+            }
+            trade = 1
         }
         upkeep = {
             food = 1
@@ -672,9 +720,9 @@ research_clerk = {
     resources = {
         category = planet_researchers
         produces = {
-            physics_research = 5
-            engineering_research = 5
-            society_research = 5
+            physics_research = 6
+            engineering_research = 6
+            society_research = 6
             unity = 2
             trade = 1
             sr_dark_matter = 0.05
@@ -685,9 +733,6 @@ research_clerk = {
             food = 1.5
             consumer_goods = 1.5
         }
-    }
-    triggered_planet_modifier = {
-        planet_researchers_produces_mult = 0.005
     }
     weight = {
         weight = 500
@@ -942,6 +987,14 @@ soldier_clerk = {
             condition_string = WORKER_JOB_TRIGGER
             building_icon = building_solarpunk_gaiaseeder
         }
+        swap_type = {
+            trigger = {
+                exists = owner
+                owner = {has_origin = origin_hsr_ipc}
+            }
+            name = ipc_soldier
+            weight = 5
+        }
     }
 
     tags = { soldier }
@@ -991,6 +1044,13 @@ soldier_clerk = {
         planet_stability_add = 0.25
         planet_crime_add = -500
         ship_weapon_damage = 0.03
+    }
+    triggered_planet_modifier = {
+        potential = {
+            owner? = {
+                is_hsr_arkship_starbase = yes
+            }
+        }
         ship_weapon_range_mult = 0.03
         weapon_type_explosive_weapon_damage_mult = 0.03
         weapon_type_kinetic_weapon_damage_mult = 0.03
