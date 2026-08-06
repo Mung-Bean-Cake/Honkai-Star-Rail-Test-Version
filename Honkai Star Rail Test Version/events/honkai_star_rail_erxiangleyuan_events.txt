@@ -21,7 +21,7 @@ country_event = {
 	}
 	immediate = {
 		set_variable = {
-			which = shou_times
+			which = show_times
 			value = 0
 		}
 		set_country_flag = allow_show_time
@@ -225,12 +225,16 @@ country_event = {
 	is_triggered_only = yes
 
 	trigger= {
-		has_country_flag = haimeixiewan
+		#has_country_flag = haimeixiewan
 		has_country_flag = allow_show_time
 		is_ai = no
 	}
 
 	immediate = {
+		if = {
+			limit = {check_variable = {which = show_times value = 1}}
+			change_variable = {which = show_times value = -1}
+		}
 		if = {
 			limit = {any_owned_leader = {has_leader_flag = yaoguang} }
 			country_event = {id = xiaoqiaosi.6}
@@ -249,8 +253,13 @@ country_event = {
 				}
 			}
 		}
+		change_variable = {
+			which = show_times
+			value  = 1
+		}
 		name = rep.1000_0
-		
+		is_dialog_only = yes
+		response_text = xiaoqiaosi.1000_yaoyang_op
 		country_event = {
 			id = xiaoqiaosi.2000
 		}
@@ -267,8 +276,13 @@ country_event = {
 				}
 			}
 		}
+		change_variable = {
+			which = show_times
+			value  = 1
+		}
 		name = rep.1000_1
-		
+		is_dialog_only = yes
+		response_text = xiaoqiaosi.1000_huohua_op
 		country_event = {
 			id = xiaoqiaosi.2001
 		}
@@ -285,15 +299,20 @@ country_event = {
 				}
 			}
 		}
+		change_variable = {
+			which = show_times
+			value  = 1
+		}
 		name = rep.1000_2
-		
+		is_dialog_only = yes
+		response_text = xiaoqiaosi.1000_feiying_op
 		country_event = {
 			id = xiaoqiaosi.2002
 		}
 	}
 	#狼尊
 	option = {
-		trigger = {any_owned_leader = {has_leader_flag = feiying}}
+		trigger = {any_owned_leader = {has_leader_flag = langzun}}
 		allow = {
 			custom_tooltip = {
 				fail_text = xiaoqiaosi.op.xiemu #本地化
@@ -303,17 +322,18 @@ country_event = {
 				}
 			}
 		}
-		name = rep.1000_2
-		
+		change_variable = {
+			which = show_times
+			value  = 1
+		}
+		name = rep.1000_3
+		is_dialog_only = yes
+		response_text = xiaoqiaosi.1000_langzun_op
 		country_event = {
-			id = xiaoqiaosi.2002
+			id = xiaoqiaosi.2003
 		}
 	}
-	after = {
-		country_event = {
-			id = xiaoqiaosi.3000
-		}
-	}
+	
 }
 
 #主动效果
@@ -356,11 +376,7 @@ country_event = {
 		change_variable = {which = num_leader_yaoguang_t1 value = 1}
 	}
 
-	after = {
-		country_event = {
-			id = xiaoqiaosi.1000
-		}
-	}
+	
 }
 #火花
 country_event = {
@@ -384,11 +400,7 @@ country_event = {
 		}	
 	}
 
-	after = {
-		country_event = {
-			id = xiaoqiaosi.1000
-		}
-	}
+	
 }
 #绯英
 country_event = {
@@ -400,35 +412,26 @@ country_event = {
 	immediate = {
 		set_country_flag = is_huanyu_time
 		set_country_flag = is_show_time_feiying
-		hidden_effect = {
-			capital_scope = {
-				create_fleet = {
-					name = "NAME_Zarqlans_Pilgrims"
-					effect = {
-						while = {
-							count = root.zarqlan_fervor
-							create_fallen_empire_large_ship = yes
-						}
-						while = {
-							count = root.value:zarqlan_fervor_three
-							create_fallen_empire_small_ship = yes
-						}
-						set_location = {
-							target = prev
-							distance = 45
-							angle = random
-						}
-						set_owner = root
+		create_fleet = {
+				name = "feiying_ship"
+				effect = {
+					set_owner = root
+					create_ship = {
+						name =  "feiying_ship"
+					    design = "feiying_ship_design" 
+					}
+					set_location = {
+						target = ROOT.capital_scope
+						#target = event_target:Wengfaluosi_2_syste
+		 			    distance = 50
+					    angle = random
+		 			    direction = in_system
+
 					}
 				}
 			}
 	}
-	}
-	after = {
-		country_event = {
-			id = xiaoqiaosi.1000
-		}
-	}
+	
 }
 #狼尊
 country_event = {
@@ -453,11 +456,7 @@ country_event = {
 			value = this.owner.num_leader_langzun_t1
 		}
 	}
-	after = {
-		country_event = {
-			id = xiaoqiaosi.1000
-		}
-	}
+	
 }
 
 #被动效果
@@ -570,4 +569,3 @@ country_event = {
 		}
 	}
 }
-
