@@ -397,3 +397,132 @@ country_event = {
         }
     }
 }
+#托帕
+carrier_event = {
+    id = hsr_leader.101
+    is_triggered_only = yes
+    hide_window = yes
+    immediate = {
+        add_modifier = {
+            modifier = tuopa_payment_difficulty_debuff
+            years = 1
+        }
+    }
+}
+carrier_event = {
+    id = hsr_leader.102
+    is_triggered_only = yes
+    hide_window = yes
+    trigger = {
+        exists = owner
+        owner = {
+            any_owned_leader = {
+                has_leader_flag = tuopa
+            }
+        }
+    }
+    immediate = {
+        this.owner = {
+            random_list = {
+                1 = { add_resource = { minerals = 500 }}
+                1 = { add_resource = { energy = 500 }}
+                1 = { add_resource = { food = 500 }}
+                1 = { add_resource = { trade = 500 }}
+                1 = { add_resource = { alloys = 200 }}
+                1 = { add_resource = { consumer_goods = 200 }}
+                1 = { add_resource = { exotic_gases = 50 }}
+                1 = { add_resource = { volatile_motes = 50 }}
+                1 = { add_resource = { rare_crystals = 50 }}
+            }
+        }
+    }
+}
+country_event = {
+    id = hsr_leader.103
+    is_triggered_only = yes
+    hide_window = yes
+    trigger = {
+        any_owned_leader = {
+            has_leader_flag = tuopa
+        }
+    }
+    immediate = {
+        random_owned_colony = {
+            random_list = {
+                1 = { add_modifier = { modifier = tuopa_trait_t3_buff_1 years = 1 } }
+                1 = { add_modifier = { modifier = tuopa_trait_t3_buff_2 years = 1 } }
+                1 = { add_modifier = { modifier = tuopa_trait_t3_buff_3 years = 1 } }
+            }
+        }
+    }
+}
+country_event = {
+    id = hsr_leader.104
+    is_triggered_only = yes
+    hide_window = yes
+    trigger = {
+        any_owned_leader = {
+            has_leader_flag = shajin
+        }
+    }
+    immediate = {
+        random_owned_ship = {
+            limit = {
+                not = { has_modifier = shajin_trait_t3_buff }
+            }
+            add_modifier = {
+                modifier = shajin_trait_t3_buff
+                years = 5
+            }
+        }
+    }
+}
+country_event = {
+    id = hsr_leader.105
+    is_triggered_only = yes
+    hide_window = yes
+    trigger = {
+        any_owned_leader = {
+            has_leader_flag = shajin
+        }
+    }
+    immediate = {
+        random_list = {
+            1 = {event_target:shajin_leader = {change_variable = { which = shajin_buff_1_value value = 1 }}}
+            1 = {event_target:shajin_leader = {change_variable = { which = shajin_buff_2_value value = 1 }}}
+            1 = {event_target:shajin_leader = {change_variable = { which = shajin_buff_3_value value = 1 }}}
+            1 = {add_resource = { minerals = -500 }}
+            1 = {}
+        }
+    }
+}
+carrier_event = {
+    id = hsr_leader.106
+    is_triggered_only = yes
+    hide_window = yes
+    trigger = {
+        owner = {
+            any_owned_leader = {
+                has_leader_flag = feicui
+            }
+        }
+
+    }
+    immediate = {
+        add_modifier = {
+            modifier = feixui_trait_t3_buff
+            years = 5
+        }
+        owner = {
+            random_owned_leader = {
+                limit = {
+                    has_leader_flag = feicui
+                }
+                change_variable = {
+                    which = leader_trait_feicui_t1_value
+                    value = 1
+                }
+            }
+        }
+    }
+}

@@ -1,5 +1,5 @@
 leader_trait_human_resources = {
-    icon = "gfx/interface/icons/traits/leader_trait_human_resources.dds"
+    icon = "gfx/interface/icons/traits/leader_traits/leader_trait_human_resources.dds"
     # 统治者
     triggered_councilor_modifier = {
         potential = {
@@ -139,6 +139,360 @@ leader_trait_jiyi_ipc_leader = {
         species_leader_exp_gain = -0.75
     }
     leader_class = { commander official scientist }
+    initial = no
+    randomized = no
+}
+#托帕
+leader_trait_tuopa_t1 = {#解锁决议，短时间内知殖民地建造花费大幅降低，建造速度大幅提升，结束以后将会大幅提升建筑和区划维护费
+    inline_script = {
+        script = trait/hsr_icons
+        ICON = "GFX_leader_trait_tuopa_t1"
+        CLASS = leader
+        RARITY = common
+        COUNCIL = yes
+        TIER = 1
+    }
+    councilor_modifier = {
+        megastructures_cost_mult = -0.25
+        starbase_shipyard_build_speed_mult = 0.25
+        starbase_building_build_speed_mult = 0.25
+    }
+    leader_class = { official }
+    initial = no
+    randomized = no
+}
+leader_trait_tuopa_t2 = {#每当一个新的建筑，区划，zone建造时（不包括升级和替换），将随机为我们返还定量的数值
+    inline_script = {
+        script = trait/hsr_icons
+        ICON = "GFX_leader_trait_tuopa_t2"
+        CLASS = leader
+        RARITY = common
+        COUNCIL = yes
+        TIER = 1
+    }
+    councilor_modifier = {
+        planet_building_capacity_add = 1
+        planet_building_build_speed_mult = 0.25
+        planet_clear_blocker_speed_mult = 0.25
+    }
+    leader_class = { official }
+    initial = no
+    randomized = no
+}
+leader_trait_tuopa_t3 = {#
+    inline_script = {
+        script = trait/hsr_icons
+        ICON = "GFX_leader_trait_tuopa_t3"
+        CLASS = leader
+        RARITY = common
+        COUNCIL = yes
+        TIER = 1
+    }
+    councilor_modifier = {
+        planet_jobs_upkeep_mult = -0.05
+        country_trade_fee = -0.05
+        ships_logistics_mult = -0.1
+    }
+    triggered_councilor_modifier = {#账账效果
+        branch_office_value_mult = 0.025
+        commercial_pact_mult = 0.025
+        mult = trigger:has_total_skill
+    }
+    leader_class = { official }
+    initial = no
+    randomized = no
+}
+leader_trait_tuopa_t4 = {#
+    inline_script = {
+        script = trait/hsr_icons
+        ICON = "GFX_leader_trait_tuopa_t4"
+        CLASS = leader
+        RARITY = common
+        COUNCIL = no
+        TIER = 1
+    }
+    planet_modifier = {
+        planet_building_build_speed_mult = 0.75
+        worker_and_simple_drone_cat_bonus_workforce_mult = 0.2
+        planet_max_districts_add = 2
+    }
+    sector_modifier = {
+        planet_building_build_speed_mult = 0.375
+        worker_and_simple_drone_cat_bonus_workforce_mult = 0.1
+    }
+    leader_class = { official }
+    initial = no
+    randomized = no
+}
+leader_trait_tuopa_t5 = {#
+    inline_script = {
+        script = trait/hsr_icons
+        ICON = "GFX_leader_trait_tuopa_t5"
+        CLASS = leader
+        RARITY = common
+        COUNCIL = no
+        TIER = 1
+    }
+    self_modifier = {
+        leaders_upkeep_mult = -0.5
+        leader_lifespan_add = 100
+    }
+    triggered_councilor_modifier = {
+        councilor_skill_add = 1
+        mult = this.owner.num_tuopa_other_skill
+    }
+    triggered_self_modifier = {
+        leader_skill_add = 1
+        mult = this.owner.num_tuopa_other_skill
+    }
+    leader_class = { official }
+    initial = no
+    randomized = no
+}
+#砂金
+leader_trait_shajin_t1 = {#每年为随机舰队提供船体，装甲，护盾buff,5年
+    inline_script = {
+        script = trait/hsr_icons
+        ICON = "GFX_leader_trait_shajin_t1"
+        CLASS = leader
+        RARITY = common
+        COUNCIL = yes
+        TIER = 1
+    }
+    councilor_modifier = {
+        ship_hull_mult = 0.25
+        ship_armor_mult = 0.25
+        ship_shield_mult = 0.25
+        ship_hull_regen_add_static = 5
+        ship_armor_regen_add_static = 5
+        ship_shield_regen_add_static = 5
+    }
+    leader_class = { official }
+    initial = no
+    randomized = no
+}
+leader_trait_shajin_t2 = {#
+    inline_script = {
+        script = trait/hsr_icons
+        ICON = "GFX_leader_trait_shajin_t2"
+        CLASS = leader
+        RARITY = common
+        COUNCIL = yes
+        TIER = 1
+    }
+    councilor_modifier = {
+        station_gatherers_produces_mult = 0.25
+        station_gatherers_cost_mult = -0.25
+        empire_size_districts_mult = -0.05
+    }
+    triggered_councilor_modifier = {
+        country_minerals_produces_mult = 0.1
+        mult = this.leader.shajin_buff_1_value
+    }
+    triggered_councilor_modifier = {
+        country_trade_produces_mult = 0.01
+        mult = this.leader.shajin_buff_2_value
+    }
+    triggered_councilor_modifier = {
+        country_energy_produces_mult = 0.01
+        mult = this.leader.shajin_buff_3_value
+    }
+    leader_class = { official }
+    initial = no
+    randomized = no
+}
+leader_trait_shajin_t3 = {#
+    inline_script = {
+        script = trait/hsr_icons
+        ICON = "GFX_leader_trait_shajin_t3"
+        CLASS = leader
+        RARITY = common
+        COUNCIL = yes
+        TIER = 1
+    }
+    councilor_modifier = {
+        country_starbase_capacity_mult = 0.5
+        country_naval_cap_mult = 0.25
+        planet_army_build_speed_mult = 0.2
+        army_experience_gain_mult = 0.33
+        army_starting_experience_add = 100
+    }
+    leader_class = { official }
+    initial = no
+    randomized = no
+}
+leader_trait_shajin_t4 = {#
+    inline_script = {
+        script = trait/hsr_icons
+        ICON = "GFX_leader_trait_shajin_t4"
+        CLASS = leader
+        RARITY = common
+        COUNCIL = no
+        TIER = 1
+    }
+    planet_modifier = {
+        planet_jobs_minerals_produces_mult = 0.40
+        planet_miners_minerals_produces_add = 0.5
+        planet_amenities_mult = 0.2
+    }
+    sector_modifier = {
+        planet_jobs_minerals_produces_mult = 0.20
+        planet_miners_minerals_produces_add = 0.25
+        planet_amenities_mult = 0.1
+    }
+    leader_class = { official }
+    initial = no
+    randomized = no
+}
+leader_trait_shajin_t5 = {#
+    inline_script = {
+        script = trait/hsr_icons
+        ICON = "GFX_leader_trait_shajin_t5"
+        CLASS = leader
+        RARITY = common
+        COUNCIL = no
+        TIER = 1
+    }
+    self_modifier = {
+        leaders_upkeep_mult = -0.5
+        leader_lifespan_add = 100
+    }
+    triggered_councilor_modifier = {
+        councilor_skill_add = 1
+        mult = this.owner.num_shajin_other_skill
+    }
+    triggered_self_modifier = {
+        leader_skill_add = 1
+        mult = this.owner.num_shajin_other_skill
+    }
+    leader_class = { official }
+    initial = no
+    randomized = no
+}
+#翡翠
+leader_trait_feicui_t1 = {
+    inline_script = {
+        script = trait/hsr_icons
+        ICON = "GFX_leader_trait_feicui_t1"
+        CLASS = leader
+        RARITY = common
+        COUNCIL = yes
+        TIER = 1
+    }
+    councilor_modifier = {
+        country_starbase_influence_cost_mult = -0.25
+        country_claim_influence_cost_mult = -0.15
+        empire_size_systems_mult = -0.15
+    }
+    triggered_councilor_modifier = {
+        potential = { root = {is_nomadic = yes} }
+        country_starbase_influence_cost_mult = 0.25
+        country_claim_influence_cost_mult = 0.15
+        empire_size_systems_mult = 0.15
+        megastructures_waystations_influence_cost_mult = -0.25
+        starbase_stockpile_capacity_mult = 0.15
+        shipsize_nomads_constructor_stockpile_capacity_mult = 0.15
+        shipsize_nomads_engineer_vessel_stockpile_capacity_mult = 0.15
+    }
+    triggered_councilor_modifier = {
+        branch_office_value_mult = 0.01
+        mult = this.leader.leader_trait_feicui_t1_value
+    }
+    leader_class = { official }
+    initial = no
+    randomized = no
+}
+leader_trait_feicui_t2 = {#
+    inline_script = {
+        script = trait/hsr_icons
+        ICON = "GFX_leader_trait_feicui_t2"
+        CLASS = leader
+        RARITY = common
+        COUNCIL = yes
+        TIER = 1
+    }
+    councilor_modifier = {
+        spy_network_daily_value_add = 1
+        espionage_hostile_operation_difficulty_add = 1
+        intel_decryption_add = 1
+        espionage_operation_skill_add = 2
+        spy_network_levels_add = 10
+        espionage_hostile_operation_cost_mult = 0.25
+        espionage_operation_cost_mult = -0.25
+    }
+    triggered_councilor_modifier = {
+        diplo_weight_mult = 0.1
+        branch_office_value_mult = 0.05
+        mult = trigger:count_spynetwork
+    }
+    triggered_modifier = {
+        damage_vs_rival_mult = 0.1
+        mult = trigger:num_rivals
+    }
+    leader_class = { official }
+    initial = no
+    randomized = no
+}
+leader_trait_feicui_t3 = {#
+    inline_script = {
+        script = trait/hsr_icons
+        ICON = "GFX_leader_trait_feicui_t3"
+        CLASS = leader
+        RARITY = common
+        COUNCIL = yes
+        TIER = 1
+    }
+    councilor_modifier = {
+        country_edict_fund_add = 50
+        edicts_upkeep_mult = -0.25
+        planet_decision_enact_speed_mult = 0.25
+        empire_size_penalty_mult = -0.1
+    }
+    leader_class = { official }
+    initial = no
+    randomized = no
+}
+leader_trait_feicui_t4 = {#
+    inline_script = {
+        script = trait/hsr_icons
+        ICON = "GFX_leader_trait_feicui_t4"
+        CLASS = leader
+        RARITY = common
+        COUNCIL =yes
+        TIER = 1
+    }
+    councilor_modifier = {
+        empire_size_branch_office_mult = -0.25
+        planet_branch_offices_cost_mult = -0.25
+        country_subject_trust_cap_add = 50
+        country_subject_acceptance_add = 25
+    }
+    leader_class = { official }
+    initial = no
+    randomized = no
+}
+leader_trait_feicui_t5 = {#
+    inline_script = {
+        script = trait/hsr_icons
+        ICON = "GFX_leader_trait_feicui_t5"
+        CLASS = leader
+        RARITY = common
+        COUNCIL = no
+        TIER = 1
+    }
+    self_modifier = {
+        leaders_upkeep_mult = -0.5
+        leader_lifespan_add = 100
+    }
+    triggered_councilor_modifier = {
+        councilor_skill_add = 1
+        mult = this.owner.num_feicui_other_skill
+    }
+    triggered_self_modifier = {
+        leader_skill_add = 1
+        mult = this.owner.num_feicui_other_skill
+    }
+    leader_class = { official }
     initial = no
     randomized = no
 }

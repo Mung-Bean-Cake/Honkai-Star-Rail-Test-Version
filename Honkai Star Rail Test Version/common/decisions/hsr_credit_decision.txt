@@ -643,3 +643,32 @@ decision_hsr_army_credit_fund = {
         }
     }
 }
+decision_leader_trait_tuopa_t1 = {
+    owned_planets_only = yes
+    icon = decision_leader_trait_tuopa_t1
+    potential = {
+        exists = owner
+        owner = {
+            any_owned_leader = {
+                has_leader_flag = tuopa
+            }
+        }
+    }
+
+    allow = {
+        not = {
+            has_modifier = tuopa_payment_difficulty
+            has_modifier = tuopa_payment_difficulty_debuff
+        }
+    }
+    effect = {
+        custom_tooltip = decision_leader_trait_tuopa_t1_effect
+        hidden_effect = {
+            add_modifier = {
+                modifier = tuopa_payment_difficulty
+                years = 2
+            }
+            carrier_event = { id = hsr_leader.101 years = 2 }
+        }
+    }
+}
