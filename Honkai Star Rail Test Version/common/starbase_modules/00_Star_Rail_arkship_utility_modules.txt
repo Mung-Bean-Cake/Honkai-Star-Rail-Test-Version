@@ -1,0 +1,156 @@
+
+Star_Rail_arkship_engineering_bay = {
+	icon = "GFX_arkship_engineering_bay"
+	section = "Star_Rail_ARKSHIP_CONSTRUCTION_MODULE"
+	construction_days = 180
+	starbase_type = arkship
+	category = sm_naval_support_cat
+
+	potential = {
+		Star_Rail_arkship_moudles_and_buildings_potential_built = yes
+	}
+	possible = { count_starbase_modules = { type = Star_Rail_arkship_beastport count < 1 include_being_constructed = yes } }
+	cannot_fit_on_slots = { spinal_mount_1 spinal_mount_2 }
+
+	resources = {
+		category = starbase_arkship_upgrades
+		cost = { alloys = @arkship_cost_alloys_100 }
+		upkeep = { energy = @arkship_upkeep_energy_2 }
+	}
+
+	station_modifier = { show_only_custom_tooltip = no megastructure_build_speed_mult = 0.15 }
+	planet_modifier = { planet_building_capacity_add = 1 }
+
+	on_finished = { set_ship_construction_type = starbase_shipyard }
+	on_destroyed = {
+		if = { limit = { NOT = { has_starbase_module = Star_Rail_arkship_engineering_bay } } set_ship_construction_type = none }
+	}
+
+	inline_script = { script = jobs/arkship_module_soldiers_add ZONE = zone_ark_shipwright AMOUNT = @arkship_module_jobs }
+	ai_weight = { weight = 100 }
+}
+
+Star_Rail_arkship_beastport = {
+	icon = "GFX_starbase_beastport"
+	section = "Star_Rail_ARKSHIP_CONSTRUCTION_MODULE"
+	construction_days = 180
+	starbase_type = arkship
+	category = sm_naval_support_cat
+
+	potential = {
+		Star_Rail_arkship_moudles_and_buildings_potential_built = yes
+	}
+	possible = { count_starbase_modules = { type = Star_Rail_arkship_engineering_bay count < 1 include_being_constructed = yes } }
+	abort_construction_trigger = { OR = { has_starbase_module = Star_Rail_arkship_engineering_bay } }
+
+	resources = {
+		category = starbase_modules
+		cost = { alloys = @arkship_cost_alloys_100 }
+		upkeep = { energy = @arkship_upkeep_energy_2 }
+	}
+
+	cannot_fit_on_slots = { spinal_mount_1 spinal_mount_2 }
+
+	planet_modifier = { planet_building_capacity_add = 1 }
+	country_modifier = { country_vivarium_max_capacity_add = 30 }
+
+	on_finished = { set_ship_construction_type = starbase_beastport }
+	on_destroyed = {
+		if = { limit = { NOT = { has_starbase_module = beastport } } set_ship_construction_type = none }
+	}
+
+	inline_script = { script = jobs/arkship_module_soldiers_add ZONE = zone_ark_shipwright AMOUNT = @arkship_module_jobs }
+	ai_weight = {
+		inline_script = { script = starbase_modules/ship_construction_ai_weight MODULE = beastport }
+		modifier = { factor = 0 owner = { uses_fauna_ship_sizes = no } }
+	}
+}
+
+Star_Rail_arkship_docking_bay = {
+	icon = "GFX_arkship_docking_bay"
+	section = "Star_Rail_ARKSHIP_FACTORY_MODULE"
+	construction_days = 180
+	starbase_type = arkship
+	category = sm_utility_cat
+
+	potential = {
+		Star_Rail_arkship_moudles_and_buildings_potential_built = yes
+	}
+	cannot_fit_on_slots = { spinal_mount_1 spinal_mount_2 }
+
+	resources = {
+		category = starbase_arkship_upgrades
+		cost = { alloys = @arkship_cost_alloys_50 }
+		upkeep = { energy = @arkship_upkeep_energy_1 trade = @arkship_upkeep_trade_4 }
+	}
+
+	country_modifier = { country_naval_cap_add = 5 }
+	station_modifier = { ship_starbase_stockpile_collection_rate_mult = 0.10 }
+
+	ai_weight = { weight = 100 }
+}
+
+Star_Rail_arkship_habitation_module = {
+	icon = "GFX_arkship_habitation_module"
+	section = "Star_Rail_ARKSHIP_LIVING_SPACE_MODULE"
+	construction_days = 180
+	starbase_type = arkship
+	category = sm_utility_cat
+
+	potential = {
+		Star_Rail_arkship_moudles_and_buildings_potential_built = yes
+	}
+	cannot_fit_on_slots = { spinal_mount_1 spinal_mount_2 }
+
+	resources = {
+		category = starbase_arkship_upgrades
+		cost = { alloys = @arkship_cost_alloys_200 influence = @arkship_cost_influence_25 exotic_gases = @arkship_cost_strategic_25 }
+		upkeep = { energy = @arkship_upkeep_energy_2 exotic_gases = @arkship_upkeep_strategic_1 }
+	}
+
+	planet_modifier = { planet_max_districts_add = 1 pop_environment_tolerance = 0.05 }
+	ai_weight = { weight = 100 }
+}
+
+Star_Rail_arkship_grand_archive = {
+	icon = "GFX_arkship_grand_archive"
+	section = "Star_Rail_ARKSHIP_LIVING_SPACE_MODULE"
+	construction_days = 1800
+	starbase_type = arkship
+	category = sm_utility_cat
+
+	empire_limit = { base = 1 }
+
+	potential = {
+		Star_Rail_arkship_moudles_and_buildings_potential_built = yes
+	}
+	cannot_fit_on_slots = { spinal_mount_1 spinal_mount_2 }
+
+	resources = {
+		category = starbase_arkship_upgrades
+		cost = { alloys = @arkship_cost_alloys_500 volatile_motes = @arkship_cost_strategic_100 }
+		upkeep = { energy = @arkship_upkeep_energy_10 }
+	}
+
+	country_modifier = { country_vivarium_max_capacity_add = @grand_archive_vivarium_capacity }
+
+	on_finished = {
+		owner = {
+			if = { limit = { has_country_flag = grand_archive_destroyed } remove_country_flag = grand_archive_destroyed }
+			set_country_flag = has_Star_Rail_arkship_grand_archive_module
+			country_event = { id = grand_archive.4120 }
+			country_event = { id = grand_archive.4199 }
+			if = { limit = { has_origin = origin_treasure_hunters } country_event = { id = grand_archive.8090 scopes = { from = prev.solar_system } } }
+		}
+	}
+	on_destroyed = {
+		owner = {
+			remove_country_flag = ga_destroyed_contains_space_fauna
+			if = { limit = { num_vivarium_slots > 0 } set_country_flag = ga_destroyed_contains_space_fauna release_all_vivarium_fauna = { LOCATION = prev.solar_system } }
+			set_country_flag = grand_archive_destroyed
+			remove_country_flag = has_Star_Rail_arkship_grand_archive_module
+		}
+	}
+
+	ai_weight = { weight = 100 }
+}
