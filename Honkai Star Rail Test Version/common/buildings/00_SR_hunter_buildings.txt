@@ -122,8 +122,9 @@ building_hunter_hacker = {
 	}
 }
 building_hunter_hacker_2 = {
-	base_buildtime = 600
+	base_buildtime = 500
 	exempt_from_ai_planet_specialization = no
+	can_build = no
 	category = trade
 	icon = building_hacker_2
 	building_sets = {
@@ -132,7 +133,8 @@ building_hunter_hacker_2 = {
 	}
 	potential = {
 		exists = owner
-		owner = { has_origin = origin_StellaronHunter }
+		owner = { has_origin = origin_StellaronHunter 
+				has_technology = tech_hacker_1}
 	}
 	destroy_trigger = {
 		exists = owner
@@ -178,8 +180,84 @@ building_hunter_hacker_2 = {
 	show_tech_unlock_if = {
 		is_regular_empire = yes
 	}
-	#upgrades = {
-	#building_avb_commercial_2
+	upgrades = {
+	building_hunter_hacker_3
+	}
+	prerequisites = {
+		tech_hacker_1
+	}
+
+	show_tech_unlock_if = {
+		is_nomadic = no
+	}
+}
+building_hunter_hacker_3 = {
+	base_buildtime = 1000
+	empire_limit = 3
+	exempt_from_ai_planet_specialization = no
+	can_build = no
+	category = trade
+	icon = building_hacker_3
+	building_sets = {
+		urban
+		trade
+	}
+	potential = {
+		exists = owner
+		owner = { has_origin = origin_StellaronHunter 
+				has_technology = tech_hacker_2}
+	}
+	destroy_trigger = {
+		exists = owner
+		OR = {
+			owner = { is_regular_empire = no }
+		}
+	}
+	allow = {
+	}
+	planet_modifier = {
+		job_wolf_hacker_add = 1000
+		planet_jobs_upkeep_mult = -0.3
+		pop_happiness = 0.7
+	}
+	resources = {
+		category = planet_buildings
+		# PRODUCES
+		cost = {
+			alloys = 800
+			energy = 1000
+			unity = 400
+		}
+		produces = {
+			trade = 500
+			unity = 300
+		}
+		upkeep = {
+			consumer_goods = 50
+			energy = 100
+			minerals = 150
+		}
+		inline_script = "jobs/ethic_job_resources_memorialist"
+	}
+	inline_script = {
+		script = jobs/trader_add
+		AMOUNT = @building_static_jobs
+	}
+
+	prerequisites = {
+		"tech_interplanetary_commerce"
+	}
+
+	show_tech_unlock_if = {
+		is_regular_empire = yes
+	}
+	prerequisites = {
+		tech_hacker_2
+	}
+
+	show_tech_unlock_if = {
+		is_nomadic = no
+	}
 }
 building_sets = {
 	base_buildtime = 600
