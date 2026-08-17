@@ -55,9 +55,143 @@ building_hunter = {
 
 	upgrades = {}
 }
+building_hunter_farm = {
+	base_buildtime = 200
+	planet_limit = 2
+	exempt_from_ai_planet_specialization = no
+	category = resource
+	icon = building_hunter_farm
+	building_sets = {
+		farming
+	}
 
+	potential = {
+		exists = owner
+		owner = { has_origin = origin_StellaronHunter }
+	}
+	convert_to = {
+		building_hunter_hacker_2
+	}
+	destroy_trigger = {
+		exists = owner
+		OR = {
+			owner = { is_regular_empire = no }
+		}
+	}
+	allow = {
+	}
+	modifier = {
+		country_max_resource_food_add = 5000
+		shipsize_colonizer_build_speed_mult = 0.1
+	}
+	planet_modifier = {
+		job_ren_farmer_add = 100
+		pop_ethic_pacifist_attraction_mult = 0.05
+	}
+	resources = {
+		category = planet_buildings
+		# PRODUCES
+		cost = {
+			unity = 250
+			energy = 300
+		}
+		produces = {
+			food = 80
+			exotic_gases = 5
+		}
+		upkeep = {
+			consumer_goods = 10
+			energy = 30
+			minerals = 5
+		}
+		inline_script = "jobs/ethic_job_resources_memorialist"
+	}
+	inline_script = {
+		script = jobs/farmer_add
+		AMOUNT = @building_static_jobs
+	}
+
+	prerequisites = {
+		"tech_interplanetary_commerce"
+	}
+
+	show_tech_unlock_if = {
+		is_regular_empire = yes
+	}
+	upgrades = {
+		building_hunter_farm_2
+	}
+}
+building_hunter_farm_2 = {
+	base_buildtime = 500
+	planet_limit = 1
+	exempt_from_ai_planet_specialization = no
+	category = resource
+	can_build = no
+	icon = building_hunter_farm_2
+	building_sets = {
+		farming
+	}
+
+	potential = {
+		exists = owner
+		owner = { has_origin = origin_StellaronHunter }
+	}
+	convert_to = {
+		building_hunter_hacker_2
+	}
+	destroy_trigger = {
+		exists = owner
+		OR = {
+			owner = { is_regular_empire = no }
+		}
+	}
+	allow = {
+	}
+	country_modifier = {
+		country_max_resource_food_add = 5000
+	}
+	planet_modifier = {
+		job_ren_farmer_add = 400
+		pop_ethic_pacifist_attraction_mult = 0.25
+		HABITABILITY_CEIL_ADD = 0.3
+	}
+	resources = {
+		category = planet_buildings
+		# PRODUCES
+		cost = {
+			unity = 400
+			energy = 400
+			consumer_goods = 500
+		}
+		produces = {
+			food = 200
+			exotic_gases = 20
+			volatile_mote = 30
+		}
+		upkeep = {
+			consumer_goods = 30
+			energy = 50
+			minerals = 30
+		}
+		inline_script = "jobs/ethic_job_resources_memorialist"
+	}
+	inline_script = {
+		script = jobs/farmer_add
+		AMOUNT = @building_static_jobs
+	}
+
+	prerequisites = {
+		"tech_interplanetary_commerce"
+	}
+
+	show_tech_unlock_if = {
+		is_regular_empire = yes
+	}
+}
 building_hunter_hacker = {
 	base_buildtime = 200
+	planet_limit = 2
 	exempt_from_ai_planet_specialization = no
 	category = trade
 	icon = building_hacker
@@ -123,6 +257,7 @@ building_hunter_hacker = {
 }
 building_hunter_hacker_2 = {
 	base_buildtime = 500
+	planet_limit = 2
 	exempt_from_ai_planet_specialization = no
 	can_build = no
 	category = trade
@@ -133,8 +268,7 @@ building_hunter_hacker_2 = {
 	}
 	potential = {
 		exists = owner
-		owner = { has_origin = origin_StellaronHunter 
-				has_technology = tech_hacker_1}
+		owner = { has_origin = origin_StellaronHunter }
 	}
 	destroy_trigger = {
 		exists = owner
@@ -145,6 +279,9 @@ building_hunter_hacker_2 = {
 		}
 	}
 	allow = {
+		owner = {
+			has_technology = tech_hacker_1
+		}
 	}
 	planet_modifier = {
 		job_wolf_hacker_add = 300
@@ -180,9 +317,6 @@ building_hunter_hacker_2 = {
 	show_tech_unlock_if = {
 		is_regular_empire = yes
 	}
-	upgrades = {
-	building_hunter_hacker_3
-	}
 	prerequisites = {
 		tech_hacker_1
 	}
@@ -193,9 +327,8 @@ building_hunter_hacker_2 = {
 }
 building_hunter_hacker_3 = {
 	base_buildtime = 1000
-	empire_limit = 3
+	planet_limit = 1
 	exempt_from_ai_planet_specialization = no
-	can_build = no
 	category = trade
 	icon = building_hacker_3
 	building_sets = {
@@ -259,19 +392,20 @@ building_hunter_hacker_3 = {
 		is_nomadic = no
 	}
 }
-building_sets = {
+building_gelamo_military_camp = {
 	base_buildtime = 600
 	empire_limit = 2
 	category = army
+	icon = building_gelamo_military_camp
+	building_sets = {
+		army
+	}
 	potential = {
 		exists = owner
 		owner = {
 			is_regular_empire = yes
 			has_civic = civic_StellaronHunter_1
 		}
-	}
-	building_sets = {
-		fortress
 	}
 	planet_modifier = {
 		job_gelamo_soldier_add = 500
@@ -287,7 +421,8 @@ building_sets = {
 			alloys = 500
 		}
 		upkeep = {
-			minerals = 5
+			minerals = 50
+			energy = 100
 		}
 		produces = {}
 	}
@@ -307,7 +442,7 @@ building_hunter_ren = {
 		}
 	}
 	building_sets = {
-		fortress
+		army
 	}
 	planet_modifier = {
 		job_ren_soldier_add = 200

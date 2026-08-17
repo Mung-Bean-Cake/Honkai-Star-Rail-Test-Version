@@ -119,6 +119,7 @@ ren_soldier = {
 }
 gelamo_soldier = {
 	category = StellaronHunter_class
+	icon = job_gelamo_soldier
 	swappable_data = {
 		default = {
 			condition_string = SOLDIER_JOB_TRIGGER
@@ -222,7 +223,7 @@ gelamo_soldier = {
 
 wolf_hacker = {
 	category = StellaronHunter_class
-
+	icon = job_wolf_hacker
 	possible_pre_triggers = {
 		has_owner = yes
 		is_being_purged = no
@@ -255,6 +256,48 @@ wolf_hacker = {
 			always = yes
 		}
 		planet_amenities_add = 200
+	}
+	weight = {
+		weight = 100
+	}
+}
+
+ren_farmer = {
+	category = StellaronHunter_class
+	icon = job_ren_farmer
+	possible_pre_triggers = {
+		has_owner = yes
+		is_being_purged = no
+		is_being_assimilated = no
+		is_sapient = yes
+	}
+
+	tags = { amenities farm unity }
+
+	swappable_data = {
+		default = {
+			condition_string = SPECIALIST_JOB_TRIGGER
+			building_icon = building_holo_theatres
+		}
+	}
+
+	possible_precalc = can_fill_specialist_job
+
+	resources = {
+		category = planet_StellaronHunter_job
+		produces = {
+			food = 20
+			sr_zro = 0.5
+		}
+		upkeep = {
+			consumer_goods = 8
+		}
+	}
+	triggered_planet_modifier = {
+		potential = {
+			always = yes
+		}
+		HABITABILITY_FLOOR_ADD = 0.1
 	}
 	weight = {
 		weight = 100
