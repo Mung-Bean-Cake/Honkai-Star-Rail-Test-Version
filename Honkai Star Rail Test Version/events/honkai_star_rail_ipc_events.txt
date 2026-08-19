@@ -254,6 +254,11 @@ country_event = {
     }
 
     immediate = {
+        #政策
+        set_policy = {
+            policy = hsr_trade_policy
+            option = hsr_trade_policy_1
+        }
         #初始科技
         hidden_effect = {
             give_physics_tech_tier_1_effect = yes
@@ -325,6 +330,162 @@ country_event = {
             set_leader_flag = ipc_leader
             set_leader_flag = leader_death_events_blocked  # 阻止原版葬礼事件
             save_global_event_target_as = ipc_leader
+        }
+        ##砂金
+        SR_leader_creator = {
+            SPECIES_NAME = star_rail_leader
+            SPECIES_CLASS = Star_Rail
+            LEADER_PORTRAIT = shajin
+            SKILL = 1
+            CLASS = official
+            NAME = NAME_shajin
+            GENDER = male
+            HIDEAGE = yes
+            ETHIC = ethic_xenophile
+            CATCH_PHRASE = shajin_catch_phrase
+            DESC = shajin_backstory
+            EVENT_TARGET = shajin_leader
+        }
+        last_created_leader = {
+            remove_all_positive_traits = yes
+            add_trait = {trait = leader_trait_shajin_t1 show_message = no}
+            add_trait = {trait = leader_trait_shajin_t2 show_message = no}
+            add_trait = {trait = leader_trait_shajin_t3 show_message = no}
+            change_background_job = politician
+        }
+        SR_hire_leader = {
+            EVENT_TARGET = shajin_leader
+        }
+        set_country_flag = shajin_set
+        last_created_leader = {
+            set_leader_flag = legendary_leader
+            save_global_event_target_as = shajin_leader
+            set_leader_flag = immune_to_negative_traits
+            set_leader_flag = shajin
+            set_council_position = councilor_building_materials_logistics_department
+        }
+        ##托帕
+        SR_leader_creator = {
+            SPECIES_NAME = star_rail_leader
+            SPECIES_CLASS = Star_Rail
+            LEADER_PORTRAIT = tuopa
+            SKILL = 1
+            CLASS = official
+            NAME = NAME_tuopa
+            GENDER = female
+            HIDEAGE = yes
+            ETHIC = ethic_xenophile
+            CATCH_PHRASE = tuopa_catch_phrase
+            DESC = tuopa_backstory
+            EVENT_TARGET = tuopa_leader
+        }
+        last_created_leader = {
+            remove_all_positive_traits = yes
+            add_trait = {trait = leader_trait_tuopa_t1 show_message = no}
+            add_trait = {trait = leader_trait_tuopa_t2 show_message = no}
+            add_trait = {trait = leader_trait_tuopa_t3 show_message = no}
+            change_background_job =politician
+        }
+        SR_hire_leader = {
+            EVENT_TARGET = tuopa_leader
+        }
+        set_country_flag = tuopa_set
+        last_created_leader = {
+            set_leader_flag = legendary_leader
+            save_global_event_target_as = tuopa_leader
+            set_leader_flag = immune_to_negative_traits
+            set_leader_flag = tuopa
+            set_council_position = councilor_strategic_investment_department
+        }
+        ##翡翠
+        SR_leader_creator = {
+            SPECIES_NAME = star_rail_leader
+            SPECIES_CLASS = Star_Rail
+            LEADER_PORTRAIT = feicui
+            SKILL = 1
+            CLASS = official
+            NAME = NAME_feicui
+            GENDER = female
+            HIDEAGE = yes
+            ETHIC = ethic_xenophile
+            CATCH_PHRASE = feicui_catch_phrase
+            DESC = feicui_backstory
+            EVENT_TARGET = feicui_leader
+        }
+        last_created_leader = {
+            remove_all_positive_traits = yes
+            add_trait = {trait = leader_trait_feicui_t1 show_message = no}
+            add_trait = {trait = leader_trait_feicui_t2 show_message = no}
+            add_trait = {trait = leader_trait_feicui_t3 show_message = no}
+            change_background_job = politician
+        }
+        hidden_effect = {
+            SR_hire_leader = {
+                EVENT_TARGET = feicui_leader
+            }
+            set_country_flag = feicui_set
+            last_created_leader = {
+                set_leader_flag = legendary_leader
+                save_global_event_target_as = feicui_leader
+                set_leader_flag = immune_to_negative_traits
+                set_leader_flag = feicui
+                set_council_position = councilor_marketing_expansion_department
+            }
+        }
+        capital_scope.solar_system = {
+            save_event_target_as = ipc_sysytem
+            every_system = {
+                limit = {
+                    distance = {
+                        source = event_target:ipc_sysytem
+                        max_jumps = 4
+                        min_jumps = 1
+                        type = hyperlane
+                        use_bypasses = no
+                    }
+                    not = {
+                        exists = owner
+                    }
+                }
+                create_starbase = {
+                    size = starbase_outpost
+                    owner = root
+                }
+                every_system_planet = {
+                    if = {
+                        limit = {
+                            has_deposit_for = shipclass_mining_station
+                            has_mining_station = no
+                        }
+                        create_mining_station = {
+                            owner = root
+                        }
+                    }
+                    if = {
+                        limit = {
+                            has_deposit_for = shipclass_research_station
+                            has_research_station = no
+                        }
+                        create_research_station = {
+                            owner = root
+                        }
+                    }
+                }
+            }
+        }
+        random_system_within_border = {
+            spawn_system = {
+                min_distance = 10
+                max_distance = 30
+                max_jumps = 0
+                initializer = "ipc_junipter_system"
+            }
+            last_created_system = {
+                create_starbase = {
+                    size = starbase_outpost
+                    owner = root
+                }
+            }
         }
         #首都调整
         capital_scope = {
