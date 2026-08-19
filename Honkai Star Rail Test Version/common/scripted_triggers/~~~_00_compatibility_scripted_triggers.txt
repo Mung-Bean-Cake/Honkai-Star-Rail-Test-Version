@@ -1,0 +1,200 @@
+
+titan_potential_construction = {
+    OR = {
+        is_scope_type = starbase
+        AND = {
+            is_scope_type = megastructure
+            OR = {
+                is_megastructure_type = mega_shipyard_3
+                is_megastructure_type = mega_shipyard_restored
+                check_modifier_value = { modifier = megastructure_can_build_titan value > 0 }
+            }
+        }
+    }
+}
+
+titan_possible_construction = {
+    if = {
+        limit = {
+            is_scope_type = megastructure
+        }
+        OR = {
+            is_megastructure_type = mega_shipyard_3
+            is_megastructure_type = mega_shipyard_restored
+            custom_tooltip = {
+                fail_text = modifier_can_build_ship_failed
+                check_modifier_value = { modifier = megastructure_can_build_titan value > 0 }
+            }
+        }
+    }
+    else_if = {
+        limit = {
+            is_arkship_starbase = yes
+        }
+        custom_tooltip = {
+            fail_text = arkship_capital_shipyard_trigger
+            has_starbase_module = arkship_capital_shipyard
+        }
+    }
+    else = {
+        OR = {
+            custom_tooltip = {
+                fail_text = modifier_can_build_ship_failed
+                ship = { check_modifier_value = { modifier = starbase_can_build_titan value > 0 } }
+            }
+            AND = {
+                custom_tooltip = {
+                    fail_text = starbase_citadel_trigger
+                    is_scope_type = starbase
+                    has_starbase_size >= starbase_citadel
+                }
+                OR = {
+                    custom_tooltip = {
+                        fail_text = modifier_can_build_ship_failed
+                        ship = { check_modifier_value = { modifier = starbase_citadel_can_build_titan value > 0 } }
+                    }
+                    custom_tooltip = {
+                        fail_text = starbase_capital_yards_trigger
+                        is_scope_type = starbase
+                        has_starbase_building = capital_yards
+                    }
+                }
+            }
+        }
+    }
+}
+
+colossus_potential_construction = {
+    OR = {
+        is_scope_type = starbase
+        AND = {
+            is_scope_type = megastructure
+            OR = {
+                is_megastructure_type = mega_shipyard_3
+                is_megastructure_type = mega_shipyard_restored
+                check_modifier_value = { modifier = megastructure_can_build_colossus value > 0 }
+            }
+        }
+    }
+}
+
+colossus_possible_construction = {
+    if = {
+        limit = {
+            is_scope_type = megastructure
+        }
+        OR = {
+            is_megastructure_type = mega_shipyard_3
+            is_megastructure_type = mega_shipyard_restored
+            custom_tooltip = {
+                fail_text = modifier_can_build_ship_failed
+                check_modifier_value = { modifier = megastructure_can_build_colossus value > 0 }
+            }
+        }
+    }
+    else_if = {
+        limit = {
+            is_arkship_starbase = yes
+        }
+        custom_tooltip = {
+            fail_text = arkship_capital_shipyard_trigger
+            has_starbase_module = arkship_capital_shipyard
+        }
+    }
+    else = {
+        OR = {
+            custom_tooltip = {
+                fail_text = modifier_can_build_ship_failed
+                ship = { check_modifier_value = { modifier = starbase_can_build_colossus value > 0 } }
+            }
+            AND = {
+                custom_tooltip = {
+                    fail_text = starbase_citadel_trigger
+                    is_scope_type = starbase
+                    has_starbase_size >= starbase_citadel
+                }
+                OR = {
+                    custom_tooltip = {
+                        fail_text = modifier_can_build_ship_failed
+                        ship = { check_modifier_value = { modifier = starbase_citadel_can_build_colossus value > 0 } }
+                    }
+                    custom_tooltip = {
+                        fail_text = starbase_capital_yards_trigger
+                        is_scope_type = starbase
+                        has_starbase_building = capital_yards
+                    }
+                }
+            }
+        }
+    }
+}
+
+juggernaut_potential_construction = {
+    OR = {
+        AND = {
+            is_scope_type = starbase
+            NOT = {
+                has_starbase_size = juggernaut
+            }
+        }
+        AND = {
+            is_scope_type = megastructure
+            OR = {
+                is_megastructure_type = mega_shipyard_3
+                is_megastructure_type = mega_shipyard_restored
+                check_modifier_value = { modifier = megastructure_can_build_juggernaut value > 0 }
+            }
+        }
+    }
+}
+
+juggernaut_possible_construction = {
+    if = {
+        limit = {
+            is_scope_type = megastructure
+        }
+        OR = {
+            is_megastructure_type = mega_shipyard_3
+            is_megastructure_type = mega_shipyard_restored
+            custom_tooltip = {
+                fail_text = modifier_can_build_ship_failed
+                check_modifier_value = { modifier = megastructure_can_build_juggernaut value > 0 }
+            }
+        }
+    }
+    else_if = {
+        limit = {
+            is_arkship_starbase = yes
+        }
+        custom_tooltip = {
+            fail_text = arkship_capital_shipyard_trigger
+            has_starbase_module = arkship_capital_shipyard
+        }
+    }
+    else = {
+        OR = {
+            custom_tooltip = {
+                fail_text = modifier_can_build_ship_failed
+                ship = { check_modifier_value = { modifier = starbase_can_build_titan value > 0 } }
+            }
+            AND = {
+                custom_tooltip = {
+                    fail_text = starbase_citadel_trigger
+                    is_scope_type = starbase
+                    has_starbase_size >= starbase_citadel
+                }
+                OR = {
+                    custom_tooltip = {
+                        fail_text = modifier_can_build_ship_failed
+                        ship = { check_modifier_value = { modifier = starbase_citadel_can_build_titan value > 0 } }
+                    }
+                    custom_tooltip = {
+                        fail_text = starbase_capital_yards_trigger
+                        is_scope_type = starbase
+                        has_starbase_building = capital_yards
+                    }
+                }
+            }
+        }
+    }
+}
