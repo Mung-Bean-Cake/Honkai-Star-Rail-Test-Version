@@ -1,5 +1,6 @@
 building_hunter = {
-	capital = no
+	base_buildtime = 1200
+	capital = yes
 	can_demolish = no
 	can_be_disabled = no
 	can_be_ruined = yes
@@ -114,10 +115,6 @@ building_gelamo_palace = {
 			food = 40
 		}
 		inline_script = "jobs/ethic_job_resources_memorialist"
-	}
-	inline_script = {
-		script = jobs/farmer_add
-		AMOUNT = @building_static_jobs
 	}
 
 	prerequisites = {
@@ -240,10 +237,6 @@ building_hunter_farm = {
 		}
 		inline_script = "jobs/ethic_job_resources_memorialist"
 	}
-	inline_script = {
-		script = jobs/farmer_add
-		AMOUNT = @building_static_jobs
-	}
 
 	prerequisites = {
 		"tech_interplanetary_commerce"
@@ -279,6 +272,9 @@ building_hunter_farm_2 = {
 		}
 	}
 	allow = {
+		owner = {
+			has_technology = tech_shuhu_1
+		}
 	}
 	planet_modifier = {
 		job_ren_farmer_add = 400
@@ -305,13 +301,9 @@ building_hunter_farm_2 = {
 		}
 		inline_script = "jobs/ethic_job_resources_memorialist"
 	}
-	inline_script = {
-		script = jobs/farmer_add
-		AMOUNT = @building_static_jobs
-	}
 
 	prerequisites = {
-		"tech_interplanetary_commerce"
+		tech_shuhu_1
 	}
 
 	show_tech_unlock_if = {
@@ -340,6 +332,9 @@ building_hunter_farm_3 = {
 		}
 	}
 	allow = {
+		owner = {
+			has_technology = tech_shuhu_2
+		}
 	}
 	country_modifier = {
 		shipsize_colonizer_build_speed_mult = 0.2
@@ -373,13 +368,8 @@ building_hunter_farm_3 = {
 		}
 		inline_script = "jobs/ethic_job_resources_memorialist"
 	}
-	inline_script = {
-		script = jobs/farmer_add
-		AMOUNT = @building_static_jobs
-	}
-
 	prerequisites = {
-		"tech_interplanetary_commerce"
+		tech_shuhu_2
 	}
 
 	show_tech_unlock_if = {
@@ -680,9 +670,6 @@ building_cyber_miner= {
 		job_cyber_miner_add = 100
 		planet_crime_add = 5
 	}
-	country_modifier = {
-		POP_FOOD_REQ = 1
-	}
 	resources = {
 		category = planet_buildings
 		cost = {
@@ -719,6 +706,11 @@ building_cyber_miner_2= {
 	country_modifier = {
 		COMMAND_LIMIT_ADD = 10
 	}
+	allow = {
+		owner = {
+				has_technology = tech_yitai_data_1
+			}
+	}
 	planet_modifier = {
 		job_cyber_miner_add = 400
 		planet_crime_add = 15
@@ -738,7 +730,9 @@ building_cyber_miner_2= {
 			energy = 200
 		}
 	}
-
+	prerequisites = {
+		tech_yitai_data_1
+	}
 	upgrades = {
 		building_cyber_miner_3
 	}
@@ -759,6 +753,11 @@ building_cyber_miner_3= {
 	building_sets = {
 		urban
 		generator
+	}
+	allow = {
+		owner = {
+				has_technology = tech_yitai_data_2
+			}
 	}
 	planet_modifier = {
 		job_cyber_miner_add = 1000
@@ -782,5 +781,8 @@ building_cyber_miner_3= {
 		produces = {
 			energy = 600
 		}
+	}
+	prerequisites = {
+		tech_yitai_data_2
 	}
 }
