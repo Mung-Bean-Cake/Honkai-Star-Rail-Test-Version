@@ -1,0 +1,139 @@
+district_hunter_gov = {
+	base_buildtime = 800
+    is_capped_by_modifier = no
+	icon = district_train_planet_3
+	zone_slots = {
+        slot_pc_hunter_hub
+        slot_pc_herta_fleet
+	}
+    show_on_uncolonized = {
+		exists = from
+		from = {
+			OR = {
+				has_origin = origin_StellaronHunter
+			}
+		}
+		uses_district_set = pc_hunter_hub_set
+	}
+    potential = {
+		exists = owner
+		owner = {
+			OR = {
+				has_origin = origin_StellaronHunter
+			}
+		}
+        uses_district_set = pc_hunter_hub_set
+	}
+    resources = {
+		category = planet_districts
+        produces = {
+            unity = 10
+            physics_research = 2
+            society_research = 2
+            engineering_research = 2
+        }
+		cost = {
+			minerals = 800
+            alloys = 50
+		}
+		upkeep = {
+			energy = 5
+			alloys = 3		}
+	}
+
+	planet_modifier = {
+		planet_housing_add = 500
+        job_ren_farmer_add = 20
+        job_wolf_hacker_add = 20
+        planet_num_pops_mult = -0.05
+        planet_district_hunter_gov_build_speed_mult = 0.05
+	}
+
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = {
+				has_valid_civic = civic_StellaronHunter_2
+			}
+		}
+		modifier = {
+			planet_housing_add = 500
+            POP_HAPPINESS_MULT = 0.1
+		}
+	}
+}
+
+
+district_hunter_gelamo = {
+    base_buildtime = 600
+    is_capped_by_modifier = no
+    expansion_planner = yes
+    icon = district_train_planet_3
+    show_on_uncolonized = {
+        exists = from
+        from = {
+            OR = {
+                has_origin = origin_StellaronHunter
+            }
+        }
+        uses_district_set = pc_hunter_hub_set
+    }
+    potential = {
+        exists = owner
+        owner = {
+            OR = {
+                has_origin = origin_StellaronHunter
+            }
+        }
+        uses_district_set = pc_hunter_hub_set
+    }
+    conversion_ratio = 1
+    convert_to = {
+        district_crashed_slaver_ship
+        district_arcology_housing
+        district_rw_city
+        district_nexus
+        district_hive
+        district_prison
+        district_craglands
+        district_mindlink
+        district_crashed_slaver_ship
+        district_resort
+        district_slave
+    }
+    zone_slots = {
+        slot_city_government
+        slot_pc_hunter_hub
+    }
+    resources = {
+        category = planet_districts
+        produces = {
+            sr_living_metal = 2
+            rare_crystals = 2
+            exotic_gases = 2
+            sr_dark_matter = 0.5
+        }
+        cost = {
+            alloys = 800
+            food = 200
+            unity = 50
+        }
+        upkeep = {
+            minerals = 50
+			alloys = 50
+			consumer_goods = 50
+			food = 40
+        }
+    }
+    planet_modifier = {
+        logistic_growth_mult = 0.05
+        bonus_pop_growth_mult = 0.05        
+        PLANET_POP_ASSEMBLY_ADD = 2
+        job_gelamo_waitress_add = 10
+        PLANET_IMMIGRATION_PULL_MULT = 0.05
+        planet_district_hunter_gelamo_build_speed_mult = 0.05
+    }
+    ai_weight = {
+        weight = 100
+    }
+}

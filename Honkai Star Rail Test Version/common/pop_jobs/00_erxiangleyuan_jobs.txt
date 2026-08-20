@@ -1,0 +1,46 @@
+Sparxie_fans = {
+	category = specialist
+    swappable_data = {
+        default = {
+            condition_string = specialist_JOB_TRIGGER
+            building_icon = building_colony_shelter
+            icon = Sparxie_fans
+        }
+        
+    }
+    can_be_automated = yes
+    tags = {  unity }
+
+    possible_pre_triggers = {
+        has_owner = yes
+        is_being_purged = no
+        is_being_assimilated = no
+        is_sapient = yes
+    }
+
+    possible_precalc = can_fill_specialist_job
+
+    triggered_planet_modifier = {
+        potential = { always = yes }
+        planet_amenities_add = 200
+        mult = value:scripted_modifier_mult|MODIFIER|pop_job_amenities_mult|
+    }
+    resources = {
+        category = planet_jobs_specialist
+        produces = {
+            xiaodian = 0.5
+            trade = 0.5
+        }
+        upkeep = {
+            consumer_goods = 0.5
+
+        }
+    }
+    weight = {
+        weight = 100
+    }
+}
+
+dieceng = {
+    
+}
