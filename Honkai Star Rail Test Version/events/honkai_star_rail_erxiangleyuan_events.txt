@@ -83,22 +83,28 @@ country_event = {
 
 
 #千冶刃——转换技
-leader_event = {
+country_event = {
 	id = xiaoqiaosi.3
 	is_triggered_only = yes
 	hide_window = yes
 
 	trigger = {
-		leader_class = commander
-		has_trait = leader_qianyeren_t1	
-		exists = planet
+		any_owned_leader = {
+			leader_class = commander
+			has_trait = leader_qianyeren_t1	
+			exists = planet
+		}
 	}
 
 	immediate = {
-		change_variable = {
+		owner = {
+			change_variable = {
 			which = num_leader_qianyeren_t1
 			value = 1
-		}		
+		}	
+
+		}
+			
 	}
 }
 
@@ -374,9 +380,10 @@ country_event = {
 			}
 		}
 		change_variable = {which = num_leader_yaoguang_t1 value = 1}
+		country_event = {
+			id = xiaoqiaosi.3000
+		}
 	}
-
-	
 }
 #火花
 country_event = {
@@ -397,6 +404,9 @@ country_event = {
 			10 = {hidden_effect = {random_common_curiosity_get = yes}}
 			10 = {hidden_effect = {random_rare_curiosity_get = yes}}
 			10 = {hidden_effect = {random_epic_curiosity_get = yes}}
+		}
+		country_event = {
+			id = xiaoqiaosi.3000
 		}	
 	}
 
@@ -430,6 +440,9 @@ country_event = {
 					}
 				}
 			}
+			country_event = {
+			id = xiaoqiaosi.3000
+		}
 	}
 	
 }
@@ -455,6 +468,9 @@ country_event = {
 			which = num_leader_langzun_t2
 			value = this.owner.num_leader_langzun_t1
 		}
+		country_event = {
+			id = xiaoqiaosi.3000
+		}
 	}
 	
 }
@@ -468,7 +484,7 @@ country_event = {
 	#hide_window = yes
 
 	trigger = {
-		has_country_flag = is_huanyu_time
+		
 	}
 
 	immediate = {
