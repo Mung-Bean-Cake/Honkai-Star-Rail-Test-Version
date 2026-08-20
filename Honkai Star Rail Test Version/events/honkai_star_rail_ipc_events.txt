@@ -473,6 +473,8 @@ country_event = {
                 }
             }
         }
+        #附属星系生成
+        #取木星
         random_system_within_border = {
             spawn_system = {
                 min_distance = 10
@@ -487,6 +489,31 @@ country_event = {
                 }
             }
         }
+        random_planet_within_border = {
+            limit = { has_planet_flag = ipc_junipter }
+            set_owner = root
+            remove_building = building_colony_shelter
+            remove_building = building_commercial_zone
+            add_district = district_city
+            add_district = district_city
+            add_district = district_mining
+            add_district = district_generator
+            add_district = district_farming
+            add_district = district_farming
+            add_district = district_farming
+            add_building = building_capital
+            add_building = building_holo_theatres
+            add_building = building_factory_1
+            add_building = building_company_headquarters_1
+            while = {
+                count = 15
+                create_pop_group = {
+                    size = 100
+                    species = owner_main_species
+                }
+            }
+        }
+
         #首都调整
         capital_scope = {
             change_pc = pc_hsr_ipc_planet
