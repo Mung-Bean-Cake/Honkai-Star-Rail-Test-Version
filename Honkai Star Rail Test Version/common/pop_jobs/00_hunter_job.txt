@@ -488,3 +488,71 @@ cyber_miner = {
 	}
 	inline_script = "jobs/automodding_priority_energy"
 }
+kafuka_librarian = {
+	category = StellaronHunter_class
+	icon = job_kafuka_librarian
+	swappable_data = {
+		default = {
+			condition_string = SOLDIER_JOB_TRIGGER
+			building_icon = building_stronghold
+		}
+	}
+	tags = { research }
+	possible_pre_triggers = {
+		has_owner = yes
+		is_being_purged = no
+		is_being_assimilated = no
+		is_sapient = yes
+	}
+	possible_precalc = can_fill_worker_job
+	triggered_country_modifier = {
+		potential = {
+			exists = owner
+			owner = {
+				has_valid_civic = civic_StellaronHunter_1
+			}
+		}
+		modifier = {
+			COUNTRY_FACTION_SURPRESSION_COST_MULT = -0.2
+		}
+	}
+	country_modifier = {
+		SHIP_ARMOR_HARDENING_ADD = 0.05
+		SHIP_ARMOR_PENETRATION_MULT = 0.05
+		SHIP_SHIELD_PENETRATION_MULT = 0.05
+		SHIP_ARMOR_ADD = 800
+	}
+	icon = job_cyber_miner_icon
+	resources = {
+		category = planet_StellaronHunter_job
+		produces = {
+			physics_research = 10
+			society_research = 10
+			engineering_research = 10
+		}
+		upkeep = {
+			exotic_gases = 1
+			sr_dark_matter = 0.1
+		}
+	}
+	weight = {
+		weight = 30
+		modifier = {
+			factor = 1.5
+			has_trait = trait_StellaronHunter_pop_3
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = trait_StellaronHunter_pop_7
+		}
+		modifier = {
+			factor = 0.6
+			has_trait = trait_lithoid
+		}
+		modifier = {
+			factor = 0.4
+			has_trait = trait_cyborg_creed_of_war
+		}
+	}
+	inline_script = "jobs/automodding_priority_energy"
+}

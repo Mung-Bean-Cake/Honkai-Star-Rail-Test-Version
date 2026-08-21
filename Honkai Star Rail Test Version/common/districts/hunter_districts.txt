@@ -1,10 +1,11 @@
 district_hunter_gov = {
 	base_buildtime = 800
     is_capped_by_modifier = no
-	icon = district_train_planet_3
+	icon = district_hunter_gov
 	zone_slots = {
+        slot_city_government
         slot_pc_hunter_hub
-        slot_pc_herta_fleet
+        slot_pc_hunter_hub
 	}
     show_on_uncolonized = {
 		exists = from
@@ -35,20 +36,23 @@ district_hunter_gov = {
 		cost = {
 			minerals = 800
             alloys = 50
+            food = 200
 		}
 		upkeep = {
 			energy = 5
-			alloys = 3		}
+			alloys = 3
+            consumer_goods = 5}
 	}
 
 	planet_modifier = {
 		planet_housing_add = 500
         job_ren_farmer_add = 20
         job_wolf_hacker_add = 20
-        planet_num_pops_mult = -0.05
+        planet_crime_add = -5
         planet_district_hunter_gov_build_speed_mult = 0.05
+        planet_building_zhimasu_center_build_speed_mult = 0.1
+        planet_building_hunter_farm_build_speed_mult = 0.1
 	}
-
 	triggered_planet_modifier = {
 		potential = {
 			exists = owner
@@ -68,7 +72,7 @@ district_hunter_gelamo = {
     base_buildtime = 600
     is_capped_by_modifier = no
     expansion_planner = yes
-    icon = district_train_planet_3
+    icon = district_hunter_gelamo
     show_on_uncolonized = {
         exists = from
         from = {
@@ -102,7 +106,6 @@ district_hunter_gelamo = {
         district_slave
     }
     zone_slots = {
-        slot_city_government
         slot_pc_hunter_hub
     }
     resources = {
@@ -129,9 +132,155 @@ district_hunter_gelamo = {
         logistic_growth_mult = 0.05
         bonus_pop_growth_mult = 0.05        
         PLANET_POP_ASSEMBLY_ADD = 2
-        job_gelamo_waitress_add = 10
-        PLANET_IMMIGRATION_PULL_MULT = 0.05
         planet_district_hunter_gelamo_build_speed_mult = 0.05
+        planet_building_gelamo_military_camp_build_speed_mult = 0.1
+        planet_building_gelamo_palace_build_speed_mult = 0.1
+    }
+    ai_weight = {
+        weight = 100
+    }
+}
+district_hunter_kafuka = {
+    base_buildtime = 600
+    is_capped_by_modifier = no
+    expansion_planner = yes
+    icon = district_hunter_kafuka
+    show_on_uncolonized = {
+        exists = from
+        from = {
+            OR = {
+                has_origin = origin_StellaronHunter
+            }
+        }
+        uses_district_set = pc_hunter_hub_set
+    }
+    potential = {
+        exists = owner
+        owner = {
+            OR = {
+                has_origin = origin_StellaronHunter
+            }
+        }
+        uses_district_set = pc_hunter_hub_set
+    }
+    conversion_ratio = 1
+    convert_to = {
+        district_crashed_slaver_ship
+        district_arcology_housing
+        district_rw_city
+        district_nexus
+        district_hive
+        district_prison
+        district_craglands
+        district_mindlink
+        district_crashed_slaver_ship
+        district_resort
+        district_slave
+    }
+    zone_slots = {
+        slot_pc_hunter_hub
+    }
+    resources = {
+        category = planet_districts
+        produces = {
+            minor_artifacts = 1
+            astral_threads = 1
+            nanites = 1
+            consumer_goods = 100
+        }
+        cost = {
+            alloys = 600
+            food = 100
+            unity = 500
+        }
+        upkeep = {
+            minerals = 50
+            alloys = 50
+            food = 40
+        }
+    }
+    planet_modifier = {
+        logistic_growth_mult = 0.02
+        planet_stability_add = 5        
+        PLANET_RESETTLEMENT_UNEMPLOYED_MULT = 0.2
+        planet_district_hunter_kafuka_build_speed_mult = 0.05
+        job_kafuka_librarian_add = 20
+        planet_building_cyber_miner_build_speed_mult = 0.1
+        planet_building_cyber_miner_2_build_speed_mult = 0.1
+        planet_building_cyber_miner_3_build_speed_mult = 0.1
+    }
+    ai_weight = {
+        weight = 100
+    }
+}
+district_hunter_yinlang = {
+    base_buildtime = 500
+    is_capped_by_modifier = no
+    expansion_planner = yes
+    icon = district_hunter_yinlang
+    show_on_uncolonized = {
+        exists = from
+        from = {
+            OR = {
+                has_origin = origin_StellaronHunter
+            }
+        }
+        uses_district_set = pc_hunter_hub_set
+    }
+    potential = {
+        exists = owner
+        owner = {
+            OR = {
+                has_origin = origin_StellaronHunter
+            }
+        }
+        uses_district_set = pc_hunter_hub_set
+    }
+    conversion_ratio = 1
+    convert_to = {
+        district_crashed_slaver_ship
+        district_arcology_housing
+        district_rw_city
+        district_nexus
+        district_hive
+        district_prison
+        district_craglands
+        district_mindlink
+        district_crashed_slaver_ship
+        district_resort
+        district_slave
+    }
+    zone_slots = {
+        slot_pc_hunter_hub
+    }
+    resources = {
+        category = planet_districts
+        produces = {
+            energy = 100
+            minerals = 80
+            trade = 50
+            yuzhousuipian = 1
+        }
+        cost = {
+            alloys = 800
+            food = 150
+            unity = 800
+        }
+        upkeep = {
+            unity = 100
+            alloys = 100
+            food = 40
+        }
+    }
+    planet_modifier = {
+        logistic_growth_mult = 0.02
+        planet_crime_add = 2
+        PLANET_RESETTLEMENT_UNEMPLOYED_MULT = 0.2
+        planet_district_hunter_yinlang_build_speed_mult = 0.05
+        planet_amenities_mult = 0.02
+        planet_building_hunter_hacker_build_speed_mult = 0.1
+        planet_building_hunter_hacker_2_build_speed_mult = 0.1
+        planet_building_hunter_hacker_3_build_speed_mult = 0.1
     }
     ai_weight = {
         weight = 100
