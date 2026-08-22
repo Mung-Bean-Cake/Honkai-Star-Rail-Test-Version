@@ -43,6 +43,55 @@ gelamo_waitress = {
 		weight = 100
 	}
 }
+kafuka_clothing_organizer = {
+	category = StellaronHunter_class
+	icon = job_kafuka_clothing_organizer
+	possible_pre_triggers = {
+		has_owner = yes
+		is_being_purged = no
+		is_being_assimilated = no
+		is_sapient = yes
+	}
+
+	tags = { research soldier unity }
+
+	swappable_data = {
+		default = {
+			condition_string = SPECIALIST_JOB_TRIGGER
+			building_icon = building_holo_theatres
+		}
+	}
+
+	possible_precalc = can_fill_specialist_job
+
+	resources = {
+		category = planet_StellaronHunter_job
+		produces = {
+			feral_insight = 5
+			society_research = 400
+			influence = 0.5
+		}
+		upkeep = {
+			energy = 500
+			alloys = 800
+			unity = 200
+		}
+	}
+	country_modifier = {
+		resolution_category_pre_ftl_stances_vote_strength_mult = 0.8
+		resolution_category_intergalacticdirective_vote_strength_mult = 0.8
+		resolution_category_defenseprivatization_vote_strength_mult = 0.4
+		resolution_category_galactic_institutions_vote_strength_mult = 1.6
+		resolution_category_custodian_reforms_vote_strength_mult = 1.6
+		resolution_category_emperor_imperial_institutions_vote_strength_mult = 1
+		resolution_category_foreign_relations_vote_strength_mult = 0.8
+		resolution_category_imperial_council_vote_strength_mult = 0.8
+		resolution_category_declare_crisis_vote_strength_mult = 0.5
+	}
+	weight = {
+		weight = 100
+	}
+}
 zhimasu = {
 	category = StellaronHunter_class
 	icon = job_zhimasu
@@ -97,6 +146,113 @@ zhimasu = {
 	}
 }
 
+
+
+ren_armourer = {
+	category = StellaronHunter_class
+	icon = job_ren_armourer
+	swappable_data = {
+		default = {
+			condition_string = SOLDIER_JOB_TRIGGER
+			building_icon = building_stronghold
+		}
+		swap_type = {
+			trigger = {
+				soldier_is_necromancer = yes
+			}
+			name = necromancer
+			desc = necromancer
+			icon = necromancer
+			building_icon = building_dread_encampment
+			weight = 20
+		}
+	}
+
+	tags = { soldier }
+	triggered_country_modifier = {
+		potential = {
+			exists = owner
+			owner = {
+				has_valid_civic = civic_StellaronHunter_1
+			}
+		}
+		modifier = {
+			country_naval_cap_mult = 0.15
+		}
+	}
+	triggered_country_modifier = {
+		potential = {
+			exists = owner
+			owner = {
+				has_valid_civic = civic_StellaronHunter_2
+			}
+		}
+		modifier = {
+			country_naval_cap_mult = 0.15
+		}
+	}
+
+	planet_modifier = {
+		POP_GOVERNMENT_ETHIC_ATTRACTION = 0.2
+		PLANET_POP_ASSEMBLY_ADD = 4
+	}
+
+	country_modifier = {
+		country_naval_cap_add = 10
+	}
+	resources = {
+		category = planet_StellaronHunter_job
+		produces = {
+			unity = 500
+		}
+		upkeep = {
+			food = 1000
+			energy = 200
+			consumer_goods = 300
+			alloys = 500
+		}
+	}
+	country_modifier = {
+		country_resource_max_add = 30000
+		VETO_COOLDOWN_MULT = -0.2
+		POP_PURGE_MULT = 0.4
+		CATAPULT_SPREAD_MULT = 0.2
+	}
+
+	inline_script = "output/soldier_triggered_modifiers"
+
+	possible_pre_triggers = {
+		has_owner = yes
+		is_being_purged = no
+		is_being_assimilated = no
+		is_sapient = yes
+	}
+
+	possible = {
+		soldier_job_check_trigger = yes
+		owner = { is_gestalt = no }
+	}
+
+	weight = {
+		weight = 50
+		modifier = {
+			factor = 2
+			has_trait = trait_StellaronHunter_pop_1
+		}
+		modifier = {
+			factor = 10
+			has_trait = trait_StellaronHunter_pop_5
+		}
+		modifier = {
+			factor = 2
+			has_trait = trait_lithoid
+		}
+		modifier = {
+			factor = 5
+			has_trait = trait_cyborg_creed_of_war
+		}
+	}
+}
 ren_soldier = {
 	icon = job_ren_soldier
 	category = StellaronHunter_class
@@ -131,31 +287,31 @@ ren_soldier = {
 	}
 
 	planet_modifier = {
-		planet_crime_add = -2.5
+		planet_crime_add = -8
 	}
 
 	country_modifier = {
-		country_naval_cap_add = 5
+		country_naval_cap_add = 10
+		FEDERATION_FLEET_CAP_ADD = 500
 	}
-	icon = job_ren_soldier_icon
 	resources = {
 		category = planet_StellaronHunter_job
 		produces = {
 			trigger = {
-				soldier_is_necromancer = yes
+				has_building = building_hunter_farm
 			}
-			society_research = 1
-			engineering_research = 1
-			country_naval_cap_add = 1
+			society_research = 3
+			engineering_research = 3
+			country_naval_cap_add = 3
 		}
 		upkeep = {
 			trigger = {
-				soldier_is_necromancer = yes
+				has_building = building_hunter_farm
 			}
-			consumer_goods = 1
+			consumer_goods = 2
 		}
 		upkeep = {
-			alloys = 2
+			alloys = 5
 		}
 	}
 
@@ -245,7 +401,7 @@ gelamo_soldier = {
 			}
 		}
 		modifier = {
-			country_naval_cap_mult = 0.1
+			country_naval_cap_mult = 0.15
 		}
 	}
 	triggered_country_modifier = {
@@ -256,32 +412,33 @@ gelamo_soldier = {
 			}
 		}
 		modifier = {
-			country_naval_cap_mult = 0.2
+			country_naval_cap_mult = 0.15
 		}
 	}
 
 	planet_modifier = {
-		POP_GOVERNMENT_ETHIC_ATTRACTION = 0.1
-		PLANET_POP_ASSEMBLY_ADD = 2
+		POP_GOVERNMENT_ETHIC_ATTRACTION = 0.2
+		PLANET_POP_ASSEMBLY_ADD = 4
 	}
 
 	country_modifier = {
-		country_naval_cap_add = 5
+		country_naval_cap_add = 10
 	}
-	icon = job_gelamo_soldier_icon
 	resources = {
 		category = planet_StellaronHunter_job
 		produces = {
+			unity = 5
+			volatile_motes = 0.5
 		}
 		upkeep = {
 			trigger = {
 				soldier_is_necromancer = yes
 			}
-			consumer_goods = 1
-			energy = 2
+			consumer_goods = 3
+			energy = 3
 		}
 		upkeep = {
-			alloys = 5
+			alloys = 9
 		}
 	}
 
@@ -344,23 +501,75 @@ wolf_hacker = {
 	resources = {
 		category = planet_StellaronHunter_job
 		produces = {
-			trade = 15
+			trade = 40
 		}
 		upkeep = {
-			consumer_goods = 3
+			consumer_goods = 5
 		}
 	}
 	triggered_planet_modifier = {
 		potential = {
 			always = yes
 		}
-		planet_amenities_add = 200
+		planet_amenities_add = 500
 	}
 	weight = {
 		weight = 100
 	}
 }
+gelamo_griller = {
+	category = StellaronHunter_class
+	icon = job_gelamo_griller
+	possible_pre_triggers = {
+		has_owner = yes
+		is_being_purged = no
+		is_being_assimilated = no
+		is_sapient = yes
+	}
 
+	tags = { amenities food unity }
+
+	swappable_data = {
+		default = {
+			condition_string = SPECIALIST_JOB_TRIGGER
+			building_icon = building_holo_theatres
+		}
+	}
+
+	possible_precalc = can_fill_specialist_job
+
+	resources = {
+		category = planet_StellaronHunter_job
+		produces = {
+			food = 50
+			menace = 2
+			multiplier = 2
+			energy = 20
+		}
+		upkeep = {
+			sr_zro = 1
+			influence = 1
+			astral_threads = 1
+		}
+	}
+	triggered_planet_modifier = {
+		potential = {
+			always = yes
+		}
+		HABITABILITY_FLOOR_ADD = 0.15
+	}
+	country_modifier = {
+		weapon_type_explosive_weapon_damage_mult = 0.05
+		s_slot_weapon_damage_mult = 0.05
+		STRIKE_CRAFT_COOLDOWN_MULT = -0.05
+		resolution_category_sanctions_defense_war_vote_strength_mult = 0.4
+		shroud_delve_cost = -0.1
+		shipsize_science_upkeep_mult = 0.5
+	}
+	weight = {
+		weight = 100
+	}
+}
 ren_farmer = {
 	category = StellaronHunter_class
 	icon = job_ren_farmer
@@ -385,8 +594,8 @@ ren_farmer = {
 	resources = {
 		category = planet_StellaronHunter_job
 		produces = {
-			food = 20
-			sr_zro = 0.5
+			food = 60
+			sr_zro = 1
 		}
 		upkeep = {
 			consumer_goods = 8
@@ -396,7 +605,7 @@ ren_farmer = {
 		potential = {
 			always = yes
 		}
-		HABITABILITY_FLOOR_ADD = 0.1
+		HABITABILITY_FLOOR_ADD = 0.15
 	}
 	weight = {
 		weight = 100
@@ -439,32 +648,32 @@ cyber_miner = {
 			}
 		}
 		modifier = {
-			COUNTRY_EDICT_FUND_ADD = 20
+			COUNTRY_EDICT_FUND_ADD = 40
 		}
 	}
 
 	planet_modifier = {
-		POP_GOVERNMENT_ETHIC_ATTRACTION = 0.1
-		PLANET_POP_ASSEMBLY_ADD = 4
+		POP_GOVERNMENT_ETHIC_ATTRACTION = 0.2
+		PLANET_POP_ASSEMBLY_ADD = 6
 	}
 
 	country_modifier = {
-		country_naval_cap_add = 5
+		country_naval_cap_add = 10
 	}
 	icon = job_cyber_miner_icon
 	resources = {
 		category = planet_StellaronHunter_job
 		produces = {
-			energy = 20
+			energy = 60
 		}
 		upkeep = {
 			trigger = {
 				soldier_is_necromancer = yes
 			}
-			consumer_goods = 4
+			consumer_goods = 8
 		}
 		upkeep = {
-			minerals = 8
+			minerals = 20
 		}
 	}
 	weight = {
@@ -520,7 +729,8 @@ kafuka_librarian = {
 		SHIP_ARMOR_HARDENING_ADD = 0.05
 		SHIP_ARMOR_PENETRATION_MULT = 0.05
 		SHIP_SHIELD_PENETRATION_MULT = 0.05
-		SHIP_ARMOR_ADD = 800
+		SHIP_ARMOR_ADD = 600
+		country_resource_max_add = 5000
 	}
 	icon = job_cyber_miner_icon
 	resources = {

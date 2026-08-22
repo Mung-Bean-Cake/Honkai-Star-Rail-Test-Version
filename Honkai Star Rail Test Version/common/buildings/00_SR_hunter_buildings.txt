@@ -55,7 +55,76 @@ building_hunter = {
 
 	upgrades = {}
 }
+building_kafuka_wardrobe = {
+	base_buildtime = 1200
+	empire_limit = 2
+	exempt_from_ai_planet_specialization = no
+	category = unity
+	icon = building_kafuka_wardrobe
+	building_sets = {
+		urban
+		unity
+		research
+		government
+	}
 
+	potential = {
+		exists = owner
+		owner = { has_origin = origin_StellaronHunter }
+	}
+	destroy_trigger = {
+		exists = owner
+		OR = {
+			owner = { is_regular_empire = no }
+		}
+	}
+	allow = {
+	}
+	country_modifier = {
+		country_commander_cap_add = 1
+		country_official_cap_add = 2
+		country_scientist_cap_add = 2
+		pop_ethic_spiritualist_attraction_mult = 0.8
+		Star_Rail_species_trait_points_add = 1
+		shipsize_starbase_citadel_build_speed_mult = 0.5
+	}
+	planet_modifier = {
+		job_kafuka_clothing_organizer_add = 50
+		planet_crime_add = -10
+		army_defense_morale_mult = 1
+	}
+	resources = {
+		category = planet_buildings
+		# PRODUCES
+		cost = {
+			minerals = 3000
+			alloys = 1000
+			yuzhousuipian = 1500
+			influence = 100
+		}
+		produces = {
+			unity = 500
+			society_research = 200
+			astral_threads = 5
+			entropy_crystals = 10
+		}
+		upkeep = {
+			yuzhousuipian = 10
+			influence = 0.5
+			energy = 300
+			unity = 200
+		}
+		inline_script = "jobs/ethic_job_resources_memorialist"
+	}
+
+	prerequisites = {
+		"tech_interplanetary_commerce"
+	}
+
+	show_tech_unlock_if = {
+		is_regular_empire = yes
+	}
+}
 building_gelamo_palace = {
 	base_buildtime = 1000
 	empire_limit = 1
@@ -66,6 +135,7 @@ building_gelamo_palace = {
 		urban
 		unity
 		research
+		government
 	}
 
 	potential = {
@@ -105,7 +175,6 @@ building_gelamo_palace = {
 			engineering_research = 50
 			society_research = 50
 			physics_research = 50
-			country_scientist_cap_add = 1
 			ENVOYS_VALUE_ADD = 1
 		}
 		upkeep = {
@@ -134,6 +203,7 @@ building_zhimasu_center = {
 	building_sets = {
 		urban
 		research
+		government
 	}
 
 	potential = {
@@ -191,7 +261,148 @@ building_zhimasu_center = {
 		is_regular_empire = yes
 	}
 }
+building_ren_arsenal = {
+	base_buildtime = 400
+	empire_limit = 1
+	category = army
+	icon = building_ren_arsenal
+	building_sets = {
+		army
+		government
+	}
+	potential = {
+		exists = owner
+		owner = {
+			is_regular_empire = yes
+			has_civic = civic_StellaronHunter_1
+		}
+	}
+	planet_modifier = {
+		job_ren_armourer_add = 100
+		PLANET_DEFENSE_ARMIES_ADD = 5
+	}
+	country_modifier = {
+		country_commander_cap_add = 2
+		country_official_cap_add = 1
+		Star_Rail_species_trait_points_add = 1
+		country_resource_max_add = 50000
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			minerals = 1500
+			alloys = 1000
+		}
+		upkeep = {
+			minerals = 800
+			energy = 150
+		}
+		produces = {
+			engineering_research = 20
+		}
+	}
 
+	upgrades = {}
+}
+building_kafuka_library = {
+	base_buildtime = 600
+	category = research
+	icon = building_kafuka_library
+	building_sets = {
+		research
+		government
+	}
+	potential = {
+		exists = owner
+		owner = {
+			is_regular_empire = yes
+			has_civic = civic_StellaronHunter_2
+		}
+	}
+	planet_modifier = {
+		job_kafuka_librarian_add = 40
+	}
+	country_modifier = {
+		country_resource_max_add = 10000
+	}
+	resources = {
+		category = planet_buildings
+		cost = {
+			minerals = 400
+			alloys = 300
+			consumer_goods = 200
+			trade = 400
+			sr_dark_matter = 5
+		}
+		upkeep = {
+			minerals = 80
+			energy = 70
+		}
+		produces = {
+			engineering_research = 20
+			society_research = 20
+			physics_research = 20
+		}
+	}
+
+	upgrades = {}
+}
+building_gelamo_BBQ = {
+	base_buildtime = 300
+	exempt_from_ai_planet_specialization = no
+	category = resource
+	icon = building_gelamo_BBQ
+	building_sets = {
+		urban
+		farming
+	}
+
+	potential = {
+		exists = owner
+		owner = { has_origin = origin_StellaronHunter }
+	}
+	destroy_trigger = {
+		exists = owner
+		OR = {
+			owner = { is_regular_empire = no }
+		}
+	}
+	allow = {
+	}
+	planet_modifier = {
+		job_gelamo_griller_add = 40
+		pop_ethic_pacifist_attraction_mult = 0.05
+		planet_num_pops = -0.1
+	}
+	resources = {
+		category = planet_buildings
+		# PRODUCES
+		cost = {
+			unity = 250
+			energy = 300
+		}
+		produces = {
+			food = 50
+			exotic_gases = 2
+			rare_crystals = 2
+		}
+		upkeep = {
+			consumer_goods = 20
+			energy = 50
+			minerals = 40
+			trade = 20
+		}
+		inline_script = "jobs/ethic_job_resources_memorialist"
+	}
+
+	prerequisites = {
+		"tech_interplanetary_commerce"
+	}
+
+	show_tech_unlock_if = {
+		is_regular_empire = yes
+	}
+}
 building_hunter_farm = {
 	base_buildtime = 200
 	planet_limit = 2
@@ -216,7 +427,7 @@ building_hunter_farm = {
 	allow = {
 	}
 	planet_modifier = {
-		job_ren_farmer_add = 100
+		job_ren_farmer_add = 40
 		pop_ethic_pacifist_attraction_mult = 0.05
 	}
 	resources = {
@@ -277,7 +488,7 @@ building_hunter_farm_2 = {
 		}
 	}
 	planet_modifier = {
-		job_ren_farmer_add = 400
+		job_ren_farmer_add = 120
 		pop_ethic_pacifist_attraction_mult = 0.25
 		HABITABILITY_CEIL_ADD = 0.3
 	}
@@ -342,7 +553,7 @@ building_hunter_farm_3 = {
 		BIOLOGICAL_species_trait_points_add = 1
 	}
 	planet_modifier = {
-		job_ren_farmer_add = 800
+		job_ren_farmer_add = 300
 		HABITABILITY_CEIL_ADD = 0.5
 		PLANET_STABILITY_ADD = 5
 		planet_crime_add = 20
@@ -405,7 +616,7 @@ building_hunter_hacker = {
 	allow = {
 	}
 	planet_modifier = {
-		job_wolf_hacker_add = 100
+		job_wolf_hacker_add = 40
 		planet_jobs_upkeep_mult = -0.1
 		pop_happiness = 0.2
 	}
@@ -471,7 +682,7 @@ building_hunter_hacker_2 = {
 		}
 	}
 	planet_modifier = {
-		job_wolf_hacker_add = 300
+		job_wolf_hacker_add = 120
 		planet_jobs_upkeep_mult = -0.15
 		pop_happiness = 0.3
 	}
@@ -536,7 +747,7 @@ building_hunter_hacker_3 = {
 	allow = {
 	}
 	planet_modifier = {
-		job_wolf_hacker_add = 1000
+		job_wolf_hacker_add = 300
 		planet_jobs_upkeep_mult = -0.3
 		pop_happiness = 0.7
 	}
@@ -586,6 +797,7 @@ building_gelamo_military_camp = {
 	icon = building_gelamo_military_camp
 	building_sets = {
 		army
+		government
 	}
 	potential = {
 		exists = owner
@@ -595,7 +807,8 @@ building_gelamo_military_camp = {
 		}
 	}
 	planet_modifier = {
-		job_gelamo_soldier_add = 500
+		job_gelamo_soldier_add = 200
+		PLANET_DEFENSE_ARMIES_ADD = 1
 	}
 	country_modifier = {
 		country_commander_cap_add = 1
@@ -630,9 +843,10 @@ building_hunter_ren = {
 	}
 	building_sets = {
 		army
+		government
 	}
 	planet_modifier = {
-		job_ren_soldier_add = 200
+		job_ren_soldier_add = 100
 		planet_crime_add = -5
 	}
 	country_modifier = {
@@ -667,7 +881,7 @@ building_cyber_miner= {
 		generator
 	}
 	planet_modifier = {
-		job_cyber_miner_add = 100
+		job_cyber_miner_add = 40
 		planet_crime_add = 5
 	}
 	resources = {
@@ -712,7 +926,7 @@ building_cyber_miner_2= {
 			}
 	}
 	planet_modifier = {
-		job_cyber_miner_add = 400
+		job_cyber_miner_add = 120
 		planet_crime_add = 15
 		planet_housing_add = 500
 	}
@@ -760,7 +974,7 @@ building_cyber_miner_3= {
 			}
 	}
 	planet_modifier = {
-		job_cyber_miner_add = 1000
+		job_cyber_miner_add = 300
 		planet_crime_add = 30
 	}
 	country_modifier = {
