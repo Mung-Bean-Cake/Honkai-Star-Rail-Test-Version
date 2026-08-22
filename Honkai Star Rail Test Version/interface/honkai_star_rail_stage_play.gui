@@ -1,0 +1,540 @@
+guiTypes = {
+
+    
+    ### FACTION OVERVIEW GUI ###
+    #reload honkai_star_rail_path.gui   DOT_SR.11
+    containerWindowType = {
+        name = "hsr_star_stage_play"
+        orientation = center
+        origo = center
+        moveable = yes
+        size = { width = 1350 height = 800 }
+
+        background = {
+            name = "background"
+            quadTextureSprite = "GFX_hsr_prth_bg"
+        }
+
+        iconType = {
+            name = "hex_bg"
+            spriteType = "GFX_hex_bg"
+            position = { x = -10000 y = -14 }
+            alwaysTransparent = yes
+        }
+        iconType = {
+            name = "empire_header_line"
+            quadTextureSprite = "GFX_line_long"
+            position = { x = 60000 y = 22 }
+            alwaysTransparent = yes
+        }
+
+        buttonType = {
+            name = "close"
+            quadTextureSprite = "GFX_close"
+            position = { x= -35 y = 0 }
+            orientation = "UPPER_RIGHT"
+            shortcut = "ESCAPE"
+            clicksound = "back_click"
+        }
+
+        # Custom header
+        instantTextBoxType = {
+            name = "irm_some_header"
+            font = "malgun_goth_24"
+            text = "ui_faction_header" 	# header text
+            position = { x = 20000 y = 5 }
+            maxWidth = 543
+            maxHeight = 22
+            fixedSize = yes
+            alwaysTransparent = yes
+        }
+        #左上
+        containerWindowType = {
+            name = "hsr_star_simulated_cosmos"
+            position = { x = 10 y = 5 }
+            size = { width = 350 height = 150 }
+            moveable = no
+            background = {
+                name = "background"
+                quadTextureSprite = "GFX_tiles_dark_area_cut_8"
+            }
+           
+        }
+        #左下
+        containerWindowType = {
+            name = "hsr_star_path_country_show"
+            position = { x = 10 y = 160 }
+            size = { width = 350 height = 630 }
+            moveable = no
+            background = {
+                name = "background"
+                quadTextureSprite = "GFX_tiles_dark_area_cut_8"
+            }
+            
+        }
+        #右
+        containerWindowType = {
+            name = "hsr_star_path_main_window"
+            #size = { width = 825 height = -10 }
+            size = { width = -30 height = -5 }
+            position = { x = 375 y = 5 }
+            background = { name = "background" spriteType = "GFX_glow_tile_cyan" }
+            verticalScrollbar = "right_vertical_slider"
+            smooth_scrolling = yes
+            clipping = yes
+           
+        }
+        ### ALL OF THIS IS HIDDEN OR DISPLACED ! ###
+
+        buttonType = { name = "focus_button" position = { x = -1180 y = -1112 } spriteType = "GFX_fleetview_focus" } # hidden
+        instantTextBoxType = { name = "heading" font = "malgun_goth_24" position = { x = -1120 y = -115 } } # hidden
+        buttonType = { name = "alien_message_background" size = { x = 0 y = 0 } position = { x = -1110 y = -11430 } spriteType = "GFX_tiles_dark_area_cut_8" } # hidden
+        buttonType = { name = "confirm_button" quadTextureSprite = "GFX_standard_button_142_34_button" } # hidden
+        containerWindowType = {
+            name = "portrait_background"
+            position = { x = -1117 y = -1145 }
+            size = { width = 0 height = 0 } 	# hide portrait window
+            iconType = { name = "event_picture" spriteType = "GFX_diplomacy_portrait_frame" } # hidden
+            iconType = { name = "portrait" spriteType = "GFX_portrait_character" } # hidden
+        }
+        containerWindowType = {
+            name = "portrait"
+            position = { x = -1117 y = -1145 }
+            size = { width = 0 height = 0 } # hide portrait window
+            iconType = { name = "portrait" spriteType = "GFX_portrait_gamesetup_mask" } # hidden
+            iconType = { name = "black_frame" spriteType = "GFX_diplomacy_portrait_shadow_frame" } # hidden
+            iconType = { name = "stripes_1" spriteType = "GFX_diplomacy_stripes_2" } # hidden
+            iconType = { name = "city_frame" spriteType = "GFX_diplomacy_portrait_frame" } # hidden
+        }
+        iconType = { name = "empire_info_bg" spriteType = "GFX_diplomacy_dark_fade_bg" } # hidden
+        instantTextBoxType = { name = "empire_name" font = "malgun_goth_24" } # hidden
+        instantTextBoxType = { name = "empire_government_type" font = "cg_16b" } # hidden
+        instantTextBoxType = { name = "empire_personality_type" font = "cg_16b" } # hidden
+        overlappingElementsBoxType = { name = "empire_ethics_icons" position = { x = -1145 y = -11138 } } # hidden
+        iconType = { name = "empire_flag" spriteType = "GFX_empire_flag_128" position = { x = -1125 y = -11235 } } # hidden
+        containerWindowType = {
+            name = "leader_details"
+            position = { x = -1125 y = -1175 }
+            containerWindowType = { name = "empire_traits_box" } # hidden
+            instantTextBoxType = { name = "empire_traits_label" font = "cg_16b" } # hidden
+            overlappingElementsBoxType = { name = "leader_traits" } # hidden
+            instantTextBoxType = { name = "leader_name" font = "cg_16b" } # hidden
+            instantTextBoxType = { name = "leader_species" font = "cg_16b" } # hidden
+        }
+        containerWindowType = {
+            name = "opinion_window"
+            position = { x = -1127 y = -11110 }
+            size = { width = 94 height = 30 }
+            iconType = { name = "their_opinion_icon" spriteType = "GFX_diplomacy_opinion" } # hidden
+            instantTextBoxType = { name = "their_opinion" font = "cg_16b" }
+        }
+
+        ### EVENT DIPLO ###
+
+        containerWindowType = {
+            name = "EVENT_DIPLO"
+            position = { x = 2 y = 50 }
+            #size = { width = 563 height = 220 }
+            moveable = no
+
+            instantTextBoxType = {
+                name = "action_title"
+                font = "malgun_goth_24"
+                position = { x = 20 y = 0 }
+                maxWidth = 200
+                alwaysTransparent = yes
+            }
+            instantTextBoxType = {
+                name = "action_desc"
+                font = "malgun_goth_24"
+                position = { x = 490 y = 0 }
+                maxWidth = 500
+                maxHeight = 180
+                orientation = "UPPER_LEFT"
+                format = center
+                alwaysTransparent = yes
+                text_color_code = "H"
+            }
+            listboxType = { name = "option_list" position = { x = -11500 y = -1130 } } # hidden option list
+        }
+        # Description Section
+        instantTextBoxType = {
+            name = "alien_message"
+            font = "cg_16b"
+            position = { x = 2000000 y = 100 }
+            maxWidth = 465
+            maxHeight = 220
+            format = left
+            scrollbartype = "standardtext_slider"
+        }
+    }
+}
+guiTypes = {
+    ### FACTION OVERVIEW GUI ###
+    #reload honkai_star_extend_planet_ui.gui
+    containerWindowType = {
+        name = "hsr_path_civic_select"
+        orientation = center
+        origo = center
+        moveable = yes
+        size = { width = 1000 height = 600 }
+
+        background = {
+            name = "background"
+            quadTextureSprite = "GFX_hsr_path_select_ui_bg_main"
+        }
+
+        buttonType = {
+            name = "close"
+            quadTextureSprite = "GFX_close"
+            position = { x= -38 y = 0 }
+            orientation = "UPPER_RIGHT"
+            shortcut = "ESCAPE"
+            clicksound = "back_click"
+        }
+        # Custom header
+        instantTextBoxType = {
+            name = "irm_some_header"
+            font = "large_title_font_28"
+            text = "hsr_path_civic_select" 	# header text
+            position = { x = 430 y = 5 }
+            maxWidth = 543
+            maxHeight = 22
+            fixedSize = yes
+            alwaysTransparent = yes
+        }
+        containerWindowType = {
+            name = "hsr_star_civic_show"
+            position = { x = 10 y = 35 }
+            size = { width = 280 height = 560 }
+            moveable = no
+            background = {
+                name = "background"
+                quadTextureSprite = "GFX_tiles_dark_area_cut_8"
+            }
+            effectButtonType = {
+                name = "hsr_star_path_civic_titlie"
+                #spriteType = "GFX_glow_tile_cyan"
+                size = { width = 200 height = 50 }
+                position = { x = 50 y = 0 }
+                format = center
+                text = hsr_star_path_civic_titlie
+                buttonFont = "malgun_goth_24"
+                font = "large_title_font_28"
+                effect = hsr_star_path_civic_titlie_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_civic_1_show"
+                #spriteType = "GFX_glow_tile_cyan"
+                size = { width = 50 height = 50 }
+                position = { x = 10 y = 70 }
+                format = center
+                text = hsr_star_path_civic_1_show
+                buttonFont = "malgun_goth_24"
+                font = "large_title_font_28"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_civic_1_text"
+                spriteType = "GFX_glow_tile_cyan"
+                size = { width = 180 height = 40 }
+                position = { x = 80 y = 50 }
+                format = center
+                text = hsr_star_path_civic_1_text
+                buttonFont = "malgun_goth_24"
+                font = "malgun_goth_24"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_civic_1_set"
+                spriteType = "GFX_glow_tile_cyan"
+                size = { width = 180 height = 40 }
+                position = { x = 80 y = 100 }
+                format = center
+                text = hsr_star_path_civic_1_set
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_star_path_civic_1_set_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_civic_2_show"
+                #spriteType = "GFX_glow_tile_cyan"
+                size = { width = 50 height = 50 }
+                position = { x = 10 y = 170 }
+                format = center
+                text = hsr_star_path_civic_2_show
+                buttonFont = "malgun_goth_24"
+                font = "large_title_font_28"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_civic_2_text"
+                spriteType = "GFX_glow_tile_cyan"
+                size = { width = 180 height = 40 }
+                position = { x = 80 y = 150 }
+                format = center
+                text = hsr_star_path_civic_2_text
+                buttonFont = "malgun_goth_24"
+                font = "malgun_goth_24"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_civic_2_set"
+                spriteType = "GFX_glow_tile_cyan"
+                size = { width = 180 height = 40 }
+                position = { x = 80 y = 200 }
+                format = center
+                text = hsr_star_path_civic_2_set
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_star_path_civic_2_set_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_civic_3_show"
+                #spriteType = "GFX_glow_tile_cyan"
+                size = { width = 50 height = 50 }
+                position = { x = 10 y = 270 }
+                format = center
+                text = hsr_star_path_civic_3_show
+                buttonFont = "malgun_goth_24"
+                font = "large_title_font_28"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_civic_3_text"
+                spriteType = "GFX_glow_tile_cyan"
+                size = { width = 180 height = 40 }
+                position = { x = 80 y = 250 }
+                format = center
+                text = hsr_star_path_civic_3_text
+                buttonFont = "malgun_goth_24"
+                font = "malgun_goth_24"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_civic_3_set"
+                spriteType = "GFX_glow_tile_cyan"
+                size = { width = 180 height = 40 }
+                position = { x = 80 y = 300 }
+                format = center
+                text = hsr_star_path_civic_3_set
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_star_path_civic_3_set_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_civic_4_show"
+                #spriteType = "GFX_glow_tile_cyan"
+                size = { width = 50 height = 50 }
+                position = { x = 10 y = 370 }
+                format = center
+                text = hsr_star_path_civic_4_show
+                buttonFont = "malgun_goth_24"
+                font = "large_title_font_28"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_civic_4_text"
+                spriteType = "GFX_glow_tile_cyan"
+                size = { width = 180 height = 40 }
+                position = { x = 80 y = 350 }
+                format = center
+                text = hsr_star_path_civic_4_text
+                buttonFont = "malgun_goth_24"
+                font = "malgun_goth_24"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_civic_4_set"
+                spriteType = "GFX_glow_tile_cyan"
+                size = { width = 180 height = 40 }
+                position = { x = 80 y = 400 }
+                format = center
+                text = hsr_star_path_civic_4_set
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_star_path_civic_4_set_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_civic_5_show"
+                #spriteType = "GFX_glow_tile_cyan"
+                size = { width = 50 height = 50 }
+                position = { x = 10 y = 470 }
+                format = center
+                text = hsr_star_path_civic_5_show
+                buttonFont = "malgun_goth_24"
+                font = "large_title_font_28"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_civic_5_text"
+                spriteType = "GFX_glow_tile_cyan"
+                size = { width = 180 height = 40 }
+                position = { x = 80 y = 450 }
+                format = center
+                text = hsr_star_path_civic_5_text
+                buttonFont = "malgun_goth_24"
+                font = "malgun_goth_24"
+                effect = the_star_rail_null_effect
+            }
+            effectButtonType = {
+                name = "hsr_star_path_civic_5_set"
+                spriteType = "GFX_glow_tile_cyan"
+                size = { width = 180 height = 40 }
+                position = { x = 80 y = 500 }
+                format = center
+                text = hsr_star_path_civic_5_set
+                buttonFont = "cg_16b"
+                font = "cg_16b"
+                effect = hsr_star_path_civic_5_set_effect
+            }
+        }
+        containerWindowType = {
+            name = "hsr_star_path_show_bg_main_window"
+            #size = { width = 825 height = -10 }
+            size = { width = 700 height = 570 }
+            position = { x = 300 y = 30 }
+            background = { name = "background" spriteType = "GFX_glow_tile_cyan" }
+            verticalScrollbar = "right_vertical_slider"
+            smooth_scrolling = yes
+            clipping = yes
+            containerWindowType = {
+                name = "hsr_star_civic_1"
+                position = { x = 10 y = 10 }
+                size = { width = 220 height = 100 }
+                moveable = no
+                background = {
+                    name = "background"
+                    quadTextureSprite = "GFX_tiles_dark_area_cut_8"
+                }
+                effectButtonType = {
+                    name = "hsr_star_civic_1_detial"
+                    spriteType = "GFX_tr_cunhu_fengrao_1"
+                    size = { width = 120 height = 50 }
+                    position = { x = 5 y = 5 }
+                    format = center
+                    scale = 2
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_star_civic_1_detial_effect
+                }
+                effectButtonType = {
+                    name = "hsr_star_civic_1_name"
+                    #spriteType = "GFX_glow_tile_cyan"
+                    size = { width = 120 height = 50 }
+                    position = { x = 95 y = 5 }
+                    format = center
+                    text = hsr_star_civic_1_name
+                    buttonFont = "malgun_goth_24"
+                    font = "malgun_goth_24"
+                    effect = the_star_rail_null_effect
+                }
+                effectButtonType = {
+                    name = "hsr_star_civic_1_reset"
+                    spriteType = "GFX_button_manual"
+                    size = { width = 120 height = 50 }
+                    position = { x = 100 y = 60 }
+                    format = center
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_star_civic_1_reset_effect
+                }
+                effectButtonType = {
+                    name = "hsr_star_civic_1_start"
+                    spriteType = "GFX_button_no_gender"
+                    size = { width = 120 height = 50 }
+                    position = { x = 160 y = 60 }
+                    format = center
+                    #text = simulated_cosmos_name
+                    buttonFont = "cg_16b"
+                    font = "malgun_goth_24"
+                    effect = hsr_star_civic_1_start_effect
+                }
+            }
+            
+        }
+        ### ALL OF THIS IS HIDDEN OR DISPLACED ! ###
+
+        buttonType = { name = "focus_button" position = { x = -1180 y = -1112 } spriteType = "GFX_fleetview_focus" } # hidden
+        instantTextBoxType = { name = "heading" font = "malgun_goth_24" position = { x = -1120 y = -115 } } # hidden
+        buttonType = { name = "alien_message_background" size = { x = 0 y = 0 } position = { x = -1110 y = -11430 } spriteType = "GFX_tiles_dark_area_cut_8" } # hidden
+        buttonType = { name = "confirm_button" quadTextureSprite = "GFX_standard_button_142_34_button" } # hidden
+        containerWindowType = {
+            name = "portrait_background"
+            position = { x = -1117 y = -1145 }
+            size = { width = 0 height = 0 } 	# hide portrait window
+            iconType = { name = "event_picture" spriteType = "GFX_diplomacy_portrait_frame" } # hidden
+            iconType = { name = "portrait" spriteType = "GFX_portrait_character" } # hidden
+        }
+        containerWindowType = {
+            name = "portrait"
+            position = { x = -1117 y = -1145 }
+            size = { width = 0 height = 0 } # hide portrait window
+            iconType = { name = "portrait" spriteType = "GFX_portrait_gamesetup_mask" } # hidden
+            iconType = { name = "black_frame" spriteType = "GFX_diplomacy_portrait_shadow_frame" } # hidden
+            iconType = { name = "stripes_1" spriteType = "GFX_diplomacy_stripes_2" } # hidden
+            iconType = { name = "city_frame" spriteType = "GFX_diplomacy_portrait_frame" } # hidden
+        }
+        iconType = { name = "empire_info_bg" spriteType = "GFX_diplomacy_dark_fade_bg" } # hidden
+        instantTextBoxType = { name = "empire_name" font = "malgun_goth_24" } # hidden
+        instantTextBoxType = { name = "empire_government_type" font = "cg_16b" } # hidden
+        instantTextBoxType = { name = "empire_personality_type" font = "cg_16b" } # hidden
+        overlappingElementsBoxType = { name = "empire_ethics_icons" position = { x = -1145 y = -11138 } } # hidden
+        iconType = { name = "empire_flag" spriteType = "GFX_empire_flag_128" position = { x = -1125 y = -11235 } } # hidden
+        containerWindowType = {
+            name = "leader_details"
+            position = { x = -1125 y = -1175 }
+            containerWindowType = { name = "empire_traits_box" } # hidden
+            instantTextBoxType = { name = "empire_traits_label" font = "cg_16b" } # hidden
+            overlappingElementsBoxType = { name = "leader_traits" } # hidden
+            instantTextBoxType = { name = "leader_name" font = "cg_16b" } # hidden
+            instantTextBoxType = { name = "leader_species" font = "cg_16b" } # hidden
+        }
+        containerWindowType = {
+            name = "opinion_window"
+            position = { x = -1127 y = -11110 }
+            size = { width = 94 height = 30 }
+            iconType = { name = "their_opinion_icon" spriteType = "GFX_diplomacy_opinion" } # hidden
+            instantTextBoxType = { name = "their_opinion" font = "cg_16b" }
+        }
+
+        ### EVENT DIPLO ###
+
+        containerWindowType = {
+            name = "EVENT_DIPLO"
+            position = { x = 2 y = 50000 }
+            #size = { width = 563 height = 220 }
+            moveable = no
+
+            instantTextBoxType = {
+                name = "action_title"
+                font = "malgun_goth_24"
+                position = { x = 20 y = 0 }
+                maxWidth = 200
+                alwaysTransparent = yes
+            }
+            instantTextBoxType = {
+                name = "action_desc"
+                font = "malgun_goth_24"
+                position = { x = 490 y = 0 }
+                maxWidth = 500
+                maxHeight = 180
+                orientation = "UPPER_LEFT"
+                format = center
+                alwaysTransparent = yes
+                text_color_code = "H"
+            }
+            listboxType = { name = "option_list" position = { x = -11500 y = -1130 } } # hidden option list
+        }
+        # Description Section
+        instantTextBoxType = {
+            name = "alien_message"
+            font = "cg_16b"
+            position = { x = 20 y = 100000 }
+            maxWidth = 465
+            maxHeight = 220
+            format = left
+            scrollbartype = "standardtext_slider"
+        }
+    }
+}
