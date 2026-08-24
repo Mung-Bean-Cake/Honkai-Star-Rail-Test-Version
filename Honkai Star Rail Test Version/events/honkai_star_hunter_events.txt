@@ -8,6 +8,7 @@ country_event = {
         has_origin = origin_StellaronHunter
     }
     immediate = {
+        set_global_flag = hunter_begin
         from = {
             if = {
                 limit = {
@@ -17,6 +18,28 @@ country_event = {
                 add_trait = {trait = leader_kafuka_t2 show_message = no}
                 add_trait = {trait = leader_kafuka_t3 show_message = no}
             }
+        }
+    }
+}
+country_event = {
+    id = DOT_SR_Hunter.2
+    hide_window = yes
+    is_triggered_only = yes
+
+    trigger = {
+        has_origin = origin_StellaronHunter
+    }
+
+    immediate = {
+        if = {
+            limit = {
+                has_origin = origin_StellaronHunter
+                NOT = { has_technology = tech_yitai_data_1 }
+            }
+            add_research_option = tech_gelamo_palace
+            add_research_option = tech_shuhu
+            add_research_option = tech_BBQ
+            add_research_option = tech_hacker_skill
         }
     }
 }
