@@ -3762,6 +3762,7 @@ leader_qianyeren_t1 = {
     }
 	triggered_self_modifier = {
 		job_dieceng_add = 1
+		job_shengxiao_add = 1
 		mult = this.owner.num_leader_qianyeren_t1
 	}
 	
@@ -3798,7 +3799,11 @@ leader_qianyeren_t2 = {
         COUNCIL = no
         TIER = 1
     }
-   triggered_fleet_modifier = {
+	triggered_self_modifier = {
+		job_shengxiao_add = 1
+		mult = this.owner.num_leader_qianyeren_t2
+	}
+    triggered_fleet_modifier = {
 		SHIP_SHIELD_PENETRATION_MULT = 0.5
 		SHIP_ARMOR_PENETRATION_MULT = 0.5
 		mult = this.owner.num_leader_qianyeren_t2
@@ -3911,6 +3916,7 @@ leader_langzun_t1 = {
     }
 	triggered_self_modifier = {
 		job_dieceng_add = 1
+		job_shengxiao_add = 1
 		mult = this.owner.num_leader_langzun_t1
 	}
 	triggered_fleet_modifier = {
@@ -3939,6 +3945,7 @@ leader_langzun_t2 = {
     }
 	triggered_self_modifier = {
 		job_dieceng_add = 1
+		job_shengxiao_add = 1
 		mult = this.owner.num_leader_langzun_t2
 	}
     triggered_fleet_modifier = {
@@ -4076,11 +4083,22 @@ leader_jiziqixing_t1 = {
         COUNCIL = no
         TIER = 1
     }
+	triggered_self_modifier = {
+		job_shengxiao_add = 1
+		mult = this.owner.num_leader_jiziqixing_t1
+	}
 	fleet_modifier = {
 		SHIP_hull_MULT = 0.2
 		ship_shield_mult = 0.2
 		SHIP_ARMOR_MULT = 0.2
 		COMMAND_LIMIT_ADD = 1000
+	}
+	triggered_fleet_modifier = {
+		SHIP_DAMAGE_REDUCTION_MULT = 0.1
+		SHIP_WEAPON_DAMAGE = 0.2
+		SHIP_WEAPON_RANGE_MULT = 0.2
+		FORCE_DISPARITY_FIRE_RATE_MULT = 0.2
+		mult = this.owner.num_leader_jiziqixing_t1
 	}
 	
 	custom_tooltip_with_modifiers = leader_jiziqixing_t1_add
@@ -4098,13 +4116,24 @@ leader_jiziqixing_t2 = {
         COUNCIL = no
         TIER = 1
     }
+	triggered_self_modifier = {
+		job_shengxiao_add = 1
+		mult = this.owner.num_leader_jiziqixing_t1
+	}
     fleet_modifier = {
 		SHIP_BASE_SPEED_MULT = 0.1
-		SHIP_WINDDOWN_MULT = -1.0
-		SHIP_EVASION_MULT = -0.5
-		SHIP_ACCURACY_MULT = 0.5
-		
+		SHIP_ORBIT_UPKEEP_MULT = -1.0
+		SHIP_ACCURACY_MULT = 0.2
+		SHIP_WINDDOWN_MULT = -0.1
+		SHIP_WINDUP_MULT = -0.1
     }
+	triggered_fleet_modifier = {
+		SHIP_DAMAGE_REDUCTION_MULT = 0.1
+		SHIP_FTL_JUMPDRIVE_RANGE_MULT = 0.5
+		SHIP_JUMPDRIVE_COOLDOWN_MULT = -0.5
+		mult = this.owner.num_leader_jiziqixing_t1
+	}
+	custom_tooltip_with_modifiers = leader_jiziqixing_t2_add
     leader_class = { commander }
     initial = no
     randomized = no
@@ -4119,12 +4148,12 @@ leader_jiziqixing_t3 = {
         COUNCIL = no
         TIER = 1
     }
-    fleet_modifier = {
-		SHIP_WEAPON_DAMAGE = 0.2
-		SHIP_WEAPON_RANGE_MULT =  0.2
-		SHIP_FIRE_RATE_MULT = 0.2
+	triggered_self_modifier = {
+		job_shengxiao_add = 1
+		mult = this.owner.num_leader_jiziqixing_t1
 	}
-	
+    
+	custom_tooltip_with_modifiers = leader_jiziqixing_t3_add
     leader_class = { commander }
     initial = no
     randomized = no
@@ -4166,12 +4195,12 @@ leader_jiziqixing_t5 = {
         COUNCIL = no
         TIER = 1
     }
+	fleet_modifier = {
+		COMMAND_LIMIT_ADD = 100
+	}
 	
 	triggered_fleet_modifier = {
-		SHIP_WINDDOWN_MULT = -0.025
-		SHIP_WINDUP_MULT = -0.025
-		SHIP_JUMPDRIVE_COOLDOWN_MULT = -0.025
-		SHIP_FTL_JUMPDRIVE_RANGE_MULT = 0.025
+		COMMAND_LIMIT_MULT = 0.05
 		mult = this.owner.num_jiziqixing_other_skill
 	}
 	
@@ -4189,13 +4218,12 @@ leader_jiziqixing_t6 = {
         COUNCIL = no
         TIER = 1
     }
-	councilor_modifier = {
-		SHIP_SHIELD_DAMAGE_MULT = 0.1
-		SHIP_ARMOR_DAMAGE_MULT = 0.1
+	self_modifier = {
+		species_leader_exp_gain = 0.4
 	}
-	triggered_councilor_modifier = {
-		SHIP_SHIELD_DAMAGE_MULT = 0.01
-		SHIP_ARMOR_DAMAGE_MULT = 0.01
+
+	triggered_self_modifier = {
+		LEADER_SKILL_LEVELS = 1
 		mult = this.owner.num_jiziqixing_other_skill
 	}
 	

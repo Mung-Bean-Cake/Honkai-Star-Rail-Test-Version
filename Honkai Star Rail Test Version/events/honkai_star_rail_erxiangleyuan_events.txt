@@ -205,21 +205,114 @@ country_event = {
 	id = xiaoqiaosi.8
 	hide_window = yes
 	is_triggered_only = yes
+	fire_only_once = yes
 
 	trigger = {
 		check_variable = {
 			which = num_leader_langzun_t2
 			value >=999
 		}
+		check_variable = {
+			which = num_leader_langzun_t999
+			value < 1
+		}
 	}
 
 	immediate = {
-		set_variable = {
+		change_variable = {
 			which = num_leader_langzun_t999
 			value = 1
 		}
 	}
 	
+}
+
+#姬子·启行——专属技
+country_event = {
+	id = xiaoqiaosi.9
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		any_owned_leader = {
+			has_trait = leader_jiziqixing_t1
+		}
+	}
+
+	immediate = {
+		if = {
+			limit = {check_variable = {which = num_leader_jiziqixing_t1 value < 1}}
+			random_owned_fleet = {
+				limit = {
+					is_ship_size = Pathfinder_ship
+				}
+				fleet_event = {id = xiaoqiaosi.10}
+			}
+		}
+		else_if = {
+			limit = {check_variable = {which = num_leader_jiziqixing_t1 value = 1}}
+			random_owned_fleet = {
+				limit = {
+					is_ship_size = Pathfinder_ship
+				}
+				fleet_event = {id = xiaoqiaosi.11}
+			}
+
+		}
+	}
+}
+
+fleet_event = {
+	id = xiaoqiaosi.10
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		is_ship_size = Pathfinder_ship
+		exists = leader
+		leader = {
+			has_trait = leader_jiziqixing_t1
+		}
+	}
+
+	immediate = {
+		owner= {
+			change_variable = {
+			which = num_leader_jiziqixing_t1
+			value = 1
+		}
+	}
+	
+}
+}
+
+fleet_event = {
+	id = xiaoqiaosi.11
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		is_ship_size = Pathfinder_ship
+		or = {
+			not = {exists = leader}
+			and = {
+				exists = leader
+				leader = {
+					not = {has_trait = leader_jiziqixing_t1}
+				}
+			}
+		}
+		
+	}
+
+	immediate = {
+		owner= {
+			change_variable = {
+			which = num_leader_jiziqixing_t1
+			value = -1
+		}
+	}
+}
 }
 
 
@@ -568,7 +661,7 @@ country_event = {
 		}
 		#被动叠层
 		if = {
-			limit = {any_owned_leader = {has_leader_flag = langzun} has_country_flag = is_huanyu_time}
+			limit = {any_owned_leader = {has_leader_flag = langzun} has_country_flag = is_huanyu_time not = {has_country_flag = is_show_time_langzun}}
 			change_variable = {
 				which = num_leader_langzun_t1
 				value = 1
