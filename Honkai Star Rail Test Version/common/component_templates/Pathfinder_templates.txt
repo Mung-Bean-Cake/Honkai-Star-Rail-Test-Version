@@ -1,0 +1,281 @@
+#轨道歼灭脉冲
+weapon_component_template = {
+    key = "Pathfinder_T"
+    size = titanic
+    type = instant
+    prio_projectile = yes
+
+    icon = "GFX_ship_part_perdition_beam"
+    icon_frame = 1
+
+    firing_arc = 20.0 #发射扇面
+    use_ship_kill_target = no
+
+    tags = {}
+
+    prerequisites = {}
+    component_set = "Pathfinder_T"
+    projectile_gfx = "perdition_beam"
+    size_restriction = {
+        Pathfinder_ship
+    }
+    resources = {
+        category = ship_components
+        cost = {
+            alloys = @titanic_t6_cost
+            rare_crystals = @titanic_t6_rare
+        }
+    
+    }
+
+    power = 0
+    damage = { min = 30000 max = 30000 }
+    hull_damage = 2
+    shield_damage = 2
+    armor_damage = 2
+    shield_penetration = 0
+    windup = { max = 70 min = 70 }
+    range = 300 #射程
+    accuracy = 5.0 #命中
+
+    target_weights = {
+        titan = 5
+        battleship = 2
+    }
+
+    ai_weight = {
+        weight = 0
+    }
+}
+#超频粒子光束
+weapon_component_template = {
+    key = "Pathfinder_EX_1"
+    size = extra_large
+    type = instant
+    prio_projectile = yes
+
+    icon = "GFX_mutation_beam_2"
+    icon_frame = 1
+
+    firing_arc = 10.0 #发射扇面
+    use_ship_kill_target = no
+
+    tags = {}
+
+    prerequisites = {}
+    component_set = "Pathfinder_EX_1"
+    projectile_gfx = "tachyon_lance"
+    size_restriction = {
+        Pathfinder_ship
+    }
+    resources = {
+        category = ship_components
+        cost = {
+            alloys = @titanic_t6_cost
+            rare_crystals = @titanic_t6_rare
+        }
+    }
+
+    power = 0
+    damage = { min = 4000 max = 6000 }
+    hull_damage = 0.3
+    shield_penetration = 0.2
+    armor_penetration = 0.2
+    windup = { max = 40 min = 40 }
+    range = 300 #射程
+    accuracy = 5.0 #命中
+
+    target_weights = {
+        titan = 2
+        battleship = 4
+    }
+
+    ai_weight = {
+        weight = 0
+    }
+}
+
+#亚暗物质机炮
+weapon_component_template = {
+    key = "Pathfinder_EX_2"
+    size = extra_large
+    type = instant
+    prio_projectile = yes
+
+    icon = "GFX_tiwate_shippart_m_tianyunlizi_t1"
+    icon_frame = 1
+
+    firing_arc = 30.0 #发射扇面
+    use_ship_kill_target = no
+
+    tags = {}
+
+    prerequisites = {}
+    component_set = "Pathfinder_EX_2"
+    projectile_gfx = "stormfire_auto_cannons_l"
+    size_restriction = {
+        Pathfinder_ship
+    }
+    resources = {
+        category = ship_components
+        cost = {
+            alloys = @titanic_t6_cost
+            rare_crystals = @titanic_t6_rare
+        }
+    }
+
+    power = 0
+    damage = { min = 400 max = 500 }
+    shield_penetration = 3
+    windup = { max = 10 min = 10 }
+    range = 200 #射程
+    accuracy = 1 #命中
+
+    target_weights = {
+        titan = 3
+        battleship = 3
+    }
+
+    ai_weight = {
+        weight = 0
+    }
+}
+
+#超重物质飞弹
+weapon_component_template = {
+    key = "Pathfinder_L"
+    size = large
+    type = missile
+    prio_projectile = yes
+
+    icon = "GFX_tiwate_maoxianjia_daodan"
+    icon_frame = 1
+
+    firing_arc = 360.0 #发射扇面
+    use_ship_kill_target = no
+
+    tags = {}
+
+    prerequisites = {}
+    component_set = "Pathfinder_L"
+    projectile_gfx = "small_missile"
+    size_restriction = {
+        Pathfinder_ship
+    }
+    resources = {
+        category = ship_components
+        cost = {
+            alloys = @titanic_t6_cost
+            rare_crystals = @titanic_t6_rare
+        }
+    }
+
+    power = 0
+    damage = { min = 500 max = 800 }
+    hull_damage = 5
+    shield_penetration = 0
+    armor_penetration = 0
+    armor_damage = 2
+    windup = { max = 20 min = 20 }
+    range = 200 #射程
+    accuracy = 0.5 #命中
+
+    target_weights = {
+        titan = 1
+        battleship = 6
+    }
+
+    ai_weight = {
+        weight = 0
+    }
+}
+
+utility_component_template = {
+	key = "Pathfinder_guanghuan"
+	size = medium
+	icon = "GFX_ship_part_aura_inspiring_presence"
+	icon_frame = 1
+	power = 0
+	hidden = yes
+	size_restriction = {  Pathfinder_ship }
+	component_set = "ship_aura_components"
+    friendly_aura = {
+		name = "Pathfinder_lingyu_1"
+		system_wide = yes
+
+		stack_info = {			#A ship can only be affected by one aura of a certain id. If multiple auras have the same ID the one with the highest priority will be applied.
+			id = Pathfinder_lingyu_1
+			priority = 1
+		}
+        limit = {
+           exists = owner
+           owner = {
+           check_variable = {
+                which = num_leader_jiziqixing_t1
+                value = 1
+            }
+           }
+        }
+
+        modifier = {
+			weapon_type_strike_craft_weapon_damage_mult = 0.2
+			weapon_type_strike_craft_speed_mult = 0.2
+            ship_orbital_bombardment_mult = 0.3
+            SHIP_HULL_REGEN_ADD_PERC = 0.01
+		    SHIP_ARMOR_REGEN_ADD_PERC = 0.01
+		    SHIP_SHIELD_REGEN_ADD_PERC = 0.01
+            
+		}
+		graphics = {
+			area_effect = {
+				entity = "circle_area_entity"
+				dynamic_scale = yes
+			}
+			ship_effect = {
+				entity = "ship_aura_positive_entity"
+				dynamic_scale = no
+			}
+		}
+	}
+	hostile_aura = {
+		name = "Pathfinder_lingyu_2"
+		system_wide = yes
+
+		stack_info = {			#A ship can only be affected by one aura of a certain id. If multiple auras have the same ID the one with the highest priority will be applied.
+			id = Pathfinder_lingyu_2
+			priority = 1
+		}
+        limit = {
+           exists = owner
+           owner = {
+           check_variable = {
+                which = num_leader_jiziqixing_t1
+                value = 1
+            }
+           }
+        }
+		damage_per_day = { 
+			damage = { min = 50 max = 50  }
+	            shield_penetration = 0.3
+	            armor_penetration = 0.3
+                accuracy = 0.9
+		}
+        modifier = {
+			SHIP_WEAPON_DAMAGE = -0.1
+            weapon_type_point_defense_weapon_damage_mult = -0.3
+			weapon_type_point_defense_weapon_fire_rate_mult = -0.3
+		}
+
+		graphics = {
+			area_effect = {
+				entity = "circle_area_entity"
+				dynamic_scale = yes
+			}
+			ship_effect = {
+				entity = "ship_aura_negative_entity"
+				dynamic_scale = no
+			}
+		}
+	}
+}
+
