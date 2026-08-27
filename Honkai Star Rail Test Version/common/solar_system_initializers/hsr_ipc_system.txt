@@ -1,3 +1,155 @@
+ipc_home_initializer = {
+	class = sc_g
+	name = NAME_ipc_home_initializer
+	flags = {
+		ipc_system
+	}
+	usage = origin
+	usage_odds = 0
+	prevent_anomalies = yes
+	planet = {
+		name = "NAME_ipc_home_initializer"
+		class = "pc_g_star"
+		orbit_distance = 0
+		orbit_angle = 1
+		size = 30
+		has_ring = no
+		init_effect = {
+			clear_deposits = yes
+			add_deposit = d_energy_5
+		}
+	}
+	planet = {
+		class = pc_molten
+		orbit_distance = 30
+		orbit_angle = 42
+		size = 10
+		has_ring = no
+		init_effect = {
+			clear_deposits = yes
+			add_deposit = d_engineering_5
+		}
+	}
+	planet = {
+		class = pc_molten
+		orbit_distance = 15
+		orbit_angle = 40
+		size = 10
+		has_ring = no
+		init_effect = {
+			clear_deposits = yes
+			add_deposit = d_minerals_5
+		}
+	}
+
+	planet = {
+		class = pc_toxic
+		orbit_distance = 40
+		orbit_angle = 142
+		size = 20
+		has_ring = no
+		init_effect = {
+			clear_deposits = yes
+			add_deposit = d_exotic_gases_5
+		}
+	}
+
+
+	planet = {
+		name = NAME_ipc_home
+		class = pc_gaia
+		orbit_distance = 55
+		orbit_angle = 142
+		size = 30
+		home_planet = yes
+		has_ring = no
+		flags = { ipc_home }
+		init_effect = {
+
+		}
+	}
+
+	planet = {
+		class = pc_barren_cold
+		orbit_distance = 60
+		orbit_angle = 99
+		size = 10
+		has_ring = no
+		init_effect = {
+			clear_deposits = yes
+			add_deposit = d_volatile_motes_5
+		}
+		moon = {
+			class = pc_rare_crystal_asteroid
+			size = 5
+			orbit_distance = 12
+			orbit_angle = 40
+			has_ring = no
+			init_effect = {
+				clear_deposits = yes
+				add_deposit = d_alloys_1
+			}
+		}
+	}
+	planet = {
+		class = pc_barren_cold
+		orbit_distance = 87
+		orbit_angle = 99
+		size = 10
+		has_ring = no
+		init_effect = {
+			clear_deposits = yes
+			add_deposit = d_alloys_5
+		}
+		moon = {
+			class = pc_barren_cold
+			size = 5
+			orbit_distance = 12
+			orbit_angle = 40
+			has_ring = no
+			init_effect = {
+				clear_deposits = yes
+				add_deposit = d_rare_crystals_5
+			}
+		}
+	}
+    neighbor_system = {
+        hyperlane_jumps = {
+			  min = 2
+			  max = 4
+        }
+        initializer = "ipc_home_taikeer"
+    }
+    neighbor_system = {
+        hyperlane_jumps = {
+			  min = 2
+			  max = 4
+        }
+        initializer = "ipc_home_ipc_2"
+    }
+    neighbor_system = {
+        hyperlane_jumps = {
+			  min = 2
+			  max = 4
+        }
+        initializer = "ipc_home_ipc_3"
+    }
+    neighbor_system = {
+        hyperlane_jumps = {
+			  min = 2
+			  max = 4
+        }
+        initializer = "sol_ipc_4"
+    }
+    #附庸星系
+    neighbor_system = {
+        hyperlane_jumps = {
+			  min = 7
+			  max = 12
+        }
+        initializer = "sol_ipc_5"
+    }
+}
 #取木星
 ipc_junipter_system = {
     name = "NAME_ipc_junipter"
@@ -246,7 +398,7 @@ ipc_home_ipc_2 = {
         class = pc_gaia
         orbit_distance = 55
         orbit_angle = 142
-        size = 6
+        size = 25
         has_ring = no
         flags = { ipc_2 }
         init_effect = {
@@ -278,7 +430,7 @@ ipc_home_ipc_2 = {
 #阿尔法尼星
 ipc_home_ipc_3 = {
     class = sc_g
-    name = NAME_ipc_3
+    name = NAME_sol_ipc_8
     flags = {
 
     }
@@ -286,7 +438,7 @@ ipc_home_ipc_3 = {
     usage_odds = 0
     prevent_anomalies = yes
     planet = {
-        name = "NAME_ipc_3"
+        name = "NAME_sol_ipc_8"
         class = "pc_g_star"
         orbit_distance = 0
         orbit_angle = 1
@@ -309,8 +461,8 @@ ipc_home_ipc_3 = {
         }
     }
     planet = {
-        name = NAME_ipc_3
-        class = pc_continental
+        name = NAME_sol_ipc_8
+        class = pc_nuked
         orbit_distance = 55
         orbit_angle = 142
         size = 25
@@ -451,9 +603,8 @@ sol_ipc_4 = {
 sol_ipc_5 = {
     class = "rl_standard_stars"
     name = NAME_sol_ipc_5
-    usage = misc_system_init
     usage_odds = 0
-
+    flags = { ipc_npc_1_sysytem }
     planet = {
         count = 1
         class = star
@@ -571,93 +722,6 @@ sol_ipc_6 = {
         count = { min = 0 max = 2 }
         orbit_distance = 40
         orbit_angle = { min = 90 max = 270 }
-    }
-}
-#新伦蒂尼恩
-sol_ipc_8 = {
-    name = NAME_sol_ipc_8
-    class = "rl_standard_stars"
-    asteroid_belt = {
-        type = rocky_asteroid_belt
-        radius = 130
-    }
-    asteroid_belt = {
-        type = icy_asteroid_belt
-        radius = 240
-    }
-
-    usage = misc_system_init
-    usage_odds = 0
-
-    planet = {
-        count = 1
-        class = star
-        orbit_distance = 0
-        orbit_angle = 1
-        size = { min = 20 max = 30 }
-        has_ring = no
-    }
-
-    change_orbit = 130
-
-    planet = {
-        count = { min = 3 max = 6 }
-        class = pc_asteroid
-        orbit_distance = 0
-        orbit_angle = { min = 70 max = 120 }
-    }
-
-    change_orbit = 110
-
-    planet = {
-        count = { min = 3 max = 6 }
-        class = pc_ice_asteroid
-        orbit_distance = 0
-        orbit_angle = { min = 70 max = 120 }
-    }
-
-    change_orbit = -210
-
-    planet = {
-        name = name_ipc_8
-        orbit_distance = 30
-        orbit_angle = { min = 90 max = 270 }
-        class = pc_nuked
-        change_orbit = @base_moon_distance
-        size = 20
-
-    }
-
-    change_orbit = 35
-
-    planet = {
-        count = { min = 2 max = 2 }
-        orbit_distance = 40
-        orbit_angle = { min = 90 max = 270 }
-
-        change_orbit = @base_moon_distance
-        flags = { ipc_8 }
-        moon = {
-            count = { min = 0 max = 1 }
-            orbit_angle = { min = 90 max = 270 }
-            orbit_distance = 5
-        }
-    }
-
-    change_orbit = 35
-
-    planet = {
-        count = { min = 2 max = 2 }
-        orbit_distance = 40
-        orbit_angle = { min = 90 max = 270 }
-
-        change_orbit = @base_moon_distance
-
-        moon = {
-            count = { min = 0 max = 1 }
-            orbit_angle = { min = 90 max = 270 }
-            orbit_distance = 5
-        }
     }
 }
 #附庸-波松尔星区

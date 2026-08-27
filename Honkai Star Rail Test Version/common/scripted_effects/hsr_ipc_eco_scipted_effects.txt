@@ -156,201 +156,342 @@ hsr_give_society_tech_tier_3_effect = {
         give_technology = { message = no tech = tech_housing_agrarian_idyll }
     }
 }
-ipc_npc_country_effect = {
-    random_system_within_border = {
-        spawn_system = {
-            min_distance = 10
-            max_distance = 30
-            min_jumps = 6
-            max_jumps = 8
-            initializer = "sol_ipc_5"
+ipc_colony_set_effect = {
+    optimize_memory
+    random_planet_within_border = {
+        limit = { has_planet_flag = ipc_junipter }
+        set_owner = root
+        remove_building = building_colony_shelter
+        remove_building = building_commercial_zone
+        add_deposit = d_rugged_woods
+        add_deposit = d_rugged_woods
+        add_deposit = d_rugged_woods
+        add_deposit = d_rugged_woods
+        add_deposit = d_rugged_woods
+        add_district = district_city
+        add_district = district_city
+        add_district = district_mining
+        add_district = district_generator
+        add_district = district_farming
+        add_district = district_farming
+        add_district = district_farming
+        add_building = building_capital
+        add_building = building_holo_theatres
+        add_building = building_factory_1
+        add_building = building_company_headquarters_1
+        add_modifier = {
+            modifier = lush_planet
+            days = -1
         }
-        last_created_system = {
-            every_system_planet = {
-                limit = { has_planet_flag = ipc_5 }
-                create_species = {
-                    name = random
-                    class = random_non_machine
-                    portrait = random
-                    traits = random
-                    homeworld = this
+        while = {
+            count = 20
+            create_pop_group = {
+                size = 100
+                species = owner_main_species
+            }
+        }
+    }
+     random_planet_within_border = {
+         limit = { has_planet_flag = ipc_taikeer }
+         set_owner = root
+         remove_building = building_colony_shelter
+         remove_building = building_commercial_zone
+         add_deposit = d_ancient_bombardment_craters
+         add_deposit = d_ancient_bombardment_craters
+         add_deposit = d_irradiated_ruins
+         add_deposit = d_irradiated_ruins
+         add_deposit = d_metal_boneyard
+         add_deposit = d_metal_boneyard
+         add_district = district_city
+         add_district = district_city
+         add_district = district_city
+         add_district = district_mining
+         add_district = district_generator
+         add_building = building_capital
+         add_building = building_holo_theatres
+         add_building = building_factory_1
+         add_building = building_company_headquarters_1
+         add_modifier = {
+             modifier = taiker_planet
+             days = -1
+         }
+         while = {
+             count = 15
+             create_pop_group = {
+                 size = 100
+                 species = owner_main_species
+             }
+         }
+     }
+    random_planet_within_border = {
+        limit = { has_planet_flag = ipc_2 }
+        set_owner = root
+        change_pc = pc_hsr_ipc_planet
+        remove_building = building_colony_shelter
+        remove_building = building_commercial_zone
+        add_building = building_capital
+        add_building = building_holo_theatres
+        add_building = building_robot_assembly_plant
+        add_building = building_company_headquarters_1
+        add_district = district_ipc_1
+        add_district = district_ipc_1
+        add_district = district_ipc_2
+        add_district = district_ipc_3
+        add_district = district_ipc_4
+        add_district = district_ipc_5
+        add_district = district_ipc_5
+        add_district = district_ipc_5
+        add_district = district_ipc_6
+        while = {
+            count = 80
+            create_pop_group = {
+                size = 100
+                species = owner_main_species
+            }
+        }
+    }
+    random_planet_within_border = {
+        limit = { has_planet_flag = ipc_3 }
+        set_owner = root
+        remove_building = building_colony_shelter
+        remove_building = building_commercial_zone
+        add_building = building_capital
+        add_building = building_holo_theatres
+        add_building = building_robot_assembly_plant
+        add_building = building_company_headquarters_1
+        add_district = district_city
+        add_district = district_city
+        add_district = district_mining
+        add_district = district_mining
+        add_district = district_generator
+        add_district = district_generator
+        add_district = district_generator
+        add_district = district_generator
+        add_district = district_farming
+        add_random_non_blocker_deposit = yes
+        add_modifier = {
+             modifier = ipc_8_planet
+             days = -1
+        }
+        while = {
+            count = 20
+            create_pop_group = {
+                size = 100
+                species = owner_main_species
+            }
+        }
+    }
+    random_planet_within_border = {
+        limit = { has_planet_flag = ipc_4 }
+        set_owner = root
+        remove_building = building_colony_shelter
+        remove_building = building_commercial_zone
+        add_building = building_capital
+        add_building = building_holo_theatres
+        add_building = building_robot_assembly_plant
+        add_building = building_company_headquarters_1
+        add_district = district_city
+        add_district = district_city
+        add_district = district_mining
+        add_district = district_mining
+        add_district = district_generator
+        add_district = district_generator
+        add_district = district_generator
+        add_district = district_farming
+        add_random_non_blocker_deposit = yes
+        while = {
+            count = 20
+            create_pop_group = {
+                size = 100
+                species = owner_main_species
+            }
+        }
+    }
+}
+ipc_npc_set_effect = {
+    every_system = {
+        limit = {
+            has_star_flag = ipc_npc_1_sysytem
+        }
+        every_system_planet = {
+            limit = { has_planet_flag = ipc_5 }
+            create_species = {
+                name = random
+                class = random_non_machine
+                portrait = random
+                traits = random
+                homeworld = this
+            }
+            last_created_species = {
+                save_event_target_as = origin_imperial_species_4
+            }
+            create_country = {
+                name = {
+                    key = "NAME_ipc_5"
+                    variable_string = "[origin_imperial_species_4.GetNamePlural]"
                 }
-                last_created_species = {
-                    save_event_target_as = origin_imperial_species_4
+                authority = auth_dictatorial
+                species = last_created_species
+                civics = {
+                    civic = civic_philosopher_king
+                    civic = civic_exalted_priesthood
                 }
-                create_country = {
-                    name = {
-                        key = "NAME_ipc_5"
-                        variable_string = "[origin_imperial_species_4.GetNamePlural]"
-                    }
-                    authority = auth_dictatorial
-                    species = last_created_species
-                    civics = {
-                        civic = civic_philosopher_king
-                        civic = civic_exalted_priesthood
-                    }
-                    ethos = {
-                        ethic = ethic_fanatic_spiritualist
-                        ethic = ethic_xenophile
-                    }
-                    origin = "origin_default"
+                ethos = {
+                    ethic = ethic_fanatic_spiritualist
+                    ethic = ethic_xenophile
+                }
+                origin = "origin_default"
+                effect = {
+                    save_global_event_target_as = origin_imperial_homeland_country_4
+                    set_country_flag = origin_imperial_vassal_palatinate_country
 
-                    effect = {
-                        save_global_event_target_as = origin_imperial_homeland_country_4
-                        set_country_flag = origin_imperial_vassal_palatinate_country
-
-                        # Subjugation
-                        set_subject_of = {
-                            who = root
-                            preset = preset_ipc_arc_subject
+                    # Subjugation
+                    set_subject_of = {
+                        who = root
+                        preset = preset_ipc_arc_subject
+                    }
+                    # Communication
+                    every_playable_country = {
+                        limit = {
+                            has_origin = origin_hsr_ipc
                         }
+                        establish_communications_no_message = event_target:origin_imperial_homeland_country_4
+                    }
 
-                        # Communication
-                        every_playable_country = {
-                            limit = {
-                                has_origin = origin_hsr_ipc
+                    # Fleets
+                    create_fleet = {
+                        effect = {
+                            set_owner = event_target:origin_imperial_homeland_country_4
+                            create_ship = {
+                                name = random
+                                random_existing_design = constructor
                             }
-                            establish_communications_no_message = event_target:origin_imperial_homeland_country_4
-                        }
-
-                        # Fleets
-                        create_fleet = {
-                            effect = {
-                                set_owner = event_target:origin_imperial_homeland_country_4
-                                create_ship = {
-                                    name = random
-                                    random_existing_design = constructor
-                                }
-                                set_location = event_target:origin_imperial_homeland_country_4.capital_star
-                            }
-                        }
-
-                        create_fleet = {
-                            effect = {
-                                set_owner = event_target:origin_imperial_homeland_country_4
-                                create_ship = {
-                                    name = random
-                                    random_existing_design = science
-                                }
-                                set_location = event_target:origin_imperial_homeland_country_4.capital_star
-                                save_event_target_as = new_science_ship_target
-                            }
-                        }
-                        create_leader = {
-                            name = random
-                            species = event_target:origin_imperial_homeland_country_4.species
-                            class = scientist
-                            skill = 1
-                        }
-                        event_target:new_science_ship_target = {
-                            assign_leader = last_created_leader
-                        }
-
-                        # Resources
-                        add_basic_resources_effect = { VALUE = 1000 }
-                        add_manufactured_resources_effect = { VALUE = 500 }
-                        add_advanced_resources_effect = { VALUE = 25 }
-
-                        # Policies
-                        set_policy = {
-                            policy = diplomatic_stance
-                            option = diplo_stance_isolationist
-                            cooldown = yes
-                        }
-                        set_policy = {
-                            policy = war_philosophy
-                            option = no_wars
-                            cooldown = yes
-                        }
-                        set_policy = {
-                            policy = orbital_bombardment
-                            option = orbital_bombardment_selective
-                            cooldown = yes
-                        }
-                        set_policy = {
-                            policy = resettlement
-                            option = resettlement_not_allowed
-                            cooldown = yes
-                        }
-                        set_policy = {
-                            policy = first_contact_protocol
-                            option = first_contact_cautious
-                            cooldown = yes
-                        }
-                        set_policy = {
-                            policy = border_policy
-                            option = border_policy_closed
-                            cooldown = yes
-                        }
-                        set_policy = {
-                            policy = economic_policy
-                            option = economic_policy_civilian
-                            cooldown = yes
-                        }
-                        set_policy = {
-                            policy = robot_pop_policy
-                            option = robot_pops_outlawed
-                            cooldown = yes
-                        }
-                        set_policy = {
-                            policy = population_controls
-                            option = population_controls_not_allowed
-                            cooldown = yes
-                        }
-                        set_policy = {
-                            policy = slavery
-                            option = slavery_not_allowed
-                            cooldown = yes
-                        }
-                        set_policy = {
-                            policy = purge
-                            option = purge_not_allowed
-                            cooldown = yes
+                            set_location = event_target:origin_imperial_homeland_country_4.capital_star
                         }
                     }
-                }
-                set_owner = event_target:origin_imperial_homeland_country_4
-                set_controller = event_target:origin_imperial_homeland_country_4
-                set_capital = yes
 
-                while = {
-                    count = 25
-                    create_pop_group = {
-                        species = event_target:origin_imperial_species_4
+                    create_fleet = {
+                        effect = {
+                            set_owner = event_target:origin_imperial_homeland_country_4
+                            create_ship = {
+                                name = random
+                                random_existing_design = science
+                            }
+                            set_location = event_target:origin_imperial_homeland_country_4.capital_star
+                            save_event_target_as = new_science_ship_target
+                        }
                     }
-                }
-
-                colony = {
-                    generate_start_buildings_and_districts = yes
+                    create_leader = {
+                        name = random
+                        species = event_target:origin_imperial_homeland_country_4.species
+                        class = scientist
+                        skill = 1
+                    }
+                    event_target:new_science_ship_target = {
+                        assign_leader = last_created_leader
+                    }
+                    # Resources
+                    add_basic_resources_effect = { VALUE = 1000 }
+                    add_manufactured_resources_effect = { VALUE = 500 }
+                    add_advanced_resources_effect = { VALUE = 25 }
+                    # Policies
+                    set_policy = {
+                        policy = diplomatic_stance
+                        option = diplo_stance_isolationist
+                        cooldown = yes
+                    }
+                    set_policy = {
+                        policy = war_philosophy
+                        option = no_wars
+                        cooldown = yes
+                    }
+                    set_policy = {
+                        policy = orbital_bombardment
+                        option = orbital_bombardment_selective
+                        cooldown = yes
+                    }
+                    set_policy = {
+                        policy = resettlement
+                        option = resettlement_not_allowed
+                        cooldown = yes
+                    }
+                    set_policy = {
+                        policy = first_contact_protocol
+                        option = first_contact_cautious
+                        cooldown = yes
+                    }
+                    set_policy = {
+                        policy = border_policy
+                        option = border_policy_closed
+                        cooldown = yes
+                    }
+                    set_policy = {
+                        policy = economic_policy
+                        option = economic_policy_civilian
+                        cooldown = yes
+                    }
+                    set_policy = {
+                        policy = robot_pop_policy
+                        option = robot_pops_outlawed
+                        cooldown = yes
+                    }
+                    set_policy = {
+                        policy = population_controls
+                        option = population_controls_not_allowed
+                        cooldown = yes
+                    }
+                    set_policy = {
+                        policy = slavery
+                        option = slavery_not_allowed
+                        cooldown = yes
+                    }
+                    set_policy = {
+                        policy = purge
+                        option = purge_not_allowed
+                        cooldown = yes
+                    }
                 }
             }
-            create_starbase = {
-                size = "starbase_starport"
+            set_owner = event_target:origin_imperial_homeland_country_4
+            set_controller = event_target:origin_imperial_homeland_country_4
+            set_capital = yes
+
+            while = {
+                count = 25
+                create_pop_group = {
+                    species = event_target:origin_imperial_species_4
+                }
+            }
+            colony = {
+                generate_start_buildings_and_districts = yes
+            }
+        }
+        create_starbase = {
+            size = "starbase_starport"
+            owner = event_target:origin_imperial_homeland_country_4
+
+            module = "shipyard"
+            module = "anchorage"
+
+            building = "crew_quarters"
+        }
+        generate_home_system_resources = yes
+        every_system_planet = {
+            limit = {
+                has_deposit_for = shipclass_mining_station
+                has_mining_station = no
+            }
+            create_mining_station = {
                 owner = event_target:origin_imperial_homeland_country_4
-
-                module = "shipyard"
-                module = "anchorage"
-
-                building = "crew_quarters"
             }
-            generate_home_system_resources = yes
-            every_system_planet = {
-                limit = {
-                    has_deposit_for = shipclass_mining_station
-                    has_mining_station = no
-                }
-                create_mining_station = {
-                    owner = event_target:origin_imperial_homeland_country_4
-                }
+        }
+        every_system_planet = {
+            limit = {
+                has_deposit_for = shipclass_research_station
+                has_research_station = no
             }
-            every_system_planet = {
-                limit = {
-                    has_deposit_for = shipclass_research_station
-                    has_research_station = no
-                }
-                create_research_station = {
-                    owner = event_target:origin_imperial_homeland_country_4
-                }
+            create_research_station = {
+                owner = event_target:origin_imperial_homeland_country_4
             }
         }
     }
