@@ -34,12 +34,84 @@ country_event = {
         if = {
             limit = {
                 has_origin = origin_StellaronHunter
-                NOT = { has_technology = tech_yitai_data_1 }
+                NOT = { has_technology = tech_shuhu }
             }
-            add_research_option = tech_gelamo_palace
             add_research_option = tech_shuhu
-            add_research_option = tech_BBQ
+            limit = {
+                has_origin = origin_StellaronHunter
+                NOT = { has_technology = tech_hacker_skill }
+            }
             add_research_option = tech_hacker_skill
         }
+        random_planet_within_border = {
+            limit = { has_planet_flag = hunter }
+            remove_building = building_luxury_residence
+            remove_building = building_precinct_house
+            add_building = building_hunter_ren
+            add_building = building_gelamo_military_camp
+        }
+        begin_event_chain = {
+            event_chain = "hunter_discover_situation_chain"
+            target = ROOT
+        }
+        capital_scope = {
+            enable_special_project = {
+                name = "hunter_discover_situation_1"
+                location = this
+                owner = root
+            }
+            enable_special_project = {
+                name = "hunter_discover_situation_2"
+                location = this
+                owner = root
+            }
+            enable_special_project = {
+                name = "hunter_discover_situation_3"
+                location = this
+                owner = root
+            }
+        }
+    }
+}
+country_event = {
+    id = DOT_SR_Hunter.10
+    is_triggered_only = yes
+    title = DOT_SR_Hunter.10.title
+    desc = DOT_SR_Hunter.10.desc
+    picture = hunter_discover_situation_1
+    trigger = {
+
+    }
+    option = {
+        name = DOT_SR_Hunter.10.a
+        custom_tooltip = DOT_SR_Hunter.10.tt
+    }
+}
+country_event = {
+    id = DOT_SR_Hunter.11
+    is_triggered_only = yes
+    title = DOT_SR_Hunter.11.title
+    desc = DOT_SR_Hunter.11.desc
+    picture = hunter_discover_situation_2
+    trigger = {
+
+    }
+    option = {
+        name = DOT_SR_Hunter.11.a
+        custom_tooltip = DOT_SR_Hunter.11.tt
+    }
+}
+country_event = {
+    id = DOT_SR_Hunter.12
+    is_triggered_only = yes
+    title = DOT_SR_Hunter.12.title
+    desc = DOT_SR_Hunter.12.desc
+    picture = hunter_discover_situation_3
+    trigger = {
+
+    }
+    option = {
+        name = DOT_SR_Hunter.12.a
+        custom_tooltip = DOT_SR_Hunter.12.tt
     }
 }
