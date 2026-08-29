@@ -11,12 +11,23 @@
 @species_trait_points = 2
 @species_max_traits = 5
 
-BIOLOGICAL = {
-	species_trait_points = @species_trait_points
-	species_max_traits = @species_max_traits
-}
 Star_Rail = {
 	species_trait_points = 6
 	species_max_traits = 20
+	resources = {
+		category = planet_pops
+		# Resource production from other sources
+		inline_script = "pop_resources/pop_misc_production"
+		produces = {
+			trigger = {
+				exists = planet
+				planet = {
+					has_modifier = astralnomical_interest_modifier
+				}
+				is_enslaved = no
+			}
+			physics_research = 1
+		}
+	}
 	inherit_traits_from = { BIOLOGICAL }
 }

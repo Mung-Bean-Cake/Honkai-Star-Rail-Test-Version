@@ -13,7 +13,7 @@ gelamo_waitress = {
 	swappable_data = {
 		default = {
 			condition_string = SPECIALIST_JOB_TRIGGER
-			building_icon = building_holo_theatres
+			building_icon = building_gelamo_palace
 		}
 	}
 
@@ -40,7 +40,55 @@ gelamo_waitress = {
 		}
 	}
 	weight = {
-		weight = 100
+		weight = 1000
+	}
+}
+job_smallyingxing = {
+	category = StellaronHunter_class
+	icon = job_smallyingxing
+	possible_pre_triggers = {
+		has_owner = yes
+		is_being_purged = no
+		is_being_assimilated = no
+		is_sapient = yes
+	}
+
+	tags = { research soldier unity }
+
+	swappable_data = {
+		default = {
+			condition_string = SPECIALIST_JOB_TRIGGER
+			building_icon = building_yingxing
+		}
+	}
+
+	possible_precalc = can_fill_specialist_job
+
+	resources = {
+		category = planet_StellaronHunter_job
+		produces = {
+			sr_zro = 2
+			minor_artifacts = 10
+			exotic_gases = 2
+			volatile_motes = 2
+			sr_living_metal = 2
+			menace = 5
+			integrity = 2
+			unity = 1600
+		}
+		upkeep = {
+			energy = 400
+			consumer_goods = 200
+			alloys = 1000
+		}
+	}
+	triggered_planet_modifier = {
+		potential = {
+			always = yes
+		}
+	}
+	weight = {
+		weight = 200
 	}
 }
 kafuka_clothing_organizer = {
@@ -58,7 +106,7 @@ kafuka_clothing_organizer = {
 	swappable_data = {
 		default = {
 			condition_string = SPECIALIST_JOB_TRIGGER
-			building_icon = building_holo_theatres
+			building_icon = building_kafuka_wardrobe
 		}
 	}
 
@@ -89,7 +137,7 @@ kafuka_clothing_organizer = {
 		resolution_category_declare_crisis_vote_strength_mult = 0.5
 	}
 	weight = {
-		weight = 100
+		weight = 500
 	}
 }
 zhimasu = {
@@ -107,7 +155,7 @@ zhimasu = {
 	swappable_data = {
 		default = {
 			condition_string = SPECIALIST_JOB_TRIGGER
-			building_icon = building_holo_theatres
+			building_icon = building_zhimasu_center
 		}
 	}
 
@@ -163,7 +211,7 @@ ren_armourer = {
 			name = necromancer
 			desc = necromancer
 			icon = necromancer
-			building_icon = building_dread_encampment
+			building_icon = building_ren_arsenal
 			weight = 20
 		}
 	}
@@ -234,7 +282,7 @@ ren_armourer = {
 	}
 
 	weight = {
-		weight = 50
+		weight = 400
 		modifier = {
 			factor = 2
 			has_trait = trait_StellaronHunter_pop_1
@@ -259,7 +307,7 @@ ren_soldier = {
 	swappable_data = {
 		default = {
 			condition_string = SOLDIER_JOB_TRIGGER
-			building_icon = building_stronghold
+			building_icon = building_hunter_ren
 		}
 		swap_type = {
 			trigger = {
@@ -378,7 +426,7 @@ gelamo_soldier = {
 	swappable_data = {
 		default = {
 			condition_string = SOLDIER_JOB_TRIGGER
-			building_icon = building_stronghold
+			building_icon = building_gelamo_military_camp
 		}
 		swap_type = {
 			trigger = {
@@ -492,7 +540,7 @@ wolf_hacker = {
 	swappable_data = {
 		default = {
 			condition_string = SPECIALIST_JOB_TRIGGER
-			building_icon = building_holo_theatres
+			building_icon = building_hunter_hacker
 		}
 	}
 
@@ -509,9 +557,14 @@ wolf_hacker = {
 	}
 	triggered_planet_modifier = {
 		potential = {
-			always = yes
+			exists = owner
+			owner = {
+				has_valid_civic = civic_StellaronHunter_2
+			}
 		}
-		planet_amenities_add = 500
+		modifier = {
+			planet_amenities_add = 500
+		}
 	}
 	weight = {
 		weight = 100
@@ -532,7 +585,7 @@ gelamo_griller = {
 	swappable_data = {
 		default = {
 			condition_string = SPECIALIST_JOB_TRIGGER
-			building_icon = building_holo_theatres
+			building_icon = building_gelamo_BBQ
 		}
 	}
 
@@ -554,9 +607,14 @@ gelamo_griller = {
 	}
 	triggered_planet_modifier = {
 		potential = {
-			always = yes
+			exists = owner
+			owner = {
+				has_valid_civic = civic_StellaronHunter_2
+			}
 		}
-		HABITABILITY_FLOOR_ADD = 0.15
+		modifier = {
+			HABITABILITY_FLOOR_ADD = 0.15
+		}
 	}
 	country_modifier = {
 		weapon_type_explosive_weapon_damage_mult = 0.05
@@ -565,6 +623,64 @@ gelamo_griller = {
 		resolution_category_sanctions_defense_war_vote_strength_mult = 0.4
 		shroud_delve_cost = -0.1
 		shipsize_science_upkeep_mult = 0.5
+	}
+	weight = {
+		weight = 100
+	}
+}
+gelamo_executive = {
+	category = StellaronHunter_class
+	icon = job_gelamo_executive
+	possible_pre_triggers = {
+		has_owner = yes
+		is_being_purged = no
+		is_being_assimilated = no
+		is_sapient = yes
+	}
+
+	tags = { amenities food unity }
+
+	swappable_data = {
+		default = {
+			condition_string = SPECIALIST_JOB_TRIGGER
+			building_icon = building_hunter_farm
+		}
+	}
+
+	possible_precalc = can_fill_specialist_job
+
+	resources = {
+		category = planet_StellaronHunter_job
+		produces = {
+			consumer_goods = 180
+		}
+		upkeep = {
+			food = 40
+			sr_dark_matter = 1
+		}
+	}
+	triggered_planet_modifier = {
+		potential = {
+			exists = owner
+			owner = {
+				has_valid_civic = civic_StellaronHunter_1
+			}
+		}
+		modifier = {
+			HABITABILITY_CEIL_ADD = 1
+			vultaum_1_cat_research_speed_mult = 1.2
+		}
+	}
+	triggered_country_modifier = {
+		potential = {
+			exists = owner
+			owner = {
+				has_valid_civic = civic_StellaronHunter_2
+			}
+		} 
+		modifier = {
+			category_metaphysics_research_speed_mult = 0.8	
+		}
 	}
 	weight = {
 		weight = 100
@@ -585,7 +701,7 @@ ren_farmer = {
 	swappable_data = {
 		default = {
 			condition_string = SPECIALIST_JOB_TRIGGER
-			building_icon = building_holo_theatres
+			building_icon = building_hunter_farm
 		}
 	}
 
@@ -618,7 +734,7 @@ cyber_miner = {
 	swappable_data = {
 		default = {
 			condition_string = SOLDIER_JOB_TRIGGER
-			building_icon = building_stronghold
+			building_icon = building_cyber_miner
 		}
 	}
 	tags = { energy }
@@ -703,7 +819,7 @@ kafuka_librarian = {
 	swappable_data = {
 		default = {
 			condition_string = SOLDIER_JOB_TRIGGER
-			building_icon = building_stronghold
+			building_icon = building_kafuka_library
 		}
 	}
 	tags = { research }
