@@ -29,19 +29,15 @@ country_event = {
     trigger = {
         has_origin = origin_StellaronHunter
     }
-
     immediate = {
         if = {
             limit = {
                 has_origin = origin_StellaronHunter
-                NOT = { has_technology = tech_shuhu }
+                NOT = { has_technology = tech_qianyan }
             }
-            add_research_option = tech_shuhu
-            limit = {
-                has_origin = origin_StellaronHunter
-                NOT = { has_technology = tech_hacker_skill }
-            }
-            add_research_option = tech_hacker_skill
+            add_research_option = tech_qianyan
+            country_event = { id = DOT_SR_Hunter.5 days = 360}
+            country_event = { id = DOT_SR_Hunter.16 days = 1800}
         }
         random_planet_within_border = {
             limit = { has_planet_flag = hunter }
@@ -74,6 +70,217 @@ country_event = {
     }
 }
 country_event = {
+    id = DOT_SR_Hunter.5
+    title = "DOT_SR_Hunter.5.title"
+    desc = DOT_SR_Hunter.5.desc
+    picture = cihang_arrive
+    show_sound = event_ship_thrusters
+    location = event_target:fengrao_cihang
+    event_chain = fengrao_cihang
+    is_triggered_only = yes
+    trigger = {
+        NOR = {
+            has_country_flag = battle_begin
+        }
+        is_ai = no
+        is_nomadic = no
+    }
+    immediate = {
+        set_country_flag = battle_begin
+        save_event_target_as = owner_country
+        capital_scope = {
+            solar_system = {
+                random_system_planet = {
+                    limit = {
+                        is_capital = no
+                        is_asteroid = no
+                        is_star = no
+                        is_moon = no
+                        NOT = { is_planet_class = pc_hunter_hub }
+                    }
+                    save_event_target_as = cihang_fleet_planet
+                }
+            }
+        }
+        owner_species = { save_event_target_as = owner_species }
+        create_country = {
+            name = "NAME_FengRao_army"
+            species = event_target:owner_species
+            type = nice_faction
+            name_list = ROOT
+            auto_delete = no
+            effect = {
+                set_graphical_culture = root
+                save_event_target_as = cihang_faction
+                set_country_flag = fengrao_cihang
+                establish_communications_no_message = root
+                establish_contact = { who = root location = root.capital_scope }
+                create_leader = {
+                    class = commander
+                    species = owner_main_species
+                    name = random
+                    skill = 4
+                    background_ethic = ethic_spiritualist
+                    background_planet = root.capital_scope
+                    background_job = commanding_officer
+                }
+                last_created_leader = {
+                    add_trait = {
+                        trait = leader_trait_crusader_2
+                    }
+                    save_event_target_as = cihang_admiral
+                }
+                create_fleet = {
+                    name = "NAME_cihang_Fleet"
+                    effect = {
+                        set_owner = prev
+                        save_event_target_as = cihang_fleet
+                        create_ship = {
+                            name = "NAME_Holy_Avatar"
+                            design = "NAME_Astral_Avatar_Small"
+                            growth_stage = 2
+                        }
+                        create_ship = {
+                            name = "NAME_cihang"
+                            design = "NAME_Astral_Avatar_Small"
+                            growth_stage = 2
+                            effect = {
+                                set_ship_flag = fengrao_cihang
+                                set_disable_at_health = 0.05
+                                save_event_target_as = fengrao_cihang
+                            }
+                        }
+                        set_location = event_target:cihang_fleet_planet
+                        set_fleet_stance = aggressive
+                        set_aggro_range_measure_from = return_point
+                        set_aggro_range = 500
+                        assign_leader = last_created_leader
+                        queue_actions = {
+                            repeat = {
+                                wait = {
+                                    duration = 100
+                                }
+                            }
+                        }
+                    }
+                }
+                add_ship_design = last_created_design
+                save_event_target_as = cihang_faction
+                set_name = random
+            }
+        }
+        begin_event_chain = {
+            event_chain = "fengrao_cihang"
+            target = ROOT
+        }
+        hidden_effect = {
+            event_target:cihang_faction = {
+                set_faction_hostility = {
+                    target = root
+                    set_hostile = yes
+                    set_neutral = no
+                    set_friendly = no
+                }
+            }
+        }
+    }
+    option = {
+        name = DOT_SR_Hunter.5.a
+        custom_tooltip = DOT_SR_Hunter.5.tt
+        tooltip = {
+        }
+    }
+}
+ship_event = {
+    id = DOT_SR_Hunter.6
+    hide_window = yes
+    is_triggered_only = yes
+    trigger = {
+        has_ship_flag = fengrao_cihang
+    }
+    immediate = {
+        FROM = { owner = { country_event = { id = DOT_SR_Hunter.7 } } }
+    }
+}
+country_event = {
+    id = DOT_SR_Hunter.7
+    title = "DOT_SR_Hunter.7.title"
+    desc = DOT_SR_Hunter.7.desc
+    picture = cihang_disabled
+    show_sound = event_space_battle
+    location = FROM
+    trackable = yes
+    event_chain = fengrao_cihang
+    is_triggered_only = yes
+    immediate = {
+        FROM = { save_event_target_as = disabled_fengrao_cihang }
+    }
+    option = {
+        name = "DOT_SR_Hunter.7.a"
+        from = {
+            create_point_of_interest = {
+                id = fengrao_cihang_poi.1
+                name = "fengrao_cihang_fleet_poi"
+                event_chain = "fengrao_cihang"
+                location = event_target:fengrao_cihang
+            }
+            enable_special_project = {
+                name = "cihang_research"
+                location = event_target:disabled_fengrao_cihang
+                owner = root
+            }
+        }
+    }
+}
+ship_event = {
+    id = DOT_SR_Hunter.8
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = {
+        hidden_effect = {
+            owner = {
+                remove_point_of_interest = fengrao_cihang_poi.1
+            }
+            fromfrom = {
+                fleet = { destroy_fleet = this }
+            }
+        }
+        FROM = { owner = { country_event = { id = DOT_SR_Hunter.9 } } }
+    }
+}
+country_event = {
+    id = DOT_SR_Hunter.9
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = {
+        end_event_chain = "fengrao_cihang"
+        remove_country_flag = battle_begin
+        hidden_effect = {
+            create_fleet = {
+                name = "NAME_new_cihang"
+                settings = {
+                    can_upgrade = yes
+                    can_change_composition = yes
+                    can_change_leader = yes
+                    can_disband = yes
+                    spawn_debris = no
+                }
+                effect = {
+                    set_owner = root.owner
+                    create_ship = {
+                        design = NAME_Astral_Avatar_Small
+                        name = "NAME_new_cihang"
+                        prefix = no
+                        upgradable = yes
+                    }
+                    set_fleet_stance = evasive
+                    set_location = root.capital_scope
+                }
+            }
+        }
+    }
+}
+country_event = {
     id = DOT_SR_Hunter.10
     is_triggered_only = yes
     title = DOT_SR_Hunter.10.title
@@ -85,6 +292,9 @@ country_event = {
     option = {
         name = DOT_SR_Hunter.10.a
         custom_tooltip = DOT_SR_Hunter.10.tt
+        hidden_effect = {
+            country_event = { id = DOT_SR_Hunter.13 days = 30 }
+        }
     }
 }
 country_event = {
@@ -113,5 +323,286 @@ country_event = {
     option = {
         name = DOT_SR_Hunter.12.a
         custom_tooltip = DOT_SR_Hunter.12.tt
+    }
+}
+country_event = {
+    id = DOT_SR_Hunter.13
+    is_triggered_only = yes
+    title = DOT_SR_Hunter.13.title
+    desc = DOT_SR_Hunter.13.desc
+    picture = hunter_trade_century_1
+    trigger = {
+    }
+    option = {
+        name = DOT_SR_Hunter.13.a
+        custom_tooltip = DOT_SR_Hunter.13.tt
+        add_research_option = tech_hacker_skill
+        hidden_effect = {
+            country_event = { id = DOT_SR_Hunter.14 days = 90 }
+        }
+    }
+}
+country_event = {
+    id = DOT_SR_Hunter.14
+    is_triggered_only = yes
+    title = DOT_SR_Hunter.14.title
+    desc = DOT_SR_Hunter.14.desc
+    picture = hunter_trade_century_2
+    option = {
+        name = DOT_SR_Hunter.14.a
+        custom_tooltip = DOT_SR_Hunter.14.tt
+        add_research_option = tech_hacker_1
+        hidden_effect = {
+            country_event = { id = DOT_SR_Hunter.15 days = 270 }
+        }
+    }
+}
+country_event = {
+    id = DOT_SR_Hunter.15
+    is_triggered_only = yes
+    title = DOT_SR_Hunter.15.title
+    desc = DOT_SR_Hunter.15.desc
+    picture = hunter_trade_century_3
+    option = {
+        name = DOT_SR_Hunter.15.a
+        custom_tooltip = DOT_SR_Hunter.15.tt
+        add_research_option = tech_hacker_2
+    }
+}
+country_event = {
+    id = DOT_SR_Hunter.16
+    title = "DOT_SR_Hunter.16.title"
+    desc = DOT_SR_Hunter.16.desc
+    picture = shouxing_arrive
+    show_sound = event_ship_thrusters
+    location = event_target:fengrao_shouxing
+    event_chain = fengrao_shouxing
+    is_triggered_only = yes
+    trigger = {
+        NOR = {
+            has_country_flag = battle_2_begin
+        }
+        is_ai = no
+        is_nomadic = no
+    }
+    immediate = {
+        set_country_flag = battle_2_begin
+        save_event_target_as = owner_country
+        capital_scope = {
+            solar_system = {
+                random_system_planet = {
+                    limit = {
+                        is_capital = no
+                        is_asteroid = no
+                        is_star = no
+                        is_moon = no
+                        NOT = { is_planet_class = pc_hunter_hub }
+                    }
+                    save_event_target_as = shouxing_fleet_planet
+                }
+            }
+        }
+        owner_species = { save_event_target_as = owner_species }
+        create_country = {
+            name = "NAME_FengRao_army"
+            species = event_target:owner_species
+            type = nice_faction
+            name_list = ROOT
+            auto_delete = no
+            effect = {
+                set_graphical_culture = root
+                save_event_target_as = shouxing_faction
+                set_country_flag = fengrao_shouxing
+                establish_communications_no_message = root
+                establish_contact = { who = root location = root.capital_scope }
+                create_leader = {
+                    class = commander
+                    species = owner_main_species
+                    name = random
+                    skill = 4
+                    background_ethic = ethic_spiritualist
+                    background_planet = root.capital_scope
+                    background_job = commanding_officer
+                }
+                last_created_leader = {
+                    add_trait = {
+                        trait = leader_trait_crusader_2
+                    }
+                    save_event_target_as = shouxing_admiral
+                }
+                create_fleet = {
+                    name = "NAME_shouxing_Fleet"
+                    effect = {
+                        set_owner = prev
+                        save_event_target_as = shouxing_fleet
+                        create_ship = {
+                            name = "NAME_xuechou"
+                            design = NAME_shouxing
+                            growth_stage = 2
+                        }
+                        create_ship = {
+                            name = "NAME_changheng"
+                            design = NAME_shouxing
+                            growth_stage = 2
+                        }
+                        create_ship = {
+                            name = "NAME_shouxing"
+                            design = NAME_shouxing
+                            growth_stage = 3
+                            effect = {
+                                set_ship_flag = fengrao_shouxing
+                                set_disable_at_health = 0.02
+                                save_event_target_as = fengrao_shouxing
+                            }
+                        }
+                        set_location = event_target:shouxing_fleet_planet
+                        set_fleet_stance = aggressive
+                        set_aggro_range_measure_from = return_point
+                        set_aggro_range = 500
+                        assign_leader = last_created_leader
+                        queue_actions = {
+                            repeat = {
+                                wait = {
+                                    duration = 100
+                                }
+                            }
+                        }
+                    }
+                }
+                add_ship_design = last_created_design
+                save_event_target_as = shouxing_faction
+                set_name = random
+            }
+        }
+        begin_event_chain = {
+            event_chain = "fengrao_shouxing"
+            target = ROOT
+        }
+        hidden_effect = {
+            event_target:shouxing_faction = {
+                set_faction_hostility = {
+                    target = root
+                    set_hostile = yes
+                    set_neutral = no
+                    set_friendly = no
+                }
+            }
+            create_fleet = {
+                name = "NAME_IPC_helper_FLEET"
+                settings = {
+                    can_upgrade = yes
+                    can_change_composition = yes
+                    can_change_leader = yes
+                    can_disband = yes
+                    spawn_debris = no
+                }
+                effect = {
+                    set_owner = root.owner
+                    create_ship = {
+                        design = "IPC_helper_01"
+                        name = "NAME_IPC_helper"
+                        prefix = no
+                        upgradable = yes
+                    }
+                    set_fleet_stance = aggressive
+                    set_location = root.capital_scope
+                }
+            }
+        }
+    }
+    option = {
+        name = DOT_SR_Hunter.16.a
+        custom_tooltip = DOT_SR_Hunter.16.tt
+        tooltip = {
+        }
+    }
+}
+ship_event = {
+    id = DOT_SR_Hunter.17
+    hide_window = yes
+    is_triggered_only = yes
+    trigger = {
+        has_ship_flag = fengrao_shouxing
+    }
+    immediate = {
+        FROM = { owner = { country_event = { id = DOT_SR_Hunter.18 } } }
+    }
+}
+country_event = {
+    id = DOT_SR_Hunter.18
+    title = "DOT_SR_Hunter.18.title"
+    desc = DOT_SR_Hunter.18.desc
+    picture = shouxing_disabled
+    show_sound = event_space_battle
+    location = FROM
+    trackable = yes
+    event_chain = fengrao_shouxing
+    is_triggered_only = yes
+    immediate = {
+        FROM = { save_event_target_as = disabled_fengrao_shouxing }
+    }
+    option = {
+        name = "DOT_SR_Hunter.18.a"
+        from = {
+            create_point_of_interest = {
+                id = fengrao_shouxing_poi.1
+                name = "fengrao_shouxing_fleet_poi"
+                event_chain = "fengrao_shouxing"
+                location = event_target:fengrao_shouxing
+            }
+            enable_special_project = {
+                name = "shouxing_research"
+                location = event_target:disabled_fengrao_shouxing
+                owner = root
+            }
+        }
+    }
+}
+ship_event = {
+    id = DOT_SR_Hunter.19
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = {
+        hidden_effect = {
+            owner = {
+                remove_point_of_interest = fengrao_shouxing_poi.1
+            }
+            fromfrom = {
+                fleet = { destroy_fleet = this }
+            }
+        }
+        FROM = { owner = { country_event = { id = DOT_SR_Hunter.20 } } }
+    }
+}
+country_event = {
+    id = DOT_SR_Hunter.20
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = {
+        end_event_chain = "fengrao_shouxing"
+        remove_country_flag = battle_2_begin
+        hidden_effect = {
+            create_fleet = {
+                name = "NAME_new_shouxing"
+                settings = {
+                    can_upgrade = yes
+                    can_change_composition = yes
+                    can_change_leader = yes
+                    can_disband = yes
+                    spawn_debris = no
+                }
+                effect = {
+                    set_owner = root.owner
+                    create_ship = {
+                        design = "NAME_shouxing"
+                        name = "NAME_new_shouxing"
+                        prefix = no
+                        upgradable = yes
+                    }
+                    set_fleet_stance = evasive
+                    set_location = root.capital_scope
+                }
+            }
+        }
     }
 }
