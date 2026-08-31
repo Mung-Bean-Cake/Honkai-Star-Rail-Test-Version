@@ -1,0 +1,60 @@
+hsr_star_play_$value$_detial_effect = {
+    allow = {
+        always = yes
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_star_play_$value$_detial_effect
+    }
+}
+
+
+hsr_star_play_$value$_choose_effect = {
+    allow = {      
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = start_civic
+        hidden_effect = {
+            from = {
+                hsr_play_choose = {civic_name = $civic_name$  value = $value$ }
+				
+            }
+        }
+    }
+}
+hsr_star_civic_$value$_reset_effect = {
+    allow = {
+        custom_tooltip = {
+            fail_text = need_selected
+            hidden_trigger = {
+                from = {
+                    has_country_flag = $civic_name$
+                }
+            }
+        }
+        custom_tooltip = {
+            fail_text = need_selected_slot
+            hidden_trigger = {
+                from = {
+                    is_path_slot = yes
+                }
+            }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = reset_civic
+        hidden_effect = {
+            from = {
+                hsr_civic_reset = {civic_name = $civic_name$ value = $value$}
+            }
+        }
+    }
+}

@@ -314,6 +314,39 @@ fleet_event = {
 	}
 }
 }
+country_event = {
+	id = xiaoqiaosi.12
+	hide_window = yes
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	trigger = {
+		any_owned_leader = {
+			has_trait = leader_jiziqixing_t1
+		}
+	}
+
+	immediate = {
+		create_fleet = {
+				name = "Pathfinder_ship"
+				effect = {
+					set_owner = root
+					create_ship = {
+						name =  "Pathfinder_ship"
+					    design = "Pathfinder_ship_design" 
+					}
+					set_location = {
+						target = ROOT.capital_scope
+		 			    distance = 50
+					    angle = random
+		 			    direction = in_system
+
+					}
+				}
+			}
+	}
+}
+
 
 
 #啊哈时刻
@@ -703,12 +736,39 @@ country_event = {
 country_event = {
     id = xiaoqiaosi.4000
     title = "xiaoqiaosi.4000_title"
-    desc = xiaoqiaosi.4000_title
+    desc = xiaoqiaosi.4000_desc
+    is_triggered_only = yes
+
+	
+    option = {
+        name = xiaoqiaosi.4000_r1
+		set_country_flag = hsr_star_play_0_set
+		country_event = {
+			id = xiaoqiaosi.4001
+		}
+		
+        
+    }
+	option = {
+        name = xiaoqiaosi.4000_r2
+        remove_country_flag = hsr_star_play_0_set
+    }
+}
+country_event = {
+    id = xiaoqiaosi.4001
+    title = "xiaoqiaosi.4001_title"
+    desc = xiaoqiaosi.4001_title
     is_triggered_only = yes
     diplomatic = yes
     custom_gui = hsr_play_select
+
+	immediate = {
+		set_country_flag = hsr_star_play_0_set
+		owner = {hsr_play_rechoose = yes}
+	}
     option = {
         name = OK
         default_hide_option = yes
     }
 }
+
