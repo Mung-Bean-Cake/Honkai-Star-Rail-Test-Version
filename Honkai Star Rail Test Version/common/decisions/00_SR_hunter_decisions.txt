@@ -1,0 +1,41 @@
+decision_hunter_hub_change = {
+	owned_planets_only = yes
+	sound = event_ground_battle_02
+	icon = decision_victorious_army
+	potential = {
+		from = {
+			has_origin = origin_StellaronHunter
+		}
+		NOT = {
+			is_planet_class = pc_hunter_hub
+		}
+	}
+	enactment_time = 100
+	allow = {
+		owner = {
+			resource_stockpile_compare = {
+				resource = sr_dark_matter
+				value >= 50
+			}
+			resource_stockpile_compare = {
+				resource = menace
+				value >= 20
+			}
+		}
+	}
+
+	effect = {
+		owner = {
+			add_resource = {
+				sr_dark_matter = -50
+				menace = -20
+			}
+		}
+		set_planet_flag = hunter_hub
+		planet_event = {id = DOT_SR_Hunter.3 }
+	}
+
+	ai_weight = {
+		weight = 0
+	}
+}

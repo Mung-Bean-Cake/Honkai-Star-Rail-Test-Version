@@ -813,6 +813,53 @@ cyber_miner = {
 	}
 	inline_script = "jobs/automodding_priority_energy"
 }
+gelamo_miner = {
+	category = StellaronHunter_class
+	icon = job_gelamo_miner
+	swappable_data = {
+		default = {
+			condition_string = SOLDIER_JOB_TRIGGER
+			building_icon = building_gelamo_mining_station_2
+		}
+	}
+	tags = { minerals }
+	possible_pre_triggers = {
+		has_owner = yes
+		is_being_purged = no
+		is_being_assimilated = no
+		is_sapient = yes
+	}
+	possible_precalc = can_fill_worker_job
+
+	country_modifier = {
+		shipsize_cruiser_hull_add = 1000
+		shipsize_cruiser_armor_mult = 0.1
+		l_slot_weapon_damage_mult = 0.1
+		t_slot_weapon_damage_mult = 0.1
+	}
+	icon = job_gelamo_miner_icon
+	resources = {
+		category = planet_StellaronHunter_job
+		produces = {
+			minerals = 200
+		}
+		upkeep = {
+			consumer_goods = 100
+			sr_zro = 2
+		}
+	}
+	weight = {
+		weight = 30
+		modifier = {
+			factor = 1.5
+			has_trait = trait_StellaronHunter_pop_2
+		}
+		modifier = {
+			factor = 1.5
+			has_trait = trait_StellaronHunter_pop_5
+		}
+	}
+}
 kafuka_librarian = {
 	category = StellaronHunter_class
 	icon = job_kafuka_librarian

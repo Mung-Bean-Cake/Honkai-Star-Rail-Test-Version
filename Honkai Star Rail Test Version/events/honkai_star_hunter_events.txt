@@ -46,6 +46,12 @@ country_event = {
             add_building = building_hunter_ren
             add_building = building_gelamo_military_camp
         }
+        random_planet_within_border = {
+            limit = {
+                is_capital = no 
+                has_planet_flag = gelamo }
+            save_event_target_as = gelamo_planet
+        }
         begin_event_chain = {
             event_chain = "hunter_discover_situation_chain"
             target = ROOT
@@ -53,20 +59,21 @@ country_event = {
         capital_scope = {
             enable_special_project = {
                 name = "hunter_discover_situation_1"
-                location = this
-                owner = root
-            }
-            enable_special_project = {
-                name = "hunter_discover_situation_2"
-                location = this
-                owner = root
-            }
-            enable_special_project = {
-                name = "hunter_discover_situation_3"
-                location = this
+                location = event_target:gelamo_planet
                 owner = root
             }
         }
+    }
+}
+planet_event = {
+    id = DOT_SR_Hunter.3
+    hide_window = yes
+    is_triggered_only = yes
+    trigger = {
+        has_planet_flag = hunter_hub
+    }
+    immediate = {
+        change_pc = pc_hunter_hub
     }
 }
 country_event = {
@@ -294,6 +301,11 @@ country_event = {
         custom_tooltip = DOT_SR_Hunter.10.tt
         hidden_effect = {
             country_event = { id = DOT_SR_Hunter.13 days = 30 }
+            enable_special_project = {
+                name = "hunter_discover_situation_2"
+                location = event_target:gelamo_planet
+                owner = root
+            }
         }
     }
 }
@@ -309,6 +321,11 @@ country_event = {
     option = {
         name = DOT_SR_Hunter.11.a
         custom_tooltip = DOT_SR_Hunter.11.tt
+        enable_special_project = {
+            name = "hunter_discover_situation_3"
+            location = event_target:gelamo_planet
+            owner = root
+        }
     }
 }
 country_event = {
@@ -323,6 +340,9 @@ country_event = {
     option = {
         name = DOT_SR_Hunter.12.a
         custom_tooltip = DOT_SR_Hunter.12.tt
+        hidden_effect = {
+            country_event = { id = DOT_SR_Hunter.21 days = 60 }
+        }
     }
 }
 country_event = {
@@ -412,7 +432,6 @@ country_event = {
             effect = {
                 set_graphical_culture = root
                 save_event_target_as = shouxing_faction
-                set_country_flag = fengrao_shouxing
                 establish_communications_no_message = root
                 establish_contact = { who = root location = root.capital_scope }
                 create_leader = {
@@ -472,6 +491,7 @@ country_event = {
                 add_ship_design = last_created_design
                 save_event_target_as = shouxing_faction
                 set_name = random
+                set_country_flag = fengrao_shouxing@root
             }
         }
         begin_event_chain = {
@@ -490,9 +510,9 @@ country_event = {
             create_fleet = {
                 name = "NAME_IPC_helper_FLEET"
                 settings = {
-                    can_upgrade = yes
-                    can_change_composition = yes
-                    can_change_leader = yes
+                    can_upgrade = no
+                    can_change_composition = no
+                    can_change_leader = no
                     can_disband = yes
                     spawn_debris = no
                 }
@@ -502,9 +522,10 @@ country_event = {
                         design = "IPC_helper_01"
                         name = "NAME_IPC_helper"
                         prefix = no
-                        upgradable = yes
+                        upgradable = no
                     }
                     set_fleet_stance = aggressive
+                    set_fleet_flag = IPC_helper_01
                     set_location = root.capital_scope
                 }
             }
@@ -523,9 +544,29 @@ ship_event = {
     is_triggered_only = yes
     trigger = {
         has_ship_flag = fengrao_shouxing
+        owner = { has_country_flag = fengrao_shouxing@from.owner }
     }
     immediate = {
         FROM = { owner = { country_event = { id = DOT_SR_Hunter.18 } } }
+        hidden_effect = {
+            from = {
+                fleet = {
+                    fleet_event = { id = DOT_SR_Hunter.17-1}
+                }
+            }
+        }
+    }
+}
+fleet_event = {
+    id = DOT_SR_Hunter.17-1
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = {
+        hidden_effect = {
+            fromfrom = {
+                fleet = { destroy_fleet = event_target:IPC_helper_01 }
+            }
+        }
     }
 }
 country_event = {
@@ -540,6 +581,12 @@ country_event = {
     is_triggered_only = yes
     immediate = {
         FROM = { save_event_target_as = disabled_fengrao_shouxing }
+        every_owned_fleet = {
+            limit = {
+                has_fleet_flag = IPC_helper_01
+            }
+            save_global_event_target_as = IPC_helper_01
+        }
     }
     option = {
         name = "DOT_SR_Hunter.18.a"
@@ -604,5 +651,211 @@ country_event = {
                 }
             }
         }
+    }
+}
+country_event = {
+    id = DOT_SR_Hunter.21
+    hide_window = yes
+    is_triggered_only = yes
+
+    trigger = {
+        has_origin = origin_StellaronHunter
+    }
+    immediate = {
+        end_event_chain = "hunter_discover_situation_chain"
+        begin_event_chain = {
+            event_chain = "gelamo_discover_chain"
+            target = root
+        }
+        capital_scope = {
+            enable_special_project = {
+                name = "gelamo_discovery_1"
+                location = event_target:gelamo_planet
+                owner = root
+            }
+        }
+    }
+}
+country_event = {
+    id = DOT_SR_Hunter.22
+    is_triggered_only = yes
+    title = DOT_SR_Hunter.22.title
+    desc = DOT_SR_Hunter.22.desc
+    picture = gelamo_discovery_1
+    trigger = {
+    }
+    option = {
+        name = DOT_SR_Hunter.22.a
+        capital_scope = {
+            enable_special_project = {
+                name = "gelamo_discovery_2"
+                location = event_target:gelamo_planet
+                owner = root
+            }
+        }
+    }
+}
+country_event = {
+    id = DOT_SR_Hunter.23
+    is_triggered_only = yes
+    title = DOT_SR_Hunter.23.title
+    desc = DOT_SR_Hunter.23.desc
+    picture = gelamo_discovery_2
+    trigger = {
+    }
+    option = {
+        name = DOT_SR_Hunter.23.a
+        capital_scope = {
+            enable_special_project = {
+                name = "gelamo_discovery_3"
+                location = event_target:gelamo_planet
+                owner = root
+            }
+        }
+    }
+}
+country_event = {
+    id = DOT_SR_Hunter.24
+    is_triggered_only = yes
+    title = DOT_SR_Hunter.24.title
+    desc = DOT_SR_Hunter.24.desc
+    show_sound = event_ship_thrusters
+    location = event_target:gelamo_planet
+    event_chain = gelamo_discover_chain
+    picture = gelamo_discovery_3
+    trigger = {
+        NOR = {
+            has_country_flag = swarm_battle_1_begin
+        }
+        is_ai = no
+        is_nomadic = no
+    }
+    immediate = {
+        capital_scope = {
+            enable_special_project = {
+                name = "gelamo_discovery_4"
+                location = event_target:gelamo_planet
+                owner = root
+            }
+        }
+        set_country_flag = swarm_battle_1_begin
+        save_event_target_as = owner_country
+        owner_species = { save_event_target_as = owner_species }
+        create_country = {
+            name = "NAME_swarm_army"
+            species = event_target:owner_species
+            type = swarm_army
+            name_list = ROOT
+            auto_delete = no
+            effect = {
+                set_graphical_culture = root
+                save_event_target_as = swarm_faction
+                establish_communications_no_message = root
+                create_leader = {
+                    class = commander
+                    species = owner_main_species
+                    name = random
+                    skill = 6
+                    background_ethic = ethic_spiritualist
+                    background_planet = root.capital_scope
+                    background_job = commanding_officer
+                }
+                last_created_leader = {
+                    add_trait = {
+                        trait = leader_trait_crusader_2
+                    }
+                    save_event_target_as = swarm_admiral
+                }
+                create_fleet = {
+                    name = "NAME_gelamo_swarm_Fleet"
+                    effect = {
+                        set_owner = prev
+                        save_event_target_as = gelamo_swarm_fleet
+                        while = {
+                            count = 80
+                            create_ship = {
+                                name = random
+                                design = NAME_CHARGER_1
+                                growth_stage = 2
+                            }
+                        }
+                        while = {
+                            count = 19
+                            create_ship = {
+                                name = random
+                                design = NAME_MOTH_1
+                                growth_stage = 2
+                            }
+                        }
+                        create_ship = {
+                            name = "NAME_swarm_cave"
+                            design = NAME_MOTH_1
+                            growth_stage = 3
+                        }
+                        set_location = event_target:gelamo_planet
+                        set_fleet_stance = aggressive
+                        set_aggro_range_measure_from = return_point
+                        set_aggro_range = 500
+                        assign_leader = last_created_leader
+                        queue_actions = {
+                            repeat = {
+                                wait = {
+                                    duration = 100
+                                }
+                            }
+                        }
+                    }
+                }
+                add_ship_design = last_created_design
+                set_name = random
+            }
+        }
+        hidden_effect = {
+            event_target:swarm_faction = {
+                set_faction_hostility = {
+                    target = root
+                    set_hostile = yes
+                    set_neutral = no
+                    set_friendly = no
+                }
+            }
+        }
+    }
+    option = {
+        name = DOT_SR_Hunter.24.a
+        hidden_effect = {
+        }
+    }
+}
+
+country_event = {
+    id = DOT_SR_Hunter.25
+    title = DOT_SR_Hunter.25.title
+    desc = DOT_SR_Hunter.25.desc
+    location = event_target:gelamo_planet
+    picture = gelamo_discovery_4
+    is_triggered_only = yes
+    trigger = {
+        owner = { 
+            has_origin = origin_StellaronHunter 
+            has_country_flag = swarm_battle_1_begin
+        }
+    }
+    option = {
+        name = DOT_SR_Hunter.25.a
+        remove_country_flag = swarm_battle_1_begin
+    }
+}
+country_event = {
+    id = DOT_SR_Hunter.26
+    is_triggered_only = yes
+    title = DOT_SR_Hunter.26.title
+    desc = DOT_SR_Hunter.26.desc
+    picture = gelamo_discovery_4
+    trigger = {
+    }
+    option = {
+        name = DOT_SR_Hunter.26.a
+        end_event_chain = "gelamo_discover_chain"
     }
 }
