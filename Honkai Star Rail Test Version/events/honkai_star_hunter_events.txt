@@ -77,6 +77,70 @@ planet_event = {
     }
 }
 country_event = {
+    id = DOT_SR_Hunter.4
+    is_triggered_only = yes
+    title = DOT_SR_Hunter.4.title
+    desc = DOT_SR_Hunter.4.desc
+    picture = aha_gift
+    trigger = {
+        always = yes
+    }
+    immediate = {
+    }
+    option = {
+        name = DOT_SR_Hunter.4.a
+        custom_tooltip = DOT_SR_Hunter.4.tt
+        owner = {
+            set_country_flag = received_aha_gift
+            add_monthly_resource_mult = {
+                resource = trade
+                value = 12
+                min = 5000
+                max = 50000
+            }
+            add_monthly_resource_mult = {
+                resource = sr_zro
+                value = 12
+                min = 50
+                max = 500
+            }
+            add_monthly_resource_mult = {
+                resource = minor_artifacts
+                value = 12
+                min = 100
+                max = 1000
+            }
+            add_monthly_resource_mult = {
+                resource = energy
+                value = 12
+                min = 5000
+                max = 50000
+            }
+            add_monthly_resource_mult = {
+                resource = exotic_gases
+                value = 12
+                min = 200
+                max = 2000
+            }
+        }
+    }
+    option = {
+        name = DOT_SR_Hunter.4.b
+        custom_tooltip = DOT_SR_Hunter.4.th
+        hidden_effect = {
+            random_planet_within_border = {
+                limit = {
+                    is_capital = yes
+                }
+                remove_building = building_factory_1
+                remove_building = building_medical_1
+                remove_building = building_holo_theatres
+                remove_building = building_robot_assembly_plant
+            }
+        }
+    }
+}
+country_event = {
     id = DOT_SR_Hunter.5
     title = "DOT_SR_Hunter.5.title"
     desc = DOT_SR_Hunter.5.desc
@@ -857,5 +921,68 @@ country_event = {
     option = {
         name = DOT_SR_Hunter.26.a
         end_event_chain = "gelamo_discover_chain"
+    }
+}
+country_event = {
+    id = DOT_SR_Hunter.27
+    title = DOT_SR_Hunter.27.title
+    desc = DOT_SR_Hunter.27.desc
+    is_triggered_only = yes
+    picture = aha_gift
+    trigger = {
+        has_country_flag = received_aha_gift
+        NOT = {has_modifier = aha_joke}
+        NOT = {from = {is_special_megastructure = yes}}
+    }
+    immediate = {
+        random_list = {
+            50 = {}
+            50 = {
+                owner = {
+                    every_owned_megastructure = {delete_megastructure = this}
+                    remove_country_flag = received_aha_gift
+                    set_country_flag = aha_joke_2
+                    add_modifier = {
+                        modifier = aha_joke
+                        days = 1080
+                    } 
+                }
+            }
+        }
+    }
+    option = {
+        name = DOT_SR_Hunter.27.a
+    }
+}
+country_event = {
+    id = DOT_SR_Hunter.28
+    title = DOT_SR_Hunter.28.title
+    desc = DOT_SR_Hunter.28.desc
+    is_triggered_only = yes
+    picture = aha_gift
+    trigger = {
+        has_country_flag = aha_joke_2
+        NOT = {has_modifier = aha_joke}
+        NOT = {from = {is_special_megastructure = yes}}
+    }
+    immediate = {
+        random_list = {
+            70 = {}
+            30 = {
+                owner = {
+                    every_owned_megastructure = {
+                        delete_megastructure = this
+                    }
+                    remove_country_flag = aha_joke_2
+                    add_modifier = {
+                        modifier = aha_joke
+                        days = 1800
+                    } 
+                }
+            }
+        }
+    }
+    option = {
+        name = DOT_SR_Hunter.28.a
     }
 }
