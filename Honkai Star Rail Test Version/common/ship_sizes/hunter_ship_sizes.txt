@@ -30,7 +30,7 @@ Hunter_dawn = {
     class = shipclass_military
     enable_default_design = yes
     enable_3dview_in_ship_browser = yes
-    use_shipnames_from = corvette
+    use_shipnames_from = cruiser
     prerequisites = { "tech_Hunter_dawn" }
     construction_type = starbase_shipyard
     required_component_set = "dawn_power_core"
@@ -53,7 +53,7 @@ Hunter_dawn = {
         unity = 20
     }
 }
-middle_fengrao_leader = {
+middle_path_leader = {
     formation_priority = @battleship_formation_priority
     max_speed = 40
     acceleration = 0.2
@@ -64,8 +64,10 @@ middle_fengrao_leader = {
         SHIP_HULL_REGEN_ADD_PERC = 100
         SHIP_SPEED_REDUCTION = -0.05
         SHIP_ACCURACY_ADD = 2
+        SHIP_ARMOR_ADD = 50000
+        SHIP_SHIELD_ADD = 50000
     }
-    max_hitpoints = 20000
+    max_hitpoints = 50000
     size_multiplier = 60
     map_counter_icon = ship_counter_16
     fleet_slot_size = 4
@@ -75,19 +77,19 @@ middle_fengrao_leader = {
     icon = ship_size_military_32
     entity = "fallen_empire_02_turret_energy_torpedo_entity"
     construction_type = starbase_shipyard
-    base_buildtime = 240
+    base_buildtime = 960
     can_have_federation_design = yes
     components_add_to_cost = no
     default_behavior = line
-    role_background = "GFX_role_selection_cruiser"
+    role_background = "GFX_role_selection_battleship"
     combat_disengage_chance = 1.20
     components_add_to_cost = no
     ship_roles = { artillery carrier }
     class = shipclass_military
     enable_default_design = yes
     enable_3dview_in_ship_browser = yes
-    use_shipnames_from = corvette
-    prerequisites = {always = no}
+    use_shipnames_from = battleship
+    prerequisites = { tech_fengrao_burst_shield }
     construction_type = starbase_shipyard
     required_component_set = "dawn_power_core"
     required_component_set = "dawn_ftl_components"
@@ -107,5 +109,68 @@ middle_fengrao_leader = {
     }
     min_upgrade_cost = {
         influence = 0.5
+    }
+}
+middle_path_commander = {
+    formation_priority = @titan_formation_priority
+    max_speed = 72
+    acceleration = 0.2
+    rotation_speed = 0.2
+    collision_radius = 4
+    modifier = {
+        ship_evasion_add = -5
+        SHIP_HULL_REGEN_ADD_PERC = 10000
+        SHIP_ARMOR_REGEN_ADD_PERC = 10000
+        SHIP_SPEED_REDUCTION = -0.1
+        SHIP_WEAPON_RANGE_MULT = 0.2
+        SHIP_TRACKING_ADD = 2
+        SHIP_SHIELD_PENETRATION_ADD = 5
+        SHIP_SHIELD_HARDENING_ADD = 10
+        SHIP_ARMOR_ADD = 300000
+        SHIP_SHIELD_ADD = 500000
+    }
+    max_hitpoints = 750000
+    size_multiplier = 100
+    map_counter_icon = ship_counter_128
+    fleet_slot_size = 4
+    section_slots = {"mid" = { locator = "part2" } }
+    num_target_locators = 2
+    is_space_station = no
+    icon = ship_size_military_64
+    entity = "fallen_empire_02_turret_energy_torpedo_entity"
+    construction_type = starbase_shipyard
+    base_buildtime = 1680
+    can_have_federation_design = yes
+    components_add_to_cost = no
+    default_behavior = swarm
+    role_background = "GFX_role_selection_titan"
+    combat_disengage_chance = 1.80
+    components_add_to_cost = no
+    ship_roles = { artillery carrier screen}
+    class = shipclass_military
+    enable_default_design = yes
+    enable_3dview_in_ship_browser = yes
+    use_shipnames_from = titan
+    prerequisites = { tech_fengrao_burst_shield }
+    construction_type = starbase_shipyard
+    required_component_set = "dawn_power_core"
+    required_component_set = "dawn_ftl_components"
+    required_component_set = "dawn_thruster_components"
+    required_component_set = "dawn_sensor_components"
+    required_component_set = "dawn_combat_computers"
+    resources = {
+        category = ships
+        cost = {
+            influence = 100
+            yuzhousuipian = 2000
+            sr_dark_matter = 100
+            sr_zro = 500
+        }
+        upkeep = {
+        }
+    }
+    min_upgrade_cost = {
+        influence = 5
+        sr_zro = 10
     }
 }

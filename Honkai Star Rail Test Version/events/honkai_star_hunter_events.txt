@@ -994,3 +994,66 @@ country_event = {
         name = DOT_SR_Hunter.28.a
     }
 }
+#丰饶爆裂盾的AOE爆炸
+country_event = {
+    id = DOT_SR_Hunter.29
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = {
+        if = {
+            limit = {
+                exists = fromfrom
+                fromfrom = {
+                    has_component = fengrao_burst_shield_small
+                }
+            }
+            fromfrom = {
+                save_event_target_as = fengrao_burst_center
+            }
+            fromfrom = {
+                owner = {
+                    save_event_target_as = fengrao_burst_owner
+                }
+            }
+            fengrao_shield_burst_small_effect = { RADIUS = 100 DAMAGE = 20000 SHIELD_DAMAGE = 40000}
+        }
+        else_if = {
+            limit = {
+                exists = fromfrom
+                fromfrom = {
+                    fromfrom = {
+                        has_component = fengrao_burst_shield_medium
+                    }
+                }
+            }
+            fromfrom = {
+                save_event_target_as = fengrao_burst_center
+            }
+            fromfrom = {
+                owner = {
+                    save_event_target_as = fengrao_burst_owner
+                }
+            }
+            fengrao_shield_burst_medium_effect = { RADIUS = 300 DAMAGE = 80000 SHIELD_DAMAGE = 200000}
+                }
+        else_if = {
+            limit = {
+                exists = fromfrom
+                fromfrom = {
+                    fromfrom = {
+                        has_component = fengrao_burst_shield_large
+                    }
+                }
+            }
+            fromfrom = {
+                save_event_target_as = fengrao_burst_center
+            }
+            fromfrom = {
+                owner = {
+                    save_event_target_as = fengrao_burst_owner
+                }
+            }
+            fengrao_shield_burst_large_effect = { RADIUS = 600 DAMAGE = 200000 SHIELD_DAMAGE = 500000}
+        }  
+    }
+}
