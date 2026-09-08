@@ -3402,13 +3402,10 @@ leader_huohua_t1 = {
 		mult = this.owner.num_leader_huohua_t2
 	}
 	triggered_planet_modifier = {
-		job_Sparxie_fans_add = 100
+		job_Sparxie_fans_add = 200
 		mult = this.owner.num_leader_huohua_t2
 	}
-	triggered_sector_modifier = {
-		job_Sparxie_fans_add = 100
-		mult = this.owner.num_leader_huohua_t2
-	}
+
 	
 	custom_tooltip_with_modifiers = leader_huohua_t1_add
 	leader_class = { official }
@@ -3426,17 +3423,11 @@ leader_huohua_t2 = {
         TIER = 1
     }
     planet_modifier = {
-		POP_BONUS_WORKFORCE_MULT = 0.5
-		JOB_MAX_WORKFORCE_MULT = 1.0
-		planet_jobs_worker_produces_mult = 0.5
-		planet_jobs_specialist_produces_mult = 0.5
+		POP_BONUS_WORKFORCE_MULT = 0.7
+		planet_jobs_produces_mult = 0.3
+		PLANETARY_ASCENSION_EFFECT_MULT = 0.2
 	}
-	sector_modifier = {
-		POP_BONUS_WORKFORCE_MULT = 0.3
-		JOB_MAX_WORKFORCE_MULT = 1.0
-		planet_jobs_worker_produces_mult = 0.3
-		planet_jobs_specialist_produces_mult = 0.3	
-	}
+	
 	custom_tooltip_with_modifiers = leader_huohua_t2_add
     leader_class = { official }
     initial = no
@@ -3455,15 +3446,10 @@ leader_huohua_t3 = {
     planet_modifier = {
 		planet_buildings_cost_mult = -0.3
 		planet_buildings_upkeep_mult = -0.3
-		planet_structures_cost_mult = -0.3
-		planet_structures_upkeep_mult = -0.3
+		planet_districts_cost_mult = -0.3
+		planet_districts_upkeep_mult = -0.3		
 	}
-	sector_modifier = {
-		planet_buildings_cost_mult = -0.1
-		planet_buildings_upkeep_mult = -0.1
-		planet_structures_cost_mult = -0.1
-		planet_structures_upkeep_mult = -0.1
-	}
+	
 	
     leader_class = { official }
     initial = no
@@ -3480,14 +3466,8 @@ leader_huohua_t4 = {
         TIER = 1
     }
 	planet_modifier = {
-		planet_districts_upkeep_mult = -0.2
-		planet_districts_cost_mult = -0.2
-		
-	}
-	sector_modifier = {
-		planet_districts_upkeep_mult = -0.1
-		planet_districts_cost_mult = -0.1
-		
+		POP_PROMOTION_TIME_MULT = -0.4
+		POP_DEMOTION_TIME_MULT = -0.4
 	}
 	
    
@@ -3508,15 +3488,8 @@ leader_huohua_t5 = {
 	on_gained_effect = {
 		set_leader_flag = flag_leader_huohua_t5
 	}
-	planet_modifier = {
-		LOGISTIC_GROWTH_MULT = 0.1
-	}
 	triggered_planet_modifier = {
-		LOGISTIC_GROWTH_MULT = 0.01
-		mult = this.owner.num_huohua_other_skill
-	}
-	triggered_sector_modifier = {
-		LOGISTIC_GROWTH_MULT = 0.01
+		LOGISTIC_GROWTH_MULT = 0.02
 		mult = this.owner.num_huohua_other_skill
 	}
 	custom_tooltip_with_modifiers = leader_huohua_t5_add
@@ -3537,18 +3510,10 @@ leader_huohua_t6 = {
 	on_gained_effect = {
 		set_leader_flag = flag_leader_huohua_t6_add
 	}
-	planet_modifier = {
-		POP_HAPPINESS = 0.2
-		PLANET_AMENITIES_ADD = 0.2
-	}
+	
 	triggered_planet_modifier = {
-		POP_HAPPINESS = 0.04
-		PLANET_AMENITIES_ADD = 0.04
-		mult = this.owner.num_huohua_other_skill
-	}
-	triggered_sector_modifier = {
-		POP_HAPPINESS = 0.02
-		PLANET_AMENITIES_ADD = 0.02
+		POP_HAPPINESS = 0.05
+		PLANET_AMENITIES_ADD = 0.05
 		mult = this.owner.num_huohua_other_skill
 	}
 	#custom_tooltip_with_modifiers = leader_huohua_t6_add
@@ -3566,20 +3531,9 @@ leader_huohua_t7 = {
         COUNCIL = no
         TIER = 1
     }
-	planet_modifier = {
-		EMPIRE_SIZE_DISTRICTS_MULT = -0.1
-		EMPIRE_SIZE_SYSTEMS_MULT = -0.1
-		EMPIRE_SIZE_COLONIES_MULT = -0.1
-		EMPIRE_SIZE_POPS_MULT = -0.1
-	}
+	
+	
 	triggered_planet_modifier = {
-		EMPIRE_SIZE_DISTRICTS_MULT = -0.01
-		EMPIRE_SIZE_SYSTEMS_MULT = -0.01
-		EMPIRE_SIZE_COLONIES_MULT = -0.01
-		EMPIRE_SIZE_POPS_MULT = -0.01
-		mult = this.owner.num_huohua_other_skill
-	}
-	triggered_sector_modifier = {
 		EMPIRE_SIZE_DISTRICTS_MULT = -0.01
 		EMPIRE_SIZE_SYSTEMS_MULT = -0.01
 		EMPIRE_SIZE_COLONIES_MULT = -0.01
@@ -4228,7 +4182,7 @@ leader_jiziqixing_t6 = {
         TIER = 1
     }
 	self_modifier = {
-		species_leader_exp_gain = 0.4
+		species_leader_exp_gain = 0.5
 	}
 
 	triggered_self_modifier = {
@@ -4237,6 +4191,173 @@ leader_jiziqixing_t6 = {
 	}
 	
     leader_class = { commander }
+    initial = no
+    randomized = no
+}
+
+#扑翅雀跃的和声
+leader_zhigengniaoqingge_t1 = {
+    inline_script = {
+        script = trait/hsr_icons
+        ICON = "GFX_leader_zhigengniaoqingge_t1"
+        CLASS = official
+        RARITY = paragon
+        COUNCIL = no
+        TIER = 1
+    }
+	triggered_self_modifier = {
+		job_dieceng_add = 1
+		mult = this.owner.num_leader_zhigengniaoqingge_t1_1
+	}
+	triggered_self_modifier = {
+		job_shengxiao_add = 1
+		mult = this.owner.num_leader_zhigengniaoqingge_t1
+	}
+	triggered_sector_modifier = {
+		planet_jobs_produces_mult = 0.1
+		mult = this.owner.num_leader_zhigengniaoqingge_t1
+	}
+	triggered_sector_modifier = {
+		planet_jobs_produces_mult = 0.01
+		mult = this.owner.num_leader_zhigengniaoqingge_t1_2
+	}
+	
+	custom_tooltip_with_modifiers = leader_zhigengniaoqingge_t1_add
+	leader_class = { official }
+	initial = no
+	randomized = no
+}
+
+#叽叽啾啾四重奏
+leader_zhigengniaoqingge_t2 = {
+    inline_script = {
+        script = trait/hsr_icons
+        ICON = "GFX_leader_zhigengniaoqingge_t2"
+        CLASS = official
+        RARITY = paragon
+        COUNCIL = no
+        TIER = 1
+    }
+	triggered_self_modifier = {
+		job_dieceng_add = 1
+		mult = this.owner.num_leader_zhigengniaoqingge_t1_2
+	}
+	triggered_sector_modifier = {
+		planet_jobs_upkeep_mult = -0.005
+		mult = this.owner.num_leader_zhigengniaoqingge_t2
+	}
+	custom_tooltip_with_modifiers = leader_zhigengniaoqingge_t2_add
+    leader_class = { official }
+    initial = no
+    randomized = no
+}
+#跃入这片蔚蓝狂想
+leader_zhigengniaoqingge_t3 = {
+    inline_script = {
+        script = trait/hsr_icons
+        ICON = "GFX_leader_zhigengniaoqingge_t3"
+        CLASS = official
+        RARITY = paragon
+        COUNCIL = no
+        TIER = 1
+    }
+    sector_modifier = {
+		EMPIRE_SIZE_COLONIES_MULT = -0.5
+		EMPIRE_SIZE_SYSTEMS_MULT = -0.5
+		EMPIRE_SIZE_DISTRICTS_MULT = -0.5
+	}
+	
+    leader_class = { official }
+    initial = no
+    randomized = no
+}
+#巡游在无界的天空
+leader_zhigengniaoqingge_t4 = {
+    inline_script = {
+        script = trait/hsr_icons
+        ICON = "GFX_leader_zhigengniaoqingge_t4"
+        CLASS = official
+        RARITY = paragon
+        COUNCIL = no
+        TIER = 1
+    }
+	sector_modifier = {
+		planet_buildings_cost_mult = -0.2
+		planet_buildings_upkeep_mult = -0.2
+		planet_districts_cost_mult = -0.2
+		planet_districts_upkeep_mult = -0.2
+	}
+	
+   
+    leader_class = { official }
+    initial = no
+    randomized = no
+}
+#重构谐乐
+leader_zhigengniaoqingge_t5 = {
+    inline_script = {
+        script = trait/hsr_icons
+        ICON = "GFX_leader_zhigengniaoqingge_t5"
+        CLASS = official
+        RARITY = paragon
+        COUNCIL = no
+        TIER = 1
+    }
+	on_gained_effect = {
+		set_leader_flag = flag_leader_zhigengniaoqingge_t5
+	}
+	triggered_planet_modifier = {
+		job_shuiniao_yiling_add = 100
+		mult = this.owner.num_zhigengniaoqingge_other_skill
+	}
+
+	custom_tooltip_with_modifiers = leader_zhigengniaoqingge_t5_add
+    leader_class = { official }
+    initial = no
+    randomized = no
+}
+#即兴蓝调
+leader_zhigengniaoqingge_t6 = {
+    inline_script = {
+        script = trait/hsr_icons
+        ICON = "GFX_leader_zhigengniaoqingge_t6"
+        CLASS = official
+        RARITY = paragon
+        COUNCIL = no
+        TIER = 1
+    }
+	on_gained_effect = {
+		set_leader_flag = flag_leader_zhigengniaoqingge_t7
+	}
+	triggered_planet_modifier = {
+		job_shuiniao_yiling_add = 100
+		mult = this.owner.num_zhigengniaoqingge_other_skill
+	}
+	custom_tooltip_with_modifiers = leader_zhigengniaoqingge_t6_add
+    leader_class = { official }
+    initial = no
+    randomized = no
+}
+#偏离和弦
+leader_zhigengniaoqingge_t7 = {
+    inline_script = {
+        script = trait/hsr_icons
+        ICON = "GFX_leader_zhigengniaoqingge_t7"
+        CLASS = official
+        RARITY = paragon
+        COUNCIL = no
+        TIER = 1
+    }
+	on_gained_effect = {
+		set_leader_flag = flag_leader_zhigengniaoqingge_t7
+	}
+	triggered_sector_modifier = {
+		job_shuiniao_yiling_add = 100
+		mult = this.owner.num_zhigengniaoqingge_other_skill
+	}
+	
+	custom_tooltip_with_modifiers = leader_zhigengniaoqingge_t7_add
+    leader_class = { official }
     initial = no
     randomized = no
 }
