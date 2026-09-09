@@ -869,3 +869,81 @@ utility_component_template = {
     show_tech_unlock_if = { country_uses_bio_ships = no }
     ai_weight = { weight = 0 }
 }
+utility_component_template = {
+    key = "shield_killer_fengrao"
+    size = medium
+    icon = "shield_killer_fengrao"
+    icon_frame = 1
+    power = -200
+    component_set = "path_aura_components"
+    class_restriction = { shipclass_military shipclass_transport shipclass_military_special shipclass_starbase }
+    hostile_aura = {
+        name = "shield_killer_fengrao"
+        system_wide = yes
+
+        stack_info = {
+            id = shield_killer_fengrao
+            priority = 1
+        }
+        damage_per_day = { 
+            damage = { min = 50 max = 500  }
+            shield_penetration = 0.4
+            armor_penetration = 0.4
+            accuracy = 0.6
+        }
+        modifier = {
+            SHIP_WEAPON_DAMAGE = -0.1
+            ship_shield_mult = -0.60
+        }
+        graphics = {
+            area_effect = {
+                entity = "circle_area_entity"
+                dynamic_scale = yes
+            }
+            ship_effect = {
+                entity = "ship_aura_negative_entity"
+                dynamic_scale = no
+            }
+        }
+    }
+    prerequisites = { tech_fengrao_burst_shield }
+}
+utility_component_template = {
+    key = "energy_killer_fengrao"
+    size = medium
+    icon = "energy_killer_fengrao"
+    icon_frame = 1
+    power = -200
+    component_set = "path_aura_components"
+    class_restriction = { shipclass_military shipclass_transport shipclass_military_special shipclass_starbase }
+    hostile_aura = {
+        name = "energy_killer_fengrao"
+        system_wide = yes
+
+        stack_info = {
+            id = energy_killer_fengrao
+            priority = 1
+        }
+        damage_per_day = { 
+            damage = { min = 2000 max = 15000  }
+            armor_penetration = 0.4
+            accuracy = 0.2
+        }
+        modifier = {
+            weapon_type_energy_weapon_damage_mult = -0.3
+            weapon_type_energy_weapon_fire_rate_mult = -0.2
+            ship_engagement_range_mult = -0.2
+        }
+        graphics = {
+            area_effect = {
+                entity = "circle_area_entity"
+                dynamic_scale = yes
+            }
+            ship_effect = {
+                entity = "ship_aura_negative_entity"
+                dynamic_scale = no
+            }
+        }
+    }
+    prerequisites = { tech_fengrao_burst_shield }
+}

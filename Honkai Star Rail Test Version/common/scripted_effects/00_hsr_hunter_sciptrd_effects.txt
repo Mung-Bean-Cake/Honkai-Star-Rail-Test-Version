@@ -8,6 +8,9 @@ fengrao_shield_burst_small_effect = {
 					type = euclidean
 					max_distance <= $RADIUS|100$
 				}
+				not = { owner = {
+					is_same_value = event_target:fengrao_burst_owner
+				} }
 			}
 			reduce_shield = $SHIELD_DAMAGE|40000$
 			reduce_hp = $DAMAGE|20000$
@@ -24,6 +27,9 @@ fengrao_shield_burst_medium_effect = {
 					type = euclidean
 					max_distance <= $RADIUS|300$
 				}
+				not = { owner = {
+					is_same_value = event_target:fengrao_burst_owner
+				} }
 			}
 			reduce_shield = $SHIELD_DAMAGE|200000$
 			reduce_hp = $DAMAGE|80000$
@@ -31,18 +37,21 @@ fengrao_shield_burst_medium_effect = {
 	}
 }
 fengrao_shield_burst_large_effect = {
-		every_country = {
-			every_owned_ship = {
-				limit = {
-					distance = { 
-					source = event_target:fengrao_burst_center
-					same_solar_system = yes
-					type = euclidean
-					max_distance <= $RADIUS|600$
+	every_country = {
+		every_owned_ship = {
+			limit = {
+				distance = { 
+				source = event_target:fengrao_burst_center
+				same_solar_system = yes
+				type = euclidean
+				max_distance <= $RADIUS|600$
 				}
-				}
-				reduce_shield = $SHIELD_DAMAGE|500000$
-				reduce_hp = $DAMAGE|200000$
+				not = { owner = {
+					is_same_value = event_target:fengrao_burst_owner
+				} }
+			}
+			reduce_shield = $SHIELD_DAMAGE|500000$
+			reduce_hp = $DAMAGE|200000$
 			}
 		}
 }
