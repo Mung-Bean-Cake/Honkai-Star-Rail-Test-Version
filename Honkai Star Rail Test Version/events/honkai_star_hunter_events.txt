@@ -148,6 +148,7 @@ country_event = {
         }
     }
 }
+#5-9丰饶慈航入侵事件
 country_event = {
     id = DOT_SR_Hunter.5
     title = "DOT_SR_Hunter.5.title"
@@ -359,6 +360,7 @@ country_event = {
         }
     }
 }
+#10-12格拉默一期考古事件
 country_event = {
     id = DOT_SR_Hunter.10
     is_triggered_only = yes
@@ -417,6 +419,7 @@ country_event = {
         }
     }
 }
+#13-15贸易建筑事件
 country_event = {
     id = DOT_SR_Hunter.13
     is_triggered_only = yes
@@ -461,6 +464,7 @@ country_event = {
         add_research_option = tech_hacker_2
     }
 }
+#16-20丰饶寿形舰队入侵事件
 country_event = {
     id = DOT_SR_Hunter.16
     title = "DOT_SR_Hunter.16.title"
@@ -725,6 +729,7 @@ country_event = {
         }
     }
 }
+#21-26格拉默二期考古事件
 country_event = {
     id = DOT_SR_Hunter.21
     hide_window = yes
@@ -1055,5 +1060,188 @@ country_event = {
             }
             fengrao_shield_burst_large_effect = { RADIUS = 600 DAMAGE = 200000 SHIELD_DAMAGE = 500000}
         }  
+    }
+}
+#30-36 能量币建筑事件
+country_event = {
+    id = DOT_SR_Hunter.30
+    title = DOT_SR_Hunter.30.title
+    desc = DOT_SR_Hunter.30.desc
+    is_triggered_only = yes
+    picture = cyber_miner_1
+    trigger = {
+        owner = {
+            has_origin = origin_StellaronHunter
+            NOT = {
+                has_technology = tech_cyber_skill
+                has_country_flag = got_cyber_miner_1
+            }
+        }
+    }
+    immediate = {
+    }
+    option = {
+        name = DOT_SR_Hunter.30.a
+        custom_tooltip = DOT_SR_Hunter.30.tt
+        allow = {
+            resource_stockpile_compare = {
+                resource = energy
+                value >= 500
+            }
+        }
+        add_resource = {energy = -500}
+        hidden_effect = {
+            random_list = {
+                80 = {country_event = {id = DOT_SR_Hunter.32}}
+                20 = {country_event = {id = DOT_SR_Hunter.31}}
+            }
+        }
+    }
+    option = {
+        name = DOT_SR_Hunter.30.b
+        custom_tooltip = DOT_SR_Hunter.30.th
+    }
+}
+country_event = {
+    id = DOT_SR_Hunter.31
+    title = DOT_SR_Hunter.31.title
+    desc = DOT_SR_Hunter.31.desc
+    is_triggered_only = yes
+    picture = cyber_miner_win
+    trigger = {
+    }
+    immediate = {
+        set_country_flag = got_cyber_miner_1
+    }
+    option = {
+        name = DOT_SR_Hunter.31.a
+        owner = {add_research_option = tech_cyber_skill}
+        country_event = {id = DOT_SR_Hunter.33 days = 180}
+    }
+}
+country_event = {
+    id = DOT_SR_Hunter.32
+    title = DOT_SR_Hunter.32.title
+    desc = DOT_SR_Hunter.32.desc
+    is_triggered_only = yes
+    picture = cyber_miner_lose
+    trigger = {
+    }
+    immediate = {
+    }
+    option = {
+        name = DOT_SR_Hunter.32.a
+    }
+}
+country_event = {
+    id = DOT_SR_Hunter.33
+    title = DOT_SR_Hunter.33.title
+    desc = DOT_SR_Hunter.33.desc
+    is_triggered_only = yes
+    picture = cyber_miner_2
+    trigger = {
+    }
+    immediate = {
+        set_country_flag = got_cyber_miner_2
+    }
+    option = {
+        name = DOT_SR_Hunter.33.a
+        owner = {add_research_option = tech_yitai_data_1}
+    }
+}
+country_event = {
+    id = DOT_SR_Hunter.34
+    title = DOT_SR_Hunter.34.title
+    desc = DOT_SR_Hunter.34.desc
+    is_triggered_only = yes
+    picture = cyber_miner_3
+    trigger = {
+        owner = {
+            has_origin = origin_StellaronHunter
+            has_country_flag = got_cyber_miner_2
+            NOT = {
+                has_technology = tech_yitai_data_2
+                has_country_flag = got_cyber_miner_3
+            }
+        }
+    }
+    immediate = {
+    }
+    option = {
+        name = DOT_SR_Hunter.34.a
+        custom_tooltip = DOT_SR_Hunter.34.tt
+        allow = {
+            resource_stockpile_compare = {
+                resource = energy
+                value >= 1500
+            }
+            resource_stockpile_compare = {
+                resource = consumer_goods
+                value >= 2500
+            }
+        }
+        add_resource = {energy = -1500}
+        add_resource = {consumer_goods = -2500}
+        hidden_effect = {
+            random_list = {
+                30 = {country_event = {id = DOT_SR_Hunter.35}}
+                70 = {country_event = {id = DOT_SR_Hunter.36}}
+            }
+        }
+    }
+    option = {
+        name = DOT_SR_Hunter.34.b
+        custom_tooltip = DOT_SR_Hunter.34.th
+    }
+}
+country_event = {
+    id = DOT_SR_Hunter.35
+    title = DOT_SR_Hunter.35.title
+    desc = DOT_SR_Hunter.35.desc
+    is_triggered_only = yes
+    picture = cyber_miner_win
+    trigger = {
+    }
+    immediate = {
+        remove_country_flag = got_cyber_miner_2
+        set_country_flag = got_cyber_miner_3
+    }
+    option = {
+        name = DOT_SR_Hunter.35.a
+        owner = {add_research_option = tech_yitai_data_2}
+    }
+}
+country_event = {
+    id = DOT_SR_Hunter.36
+    title = DOT_SR_Hunter.36.title
+    desc = DOT_SR_Hunter.36.desc
+    is_triggered_only = yes
+    picture = cyber_miner_lose
+    trigger = {
+    }
+    immediate = {
+    }
+    option = {
+        name = DOT_SR_Hunter.36.a
+    }
+}
+country_event = {
+    id = DOT_SR_Hunter.37
+    title = DOT_SR_Hunter.37.title
+    desc = DOT_SR_Hunter.37.desc
+    is_triggered_only = yes
+    picture = kafuka_library
+    trigger = {
+        has_civic = civic_StellaronHunter_2
+        NOT = {
+            has_country_flag = got_kafuka_libaray
+        }
+    }
+    immediate = {
+        set_country_flag = got_kafuka_libaray
+    }
+    option = {
+        name = DOT_SR_Hunter.37.a
+        owner = {add_research_option = tech_kafuka_library}
     }
 }
