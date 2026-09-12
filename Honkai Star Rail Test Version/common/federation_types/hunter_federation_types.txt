@@ -1,0 +1,76 @@
+new_order_federation = {
+    base_intel = 50
+    icon = "new_order_federation"
+    potential = {
+        always = yes
+    }
+    allow = {
+        federation_check_for_subject_trigger = yes
+        custom_tooltip = {
+            fail_text = requires_actor_not_barbaric_despoilers
+            NOT = { has_valid_civic = civic_barbaric_despoilers }
+        }
+        custom_tooltip = {
+            fail_text = no_galactic_rescue_federation
+            has_country_flag = new_order
+        }
+    }
+    levels = {
+        level_1 = {
+            experience = 1600
+            perks = {
+                new_order_diplomacy
+            }
+        }
+        level_2 = {
+            experience = 2800
+            perks = {
+                new_order_food
+                new_order_science   
+                new_order_trade
+            }
+        }
+        level_3 = {
+            experience = 4200
+            perks = {
+                new_order_maintain
+                new_order_ship_defence
+                new_order_strike_craft
+            }
+        }
+        level_4 = {
+            experience = 7200
+            perks = {
+                new_order_martial_law
+                new_order_minerals
+                new_order_research
+            }
+        }
+        level_5 = {
+            perks = {
+                new_order_pops
+                new_order_alloys
+                new_order_rivalries
+            }
+        }
+    }
+    on_create = {
+        remove_federation_flag = enable_federation_cooldowns
+        set_federation_law = allow_subjects_to_join_yes   #附庸可加入联邦
+        set_federation_law = centralization_minimal   #联邦集权：最低
+        set_federation_law = succession_type_rotation	#继任方式：轮换制
+        set_federation_law = succession_term_years_40		#主序任期：40年
+        set_federation_law = fleet_contribution_none		#舰队共享：高
+        set_federation_law = federation_build_fleets_everyone	#联邦舰队建设：所有人
+        set_federation_law = vote_weight_equal		#投票权重：平等
+        set_federation_law = declare_war_president_vote	#宣战方式：主席决定
+        set_federation_law = invite_members_unanimous_vote	#新成员邀请制：一致通过
+        set_federation_law = kick_members_majority_vote		#成员开除制：多数通过
+        set_federation_law = free_migration_no		#自由移民：禁止
+        set_federation_law = treaties_separate_yes		#自主协议：启用
+        set_federation_flag = enable_federation_cooldowns
+    }
+    ai_weight = {
+        base = 0
+    }
+}
