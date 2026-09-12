@@ -2,11 +2,8 @@
 rewrite_plays_effect = {
    allow = {
         custom_tooltip = {
-            fail_text = need_rewrite_plays_effect_tt
             hidden_trigger = {
-                from = {
-                    has_country_flag = allow_show_time
-                }
+                from = {has_country_flag = haimeixiewan}
             }
         }
     }
@@ -20,6 +17,49 @@ rewrite_plays_effect = {
         }
     }
 }
+hsr_play_0_set_effect = {
+     allow = {
+        custom_tooltip = {
+            fail_text = need_rewrite_plays_effect_tt
+            hidden_trigger = {
+                from = {
+                    or = {
+                        has_country_flag =  hsr_stage_play_1_choose
+                        has_country_flag =  hsr_stage_play_2_choose
+                    }
+                }
+            }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = can_select
+        hidden_effect = {
+            country_event = { id = xiaoqiaosi.4003 }
+        }
+    }
+}
+hsr_stage_play_1_set_effect = {
+   allow = {
+        custom_tooltip = {
+            fail_text = need_rewrite_plays_effect_tt
+            hidden_trigger = {
+            }
+        }
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = can_select
+        hidden_effect = {
+            country_event = { id = xiaoqiaosi.4002 }
+        }
+    }
+}
+##########
 hsr_star_show_effect = {
     allow = {
         always = yes
@@ -31,14 +71,17 @@ hsr_star_show_effect = {
         custom_tooltip = hsr_star_show_effect
     }
 }
-hsr_star_play_1_start_effect = {
+#剧本选择
+hsr_stage_play_1_start_effect = {
     allow = {
          custom_tooltip = {
             fail_text = has_choose
             hidden_trigger = {
                 from = {
-                    not = {has_country_flag = hsr_star_play_1_choose}
-                    has_country_flag = hsr_star_play_0_set
+                    not = {has_country_flag = hsr_stage_play_1_choose}
+                    has_country_flag = hsr_stage_play_0_set
+                    has_country_flag = haimeixiewan
+                    
                 }
             }
         }
@@ -48,14 +91,70 @@ hsr_star_play_1_start_effect = {
         always = yes
     }
     effect = {
-        set_country_flag = hsr_star_play_1_choose
-        remove_country_flag = hsr_star_play_0_set
+        set_country_flag = hsr_stage_play_1_choose
+        remove_country_flag = hsr_stage_play_0_set
         set_variable = {
-            which = hsr_star_play_0
+            which = hsr_stage_play_0
+            value = 1
+        }
+    }
+}
+hsr_stage_play_2_start_effect = {
+    allow = {
+         custom_tooltip = {
+            fail_text = has_choose
+            hidden_trigger = {
+                from = {
+                    not = {has_country_flag = hsr_stage_play_2_choose}
+                    has_country_flag = hsr_stage_play_0_set
+                    
+                }
+            }
+        }
+        
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        set_country_flag = hsr_stage_play_2_choose
+        remove_country_flag = hsr_stage_play_0_set
+        set_variable = {
+            which = hsr_stage_play_0
+            value = 2
+        }
+    }
+}
+#剧本应用
+hsr_play_1_set_effect = {
+    allow = {
+         custom_tooltip = {
+            fail_text = has_choose
+            hidden_trigger = {
+                from = {
+                  not = {has_country_flag = hsr_stage_play_1_set}
+                  #has_country_flag = hsr_stage_play_1_complete
+                  has_country_flag = haimeixiewan
+                }
+            }
+        }
+        
+    }
+    potential = {
+        always = yes
+    }
+    effect = {
+        set_country_flag = hsr_stage_play_1_set
+        set_variable = {
+            which = hsr_stage_play_1
             value = 1
         }
     }
 }
 
 
-
+inline_script = {
+    script = button_effect/hsr_stage_play
+    civic_name = hsr_stage_play_1
+    value = 1
+}

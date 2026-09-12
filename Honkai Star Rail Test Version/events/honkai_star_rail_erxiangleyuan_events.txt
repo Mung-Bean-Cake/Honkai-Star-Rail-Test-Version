@@ -437,7 +437,6 @@ country_event = {
 	is_triggered_only = yes
 
 	trigger= {
-		#has_country_flag = haimeixiewan
 		has_country_flag = allow_show_time
 		is_ai = no
 	}
@@ -826,7 +825,7 @@ country_event = {
 	
     option = {
         name = xiaoqiaosi.4000_r1
-		set_country_flag = hsr_star_play_0_set
+		set_country_flag = hsr_stage_play_0_set
 		country_event = {
 			id = xiaoqiaosi.4001
 		}
@@ -835,7 +834,7 @@ country_event = {
     }
 	option = {
         name = xiaoqiaosi.4000_r2
-        remove_country_flag = hsr_star_play_0_set
+        remove_country_flag = hsr_stage_play_0_set
     }
 }
 country_event = {
@@ -847,8 +846,23 @@ country_event = {
     custom_gui = hsr_play_select
 
 	immediate = {
-		set_country_flag = hsr_star_play_0_set
-		owner = {hsr_play_rechoose = yes}
+		remove_country_flag = hsr_stage_play_1_choose
+		remove_country_flag = hsr_stage_play_2_choose
+	}
+    option = {
+        name = OK
+        default_hide_option = yes
+    }
+}
+country_event = {
+    id = xiaoqiaosi.4002
+    title = "xiaoqiaosi.4001_title"
+    desc = xiaoqiaosi.4001_title
+    is_triggered_only = yes
+    diplomatic = yes
+    custom_gui = hsr_play_set
+
+	immediate = {
 	}
     option = {
         name = OK
@@ -856,3 +870,18 @@ country_event = {
     }
 }
 
+country_event = {
+    id = xiaoqiaosi.4003
+    title = "xiaoqiaosi.4001_title"
+    desc = xiaoqiaosi.4001_title
+    is_triggered_only = yes
+    diplomatic = yes
+    custom_gui = hsr_stage_play_names_list
+
+	immediate = {
+	}
+    option = {
+        name = OK
+        default_hide_option = yes
+    }
+}
