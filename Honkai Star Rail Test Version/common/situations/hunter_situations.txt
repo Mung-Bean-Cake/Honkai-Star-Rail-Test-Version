@@ -1,0 +1,192 @@
+situation_hunter_back_ancient = {
+    picture = situation_hunter_back_ancient
+    fail_icon_frame = GFX_situation_outcome_frame_red
+    fail_icon = GFX_situation_outcome_unknown
+    complete_icon_frame = GFX_situation_outcome_frame_blue
+    complete_icon = GFX_situation_outcome_ascension
+    category = neutral
+    situation_log_category = urgent_matters
+    initial_progress = 100
+    on_fail = {
+        custom_tooltip = situation_hunter_back_ancient_reverse_outcome
+        hidden_effect = {
+            owner = {
+                add_modifier = {
+                    modifier = situation_hunter_back_ancient_reverse_modifier
+                }
+            }
+            destroy_situation = this
+        }
+    }
+    on_progress_complete = {
+        custom_tooltip = situation_hunter_back_ancient_forward_outcome
+        hidden_effect = {
+            owner = {
+                set_country_flag = situation_hunter_back_ancient_forward_done
+                add_tech_progress = {
+                    tech = tech_federation_code
+                    progress = 0.6
+                }
+            }
+            destroy_situation = this
+        }
+    }
+    stages = {
+        situation_hunter_back_ancient_reverse_2 = {
+            icon = GFX_situation_stage_2
+            icon_background = GFX_situation_stage_frame_blue
+            end = 50
+            modifier = {
+                country_engineering_tech_research_speed = 0.4
+                planet_stability_add = -15
+                ship_hull_mult = -0.3
+                starbase_buildings_sr_dark_matter_produces_add = 10
+                starbase_buildings_energy_produces_add = -800
+                starbase_buildings_rare_crystals_produces_add = 400
+            }
+        }
+        situation_hunter_back_ancient_reverse_1 = {
+            icon = GFX_situation_stage_1
+            icon_background = GFX_situation_stage_frame_gray
+            end = 100
+            modifier = {
+                country_research_expend_bonus_mult = 0.3
+                country_alloys_produces_mult = -0.9
+                planet_crime_add = 20
+                ship_shield_mult = 0.5
+            }
+        }
+        situation_hunter_back_ancient_forward_1 = {
+            icon = GFX_situation_stage_1
+            icon_background = GFX_situation_stage_frame_yellow
+            end = 140
+            modifier = {
+                job_researcher_per_pop = 0.01
+                country_alloys_produces_mult = 0.2
+                country_unity_produces_mult = 0.4
+            }
+        }
+        situation_hunter_back_ancient_forward_2 = {
+            icon = GFX_situation_stage_2
+            icon_background = GFX_situation_stage_frame_magenta
+            end = 160
+            modifier = {
+                country_engineering_tech_research_speed = -0.8
+                bonus_pop_growth = 10
+                ship_hull_mult = 0.3
+                armies_energy_cost_mult = 0.3
+            }
+        }
+        situation_hunter_back_ancient_forward_3 = {
+            icon = GFX_situation_stage_3
+            icon_background = GFX_situation_stage_frame_orange
+            end = 200
+            modifier = {
+                planet_stability_add = 10
+                country_base_influence_produces_add = -2
+                ship_shield_hardening_add = 0.2
+                ship_armor_mult = 0.4
+                country_alloys_produces_mult = -0.5
+            }
+        }
+    }
+    approach = {
+        name = situation_influence_shape
+        icon = GFX_situation_approach_influence
+        icon_background = GFX_situation_approach_bg_red
+        allow = {
+            owner = {
+                has_resource = { type = influence amount >= 1 }
+                has_resource = { type = trade amount >= 100 }
+            }
+        }
+        on_select = {
+            custom_tooltip = approach_situation_destroy_crystal_sphere_astral_tt
+        }
+        modifier = {
+            country_unity_produces_mult = 0.1
+        }
+        resources = {
+            category = situations
+            produces = {
+                sr_dark_matter = 1
+            }
+            upkeep = {
+                trade = 100
+                influence = 1
+            }
+        }
+        ai_weight = {
+            base = 0
+        }
+    }
+    approach = {
+        name = situation_astral_shape
+        icon = GFX_situation_approach_astral
+        icon_background = GFX_situation_approach_bg_green
+        allow = {
+            owner = {
+                has_resource = { type = astral_threads amount >= 10 }
+            }
+        }
+        on_select = {
+            custom_tooltip = approach_situation_destroy_crystal_sphere_astral_tt
+        }
+        resources = {
+            category = situations
+            upkeep = {
+                astral_threads = 10
+            }
+        }
+        triggered_modifier = {
+            country_society_research_produces_mult = 0.05
+            country_physics_research_produces_mult = 0.05
+            country_engineering_research_produces_mult = 0.05
+        }
+    }
+    approach = {
+        name = situation_ship_shape
+        icon = GFX_situation_approach_disrupt
+        icon_background = GFX_situation_approach_bg_yellow
+        default = yes
+        modifier = {
+            ship_armor_mult = -0.2
+            ship_hull_mult = -0.5
+        }
+        allow = {
+            owner = {
+                has_resource = { type = energy amount >= 50 }
+            }
+        }
+        on_select = {
+            custom_tooltip = approach_situation_destroy_crystal_sphere_astral_tt
+        }
+        resources = {
+            category = situations
+            upkeep = {
+                energy = 50
+            }
+        }
+        ai_weight = {
+            base = 1
+        }
+    }
+    monthly_progress = {
+        base = 0
+        modifier = {
+            add = -5
+            desc = situation_engine_of_creation_frugal
+            current_situation_approach = situation_astral_shape
+        }
+        modifier = {
+            add = 5
+            desc = situation_engine_of_creation_frugal
+            current_situation_approach = situation_ship_shape
+        }
+        modifier = {
+            add = 10
+            desc = situation_engine_of_creation_frugal
+            current_situation_approach = situation_influence_shape
+        }
+    }
+}

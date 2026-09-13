@@ -347,7 +347,87 @@ country_event = {
 	}
 }
 
+#水鸟
+country_event = {
+	id = xiaoqiaosi.13
+	hide_window = yes
+	is_triggered_only = yes
 
+	trigger = {
+		any_owned_leader = {
+			has_trait = leader_zhigengniaoqingge_t1
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			which = num_leader_zhigengniaoqingge_t1_1
+			value = Fever_energy
+		}
+		if = {
+			limit = {check_variable = {which = Fever_energy value >= 12} owner = {not = {has_country_flag = leader_zhigengniaoqingge_t1_allow}}}
+			change_variable = {
+				which = num_leader_zhigengniaoqingge_t1
+				value = 1
+			}
+			set_country_flag = leader_zhigengniaoqingge_t1_allow
+		}
+		if = {
+			limit = {check_variable = {which = Fever_energy value >= 12} owner =  {has_country_flag = leader_zhigengniaoqingge_t1_allow}}
+			change_variable = {
+				which = Fever_energy
+				value = -6
+			}
+			change_variable = {
+				which = num_leader_zhigengniaoqingge_t2
+				value = 6
+			}
+		}
+		if = {
+			limit = {check_variable = {which = Fever_energy value < 12} }
+			set_variable = {
+				which = num_leader_zhigengniaoqingge_t1
+				value = 0
+			}
+			remove_country_flag = leader_zhigengniaoqingge_t1_allow
+		}
+		if = {
+			limit = {check_variable = {which = Fever_energy value < 0} }
+			set_variable = {
+				which = Fever_energy
+				value = 0
+			}
+		}
+	}
+}
+
+country_event = {
+	id = xiaoqiaosi.14
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		any_owned_leader = {
+			has_trait = leader_zhigengniaoqingge_t1
+		}
+		check_variable = {
+			which = Fever_energy
+			value >= 12
+		}
+	}
+
+	immediate = {
+		
+		change_variable = {
+			which = num_leader_zhigengniaoqingge_t1_1
+			value = -6
+		}
+		set_variable = {
+			which = num_leader_zhigengniaoqingge_t1_2
+			value = num_leader_zhigengniaoqingge_t1_1
+		}
+	}
+}
 
 #啊哈时刻
 country_event = {
@@ -357,7 +437,6 @@ country_event = {
 	is_triggered_only = yes
 
 	trigger= {
-		#has_country_flag = haimeixiewan
 		has_country_flag = allow_show_time
 		is_ai = no
 	}
@@ -536,14 +615,14 @@ country_event = {
 		}
 		
 	}
-	option= {name = xiaoqiaosi.2001.op_1 trigger= {owner= {has_country_flag = xiaoqiaosi.2001_1_flag}} }
-	option= {name = xiaoqiaosi.2001.op_2 trigger= {owner= {has_country_flag = xiaoqiaosi.2001_2_flag}} }
-	option= {name = xiaoqiaosi.2001.op_3 trigger= {owner= {has_country_flag = xiaoqiaosi.2001_3_flag}} }
-	option= {name = xiaoqiaosi.2001.op_4 trigger= {owner= {has_country_flag = xiaoqiaosi.2001_4_flag}} }
-	option= {name = xiaoqiaosi.2001.op_5 trigger= {owner= {has_country_flag = xiaoqiaosi.2001_5_flag}} }
-	option= {name = xiaoqiaosi.2001.op_6 trigger= {owner= {has_country_flag = xiaoqiaosi.2001_6_flag}} }
-	option= {name = xiaoqiaosi.2001.op_7 trigger= {owner= {has_country_flag = xiaoqiaosi.2001_7_flag}} }
-	option= {name = xiaoqiaosi.2001.op_8 trigger= {owner= {has_country_flag = xiaoqiaosi.2001_8_flag}} }
+	option= {name = xiaoqiaosi.2001.op_1 trigger= {owner= {has_country_flag = xiaoqiaosi.2001_1_flag}} remove_country_flag = xiaoqiaosi.2001_1_flag}
+	option= {name = xiaoqiaosi.2001.op_2 trigger= {owner= {has_country_flag = xiaoqiaosi.2001_2_flag}} remove_country_flag = xiaoqiaosi.2001_2_flag}
+	option= {name = xiaoqiaosi.2001.op_3 trigger= {owner= {has_country_flag = xiaoqiaosi.2001_3_flag}} remove_country_flag = xiaoqiaosi.2001_3_flag}
+	option= {name = xiaoqiaosi.2001.op_4 trigger= {owner= {has_country_flag = xiaoqiaosi.2001_4_flag}} remove_country_flag = xiaoqiaosi.2001_4_flag}
+	option= {name = xiaoqiaosi.2001.op_5 trigger= {owner= {has_country_flag = xiaoqiaosi.2001_5_flag}} remove_country_flag = xiaoqiaosi.2001_5_flag}
+	option= {name = xiaoqiaosi.2001.op_6 trigger= {owner= {has_country_flag = xiaoqiaosi.2001_6_flag}} remove_country_flag = xiaoqiaosi.2001_6_flag}
+	option= {name = xiaoqiaosi.2001.op_7 trigger= {owner= {has_country_flag = xiaoqiaosi.2001_7_flag}} remove_country_flag = xiaoqiaosi.2001_7_flag}
+	option= {name = xiaoqiaosi.2001.op_8 trigger= {owner= {has_country_flag = xiaoqiaosi.2001_8_flag}} remove_country_flag = xiaoqiaosi.2001_8_flag}
 		
 }
 
@@ -697,7 +776,7 @@ country_event = {
 			limit = {any_owned_leader = {has_leader_flag = langzun} has_country_flag = is_huanyu_time not = {has_country_flag = is_show_time_langzun}}
 			change_variable = {
 				which = num_leader_langzun_t1
-				value = 1
+				value = 2
 			}
 		}	
 		
@@ -730,6 +809,10 @@ country_event = {
 			xuwu_value = 100
 			zhishi_value = 100
 		}
+		change_variable = {
+			which = Fever_energy
+			value = 150000
+		}
 	}
 }
 #话剧事件
@@ -742,7 +825,7 @@ country_event = {
 	
     option = {
         name = xiaoqiaosi.4000_r1
-		set_country_flag = hsr_star_play_0_set
+		set_country_flag = hsr_stage_play_0_set
 		country_event = {
 			id = xiaoqiaosi.4001
 		}
@@ -751,7 +834,7 @@ country_event = {
     }
 	option = {
         name = xiaoqiaosi.4000_r2
-        remove_country_flag = hsr_star_play_0_set
+        remove_country_flag = hsr_stage_play_0_set
     }
 }
 country_event = {
@@ -763,8 +846,23 @@ country_event = {
     custom_gui = hsr_play_select
 
 	immediate = {
-		set_country_flag = hsr_star_play_0_set
-		owner = {hsr_play_rechoose = yes}
+		remove_country_flag = hsr_stage_play_1_choose
+		remove_country_flag = hsr_stage_play_2_choose
+	}
+    option = {
+        name = OK
+        default_hide_option = yes
+    }
+}
+country_event = {
+    id = xiaoqiaosi.4002
+    title = "xiaoqiaosi.4001_title"
+    desc = xiaoqiaosi.4001_title
+    is_triggered_only = yes
+    diplomatic = yes
+    custom_gui = hsr_play_set
+
+	immediate = {
 	}
     option = {
         name = OK
@@ -772,3 +870,18 @@ country_event = {
     }
 }
 
+country_event = {
+    id = xiaoqiaosi.4003
+    title = "xiaoqiaosi.4001_title"
+    desc = xiaoqiaosi.4001_title
+    is_triggered_only = yes
+    diplomatic = yes
+    custom_gui = hsr_stage_play_names_list
+
+	immediate = {
+	}
+    option = {
+        name = OK
+        default_hide_option = yes
+    }
+}
