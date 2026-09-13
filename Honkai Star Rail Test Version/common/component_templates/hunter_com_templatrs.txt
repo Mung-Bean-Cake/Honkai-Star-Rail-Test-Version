@@ -53,7 +53,7 @@ utility_component_template = {
         }
     }
     component_set = "dawn_power_core"
-    prerequisites = {  }
+    prerequisites = { tech_gelamo_judgement }
     upgrades_to = "dawn_ZERO_POINT_REACTOR"
     show_tech_unlock_if = { country_uses_bio_ships = no }
     ai_weight = { weight = 2 }
@@ -92,7 +92,7 @@ utility_component_template = {
         }
     }
     component_set = "dawn_power_core"
-    prerequisites = {  }
+    prerequisites = { tech_shuhu_2 }
     upgrades_to = "dawn_yitai_power_reactor"
     show_tech_unlock_if = { country_uses_bio_ships = no }
     ai_weight = { weight = 4 }
@@ -157,7 +157,7 @@ utility_component_template = {
         ship_evasion_add = 4
     }
     component_set = "dawn_thruster_components"
-    prerequisites = {  }
+    prerequisites = { tech_gelamo_judgement }
     upgrades_to = "DAWN_THRUSTER_3"
     show_tech_unlock_if = { country_uses_bio_ships = no }
     ai_weight = { weight = 2 }
@@ -201,7 +201,7 @@ utility_component_template = {
         SHIP_EVASION_MULT = 0.05
     }
     component_set = "dawn_thruster_components"
-    prerequisites = {  }
+    prerequisites = { tech_shuhu_2 }
     upgrades_to = "DAWN_THRUSTER_5"
     show_tech_unlock_if = { country_uses_bio_ships = no }
     ai_weight = { weight = 4 }
@@ -268,7 +268,7 @@ utility_component_template = {
         ship_jumpdrive_cooldown_mult = -0.10
     }
     component_set = "dawn_ftl_components"
-    prerequisites = {  }
+    prerequisites = { tech_gelamo_mining_2 }
     upgrades_to = "DAWN_HYPERDRIVE_3"
     show_tech_unlock_if = { country_uses_bio_ships = no }
     ai_weight = { weight = 2 }
@@ -384,7 +384,7 @@ utility_component_template = {
         ship_tracking_add = 6
     }
     component_set = "dawn_sensor_components"
-    prerequisites = {  }
+    prerequisites = { tech_BBQ }
     upgrades_to = "DAWN_SENSOR_3"
     show_tech_unlock_if = { country_uses_bio_ships = no }
     ai_weight = { weight = 10 }
@@ -933,6 +933,43 @@ utility_component_template = {
             weapon_type_energy_weapon_damage_mult = -0.3
             weapon_type_energy_weapon_fire_rate_mult = -0.2
             ship_engagement_range_mult = -0.2
+        }
+        graphics = {
+            area_effect = {
+                entity = "circle_area_entity"
+                dynamic_scale = yes
+            }
+            ship_effect = {
+                entity = "ship_aura_negative_entity"
+                dynamic_scale = no
+            }
+        }
+    }
+    prerequisites = { tech_fengrao_burst_shield }
+}
+utility_component_template = {
+    key = "treatment_fengrao"
+    size = medium
+    icon = "treatment_fengrao"
+    icon_frame = 1
+    power = -200
+    component_set = "path_aura_components"
+    class_restriction = { shipclass_military shipclass_transport shipclass_military_special shipclass_starbase }
+    friendly_aura = {
+        name = "treatment_fengrao"
+        system_wide = yes
+        stack_info = {
+            id = treatment_fengrao
+            priority = 1
+        }
+        modifier = {
+            SHIP_SHIELD_REGEN_ADD_PERC = 7.5
+            ship_armor_regen_add_static = 15000
+            ship_hull_regen_add_static = 10000
+            SHIP_HULL_REGEN_ADD_PERC = 1.5
+            SHIP_WEAPON_RANGE_MULT = 0.1
+            SHIP_ACCURACY_ADD = 2
+            SHIP_TARGET_WEIGHT_MULT = 0.2
         }
         graphics = {
             area_effect = {
