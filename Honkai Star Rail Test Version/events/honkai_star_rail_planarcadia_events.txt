@@ -1,0 +1,280 @@
+namespace = hsr_planarcadia
+#1000故事类
+situation_event = {
+	id = hsr_planarcadia.1000
+	is_triggered_only = yes
+	title = hsr_planarcadia.1000.title
+	desc = hsr_planarcadia.1000.desc
+	picture = GFX_evt_diplomatic_visit
+	trigger = {
+
+	}
+    immediate = {
+        root.owner = {
+            set_country_flag = ipc_help_start
+        }
+    }
+	option = {
+		name = hsr_planarcadia.1000.a
+        root.owner = {
+            add_resource = {
+                unity = 500
+            }
+        }
+	}
+}
+situation_event = {
+	id = hsr_planarcadia.1001
+	is_triggered_only = yes
+	title = hsr_ipc.2024.title
+	desc = hsr_ipc.2024.desc
+	picture = GFX_evt_erxiangleyuan_landscape
+	trigger = {
+
+	}
+    immediate = {
+        root.owner = {
+            set_country_flag = planarcadia_start
+        }
+    }
+	option = {
+		name = hsr_planarcadia.1001.a
+        root.owner = {
+            add_resource = {
+                unity = 3000
+            }
+            random_planet_within_border = {
+                limit = { has_planet_flag = erxiangleyuan }
+                while = {
+                    count = 5
+                    remove_deposit = d_two_dimensional_collapse
+                }
+            }
+        }
+	}
+}
+country_event = {
+	id = hsr_planarcadia.1002
+	is_triggered_only = yes
+	title = hsr_planarcadia.1002.title
+	desc = hsr_planarcadia.1002.desc
+	picture = GFX_evt_erxiangleyuan_rise_up
+	trigger = {
+
+	}
+    immediate = {
+
+    }
+	option = {
+		name = hsr_planarcadia.1002.a
+        add_modifier = {
+            modifier = erxiangleyuan_buff
+            days = -1
+        }
+	}
+}
+situation_event = {
+	id = hsr_planarcadia.1003
+	is_triggered_only = yes
+	title = hsr_ipc.2026.title
+	desc = hsr_planarcadia.1003.desc
+	picture = GFX_evt_erxiangleyuan_gechuan
+	trigger = {
+
+	}
+    immediate = {
+        root.owner = {
+            set_country_flag = planarcadia_start_1
+        }
+    }
+	option = {
+		name = hsr_planarcadia.1003.a
+        root.owner = {
+            add_resource = {
+                influence = 50
+            }
+            add_modifier = {
+                modifier = erxiangleyuan_buff_2
+                days = -1
+            }
+            random_planet_within_border = {
+                limit = { has_planet_flag = erxiangleyuan }
+                remove_modifier = erxiangleyuan_debuff
+                while = {
+			        count = 5
+                    create_army = {
+                        owner = owner
+                        species = owner
+                        type = "defense_army"
+                    }
+		        }
+            }
+        }
+	}
+}
+situation_event = {
+    id = hsr_planarcadia.1004
+    is_triggered_only = yes
+    title = hsr_planarcadia.1004.title
+    desc = hsr_planarcadia.1004.desc
+    picture = GFX_evt_ipc_zhenzhu
+    trigger = {
+
+    }
+    immediate = {
+
+    }
+    option = {
+        name = hsr_planarcadia.1004.a
+        root.owner = {
+            ruler = {
+                kill_leader = {  }
+            }
+            SR_leader_creator = {
+                SPECIES_NAME = star_rail_leader
+                SPECIES_CLASS = Star_Rail
+                LEADER_PORTRAIT = zhenzhu
+                SKILL = 1
+                CLASS = scientist
+                NAME = NAME_zhenzhu
+                GENDER = female
+                HIDEAGE = yes
+                ETHIC = ethic_xenophile
+                CATCH_PHRASE = zhenzhu_catch_phrase
+                DESC = zhenzhu_backstory
+                EVENT_TARGET = zhenzhu_leader
+            }
+            last_created_leader = {
+                remove_all_positive_traits = yes
+                change_background_job = physicist
+            }
+            SR_hire_leader = {
+                EVENT_TARGET = zhenzhu_leader
+            }
+            set_country_flag = zhenzhu_set
+            last_created_leader = {
+                set_leader_flag = legendary_leader
+                save_global_event_target_as = zhenzhu_leader
+                set_leader_flag = immune_to_negative_traits
+                set_leader_flag = zhenzhu
+
+            }
+            set_leader = event_target:zhenzhu_leader
+        }
+    }
+}
+situation_event = {
+    id = hsr_planarcadia.1005
+    is_triggered_only = yes
+    title = hsr_planarcadia.1005.title
+    desc = hsr_planarcadia.1005.desc
+    picture = GFX_evt_erxiangleyuan_huishi
+    trigger = {
+
+    }
+    immediate = {
+
+    }
+    option = {
+        name = hsr_planarcadia.1003.a
+        root.owner = {
+            add_resource = {
+                influence = 100
+            }
+            remove_modifier = erxiangleyuan_buff
+            add_modifier = {
+                modifier = erxiangleyuan_buff_1
+                days = -1
+            }
+        }
+    }
+}
+situation_event = {
+    id = hsr_planarcadia.1006
+    is_triggered_only = yes
+    title = hsr_ipc.2029.title
+    desc = hsr_ipc.2029.desc
+    picture = GFX_evt_erxiangleyuan_gaosimo
+    trigger = {
+
+    }
+    immediate = {
+
+    }
+    option = {
+        name = hsr_planarcadia.1006.a
+        root.owner = {
+            random_planet_within_border = {
+                limit = { has_planet_flag = erxiangleyuan }
+                add_modifier = {
+                    modifier = erxiangleyuan_debuff_1
+                    days = -1
+                }
+            }
+        }
+    }
+}
+situation_event = {
+    id = hsr_planarcadia.1007
+    is_triggered_only = yes
+    title = hsr_ipc.2030.title
+    desc = hsr_ipc.2030.desc
+    picture = GFX_evt_tradestation_interior
+    trigger = {
+
+    }
+    immediate = {
+
+    }
+    option = {
+        name = hsr_planarcadia.1007.a
+        root.owner = {
+            add_monthly_resource_mult = {
+                resource = unity
+                value = @tier3unityreward
+                min = @tier3unitymin
+                max = @tier3unitymax
+            }
+            random_planet_within_border = {
+                limit = { has_planet_flag = erxiangleyuan }
+                remove_modifier = erxiangleyuan_debuff_1
+            }
+        }
+    }
+}
+situation_event = {
+    id = hsr_planarcadia.1008
+    is_triggered_only = yes
+    title = hsr_ipc.2031.title
+    desc = hsr_planarcadia.1008.desc
+    picture = GFX_evt_financial_instruments
+    trigger = {
+
+    }
+    immediate = {
+
+    }
+    option = {
+        name = hsr_planarcadia.1008.a
+        root.owner = {
+            add_resource = {
+                influence = 100
+            }
+            add_monthly_resource_mult = {
+                resource = trade
+                value = 36
+                min = @tier3unitymin
+                max = @tier3unitymax
+            }
+            add_monthly_resource_mult = {
+                resource = unity
+                value = 36
+                min = @tier3unitymin
+                max = @tier3unitymax
+            }
+        }
+    }
+    after = {
+        destroy_situation = this
+    }
+}

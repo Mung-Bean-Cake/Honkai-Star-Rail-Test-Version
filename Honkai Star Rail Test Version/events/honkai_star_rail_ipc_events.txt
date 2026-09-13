@@ -482,9 +482,10 @@ country_event = {
                 }
             }
         }
-        #殖民地
+        #殖民地附庸
         ipc_colony_set_effect = yes
         ipc_npc_set_effect = yes
+        ipc_erxiangleyuan_set_effect = yes
         #舰队
         while = {
              count = 2
@@ -580,7 +581,7 @@ country_event = {
                 }
             }
         }
-        country_event = { id = hsr_ipc.2020 days = 3 }
+        country_event = { id = hsr_ipc.2020 days = 30 }
     }
 }
 country_event = {
@@ -1021,5 +1022,312 @@ country_event = {
     }
 	option = {
 		name = hsr_ipc.2020.a
+        start_situation = { type = situation_various_world_reconstruction_plans_ipc }
+        hidden_effect = {
+            country_event = { id = hsr_ipc.2022 days = 50 }
+            event_target:origin_ipc_erxiangleyuan_country = {
+                start_situation = { type = situation_various_world_reconstruction_plans_erxiangleyuan }
+                add_modifier = {
+                    modifier = ipc_npc_effect
+                    days = -1
+                }
+            }
+        }
 	}
+}
+situation_event = {
+	id = hsr_ipc.2021
+	is_triggered_only = yes
+	title = hsr_ipc.2021.title
+	desc = hsr_ipc.2021.desc
+	picture = GFX_evt_caravaneers
+	trigger = {
+
+	}
+    immediate = {
+        root.owner = {
+            set_country_flag = ipc_help_start
+        }
+    }
+	option = {
+		name = hsr_ipc.2021.a
+        root.owner = {
+            add_resource = {
+                influence = 10
+            }
+        }
+	}
+}
+country_event = {
+	id = hsr_ipc.2022
+	is_triggered_only = yes
+	title = hsr_ipc.2022.title
+	desc = hsr_ipc.2022.desc
+	picture = GFX_evt_ipc_npc_adventure
+	trigger = {
+
+	}
+    immediate = {
+
+    }
+	option = {
+		name = hsr_ipc.2022.a
+        hidden_effect = {
+            country_event = { id = hsr_ipc.2023 days = 40 }
+        }
+	}
+}
+country_event = {
+	id = hsr_ipc.2023
+	is_triggered_only = yes
+	title = hsr_ipc.2023.title
+	desc = hsr_ipc.2023.desc
+	picture = GFX_evt_ipc_npc_adventure_1
+	trigger = {
+
+	}
+    immediate = {
+
+    }
+	option = {
+		name = hsr_ipc.2023.a
+	}
+}
+situation_event = {
+	id = hsr_ipc.2024
+	is_triggered_only = yes
+	title = hsr_ipc.2024.title
+	desc = hsr_ipc.2024.desc
+	picture = GFX_evt_erxiangleyuan_landscape
+	trigger = {
+
+	}
+    immediate = {
+        root.owner = {
+            set_country_flag = planarcadia_start
+        }
+    }
+	option = {
+		name = hsr_ipc.2024.a
+        root.owner = {
+            add_resource = {
+                influence = 50
+            }
+            add_monthly_resource_mult = {
+				resource = trade
+				value = @tier3unityreward
+				min = @tier3unitymin
+				max = @tier3unitymax
+			}
+            add_monthly_resource_mult = {
+				resource = society_research
+				value = @tier3unityreward
+				min = @tier3unitymin
+				max = @tier3unitymax
+			}
+            hidden_effect = {
+                country_event = { id = hsr_ipc.2025  days = 30}
+            }
+        }
+	}
+}
+country_event = {
+	id = hsr_ipc.2025
+	is_triggered_only = yes
+	title = hsr_ipc.2025.title
+	desc = hsr_ipc.2025.desc
+	picture = GFX_evt_ipc_zhantou
+	trigger = {
+
+	}
+    immediate = {
+
+    }
+	option = {
+		name = hsr_ipc.2025.a
+        add_monthly_resource_mult = {
+            resource = trade
+            value = @tier1unityreward
+            min = @tier1unitymin
+            max = @tier1unitymax
+        }
+        add_resource = {
+            unity = -500
+        }
+        hidden_effect = {
+            event_target:origin_ipc_erxiangleyuan_country = {
+                country_event = { id = hsr_planarcadia.1002 }
+            }
+        }
+	}
+}
+situation_event = {
+	id = hsr_ipc.2026
+	is_triggered_only = yes
+	title = hsr_ipc.2026.title
+	desc = hsr_ipc.2026.desc
+	picture = GFX_evt_salute
+	trigger = {
+
+	}
+    immediate = {
+        root.owner = {
+            set_country_flag = planarcadia_start_1
+        }
+    }
+	option = {
+		name = hsr_ipc.2026.a
+        root.owner = {
+            add_resource = {
+                influence = 50
+            }
+            add_monthly_resource_mult = {
+				resource = trade
+				value = @tier3unityreward
+				min = @tier3unitymin
+				max = @tier3unitymax
+			}
+            add_monthly_resource_mult = {
+				resource = society_research
+				value = @tier3unityreward
+				min = @tier3unitymin
+				max = @tier3unitymax
+			}
+        }
+	}
+}
+situation_event = {
+	id = hsr_ipc.2027
+	is_triggered_only = yes
+	title = hsr_ipc.2027.title
+	desc = hsr_ipc.2027.desc
+	picture = GFX_evt_ipc_zhenzhu
+	trigger = {
+
+	}
+    immediate = {
+
+    }
+	option = {
+		name = hsr_ipc.2027.a
+        root.owner = {
+            add_resource = {
+                influence = 50
+            }
+            add_monthly_resource_mult = {
+				resource = trade
+				value = @tier3unityreward
+				min = @tier3unitymin
+				max = @tier3unitymax
+			}
+            add_monthly_resource_mult = {
+				resource = society_research
+				value = @tier3unityreward
+				min = @tier3unitymin
+				max = @tier3unitymax
+			}
+        }
+	}
+}
+situation_event = {
+    id = hsr_ipc.2028
+    is_triggered_only = yes
+    title = hsr_ipc.2028.title
+    desc = hsr_ipc.2028.desc
+    picture = GFX_evt_ipc_qianxingcheng
+    trigger = {
+
+    }
+    immediate = {
+        root.owner = {
+            set_country_flag = ipc_research
+        }
+    }
+    option = {
+        name = hsr_ipc.2028.a
+        custom_tooltip = hsr_ipc.2028.a.desc
+        root.owner = {
+            random_owned_planet = {
+                limit = {
+                    has_planet_flag = ipc_2
+                }
+                add_modifier = {
+                    modifier = ipc_shengyanyuan
+                    days = -1
+                }
+            }
+        }
+    }
+}
+situation_event = {
+    id = hsr_ipc.2029
+    is_triggered_only = yes
+    title = hsr_ipc.2029.title
+    desc = hsr_ipc.2029.desc
+    picture = GFX_evt_erxiangleyuan_gaosimo
+    trigger = {
+
+    }
+    immediate = {
+
+    }
+    option = {
+        name = hsr_ipc.2029.a
+    }
+}
+situation_event = {
+    id = hsr_ipc.2030
+    is_triggered_only = yes
+    title = hsr_ipc.2030.title
+    desc = hsr_ipc.2030.desc
+    picture = GFX_evt_tradestation_interior
+    trigger = {
+
+    }
+    immediate = {
+
+    }
+    option = {
+        name = hsr_ipc.2030.a
+    }
+}
+situation_event = {
+    id = hsr_ipc.2031
+    is_triggered_only = yes
+    title = hsr_ipc.2031.title
+    desc = hsr_ipc.2031.desc
+    picture = GFX_evt_financial_instruments
+    trigger = {
+
+    }
+    immediate = {
+
+    }
+    option = {
+        name = hsr_ipc.2031.a
+        root.owner = {
+            add_modifier = {
+                modifier = ipc_buff_1
+                days = -1
+            }
+            add_resource = {
+                influence = 100
+            }
+            add_monthly_resource_mult = {
+                resource = trade
+                value = @tier3unityreward
+                min = @tier3unitymin
+                max = @tier3unitymax
+            }
+            add_monthly_resource_mult = {
+                resource = unity
+                value = @tier3unityreward
+                min = @tier3unitymin
+                max = @tier3unitymax
+            }
+        }
+    }
+    after = {
+        destroy_situation = this
+    }
 }

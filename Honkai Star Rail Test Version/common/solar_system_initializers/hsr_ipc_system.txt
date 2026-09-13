@@ -148,6 +148,13 @@ ipc_home_initializer = {
         }
         initializer = "ipc_home_ipc_5"
     }
+    neighbor_system = {
+        hyperlane_jumps = {
+			  min = 6
+			  max = 9
+        }
+        initializer = "erxiangleyuan_sysytem"
+    }
 }
 #取木星
 ipc_junipter_system = {
@@ -364,7 +371,7 @@ ipc_home_ipc_2 = {
     class = sc_g
     name = NAME_ipc_2
     flags = {
-
+        ipc_home_ipc_2
     }
     usage = misc_system_init
     usage_odds = 0
@@ -613,6 +620,85 @@ ipc_home_ipc_5 = {
             orbit_angle = { min = 90 max = 270 }
             orbit_distance = 5
         }
+    }
+
+    planet = {
+        count = { min = 0 max = 2 }
+        orbit_angle = { min = 90 max = 270 }
+        orbit_distance = 70
+    }
+}
+erxiangleyuan_sysytem = {
+    class = sc_g
+    name = NAME_sol_erxiangleyuan_sysytem
+    flags = {
+        erxiangleyuan_sysytem
+    }
+    usage_odds = 0
+    prevent_anomalies = yes
+    planet = {
+        name = "NAME_sol_erxiangleyuan_sysytem"
+        class = "pc_g_star"
+        orbit_distance = 0
+        orbit_angle = 1
+        size = 30
+        has_ring = no
+        init_effect = {
+            clear_deposits = yes
+            add_deposit = d_physics_2
+        }
+    }
+    planet = {
+        class = pc_rare_crystal_asteroid
+        orbit_distance = 25
+        orbit_angle = 40
+        size = 1
+        has_ring = no
+        init_effect = {
+            clear_deposits = yes
+            add_deposit = d_minerals_2
+        }
+    }
+    planet = {
+        name = NAME_sol_erxiangleyuan
+        class = pc_continental
+        orbit_distance = 55
+        orbit_angle = 142
+        size = 25
+        has_ring = no
+        flags = { erxiangleyuan }
+        home_planet = yes
+        moon = {
+            name = NAME_sol_erxiangleyuan_moon
+            class = pc_barren_cold
+            orbit_angle = { min = 90 max = 270 }
+            orbit_distance = 25
+            init_effect = {
+                add_deposit = d_trade_value_10
+            }
+        }
+    }
+    planet = {
+        count = 2
+        orbit_angle = { min = 90 max = 270 }
+        orbit_distance = 20
+
+        change_orbit = @base_moon_distance
+
+        moon = {
+            count = { min = 0 max = 1 }
+            class = random_non_colonizable
+            orbit_angle = { min = 90 max = 270 }
+            orbit_distance = 5
+        }
+    }
+    planet = {
+        count = 2
+        orbit_angle = { min = 90 max = 270 }
+        orbit_distance = 45
+
+        change_orbit = @base_moon_distance
+
     }
 
     planet = {

@@ -86,3 +86,487 @@ situation_cunhu_support_team = {
         }
     }
 }
+situation_various_world_reconstruction_plans_ipc = {
+	picture = GFX_evt_erxiangleyuan_landscape
+	complete_icon_frame = GFX_situation_outcome_frame_blue
+	complete_icon = GFX_situation_outcome_positive
+	on_progress_complete = {
+		custom_tooltip = situation_various_world_reconstruction_plans_ipc
+		hidden_effect = {
+			situation_event = { id = hsr_ipc.2031 }
+		}
+		set_situation_locked = yes
+	}
+	stages = {
+		stage_1 = {
+			icon = GFX_situation_stage_1
+			icon_background = GFX_situation_stage_frame_blue
+			end = 125#修零件
+			on_first_enter = {
+				situation_event = { id = hsr_ipc.2021 }
+			}
+			custom_tooltip = stage_engine_of_creation_effects
+		}
+		stage_2 = {
+			icon = GFX_situation_stage_2
+			icon_background = GFX_situation_stage_frame_blue
+			end = 250#组装
+			on_first_enter = {
+				situation_event = { id = hsr_ipc.2024 }
+			}
+			custom_tooltip = stage_engine_of_creation_effects
+		}
+		stage_3 = {
+			icon = GFX_situation_stage_3
+			icon_background = GFX_situation_stage_frame_blue
+			end = 375#抽取能源，供给能源
+			on_first_enter = {
+				situation_event = { id = hsr_ipc.2026 }
+			}
+			custom_tooltip = stage_engine_of_creation_effects
+		}
+		stage_4 = {
+			icon = GFX_situation_stage_4
+			icon_background = GFX_situation_stage_frame_blue
+			end = 500#重启引擎，各项机能实验
+			on_first_enter = {
+				situation_event = { id = hsr_ipc.2027 }
+			}
+			custom_tooltip = stage_engine_of_creation_effects
+		}
+		stage_5 = {
+			icon = GFX_situation_stage_5
+			icon_background = GFX_situation_stage_frame_blue
+			end = 625#完成行星表面裂隙清除
+			on_first_enter = {
+				situation_event = { id = hsr_ipc.2028 }
+			}
+			custom_tooltip = stage_engine_of_creation_effects
+		}
+		stage_6 = {
+			icon = GFX_situation_stage_6
+			icon_background = GFX_situation_stage_frame_blue
+			end = 750#环境改造
+			on_first_enter = {
+				situation_event = { id = hsr_ipc.2029 }
+			}
+			custom_tooltip = stage_engine_of_creation_effects
+		}
+		stage_7 = {
+			icon = GFX_situation_stage_7
+			icon_background = GFX_situation_stage_frame_blue
+			end = 875#修缮完善，将能量供给回行星
+			on_first_enter = {
+				situation_event = { id = hsr_ipc.2030 }
+			}
+			custom_tooltip = stage_engine_of_creation_effects
+		}
+	}
+	approach = {
+		name = situation_ipc_help_regular
+		icon = GFX_situation_approach_balance_sheet
+		icon_background = GFX_situation_approach_bg_yellow
+		on_select = {
+			custom_tooltip = approach_ipc_help_regular_tt
+			hidden_effect = {
+				event_target:origin_ipc_erxiangleyuan_country = {
+					every_situation = {
+						limit = { is_situation_type = situation_various_world_reconstruction_plans_erxiangleyuan }
+						set_situation_approach = situation_erxiangleyuan_help_regular
+					}
+				}
+			}
+		}
+		default = yes
+		resources = {
+			upkeep = {
+				minerals = 40
+				energy = 40
+				food = 40
+				alloys = 20
+				consumer_goods = 20
+			}
+			produces = {
+				influence = 2
+			}
+		}
+		modifier = {
+			diplo_weight_mult = 0.2
+		}
+	}
+	approach = {
+		name = situation_ipc_help_generous
+		icon = GFX_situation_approach_balance_sheet
+		icon_background = GFX_situation_approach_bg_green
+		on_select = {
+			custom_tooltip = approach_ipc_help_generous_tt
+			hidden_effect = {
+				event_target:origin_ipc_erxiangleyuan_country = {
+					every_situation = {
+						limit = { is_situation_type = situation_various_world_reconstruction_plans_erxiangleyuan }
+						set_situation_approach = situation_erxiangleyuan_help_generous
+					}
+				}
+			}
+		}
+		resources = {
+			upkeep = {
+				minerals = 60
+				energy = 60
+				food = 60
+				alloys = 30
+				consumer_goods = 30
+			}
+			produces = {
+				influence = 3
+			}
+		}
+		modifier = {
+			diplo_weight_mult = 0.3
+		}
+	}
+	approach = {
+		name = situation_ipc_help_frugal
+		icon = GFX_situation_approach_balance_sheet
+		icon_background = GFX_situation_approach_bg_red
+		on_select = {
+			custom_tooltip = approach_ipc_help_frugal_tt
+			hidden_effect = {
+				event_target:origin_ipc_erxiangleyuan_country = {
+					every_situation = {
+						limit = { is_situation_type = situation_various_world_reconstruction_plans_erxiangleyuan }
+						set_situation_approach = situation_erxiangleyuan_help_frugal
+					}
+				}
+			}
+		}
+		resources = {
+			upkeep = {
+				minerals = 20
+				energy = 20
+				food = 20
+				alloys = 10
+				consumer_goods = 10
+			}
+			produces = {
+				influence = 1
+			}
+		}
+		modifier = {
+			diplo_weight_mult = 0.1
+		}
+	}
+	approach = {
+		name = situation_ipc_research
+		icon = GFX_situation_approach_research
+		icon_background = GFX_situation_approach_bg_green
+		on_select = {
+			custom_tooltip = approach_ipc_research
+			hidden_effect = {
+				event_target:origin_ipc_erxiangleyuan_country = {
+					every_situation = {
+						limit = { is_situation_type = situation_various_world_reconstruction_plans_erxiangleyuan }
+						set_situation_approach = situation_erxiangleyuan_research
+					}
+				}
+			}
+		}
+		potential = {
+			root.owner = {
+				has_country_flag = ipc_research
+			}
+		}
+		resources = {
+			upkeep = {
+				minerals = 70
+				energy = 70
+				food = 70
+				alloys = 35
+				consumer_goods = 35
+			}
+			produces = {
+				influence = 1
+				physics_research = 10
+				society_research = 10
+				engineering_research = 10
+			}
+		}
+		modifier = {
+			diplo_weight_mult = 0.1
+			all_technology_research_speed = 0.1
+		}
+	}
+	on_monthly = {
+		events = {
+
+	    }
+		random_events = {
+			1200 = 0
+		}
+	}
+	monthly_progress = {
+		base = 2
+		modifier = {
+			add = -0.5
+			desc = situation_ipc_help_frugal
+			current_situation_approach = situation_ipc_help_frugal
+		}
+		modifier = {
+			add = 0.3
+			desc = ipc_help_start
+			owner = {
+				has_country_flag = ipc_help_start
+			}
+		}
+		modifier = {
+			add = 0.2
+			desc = planarcadia_start
+			owner = {
+				has_country_flag = planarcadia_start
+			}
+		}
+		modifier = {
+			add = 0.2
+			desc = planarcadia_start_1
+			owner = {
+				has_country_flag = planarcadia_start_1
+			}
+		}
+		modifier = {
+			add = -0.1
+			desc = situation_ipc_research
+			current_situation_approach = situation_ipc_research
+		}
+		modifier = {
+			add = 0.5
+			desc = situation_ipc_help_generous
+			current_situation_approach = situation_ipc_help_generous
+		}
+	}
+}
+situation_various_world_reconstruction_plans_erxiangleyuan = {
+	picture = GFX_evt_erxiangleyuan_landscape
+	complete_icon_frame = GFX_situation_outcome_frame_blue
+	complete_icon = GFX_situation_outcome_positive
+	on_progress_complete = {
+		custom_tooltip = situation_various_world_reconstruction_plans_ipc
+		hidden_effect = {
+			situation_event = { id = hsr_planarcadia.1008 }
+		}
+		set_situation_locked = yes
+	}
+	stages = {
+		stage_1 = {
+			icon = GFX_situation_stage_1
+			icon_background = GFX_situation_stage_frame_blue
+			end = 125#修零件
+			on_first_enter = {
+				situation_event = { id = hsr_planarcadia.1000 }
+			}
+			custom_tooltip = stage_engine_of_creation_effects
+		}
+		stage_2 = {
+			icon = GFX_situation_stage_2
+			icon_background = GFX_situation_stage_frame_blue
+			end = 250#组装
+			on_first_enter = {
+				situation_event = { id = hsr_planarcadia.1001 }
+			}
+			custom_tooltip = stage_engine_of_creation_effects
+		}
+		stage_3 = {
+			icon = GFX_situation_stage_3
+			icon_background = GFX_situation_stage_frame_blue
+			end = 375#抽取能源，供给能源
+			on_first_enter = {
+				situation_event = { id = hsr_planarcadia.1003 }
+			}
+			custom_tooltip = stage_engine_of_creation_effects
+		}
+		stage_4 = {
+			icon = GFX_situation_stage_4
+			icon_background = GFX_situation_stage_frame_blue
+			end = 500#重启引擎，各项机能实验
+			on_first_enter = {
+				situation_event = { id = hsr_planarcadia.1004 }
+			}
+			custom_tooltip = stage_engine_of_creation_effects
+		}
+		stage_5 = {
+			icon = GFX_situation_stage_5
+			icon_background = GFX_situation_stage_frame_blue
+			end = 625#完成行星表面裂隙清除
+			on_first_enter = {
+				situation_event = { id = hsr_planarcadia.1005 }
+			}
+			custom_tooltip = stage_engine_of_creation_effects
+		}
+		stage_6 = {
+			icon = GFX_situation_stage_6
+			icon_background = GFX_situation_stage_frame_blue
+			end = 750#环境改造
+			on_first_enter = {
+				situation_event = { id = hsr_planarcadia.1006 }
+			}
+			custom_tooltip = stage_engine_of_creation_effects
+		}
+		stage_7 = {
+			icon = GFX_situation_stage_7
+			icon_background = GFX_situation_stage_frame_blue
+			end = 875#修缮完善，将能量供给回行星
+			on_first_enter = {
+				situation_event = { id = hsr_planarcadia.1007 }
+			}
+			custom_tooltip = stage_engine_of_creation_effects
+		}
+	}
+	approach = {
+		name = situation_erxiangleyuan_help_regular
+		icon = GFX_situation_approach_balance_sheet
+		icon_background = GFX_situation_approach_bg_yellow
+		on_select = {
+			custom_tooltip = approach_erxiangleyuan_help_regular_tt
+		}
+		potential = {
+			root.owner = {
+				has_country_flag = ipc_give_opportunity
+			}
+		}
+		default = yes
+		resources = {
+			produces = {
+				minerals = 40
+				energy = 40
+				food = 40
+				alloys = 20
+				consumer_goods = 20
+			}
+		}
+		modifier = {
+			pop_bonus_workforce_mult = 0.1
+		}
+	}
+	approach = {
+		name = situation_erxiangleyuan_help_generous
+		icon = GFX_situation_approach_balance_sheet
+		icon_background = GFX_situation_approach_bg_green
+		on_select = {
+			custom_tooltip = approach_erxiangleyuan_help_generous_tt
+		}
+		potential = {
+			root.owner = {
+				has_country_flag = ipc_give_opportunity
+			}
+		}
+		resources = {
+			produces = {
+				minerals = 60
+				energy = 60
+				food = 60
+				alloys = 30
+				consumer_goods = 30
+			}
+		}
+		modifier = {
+			pop_bonus_workforce_mult = 0.1
+			country_produces_mult = 0.1
+		}
+	}
+	approach = {
+		name = situation_erxiangleyuan_help_frugal
+		icon = GFX_situation_approach_balance_sheet
+		icon_background = GFX_situation_approach_bg_red
+		on_select = {
+			custom_tooltip = approach_erxiangleyuan_help_frugal_tt
+		}
+		potential = {
+			root.owner = {
+				has_country_flag = ipc_give_opportunity
+			}
+		}
+		resources = {
+			produces = {
+				minerals = 20
+				energy = 20
+				food = 20
+				alloys = 10
+				consumer_goods = 10
+			}
+		}
+		modifier = {
+			pop_bonus_workforce_mult = 0.05
+		}
+	}
+	approach = {
+		name = situation_erxiangleyuan_research
+		icon = GFX_situation_approach_research
+		icon_background = GFX_situation_approach_bg_green
+		on_select = {
+			custom_tooltip = approach_erxiangleyuan_research
+		}
+		potential = {
+			root.owner = {
+				has_country_flag = ipc_give_opportunity
+			}
+		}
+		resources = {
+			produces = {
+				minerals = 70
+				energy = 70
+				food = 70
+				alloys = 35
+				consumer_goods = 35
+			}
+		}
+		modifier = {
+			pop_bonus_workforce_mult = 0.05
+		}
+	}
+	on_monthly = {
+		events = {
+
+	    }
+		random_events = {
+			1200 = 0
+		}
+	}
+	monthly_progress = {
+		base = 2
+		modifier = {
+			add = -0.5
+			desc = situation_ipc_help_frugal
+			current_situation_approach = situation_ipc_help_frugal
+		}
+		modifier = {
+			add = 0.3
+			desc = ipc_help_start
+			owner = {
+				has_country_flag = ipc_help_start
+			}
+		}
+		modifier = {
+			add = 0.2
+			desc = planarcadia_start
+			owner = {
+				has_country_flag = planarcadia_start
+			}
+		}
+		modifier = {
+			add = 0.2
+			desc = planarcadia_start_1
+			owner = {
+				has_country_flag = planarcadia_start_1
+			}
+		}
+		modifier = {
+			add = -0.1
+			desc = situation_ipc_research
+			current_situation_approach = situation_ipc_research
+		}
+		modifier = {
+			add = 0.5
+			desc = situation_ipc_help_generous
+			current_situation_approach = situation_ipc_help_generous
+		}
+	}
+}
