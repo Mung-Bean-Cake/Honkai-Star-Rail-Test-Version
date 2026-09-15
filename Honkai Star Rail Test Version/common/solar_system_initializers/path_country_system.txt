@@ -1,0 +1,1731 @@
+@base_moon_distance = 10
+@marauderClusterRange = 120
+fengraomin_1 = {
+	class = "sc_g"
+	usage = misc_system_init
+	asteroid_belt = {
+		type = rocky_asteroid_belt
+		radius = 230
+	}
+	max_instances = 1
+	usage_odds = {
+		base = 0
+	}
+	spawn_chance = 0
+	flags = { fengraomin_system fengraomin_capital_1 }
+	planet = {
+		class = pc_gaia
+		orbit_distance = 0
+		orbit_angle = 1
+		size = { min = 20 max = 30 }
+		has_ring = no
+
+		init_effect = {
+			create_cluster = {
+				id = fengraomin_cluster
+				radius = @marauderClusterRange
+				center = this.solar_system
+			}
+			create_species = {
+				name = fengraomin
+				class = fengraomin
+				blocked_archetypes = {
+					fengraomin
+				}
+				portrait = random
+				traits = {
+					trait = "trait_pc_habitat_preference"
+					trait = trait_exd
+					trait = "trait_extremely_adaptive"
+					trait = "trait_rapid_breeders"
+					trait = "trait_nomadic"
+					trait = trait_cyborg_creed_of_war
+					trait = trait_crucible_community
+				}
+			}
+			create_country = {
+				name_list = DOT_SR_fengraomin
+				species = last_created_species
+				type = fengraomin
+				civics = { civic = civic_hive_ascetic }
+				origin = origin_common_ground
+				flag = {
+					background= {
+						category = "backgrounds"
+						file = "00_solid.dds"
+					}
+					colors={
+						"black"
+						"blue"
+						"white"
+						"null"
+					}
+				}
+				ethos = {
+					ethic = ethic_fanatic_militarist
+					ethic = ethic_xenophobe
+				}
+				ignore_initial_colony_error = yes
+			}
+			last_created_country = {
+				set_graphical_culture = DOT_SR_humanoid_01
+				save_global_event_target_as = fengraomin_country
+				set_country_flag = fengraomin_1
+				set_name = NAME_fengraomin
+				create_ship_design = { design = "NAME_Void_Dwelling" }
+				add_ship_design = last_created_design
+				set_custom_capital_location = prev
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_FE_XENOPHILE_Citadel_2"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 230
+						angle = 110
+					}
+				}
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_FE_XENOPHILE_Citadel_2"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 230
+						angle = 200
+					}
+				}
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_FE_XENOPHILE_Citadel_2"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					while = {
+						count = 40
+						create_ship = {
+							name = random
+							design = "NAME_Ancient_Guardian"
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+					}
+					set_location = {
+						target = prev
+						distance = 230
+						angle = 220
+					}
+				}
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_FE_XENOPHILE_Citadel_3"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 230
+						angle = 250
+					}
+				}
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_FE_XENOPHILE_Citadel_1"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 230
+						angle = 260
+					}
+				}
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_FE_XENOPHILE_Citadel_2"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 230
+						angle = 280
+					}
+				}
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_FE_XENOPHILE_Citadel_1"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 230
+						angle = 300
+					}
+				}
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_FE_XENOPHILE_Citadel_1"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					while = {
+						count = 20
+						create_ship = {
+							name = random
+							design = "NAME_middle_fengrao_leader"
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+					}
+					set_formation_scale = 2
+					set_fleet_stance = aggressive
+					set_aggro_range_measure_from = self
+					set_aggro_range = 250
+					set_location = {
+						target = prev
+						distance = 20
+						angle = 120
+					}
+				}
+				settings = {
+					garrison = yes
+				}
+			}
+			create_ambient_object = {
+				type = "abandoned_starbase_01_object"
+				location = this
+			}
+		}
+	}
+	change_orbit = 50
+	planet = {
+		class = pc_molten
+		orbit_distance = 25
+		size = 20
+		orbit_angle = 20
+		flags = { raid_source }
+		init_effect = {
+			set_deposit = d_minerals_8
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_FE_XENOPHILE_Citadel_3"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = pc_toxic
+		orbit_distance = 25
+		size = 11
+		orbit_angle = 100
+		init_effect = {
+			set_deposit = d_minerals_8
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_FE_XENOPHILE_Citadel_1"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_FE_XENOPHILE_Citadel_2"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 230
+						angle = 140
+					}
+				}
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_FE_XENOPHILE_Citadel_2"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 230
+						angle = 170
+					}
+				}
+			}
+		}
+	}
+	planet = {
+		class = pc_gas_giant
+		orbit_distance = 40
+		orbit_angle = -60
+		size = 40
+
+		init_effect = {
+			create_ambient_object = {
+				type = "abandoned_starbase_01_object"
+				location = this
+			}
+		}
+
+		change_orbit = @base_moon_distance
+
+		moon = {
+			class = pc_barren
+			size = 8
+			orbit_angle = 90
+			orbit_distance = 6
+			init_effect = {
+				set_deposit = d_minerals_8
+				create_fleet = {
+					effect = {
+						set_owner = event_target:fengraomin_country
+						create_ship = {
+							name = random
+							design = "NAME_FE_XENOPHILE_Citadel_2"
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+						set_location = {
+							target = prev
+							distance = 10
+							angle = 0
+						}
+					}
+				}
+				create_fleet = {
+					effect = {
+						set_owner = event_target:fengraomin_country
+						create_ship = {
+							name = random
+							design = "NAME_FE_XENOPHILE_Citadel_2"
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+						set_location = {
+							target = prev
+							distance = 230
+							angle = 330
+						}
+					}
+				}
+			}
+		}
+		moon = {
+			class = pc_barren_cold
+			size = 10
+			orbit_angle = 95
+			orbit_distance = 6
+
+			init_effect = {
+				create_fleet = {
+					effect = {
+						set_owner = event_target:fengraomin_country
+						create_ship = {
+							name = random
+							design = "NAME_FE_XENOPHILE_Citadel_2"
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+						set_location = {
+							target = prev
+							distance = 230
+							angle = 330
+						}
+					}
+				}
+				create_fleet = {
+					effect = {
+						set_owner = event_target:fengraomin_country
+						while = {
+							count = 200
+							create_ship = {
+								name = random
+								design = "NAME_Black_Earl"
+								graphical_culture = "DOT_SR_humanoid_01"
+							}
+						}
+						while = {
+							count = 30
+							create_ship = {
+								name = random
+								design = "NAME_Dragonspawn"
+								graphical_culture = "DOT_SR_humanoid_01"
+							}
+						}
+						while = {
+							count = 10
+							create_ship = {
+								name = random
+								design = "NAME_middle_fengrao_leader"
+								graphical_culture = "DOT_SR_humanoid_01"
+							}
+						}
+						set_formation_scale = 2
+						set_fleet_stance = aggressive
+						set_aggro_range_measure_from = self
+						set_aggro_range = 250
+						set_location = {
+							target = prev
+							distance = 20
+							angle = 120
+						}
+					}
+					settings = {
+						garrison = yes
+					}
+				}
+			}
+		}
+		moon = {
+			class = pc_frozen
+			size = 9
+			orbit_angle = 125
+			orbit_distance = 6
+
+			init_effect = {
+				create_ambient_object = {
+					type = "abandoned_starbase_01_object"
+					location = this
+				}
+				create_ambient_object = {
+					type = "medium_debris_01_object"
+					location = this
+				}
+			}
+		}
+		moon = {
+			class = pc_toxic
+			size = 11
+			orbit_angle = 160
+			orbit_distance = 6
+			init_effect = {
+				set_deposit = d_minerals_8
+				create_fleet = {
+					effect = {
+						set_owner = event_target:fengraomin_country
+						create_ship = {
+							name = random
+							design = "NAME_FE_XENOPHILE_Citadel_3"
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+						set_location = {
+							target = prev
+							distance = 10
+							angle = 0
+						}
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = pc_barren_cold
+		orbit_distance = 40
+		size = 25
+		orbit_angle = 55
+
+		init_effect = {
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					while = {
+						count = 15
+						create_ship = {
+							name = random
+							design = "NAME_middle_fengrao_leader"
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+					}
+					set_formation_scale = 2
+					set_fleet_stance = aggressive
+					set_aggro_range_measure_from = self
+					set_aggro_range = 250
+					set_location = {
+						target = prev
+						distance = 20
+						angle = 120
+					}
+				}
+				settings = {
+					garrison = yes
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = pc_barren
+		orbit_distance = 25
+		size = 15
+		orbit_angle = 120
+
+		init_effect = {
+			create_ambient_object = {
+				type = "abandoned_starbase_01_object"
+				location = this
+			}
+		}
+
+		change_orbit = @base_moon_distance
+
+		moon = {
+			class = pc_frozen
+			size = 8
+			orbit_angle = 90
+			orbit_distance = 6
+
+			init_effect = {
+				create_fleet = {
+					effect = {
+						set_owner = event_target:fengraomin_country
+						while = {
+							count = 150
+							create_ship = {
+								name = random
+								design = "NAME_Black_Earl"
+								graphical_culture = "DOT_SR_humanoid_01"
+							}
+						}
+						while = {
+							count = 20
+							create_ship = {
+								name = random
+								design = "NAME_Dragonspawn"
+								graphical_culture = "DOT_SR_humanoid_01"
+							}
+						}
+						while = {
+							count = 10
+							create_ship = {
+								name = random
+								design = "NAME_middle_fengrao_leader"
+								graphical_culture = "DOT_SR_humanoid_01"
+							}
+						}
+						set_formation_scale = 2
+						set_fleet_stance = aggressive
+						set_aggro_range_measure_from = self
+						set_aggro_range = 250
+						set_location = {
+							target = prev
+							distance = 20
+							angle = 120
+						}
+					}
+					settings = {
+						garrison = yes
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = "pc_asteroid"
+		orbit_distance = 25
+		orbit_angle = -210
+		size = 5
+		has_ring = no
+		init_effect = {
+			set_deposit = d_minerals_8
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_FE_XENOPHILE_Citadel_1"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = "pc_asteroid"
+		orbit_distance = 0
+		orbit_angle = -95
+		size = 5
+		has_ring = no
+		init_effect = {
+			set_deposit = d_minerals_8
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_FE_XENOPHILE_Citadel_2"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = "pc_asteroid"
+		orbit_distance = 0
+		orbit_angle = 285
+		size = 5
+		has_ring = no
+		init_effect = {
+			set_deposit = d_minerals_8
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_FE_XENOPHILE_Citadel_3"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = "pc_asteroid"
+		orbit_distance = 0
+		orbit_angle = -80
+		size = 5
+		has_ring = no
+		init_effect = {
+			set_deposit = d_minerals_8
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_FE_XENOPHILE_Citadel_2"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = "pc_asteroid"
+		orbit_distance = 0
+		orbit_angle = -80
+		size = 5
+		has_ring = no
+		init_effect = {
+			set_deposit = d_minerals_8
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_FE_XENOPHILE_Citadel_3"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = "pc_asteroid"
+		orbit_distance = 0
+		orbit_angle = -80
+		size = 5
+		has_ring = no
+		init_effect = {
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_FE_XENOPHILE_Citadel_3"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = "pc_asteroid"
+		orbit_distance = 0
+		orbit_angle = -80
+		size = 5
+		has_ring = no
+		init_effect = {
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_FE_XENOPHILE_Citadel_2"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = "pc_asteroid"
+		orbit_distance = 0
+		orbit_angle = -80
+		size = 5
+		has_ring = no
+		init_effect = {
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_FE_XENOPHILE_Citadel_3"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = pc_barren_cold
+		orbit_distance = 30
+		size = 10
+		orbit_angle = 125
+
+		init_effect = {
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_FE_XENOPHILE_Citadel_2"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = pc_frozen
+		orbit_distance = 25
+		size = 8
+		orbit_angle = 125
+
+		init_effect = {
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_FE_XENOPHILE_Citadel_2"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = pc_frozen
+		orbit_distance = 25
+		size = 12
+		orbit_angle = 125
+
+		init_effect = {
+			create_ambient_object = {
+				type = "abandoned_starbase_01_object"
+				location = this
+			}
+			create_ambient_object = {
+				type = "medium_debris_01_object"
+				location = this
+			}
+		}
+
+		change_orbit = @base_moon_distance
+
+		moon = {
+			class = pc_frozen
+			size = 8
+			orbit_angle = 90
+			orbit_distance = 6
+
+			init_effect = {
+				create_fleet = {
+					effect = {
+						set_owner = event_target:fengraomin_country
+						while = {
+							count = 240
+							create_ship = {
+								name = random
+								design = "NAME_Black_Earl"
+								graphical_culture = "DOT_SR_humanoid_01"
+							}
+						}
+						while = {
+							count = 30
+							create_ship = {
+								name = random
+								design = "NAME_Dragonspawn"
+								graphical_culture = "DOT_SR_humanoid_01"
+							}
+						}
+						create_ship = {
+							name = NAME_fengraomin_commander_1
+							design = "NAME_middle_fengrao_commander"
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+						set_formation_scale = 2
+						set_fleet_stance = aggressive
+						set_aggro_range_measure_from = self
+						set_aggro_range = 250
+						set_location = {
+							target = prev
+							distance = 20
+							angle = 120
+						}
+					}
+					settings = {
+						garrison = yes
+					}
+				}
+			}
+		}
+	}
+	init_effect = {
+		event_target:fengraomin_country = { save_event_target_as = fengraomin_starbase_owner }
+		create_fengraomin_starbase = yes
+		spawn_system = {
+			initializer = fengraomin_2
+			min_distance >= 15
+			max_distance <= 20
+		}
+	}
+}
+fengraomin_2 = {
+	class = "sc_g"
+	flags = { fengraomin_system }
+	planet = {
+		class = pc_hunter_hub
+		orbit_distance = 0
+		orbit_angle = 1
+		size = { min = 30 max = 50 }
+		has_ring = no
+
+		init_effect = {
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_FE_XENOPHILE_Citadel_2"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 60
+						angle = 110
+					}
+				}
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_FE_XENOPHILE_Citadel_2"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 60
+						angle = 200
+					}
+				}
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_FE_XENOPHILE_Citadel_2"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 90
+						angle = 220
+					}
+				}
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_FE_XENOPHILE_Citadel_3"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 150
+						angle = 250
+					}
+				}
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_FE_XENOPHILE_Citadel_2"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 200
+						angle = 260
+					}
+				}
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_FE_XENOPHILE_Citadel_2"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 230
+						angle = 280
+					}
+				}
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_FE_XENOPHILE_Citadel_3"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 270
+						angle = 300
+					}
+				}
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_FE_XENOPHILE_Citadel_3"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 320
+						angle = 0
+					}
+				}
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					while = {
+						count = 30
+						create_ship = {
+							name = random
+							design = "NAME_Ancient_Guardian"
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+					}
+					set_location = {
+						target = prev
+						distance = 320
+						angle = 0
+					}
+				}
+			}
+			create_ambient_object = {
+				type = "abandoned_starbase_01_object"
+				location = this
+			}
+		}
+	}
+	change_orbit = 50
+	planet = {
+		class = pc_molten
+		orbit_distance = 25
+		size = 20
+		orbit_angle = 20
+		flags = { raid_source }
+		init_effect = {
+			set_deposit = d_minerals_8
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_FE_XENOPHILE_Citadel_3"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = pc_toxic
+		orbit_distance = 25
+		size = 11
+		orbit_angle = 100
+		init_effect = {
+			set_deposit = d_minerals_8
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_FE_XENOPHILE_Citadel_3"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_FE_XENOPHILE_Citadel_2"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 230
+						angle = 140
+					}
+				}
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_FE_XENOPHILE_Citadel_2"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 230
+						angle = 170
+					}
+				}
+			}
+		}
+	}
+	planet = {
+		class = pc_gas_giant
+		orbit_distance = 40
+		orbit_angle = -60
+		size = 40
+
+		init_effect = {
+			create_ambient_object = {
+				type = "abandoned_starbase_01_object"
+				location = this
+			}
+		}
+
+		change_orbit = @base_moon_distance
+
+		moon = {
+			class = pc_barren
+			size = 8
+			orbit_angle = 90
+			orbit_distance = 6
+			init_effect = {
+				set_deposit = d_minerals_8
+				create_fleet = {
+					effect = {
+						set_owner = event_target:fengraomin_country
+						create_ship = {
+							name = random
+							design = "NAME_FE_XENOPHILE_Citadel_2"
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+						set_location = {
+							target = prev
+							distance = 10
+							angle = 0
+						}
+					}
+				}
+				create_fleet = {
+					effect = {
+						set_owner = event_target:fengraomin_country
+						create_ship = {
+							name = random
+							design = "NAME_FE_XENOPHILE_Citadel_2"
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+						set_location = {
+							target = prev
+							distance = 230
+							angle = 330
+						}
+					}
+				}
+			}
+		}
+		moon = {
+			class = pc_barren_cold
+			size = 10
+			orbit_angle = 95
+			orbit_distance = 6
+
+			init_effect = {
+				create_fleet = {
+					effect = {
+						set_owner = event_target:fengraomin_country
+						create_ship = {
+							name = random
+							design = "NAME_FE_XENOPHILE_Citadel_2"
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+						while = {
+							count = 80
+							create_ship = {
+								name = random
+								design = "NAME_Ancient_Guardian"
+								graphical_culture = "DOT_SR_humanoid_01"
+							}
+						}
+						set_location = {
+							target = prev
+							distance = 230
+							angle = 330
+						}
+					}
+				}
+				create_fleet = {
+					effect = {
+						set_owner = event_target:fengraomin_country
+						while = {
+							count = 5
+							create_ship = {
+								name = random
+								design = "NAME_middle_fengrao_leader"
+								graphical_culture = "DOT_SR_humanoid_01"
+							}
+						}
+						set_formation_scale = 2
+						set_fleet_stance = aggressive
+						set_aggro_range_measure_from = self
+						set_aggro_range = 250
+						set_location = {
+							target = prev
+							distance = 20
+							angle = 120
+						}
+					}
+					settings = {
+						garrison = yes
+					}
+				}
+			}
+		}
+		moon = {
+			class = pc_frozen
+			size = 9
+			orbit_angle = 125
+			orbit_distance = 6
+
+			init_effect = {
+				create_ambient_object = {
+					type = "abandoned_starbase_01_object"
+					location = this
+				}
+				create_ambient_object = {
+					type = "medium_debris_01_object"
+					location = this
+				}
+			}
+		}
+		moon = {
+			class = pc_toxic
+			size = 11
+			orbit_angle = 160
+			orbit_distance = 6
+			init_effect = {
+				set_deposit = d_minerals_8
+				create_fleet = {
+					effect = {
+						set_owner = event_target:fengraomin_country
+						create_ship = {
+							name = random
+							design = "NAME_FE_XENOPHILE_Citadel_3"
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+						set_location = {
+							target = prev
+							distance = 10
+							angle = 0
+						}
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = pc_barren_cold
+		orbit_distance = 40
+		size = 25
+		orbit_angle = 55
+
+		init_effect = {
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_FE_XENOPHILE_Citadel_3"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = pc_barren
+		orbit_distance = 25
+		size = 15
+		orbit_angle = 120
+
+		init_effect = {
+			create_ambient_object = {
+				type = "abandoned_starbase_01_object"
+				location = this
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					while = {
+						count = 20
+						create_ship = {
+							name = random
+							design = "NAME_middle_fengrao_leader"
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+					}
+					set_formation_scale = 2
+					set_fleet_stance = aggressive
+					set_aggro_range_measure_from = self
+					set_aggro_range = 250
+					set_location = {
+						target = prev
+						distance = 100
+						angle = 120
+					}
+				}
+				settings = {
+					garrison = yes
+				}
+			}
+		}
+
+		change_orbit = @base_moon_distance
+
+		moon = {
+			class = pc_frozen
+			size = 8
+			orbit_angle = 90
+			orbit_distance = 6
+
+			init_effect = {
+				create_fleet = {
+					effect = {
+						set_owner = event_target:fengraomin_country
+						while = {
+							count = 20
+							create_ship = {
+								name = random
+								design = "NAME_middle_fengrao_leader"
+								graphical_culture = "DOT_SR_humanoid_01"
+							}
+						}
+						set_formation_scale = 2
+						set_fleet_stance = aggressive
+						set_aggro_range_measure_from = self
+						set_aggro_range = 250
+						set_location = {
+							target = prev
+							distance = 20
+							angle = 120
+						}
+					}
+					settings = {
+						garrison = yes
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = "pc_asteroid"
+		orbit_distance = 25
+		orbit_angle = -210
+		size = 5
+		has_ring = no
+		init_effect = {
+			set_deposit = d_minerals_8
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					while = {
+						count = 30
+						create_ship = {
+							name = random
+							design = "NAME_Ancient_Guardian"
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = "pc_asteroid"
+		orbit_distance = 0
+		orbit_angle = -95
+		size = 5
+		has_ring = no
+		init_effect = {
+			set_deposit = d_minerals_8
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					while = {
+						count = 40
+						create_ship = {
+							name = random
+							design = "NAME_Ancient_Guardian"
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+					}
+					create_ship = {
+						name = random
+						design = "NAME_FE_XENOPHILE_Citadel_2"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = "pc_asteroid"
+		orbit_distance = 0
+		orbit_angle = 285
+		size = 5
+		has_ring = no
+		init_effect = {
+			set_deposit = d_minerals_8
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					while = {
+						count = 80
+						create_ship = {
+							name = random
+							design = "NAME_Ancient_Guardian"
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+					}
+					create_ship = {
+						name = random
+						design = "NAME_FE_XENOPHILE_Citadel_3"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = "pc_gaia"
+		orbit_distance = 0
+		orbit_angle = -80
+		size = 5
+		has_ring = no
+		init_effect = {
+			set_deposit = d_minerals_8
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					while = {
+						count = 10
+						create_ship = {
+							name = random
+							design = "NAME_Dragonspawn"
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+					}
+					create_ship = {
+						name = random
+						design = "NAME_FE_XENOPHILE_Citadel_2"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+					while = {
+						count = 5
+						create_ship = {
+							name = random
+							design = "NAME_middle_fengrao_leader"
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+					}
+					set_formation_scale = 2
+					set_fleet_stance = aggressive
+					set_aggro_range_measure_from = self
+					set_aggro_range = 250
+					set_location = {
+						target = prev
+						distance = 20
+						angle = 120
+					}
+				}
+				settings = {
+					garrison = yes
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = "pc_desert"
+		orbit_distance = 0
+		orbit_angle = -80
+		size = 5
+		has_ring = no
+		init_effect = {
+			set_deposit = d_minerals_8
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					while = {
+						count = 15
+						create_ship = {
+							name = random
+							design = "NAME_Ancient_Guardian"
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+					}
+					create_ship = {
+						name = random
+						design = "NAME_FE_XENOPHILE_Citadel_3"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 30
+						angle = 0
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = "pc_asteroid"
+		orbit_distance = 0
+		orbit_angle = -80
+		size = 5
+		has_ring = no
+		init_effect = {
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_FE_XENOPHILE_Citadel_3"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = "pc_asteroid"
+		orbit_distance = 0
+		orbit_angle = -80
+		size = 5
+		has_ring = no
+		init_effect = {
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_FE_XENOPHILE_Citadel_2"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = "pc_asteroid"
+		orbit_distance = 0
+		orbit_angle = -80
+		size = 5
+		has_ring = no
+		init_effect = {
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_FE_XENOPHILE_Citadel_3"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+		}
+	}
+	planet = {
+		class = pc_frozen
+		orbit_distance = 25
+		size = 12
+		orbit_angle = 125
+		init_effect = {
+			create_ambient_object = {
+				type = "abandoned_starbase_01_object"
+				location = this
+			}
+			create_ambient_object = {
+				type = "medium_debris_01_object"
+				location = this
+			}
+		}
+		change_orbit = @base_moon_distance
+		moon = {
+			class = pc_frozen
+			size = 8
+			orbit_angle = 90
+			orbit_distance = 6
+
+			init_effect = {
+				create_fleet = {
+					effect = {
+						set_owner = event_target:fengraomin_country
+						create_ship = {
+							name = NAME_fengraomin_commander_2
+							design = "NAME_middle_fengrao_commander"
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+						while = {
+							count = 5
+							create_ship = {
+								name = random
+								design = "NAME_middle_fengrao_leader"
+								graphical_culture = "DOT_SR_humanoid_01"
+							}
+						}
+						set_formation_scale = 2
+						set_fleet_stance = aggressive
+						set_aggro_range_measure_from = self
+						set_aggro_range = 250
+						set_location = {
+							target = prev
+							distance = 20
+							angle = 120
+						}
+					}
+					settings = {
+						garrison = yes
+					}
+				}
+			}
+		}
+	}
+	init_effect = {
+		event_target:fengraomin_country = { save_event_target_as = fengraomin_starbase_owner }
+		create_fengraomin_starbase = yes
+		every_neighbor_system = {
+			set_star_flag = fengraomin_cluster
+			every_neighbor_system = {
+				set_star_flag = fengraomin_cluster
+			}
+		}
+	}
+}
