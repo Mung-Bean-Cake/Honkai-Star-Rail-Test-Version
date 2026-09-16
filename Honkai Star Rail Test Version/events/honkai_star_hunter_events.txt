@@ -8,7 +8,6 @@ country_event = {
         has_origin = origin_StellaronHunter
     }
     immediate = {
-        set_global_flag = hunter_begin
         from = {
             if = {
                 limit = {
@@ -210,7 +209,7 @@ country_event = {
                         trait = leader_trait_crusader_2
                     }
                     save_event_target_as = cihang_admiral
-                }
+                }         
                 create_fleet = {
                     name = "NAME_cihang_Fleet"
                     effect = {
@@ -234,7 +233,7 @@ country_event = {
                         set_location = event_target:cihang_fleet_planet
                         set_fleet_stance = aggressive
                         set_aggro_range_measure_from = return_point
-                        set_aggro_range = 500
+                        set_aggro_range = 800
                         assign_leader = last_created_leader
                         queue_actions = {
                             repeat = {
@@ -1041,7 +1040,7 @@ country_event = {
                 }
             }
             fengrao_shield_burst_medium_effect = { RADIUS = 300 DAMAGE = 80000 SHIELD_DAMAGE = 200000}
-                }
+        }
         else_if = {
             limit = {
                 exists = fromfrom
@@ -1059,8 +1058,27 @@ country_event = {
                     save_event_target_as = fengrao_burst_owner
                 }
             }
-            fengrao_shield_burst_large_effect = { RADIUS = 600 DAMAGE = 200000 SHIELD_DAMAGE = 500000}
+            fengrao_shield_burst_large_effect = { RADIUS = 450 DAMAGE = 200000 SHIELD_DAMAGE = 500000}
         }  
+        else_if = {
+            limit = {
+                exists = fromfrom
+                fromfrom = {
+                    fromfrom = {
+                        has_component = fengrao_burst_shield_extra_large
+                    }
+                }
+            }
+            fromfrom = {
+                save_event_target_as = fengrao_burst_center
+            }
+            fromfrom = {
+                owner = {
+                    save_event_target_as = fengrao_burst_owner
+                }
+            }
+            fengrao_shield_burst_extra_large_effect = { RADIUS = 600 DAMAGE = 1800000 SHIELD_DAMAGE = 2400000}
+        }
     }
 }
 #30-36 能量币建筑事件
