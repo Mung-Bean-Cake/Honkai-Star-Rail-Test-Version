@@ -3,6 +3,7 @@
 fengraomin_1 = {
 	class = "sc_g"
 	usage = misc_system_init
+	name = fengraomin_1
 	asteroid_belt = {
 		type = rocky_asteroid_belt
 		radius = 230
@@ -57,7 +58,7 @@ fengraomin_1 = {
 					colors={
 						"black"
 						"blue"
-						"white"
+						"null"
 						"null"
 					}
 				}
@@ -914,6 +915,7 @@ fengraomin_1 = {
 }
 fengraomin_2 = {
 	class = "sc_g"
+	name = fengraomin_2
 	flags = { fengraomin_system }
 	planet = {
 		class = pc_hunter_hub
@@ -1727,5 +1729,400 @@ fengraomin_2 = {
 				set_star_flag = fengraomin_cluster
 			}
 		}
+	}
+}
+hatuobiya = {
+	class = "sc_a"
+	usage = misc_system_init
+	name = "NAME_hatuobiya"
+	usage_odds = {
+		base = 0
+	}
+	max_instances = 1
+	spawn_chance = 100
+	flags = { aha_home }
+
+	asteroid_belt = {
+		type = rocky_asteroid_belt
+		radius = 40
+	}
+
+	asteroid_belt = {
+		type = icy_asteroid_belt
+		radius = 110
+	}
+
+	planet = {
+		class = star
+		orbit_distance = 0
+
+		init_effect = {
+			create_ambient_object = {
+				type = caravaneer_billboard_1
+				scale = 4
+				location = this
+				entity_offset_height = { min = -9 max = -11 }
+			}
+			last_created_ambient_object = {
+				set_location = {
+					target = prev
+					distance = 40
+					angle = 225
+				}
+			}
+			save_global_event_target_as = aha_home_star
+			create_species = {
+				name = masked_fool
+				class = Star_Rail
+				portrait = random
+				traits = random
+				effect = {
+					modify_species = {
+						ideal_planet_class = pc_habitat
+					}
+				}
+			}
+			create_country = {
+				name = NAME_Aha
+				type = Aha
+				name_list = DOT_SR_Aha
+				authority = auth_imperial
+				civics = {
+					civic = civic_environmental_architects
+					civic = civic_eager_explorers
+				}
+				origin = origin_fruitful
+				species = last_created_species
+				flag = {
+					icon = {
+						category = "special"
+						file = "caravaneer_00.dds"
+					}
+					background = {
+						category = "backgrounds"
+						file = "triangle_split.dds"
+					}
+					colors={
+						"red"
+						"dark_green"
+						"null"
+						"null"
+					}
+				}
+				ethos = {
+					ethic = ethic_egalitarian
+					ethic = ethic_pacifist
+					ethic = ethic_xenophile
+				}
+				ignore_initial_colony_error = yes
+				effect = {
+					set_country_flag = Aha_country
+					set_graphical_culture = DOT_SR_humanoid_01
+					save_global_event_target_as = Aha_home_country
+					create_fleet = {
+						name = "NAME_Caravaneer_Coalition_Base"
+						settings = { spawn_debris = no }
+						effect = {
+							set_owner = prev
+							create_ship = {
+								name = NAME_Tradestation_Tungle
+								design = "NAME_Aha_defence"
+								graphical_culture = prev
+								effect = {
+									set_ship_flag = Aha_home_tradestation
+								}
+							}
+							set_location = {
+								target = prevprev
+								angle = random
+								distance = 40
+							}
+							save_global_event_target_as = Aha_country_fleet
+							prev = {
+								set_custom_capital_location = event_target:CaravaneerCustomCapital
+							}
+						}
+					}
+					create_leader = {
+						class = official
+						species = owner
+						name = random
+						skill = 10
+						immortal = yes
+					}
+					set_leader = last_created_leader
+					create_ship_design = { design = "NAME_Caravaneer_Starbase" }
+					add_ship_design = last_created_design
+				}
+			}
+		}
+	}
+	change_orbit = 48
+	planet = {
+		count = 1
+		orbit_angle = { min = 355 max = 5 }
+		size = { min = 10 max = 25 }
+		class = "rl_unhabitable_planets"
+		orbit_distance = 12
+	}
+
+	planet = {
+		count = 1
+		orbit_angle = { min = 175 max = 185 }
+		size = { min = 10 max = 25 }
+		class = "pc_gaia"
+		orbit_distance = 12
+	}
+
+	planet = {
+		count = 1
+		orbit_angle = { min = 85 max = 95 }
+		size = { min = 10 max = 25 }
+		class = "pc_desert"
+		orbit_distance = 12
+	}
+
+	planet = {
+		count = 1
+		orbit_angle = { min = 175 max = 185 }
+		size = { min = 10 max = 25 }
+		class = "pc_hunter_hub"
+		orbit_distance = 12
+	}
+
+	init_effect = {
+		save_global_event_target_as = Aha_home_star
+		# Randomize which fleets are spawned
+		set_global_flag = Aha_1
+		set_global_flag = Aha_2
+		create_starbase = {
+			size = starbase_citadel
+			owner = event_target:Aha_home_country
+		}
+
+		# FLEET 1
+		if = {
+			limit = { has_global_flag = Aha_1 }
+			create_species = {
+				name = masked_fool
+				class = Star_Rail
+				portrait = random
+				traits = random
+			}
+			create_country = {
+				name = NAME_masked_fool
+				type = Aha_part
+				name_list = DOT_SR_Aha
+				authority = auth_democratic
+				civics = {
+					civic = civic_scavengers
+					civic = civic_technocracy
+				}
+				species = last_created_species
+				flag = {
+					icon = {
+						category = "special"
+						file = "caravaneer_01.dds"
+					}
+					background = {
+						category = "backgrounds"
+						file = "vertical.dds"
+					}
+					colors = {
+						"white"
+						"red"
+						"null"
+						"null"
+					}
+				}
+				ethos = {
+					ethic = ethic_materialist
+					ethic = ethic_pacifist
+					ethic = ethic_egalitarian
+				}
+				ignore_initial_colony_error = yes
+				effect = {
+					set_country_flag = masked_fool_country
+					set_graphical_culture = DOT_SR_humanoid_01
+					save_global_event_target_as = masked_fool_country
+					create_fleet = {
+						name = "NAME_masked_fool_fleet"
+						settings = { spawn_debris = no }
+						effect = {
+							set_fleet_stance = passive
+							set_formation_scale = 2.5
+							set_owner = prev
+							create_ship = {
+								name = "NAME_origin_of_fool"
+								design = NAME_Schooner
+							}
+							while = {
+								count = 10
+								create_ship = {
+									name = random
+									design = NAME_Dragonspawn
+								}
+							}
+							while = {
+								count = 20
+								create_ship = {
+									name = random
+									design = NAME_Spectral_Wraith_520THz
+								}
+							}
+							set_location = {
+								target = event_target:aha_home_star
+								angle = 90
+								distance = 40
+							}
+							set_fleet_flag = masked_fool_fleet
+							save_global_event_target_as = masked_fool_fleet
+						}
+					}
+					create_leader = {
+						class = commander
+						species = this
+						name = random
+						skill = 5
+						immortal = yes
+					}
+					set_leader = last_created_leader
+				}
+			}
+		}
+		# FLEET 2
+		if = {
+			limit = { has_global_flag = Aha_2 }
+			create_species = {
+				name = mourning_actors
+				class = random_non_machine
+				portrait = random
+				traits = random
+			}
+			create_country = {
+				name = NAME_mourning_actors
+				type = Aha_part
+				name_list = DOT_SR_Aha
+				authority = auth_oligarchic
+				civics = {
+					civic = civic_beastmasters
+					civic = civic_toxic_baths
+				}
+				species = last_created_species
+				flag = {
+					icon = {
+						category = "special"
+						file = "caravaneer_02.dds"
+					}
+					background= {
+						category = "backgrounds"
+						file = "new_dawn.dds"
+					}
+					colors={
+						"white"
+						"black"
+						"null"
+						"null"
+					}
+				}
+				ethos = {
+					ethic = ethic_egalitarian
+					ethic = ethic_fanatic_militarist
+
+				}
+				ignore_initial_colony_error = yes
+				effect = {
+					set_country_flag = mourning_actors_country
+					set_graphical_culture = DOT_SR_humanoid_01
+					save_global_event_target_as = mourning_actors_country
+					create_fleet = {
+						name = "NAME_mourning_actors_fleet"
+						settings = { spawn_debris = no }
+						effect = {
+							set_fleet_stance = passive
+							set_formation_scale = 2.5
+							set_owner = prev
+							create_ship = {
+								name = "NAME_troupe_leader"
+								design = NAME_Schooner
+							}
+							while = {
+								count = 20
+								create_ship = {
+									name = random
+									design = NAME_Dragonspawn
+								}
+							}
+							while = {
+								count = 40
+								create_ship = {
+									name = random
+									design = NAME_Spectral_Wraith_520THz
+								}
+							}
+							set_location = {
+								target = event_target:aha_home_star
+								angle = 180
+								distance = 40
+							}
+							set_fleet_flag = mourning_actors_fleet
+							save_global_event_target_as = mourning_actors_fleet
+						}
+					}
+					create_leader = {
+						class = commander
+						species = this
+						name = random
+						skill = 10
+					}
+					set_leader = last_created_leader
+				}
+			}
+		}
+		if = {
+			limit = { exists = event_target:mourning_actors_country }
+			event_target:mourning_actors_country = {
+				if = {
+					limit = { exists = event_target:masked_fool_country }
+					establish_communications_no_message = event_target:masked_fool_country
+				}
+				establish_communications_no_message = event_target:Aha_home_country
+			}
+		}
+		if = {
+			limit = { exists = event_target:masked_fool_country }
+			event_target:masked_fool_country = {
+				if = {
+					limit = { exists = event_target:mourning_actors_country }
+					establish_communications_no_message = event_target:mourning_actors_country
+				}
+				establish_communications_no_message = event_target:Aha_home_country
+			}
+		}
+		# Randomize caravan order
+		#random_list = {
+			#1 = { # 1 - 2
+				#modifier = {
+					#factor = 0
+					#NAND = {
+						#has_global_flag = Aha_1
+						#has_global_flag = Aha_2
+					#}
+				#}
+				#event_target:mourning_actors_fleet = { fleet_event = { id = cara.1000 days = @caravaneerfleetlaunch1 } }
+				#event_target:masked_fool_fleet = { fleet_event = { id = cara.2000 days = @caravaneerfleetlaunch2 } }
+			#}
+			#1 = { # 2 - 1
+				#modifier = {
+					#factor = 0
+					#NAND = {
+						#has_global_flag = Aha_2
+						#has_global_flag = Aha_1
+					#}
+				#}
+				#event_target:masked_fool_fleet = { fleet_event = { id = cara.2000 days = @caravaneerfleetlaunch1 } }
+				#event_target:mourning_actors_fleet = { fleet_event = { id = cara.1000 days = @caravaneerfleetlaunch2 } }
+			#}
+		#}
 	}
 }

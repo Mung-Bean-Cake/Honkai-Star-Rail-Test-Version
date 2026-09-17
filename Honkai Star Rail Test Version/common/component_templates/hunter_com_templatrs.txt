@@ -905,6 +905,60 @@ utility_component_template = {
     show_tech_unlock_if = { country_uses_bio_ships = no }
     ai_weight = { weight = 0 }
 }
+#舰载机
+strike_craft_component_template = {
+    key = "aha_strike_craft"
+    size = LARGE
+    entity = "bomber_entity"
+    weapon_type = point_defence
+    projectile_gfx = "scout_laser_1"
+    power = -60
+    resources = {
+        category = ship_components
+        cost = {
+            food = 50
+            mult = @alloy_to_food_cost_ratio
+        }
+        upkeep = {
+            food = 0.2
+            alloys = @l_t1_upkeep_alloys
+        }
+    }
+    potential = {
+        has_origin = origin_StellaronHunter
+        OR = {
+            is_country_type = Aha
+        }
+        OR = {
+            is_country_type = Aha_part
+        }
+    }
+    count = 32
+    regeneration_per_day = 4
+    launch_time = 8
+    damage = { min = 16 max = 32 }
+    cooldown = 16
+    range = 80
+    engagement_range = @engagement_range
+    accuracy = 0.6
+    tracking = 0.90
+    health = 45
+    armor = 20
+    shield = 30
+    evasion = 0.20
+    speed = 750
+    rotation_speed = 0.5
+    acceleration = 1
+    shield_penetration = 1.5
+    armor_damage = 3
+    ship_behavior = "fighters_behavior"
+    icon = "GFX_mutation_flagella_marsupium_0"
+    icon_frame = 1
+    component_set = "BIO_SCOUT_HANGAR_1"
+    tags = { weapon_type_strike_craft }
+    ai_tags = { weapon_role_point_defense carrier }
+    point_defence_targets = { "strike_craft" }
+}
 utility_component_template = {
     key = "shield_killer_fengrao"
     size = medium
