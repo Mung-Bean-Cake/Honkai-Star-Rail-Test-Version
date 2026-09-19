@@ -127,10 +127,9 @@ utility_component_template = {
     power = 1400
     resources = {
         category = ship_components
-        cost = { sr_zro = 10 }
+        cost = { huanyudu = 400 }
         upkeep = {
-            exotic_gases = 1
-            consumer_goods = 20
+            huanyudu = 2
         }
     }
     modifier = {
@@ -149,10 +148,9 @@ utility_component_template = {
     power = 3600
     resources = {
         category = ship_components
-        cost = { sr_zro = 10 }
+        cost = { huanyudu = 1500 }
         upkeep = {
-            influence = 2
-            yuzhousuipian = 500
+            yuzhousuipian = 5
         }
     }
     modifier = {
@@ -161,7 +159,7 @@ utility_component_template = {
         ship_size_damage_factor = 0.5
     }
     component_set = "aha_power_reactor"
-    prerequisites = {  }
+    prerequisites = { tech_aha_power_reactor }
     ai_weight = { weight = 0 }
 }
 ######################################
@@ -961,12 +959,9 @@ strike_craft_component_template = {
     resources = {
         category = ship_components
         cost = {
-            food = 50
-            mult = @alloy_to_food_cost_ratio
+            huanyudu = 50
         }
         upkeep = {
-            food = 0.2
-            alloys = @l_t1_upkeep_alloys
         }
     }
     potential = {
@@ -997,8 +992,7 @@ strike_craft_component_template = {
     tags = { weapon_type_strike_craft }
     ai_tags = { weapon_role_point_defense carrier }
     point_defence_targets = { "strike_craft" }
-    prerequisites = {
-    }
+    prerequisites = { tech_aha_strike_craft }
 }
 #阿哈鱼雷
 weapon_component_template = {
@@ -1008,12 +1002,10 @@ weapon_component_template = {
     icon_frame = 1
     type = missile
     firing_arc = 180.0
-    potential = {
-    }
     show_tech_unlock_if = {
         has_origin = origin_StellaronHunter
     }
-    prerequisites = {  }
+    prerequisites = { tech_aha_missile_1 }
     power = -80
     damage = { min = 360 max = 820 }
     windup = {
@@ -1042,11 +1034,9 @@ weapon_component_template = {
     resources = {
         category = ship_components
         cost = {
-            energy = 200
+            huanyudu = 25
         }
         upkeep = {
-            food = 4
-            alloys = 10
         }
     }
 }
@@ -1057,13 +1047,11 @@ weapon_component_template = {
     icon_frame = 1
     type = missile
     firing_arc = 270.0
-    potential = {
-    }
     show_tech_unlock_if = {
         has_origin = origin_StellaronHunter
     }
-    prerequisites = {  }
-    power = -150
+    prerequisites = { tech_aha_missile_research_aoe }
+    power = -180
     damage = { min = 560 max = 1080 }
     windup = {
         min = 5
@@ -1073,6 +1061,8 @@ weapon_component_template = {
     missile_armor = 400
     missile_evasion = 0.2
     missile_speed = 6
+    collateral_range = 10
+    collateral_damage = {min = 50 max = 1000}
     range = 300
     missile_retarget_range = 120
     accuracy = 0.9
@@ -1091,11 +1081,9 @@ weapon_component_template = {
     resources = {
         category = ship_components
         cost = {
-            energy = 1000
+            huanyudu = 90
         }
         upkeep = {
-            food = 40
-            alloys = 200
         }
     }
 }
@@ -1111,13 +1099,16 @@ weapon_component_template = {
     show_tech_unlock_if = {
         has_origin = origin_StellaronHunter
     }
-    prerequisites = {  }
-    power = -150
+    prerequisites = { tech_aha_missile_research_chain }
+    power = -220
     damage = { min = 560 max = 1080 }
     windup = {
         min = 5
         max = 20
     }
+    chain_damage = { min = 200 max = 800}
+    chain_range = 20
+    chain_count = 5
     missile_health = 500
     missile_armor = 400
     missile_evasion = 0.2
@@ -1140,11 +1131,9 @@ weapon_component_template = {
     resources = {
         category = ship_components
         cost = {
-            energy = 1000
+            huanyudu = 120
         }
         upkeep = {
-            food = 40
-            alloys = 200
         }
     }
 }

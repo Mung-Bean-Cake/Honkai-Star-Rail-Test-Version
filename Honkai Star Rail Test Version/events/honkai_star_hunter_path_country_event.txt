@@ -31,3 +31,1020 @@ country_event = {
         }
     }
 }
+country_event = {
+    id = path_country.2
+    title = communication_aha.title
+    desc = ahabi_desc
+    custom_gui = "enclave_caravaneer_window"
+    diplomatic = yes
+    is_triggered_only = yes
+
+    picture_event_data = {
+        portrait = event_target:Aha_home_country
+        room = caravaneer_home_room
+        planet_background = pc_gaia
+    }
+    location = event_target:Aha_home_country
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = ahabiwhat
+        is_dialog_only = yes
+        response_text = ahabiwhat.reply
+        ai_chance = {
+            factor = 0
+        }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = ahabi.a
+        is_dialog_only = yes
+        ai_chance = {
+            factor = 1
+        }
+        allow = {
+            resource_stockpile_compare = {
+                resource = sr_dark_matter
+                value >= 50
+            }
+        }
+        add_resource = {
+            sr_dark_matter = -50
+        }
+        hidden_effect = {
+            change_variable = {
+                which = owned_ahabi
+                value = 500
+            }
+            custom_tooltip = 500ahabi
+            country_event = { id = path_country.2 }
+        }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = ahabi.b
+        is_dialog_only = yes
+        ai_chance = {
+            factor = 2
+        }
+        allow = {
+            resource_stockpile_compare = { resource = sr_zro value >= 100 }
+        }
+        add_resource = {
+            sr_zro = -100
+        }
+        hidden_effect = {
+            change_variable = {
+                which = owned_ahabi
+                value = 800
+            }
+            custom_tooltip = 800ahabi
+            country_event = { id = path_country.2 }
+        }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = ahabi.c
+        is_dialog_only = yes
+        ai_chance = {
+            factor = 0
+        }
+        allow = {
+            resource_stockpile_compare = { resource = yuzhousuipian value >= 5000 }
+        }
+        add_resource = {
+            yuzhousuipian = -5000
+        }
+        hidden_effect = {
+            change_variable = {
+                which = owned_ahabi
+                value = 1200
+            }
+            custom_tooltip = 1200ahabi
+            country_event = { id = path_country.2 }
+        }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = how_many_ahabi
+        is_dialog_only = yes
+        response_text = how_many_ahabi_reply
+        ai_chance = {
+            factor = 0
+        }
+        allow = {
+            custom_tooltip = {
+                fail_text = how_many_ahabi_reply_zero
+                check_variable = {
+                    which = owned_ahabi
+                    value > 0
+                }
+            }
+        }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = communication_masked_fool
+        communication_masked_fool = yes
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = communication_mourning_actors
+        communication_mourning_actors = yes
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = cara_home_exit
+        default_hide_option = yes
+    }
+}
+country_event = {
+    id = path_country.3
+    title = communication_masked_fool.title
+    desc = masked_fool_desc
+    custom_gui = "enclave_caravaneer_window"
+    diplomatic = yes
+    is_triggered_only = yes
+    picture_event_data = {
+        portrait = event_target:masked_fool_country
+        room = caravaneer_home_room
+        planet_background = pc_a_star
+    }
+    location = event_target:masked_fool_country
+    immediate = {
+        random_list = {
+            99 = {}
+            1 = { set_country_flag = hello }
+        }
+    }
+
+    after = {
+        hidden_effect = {
+            if = {
+                limit = { has_country_flag = hello }
+                remove_country_flag = hello
+            }
+        }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = ahabi.d
+        is_dialog_only = yes
+        ai_chance = {
+            factor = 1
+        }
+        allow = {
+            resource_stockpile_compare = {
+                resource = huanyudu
+                value >= 400
+            }
+        }
+        add_resource = {
+            huanyudu = -400
+        }
+        hidden_effect = {
+            change_variable = {
+                which = owned_ahabi
+                value = 3600
+            }
+            custom_tooltip = 2000ahabi
+            communication_masked_fool = yes
+        }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = ahabi_lottery
+        custom_tooltip = ahabi_lottery_spend
+        trigger = { NOT = { has_country_flag = hello } }
+        allow = {
+            custom_tooltip = {
+                check_variable = {
+                    which = owned_ahabi
+                    value >= 1000
+                }
+            }
+        }
+        hidden_effect = {
+            change_variable = {
+                which = owned_ahabi
+                value = -1000
+            }
+            country_event = { id = path_country.4 }
+        }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = path_message_lookbox
+        custom_tooltip = path_message_lookbox_spend
+        ai_chance = {
+            factor = 10
+            modifier = {
+                factor = 0
+                OR = {
+                    check_variable = {
+                        which = owned_ahabi
+                        value < 8000
+                    }
+                }
+            }
+        }
+        allow = {
+            custom_tooltip = {
+                check_variable = {
+                    which = owned_ahabi
+                    value >= 6000*box_cost
+                }
+            }
+        }
+        hidden_effect = {
+            change_variable = {
+                which = owned_ahabi
+                value = -8000
+            }
+            country_event = { id = path_country.6 }
+        }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = how_many_ahabi
+        is_dialog_only = yes
+        response_text = how_many_ahabi_reply
+        ai_chance = {
+            factor = 0
+        }
+        allow = {
+            custom_tooltip = {
+                fail_text = how_many_ahabi_reply_zero
+                check_variable = {
+                    which = owned_ahabi
+                    value > 0
+                }
+            }
+        }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = communication_Aha
+        communication_Aha = yes
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = communication_mourning_actors
+        communication_mourning_actors = yes
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = cara_home_exit
+        default_hide_option = yes
+    }
+}
+country_event = {
+    id = path_country.4
+    title = ahabi_lottery
+    desc = slotsdesc1
+    custom_gui = "enclave_caravaneer_window"
+    diplomatic = yes
+    is_triggered_only = yes
+    show_sound = event_slot_machine
+    picture_event_data = {
+        portrait = event_target:masked_fool_country
+        room = caravaneer_slotmachine_room
+        planet_background = pc_a_star
+    }
+    location = event_target:masked_fool_country
+
+    immediate = {
+        random_list = {
+            10 = { set_country_flag = bad1 }
+            15 = { set_country_flag = bad2 }
+            20 = { set_country_flag = good1a }
+            14 = { set_country_flag = good1b }
+            13 = { set_country_flag = good1c }
+            13 = { set_country_flag = good2a }
+            12 = { set_country_flag = good2b }
+            2 = { set_country_flag = good2c }
+            1 = {
+                modifier = {
+                    factor = 0
+                    has_modifier = extended_payout_goodest
+                }
+                set_country_flag = good3
+            }
+        }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = SCORE
+        add_resource = { huanyudu = 50 }
+        hidden_effect = {
+            remove_country_flag = good1a
+            communication_masked_fool = yes
+        }
+        exclusive_trigger = { has_country_flag = good1a }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = SCORE
+        add_resource = { huanyudu = 150 }
+        hidden_effect = {
+            remove_country_flag = good1b
+            communication_masked_fool = yes
+        }
+        exclusive_trigger = { has_country_flag = good1b }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = SCORE
+        custom_tooltip = won_5000ahabi
+        hidden_effect = {
+            change_variable = {
+                which = owned_ahabi
+                value = 5000
+            }
+            remove_country_flag = good1c
+            communication_masked_fool = yes
+        }
+        exclusive_trigger = { has_country_flag = good1c }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = KACHING
+        add_resource = { huanyudu = 200 }
+        add_monthly_resource_mult = {
+            resource = astral_threads
+            value = 12
+            min = 100
+            max = 500
+        }
+        hidden_effect = {
+            remove_country_flag = good2a
+            communication_masked_fool = yes
+        }
+        exclusive_trigger = { has_country_flag = good2a }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = KACHING
+        add_resource = { huanyudu = 600 }
+        add_monthly_resource_mult = {
+            resource = alloys
+            value = 120
+            min = 500
+            max = 8000
+        }
+        hidden_effect = {
+            remove_country_flag = good2b
+            communication_masked_fool = yes
+        }
+        exclusive_trigger = { has_country_flag = good2b }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = aha_reward
+        aha_reward = yes
+        hidden_effect = {
+            remove_country_flag = good2c
+            communication_masked_fool = yes
+        }
+        exclusive_trigger = { has_country_flag = good2c }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = aha_large_reward
+        add_resource = { huanyudu = 4000 }
+        add_modifier = {
+            modifier = extended_payout_goodest
+            days = 18000
+        }
+        exclusive_trigger = { has_country_flag = good3 }
+        hidden_effect = {
+            remove_country_flag = good3
+            communication_masked_fool = yes
+        }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = SCOREQ
+        hidden_effect = {
+            change_variable = {
+                which = owned_ahabi
+                value = 100
+            }
+            custom_tooltip = won_100ahabi
+            remove_country_flag = bad1
+            communication_masked_fool = yes
+        }
+        exclusive_trigger = { has_country_flag = bad1 }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = SCOREQ
+        hidden_effect = {
+            change_variable = {
+                which = owned_ahabi
+                value = 500
+            }
+            custom_tooltip = won_500ahabi
+            remove_country_flag = bad2
+            communication_masked_fool = yes
+        }
+        exclusive_trigger = { has_country_flag = bad2 }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = cara_home_exit
+        trigger = { always = no } # just here to for the X button
+        hidden_effect = {
+            switch = {
+                trigger = has_country_flag
+                bad1 = {	remove_country_flag = bad1 }
+                bad2 = {	remove_country_flag = bad2 }
+                good1a = {	remove_country_flag = good1a }
+                good1b = {	remove_country_flag = good1b }
+                good1c = {	remove_country_flag = good1c }
+                good2a = {	remove_country_flag = good2a }
+                good2b = {	remove_country_flag = good2b }
+                good3 = {	remove_country_flag = good3 }
+            }
+        }
+        default_hide_option = yes
+    }
+}
+country_event = {
+    id = path_country.5
+    title = communication_mourning_actors.title
+    desc = mourning_actors_desc
+    custom_gui = "enclave_caravaneer_window"
+    diplomatic = yes
+    is_triggered_only = yes
+    picture_event_data = {
+        portrait = event_target:mourning_actors_country
+        room = caravaneer_home_room
+        planet_background = pc_gaia
+    }
+    location = event_target:mourning_actors_country
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = how_many_ahabi
+        is_dialog_only = yes
+        response_text = how_many_ahabi_reply
+        ai_chance = {
+            factor = 0
+        }
+        allow = {
+            custom_tooltip = {
+                fail_text = how_many_ahabi_reply_zero
+                check_variable = {
+                    which = owned_ahabi
+                    value > 0
+                }
+            }
+        }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = mourning_actors_leader
+        is_dialog_only = yes
+        ai_chance = {
+            factor = 1
+        }
+        allow = {
+            resource_stockpile_compare = {
+                resource = huanyudu
+                value >= 4000
+            }
+        }
+        add_resource = {
+            huanyudu = -4000
+        }
+        hidden_effect = {
+            custom_tooltip = mourning_actors_leader_receive
+            country_event = { id = path_country.7 }
+        }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = mourning_actors_investment
+        is_dialog_only = yes
+        ai_chance = {
+            factor = 0
+        }
+        allow = {
+            resource_stockpile_compare = {
+                resource = huanyudu
+                value >= 5000
+            }
+            NOT = {
+                has_country_flag = has_mourning_actors_investment
+            }
+        }
+        add_resource = {
+            huanyudu = -5000
+        }
+        hidden_effect = {
+            set_timed_country_flag = {
+                flag = has_mourning_actors_investment
+                days = 10
+            }
+            random_list = {
+                6 = { set_country_flag = investment_outcome_1}
+                8 = { set_country_flag = investment_outcome_2}
+                12 = { set_country_flag = investment_outcome_3}
+                10 = { set_country_flag = investment_outcome_4}
+                28 = { set_country_flag = investment_outcome_5}
+                36 = { set_country_flag = investment_outcome_6}
+            }
+            custom_tooltip = mourning_actors_investment_desc
+            country_event = { id = path_country.8 days = 10 }
+        }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = communication_masked_fool
+        communication_masked_fool = yes
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = communication_Aha
+        communication_Aha = yes
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = cara_home_exit
+        default_hide_option = yes
+    }
+}
+country_event = {
+    id = path_country.6
+    title = path_message_lookbox
+    desc = slotsdesc1
+    diplomatic = yes
+    is_triggered_only = yes
+    custom_gui = "enclave_caravaneer_window"
+    show_sound = event_lootbox_good
+    picture_event_data = {
+        portrait = event_target:masked_fool_country
+        room = caravaneer_slotmachine_room
+        planet_background = pc_ringworld_habitable
+    }
+    location = event_target:masked_fool_country
+    immediate = {
+        random_list = {
+            # Galatron
+            # Empty
+            10 = {
+                modifier = {
+                    factor = 0
+                    has_technology = tech_aha_strike_craft
+                }
+                set_country_flag = path_message_a
+            }
+            10 = {
+                modifier = {
+                    factor = 0
+                    has_technology = tech_aha_missile_1
+                }
+                set_country_flag = path_message_b
+            }
+            10 = {
+                modifier = {
+                    factor = 0
+                    has_technology = tech_aha_missile_research_aoe
+                }
+                set_country_flag = path_message_c
+            }
+            10 = {
+                modifier = {
+                    factor = 0
+                    has_technology = tech_aha_missile_research_chain
+                }
+                set_country_flag = path_message_d
+            }
+            10 = {
+                modifier = {
+                    factor = 0
+                    has_technology = tech_aha_power_reactor
+                }
+                set_country_flag = path_message_e
+            }
+            10 = {
+                set_country_flag = path_message_f
+            }
+            40 = {
+                modifier = {
+                    factor = 0
+                    has_country_flag = lootbox_contents_empty
+                }
+                custom_tooltip = lootbox_contents_empty
+                set_country_flag = recent_empty_lootbox
+            }
+        }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = lootbox_contents_empty
+        hidden_effect = {
+            remove_country_flag = recent_empty_lootbox
+            communication_masked_fool = yes
+        }
+        exclusive_trigger = { has_country_flag = recent_empty_lootbox }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = path_message_a
+        capital_scope = { add_modifier = { modifier = ancient_trade_route days = -1 } }
+        add_tech_progress = {
+            tech = tech_aha_strike_craft
+            progress = 0.5
+        }
+        hidden_effect = {
+            remove_country_flag = path_message_a
+            communication_masked_fool = yes
+        }
+        exclusive_trigger = { has_country_flag = path_message_a }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = path_message_b
+        add_resource = { huanyudu = 200 }
+        add_tech_progress = {
+            tech = tech_aha_missile_1
+            progress = 0.5
+        }
+        hidden_effect = {
+            remove_country_flag = path_message_b
+            communication_masked_fool = yes
+        }
+        exclusive_trigger = { has_country_flag = path_message_b }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = path_message_c
+        add_tech_progress = {
+            tech = tech_aha_missile_research_aoe
+            progress = 0.5
+        }
+        hidden_effect = {
+            change_variable = {
+                which = owned_ahabi
+                value = 5000
+            }
+            remove_country_flag = path_message_c
+            communication_masked_fool = yes
+        }
+        exclusive_trigger = { has_country_flag = path_message_c }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = path_message_d
+        add_monthly_resource_mult = {
+            resource = society_research
+            value = 24
+            min = 2000
+        }
+        add_tech_progress = {
+            tech = tech_aha_missile_research_chain
+            progress = 0.5
+        }
+        hidden_effect = {
+            remove_country_flag = path_message_d
+            communication_masked_fool = yes
+        }
+        exclusive_trigger = { has_country_flag = path_message_d }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = path_message_e
+        add_resource = { huanyudu = 400 }
+        add_tech_progress = {
+            tech = tech_aha_power_reactor
+            progress = 0.5
+        }
+        hidden_effect = {
+            remove_country_flag = path_message_e
+            communication_masked_fool = yes
+        }
+        exclusive_trigger = { has_country_flag = path_message_e }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = path_message_f
+        add_resource = { huanyudu = 3000 }
+        hidden_effect = {
+            remove_country_flag = path_message_f
+            communication_masked_fool = yes
+        }
+        exclusive_trigger = { has_country_flag = path_message_f }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = cara_home_exit
+        trigger = { always = no }
+        hidden_effect = {
+            switch = {
+                trigger = has_country_flag
+                recent_empty_lootbox = {remove_country_flag = recent_empty_lootbox }
+                path_message_a = {	remove_country_flag = path_message_a }
+                path_message_b = {	remove_country_flag = path_message_b }
+                path_message_c = {	remove_country_flag = path_message_c }
+                path_message_d = {	remove_country_flag = path_message_d }
+                path_message_e = {	remove_country_flag = path_message_e }
+                path_message_f = {	remove_country_flag = path_message_f }
+            }
+        }
+        default_hide_option = yes
+    }
+}
+country_event = {
+    id = path_country.7
+    title = got_mourning_actors_leader
+    desc = mourning_actors_leader_receive
+    diplomatic = yes
+    is_triggered_only = yes
+    custom_gui = "enclave_caravaneer_window"
+    picture_event_data = {
+        portrait = event_target:mourning_actors_country
+        room = ethic_spaceship_room
+        planet_background = pc_gaia
+    }
+    immediate = {
+        custom_tooltip = fleet3deal2product1_tooltip
+        create_leader = {
+            class = commander
+            species = event_target:mourning_actors_country
+            name = random
+            skill = 6
+        }
+        random_list = {
+            8 = { set_country_flag = mourning_actors_leader_1}
+            8 = { set_country_flag = mourning_actors_leader_2}
+            8 = { set_country_flag = mourning_actors_leader_3}
+            8 = { set_country_flag = mourning_actors_leader_4}
+            8 = { set_country_flag = mourning_actors_leader_5}
+            8 = { set_country_flag = mourning_actors_leader_6}
+            18 = { set_country_flag = mourning_actors_leader_7}
+            8 = { set_country_flag = mourning_actors_leader_8}
+            18 = { set_country_flag = mourning_actors_leader_9}
+            8 = { set_country_flag = mourning_actors_leader_10}
+        }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = cara_home_exit
+        hidden_effect = {
+            remove_country_flag = mourning_actors_leader_1
+            last_created_leader = {
+                add_trait = {
+                    trait = leader_langzun_t4
+                    show_message = no
+                }
+            }
+            country_event = { id = path_country.5 }
+        }
+        exclusive_trigger = { has_country_flag = mourning_actors_leader_1 }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = cara_home_exit
+        hidden_effect = {
+            remove_country_flag = mourning_actors_leader_2
+            last_created_leader = {
+                add_trait = {
+                    trait = leader_feiying_t2
+                    show_message = no
+                }
+            }
+            country_event = { id = path_country.5 }
+        }
+        exclusive_trigger = { has_country_flag = mourning_actors_leader_2 }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = cara_home_exit
+        hidden_effect = {
+            remove_country_flag = mourning_actors_leader_3
+            last_created_leader = {
+                add_trait = {
+                    trait = leader_jiziqixing_t4
+                    show_message = no
+                }
+            }
+            country_event = { id = path_country.5 }
+        }
+        exclusive_trigger = { has_country_flag = mourning_actors_leader_3 }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = cara_home_exit
+        hidden_effect = {
+            remove_country_flag = mourning_actors_leader_4
+            last_created_leader = {
+                add_trait = {
+                    trait = leader_busitu_t3
+                    show_message = no
+                }
+            }
+            country_event = { id = path_country.5 }
+        }
+        exclusive_trigger = { has_country_flag = mourning_actors_leader_4 }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = cara_home_exit
+        hidden_effect = {
+            remove_country_flag = mourning_actors_leader_5
+            last_created_leader = {
+                add_trait = {
+                    trait = leader_shuishajin_t1
+                    show_message = no
+                }
+            }
+            country_event = { id = path_country.5 }
+        }
+        exclusive_trigger = { has_country_flag = mourning_actors_leader_5 }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = cara_home_exit
+        hidden_effect = {
+            remove_country_flag = mourning_actors_leader_6
+            last_created_leader = {
+                add_trait = {
+                    trait = leader_ren_t2
+                    show_message = no
+                }
+            }
+            country_event = { id = path_country.5 }
+        }
+        exclusive_trigger = { has_country_flag = mourning_actors_leader_6 }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = cara_home_exit
+        hidden_effect = {
+            remove_country_flag = mourning_actors_leader_7
+            last_created_leader = {
+                add_trait = {
+                    trait = leader_trait_admiral_hells_heart
+                    show_message = no
+                }
+            }
+            country_event = { id = path_country.5 }
+        }
+        exclusive_trigger = { has_country_flag = mourning_actors_leader_7 }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = cara_home_exit
+        hidden_effect = {
+            remove_country_flag = mourning_actors_leader_8
+            last_created_leader = {
+                add_trait = {
+                    trait = leader_heitiane_t1
+                    show_message = no
+                }
+            }
+            country_event = { id = path_country.5 }
+        }
+        exclusive_trigger = { has_country_flag = mourning_actors_leader_8 }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = cara_home_exit
+        hidden_effect = {
+            remove_country_flag = mourning_actors_leader_9
+            last_created_leader = {
+                add_trait = {
+                    trait = leader_trait_admiral_warform_node
+                    show_message = no
+                }
+            }
+            country_event = { id = path_country.5 }
+        }
+        exclusive_trigger = { has_country_flag = mourning_actors_leader_9 }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = cara_home_exit
+        hidden_effect = {
+            remove_country_flag = mourning_actors_leader_10
+            last_created_leader = {
+                add_trait = {
+                    trait = leader_danheng_t1
+                    show_message = no
+                }
+            }
+            country_event = { id = path_country.5 }
+        }
+        exclusive_trigger = { has_country_flag = mourning_actors_leader_10 }
+    }
+}
+country_event = {
+    id = path_country.8
+    title = mourning_actors_investment_outcome
+    desc = {
+        text = investment_outcome_1
+        trigger = {
+            has_country_flag = investment_outcome_1
+        }
+    }
+    desc = {
+        text = investment_outcome_2
+        trigger = {
+            has_country_flag = investment_outcome_2
+        }
+    }
+    desc = {
+        text = investment_outcome_3
+        trigger = {
+            has_country_flag = investment_outcome_3
+        }
+    }
+    desc = {
+        text = investment_outcome_4
+        trigger = {
+            has_country_flag = investment_outcome_4
+        }
+    }
+    desc = {
+        text = investment_outcome_5
+        trigger = {
+            has_country_flag = investment_outcome_5
+        }
+    }
+    desc = {
+        text = investment_outcome_6
+        trigger = {
+            has_country_flag = investment_outcome_6
+        }
+    }
+    diplomatic = yes
+    is_triggered_only = yes
+    custom_gui = "enclave_caravaneer_window"
+    picture_event_data = {
+        portrait = event_target:mourning_actors_country
+        room = ethic_spaceship_room
+        planet_background = pc_gaia
+    }
+    immediate = {
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = cara_home_exit
+        hidden_effect = {
+            remove_country_flag = investment_outcome_1
+            add_resource = { huanyudu = 30000 }
+            country_event = { id = path_country.5 }
+        }
+        exclusive_trigger = { has_country_flag = investment_outcome_1 }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = cara_home_exit
+        hidden_effect = {
+            remove_country_flag = investment_outcome_2
+            add_resource = { huanyudu = 20000 }
+            country_event = { id = path_country.5 }
+        }
+        exclusive_trigger = { has_country_flag = investment_outcome_2 }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = cara_home_exit
+        hidden_effect = {
+            remove_country_flag = investment_outcome_3
+            add_resource = { huanyudu = 12000 }
+            country_event = { id = path_country.5 }
+        }
+        exclusive_trigger = { has_country_flag = investment_outcome_3 }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = cara_home_exit
+        hidden_effect = {
+            remove_country_flag = investment_outcome_4
+            add_resource = { huanyudu = 8000 }
+            country_event = { id = path_country.5 }
+        }
+        exclusive_trigger = { has_country_flag = investment_outcome_4 }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = cara_home_exit
+        hidden_effect = {
+            remove_country_flag = investment_outcome_5
+            add_resource = { huanyudu = 4000 }
+            country_event = { id = path_country.5 }
+        }
+        exclusive_trigger = { has_country_flag = investment_outcome_5 }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = cara_home_exit
+        hidden_effect = {
+            remove_country_flag = investment_outcome_6
+            country_event = { id = path_country.5 }
+            set_country_flag = can_investment
+        }
+        exclusive_trigger = { has_country_flag = investment_outcome_6 }
+    }
+}
