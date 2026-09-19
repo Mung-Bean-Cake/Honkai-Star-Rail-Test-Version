@@ -628,13 +628,14 @@ ipc_home_ipc_5 = {
         orbit_distance = 70
     }
 }
+
 erxiangleyuan_sysytem = {
     class = sc_g
     name = NAME_sol_erxiangleyuan_sysytem
     flags = {
         erxiangleyuan_sysytem
     }
-    usage_odds = 0
+    usage = origin
     prevent_anomalies = yes
     planet = {
         name = "NAME_sol_erxiangleyuan_sysytem"
@@ -660,14 +661,32 @@ erxiangleyuan_sysytem = {
         }
     }
     planet = {
-        name = NAME_sol_erxiangleyuan
-        class = pc_continental
+        name = NAME_erxiangleyuan
+        class = pc_erxiangleyuan
         orbit_distance = 55
         orbit_angle = 142
-        size = 25
+        size = 40
         has_ring = no
         flags = { erxiangleyuan }
         home_planet = yes
+        init_effect = {
+            add_modifier = {
+                modifier = planet_huanyu_pleasure
+                days = -1
+            }
+            set_variable = {
+				which = planet_huanyu_pleasure_1
+				value = 0
+			}
+			set_variable = {
+				which = planet_huanyu_pleasure_2
+				value = 100
+			}
+            set_variable = {
+                which = planet_huanyu_pleasure
+                value = this.trigger:free_amenities
+            }
+        }
         moon = {
             name = NAME_sol_erxiangleyuan_moon
             class = pc_barren_cold
