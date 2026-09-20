@@ -64,7 +64,7 @@ hsr_path_year_reset = {
     if = {
         limit = {
             check_variable_arithmetic = {
-                which = from.value:country_path_$path$_value
+                which = value:country_path_$path$_value
                 value <= 40
             }
             has_country_flag = hsr_$path$_secondary
@@ -78,11 +78,11 @@ hsr_path_year_reset = {
     if = {
         limit = {
             check_variable_arithmetic = {
-                which = from.value:country_path_$path$_value
+                which = value:country_path_$path$_value
                 value > 40
             }
             check_variable_arithmetic = {
-                which = from.value:country_path_$path$_value
+                which = value:country_path_$path$_value
                 value < 60
             }
             has_country_flag = hsr_$path$_primary
@@ -237,7 +237,7 @@ hsr_civic_reset = {
 curiosity_get_effect = {
     optimize_memory
     if = {
-        limit = { has_specimen = $KEY_NAME$ }
+        limit = { has_grand_archive = yes  has_specimen = $KEY_NAME$ }
         change_variable = {
             which = yuzhousuipian
             value = $VALUE$
