@@ -1,0 +1,107 @@
+# =====================================================================
+# 星穹列车 · 「列车靠站」决策      BY WorkBuddy
+# =====================================================================
+# 【为什么需要这个决策】
+#   本 MOD 的列车预设 prescripted_countries/00_DOT_SR_countries.txt 第 23 行写了
+#       is_nomadic = yes
+#   这让列车成为【游牧帝国】。而游牧在引擎层面是「不能宣称 / 拥有星系」的
+#   （原版本地化 nomadic_gameplay_desc 原文：
+#    "Cannot claim or own Systems and Planets"）。
+#   恒星基地的本质就是「宣称并拥有一个星系」，所以游牧永远做不成 ——
+#   用工程船下订单，进度会一路走到 100%，然后失败，error.log 里什么都不留。
+#
+# 【试过但没用的路子（别重复踩）】
+#   1) 放开 constructor / starbase_outpost 的 potential_country 闸门
+#      -> 只能让订单"能下"，完成那一步照样被引擎挡掉。已回滚到 .backup/ship_sizes/。
+#   2) country_types 的 custom_starbase = xxx
+#      -> 它只决定「基地用哪个舰体」，不改变「拥有星系」这一步，救不了游牧。
+#         而且列车用的是 MOD 公共的 default 国家类型，加上去会波及所有 MOD 国家。
+#
+# 【正解】
+#   原版给游牧留了一把开锁钥匙，就在原版「定居」流程里：
+#       set_country_as_nomad_effect = { IS_NOMAD = no }
+#   （其本体 = set_country_code_flags = { is_nomadic = <值> }，
+#     定义于原版 common/scripted_effects/nomads_effects.txt 第 6 行）
+#
+#   本决策把同一把钥匙交给玩家：靠站 = 主动放弃游牧身份，但仍保留列车（方舟舰），
+#   从这一刻起列车可以正常宣称星系、建造真正的恒星基地。
+#
+# 【单向说明】
+#   靠站不可逆（本决策不提供反悔按钮）。想变回游牧，请走原版的「启程」流程
+#   （decision_nomad_embarkation，需要 is_nomadic = no + 适应/多面性传统完成）。
+#
+# 【测试建议】改完先另存一份存档再试。
+# =====================================================================
+# 原版参考：common/scripted_effects/nomads_effects.txt 第 4870 行
+#           arkship_settle_planet_effect（原版定居都做了什么）
+#           common/decisions/15_nomads_dlc_decisions.txt 第 169 行
+#           （决策字段写法）
+# =====================================================================
+
+decision_aex_dock_train = {
+	owned_planets_only = yes
+	important = yes
+	sound = event_administrative_work
+	icon = decision_politics
+	enactment_time = 90
+
+	potential = {
+		owner = {
+			has_origin = origin_Astral_Express
+			is_nomadic = yes
+		}
+	}
+
+	allow = {
+		always = yes
+	}
+
+	resources = {
+		category = decisions
+		cost = {
+			influence = 50
+		}
+	}
+
+	effect = {
+		custom_tooltip = aex_dock_train_effect_tt
+		owner = {
+			# ★ 核心：摘掉游牧身份（原版定居用的同一把钥匙）
+			set_country_as_nomad_effect = { IS_NOMAD = no }
+
+			# 游牧用"作战储备"替代能量/矿物，转定居后要换回普通经济
+			set_resource_converter = none
+
+			# 游牧无视关闭国界，转定居后恢复成正常国界
+			set_faction_properties = { needs_border_access = yes }
+
+			set_country_flag = aex_train_docked
+
+			# 补上被游牧 starting_potential 屏蔽掉的那批科技
+			# （与原版定居流程给的科技一致）
+			give_technology = { tech = tech_colonization_1			message = no }
+			give_technology = { tech = tech_starbase_1				message = no }
+			give_technology = { tech = tech_starbase_2				message = no }
+			give_technology = { tech = tech_space_defense_station_1	message = no }
+			give_technology = { tech = tech_solar_panel_network		message = no }
+			give_technology = { tech = tech_mechanized_mining		message = no }
+
+			# 已经研究过更高级驿站科技的，按原版规则补对应的恒星基地科技
+			if = {
+				limit = { has_technology = tech_waystation_2 }
+				give_technology = { tech = tech_starbase_3 message = no }
+			}
+			if = {
+				limit = { has_technology = tech_waystation_3 }
+				give_technology = { tech = tech_starbase_4 message = no }
+			}
+
+			# 让工程船等自动设计重新生成
+			refresh_auto_generated_ship_designs = yes
+		}
+	}
+
+	ai_weight = {
+		weight = 0
+	}
+}
