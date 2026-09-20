@@ -149,6 +149,43 @@ country_event = {
 				save_global_event_target_as = Dvalin_General_Exist
 			}
 		}
+		# 驾驶员：原神·璃月七星「玉衡」刻晴
+		create_species = {
+			name = "Star_Rail"
+			class = "Star_Rail"
+			portrait = keqing
+			traits = { trait = "trait_enduring" }
+			immortal = yes
+			allow_negative_traits = no
+			effect = { save_event_target_as = keqing_species }
+		}
+		create_leader = {
+			class = commander
+			species = event_target:keqing_species
+			name = "NAME_keqing"
+			skill = 5
+			gender = female
+			tier = leader_tier_legendary
+			immortal = yes
+			background_ethic = ethic_materialist
+			skip_background_generation = yes
+			custom_description = keqing_desc
+			custom_catch_phrase = keqing_catch_phrase
+			hide_age = yes
+			randomize_traits = no
+			effect = {
+				set_leader_flag = legendary_leader
+				set_leader_flag = leader_death_events_blocked
+				set_leader_flag = immune_to_negative_traits
+				set_leader_flag = keqing
+				remove_all_positive_traits = yes
+				add_trait = leader_trait_yuheng
+				save_global_event_target_as = keqing_leader
+			}
+		}
+		event_target:Dvalin_General_Exist = {
+			assign_leader = event_target:keqing_leader
+		}
 	}
 	diplomatic = yes #是否启用外交界面
 	# diplomatic_title = DOT_SR_Dvalin.001.name #外交界面标题本地化 Key，不写默认为“传入通讯”
