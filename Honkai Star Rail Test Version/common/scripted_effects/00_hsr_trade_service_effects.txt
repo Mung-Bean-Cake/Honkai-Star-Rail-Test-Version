@@ -1,0 +1,16 @@
+#4.4.6 无内置 add_modifier_multiplier 效果。按调用点签名（modifier / variable / value）补齐实现：
+# 先按 value 调整计数器，再以计数器当前值作为 multiplier 重新施加该修正；计数为 0 时保持移除状态。
+# 调用示例： add_modifier_multiplier = { modifier = X variable = Y_count value = 1 }
+add_modifier_multiplier = {
+    change_variable = { which = $variable$ value = $value$ }
+    remove_modifier = $modifier$
+    if = {
+        limit = {
+            check_variable = { which = $variable$ value >= 1 }
+        }
+        add_modifier = {
+            modifier = $modifier$
+            multiplier = value:$variable$
+        }
+    }
+}

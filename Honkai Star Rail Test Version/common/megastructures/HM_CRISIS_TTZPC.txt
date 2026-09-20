@@ -12,7 +12,7 @@ mega_HM_CRISIS_TTZPC = {
         cost = { alloys = 70000 influence = 200 }
         upkeep = {
             trigger = {
-                exists = star
+                #exists = star   # 4.4.6: upkeep.trigger 在 country 作用域下求值，country 无 star 链接；下方 solar_system = { star = {} } 已足够
                 NOT = {
                     solar_system = {
                         star = {
@@ -25,7 +25,7 @@ mega_HM_CRISIS_TTZPC = {
         }
         upkeep = {
             trigger = {
-                exists = star
+                #exists = star   # 4.4.6: upkeep.trigger 在 country 作用域下求值，country 无 star 链接；下方 solar_system = { star = {} } 已足够
                 solar_system = {
                     star = {
                         is_star_class = sc_black_hole
@@ -78,6 +78,6 @@ mega_HM_CRISIS_TTZPC = {
         ship_military_alloys_upkeep_mult = -0.5
     }
 
-    on_build_complete = {
-    }
+    #on_build_complete = {   # 重复定义（4.4.6 报 Duplicate effect），已注释
+    #}
 }
