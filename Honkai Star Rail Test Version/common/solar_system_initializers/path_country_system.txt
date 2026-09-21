@@ -13,15 +13,15 @@ fengraomin_1 = {
 		base = 0
 	}
 	spawn_chance = 0
-	flags = { fengraomin_system fengraomin_capital_1 }
+	flags = { fengraomin_system fengraomin_capital }
 	planet = {
 		class = pc_gaia
 		orbit_distance = 0
 		orbit_angle = 1
 		size = { min = 20 max = 30 }
 		has_ring = no
-
 		init_effect = {
+			save_global_event_target_as = fengraomin_home_star
 			create_cluster = {
 				id = fengraomin_cluster
 				radius = @marauderClusterRange
@@ -45,19 +45,24 @@ fengraomin_1 = {
 				}
 			}
 			create_country = {
+				name = NAME_fengraomin
 				name_list = DOT_SR_fengraomin
 				species = last_created_species
 				type = fengraomin
 				civics = { civic = civic_hive_ascetic }
 				origin = origin_common_ground
 				flag = {
+					icon = {
+						category = "special"
+						file = "caravaneer_01.dds"
+					}
 					background= {
 						category = "backgrounds"
 						file = "00_solid.dds"
 					}
 					colors={
 						"black"
-						"blue"
+						"green"
 						"null"
 						"null"
 					}
@@ -67,28 +72,53 @@ fengraomin_1 = {
 					ethic = ethic_xenophobe
 				}
 				ignore_initial_colony_error = yes
-			}
-			last_created_country = {
-				set_graphical_culture = DOT_SR_humanoid_01
-				save_global_event_target_as = fengraomin_country
-				set_country_flag = fengraomin_1
-				set_name = NAME_fengraomin
-				create_ship_design = { design = "NAME_Void_Dwelling" }
-				add_ship_design = last_created_design
-				set_custom_capital_location = prev
-			}
-			create_fleet = {
 				effect = {
-					set_owner = event_target:fengraomin_country
-					create_ship = {
-						name = random
-						design = "NAME_FE_XENOPHILE_Citadel_2"
-						graphical_culture = "DOT_SR_humanoid_01"
-					}
-					set_location = {
-						target = prev
-						distance = 230
-						angle = 110
+					set_country_flag = fengraomin
+					set_graphical_culture = DOT_SR_humanoid_01
+					save_global_event_target_as = fengraomin_country
+					create_fleet = {
+						name = "name_hong"
+						settings = { spawn_debris = no }
+						effect = {
+							set_fleet_stance = aggressive
+							set_formation_scale = 2.5
+							set_owner = prev
+							while = {
+								count = 200
+								create_ship = {
+									name = random
+									design = "NAME_Black_Earl"
+									graphical_culture = "DOT_SR_humanoid_01"
+								}
+							}
+							while = {
+								count = 40
+								create_ship = {
+									name = random
+									design = NAME_middle_fengrao_leader
+								}
+							}
+							while = {
+								count = 20
+								create_ship = {
+									name = random
+									design = "NAME_Dragonspawn"
+									graphical_culture = "DOT_SR_humanoid_01"
+								}
+							}
+							create_ship = {
+								name = NAME_fengraomin_commander_1
+								design = "NAME_middle_fengrao_commander"
+								graphical_culture = "DOT_SR_humanoid_01"
+							}
+							set_location = {
+								target = event_target:fengraomin_home_star
+								angle = 90
+								distance = 10
+							}
+							set_fleet_flag = fengraomin_fleet_1
+							save_global_event_target_as = fengraomin_fleet_1
+						}
 					}
 				}
 			}
@@ -97,7 +127,7 @@ fengraomin_1 = {
 					set_owner = event_target:fengraomin_country
 					create_ship = {
 						name = random
-						design = "NAME_FE_XENOPHILE_Citadel_2"
+						design = "NAME_Watcher"
 						graphical_culture = "DOT_SR_humanoid_01"
 					}
 					set_location = {
@@ -112,14 +142,14 @@ fengraomin_1 = {
 					set_owner = event_target:fengraomin_country
 					create_ship = {
 						name = random
-						design = "NAME_FE_XENOPHILE_Citadel_2"
+						design = "NAME_Sigma"
 						graphical_culture = "DOT_SR_humanoid_01"
 					}
 					while = {
 						count = 40
 						create_ship = {
 							name = random
-							design = "NAME_Ancient_Guardian"
+							design = "NAME_Devastator"
 							graphical_culture = "DOT_SR_humanoid_01"
 						}
 					}
@@ -135,7 +165,7 @@ fengraomin_1 = {
 					set_owner = event_target:fengraomin_country
 					create_ship = {
 						name = random
-						design = "NAME_FE_XENOPHILE_Citadel_3"
+						design = "NAME_Watcher"
 						graphical_culture = "DOT_SR_humanoid_01"
 					}
 					set_location = {
@@ -150,7 +180,7 @@ fengraomin_1 = {
 					set_owner = event_target:fengraomin_country
 					create_ship = {
 						name = random
-						design = "NAME_FE_XENOPHILE_Citadel_1"
+						design = "NAME_Sigma"
 						graphical_culture = "DOT_SR_humanoid_01"
 					}
 					set_location = {
@@ -165,7 +195,7 @@ fengraomin_1 = {
 					set_owner = event_target:fengraomin_country
 					create_ship = {
 						name = random
-						design = "NAME_FE_XENOPHILE_Citadel_2"
+						design = "NAME_Watcher"
 						graphical_culture = "DOT_SR_humanoid_01"
 					}
 					set_location = {
@@ -180,7 +210,7 @@ fengraomin_1 = {
 					set_owner = event_target:fengraomin_country
 					create_ship = {
 						name = random
-						design = "NAME_FE_XENOPHILE_Citadel_1"
+						design = "NAME_Sigma"
 						graphical_culture = "DOT_SR_humanoid_01"
 					}
 					set_location = {
@@ -195,7 +225,7 @@ fengraomin_1 = {
 					set_owner = event_target:fengraomin_country
 					create_ship = {
 						name = random
-						design = "NAME_FE_XENOPHILE_Citadel_1"
+						design = "NAME_Watcher"
 						graphical_culture = "DOT_SR_humanoid_01"
 					}
 					set_location = {
@@ -242,7 +272,7 @@ fengraomin_1 = {
 		orbit_distance = 25
 		size = 20
 		orbit_angle = 20
-		flags = { raid_source }
+		flags = { rob_source }
 		init_effect = {
 			set_deposit = d_minerals_8
 			create_fleet = {
@@ -250,7 +280,7 @@ fengraomin_1 = {
 					set_owner = event_target:fengraomin_country
 					create_ship = {
 						name = random
-						design = "NAME_FE_XENOPHILE_Citadel_3"
+						design = "NAME_Watcher"
 						graphical_culture = "DOT_SR_humanoid_01"
 					}
 					set_location = {
@@ -280,7 +310,7 @@ fengraomin_1 = {
 					set_owner = event_target:fengraomin_country
 					create_ship = {
 						name = random
-						design = "NAME_FE_XENOPHILE_Citadel_1"
+						design = "NAME_Watcher"
 						graphical_culture = "DOT_SR_humanoid_01"
 					}
 					set_location = {
@@ -295,7 +325,7 @@ fengraomin_1 = {
 					set_owner = event_target:fengraomin_country
 					create_ship = {
 						name = random
-						design = "NAME_FE_XENOPHILE_Citadel_2"
+						design = "NAME_Sigma"
 						graphical_culture = "DOT_SR_humanoid_01"
 					}
 					set_location = {
@@ -310,7 +340,7 @@ fengraomin_1 = {
 					set_owner = event_target:fengraomin_country
 					create_ship = {
 						name = random
-						design = "NAME_FE_XENOPHILE_Citadel_2"
+						design = "NAME_Watcher"
 						graphical_culture = "DOT_SR_humanoid_01"
 					}
 					set_location = {
@@ -349,7 +379,7 @@ fengraomin_1 = {
 						set_owner = event_target:fengraomin_country
 						create_ship = {
 							name = random
-							design = "NAME_FE_XENOPHILE_Citadel_2"
+							design = "NAME_Watcher"
 							graphical_culture = "DOT_SR_humanoid_01"
 						}
 						set_location = {
@@ -364,7 +394,7 @@ fengraomin_1 = {
 						set_owner = event_target:fengraomin_country
 						create_ship = {
 							name = random
-							design = "NAME_FE_XENOPHILE_Citadel_2"
+							design = "NAME_Sigma"
 							graphical_culture = "DOT_SR_humanoid_01"
 						}
 						set_location = {
@@ -388,7 +418,7 @@ fengraomin_1 = {
 						set_owner = event_target:fengraomin_country
 						create_ship = {
 							name = random
-							design = "NAME_FE_XENOPHILE_Citadel_2"
+							design = "NAME_Sigma"
 							graphical_culture = "DOT_SR_humanoid_01"
 						}
 						set_location = {
@@ -470,7 +500,7 @@ fengraomin_1 = {
 						set_owner = event_target:fengraomin_country
 						create_ship = {
 							name = random
-							design = "NAME_FE_XENOPHILE_Citadel_3"
+							design = "NAME_Sigma"
 							graphical_culture = "DOT_SR_humanoid_01"
 						}
 						set_location = {
@@ -599,7 +629,7 @@ fengraomin_1 = {
 					set_owner = event_target:fengraomin_country
 					create_ship = {
 						name = random
-						design = "NAME_FE_XENOPHILE_Citadel_1"
+						design = "NAME_Sigma"
 						graphical_culture = "DOT_SR_humanoid_01"
 					}
 					set_location = {
@@ -625,7 +655,7 @@ fengraomin_1 = {
 					set_owner = event_target:fengraomin_country
 					create_ship = {
 						name = random
-						design = "NAME_FE_XENOPHILE_Citadel_2"
+						design = "NAME_Sigma"
 						graphical_culture = "DOT_SR_humanoid_01"
 					}
 					set_location = {
@@ -651,7 +681,7 @@ fengraomin_1 = {
 					set_owner = event_target:fengraomin_country
 					create_ship = {
 						name = random
-						design = "NAME_FE_XENOPHILE_Citadel_3"
+						design = "NAME_Sigma"
 						graphical_culture = "DOT_SR_humanoid_01"
 					}
 					set_location = {
@@ -677,7 +707,7 @@ fengraomin_1 = {
 					set_owner = event_target:fengraomin_country
 					create_ship = {
 						name = random
-						design = "NAME_FE_XENOPHILE_Citadel_2"
+						design = "NAME_Sigma"
 						graphical_culture = "DOT_SR_humanoid_01"
 					}
 					set_location = {
@@ -703,7 +733,7 @@ fengraomin_1 = {
 					set_owner = event_target:fengraomin_country
 					create_ship = {
 						name = random
-						design = "NAME_FE_XENOPHILE_Citadel_3"
+						design = "NAME_Sigma"
 						graphical_culture = "DOT_SR_humanoid_01"
 					}
 					set_location = {
@@ -728,7 +758,7 @@ fengraomin_1 = {
 					set_owner = event_target:fengraomin_country
 					create_ship = {
 						name = random
-						design = "NAME_FE_XENOPHILE_Citadel_3"
+						design = "NAME_Sigma"
 						graphical_culture = "DOT_SR_humanoid_01"
 					}
 					set_location = {
@@ -753,7 +783,7 @@ fengraomin_1 = {
 					set_owner = event_target:fengraomin_country
 					create_ship = {
 						name = random
-						design = "NAME_FE_XENOPHILE_Citadel_2"
+						design = "NAME_Sigma"
 						graphical_culture = "DOT_SR_humanoid_01"
 					}
 					set_location = {
@@ -778,7 +808,7 @@ fengraomin_1 = {
 					set_owner = event_target:fengraomin_country
 					create_ship = {
 						name = random
-						design = "NAME_FE_XENOPHILE_Citadel_3"
+						design = "NAME_Sigma"
 						graphical_culture = "DOT_SR_humanoid_01"
 					}
 					set_location = {
@@ -803,7 +833,7 @@ fengraomin_1 = {
 					set_owner = event_target:fengraomin_country
 					create_ship = {
 						name = random
-						design = "NAME_FE_XENOPHILE_Citadel_2"
+						design = "NAME_Sigma"
 						graphical_culture = "DOT_SR_humanoid_01"
 					}
 					set_location = {
@@ -828,7 +858,7 @@ fengraomin_1 = {
 					set_owner = event_target:fengraomin_country
 					create_ship = {
 						name = random
-						design = "NAME_FE_XENOPHILE_Citadel_2"
+						design = "NAME_Sigma"
 						graphical_culture = "DOT_SR_humanoid_01"
 					}
 					set_location = {
@@ -865,47 +895,6 @@ fengraomin_1 = {
 			size = 8
 			orbit_angle = 90
 			orbit_distance = 6
-
-			init_effect = {
-				create_fleet = {
-					effect = {
-						set_owner = event_target:fengraomin_country
-						while = {
-							count = 240
-							create_ship = {
-								name = random
-								design = "NAME_Black_Earl"
-								graphical_culture = "DOT_SR_humanoid_01"
-							}
-						}
-						while = {
-							count = 30
-							create_ship = {
-								name = random
-								design = "NAME_Dragonspawn"
-								graphical_culture = "DOT_SR_humanoid_01"
-							}
-						}
-						create_ship = {
-							name = NAME_fengraomin_commander_1
-							design = "NAME_middle_fengrao_commander"
-							graphical_culture = "DOT_SR_humanoid_01"
-						}
-						set_formation_scale = 2
-						set_fleet_stance = aggressive
-						set_aggro_range_measure_from = self
-						set_aggro_range = 250
-						set_location = {
-							target = prev
-							distance = 20
-							angle = 120
-						}
-					}
-					settings = {
-						garrison = yes
-					}
-				}
-			}
 		}
 	}
 	init_effect = {
@@ -928,8 +917,51 @@ fengraomin_2 = {
 		orbit_angle = 1
 		size = { min = 30 max = 50 }
 		has_ring = no
-
 		init_effect = {
+			save_global_event_target_as = fengraomin_home_star_2
+			create_fleet = {
+				settings = { spawn_debris = no }
+				effect = {
+					set_fleet_stance = aggressive
+					set_formation_scale = 2.5
+					set_owner = event_target:fengraomin_country
+					while = {
+						count = 200
+						create_ship = {
+							name = random
+							design = NAME_Divine_Glory
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+					}
+					while = {
+						count = 30
+						create_ship = {
+							name = random
+							design = NAME_middle_fengrao_leader
+						}
+					}
+					while = {
+						count = 10
+						create_ship = {
+							name = random
+							design = "NAME_Dragonspawn"
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+					}
+					create_ship = {
+						name = NAME_fengraomin_commander_2
+						design = "NAME_middle_fengrao_commander"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = event_target:fengraomin_home_star_2
+						angle = 90
+						distance = 50
+					}
+					set_fleet_flag = fengraomin_fleet_2
+					save_global_event_target_as = fengraomin_fleet_2
+				}
+			}
 			create_starbase = {
 				size = starbase_citadel
 				owner = event_target:fengraomin_country
@@ -939,7 +971,7 @@ fengraomin_2 = {
 					set_owner = event_target:fengraomin_country
 					create_ship = {
 						name = random
-						design = "NAME_FE_XENOPHILE_Citadel_2"
+						design = "NAME_Sigma"
 						graphical_culture = "DOT_SR_humanoid_01"
 					}
 					set_location = {
@@ -954,7 +986,7 @@ fengraomin_2 = {
 					set_owner = event_target:fengraomin_country
 					create_ship = {
 						name = random
-						design = "NAME_FE_XENOPHILE_Citadel_2"
+						design = "NAME_Sigma"
 						graphical_culture = "DOT_SR_humanoid_01"
 					}
 					set_location = {
@@ -969,7 +1001,7 @@ fengraomin_2 = {
 					set_owner = event_target:fengraomin_country
 					create_ship = {
 						name = random
-						design = "NAME_FE_XENOPHILE_Citadel_2"
+						design = "NAME_Sigma"
 						graphical_culture = "DOT_SR_humanoid_01"
 					}
 					set_location = {
@@ -984,7 +1016,7 @@ fengraomin_2 = {
 					set_owner = event_target:fengraomin_country
 					create_ship = {
 						name = random
-						design = "NAME_FE_XENOPHILE_Citadel_3"
+						design = "NAME_Sigma"
 						graphical_culture = "DOT_SR_humanoid_01"
 					}
 					set_location = {
@@ -999,7 +1031,7 @@ fengraomin_2 = {
 					set_owner = event_target:fengraomin_country
 					create_ship = {
 						name = random
-						design = "NAME_FE_XENOPHILE_Citadel_2"
+						design = "NAME_Watcher"
 						graphical_culture = "DOT_SR_humanoid_01"
 					}
 					set_location = {
@@ -1014,7 +1046,7 @@ fengraomin_2 = {
 					set_owner = event_target:fengraomin_country
 					create_ship = {
 						name = random
-						design = "NAME_FE_XENOPHILE_Citadel_2"
+						design = "NAME_Sigma"
 						graphical_culture = "DOT_SR_humanoid_01"
 					}
 					set_location = {
@@ -1029,7 +1061,7 @@ fengraomin_2 = {
 					set_owner = event_target:fengraomin_country
 					create_ship = {
 						name = random
-						design = "NAME_FE_XENOPHILE_Citadel_3"
+						design = "NAME_Watcher"
 						graphical_culture = "DOT_SR_humanoid_01"
 					}
 					set_location = {
@@ -1044,7 +1076,7 @@ fengraomin_2 = {
 					set_owner = event_target:fengraomin_country
 					create_ship = {
 						name = random
-						design = "NAME_FE_XENOPHILE_Citadel_3"
+						design = "NAME_Watcher"
 						graphical_culture = "DOT_SR_humanoid_01"
 					}
 					set_location = {
@@ -1061,7 +1093,7 @@ fengraomin_2 = {
 						count = 30
 						create_ship = {
 							name = random
-							design = "NAME_Ancient_Guardian"
+							design = "NAME_Devastator"
 							graphical_culture = "DOT_SR_humanoid_01"
 						}
 					}
@@ -1084,7 +1116,7 @@ fengraomin_2 = {
 		orbit_distance = 25
 		size = 20
 		orbit_angle = 20
-		flags = { raid_source }
+		flags = { rob_source }
 		init_effect = {
 			set_deposit = d_minerals_8
 			create_fleet = {
@@ -1092,7 +1124,7 @@ fengraomin_2 = {
 					set_owner = event_target:fengraomin_country
 					create_ship = {
 						name = random
-						design = "NAME_FE_XENOPHILE_Citadel_3"
+						design = "NAME_Watcher"
 						graphical_culture = "DOT_SR_humanoid_01"
 					}
 					set_location = {
@@ -1117,7 +1149,7 @@ fengraomin_2 = {
 					set_owner = event_target:fengraomin_country
 					create_ship = {
 						name = random
-						design = "NAME_FE_XENOPHILE_Citadel_3"
+						design = "NAME_Watcher"
 						graphical_culture = "DOT_SR_humanoid_01"
 					}
 					set_location = {
@@ -1132,7 +1164,7 @@ fengraomin_2 = {
 					set_owner = event_target:fengraomin_country
 					create_ship = {
 						name = random
-						design = "NAME_FE_XENOPHILE_Citadel_2"
+						design = "NAME_Sigma"
 						graphical_culture = "DOT_SR_humanoid_01"
 					}
 					set_location = {
@@ -1147,7 +1179,7 @@ fengraomin_2 = {
 					set_owner = event_target:fengraomin_country
 					create_ship = {
 						name = random
-						design = "NAME_FE_XENOPHILE_Citadel_2"
+						design = "NAME_Watcher"
 						graphical_culture = "DOT_SR_humanoid_01"
 					}
 					set_location = {
@@ -1186,7 +1218,7 @@ fengraomin_2 = {
 						set_owner = event_target:fengraomin_country
 						create_ship = {
 							name = random
-							design = "NAME_FE_XENOPHILE_Citadel_2"
+							design = "NAME_Watcher"
 							graphical_culture = "DOT_SR_humanoid_01"
 						}
 						set_location = {
@@ -1201,7 +1233,7 @@ fengraomin_2 = {
 						set_owner = event_target:fengraomin_country
 						create_ship = {
 							name = random
-							design = "NAME_FE_XENOPHILE_Citadel_2"
+							design = "NAME_Sigma"
 							graphical_culture = "DOT_SR_humanoid_01"
 						}
 						set_location = {
@@ -1225,14 +1257,14 @@ fengraomin_2 = {
 						set_owner = event_target:fengraomin_country
 						create_ship = {
 							name = random
-							design = "NAME_FE_XENOPHILE_Citadel_2"
+							design = "NAME_Sigma"
 							graphical_culture = "DOT_SR_humanoid_01"
 						}
 						while = {
 							count = 80
 							create_ship = {
 								name = random
-								design = "NAME_Ancient_Guardian"
+								design = "NAME_Devastator"
 								graphical_culture = "DOT_SR_humanoid_01"
 							}
 						}
@@ -1247,7 +1279,7 @@ fengraomin_2 = {
 					effect = {
 						set_owner = event_target:fengraomin_country
 						while = {
-							count = 5
+							count = 20
 							create_ship = {
 								name = random
 								design = "NAME_middle_fengrao_leader"
@@ -1299,7 +1331,7 @@ fengraomin_2 = {
 						set_owner = event_target:fengraomin_country
 						create_ship = {
 							name = random
-							design = "NAME_FE_XENOPHILE_Citadel_3"
+							design = "NAME_Sigma"
 							graphical_culture = "DOT_SR_humanoid_01"
 						}
 						set_location = {
@@ -1325,7 +1357,7 @@ fengraomin_2 = {
 					set_owner = event_target:fengraomin_country
 					create_ship = {
 						name = random
-						design = "NAME_FE_XENOPHILE_Citadel_3"
+						design = "NAME_Sigma"
 						graphical_culture = "DOT_SR_humanoid_01"
 					}
 					set_location = {
@@ -1353,7 +1385,7 @@ fengraomin_2 = {
 				effect = {
 					set_owner = event_target:fengraomin_country
 					while = {
-						count = 20
+						count = 40
 						create_ship = {
 							name = random
 							design = "NAME_middle_fengrao_leader"
@@ -1389,7 +1421,7 @@ fengraomin_2 = {
 					effect = {
 						set_owner = event_target:fengraomin_country
 						while = {
-							count = 20
+							count = 60
 							create_ship = {
 								name = random
 								design = "NAME_middle_fengrao_leader"
@@ -1429,7 +1461,7 @@ fengraomin_2 = {
 						count = 30
 						create_ship = {
 							name = random
-							design = "NAME_Ancient_Guardian"
+							design = "NAME_Devastator"
 							graphical_culture = "DOT_SR_humanoid_01"
 						}
 					}
@@ -1458,13 +1490,13 @@ fengraomin_2 = {
 						count = 40
 						create_ship = {
 							name = random
-							design = "NAME_Ancient_Guardian"
+							design = "NAME_Devastator"
 							graphical_culture = "DOT_SR_humanoid_01"
 						}
 					}
 					create_ship = {
 						name = random
-						design = "NAME_FE_XENOPHILE_Citadel_2"
+						design = "NAME_Sigma"
 						graphical_culture = "DOT_SR_humanoid_01"
 					}
 					set_location = {
@@ -1492,13 +1524,13 @@ fengraomin_2 = {
 						count = 80
 						create_ship = {
 							name = random
-							design = "NAME_Ancient_Guardian"
+							design = "NAME_Devastator"
 							graphical_culture = "DOT_SR_humanoid_01"
 						}
 					}
 					create_ship = {
 						name = random
-						design = "NAME_FE_XENOPHILE_Citadel_3"
+						design = "NAME_Sigma"
 						graphical_culture = "DOT_SR_humanoid_01"
 					}
 					set_location = {
@@ -1523,7 +1555,7 @@ fengraomin_2 = {
 				effect = {
 					set_owner = event_target:fengraomin_country
 					while = {
-						count = 10
+						count = 20
 						create_ship = {
 							name = random
 							design = "NAME_Dragonspawn"
@@ -1532,7 +1564,7 @@ fengraomin_2 = {
 					}
 					create_ship = {
 						name = random
-						design = "NAME_FE_XENOPHILE_Citadel_2"
+						design = "NAME_Sigma"
 						graphical_culture = "DOT_SR_humanoid_01"
 					}
 					set_location = {
@@ -1580,13 +1612,13 @@ fengraomin_2 = {
 						count = 15
 						create_ship = {
 							name = random
-							design = "NAME_Ancient_Guardian"
+							design = "NAME_Devastator"
 							graphical_culture = "DOT_SR_humanoid_01"
 						}
 					}
 					create_ship = {
 						name = random
-						design = "NAME_FE_XENOPHILE_Citadel_3"
+						design = "NAME_Sigma"
 						graphical_culture = "DOT_SR_humanoid_01"
 					}
 					set_location = {
@@ -1611,7 +1643,7 @@ fengraomin_2 = {
 					set_owner = event_target:fengraomin_country
 					create_ship = {
 						name = random
-						design = "NAME_FE_XENOPHILE_Citadel_3"
+						design = "NAME_Sigma"
 						graphical_culture = "DOT_SR_humanoid_01"
 					}
 					set_location = {
@@ -1636,7 +1668,7 @@ fengraomin_2 = {
 					set_owner = event_target:fengraomin_country
 					create_ship = {
 						name = random
-						design = "NAME_FE_XENOPHILE_Citadel_2"
+						design = "NAME_Sigma"
 						graphical_culture = "DOT_SR_humanoid_01"
 					}
 					set_location = {
@@ -1661,7 +1693,7 @@ fengraomin_2 = {
 					set_owner = event_target:fengraomin_country
 					create_ship = {
 						name = random
-						design = "NAME_FE_XENOPHILE_Citadel_3"
+						design = "NAME_Sigma"
 						graphical_culture = "DOT_SR_humanoid_01"
 					}
 					set_location = {
@@ -1700,30 +1732,15 @@ fengraomin_2 = {
 					effect = {
 						set_owner = event_target:fengraomin_country
 						create_ship = {
-							name = NAME_fengraomin_commander_2
-							design = "NAME_middle_fengrao_commander"
+							name = random
+							design = "NAME_Sigma"
 							graphical_culture = "DOT_SR_humanoid_01"
 						}
-						while = {
-							count = 5
-							create_ship = {
-								name = random
-								design = "NAME_middle_fengrao_leader"
-								graphical_culture = "DOT_SR_humanoid_01"
-							}
-						}
-						set_formation_scale = 2
-						set_fleet_stance = aggressive
-						set_aggro_range_measure_from = self
-						set_aggro_range = 250
 						set_location = {
 							target = prev
-							distance = 20
-							angle = 120
+							distance = 10
+							angle = 0
 						}
-					}
-					settings = {
-						garrison = yes
 					}
 				}
 			}
@@ -1791,6 +1808,13 @@ hatuobiya = {
 					}
 				}
 			}
+			create_leader = {
+				class = commander
+				species = this
+				name = name_hong
+				skill = 1
+				immortal = yes
+			}
 			create_country = {
 				name = NAME_Aha
 				type = Aha
@@ -1841,14 +1865,6 @@ hatuobiya = {
 									set_ship_flag = Aha_home_tradestation
 								}
 							}
-							create_ship = {
-								name = NAME_Aha_defence
-								design = "NAME_Aha_defence"
-								graphical_culture = prev
-								effect = {
-									set_ship_flag = Aha_home_tradestation
-								}
-							}
 							set_location = {
 								target = prevprev
 								angle = random
@@ -1860,14 +1876,7 @@ hatuobiya = {
 							}
 						}
 					}
-					create_leader = {
-						class = official
-						species = owner
-						name = random
-						skill = 10
-						immortal = yes
-					}
-					set_leader = last_created_leader
+					assign_leader = last_created_leader
 					create_ship_design = { design = "NAME_Caravaneer_Starbase" }
 					add_ship_design = last_created_design
 				}
@@ -1916,7 +1925,6 @@ hatuobiya = {
 			size = starbase_citadel
 			owner = event_target:Aha_home_country
 		}
-
 		# FLEET 1
 		if = {
 			limit = { has_global_flag = Aha_1 }
@@ -1996,14 +2004,6 @@ hatuobiya = {
 							save_global_event_target_as = masked_fool_fleet
 						}
 					}
-					create_leader = {
-						class = commander
-						species = this
-						name = random
-						skill = 5
-						immortal = yes
-					}
-					set_leader = last_created_leader
 				}
 			}
 		}
@@ -2086,13 +2086,6 @@ hatuobiya = {
 							save_global_event_target_as = mourning_actors_fleet
 						}
 					}
-					create_leader = {
-						class = commander
-						species = this
-						name = random
-						skill = 10
-					}
-					set_leader = last_created_leader
 				}
 			}
 		}

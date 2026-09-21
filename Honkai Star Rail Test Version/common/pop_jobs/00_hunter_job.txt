@@ -21,12 +21,13 @@ gelamo_waitress = {
 			physics_research = 200
 			society_research = 200
 			engineering_research = 200
-			sr_zro = 15
-			unity = 1200
+			sr_zro = 10
+			unity = 800
 		}
 		upkeep = {
-			energy = 200
+			energy = 320
 			consumer_goods = 400
+			food = 400
 			alloys = 400
 		}
 	}
@@ -64,12 +65,12 @@ smallyingxing = {
 			exotic_gases = 2
 			volatile_motes = 2
 			sr_living_metal = 2
-			menace = 5
-			integrity = 2
-			unity = 1600
+			menace = 2
+			integrity = 1
+			unity = 800
 		}
 		upkeep = {
-			energy = 400
+			energy = 500
 			consumer_goods = 200
 			alloys = 1000
 		}
@@ -104,13 +105,13 @@ kafuka_clothing_organizer = {
 		category = planet_StellaronHunter_job
 		produces = {
 			feral_insight = 5
-			society_research = 400
+			society_research = 320
 			influence = 0.5
 		}
 		upkeep = {
-			energy = 500
+			energy = 400
 			alloys = 800
-			unity = 200
+			unity = 300
 		}
 	}
 	country_modifier = {
@@ -163,15 +164,20 @@ zhimasu = {
 			alloys = 500
 		}
 	}
-	triggered_planet_modifier = {
+	triggered_country_modifier = {
 		potential = {
-			always = yes
-			POP_FACTION_SUPPORT_INCREASE_CHANCE_MULT = 0.4
-			PLANET_ARMY_BUILD_SPEED_MULT = 0.2
-			PLANET_BUILDING_CAPACITY_ADD = 5
-			planet_structures_cost_mult = 0.5
-			country_official_cap_add = 2.5
+			exists = owner
+			owner = {
+				has_valid_civic = civic_StellaronHunter_1
+			}
 		}
+		planet_structures_cost_mult = 0.5
+		country_official_cap_add = 2.5
+	}
+	modifier = {
+		POP_FACTION_SUPPORT_INCREASE_CHANCE_MULT = 0.4
+		PLANET_ARMY_BUILD_SPEED_MULT = 0.2
+		PLANET_BUILDING_CAPACITY_ADD = 5
 	}
 	weight = {
 		weight = 100
@@ -220,7 +226,7 @@ ren_armourer = {
 		}
 	}
 	planet_modifier = {
-		POP_GOVERNMENT_ETHIC_ATTRACTION = 0.2
+		POP_GOVERNMENT_ETHIC_ATTRACTION = 0.5
 		PLANET_POP_ASSEMBLY_ADD = 4
 	}
 	country_modifier = {
@@ -240,8 +246,8 @@ ren_armourer = {
 	}
 	country_modifier = {
 		country_resource_max_add = 30000
-		VETO_COOLDOWN_MULT = -0.2
-		POP_PURGE_MULT = 0.4
+		VETO_COOLDOWN_MULT = -0.1
+		POP_PURGE_MULT = 0.5
 		CATAPULT_SPREAD_MULT = 0.2
 	}
 	inline_script = "output/soldier_triggered_modifiers"
@@ -307,11 +313,11 @@ ren_soldier = {
 		}
 	}
 	planet_modifier = {
-		planet_crime_add = -8
+		planet_crime_add = -5
 	}
 	country_modifier = {
 		country_naval_cap_add = 10
-		FEDERATION_FLEET_CAP_ADD = 500
+		FEDERATION_FLEET_CAP_ADD = 600
 	}
 	resources = {
 		category = planet_StellaronHunter_job
@@ -439,18 +445,19 @@ gelamo_soldier = {
 	resources = {
 		category = planet_StellaronHunter_job
 		produces = {
-			unity = 5
-			volatile_motes = 0.5
+			unity = 10
+			exotic_gases = 1
+			volatile_motes = 1
 		}
 		upkeep = {
 			trigger = {
 				soldier_is_necromancer = yes
 			}
-			consumer_goods = 3
-			energy = 3
+			consumer_goods = 5
+			energy = 5
 		}
 		upkeep = {
-			alloys = 9
+			alloys = 15
 		}
 	}
 	inline_script = "output/soldier_triggered_modifiers"
@@ -504,9 +511,10 @@ wolf_hacker = {
 	resources = {
 		category = planet_StellaronHunter_job
 		produces = {
-			trade = 40
+			trade = 50
 		}
 		upkeep = {
+			food = 10
 			consumer_goods = 5
 		}
 	}
@@ -518,7 +526,7 @@ wolf_hacker = {
 			}
 		}
 		modifier = {
-			planet_amenities_add = 500
+			planet_amenities_add = 1000
 		}
 	}
 	weight = {
@@ -545,15 +553,16 @@ gelamo_griller = {
 	resources = {
 		category = planet_StellaronHunter_job
 		produces = {
-			food = 50
-			menace = 2
-			multiplier = 2
+			food = 75
+			menace = 1
+			multiplier = 1
 			energy = 20
 		}
 		upkeep = {
 			sr_zro = 1
 			influence = 1
 			astral_threads = 1
+			minor_artifacts = 1
 		}
 	}
 	triggered_planet_modifier = {
@@ -602,8 +611,8 @@ gelamo_executive = {
 			consumer_goods = 180
 		}
 		upkeep = {
-			food = 40
-			sr_dark_matter = 1
+			food = 20
+			sr_dark_matter = 2
 		}
 	}
 	triggered_planet_modifier = {
@@ -653,11 +662,12 @@ ren_farmer = {
 	resources = {
 		category = planet_StellaronHunter_job
 		produces = {
-			food = 60
+			food = 75
 			sr_zro = 1
 		}
 		upkeep = {
-			consumer_goods = 8
+			consumer_goods = 10
+			energy = 5
 		}
 	}
 	triggered_planet_modifier = {
@@ -719,16 +729,16 @@ cyber_miner = {
 	resources = {
 		category = planet_StellaronHunter_job
 		produces = {
-			energy = 60
+			energy = 50
 		}
 		upkeep = {
 			trigger = {
 				soldier_is_necromancer = yes
 			}
-			consumer_goods = 8
+			consumer_goods = 10
 		}
 		upkeep = {
-			minerals = 20
+			minerals = 25
 		}
 	}
 	weight = {
@@ -779,11 +789,11 @@ gelamo_miner = {
 	resources = {
 		category = planet_StellaronHunter_job
 		produces = {
-			minerals = 200
+			minerals = 180
 		}
 		upkeep = {
 			consumer_goods = 100
-			sr_zro = 2
+			sr_zro = 3
 		}
 	}
 	weight = {
@@ -842,7 +852,8 @@ kafuka_librarian = {
 			engineering_research = 10
 		}
 		upkeep = {
-			exotic_gases = 1
+			exotic_gases = 2
+			rare_crystals = 2
 			sr_dark_matter = 0.1
 		}
 	}

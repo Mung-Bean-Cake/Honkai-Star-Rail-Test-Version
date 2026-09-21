@@ -1048,3 +1048,544 @@ country_event = {
         exclusive_trigger = { has_country_flag = investment_outcome_6 }
     }
 }
+country_event = {
+    id = path_country.11
+    title = "communication_aha.title"
+    desc = "aha.welcome"
+    is_triggered_only = yes
+    diplomatic = yes
+    picture_event_data = {
+        portrait = event_target:Aha_home_country
+        room = ethic_spaceship_room
+    }
+    show_sound = event_ship_bridge
+    location = event_target:Aha_home_country
+
+    trigger = {
+        exists = event_target:Aha_home_country
+        from = {
+            is_same_value = event_target:Aha_home_country
+        }
+        NOR = {
+            has_communications = from
+            has_country_flag = met_Aha_country
+        }
+    }
+
+    immediate = {
+        establish_communications_no_message = event_target:Aha_home_country
+        set_country_flag = met_Aha_country
+    }
+
+    option = {
+        name = "path_country.11.a"
+    }
+}
+country_event = {
+    id = path_country.12
+    title = "discover_fengraomin"
+    desc ="discover_fengraomin.desc"
+    is_triggered_only = yes
+
+    diplomatic = yes
+    picture_event_data = {
+        portrait = event_target:fengraomin_country
+        room = ethic_spaceship_room
+    }
+    show_sound = event_ship_bridge
+    location = event_target:fengraomin_country
+
+    trigger = {
+        exists = event_target:fengraomin_country
+        from = {
+            is_same_value = event_target:fengraomin_country
+        }
+        NOR = {
+            has_communications = from
+            has_country_flag = met_fengraomin
+        }
+    }
+
+    immediate = {
+        establish_communications_no_message = event_target:fengraomin_country
+        set_country_flag = met_fengraomin
+    }
+
+    option = {
+        name = "pirate.155.a"
+    }
+}
+event = {
+    id = path_country.13
+    hide_window = yes
+    is_triggered_only = yes
+    trigger = {
+        years_passed >= 1
+        any_country = {
+            is_country_type = default
+            is_nomadic = no
+            NOT = { has_country_flag = under_fengraomin_country_attack }
+            any_relation = {
+                AND = {
+                    has_communications = prev
+                    NOR = {
+                        has_country_flag = rob_ongoing
+                        has_country_flag = fengraomin_cooldown
+                    }
+                }
+            }
+        }
+    }
+    immediate = {
+        random_country = {
+            limit = {
+                is_country_type = default
+                is_nomadic = no
+                has_origin = origin_StellaronHunter
+                NOT = { has_country_flag = under_fengraomin_country_attack }
+                any_relation = {
+                    AND = {
+                        has_communications = prev
+                        NOR = {
+                            has_country_flag = rob_ongoing
+                        }
+                    }
+                }
+            }
+            random_relation = {
+                limit = {
+                    has_communications = prev
+                    NOR = {
+                        has_country_flag = rob_ongoing
+                    }
+                }
+            }
+            country_event = { id = path_country.14 days = 1 }
+        }
+    }
+}
+country_event = {
+    id = path_country.14
+    title = "fengraomin.robber"
+    desc = fengraomin.robber.desc
+    diplomatic = yes
+    picture_event_data = {
+        portrait = event_target:fengraomin_country
+        room = "marauder_room"
+    }
+    is_triggered_only = yes
+    trigger = {
+        exists = event_target:fengraomin_country
+        event_target:fengraomin_country = {
+            any_relation = { is_same_value = root }
+            NOT = {
+                any_controlled_fleet = { has_fleet_flag = fengraomin_robbering_fleet }
+            }
+        }
+        NOT = { has_country_flag = recently_robed_by_fengraomin }
+    }
+
+    immediate = {
+        # Determine tribute level
+        if = {
+            limit = {
+                has_monthly_income = { resource = influence value <= 3 }
+            }
+            set_country_flag = fengraomin_tribute_1@event_target:fengraomin_country
+        }
+        if = {
+            limit = {
+                has_monthly_income = { resource = influence value > 3 }
+                has_monthly_income = { resource = influence value <= 4 }
+            }
+            set_country_flag = fengraomin_tribute_2@event_target:fengraomin_country
+        }
+        if = {
+            limit = {
+                has_monthly_income = { resource = influence value > 4 }
+                has_monthly_income = { resource = influence value <= 5 }
+            }
+            set_country_flag = fengraomin_tribute_3@event_target:fengraomin_country
+        }
+        if = {
+            limit = {
+                has_monthly_income = { resource = influence value > 5 }
+                has_monthly_income = { resource = influence value <= 6 }
+            }
+            set_country_flag = fengraomin_tribute_4@event_target:fengraomin_country
+        }
+        if = {
+            limit = {
+                has_monthly_income = { resource = influence value > 6 }
+                has_monthly_income = { resource = influence value <= 7 }
+            }
+            set_country_flag = fengraomin_tribute_5@event_target:fengraomin_country
+        }
+        if = {
+            limit = {
+                has_monthly_income = { resource = influence value > 7 }
+            }
+            set_country_flag = fengraomin_tribute_6@event_target:fengraomin_country
+        }
+        set_timed_country_flag = {
+            flag = recently_robed_by_fengraomin
+            months = 48
+        }
+        set_country_flag = rob_target_of@event_target:fengraomin_country
+        set_country_flag = under_fengraomin_country_attack
+        if = {
+            limit = {
+                event_target:fengraomin_country = { has_country_flag = fengraomin }
+            }
+            random_system = {
+                limit = { has_star_flag = fengraomin_capital }
+                save_event_target_as = fengraomin_system
+                random_system_planet = {
+                    limit = { has_carrier_flag = rob_source }
+                    save_event_target_as = rob_source
+                }
+            }
+        }
+    }
+    option = {
+        name = fengraomin.robber.a
+        trigger = {
+            event_target:fengraomin_country = { has_country_flag = fengraomin }
+        }
+        response_text = marauder.101.1.a.response
+        allow = {
+            fengraomin_food_tribute = yes
+        }
+        fengraomin_cost_food = yes
+        hidden_effect = {
+            remove_country_flag = rob_target_of@event_target:fengraomin_country
+            remove_country_flag = under_fengraomin_country_attack
+            remove_country_flag = fengraomin_tribute_1@event_target:fengraomin_country
+            remove_country_flag = fengraomin_tribute_2@event_target:fengraomin_country
+            remove_country_flag = fengraomin_tribute_3@event_target:fengraomin_country
+            remove_country_flag = fengraomin_tribute_4@event_target:fengraomin_country
+            remove_country_flag = fengraomin_tribute_5@event_target:fengraomin_country
+            remove_country_flag = fengraomin_tribute_6@event_target:fengraomin_country
+            remove_relation_flag = {
+                who = event_target:fengraomin_country
+                flag = rob_begin_target
+            }
+        }
+    }
+    option = {
+        name = fengraomin.robber.b
+        trigger = {
+            event_target:fengraomin_country = { has_country_flag = fengraomin }
+        }
+        response_text = marauder.101.1.a.response
+        owner = {
+            random_owned_planet = {
+                limit = {
+                    count_owned_pop_amount = {
+                        count >= 500
+                        limit = {
+                            is_sapient = yes
+                            is_robot_pop_group = no
+                        }
+                    }
+                }
+                save_event_target_as = encourage_diversity_planet
+                weighted_random_owned_pop_group = {
+                    limit = {
+                        is_sapient = yes
+                        is_robot_pop_group = no
+                    }
+                    create_species = {
+                        is_mod = yes
+                        name = fr_kfk
+                        plural = fr_kfk
+                        class = this
+                        portrait = this
+                        traits = this
+                        can_be_modified = this
+                        homeworld = this
+                        namelist = this
+                        gender = this
+                        effect = {
+                            random_list = {
+                                1 = {
+                                    modifier = {
+                                        factor = 0
+                                        has_trait = trait_fengraomin_1 
+                                    }
+                                    modify_species = {
+                                        species = this
+                                        change_scoped_species = no
+                                        add_trait = trait_fengraomin_1 
+                                        add_traits_at_start_of_list = yes
+                                        effect = { save_event_target_as = fr_species }
+                                    }
+                                }
+                                1 = {
+                                    modifier = {
+                                        factor = 0
+                                        has_trait = trait_fengraomin_2
+                                    }
+                                    modify_species = {
+                                        species = this
+                                        change_scoped_species = no
+                                        add_trait = trait_fengraomin_2
+                                        add_traits_at_start_of_list = yes
+                                        effect = { save_event_target_as = fr_species }
+                                    }
+                                }
+                                1 = {
+                                    modifier = {
+                                        factor = 0
+                                        has_trait = trait_fengraomin_3
+                                    }
+                                    modify_species = {
+                                        species = this
+                                        change_scoped_species = no
+                                        add_trait = trait_fengraomin_3
+                                        add_traits_at_start_of_list = yes
+                                        effect = { save_event_target_as = fr_species }
+                                    }
+                                }
+                                1 = {
+                                    modifier = {
+                                        factor = 0
+                                        has_trait = trait_fengraomin_4
+                                    }
+                                    modify_species = {
+                                        species = this
+                                        change_scoped_species = no
+                                        add_trait = trait_fengraomin_4
+                                        add_traits_at_start_of_list = yes
+                                        effect = { save_event_target_as = fr_species }
+                                    }
+                                }
+                                1 = {
+                                    modifier = {
+                                        factor = 0
+                                        has_trait = trait_fengraomin_5
+                                    }
+                                    modify_species = {
+                                        species = this
+                                        change_scoped_species = no
+                                        add_trait = trait_fengraomin_5
+                                        add_traits_at_start_of_list = yes
+                                        effect = { save_event_target_as = fr_species }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    save_event_target_as = fr_pop_group
+                    prev = {
+                        create_pop_group = {
+                            pop_group = event_target:fr_pop_group
+                            species = event_target:fr_species
+                            size = 0
+                            effect = {
+                                transfer_pop_amount = {
+                                    source = event_target:fr_pop_group
+                                    target = this
+                                    amount = 500
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        hidden_effect = {
+            remove_country_flag = rob_target_of@event_target:fengraomin_country
+            remove_country_flag = under_fengraomin_country_attack
+            remove_country_flag = fengraomin_tribute_1@event_target:fengraomin_country
+            remove_country_flag = fengraomin_tribute_2@event_target:fengraomin_country
+            remove_country_flag = fengraomin_tribute_3@event_target:fengraomin_country
+            remove_country_flag = fengraomin_tribute_4@event_target:fengraomin_country
+            remove_country_flag = fengraomin_tribute_5@event_target:fengraomin_country
+            remove_country_flag = fengraomin_tribute_6@event_target:fengraomin_country
+            remove_relation_flag = {
+                who = event_target:fengraomin_country
+                flag = rob_begin_target
+            }
+        }
+    }
+    option = {
+        name = fengraomin.robber.c
+        response_text = marauder.101.1.b.response
+        hidden_effect = {
+            set_relation_flag = {
+                who = event_target:fengraomin_country
+                flag = rob_begin_target
+            }
+            save_event_target_as = rob_target
+            set_country_flag = rob_ongoing
+            create_leader = {
+                class = commander
+                species = event_target:fengraomin_species
+                name = random
+                skill = 10
+                leader_age_min = 20
+                leader_age_max = 450
+                traits = {
+                    0 = leader_trait_mercenary_warrior
+                }
+            }
+            save_event_target_as = robber_leader
+            create_fleet = {
+                name = "NAME_fengraomin_robbing_fleet"
+                effect = {
+                    set_owner = event_target:fengraomin_country
+                    create_fengraomin_robber = yes
+                    set_location = event_target:rob_source
+                    set_fleet_stance = aggressive
+                    set_fleet_bombardment_stance = indiscriminate
+                    set_aggro_range_measure_from = self
+                    set_aggro_range = 150
+                    set_fleet_flag = robbing_fleet
+                    assign_leader = event_target:robber_leader
+                    closest_system = {
+                        use_bypasses = yes
+                        limit = {
+                            any_system_planet = {
+                                exists = owner
+                                owner = { is_same_value = root }
+                                pop_amount > 0
+                            }
+                        }
+                        save_event_target_as = fr_attack_system
+                    }
+                    if = {
+                        limit = {
+                            exists = event_target:fr_attack_system
+                        }
+                        event_target:fr_attack_system = {
+                            random_system_planet = {
+                                limit = {
+                                    exists = owner
+                                    owner = { is_same_value = root }
+                                    pop_amount > 0
+                                }
+                                save_event_target_as = fr_attack_planet
+                            }
+                        }
+                        auto_move_to_planet = {
+                            target = event_target:fr_attack_planet
+                            clear_auto_move_on_arrival = no
+                        }
+                    }
+                }
+            }
+            set_faction_hostility = {
+                target = event_target:rob_target
+                set_hostile = yes
+                set_neutral = no
+                set_friendly = no
+            }
+        }
+    }
+}
+country_event = {
+    id = path_country.15
+    title = communication_fengraomin.title
+    desc = fengraomin_desc
+    custom_gui = "enclave_caravaneer_window"
+    diplomatic = yes
+    is_triggered_only = yes
+    picture_event_data = {
+        portrait = event_target:fengraomin_country
+        room = "marauder_room"
+        planet_background = pc_astral_scar
+    }
+    location = event_target:fengraomin_country
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = fengraomin_ship
+        is_dialog_only = yes
+        ai_chance = {
+            factor = 20
+        }
+        allow = {
+            resource_stockpile_compare = {
+                resource = influence
+                value >= 10
+            }
+        }
+        add_resource = {
+            influence = -10
+        }
+        hidden_effect = {
+            create_fleet = {
+                settings = {
+                    can_upgrade = yes
+                    can_change_composition = yes
+                    can_change_leader = yes
+                    can_disband = yes
+                    spawn_debris = no
+                }
+                effect = {
+                    set_owner = root.owner
+                    create_ship = {
+                        design = NAME_shouxing
+                        name = random
+                        prefix = no
+                        upgradable = yes
+                    }
+                    set_fleet_stance = evasive
+                    set_location = root.capital_scope
+                }
+            }
+        }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = fengraomin_large_ship
+        is_dialog_only = yes
+        ai_chance = {
+            factor = 20
+        }
+        allow = {
+            resource_stockpile_compare = {
+                resource = influence
+                value >= 25
+            }
+            resource_stockpile_compare = {
+                resource = food
+                value >= 17500
+            }
+        }
+        add_resource = {
+            influence = -25
+            food = -17500
+        }
+        hidden_effect = {
+            create_fleet = {
+                settings = {
+                    can_upgrade = yes
+                    can_change_composition = yes
+                    can_change_leader = yes
+                    can_disband = yes
+                    spawn_debris = no
+                }
+                effect = {
+                    set_owner = root.owner
+                    while = {
+                        count = 3
+                        create_ship = {
+                            design = NAME_middle_fengrao_leader
+                            name = random
+                            prefix = no
+                            upgradable = yes
+                        }
+                    }
+                    set_fleet_stance = evasive
+                    set_location = root.capital_scope
+                }
+            }
+        }
+    }
+    option = {
+        custom_gui = "enclave_caravaneer_option"
+        name = cara_home_exit
+        default_hide_option = yes
+    }
+}
