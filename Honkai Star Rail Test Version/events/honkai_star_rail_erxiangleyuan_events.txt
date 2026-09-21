@@ -1,9 +1,153 @@
 namespace = xiaoqiaosi
+country_event = {
+	id = xiaoqiaosi.1001
+	hide_window = yes
+	is_triggered_only = yes
+	fire_only_once = yes
 
+	trigger = {
+		is_ai = no
+		has_origin = origin_erxiangleyuan
+	}
+	immediate = {
+		change_variable = {
+			which = yuzhousuipian
+			value = 5000
+		}
+		hsr_path_first_set = {
+			cunhu_value = 20
+			fanyu_value = 5
+			fengrao_value = 5
+			huanyu_value = 70
+			huimie_value = 20
+			jiyi_value = 5
+			tongxie_value = 15
+			xunlie_value = 15
+			xuwu_value = 5
+			zhishi_value = 15
+		}
+		set_country_flag = use_path
+		add_tradition = tr_huanyu
+		add_tradition = tr_huimie
+		give_technology = { tech = tech_path_civic_1 message = no }
+		set_variable = {
+			which = huanyu_pleasure
+			value = 0
+		}
+		set_variable = {
+			which = Fever_energy
+			value = 0
+		}
+
+		ruler = {
+			remove_all_positive_traits = yes
+			set_name = NAME_huanyunv
+			change_species = event_target:Star_rail
+			change_leader_class = commander
+			change_leader_portrait = huanyunv
+			change_background_ethic = ethic_materialist
+			add_skill_without_trait_selection = 3
+			add_trait = {trait = leader_huanyunv_t1 show_message = no}
+			add_trait = {trait = leader_huanyunv_t2 show_message = no}
+			add_trait = {trait = leader_huanyunv_t3 show_message = no}
+			add_trait = {trait = leader_huanyunv_t7 show_message = no}
+			set_gender = female
+			set_age = 16
+			set_leader_flag = legendary_leader
+			set_leader_flag = immune_to_negative_traits
+			set_leader_flag = huanyunv
+			set_leader_flag = leader_death_events_blocked  # 阻止原版葬礼事件
+			save_global_event_target_as = huanyunv_leader
+		}
+	}
+}
+planet_event = {
+	id = xiaoqiaosi.1002
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		owner = {
+			has_origin = origin_erxiangleyuan
+		}
+		is_planet_class = pc_erxiangleyuan
+	}
+	immediate = {
+		this = {
+			set_variable = {
+				which = planet_huanyu_pleasure
+				value = 0
+			}
+			set_variable = {
+				which = planet_huanyu_pleasure_1
+				value = 0
+			}
+			set_variable = {
+				which = planet_huanyu_pleasure_2
+				value = 100
+			}
+			add_modifier = {
+				modifier = planet_huanyu_pleasure
+				days = -1
+			}
+		}
+	}
+}
+country_event = {
+	id = xiaoqiaosi.1003
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		owner = {
+			has_origin = origin_erxiangleyuan
+		}
+		
+	}
+	immediate = {
+		every_owned_planet = {
+			limit = {}
+			set_variable = {
+				which = planet_huanyu_pleasure
+				value = this.owner.huanyu_pleasure
+			}
+			
+		}
+	}
+}
+country_event = {
+	id = xiaoqiaosi.1004
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		owner = {
+			has_origin = origin_erxiangleyuan
+		}
+	}
+	immediate = {
+		every_owned_planet = {
+			limit= {is_planet_class = pc_erxiangleyuan}
+			if = {
+				limit = {check_variable = {which = planet_huanyu_pleasure value >=planet_huanyu_pleasure_2}}
+				change_variable = {which = planet_huanyu_pleasure_1 value = 1}
+				change_variable = {which = planet_huanyu_pleasure_2 value = 100}
+			}
+		}
+		export_resource_stockpile_to_variable = {
+			resource = Fever_energy
+			variable = Fever_energy
+		}
+		export_resource_stockpile_to_variable = {
+			resource = huanyu_pleasure
+			variable = huanyu_pleasure
+		}
+	}
+}
+#引导事件
 country_event = {
 	id = xiaoqiaosi.0
-	title = xiaoqiaosi.0_title
-	desc = xiaoqiaosi.0_desc
+	hide_window = yes
 	is_triggered_only = yes
 	fire_only_once = yes
 
@@ -34,6 +178,7 @@ country_event = {
 		}
 	}
 }
+
 #欢愉主
 country_event = {
 	id = xiaoqiaosi.1
