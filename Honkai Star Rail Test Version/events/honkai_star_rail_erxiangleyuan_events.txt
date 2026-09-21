@@ -1,4 +1,5 @@
 namespace = xiaoqiaosi
+#————————————————————————————————————————————————————————————预加载1001-1999
 country_event = {
 	id = xiaoqiaosi.1001
 	hide_window = yes
@@ -134,9 +135,10 @@ country_event = {
 				change_variable = {which = planet_huanyu_pleasure_2 value = 100}
 			}
 		}
+		
 		export_resource_stockpile_to_variable = {
-			resource = Fever_energy
-			variable = Fever_energy
+			resource = xiaodian
+			variable = check_xiaodian
 		}
 		export_resource_stockpile_to_variable = {
 			resource = huanyu_pleasure
@@ -144,6 +146,7 @@ country_event = {
 		}
 	}
 }
+#————————————————————————————————————————————————————————————
 #引导事件
 country_event = {
 	id = xiaoqiaosi.0
@@ -166,6 +169,10 @@ country_event = {
 	}
 	immediate = {
 		set_variable = {
+			which = check_xiaodian
+			value = 0
+		}
+		set_variable = {
 			which = show_times
 			value = 0
 		}
@@ -178,7 +185,7 @@ country_event = {
 		}
 	}
 }
-
+#————————————————————————————————————————————————————————————角色技能1——999
 #欢愉主
 country_event = {
 	id = xiaoqiaosi.1
@@ -510,6 +517,10 @@ country_event = {
 			which = num_leader_zhigengniaoqingge_t1_1
 			value = Fever_energy
 		}
+		export_resource_stockpile_to_variable = {
+			resource = Fever_energy
+			variable = Fever_energy
+		}
 		if = {
 			limit = {check_variable = {which = Fever_energy value >= 12} owner = {not = {has_country_flag = leader_zhigengniaoqingge_t1_allow}}}
 			change_variable = {
@@ -641,6 +652,59 @@ country_event = {
 		}
 	}
 }
+#————————————————————————————————————————————————————————————阿哈年度奖10000_19999
+country_event = {
+	id = xiaoqiaosi.10000
+	title = xiaoqiaosi.10000_title
+	desc = {
+		trigger = {
+			not = {
+				has_country_flag = check_xiaodian_1
+			}
+		}
+		text = xiaoqiaosi.10000_desc0
+		}
+	
+	desc = {trigger = {has_country_flag = check_xiaodian_1} text = xiaoqiaosi.10000_desc1}
+	picture = GFX_xiaoqiaosi_1000
+	is_triggered_only = yes
+
+	trigger = {
+		has_country_flag = allow_show_time
+	}
+
+	immediate = {
+		remove_country_flag = check_xiaodian_1
+
+
+		if = {
+			limit = {check_variable = {which = check_xiaodian value >=1} owner = {not = {has_country_flag = check_xiaodian}}} 
+			set_country_flag = check_xiaodian
+		}
+		#check_xiaodian_1
+		if = {
+			limit = {check_variable = {which = check_xiaodian value >=1} owner = {has_country_flag = check_xiaodian}}
+			random_list = {
+				10 = {country_event = {id = xiaoqiaosi.2000 days = 1}}
+				10 = {country_event = {id = xiaoqiaosi.2001 days = 1}}
+				10 = {country_event = {id = xiaoqiaosi.2002 days = 1}}
+				10 = {country_event = {id = xiaoqiaosi.2003 days = 1}}
+				10 = {country_event = {id = xiaoqiaosi.2004 days = 1}}
+
+			}
+			set_country_flag = check_xiaodian_1
+			add_resource = {
+				xiaodian = -99999999
+			}
+			set_variable = {
+				which = check_xiaodian
+				value = 0
+			}
+			
+		}
+	}
+}
+#————————————————————————————————————————————————————————————啊哈时刻1000  欢愉技2000-2999
 #啊哈时刻
 country_event = {
 	id = xiaoqiaosi.1000
@@ -1178,6 +1242,8 @@ country_event = {
 	picture = GFX_xiaoqiaosi_2005
 	is_triggered_only = yes
 
+	
+
 	immediate = {
 		if = {
 			limit = {owner = {has_country_flag = xiaoqiaosi.2005_op_1}}
@@ -1400,7 +1466,7 @@ country_event = {
 
 }
 
-
+#————————————————————————————————————————————————————————————
 #被动效果
 country_event = {
 	id = xiaoqiaosi.3000
@@ -1511,6 +1577,7 @@ country_event = {
 	}
 	
 }
+#————————————————————————————————————————————————————————————
 country_event = {
 	id = xiaoqiaosi.3001
 	title = xiaoqiaosi.3001_title
@@ -1552,6 +1619,8 @@ country_event = {
 	is_triggered_only = yes
 	
 }
+
+#————————————————————————————————————————————————————————————
 #话剧事件
 country_event = {
     id = xiaoqiaosi.4000
