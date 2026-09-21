@@ -1,0 +1,605 @@
+# =====================================================================
+#  星穹铁道 × 原神 · 提瓦特联动
+#  namespace: DOTGI_teyvat
+#
+#  玩法流程：
+#  1. 开局在符合条件的帝国首都星系生成【星界裂隙】与【提瓦特星系】
+#  2. 发现裂隙的瞬间（同一天）：
+#       · 立刻进入局势【来自虚空的求救信号】
+#       · 立刻配发探索裂隙的科技 tech_rift_sphere 与虫洞科技 tech_wormhole_stabilization
+#       · 立刻完成对裂隙所在星系的调查
+#       · 立刻在该星系建立恒星基地（游牧帝国走不通正常建造流程，只能由脚本直接建立）
+#  3. 探索裂隙 → 局势【来自虚空的求救信号】逐步推进
+#  4. 探明裂隙尽头 → 裂隙坍缩为虫洞，帝国可经虫洞抵达提瓦特
+#  5. 抵达提瓦特 → 触发异常现象【深渊侵蚀】与局势【深渊侵蚀】
+#  6. 完成局势 → 深渊消散，提瓦特文明觉醒；提瓦特保留自己的母星与母星系，
+#     帝国不占领其星球、并交出该星系的恒星基地（否则原版会把母星判给基地所有者）；
+#     然后由玩家决定其地位（臣服为附庸 / 保持独立成为朝贡国）
+#  7. 若 100 年内未解决 → 提瓦特被虚境吞噬，化为虚境星球
+# =====================================================================
+
+namespace = DOTGI_teyvat
+
+# ---------------------------------------------------------------------
+# 0) 开局掷骰：非 AI 帝国 100%（星穹列车起源）/ 50% 获得裂隙
+# ---------------------------------------------------------------------
+country_event = {
+	id = DOTGI_teyvat.100
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		is_ai = no
+		is_country_type = default
+		has_astral_planes_dlc = yes		# 星界裂隙本体需要 Astral Planes
+		exists = capital_scope
+		NOT = { has_country_flag = DOTGI_teyvat_void_signal_started }
+	}
+
+	immediate = {
+		if = {
+			limit = { has_origin = origin_Astral_Express }
+			country_event = { id = DOTGI_teyvat.101 }
+		}
+		else_if = {
+			limit = {
+				random = { chance = 50 }
+			}
+			country_event = { id = DOTGI_teyvat.101 }
+		}
+	}
+}
+
+# ---------------------------------------------------------------------
+# 1) 生成裂隙 + 提瓦特星系 + 提瓦特文明
+# ---------------------------------------------------------------------
+country_event = {
+	id = DOTGI_teyvat.101
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		NOT = { has_country_flag = DOTGI_teyvat_void_signal_started }
+		exists = capital_scope
+	}
+
+	immediate = {
+		set_country_flag = DOTGI_teyvat_void_signal_started
+
+		# ---- 1) 在首都星系内生成星界裂隙【来自虚空的求救信号】 ----
+		capital_scope = {
+			solar_system = {
+				if = {
+					limit = { NOT = { has_astral_rift = yes } }
+					spawn_astral_rift = {
+						id = DOTGI_teyvat_rift
+						orbit_distance = 100
+						orbit_angle = 320
+						init_effect = {
+							set_astral_rift_flag = DOTGI_teyvat_rift
+						}
+					}
+				}
+				# 记下「裂隙所在星系」：之后的调查 / 恒星基地 / 虫洞都认这个 target
+				save_global_event_target_as = DOTGI_teyvat_rift_system
+			}
+		}
+
+		# ---- 2) 发现裂隙的同时：局势【来自虚空的求救信号】立即开始 ----
+		if = {
+			limit = {
+				NOT = { any_situation = { is_situation_type = DOTGI_distress_signal_situation } }
+			}
+			start_situation = { type = DOTGI_distress_signal_situation }
+		}
+
+		# ---- 3) 同时配发：探索裂隙的科技【tech_rift_sphere】+ 虫洞科技 ----
+		if = {
+			limit = { has_astral_planes_dlc = yes }
+			give_technology = { tech = tech_rift_sphere message = no }
+		}
+		give_technology = { tech = tech_wormhole_stabilization message = no }
+		add_seen_bypass_type = wormhole
+
+		# ---- 4) 完成对裂隙所在星系的调查，并在该星系建立恒星基地 ----
+		if = {
+			limit = { exists = event_target:DOTGI_teyvat_rift_system }
+			event_target:DOTGI_teyvat_rift_system = {
+				set_surveyed = {
+					surveyed = yes
+					surveyor = root
+				}
+				# 已有恒星基地（例如普通帝国的首都星系）就不重复建
+				if = {
+					limit = { NOT = { any_starbase_in_system = { always = yes } } }
+					create_starbase = {
+						owner = root
+						size = starbase_outpost
+					}
+				}
+			}
+		}
+
+		# ---- 5) 提瓦特星系：孤立体（没有超空间航道），只能靠虫洞抵达 ----
+		if = {
+			limit = { NOT = { exists = event_target:DOTGI_teyvat_system } }
+			capital_scope = {
+				solar_system = {
+					spawn_system = {
+						min_distance = 6
+						max_distance = 6
+						max_jumps = 0
+						hyperlane = no
+						min_orientation_angle = 90
+						max_orientation_angle = 90
+						is_discovered = no
+						initializer = DOTGI_teyvat_system
+					}
+					last_created_system = {
+						save_global_event_target_as = DOTGI_teyvat_system
+						set_star_flag = DOTGI_teyvat
+						random_system_planet = {
+							limit = { has_planet_flag = DOTGI_teyvat_world }
+							save_global_event_target_as = DOTGI_teyvat_planet
+						}
+					}
+				}
+			}
+		}
+
+		# ---- 6) 建立提瓦特文明（盖亚母星 · 机械时代原始文明 · 领袖荧） ----
+		if = {
+			limit = { NOT = { exists = event_target:DOTGI_teyvat_country } }
+			DOTGI_setup_teyvat_civilization = yes
+		}
+
+		# ---- 7) 开局通知 ----
+		country_event = { id = DOTGI_teyvat.151 days = 3 }
+	}
+}
+
+# ---------------------------------------------------------------------
+# 2) 星界裂隙事件链：来自虚空的求救信号
+#    ROOT = 星界裂隙，explorer = 探索国
+# ---------------------------------------------------------------------
+astral_rift_event = {
+	id = DOTGI_teyvat.1
+	title = DOTGI_teyvat.1.name
+	desc = DOTGI_teyvat.1.desc
+	picture = GFX_evt_astral_rift
+	show_sound = ap_rift_event_0_astral_wonder
+	difficulty = 0
+	astral_rift = yes
+	is_triggered_only = yes
+
+	option = {
+		name = DOTGI_teyvat.1.a
+		set_astral_rift_flag = DOTGI_teyvat_stage_1
+		explorer = {
+			DOTGI_add_distress_progress = { VALUE = 25 }
+		}
+		set_next_astral_rift_event = { id = DOTGI_teyvat.2 }
+	}
+}
+
+astral_rift_event = {
+	id = DOTGI_teyvat.2
+	title = DOTGI_teyvat.2.name
+	desc = DOTGI_teyvat.2.desc
+	picture = GFX_evt_astral_rift_zoom_1
+	show_sound = ap_rift_event_0_astral_wonder
+	difficulty = 0
+	astral_rift = yes
+	is_triggered_only = yes
+
+	option = {
+		name = DOTGI_teyvat.2.a
+		explorer = {
+			DOTGI_add_distress_progress = { VALUE = 30 }
+		}
+		set_next_astral_rift_event = { id = DOTGI_teyvat.3 }
+	}
+	option = {
+		name = DOTGI_teyvat.2.b
+		explorer = {
+			DOTGI_add_distress_progress = { VALUE = 30 }
+		}
+		set_next_astral_rift_event = { id = DOTGI_teyvat.3 }
+	}
+}
+
+astral_rift_event = {
+	id = DOTGI_teyvat.3
+	title = DOTGI_teyvat.3.name
+	desc = DOTGI_teyvat.3.desc
+	picture = GFX_evt_astral_rift_library
+	show_sound = ap_rift_event_0_astral_wonder
+	difficulty = 0
+	astral_rift = yes
+	is_triggered_only = yes
+
+	option = {
+		name = DOTGI_teyvat.3.a
+		explorer = {
+			DOTGI_add_distress_progress = { VALUE = 30 }
+		}
+		set_next_astral_rift_event = { id = DOTGI_teyvat.4 }
+	}
+}
+
+# 终点：裂隙尽头就是提瓦特的坐标
+astral_rift_event = {
+	id = DOTGI_teyvat.4
+	title = DOTGI_teyvat.4.name
+	desc = DOTGI_teyvat.4.desc
+	picture = GFX_evt_astral_rift_riftworld
+	show_sound = ap_rift_event_0_astral_wonder
+	difficulty = 0
+	astral_rift = yes
+	is_triggered_only = yes
+
+	option = {
+		name = DOTGI_teyvat.4.a
+		set_astral_rift_flag = DOTGI_teyvat_finale
+		finish_astral_rift = yes
+	}
+}
+
+# ---------------------------------------------------------------------
+# 3) 探索开始 / 结束
+#    【局势现在在「发现裂隙」的瞬间就已开始（见 .101）】，
+#    这里的 .150 只作兜底：万一局势因故不在，重新拉起。
+# ---------------------------------------------------------------------
+country_event = {
+	id = DOTGI_teyvat.150
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		from = { has_astral_rift_flag = DOTGI_teyvat_rift }
+	}
+
+	immediate = {
+		if = {
+			limit = {
+				NOT = { any_situation = { is_situation_type = DOTGI_distress_signal_situation } }
+			}
+			start_situation = { type = DOTGI_distress_signal_situation }
+			if = {
+				limit = { has_astral_planes_dlc = yes }
+				give_technology = { tech = tech_rift_sphere message = no }
+			}
+			give_technology = { tech = tech_wormhole_stabilization message = no }
+			country_event = { id = DOTGI_teyvat.151 days = 2 }
+		}
+	}
+}
+
+country_event = {
+	id = DOTGI_teyvat.151
+	title = DOTGI_teyvat.151.name
+	desc = DOTGI_teyvat.151.desc
+	picture = GFX_evt_astral_rift_advisor_nice
+	show_sound = event_scanner
+	is_triggered_only = yes
+
+	option = {
+		name = DOTGI_teyvat.151.a
+	}
+}
+
+# 裂隙探索彻底结束 → 裂隙坍缩为虫洞
+country_event = {
+	id = DOTGI_teyvat.190
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		from = {
+			has_astral_rift_flag = DOTGI_teyvat_rift
+			has_astral_rift_flag = DOTGI_teyvat_finale
+		}
+	}
+
+	immediate = {
+		DOTGI_open_teyvat_wormhole = yes
+		DOTGI_complete_distress_signal = yes
+		country_event = { id = DOTGI_teyvat.195 days = 5 }
+	}
+}
+
+country_event = {
+	id = DOTGI_teyvat.195
+	title = DOTGI_teyvat.195.name
+	desc = DOTGI_teyvat.195.desc
+	picture = GFX_evt_astral_rift_corridors
+	show_sound = event_scanner
+	is_triggered_only = yes
+
+	option = {
+		name = DOTGI_teyvat.195.a
+		add_resource = { astral_threads = 250 }
+	}
+}
+
+# ---------------------------------------------------------------------
+# 4) 抵达提瓦特：触发【深渊侵蚀】异常现象与局势
+#    on_entering_system_first_time ⇒ ROOT = Ship / FROM = System / owner = Country
+# ---------------------------------------------------------------------
+ship_event = {
+	id = DOTGI_teyvat.200
+	title = DOTGI_teyvat.200.name
+	desc = DOTGI_teyvat.200.desc
+	picture = GFX_evt_gaia
+	show_sound = event_scanner
+	is_triggered_only = yes
+
+	trigger = {
+		from = { has_star_flag = DOTGI_teyvat }
+		owner = {
+			exists = yes
+			is_ai = no
+			NOT = { has_country_flag = DOTGI_abyss_discovered }
+		}
+	}
+
+	immediate = {
+		hidden_effect = {
+			owner = {
+				set_country_flag = DOTGI_abyss_discovered
+				start_situation = { type = DOTGI_abyss_erosion_situation }
+			}
+		}
+	}
+
+	option = {
+		name = DOTGI_teyvat.200.a
+		owner = {
+			country_event = { id = DOTGI_teyvat.201 days = 5 }
+		}
+	}
+}
+
+country_event = {
+	id = DOTGI_teyvat.201
+	title = DOTGI_teyvat.201.name
+	desc = DOTGI_teyvat.201.desc
+	picture = GFX_evt_astral_rift_riftworld
+	show_sound = event_scanner
+	is_triggered_only = yes
+
+	option = {
+		name = DOTGI_teyvat.201.a
+	}
+}
+
+# ---------------------------------------------------------------------
+# 5) 异常现象【深渊侵蚀】研究完成
+#    ROOT = Ship / FROM = Planet
+# ---------------------------------------------------------------------
+ship_event = {
+	id = DOTGI_teyvat.210
+	title = DOTGI_teyvat.210.name
+	desc = DOTGI_teyvat.210.desc
+	picture = GFX_evt_astral_rift_riftworld
+	show_sound = event_scanner
+	location = from
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			owner = {
+				if = {
+					limit = { NOT = { has_country_flag = DOTGI_abyss_discovered } }
+					set_country_flag = DOTGI_abyss_discovered
+					start_situation = { type = DOTGI_abyss_erosion_situation }
+				}
+			}
+		}
+	}
+
+	option = {
+		name = DOTGI_teyvat.210.a
+		owner = {
+			if = {
+				limit = {
+					any_situation = { is_situation_type = DOTGI_abyss_erosion_situation }
+				}
+				every_situation = {
+					limit = { is_situation_type = DOTGI_abyss_erosion_situation }
+					set_situation_flag = DOTGI_abyss_studied
+					add_situation_progress = 150
+				}
+			}
+		}
+	}
+}
+
+# ---------------------------------------------------------------------
+# 6) 局势【深渊侵蚀】完成 → 提瓦特文明觉醒
+#    ★ 提瓦特保留自己的母星与主权，帝国不占领它的星球。
+#      它的地位由玩家决定：臣服为附庸（附庸国）或保持独立（朝贡国）。
+# ---------------------------------------------------------------------
+country_event = {
+	id = DOTGI_teyvat.220
+	title = DOTGI_teyvat.220.name
+	desc = DOTGI_teyvat.220.desc
+	picture = GFX_evt_gaia
+	show_sound = event_scanner
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			# 深渊消散，提瓦特获得新生
+			if = {
+				limit = { exists = event_target:DOTGI_teyvat_planet }
+				event_target:DOTGI_teyvat_planet = {
+					remove_modifier = DOTGI_abyss_erosion_modifier
+					add_modifier = {
+						modifier = DOTGI_teyvat_awakened_modifier
+						days = -1
+					}
+				}
+			}
+
+			# 提瓦特文明完全觉醒（它依旧是一个独立国家，拥有自己的首都星球）
+			if = {
+				limit = { exists = event_target:DOTGI_teyvat_country }
+				event_target:DOTGI_teyvat_country = {
+					set_country_flag = DOTGI_teyvat_awakened
+					remove_country_flag = machine_age
+					remove_country_flag = early_space_age
+					achieve_ftl_effect = yes
+					# achieve_ftl_effect 会把国名与物种肖像文化随机化，这里改回「提瓦特」
+					set_name = "DOTGI_teyvat_country_name"
+					founder_species = {
+						set_graphical_culture = DOT_SR_humanoid_01
+					}
+					ruler = {
+						set_name = "NAME_DOTGI_ying"
+						set_gender = female
+						change_leader_portrait = genshin_001
+					}
+					establish_communications_no_message = root
+
+					# ---- 母星归提瓦特自己 —— 帝国不占领这颗星球 ----
+					if = {
+						limit = { exists = event_target:DOTGI_teyvat_planet }
+						event_target:DOTGI_teyvat_planet = {
+							set_owner = event_target:DOTGI_teyvat_country
+						}
+					}
+
+					# ---- 母星系的恒星基地也一并交还提瓦特 ----
+					# 原版 action.85「混合归属星系里的行星会倒向恒星基地所有者」只认基地所有者、
+					# 不看宗主关系：只要提瓦特星系里还留着一座属于帝国的恒星基地，母星迟早会被判给帝国。
+					# 所以这里把该星系的恒星基地全部转给提瓦特 —— 帝国在提瓦特星系不再持有任何东西。
+					if = {
+						limit = { exists = event_target:DOTGI_teyvat_system }
+						event_target:DOTGI_teyvat_system = {
+							every_starbase_in_system = {
+								limit = {
+									NOT = {
+										owner = { is_same_value = event_target:DOTGI_teyvat_country }
+									}
+								}
+								set_owner = event_target:DOTGI_teyvat_country
+							}
+						}
+					}
+				}
+			}
+
+			remove_country_flag = DOTGI_abyss_situation_active
+		}
+	}
+
+	# 选择一：接受臣服 —— 提瓦特成为帝国的附庸国
+	option = {
+		name = DOTGI_teyvat.220.a
+		custom_tooltip = DOTGI_teyvat.220.vassal_tt
+		event_target:DOTGI_teyvat_country = {
+			set_subject_of = {
+				who = root
+				preset = preset_vassal
+				allow_instant_negotiation = yes
+			}
+		}
+		if = {
+			limit = { exists = event_target:DOTGI_teyvat_planet }
+			event_target:DOTGI_teyvat_planet = {
+				set_owner = event_target:DOTGI_teyvat_country
+			}
+		}
+
+		# ---- 母星系的恒星基地也一并交还提瓦特 ----
+		# 原版 action.85「混合归属星系里的行星会倒向恒星基地所有者」只认基地所有者、
+		# 不看宗主关系：只要提瓦特星系里还留着一座属于帝国的恒星基地，母星迟早会被判给帝国。
+		# 所以这里把该星系的恒星基地全部转给提瓦特 —— 帝国在提瓦特星系不再持有任何东西。
+		if = {
+			limit = { exists = event_target:DOTGI_teyvat_system }
+			event_target:DOTGI_teyvat_system = {
+				every_starbase_in_system = {
+					limit = {
+						NOT = {
+							owner = { is_same_value = event_target:DOTGI_teyvat_country }
+						}
+					}
+					set_owner = event_target:DOTGI_teyvat_country
+				}
+			}
+		}
+	}
+
+	# 选择二：保持独立 —— 提瓦特作为朝贡国向帝国纳贡
+	option = {
+		name = DOTGI_teyvat.220.b
+		custom_tooltip = DOTGI_teyvat.220.tributary_tt
+		event_target:DOTGI_teyvat_country = {
+			set_subject_of = {
+				who = root
+				preset = preset_tributary
+				allow_instant_negotiation = yes
+			}
+		}
+		if = {
+			limit = { exists = event_target:DOTGI_teyvat_planet }
+			event_target:DOTGI_teyvat_planet = {
+				set_owner = event_target:DOTGI_teyvat_country
+			}
+		}
+
+		# ---- 母星系的恒星基地也一并交还提瓦特 ----
+		# 原版 action.85「混合归属星系里的行星会倒向恒星基地所有者」只认基地所有者、
+		# 不看宗主关系：只要提瓦特星系里还留着一座属于帝国的恒星基地，母星迟早会被判给帝国。
+		# 所以这里把该星系的恒星基地全部转给提瓦特 —— 帝国在提瓦特星系不再持有任何东西。
+		if = {
+			limit = { exists = event_target:DOTGI_teyvat_system }
+			event_target:DOTGI_teyvat_system = {
+				every_starbase_in_system = {
+					limit = {
+						NOT = {
+							owner = { is_same_value = event_target:DOTGI_teyvat_country }
+						}
+					}
+					set_owner = event_target:DOTGI_teyvat_country
+				}
+			}
+		}
+	}
+}
+
+# ---------------------------------------------------------------------
+# 7) 100 年期限届满：提瓦特被虚境吞噬
+# ---------------------------------------------------------------------
+country_event = {
+	id = DOTGI_teyvat.230
+	title = DOTGI_teyvat.230.name
+	desc = DOTGI_teyvat.230.desc
+	picture = GFX_evt_astral_rift_riftworld
+	show_sound = event_scanner
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = { exists = event_target:DOTGI_teyvat_planet }
+				event_target:DOTGI_teyvat_planet = {
+					remove_modifier = DOTGI_abyss_erosion_modifier
+					change_pc = { class = pc_shrouded }
+				}
+			}
+			if = {
+				limit = { exists = event_target:DOTGI_teyvat_country }
+				event_target:DOTGI_teyvat_country = {
+					set_country_flag = DOTGI_teyvat_devoured
+				}
+			}
+			remove_country_flag = DOTGI_abyss_situation_active
+		}
+	}
+
+	option = {
+		name = DOTGI_teyvat.230.a
+	}
+}

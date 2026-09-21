@@ -1,0 +1,226 @@
+# ============================================================
+#  星穹铁道 × 原神 · 提瓦特联动 —— 局势
+# ============================================================
+
+# ------------------------------------------------------------
+#  【来自虚空的求救信号】
+#  在「发现裂隙」的瞬间即由开局事件 DOTGI_teyvat.101 开启，
+#  随后由裂隙探索事件逐步推进，探明裂隙尽头即完成。
+# ------------------------------------------------------------
+DOTGI_distress_signal_situation = {
+	picture = GFX_evt_astral_rift_advisor_nice
+	category = neutral
+	situation_log_category = developments
+
+	complete_icon = GFX_situation_outcome_positive
+	complete_icon_frame = GFX_situation_outcome_frame_green
+	fail_icon = GFX_situation_outcome_negative
+	fail_icon_frame = GFX_situation_outcome_frame_red
+
+	on_start = { }
+
+	on_progress_complete = {
+		custom_tooltip = DOTGI_distress_signal_outcome
+		hidden_effect = {
+			owner = { DOTGI_open_teyvat_wormhole = yes }
+			destroy_situation = this
+		}
+	}
+
+	on_fail = {
+		# 该局势不存在失败路径，仅作兜底
+		destroy_situation = this
+	}
+
+	abort_trigger = {
+		NOT = { exists = owner }
+	}
+
+	stages = {
+		DOTGI_distress_signal_stage_1 = {
+			icon = GFX_situation_stage_1
+			icon_background = GFX_situation_stage_frame_blue
+			end = 30
+			custom_tooltip = DOTGI_distress_signal_stage_1_tt
+		}
+		DOTGI_distress_signal_stage_2 = {
+			icon = GFX_situation_stage_2
+			icon_background = GFX_situation_stage_frame_blue
+			end = 65
+			custom_tooltip = DOTGI_distress_signal_stage_2_tt
+		}
+		DOTGI_distress_signal_stage_3 = {
+			icon = GFX_situation_stage_3
+			icon_background = GFX_situation_stage_frame_blue
+			end = 100
+			custom_tooltip = DOTGI_distress_signal_stage_3_tt
+		}
+	}
+
+	# 进度完全由裂隙探索事件推进
+	monthly_progress = {
+		base = 0
+	}
+
+	approach = {
+		name = DOTGI_approach_decode_signal
+		icon = GFX_situation_approach_research
+		icon_background = GFX_situation_approach_bg_yellow
+		default = yes
+		resources = {
+			category = situations
+			upkeep = {
+				energy = 10
+			}
+		}
+		ai_weight = {
+			base = 0
+		}
+	}
+}
+
+# ------------------------------------------------------------
+#  【深渊侵蚀】
+#  会在 100 年后（约 1200 个月）吞噬提瓦特，将其变为虚境星球。
+#  投入资源完成调查可彻底化解危机，并使提瓦特文明觉醒。
+# ------------------------------------------------------------
+DOTGI_abyss_erosion_situation = {
+	picture = GFX_evt_astral_rift_riftworld
+	category = negative
+	situation_log_category = empire_concerns
+
+	progress_direction = bidirectional
+	# 进度条：0（左端 = 提瓦特被虚境吞噬）→ 2400（右端 = 危机根除）
+	# 开局 1200，什么都不做每月 -1 ⇒ 1200 个月（100 年）后沉入虚境
+	start_value = 0
+	initial_progress = 1200
+	complete_category = positive
+	fail_category = negative
+
+	complete_icon = GFX_situation_outcome_positive
+	complete_icon_frame = GFX_situation_outcome_frame_green
+	fail_icon = GFX_situation_outcome_negative
+	fail_icon_frame = GFX_situation_outcome_frame_red
+
+	potential = {
+		has_country_flag = DOTGI_abyss_discovered
+	}
+
+	abort_trigger = {
+		NOT = { exists = event_target:DOTGI_teyvat_planet }
+	}
+
+	on_start = {
+		owner = {
+			set_country_flag = DOTGI_abyss_situation_active
+		}
+	}
+
+	on_progress_complete = {
+		custom_tooltip = DOTGI_abyss_erosion_outcome
+		hidden_effect = {
+			owner = { country_event = { id = DOTGI_teyvat.220 days = 3 } }
+			destroy_situation = this
+		}
+	}
+
+	on_fail = {
+		custom_tooltip = DOTGI_abyss_erosion_fail_outcome
+		hidden_effect = {
+			owner = { country_event = { id = DOTGI_teyvat.230 days = 3 } }
+			destroy_situation = this
+		}
+	}
+
+	on_abort = {
+		owner = {
+			remove_country_flag = DOTGI_abyss_situation_active
+		}
+	}
+
+	stages = {
+		DOTGI_abyss_erosion_stage_1 = {
+			icon = GFX_situation_stage_1
+			icon_background = GFX_situation_stage_frame_red
+			end = 1300
+			custom_tooltip = DOTGI_abyss_erosion_stage_1_tt
+		}
+		DOTGI_abyss_erosion_stage_2 = {
+			icon = GFX_situation_stage_2
+			icon_background = GFX_situation_stage_frame_red
+			end = 1900
+			custom_tooltip = DOTGI_abyss_erosion_stage_2_tt
+		}
+		DOTGI_abyss_erosion_stage_3 = {
+			icon = GFX_situation_stage_3
+			icon_background = GFX_situation_stage_frame_green
+			end = 2400
+			custom_tooltip = DOTGI_abyss_erosion_stage_3_tt
+		}
+	}
+
+	# 什么都不做 → 每月 -1，1200 个月（100 年）后提瓦特沉入虚境
+	monthly_progress = {
+		base = -1
+		# 【深度调查】投入大量资源，稳步化解侵蚀
+		modifier = {
+			desc = DOTGI_abyss_progress_investigate
+			current_situation_approach = DOTGI_approach_abyss_investigate
+			add = 9
+		}
+		# 【封锁深渊】廉价维持，只能拖延，无法根治
+		modifier = {
+			desc = DOTGI_abyss_progress_contain
+			current_situation_approach = DOTGI_approach_abyss_contain
+			add = 1
+		}
+		# 异常现象研究取得突破
+		modifier = {
+			desc = DOTGI_abyss_progress_anomaly_done
+			has_situation_flag = DOTGI_abyss_studied
+			add = 1
+		}
+	}
+
+	approach = {
+		name = DOTGI_approach_abyss_investigate
+		icon = GFX_situation_approach_research
+		icon_background = GFX_situation_approach_bg_green
+		resources = {
+			category = situations
+			upkeep = {
+				energy = 40
+				minerals = 40
+				alloys = 10
+			}
+		}
+		ai_weight = {
+			base = 100
+		}
+	}
+
+	approach = {
+		name = DOTGI_approach_abyss_contain
+		icon = GFX_situation_approach_fist
+		icon_background = GFX_situation_approach_bg_yellow
+		resources = {
+			category = situations
+			upkeep = {
+				energy = 15
+			}
+		}
+		ai_weight = {
+			base = 10
+		}
+	}
+
+	approach = {
+		name = DOTGI_approach_abyss_ignore
+		icon = GFX_situation_approach_shrug
+		icon_background = GFX_situation_approach_bg_red
+		default = yes
+		ai_weight = {
+			base = 1
+		}
+	}
+}

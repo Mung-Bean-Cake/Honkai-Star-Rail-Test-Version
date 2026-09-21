@@ -1,0 +1,36 @@
+# ============================================================
+#  星穹铁道 × 原神 · 提瓦特联动 —— on_actions 挂钩
+#  同名 on_action 块在多个文件间是「合并」关系，不会覆盖原版。
+# ============================================================
+
+# 开局：为符合条件的帝国生成裂隙与提瓦特星系
+# 用 on_game_start_country 而不是 on_game_start，确保首都/舰队都已就绪
+on_game_start_country = {
+	events = {
+		DOTGI_teyvat.100
+	}
+}
+
+# 开始探索星界裂隙时开启局势【来自虚空的求救信号】
+# THIS = Country / FROM = AstralRift / FROMFROM = Fleet
+on_astral_rift_exploration_start = {
+	events = {
+		DOTGI_teyvat.150
+	}
+}
+
+# 探索结束（裂隙尽头）
+# THIS = Country / FROM = AstralRift / FROMFROM = Fleet
+on_astral_rift_exploration_complete = {
+	events = {
+		DOTGI_teyvat.190
+	}
+}
+
+# 首次进入提瓦特星系：触发【深渊侵蚀】异常现象与局势
+# Scope = Ship / From = System / FromFrom = Country
+on_entering_system_first_time = {
+	events = {
+		DOTGI_teyvat.200
+	}
+}
