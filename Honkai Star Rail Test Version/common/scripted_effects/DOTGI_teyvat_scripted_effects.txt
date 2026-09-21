@@ -15,6 +15,7 @@ DOTGI_setup_teyvat_civilization = {
 		homeworld = event_target:DOTGI_teyvat_planet
 		traits = {
 			trait = "trait_DOTGI_genshin_blessing"
+			trait = "trait_psionic"
 		}
 		sapient = yes
 		namelist = random
@@ -33,7 +34,24 @@ DOTGI_setup_teyvat_civilization = {
 			ethic = ethic_fanatic_spiritualist
 			ethic = ethic_xenophile
 		}
-		flag = random
+		# 注意：create_country 的 flag 参数不接受 common/prescripted_flags 里的键名
+		# （写成 empire_hsr_10 会被引擎静默丢弃），只能给内联的徽记块。
+		flag = {
+			icon = {
+				category = "DOT_SR"
+				file = "DOT_SR_09.dds"
+			}
+			background = {
+				category = "backgrounds"
+				file = "00_solid.dds"
+			}
+			colors = {
+				"white"
+				"black"
+				"null"
+				"null"
+			}
+		}
 		graphical_culture = DOT_SR_humanoid_01
 		city_graphical_culture = DOT_SR_humanoid_01
 		origin = "origin_default_pre_ftl"

@@ -450,8 +450,25 @@ country_event = {
 					remove_country_flag = machine_age
 					remove_country_flag = early_space_age
 					achieve_ftl_effect = yes
-					# achieve_ftl_effect 会把国名与物种肖像文化随机化，这里改回「提瓦特」
+					# achieve_ftl_effect 会把国名、物种肖像文化与旗帜全部随机化，这里逐项改回「提瓦特」
 					set_name = "DOTGI_teyvat_country_name"
+					# 旗帜必须在这里重设一次：achieve_ftl_effect 内部含 change_country_flag = random
+					change_country_flag = {
+						icon = {
+							category = "DOT_SR"
+							file = "DOT_SR_09.dds"
+						}
+						background = {
+							category = "backgrounds"
+							file = "00_solid.dds"
+						}
+						colors = {
+							"white"
+							"black"
+							"null"
+							"null"
+						}
+					}
 					founder_species = {
 						set_graphical_culture = DOT_SR_humanoid_01
 					}
