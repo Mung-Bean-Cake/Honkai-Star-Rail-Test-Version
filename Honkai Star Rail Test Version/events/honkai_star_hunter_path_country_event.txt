@@ -144,11 +144,17 @@ country_event = {
     option = {
         custom_gui = "enclave_caravaneer_option"
         name = communication_masked_fool
+        trigger = {
+            exists = event_target:masked_fool_country
+        }
         communication_masked_fool = yes
     }
     option = {
         custom_gui = "enclave_caravaneer_option"
         name = communication_mourning_actors
+        trigger = {
+            exists = event_target:mourning_actors_country
+        }
         communication_mourning_actors = yes
     }
     option = {
@@ -284,11 +290,17 @@ country_event = {
     option = {
         custom_gui = "enclave_caravaneer_option"
         name = communication_Aha
+        trigger = {
+            exists = event_target:Aha_home_country
+        }
         communication_Aha = yes
     }
     option = {
         custom_gui = "enclave_caravaneer_option"
         name = communication_mourning_actors
+        trigger = {
+            exists = event_target:mourning_actors_country
+        }
         communication_mourning_actors = yes
     }
     option = {
@@ -560,11 +572,17 @@ country_event = {
     option = {
         custom_gui = "enclave_caravaneer_option"
         name = communication_masked_fool
+        trigger = {
+            exists = event_target:masked_fool_country
+        }
         communication_masked_fool = yes
     }
     option = {
         custom_gui = "enclave_caravaneer_option"
         name = communication_Aha
+        trigger = {
+            exists = event_target:Aha_home_country
+        }
         communication_Aha = yes
     }
     option = {
@@ -1535,6 +1553,7 @@ country_event = {
                 }
             }
         }
+        country_event = { id = path_country.15 }
     }
     option = {
         custom_gui = "enclave_caravaneer_option"
@@ -1581,11 +1600,84 @@ country_event = {
                     set_location = root.capital_scope
                 }
             }
+            country_event = { id = path_country.15 }
         }
     }
     option = {
         custom_gui = "enclave_caravaneer_option"
         name = cara_home_exit
         default_hide_option = yes
+    }
+}
+country_event = {
+    id = path_country.16
+    title = fengraomin.death
+    desc = fengraomin.death_desc
+    picture = fengraomin_death
+    is_triggered_only = yes
+    trigger = {
+        is_country_type = fengraomin
+        count_controlled_ship = {
+            count = 0
+        }
+    }
+    immediate = {
+        destroy_country = yes
+    }
+}
+country_event = {
+    id = path_country.17
+    title = masked_fool.death
+    desc = masked_fool.death_desc
+    picture = masked_fool_death
+    is_triggered_only = yes
+    trigger = {
+        is_country = event_target:masked_fool_country
+        count_controlled_ship = {
+            count = 0
+        }
+    }
+    immediate = {
+        destroy_country = yes
+    }
+}
+country_event = {
+    id = path_country.18
+    title = mourning_actors.death
+    desc = mourning_actors.death_desc
+    picture = mourning_actors_death
+    is_triggered_only = yes
+    trigger = {
+        is_country = event_target:mourning_actors_country
+        count_controlled_ship = {
+            count = 0
+        }
+    }
+    immediate = {
+        destroy_country = yes
+    }
+}
+ship_event = {
+    id = path_country.19
+    hide_window = yes
+    is_triggered_only = yes
+    trigger = {
+        owner = {
+            is_country_type = fengraomin
+        }
+    }
+    immediate = {
+        if = {
+            limit = {
+                is_ship_size = starbase_citadel
+            }
+            damage_ship = 1
+            fleet = {
+                destroy_fleet = this
+            }
+        }
+        else = {
+            destroy_fleet = this
+        }
     }
 }
