@@ -38,13 +38,17 @@ country_event = {
     custom_gui = "enclave_caravaneer_window"
     diplomatic = yes
     is_triggered_only = yes
-
     picture_event_data = {
         portrait = event_target:Aha_home_country
         room = caravaneer_home_room
         planet_background = pc_gaia
     }
     location = event_target:Aha_home_country
+    trigger = {
+        NOT = {
+            has_country_flag = success_exit
+        }
+    }
     option = {
         custom_gui = "enclave_caravaneer_option"
         name = ahabiwhat
@@ -1506,19 +1510,18 @@ country_event = {
     id = path_country.15
     title = communication_fengraomin.title
     desc = fengraomin_desc
-    custom_gui = "enclave_caravaneer_window"
     diplomatic = yes
     is_triggered_only = yes
+    custom_gui = "enclave_curator_window"
     picture_event_data = {
         portrait = event_target:fengraomin_country
         room = "marauder_room"
-        planet_background = pc_astral_scar
+        planet_background = pc_gray_goo
     }
     location = event_target:fengraomin_country
     option = {
-        custom_gui = "enclave_caravaneer_option"
+        custom_gui = "enclave_curator_option"
         name = fengraomin_ship
-        is_dialog_only = yes
         ai_chance = {
             factor = 20
         }
@@ -1556,9 +1559,8 @@ country_event = {
         country_event = { id = path_country.15 }
     }
     option = {
-        custom_gui = "enclave_caravaneer_option"
+        custom_gui = "enclave_curator_option"
         name = fengraomin_large_ship
-        is_dialog_only = yes
         ai_chance = {
             factor = 20
         }
@@ -1604,9 +1606,13 @@ country_event = {
         }
     }
     option = {
-        custom_gui = "enclave_caravaneer_option"
+        custom_gui = "enclave_curator_option"
         name = cara_home_exit
         default_hide_option = yes
+        set_timed_country_flag = {
+            flag = success_exit
+            days = 7
+        }
     }
 }
 country_event = {
@@ -1622,7 +1628,17 @@ country_event = {
         }
     }
     immediate = {
+        random_list = {
+            100 = {
+                set_global_flag = fengrao_middle_crisis
+                country_event = { id = script_crisis.1 }
+            }
+            0 = {}
+        }
         destroy_country = yes
+    }
+    option = {
+        name = fengraomin.death_option
     }
 }
 country_event = {
@@ -1640,6 +1656,9 @@ country_event = {
     immediate = {
         destroy_country = yes
     }
+    option = {
+        name = masked_fool.death_option
+    }
 }
 country_event = {
     id = path_country.18
@@ -1655,6 +1674,9 @@ country_event = {
     }
     immediate = {
         destroy_country = yes
+    }
+    option = {
+        name = mourning_actors.death_option
     }
 }
 ship_event = {

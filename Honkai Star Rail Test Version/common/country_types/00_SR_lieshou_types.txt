@@ -45,31 +45,73 @@ swarm_army = {
 }
 fengraomin = {
     attack_unarmed_orbital_stations = yes
-    scaled_difficulty_bonuses = 1.0	# scales to setting
+    scaled_difficulty_bonuses = 1.2	# scales to setting
     show_in_contacts_list = yes
     custom_diplomacy = yes
+    mid_game_crisis = yes
     share_survey_data = no
     enforces_borders = no
     needs_survey = no
-    government = yes
     has_complete_sensor = yes
-    can_have_their_comms_shared = yes
+    can_have_their_comms_shared = no
     custom_starbase = starbase_marauder
-    observable = no
+    observable = yes
     ai = {
-        enabled = no
+        enabled = yes
+        modules = {
+            horde_interior_minister_module
+            horde_military_minister_module
+        }
     }
-
     faction = {
         hostile = yes
         pirate = yes
         needs_border_access = no
         generate_borders = yes
         needs_colony = no
-        auto_delete = no
     }
     modules = {
-        exclusive_diplomacy_module = {} # Nothing is allowed, but we need this for relationships.
+        exclusive_diplomacy_module = {}
+        tiered_technology_module = {
+            tier = 2
+            rare = yes
+        }
+        standard_event_module = {}
+    }
+}
+fengraomin_crisis = {
+    attack_unarmed_orbital_stations = yes
+    scaled_difficulty_bonuses = 2.2	# scales to setting
+    destroys_starbases = yes
+    show_in_contacts_list = yes
+    counts_for_victory = yes
+    custom_diplomacy = yes
+    mid_game_crisis = yes
+    share_survey_data = no
+    enforces_borders = no
+    needs_survey = no
+    has_complete_sensor = yes
+    can_have_their_comms_shared = yes
+    custom_starbase = starbase_marauder
+    observable = yes
+    ai = {
+        enabled = yes
+        modules = {
+            horde_interior_minister_module
+            horde_military_minister_module
+        }
+    }
+    faction = {
+        hostile = yes
+        pirate = yes
+        needs_border_access = no
+        generate_borders = yes
+        needs_colony = no
+    }
+    modules = {
+        exclusive_diplomacy_module = {
+            contact_rule = always
+        }
         tiered_technology_module = {
             tier = 4
             rare = yes
