@@ -1,0 +1,166 @@
+aha = {
+	potential = {
+		has_starbase_size > starbase_outpost
+		exists = owner
+	}
+
+	ai_use_defense_platforms = yes
+
+	weight_modifier = {
+		base = 50
+		complex_trigger_modifier = { 
+			trigger = count_starbase_modules
+			parameters = {
+				type = gun_battery
+			}
+			mode = add
+			mult = 75
+		}
+		complex_trigger_modifier = { #+75 for each missile_battery
+			trigger = count_starbase_modules
+			parameters = {
+				type = missile_battery
+			}
+			mode = add
+			mult = 150
+		}
+		complex_trigger_modifier = { #+75 for each hangar_bay
+			trigger = count_starbase_modules
+			parameters = {
+				type = hangar_bay
+			}
+			mode = add
+			mult = 150
+		}
+	}
+
+	ai_design = {
+		min = {
+			base = 8
+		}
+
+		ratio = {
+			base = 0.40
+			modifier = {
+				add = 0.10
+				exists = owner
+				owner = {
+					has_ethic = ethic_pacifist
+				}
+			}
+			modifier = {
+				add = 0.10
+				exists = owner
+				owner = {
+					has_ethic = ethic_fanatic_pacifist
+				}
+			}
+		}
+
+		# token followed by priority
+		buildings = {
+
+			target_uplink_computer = {
+				base = 1.00
+			}
+
+			command_center = {
+				base = 1.00
+			}
+
+			defense_grid = {
+				base = 1.00
+			}
+
+			communications_jammer = {
+				base = 0.90
+			}
+
+			disruption_field = {
+				base = 0.90
+			}
+
+			ice_mining_station = {
+				base = 3.00
+			}
+
+			dragon_hatchery = {
+				base = 3.00
+			}
+
+			hydroponics_bay = {
+				base = 0.25
+			}
+
+			reloading_bay = {
+				base = 2.00
+			}
+
+			zroni_storm_caster = {
+				base = 1.5
+				modifier = {
+					factor = 0
+					exists = owner
+					owner = {
+						has_monthly_income = {
+							resource = sr_zro
+							value < 2
+						}
+					}
+				}
+			}
+			offspring_outlook = {
+				base = 10
+			}
+
+			recruitment_office = {
+				base = 0.50
+			}
+
+			black_hole_observatory = {
+				base = 2.00
+			}
+
+			deep_space_black_site = {
+				base = 2.00
+			}
+
+			shroud_beacon = {
+				base = 0.50
+			}
+
+			nanite_harvester = {
+				base = 3.00
+			}
+
+			trader_proxy_office = {
+				base = 2.00
+			}
+		}
+
+		modules = {
+			hangar_bay = {
+				base = 0.80
+				modifier = {
+					factor = 2
+					exists = owner
+					owner = {
+						is_flight_schools_empire = yes
+					}
+				}
+			}
+
+			missile_battery = {
+				base = 1.80
+			}
+
+			gun_battery = {
+				base = 1.00
+			}
+
+			archaeo_rampart = {
+				base = 2.00
+			}
+		}
+	}
+}

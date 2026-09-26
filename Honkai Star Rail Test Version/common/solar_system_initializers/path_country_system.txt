@@ -1,0 +1,2140 @@
+@base_moon_distance = 10
+@marauderClusterRange = 120
+fengraomin_1 = {
+	class = "sc_g"
+	usage = misc_system_init
+	name = fengraomin_1
+	asteroid_belt = {
+		type = rocky_asteroid_belt
+		radius = 230
+	}
+	max_instances = 1
+	usage_odds = {
+		base = 0
+	}
+	spawn_chance = 0
+	flags = { fengraomin_system fengraomin_capital }
+	planet = {
+		class = pc_gaia
+		orbit_distance = 0
+		orbit_angle = 1
+		size = { min = 20 max = 30 }
+		has_ring = no
+		init_effect = {
+			save_global_event_target_as = fengraomin_home_star
+			create_cluster = {
+				id = fengraomin_cluster
+				radius = @marauderClusterRange
+				center = this.solar_system
+			}
+			create_species = {
+				name = fengraomin
+				class = fengraomin
+				blocked_archetypes = {
+					fengraomin
+				}
+				portrait = random
+				traits = {
+					trait = "trait_pc_habitat_preference"
+					trait = trait_exd
+					trait = "trait_extremely_adaptive"
+					trait = "trait_rapid_breeders"
+					trait = "trait_nomadic"
+					trait = trait_cyborg_creed_of_war
+					trait = trait_crucible_community
+				}
+				effect = {save_event_target_as = fengraomin_species}
+			}
+			create_country = {
+				name = NAME_fengraomin
+				name_list = DOT_SR_fengraomin
+				species = last_created_species
+				type = fengraomin
+				civics = { civic = civic_hive_ascetic }
+				origin = origin_common_ground
+				flag = {
+					icon = {
+						category = "special"
+						file = "caravaneer_01.dds"
+					}
+					background= {
+						category = "backgrounds"
+						file = "00_solid.dds"
+					}
+					colors={
+						"black"
+						"green"
+						"null"
+						"null"
+					}
+				}
+				ethos = {
+					ethic = ethic_fanatic_militarist
+					ethic = ethic_xenophobe
+				}
+				ignore_initial_colony_error = yes
+				effect = {
+					set_country_flag = fengraomin
+					set_graphical_culture = DOT_SR_humanoid_01
+					save_global_event_target_as = fengraomin_country
+					create_fleet = {
+						name = "name_hong"
+						settings = { spawn_debris = no }
+						effect = {
+							set_fleet_stance = aggressive
+							set_formation_scale = 2.5
+							set_owner = prev
+							while = {
+								count = 200
+								create_ship = {
+									name = random
+									design = "NAME_Black_Earl"
+									graphical_culture = "DOT_SR_humanoid_01"
+								}
+							}
+							while = {
+								count = 40
+								create_ship = {
+									name = random
+									design = NAME_middle_fengrao_leader
+								}
+							}
+							while = {
+								count = 20
+								create_ship = {
+									name = random
+									design = "NAME_Dragonspawn"
+									graphical_culture = "DOT_SR_humanoid_01"
+								}
+							}
+							create_ship = {
+								name = NAME_fengraomin_commander_1
+								design = "NAME_middle_fengrao_commander"
+								graphical_culture = "DOT_SR_humanoid_01"
+							}
+							set_location = {
+								target = event_target:fengraomin_home_star
+								angle = 90
+								distance = 10
+							}
+							set_fleet_flag = fengraomin_fleet_1
+							save_global_event_target_as = fengraomin_fleet_1
+						}
+					}
+				}
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_Watcher"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 230
+						angle = 200
+					}
+				}
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_Sigma"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					while = {
+						count = 40
+						create_ship = {
+							name = random
+							design = "NAME_Devastator"
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+					}
+					set_location = {
+						target = prev
+						distance = 230
+						angle = 220
+					}
+				}
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_Watcher"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 230
+						angle = 250
+					}
+				}
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_Sigma"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 230
+						angle = 260
+					}
+				}
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_Watcher"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 230
+						angle = 280
+					}
+				}
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_Sigma"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 230
+						angle = 300
+					}
+				}
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_Watcher"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					while = {
+						count = 20
+						create_ship = {
+							name = random
+							design = "NAME_middle_fengrao_leader"
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+					}
+					set_formation_scale = 2
+					set_fleet_stance = aggressive
+					set_aggro_range_measure_from = self
+					set_aggro_range = 250
+					set_location = {
+						target = prev
+						distance = 20
+						angle = 120
+					}
+				}
+				settings = {
+					garrison = yes
+				}
+			}
+			create_ambient_object = {
+				type = "abandoned_starbase_01_object"
+				location = this
+			}
+		}
+	}
+	change_orbit = 50
+	planet = {
+		class = pc_molten
+		orbit_distance = 25
+		size = 20
+		orbit_angle = 20
+		flags = { rob_source yuhuang_source }
+		init_effect = {
+			set_deposit = d_minerals_8
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_Watcher"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+		}
+	}
+	init_effect = {
+		create_starbase = {
+			size = starbase_citadel
+			owner = event_target:fengraomin_country
+		}
+	}
+	planet = {
+		class = pc_toxic
+		orbit_distance = 25
+		size = 11
+		orbit_angle = 100
+		init_effect = {
+			set_deposit = d_minerals_8
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_Watcher"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_Sigma"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 230
+						angle = 140
+					}
+				}
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_Watcher"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 230
+						angle = 170
+					}
+				}
+			}
+		}
+	}
+	planet = {
+		class = pc_gas_giant
+		orbit_distance = 40
+		orbit_angle = -60
+		size = 40
+
+		init_effect = {
+			create_ambient_object = {
+				type = "abandoned_starbase_01_object"
+				location = this
+			}
+		}
+
+		change_orbit = @base_moon_distance
+
+		moon = {
+			class = pc_barren
+			size = 8
+			orbit_angle = 90
+			orbit_distance = 6
+			init_effect = {
+				set_deposit = d_minerals_8
+				create_fleet = {
+					effect = {
+						set_owner = event_target:fengraomin_country
+						create_ship = {
+							name = random
+							design = "NAME_Watcher"
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+						set_location = {
+							target = prev
+							distance = 10
+							angle = 0
+						}
+					}
+				}
+				create_fleet = {
+					effect = {
+						set_owner = event_target:fengraomin_country
+						create_ship = {
+							name = random
+							design = "NAME_Sigma"
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+						set_location = {
+							target = prev
+							distance = 230
+							angle = 330
+						}
+					}
+				}
+			}
+		}
+		moon = {
+			class = pc_barren_cold
+			size = 10
+			orbit_angle = 95
+			orbit_distance = 6
+
+			init_effect = {
+				create_fleet = {
+					effect = {
+						set_owner = event_target:fengraomin_country
+						create_ship = {
+							name = random
+							design = "NAME_Sigma"
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+						set_location = {
+							target = prev
+							distance = 230
+							angle = 330
+						}
+					}
+				}
+				create_fleet = {
+					effect = {
+						set_owner = event_target:fengraomin_country
+						while = {
+							count = 200
+							create_ship = {
+								name = random
+								design = "NAME_Black_Earl"
+								graphical_culture = "DOT_SR_humanoid_01"
+							}
+						}
+						while = {
+							count = 30
+							create_ship = {
+								name = random
+								design = "NAME_Dragonspawn"
+								graphical_culture = "DOT_SR_humanoid_01"
+							}
+						}
+						while = {
+							count = 10
+							create_ship = {
+								name = random
+								design = "NAME_middle_fengrao_leader"
+								graphical_culture = "DOT_SR_humanoid_01"
+							}
+						}
+						set_formation_scale = 2
+						set_fleet_stance = aggressive
+						set_aggro_range_measure_from = self
+						set_aggro_range = 250
+						set_location = {
+							target = prev
+							distance = 20
+							angle = 120
+						}
+					}
+					settings = {
+						garrison = yes
+					}
+				}
+			}
+		}
+		moon = {
+			class = pc_frozen
+			size = 9
+			orbit_angle = 125
+			orbit_distance = 6
+
+			init_effect = {
+				create_ambient_object = {
+					type = "abandoned_starbase_01_object"
+					location = this
+				}
+				create_ambient_object = {
+					type = "medium_debris_01_object"
+					location = this
+				}
+			}
+		}
+		moon = {
+			class = pc_toxic
+			size = 11
+			orbit_angle = 160
+			orbit_distance = 6
+			init_effect = {
+				set_deposit = d_minerals_8
+				create_fleet = {
+					effect = {
+						set_owner = event_target:fengraomin_country
+						create_ship = {
+							name = random
+							design = "NAME_Sigma"
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+						set_location = {
+							target = prev
+							distance = 10
+							angle = 0
+						}
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = pc_barren_cold
+		orbit_distance = 40
+		size = 25
+		orbit_angle = 55
+
+		init_effect = {
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					while = {
+						count = 15
+						create_ship = {
+							name = random
+							design = "NAME_middle_fengrao_leader"
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+					}
+					set_formation_scale = 2
+					set_fleet_stance = aggressive
+					set_aggro_range_measure_from = self
+					set_aggro_range = 250
+					set_location = {
+						target = prev
+						distance = 20
+						angle = 120
+					}
+				}
+				settings = {
+					garrison = yes
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = pc_barren
+		orbit_distance = 25
+		size = 15
+		orbit_angle = 120
+
+		init_effect = {
+			create_ambient_object = {
+				type = "abandoned_starbase_01_object"
+				location = this
+			}
+		}
+
+		change_orbit = @base_moon_distance
+
+		moon = {
+			class = pc_frozen
+			size = 8
+			orbit_angle = 90
+			orbit_distance = 6
+
+			init_effect = {
+				create_fleet = {
+					effect = {
+						set_owner = event_target:fengraomin_country
+						while = {
+							count = 150
+							create_ship = {
+								name = random
+								design = "NAME_Black_Earl"
+								graphical_culture = "DOT_SR_humanoid_01"
+							}
+						}
+						while = {
+							count = 20
+							create_ship = {
+								name = random
+								design = "NAME_Dragonspawn"
+								graphical_culture = "DOT_SR_humanoid_01"
+							}
+						}
+						while = {
+							count = 10
+							create_ship = {
+								name = random
+								design = "NAME_middle_fengrao_leader"
+								graphical_culture = "DOT_SR_humanoid_01"
+							}
+						}
+						set_formation_scale = 2
+						set_fleet_stance = aggressive
+						set_aggro_range_measure_from = self
+						set_aggro_range = 250
+						set_location = {
+							target = prev
+							distance = 20
+							angle = 120
+						}
+					}
+					settings = {
+						garrison = yes
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = "pc_asteroid"
+		orbit_distance = 25
+		orbit_angle = -210
+		size = 5
+		has_ring = no
+		init_effect = {
+			set_deposit = d_minerals_8
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_Sigma"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = "pc_asteroid"
+		orbit_distance = 0
+		orbit_angle = -95
+		size = 5
+		has_ring = no
+		init_effect = {
+			set_deposit = d_minerals_8
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_Sigma"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = "pc_asteroid"
+		orbit_distance = 0
+		orbit_angle = 285
+		size = 5
+		has_ring = no
+		init_effect = {
+			set_deposit = d_minerals_8
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_Sigma"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = "pc_asteroid"
+		orbit_distance = 0
+		orbit_angle = -80
+		size = 5
+		has_ring = no
+		init_effect = {
+			set_deposit = d_minerals_8
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_Sigma"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = "pc_asteroid"
+		orbit_distance = 0
+		orbit_angle = -80
+		size = 5
+		has_ring = no
+		init_effect = {
+			set_deposit = d_minerals_8
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_Sigma"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = "pc_asteroid"
+		orbit_distance = 0
+		orbit_angle = -80
+		size = 5
+		has_ring = no
+		init_effect = {
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_Sigma"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = "pc_asteroid"
+		orbit_distance = 0
+		orbit_angle = -80
+		size = 5
+		has_ring = no
+		init_effect = {
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_Sigma"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = "pc_asteroid"
+		orbit_distance = 0
+		orbit_angle = -80
+		size = 5
+		has_ring = no
+		init_effect = {
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_Sigma"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = pc_barren_cold
+		orbit_distance = 30
+		size = 10
+		orbit_angle = 125
+
+		init_effect = {
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_Sigma"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = pc_frozen
+		orbit_distance = 25
+		size = 8
+		orbit_angle = 125
+
+		init_effect = {
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_Sigma"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = pc_frozen
+		orbit_distance = 25
+		size = 12
+		orbit_angle = 125
+
+		init_effect = {
+			create_ambient_object = {
+				type = "abandoned_starbase_01_object"
+				location = this
+			}
+			create_ambient_object = {
+				type = "medium_debris_01_object"
+				location = this
+			}
+		}
+
+		change_orbit = @base_moon_distance
+
+		moon = {
+			class = pc_frozen
+			size = 8
+			orbit_angle = 90
+			orbit_distance = 6
+		}
+	}
+	init_effect = {
+		event_target:fengraomin_country = { save_event_target_as = fengraomin_starbase_owner }
+		create_fengraomin_starbase = yes
+		spawn_system = {
+			initializer = fengraomin_2
+			min_distance >= 15
+			max_distance <= 20
+		}
+	}
+}
+fengraomin_2 = {
+	class = "sc_g"
+	name = fengraomin_2
+	flags = { fengraomin_system }
+	planet = {
+		class = pc_hunter_hub
+		orbit_distance = 0
+		orbit_angle = 1
+		size = { min = 30 max = 50 }
+		has_ring = no
+		init_effect = {
+			save_global_event_target_as = fengraomin_home_star_2
+			create_fleet = {
+				settings = { spawn_debris = no }
+				effect = {
+					set_fleet_stance = aggressive
+					set_formation_scale = 2.5
+					set_owner = event_target:fengraomin_country
+					while = {
+						count = 200
+						create_ship = {
+							name = random
+							design = NAME_Divine_Glory
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+					}
+					while = {
+						count = 30
+						create_ship = {
+							name = random
+							design = NAME_middle_fengrao_leader
+						}
+					}
+					while = {
+						count = 10
+						create_ship = {
+							name = random
+							design = "NAME_Dragonspawn"
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+					}
+					create_ship = {
+						name = NAME_fengraomin_commander_2
+						design = "NAME_middle_fengrao_commander"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = event_target:fengraomin_home_star_2
+						angle = 90
+						distance = 50
+					}
+					set_fleet_flag = fengraomin_fleet_2
+					save_global_event_target_as = fengraomin_fleet_2
+				}
+			}
+			create_starbase = {
+				size = starbase_citadel
+				owner = event_target:fengraomin_country
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_Sigma"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 60
+						angle = 110
+					}
+				}
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_Sigma"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 60
+						angle = 200
+					}
+				}
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_Sigma"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 90
+						angle = 220
+					}
+				}
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_Sigma"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 150
+						angle = 250
+					}
+				}
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_Watcher"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 200
+						angle = 260
+					}
+				}
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_Sigma"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 230
+						angle = 280
+					}
+				}
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_Watcher"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 270
+						angle = 300
+					}
+				}
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_Watcher"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 320
+						angle = 0
+					}
+				}
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					while = {
+						count = 30
+						create_ship = {
+							name = random
+							design = "NAME_Devastator"
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+					}
+					set_location = {
+						target = prev
+						distance = 320
+						angle = 0
+					}
+				}
+			}
+			create_ambient_object = {
+				type = "abandoned_starbase_01_object"
+				location = this
+			}
+		}
+	}
+	change_orbit = 50
+	planet = {
+		class = pc_molten
+		orbit_distance = 25
+		size = 20
+		orbit_angle = 20
+		flags = { rob_source yuhuang_source }
+		init_effect = {
+			set_deposit = d_minerals_8
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_Watcher"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = pc_toxic
+		orbit_distance = 25
+		size = 11
+		orbit_angle = 100
+		flags = { yuhuang_source }
+		init_effect = {
+			set_deposit = d_minerals_8
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_Watcher"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_Sigma"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 230
+						angle = 140
+					}
+				}
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_Watcher"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 230
+						angle = 170
+					}
+				}
+			}
+		}
+	}
+	planet = {
+		class = pc_gas_giant
+		orbit_distance = 40
+		orbit_angle = -60
+		size = 40
+		flags = { yuhuang_source }
+		init_effect = {
+			create_ambient_object = {
+				type = "abandoned_starbase_01_object"
+				location = this
+			}
+		}
+
+		change_orbit = @base_moon_distance
+
+		moon = {
+			class = pc_barren
+			size = 8
+			orbit_angle = 90
+			orbit_distance = 6
+			init_effect = {
+				set_deposit = d_minerals_8
+				create_fleet = {
+					effect = {
+						set_owner = event_target:fengraomin_country
+						create_ship = {
+							name = random
+							design = "NAME_Watcher"
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+						set_location = {
+							target = prev
+							distance = 10
+							angle = 0
+						}
+					}
+				}
+				create_fleet = {
+					effect = {
+						set_owner = event_target:fengraomin_country
+						create_ship = {
+							name = random
+							design = "NAME_Sigma"
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+						set_location = {
+							target = prev
+							distance = 230
+							angle = 330
+						}
+					}
+				}
+			}
+		}
+		moon = {
+			class = pc_barren_cold
+			size = 10
+			orbit_angle = 95
+			orbit_distance = 6
+
+			init_effect = {
+				create_fleet = {
+					effect = {
+						set_owner = event_target:fengraomin_country
+						create_ship = {
+							name = random
+							design = "NAME_Sigma"
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+						while = {
+							count = 80
+							create_ship = {
+								name = random
+								design = "NAME_Devastator"
+								graphical_culture = "DOT_SR_humanoid_01"
+							}
+						}
+						set_location = {
+							target = prev
+							distance = 230
+							angle = 330
+						}
+					}
+				}
+				create_fleet = {
+					effect = {
+						set_owner = event_target:fengraomin_country
+						while = {
+							count = 20
+							create_ship = {
+								name = random
+								design = "NAME_middle_fengrao_leader"
+								graphical_culture = "DOT_SR_humanoid_01"
+							}
+						}
+						set_formation_scale = 2
+						set_fleet_stance = aggressive
+						set_aggro_range_measure_from = self
+						set_aggro_range = 250
+						set_location = {
+							target = prev
+							distance = 20
+							angle = 120
+						}
+					}
+					settings = {
+						garrison = yes
+					}
+				}
+			}
+		}
+		moon = {
+			class = pc_frozen
+			size = 9
+			orbit_angle = 125
+			orbit_distance = 6
+
+			init_effect = {
+				create_ambient_object = {
+					type = "abandoned_starbase_01_object"
+					location = this
+				}
+				create_ambient_object = {
+					type = "medium_debris_01_object"
+					location = this
+				}
+			}
+		}
+		moon = {
+			class = pc_toxic
+			size = 11
+			orbit_angle = 160
+			orbit_distance = 6
+			init_effect = {
+				set_deposit = d_minerals_8
+				create_fleet = {
+					effect = {
+						set_owner = event_target:fengraomin_country
+						create_ship = {
+							name = random
+							design = "NAME_Sigma"
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+						set_location = {
+							target = prev
+							distance = 10
+							angle = 0
+						}
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = pc_barren_cold
+		orbit_distance = 40
+		size = 25
+		orbit_angle = 55
+
+		init_effect = {
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_Sigma"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = pc_barren
+		orbit_distance = 25
+		size = 15
+		orbit_angle = 120
+
+		init_effect = {
+			create_ambient_object = {
+				type = "abandoned_starbase_01_object"
+				location = this
+			}
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					while = {
+						count = 40
+						create_ship = {
+							name = random
+							design = "NAME_middle_fengrao_leader"
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+					}
+					set_formation_scale = 2
+					set_fleet_stance = aggressive
+					set_aggro_range_measure_from = self
+					set_aggro_range = 250
+					set_location = {
+						target = prev
+						distance = 100
+						angle = 120
+					}
+				}
+				settings = {
+					garrison = yes
+				}
+			}
+		}
+
+		change_orbit = @base_moon_distance
+
+		moon = {
+			class = pc_frozen
+			size = 8
+			orbit_angle = 90
+			orbit_distance = 6
+
+			init_effect = {
+				create_fleet = {
+					effect = {
+						set_owner = event_target:fengraomin_country
+						while = {
+							count = 60
+							create_ship = {
+								name = random
+								design = "NAME_middle_fengrao_leader"
+								graphical_culture = "DOT_SR_humanoid_01"
+							}
+						}
+						set_formation_scale = 2
+						set_fleet_stance = aggressive
+						set_aggro_range_measure_from = self
+						set_aggro_range = 250
+						set_location = {
+							target = prev
+							distance = 20
+							angle = 120
+						}
+					}
+					settings = {
+						garrison = yes
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = "pc_asteroid"
+		orbit_distance = 25
+		orbit_angle = -210
+		size = 5
+		has_ring = no
+		init_effect = {
+			set_deposit = d_minerals_8
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					while = {
+						count = 30
+						create_ship = {
+							name = random
+							design = "NAME_Devastator"
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = "pc_asteroid"
+		orbit_distance = 0
+		orbit_angle = -95
+		size = 5
+		has_ring = no
+		init_effect = {
+			set_deposit = d_minerals_8
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					while = {
+						count = 40
+						create_ship = {
+							name = random
+							design = "NAME_Devastator"
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+					}
+					create_ship = {
+						name = random
+						design = "NAME_Sigma"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = "pc_asteroid"
+		orbit_distance = 0
+		orbit_angle = 285
+		size = 5
+		has_ring = no
+		init_effect = {
+			set_deposit = d_minerals_8
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					while = {
+						count = 80
+						create_ship = {
+							name = random
+							design = "NAME_Devastator"
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+					}
+					create_ship = {
+						name = random
+						design = "NAME_Sigma"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = "pc_gaia"
+		orbit_distance = 0
+		orbit_angle = -80
+		size = 5
+		has_ring = no
+		init_effect = {
+			set_deposit = d_minerals_8
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					while = {
+						count = 20
+						create_ship = {
+							name = random
+							design = "NAME_Dragonspawn"
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+					}
+					create_ship = {
+						name = random
+						design = "NAME_Sigma"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+					while = {
+						count = 5
+						create_ship = {
+							name = random
+							design = "NAME_middle_fengrao_leader"
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+					}
+					set_formation_scale = 2
+					set_fleet_stance = aggressive
+					set_aggro_range_measure_from = self
+					set_aggro_range = 250
+					set_location = {
+						target = prev
+						distance = 20
+						angle = 120
+					}
+				}
+				settings = {
+					garrison = yes
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = "pc_desert"
+		orbit_distance = 0
+		orbit_angle = -80
+		size = 5
+		has_ring = no
+		init_effect = {
+			set_deposit = d_minerals_8
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					while = {
+						count = 15
+						create_ship = {
+							name = random
+							design = "NAME_Devastator"
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+					}
+					create_ship = {
+						name = random
+						design = "NAME_Sigma"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 30
+						angle = 0
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = "pc_asteroid"
+		orbit_distance = 0
+		orbit_angle = -80
+		size = 5
+		has_ring = no
+		init_effect = {
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_Sigma"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = "pc_asteroid"
+		orbit_distance = 0
+		orbit_angle = -80
+		size = 5
+		has_ring = no
+		init_effect = {
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_Sigma"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+		}
+	}
+
+	planet = {
+		class = "pc_asteroid"
+		orbit_distance = 0
+		orbit_angle = -80
+		size = 5
+		has_ring = no
+		init_effect = {
+			create_fleet = {
+				effect = {
+					set_owner = event_target:fengraomin_country
+					create_ship = {
+						name = random
+						design = "NAME_Sigma"
+						graphical_culture = "DOT_SR_humanoid_01"
+					}
+					set_location = {
+						target = prev
+						distance = 10
+						angle = 0
+					}
+				}
+			}
+		}
+	}
+	planet = {
+		class = pc_frozen
+		orbit_distance = 25
+		size = 12
+		orbit_angle = 125
+		init_effect = {
+			create_ambient_object = {
+				type = "abandoned_starbase_01_object"
+				location = this
+			}
+			create_ambient_object = {
+				type = "medium_debris_01_object"
+				location = this
+			}
+		}
+		change_orbit = @base_moon_distance
+		moon = {
+			class = pc_frozen
+			size = 8
+			orbit_angle = 90
+			orbit_distance = 6
+
+			init_effect = {
+				create_fleet = {
+					effect = {
+						set_owner = event_target:fengraomin_country
+						create_ship = {
+							name = random
+							design = "NAME_Sigma"
+							graphical_culture = "DOT_SR_humanoid_01"
+						}
+						set_location = {
+							target = prev
+							distance = 10
+							angle = 0
+						}
+					}
+				}
+			}
+		}
+	}
+	init_effect = {
+		event_target:fengraomin_country = { save_event_target_as = fengraomin_starbase_owner }
+		create_fengraomin_starbase = yes
+		every_neighbor_system = {
+			set_star_flag = fengraomin_cluster
+			every_neighbor_system = {
+				set_star_flag = fengraomin_cluster
+			}
+		}
+	}
+}
+hatuobiya = {
+	class = "sc_a"
+	usage = misc_system_init
+	name = "NAME_hatuobiya"
+	usage_odds = {
+		base = 0
+	}
+	max_instances = 1
+	spawn_chance = 100
+	flags = { aha_home }
+
+	asteroid_belt = {
+		type = rocky_asteroid_belt
+		radius = 40
+	}
+
+	asteroid_belt = {
+		type = icy_asteroid_belt
+		radius = 110
+	}
+
+	planet = {
+		class = star
+		orbit_distance = 0
+
+		init_effect = {
+			create_ambient_object = {
+				type = caravaneer_billboard_1
+				scale = 4
+				location = this
+				entity_offset_height = { min = -9 max = -11 }
+			}
+			last_created_ambient_object = {
+				set_location = {
+					target = prev
+					distance = 40
+					angle = 225
+				}
+			}
+			save_global_event_target_as = aha_home_star
+			create_species = {
+				name = masked_fool
+				class = Star_Rail
+				portrait = Star_Rail
+				traits = random
+				effect = {
+					modify_species = {
+						ideal_planet_class = pc_habitat
+					}
+				}
+			}
+			create_leader = {
+				class = commander
+				species = this
+				name = name_hong
+				skill = 1
+				immortal = yes
+			}
+			create_country = {
+				name = NAME_Aha
+				type = Aha
+				name_list = DOT_SR_Aha
+				authority = auth_imperial
+				civics = {
+					civic = civic_environmental_architects
+					civic = civic_eager_explorers
+				}
+				origin = origin_fruitful
+				species = last_created_species
+				flag = {
+					icon = {
+						category = "special"
+						file = "gdf.dds"
+					}
+					background = {
+						category = "backgrounds"
+						file = "triangle_split.dds"
+					}
+					colors={
+						"red"
+						"dark_blue"
+						"null"
+						"null"
+					}
+				}
+				ethos = {
+					ethic = ethic_egalitarian
+					ethic = ethic_pacifist
+					ethic = ethic_xenophile
+				}
+				ignore_initial_colony_error = yes
+				effect = {
+					set_country_flag = Aha_country
+					set_graphical_culture = DOT_SR_humanoid_01
+					save_global_event_target_as = Aha_home_country
+					create_fleet = {
+						name = "NAME_Caravaneer_Coalition_Base"
+						settings = { spawn_debris = no }
+						effect = {
+							set_owner = prev
+							create_ship = {
+								name = NAME_Aha_defence
+								design = "NAME_Aha_defence"
+								graphical_culture = prev
+								effect = {
+									set_ship_flag = Aha_home_tradestation
+								}
+							}
+							set_location = {
+								target = prevprev
+								angle = random
+								distance = 40
+							}
+							save_global_event_target_as = Aha_country_fleet
+							prev = {
+								set_custom_capital_location = event_target:CaravaneerCustomCapital
+							}
+						}
+					}
+					assign_leader = last_created_leader
+					create_ship_design = { design = "NAME_Caravaneer_Starbase" }
+					add_ship_design = last_created_design
+				}
+			}
+		}
+	}
+	change_orbit = 48
+	planet = {
+		count = 1
+		orbit_angle = { min = 355 max = 5 }
+		size = { min = 10 max = 25 }
+		class = "rl_unhabitable_planets"
+		orbit_distance = 12
+	}
+
+	planet = {
+		count = 1
+		orbit_angle = { min = 175 max = 185 }
+		size = { min = 10 max = 25 }
+		class = "pc_gaia"
+		orbit_distance = 12
+	}
+
+	planet = {
+		count = 1
+		orbit_angle = { min = 85 max = 95 }
+		size = { min = 10 max = 25 }
+		class = "pc_desert"
+		orbit_distance = 12
+	}
+
+	planet = {
+		count = 1
+		orbit_angle = { min = 175 max = 185 }
+		size = { min = 10 max = 25 }
+		class = "pc_hunter_hub"
+		orbit_distance = 12
+	}
+
+	init_effect = {
+		save_global_event_target_as = Aha_home_star
+		# Randomize which fleets are spawned
+		set_global_flag = Aha_1
+		set_global_flag = Aha_2
+		create_starbase = {
+			size = starbase_citadel
+			owner = event_target:Aha_home_country
+		}
+		# FLEET 1
+		if = {
+			limit = { has_global_flag = Aha_1 }
+			create_species = {
+				name = masked_fool
+				class = Star_Rail
+				portrait = Star_Rail
+				traits = random
+			}
+			create_country = {
+				name = NAME_masked_fool
+				type = Aha_part
+				name_list = DOT_SR_Aha
+				authority = auth_democratic
+				civics = {
+					civic = civic_scavengers
+					civic = civic_technocracy
+				}
+				species = last_created_species
+				flag = {
+					icon = {
+						category = "special"
+						file = "caravaneer_01.dds"
+					}
+					background = {
+						category = "backgrounds"
+						file = "vertical.dds"
+					}
+					colors = {
+						"white"
+						"red"
+						"null"
+						"null"
+					}
+				}
+				ethos = {
+					ethic = ethic_materialist
+					ethic = ethic_pacifist
+					ethic = ethic_egalitarian
+				}
+				ignore_initial_colony_error = yes
+				effect = {
+					set_country_flag = masked_fool_country
+					set_graphical_culture = DOT_SR_humanoid_01
+					save_global_event_target_as = masked_fool_country
+					create_fleet = {
+						name = "NAME_masked_fool_fleet"
+						settings = { spawn_debris = no }
+						effect = {
+							set_fleet_stance = passive
+							set_formation_scale = 2.5
+							set_owner = prev
+							create_ship = {
+								name = "NAME_origin_of_fool"
+								design = NAME_Aha_emanator
+							}
+							while = {
+								count = 10
+								create_ship = {
+									name = random
+									design = NAME_Dragonspawn
+								}
+							}
+							while = {
+								count = 60
+								create_ship = {
+									name = random
+									design = "NAME_masked_fool"
+								}
+							}
+							set_location = {
+								target = event_target:aha_home_star
+								angle = 90
+								distance = 40
+							}
+							set_fleet_flag = masked_fool_fleet
+							save_global_event_target_as = masked_fool_fleet
+						}
+					}
+				}
+			}
+		}
+		# FLEET 2
+		if = {
+			limit = { has_global_flag = Aha_2 }
+			create_species = {
+				name = mourning_actors
+				class = Star_Rail
+				portrait = Star_Rail
+				traits = random
+			}
+			create_country = {
+				name = NAME_mourning_actors
+				type = Aha_part
+				name_list = DOT_SR_Aha
+				authority = auth_oligarchic
+				civics = {
+					civic = civic_beastmasters
+					civic = civic_toxic_baths
+				}
+				species = last_created_species
+				flag = {
+					icon = {
+						category = "special"
+						file = "caravaneer_02.dds"
+					}
+					background= {
+						category = "backgrounds"
+						file = "new_dawn.dds"
+					}
+					colors={
+						"white"
+						"black"
+						"null"
+						"null"
+					}
+				}
+				ethos = {
+					ethic = ethic_egalitarian
+					ethic = ethic_fanatic_militarist
+
+				}
+				ignore_initial_colony_error = yes
+				effect = {
+					set_country_flag = mourning_actors_country
+					set_graphical_culture = DOT_SR_humanoid_01
+					save_global_event_target_as = mourning_actors_country
+					create_fleet = {
+						name = "NAME_mourning_actors_fleet"
+						settings = { spawn_debris = no }
+						effect = {
+							set_fleet_stance = passive
+							set_formation_scale = 2.5
+							set_owner = prev
+							create_ship = {
+								name = "NAME_troupe_leader"
+								design = NAME_Aha_emanator
+							}
+							while = {
+								count = 20
+								create_ship = {
+									name = random
+									design = NAME_Dragonspawn
+								}
+							}
+							while = {
+								count = 20
+								create_ship = {
+									name = random
+									design = "NAME_masked_fool"
+								}
+							}
+							set_location = {
+								target = event_target:aha_home_star
+								angle = 180
+								distance = 40
+							}
+							set_fleet_flag = mourning_actors_fleet
+							save_global_event_target_as = mourning_actors_fleet
+						}
+					}
+				}
+			}
+		}
+		if = {
+			limit = { exists = event_target:mourning_actors_country }
+			event_target:mourning_actors_country = {
+				if = {
+					limit = { exists = event_target:masked_fool_country }
+					establish_communications_no_message = event_target:masked_fool_country
+				}
+				establish_communications_no_message = event_target:Aha_home_country
+			}
+		}
+		if = {
+			limit = { exists = event_target:masked_fool_country }
+			event_target:masked_fool_country = {
+				if = {
+					limit = { exists = event_target:mourning_actors_country }
+					establish_communications_no_message = event_target:mourning_actors_country
+				}
+				establish_communications_no_message = event_target:Aha_home_country
+			}
+		}
+		# Randomize caravan order
+		#random_list = {
+			#1 = { # 1 - 2
+				#modifier = {
+					#factor = 0
+					#NAND = {
+						#has_global_flag = Aha_1
+						#has_global_flag = Aha_2
+					#}
+				#}
+				#event_target:mourning_actors_fleet = { fleet_event = { id = cara.1000 days = @caravaneerfleetlaunch1 } }
+				#event_target:masked_fool_fleet = { fleet_event = { id = cara.2000 days = @caravaneerfleetlaunch2 } }
+			#}
+			#1 = { # 2 - 1
+				#modifier = {
+					#factor = 0
+					#NAND = {
+						#has_global_flag = Aha_2
+						#has_global_flag = Aha_1
+					#}
+				#}
+				#event_target:masked_fool_fleet = { fleet_event = { id = cara.2000 days = @caravaneerfleetlaunch1 } }
+				#event_target:mourning_actors_fleet = { fleet_event = { id = cara.1000 days = @caravaneerfleetlaunch2 } }
+			#}
+		#}
+	}
+}

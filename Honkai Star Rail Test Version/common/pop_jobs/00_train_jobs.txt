@@ -26,10 +26,10 @@ train_common_clerk = {
     resources = {
         category = planet_jobs_worker
         produces = {
-            energy = 1.5
-            minerals = 1.5
-            food = 1.5
-            trade = 1.5
+            energy = 1.2
+            minerals = 1.2
+            food = 1.2
+            trade = 1.2
             alloys = 0.5
             consumer_goods = 0.5
             rare_crystals = 0.1
@@ -38,11 +38,11 @@ train_common_clerk = {
             society_research = 0.1
             physics_research = 0.1
             engineering_research = 0.1
-            sr_zro = 0.01
-            sr_living_metal = 0.01
-            sr_dark_matter = 0.01
-            minor_artifacts = 0.01
-            nanites = 0.01
+            sr_zro = 1.00
+            sr_living_metal = 1.00
+            sr_dark_matter = 1.00
+            minor_artifacts = 1.00
+            nanites = 1.00
         }
         upkeep = {
             energy = 1
@@ -81,14 +81,14 @@ train_pilot = {
             trade = 2
         }
         upkeep = {
-            food = 1.5
-            consumer_goods = 1.5
+            food = 1.2
+            consumer_goods = 1.2
         }
     }
     planet_modifier = {
         planet_stability_add = 0.02
         planet_crime_add = -10
-        bonus_automated_workforce_mult = 0.01
+        bonus_automated_workforce_mult = 1.00
         planet_jobs_produces_mult = 0.005
     }
     weight = {
@@ -342,8 +342,8 @@ train_surveyor = {
             sr_zro = 0.05
         }
         upkeep = {
-            food = 1.5
-            consumer_goods = 1.5
+            food = 1.2
+            consumer_goods = 1.2
         }
     }
     triggered_planet_modifier = {
@@ -351,5 +351,60 @@ train_surveyor = {
     }
     weight = {
         weight = 2000
+    }
+}
+train_trailblazer = {
+    category = specialist
+    swappable_data = {
+        default = {
+            condition_string = RULER_JOB_TRIGGER
+            building_icon = building_capital
+        }
+    }
+    can_be_automated = no
+    tags = { }
+
+    possible_pre_triggers = {
+        has_owner = yes
+        is_being_purged = no
+        is_being_assimilated = no
+        is_sapient = yes
+    }
+
+    possible_precalc = can_fill_specialist_job
+
+    resources = {
+        category = planet_jobs_specialist
+        produces = {
+            energy = 1.00
+            minerals = 1.00
+            food = 2.00
+            trade = 1.00
+            unity = 1.00
+            influence = 1.00
+            alloys = 2.00
+            consumer_goods = 2.00
+            rare_crystals = 1.00
+            exotic_gases = 1.00
+            volatile_motes = 1.00
+            physics_research = 1.00
+            society_research = 1.00
+            engineering_research = 1.00
+            sr_zro = 1.00
+            sr_living_metal = 1.00
+            sr_dark_matter = 1.00
+            nanites = 1.00
+            minor_artifacts = 1.00
+        }
+        upkeep = {
+            food = 1.00
+        }
+    }
+    planet_modifier = {
+        planet_stability_add = 0.01
+        planet_crime_add = -0.10
+    }
+    weight = {
+        weight = 3000
     }
 }

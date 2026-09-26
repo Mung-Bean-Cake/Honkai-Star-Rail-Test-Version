@@ -1,0 +1,194 @@
+# ============================================================
+#  星穹铁道 × 原神 · 提瓦特联动 —— 脚本效果
+# ============================================================
+
+# ------------------------------------------------------------
+# 建立提瓦特文明（在「发现该星系的帝国」作用域内调用）
+# 前置：event_target:DOTGI_teyvat_planet 已存在
+# ------------------------------------------------------------
+DOTGI_setup_teyvat_civilization = {
+	create_species = {
+		name = "DOTGI_teyvat_species_name"
+		plural = "DOTGI_teyvat_species_plural"
+		class = Star_Rail
+		portrait = genshin_001
+		homeworld = event_target:DOTGI_teyvat_planet
+		traits = {
+			trait = "trait_DOTGI_genshin_blessing"
+			trait = "trait_psionic"
+		}
+		sapient = yes
+		namelist = random
+		effect = {
+			save_global_event_target_as = DOTGI_teyvat_species
+		}
+	}
+
+	create_country = {
+		name = "DOTGI_teyvat_country_name"
+		adjective = "DOTGI_teyvat_country_adj"
+		authority = random
+		civics = random
+		species = last_created_species
+		ethos = {
+			ethic = ethic_fanatic_spiritualist
+			ethic = ethic_xenophile
+		}
+		# 注意：create_country 的 flag 参数不接受 common/prescripted_flags 里的键名
+		# （写成 empire_hsr_10 会被引擎静默丢弃），只能给内联的徽记块。
+		flag = {
+			icon = {
+				category = "DOT_SR"
+				file = "DOT_SR_09.dds"
+			}
+			background = {
+				category = "backgrounds"
+				file = "00_solid.dds"
+			}
+			colors = {
+				"white"
+				"black"
+				"null"
+				"null"
+			}
+		}
+		graphical_culture = DOT_SR_humanoid_01
+		city_graphical_culture = DOT_SR_humanoid_01
+		origin = "origin_default_pre_ftl"
+		type = primitive
+		day_zero_contact = no
+		effect = {
+			save_global_event_target_as = DOTGI_teyvat_country
+			set_country_flag = DOTGI_teyvat_civ
+			set_country_flag = machine_age
+			set_pre_ftl_age = machine_age
+			# origin 字段在部分版本不生效，这里再显式兜底一次
+			set_origin = origin_default_pre_ftl
+		}
+	}
+
+	# 母星归属、原始时代建筑与人口
+	event_target:DOTGI_teyvat_planet = {
+		setup_pre_ftl_planet = yes
+		pre_ftl_clean_up_effect = yes
+		# 深渊侵蚀的异常现象与星球修正
+		add_anomaly = { category = DOTGI_abyss_erosion_cat }
+		add_modifier = {
+			modifier = DOTGI_abyss_erosion_modifier
+			days = -1
+		}
+	}
+
+	# 提瓦特文明的领袖：荧
+	last_created_country = {
+		if = {
+			limit = { exists = ruler }
+			ruler = {
+				set_name = "NAME_DOTGI_ying"
+				set_gender = female
+				change_leader_portrait = genshin_001
+			}
+		}
+	}
+}
+
+# ------------------------------------------------------------
+# 裂隙坍缩为虫洞，帝国获得虫洞科技（幂等）
+# 在「发现者帝国」作用域内调用
+# ------------------------------------------------------------
+DOTGI_open_teyvat_wormhole = {
+	if = {
+		limit = {
+			NOT = { has_country_flag = DOTGI_void_signal_resolved }
+		}
+		hidden_effect = {
+			set_country_flag = DOTGI_void_signal_resolved
+
+			# 1) 裂隙坍缩（裂隙所在星系 = DOTGI_teyvat_rift_system，开局生成时记下）
+			if = {
+				limit = {
+					exists = event_target:DOTGI_teyvat_rift_system
+					event_target:DOTGI_teyvat_rift_system = { has_astral_rift = yes }
+				}
+				event_target:DOTGI_teyvat_rift_system = {
+					astral_rift = {
+						destroy_astral_rift = this
+					}
+				}
+			}
+
+			# 2) 裂隙端与提瓦特端各生成一个天然虫洞
+			if = {
+				limit = { exists = event_target:DOTGI_teyvat_rift_system }
+				event_target:DOTGI_teyvat_rift_system = {
+					if = {
+						limit = { NOT = { has_natural_wormhole = yes } }
+						spawn_natural_wormhole = {
+							bypass_type = wormhole
+							random_pos = yes
+							orbit_angle = 360
+						}
+					}
+				}
+			}
+			if = {
+				limit = { exists = event_target:DOTGI_teyvat_system }
+				event_target:DOTGI_teyvat_system = {
+					if = {
+						limit = { NOT = { has_natural_wormhole = yes } }
+						spawn_natural_wormhole = {
+							bypass_type = wormhole
+							random_pos = yes
+							orbit_angle = 360
+						}
+					}
+				}
+				# 3) 连接两端
+				if = {
+					limit = { exists = event_target:DOTGI_teyvat_rift_system }
+					event_target:DOTGI_teyvat_rift_system = {
+						link_wormholes = event_target:DOTGI_teyvat_system
+					}
+				}
+			}
+
+			# 4) 兜底：确保虫洞科技与虫洞认知在手（正常流程在发现裂隙时就已配发）
+			give_technology = { tech = tech_wormhole_stabilization message = no }
+			add_seen_bypass_type = wormhole
+			set_country_flag = DOTGI_wormhole_opened
+		}
+	}
+}
+
+# ------------------------------------------------------------
+# 推进【来自虚空的求救信号】局势（裂隙探索事件调用）
+# 用法：DOTGI_add_distress_progress = { VALUE = 25 }
+# ------------------------------------------------------------
+DOTGI_add_distress_progress = {
+	hidden_effect = {
+		if = {
+			limit = {
+				any_situation = { is_situation_type = DOTGI_distress_signal_situation }
+			}
+			every_situation = {
+				limit = { is_situation_type = DOTGI_distress_signal_situation }
+				add_situation_progress = $VALUE$
+			}
+		}
+	}
+}
+
+# ------------------------------------------------------------
+# 把【来自虚空的求救信号】局势推到完成
+# ------------------------------------------------------------
+DOTGI_complete_distress_signal = {
+	if = {
+		limit = {
+			any_situation = { is_situation_type = DOTGI_distress_signal_situation }
+		}
+		every_situation = {
+			limit = { is_situation_type = DOTGI_distress_signal_situation }
+			set_situation_progress = 100
+		}
+	}
+}

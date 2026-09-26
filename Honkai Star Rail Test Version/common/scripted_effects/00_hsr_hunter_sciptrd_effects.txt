@@ -44,7 +44,7 @@ fengrao_shield_burst_large_effect = {
 				source = event_target:fengrao_burst_center
 				same_solar_system = yes
 				type = euclidean
-				max_distance <= $RADIUS|600$
+				max_distance <= $RADIUS|450$
 				}
 				not = { owner = {
 					is_same_value = event_target:fengrao_burst_owner
@@ -54,4 +54,403 @@ fengrao_shield_burst_large_effect = {
 			reduce_hp = $DAMAGE|200000$
 			}
 		}
+}
+fengrao_shield_burst_extra_large_effect = {
+	every_country = {
+		every_owned_ship = {
+			limit = {
+				distance = { 
+					source = event_target:fengrao_burst_center
+					same_solar_system = yes
+					type = euclidean
+					max_distance <= $RADIUS|600$
+				}
+				not = { owner = {
+					is_same_value = event_target:fengrao_burst_owner
+				} }
+			}
+			reduce_shield = $SHIELD_DAMAGE|2400000$
+			reduce_hp = $DAMAGE|1800000$
+		}
+	}
+}
+create_fengraomin_country = {
+	event_target:fengraomin_system = {
+		random_system_planet = {
+			limit = { $HOME_PLANET_TRIGGER|always$ = yes }
+			save_event_target_as = fengraomin_home
+			create_country = {
+				name = "NAME_fengraomin"
+				type = pirate
+				species = event_target:owner_species
+				name_list = "DOT_SR_fengraomin"
+				flag = {
+					background = {
+						category = "backgrounds"
+						file = "00_solid.dds"
+					}
+					colors ={
+						"black"
+						"blue"
+						"null"
+						"null"
+					}
+				}
+			}
+			event_target:fengraomin_system = {
+				set_name = random
+				randomize_flag_symbol = "pirate"
+				every_country = {
+					establish_communications_no_message = prev
+				}
+			}
+		}
+	}
+}
+create_fengraomin_fleet = {
+	event_target:fengraomin_system = {
+		create_leader = {
+			class = commander
+			species = DOT_SR_fengraomin
+			name = random
+			skill = 1
+		}
+		create_fleet = {
+			name = "NAME_Fengraomin_Fleet"
+			effect = {
+				set_owner = event_target:fengraomin_system
+				if = {
+					limit = {
+						years_passed < 20
+					}
+					create_fengraomin_ships_0 = yes
+				}
+				if = {
+					limit = {
+						years_passed > 40
+					}
+					create_pirate_ships_1 = yes
+				}
+				if = {
+					limit = {
+						years_passed > 60
+					}
+					create_pirate_ships_2 = yes
+				}
+				if = {
+					limit = {
+						years_passed > 80
+					}
+					create_pirate_ships_3 = yes
+				}
+				if = {
+					limit = {
+						years_passed > 100
+					}
+					create_pirate_ships_4 = yes
+				}
+				if = {
+					limit = {
+						years_passed > 110
+					}
+					create_pirate_ships_5 = yes
+				}
+				if = {
+					limit = {
+						years_passed > 120
+					}
+					create_pirate_ships_6 = yes
+				}
+				if = {
+					limit = {
+						years_passed > 130
+					}
+					create_pirate_ships_7 = yes
+				}
+				if = {
+					limit = {
+						years_passed > 140
+					}
+					create_pirate_ships_8 = yes
+				}
+				if = {
+					limit = {
+						years_passed > 150
+					}
+					create_pirate_ships_9 = yes
+				}
+				if = {
+					limit = {
+						years_passed > 160
+					}
+					create_pirate_ships_10 = yes
+				}
+				assign_leader = last_created_leader
+				set_location = event_target:fengraomin_home
+				set_fleet_stance = aggressive
+				set_aggro_range_measure_from = self
+				set_aggro_range = 800
+			}
+		}
+	}
+}
+create_fengraomin_ships_0 = {
+	create_ship_design = {
+		design = "NAME_Reaver"
+	}
+	while = {
+		count = 10
+		create_ship = {
+			name = random
+			design = last_created_design
+			graphical_culture = "pirate_01"
+		}
+	}
+}
+create_fengraomin_starbase = {
+	create_starbase = {
+		size = "starbase_marauder"
+		owner = event_target:fengraomin_starbase_owner
+	}
+}
+communication_masked_fool = {
+	hidden_effect = {
+		country_event = { id = path_country.3 }
+		establish_communications_no_message = event_target:masked_fool_country
+	}
+}
+communication_Aha = {
+	hidden_effect = {
+		country_event = { id = path_country.2 }
+	}
+}
+communication_mourning_actors = {
+	hidden_effect = {
+		country_event = { id = path_country.5 }
+		establish_communications_no_message = event_target:mourning_actors_country
+	}
+}
+aha_reward = {
+	if = {
+		locked_random_list = {
+			33 = {
+				owner = { add_resource = { huanyudu = 800 } }
+			}
+			33 = {
+				owner = { add_resource = { huanyudu = 1200 } }
+			}
+			33 = {
+				owner = { add_resource = { huanyudu = 2000 } }
+			}
+		}
+		hidden_effect = {
+			country_event = { id = path_country.3 }
+		}
+	}
+}
+fengraomin_cost_food = {
+	if = {
+		limit = { has_country_flag = fengraomin_tribute_1@event_target:fengraomin_country }
+		add_resource = { food = -10000 }
+	}
+	if = {
+		limit = { has_country_flag = fengraomin_tribute_2@event_target:fengraomin_country }
+		add_resource = { food = -20000 }
+	}
+	if = {
+		limit = { has_country_flag = fengraomin_tribute_3@event_target:fengraomin_country }
+		add_resource = { food = -30000 }
+	}
+	if = {
+		limit = { has_country_flag = fengraomin_tribute_4@event_target:fengraomin_country }
+		add_resource = { food = -50000 }
+	}
+	if = {
+		limit = { has_country_flag = fengraomin_tribute_5@event_target:fengraomin_country }
+		add_resource = { food = -100000 }
+	}
+	if = {
+		limit = { has_country_flag = fengraomin_tribute_6@event_target:fengraomin_country }
+		add_resource = { food = -200000 }
+	}
+}
+create_fengraomin_robber = {
+	if = {
+		limit = { years_passed < 10 }
+		while = {
+			count = 20
+			create_ship = {
+				name = random
+				design = "NAME_Black_Earl"
+				prefix = no
+				graphical_culture = "DOT_SR_humanoid_01"
+			}
+		}
+		while = {
+			count = 40
+			create_ship = {
+				name = random
+				design = "NAME_Lancer"
+				prefix = no
+				graphical_culture = "DOT_SR_humanoid_01"
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			years_passed < 20
+		}
+		while = {
+			count = 50
+			create_ship = {
+				name = random
+				design = "NAME_Black_Earl"
+				prefix = no
+				graphical_culture = "DOT_SR_humanoid_01"
+			}
+		}
+		while = {
+			count = 40
+			create_ship = {
+				name = random
+				design = "NAME_Void_Champion"
+				prefix = no
+				graphical_culture = "DOT_SR_humanoid_01"
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			years_passed < 30
+		}
+		while = {
+			count = 90
+			create_ship = {
+				name = random
+				design = "NAME_Black_Earl"
+				prefix = no
+				graphical_culture = "DOT_SR_humanoid_01"
+			}
+		}
+		while = {
+			count = 10
+			create_ship = {
+				name = random
+				design = space_dragon_baby
+				prefix = no
+				graphical_culture = "DOT_SR_humanoid_01"
+			}
+		}
+		while = {
+			count = 120
+			create_ship = {
+				name = random
+				design = "NAME_Void_Champion"
+				prefix = no
+				graphical_culture = "DOT_SR_humanoid_01"
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			years_passed < 40
+		}
+		while = {
+			count = 160
+			create_ship = {
+				name = random
+				design = "NAME_Black_Earl"
+				prefix = no
+				graphical_culture = "DOT_SR_humanoid_01"
+			}
+		}
+		while = {
+			count = 40
+			create_ship = {
+				name = random
+				design = space_dragon_baby
+				prefix = no
+				graphical_culture = "DOT_SR_humanoid_01"
+			}
+		}
+		while = {
+			count = 25
+			create_ship = {
+				name = random
+				design = middle_fengrao_leader
+				prefix = no
+				graphical_culture = "DOT_SR_humanoid_01"
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			years_passed < 60
+		}
+		while = {
+			count = 320
+			create_ship = {
+				name = random
+				design = "NAME_Black_Earl"
+				prefix = no
+				graphical_culture = "DOT_SR_humanoid_01"
+			}
+		}
+		while = {
+			count = 120
+			create_ship = {
+				name = random
+				design = space_dragon_baby
+				prefix = no
+				graphical_culture = "DOT_SR_humanoid_01"
+			}
+		}
+		while = {
+			count = 60
+			create_ship = {
+				name = random
+				design = middle_fengrao_leader
+				prefix = no
+				graphical_culture = "DOT_SR_humanoid_01"
+			}
+		}
+	}
+	else = {
+		while = {
+			count = 560
+			create_ship = {
+				name = random
+				design = "NAME_Black_Earl"
+				prefix = no
+				graphical_culture = "DOT_SR_humanoid_01"
+			}
+		}
+		while = {
+			count = 180
+			create_ship = {
+				name = random
+				design = space_dragon_baby
+				prefix = no
+				graphical_culture = "DOT_SR_humanoid_01"
+			}
+		}
+		while = {
+			count = 80
+			create_ship = {
+				name = random
+				design = middle_fengrao_leader
+				prefix = no
+				graphical_culture = "DOT_SR_humanoid_01"
+			}
+		}
+		while = {
+			count = 1
+			create_ship = {
+				name = random
+				design = middle_fengrao_commander
+				prefix = no
+				graphical_culture = "DOT_SR_humanoid_01"
+			}
+		}
+	}
 }

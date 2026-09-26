@@ -49,6 +49,11 @@ country_event = {
 		give_technology = { tech = tech_honkai_star_rail_hull_t1 message = no }
 		give_technology = { tech = tech_honkai_star_rail_power_t1 message = no }
 		give_technology = { tech = tech_science_arkship message = no }
+		#星穹列车虽然是游牧起源，但同样允许建造普通恒星基地（见 common/ship_sizes、common/technology 的 zz_Astral_Express_* 覆盖）
+		give_technology = { tech = tech_starbase_1 message = no }
+		give_technology = { tech = tech_starbase_2 message = no }
+		give_technology = { tech = tech_solar_panel_network message = no }
+		give_technology = { tech = tech_space_defense_station_1 message = no }
 		add_research_option = tech_galactic_archivism
 		# set_policy = {	}
 		random_owned_fleet = {
@@ -82,26 +87,7 @@ country_event = {
 							fleet = {
 							}
 							colony = {
-								remove_building = building_colony_shelter
-								clear_blockers = yes
-								clear_deposits = yes
-								clear_planet_modifiers = yes#防止出现原版殖民地的各种奇怪事件
-								remove_district = district_city
-								add_district = district_train_planet_1
-								add_district = district_train_planet_1
-								add_district = district_train_planet_2
-								add_district = district_train_planet_2
-								add_district = district_train_planet_3
-								add_district = district_train_planet_3
-								add_district = district_train_planet_4
-								add_district = district_train_planet_4
-								add_district = district_train_planet_5
-								add_district = district_train_planet_5
-								add_district = district_train_planet_5
-								remove_building = building_commercial_zone
 								add_building = building_capital
-								add_building = building_holo_theatres
-								#generate_start_pops = yes
 								set_capital = yes
 								while = {
 									count = 2
@@ -162,6 +148,43 @@ country_event = {
 				}
 				save_global_event_target_as = Dvalin_General_Exist
 			}
+		}
+		# 驾驶员：原神·璃月七星「玉衡」刻晴
+		create_species = {
+			name = "Star_Rail"
+			class = "Star_Rail"
+			portrait = keqing
+			traits = { trait = "trait_enduring" }
+			immortal = yes
+			allow_negative_traits = no
+			effect = { save_event_target_as = keqing_species }
+		}
+		create_leader = {
+			class = commander
+			species = event_target:keqing_species
+			name = "NAME_keqing"
+			skill = 5
+			gender = female
+			tier = leader_tier_legendary
+			immortal = yes
+			background_ethic = ethic_materialist
+			skip_background_generation = yes
+			custom_description = keqing_desc
+			custom_catch_phrase = keqing_catch_phrase
+			hide_age = yes
+			randomize_traits = no
+			effect = {
+				set_leader_flag = legendary_leader
+				set_leader_flag = leader_death_events_blocked
+				set_leader_flag = immune_to_negative_traits
+				set_leader_flag = keqing
+				remove_all_positive_traits = yes
+				add_trait = leader_trait_yuheng
+				save_global_event_target_as = keqing_leader
+			}
+		}
+		event_target:Dvalin_General_Exist = {
+			assign_leader = event_target:keqing_leader
 		}
 	}
 	diplomatic = yes #是否启用外交界面

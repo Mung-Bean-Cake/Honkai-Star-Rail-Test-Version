@@ -8,7 +8,6 @@ country_event = {
         has_origin = origin_StellaronHunter
     }
     immediate = {
-        set_global_flag = hunter_begin
         from = {
             if = {
                 limit = {
@@ -120,16 +119,16 @@ country_event = {
                 max = 1000
             }
             add_monthly_resource_mult = {
-                resource = energy
+                resource = yuzhousuipian
                 value = 12
                 min = 5000
                 max = 50000
             }
             add_monthly_resource_mult = {
-                resource = exotic_gases
+                resource = huanyudu
                 value = 12
-                min = 200
-                max = 2000
+                min = 20
+                max = 200
             }
         }
     }
@@ -210,7 +209,7 @@ country_event = {
                         trait = leader_trait_crusader_2
                     }
                     save_event_target_as = cihang_admiral
-                }
+                }         
                 create_fleet = {
                     name = "NAME_cihang_Fleet"
                     effect = {
@@ -234,7 +233,7 @@ country_event = {
                         set_location = event_target:cihang_fleet_planet
                         set_fleet_stance = aggressive
                         set_aggro_range_measure_from = return_point
-                        set_aggro_range = 500
+                        set_aggro_range = 800
                         assign_leader = last_created_leader
                         queue_actions = {
                             repeat = {
@@ -602,7 +601,7 @@ country_event = {
                         upgradable = no
                     }
                     set_fleet_stance = aggressive
-                    set_fleet_flag = IPC_helper_01
+                    save_event_target_as = IPC_helper_01
                     set_location = root.capital_scope
                 }
             }
@@ -628,14 +627,14 @@ ship_event = {
         hidden_effect = {
             from = {
                 fleet = {
-                    fleet_event = { id = DOT_SR_Hunter.17-1}
+                    fleet_event = { id = DOT_SR_Hunter.40}
                 }
             }
         }
     }
 }
 fleet_event = {
-    id = DOT_SR_Hunter.17-1
+    id = DOT_SR_Hunter.40
     hide_window = yes
     is_triggered_only = yes
     immediate = {
@@ -959,7 +958,13 @@ country_event = {
                     add_modifier = {
                         modifier = aha_joke
                         days = 1080
-                    } 
+                    }
+                    add_monthly_resource_mult = {
+                        resource = huanyudu
+                        value = 12
+                        min = 50
+                        max = 250
+                    }
                 }
             }
         }
@@ -986,6 +991,12 @@ country_event = {
                 owner = {
                     every_owned_megastructure = {
                         delete_megastructure = this
+                    }
+                    add_monthly_resource_mult = {
+                        resource = huanyudu
+                        value = 12
+                        min = 120
+                        max = 2000
                     }
                     remove_country_flag = aha_joke_2
                     add_modifier = {
@@ -1041,7 +1052,7 @@ country_event = {
                 }
             }
             fengrao_shield_burst_medium_effect = { RADIUS = 300 DAMAGE = 80000 SHIELD_DAMAGE = 200000}
-                }
+        }
         else_if = {
             limit = {
                 exists = fromfrom
@@ -1059,8 +1070,27 @@ country_event = {
                     save_event_target_as = fengrao_burst_owner
                 }
             }
-            fengrao_shield_burst_large_effect = { RADIUS = 600 DAMAGE = 200000 SHIELD_DAMAGE = 500000}
+            fengrao_shield_burst_large_effect = { RADIUS = 450 DAMAGE = 200000 SHIELD_DAMAGE = 500000}
         }  
+        else_if = {
+            limit = {
+                exists = fromfrom
+                fromfrom = {
+                    fromfrom = {
+                        has_component = fengrao_burst_shield_extra_large
+                    }
+                }
+            }
+            fromfrom = {
+                save_event_target_as = fengrao_burst_center
+            }
+            fromfrom = {
+                owner = {
+                    save_event_target_as = fengrao_burst_owner
+                }
+            }
+            fengrao_shield_burst_extra_large_effect = { RADIUS = 600 DAMAGE = 1800000 SHIELD_DAMAGE = 2400000}
+        }
     }
 }
 #30-36 能量币建筑事件
@@ -1257,5 +1287,29 @@ country_event = {
         start_situation = {
             type = situation_hunter_back_ancient
         }
+    }
+}
+country_event = {
+    id = DOT_SR_Hunter.39
+    title = DOT_SR_Hunter.39.title
+    desc = DOT_SR_Hunter.39.desc
+    is_triggered_only = yes
+    picture = aha_angry
+    trigger = {
+        has_deficit = huanyudu
+        NOR = {
+            has_country_flag = received_aha_gift
+        }
+    }
+    immediate = {
+        set_country_flag = received_aha_gift
+        add_resource = { alloys = -5000 }
+        add_resource = { energy = -10000 }
+        add_resource = { trade = -5000 } 
+        add_resource = { food = -10000 }
+        add_resource = { yuzhousuipian = -10000 }
+        add_resource = { consumer_goods = -10000 }
+        add_resource = { sr_zro = -1000 }
+        add_resource = { minerals = -10000} 
     }
 }

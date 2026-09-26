@@ -12,8 +12,32 @@ honkai_star_rail_default_govement_trigger = {
         has_authority = auth_lieshou
         has_authority = auth_yaliluo
         has_authority = auth_global_giant_enterprise
+        has_authority = auth_Astral_Express
     }
 }
+
+# 解锁游牧
+has_nomads_dlc = {
+    optimize_memory
+    exists = owner
+    owner = {
+        OR = {
+            has_origin = origin_astral_express
+            has_origin = origin_Xianzhou
+        }
+    }
+}
+nomad_can_settle_trigger = {
+    optimize_memory
+    exists = owner
+    owner = {
+        OR = {
+            has_origin = origin_astral_express
+            has_origin = origin_Xianzhou
+        }
+    }
+}
+
 is_antimatter_must = {
     optimize_memory
     exists = owner
@@ -111,6 +135,7 @@ is_path_slot = {
 }
 is_special_megastructure = {
     OR = {
+        is_megastructure_type = grand_archive
         is_megastructure_type = deep_space_citadel_0
         is_megastructure_type = deep_space_citadel_1
         is_megastructure_type = deep_space_citadel_2
@@ -118,6 +143,32 @@ is_special_megastructure = {
         is_megastructure_type = habitat_central_complex
         is_megastructure_type = habitat_central_complex_ruined
         is_megastructure_type = habitat_central_complex_restored
+    }
+}
+fengraomin_food_tribute = {
+    if = {
+        limit = { has_country_flag = fengraomin_tribute_6@event_target:fengraomin_country }
+        resource_stockpile_compare = { resource = food value >= 200000 }
+    }
+    else_if = {
+        limit = { has_country_flag = fengraomin_tribute_5@event_target:fengraomin_country }
+        resource_stockpile_compare = { resource = food value >= 100000 }
+    }
+    else_if = {
+        limit = { has_country_flag = fengraomin_tribute_4@event_target:fengraomin_country }
+        resource_stockpile_compare = { resource = food value >= 50000 }
+    }
+    else_if = {
+        limit = { has_country_flag = fengraomin_tribute_3@event_target:fengraomin_country }
+        resource_stockpile_compare = { resource = food value >= 30000 }
+    }
+    else_if = {
+        limit = { has_country_flag = fengraomin_tribute_2@event_target:fengraomin_country }
+        resource_stockpile_compare = { resource = food value >= 20000 }
+    }
+    else_if = {
+        limit = { has_country_flag = fengraomin_tribute_1@event_target:fengraomin_country }
+        resource_stockpile_compare = { resource = food value >= 10000 }
     }
 }
 is_hsr_arkship_starbase = {
@@ -128,6 +179,19 @@ is_hsr_arkship_starbase = {
         has_starbase_size = xianzhou_planet_fleet
     }
 }
+
+#4.4.6 中 has_starbase_size 仅支持 starbase 作用域；供国家作用域调用（例如 job 的 owner? = {}）
+is_hsr_arkship_starbase_owned = {
+    any_owned_starbase = {
+        OR = {
+            has_starbase_size = herta_station_fleet
+            has_starbase_size = luosi_planet_fleet
+            has_starbase_size = train_planet_fleet
+            has_starbase_size = xianzhou_planet_fleet
+        }
+    }
+}
+
 #恒星基地（方舟）模块建筑
 Star_Rail_arkship_moudles_and_buildings_potential_built = {
     is_hsr_arkship_starbase = yes

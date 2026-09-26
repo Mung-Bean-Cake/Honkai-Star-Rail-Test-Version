@@ -1,0 +1,343 @@
+# ====================
+# 星穹列车 · 恒星基地科技解锁 BY WorkBuddy
+# ====================
+# 目的：原版恒星基地相关科技都带 potential = { is_nomadic = no }，
+# 游牧势力永远研究不到、也拿不到开局赠送，于是「能造前哨站但永远升不了级」。
+# 这里为星穹列车起源（origin_Astral_Express）开例外。
+#
+# 注意：本文件是【整块复制原版再改一处】，不要精简，否则会丢字段。
+# 原版出处：common/technology/00_eng_tech.txt
+
+# 恒星级太阳能板（恒星基地建筑）
+tech_solar_panel_network = {
+	area = engineering
+	tier = 0
+	category = { voidcraft }
+	prerequisites = { "tech_starbase_2" }
+	start_tech = yes
+
+	potential = {
+		OR = {
+			is_nomadic = no
+			has_origin = origin_Astral_Express	# ← 星穹列车例外
+		}
+	}
+
+	starting_potential = {
+		OR = {
+			is_nomadic = no
+			has_origin = origin_Astral_Express	# ← 星穹列车例外
+		}
+	}
+}
+
+# 前哨站
+tech_starbase_1 = {
+	cost = 0
+	area = engineering
+	start_tech = yes
+	category = { voidcraft }
+	prerequisites = { "tech_space_construction" }
+	tier = 0
+
+	potential = {
+		OR = {
+			is_nomadic = no
+			has_origin = origin_Astral_Express	# ← 星穹列车例外
+		}
+	}
+
+	prereqfor_desc = {
+		ship = {
+			title = "TECH_UNLOCK_OUTPOST_CONSTRUCTION_TITLE"
+			desc = "TECH_UNLOCK_OUTPOST_CONSTRUCTION_DESC"
+		}
+	}
+
+	# unlocks Outposts
+
+	starting_potential = {
+		OR = {
+			is_nomadic = no
+			has_origin = origin_Astral_Express	# ← 星穹列车例外
+		}
+	}
+}
+
+
+# 星港
+tech_starbase_2 = {
+	cost = 0
+	area = engineering
+	start_tech = yes
+	category = { voidcraft }
+	tier = 0
+	prerequisites = { "tech_starbase_1" }
+
+	potential = {
+		OR = {
+			is_nomadic = no
+			has_origin = origin_Astral_Express	# ← 星穹列车例外
+		}
+	}
+
+	prereqfor_desc = {
+		ship = {
+			title = "TECH_UNLOCK_STARPORT_CONSTRUCTION_TITLE"
+			desc = "TECH_UNLOCK_STARPORT_CONSTRUCTION_DESC"
+		}
+	}
+
+	# unlocks Starport
+	ai_weight = {
+		factor = @ai_starbase_types_factor
+		modifier = {
+			factor = @shattered_ring_ai_tech_factor
+			has_origin = origin_shattered_ring
+		}
+	}
+
+	starting_potential = {
+		OR = {
+			is_nomadic = no
+			has_origin = origin_Astral_Express	# ← 星穹列车例外
+		}
+	}
+}
+
+# 星堡
+tech_starbase_3 = {
+	cost = @tier2cost2
+	area = engineering
+	category = { voidcraft }
+	tier = 2
+	prerequisites = { "tech_starbase_2" }
+	weight = @tier2weight2
+
+	potential = {
+		OR = {
+			is_nomadic = no
+			has_origin = origin_Astral_Express	# ← 星穹列车例外
+		}
+	}
+
+	# unlocks Starhold
+	weight_modifier = {
+		modifier = {
+			factor = 0.1
+			NOT = { years_passed > 20 }
+		}
+		modifier = {
+			factor = 10
+			any_neighbor_country = {
+				has_technology = tech_starbase_3
+			}
+		}
+		modifier = {
+			factor = 2
+			years_passed > 30
+		}
+		modifier = {
+			factor = 3
+			years_passed > 35
+		}
+		modifier = {
+			factor = 4
+			years_passed > 40
+		}
+		modifier = {
+			factor = 5
+			count_starbase_sizes = {
+				starbase_size = starbase_starport
+				count >= 3
+			}
+		}
+		modifier = {
+			factor = 1.25
+			has_tradition = tr_unyielding_adopt
+		}
+		modifier = {
+			factor = 10
+			has_modifier = agenda_impenetrable_border_finish
+		}
+	}
+
+	prereqfor_desc = {
+		ship = {
+			title = "TECH_UNLOCK_STARHOLD_CONSTRUCTION_TITLE"
+			desc = "TECH_UNLOCK_STARHOLD_CONSTRUCTION_DESC"
+		}
+	}
+
+	ai_weight = {
+		factor = @ai_starbase_types_factor
+		modifier = {
+			factor = @shattered_ring_ai_tech_factor
+			has_origin = origin_shattered_ring
+		}
+	}
+}
+
+# 星垒
+tech_starbase_4 = {
+	cost = @tier3cost2
+	area = engineering
+	category = { voidcraft }
+	tier = 3
+	prerequisites = { "tech_starbase_3" }
+	weight = @tier3weight2
+
+	potential = {
+		OR = {
+			is_nomadic = no
+			has_origin = origin_Astral_Express	# ← 星穹列车例外
+		}
+	}
+
+	# unlocks Star Fortress
+	weight_modifier = {
+		modifier = {
+			factor = 0.1
+			NOT = { years_passed > 50 }
+		}
+		modifier = {
+			factor = 10
+			any_neighbor_country = {
+				has_technology = tech_starbase_4
+			}
+		}
+		modifier = {
+			factor = 2
+			years_passed > 60
+		}
+		modifier = {
+			factor = 3
+			years_passed > 65
+		}
+		modifier = {
+			factor = 4
+			years_passed > 70
+		}
+		modifier = {
+			factor = 5
+			count_starbase_sizes = {
+				starbase_size = starbase_starhold
+				count >= 3
+			}
+		}
+		modifier = {
+			factor = 1.25
+			has_tradition = tr_unyielding_adopt
+		}
+		modifier = {
+			factor = 5
+			has_modifier = agenda_impenetrable_border_finish
+		}
+	}
+
+	prereqfor_desc = {
+		ship = {
+			title = "TECH_UNLOCK_STAR_FORTRESS_CONSTRUCTION_TITLE"
+			desc = "TECH_UNLOCK_STAR_FORTRESS_CONSTRUCTION_DESC"
+		}
+	}
+
+	ai_weight = {
+		factor = @ai_starbase_types_factor
+
+	}
+}
+
+# 星际要塞
+tech_starbase_5 = {
+	cost = @tier4cost2
+	area = engineering
+	category = { voidcraft }
+	tier = 4
+	prerequisites = { "tech_starbase_4" }
+	weight = @tier4weight2
+
+	potential = {
+		OR = {
+			is_nomadic = no
+			has_origin = origin_Astral_Express	# ← 星穹列车例外
+		}
+	}
+
+	# unlocks Citadel
+	weight_modifier = {
+		modifier = {
+			factor = 0.1
+			NOT = { years_passed > 70 }
+		}
+		modifier = {
+			factor = 10
+			any_neighbor_country = {
+				has_technology = tech_starbase_5
+			}
+		}
+		modifier = {
+			factor = 2
+			years_passed > 90
+		}
+		modifier = {
+			factor = 3
+			years_passed > 95
+		}
+		modifier = {
+			factor = 4
+			years_passed > 100
+		}
+		modifier = {
+			factor = 5
+			count_starbase_sizes = {
+				starbase_size = starbase_starfortress
+				count >= 3
+			}
+		}
+		modifier = {
+			factor = 1.25
+			has_tradition = tr_unyielding_adopt
+		}
+		modifier = {
+			factor = 5
+			has_modifier = agenda_impenetrable_border_finish
+		}
+	}
+
+	prereqfor_desc = {
+		ship = {
+			title = "TECH_UNLOCK_CITADEL_CONSTRUCTION_TITLE"
+			desc = "TECH_UNLOCK_CITADEL_CONSTRUCTION_DESC"
+		}
+	}
+
+	ai_weight = {
+		factor = @ai_starbase_types_factor
+
+	}
+}
+
+# 防御平台
+tech_space_defense_station_1 = {
+	cost = 0
+	tier = 0
+	area = engineering
+	start_tech = yes
+	category = { voidcraft }
+	prerequisites = { "tech_starbase_1" }
+
+	potential = {
+		OR = {
+			is_nomadic = no
+			has_origin = origin_Astral_Express	# ← 星穹列车例外
+		}
+	}
+
+	starting_potential = {
+		OR = {
+			is_nomadic = no
+			has_origin = origin_Astral_Express	# ← 星穹列车例外
+		}
+	}
+}

@@ -1,0 +1,116 @@
+# ============================================================
+#  星穹铁道 × 原神 · 提瓦特联动 —— 提瓦特星系
+#  该星系在开局由 DOTGI_teyvat.101 通过 spawn_system 生成在
+#  目标帝国首都星系附近，且 hyperlane = no（只能通过虫洞抵达）。
+# ============================================================
+
+DOTGI_teyvat_system = {
+	name = "DOTGI_teyvat_system"
+	class = "sc_g"
+	max_instances = 1
+	usage = misc_system_init
+	flags = { DOTGI_teyvat_star }
+	asteroid_belt = {
+		type = rocky_asteroid_belt
+		radius = 110
+	}
+
+	# ---------- 恒星 ----------
+	planet = {
+		class = star
+		orbit_distance = 0
+		init_effect = {
+			add_deposit = d_physics_5
+			add_deposit = d_society_5
+			add_deposit = d_engineering_5
+			add_deposit = d_energy_5
+		}
+	}
+
+	# ---------- 提瓦特（盖亚世界 · 提瓦特文明母星） ----------
+	planet = {
+		name = "DOTGI_Teyvat"
+		class = "pc_gaia"
+		orbit_distance = 30
+		orbit_angle = 45
+		size = 30
+		has_ring = no
+		flags = { DOTGI_teyvat_world }
+		init_effect = {
+			clear_deposits = yes
+			# 地表：极其富饶
+			add_deposit = d_green_hills
+			add_deposit = d_lush_jungle
+			add_deposit = d_rich_mountain
+			add_deposit = d_prosperous_mesa
+			add_deposit = d_tempestous_mountain
+			add_deposit = d_submerged_ore_veins
+			add_deposit = d_ore_rich_caverns
+			add_deposit = d_bountiful_plains
+			# 轨道资源：战略资源富集
+			add_deposit = d_exotic_gases_5
+			add_deposit = d_rare_crystals_5
+			add_deposit = d_volatile_motes_5
+			add_deposit = d_zro_deposit_5
+			add_deposit = d_dark_matter_deposit_3
+			add_deposit = d_alloys_5
+			add_deposit = d_minerals_5
+			add_deposit = d_trade_value_5
+			save_global_event_target_as = DOTGI_teyvat_planet
+			solar_system = {
+				save_global_event_target_as = DOTGI_teyvat_system
+			}
+		}
+		moon = {
+			name = "DOT_SY"
+			class = pc_relic
+			orbit_distance = 10
+			orbit_angle = 100
+			size = 10
+			has_ring = yes
+			init_effect = {
+				prevent_anomaly = yes
+				set_deposit = d_volatile_motes_5
+				# create_archaeological_site = site_the_last_stand
+				create_archaeological_site = site_from_gateway_sent
+				# create_archaeological_site = larion_digsite
+				add_deposit = d_ore_rich_caverns
+				add_deposit = d_rich_mountain
+				add_deposit = d_green_hills
+				add_deposit = d_lush_jungle
+				add_deposit = d_tempestous_mountain
+				add_deposit = d_prosperous_mesa
+				add_deposit = d_submerged_ore_veins
+			}
+		}
+	}
+
+	# ---------- 外围：虚空残响（贫瘠但资源尚可） ----------
+	planet = {
+		class = "pc_barren"
+		orbit_distance = 25
+		orbit_angle = 180
+		size = 18
+		init_effect = {
+			prevent_anomaly = yes
+			clear_deposits = yes
+			add_deposit = d_minerals_5
+			add_deposit = d_physics_5
+			add_deposit = d_engineering_5
+			add_deposit = d_society_5
+		}
+	}
+
+	planet = {
+		class = "pc_gas_giant"
+		orbit_distance = 20
+		orbit_angle = 300
+		size = 22
+		init_effect = {
+			prevent_anomaly = yes
+			clear_deposits = yes
+			add_deposit = d_exotic_gases_5
+			add_deposit = d_energy_5
+		}
+	}
+}

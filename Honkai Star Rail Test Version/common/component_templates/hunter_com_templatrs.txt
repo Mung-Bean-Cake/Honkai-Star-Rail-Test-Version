@@ -119,6 +119,49 @@ utility_component_template = {
     show_tech_unlock_if = { country_uses_bio_ships = no }
     ai_weight = { weight = 4 }
 }
+utility_component_template = {
+    key = "aha_power_reactor"
+    size = small
+    icon = "aha_power_reactor"
+    icon_frame = 1
+    power = 1400
+    resources = {
+        category = ship_components
+        cost = { huanyudu = 400 }
+        upkeep = {
+            huanyudu = 2
+        }
+    }
+    modifier = {
+        SHIP_ENGAGEMENT_RANGE_MULT = 0.3
+        ship_psionic_aura_fire_rate_mult = 0.2
+    }
+    component_set = "aha_power_reactor"
+    prerequisites = {  }
+    ai_weight = { weight = 0 }
+}
+utility_component_template = {
+    key = "aha_power_reactor_2"
+    size = small
+    icon = "aha_power_reactor"
+    icon_frame = 1
+    power = 3600
+    resources = {
+        category = ship_components
+        cost = { huanyudu = 1500 }
+        upkeep = {
+            yuzhousuipian = 5
+        }
+    }
+    modifier = {
+        SHIP_ENGAGEMENT_RANGE_MULT = 0.3
+        ship_emergency_ftl_mult = -0.2
+        ship_size_damage_factor = 0.5
+    }
+    component_set = "aha_power_reactor"
+    prerequisites = { tech_aha_power_reactor }
+    ai_weight = { weight = 0 }
+}
 ######################################
 ###  推进器  dawn_thruster_components ###
 ######################################
@@ -291,7 +334,7 @@ utility_component_template = {
     }
     component_set = "dawn_ftl_components"
     prerequisites = { tech_yitai_coding }
-    upgrades_to = "DAWN_JUMP_DRIVE"
+    upgrades_to = "DAWN_WRAP_DRIVE_1"
     show_tech_unlock_if = { country_uses_bio_ships = no }
     ai_weight = { weight = 3 }
 }
@@ -811,6 +854,7 @@ utility_component_template = {
         ship_shield_add = 2500
         ship_shield_regen_add_static = 150
         ship_shield_hardening_add = 0.2
+        SHIP_ARMOR_HARDENING_ADD = 0.1
     }
     prerequisites = { tech_fengrao_burst_shield }
     show_tech_unlock_if = { country_uses_bio_ships = no }
@@ -835,7 +879,9 @@ utility_component_template = {
     modifier = {
         ship_shield_add = 6000
         ship_shield_regen_add_static = 480
+        SHIP_ARMOR_REGEN_ADD_STATIC = 500
         ship_shield_hardening_add = 0.36
+        SHIP_ARMOR_HARDENING_ADD = 0.2
         ship_hull_add = 5000
     }
     prerequisites = { tech_fengrao_burst_shield }
@@ -862,12 +908,234 @@ utility_component_template = {
     modifier = {
         ship_shield_add = 12000
         ship_shield_regen_add_static = 1200
+        SHIP_ARMOR_REGEN_ADD_STATIC = 800
         ship_shield_hardening_add = 0.6
+        SHIP_ARMOR_HARDENING_ADD = 0.4
+        SHIP_DAMAGE_REDUCTION_ADD = 1
         ship_hull_add = 10000
     }
     prerequisites = { tech_fengrao_burst_shield }
     show_tech_unlock_if = { country_uses_bio_ships = no }
     ai_weight = { weight = 0 }
+}
+utility_component_template = {
+    key = "fengrao_burst_shield_extra_large"
+    size = extra_large
+    icon = "fengrao_burst_shield"
+    icon_frame = 1
+    power = -180
+    resources = {
+        category = ship_components
+        cost = { 
+            sr_zro = 20
+            sr_dark_matter = 15
+            yuzhousuipian = 2100 
+        }
+        upkeep = {
+        }
+    }
+    component_set = "fengrao_burst_shield"
+    modifier = {
+        ship_shield_add = 28000
+        ship_shield_regen_add_static = 3000
+        SHIP_ARMOR_REGEN_ADD_STATIC = 2400
+        SHIP_ARMOR_HARDENING_ADD = 0.6
+        ship_shield_hardening_add = 1.2
+        SHIP_DAMAGE_REDUCTION_ADD = 2
+        ship_hull_add = 40000
+    }
+    prerequisites = { tech_fengrao_burst_shield }
+    show_tech_unlock_if = { country_uses_bio_ships = no }
+    ai_weight = { weight = 0 }
+}
+#阿哈舰载机
+strike_craft_component_template = {
+    key = "aha_strike_craft"
+    size = LARGE
+    entity = "bomber_entity"
+    weapon_type = point_defence
+    projectile_gfx = "scout_laser_1"
+    power = -60
+    resources = {
+        category = ship_components
+        cost = {
+            huanyudu = 50
+        }
+        upkeep = {
+        }
+    }
+    potential = {
+    }
+    count = 32
+    regeneration_per_day = 4
+    launch_time = 8
+    damage = { min = 28 max = 42 }
+    cooldown = 16
+    range = 40
+    engagement_range = 180
+    accuracy = 0.5
+    tracking = 0.90
+    health = 45
+    armor = 20
+    shield = 30
+    evasion = 0.20
+    speed = 960
+    rotation_speed = 0.5
+    acceleration = 1
+    shield_penetration = 4
+    hull_damage = 1.5
+    armor_damage = 3
+    ship_behavior = "fighters_behavior"
+    icon = "aha_strike_craft"
+    icon_frame = 1
+    component_set = "aha_strike_craft"
+    tags = { weapon_type_strike_craft }
+    ai_tags = { weapon_role_point_defense carrier }
+    point_defence_targets = { "strike_craft" }
+    prerequisites = { tech_aha_strike_craft }
+}
+#阿哈鱼雷
+weapon_component_template = {
+    key = "aha_missile_1"
+    size = torpedo
+    icon = "aha_missile"
+    icon_frame = 1
+    type = missile
+    firing_arc = 180.0
+    show_tech_unlock_if = {
+        has_origin = origin_StellaronHunter
+    }
+    prerequisites = { tech_aha_missile_1 }
+    power = -80
+    damage = { min = 360 max = 820 }
+    windup = {
+        min = 1
+        max = 40
+    }
+    missile_health = 50
+    missile_armor = 40
+    missile_evasion = 0.8
+    missile_speed = 40
+    range = 160
+    missile_retarget_range = 180
+    accuracy = 0.6
+    tracking = 0.40
+    shield_penetration = 3
+    total_fire_time = 180
+    shield_damage = 8
+    hull_damage = 0.6
+    armor_damage = 4.8
+    armor_penetration = 0.3
+    component_set = "aha_missile_1"
+    projectile_gfx = "swarmer_missiles"
+    tags = { weapon_type_explosive g_slot }
+    ai_tags = { weapon_role_artillery artillery artillery_stealth }
+    ai_tag_weight = 0
+    resources = {
+        category = ship_components
+        cost = {
+            huanyudu = 25
+        }
+        upkeep = {
+        }
+    }
+}
+weapon_component_template = {
+    key = "aha_missile_2"
+    size = torpedo
+    icon = "aha_missile_2"
+    icon_frame = 1
+    type = missile
+    firing_arc = 270.0
+    show_tech_unlock_if = {
+        has_origin = origin_StellaronHunter
+    }
+    prerequisites = { tech_aha_missile_research_aoe }
+    power = -180
+    damage = { min = 560 max = 1080 }
+    windup = {
+        min = 5
+        max = 20
+    }
+    missile_health = 500
+    missile_armor = 400
+    missile_evasion = 0.2
+    missile_speed = 6
+    collateral_range = 10
+    collateral_damage = {min = 50 max = 1000}
+    range = 300
+    missile_retarget_range = 120
+    accuracy = 0.9
+    tracking = 0.90
+    shield_penetration = 0.7
+    total_fire_time = 72
+    shield_damage = 0.8
+    hull_damage = 10
+    armor_damage = 0.5
+    armor_penetration = 0.4
+    component_set = "aha_missile_2"
+    projectile_gfx = "swarmer_missiles"
+    tags = { weapon_type_explosive g_slot energy_torpedoes }
+    ai_tags = { weapon_role_artillery artillery artillery_stealth }
+    ai_tag_weight = 0
+    resources = {
+        category = ship_components
+        cost = {
+            huanyudu = 90
+        }
+        upkeep = {
+        }
+    }
+}
+weapon_component_template = {
+    key = "aha_missile_2_medium"
+    size = medium
+    icon = "aha_missile_2"
+    icon_frame = 1
+    type = missile
+    firing_arc = 270.0
+    potential = {
+    }
+    show_tech_unlock_if = {
+        has_origin = origin_StellaronHunter
+    }
+    prerequisites = { tech_aha_missile_research_chain }
+    power = -220
+    damage = { min = 560 max = 1080 }
+    windup = {
+        min = 5
+        max = 20
+    }
+    chain_damage = { min = 200 max = 800}
+    chain_range = 20
+    chain_count = 5
+    missile_health = 500
+    missile_armor = 400
+    missile_evasion = 0.2
+    missile_speed = 6
+    range = 300
+    missile_retarget_range = 120
+    accuracy = 0.9
+    tracking = 0.90
+    shield_penetration = 0.7
+    total_fire_time = 72
+    shield_damage = 0.8
+    hull_damage = 10
+    armor_damage = 0.5
+    armor_penetration = 0.4
+    component_set = "aha_missile_2"
+    projectile_gfx = "swarmer_missiles"
+    tags = { weapon_type_explosive g_slot energy_torpedoes }
+    ai_tags = { weapon_role_artillery artillery artillery_stealth }
+    ai_tag_weight = 0
+    resources = {
+        category = ship_components
+        cost = {
+            huanyudu = 120
+        }
+        upkeep = {
+        }
+    }
 }
 utility_component_template = {
     key = "shield_killer_fengrao"

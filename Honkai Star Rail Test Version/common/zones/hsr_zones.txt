@@ -45,24 +45,27 @@ zone_pc_herta_research = {
 
 zone_pc_hunter_hub = {
     icon = GFX_zone_pc_hunter_hub
-    base_buildtime = 300
+    base_buildtime = 420
     potential = { # planet scope
         exists = owner
         owner = {
             has_origin = origin_StellaronHunter
         }
+        is_planet_class = pc_hunter_hub
     }
-    unlock = { # planet scope
+    unlock = {
         exists = owner
         owner = {
             has_origin = origin_StellaronHunter
         }
+        is_planet_class = pc_hunter_hub
     }
     resources = {
         category = planet_zones
         cost = {
-            alloys = 500
-            unity = 200
+            alloys = 600
+            food = 200
+            unity = 320
         }
     }
     max_buildings = 3
@@ -85,10 +88,226 @@ zone_pc_hunter_hub = {
     triggered_district_planet_modifier = {
         planet_housing_add = -500
         bonus_pop_growth_mult = 0.05
-        job_gelamo_soldier_add = 100
+        job_gelamo_soldier_add = 50
         pop_ethic_militarist_attraction_mult = 0.1
         COMMAND_LIMIT_ADD = 2
-        planet_districts_cost_mult = -0.05
+        planet_districts_cost_mult = -0.01
+    }
+    covert_to = {
+
+    }
+}
+zone_night_city = {
+	icon = GFX_zone_night_city 
+	base_buildtime = 200
+	potential = {
+        is_planet_class = pc_erxiangleyuan
+	
+	}
+
+	unlock = { # planet scope
+	owner = {
+		has_origin = origin_erxiangleyuan
+
+	}
+	}
+
+	resources = {
+		category = planet_zones
+		cost = {
+			minerals = 1000
+		}
+	}
+
+	max_buildings = 3
+
+	zone_sets = {
+		urban
+	}
+
+	include = {
+		all
+	}
+
+	excluded_building_sets = {
+		automation
+        trade
+        urban
+        industrial
+        research
+        generator
+	}
+    triggered_district_planet_modifier = {
+        planet_jobs_trade_produces_mult = 0.2
+        planet_jobs_energy_produces_mult = 0.2
+        planet_jobs_alloys_produces_mult = 0.2
+        planet_crime_mult = 0.15
+        job_foundry_add = 100
+	    job_technician_add = 100
+	    job_clerk_add = 100
+        
+
+    }
+	inline_script = {
+		script = job/zone_night_city
+		AMOUNT = @scaling_district_1_job
+	}
+
+	
+
+	ai_priority = 0
+}
+
+zone_Camelot_city = {
+	icon = GFX_zone_Camelot_city 
+	base_buildtime = 200
+	potential = {
+        is_planet_class = pc_erxiangleyuan
+	
+	}
+
+	unlock = { # planet scope
+	owner = {
+		has_origin = origin_erxiangleyuan
+
+	}
+	}
+
+	resources = {
+		category = planet_zones
+		cost = {
+			minerals = 1000
+		}
+	}
+
+	max_buildings = 3
+
+	zone_sets = {
+		urban
+	}
+
+	include = {
+		all
+	}
+    triggered_district_planet_modifier = {
+        planet_districts_upkeep_mult = -0.01
+        job_soldier_add = 100
+        naval_cap_from_shipwright = 2
+		ship_build_speed_from_shipwright = 0.015
+    }
+
+	excluded_building_sets = {
+		automation
+        trade
+        urban
+        industrial
+        research
+        generator
+	}
+	inline_script = {
+		script = job/zone_Camelot_city
+		AMOUNT = @scaling_district_1_job
+	}
+
+	
+
+	ai_priority = 0
+}
+zone_pc_hunter_hub_center = {
+    icon = GFX_zone_pc_hunter_hub
+    base_buildtime = 720
+    potential = {
+        exists = owner
+        owner = {
+            has_origin = origin_StellaronHunter
+        }
+    }
+    unlock = {
+        exists = owner
+        owner = {
+            has_origin = origin_StellaronHunter
+        }
+    }
+    resources = {
+        category = planet_zones
+        cost = {
+            alloys = 1200
+            sr_zro = 50
+            huanyudu = 120
+            food = 2000
+            unity = 1200
+        }
+    }
+    max_buildings = 24
+    zone_sets = {
+        zone_pc_extra_hunter_hub
+    }
+    included_building_sets = {
+        automation
+        trade
+        urban
+        industrial
+        research
+        generator
+    }
+    triggered_district_planet_modifier = {
+        planet_housing_add = -2000
+        miner_jobs_bonus_workforce_mult = 0.05
+        pop_workforce_mult = 0.02
+        job_kafuka_clothing_organizer_add = 1
+        job_ren_soldier_add = 10
+        job_zhimasu_add = 1
+        planet_districts_cost_mult = 0.05
+        COMMAND_LIMIT_ADD = 2
+        planet_district_zone_pc_hunter_hub_center_cost_mult = -0.02
+    }
+    convert_to = {
+
+    }
+}
+zone_pc_hunter_ring_1 = {
+    icon = GFX_zone_pc_hunter_hub
+    base_buildtime = 1280
+    potential = { # planet scope
+        exists = owner
+        owner = {
+            has_origin = origin_StellaronHunter
+        }
+    }
+    unlock = {
+        exists = owner
+        owner = {
+            has_origin = origin_StellaronHunter
+        }
+    }
+    resources = {
+        category = planet_zones
+        cost = {
+            alloys = 600
+            food = 200
+            unity = 320
+        }
+    }
+    max_buildings = 54
+    zone_sets = {
+        zone_pc_extra_hunter_ring
+    }
+    included_building_sets = {
+        automation
+        trade
+        urban
+        industrial
+        research
+        generator
+    }
+    triggered_district_planet_modifier = {
+        planet_housing_add = -1000
+        miner_jobs_bonus_workforce_mult = 0.05
+        job_ren_soldier_add = 10
+        job_zhimasu_add = 1
+        planet_buildings_cost_mult = 0.05
+        COMMAND_LIMIT_ADD = 2
+        planet_districts_cost_mult = -0.01
     }
     convert_to = {
 

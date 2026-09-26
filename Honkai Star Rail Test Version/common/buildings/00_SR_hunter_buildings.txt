@@ -181,6 +181,7 @@ building_gelamo_palace = {
 		}
 	}
 	country_modifier = {
+		envoys_add = 1	# 原 ENVOYS_VALUE_ADD(4.4.6 改用 envoys_add)
 		planet_districts_upkeep_mult = -0.2
 		planet_buildings_cost_mult = -0.2
 		BIOLOGICAL_species_trait_points_add = 1
@@ -205,7 +206,7 @@ building_gelamo_palace = {
 			engineering_research = 50
 			society_research = 50
 			physics_research = 50
-			ENVOYS_VALUE_ADD = 1
+			# ENVOYS_VALUE_ADD = 1   # 4.4.6 无此修饰符；改为 country_modifier.envoys_add
 		}
 		upkeep = {
 			minerals = 75
@@ -642,7 +643,7 @@ building_hunter_farm_2 = {
 		produces = {
 			food = 200
 			exotic_gases = 20
-			volatile_mote = 30
+			volatile_motes = 30
 		}
 		upkeep = {
 			consumer_goods = 30
@@ -1172,7 +1173,8 @@ building_cyber_miner_3= {
 	country_modifier = {
 		ship_colonizer_alloys_cost_add = -50
 		ship_colonizer_food_cost_add = -50
-		ship_military_station_medium_cost_mult = -0.1
+		# 无效修正器（原版无此键）。有效名是 shipclass_military_station_build_cost_mult，但其分类为 Megastructures/Starbases/Colony，放在 country_modifier 里会被判"分类不符"，故先停用
+		# ship_military_station_medium_cost_mult = -0.1
 	}
 	resources = {
 		category = planet_buildings

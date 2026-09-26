@@ -64,10 +64,10 @@ middle_path_leader = {
         SHIP_HULL_REGEN_ADD_PERC = 100
         SHIP_SPEED_REDUCTION = -0.05
         SHIP_ACCURACY_ADD = 2
-        SHIP_ARMOR_ADD = 50000
-        SHIP_SHIELD_ADD = 50000
+        SHIP_ARMOR_ADD = 150000
+        SHIP_SHIELD_ADD = 200000
     }
-    max_hitpoints = 50000
+    max_hitpoints = 450000
     size_multiplier = 60
     map_counter_icon = ship_counter_16
     fleet_slot_size = 4
@@ -126,10 +126,10 @@ middle_path_commander = {
         SHIP_TRACKING_ADD = 2
         SHIP_SHIELD_PENETRATION_ADD = 5
         SHIP_SHIELD_HARDENING_ADD = 10
-        SHIP_ARMOR_ADD = 300000
-        SHIP_SHIELD_ADD = 500000
+        SHIP_ARMOR_ADD = 640000
+        SHIP_SHIELD_ADD = 720000
     }
-    max_hitpoints = 750000
+    max_hitpoints = 1250000
     size_multiplier = 100
     map_counter_icon = ship_counter_128
     fleet_slot_size = 4
@@ -175,6 +175,64 @@ middle_path_commander = {
         sr_zro = 10
     }
 }
+aha_emanator = {
+    entity = leviathan_01_voidspawn_ambient_object_entity
+    formation_priority = @titan_formation_priority
+    max_speed = 160
+    acceleration = 0.2
+    rotation_speed = 0.5
+    collision_radius = 4
+    modifier = {
+        ship_evasion_add = 5
+        ship_hull_regen_add_static = 2000
+        ship_armor_regen_add_static = 5000
+        SHIP_WEAPON_RANGE_MULT = 0.4
+        SHIP_TRACKING_ADD = 10
+        SHIP_SHIELD_HARDENING_ADD = 5
+        SHIP_ARMOR_ADD = 120000
+        SHIP_SHIELD_ADD = 1500000
+        ship_fire_rate_mult = 0.75
+    }
+    max_hitpoints = 1450000
+    size_multiplier = 80
+    map_counter_icon = ship_counter_128
+    fleet_slot_size = 4
+    section_slots = {"mid" = { locator = "part2" } }
+    num_target_locators = 2
+    is_space_station = no
+    icon = ship_size_military_64
+    construction_type = starbase_shipyard
+    base_buildtime = 960
+    can_have_federation_design = yes
+    components_add_to_cost = no
+    default_behavior = torpedo
+    role_background = "GFX_role_selection_titan"
+    combat_disengage_chance = 1.80
+    components_add_to_cost = no
+    ship_roles = { carrier energy_torpedoes}
+    class = shipclass_military
+    enable_default_design = yes
+    enable_3dview_in_ship_browser = yes
+    use_shipnames_from = titan
+    prerequisites = { tech_fengrao_burst_shield }
+    construction_type = starbase_shipyard
+    required_component_set = "aha_power_reactor"
+    required_component_set = "dawn_ftl_components"
+    required_component_set = "dawn_thruster_components"
+    required_component_set = "dawn_sensor_components"
+    required_component_set = "dawn_combat_computers"
+    resources = {
+        category = ships
+        cost = {
+            huanyudu = 100000
+        }
+        upkeep = {
+        }
+    }
+    min_upgrade_cost = {
+        huanyudu = 100
+    }
+}
 middle_fengrao_emanator = {
     formation_priority = @titan_formation_priority
     max_speed = 240
@@ -188,10 +246,10 @@ middle_fengrao_emanator = {
         SHIP_TRACKING_ADD = 5
         SHIP_SHIELD_PENETRATION_ADD = 5
         SHIP_SHIELD_HARDENING_ADD = 10
-        SHIP_ARMOR_ADD = 1200000
-        SHIP_SHIELD_ADD = 1500000
+        SHIP_ARMOR_ADD = 2100000
+        SHIP_SHIELD_ADD = 2500000
     }
-    max_hitpoints = 2750000
+    max_hitpoints = 4250000
     size_multiplier = 240
     map_counter_icon = ship_counter_128
     fleet_slot_size = 4
@@ -199,7 +257,7 @@ middle_fengrao_emanator = {
     num_target_locators = 1
     is_space_station = no
     icon = ship_size_military_64
-    entity = "fallen_empire_02_turret_energy_torpedo_entity"
+    entity = "leviathan_01_voidspawn_section_entity"
     construction_type = starbase_shipyard
     base_buildtime = 6400
     can_have_federation_design = yes
