@@ -1,0 +1,81 @@
+decision_Aether_Editing_Technology = {
+	important = yes
+	owned_planets_only = yes
+	icon = decision_arcology_project
+
+	enactment_time = 1800
+	resources = {
+		category = decisions
+		cost = {
+			huanyu_pleasure = 5000
+			alloys = 10000
+		}
+	}
+
+	potential = {
+		NOR = {
+			is_planet_class = pc_city
+			
+			is_planet_class = pc_erxiangleyuan
+			has_modifier = resort_colony
+			has_modifier = penal_colony
+			has_modifier = slave_colony
+			has_modifier = pm_wenkwort_custodian
+			has_carrier_flag = resort_colony_queued
+		}
+		is_artificial = no
+		exists = owner
+		owner = { has_origin = origin_erxiangleyuan }
+	}
+
+	allow = {
+		if = {
+			limit = { owner = { is_ai = no } }
+			custom_tooltip = {
+				fail_text = legendary_leader_decision_arcology_project
+				NOT = { has_carrier_flag = legendary_leader_planet }
+			}
+		}
+		num_uncleared_blockers < 1
+	}
+
+	on_queued = {
+		set_carrier_flag = arcology_project_construction
+	}
+
+	on_unqueued = {
+		remove_carrier_flag = arcology_project_construction
+	}
+
+	effect = {
+		remove_carrier_flag = arcology_project_construction
+		# Make city-planet
+		custom_tooltip = decision_arcology_project_effects
+		hidden_effect = {
+			save_deposits = yes
+			clear_deposits = yes
+			restore_saved_deposits = yes
+			change_pc = pc_erxiangleyuan
+			#relic_world_conversion_effect = {
+				#DISTRICT = district_arcology_housing
+				#VARIABLE = num_housing_districts
+			#}
+			set_planet_entity = {
+				entity = "city_planet_entity"
+				graphical_culture = owner
+			}
+		}
+	}
+
+	ai_weight = {
+		weight = 1
+		modifier = {
+			factor = 100
+			exists = owner
+			OR = {
+				pop_amount >= 7000
+				is_capital = yes
+			}
+		}
+	}
+}

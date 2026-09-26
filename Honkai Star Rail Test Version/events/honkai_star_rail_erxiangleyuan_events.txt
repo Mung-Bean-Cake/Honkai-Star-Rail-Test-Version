@@ -36,9 +36,16 @@ country_event = {
 			value = 0
 		}
 		set_variable = {
-			which = Fever_energy
+			which = xiaodian
 			value = 0
 		}
+		random_owned_planet = {
+			limit = {is_planet_class = pc_erxiangleyuan is_capital = yes}
+			add_district = district_erxiangleyuan_alloys
+			add_district = district_erxiangleyuan_miners
+			add_district = district_erxiangleyuan_energy
+		}
+
 
 		ruler = {
 			remove_all_positive_traits = yes
@@ -655,18 +662,7 @@ country_event = {
 #————————————————————————————————————————————————————————————阿哈年度奖10000_19999
 country_event = {
 	id = xiaoqiaosi.10000
-	title = xiaoqiaosi.10000_title
-	desc = {
-		trigger = {
-			not = {
-				has_country_flag = check_xiaodian_1
-			}
-		}
-		text = xiaoqiaosi.10000_desc0
-		}
-	
-	desc = {trigger = {has_country_flag = check_xiaodian_1} text = xiaoqiaosi.10000_desc1}
-	picture = GFX_xiaoqiaosi_1000
+	hide_window = yes
 	is_triggered_only = yes
 
 	trigger = {
@@ -674,22 +670,16 @@ country_event = {
 	}
 
 	immediate = {
-		remove_country_flag = check_xiaodian_1
-
-
-		if = {
-			limit = {check_variable = {which = check_xiaodian value >=1} owner = {not = {has_country_flag = check_xiaodian}}} 
-			set_country_flag = check_xiaodian
-		}
+		
 		#check_xiaodian_1
 		if = {
-			limit = {check_variable = {which = check_xiaodian value >=1} owner = {has_country_flag = check_xiaodian}}
+			limit = {has_country_flag = check_xiaodian_1}
 			random_list = {
-				10 = {country_event = {id = xiaoqiaosi.2000 days = 1}}
-				10 = {country_event = {id = xiaoqiaosi.2001 days = 1}}
-				10 = {country_event = {id = xiaoqiaosi.2002 days = 1}}
-				10 = {country_event = {id = xiaoqiaosi.2003 days = 1}}
-				10 = {country_event = {id = xiaoqiaosi.2004 days = 1}}
+				10 = {country_event = {id = xiaoqiaosi.2000 days = 10}}
+				10 = {country_event = {id = xiaoqiaosi.2001 days = 10}}
+				10 = {country_event = {id = xiaoqiaosi.2002 days = 10}}
+				10 = {country_event = {id = xiaoqiaosi.2003 days = 10}}
+				10 = {country_event = {id = xiaoqiaosi.2004 days = 10}}
 
 			}
 			set_country_flag = check_xiaodian_1
@@ -709,7 +699,8 @@ country_event = {
 country_event = {
 	id = xiaoqiaosi.1000
 	title = xiaoqiaosi.1000_title
-	desc = xiaoqiaosi.1000_desc
+	desc  ={trigger = {has_country_flag = check_xiaodian_0} text = xiaoqiaosi.1000_desc0}
+	desc  ={trigger = {has_country_flag = check_xiaodian_1} text = xiaoqiaosi.1000_desc1}
 	picture = GFX_xiaoqiaosi_1000
 	is_triggered_only = yes
 
@@ -719,6 +710,21 @@ country_event = {
 	}
 
 	immediate = {
+		if = {
+			limit = {check_variable = {which = check_xiaodian value <200}}
+			set_country_flag = check_xiaodian_0
+	    }
+		if = {
+			limit = {check_variable = {which = check_xiaodian value >=200}}
+			set_country_flag = check_xiaodian_1
+	    }
+
+
+
+		remove_country_flag = check_xiaodian_1
+		#年终奖
+		#————————————————————————————————————————————————————————————
+		#出演
 		if = {
 			limit = {check_variable = {which = show_times value = 1}}
 			change_variable = {which = show_times value = -1}
