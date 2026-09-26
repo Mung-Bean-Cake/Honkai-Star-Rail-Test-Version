@@ -1,0 +1,38 @@
+hsr_planet_policy_$class_value$_$num_value$_effect = {
+    allow = {
+        custom_tooltip = {
+            text = need_more_credits
+            hidden_trigger = {
+                check_variable = {
+                    which = hsr_credits_planet_trade_storage
+                    value >= $policy_start_value$
+                }
+            }
+        }
+        custom_tooltip = {
+            text = has_use_policy
+            hidden_trigger = {
+                not = {
+                    has_modifier = $modifier_value$
+                }
+            }
+        }
+    }
+    potential = {
+
+    }
+    effect = {
+        custom_tooltip = hsr_planet_policy_$class_value$_$num_value$_effect_text
+        hidden_effect = {
+            change_variable = {
+                which = hsr_credits_planet_trade_storage
+                value = -$policy_start_value$
+            }
+            add_modifier = {
+                modifier = $modifier_value$
+                days = $days$
+                mult = value:hsr_add_mult_value|BASEVAR|0.5|VAR1|$policy_class$|
+            }
+        }
+    }
+}

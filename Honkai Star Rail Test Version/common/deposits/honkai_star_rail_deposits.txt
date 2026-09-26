@@ -72,3 +72,170 @@ d_two_dimensional_collapse = {
 		always = no
 	}
 }
+d_colony_credits_slot = {
+    is_for_colonizable = yes
+    icon = d_central_spire
+    category = deposit_cat_rare
+
+    potential = { always = no }
+    #社会管理
+    triggered_planet_modifier = {
+        potential = {
+            check_variable = {
+                which = hsr_planet_social
+                value = 1
+            }
+        }
+        planet_stability_add = -10
+        planet_crime_add = 50
+        pop_happiness = -0.1
+    }
+    triggered_planet_modifier = {
+        potential = {
+            check_variable = {
+                which = hsr_planet_social
+                value = 2
+            }
+        }
+        planet_stability_add = 3
+        planet_crime_mult = -0.25
+        planet_credit_expenses_other_mult = 2000
+    }
+    triggered_planet_modifier = {
+        potential = {
+            check_variable = {
+                which = hsr_planet_social
+                value = 3
+            }
+        }
+        planet_stability_add = 5
+        planet_crime_mult = -0.5
+        pop_resettlement_cost_mult = -0.25
+        pop_bonus_workforce_mult = 0.025
+        planet_credit_expenses_other_mult = 6000
+    }
+    #民生福利
+    triggered_planet_modifier = {
+        potential = {
+            check_variable = {
+                which = hsr_planet_governance
+                value = 1
+            }
+        }
+        pop_happiness = -0.15
+        planet_amenities_mult = -0.15
+    }
+    triggered_planet_modifier = {
+        potential = {
+            check_variable = {
+                which = hsr_planet_governance
+                value = 2
+            }
+        }
+        pop_happiness = 0.05
+        planet_amenities_mult = 0.05
+        planet_credit_expenses_other_mult = 2000
+    }
+    triggered_planet_modifier = {
+        potential = {
+            check_variable = {
+                which = hsr_planet_governance
+                value = 3
+            }
+        }
+        pop_happiness = 0.15
+        planet_amenities_mult = 0.15
+        pop_bonus_workforce_mult = 0.025
+        planet_resettlement_unemployed_destination_mult = 0.5
+        planet_credit_expenses_other_mult = 6000
+    }
+    #工业发展
+    triggered_planet_modifier = {
+        potential = {
+            check_variable = {
+                which = hsr_planet_industrial
+                value = 1
+            }
+        }
+        planet_building_build_speed_mult = -0.1
+        planet_clear_blocker_speed_mult = -0.1
+    }
+    triggered_planet_modifier = {
+        potential = {
+            check_variable = {
+                which = hsr_planet_industrial
+                value = 2
+            }
+        }
+        planet_building_build_speed_mult = 0.1
+        planet_clear_blocker_speed_mult = 0.1
+        planet_credit_expenses_other_mult = 2000
+    }
+    triggered_planet_modifier = {
+        potential = {
+            check_variable = {
+                which = hsr_planet_industrial
+                value = 3
+            }
+        }
+        planet_building_build_speed_mult = 0.15
+        planet_clear_blocker_speed_mult = 0.15
+        planet_building_capacity_add = 1
+        planet_jobs_produces_mult = 0.025
+        planet_credit_expenses_other_mult = 6000
+    }
+    #军事戒备
+    triggered_planet_modifier = {
+        potential = {
+            check_variable = {
+                which = hsr_planet_military
+                value = 1
+            }
+        }
+        army_defense_damage_mult = -0.25
+        army_defense_health_mult = -0.25
+        army_defense_morale_mult = -0.25
+    }
+    triggered_planet_modifier = {
+        potential = {
+            check_variable = {
+                which = hsr_planet_military
+                value = 2
+            }
+        }
+        army_defense_damage_mult = 0.25
+        army_defense_health_mult = 0.25
+        army_defense_morale_mult = 0.25
+        planet_army_build_speed_mult = 0.1
+        planet_credit_expenses_other_mult = 2000
+    }
+    triggered_planet_modifier = {
+        potential = {
+            check_variable = {
+                which = hsr_planet_military
+                value = 3
+            }
+        }
+        planet_defense_armies_add = 5
+        army_defense_damage_mult = 1
+        army_defense_health_mult = 1
+        army_defense_morale_mult = 1
+        planet_army_build_speed_mult = 0.25
+        planet_soldiers_produces_mult = 0.1
+        planet_soldiers_upkeep_mult = -0.1
+        planet_credit_expenses_other_mult = 6000
+    }
+    triggered_planet_modifier = {
+        potential = {
+            check_variable = {
+                which = hsr_planet_military
+                value = 3
+            }
+        }
+        planet_stability_add = 1
+        planet_amenities_mult = 0.05
+        pop_bonus_workforce_mult = 0.05
+        planet_building_build_speed_mult = 0.05
+        mult = value:hsr_add_mult_value|BASEVAR|0.00001|VAR1|hsr_credits_planet_trade_storage|
+    }
+}
