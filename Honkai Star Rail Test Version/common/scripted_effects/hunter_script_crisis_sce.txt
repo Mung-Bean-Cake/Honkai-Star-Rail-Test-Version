@@ -34,19 +34,9 @@ fengrao_middle_crisis_effect = {
 			random_system = {
 				limit = { has_star_flag = fengraomin_system }
 				create_starbase = {
-					size = starbase_citadel
+					size = "starbase_marauder"
 					owner = event_target:yuhuang_fengrao_country
 				}
-			}
-		}
-	}
-	if = {
-		limit = {
-			exists = event_target:fengraomin_country
-		}
-		event_target:yuhuang_fengrao_country = {
-			annex_country = {
-				target = event_target:fengraomin_country
 			}
 		}
 	}
@@ -55,7 +45,7 @@ fengrao_middle_crisis_effect = {
 		random_system_planet = {
 			limit = { has_planet_flag = yuhuang_source }
 			save_global_event_target_as = yuhuang_planet_point
-			set_carrier_flag = yuhuang_planet_point
+			set_planet_flag = yuhuang_planet_point
 		}
 	}
 	event_target:yuhuang_fengrao_country = {
@@ -167,11 +157,19 @@ fengrao_middle_crisis_effect = {
 		create_fengrao_constructors = yes
 		create_fengrao_constructors = yes
 		create_fengrao_constructors = yes
-		country_event = { id = marauder.520 days = 180 } # 循环增加舰队，后面写
+		country_event = { id = script_crisis.6 days = 90 } # 循环增加舰队，后面写
 		every_playable_country = {
 			establish_communications_no_message = root
-			country_event = { id = marauder.501 }
+			country_event = { id = script_crisis.3 }
 		}	
+	}
+	if = {
+		limit = {
+			exists = event_target:fengraomin_country
+		}
+		country_event = {
+			id = script_crisis.4
+		}
 	}
 }
 create_1st_yuhuang_fleet = {
@@ -180,7 +178,7 @@ create_1st_yuhuang_fleet = {
 		effect = {
 			set_owner = event_target:yuhuang_fengrao_country
 			while = {
-				count = 90
+				count = 120
 				create_ship = {
 					name = random
 					design = NAME_Black_Earl
@@ -189,7 +187,7 @@ create_1st_yuhuang_fleet = {
 				}
 			}
 			while = {
-				count = 15
+				count = 25
 				create_ship = {
 					name = random
 					design = NAME_middle_fengrao_leader
@@ -219,6 +217,7 @@ create_1st_yuhuang_fleet = {
 				}
 			}
 			assign_leader = event_target:yuhuang_fleet_admiral
+			save_event_target_as = yuhuang_fleet
 			set_fleet_flag = yuhuang_fleet
 			set_location = {
 				target = event_target:yuhuang_planet_point
@@ -241,7 +240,7 @@ create_commander_yuhuang_fleet_1 = {
 		effect = {
 			set_owner = event_target:yuhuang_fengrao_country
 			while = {
-				count = 10
+				count = 12
 				create_ship = {
 					name = random
 					design = NAME_middle_fengrao_leader
@@ -250,7 +249,7 @@ create_commander_yuhuang_fleet_1 = {
 				}
 			}
 			while = {
-				count = 20
+				count = 24
 				create_ship = {
 					name = random
 					design = "NAME_Dragonspawn"
@@ -302,7 +301,7 @@ create_commander_yuhuang_fleet_2 = {
 		effect = {
 			set_owner = event_target:yuhuang_fengrao_country
 			while = {
-				count = 12
+				count = 15
 				create_ship = {
 					name = random
 					design = NAME_middle_fengrao_leader
@@ -311,7 +310,7 @@ create_commander_yuhuang_fleet_2 = {
 				}
 			}
 			while = {
-				count = 12
+				count = 18
 				create_ship = {
 					name = random
 					design = "NAME_Dragonspawn"
@@ -320,7 +319,7 @@ create_commander_yuhuang_fleet_2 = {
 				}
 			}
 			while = {
-				count = 200
+				count = 180
 				create_ship = {
 					name = random
 					design = NAME_shouxing
@@ -329,7 +328,7 @@ create_commander_yuhuang_fleet_2 = {
 				}
 			}
 			while = {
-				count = 10
+				count = 15
 				create_ship = {
 					name = random
 					design = "NAME_Ancestral_Glory"
@@ -375,7 +374,7 @@ create_leader_yuhuang_fleet = {
 		effect = {
 			set_owner = event_target:yuhuang_fengrao_country
 			while = {
-				count = 10
+				count = 15
 				create_ship = {
 					name = random
 					design = NAME_middle_fengrao_leader
@@ -384,7 +383,7 @@ create_leader_yuhuang_fleet = {
 				}
 			}
 			while = {
-				count = 5
+				count = 8
 				create_ship = {
 					name = random
 					design = "NAME_Dragonspawn"
@@ -393,7 +392,7 @@ create_leader_yuhuang_fleet = {
 				}
 			}
 			while = {
-				count = 50
+				count = 64
 				create_ship = {
 					name = random
 					design = NAME_shouxing
@@ -412,7 +411,73 @@ create_leader_yuhuang_fleet = {
 			}
 			assign_leader = last_created_leader
 			set_location = {
-				target = event_target:yuhuang_planet_point
+				target = event_target:yuhuang_fleet
+				distance = 60
+				angle = random
+			}
+		}
+		settings = {
+			uses_naval_capacity = no
+			can_upgrade = no
+			can_change_composition = no
+		}
+	}
+}
+create_normal_yuhuang_fleet = {
+	create_leader = {
+		class = commander
+		species = owner_main_species
+		name = random
+		skill = 5
+		leader_age_min = 300
+		leader_age_max = 1200
+		traits = {
+			0 = leader_langzun_t3
+			0 = leader_trait_chosen
+		}
+	}
+	create_fleet = {
+		effect = {
+			set_owner = event_target:yuhuang_fengrao_country
+			while = {
+				count = 5
+				create_ship = {
+					name = random
+					design = NAME_middle_fengrao_leader
+					prefix = no
+					graphical_culture = "pirate_01"
+				}
+			}
+			while = {
+				count = 5
+				create_ship = {
+					name = random
+					design = "NAME_Dragonspawn"
+					prefix = no
+					graphical_culture = "pirate_01"
+				}
+			}
+			while = {
+				count = 20
+				create_ship = {
+					name = random
+					design = NAME_shouxing
+					prefix = no
+					graphical_culture = "pirate_01"
+				}
+			}
+			while = {
+				count = 2
+				create_ship = {
+					name = random
+					design = "NAME_Ancestral_Glory"
+					prefix = no
+					graphical_culture = "pirate_01"
+				}
+			}
+			assign_leader = last_created_leader
+			set_location = {
+				target = event_target:yuhuang_fleet
 				distance = 60
 				angle = random
 			}
@@ -444,7 +509,7 @@ create_yuhuang_armies = {
 				}
 			}
 			set_location = {
-				target = event_target:yuhuang_planet_point
+				target = event_target:yuhuang_fleet
 				distance = 60
 				angle = random
 			}

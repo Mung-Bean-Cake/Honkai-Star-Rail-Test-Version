@@ -1,17 +1,15 @@
 namespace = script_crisis
 country_event = {
     id = script_crisis.1
-    title = "marauder.501.name"
-    desc = "marauder.501.desc"
-    picture = GFX_evt_khan_throne_room
+    hide_window = yes
     is_triggered_only = yes
     trigger = {
-        is_country = event_target:fengraomin_country
+        is_country_type = fengraomin
         NOR = {
             has_global_flag = fengrao_crisis_started
         }
+        has_global_flag = fengrao_middle_crisis
         has_country_flag = fengraomin
-        any_system_within_border = { has_star_flag = fengraomin_system }
     }
     immediate = {
         fengrao_middle_crisis_effect = yes
@@ -22,12 +20,10 @@ country_event = {
 }
 country_event = {
     id = script_crisis.2
-    title = "marauder.501.name"
-    desc = "marauder.501.desc"
-    picture = GFX_evt_khan_throne_room
+    hide_window = yes
     fire_only_once = yes
     trigger = {
-        is_country = event_target:fengraomin_country
+        is_country_type = fengraomin
         mid_game_years_passed >= 1
         end_game_years_passed < 0
         NOR = {
@@ -35,116 +31,132 @@ country_event = {
             has_global_flag = fengrao_middle_crisis
         }
         has_country_flag = fengraomin
-        any_system_within_border = { has_star_flag = fengraomin_system }
     }
     mean_time_to_happen = {
         years = 20
         modifier = {
-            factor = 0.3
-            mid_game_years_passed >= 1
+            factor = 0.1
+            mid_game_years_passed >= 5
         }
         modifier = {
-            factor = 1.25
+            factor = 1.2
             count_country = {
                 limit = { is_country_type = fengraomin }
                 count = 1
-            }
-        }
-        modifier = {
-            factor = 0.05
-            any_playable_country = {
-                has_global_flag = fengrao_middle_crisis
             }
         }
     }
     immediate = {
         fengrao_middle_crisis_effect = yes
         country_event = {
-            id = script_crisis.3
+            id = script_crisis.5
         }
     }
 }
-# The Drums of War
 country_event = {
     id = script_crisis.3
-    title = "marauder.501.name"
-    desc = "marauder.501.desc"
+    title = "script_crisis.3.name"
+    desc = "script_crisis.3.desc"
+    picture = GFX_evt_large_explosion
+    show_sound = event_radio_chatter
+    location = event_target:yuhuang_planet_point
+    is_triggered_only = yes
+    option = {
+        name = script_crisis.3.a
+    }
+}
+country_event = {
+    id = script_crisis.4
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = {
+        event_target:fengraomin_country = {
+            every_controlled_fleet = {
+                limit = {
+                    OR = {
+                        has_fleet_flag = fengraomin_fleet_1
+                        has_fleet_flag = fengraomin_fleet_2
+                    }
+                }
+                set_owner = event_target:yuhuang_fengrao_country
+            }
+            destroy_country = yes
+        }
+    }
+}
+country_event = {
+    id = script_crisis.5
+    title = "script_crisis.5.name"
+    desc = "script_crisis.5.desc"
     picture = GFX_evt_khan_throne_room
     show_sound = event_radio_chatter
     location = event_target:yuhuang_planet_point
-
     is_triggered_only = yes
-
     option = {
-        name = marauder.501.a
-        hidden_effect = {
-            country_event = { id = marauder.502 }
-        }
-    }
-    after = {
-        country_event = { id = timeline.63 } # Timeline Great Khan Crisis
+        name = script_crisis.5.a
     }
 }
-
-# Great Khan's Announcement
 country_event = {
-    id = marauder.502
-    title = "greatkhan_diplo_header"
-    desc = "marauder.502.desc"
-
-    diplomatic = yes
-
-    picture_event_data = {
-        portrait = event_target:raider_khanate
-        room = "khan_room"
-    }
-
+    id = script_crisis.6
+    hide_window = yes
     is_triggered_only = yes
-
+    trigger = {
+        has_global_flag = fengrao_crisis_started
+    }
     immediate = {
-        set_global_flag = great_khan_announcement
-    }
-
-    option = {
-        name = marauder.502.a
-        trigger = {
-            is_machine_empire = no
+        create_fengrao_constructors = yes
+        if = {
+            limit = { num_armies < 60 }
+            create_yuhuang_armies = yes
+            create_yuhuang_armies = yes
         }
-    }
-    option = {
-        name = marauder.502.b
-        trigger = {
-            is_machine_empire = yes
+        random_list = {
+            20 = {
+                create_leader_yuhuang_fleet = yes
+            }
+            80 = {
+                create_normal_yuhuang_fleet = yes
+            }
         }
+        country_event = { id = script_crisis.6 days = 90 }
     }
 }
-
 # Horde Conquers Planet (HIDDEN)
 country_event = {
-    id = marauder.503
+    id = script_crisis.7
     hide_window = yes
-
     is_triggered_only = yes
-
     trigger = {
-        is_country_type = awakened_marauders
+        is_country_type = fengraomin
     }
-
     immediate = {
         fromfrom = {
-            save_event_target_as = conquered_planet
+            save_event_target_as = yuhuang_planet
             set_owner = root
         }
         from = {
             country_event = { id = marauder.504 }
             change_variable = {
-                which = "planets_lost_to_marauder"
+                which = "planets_lost_to_yuhuang"
                 value = 1
             }
-            set_country_flag = former_owner@fromfrom
+            set_country_flag = pc_owner_yuhuang@fromfrom
         }
         fromfrom = {
-            # Create Defense Armies
+            set_variable = {
+                which = yuhuang_pc_pop
+                value = pop_amount
+            }
+            while = {
+                count = pop_amount
+                kill_pop_group = {
+                    pop_group = this
+                }
+            }
+            create_pop_group = {
+                species = event_target:fengraomin_species
+                size = variable:yuhuang_pc_pop
+            }
             create_army = {
                 owner = root
                 species = root.species
@@ -175,65 +187,6 @@ country_event = {
                 species = root.species
                 type = "defense_army"
             }
-            # Create Marauder Pops
-            if = {
-                limit = { free_housing <= 100 }
-                while = {
-                    count = 4
-                    limit = {
-                        pop_amount > 100
-                    }
-                    random_owned_pop_group = {
-                        kill_single_pop = yes
-                    }
-                }
-                while = {
-                    count = 4
-                    create_pop_group = {
-                        species = root.species
-                    }
-                }
-            }
-            if = {
-                limit = {
-                    free_housing > 100
-                    free_housing < 600
-                }
-                while = {
-                    count = 4
-                    limit = {
-                        pop_amount > 100
-                    }
-                    random_owned_pop_group = {
-                        kill_single_pop = yes
-                    }
-                }
-                while = {
-                    count = 8
-                    create_pop_group = {
-                        species = root.species
-                    }
-                }
-            }
-            if = {
-                limit = { free_housing > 500 }
-                while = {
-                    count = 3
-                    limit = {
-                        pop_amount > 100
-                    }
-                    random_owned_pop_group = {
-                        kill_single_pop = yes
-                    }
-                }
-                while = {
-                    count = 12
-                    create_pop_group = {
-                        species = root.species
-                    }
-                }
-            }
-            # Flip Starbase ownership or create a new one
             if = {
                 limit = {
                     solar_system = {
@@ -795,68 +748,6 @@ country_event = {
     }
 }
 
-# Marauder Reinforcement Cycle
-country_event = {
-    id = marauder.520
-    hide_window = yes
-
-    is_triggered_only = yes
-
-    trigger = {
-        has_global_flag = marauder_crisis_started
-        any_planet_within_border = {
-            has_carrier_flag = marauder_rally_point # Make sure home system still owned
-        }
-    }
-
-    immediate = {
-        create_marauder_constructors = yes
-        if = {
-            limit = { num_armies < 40 }
-            create_marauder_armies = yes
-        }
-        # If at fleet cap, check again later
-        if = {
-            limit = {
-                if = {
-                    limit = {
-                        is_difficulty <= 2
-                    }
-                    fleet_power > 100000
-                }
-                else_if = {
-                    limit = {
-                        is_difficulty = 3
-                    }
-                    fleet_power > 250000
-                }
-                else_if = {
-                    limit = {
-                        is_difficulty = 4
-                    }
-                    fleet_power > 450000
-                }
-                else_if = {
-                    limit = {
-                        is_difficulty = 5
-                    }
-                    fleet_power > 600000
-                }
-                else_if = {
-                    limit = {
-                        is_difficulty = 6
-                    }
-                    fleet_power > 1000000
-                }
-
-            }
-            country_event = { id = marauder.520 days = 340 }
-            break = yes
-        }
-        create_marauder_fleet = yes
-        country_event = { id = marauder.520 days = 340 }
-    }
-}
 
 # Heirs of the Khan Reinforcement Variant
 country_event = {
