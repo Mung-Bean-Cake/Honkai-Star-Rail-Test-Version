@@ -29,6 +29,7 @@ fengrao_middle_crisis_effect = {
 		ignore_initial_colony_error = yes
 		effect = {
 			save_global_event_target_as = yuhuang_fengrao_country
+			save_global_event_target_as = crisis_country
 			set_global_flag = fengrao_crisis_started
 			set_global_flag = fengrao_crisis_ongoing
 			random_system = {
@@ -157,7 +158,7 @@ fengrao_middle_crisis_effect = {
 		create_fengrao_constructors = yes
 		create_fengrao_constructors = yes
 		create_fengrao_constructors = yes
-		country_event = { id = script_crisis.6 days = 90 } # 循环增加舰队，后面写
+		country_event = { id = script_crisis.6 days = 150 } # 循环增加舰队，后面写
 		every_playable_country = {
 			establish_communications_no_message = root
 			country_event = { id = script_crisis.3 }
@@ -224,6 +225,7 @@ create_1st_yuhuang_fleet = {
 				distance = 30
 				angle = random
 			}
+			fleet_event = { id = crisis_fleet_action.1 days = 12 random = 8 }
 		}
 		settings = {
 			can_upgrade = no
@@ -287,6 +289,7 @@ create_commander_yuhuang_fleet_1 = {
 				distance = 60
 				angle = random
 			}
+			fleet_event = { id = crisis_fleet_action.1 days = 12 random = 8 }
 		}
 		settings = {
 			uses_naval_capacity = no
@@ -348,6 +351,7 @@ create_commander_yuhuang_fleet_2 = {
 				distance = 60
 				angle = random
 			}
+			fleet_event = { id = crisis_fleet_action.1 days = 12 random = 8 }
 		}
 		settings = {
 			uses_naval_capacity = no
@@ -415,6 +419,7 @@ create_leader_yuhuang_fleet = {
 				distance = 60
 				angle = random
 			}
+			fleet_event = { id = crisis_fleet_action.1 days = 12 random = 8 }
 		}
 		settings = {
 			uses_naval_capacity = no
@@ -481,6 +486,7 @@ create_normal_yuhuang_fleet = {
 				distance = 60
 				angle = random
 			}
+			fleet_event = { id = crisis_fleet_action.1 days = 12 random = 8 }
 		}
 		settings = {
 			uses_naval_capacity = no
@@ -513,6 +519,7 @@ create_yuhuang_armies = {
 				distance = 60
 				angle = random
 			}
+			fleet_event = { id = crisis_fleet_action.2 days = 12 random = 8 }
 		}
 	}
 	last_created_army = { assign_leader = last_created_leader }
@@ -539,6 +546,956 @@ create_fengrao_constructors = {
 					distance = 20
 					angle = random
 				}
+				fleet_event = { id = crisis_fleet_action.1 days = 12 random = 8 }
+			}
+		}
+	}
+}
+crisis_fleet_action = {
+	optimize_memory
+	#在当前星系寻找是否存在敌对舰队
+	if = {
+		limit = {
+			root = {
+				exists = solar_system
+				solar_system = { any_ship_in_system = {
+					exists = owner
+					owner = { is_hostile = event_target:crisis_country }
+					is_disabled = no is_ship_class = shipclass_military
+				} }
+			}
+		}
+		root = {
+			solar_system = {
+				random_fleet_in_system = {
+					limit = {
+						exists = owner
+						owner = { is_hostile = event_target:crisis_country }
+						any_owned_ship = { is_disabled = no is_ship_class = shipclass_military }
+					}
+					prevprev = { auto_follow_fleet = { target = prev attack_fleet = yes } }
+				}
+			}
+		}
+	}
+	#在当前星系寻找是否存在无己方单位的敌对星球
+	else_if = {
+		limit = {
+			root = {
+				exists = solar_system
+				solar_system = {
+					any_system_planet = {
+						exists = controller
+						controller = { is_hostile = event_target:crisis_country }
+						OR = {
+							is_colony = yes
+							is_under_colonization = yes
+						}
+						count_fleet_in_orbit = { count = 0 limit = {
+							exists = owner
+							owner = { is_same_value = event_target:crisis_country }
+							NOT = { is_same_value = root }
+						} }
+					}
+				}
+			}
+		}
+		root = {
+			solar_system = {
+				random_system_planet = {
+					limit = {
+						exists = controller
+						controller = { is_hostile = event_target:crisis_country }
+						OR = {
+							is_colony = yes
+							is_under_colonization = yes
+						}
+						count_fleet_in_orbit = { count = 0 limit = {
+							exists = owner
+							owner = { is_same_value = event_target:crisis_country }
+							NOT = { is_same_value = root }
+						} }
+					}
+					prevprev = { auto_move_to_planet = { target = prev clear_auto_move_on_arrival = yes } }
+				}
+			}
+		}
+	}
+	#在当前星系寻找是否存在敌对登陆船
+	else_if = {
+		limit = {
+			root = {
+				exists = solar_system
+				solar_system = { any_ship_in_system = {
+					exists = owner
+					owner = { is_hostile = event_target:crisis_country }
+					is_disabled = no is_ship_class = shipclass_transport
+				} }
+			}
+		}
+		root = {
+			solar_system = {
+				random_fleet_in_system = {
+					limit = {
+						exists = owner
+						owner = { is_hostile = event_target:crisis_country }
+						any_owned_ship = { is_disabled = no is_ship_class = shipclass_transport }
+					}
+					prevprev = { auto_follow_fleet = { target = prev attack_fleet = yes } }
+				}
+			}
+		}
+	}
+	#在周围星系寻找是否存在敌对单位（空间站，舰队，殖民地，登陆船）
+	else_if = {
+		limit = {
+			solar_system = { any_neighbor_system = { OR = {
+				AND = {
+					exists = starbase
+					starbase = { exists = owner owner = { is_hostile = event_target:crisis_country } }
+				}
+				any_ship_in_system = {
+					exists = owner
+					owner = { is_hostile = event_target:crisis_country }
+					is_disabled = no is_ship_class = shipclass_military
+				}
+				any_system_planet = {
+					exists = controller
+					controller = { is_hostile = event_target:crisis_country }
+					OR = {
+						is_colony = yes
+						is_under_colonization = yes
+					}
+					count_fleet_in_orbit = { count = 0 limit = {
+						exists = owner
+						owner = { is_same_value = event_target:crisis_country }
+						NOT = { is_same_value = root }
+					} }
+				}
+				any_ship_in_system = {
+					exists = owner
+					owner = { is_hostile = event_target:crisis_country }
+					is_disabled = no is_ship_class = shipclass_transport
+				}
+			} } }
+		}
+		solar_system = { random_neighbor_system = {
+			limit = { OR = {
+				AND = {
+					exists = starbase
+					starbase = { exists = owner owner = { is_hostile = event_target:crisis_country } }
+				}
+				any_ship_in_system = {
+					exists = owner
+					owner = { is_hostile = event_target:crisis_country }
+					is_disabled = no is_ship_class = shipclass_military
+				}
+				any_system_planet = {
+					exists = controller
+					controller = { is_hostile = event_target:crisis_country }
+					OR = {
+						is_colony = yes
+						is_under_colonization = yes
+					}
+					count_fleet_in_orbit = { count = 0 limit = {
+						exists = owner
+						owner = { is_same_value = event_target:crisis_country }
+						NOT = { is_same_value = root }
+					} }
+				}
+				any_ship_in_system = {
+					exists = owner
+					owner = { is_hostile = event_target:crisis_country }
+					is_disabled = no is_ship_class = shipclass_transport
+				}
+			} }
+			system_star = { prevprevprev = { auto_move_to_planet = { target = prev clear_auto_move_on_arrival = yes } } }
+		} }
+	}
+	#自动索敌，看看哪个倒霉蛋会被锁定~
+	else = {
+		random_list = {
+			#50%概率寻找30步内是否存在有敌对星球的敌对星系
+			50 = {
+				closest_system = {
+					max_steps = 30
+					limit = {
+						NOT = { is_same_value = root.solar_system }
+						OR = {
+							AND = {
+								exists = starbase
+								starbase = {
+									exists = owner
+									owner = { is_hostile = event_target:crisis_country }
+								}
+							}
+							any_system_planet = {
+								exists = controller
+								controller = { is_hostile = event_target:crisis_country }
+								OR = {
+									is_colony = yes
+									is_under_colonization = yes
+								}
+								count_fleet_in_orbit = { count = 0 limit = {
+									exists = owner
+									owner = { is_same_value = event_target:crisis_country }
+									NOT = { is_same_value = root }
+								} }
+							}
+						}
+						prev = { can_access_system = prev }
+					}
+					save_event_target_as = nearly_can_attack_fleet_target
+				}
+				#若星系内存在有效目标，就90%概率走过去，10%概率飞过去。如果不能走就直接飞起来（诶嘿~）
+				if = {
+					limit = { exists = event_target:nearly_can_attack_fleet_target }
+					event_target:nearly_can_attack_fleet_target = {
+						if = {
+							limit = {
+								any_system_planet = {
+									exists = controller
+									controller = { is_hostile = event_target:crisis_country }
+									OR = {
+										is_colony = yes
+										is_under_colonization = yes
+									}
+									count_fleet_in_orbit = { count = 0 limit = {
+										exists = owner
+										owner = { is_same_value = event_target:crisis_country }
+										NOT = { is_same_value = root }
+									} }
+								}
+							}
+							random_system_planet = {
+								limit = {
+									exists = controller
+									controller = { is_hostile = event_target:crisis_country }
+									OR = {
+										is_colony = yes
+										is_under_colonization = yes
+									}
+									count_fleet_in_orbit = { count = 0 limit = {
+										exists = owner
+										owner = { is_same_value = event_target:crisis_country }
+										NOT = { is_same_value = root }
+									} }
+								}
+								crisis_jump_attitude_planet_fleet_action = yes
+							}
+						}
+						else = { system_star = { prevprev = { auto_move_to_planet = { target = prev clear_auto_move_on_arrival = yes } } } }
+					}
+				}
+				#找不到目标，再找一次
+				else = {
+					#开始找目标
+					closest_system = {
+						max_steps = 30
+						use_bypasses = yes
+						limit = {
+							NOT = { is_same_value = root.solar_system }
+							OR = {
+								AND = {
+									exists = starbase
+									starbase = {
+										exists = owner
+										owner = { is_hostile = event_target:crisis_country }
+									}
+								}
+								any_system_planet = {
+									exists = controller
+									controller = { is_hostile = event_target:crisis_country }
+									OR = {
+										is_colony = yes
+										is_under_colonization = yes
+									}
+									count_fleet_in_orbit = { count = 0 limit = {
+										exists = owner
+										owner = { is_same_value = event_target:crisis_country }
+										NOT = { is_same_value = root }
+									} }
+								}
+							}
+						}
+						save_event_target_as = nearly_can_attack_fleet_target
+					}
+					#若星系内存在有效目标，就90%概率走过去，10%概率飞过去。如果不能走就直接飞起来（诶嘿~）
+					if = {
+						limit = { exists = event_target:nearly_can_attack_fleet_target }
+						event_target:nearly_can_attack_fleet_target = {
+							if = {
+								limit = {
+									any_system_planet = {
+										exists = controller
+										controller = { is_hostile = event_target:crisis_country }
+										OR = {
+											is_colony = yes
+											is_under_colonization = yes
+										}
+										count_fleet_in_orbit = { count = 0 limit = {
+											exists = owner
+											owner = { is_same_value = event_target:crisis_country }
+											NOT = { is_same_value = root }
+										} }
+									}
+								}
+								random_system_planet = {
+									limit = {
+										exists = controller
+										controller = { is_hostile = event_target:crisis_country }
+										OR = {
+											is_colony = yes
+											is_under_colonization = yes
+										}
+										count_fleet_in_orbit = { count = 0 limit = {
+											exists = owner
+											owner = { is_same_value = event_target:crisis_country }
+											NOT = { is_same_value = root }
+										} }
+									}
+									crisis_jump_attitude_planet_fleet_action = yes
+								}
+							}
+							else = { system_star = { prevprev = { auto_move_to_planet = { target = prev clear_auto_move_on_arrival = yes } } } }
+						}
+					}
+					#找不到目标，睡一觉捏~
+					else = { crisis_fleet_wandering_action = yes }
+				}
+			}
+			25 = {
+				#25%概率寻找70步内是否存在有敌对舰船或敌对运输船的敌对星系
+				closest_system = {
+					max_steps = 70
+					use_bypasses = yes
+					limit = {
+						NOT = { is_same_value = root.solar_system }
+						OR = {
+							any_ship_in_system = {
+								exists = owner
+								owner = { is_hostile = event_target:crisis_country }
+								is_disabled = no is_ship_class = shipclass_military
+							}
+							any_ship_in_system = {
+								exists = owner
+								owner = { is_hostile = event_target:crisis_country }
+								is_disabled = no is_ship_class = shipclass_transport
+							}	
+						}
+						prev = { can_access_system = prev }
+					}
+					save_event_target_as = nearly_can_attack_fleet_target
+				}
+				#若星系内存在有效目标，就70%概率走过去，30%概率飞过去。如果不能走就直接飞起来（诶嘿~）
+				if = {
+					limit = { exists = event_target:nearly_can_attack_fleet_target }
+					event_target:nearly_can_attack_fleet_target = {
+						random_fleet_in_system = {
+							limit = {
+								exists = owner
+								owner = { is_hostile = event_target:crisis_country }
+								OR = {
+									any_owned_ship = { is_disabled = no is_ship_class = shipclass_military }
+									any_owned_ship = { is_disabled = no is_ship_class = shipclass_transport }
+								}
+							}
+							crisis_jump_fleet_attack_action = yes
+						}
+					}
+				}
+				#找不到目标，再找一次
+				else = {
+					closest_system = {
+						max_steps = 70
+						limit = {
+							NOT = { is_same_value = root.solar_system }
+							OR = {
+								any_ship_in_system = {
+									exists = owner
+									owner = { is_hostile = event_target:crisis_country }
+									is_disabled = no is_ship_class = shipclass_military
+								}
+								any_ship_in_system = {
+									exists = owner
+									owner = { is_hostile = event_target:crisis_country }
+									is_disabled = no is_ship_class = shipclass_transport
+								}	
+							}
+						}
+						save_event_target_as = nearly_can_attack_fleet_target
+					}
+					#若星系内存在有效目标，就70%概率走过去，30%概率飞过去。如果不能走就直接飞起来（诶嘿~）
+					if = {
+						limit = { exists = event_target:nearly_can_attack_fleet_target }
+						event_target:nearly_can_attack_fleet_target = {
+							random_fleet_in_system = {
+								limit = {
+									exists = owner
+									owner = { is_hostile = event_target:crisis_country }
+									OR = {
+										any_owned_ship = { is_disabled = no is_ship_class = shipclass_military }
+										any_owned_ship = { is_disabled = no is_ship_class = shipclass_transport }
+									}
+								}
+								crisis_jump_fleet_attack_action = yes
+							}
+						}
+					}
+					#找不到目标，睡一觉捏~
+					else = { crisis_fleet_wandering_action = yes }
+				}
+			}
+			25 = {
+				#25%概率寻找10跳内是否存在有敌对舰船或敌对运输船的敌对星系
+				random_system = {
+					limit = {
+						NOT = { is_same_value = root.solar_system }
+						distance = {
+							source = root.solar_system
+							type = hyperlane
+							use_bypasses = yes
+							min_jumps = 1
+							max_jumps = 10
+						}
+						OR = {
+							any_ship_in_system = {
+								exists = owner
+								owner = { is_hostile = event_target:crisis_country }
+								is_disabled = no is_ship_class = shipclass_military
+							}
+							any_ship_in_system = {
+								exists = owner
+								owner = { is_hostile = event_target:crisis_country }
+								is_disabled = no is_ship_class = shipclass_transport
+							}
+						}
+						prev = { can_access_system = prev }
+					}
+					save_event_target_as = nearly_can_attack_fleet_target
+				}
+				#若星系内存在有效目标，就70%概率走过去，30%概率飞过去。如果不能走就直接飞起来（诶嘿~）
+				if = {
+					limit = { exists = event_target:nearly_can_attack_fleet_target }
+					event_target:nearly_can_attack_fleet_target = {
+						random_fleet_in_system = {
+							limit = {
+								exists = owner
+								owner = { is_hostile = event_target:crisis_country }
+								OR = {
+									any_owned_ship = { is_disabled = no is_ship_class = shipclass_military }
+									any_owned_ship = { is_disabled = no is_ship_class = shipclass_transport }
+								}
+							}
+							crisis_jump_fleet_attack_action = yes
+						}
+					}
+				}
+				#找不到目标，再找一次
+				else = {
+					random_system = {
+						limit = {
+							NOT = { is_same_value = root.solar_system }
+							distance = {
+								source = root.solar_system
+								type = hyperlane
+								use_bypasses = yes
+								min_jumps = 1
+								max_jumps = 10
+							}
+							OR = {
+								any_ship_in_system = {
+									exists = owner
+									owner = { is_hostile = event_target:crisis_country }
+									is_disabled = no is_ship_class = shipclass_military
+								}
+								any_ship_in_system = {
+									exists = owner
+									owner = { is_hostile = event_target:crisis_country }
+									is_disabled = no is_ship_class = shipclass_transport
+								}
+							}
+						}
+						save_event_target_as = nearly_can_attack_fleet_target
+					}
+					#如果星系内具备有效目标，就70%概率走过去，30%概率飞过去（飞过去必须吃debuff）
+					if = {
+						limit = { exists = event_target:nearly_can_attack_fleet_target }
+						event_target:nearly_can_attack_fleet_target = {
+							random_fleet_in_system = {
+								limit = {
+									exists = owner
+									owner = { is_hostile = event_target:crisis_country }
+									OR = {
+										any_owned_ship = { is_disabled = no is_ship_class = shipclass_military }
+										any_owned_ship = { is_disabled = no is_ship_class = shipclass_transport }
+									}
+								}
+								crisis_jump_fleet_attack_action = yes
+							}
+						}
+					}
+					#找不到目标，睡一觉捏~
+					else = { crisis_fleet_wandering_action = yes }
+				}
+			}
+		}
+	}
+}
+crisis_fleet_transport_action = {
+	optimize_memory
+	#在当前星系寻找是否存在无己方单位的敌对星球
+	if = {
+		limit = {
+			root = {
+				exists = solar_system
+				solar_system = {
+					any_system_planet = {
+						exists = controller
+						controller = { is_hostile = event_target:crisis_country }
+						OR = {
+							is_colony = yes
+							is_under_colonization = yes
+						}
+					}
+				}
+			}
+		}
+		root = {
+			solar_system = {
+				random_system_planet = {
+					limit = {
+						exists = controller
+						controller = { is_hostile = event_target:crisis_country }
+						OR = {
+							is_colony = yes
+							is_under_colonization = yes
+						}
+					}
+					prevprev = { auto_move_to_planet = { target = prev clear_auto_move_on_arrival = yes } }
+				}
+			}
+		}
+	}
+	#在周围星系寻找是否存在敌方殖民地
+	else_if = {
+		limit = {
+			solar_system = { any_neighbor_system = {
+				any_system_planet = {
+					exists = controller
+					controller = { is_hostile = event_target:crisis_country }
+					OR = {
+						is_colony = yes
+						is_under_colonization = yes
+					}
+				}
+			} }
+		}
+		solar_system = { random_neighbor_system = {
+			limit = {
+				any_system_planet = {
+					exists = controller
+					controller = { is_hostile = event_target:crisis_country }
+					OR = {
+						is_colony = yes
+						is_under_colonization = yes
+					}
+				}
+			}
+			system_star = { prevprevprev = { auto_move_to_planet = { target = prev clear_auto_move_on_arrival = yes } } }
+		} }
+	}
+	#自动索敌，看看哪个倒霉蛋会被锁定~
+	else = {
+		random_list = {
+			#50%概率寻找100步内是否存在有敌对星球的敌对星系
+			50 = {
+				closest_system = {
+					max_steps = 100
+					limit = {
+						NOT = { is_same_value = root.solar_system }
+						any_system_planet = {
+							exists = controller
+							controller = { is_hostile = event_target:crisis_country }
+							OR = {
+								is_colony = yes
+								is_under_colonization = yes
+							}
+						}
+						prev = { can_access_system = prev }
+					}
+				}
+				save_event_target_as = nearly_can_attack_fleet_target
+				#若星系内存在有效目标，就90%概率走过去，10%概率飞过去。如果不能走就直接飞起来（诶嘿~）
+				if = {
+					limit = { exists = event_target:nearly_can_attack_fleet_target }
+					event_target:nearly_can_attack_fleet_target = {
+						if = {
+							limit = {
+								any_system_planet = {
+									exists = controller
+									controller = { is_hostile = event_target:crisis_country }
+									OR = {
+										is_colony = yes
+										is_under_colonization = yes
+									}
+								}
+							}
+							random_system_planet = {
+								limit = {
+									exists = controller
+									controller = { is_hostile = event_target:crisis_country }
+									OR = {
+										is_colony = yes
+										is_under_colonization = yes
+									}
+								}
+								crisis_jump_attitude_planet_fleet_action = yes
+							}
+						}
+						else = { system_star = { prevprev = { auto_move_to_planet = { target = prev clear_auto_move_on_arrival = yes } } } }
+					}
+				}
+				#找不到目标，再找一次
+				else = {
+					#开始找目标
+					closest_system = {
+						max_steps = 100
+						use_bypasses = yes
+						limit = {
+							NOT = { is_same_value = root.solar_system }
+							any_system_planet = {
+								exists = controller
+								controller = { is_hostile = event_target:crisis_country }
+								OR = {
+									is_colony = yes
+									is_under_colonization = yes
+								}
+							}
+						}
+						save_event_target_as = nearly_can_attack_fleet_target
+					}
+					#若星系内存在有效目标，就90%概率走过去，10%概率飞过去。如果不能走就直接飞起来（诶嘿~）
+					if = {
+						limit = { exists = event_target:nearly_can_attack_fleet_target }
+						event_target:nearly_can_attack_fleet_target = {
+							if = {
+								limit = {
+									any_system_planet = {
+										exists = controller
+										controller = { is_hostile = event_target:crisis_country }
+										OR = {
+											is_colony = yes
+											is_under_colonization = yes
+										}
+									}
+								}
+								random_system_planet = {
+									limit = {
+										exists = controller
+										controller = { is_hostile = event_target:crisis_country }
+										OR = {
+											is_colony = yes
+											is_under_colonization = yes
+										}
+									}
+									crisis_jump_attitude_planet_fleet_action = yes
+								}
+							}
+							else = { system_star = { prevprev = { auto_move_to_planet = { target = prev clear_auto_move_on_arrival = yes } } } }
+						}
+					}
+					#找不到目标，睡一觉捏~
+					else = { fleet_event = { id = crisis_fleet_action.4 days = 12 random = 8 } }
+				}
+			}
+			50 = {
+				#50%概率寻找15跳内是否存在有敌对星球的敌对星系
+				random_system = {
+					limit = {
+						NOT = { is_same_value = root.solar_system }
+						distance = {
+							source = root.solar_system
+							type = hyperlane
+							use_bypasses = yes
+							min_jumps = 1
+							max_jumps = 15
+						}
+						any_system_planet = {
+							exists = controller
+							controller = { is_hostile = event_target:crisis_country }
+							OR = {
+								is_colony = yes
+								is_under_colonization = yes
+							}
+						}
+						prev = { can_access_system = prev }
+					}
+					save_event_target_as = nearly_can_attack_fleet_target
+				}
+				#若星系内存在有效目标，就70%概率走过去，30%概率飞过去。如果不能走就直接飞起来（诶嘿~）
+				if = {
+					limit = { exists = event_target:nearly_can_attack_fleet_target }
+					event_target:nearly_can_attack_fleet_target = {
+						if = {
+							limit = {
+								any_system_planet = {
+									exists = controller
+									controller = { is_hostile = event_target:crisis_country }
+									OR = {
+										is_colony = yes
+										is_under_colonization = yes
+									}
+								}
+							}
+							random_system_planet = {
+								limit = {
+									exists = controller
+									controller = { is_hostile = event_target:crisis_country }
+									OR = {
+										is_colony = yes
+										is_under_colonization = yes
+									}
+								}
+								crisis_jump_attitude_planet_fleet_action = yes
+							}
+						}
+						else = { system_star = { prevprev = { auto_move_to_planet = { target = prev clear_auto_move_on_arrival = yes } } } }
+					}
+				}
+				#找不到目标，再找一次
+				else = {
+					#开始找目标
+					closest_system = {
+						max_steps = 100
+						use_bypasses = yes
+						limit = {
+							NOT = { is_same_value = root.solar_system }
+							any_system_planet = {
+								exists = controller
+								controller = { is_hostile = event_target:crisis_country }
+								OR = {
+									is_colony = yes
+									is_under_colonization = yes
+								}
+							}
+						}
+						save_event_target_as = nearly_can_attack_fleet_target
+					}
+					#若星系内存在有效目标，就90%概率走过去，10%概率飞过去。如果不能走就直接飞起来（诶嘿~）
+					if = {
+						limit = { exists = event_target:nearly_can_attack_fleet_target }
+						event_target:nearly_can_attack_fleet_target = {
+							if = {
+								limit = {
+									any_system_planet = {
+										exists = controller
+										controller = { is_hostile = event_target:crisis_country }
+										OR = {
+											is_colony = yes
+											is_under_colonization = yes
+										}
+									}
+								}
+								random_system_planet = {
+									limit = {
+										exists = controller
+										controller = { is_hostile = event_target:crisis_country }
+										OR = {
+											is_colony = yes
+											is_under_colonization = yes
+										}
+									}
+									crisis_jump_attitude_planet_fleet_action = yes
+								}
+							}
+							else = { system_star = { prevprev = { auto_move_to_planet = { target = prev clear_auto_move_on_arrival = yes } } } }
+						}
+					}
+					#找不到目标，睡一觉捏~
+					else = { fleet_event = { id = crisis_fleet_action.4 days = 12 random = 8 } }
+				}
+			}
+		}
+	}
+}
+transport_land_action = {
+	# THIS = 运输舰队 fleet
+	# FROM = 轨道对象 planet / starbase / megastructure
+	if = {
+		limit = {
+			is_ship_class = shipclass_transport
+			exists = from
+			from = {
+				is_scope_type = planet
+				OR = {
+					is_colony = yes
+					is_under_colonization = yes
+				}
+				exists = controller
+				controller = { is_hostile = event_target:crisis_country }
+			}
+		}
+		from = {
+			save_event_target_as = auto_land_target_planet
+		}
+		queue_actions = {
+			land_armies_order = {
+				target = event_target:auto_land_target_planet
+			}
+		}
+	}
+}
+crisis_fleet_wandering_action = {
+	optimize_memory
+	clear_orders = yes
+	clear_fleet_actions = this
+	random_list = {
+		60 = {
+			solar_system = { random_neighbor_system = {
+				limit = { prevprev = { can_access_system = prev } }
+				save_event_target_as = crisis_fleet_wandering_action_target
+			} }
+			if = {
+				limit = { exists = event_target:crisis_fleet_wandering_action_target }
+				event_target:crisis_fleet_wandering_action_target = {
+					system_star = { prevprev = { auto_move_to_planet = { target = prev clear_auto_move_on_arrival = yes } } }
+				}
+			}
+			else = {
+				fleet_event = { id = crisis_fleet_action.1 days = 12 random = 8 }
+			}
+		}
+		40 = {
+			modifier = {
+				factor = 0
+				any_owned_ship = { has_ship_flag = crisis_fleet_jump_drive_cooldown }
+			}
+			random_system = {
+				limit = {
+					NOT = { is_same_value = prev.solar_system }
+					OR = {
+						AND = {
+							exists = starbase
+							starbase = { exists = owner owner = { is_hostile = event_target:crisis_country } }
+						}
+						any_system_planet = {
+							exists = controller
+							controller = { is_hostile = event_target:crisis_country }
+							OR = {
+								is_colony = yes
+								is_under_colonization = yes
+							}
+							count_fleet_in_orbit = { count = 0 limit = {
+								exists = owner
+								owner = { is_same_value = event_target:crisis_country }
+								NOT = { is_same_value = root }
+							} }
+						}
+						any_ship_in_system = {
+							exists = owner
+							owner = { is_hostile = event_target:crisis_country }
+							is_disabled = no is_ship_class = shipclass_military
+						}
+						any_ship_in_system = {
+							exists = owner
+							owner = { is_hostile = event_target:crisis_country }
+							is_disabled = no is_ship_class = shipclass_transport
+						}
+					}
+				}
+				save_event_target_as = crisis_fleet_wandering_action_target
+			}
+			if = {
+				limit = { exists = event_target:crisis_fleet_wandering_action_target }
+				event_target:crisis_fleet_wandering_action_target = {
+					random_system_planet = {
+						limit = { is_primary_star = yes }
+						prevprev = {
+							set_location = { target = prev distance = 200 angle = random }
+							auto_move_to_planet = { target = prev clear_auto_move_on_arrival = yes }
+						}
+					}
+				}
+			}
+			else = {
+				solar_system = { random_neighbor_system = {
+					limit = { prevprev = { can_access_system = prev } }
+					save_event_target_as = crisis_fleet_wandering_action_target
+				} }
+				if = {
+					limit = { exists = event_target:crisis_fleet_wandering_action_target }
+					event_target:crisis_fleet_wandering_action_target = {
+						system_star = { prevprev = { auto_move_to_planet = { target = prev clear_auto_move_on_arrival = yes } } }
+					}
+				}
+				else = {
+					fleet_event = { id = crisis_fleet_action.1 days = 12 random = 8 }
+				}
+			}
+		}
+	}
+}
+crisis_jump_attitude_planet_fleet_action = {
+	optimize_memory
+	random_list = {
+		90 = { prevprev = { auto_move_to_planet = { target = prev clear_auto_move_on_arrival = yes } } }
+		10 = {
+			modifier = {
+				factor = 0
+				prevprev = { any_owned_ship = { has_ship_flag = crisis_fleet_jump_drive_cooldown } }
+			}
+			prevprev = {
+				set_location = { target = prev distance = 200 angle = random }
+				if = {
+					limit = {
+						exists = owner owner = {
+							OR = {
+								is_country_type = fengraomin_crisis
+							}
+						}
+					}
+					while = {
+						limit = { any_owned_ship = { NOT = { has_ship_flag = crisis_fleet_jump_drive_cooldown } } }
+						random_owned_ship = {
+							limit = { NOT = { has_ship_flag = crisis_fleet_jump_drive_cooldown } }
+							set_timed_ship_flag = { flag = crisis_fleet_jump_drive_cooldown days = 60 }
+						}
+					}
+				}
+				else = {
+					while = {
+						limit = { any_owned_ship = { NOT = { has_ship_flag = crisis_fleet_jump_drive_cooldown } } }
+						random_owned_ship = {
+							limit = { NOT = { has_ship_flag = crisis_fleet_jump_drive_cooldown } }
+							set_timed_ship_flag = { flag = crisis_fleet_jump_drive_cooldown days = 180 }
+						}
+					}
+				}
+				auto_move_to_planet = { target = prev clear_auto_move_on_arrival = yes }
+			}
+		}
+	}
+}
+crisis_jump_fleet_attack_action = {
+	optimize_memory
+	random_list = {
+		70 = { prevprev = { auto_follow_fleet = { target = prev attack_fleet = yes } } }
+		30 = {
+			modifier = {
+				factor = 0
+				prevprev = { any_owned_ship = { has_ship_flag = crisis_fleet_jump_drive_cooldown } }
+			}
+			prevprev = {
+				set_location = { target = prev distance = 200 angle = random }
+				while = {
+					limit = { any_owned_ship = { NOT = { has_ship_flag = crisis_fleet_jump_drive_cooldown } } }
+					random_owned_ship = {
+						limit = { NOT = { has_ship_flag = crisis_fleet_jump_drive_cooldown } }
+						set_timed_ship_flag = { flag = crisis_fleet_jump_drive_cooldown days = 180 }
+					}
+				}
+				auto_follow_fleet = { target = prev attack_fleet = yes }
 			}
 		}
 	}
