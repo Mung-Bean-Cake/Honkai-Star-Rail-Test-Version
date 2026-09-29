@@ -1,7 +1,9 @@
 import os
 import sys
+import chardet
 
-blackList = ["Ilyich Genshin Test Version\common\备份文件", "Ilyich Genshin Test Version/common/备份文件"]
+blackList = [r"Honkai Star Rail Test Version\common\备份文件", "Honkai Star Rail Test Version/common/备份文件", 
+             r"Honkai Star Rail Test Version\.backups", "Honkai Star Rail Test Version/.backups"]
 
 # 检测本地化文件的双引号
 def CheckFileQuotation(filePath):
@@ -39,7 +41,29 @@ def CheckDirQuotation(dirPath):
             allFilesCorrect = (CheckDirQuotation(filePath) and allFilesCorrect)
     return allFilesCorrect
 
-# 检测txt文件的大括号匹配
+# 检测本地化文件的编码格式
+def CheckFileEncoding(filePath):
+    with open(filePath, 'rb') as f:
+        det = chardet.detect(f.read())
+        if det['encoding'] == "UTF-8-SIG": # utf-8-bom会被chardet检测为UTF-8-SIG
+            return True
+        print("文件出错: %s 文件编码格式为: %s" % (filePath, det['encoding']))
+        return False
+
+def CheckDirEncoding(dirPath):
+    allFilesCorrect = True
+    files = os.listdir(dirPath)
+    for file in files:
+        filePath = os.path.join(dirPath, file)
+        if filePath in blackList:
+            continue
+        elif os.path.isfile(filePath) and ".yml" in file:
+            allFilesCorrect = (CheckFileEncoding(filePath) and allFilesCorrect)
+        elif os.path.isdir(filePath):
+            allFilesCorrect = (CheckDirEncoding(filePath) and allFilesCorrect)
+    return allFilesCorrect
+
+# 检测txt、gui文件的大括号匹配
 def CheckFileBracket(filePath):
     fileCorrect = True
     with open(filePath, 'r', errors='ignore') as f:
@@ -74,18 +98,21 @@ def CheckDirBracket(dirPath):
         filePath = os.path.join(dirPath, file)
         if filePath in blackList:
             continue
-        if os.path.isfile(filePath) and ".txt" in file:
+        if os.path.isfile(filePath) and (".txt" in file or ".gui" in file):
             allFilesCorrect = (CheckFileBracket(filePath) and allFilesCorrect)
         elif os.path.isdir(filePath):
             allFilesCorrect = (CheckDirBracket(filePath) and allFilesCorrect)
     return allFilesCorrect
 
 def main():
-    modPath = "Ilyich Genshin Test Version"
+    modPath = "Honkai Star Rail Test Version"
     if not CheckDirBracket(modPath):
         sys.exit(1)
-    chineseLocalisationPath = "Ilyich Genshin Test Version/localisation/simp_chinese" # 目前只检测中文
-    if not CheckDirQuotation(chineseLocalisationPath):
+    chineseLocalisationPath = "Honkai Star Rail Test Version/localisation/simp_chinese"
+    englishLocalisationPath = "Honkai Star Rail Test Version/localisation/english"
+    if not CheckDirQuotation(chineseLocalisationPath): # 目前引号只检测中文
+        sys.exit(1)
+    if not (CheckDirEncoding(chineseLocalisationPath) and CheckDirEncoding(englishLocalisationPath)):
         sys.exit(1)
 
 if __name__ == "__main__":
