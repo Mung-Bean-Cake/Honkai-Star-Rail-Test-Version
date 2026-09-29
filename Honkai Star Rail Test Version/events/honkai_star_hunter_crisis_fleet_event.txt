@@ -1,0 +1,87 @@
+namespace = crisis_fleet_action
+fleet_event = {
+    id = crisis_fleet_action.1
+    hide_window = yes
+    is_triggered_only = yes
+    trigger = {
+        exists = this
+        has_global_flag = fengrao_crisis_started
+    }
+    immediate = { crisis_fleet_action = yes }
+}
+fleet_event = {
+    id = crisis_fleet_action.2
+    hide_window = yes
+    is_triggered_only = yes
+    trigger = {
+        exists = this
+        has_global_flag = fengrao_crisis_started
+        is_ship_class = shipclass_transport
+    }
+    immediate = { crisis_fleet_transport_action = yes }
+}
+fleet_event = {
+    id = crisis_fleet_action.3
+    hide_window = yes
+    is_triggered_only = yes
+    trigger = {
+        exists = this
+        has_global_flag = fengrao_crisis_started
+        owner = {
+            is_same_value = event_target:crisis_country
+        }
+        is_ship_class = shipclass_military
+        NOT = {
+            any_combatant_fleet = {
+                always = yes
+            }
+            has_fleet_flag = crisis_fleet_actioning
+        }
+        has_fleet_order = orbit_planet_order
+    }
+    immediate = { 
+        set_fleet_flag = crisis_fleet_actioning
+        crisis_fleet_action = yes
+        remove_fleet_flag = crisis_fleet_actioning 
+    }
+}
+fleet_event = {
+    id = crisis_fleet_action.4
+    hide_window = yes
+    is_triggered_only = yes
+    trigger = {
+        exists = this
+        has_global_flag = fengrao_crisis_started
+        owner = {
+            is_same_value = event_target:crisis_country
+        }
+        is_ship_class = shipclass_transport
+        NOT = {
+            any_combatant_fleet = {
+                always = yes
+            }
+            has_fleet_flag = crisis_fleet_transport_actioning
+        }
+        has_fleet_order = orbit_planet_order
+    }
+    immediate = { 
+        set_fleet_flag = crisis_fleet_transport_actioning
+        crisis_fleet_transport_action = yes
+        remove_fleet_flag = crisis_fleet_transport_actioning 
+    }
+}
+fleet_event = {
+    id = crisis_fleet_action.5
+    hide_window = yes
+    is_triggered_only = yes
+    trigger = {
+        has_global_flag = fengrao_crisis_started
+        owner = {
+            is_same_value = event_target:crisis_country
+        }
+        is_ship_class = shipclass_transport
+    }
+    immediate = {
+        transport_land_action = yes
+    }
+}

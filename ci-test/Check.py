@@ -2,10 +2,8 @@ import os
 import sys
 import chardet
 
-blackList = ["Daybreak of Teyvat Alpha Version\common\备份文件", "Daybreak of Teyvat Alpha Version/common/备份文件", 
-             "Daybreak of Teyvat Alpha Version\.backups", "Daybreak of Teyvat Alpha Version/.backups",
-             "Honkai Star Rail Test Version\common\备份文件", "Honkai Star Rail Test Version/common/备份文件", 
-             "Honkai Star Rail Test Version\.backups", "Honkai Star Rail Test Version/.backups"]
+blackList = [r"Honkai Star Rail Test Version\common\备份文件", "Honkai Star Rail Test Version/common/备份文件", 
+             r"Honkai Star Rail Test Version\.backups", "Honkai Star Rail Test Version/.backups"]
 
 # 检测本地化文件的双引号
 def CheckFileQuotation(filePath):
