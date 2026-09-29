@@ -659,7 +659,53 @@ country_event = {
 		}
 	}
 }
-#————————————————————————————————————————————————————————————阿哈年度奖10000_19999
+#真珠
+#如果美术底本为欢愉主
+    
+country_event = {
+	id = xiaoqiaosi.17
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		 
+	}
+
+	immediate = {
+		
+	if = {
+        limit = { has_country_flag = xiaoqiaosi.2006_op_0}
+		remove_country_flag = is_huanyu_time
+        set_country_flag = is_show_time_huanyunv
+    }
+    if= {
+         limit = { has_country_flag = xiaoqiaosi.2006_op_1}
+		 remove_country_flag = is_huanyu_time
+        country_event = { id = xiaoqiaosi.2001 days = 5}
+    }
+    if= {
+         limit = { has_country_flag = xiaoqiaosi.2006_op_2}
+		 remove_country_flag = is_huanyu_time
+        country_event = { id = xiaoqiaosi.2002 days = 5}
+    }
+    if= {
+         limit = { has_country_flag = xiaoqiaosi.2006_op_3}
+		 remove_country_flag = is_huanyu_time
+        country_event = { id = xiaoqiaosi.2003 days = 5}
+    }
+    if= {
+         limit = { has_country_flag = xiaoqiaosi.2006_op_4}
+		 remove_country_flag = is_huanyu_time
+        country_event = { id = xiaoqiaosi.2004 days = 5}
+    }
+    if= {
+        limit = { has_country_flag = xiaoqiaosi.2006_op_5}
+		remove_country_flag = is_huanyu_time
+        country_event = { id = xiaoqiaosi.2005 days = 5}
+    }
+	}
+}
+#————————————————————————————————————————————————————————————阿哈年度奖10000
 country_event = {
 	id = xiaoqiaosi.10000
 	hide_window = yes
@@ -737,6 +783,7 @@ country_event = {
 			limit = {any_owned_leader = {has_leader_flag = yaoguang} }
 			country_event = {id = xiaoqiaosi.6}
 		}
+		
 
 
 		remove_country_flag = is_huanyu_time
@@ -745,6 +792,7 @@ country_event = {
 		remove_country_flag = is_show_time_feiying
 		remove_country_flag = is_show_time_langzun
 		remove_country_flag = is_show_time_shuishajin
+		remove_country_flag = is_show_time_zhenzhu
 	}
 
 	#欢愉主
@@ -942,7 +990,34 @@ country_event = {
 			id = xiaoqiaosi.2005
 		}
 	}
-	
+	#真珠
+	option = {
+		trigger = {any_owned_leader = {has_leader_flag = zhenzhu}}
+		allow = {
+			custom_tooltip = {
+				fail_text = xiaoqiaosi.op.xiemu #本地化
+				check_variable = {
+					which = show_times
+					value < 1
+				}
+			}
+			custom_tooltip = {
+				fail_text = xiaoqiaosi.op.not #本地化
+				not = {owner = {has_country_flag = is_show_time_zhenzhu}}
+			}
+		}
+		set_country_flag = is_huanyu_time
+		change_variable = {
+			which = show_times
+			value  = 1
+		}
+		name = rep.1000_6
+		is_dialog_only = yes
+		response_text = xiaoqiaosi.1000_zhenzhu_op
+		country_event = {
+			id = xiaoqiaosi.2006
+		}
+	}
 }
 
 #主动效果
@@ -960,7 +1035,7 @@ country_event = {
 			limit = {has_country_flag = is_show_time_huanyunv has_country_flag = is_show_time_yaoguang }
 			country_event = {
 				id = xiaoqiaosi.2001
-				days = 10
+				days = 5
 			}
 			remove_country_flag = is_show_time_huanyunv
 		}
@@ -968,7 +1043,7 @@ country_event = {
 			limit = {has_country_flag = is_show_time_huanyunv has_country_flag = is_show_time_huohua }
 			country_event = {
 				id = xiaoqiaosi.2002
-				days = 10
+				days = 5
 			}
 			remove_country_flag = is_show_time_huanyunv
 		}
@@ -976,7 +1051,7 @@ country_event = {
 			limit = {has_country_flag = is_show_time_huanyunv has_country_flag = is_show_time_feiying }
 			country_event = {
 				id = xiaoqiaosi.2003
-				days = 10
+				days = 5
 			}
 			remove_country_flag = is_show_time_huanyunv
 		}
@@ -984,10 +1059,19 @@ country_event = {
 			limit = {has_country_flag = is_show_time_huanyunv has_country_flag = is_show_time_langzun }
 			country_event = {
 				id = xiaoqiaosi.2004
-				days = 10
+				days = 5
 			}
 			remove_country_flag = is_show_time_huanyunv
 		}
+		if = {
+			limit = {has_country_flag = is_show_time_huanyunv has_country_flag = is_show_time_shuishajin }
+			country_event = {
+				id = xiaoqiaosi.2005
+				days = 5
+			}
+			remove_country_flag = is_show_time_huanyunv
+		}
+		#不会让你选真珠的哈哈
 	}
 }
 #爻光
@@ -1475,7 +1559,78 @@ country_event = {
 	
 
 }
+country_event = {
+	id = xiaoqiaosi.2006
+	title = xiaoqiaosi.2006_title
+	desc = xiaoqiaosi.2006_desc
+	picture = GFX_xiaoqiaosi_2006
+	is_triggered_only = yes
 
+	immediate = {
+		 
+		set_country_flag = is_show_time_zhenzhu
+		remove_country_flag = xiaoqiaosi.2006_op_0
+        remove_country_flag = xiaoqiaosi.2006_op_1
+        remove_country_flag = xiaoqiaosi.2006_op_2
+        remove_country_flag = xiaoqiaosi.2006_op_3
+        remove_country_flag = xiaoqiaosi.2006_op_4
+        remove_country_flag = xiaoqiaosi.2006_op_5
+		country_event = {
+			id = xiaoqiaosi.3000
+		}
+	}
+	option = {
+		name = xiaoqiaosi.2006_op_0
+		trigger = {owner = {any_owned_leader = {has_leader_flag = huanyunv}}}
+		set_country_flag = xiaoqiaosi.2006_op_0
+		country_event = {id = xiaoqiaosi.20060 days = 5}
+	}
+	option = {
+		name = xiaoqiaosi.2006_op_1
+		trigger = {owner = {any_owned_leader = {has_leader_flag = yaoguang}}}
+		set_country_flag = xiaoqiaosi.2006_op_1
+		country_event = {id = xiaoqiaosi.20060 days = 5}
+	}
+	option = {
+		name = xiaoqiaosi.2006_op_2
+		trigger = {owner = {any_owned_leader = {has_leader_flag = huohua}}}
+		set_country_flag = xiaoqiaosi.2006_op_2
+		country_event = {id = xiaoqiaosi.20060 days = 5}
+	}
+	option = {
+		name = xiaoqiaosi.2006_op_3
+		trigger = {owner = {any_owned_leader = {has_leader_flag = feiying}}}
+		set_country_flag = xiaoqiaosi.2006_op_3
+		country_event = {id = xiaoqiaosi.20060 days = 5}
+	}
+	option = {
+		name = xiaoqiaosi.2006_op_4
+		trigger = {owner = {any_owned_leader = {has_leader_flag = langzun}}}
+		set_country_flag = xiaoqiaosi.2006_op_4
+		country_event = {id = xiaoqiaosi.20060 days = 5}
+	}
+	option = {
+		name = xiaoqiaosi.2006_op_5
+		trigger = {owner = {any_owned_leader = {has_leader_flag = shuishajin}}}
+		set_country_flag = xiaoqiaosi.2006_op_5
+		country_event = {id = xiaoqiaosi.20060 days = 5}
+	}
+	
+}
+country_event = {
+	id = xiaoqiaosi.20060
+	hide_window = yes
+	is_triggered_only = yes
+
+	immediate = {
+		inline_script = {
+			script = trait/leader_zhenzhu_t1_effect
+		}
+	}
+		 
+	
+	
+}
 #————————————————————————————————————————————————————————————
 #被动效果
 country_event = {
@@ -1488,9 +1643,11 @@ country_event = {
 
 	trigger = {
 		has_country_flag = is_huanyu_time
+		
 	}
 
 	immediate = {
+		#测试用，输入event xiaoqiaosi.3001
 		if = {
 			limit = {owner = {has_country_flag = haimeixiewan} }
 			owner = {
@@ -1498,6 +1655,7 @@ country_event = {
 			}
 			
 		}
+		#欢愉主
 		#leader_huanyunv_t1
 		if = {
 			limit = {any_owned_leader = {has_leader_flag = huanyunv} has_country_flag = is_show_time_huanyunv }
@@ -1530,6 +1688,7 @@ country_event = {
 				value = 1
 			}
 		}
+		#火花
 		#leader_huohua_t2
 		if = {
 			limit = {any_owned_leader = {has_leader_flag = huohua} has_country_flag = is_huanyu_time}
@@ -1546,6 +1705,7 @@ country_event = {
 				value = 10
 			}
 		}
+		#绯英
 		#leader_feiying_t2
 		if = {
 			limit = {any_owned_leader = {has_leader_flag = feiying} has_country_flag = is_show_time_feiying}
@@ -1562,6 +1722,7 @@ country_event = {
 				days = 180
 			}
 		}
+		#狼尊
 		#leader_langzun_t1
 		#回复笑点
 		if = {
@@ -1583,7 +1744,13 @@ country_event = {
 				value = 2
 			}
 		}	
-		
+		#真珠
+		#leader_zhenzhu_t2
+		if ={
+			limit = {any_owned_leader = {has_leader_flag = zhenzhu} has_country_flag = is_huanyu_time }
+			country_event = {id = xiaoqiaosi.17}
+			#inline_script = {script = trait/leader_zhenzhu_t2_effect}
+		}
 	}
 	
 }
@@ -1626,6 +1793,20 @@ country_event = {
 	id = xiaoqiaosi.3002
 	title = xiaoqiaosi.3000_title
 	desc = xiaoqiaosi.3000_title
+	is_triggered_only = yes
+	
+}
+country_event = {
+	id = xiaoqiaosi.3003
+	title = xiaoqiaosi.3003_title
+	desc = xiaoqiaosi.3003_desc
+	is_triggered_only = yes
+	
+}
+country_event = {
+	id = xiaoqiaosi.3004
+	title = xiaoqiaosi.3004_title
+	desc = xiaoqiaosi.3004_desc
 	is_triggered_only = yes
 	
 }
