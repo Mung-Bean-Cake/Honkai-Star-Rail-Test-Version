@@ -13,6 +13,18 @@ country_event = {
     }
     immediate = {
         fengrao_middle_crisis_effect = yes
+        every_country = {
+            limit = {
+                NOT = {
+                    is_same_value = event_target:crisis_country
+                }
+            }
+            add_casus_belli = {
+                type = cb_purification
+                who = THIS
+                days = 36000
+            }
+        }
         country_event = {
             id = script_crisis.3
         }
@@ -48,6 +60,18 @@ country_event = {
     }
     immediate = {
         fengrao_middle_crisis_effect = yes
+        every_country = {
+            limit = {
+                NOT = {
+                    is_same_value = event_target:crisis_country
+                }
+            }
+            add_casus_belli = {
+                type = cb_purification
+                who = THIS
+                days = 36000
+            }
+        }
         country_event = {
             id = script_crisis.5
         }
@@ -76,9 +100,20 @@ country_event = {
                     OR = {
                         has_fleet_flag = fengraomin_fleet_1
                         has_fleet_flag = fengraomin_fleet_2
+                        has_fleet_flag = fengraomin_fleet_3
+                        has_fleet_flag = fengraomin_fleet_4
+                        has_fleet_flag = fengraomin_fleet_5
+                        has_fleet_flag = fengraomin_fleet_6
+                        has_fleet_flag = fengraomin_fleet_7
+                        has_fleet_flag = fengraomin_fleet_8
+                        has_fleet_flag = fengraomin_fleet_9
+                        has_fleet_flag = fengraomin_fleet_10
                     }
                 }
                 set_owner = event_target:yuhuang_fengrao_country
+                fleet_event = {
+                    id = crisis_fleet_action.1 days = 15 random = 10
+                }
             }
             destroy_country = yes
         }

@@ -225,6 +225,9 @@ create_1st_yuhuang_fleet = {
 				distance = 30
 				angle = random
 			}
+			set_fleet_stance = aggressive
+			set_aggro_range = 800
+			set_aggro_range_measure_from = return_point
 			fleet_event = { id = crisis_fleet_action.1 days = 12 random = 8 }
 		}
 		settings = {
@@ -289,6 +292,9 @@ create_commander_yuhuang_fleet_1 = {
 				distance = 60
 				angle = random
 			}
+			set_fleet_stance = aggressive
+			set_aggro_range = 800
+			set_aggro_range_measure_from = return_point
 			fleet_event = { id = crisis_fleet_action.1 days = 12 random = 8 }
 		}
 		settings = {
@@ -351,6 +357,9 @@ create_commander_yuhuang_fleet_2 = {
 				distance = 60
 				angle = random
 			}
+			set_fleet_stance = aggressive
+			set_aggro_range = 800
+			set_aggro_range_measure_from = return_point
 			fleet_event = { id = crisis_fleet_action.1 days = 12 random = 8 }
 		}
 		settings = {
@@ -419,6 +428,9 @@ create_leader_yuhuang_fleet = {
 				distance = 60
 				angle = random
 			}
+			set_fleet_stance = aggressive
+			set_aggro_range = 800
+			set_aggro_range_measure_from = return_point
 			fleet_event = { id = crisis_fleet_action.1 days = 12 random = 8 }
 		}
 		settings = {
@@ -486,6 +498,9 @@ create_normal_yuhuang_fleet = {
 				distance = 60
 				angle = random
 			}
+			set_fleet_stance = aggressive
+			set_aggro_range = 800
+			set_aggro_range_measure_from = return_point
 			fleet_event = { id = crisis_fleet_action.1 days = 12 random = 8 }
 		}
 		settings = {
@@ -539,7 +554,7 @@ create_fengrao_constructors = {
 				set_owner = event_target:yuhuang_fengrao_country
 				create_ship = {
 					name = random
-					design = "NAME_fengrao_Builder"
+					design = NAME_Builder
 				}
 				set_location = {
 					target = event_target:yuhuang_planet_point
@@ -586,16 +601,23 @@ crisis_fleet_action = {
 				solar_system = {
 					any_system_planet = {
 						exists = controller
-						controller = { is_hostile = event_target:crisis_country }
+						NOT = {
+							controller = {
+								is_same_value = event_target:crisis_country
+							}
+						}
+						owner = { is_hostile = event_target:crisis_country }
 						OR = {
 							is_colony = yes
 							is_under_colonization = yes
 						}
-						count_fleet_in_orbit = { count = 0 limit = {
-							exists = owner
-							owner = { is_same_value = event_target:crisis_country }
-							NOT = { is_same_value = root }
-						} }
+						count_fleet_in_orbit = {
+							count = 0
+							limit = {
+								owner = { is_same_value = event_target:crisis_country }
+								is_ship_class = shipclass_military
+							}
+						}
 					}
 				}
 			}
@@ -605,16 +627,23 @@ crisis_fleet_action = {
 				random_system_planet = {
 					limit = {
 						exists = controller
-						controller = { is_hostile = event_target:crisis_country }
+						NOT = {
+							controller = {
+								is_same_value = event_target:crisis_country
+							}
+						}
+						owner = { is_hostile = event_target:crisis_country }
 						OR = {
 							is_colony = yes
 							is_under_colonization = yes
 						}
-						count_fleet_in_orbit = { count = 0 limit = {
-							exists = owner
-							owner = { is_same_value = event_target:crisis_country }
-							NOT = { is_same_value = root }
-						} }
+						count_fleet_in_orbit = {
+							count = 0
+							limit = {
+								owner = { is_same_value = event_target:crisis_country }
+								is_ship_class = shipclass_military
+							}
+						}
 					}
 					prevprev = { auto_move_to_planet = { target = prev clear_auto_move_on_arrival = yes } }
 				}
@@ -661,16 +690,23 @@ crisis_fleet_action = {
 				}
 				any_system_planet = {
 					exists = controller
-					controller = { is_hostile = event_target:crisis_country }
+					NOT = {
+						controller = {
+							is_same_value = event_target:crisis_country
+						}
+					}
+					owner = { is_hostile = event_target:crisis_country }
 					OR = {
 						is_colony = yes
 						is_under_colonization = yes
 					}
-					count_fleet_in_orbit = { count = 0 limit = {
-						exists = owner
-						owner = { is_same_value = event_target:crisis_country }
-						NOT = { is_same_value = root }
-					} }
+					count_fleet_in_orbit = {
+						count = 0
+						limit = {
+							owner = { is_same_value = event_target:crisis_country }
+							is_ship_class = shipclass_military
+						}
+					}
 				}
 				any_ship_in_system = {
 					exists = owner
@@ -692,16 +728,23 @@ crisis_fleet_action = {
 				}
 				any_system_planet = {
 					exists = controller
-					controller = { is_hostile = event_target:crisis_country }
+					NOT = {
+						controller = {
+							is_same_value = event_target:crisis_country
+						}
+					}
+					owner = { is_hostile = event_target:crisis_country }
 					OR = {
 						is_colony = yes
 						is_under_colonization = yes
 					}
-					count_fleet_in_orbit = { count = 0 limit = {
-						exists = owner
-						owner = { is_same_value = event_target:crisis_country }
-						NOT = { is_same_value = root }
-					} }
+					count_fleet_in_orbit = {
+						count = 0
+						limit = {
+							owner = { is_same_value = event_target:crisis_country }
+							is_ship_class = shipclass_military
+						}
+					}
 				}
 				any_ship_in_system = {
 					exists = owner
@@ -731,16 +774,23 @@ crisis_fleet_action = {
 							}
 							any_system_planet = {
 								exists = controller
-								controller = { is_hostile = event_target:crisis_country }
+								NOT = {
+									controller = {
+										is_same_value = event_target:crisis_country
+									}
+								}
+								owner = { is_hostile = event_target:crisis_country }
 								OR = {
 									is_colony = yes
 									is_under_colonization = yes
 								}
-								count_fleet_in_orbit = { count = 0 limit = {
-									exists = owner
-									owner = { is_same_value = event_target:crisis_country }
-									NOT = { is_same_value = root }
-								} }
+								count_fleet_in_orbit = {
+									count = 0
+									limit = {
+										owner = { is_same_value = event_target:crisis_country }
+										is_ship_class = shipclass_military
+									}
+								}
 							}
 						}
 						prev = { can_access_system = prev }
@@ -755,31 +805,45 @@ crisis_fleet_action = {
 							limit = {
 								any_system_planet = {
 									exists = controller
-									controller = { is_hostile = event_target:crisis_country }
+									NOT = {
+										controller = {
+											is_same_value = event_target:crisis_country
+										}
+									}
+									owner = { is_hostile = event_target:crisis_country }
 									OR = {
 										is_colony = yes
 										is_under_colonization = yes
 									}
-									count_fleet_in_orbit = { count = 0 limit = {
-										exists = owner
-										owner = { is_same_value = event_target:crisis_country }
-										NOT = { is_same_value = root }
-									} }
+									count_fleet_in_orbit = {
+										count = 0
+										limit = {
+											owner = { is_same_value = event_target:crisis_country }
+											is_ship_class = shipclass_military
+										}
+									}
 								}
 							}
 							random_system_planet = {
 								limit = {
 									exists = controller
-									controller = { is_hostile = event_target:crisis_country }
+									NOT = {
+										controller = {
+											is_same_value = event_target:crisis_country
+										}
+									}
+									owner = { is_hostile = event_target:crisis_country }
 									OR = {
 										is_colony = yes
 										is_under_colonization = yes
 									}
-									count_fleet_in_orbit = { count = 0 limit = {
-										exists = owner
-										owner = { is_same_value = event_target:crisis_country }
-										NOT = { is_same_value = root }
-									} }
+									count_fleet_in_orbit = {
+										count = 0
+										limit = {
+											owner = { is_same_value = event_target:crisis_country }
+											is_ship_class = shipclass_military
+										}
+									}
 								}
 								crisis_jump_attitude_planet_fleet_action = yes
 							}
@@ -805,16 +869,23 @@ crisis_fleet_action = {
 								}
 								any_system_planet = {
 									exists = controller
-									controller = { is_hostile = event_target:crisis_country }
+									NOT = {
+										controller = {
+											is_same_value = event_target:crisis_country
+										}
+									}
+									owner = { is_hostile = event_target:crisis_country }
 									OR = {
 										is_colony = yes
 										is_under_colonization = yes
 									}
-									count_fleet_in_orbit = { count = 0 limit = {
-										exists = owner
-										owner = { is_same_value = event_target:crisis_country }
-										NOT = { is_same_value = root }
-									} }
+									count_fleet_in_orbit = {
+										count = 0
+										limit = {
+											owner = { is_same_value = event_target:crisis_country }
+											is_ship_class = shipclass_military
+										}
+									}
 								}
 							}
 						}
@@ -828,31 +899,45 @@ crisis_fleet_action = {
 								limit = {
 									any_system_planet = {
 										exists = controller
-										controller = { is_hostile = event_target:crisis_country }
+										NOT = {
+											controller = {
+												is_same_value = event_target:crisis_country
+											}
+										}
+										owner = { is_hostile = event_target:crisis_country }
 										OR = {
 											is_colony = yes
 											is_under_colonization = yes
 										}
-										count_fleet_in_orbit = { count = 0 limit = {
-											exists = owner
-											owner = { is_same_value = event_target:crisis_country }
-											NOT = { is_same_value = root }
-										} }
+										count_fleet_in_orbit = {
+											count = 0
+											limit = {
+												owner = { is_same_value = event_target:crisis_country }
+												is_ship_class = shipclass_military
+											}
+										}
 									}
 								}
 								random_system_planet = {
 									limit = {
 										exists = controller
-										controller = { is_hostile = event_target:crisis_country }
+										NOT = {
+											controller = {
+												is_same_value = event_target:crisis_country
+											}
+										}
+										owner = { is_hostile = event_target:crisis_country }
 										OR = {
 											is_colony = yes
 											is_under_colonization = yes
 										}
-										count_fleet_in_orbit = { count = 0 limit = {
-											exists = owner
-											owner = { is_same_value = event_target:crisis_country }
-											NOT = { is_same_value = root }
-										} }
+										count_fleet_in_orbit = {
+											count = 0
+											limit = {
+												owner = { is_same_value = event_target:crisis_country }
+												is_ship_class = shipclass_military
+											}
+										}
 									}
 									crisis_jump_attitude_planet_fleet_action = yes
 								}
@@ -1052,10 +1137,22 @@ crisis_fleet_transport_action = {
 				solar_system = {
 					any_system_planet = {
 						exists = controller
-						controller = { is_hostile = event_target:crisis_country }
+						NOT = {
+							controller = {
+								is_same_value = event_target:crisis_country
+							}
+						}
+						owner = { is_hostile = event_target:crisis_country }
 						OR = {
 							is_colony = yes
 							is_under_colonization = yes
+						}
+						count_fleet_in_orbit = {
+							count = 0
+							limit = {
+								owner = { is_same_value = event_target:crisis_country }
+								is_ship_class = shipclass_military
+							}
 						}
 					}
 				}
@@ -1066,10 +1163,22 @@ crisis_fleet_transport_action = {
 				random_system_planet = {
 					limit = {
 						exists = controller
-						controller = { is_hostile = event_target:crisis_country }
+						NOT = {
+							controller = {
+								is_same_value = event_target:crisis_country
+							}
+						}
+						owner = { is_hostile = event_target:crisis_country }
 						OR = {
 							is_colony = yes
 							is_under_colonization = yes
+						}
+						count_fleet_in_orbit = {
+							count = 0
+							limit = {
+								owner = { is_same_value = event_target:crisis_country }
+								is_ship_class = shipclass_military
+							}
 						}
 					}
 					prevprev = { auto_move_to_planet = { target = prev clear_auto_move_on_arrival = yes } }
@@ -1083,10 +1192,22 @@ crisis_fleet_transport_action = {
 			solar_system = { any_neighbor_system = {
 				any_system_planet = {
 					exists = controller
-					controller = { is_hostile = event_target:crisis_country }
+					NOT = {
+						controller = {
+							is_same_value = event_target:crisis_country
+						}
+					}
+					owner = { is_hostile = event_target:crisis_country }
 					OR = {
 						is_colony = yes
 						is_under_colonization = yes
+					}
+					count_fleet_in_orbit = {
+						count = 0
+						limit = {
+							owner = { is_same_value = event_target:crisis_country }
+							is_ship_class = shipclass_military
+						}
 					}
 				}
 			} }
@@ -1095,10 +1216,22 @@ crisis_fleet_transport_action = {
 			limit = {
 				any_system_planet = {
 					exists = controller
-					controller = { is_hostile = event_target:crisis_country }
+					NOT = {
+						controller = {
+							is_same_value = event_target:crisis_country
+						}
+					}
+					owner = { is_hostile = event_target:crisis_country }
 					OR = {
 						is_colony = yes
 						is_under_colonization = yes
+					}
+					count_fleet_in_orbit = {
+						count = 0
+						limit = {
+							owner = { is_same_value = event_target:crisis_country }
+							is_ship_class = shipclass_military
+						}
 					}
 				}
 			}
@@ -1116,10 +1249,22 @@ crisis_fleet_transport_action = {
 						NOT = { is_same_value = root.solar_system }
 						any_system_planet = {
 							exists = controller
-							controller = { is_hostile = event_target:crisis_country }
+							NOT = {
+								controller = {
+									is_same_value = event_target:crisis_country
+								}
+							}
+							owner = { is_hostile = event_target:crisis_country }
 							OR = {
 								is_colony = yes
 								is_under_colonization = yes
+							}
+							count_fleet_in_orbit = {
+								count = 0
+								limit = {
+									owner = { is_same_value = event_target:crisis_country }
+									is_ship_class = shipclass_military
+								}
 							}
 						}
 						prev = { can_access_system = prev }
@@ -1134,20 +1279,44 @@ crisis_fleet_transport_action = {
 							limit = {
 								any_system_planet = {
 									exists = controller
-									controller = { is_hostile = event_target:crisis_country }
+									NOT = {
+										controller = {
+											is_same_value = event_target:crisis_country
+										}
+									}
+									owner = { is_hostile = event_target:crisis_country }
 									OR = {
 										is_colony = yes
 										is_under_colonization = yes
+									}
+									count_fleet_in_orbit = {
+										count = 0
+										limit = {
+											owner = { is_same_value = event_target:crisis_country }
+											is_ship_class = shipclass_military
+										}
 									}
 								}
 							}
 							random_system_planet = {
 								limit = {
 									exists = controller
-									controller = { is_hostile = event_target:crisis_country }
+									NOT = {
+										controller = {
+											is_same_value = event_target:crisis_country
+										}
+									}
+									owner = { is_hostile = event_target:crisis_country }
 									OR = {
 										is_colony = yes
 										is_under_colonization = yes
+									}
+									count_fleet_in_orbit = {
+										count = 0
+										limit = {
+											owner = { is_same_value = event_target:crisis_country }
+											is_ship_class = shipclass_military
+										}
 									}
 								}
 								crisis_jump_attitude_planet_fleet_action = yes
@@ -1166,10 +1335,22 @@ crisis_fleet_transport_action = {
 							NOT = { is_same_value = root.solar_system }
 							any_system_planet = {
 								exists = controller
-								controller = { is_hostile = event_target:crisis_country }
+								NOT = {
+									controller = {
+										is_same_value = event_target:crisis_country
+									}
+								}
+								owner = { is_hostile = event_target:crisis_country }
 								OR = {
 									is_colony = yes
 									is_under_colonization = yes
+								}
+								count_fleet_in_orbit = {
+									count = 0
+									limit = {
+										owner = { is_same_value = event_target:crisis_country }
+										is_ship_class = shipclass_military
+									}
 								}
 							}
 						}
@@ -1183,20 +1364,44 @@ crisis_fleet_transport_action = {
 								limit = {
 									any_system_planet = {
 										exists = controller
-										controller = { is_hostile = event_target:crisis_country }
+										NOT = {
+											controller = {
+												is_same_value = event_target:crisis_country
+											}
+										}
+										owner = { is_hostile = event_target:crisis_country }
 										OR = {
 											is_colony = yes
 											is_under_colonization = yes
+										}
+										count_fleet_in_orbit = {
+											count = 0
+											limit = {
+												owner = { is_same_value = event_target:crisis_country }
+												is_ship_class = shipclass_military
+											}
 										}
 									}
 								}
 								random_system_planet = {
 									limit = {
 										exists = controller
-										controller = { is_hostile = event_target:crisis_country }
+										NOT = {
+											controller = {
+												is_same_value = event_target:crisis_country
+											}
+										}
+										owner = { is_hostile = event_target:crisis_country }
 										OR = {
 											is_colony = yes
 											is_under_colonization = yes
+										}
+										count_fleet_in_orbit = {
+											count = 0
+											limit = {
+												owner = { is_same_value = event_target:crisis_country }
+												is_ship_class = shipclass_military
+											}
 										}
 									}
 									crisis_jump_attitude_planet_fleet_action = yes
@@ -1205,8 +1410,6 @@ crisis_fleet_transport_action = {
 							else = { system_star = { prevprev = { auto_move_to_planet = { target = prev clear_auto_move_on_arrival = yes } } } }
 						}
 					}
-					#找不到目标，睡一觉捏~
-					else = { fleet_event = { id = crisis_fleet_action.4 days = 12 random = 8 } }
 				}
 			}
 			50 = {
@@ -1223,10 +1426,22 @@ crisis_fleet_transport_action = {
 						}
 						any_system_planet = {
 							exists = controller
-							controller = { is_hostile = event_target:crisis_country }
+							NOT = {
+								controller = {
+									is_same_value = event_target:crisis_country
+								}
+							}
+							owner = { is_hostile = event_target:crisis_country }
 							OR = {
 								is_colony = yes
 								is_under_colonization = yes
+							}
+							count_fleet_in_orbit = {
+								count = 0
+								limit = {
+									owner = { is_same_value = event_target:crisis_country }
+									is_ship_class = shipclass_military
+								}
 							}
 						}
 						prev = { can_access_system = prev }
@@ -1241,20 +1456,43 @@ crisis_fleet_transport_action = {
 							limit = {
 								any_system_planet = {
 									exists = controller
-									controller = { is_hostile = event_target:crisis_country }
+									NOT = {
+										controller = {
+											is_same_value = event_target:crisis_country
+										}
+									}
+									owner = { is_hostile = event_target:crisis_country }
 									OR = {
 										is_colony = yes
 										is_under_colonization = yes
+									}
+									count_fleet_in_orbit = {
+										count = 0
+										limit = {
+											owner = { is_same_value = event_target:crisis_country }
+											is_ship_class = shipclass_military
+										}
 									}
 								}
 							}
 							random_system_planet = {
 								limit = {
 									exists = controller
-									controller = { is_hostile = event_target:crisis_country }
+									NOT = {
+										controller = {
+											is_same_value = event_target:crisis_country
+										}
+									}
+									owner = { is_hostile = event_target:crisis_country }
 									OR = {
 										is_colony = yes
 										is_under_colonization = yes
+									}						count_fleet_in_orbit = {
+										count = 0
+										limit = {
+											owner = { is_same_value = event_target:crisis_country }
+											is_ship_class = shipclass_military
+										}
 									}
 								}
 								crisis_jump_attitude_planet_fleet_action = yes
@@ -1273,10 +1511,22 @@ crisis_fleet_transport_action = {
 							NOT = { is_same_value = root.solar_system }
 							any_system_planet = {
 								exists = controller
-								controller = { is_hostile = event_target:crisis_country }
+								NOT = {
+									controller = {
+										is_same_value = event_target:crisis_country
+									}
+								}
+								owner = { is_hostile = event_target:crisis_country }
 								OR = {
 									is_colony = yes
 									is_under_colonization = yes
+								}
+								count_fleet_in_orbit = {
+									count = 0
+									limit = {
+										owner = { is_same_value = event_target:crisis_country }
+										is_ship_class = shipclass_military
+									}
 								}
 							}
 						}
@@ -1290,20 +1540,44 @@ crisis_fleet_transport_action = {
 								limit = {
 									any_system_planet = {
 										exists = controller
-										controller = { is_hostile = event_target:crisis_country }
+										NOT = {
+											controller = {
+												is_same_value = event_target:crisis_country
+											}
+										}
+										owner = { is_hostile = event_target:crisis_country }
 										OR = {
 											is_colony = yes
 											is_under_colonization = yes
+										}
+										count_fleet_in_orbit = {
+											count = 0
+											limit = {
+												owner = { is_same_value = event_target:crisis_country }
+												is_ship_class = shipclass_military
+											}
 										}
 									}
 								}
 								random_system_planet = {
 									limit = {
 										exists = controller
-										controller = { is_hostile = event_target:crisis_country }
+										NOT = {
+											controller = {
+												is_same_value = event_target:crisis_country
+											}
+										}
+										owner = { is_hostile = event_target:crisis_country }
 										OR = {
 											is_colony = yes
 											is_under_colonization = yes
+										}
+										count_fleet_in_orbit = {
+											count = 0
+											limit = {
+												owner = { is_same_value = event_target:crisis_country }
+												is_ship_class = shipclass_military
+											}
 										}
 									}
 									crisis_jump_attitude_planet_fleet_action = yes
@@ -1312,36 +1586,72 @@ crisis_fleet_transport_action = {
 							else = { system_star = { prevprev = { auto_move_to_planet = { target = prev clear_auto_move_on_arrival = yes } } } }
 						}
 					}
-					#找不到目标，睡一觉捏~
-					else = { fleet_event = { id = crisis_fleet_action.4 days = 12 random = 8 } }
 				}
 			}
 		}
 	}
 }
-transport_land_action = {
-	# THIS = 运输舰队 fleet
-	# FROM = 轨道对象 planet / starbase / megastructure
+crisis_fleet_move_toward_colony = {
 	if = {
-		limit = {
-			is_ship_class = shipclass_transport
-			exists = from
-			from = {
-				is_scope_type = planet
-				OR = {
-					is_colony = yes
-					is_under_colonization = yes
+		from = {
+			solar_system = {
+				random_system_planet = {
+					limit = {
+						exists = controller
+						NOT = {
+							controller = {
+								is_same_value = event_target:crisis_country
+							}
+						}
+						owner = { is_hostile = event_target:crisis_country }
+						OR = {
+							is_colony = yes
+							is_under_colonization = yes
+						}
+						count_fleet_in_orbit = {
+							count = 0
+							limit = {
+								owner = { is_same_value = event_target:crisis_country }
+								is_ship_class = shipclass_military
+							}
+						}
+					}
 				}
-				exists = controller
-				controller = { is_hostile = event_target:crisis_country }
 			}
 		}
 		from = {
-			save_event_target_as = auto_land_target_planet
+			solar_system = {
+				random_system_planet = {
+					limit = {
+						exists = controller
+						NOT = {
+							controller = {
+								is_same_value = event_target:crisis_country
+							}
+						}
+						owner = { is_hostile = event_target:crisis_country }
+						OR = {
+							is_colony = yes
+							is_under_colonization = yes
+						}
+						count_fleet_in_orbit = {
+							count = 0
+							limit = {
+								owner = { is_same_value = event_target:crisis_country }
+								is_ship_class = shipclass_military
+							}
+						}
+					}
+					save_event_target_as = nearly_attack_colony
+				}
+			}
 		}
-		queue_actions = {
-			land_armies_order = {
-				target = event_target:auto_land_target_planet
+		if = {
+			limit = { exists = event_target:nearly_attack_colony }
+			clear_orders = yes
+			auto_move_to_planet = {
+				target = event_target:nearly_attack_colony
+				clear_auto_move_on_arrival = yes
 			}
 		}
 	}
@@ -1362,9 +1672,6 @@ crisis_fleet_wandering_action = {
 					system_star = { prevprev = { auto_move_to_planet = { target = prev clear_auto_move_on_arrival = yes } } }
 				}
 			}
-			else = {
-				fleet_event = { id = crisis_fleet_action.1 days = 12 random = 8 }
-			}
 		}
 		40 = {
 			modifier = {
@@ -1381,16 +1688,23 @@ crisis_fleet_wandering_action = {
 						}
 						any_system_planet = {
 							exists = controller
-							controller = { is_hostile = event_target:crisis_country }
+							NOT = {
+								controller = {
+									is_same_value = event_target:crisis_country
+								}
+							}
+							owner = { is_hostile = event_target:crisis_country }
 							OR = {
 								is_colony = yes
 								is_under_colonization = yes
 							}
-							count_fleet_in_orbit = { count = 0 limit = {
-								exists = owner
-								owner = { is_same_value = event_target:crisis_country }
-								NOT = { is_same_value = root }
-							} }
+							count_fleet_in_orbit = {
+								count = 0
+								limit = {
+									owner = { is_same_value = event_target:crisis_country }
+									is_ship_class = shipclass_military
+								}
+							}
 						}
 						any_ship_in_system = {
 							exists = owner
@@ -1428,9 +1742,6 @@ crisis_fleet_wandering_action = {
 					event_target:crisis_fleet_wandering_action_target = {
 						system_star = { prevprev = { auto_move_to_planet = { target = prev clear_auto_move_on_arrival = yes } } }
 					}
-				}
-				else = {
-					fleet_event = { id = crisis_fleet_action.1 days = 12 random = 8 }
 				}
 			}
 		}

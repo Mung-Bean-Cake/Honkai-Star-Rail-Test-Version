@@ -6,8 +6,29 @@ fleet_event = {
     trigger = {
         exists = this
         has_global_flag = fengrao_crisis_started
+        owner = {
+            is_same_value = event_target:crisis_country
+        }
+        NOT = {
+            is_ship_class = shipclass_transport
+        }
     }
-    immediate = { crisis_fleet_action = yes }
+    immediate = {
+        if = {
+            limit = {
+                NOT = {
+                    any_combatant_fleet = {
+                        always = yes
+                    }
+                }
+            }
+            crisis_fleet_action = yes
+            crisis_fleet_move_toward_colony = yes
+        }
+        fleet_event = {
+            id = crisis_fleet_action.1 days = 15 random = 10
+        }
+    }
 }
 fleet_event = {
     id = crisis_fleet_action.2
@@ -16,9 +37,47 @@ fleet_event = {
     trigger = {
         exists = this
         has_global_flag = fengrao_crisis_started
+        owner = {
+            is_same_value = event_target:crisis_country
+        }
         is_ship_class = shipclass_transport
     }
-    immediate = { crisis_fleet_transport_action = yes }
+    immediate = {
+        if = {
+            limit = {
+                NOT = {
+                    any_combatant_fleet = {
+                        always = yes
+                    }
+                }
+            }
+            if = {
+                limit = {
+                    solar_system = {
+                        any_system_planet = {
+                            exists = controller
+                            NOT = { controller = { is_same_value = event_target:crisis_country } }
+                            owner = { is_hostile = event_target:crisis_country }
+                            OR = {
+                                is_colony = yes
+                                is_under_colonization = yes
+                            }
+                        }
+                    }
+                }
+                fleet_event = {
+                    id = crisis_fleet_action.3 days = 2
+                }
+            }
+            else = {
+                crisis_fleet_transport_action = yes
+                crisis_fleet_move_toward_colony = yes
+            }
+        }
+        fleet_event = {
+            id = crisis_fleet_action.2 days = 15 random = 10
+        }
+    }
 }
 fleet_event = {
     id = crisis_fleet_action.3
@@ -27,61 +86,39 @@ fleet_event = {
     trigger = {
         exists = this
         has_global_flag = fengrao_crisis_started
-        owner = {
-            is_same_value = event_target:crisis_country
-        }
-        is_ship_class = shipclass_military
-        NOT = {
-            any_combatant_fleet = {
-                always = yes
-            }
-            has_fleet_flag = crisis_fleet_actioning
-        }
-        has_fleet_order = orbit_planet_order
-    }
-    immediate = { 
-        set_fleet_flag = crisis_fleet_actioning
-        crisis_fleet_action = yes
-        remove_fleet_flag = crisis_fleet_actioning 
-    }
-}
-fleet_event = {
-    id = crisis_fleet_action.4
-    hide_window = yes
-    is_triggered_only = yes
-    trigger = {
-        exists = this
-        has_global_flag = fengrao_crisis_started
-        owner = {
-            is_same_value = event_target:crisis_country
-        }
-        is_ship_class = shipclass_transport
-        NOT = {
-            any_combatant_fleet = {
-                always = yes
-            }
-            has_fleet_flag = crisis_fleet_transport_actioning
-        }
-        has_fleet_order = orbit_planet_order
-    }
-    immediate = { 
-        set_fleet_flag = crisis_fleet_transport_actioning
-        crisis_fleet_transport_action = yes
-        remove_fleet_flag = crisis_fleet_transport_actioning 
-    }
-}
-fleet_event = {
-    id = crisis_fleet_action.5
-    hide_window = yes
-    is_triggered_only = yes
-    trigger = {
-        has_global_flag = fengrao_crisis_started
-        owner = {
-            is_same_value = event_target:crisis_country
-        }
+        owner = { is_same_value = event_target:crisis_country }
         is_ship_class = shipclass_transport
     }
     immediate = {
-        transport_land_action = yes
+        solar_system = {
+            random_system_planet = {
+                limit = {
+                    exists = controller
+                    NOT = { controller = { is_same_value = event_target:crisis_country } }
+                    owner = { is_hostile = event_target:crisis_country }
+                    OR = {
+                        is_colony = yes
+                        is_under_colonization = yes
+                    }
+                }
+                save_event_target_as = crisis_land_target
+            }
+        }
+        if = {
+            limit = { exists = event_target:crisis_land_target }
+            queue_actions = {
+                find_closest_planet = {
+                    trigger = {
+                        is_same_value = event_target:crisis_land_target
+                    }
+                    found_planet = {
+                        move_to = this
+                        orbit_planet = this
+                        land_armies = this
+                    }
+                }
+                
+            }
+        }
     }
 }
