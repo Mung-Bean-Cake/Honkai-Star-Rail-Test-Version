@@ -28,6 +28,9 @@ country_event = {
         country_event = {
             id = script_crisis.3
         }
+        country_event = {
+            id = script_crisis.7
+        }
     }
 }
 country_event = {
@@ -74,6 +77,9 @@ country_event = {
         }
         country_event = {
             id = script_crisis.5
+        }
+        country_event = {
+            id = script_crisis.7
         }
     }
 }
@@ -139,105 +145,46 @@ country_event = {
         has_global_flag = fengrao_crisis_started
     }
     immediate = {
-        create_fengrao_constructors = yes
-        create_yuhuang_armies = yes
         random_list = {
             20 = {
+                create_extra_yuhuang_fleet = yes
+            }
+            30 = {
                 create_leader_yuhuang_fleet = yes
             }
-            80 = {
+            50 = {
                 create_normal_yuhuang_fleet = yes
             }
         }
         country_event = { id = script_crisis.6 days = 150 }
     }
 }
-# Horde Conquers Planet (HIDDEN)
 country_event = {
     id = script_crisis.7
     hide_window = yes
     is_triggered_only = yes
-    trigger = {
-        is_country_type = fengraomin
-    }
     immediate = {
-        fromfrom = {
-            save_event_target_as = yuhuang_planet
-            set_owner = root
-        }
-        from = {
-            country_event = { id = marauder.504 }
-            change_variable = {
-                which = "planets_lost_to_yuhuang"
-                value = 1
-            }
-            set_country_flag = pc_owner_yuhuang@fromfrom
-        }
-        fromfrom = {
-            set_variable = {
-                which = yuhuang_pc_pop
-                value = pop_amount
-            }
-            while = {
-                count = pop_amount
-                kill_pop_group = {
-                    pop_group = this
-                }
-            }
-            create_pop_group = {
-                species = event_target:fengraomin_species
-                size = variable:yuhuang_pc_pop
-            }
-            create_army = {
-                owner = root
-                species = root.species
-                type = "defense_army"
-            }
-            create_army = {
-                owner = root
-                species = root.species
-                type = "defense_army"
-            }
-            create_army = {
-                owner = root
-                species = root.species
-                type = "defense_army"
-            }
-            create_army = {
-                owner = root
-                species = root.species
-                type = "defense_army"
-            }
-            create_army = {
-                owner = root
-                species = root.species
-                type = "defense_army"
-            }
-            create_army = {
-                owner = root
-                species = root.species
-                type = "defense_army"
-            }
-            if = {
-                limit = {
-                    solar_system = {
-                        exists = starbase
-                        starbase = {
-                            fleet = {
-                                owner = { NOT = { is_same_value = root } }
-                            }
-                        }
+        # 确保天灾国家存在
+        if = {
+            limit = { exists = event_target:yuhuang_fengrao_country }
+            event_target:yuhuang_fengrao_country = {
+                # 遍历所有国家
+                every_country = {
+                    limit = {
+                        # 不向自己宣战
+                        NOT = { is_same_value = event_target:yuhuang_fengrao_country }
+                        # 防止重复宣战
+                        NOT = { has_war_flag = war_with_yuhuang }
                     }
-                }
-                solar_system = {
-                    starbase = { set_owner = root }
-                }
-            }
-            else = {
-                solar_system = {
-                    create_starbase = {
-                        size = "starbase_marauder"
-                        owner = root
+                    # 在目标国家的 scope 下，切换回天灾 scope 执行效果
+                    event_target:yuhuang_fengrao_country = {
+                        # 强行建立通讯（防止因无通讯导致宣战失败）
+                        establish_communications_no_message = prev
+                        # 宣战：以终结威胁为目标（全面战争）
+                        declare_war = {
+                            target = prev
+                            attacker_war_goal = wg_end_threat
+                        }
                     }
                 }
             }

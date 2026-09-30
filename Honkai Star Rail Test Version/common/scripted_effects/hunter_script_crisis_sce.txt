@@ -32,6 +32,11 @@ fengrao_middle_crisis_effect = {
 			save_global_event_target_as = crisis_country
 			set_global_flag = fengrao_crisis_started
 			set_global_flag = fengrao_crisis_ongoing
+			set_policy = {
+				policy = war_philosophy
+				option = no_retreat_doctrine
+				cooldown = no
+			}
 			random_system = {
 				limit = { has_star_flag = fengraomin_system }
 				create_starbase = {
@@ -56,21 +61,22 @@ fengrao_middle_crisis_effect = {
 		add_ship_design = last_created_design
 		create_leader = {
 			class = commander
-			species = owner_main_species
+			species = event_target:fengraomin_species
 			name = yuhuang
 			skill = 10
 			leader_age_min = 4020
 			leader_age_max = 6000
 			randomize_traits = no
 			traits = {
-				trait = leader_trait_ruler_great_khan
-				trait = leader_trait_master_gunner
+				trait = trait_yuhuang_juryrigger_2
+				trait = trait_yuhuang_tracking_2
 				trait = subclass_commander_admiral
+				trait = trait_yuhuang_shield_repair_2
 				trait = leader_trait_gunship_specialization_2
 				trait = leader_trait_wrecker_2
-				trait = leader_trait_reckless_2
+				trait = trait_yuhuang_war_hoping
 				trait = leader_trait_artillerist_2
-				trait = leader_trait_demolisher_2
+				trait = trait_yuhuang_armer_harder_2
 			}
 		}
 		last_created_leader = {
@@ -97,19 +103,20 @@ fengrao_middle_crisis_effect = {
 		}
 		create_leader = {
 			class = commander
-			species = owner_main_species
+			species = event_target:fengraomin_species
 			name = fengraoxuanlu
 			skill = 7
 			leader_age_min = 1200
 			leader_age_max = 3200
 			randomize_traits = yes
 			traits = {
-				trait = leader_trait_mercenary_warrior
-				trait = leader_trait_master_gunner
+				trait = trait_yuhuang_juryrigger
+				trait = trait_yuhuang_tracking
 				trait = subclass_commander_admiral
 				trait = leader_trait_gunship_specialization_2
-				trait = leader_alan_t2
-				trait = leader_trait_reckless_2
+				trait = trait_yuhuang_shield_repair_2
+				trait = trait_yuhuang_leader_hoping
+				trait = trait_yuhuang_armer_harder_2
 				trait = leader_trait_artillerist_2
 				trait = leader_trait_chosen
 			}
@@ -120,20 +127,21 @@ fengrao_middle_crisis_effect = {
 		}
 		create_leader = {
 			class = commander
-			species = owner_main_species
+			species = event_target:fengraomin_species
 			name = liaoyuan
 			skill = 8
 			leader_age_min = 1600
 			leader_age_max = 3800
 			randomize_traits = yes
 			traits = {
-				trait = leader_trait_master_gunner
-				trait = subclass_commander_admiral
+				trait = trait_yuhuang_tracking
+				trait = trait_yuhuang_juryrigger
 				trait = leader_trait_gunship_specialization_2
-				trait = leader_langzun_t2
+				trait = trait_yuhuang_shield_repair_2
+				trait = trait_yuhuang_armer_harder
 				trait = leader_trait_chosen
 				trait = leader_trait_artillerist_2
-				trait = leader_alan_t4
+				trait = trait_yuhuang_leader_hoping
 				trait = leader_alan_t5
 			}
 		}
@@ -149,15 +157,6 @@ fengrao_middle_crisis_effect = {
 		create_leader_yuhuang_fleet = yes
 		create_leader_yuhuang_fleet = yes
 		create_leader_yuhuang_fleet = yes
-		create_yuhuang_armies = yes
-		create_yuhuang_armies = yes
-		create_yuhuang_armies = yes
-		create_yuhuang_armies = yes
-		create_yuhuang_armies = yes
-		create_fengrao_constructors = yes
-		create_fengrao_constructors = yes
-		create_fengrao_constructors = yes
-		create_fengrao_constructors = yes
 		country_event = { id = script_crisis.6 days = 150 } # 循环增加舰队，后面写
 		every_playable_country = {
 			establish_communications_no_message = root
@@ -179,16 +178,7 @@ create_1st_yuhuang_fleet = {
 		effect = {
 			set_owner = event_target:yuhuang_fengrao_country
 			while = {
-				count = 120
-				create_ship = {
-					name = random
-					design = NAME_Black_Earl
-					prefix = no
-					graphical_culture = "pirate_01"
-				}
-			}
-			while = {
-				count = 25
+				count = 45
 				create_ship = {
 					name = random
 					design = NAME_middle_fengrao_leader
@@ -245,19 +235,10 @@ create_commander_yuhuang_fleet_1 = {
 		effect = {
 			set_owner = event_target:yuhuang_fengrao_country
 			while = {
-				count = 12
+				count = 20
 				create_ship = {
 					name = random
 					design = NAME_middle_fengrao_leader
-					prefix = no
-					graphical_culture = "pirate_01"
-				}
-			}
-			while = {
-				count = 24
-				create_ship = {
-					name = random
-					design = "NAME_Dragonspawn"
 					prefix = no
 					graphical_culture = "pirate_01"
 				}
@@ -272,7 +253,7 @@ create_commander_yuhuang_fleet_1 = {
 				}
 			}
 			while = {
-				count = 10
+				count = 40
 				create_ship = {
 					name = random
 					design = "NAME_Ancestral_Glory"
@@ -310,19 +291,10 @@ create_commander_yuhuang_fleet_2 = {
 		effect = {
 			set_owner = event_target:yuhuang_fengrao_country
 			while = {
-				count = 15
+				count = 25
 				create_ship = {
 					name = random
 					design = NAME_middle_fengrao_leader
-					prefix = no
-					graphical_culture = "pirate_01"
-				}
-			}
-			while = {
-				count = 18
-				create_ship = {
-					name = random
-					design = "NAME_Dragonspawn"
 					prefix = no
 					graphical_culture = "pirate_01"
 				}
@@ -337,7 +309,7 @@ create_commander_yuhuang_fleet_2 = {
 				}
 			}
 			while = {
-				count = 15
+				count = 18
 				create_ship = {
 					name = random
 					design = "NAME_Ancestral_Glory"
@@ -369,18 +341,82 @@ create_commander_yuhuang_fleet_2 = {
 		}
 	}
 }
+create_extra_yuhuang_fleet = {
+	create_leader = {
+		class = commander
+		species = event_target:fengraomin_species
+		name = random
+		skill = 6
+		leader_age_min = 480
+		leader_age_max = 1680
+		traits = {
+			0 = trait_yuhuang_tracking
+			0 = leader_alan_t1
+			0 = leader_trait_chosen
+			0 = trait_yuhuang_shield_repair
+			0 = trait_yuhuang_armer_harder
+			0 = trait_yuhuang_leader_hoping
+		}
+	}
+	create_fleet = {
+		effect = {
+			set_owner = event_target:yuhuang_fengrao_country
+			while = {
+				count = 20
+				create_ship = {
+					name = random
+					design = NAME_middle_fengrao_leader
+					prefix = no
+					graphical_culture = "pirate_01"
+				}
+			}
+			while = {
+				count = 100
+				create_ship = {
+					name = random
+					design = NAME_shouxing
+					prefix = no
+					graphical_culture = "pirate_01"
+				}
+			}
+			create_ship = {
+				name = random
+				design = NAME_middle_fengrao_commander
+				prefix = no
+				graphical_culture = "pirate_01"
+			}
+			assign_leader = last_created_leader
+			set_location = {
+				target = event_target:yuhuang_fleet
+				distance = 60
+				angle = random
+			}
+			set_fleet_stance = aggressive
+			set_aggro_range = 800
+			set_aggro_range_measure_from = return_point
+			fleet_event = { id = crisis_fleet_action.1 days = 12 random = 8 }
+		}
+		settings = {
+			uses_naval_capacity = no
+			can_upgrade = no
+			can_change_composition = no
+		}
+	}
+}
 create_leader_yuhuang_fleet = {
 	create_leader = {
 		class = commander
-		species = owner_main_species
+		species = event_target:fengraomin_species
 		name = random
 		skill = 5
 		leader_age_min = 400
 		leader_age_max = 1500
 		traits = {
-			0 = leader_trait_mercenary_warrior
+			0 = trait_yuhuang_tracking
 			0 = leader_alan_t1
 			0 = leader_trait_chosen
+			0 = trait_yuhuang_shield_repair
+			0 = trait_yuhuang_armer_harder
 		}
 	}
 	create_fleet = {
@@ -396,16 +432,7 @@ create_leader_yuhuang_fleet = {
 				}
 			}
 			while = {
-				count = 8
-				create_ship = {
-					name = random
-					design = "NAME_Dragonspawn"
-					prefix = no
-					graphical_culture = "pirate_01"
-				}
-			}
-			while = {
-				count = 64
+				count = 80
 				create_ship = {
 					name = random
 					design = NAME_shouxing
@@ -414,7 +441,7 @@ create_leader_yuhuang_fleet = {
 				}
 			}
 			while = {
-				count = 5
+				count = 10
 				create_ship = {
 					name = random
 					design = "NAME_Ancestral_Glory"
@@ -443,14 +470,15 @@ create_leader_yuhuang_fleet = {
 create_normal_yuhuang_fleet = {
 	create_leader = {
 		class = commander
-		species = owner_main_species
+		species = event_target:fengraomin_species
 		name = random
 		skill = 5
 		leader_age_min = 300
 		leader_age_max = 1200
 		traits = {
-			0 = leader_langzun_t3
+			0 = trait_yuhuang_tracking
 			0 = leader_trait_chosen
+			0 = trait_yuhuang_shield_repair
 		}
 	}
 	create_fleet = {
@@ -475,19 +503,10 @@ create_normal_yuhuang_fleet = {
 				}
 			}
 			while = {
-				count = 20
+				count = 40
 				create_ship = {
 					name = random
 					design = NAME_shouxing
-					prefix = no
-					graphical_culture = "pirate_01"
-				}
-			}
-			while = {
-				count = 2
-				create_ship = {
-					name = random
-					design = "NAME_Ancestral_Glory"
 					prefix = no
 					graphical_culture = "pirate_01"
 				}
@@ -507,62 +526,6 @@ create_normal_yuhuang_fleet = {
 			uses_naval_capacity = no
 			can_upgrade = no
 			can_change_composition = no
-		}
-	}
-}
-create_yuhuang_armies = {
-	create_leader = {
-		class = commander
-		species = owner_main_species
-		name = random
-		skill = 5
-	}
-	create_fleet = {
-		effect = {
-			set_owner = event_target:yuhuang_fengrao_country
-			while = {
-				count = 30
-				create_army_transport = {
-					ship_name = "NAME_fengrao_Transport"
-					graphical_culture = "mammalian_01"
-					army_type = "assault_army"
-					species = owner_main_species
-				}
-			}
-			set_location = {
-				target = event_target:yuhuang_fleet
-				distance = 60
-				angle = random
-			}
-			fleet_event = { id = crisis_fleet_action.2 days = 12 random = 8 }
-		}
-	}
-	last_created_army = { assign_leader = last_created_leader }
-}
-create_fengrao_constructors = {
-	if = {
-		limit = {
-			event_target:yuhuang_fengrao_country = {
-				count_controlled_ship = {
-					limit = { is_ship_size = constructor }
-					count < 8
-				}
-			}
-		}
-		create_fleet = {
-			effect = {
-				set_owner = event_target:yuhuang_fengrao_country
-				create_ship = {
-					name = random
-					design = NAME_Builder
-				}
-				set_location = {
-					target = event_target:yuhuang_planet_point
-					distance = 20
-					angle = random
-				}
-				fleet_event = { id = crisis_fleet_action.1 days = 12 random = 8 }
-			}
 		}
 	}
 }

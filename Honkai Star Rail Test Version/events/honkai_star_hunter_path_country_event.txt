@@ -1726,3 +1726,32 @@ ship_event = {
         }
     }
 }
+ship_event = {
+    id = path_country.20
+    hide_window = yes
+    is_triggered_only = yes
+    trigger = {
+        owner = {
+            is_country_type = fengraomin_crisis
+        }
+    }
+    immediate = {
+        if = {
+            limit = {
+                is_ship_class = shipclass_starbase
+            }
+            damage_ship = 1
+            fleet = {
+                destroy_fleet = this
+            }
+        }
+        else = {
+            limit = {
+                NOT = {
+                    is_same_value = event_target:yuhuang_fleet
+                }
+            }
+            destroy_fleet = this
+        }
+    }
+}
