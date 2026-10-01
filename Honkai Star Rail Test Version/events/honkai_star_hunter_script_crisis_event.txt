@@ -13,18 +13,6 @@ country_event = {
     }
     immediate = {
         fengrao_middle_crisis_effect = yes
-        every_country = {
-            limit = {
-                NOT = {
-                    is_same_value = event_target:crisis_country
-                }
-            }
-            add_casus_belli = {
-                type = cb_purification
-                who = THIS
-                days = 36000
-            }
-        }
         country_event = {
             id = script_crisis.3
         }
@@ -191,1244 +179,283 @@ country_event = {
         }
     }
 }
-# Horde Conquers Planet
 country_event = {
-    id = marauder.504
-    title = "marauder.504.name"
-    desc = "marauder.504.desc"
-    picture = GFX_evt_ground_combat
-    show_sound = event_ground_battle
-
-    is_triggered_only = yes
-
-    option = {
-        name = marauder.504.a
-    }
-}
-
-# Great Khan Defeated First Time (HIDDEN)
-country_event = {
-    id = marauder.505
+    id = script_crisis.8
     hide_window = yes
-
     is_triggered_only = yes
-
     trigger = {
-        is_country_type = awakened_marauders
-        fromfrom = {
-            exists = leader
-            fleet = { num_ships = 0 }
-            leader = { has_leader_flag = great_khan }
-        }
-        NOT = { has_global_flag = great_khan_defeated_once }
-    }
-
-    immediate = {
-        set_global_flag = great_khan_defeated_once
-        from = { save_event_target_as = khan_destroyer }
-        fromfrom = {
-            solar_system = { save_event_target_as = khan_death_system }
-            leader = {
-                save_event_target_as = great_khan
-                exile_leader_as = exiled_khan
+        is_country_type = fengraomin_crisis
+        exists = this
+        NOT = { has_global_flag = yuhuang_defeated_once }
+        NOT = {
+            any_owned_fleet = {
+                has_fleet_flag = yuhuang_fleet
             }
         }
-        observer_event = { id = observer.14 }
+    }
+    immediate = {
+        set_global_flag = yuhuang_defeated_once
         every_country = {
-            limit = { is_ai = no }
-            country_event = { id = marauder.506 }
+            country_event = { id = script_crisis.9 }
         }
         random_country = {
             limit = { is_country_type = global_event }
-            country_event = { id = marauder.523 days = 180 random = 180 }
+            country_event = { id = script_crisis.10 days = 360 random = 180}
         }
     }
 }
-
-# Great Khan Defeated First Time
 country_event = {
-    id = marauder.506
-    title = "marauder.506.name"
-    desc = "marauder.506.desc"
+    id = script_crisis.9
+    title = "script_crisis.9.name"
+    desc = "script_crisis.9.desc"
     picture = GFX_evt_sabotaged_ship
     show_sound = event_ship_explosion
-
     is_triggered_only = yes
-
     option = {
-        name = marauder.506.a
+        name = script_crisis.9.a
     }
 }
-
-# Return of the Great Khan (HIDDEN)
 country_event = {
-    id = marauder.523
+    id = script_crisis.10
     hide_window = yes
-
     is_triggered_only = yes
-
     immediate = {
         if = {
             limit = { exists = from }
             from = {
-                country_event = { id = marauder.507 }
-            }
-        }
-        else = {
-            every_country = {
-                limit = { is_ai = no }
-                country_event = { id = marauder.524 }
+                country_event = { id = script_crisis.11 }
             }
         }
     }
 }
-
-# Return of the Great Khan (HIDDEN)
 country_event = {
-    id = marauder.507
+    id = script_crisis.11
     hide_window = yes
-
     is_triggered_only = yes
-
     immediate = {
-        create_2nd_khan_fleet = yes
-        create_marauder_fleet = yes
-        create_marauder_armies = yes
-        create_marauder_armies = yes
-        observer_event = { id = observer.15 }
-        every_country = {
-            limit = { is_ai = no }
-            country_event = { id = marauder.508 }
+        create_2nd_yuhuang_fleet = yes
+        while = {
+            count = 10
+            create_extra_yuhuang_fleet = yes
         }
+        while = {
+            count = 10
+            create_leader_yuhuang_fleet = yes
+        }
+        every_country = {
+            country_event = { id = script_crisis.13 }
+        }
+        set_global_flag = yuhuang_back
     }
 }
-
-# Return of the Great Khan
 country_event = {
-    id = marauder.508
-    title = "greatkhan_diplo_header"
-    desc = {
-        trigger = {
-            OR = {
-                any_agreement = { agreement_preset = preset_satrapy }
-                has_country_flag = rebelling_satrapy
-            }
-        }
-        text = "marauder.508.desc.1"
+    id = script_crisis.12
+    title = script_crisis.12.title
+    desc = script_crisis.12.desc
+    picture = GFX_evt_space_funeral
+    show_sound = event_airlock
+    is_triggered_only = yes
+    option = {
+        name = script_crisis.12.a
     }
-
-    desc = {
-        trigger = {
-            NOR = {
-                any_agreement = { agreement_preset = preset_satrapy }
-                has_country_flag = rebelling_satrapy
-                has_valid_civic = "civic_fanatic_purifiers"
-                has_valid_civic = "civic_hive_devouring_swarm"
-                has_valid_civic = "civic_machine_terminator"
-                is_genocidal_infernal = yes
-            }
-        }
-        text = "marauder.508.desc.2"
-    }
-
-    desc = {
-        trigger = {
-            OR = {
-                has_valid_civic = "civic_fanatic_purifiers"
-                has_valid_civic = "civic_hive_devouring_swarm"
-                has_valid_civic = "civic_machine_terminator"
-                is_genocidal_infernal = yes
-            }
-        }
-        text = "marauder.508.desc.3"
-    }
-
+}
+country_event = {
+    id = script_crisis.13
+    title = script_crisis.13.title
+    desc = script_crisis.13.desc
     diplomatic = yes
-
     picture_event_data = {
-        portrait = event_target:raider_khanate
+        portrait = event_target:yuhuang_species
         room = "khan_room"
     }
-
     is_triggered_only = yes
-
     option = {
-        name = marauder.508.a
+        name = script_crisis.13.a
     }
 }
-
-# Great Khan Defeated Second Time (HIDDEN)
 country_event = {
-    id = marauder.509
+    id = script_crisis.14
     hide_window = yes
-
     is_triggered_only = yes
-
     trigger = {
-        is_country_type = awakened_marauders
-        fromfrom = {
-            exists = leader
-            fleet = { num_ships = 0 }
-            leader = { has_leader_flag = great_khan }
+        is_country_type = fengraomin_crisis
+        exists = this
+        has_global_flag = yuhuang_defeated_once
+        has_global_flag = yuhuang_back
+        NOT = {
+            any_owned_fleet = {
+                has_fleet_flag = yuhuang_fleet
+            }
         }
-        has_global_flag = great_khan_defeated_once
     }
-
     immediate = {
-        set_global_flag = great_khan_dead
-        set_country_flag = khan_dead_event_fine
-        from = {
-            save_event_target_as = khan_destroyer
-            set_country_flag = no_khan_do
-            if = {
-                limit = { is_ai = no }
-                country_event = { id = marauder.710 days = 2 }
+        save_event_target_as = failure_yuhuang_country
+        create_species = {
+            name = failure_fengrao
+            class = fengraomin
+            blocked_archetypes = {
+                fengraomin
             }
-        }
-        fromfrom = {
-            solar_system = { save_event_target_as = khan_death_system }
-        }
-        observer_event = { id = observer.16 }
-        every_country = {
-            limit = { is_ai = no }
-            country_event = { id = marauder.510 }
-        }
-        country_event = { id = marauder.600 days = 200 random = 100 }
-        if = {
-            limit = {
-                exists = event_target:great_khan_ruler
+            portrait = avi7
+            traits = {
+                trait = "trait_pc_habitat_preference"
+                trait = "trait_extremely_adaptive"
+                trait = "trait_rapid_breeders"
+                trait = "trait_nomadic"
+                trait = trait_fengraomin_1
+                trait = trait_fengraomin_2
+                trait = trait_fengraomin_3
+                trait = trait_fengraomin_4
+                trait = trait_fengraomin_5
+                trait = trait_crucible_community
             }
-            event_target:great_khan_ruler = {
-                kill_leader = { show_notification = no }
-            }
+            effect = {save_event_target_as = failure_yuhuang_species}
         }
-        if = {
-            limit = {
-                exists = event_target:great_khan
-            }
-            event_target:great_khan = {
-                kill_leader = { show_notification = no }
-            }
-        }
-    }
-}
-
-# Great Khan Dies
-country_event = {
-    id = marauder.510
-    title = "marauder.510.name"
-    desc = "marauder.510.desc"
-    picture = GFX_evt_space_funeral
-    show_sound = event_airlock
-
-    is_triggered_only = yes
-
-    option = {
-        name = marauder.510.a
-    }
-}
-
-# Great Khan Dies for Other Reasons
-event = {
-    id = marauder.511
-    hide_window = yes
-
-    is_triggered_only = yes
-
-    trigger = {
-        has_global_flag = marauder_crisis_started
-        NOR = {
-            has_global_flag = khan_no_die
-            has_global_flag = great_khan_dead
-        }
-        event_target:raider_khanate = {
-            is_ai = yes
-        }
-    }
-
-    immediate = {
-        random_list = {
-            2 = {
-                event_target:raider_khanate = {
-                    country_event = { id = marauder.512 }
+        create_country = {
+            name = failure_yuhuang_country_1
+            name_list = DOT_SR_fengraomin
+            species = event_target:failure_yuhuang_species
+            type = fengraomin_crisis
+            civics = { civic = civic_barbaric_despoilers }
+            authority = auth_imperial
+            origin = origin_broken_shackles
+            flag = {
+                icon = {
+                    category = spherical
+                    file = "flag_spherical_21.dds"
+                }
+                background= {
+                    category = "backgrounds"
+                    file = "pattern_01.dds"
+                }
+                colors={
+                    "orange"
+                    "blue"
+                    "null"
+                    "null"
                 }
             }
-            98 = {}
-        }
-    }
-}
-
-# Great Khan Dies for Other Reasons
-country_event = {
-    id = marauder.512
-    hide_window = yes
-
-    is_triggered_only = yes
-
-    immediate = {
-        set_global_flag = great_khan_dead
-        set_country_flag = khan_dead_event_fine
-        random_list = {
-            10 = { set_country_flag = khan_dead_poison }
-            10 = { set_country_flag = khan_dead_disease }
-            10 = { set_country_flag = khan_dead_assassin }
-            10 = { set_country_flag = khan_dead_concubine }
-        }
-        observer_event = { id = observer.17 }
-        every_country = {
-            limit = { is_ai = no }
-            country_event = { id = marauder.513 }
-        }
-        country_event = { id = marauder.600 days = 200 random = 100 }
-        if = {
-            limit = {
-                exists = event_target:great_khan_ruler
+            ethos = {
+                ethic = ethic_militarist
+                ethic = ethic_fanatic_xenophobe
             }
-            event_target:great_khan_ruler = {
-                kill_leader = { show_notification = no }
+            ignore_initial_colony_error = yes
+            effect = {
+                save_event_target_as = failure_yuhuang_country_1
             }
         }
-        if = {
-            limit = {
-                exists = event_target:great_khan
-            }
-            event_target:great_khan = {
-                kill_leader = { show_notification = no }
-            }
-        }
-    }
-}
-
-# Great Khan Dies
-country_event = {
-    id = marauder.513
-    title = "marauder.510.name"
-    desc = {
-        text = marauder.513.a.desc
-        trigger = { from = { has_country_flag = khan_dead_poison } }
-    }
-    desc = {
-        text = marauder.513.b.desc
-        trigger = { from = { has_country_flag = khan_dead_disease } }
-    }
-    desc = {
-        text = marauder.513.c.desc
-        trigger = { from = { has_country_flag = khan_dead_assassin } }
-    }
-    desc = {
-        text = marauder.513.d.desc
-        trigger = { from = { has_country_flag = khan_dead_concubine } }
-    }
-    desc = {
-        text = marauder.513.e.desc
-        trigger = { from = { has_country_flag = khan_dead_age } }
-    }
-    picture = GFX_evt_space_funeral
-    show_sound = event_life_support_fail
-
-    is_triggered_only = yes
-
-    trigger = {
-        NOR = {
-            has_country_flag = heir_of_the_khan_khan_died
-            has_country_flag = heir_of_the_khan_khan
-        }
-    }
-
-    option = {
-        name = marauder.510.a
-    }
-}
-
-# Great Khan Dies of Old Age
-country_event = {
-    id = marauder.514
-    hide_window = yes
-
-    is_triggered_only = yes
-
-    trigger = {
-        is_country_type = awakened_marauders
-        NOT = { has_country_flag = khan_dead_age }
-    }
-
-    immediate = {
-        set_global_flag = great_khan_dead
-        set_country_flag = khan_dead_event_fine
-        set_country_flag = khan_dead_age
-        observer_event = { id = observer.17 }
-        every_country = {
-            limit = { is_ai = no }
-            country_event = { id = marauder.513 }
-        }
-        country_event = { id = marauder.600 days = 200 random = 100 }
-        if = {
-            limit = {
-                exists = event_target:great_khan_ruler
-            }
-            event_target:great_khan_ruler = {
-                kill_leader = { show_notification = no }
-            }
-        }
-        if = {
-            limit = {
-                exists = event_target:great_khan
-            }
-            event_target:great_khan = {
-                kill_leader = { show_notification = no }
-            }
-        }
-    }
-}
-
-# Marauder Planet Liberated (HIDDEN)
-country_event = {
-    id = marauder.515
-    hide_window = yes
-
-    is_triggered_only = yes
-
-    trigger = {
-        from = { is_country_type = awakened_marauders }
-    }
-
-    immediate = {
-        random_country = {
-            limit = { has_country_flag = former_owner@fromfrom }
-            save_event_target_as = planet_former_owner
-        }
-        fromfrom = { save_event_target_as = liberated_planet }
-        if = { # Planet belonged to liberator
-            limit = {
-                exists = event_target:planet_former_owner
-                event_target:planet_former_owner = { is_same_value = root }
-            }
-            country_event = { id = marauder.516 }
-            break = yes
-        }
-        if = { # Planet belonged to someone else
-            limit = {
-                exists = event_target:planet_former_owner
-                event_target:planet_former_owner = {
-                    NOT = { is_same_value = root }
+        create_country = {
+            name = failure_yuhuang_country_2
+            name_list = DOT_SR_fengraomin
+            species = event_target:failure_yuhuang_species
+            type = fengraomin_crisis
+            civics = { civic = civic_barbaric_despoilers }
+            authority = auth_oligarchic
+            origin = origin_broken_shackles
+            flag = {
+                icon = {
+                    category = spherical
+                    file = "flag_spherical_18.dds"
+                }
+                background= {
+                    category = "backgrounds"
+                    file = "pattern_01.dds"
+                }
+                colors={
+                    "pink"
+                    "yellow"
+                    "null"
+                    "null"
                 }
             }
-            country_event = { id = marauder.517 }
-            break = yes
-        }
-        if = { # Planet's former owner no longer exists
-            limit = {
-                NOT = { exists = event_target:planet_former_owner }
+            ethos = {
+                ethic = ethic_militarist
+                ethic = ethic_materialist
+                ethic = ethic_xenophobe
             }
-            country_event = { id = marauder.518 }
-        }
-    }
-}
-
-# Liberated Own Planet
-country_event = {
-    id = marauder.516
-    title = "marauder.516.name"
-    desc = "marauder.516.desc"
-    picture = GFX_evt_victorious_army
-    show_sound = event_ground_battle
-    location = event_target:liberated_planet
-
-    is_triggered_only = yes
-
-    option = {
-        name = marauder.516.a
-        event_target:liberated_planet = {
-            set_owner = root
-        }
-    }
-}
-
-# Liberated Someone Else's Planet
-country_event = {
-    id = marauder.517
-    title = "marauder.516.name"
-    desc = "marauder.517.desc"
-    picture = GFX_evt_victorious_army
-    show_sound = event_ground_battle
-
-    is_triggered_only = yes
-
-    option = { # Keep planet
-        trigger = { is_nomadic = no }
-        name = marauder.517.a
-        custom_tooltip = marauder.517.a.tooltip
-        event_target:planet_former_owner = {
-            add_opinion_modifier = {
-                who = root
-                modifier = opinion_kept_marauder_planet
+            ignore_initial_colony_error = yes
+            effect = {
+                save_event_target_as = failure_yuhuang_country_2
             }
         }
-        event_target:liberated_planet = {
-            set_owner = root
+        set_variable = {
+            which = failure_yuhuang_split value = 0
         }
-    }
-    option = { # Return to former owner
-        name = marauder.517.b
-        custom_tooltip = marauder.517.b.tooltip
-        event_target:liberated_planet = {
-            set_owner = event_target:planet_former_owner
-        }
-        event_target:planet_former_owner = {
-            add_opinion_modifier = {
-                who = root
-                modifier = opinion_returned_marauder_planet
-            }
-        }
-        add_favors = {
-            target = event_target:planet_former_owner
-            value = 1
-        }
-        hidden_effect = {
-            event_target:planet_former_owner = {
-                country_event = { id = marauder.519 }
-            }
-        }
-    }
-}
-
-# Liberated Dead Country's Planet
-country_event = {
-    id = marauder.518
-    title = "marauder.516.name"
-    desc = "marauder.518.desc"
-    picture = GFX_evt_victorious_army
-    show_sound = event_ground_battle
-
-    is_triggered_only = yes
-
-    option = {
-        name = marauder.516.a
-        event_target:liberated_planet = {
-            set_owner = root
-        }
-    }
-}
-
-# Liberated Returned to Our Control
-country_event = {
-    id = marauder.519
-    title = "marauder.516.name"
-    desc = "marauder.519.desc"
-    picture = GFX_evt_ground_combat
-    show_sound = event_ground_battle
-
-    is_triggered_only = yes
-
-    option = {
-        name = marauder.516.a
-    }
-}
-
-
-# Heirs of the Khan Reinforcement Variant
-country_event = {
-    id = marauder.521
-    hide_window = yes
-
-    is_triggered_only = yes
-
-    trigger = {
-        has_global_flag = marauder_crisis_started
-        overlord? = {
-            NOT = {
-                has_country_flag = heir_of_the_khan_khan_died
-            }
-        }
-        any_planet_within_border = {
-            has_carrier_flag = marauder_rally_point # Make sure home system still owned
-        }
-    }
-
-    immediate = {
-        random_planet_within_border = {
-            limit = {
-                has_carrier_flag = marauder_rally_point
-            }
-            save_event_target_as = rally_planet
-        }
-        if = {
-            limit = {
-                count_controlled_ship = {
-                    limit = { is_ship_size = constructor }
-                    count < 5
-                }
-            }
-            create_fleet = {
-                effect = {
-                    set_owner = event_target:marauder_country_1
-                    create_ship = {
-                        name = random
-                        design = "NAME_Clan_Builder"
-                    }
-                    set_location = {
-                        target = event_target:marauder_rally_point
-                        distance = 20
-                        angle = random
+        event_target:failure_yuhuang_country = {
+            every_owned_fleet = {
+                limit = {
+                    owner = {
+                        is_same_value = event_target:failure_yuhuang_country
                     }
                 }
-            }
-        }
-        if = {
-            limit = {
-                NOT = {
-                    has_country_flag = block_reinforcements
-                }
-            }
-            overlord = {
-                if = {
-                    limit = { num_armies < 40 }
-                    create_marauder_armies = yes
-                }
-                # If at fleet cap, check again later
                 if = {
                     limit = {
-                        fleet_power > 1000000
-                    }
-                    country_event = { id = marauder.521 days = 320 random = 30 }
-                    break = yes
-                }
-                create_marauder_fleet = yes
-                create_message = {
-                    type = HEIR_REINFORCEMENTS_ARRIVED
-                    localization = MESSAGE_HEIR_REINFORCEMENTS_ARRIVED
-                    target = event_target:rally_planet
-                    days = 30
-                    variable = {
-                        type = name
-                        localization = PLANET
-                        scope = event_target:rally_planet
-                    }
-                }
-            }
-        }
-        country_event = { id = marauder.521 days = 320 random = 30 }
-    }
-}
-
-# Great Khan Dies
-country_event = {
-    id = marauder.524
-    title = "marauder.524.name"
-    desc = {
-        text = marauder.524.a.desc
-        trigger = {
-            NOT = { is_same_value = event_target:khan_destroyer }
-        }
-    }
-    desc = {
-        text = marauder.524.b.desc
-        trigger = { is_same_value = event_target:khan_destroyer }
-    }
-    picture = GFX_evt_space_funeral
-    show_sound = event_airlock
-
-    is_triggered_only = yes
-
-    option = {
-        name = marauder.524.a
-        trigger = {
-            NOT = { is_same_value = event_target:khan_destroyer }
-        }
-    }
-    option = {
-        name = marauder.524.b
-        trigger = {
-            is_same_value = event_target:khan_destroyer
-        }
-        add_relic = r_khans_throne
-    }
-}
-
-# Horde Triggered Through Destruction of Stations
-country_event = {
-    id = marauder.525
-    hide_window = yes
-
-    is_triggered_only = yes
-
-    trigger = {
-        NOT = { has_global_flag = marauder_crisis_started }
-        is_country_type = dormant_marauders
-        fromfrom = { is_ship_size = marauder_void_dwelling }
-        from = { is_country_type = default }
-        count_controlled_ship = {
-            limit = { is_ship_size = marauder_void_dwelling }
-            count >= 3
-        }
-        NOT = {
-            any_playable_country = {
-                is_ai = no
-                has_origin = origin_heirs_of_the_khan
-            }
-        }
-    }
-
-    immediate = {
-        from = { save_event_target_as = awakened_horde }
-        random_list = {
-            2 = {
-                set_global_flag = horde_triggered
-                country_event = { id = marauder.500 }
-            }
-            100 = {}
-        }
-    }
-}
-
-# The Sleeper Awakes
-country_event = {
-    id = marauder.526
-    title = "marauder.526.name"
-    desc = "marauder.526.desc"
-    picture = GFX_evt_khan_throne_room
-    show_sound = event_radio_chatter
-    location = event_target:awakened_horde
-
-    is_triggered_only = yes
-
-    option = {
-        name = marauder.501.a
-        hidden_effect = {
-            country_event = { id = marauder.502 }
-        }
-    }
-}
-
-# Marauder Great Khan Diplomacy
-country_event = {
-    id = marauder.550
-    title = "greatkhan_diplo_header"
-
-    desc = {
-        trigger = {
-            NOR = {
-                any_agreement = { agreement_preset = preset_satrapy }
-                has_country_flag = rebelling_satrapy
-                has_valid_civic = "civic_fanatic_purifiers"
-                has_valid_civic = "civic_hive_devouring_swarm"
-                has_valid_civic = "civic_machine_terminator"
-                is_genocidal_infernal = yes
-            }
-        }
-        text = "marauder.550.a.desc"
-    }
-    desc = {
-        trigger = {
-            NOR = {
-                any_agreement = { agreement_preset = preset_satrapy }
-                has_country_flag = rebelling_satrapy
-                has_valid_civic = "civic_fanatic_purifiers"
-                has_valid_civic = "civic_hive_devouring_swarm"
-                has_valid_civic = "civic_machine_terminator"
-                is_genocidal_infernal = yes
-            }
-        }
-        text = "marauder.550.b.desc"
-    }
-    desc = {
-        trigger = {
-            NOR = {
-                any_agreement = { agreement_preset = preset_satrapy }
-                has_country_flag = rebelling_satrapy
-                has_valid_civic = "civic_fanatic_purifiers"
-                has_valid_civic = "civic_hive_devouring_swarm"
-                has_valid_civic = "civic_machine_terminator"
-                is_genocidal_infernal = yes
-            }
-        }
-        text = "marauder.550.c.desc"
-    }
-    desc = {
-        trigger = {
-            NOR = {
-                any_agreement = { agreement_preset = preset_satrapy }
-                has_country_flag = rebelling_satrapy
-                has_valid_civic = "civic_fanatic_purifiers"
-                has_valid_civic = "civic_hive_devouring_swarm"
-                has_valid_civic = "civic_machine_terminator"
-                is_genocidal_infernal = yes
-            }
-        }
-        text = "marauder.550.d.desc"
-    }
-    desc = {
-        trigger = {
-            NOR = {
-                any_agreement = { agreement_preset = preset_satrapy }
-                has_country_flag = rebelling_satrapy
-                has_valid_civic = "civic_fanatic_purifiers"
-                has_valid_civic = "civic_hive_devouring_swarm"
-                has_valid_civic = "civic_machine_terminator"
-                is_genocidal_infernal = yes
-            }
-        }
-        text = "marauder.550.e.desc"
-    }
-    desc = {
-        trigger = {
-            NOR = {
-                any_agreement = { agreement_preset = preset_satrapy }
-                has_country_flag = rebelling_satrapy
-                has_valid_civic = "civic_fanatic_purifiers"
-                has_valid_civic = "civic_hive_devouring_swarm"
-                has_valid_civic = "civic_machine_terminator"
-                is_genocidal_infernal = yes
-            }
-        }
-        text = "marauder.550.f.desc"
-    }
-    desc = {
-        trigger = {
-            NOR = {
-                any_agreement = { agreement_preset = preset_satrapy }
-                has_country_flag = rebelling_satrapy
-                has_valid_civic = "civic_fanatic_purifiers"
-                has_valid_civic = "civic_hive_devouring_swarm"
-                has_valid_civic = "civic_machine_terminator"
-                is_genocidal_infernal = yes
-            }
-        }
-        text = "marauder.550.g.desc"
-    }
-    desc = {
-        trigger = {
-            NOR = {
-                any_agreement = { agreement_preset = preset_satrapy }
-                has_country_flag = rebelling_satrapy
-                has_valid_civic = "civic_fanatic_purifiers"
-                has_valid_civic = "civic_hive_devouring_swarm"
-                has_valid_civic = "civic_machine_terminator"
-                is_genocidal_infernal = yes
-            }
-        }
-        text = "marauder.550.h.desc"
-    }
-    desc = {
-        trigger = {
-            NOR = {
-                any_agreement = { agreement_preset = preset_satrapy }
-                has_country_flag = rebelling_satrapy
-                has_valid_civic = "civic_fanatic_purifiers"
-                has_valid_civic = "civic_hive_devouring_swarm"
-                has_valid_civic = "civic_machine_terminator"
-                is_genocidal_infernal = yes
-            }
-        }
-        text = "marauder.550.i.desc"
-    }
-    desc = {
-        trigger = { any_agreement = { agreement_preset = preset_satrapy } }
-        text = "marauder.550.j.desc"
-    }
-    desc = {
-        trigger = { any_agreement = { agreement_preset = preset_satrapy } }
-        text = "marauder.550.k.desc"
-    }
-    desc = {
-        trigger = {
-            any_agreement = { agreement_preset = preset_satrapy }
-            is_machine_empire = yes
-        }
-        text = "marauder.550.l.desc"
-    }
-    desc = {
-        trigger = {
-            any_agreement = { agreement_preset = preset_satrapy }
-            is_machine_empire = yes
-        }
-        text = "marauder.550.m.desc"
-    }
-    desc = {
-        trigger = {
-            any_agreement = { agreement_preset = preset_satrapy }
-            is_hive_empire = yes
-        }
-        text = "marauder.550.n.desc"
-    }
-    desc = {
-        trigger = {
-            any_agreement = { agreement_preset = preset_satrapy }
-            is_hive_empire = yes
-            is_wilderness_empire = no
-        }
-        text = "marauder.550.o.desc"
-    }
-    desc = {
-        trigger = {
-            any_agreement = { agreement_preset = preset_satrapy }
-            NOT = { has_ethic = ethic_gestalt_consciousness }
-        }
-        text = "marauder.550.p.desc"
-    }
-    desc = {
-        trigger = {
-            any_agreement = { agreement_preset = preset_satrapy }
-            NOT = { has_ethic = ethic_gestalt_consciousness }
-        }
-        text = "marauder.550.q.desc"
-    }
-    desc = {
-        trigger = { has_country_flag = rebelling_satrapy }
-        text = "marauder.550.r.desc"
-    }
-    desc = {
-        trigger = { has_country_flag = rebelling_satrapy }
-        text = "marauder.550.s.desc"
-    }
-    desc = {
-        trigger = { has_country_flag = rebelling_satrapy }
-        text = "marauder.550.t.desc"
-    }
-    desc = {
-        trigger = { has_country_flag = rebelling_satrapy }
-        text = "marauder.550.u.desc"
-    }
-    desc = {
-        trigger = {
-            OR = {
-                has_valid_civic = "civic_fanatic_purifiers"
-                has_valid_civic = "civic_hive_devouring_swarm"
-                has_valid_civic = "civic_machine_terminator"
-                is_genocidal_infernal = yes
-            }
-        }
-        text = "marauder.550.v.desc"
-    }
-    desc = {
-        trigger = {
-            from = { has_country_flag = marauder_2 }
-        }
-        text = "marauder.550.w.desc"
-    }
-    picture_event_data = {
-        portrait = event_target:raider_khanate
-        room = khan_room
-    }
-    is_triggered_only = yes
-    force_open = yes
-    diplomatic = yes
-
-    trigger = {
-        from = { is_country_type = awakened_marauders }
-        NOT = { has_global_flag = great_khan_dead }
-    }
-
-    option = { # Submit?
-        name = marauder.550.a
-        trigger = {
-            NOR = {
-                any_agreement = { agreement_preset = preset_satrapy }
-                has_country_flag = rebelling_satrapy
-                has_valid_civic = "civic_fanatic_purifiers"
-                has_valid_civic = "civic_hive_devouring_swarm"
-                has_valid_civic = "civic_machine_terminator"
-                is_genocidal_infernal = yes
-            }
-        }
-        hidden_effect = {
-            country_event = { id = marauder.551 }
-        }
-    }
-
-    option = { # Submit? Already rebelled
-        name = marauder.550.a
-        trigger = {
-            has_country_flag = rebelling_satrapy
-        }
-        response_text = marauder.550.a.2.response
-        is_dialog_only = yes
-    }
-
-    option = {
-        name = marauder.550.b
-        trigger = {
-            from = { has_country_flag = marauder_2 }
-            NOR = {
-                has_country_flag = asked_about_language
-                has_valid_civic = "civic_fanatic_purifiers"
-                has_valid_civic = "civic_hive_devouring_swarm"
-                has_valid_civic = "civic_machine_terminator"
-                is_genocidal_infernal = yes
-            }
-        }
-        response_text = marauder.550.b.response
-        is_dialog_only = yes
-        hidden_effect = {
-            set_country_flag = asked_about_language
-        }
-    }
-
-    option = {
-        name = marauder.550.c
-        trigger = {
-            from = { has_country_flag = marauder_3 }
-            NOR = {
-                has_country_flag = asked_about_religion
-                has_valid_civic = "civic_fanatic_purifiers"
-                has_valid_civic = "civic_hive_devouring_swarm"
-                has_valid_civic = "civic_machine_terminator"
-                is_genocidal_infernal = yes
-            }
-        }
-        response_text = marauder.550.c.response
-        is_dialog_only = yes
-        hidden_effect = {
-            set_country_flag = asked_about_religion
-        }
-    }
-
-    option = { # Rebel?
-        name = marauder.550.d
-        trigger = {
-            any_agreement = { agreement_preset = preset_satrapy }
-        }
-        allow = {
-            custom_tooltip = {
-                fail_text = marauder.550.d_fail
-                NOT = { has_country_flag = rebellion_cooldown }
-            }
-        }
-        hidden_effect = {
-            country_event = { id = marauder.554 }
-        }
-    }
-
-    option = {
-        name = marauder.20.e
-        default_hide_option = yes
-    }
-}
-
-# Submit?
-country_event = {
-    id = marauder.551
-    title = "greatkhan_diplo_header"
-    desc = marauder.551.a.desc
-    picture_event_data = {
-        portrait = event_target:raider_khanate
-        room = khan_room
-    }
-    is_triggered_only = yes
-    force_open = yes
-    diplomatic = yes
-
-    option = {
-        name = marauder.551.a
-        trigger = { has_been_declared_crisis = no }
-        response_text = marauder.551.a.response
-        allow = {
-            custom_tooltip = {
-                text = "ACTION_ACTOR_MUST_BE_INDEPENDENT"
-                is_subject = no
-            }
-        }
-        if = {
-            limit = { is_overlord = yes }
-            every_subject = {
-                custom_tooltip = marauder.551.a.tt
-                hidden_effect = {
-                    set_subject_of = {
-                        who = event_target:raider_khanate
-                        preset = preset_satrapy
-                    }
-                    country_event = { id = marauder.553 days = 10 }
-                    event_target:raider_khanate = {
-                        set_faction_hostility = {
-                            target = prev
-                            set_hostile = no
-                            set_neutral = no
-                            set_friendly = yes
+                        check_variable = {
+                            which = failure_yuhuang_split
+                            value = 0
                         }
                     }
+                    set_owner = event_target:failure_yuhuang_country_1
+                    set_variable = {
+                        which = failure_yuhuang_split value = 1
+                    }
+                }
+                else = {
+                    set_owner = event_target:failure_yuhuang_country_2
+                    set_variable = {
+                        which = failure_yuhuang_split value = 0
+                    }
                 }
             }
-        }
-        custom_tooltip = marauder.551.a.tt
-        hidden_effect = {
-            set_subject_of = {
-                who = event_target:raider_khanate
-                preset = preset_satrapy
-            }
-            set_timed_country_flag = { flag = rebellion_cooldown days = 360 } # Can't rebel for a year after submitting.
-            save_event_target_as = new_satrapy
-            observer_event = { id = observer.19 }
-            every_country = {
+            every_owned_starbase = {
                 limit = {
-                    is_ai = no
-                    has_communications = root
-                    NOT = { is_same_value = root }
-                }
-                country_event = { id = marauder.552 }
-            }
-            country_event = { id = marauder.553 days = 10 }
-            event_target:raider_khanate = {
-                set_faction_hostility = {
-                    target = root
-                    set_hostile = no
-                    set_neutral = no
-                    set_friendly = yes
-                }
-            }
-        }
-    }
-
-    option = {
-        name = marauder.551.b
-        response_text = marauder.551.b.response
-        default_hide_option = yes
-    }
-}
-
-# New Satrapy
-country_event = {
-    id = marauder.552
-    title = "marauder.552.name"
-    desc = "marauder.552.desc"
-    picture = GFX_evt_khan_throne_room
-    show_sound = event_conversation
-
-    is_triggered_only = yes
-
-    option = {
-        name = marauder.552.a
-    }
-}
-
-# Marauder Establishes Base in Capital System
-country_event = {
-    id = marauder.553
-    title = "marauder.553.name"
-    desc = "marauder.553.desc"
-    picture = GFX_evt_khan_throne_room
-    show_sound = event_conversation
-    location = event_target:garrison_base
-
-    is_triggered_only = yes
-
-    trigger = {
-        is_nomadic = no
-    }
-
-    immediate = {
-        save_event_target_as = satrapy_empire
-        capital_scope = {
-            save_event_target_as = capital_planet
-            solar_system = { save_event_target_as = capital_system }
-        }
-        create_fleet = {
-            effect = {
-                set_owner = event_target:raider_khanate
-                create_ship = {
-                    name = "NAME_Garrison_Base"
-                    design = "NAME_Void_Dwelling"
-                    graphical_culture = "pirate_01"
-                }
-                set_location = {
-                    target = event_target:capital_planet
-                    distance = 50
-                    angle = random
-                }
-            }
-        }
-        last_created_fleet = {
-            save_event_target_as = garrison_base
-            set_fleet_flag = satrapy_garrison
-            fleet_event = { id = marauder.560 days = 10 }
-        }
-        create_fleet = {
-            name = "NAME_Garrison_Fleet"
-            effect = {
-                set_owner = event_target:raider_khanate
-                while = {
-                    count = 22
-                    create_ship = {
-                        name = random
-                        design = "NAME_Outrider"
-                        graphical_culture = "pirate_01"
+                    owner = {
+                        is_same_value = event_target:failure_yuhuang_country
                     }
                 }
-                while = {
-                    count = 14
-                    create_ship = {
-                        name = random
-                        design = "NAME_Lancer"
-                        graphical_culture = "pirate_01"
+                if = {
+                    limit = {
+                        check_variable = {
+                            which = failure_yuhuang_split
+                            value = 0
+                        }
+                    }
+                    set_owner = event_target:failure_yuhuang_country_1
+                    set_variable = {
+                        which = failure_yuhuang_split value = 1
                     }
                 }
-                while = {
-                    count = 8
-                    create_ship = {
-                        name = random
-                        design = "NAME_Void_Champion"
-                        graphical_culture = "pirate_01"
+                else = {
+                    set_owner = event_target:failure_yuhuang_country_2
+                    set_variable = {
+                        which = failure_yuhuang_split value = 0
                     }
                 }
-                set_formation_scale = 2
-                set_fleet_stance = aggressive
-                set_aggro_range_measure_from = self
-                set_aggro_range = 250
-                set_location = {
-                    target = event_target:garrison_base
-                    distance = 20
-                    angle = random
-                }
             }
-            settings = {
-                garrison = yes
-            }
+            destroy_country = yes
         }
-        last_created_fleet = {
-            set_fleet_flag = satrapy_garrison_fleet
+        every_country = {
+            country_event = { id = script_crisis.12 days = 10 }
         }
-    }
-
-    option = {
-        name = marauder.553.a
     }
 }
-
-# Rebel?
 country_event = {
-    id = marauder.554
-    title = "greatkhan_diplo_header"
-    desc = marauder.554.a.desc
-
+    id = script_crisis.15
+    title = "yuhuang_introduction"
+    desc = script_crisis.15.desc
     picture_event_data = {
-        portrait = event_target:raider_khanate
+        portrait = event_target:yuhuang_species
         room = khan_room
     }
     is_triggered_only = yes
     force_open = yes
     diplomatic = yes
-
-    option = {
-        name = marauder.554.a
-        response_text = marauder.554.a.response
-        set_subject_of = {
-            who = none
-        }
-        hidden_effect = {
-            set_country_flag = rebelling_satrapy
-            event_target:raider_khanate = {
-                set_faction_hostility = {
-                    target = root
-                    set_hostile = yes
-                    set_neutral = no
-                    set_friendly = no
-                }
-            }
-        }
+    trigger = {
+        exists = from
+        from = { is_country_type = fengraomin_crisis }
     }
-
     option = {
-        name = marauder.554.b
-        response_text = marauder.554.b.response
+        name = end_message
         default_hide_option = yes
     }
 }
