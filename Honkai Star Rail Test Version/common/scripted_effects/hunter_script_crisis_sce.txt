@@ -279,7 +279,7 @@ create_2nd_yuhuang_fleet = {
 				prefix = no
 				graphical_culture = "pirate_01"
 			}
-			assign_leader = event_target:yuhuang_fleet_admiral
+			assign_leader = last_created_leader
 			save_event_target_as = yuhuang_fleet
 			set_fleet_flag = yuhuang_fleet
 			set_location = {
@@ -1785,6 +1785,8 @@ crisis_fleet_wandering_action = {
 					random_system_planet = {
 						limit = { is_primary_star = yes }
 						prevprev = {
+							clear_orders = yes
+							clear_fleet_actions = this
 							set_location = { target = prev distance = 200 angle = random }
 							auto_move_to_planet = { target = prev clear_auto_move_on_arrival = yes }
 						}
@@ -1816,6 +1818,8 @@ crisis_jump_attitude_planet_fleet_action = {
 				prevprev = { any_owned_ship = { has_ship_flag = crisis_fleet_jump_drive_cooldown } }
 			}
 			prevprev = {
+				clear_orders = yes
+				clear_fleet_actions = this
 				set_location = { target = prev distance = 200 angle = random }
 				if = {
 					limit = {
@@ -1857,6 +1861,8 @@ crisis_jump_fleet_attack_action = {
 				prevprev = { any_owned_ship = { has_ship_flag = crisis_fleet_jump_drive_cooldown } }
 			}
 			prevprev = {
+				clear_orders = yes
+				clear_fleet_actions = this
 				set_location = { target = prev distance = 200 angle = random }
 				while = {
 					limit = { any_owned_ship = { NOT = { has_ship_flag = crisis_fleet_jump_drive_cooldown } } }

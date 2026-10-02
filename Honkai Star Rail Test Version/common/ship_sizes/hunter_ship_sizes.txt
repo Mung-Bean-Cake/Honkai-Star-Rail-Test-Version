@@ -75,7 +75,7 @@ middle_path_leader = {
     num_target_locators = 2
     is_space_station = no
     icon = ship_size_military_32
-    entity = "fallen_empire_02_turret_energy_torpedo_entity"
+    entity = "dawn_mid_1_entity"
     construction_type = starbase_shipyard
     base_buildtime = 960
     can_have_federation_design = yes
@@ -137,7 +137,7 @@ middle_path_commander = {
     num_target_locators = 2
     is_space_station = no
     icon = ship_size_military_64
-    entity = "fallen_empire_02_turret_energy_torpedo_entity"
+    entity = aquatic_dragon_entity
     construction_type = starbase_shipyard
     base_buildtime = 1680
     can_have_federation_design = yes
@@ -173,6 +173,56 @@ middle_path_commander = {
     min_upgrade_cost = {
         influence = 5
         sr_zro = 10
+    }
+}
+aha_boat = {
+    formation_priority = @cruiser_formation_priority
+    max_speed = 50
+    acceleration = 0.7
+    rotation_speed = 0.08
+    collision_radius = 4
+    modifier = {
+        ship_fire_rate_mult = 0.2
+        ship_shield_damage_mult = 0.3
+    }
+    max_hitpoints = 8000
+    size_multiplier = 10
+    map_counter_icon = ship_counter_16
+    fleet_slot_size = 4
+    section_slots = { "bow" = { locator = "part1" } "mid" = { locator = "part2" } "stern" = { locator = "part3" } }
+    num_target_locators = 2
+    is_space_station = no
+    icon = ship_size_military_32
+    entity = "dawn_frame_entity"
+    construction_type = starbase_shipyard
+    base_buildtime = 280
+    can_have_federation_design = yes
+    components_add_to_cost = no
+    default_behavior = swarm
+    role_background = "GFX_role_selection_cruiser"
+    combat_disengage_chance = 1.20
+    components_add_to_cost = yes
+    ship_roles = { debuffer_role carrier }
+    class = shipclass_military
+    enable_default_design = yes
+    enable_3dview_in_ship_browser = yes
+    use_shipnames_from = cruiser
+    prerequisites = { "tech_Hunter_dawn" }
+    construction_type = starbase_shipyard
+    required_component_set = "aha_power_reactor"
+    required_component_set = "dawn_ftl_components"
+    required_component_set = "dawn_thruster_components"
+    required_component_set = "dawn_sensor_components"
+    required_component_set = "dawn_combat_computers"
+    resources = {
+        category = ships
+        cost = {
+            huanyudu = 320
+            energy = 500
+        }
+    }
+    min_upgrade_cost = {
+        unity = 20
     }
 }
 aha_emanator = {

@@ -91,7 +91,9 @@ country_event = {
     desc = DOT_SR_Hunter.4.desc
     picture = aha_gift
     trigger = {
-        always = yes
+        NOT = {
+            has_origin = origin_erxiangleyuan
+        }
     }
     immediate = {
     }
@@ -99,7 +101,7 @@ country_event = {
         name = DOT_SR_Hunter.4.a
         custom_tooltip = DOT_SR_Hunter.4.tt
         owner = {
-            set_country_flag = received_aha_gift
+            set_country_flag = perhaps_gift
             add_monthly_resource_mult = {
                 resource = trade
                 value = 12
@@ -943,7 +945,7 @@ country_event = {
     is_triggered_only = yes
     picture = aha_gift
     trigger = {
-        has_country_flag = received_aha_gift
+        has_country_flag = perhaps_gift
         NOT = {has_modifier = aha_joke}
         NOT = {from = {is_special_megastructure = yes}}
     }
@@ -999,7 +1001,7 @@ country_event = {
                         }
                         delete_megastructure = this
                     }
-                    remove_country_flag = received_aha_gift
+                    remove_country_flag = perhaps_gift
                     set_country_flag = aha_joke_2
                     add_modifier = {
                         modifier = aha_joke
@@ -1388,11 +1390,11 @@ country_event = {
     trigger = {
         has_deficit = huanyudu
         NOR = {
-            has_country_flag = received_aha_gift
+            has_country_flag = perhaps_gift
         }
     }
     immediate = {
-        set_country_flag = received_aha_gift
+        set_country_flag = perhaps_gift
         add_resource = { alloys = -5000 }
         add_resource = { energy = -10000 }
         add_resource = { trade = -5000 } 

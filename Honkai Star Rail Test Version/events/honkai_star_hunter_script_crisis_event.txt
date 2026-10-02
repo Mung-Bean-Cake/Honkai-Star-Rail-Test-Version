@@ -152,23 +152,15 @@ country_event = {
     hide_window = yes
     is_triggered_only = yes
     immediate = {
-        # 确保天灾国家存在
         if = {
             limit = { exists = event_target:yuhuang_fengrao_country }
             event_target:yuhuang_fengrao_country = {
-                # 遍历所有国家
                 every_country = {
                     limit = {
-                        # 不向自己宣战
                         NOT = { is_same_value = event_target:yuhuang_fengrao_country }
-                        # 防止重复宣战
-                        NOT = { has_war_flag = war_with_yuhuang }
                     }
-                    # 在目标国家的 scope 下，切换回天灾 scope 执行效果
                     event_target:yuhuang_fengrao_country = {
-                        # 强行建立通讯（防止因无通讯导致宣战失败）
                         establish_communications_no_message = prev
-                        # 宣战：以终结威胁为目标（全面战争）
                         declare_war = {
                             target = prev
                             attacker_war_goal = wg_end_threat
@@ -196,10 +188,13 @@ country_event = {
     immediate = {
         set_global_flag = yuhuang_defeated_once
         every_country = {
+            limit = {
+                is_ai = no
+            }
             country_event = { id = script_crisis.9 }
         }
         random_country = {
-            limit = { is_country_type = global_event }
+            limit = { is_country_type = fengraomin_crisis }
             country_event = { id = script_crisis.10 days = 360 random = 180}
         }
     }
@@ -221,9 +216,14 @@ country_event = {
     is_triggered_only = yes
     immediate = {
         if = {
-            limit = { exists = from }
-            from = {
+            limit = { exists = event_target:yuhuang_fengrao_country }
+            event_target:yuhuang_fengrao_country = {
                 country_event = { id = script_crisis.11 }
+            }
+        }
+        else = {
+            every_country = {
+                country_event = { id = script_crisis.12 }   
             }
         }
     }
@@ -255,8 +255,46 @@ country_event = {
     picture = GFX_evt_space_funeral
     show_sound = event_airlock
     is_triggered_only = yes
+    immediate = {
+        if = {
+            limit = {
+                is_ai = no
+            }
+            add_tech_progress = {
+                tech = tech_fengrao_burst_shield
+                progress = 0.05
+            }
+            add_resource = {
+                sr_dark_matter = 3600
+            }
+        }
+    }
     option = {
         name = script_crisis.12.a
+        ai_chance = {base = 1}
+        add_resource = {
+            energy = 50000
+        }
+        add_resource = {
+            alloys = 20000
+        }
+    }
+    option = {
+        name = script_crisis.12.b
+        ai_chance = {base = 0}
+        add_resource = {
+            huanyudu = 5000
+        }
+        add_resource = {
+            yuzhousuipian = 8000
+        }
+        random_list = {
+            10 = {add_tech_progress = {
+                tech = tech_fengrao_burst_shield
+                progress = 0.01
+            }}
+            90 = {}
+        }
     }
 }
 country_event = {
@@ -315,7 +353,7 @@ country_event = {
             name = failure_yuhuang_country_1
             name_list = DOT_SR_fengraomin
             species = event_target:failure_yuhuang_species
-            type = fengraomin_crisis
+            type = fengraomin
             civics = { civic = civic_barbaric_despoilers }
             authority = auth_imperial
             origin = origin_broken_shackles
@@ -348,7 +386,7 @@ country_event = {
             name = failure_yuhuang_country_2
             name_list = DOT_SR_fengraomin
             species = event_target:failure_yuhuang_species
-            type = fengraomin_crisis
+            type = fengraomin
             civics = { civic = civic_barbaric_despoilers }
             authority = auth_oligarchic
             origin = origin_broken_shackles
@@ -435,6 +473,9 @@ country_event = {
             destroy_country = yes
         }
         every_country = {
+            limit = {
+                is_ai = no
+            }
             country_event = { id = script_crisis.12 days = 10 }
         }
     }
@@ -457,5 +498,31 @@ country_event = {
     option = {
         name = end_message
         default_hide_option = yes
+    }
+}
+country_event = {
+    id = script_crisis.16
+    hide_window = yes
+    is_triggered_only = yes
+    trigger = {
+        is_country = event_target:yuhuang_fengrao_country
+        count_owned_ship = {
+            count = 0
+        }
+        NOT = {
+            any_owned_starbase = {
+                always = yes
+            }
+            has_global_flag = yuhuang_back
+        }
+    }
+    immediate = {
+        destroy_country = yes
+        every_country = {
+            limit = {
+                is_ai = no
+            }
+            country_event = { id = script_crisis.12 days = 10 }
+        }
     }
 }
