@@ -327,6 +327,69 @@ country_event = {
         }
     }
     immediate = {
+        every_country = {
+            limit = {
+                is_ai = no
+            }
+            country_event = { id = script_crisis.12 }
+        }
+        random_country = {
+            limit = { is_country_type = fengraomin_crisis }
+            country_event = { id = script_crisis.17 days = 30 }
+        }
+    }
+}
+country_event = {
+    id = script_crisis.15
+    title = "yuhuang_introduction"
+    desc = script_crisis.15.desc
+    picture_event_data = {
+        portrait = event_target:yuhuang_species
+        room = khan_room
+    }
+    is_triggered_only = yes
+    force_open = yes
+    diplomatic = yes
+    trigger = {
+        exists = from
+        from = { is_country_type = fengraomin_crisis }
+    }
+    option = {
+        name = end_message
+        default_hide_option = yes
+    }
+}
+country_event = {
+    id = script_crisis.16
+    hide_window = yes
+    is_triggered_only = yes
+    trigger = {
+        is_country = event_target:yuhuang_fengrao_country
+        count_owned_ship = {
+            count = 0
+        }
+        NOT = {
+            any_owned_starbase = {
+                always = yes
+            }
+            has_global_flag = yuhuang_back
+        }
+    }
+    immediate = {
+        destroy_country = yes
+        every_country = {
+            limit = {
+                is_ai = no
+            }
+            country_event = { id = script_crisis.12 days = 10 }
+        }
+    }
+}
+country_event = {
+    id = script_crisis.17
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = {
         save_event_target_as = failure_yuhuang_country
         create_species = {
             name = failure_fengrao
@@ -380,6 +443,7 @@ country_event = {
             ignore_initial_colony_error = yes
             effect = {
                 save_event_target_as = failure_yuhuang_country_1
+                establish_communications_no_message = prev
             }
         }
         create_country = {
@@ -414,6 +478,7 @@ country_event = {
             ignore_initial_colony_error = yes
             effect = {
                 save_event_target_as = failure_yuhuang_country_2
+                establish_communications_no_message = prev
             }
         }
         set_variable = {
@@ -472,57 +537,24 @@ country_event = {
             }
             destroy_country = yes
         }
-        every_country = {
-            limit = {
-                is_ai = no
-            }
-            country_event = { id = script_crisis.12 days = 10 }
-        }
     }
 }
 country_event = {
-    id = script_crisis.15
-    title = "yuhuang_introduction"
-    desc = script_crisis.15.desc
-    picture_event_data = {
-        portrait = event_target:yuhuang_species
-        room = khan_room
-    }
-    is_triggered_only = yes
-    force_open = yes
-    diplomatic = yes
-    trigger = {
-        exists = from
-        from = { is_country_type = fengraomin_crisis }
-    }
-    option = {
-        name = end_message
-        default_hide_option = yes
-    }
-}
-country_event = {
-    id = script_crisis.16
+    id = script_crisis.18
     hide_window = yes
     is_triggered_only = yes
     trigger = {
-        is_country = event_target:yuhuang_fengrao_country
-        count_owned_ship = {
-            count = 0
-        }
+        has_global_flag = fengrao_crisis_ongoing
         NOT = {
-            any_owned_starbase = {
-                always = yes
-            }
-            has_global_flag = yuhuang_back
+            exists = event_target:yuhuang_fengrao_country
         }
     }
     immediate = {
-        destroy_country = yes
         every_country = {
             limit = {
                 is_ai = no
             }
-            country_event = { id = script_crisis.12 days = 10 }
+            country_event = { id = script_crisis.12 }
         }
     }
 }
