@@ -162,6 +162,18 @@ country_event = {
     picture = aha_gift
     trigger = {
         NOT = {has_country_flag = refuse_aha_gift}
+		 from= {
+			or = {
+				is_megastructure_type = mega_shipyard_0
+                is_megastructure_type = dyson_sphere_0
+                is_megastructure_type = spy_orb_0
+                is_megastructure_type = think_tank_0
+                is_megastructure_type = matter_decompressor_0
+                is_megastructure_type = mega_art_installation_0
+                is_megastructure_type = interstellar_assembly_0
+			}
+           
+        }
     }
     immediate = {
 		remove_country_flag = received_aha_gift
@@ -212,21 +224,121 @@ country_event = {
     trigger = {
         has_country_flag = received_aha_gift_1
         from= {
-           is_megastructure_type = mega_shipyard_3
-           is_megastructure_type = dyson_sphere_5
-           is_megastructure_type = spy_orb_4
-           is_megastructure_type = think_tank_3
-           is_megastructure_type = matter_decompressor_4
-           is_megastructure_type = mega_art_installation_3
-           is_megastructure_type = interstellar_assembly_4
+			or = {
+				is_megastructure_type = mega_shipyard_3
+                is_megastructure_type = dyson_sphere_5
+                is_megastructure_type = spy_orb_4
+                is_megastructure_type = think_tank_3
+                is_megastructure_type = matter_decompressor_4
+                is_megastructure_type = mega_art_installation_3
+                is_megastructure_type = interstellar_assembly_4
+			}
+           
         }
         NOT = {has_modifier = aha_joke}
         NOT = {from = {is_special_megastructure = yes}}
     }
     immediate = {
        every_owned_megastructure = {
-        limit = {has_megastructure_flag = aha_gift}
-        delete_megastructure = this
+		if = {
+			limit = {has_megastructure_flag = aha_gift is_megastructure_type = mega_shipyard_3}
+            delete_megastructure = this
+			root = {
+			    if = {
+                limit = {
+					has_relic = r_contingency_core
+                    has_country_flag = built_mega_shipyard_site
+                }
+                remove_country_flag = built_mega_shipyard_site_contingency
+            }
+            remove_country_flag = built_mega_shipyard_site
+		}
+		}
+		if = {
+			limit = {has_megastructure_flag = aha_gift is_megastructure_type = dyson_sphere_5}
+            delete_megastructure = this
+			root = {
+			    if = {
+                limit = {
+                    has_relic = r_contingency_core
+                    has_country_flag = built_dyson_sphere
+                }
+                remove_country_flag = built_dyson_sphere_contingency
+            }
+            remove_country_flag = built_dyson_sphere
+		}
+		}
+		if = {
+			limit = {has_megastructure_flag = aha_gift is_megastructure_type = spy_orb_4}
+            delete_megastructure = this
+			root = {
+			    if = {
+                limit = {
+					has_relic = r_contingency_core
+                    has_country_flag = built_spyorb
+                }
+                remove_country_flag = built_spyorb_contingency
+            }
+            remove_country_flag = built_spyorb
+		}
+		}
+		if = {
+			limit = {has_megastructure_flag = aha_gift is_megastructure_type = think_tank_3}
+            delete_megastructure = this
+			root = {
+			    if = {
+                limit = {
+                    has_relic = r_contingency_core
+                    has_country_flag = built_think_tank
+                }
+                remove_country_flag = built_think_tank_contingency
+            }
+            remove_country_flag = built_think_tank
+		}
+		}
+		if = {
+			limit = {has_megastructure_flag = aha_gift is_megastructure_type = matter_decompressor_4}
+            delete_megastructure = this
+			root = {
+			    if = {
+                limit = {
+                    has_relic = r_contingency_core
+                    has_country_flag = built_matter_decompressor_site
+                }
+                remove_country_flag = built_matter_decompressor_site_contingency
+            }
+            remove_country_flag = built_matter_decompressor_site
+		}
+		}
+		if = {
+			limit = {has_megastructure_flag = aha_gift is_megastructure_type = mega_art_installation_3}
+            delete_megastructure = this
+			root = {
+			    if = {
+                limit = {
+                    has_relic = r_contingency_core
+                    has_country_flag = built_mega_art_installation
+                }
+                remove_country_flag = built_mega_art_installation_contingency
+            }
+            remove_country_flag = built_mega_art_installation
+		}
+		}
+		if = {
+			limit = {has_megastructure_flag = aha_gift is_megastructure_type = interstellar_assembly_4}
+            delete_megastructure = this
+			root = {
+			    if = {
+                limit = {
+                    has_relic = r_contingency_core
+                    has_country_flag = built_mega_shipyard_site
+                }
+                remove_country_flag = built_interstellar_assembly_site_contingency
+            }
+            remove_country_flag = built_interstellar_assembly_site
+		}
+		}
+       
        }
        
     }
