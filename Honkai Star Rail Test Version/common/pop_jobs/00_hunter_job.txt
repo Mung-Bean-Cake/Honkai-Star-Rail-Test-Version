@@ -878,3 +878,53 @@ kafuka_librarian = {
 	}
 	inline_script = "jobs/automodding_priority_energy"
 }
+joker = {
+	category = StellaronHunter_class
+	swappable_data = {
+		default = {
+			condition_string = SOLDIER_JOB_TRIGGER
+			building_icon = building_joyful_tavern
+		}
+	}
+	tags = { trade }
+	possible_pre_triggers = {
+		has_owner = yes
+		is_being_purged = no
+		is_being_assimilated = no
+		is_sapient = yes
+	}
+	possible_precalc = can_fill_worker_job
+	triggered_country_modifier = {
+		potential = {
+			exists = owner
+			owner = {
+				has_valid_civic = civic_StellaronHunter_1
+			}
+		}
+		modifier = {
+			weapon_type_psionic_speed_mult = 0.02
+		}
+	}
+	country_modifier = {
+		weapon_type_explosive_weapon_damage_mult = 0.05
+		STARBASE_SHIPYARD_BUILD_TIME_MULT = -0.02
+		country_resource_max_add = 2000
+	}
+	resources = {
+		category = planet_StellaronHunter_job
+		produces = {
+			physics_research = 2
+			society_research = 2
+			engineering_research = 2
+			huanyudu = 10
+		}
+		upkeep = {
+			energy = 80
+			trade = 100
+			unity = 60
+		}
+	}
+	weight = {
+		weight = 120
+	}
+}
