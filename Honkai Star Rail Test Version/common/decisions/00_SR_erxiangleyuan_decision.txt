@@ -79,3 +79,53 @@ decision_Aether_Editing_Technology = {
 		}
 	}
 }
+#__________________________________________________
+decision_custom_design = {
+	important = yes
+	owned_planets_only = yes
+	icon = decision_arcology_project
+
+	enactment_time = 1
+	resources = {
+		category = decisions
+		cost = {
+			
+		}
+	}
+
+	potential = {
+		has_building = building_phantasmoon_court
+		is_planet_class = pc_erxiangleyuan
+		is_artificial = no
+		exists = owner
+		owner = { has_origin = origin_erxiangleyuan }
+	}
+
+	allow = {
+		owner = {is_ai = no}
+	}
+
+	on_queued = {
+	}
+
+	on_unqueued = {
+	}
+
+	effect = {
+		owner = {
+			country_event = {id =xiaoqiaosi.1007}
+		}
+	}
+
+	ai_weight = {
+		weight = 1
+		modifier = {
+			factor = 100
+			exists = owner
+			OR = {
+				pop_amount >= 7000
+				is_capital = yes
+			}
+		}
+	}
+}
