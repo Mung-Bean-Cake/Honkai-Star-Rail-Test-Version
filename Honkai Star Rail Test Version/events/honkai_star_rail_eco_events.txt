@@ -15,6 +15,21 @@ carrier_event = {#reload honkai_star_rail_eco.gui
     }
 }
 country_event = {
+    id = hsr_eco.10
+    title = ""
+    desc = ""
+    is_triggered_only = yes
+    diplomatic = yes
+    custom_gui = honkai_star_rail_country_credits_ui
+    immediate = {
+
+    }
+    option = {
+        name = OK
+        default_hide_option = yes
+    }
+}
+country_event = {
     id = hsr_eco.100
     is_triggered_only = yes
     hide_window = yes
@@ -103,7 +118,7 @@ country_event = {
                 change_variable = { which = hsr_credits_planet_trade_storage value = hsr_credits_planet_year_value }
                 prev = {
                     change_variable = { which = hsr_credits_country_trade_storage value = prev.hsr_credits_country_year_value }#总存储
-                    #change_variable = { which = hsr_credits_country_year_income_gross value = prev.hsr_credits_country_trade }#年收入
+                    change_variable = { which = hsr_credits_country_year_income_gross value = prev.hsr_credits_country_year_value }#年收入
                 }
             }
             else_if = {
@@ -128,11 +143,499 @@ country_event = {
                 }
             }
         }
-        remove_modifier = hsr_credits_country_modifiers
-        add_modifier = {
-            modifier = hsr_credits_country_modifiers
-            years = -1
-            mult = value:hsr_add_mult_value|BASEVAR|0.00001|VAR1|hsr_credits_country_trade_storage|
+        #中央财政结算
+        if = {
+            limit = {
+                check_variable = {
+                    which = hsr_credits_country_loan_coefficient
+                    value > 1
+                }
+            }
+            random_list = {
+                1 = { change_variable = { which = hsr_credits_country_loan_coefficient value = -0.05 } }
+                1 = { change_variable = { which = hsr_credits_country_loan_coefficient value = -0.1 } }
+                1 = { change_variable = { which = hsr_credits_country_loan_coefficient value = -0.15 } }
+                1 = { change_variable = { which = hsr_credits_country_loan_coefficient value = -0.2 } }
+            }
         }
+        else = {
+            random_list = {
+                1 = { change_variable = { which = hsr_credits_country_loan_coefficient value = 0.05 } }
+                1 = { change_variable = { which = hsr_credits_country_loan_coefficient value = 0.1 } }
+                1 = { change_variable = { which = hsr_credits_country_loan_coefficient value = 0.15 } }
+                1 = { change_variable = { which = hsr_credits_country_loan_coefficient value = 0.2 } }
+            }
+        }
+        random_list = {
+            1 = { change_variable = { which = hsr_credits_country_investment_coefficient value = -0.05 } }
+            1 = { change_variable = { which = hsr_credits_country_investment_coefficient value = -0.1 } }
+            1 = { change_variable = { which = hsr_credits_country_investment_coefficient value = -0.15 } }
+            1 = { change_variable = { which = hsr_credits_country_investment_coefficient value = -0.2 } }
+            1 = { change_variable = { which = hsr_credits_country_investment_coefficient value = 0.05 } }
+            1 = { change_variable = { which = hsr_credits_country_investment_coefficient value = 0.1 } }
+            1 = { change_variable = { which = hsr_credits_country_investment_coefficient value = 0.15 } }
+            1 = { change_variable = { which = hsr_credits_country_investment_coefficient value = 0.2 } }
+        }
+        change_variable = {
+            which = hsr_credits_country_trade_storage
+            value = value:mod_year_credits_add
+        }
+        change_variable = {
+            which = hsr_credits_country_investment
+            value = value:hsr_add_mult_value|BASEVAR|hsr_credits_country_investment_coefficient|VAR1|hsr_credits_country_investment|
+        }
+        change_variable = {
+            which = hsr_credits_country_loan
+            value = value:hsr_add_mult_value|BASEVAR|hsr_credits_country_loan_coefficient|VAR1|hsr_credits_country_loan|
+        }
+        remove_modifier = hsr_credits_country_modifiers
+        if = {
+            limit = {
+                check_variable = {
+                    which = hsr_credits_country_trade_storage
+                    value >=1000000
+                }
+            }
+            add_modifier = {
+                modifier = hsr_credits_country_modifiers
+                years = -1
+                mult = 10
+            }
+        }
+        else = {
+            add_modifier = {
+                modifier = hsr_credits_country_modifiers
+                years = -1
+                mult = value:hsr_add_mult_value|BASEVAR|0.00001|VAR1|hsr_credits_country_trade_storage|
+            }
+        }
+        remove_modifier = hsr_credits_country_loan_modifiers
+        if = {
+            limit = {
+                check_variable = {
+                    which = hsr_credits_country_loan
+                    value > 0
+                }
+            }
+            add_modifier = {
+                modifier = hsr_credits_country_loan_modifiers
+                years = -1
+                mult = value:hsr_add_mult_value|BASEVAR|0.00001|VAR1|hsr_credits_country_loan|
+            }
+        }
+    }
+}
+#大乐透
+country_event = {
+    id = hsr_eco.200
+    title = "hsr_eco.200.name"
+    desc =  hsr_eco.200.desc
+    picture = GFX_evt_engineering_research
+#treasure_pile
+    is_triggered_only = yes
+    trigger = {
+
+    }
+    option = {
+        name = hsr_eco.200.a
+        custom_tooltip = hsr_eco.200.a.loc
+        hidden_effect = {
+            random_list = {
+                1 = { add_monthly_resource_mult = { resource = energy value = 4 min = 2000 } }
+                1 = { add_monthly_resource_mult = { resource = minerals value = 4 min = 2000 } }
+                1 = { add_monthly_resource_mult = { resource = food value = 4 min = 2000 } }
+                1 = { add_monthly_resource_mult = { resource = alloys value = 4 min = 2000 } }
+                1 = { add_monthly_resource_mult = { resource = consumer_goods value = 4 min = 2000 } }
+                1 = {
+                    hidden_effect = {
+                        change_variable = { which = hsr_credits_country_trade_storage value = 10000 }
+                    }
+                }
+            }
+        }
+    }
+}
+country_event = {
+    id = hsr_eco.201
+    title = "hsr_eco.201.name"
+    desc =  hsr_eco.200.desc
+    picture = GFX_evt_engineering_research
+    #treasure_pile
+    is_triggered_only = yes
+    trigger = {
+
+    }
+    option = {
+        name = hsr_eco.200.a
+        custom_tooltip = hsr_eco.201.a.loc
+        hidden_effect = {
+            random_list = {
+                1 = { add_monthly_resource_mult = { resource = energy value = 8 min = 4000 } }
+                1 = { add_monthly_resource_mult = { resource = minerals value = 8 min = 4000 } }
+                1 = { add_monthly_resource_mult = { resource = food value = 8 min = 4000 } }
+                1 = { add_monthly_resource_mult = { resource = alloys value = 8 min = 4000 } }
+                1 = { add_monthly_resource_mult = { resource = consumer_goods value = 8 min = 4000 } }
+                1 = {
+                    hidden_effect = {
+                        change_variable = { which = hsr_credits_country_trade_storage value = 20000 }
+                    }
+                }
+                1 = {
+                    if = {
+                        limit = {
+                            has_modifier = lottory_1_sec_buff_1
+                        }
+                        remove_modifier = lottory_1_sec_buff_1
+                        add_modifier = {
+                            modifier = lottory_1_sec_buff_1
+                            years = 5
+                        }
+                        hidden_effect = {
+                            change_variable = { which = hsr_credits_country_trade_storage value = 1000 }
+                        }
+                    }
+                    else = {
+                        add_modifier = {
+                            modifier = lottory_1_sec_buff_1
+                            years = 5
+                        }
+                    }
+                }
+                1 = {
+                    if = {
+                        limit = {
+                            has_modifier = lottory_1_sec_buff_1
+                        }
+                        remove_modifier = lottory_1_sec_buff_1
+                        add_modifier = {
+                            modifier = lottory_1_sec_buff_1
+                            years = 5
+                        }
+                        hidden_effect = {
+                            change_variable = { which = hsr_credits_country_trade_storage value = 1000 }
+                        }
+                    }
+                    else = {
+                        add_modifier = {
+                            modifier = lottory_1_sec_buff_1
+                            years = 5
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+country_event = {
+    id = hsr_eco.202
+    title = "hsr_eco.202.name"
+    desc =  hsr_eco.200.desc
+    picture = GFX_evt_engineering_research
+    #treasure_pile
+    is_triggered_only = yes
+    trigger = {
+
+    }
+    option = {
+        name = hsr_eco.200.a
+        custom_tooltip = hsr_eco.202.a.loc
+        hidden_effect = {
+            random_list = {
+                1 = { add_monthly_resource_mult = { resource = energy value = 12 min = 4000 } }
+                1 = { add_monthly_resource_mult = { resource = minerals value = 12 min = 4000 } }
+                1 = { add_monthly_resource_mult = { resource = food value = 12 min = 4000 } }
+                1 = { add_monthly_resource_mult = { resource = alloys value = 12 min = 4000 } }
+                1 = { add_monthly_resource_mult = { resource = consumer_goods value = 12 min = 4000 } }
+                1 = {
+                    hidden_effect = {
+                        change_variable = { which = hsr_credits_country_trade_storage value = 40000 }
+                    }
+                }
+                1 = {
+                    random_planet_within_border = {
+                        limit = {
+                            or = {
+                                is_colony = no
+                                is_colonizable = no
+                            }
+                        }
+                        random_list = {
+                            1 = { while = { count = 10 add_deposit = d_energy_10 } }
+                            1 = { while = { count = 10 add_deposit = d_minerals_10 } }
+                            1 = { while = { count = 10 add_deposit = d_alloys_10 } }
+                            1 = { while = { count = 10 add_deposit = d_rare_crystals_5 } }
+                            1 = { while = { count = 10 add_deposit = d_exotic_gases_5 } }
+                            1 = { while = { count = 10 add_deposit = d_volatile_motes_5 } }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+country_event = {
+    id = hsr_eco.203
+    title = "hsr_eco.203.name"
+    desc =  hsr_eco.200.desc
+    picture = GFX_evt_treasure_pile
+    is_triggered_only = yes
+    trigger = {
+
+    }
+    option = {
+        name = hsr_eco.200.a
+        give_specimen = { key = yinhedaletou origin = hsr_eco_produce_3_name }
+    }
+}
+country_event = {
+    id = hsr_eco.204
+    title = "hsr_eco.204.name"
+    desc =  hsr_eco.200.desc
+    picture = GFX_evt_engineering_research
+    #treasure_pile
+    is_triggered_only = yes
+    trigger = {
+
+    }
+    option = {
+        name = hsr_eco.200.a
+        custom_tooltip = r_the_pattern_maker_effect_tt
+        hidden_effect = {
+            create_fleet = {
+                name = "NAME_Patternwalker"
+                settings = {
+                    can_upgrade = no
+                    can_change_composition = no
+                    can_change_leader = yes
+                    uses_naval_capacity = yes
+                    spawn_debris = no
+                }
+                effect = {
+                    set_owner = root
+                    if = {
+                        limit = { has_first_contact_dlc = yes }
+                        create_ship = {
+                            name = "NAME_Patternwalker"
+                            design = "NAME_Patternwalker_Cloak"
+                            upgradable = no
+                        }
+                    }
+                    else = {
+                        create_ship = {
+                            name = "NAME_Patternwalker"
+                            design = "NAME_Patternwalker"
+                            upgradable = no
+                        }
+                    }
+                    set_location = root.capital_scope
+                }
+            }
+        }
+
+    }
+}
+country_event = {
+    id = hsr_eco.205
+    title = "hsr_eco.205.name"
+    desc =  hsr_eco.200.desc
+    picture = GFX_evt_engineering_research
+    #treasure_pile
+    is_triggered_only = yes
+    trigger = {
+
+    }
+    option = {
+        name = hsr_eco.200.a
+        hidden_effect = {
+            create_built_robot_species = yes
+            capital_scope = {
+                create_pop_group = {
+                    size = 300
+                    species = last_created_species
+                }
+            }
+        }
+        custom_tooltip = flowmetal_alloy_active_effect_tt
+        custom_tooltip = relic_galaxy_active
+        locked_random_list = {
+            10 = {
+                add_random_research_option = {
+                    add_progress = 0.50
+                    area = engineering
+                    ignore_prereqs = no
+                    fail_effects = {
+                        add_monthly_resource_mult = {
+                            resource = engineering_research
+                            value = @tier5researchreward
+                            min = @tier5researchmin
+                            max = @tier5researchmax
+                        }
+                    }
+                }
+            }
+            10 = {
+                add_random_research_option = {
+                    add_progress = 0.50
+                    area = physics
+                    ignore_prereqs = no
+                    fail_effects = {
+                        add_monthly_resource_mult = {
+                            resource = physics_research
+                            value = @tier5researchreward
+                            min = @tier5researchmin
+                            max = @tier5researchmax
+                        }
+                    }
+                }
+            }
+            10 = {
+                add_random_research_option = {
+                    add_progress = 0.50
+                    area = society
+                    ignore_prereqs = no
+                    fail_effects = {
+                        add_monthly_resource_mult = {
+                            resource = society_research
+                            value = @tier5researchreward
+                            min = @tier5researchmin
+                            max = @tier5researchmax
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+country_event = {
+    id = hsr_eco.206
+    title = "hsr_eco.206.name"
+    desc =  hsr_eco.200.desc
+    picture = GFX_evt_engineering_research
+    #treasure_pile
+    is_triggered_only = yes
+    trigger = {
+
+    }
+    option = {
+        name = hsr_eco.200.a
+        custom_tooltip = hsr_eco.206.a.loc
+        hidden_effect = {
+            create_fleet = {
+                name = "NAME_Dimensional_Fleet"
+                settings = {
+                    can_upgrade = no
+                    can_change_composition = no
+                    can_change_leader = no
+                    uses_naval_capacity = no
+                    spawn_debris = no
+                }
+                effect = {
+                    set_owner = root
+                    while = {
+                        count = 2
+                        create_ship = {
+                            fleet_cache_recalc = no #skip fleet cache recalculation on each individual ship being added. Effect create_fleet will recalculate everything once after all the ships are in.
+                            name = "NAME_Astral_Avatar"
+                            design = "NAME_Astral_Avatar"
+                            upgradable = no
+                            graphical_culture = "extra_dimensional_01"
+                        }
+                    }
+                    while = {
+                        count = 5
+                        create_ship = {
+                            fleet_cache_recalc = no #skip fleet cache recalculation on each individual ship being added. Effect create_fleet will recalculate everything once after all the ships are in.
+                            name = "NAME_Astral_Avatar_Small"
+                            design = "NAME_Astral_Avatar_Small"
+                            upgradable = no
+                            graphical_culture = "extra_dimensional_01"
+                        }
+                    }
+                    set_location = root.capital_scope
+                }
+            }
+        }
+    }
+}
+country_event = {
+    id = hsr_eco.207
+    title = "hsr_eco.207.name"
+    desc =  hsr_eco.200.desc
+    picture = GFX_evt_treasure_pile
+    is_triggered_only = yes
+    trigger = {
+
+    }
+    option = {
+        name = hsr_eco.200.a
+        give_specimen = { key = xingjidaletou origin = hsr_eco_produce_3_name }
+    }
+}
+country_event = {
+    id = hsr_eco.208
+    title = "hsr_eco.208.name"
+    desc =  hsr_eco.200.desc
+    picture = GFX_evt_engineering_research
+    #treasure_pile
+    is_triggered_only = yes
+    trigger = {
+
+    }
+    option = {
+        name = hsr_eco.200.a
+        custom_tooltip = random_common_curiosity_get
+        hidden_effect = {
+            random_common_curiosity_get = yes
+        }
+    }
+}
+country_event = {
+    id = hsr_eco.209
+    title = "hsr_eco.209.name"
+    desc =  hsr_eco.200.desc
+    picture = GFX_evt_engineering_research
+    #treasure_pile
+    is_triggered_only = yes
+    trigger = {
+
+    }
+    option = {
+        name = hsr_eco.200.a
+        custom_tooltip = random_rare_curiosity_get
+        hidden_effect = {
+            random_rare_curiosity_get = yes
+        }
+    }
+}
+country_event = {
+    id = hsr_eco.210
+    title = "hsr_eco.210.name"
+    desc =  hsr_eco.200.desc
+    picture = GFX_evt_engineering_research
+    #treasure_pile
+    is_triggered_only = yes
+    trigger = {
+
+    }
+    option = {
+        name = hsr_eco.200.a
+        custom_tooltip = random_epic_curiosity_get
+        hidden_effect = {
+            random_epic_curiosity_get = yes
+        }
+    }
+}
+country_event = {
+    id = hsr_eco.211
+    title = "hsr_eco.211.name"
+    desc =  hsr_eco.200.desc
+    picture = GFX_evt_treasure_pile
+    is_triggered_only = yes
+    trigger = {
+
+    }
+    option = {
+        name = hsr_eco.200.a
+        give_specimen = { key = liangzidaletou origin = hsr_eco_produce_3_name }
     }
 }
