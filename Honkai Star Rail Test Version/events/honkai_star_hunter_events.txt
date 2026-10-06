@@ -1259,8 +1259,29 @@ country_event = {
         add_resource = {energy = -500}
         hidden_effect = {
             random_list = {
-                80 = {country_event = {id = DOT_SR_Hunter.32}}
+                20 = {country_event = {id = DOT_SR_Hunter.32}}
                 20 = {country_event = {id = DOT_SR_Hunter.31}}
+                20 = { 
+                    modifier = { 
+                        factor = 0
+                        has_country_flag = fail_yinlang_1 
+                    } 
+                    country_event = {id = DOT_SR_Hunter.32}
+                }
+                20 = { 
+                    modifier = { 
+                        factor = 0
+                        has_country_flag = fail_yinlang_2
+                    } 
+                    country_event = {id = DOT_SR_Hunter.32}
+                }
+                20 = { 
+                    modifier = { 
+                        factor = 0
+                        has_country_flag = fail_yinlang_3
+                    } 
+                    country_event = {id = DOT_SR_Hunter.32}
+                }
             }
         }
     }
@@ -1279,6 +1300,9 @@ country_event = {
     }
     immediate = {
         set_country_flag = got_cyber_miner_1
+        remove_country_flag = fail_yinlang_1
+        remove_country_flag = fail_yinlang_2
+        remove_country_flag = fail_yinlang_3
     }
     option = {
         name = DOT_SR_Hunter.31.a
@@ -1295,6 +1319,29 @@ country_event = {
     trigger = {
     }
     immediate = {
+        if = {
+            limit = {
+                NOT = {
+                    has_country_flag = fail_yinlang_1
+                }
+            }
+        }
+        set_country_flag = fail_yinlang_1
+        if = {
+            limit = {
+                has_country_flag = fail_yinlang_1
+            }
+            set_country_flag = fail_yinlang_2
+        }
+        if = {
+            limit = {
+                has_country_flag = fail_yinlang_2
+            }
+            random_list = {
+                50 = {}
+                50 = { set_country_flag = fail_yinlang_3 }
+            }
+        }
     }
     option = {
         name = DOT_SR_Hunter.32.a
@@ -1351,8 +1398,29 @@ country_event = {
         add_resource = {consumer_goods = -2500}
         hidden_effect = {
             random_list = {
-                30 = {country_event = {id = DOT_SR_Hunter.35}}
-                70 = {country_event = {id = DOT_SR_Hunter.36}}
+                25 = {country_event = {id = DOT_SR_Hunter.35}}
+                15 = {country_event = {id = DOT_SR_Hunter.36}}
+                20 = { 
+                    modifier = { 
+                        factor = 0
+                        has_country_flag = failed_yinlang_1 
+                    } 
+                    country_event = {id = DOT_SR_Hunter.36}
+                }
+                20 = { 
+                    modifier = { 
+                        factor = 0
+                        has_country_flag = failed_yinlang_2
+                    } 
+                    country_event = {id = DOT_SR_Hunter.36}
+                }
+                20 = { 
+                    modifier = { 
+                        factor = 0
+                        has_country_flag = failed_yinlang_3
+                    } 
+                    country_event = {id = DOT_SR_Hunter.36}
+                }
             }
         }
     }
@@ -1372,6 +1440,9 @@ country_event = {
     immediate = {
         remove_country_flag = got_cyber_miner_2
         set_country_flag = got_cyber_miner_3
+        remove_country_flag = failed_yinlang_1
+        remove_country_flag = failed_yinlang_2
+        remove_country_flag = failed_yinlang_3
     }
     option = {
         name = DOT_SR_Hunter.35.a
@@ -1387,6 +1458,29 @@ country_event = {
     trigger = {
     }
     immediate = {
+        if = {
+            limit = {
+                NOT = {
+                    has_country_flag = failed_yinlang_1
+                }
+            }
+        }
+        set_country_flag = failed_yinlang_1
+        if = {
+            limit = {
+                has_country_flag = failed_yinlang_1
+            }
+            set_country_flag = failed_yinlang_2
+        }
+        if = {
+            limit = {
+                has_country_flag = failed_yinlang_2
+            }
+            random_list = {
+                50 = {}
+                50 = { set_country_flag = failed_yinlang_3 }
+            }
+        }
     }
     option = {
         name = DOT_SR_Hunter.36.a
