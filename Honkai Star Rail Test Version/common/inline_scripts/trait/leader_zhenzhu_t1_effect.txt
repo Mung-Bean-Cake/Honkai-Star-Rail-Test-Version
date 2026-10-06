@@ -1,0 +1,120 @@
+# common/inline_scripts/zhenzhu_t1_effect.txt
+# 作用域要求：Country（国家）
+# 调用方式：在 xiaoqiaosi.2006 事件的 option 中通过 inline_script = { script = zhenzhu_t1_effect } 调用
+
+# ==========================================
+# 阶段1：清理旧状态（重置上一次的选择）
+# ==========================================
+
+# 1.1 遍历所有拥有的领袖，移除特质1（防止换人后原来的领袖还保留着）
+every_owned_leader = {
+    limit = { has_trait = leader_zhenzhu_t8 }
+    remove_trait = leader_zhenzhu_t8
+}
+
+# 1.2 清理真珠（第八个领袖）的状态
+# 注意：这里假设你在之前的代码中已将真珠保存为 event_target:zhenzhu_leader
+if = {
+    limit = { exists = event_target:zhenzhu_leader }
+   
+        set_variable = { which = num_leader_zhenzhu_t11 value = 0 }
+		set_variable = { which = num_leader_zhenzhu_t12 value = 0 }
+		set_variable = { which = num_leader_zhenzhu_t13 value = 0 }
+    
+}
+
+
+
+# ==========================================
+# 阶段2：读取本次选择并赋予新状态
+# ==========================================
+
+# 2.1 根据国家Flag定位到本次被选中的领袖，并添加特质1
+if = {
+    limit = { has_country_flag = xiaoqiaosi.2006_op_0 }
+    every_owned_leader = {
+        limit = { has_leader_flag = huanyunv }
+        add_trait = leader_zhenzhu_t8
+        save_event_target_as = selected_leader
+    }
+    owner = {
+        set_country_flag = xiaoqiaosi.2006_op_0
+    }
+}
+else_if = {
+    limit = { has_country_flag = xiaoqiaosi.2006_op_1 }
+    every_owned_leader = {
+        limit = { has_leader_flag = yaoguang }
+        add_trait = leader_zhenzhu_t8
+        save_event_target_as = selected_leader
+    }
+    owner = {
+       set_country_flag = xiaoqiaosi.2006_op_1
+    }
+}
+else_if = {
+    limit = { has_country_flag = xiaoqiaosi.2006_op_2 }
+    every_owned_leader = {
+        limit = { has_leader_flag = huohua }
+        add_trait = leader_zhenzhu_t8
+        save_event_target_as = selected_leader
+    }
+    owner = {
+        set_country_flag = xiaoqiaosi.2006_op_2
+    }
+}
+else_if = {
+    limit = { has_country_flag = xiaoqiaosi.2006_op_3 }
+    every_owned_leader = {
+        limit = { has_leader_flag = feiying }
+        add_trait = leader_zhenzhu_t8
+        save_event_target_as = selected_leader
+    }
+    owner = {
+       set_country_flag = xiaoqiaosi.2006_op_3
+    }
+}
+else_if = {
+    limit = { has_country_flag = xiaoqiaosi.2006_op_4 }
+    every_owned_leader = {
+        limit = { has_leader_flag = langzun }
+        add_trait = leader_zhenzhu_t8
+        save_event_target_as = selected_leader
+    }
+    owner = {
+       set_country_flag = xiaoqiaosi.2006_op_4
+    }
+}
+else_if = {
+    limit = { has_country_flag = xiaoqiaosi.2006_op_5 }
+    every_owned_leader = {
+        limit = { has_leader_flag = shuishajin }
+        add_trait = leader_zhenzhu_t8
+        save_event_target_as = selected_leader
+    }
+    owner = {
+      set_country_flag = xiaoqiaosi.2006_op_5
+    }
+}
+
+# 2.2 根据被选中领袖的职业，为真珠添加特质2并重新判定变量
+if = {
+    limit = { exists = event_target:selected_leader }
+    
+    # 判定为指挥官
+    if = {
+        limit = { event_target:selected_leader = { leader_class = commander } }
+        set_variable = { which = num_leader_zhenzhu_t11 value = 1 }
+    }
+    # 判定为行政官（官方）
+    else_if = {
+        limit = { event_target:selected_leader = { leader_class = official } }
+        set_variable = { which = num_leader_zhenzhu_t12 value = 1 }
+    }
+    # 判定为科学家
+    else_if = {
+        limit = { event_target:selected_leader = { leader_class = scientist } }
+        set_variable = { which = num_leader_zhenzhu_t13 value = 1 }
+    }
+}
+

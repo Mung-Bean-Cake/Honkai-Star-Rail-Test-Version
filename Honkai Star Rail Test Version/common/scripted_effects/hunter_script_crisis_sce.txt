@@ -1,8 +1,29 @@
 fengrao_middle_crisis_effect = {
+	create_species = {
+		name = fengraomin
+		class = fengraomin
+		blocked_archetypes = {
+			fengraomin
+		}
+		portrait = avi4
+		traits = {
+			trait = "trait_pc_habitat_preference"
+			trait = "trait_extremely_adaptive"
+			trait = "trait_rapid_breeders"
+			trait = "trait_nomadic"
+			trait = trait_fengraomin_1
+			trait = trait_fengraomin_2
+			trait = trait_fengraomin_3
+			trait = trait_fengraomin_4
+			trait = trait_fengraomin_5
+			trait = trait_crucible_community
+		}
+		effect = {save_event_target_as = yuhuang_species}
+	}
 	create_country = {
 		name = yuhuang_fengrao_country
 		name_list = DOT_SR_fengraomin
-		species = event_target:fengraomin_species
+		species = event_target:yuhuang_species
 		type = fengraomin_crisis
 		civics = { civic = civic_great_khans_vision }
 		origin = origin_common_ground
@@ -29,24 +50,20 @@ fengrao_middle_crisis_effect = {
 		ignore_initial_colony_error = yes
 		effect = {
 			save_global_event_target_as = yuhuang_fengrao_country
+			save_global_event_target_as = crisis_country
 			set_global_flag = fengrao_crisis_started
 			set_global_flag = fengrao_crisis_ongoing
+			set_policy = {
+				policy = war_philosophy
+				option = no_retreat_doctrine
+				cooldown = no
+			}
 			random_system = {
 				limit = { has_star_flag = fengraomin_system }
 				create_starbase = {
-					size = starbase_citadel
+					size = "starbase_marauder"
 					owner = event_target:yuhuang_fengrao_country
 				}
-			}
-		}
-	}
-	if = {
-		limit = {
-			exists = event_target:fengraomin_country
-		}
-		event_target:yuhuang_fengrao_country = {
-			annex_country = {
-				target = event_target:fengraomin_country
 			}
 		}
 	}
@@ -55,31 +72,39 @@ fengrao_middle_crisis_effect = {
 		random_system_planet = {
 			limit = { has_planet_flag = yuhuang_source }
 			save_global_event_target_as = yuhuang_planet_point
-			set_carrier_flag = yuhuang_planet_point
+			set_planet_flag = yuhuang_planet_point
 		}
 	}
 	event_target:yuhuang_fengrao_country = {
-		create_ship_design = { design = "NAME_fengrao_Transport" }
+		create_ship_design = { design = "NAME_middle_fengrao_leader" }
 		add_ship_design = last_created_design
-		create_ship_design = { design = "NAME_fengrao_Builder" }
+		create_ship_design = { design = "NAME_middle_fengrao_commander" }
+		add_ship_design = last_created_design
+		create_ship_design = { design = "NAME_middle_fengrao_emanator" }
+		add_ship_design = last_created_design
+		create_ship_design = { design = "NAME_Ancestral_Glory" }
+		add_ship_design = last_created_design
+		create_ship_design = { design = "NAME_shouxing" }
+		add_ship_design = last_created_design
+		create_ship_design = { design = "NAME_Dragonspawn" }
 		add_ship_design = last_created_design
 		create_leader = {
 			class = commander
-			species = owner_main_species
+			species = event_target:fengraomin_species
 			name = yuhuang
 			skill = 10
 			leader_age_min = 4020
 			leader_age_max = 6000
-			randomize_traits = no
+			randomize_traits = yes
 			traits = {
-				trait = leader_trait_ruler_great_khan
-				trait = leader_trait_master_gunner
-				trait = subclass_commander_admiral
-				trait = leader_trait_gunship_specialization_2
+				trait = trait_yuhuang_juryrigger_2
+				trait = trait_yuhuang_tracking_2
+				trait = trait_yuhuang_shield_repair_2
 				trait = leader_trait_wrecker_2
-				trait = leader_trait_reckless_2
+				trait = leader_trait_ruler_great_khan
 				trait = leader_trait_artillerist_2
-				trait = leader_trait_demolisher_2
+				trait = trait_yuhuang_armer_harder_2
+				trait = leader_trait_chosen
 			}
 		}
 		last_created_leader = {
@@ -87,17 +112,17 @@ fengrao_middle_crisis_effect = {
 			save_global_event_target_as = yuhuang_ruler
 		}
 		assign_leader = last_created_leader
-		set_timed_global_flag = { flag = khan_no_die days = 18000 }
 		clone_leader = {
 			target = event_target:yuhuang_ruler
 			class = commander
-			tier = leader_tier_legendary
 			skill = 10
+			leader_age_min = 4000
+			leader_age_max = 12000
 			randomize_traits = yes
 			effect = {
 				remove_trait = leader_trait_ruler_great_khan
 				add_trait = {
-					trait = leader_trait_great_khan
+					trait = trait_yuhuang_war_hoping
 				}
 				save_event_target_as = yuhuang_fleet_admiral
 				set_leader_flag = yuhuang
@@ -106,19 +131,20 @@ fengrao_middle_crisis_effect = {
 		}
 		create_leader = {
 			class = commander
-			species = owner_main_species
+			species = event_target:fengraomin_species
 			name = fengraoxuanlu
 			skill = 7
 			leader_age_min = 1200
 			leader_age_max = 3200
 			randomize_traits = yes
 			traits = {
-				trait = leader_trait_mercenary_warrior
-				trait = leader_trait_master_gunner
+				trait = trait_yuhuang_juryrigger
+				trait = trait_yuhuang_tracking
 				trait = subclass_commander_admiral
 				trait = leader_trait_gunship_specialization_2
-				trait = leader_alan_t2
-				trait = leader_trait_reckless_2
+				trait = trait_yuhuang_shield_repair_2
+				trait = trait_yuhuang_leader_hoping
+				trait = trait_yuhuang_armer_harder_2
 				trait = leader_trait_artillerist_2
 				trait = leader_trait_chosen
 			}
@@ -126,29 +152,6 @@ fengrao_middle_crisis_effect = {
 		last_created_leader = {
 			set_leader_flag = fengraoxuanlu_leader
 			save_global_event_target_as = fengraoxuanlu_fleet_admiral
-		}
-		create_leader = {
-			class = commander
-			species = owner_main_species
-			name = liaoyuan
-			skill = 8
-			leader_age_min = 1600
-			leader_age_max = 3800
-			randomize_traits = yes
-			traits = {
-				trait = leader_trait_master_gunner
-				trait = subclass_commander_admiral
-				trait = leader_trait_gunship_specialization_2
-				trait = leader_langzun_t2
-				trait = leader_trait_chosen
-				trait = leader_trait_artillerist_2
-				trait = leader_alan_t4
-				trait = leader_alan_t5
-			}
-		}
-		last_created_leader = {
-			set_leader_flag = liaoyuan_leader
-			save_global_event_target_as = liaoyuan_fleet_admiral
 		}
 		create_1st_yuhuang_fleet = yes
 		create_commander_yuhuang_fleet_1 = yes
@@ -158,20 +161,15 @@ fengrao_middle_crisis_effect = {
 		create_leader_yuhuang_fleet = yes
 		create_leader_yuhuang_fleet = yes
 		create_leader_yuhuang_fleet = yes
-		create_yuhuang_armies = yes
-		create_yuhuang_armies = yes
-		create_yuhuang_armies = yes
-		create_yuhuang_armies = yes
-		create_yuhuang_armies = yes
-		create_fengrao_constructors = yes
-		create_fengrao_constructors = yes
-		create_fengrao_constructors = yes
-		create_fengrao_constructors = yes
-		country_event = { id = marauder.520 days = 180 } # 循环增加舰队，后面写
-		every_playable_country = {
-			establish_communications_no_message = root
-			country_event = { id = marauder.501 }
-		}	
+		country_event = { id = script_crisis.6 days = 150 } # 循环增加舰队，后面写
+	}
+	if = {
+		limit = {
+			exists = event_target:fengraomin_country
+		}
+		country_event = {
+			id = script_crisis.4
+		}
 	}
 }
 create_1st_yuhuang_fleet = {
@@ -180,16 +178,7 @@ create_1st_yuhuang_fleet = {
 		effect = {
 			set_owner = event_target:yuhuang_fengrao_country
 			while = {
-				count = 90
-				create_ship = {
-					name = random
-					design = NAME_Black_Earl
-					prefix = no
-					graphical_culture = "pirate_01"
-				}
-			}
-			while = {
-				count = 15
+				count = 45
 				create_ship = {
 					name = random
 					design = NAME_middle_fengrao_leader
@@ -219,12 +208,93 @@ create_1st_yuhuang_fleet = {
 				}
 			}
 			assign_leader = event_target:yuhuang_fleet_admiral
+			save_event_target_as = yuhuang_fleet
 			set_fleet_flag = yuhuang_fleet
 			set_location = {
 				target = event_target:yuhuang_planet_point
 				distance = 30
 				angle = random
 			}
+			set_fleet_stance = aggressive
+			set_aggro_range = 800
+			set_aggro_range_measure_from = return_point
+			fleet_event = { id = crisis_fleet_action.1 days = 12 random = 8 }
+		}
+		settings = {
+			can_upgrade = no
+			can_disband = no
+			can_change_composition = no
+			can_change_leader = no
+			uses_naval_capacity = no
+		}
+	}
+}
+create_2nd_yuhuang_fleet = {
+	create_leader = {
+		class = commander
+		species = event_target:fengraomin_species
+		name = yuhuang
+		skill = 10
+		leader_age_min = 5100
+		leader_age_max = 6300
+		randomize_traits = yes
+		traits = {
+			trait = trait_yuhuang_juryrigger_2
+			trait = trait_yuhuang_tracking_2
+			trait = trait_yuhuang_shield_repair_2
+			trait = leader_trait_wrecker_2
+			trait = trait_yuhuang_leader_hoping
+			trait = leader_trait_artillerist_2
+			trait = trait_yuhuang_armer_harder_2
+			trait = leader_trait_chosen
+			trait = leader_feiying_t2
+			trait = leader_feiying_t4
+			trait = leader_feiying_t5
+		}
+		effect = {
+			set_leader_flag = yuhuang
+		}
+	}
+	create_fleet = {
+		name = "NAME_Chosen_of_yuhuang"
+		effect = {
+			set_owner = event_target:yuhuang_fengrao_country
+			while = {
+				count = 80
+				create_ship = {
+					name = random
+					design = NAME_middle_fengrao_leader
+					prefix = no
+					graphical_culture = "pirate_01"
+				}
+			}
+			while = {
+				count = 40
+				create_ship = {
+					name = random
+					design = "NAME_Ancestral_Glory"
+					prefix = no
+					graphical_culture = "pirate_01"
+				}
+			}
+			create_ship = {
+				name = yuhuang
+				design = NAME_middle_fengrao_emanator
+				prefix = no
+				graphical_culture = "pirate_01"
+			}
+			assign_leader = last_created_leader
+			save_event_target_as = yuhuang_fleet
+			set_fleet_flag = yuhuang_fleet
+			set_location = {
+				target = event_target:yuhuang_planet_point
+				distance = 120
+				angle = random
+			}
+			set_fleet_stance = aggressive
+			set_aggro_range = 800
+			set_aggro_range_measure_from = return_point
+			fleet_event = { id = crisis_fleet_action.1 days = 12 random = 8 }
 		}
 		settings = {
 			can_upgrade = no
@@ -236,24 +306,39 @@ create_1st_yuhuang_fleet = {
 	}
 }
 create_commander_yuhuang_fleet_1 = {
+	create_leader = {
+		class = commander
+		species = event_target:fengraomin_species
+		name = liaoyuan
+		skill = 8
+		leader_age_min = 1600
+		leader_age_max = 4000
+		randomize_traits = yes
+		traits = {
+			trait = trait_yuhuang_tracking
+			trait = trait_yuhuang_juryrigger
+			trait = leader_trait_gunship_specialization_2
+			trait = trait_yuhuang_shield_repair_2
+			trait = trait_yuhuang_armer_harder
+			trait = leader_trait_chosen
+			trait = leader_trait_artillerist_2
+			trait = trait_yuhuang_leader_hoping
+			trait = leader_alan_t5
+		}
+	}
+	last_created_leader = {
+		set_leader_flag = liaoyuan_leader
+		save_global_event_target_as = liaoyuan_fleet_admiral
+	}
 	create_fleet = {
 		name = "NAME_Chosen_of_liaoyuan"
 		effect = {
 			set_owner = event_target:yuhuang_fengrao_country
 			while = {
-				count = 10
-				create_ship = {
-					name = random
-					design = NAME_middle_fengrao_leader
-					prefix = no
-					graphical_culture = "pirate_01"
-				}
-			}
-			while = {
 				count = 20
 				create_ship = {
 					name = random
-					design = "NAME_Dragonspawn"
+					design = NAME_middle_fengrao_leader
 					prefix = no
 					graphical_culture = "pirate_01"
 				}
@@ -268,7 +353,7 @@ create_commander_yuhuang_fleet_1 = {
 				}
 			}
 			while = {
-				count = 10
+				count = 40
 				create_ship = {
 					name = random
 					design = "NAME_Ancestral_Glory"
@@ -288,6 +373,10 @@ create_commander_yuhuang_fleet_1 = {
 				distance = 60
 				angle = random
 			}
+			set_fleet_stance = aggressive
+			set_aggro_range = 800
+			set_aggro_range_measure_from = return_point
+			fleet_event = { id = crisis_fleet_action.1 days = 12 random = 8 }
 		}
 		settings = {
 			uses_naval_capacity = no
@@ -302,7 +391,7 @@ create_commander_yuhuang_fleet_2 = {
 		effect = {
 			set_owner = event_target:yuhuang_fengrao_country
 			while = {
-				count = 12
+				count = 25
 				create_ship = {
 					name = random
 					design = NAME_middle_fengrao_leader
@@ -311,16 +400,7 @@ create_commander_yuhuang_fleet_2 = {
 				}
 			}
 			while = {
-				count = 12
-				create_ship = {
-					name = random
-					design = "NAME_Dragonspawn"
-					prefix = no
-					graphical_culture = "pirate_01"
-				}
-			}
-			while = {
-				count = 200
+				count = 180
 				create_ship = {
 					name = random
 					design = NAME_shouxing
@@ -329,7 +409,7 @@ create_commander_yuhuang_fleet_2 = {
 				}
 			}
 			while = {
-				count = 10
+				count = 18
 				create_ship = {
 					name = random
 					design = "NAME_Ancestral_Glory"
@@ -349,6 +429,72 @@ create_commander_yuhuang_fleet_2 = {
 				distance = 60
 				angle = random
 			}
+			set_fleet_stance = aggressive
+			set_aggro_range = 800
+			set_aggro_range_measure_from = return_point
+			fleet_event = { id = crisis_fleet_action.1 days = 12 random = 8 }
+		}
+		settings = {
+			uses_naval_capacity = no
+			can_upgrade = no
+			can_change_composition = no
+		}
+	}
+}
+create_extra_yuhuang_fleet = {
+	create_leader = {
+		class = commander
+		species = event_target:fengraomin_species
+		name = random
+		skill = 6
+		leader_age_min = 480
+		leader_age_max = 1680
+		traits = {
+			0 = trait_yuhuang_tracking
+			0 = leader_alan_t1
+			0 = leader_trait_chosen
+			0 = trait_yuhuang_shield_repair
+			0 = trait_yuhuang_armer_harder
+			0 = trait_yuhuang_leader_hoping
+		}
+	}
+	create_fleet = {
+		effect = {
+			set_owner = event_target:yuhuang_fengrao_country
+			while = {
+				count = 20
+				create_ship = {
+					name = random
+					design = NAME_middle_fengrao_leader
+					prefix = no
+					graphical_culture = "pirate_01"
+				}
+			}
+			while = {
+				count = 100
+				create_ship = {
+					name = random
+					design = NAME_shouxing
+					prefix = no
+					graphical_culture = "pirate_01"
+				}
+			}
+			create_ship = {
+				name = random
+				design = NAME_middle_fengrao_commander
+				prefix = no
+				graphical_culture = "pirate_01"
+			}
+			assign_leader = last_created_leader
+			set_location = {
+				target = event_target:yuhuang_fleet
+				distance = 60
+				angle = random
+			}
+			set_fleet_stance = aggressive
+			set_aggro_range = 800
+			set_aggro_range_measure_from = return_point
+			fleet_event = { id = crisis_fleet_action.1 days = 12 random = 8 }
 		}
 		settings = {
 			uses_naval_capacity = no
@@ -360,22 +506,86 @@ create_commander_yuhuang_fleet_2 = {
 create_leader_yuhuang_fleet = {
 	create_leader = {
 		class = commander
-		species = owner_main_species
+		species = event_target:fengraomin_species
 		name = random
 		skill = 5
 		leader_age_min = 400
 		leader_age_max = 1500
 		traits = {
-			0 = leader_trait_mercenary_warrior
+			0 = trait_yuhuang_tracking
 			0 = leader_alan_t1
 			0 = leader_trait_chosen
+			0 = trait_yuhuang_shield_repair
+			0 = trait_yuhuang_armer_harder
 		}
 	}
 	create_fleet = {
 		effect = {
 			set_owner = event_target:yuhuang_fengrao_country
 			while = {
+				count = 15
+				create_ship = {
+					name = random
+					design = NAME_middle_fengrao_leader
+					prefix = no
+					graphical_culture = "pirate_01"
+				}
+			}
+			while = {
+				count = 80
+				create_ship = {
+					name = random
+					design = NAME_shouxing
+					prefix = no
+					graphical_culture = "pirate_01"
+				}
+			}
+			while = {
 				count = 10
+				create_ship = {
+					name = random
+					design = "NAME_Ancestral_Glory"
+					prefix = no
+					graphical_culture = "pirate_01"
+				}
+			}
+			assign_leader = last_created_leader
+			set_location = {
+				target = event_target:yuhuang_fleet
+				distance = 60
+				angle = random
+			}
+			set_fleet_stance = aggressive
+			set_aggro_range = 800
+			set_aggro_range_measure_from = return_point
+			fleet_event = { id = crisis_fleet_action.1 days = 12 random = 8 }
+		}
+		settings = {
+			uses_naval_capacity = no
+			can_upgrade = no
+			can_change_composition = no
+		}
+	}
+}
+create_normal_yuhuang_fleet = {
+	create_leader = {
+		class = commander
+		species = event_target:fengraomin_species
+		name = random
+		skill = 5
+		leader_age_min = 300
+		leader_age_max = 1200
+		traits = {
+			0 = trait_yuhuang_tracking
+			0 = leader_trait_chosen
+			0 = trait_yuhuang_shield_repair
+		}
+	}
+	create_fleet = {
+		effect = {
+			set_owner = event_target:yuhuang_fengrao_country
+			while = {
+				count = 5
 				create_ship = {
 					name = random
 					design = NAME_middle_fengrao_leader
@@ -393,7 +603,7 @@ create_leader_yuhuang_fleet = {
 				}
 			}
 			while = {
-				count = 50
+				count = 40
 				create_ship = {
 					name = random
 					design = NAME_shouxing
@@ -401,21 +611,16 @@ create_leader_yuhuang_fleet = {
 					graphical_culture = "pirate_01"
 				}
 			}
-			while = {
-				count = 5
-				create_ship = {
-					name = random
-					design = "NAME_Ancestral_Glory"
-					prefix = no
-					graphical_culture = "pirate_01"
-				}
-			}
 			assign_leader = last_created_leader
 			set_location = {
-				target = event_target:yuhuang_planet_point
+				target = event_target:yuhuang_fleet
 				distance = 60
 				angle = random
 			}
+			set_fleet_stance = aggressive
+			set_aggro_range = 800
+			set_aggro_range_measure_from = return_point
+			fleet_event = { id = crisis_fleet_action.1 days = 12 random = 8 }
 		}
 		settings = {
 			uses_naval_capacity = no
@@ -424,56 +629,1253 @@ create_leader_yuhuang_fleet = {
 		}
 	}
 }
-create_yuhuang_armies = {
-	create_leader = {
-		class = commander
-		species = owner_main_species
-		name = random
-		skill = 5
-	}
-	create_fleet = {
-		effect = {
-			set_owner = event_target:yuhuang_fengrao_country
-			while = {
-				count = 30
-				create_army_transport = {
-					ship_name = "NAME_fengrao_Transport"
-					graphical_culture = "mammalian_01"
-					army_type = "assault_army"
-					species = owner_main_species
-				}
-			}
-			set_location = {
-				target = event_target:yuhuang_planet_point
-				distance = 60
-				angle = random
-			}
-		}
-	}
-	last_created_army = { assign_leader = last_created_leader }
-}
-create_fengrao_constructors = {
+crisis_fleet_action = {
+	optimize_memory
+	#在当前星系寻找是否存在敌对舰队
 	if = {
 		limit = {
-			event_target:yuhuang_fengrao_country = {
-				count_controlled_ship = {
-					limit = { is_ship_size = constructor }
-					count < 8
+			root = {
+				exists = solar_system
+				solar_system = { any_ship_in_system = {
+					exists = owner
+					owner = { is_hostile = event_target:crisis_country }
+					is_disabled = no is_ship_class = shipclass_military
+				} }
+			}
+		}
+		root = {
+			solar_system = {
+				random_fleet_in_system = {
+					limit = {
+						exists = owner
+						owner = { is_hostile = event_target:crisis_country }
+						any_owned_ship = { is_disabled = no is_ship_class = shipclass_military }
+					}
+					prevprev = { auto_follow_fleet = { target = prev attack_fleet = yes } }
 				}
 			}
 		}
-		create_fleet = {
-			effect = {
-				set_owner = event_target:yuhuang_fengrao_country
-				create_ship = {
-					name = random
-					design = "NAME_fengrao_Builder"
+	}
+	#在当前星系寻找是否存在无己方单位的敌对星球
+	else_if = {
+		limit = {
+			root = {
+				exists = solar_system
+				solar_system = {
+					any_system_planet = {
+						exists = controller
+						NOT = {
+							controller = {
+								is_same_value = event_target:crisis_country
+							}
+						}
+						owner = { is_hostile = event_target:crisis_country }
+						OR = {
+							is_colony = yes
+							is_under_colonization = yes
+						}
+						count_fleet_in_orbit = {
+							count = 0
+							limit = {
+								owner = { is_same_value = event_target:crisis_country }
+								is_ship_class = shipclass_military
+							}
+						}
+					}
 				}
-				set_location = {
-					target = event_target:yuhuang_planet_point
-					distance = 20
-					angle = random
+			}
+		}
+		root = {
+			solar_system = {
+				random_system_planet = {
+					limit = {
+						exists = controller
+						NOT = {
+							controller = {
+								is_same_value = event_target:crisis_country
+							}
+						}
+						owner = { is_hostile = event_target:crisis_country }
+						OR = {
+							is_colony = yes
+							is_under_colonization = yes
+						}
+						count_fleet_in_orbit = {
+							count = 0
+							limit = {
+								owner = { is_same_value = event_target:crisis_country }
+								is_ship_class = shipclass_military
+							}
+						}
+					}
+					prevprev = { auto_move_to_planet = { target = prev clear_auto_move_on_arrival = yes } }
 				}
+			}
+		}
+	}
+	#在当前星系寻找是否存在敌对登陆船
+	else_if = {
+		limit = {
+			root = {
+				exists = solar_system
+				solar_system = { any_ship_in_system = {
+					exists = owner
+					owner = { is_hostile = event_target:crisis_country }
+					is_disabled = no is_ship_class = shipclass_transport
+				} }
+			}
+		}
+		root = {
+			solar_system = {
+				random_fleet_in_system = {
+					limit = {
+						exists = owner
+						owner = { is_hostile = event_target:crisis_country }
+						any_owned_ship = { is_disabled = no is_ship_class = shipclass_transport }
+					}
+					prevprev = { auto_follow_fleet = { target = prev attack_fleet = yes } }
+				}
+			}
+		}
+	}
+	#在周围星系寻找是否存在敌对单位（空间站，舰队，殖民地，登陆船）
+	else_if = {
+		limit = {
+			solar_system = { any_neighbor_system = { OR = {
+				AND = {
+					exists = starbase
+					starbase = { exists = owner owner = { is_hostile = event_target:crisis_country } }
+				}
+				any_ship_in_system = {
+					exists = owner
+					owner = { is_hostile = event_target:crisis_country }
+					is_disabled = no is_ship_class = shipclass_military
+				}
+				any_system_planet = {
+					exists = controller
+					NOT = {
+						controller = {
+							is_same_value = event_target:crisis_country
+						}
+					}
+					owner = { is_hostile = event_target:crisis_country }
+					OR = {
+						is_colony = yes
+						is_under_colonization = yes
+					}
+					count_fleet_in_orbit = {
+						count = 0
+						limit = {
+							owner = { is_same_value = event_target:crisis_country }
+							is_ship_class = shipclass_military
+						}
+					}
+				}
+				any_ship_in_system = {
+					exists = owner
+					owner = { is_hostile = event_target:crisis_country }
+					is_disabled = no is_ship_class = shipclass_transport
+				}
+			} } }
+		}
+		solar_system = { random_neighbor_system = {
+			limit = { OR = {
+				AND = {
+					exists = starbase
+					starbase = { exists = owner owner = { is_hostile = event_target:crisis_country } }
+				}
+				any_ship_in_system = {
+					exists = owner
+					owner = { is_hostile = event_target:crisis_country }
+					is_disabled = no is_ship_class = shipclass_military
+				}
+				any_system_planet = {
+					exists = controller
+					NOT = {
+						controller = {
+							is_same_value = event_target:crisis_country
+						}
+					}
+					owner = { is_hostile = event_target:crisis_country }
+					OR = {
+						is_colony = yes
+						is_under_colonization = yes
+					}
+					count_fleet_in_orbit = {
+						count = 0
+						limit = {
+							owner = { is_same_value = event_target:crisis_country }
+							is_ship_class = shipclass_military
+						}
+					}
+				}
+				any_ship_in_system = {
+					exists = owner
+					owner = { is_hostile = event_target:crisis_country }
+					is_disabled = no is_ship_class = shipclass_transport
+				}
+			} }
+			system_star = { prevprevprev = { auto_move_to_planet = { target = prev clear_auto_move_on_arrival = yes } } }
+		} }
+	}
+	#自动索敌，看看哪个倒霉蛋会被锁定~
+	else = {
+		random_list = {
+			#50%概率寻找30步内是否存在有敌对星球的敌对星系
+			50 = {
+				closest_system = {
+					max_steps = 30
+					limit = {
+						NOT = { is_same_value = root.solar_system }
+						OR = {
+							AND = {
+								exists = starbase
+								starbase = {
+									exists = owner
+									owner = { is_hostile = event_target:crisis_country }
+								}
+							}
+							any_system_planet = {
+								exists = controller
+								NOT = {
+									controller = {
+										is_same_value = event_target:crisis_country
+									}
+								}
+								owner = { is_hostile = event_target:crisis_country }
+								OR = {
+									is_colony = yes
+									is_under_colonization = yes
+								}
+								count_fleet_in_orbit = {
+									count = 0
+									limit = {
+										owner = { is_same_value = event_target:crisis_country }
+										is_ship_class = shipclass_military
+									}
+								}
+							}
+						}
+						prev = { can_access_system = prev }
+					}
+					save_event_target_as = nearly_can_attack_fleet_target
+				}
+				#若星系内存在有效目标，就90%概率走过去，10%概率飞过去。如果不能走就直接飞起来（诶嘿~）
+				if = {
+					limit = { exists = event_target:nearly_can_attack_fleet_target }
+					event_target:nearly_can_attack_fleet_target = {
+						if = {
+							limit = {
+								any_system_planet = {
+									exists = controller
+									NOT = {
+										controller = {
+											is_same_value = event_target:crisis_country
+										}
+									}
+									owner = { is_hostile = event_target:crisis_country }
+									OR = {
+										is_colony = yes
+										is_under_colonization = yes
+									}
+									count_fleet_in_orbit = {
+										count = 0
+										limit = {
+											owner = { is_same_value = event_target:crisis_country }
+											is_ship_class = shipclass_military
+										}
+									}
+								}
+							}
+							random_system_planet = {
+								limit = {
+									exists = controller
+									NOT = {
+										controller = {
+											is_same_value = event_target:crisis_country
+										}
+									}
+									owner = { is_hostile = event_target:crisis_country }
+									OR = {
+										is_colony = yes
+										is_under_colonization = yes
+									}
+									count_fleet_in_orbit = {
+										count = 0
+										limit = {
+											owner = { is_same_value = event_target:crisis_country }
+											is_ship_class = shipclass_military
+										}
+									}
+								}
+								crisis_jump_attitude_planet_fleet_action = yes
+							}
+						}
+						else = { system_star = { prevprev = { auto_move_to_planet = { target = prev clear_auto_move_on_arrival = yes } } } }
+					}
+				}
+				#找不到目标，再找一次
+				else = {
+					#开始找目标
+					closest_system = {
+						max_steps = 30
+						use_bypasses = yes
+						limit = {
+							NOT = { is_same_value = root.solar_system }
+							OR = {
+								AND = {
+									exists = starbase
+									starbase = {
+										exists = owner
+										owner = { is_hostile = event_target:crisis_country }
+									}
+								}
+								any_system_planet = {
+									exists = controller
+									NOT = {
+										controller = {
+											is_same_value = event_target:crisis_country
+										}
+									}
+									owner = { is_hostile = event_target:crisis_country }
+									OR = {
+										is_colony = yes
+										is_under_colonization = yes
+									}
+									count_fleet_in_orbit = {
+										count = 0
+										limit = {
+											owner = { is_same_value = event_target:crisis_country }
+											is_ship_class = shipclass_military
+										}
+									}
+								}
+							}
+						}
+						save_event_target_as = nearly_can_attack_fleet_target
+					}
+					#若星系内存在有效目标，就90%概率走过去，10%概率飞过去。如果不能走就直接飞起来（诶嘿~）
+					if = {
+						limit = { exists = event_target:nearly_can_attack_fleet_target }
+						event_target:nearly_can_attack_fleet_target = {
+							if = {
+								limit = {
+									any_system_planet = {
+										exists = controller
+										NOT = {
+											controller = {
+												is_same_value = event_target:crisis_country
+											}
+										}
+										owner = { is_hostile = event_target:crisis_country }
+										OR = {
+											is_colony = yes
+											is_under_colonization = yes
+										}
+										count_fleet_in_orbit = {
+											count = 0
+											limit = {
+												owner = { is_same_value = event_target:crisis_country }
+												is_ship_class = shipclass_military
+											}
+										}
+									}
+								}
+								random_system_planet = {
+									limit = {
+										exists = controller
+										NOT = {
+											controller = {
+												is_same_value = event_target:crisis_country
+											}
+										}
+										owner = { is_hostile = event_target:crisis_country }
+										OR = {
+											is_colony = yes
+											is_under_colonization = yes
+										}
+										count_fleet_in_orbit = {
+											count = 0
+											limit = {
+												owner = { is_same_value = event_target:crisis_country }
+												is_ship_class = shipclass_military
+											}
+										}
+									}
+									crisis_jump_attitude_planet_fleet_action = yes
+								}
+							}
+							else = { system_star = { prevprev = { auto_move_to_planet = { target = prev clear_auto_move_on_arrival = yes } } } }
+						}
+					}
+					#找不到目标，睡一觉捏~
+					else = { crisis_fleet_wandering_action = yes }
+				}
+			}
+			25 = {
+				#25%概率寻找70步内是否存在有敌对舰船或敌对运输船的敌对星系
+				closest_system = {
+					max_steps = 70
+					use_bypasses = yes
+					limit = {
+						NOT = { is_same_value = root.solar_system }
+						OR = {
+							any_ship_in_system = {
+								exists = owner
+								owner = { is_hostile = event_target:crisis_country }
+								is_disabled = no is_ship_class = shipclass_military
+							}
+							any_ship_in_system = {
+								exists = owner
+								owner = { is_hostile = event_target:crisis_country }
+								is_disabled = no is_ship_class = shipclass_transport
+							}	
+						}
+						prev = { can_access_system = prev }
+					}
+					save_event_target_as = nearly_can_attack_fleet_target
+				}
+				#若星系内存在有效目标，就70%概率走过去，30%概率飞过去。如果不能走就直接飞起来（诶嘿~）
+				if = {
+					limit = { exists = event_target:nearly_can_attack_fleet_target }
+					event_target:nearly_can_attack_fleet_target = {
+						random_fleet_in_system = {
+							limit = {
+								exists = owner
+								owner = { is_hostile = event_target:crisis_country }
+								OR = {
+									any_owned_ship = { is_disabled = no is_ship_class = shipclass_military }
+									any_owned_ship = { is_disabled = no is_ship_class = shipclass_transport }
+								}
+							}
+							crisis_jump_fleet_attack_action = yes
+						}
+					}
+				}
+				#找不到目标，再找一次
+				else = {
+					closest_system = {
+						max_steps = 70
+						limit = {
+							NOT = { is_same_value = root.solar_system }
+							OR = {
+								any_ship_in_system = {
+									exists = owner
+									owner = { is_hostile = event_target:crisis_country }
+									is_disabled = no is_ship_class = shipclass_military
+								}
+								any_ship_in_system = {
+									exists = owner
+									owner = { is_hostile = event_target:crisis_country }
+									is_disabled = no is_ship_class = shipclass_transport
+								}	
+							}
+						}
+						save_event_target_as = nearly_can_attack_fleet_target
+					}
+					#若星系内存在有效目标，就70%概率走过去，30%概率飞过去。如果不能走就直接飞起来（诶嘿~）
+					if = {
+						limit = { exists = event_target:nearly_can_attack_fleet_target }
+						event_target:nearly_can_attack_fleet_target = {
+							random_fleet_in_system = {
+								limit = {
+									exists = owner
+									owner = { is_hostile = event_target:crisis_country }
+									OR = {
+										any_owned_ship = { is_disabled = no is_ship_class = shipclass_military }
+										any_owned_ship = { is_disabled = no is_ship_class = shipclass_transport }
+									}
+								}
+								crisis_jump_fleet_attack_action = yes
+							}
+						}
+					}
+					#找不到目标，睡一觉捏~
+					else = { crisis_fleet_wandering_action = yes }
+				}
+			}
+			25 = {
+				#25%概率寻找10跳内是否存在有敌对舰船或敌对运输船的敌对星系
+				random_system = {
+					limit = {
+						NOT = { is_same_value = root.solar_system }
+						distance = {
+							source = root.solar_system
+							type = hyperlane
+							use_bypasses = yes
+							min_jumps = 1
+							max_jumps = 10
+						}
+						OR = {
+							any_ship_in_system = {
+								exists = owner
+								owner = { is_hostile = event_target:crisis_country }
+								is_disabled = no is_ship_class = shipclass_military
+							}
+							any_ship_in_system = {
+								exists = owner
+								owner = { is_hostile = event_target:crisis_country }
+								is_disabled = no is_ship_class = shipclass_transport
+							}
+						}
+						prev = { can_access_system = prev }
+					}
+					save_event_target_as = nearly_can_attack_fleet_target
+				}
+				#若星系内存在有效目标，就70%概率走过去，30%概率飞过去。如果不能走就直接飞起来（诶嘿~）
+				if = {
+					limit = { exists = event_target:nearly_can_attack_fleet_target }
+					event_target:nearly_can_attack_fleet_target = {
+						random_fleet_in_system = {
+							limit = {
+								exists = owner
+								owner = { is_hostile = event_target:crisis_country }
+								OR = {
+									any_owned_ship = { is_disabled = no is_ship_class = shipclass_military }
+									any_owned_ship = { is_disabled = no is_ship_class = shipclass_transport }
+								}
+							}
+							crisis_jump_fleet_attack_action = yes
+						}
+					}
+				}
+				#找不到目标，再找一次
+				else = {
+					random_system = {
+						limit = {
+							NOT = { is_same_value = root.solar_system }
+							distance = {
+								source = root.solar_system
+								type = hyperlane
+								use_bypasses = yes
+								min_jumps = 1
+								max_jumps = 10
+							}
+							OR = {
+								any_ship_in_system = {
+									exists = owner
+									owner = { is_hostile = event_target:crisis_country }
+									is_disabled = no is_ship_class = shipclass_military
+								}
+								any_ship_in_system = {
+									exists = owner
+									owner = { is_hostile = event_target:crisis_country }
+									is_disabled = no is_ship_class = shipclass_transport
+								}
+							}
+						}
+						save_event_target_as = nearly_can_attack_fleet_target
+					}
+					#如果星系内具备有效目标，就70%概率走过去，30%概率飞过去（飞过去必须吃debuff）
+					if = {
+						limit = { exists = event_target:nearly_can_attack_fleet_target }
+						event_target:nearly_can_attack_fleet_target = {
+							random_fleet_in_system = {
+								limit = {
+									exists = owner
+									owner = { is_hostile = event_target:crisis_country }
+									OR = {
+										any_owned_ship = { is_disabled = no is_ship_class = shipclass_military }
+										any_owned_ship = { is_disabled = no is_ship_class = shipclass_transport }
+									}
+								}
+								crisis_jump_fleet_attack_action = yes
+							}
+						}
+					}
+					#找不到目标，睡一觉捏~
+					else = { crisis_fleet_wandering_action = yes }
+				}
+			}
+		}
+	}
+}
+crisis_fleet_transport_action = {
+	optimize_memory
+	#在当前星系寻找是否存在无己方单位的敌对星球
+	if = {
+		limit = {
+			root = {
+				exists = solar_system
+				solar_system = {
+					any_system_planet = {
+						exists = controller
+						NOT = {
+							controller = {
+								is_same_value = event_target:crisis_country
+							}
+						}
+						owner = { is_hostile = event_target:crisis_country }
+						OR = {
+							is_colony = yes
+							is_under_colonization = yes
+						}
+						count_fleet_in_orbit = {
+							count = 0
+							limit = {
+								owner = { is_same_value = event_target:crisis_country }
+								is_ship_class = shipclass_military
+							}
+						}
+					}
+				}
+			}
+		}
+		root = {
+			solar_system = {
+				random_system_planet = {
+					limit = {
+						exists = controller
+						NOT = {
+							controller = {
+								is_same_value = event_target:crisis_country
+							}
+						}
+						owner = { is_hostile = event_target:crisis_country }
+						OR = {
+							is_colony = yes
+							is_under_colonization = yes
+						}
+						count_fleet_in_orbit = {
+							count = 0
+							limit = {
+								owner = { is_same_value = event_target:crisis_country }
+								is_ship_class = shipclass_military
+							}
+						}
+					}
+					prevprev = { auto_move_to_planet = { target = prev clear_auto_move_on_arrival = yes } }
+				}
+			}
+		}
+	}
+	#在周围星系寻找是否存在敌方殖民地
+	else_if = {
+		limit = {
+			solar_system = { any_neighbor_system = {
+				any_system_planet = {
+					exists = controller
+					NOT = {
+						controller = {
+							is_same_value = event_target:crisis_country
+						}
+					}
+					owner = { is_hostile = event_target:crisis_country }
+					OR = {
+						is_colony = yes
+						is_under_colonization = yes
+					}
+					count_fleet_in_orbit = {
+						count = 0
+						limit = {
+							owner = { is_same_value = event_target:crisis_country }
+							is_ship_class = shipclass_military
+						}
+					}
+				}
+			} }
+		}
+		solar_system = { random_neighbor_system = {
+			limit = {
+				any_system_planet = {
+					exists = controller
+					NOT = {
+						controller = {
+							is_same_value = event_target:crisis_country
+						}
+					}
+					owner = { is_hostile = event_target:crisis_country }
+					OR = {
+						is_colony = yes
+						is_under_colonization = yes
+					}
+					count_fleet_in_orbit = {
+						count = 0
+						limit = {
+							owner = { is_same_value = event_target:crisis_country }
+							is_ship_class = shipclass_military
+						}
+					}
+				}
+			}
+			system_star = { prevprevprev = { auto_move_to_planet = { target = prev clear_auto_move_on_arrival = yes } } }
+		} }
+	}
+	#自动索敌，看看哪个倒霉蛋会被锁定~
+	else = {
+		random_list = {
+			#50%概率寻找100步内是否存在有敌对星球的敌对星系
+			50 = {
+				closest_system = {
+					max_steps = 100
+					limit = {
+						NOT = { is_same_value = root.solar_system }
+						any_system_planet = {
+							exists = controller
+							NOT = {
+								controller = {
+									is_same_value = event_target:crisis_country
+								}
+							}
+							owner = { is_hostile = event_target:crisis_country }
+							OR = {
+								is_colony = yes
+								is_under_colonization = yes
+							}
+							count_fleet_in_orbit = {
+								count = 0
+								limit = {
+									owner = { is_same_value = event_target:crisis_country }
+									is_ship_class = shipclass_military
+								}
+							}
+						}
+						prev = { can_access_system = prev }
+					}
+				}
+				save_event_target_as = nearly_can_attack_fleet_target
+				#若星系内存在有效目标，就90%概率走过去，10%概率飞过去。如果不能走就直接飞起来（诶嘿~）
+				if = {
+					limit = { exists = event_target:nearly_can_attack_fleet_target }
+					event_target:nearly_can_attack_fleet_target = {
+						if = {
+							limit = {
+								any_system_planet = {
+									exists = controller
+									NOT = {
+										controller = {
+											is_same_value = event_target:crisis_country
+										}
+									}
+									owner = { is_hostile = event_target:crisis_country }
+									OR = {
+										is_colony = yes
+										is_under_colonization = yes
+									}
+									count_fleet_in_orbit = {
+										count = 0
+										limit = {
+											owner = { is_same_value = event_target:crisis_country }
+											is_ship_class = shipclass_military
+										}
+									}
+								}
+							}
+							random_system_planet = {
+								limit = {
+									exists = controller
+									NOT = {
+										controller = {
+											is_same_value = event_target:crisis_country
+										}
+									}
+									owner = { is_hostile = event_target:crisis_country }
+									OR = {
+										is_colony = yes
+										is_under_colonization = yes
+									}
+									count_fleet_in_orbit = {
+										count = 0
+										limit = {
+											owner = { is_same_value = event_target:crisis_country }
+											is_ship_class = shipclass_military
+										}
+									}
+								}
+								crisis_jump_attitude_planet_fleet_action = yes
+							}
+						}
+						else = { system_star = { prevprev = { auto_move_to_planet = { target = prev clear_auto_move_on_arrival = yes } } } }
+					}
+				}
+				#找不到目标，再找一次
+				else = {
+					#开始找目标
+					closest_system = {
+						max_steps = 100
+						use_bypasses = yes
+						limit = {
+							NOT = { is_same_value = root.solar_system }
+							any_system_planet = {
+								exists = controller
+								NOT = {
+									controller = {
+										is_same_value = event_target:crisis_country
+									}
+								}
+								owner = { is_hostile = event_target:crisis_country }
+								OR = {
+									is_colony = yes
+									is_under_colonization = yes
+								}
+								count_fleet_in_orbit = {
+									count = 0
+									limit = {
+										owner = { is_same_value = event_target:crisis_country }
+										is_ship_class = shipclass_military
+									}
+								}
+							}
+						}
+						save_event_target_as = nearly_can_attack_fleet_target
+					}
+					#若星系内存在有效目标，就90%概率走过去，10%概率飞过去。如果不能走就直接飞起来（诶嘿~）
+					if = {
+						limit = { exists = event_target:nearly_can_attack_fleet_target }
+						event_target:nearly_can_attack_fleet_target = {
+							if = {
+								limit = {
+									any_system_planet = {
+										exists = controller
+										NOT = {
+											controller = {
+												is_same_value = event_target:crisis_country
+											}
+										}
+										owner = { is_hostile = event_target:crisis_country }
+										OR = {
+											is_colony = yes
+											is_under_colonization = yes
+										}
+										count_fleet_in_orbit = {
+											count = 0
+											limit = {
+												owner = { is_same_value = event_target:crisis_country }
+												is_ship_class = shipclass_military
+											}
+										}
+									}
+								}
+								random_system_planet = {
+									limit = {
+										exists = controller
+										NOT = {
+											controller = {
+												is_same_value = event_target:crisis_country
+											}
+										}
+										owner = { is_hostile = event_target:crisis_country }
+										OR = {
+											is_colony = yes
+											is_under_colonization = yes
+										}
+										count_fleet_in_orbit = {
+											count = 0
+											limit = {
+												owner = { is_same_value = event_target:crisis_country }
+												is_ship_class = shipclass_military
+											}
+										}
+									}
+									crisis_jump_attitude_planet_fleet_action = yes
+								}
+							}
+							else = { system_star = { prevprev = { auto_move_to_planet = { target = prev clear_auto_move_on_arrival = yes } } } }
+						}
+					}
+				}
+			}
+			50 = {
+				#50%概率寻找15跳内是否存在有敌对星球的敌对星系
+				random_system = {
+					limit = {
+						NOT = { is_same_value = root.solar_system }
+						distance = {
+							source = root.solar_system
+							type = hyperlane
+							use_bypasses = yes
+							min_jumps = 1
+							max_jumps = 15
+						}
+						any_system_planet = {
+							exists = controller
+							NOT = {
+								controller = {
+									is_same_value = event_target:crisis_country
+								}
+							}
+							owner = { is_hostile = event_target:crisis_country }
+							OR = {
+								is_colony = yes
+								is_under_colonization = yes
+							}
+							count_fleet_in_orbit = {
+								count = 0
+								limit = {
+									owner = { is_same_value = event_target:crisis_country }
+									is_ship_class = shipclass_military
+								}
+							}
+						}
+						prev = { can_access_system = prev }
+					}
+					save_event_target_as = nearly_can_attack_fleet_target
+				}
+				#若星系内存在有效目标，就70%概率走过去，30%概率飞过去。如果不能走就直接飞起来（诶嘿~）
+				if = {
+					limit = { exists = event_target:nearly_can_attack_fleet_target }
+					event_target:nearly_can_attack_fleet_target = {
+						if = {
+							limit = {
+								any_system_planet = {
+									exists = controller
+									NOT = {
+										controller = {
+											is_same_value = event_target:crisis_country
+										}
+									}
+									owner = { is_hostile = event_target:crisis_country }
+									OR = {
+										is_colony = yes
+										is_under_colonization = yes
+									}
+									count_fleet_in_orbit = {
+										count = 0
+										limit = {
+											owner = { is_same_value = event_target:crisis_country }
+											is_ship_class = shipclass_military
+										}
+									}
+								}
+							}
+							random_system_planet = {
+								limit = {
+									exists = controller
+									NOT = {
+										controller = {
+											is_same_value = event_target:crisis_country
+										}
+									}
+									owner = { is_hostile = event_target:crisis_country }
+									OR = {
+										is_colony = yes
+										is_under_colonization = yes
+									}						count_fleet_in_orbit = {
+										count = 0
+										limit = {
+											owner = { is_same_value = event_target:crisis_country }
+											is_ship_class = shipclass_military
+										}
+									}
+								}
+								crisis_jump_attitude_planet_fleet_action = yes
+							}
+						}
+						else = { system_star = { prevprev = { auto_move_to_planet = { target = prev clear_auto_move_on_arrival = yes } } } }
+					}
+				}
+				#找不到目标，再找一次
+				else = {
+					#开始找目标
+					closest_system = {
+						max_steps = 100
+						use_bypasses = yes
+						limit = {
+							NOT = { is_same_value = root.solar_system }
+							any_system_planet = {
+								exists = controller
+								NOT = {
+									controller = {
+										is_same_value = event_target:crisis_country
+									}
+								}
+								owner = { is_hostile = event_target:crisis_country }
+								OR = {
+									is_colony = yes
+									is_under_colonization = yes
+								}
+								count_fleet_in_orbit = {
+									count = 0
+									limit = {
+										owner = { is_same_value = event_target:crisis_country }
+										is_ship_class = shipclass_military
+									}
+								}
+							}
+						}
+						save_event_target_as = nearly_can_attack_fleet_target
+					}
+					#若星系内存在有效目标，就90%概率走过去，10%概率飞过去。如果不能走就直接飞起来（诶嘿~）
+					if = {
+						limit = { exists = event_target:nearly_can_attack_fleet_target }
+						event_target:nearly_can_attack_fleet_target = {
+							if = {
+								limit = {
+									any_system_planet = {
+										exists = controller
+										NOT = {
+											controller = {
+												is_same_value = event_target:crisis_country
+											}
+										}
+										owner = { is_hostile = event_target:crisis_country }
+										OR = {
+											is_colony = yes
+											is_under_colonization = yes
+										}
+										count_fleet_in_orbit = {
+											count = 0
+											limit = {
+												owner = { is_same_value = event_target:crisis_country }
+												is_ship_class = shipclass_military
+											}
+										}
+									}
+								}
+								random_system_planet = {
+									limit = {
+										exists = controller
+										NOT = {
+											controller = {
+												is_same_value = event_target:crisis_country
+											}
+										}
+										owner = { is_hostile = event_target:crisis_country }
+										OR = {
+											is_colony = yes
+											is_under_colonization = yes
+										}
+										count_fleet_in_orbit = {
+											count = 0
+											limit = {
+												owner = { is_same_value = event_target:crisis_country }
+												is_ship_class = shipclass_military
+											}
+										}
+									}
+									crisis_jump_attitude_planet_fleet_action = yes
+								}
+							}
+							else = { system_star = { prevprev = { auto_move_to_planet = { target = prev clear_auto_move_on_arrival = yes } } } }
+						}
+					}
+				}
+			}
+		}
+	}
+}
+crisis_fleet_move_toward_colony = {
+	if = {
+		from = {
+			solar_system = {
+				random_system_planet = {
+					limit = {
+						exists = controller
+						NOT = {
+							controller = {
+								is_same_value = event_target:crisis_country
+							}
+						}
+						owner = { is_hostile = event_target:crisis_country }
+						OR = {
+							is_colony = yes
+							is_under_colonization = yes
+						}
+						count_fleet_in_orbit = {
+							count = 0
+							limit = {
+								owner = { is_same_value = event_target:crisis_country }
+								is_ship_class = shipclass_military
+							}
+						}
+					}
+				}
+			}
+		}
+		from = {
+			solar_system = {
+				random_system_planet = {
+					limit = {
+						exists = controller
+						NOT = {
+							controller = {
+								is_same_value = event_target:crisis_country
+							}
+						}
+						owner = { is_hostile = event_target:crisis_country }
+						OR = {
+							is_colony = yes
+							is_under_colonization = yes
+						}
+						count_fleet_in_orbit = {
+							count = 0
+							limit = {
+								owner = { is_same_value = event_target:crisis_country }
+								is_ship_class = shipclass_military
+							}
+						}
+					}
+					save_event_target_as = nearly_attack_colony
+				}
+			}
+		}
+		if = {
+			limit = { exists = event_target:nearly_attack_colony }
+			clear_orders = yes
+			auto_move_to_planet = {
+				target = event_target:nearly_attack_colony
+				clear_auto_move_on_arrival = yes
+			}
+		}
+	}
+}
+crisis_fleet_wandering_action = {
+	optimize_memory
+	clear_orders = yes
+	clear_fleet_actions = this
+	random_list = {
+		60 = {
+			solar_system = { random_neighbor_system = {
+				limit = { prevprev = { can_access_system = prev } }
+				save_event_target_as = crisis_fleet_wandering_action_target
+			} }
+			if = {
+				limit = { exists = event_target:crisis_fleet_wandering_action_target }
+				event_target:crisis_fleet_wandering_action_target = {
+					system_star = { prevprev = { auto_move_to_planet = { target = prev clear_auto_move_on_arrival = yes } } }
+				}
+			}
+		}
+		40 = {
+			modifier = {
+				factor = 0
+				any_owned_ship = { has_ship_flag = crisis_fleet_jump_drive_cooldown }
+			}
+			random_system = {
+				limit = {
+					NOT = { is_same_value = prev.solar_system }
+					OR = {
+						AND = {
+							exists = starbase
+							starbase = { exists = owner owner = { is_hostile = event_target:crisis_country } }
+						}
+						any_system_planet = {
+							exists = controller
+							NOT = {
+								controller = {
+									is_same_value = event_target:crisis_country
+								}
+							}
+							owner = { is_hostile = event_target:crisis_country }
+							OR = {
+								is_colony = yes
+								is_under_colonization = yes
+							}
+							count_fleet_in_orbit = {
+								count = 0
+								limit = {
+									owner = { is_same_value = event_target:crisis_country }
+									is_ship_class = shipclass_military
+								}
+							}
+						}
+						any_ship_in_system = {
+							exists = owner
+							owner = { is_hostile = event_target:crisis_country }
+							is_disabled = no is_ship_class = shipclass_military
+						}
+						any_ship_in_system = {
+							exists = owner
+							owner = { is_hostile = event_target:crisis_country }
+							is_disabled = no is_ship_class = shipclass_transport
+						}
+					}
+				}
+				save_event_target_as = crisis_fleet_wandering_action_target
+			}
+			if = {
+				limit = { exists = event_target:crisis_fleet_wandering_action_target }
+				event_target:crisis_fleet_wandering_action_target = {
+					random_system_planet = {
+						limit = { is_primary_star = yes }
+						prevprev = {
+							clear_orders = yes
+							clear_fleet_actions = this
+							set_location = { target = prev distance = 200 angle = random }
+							auto_move_to_planet = { target = prev clear_auto_move_on_arrival = yes }
+						}
+					}
+				}
+			}
+			else = {
+				solar_system = { random_neighbor_system = {
+					limit = { prevprev = { can_access_system = prev } }
+					save_event_target_as = crisis_fleet_wandering_action_target
+				} }
+				if = {
+					limit = { exists = event_target:crisis_fleet_wandering_action_target }
+					event_target:crisis_fleet_wandering_action_target = {
+						system_star = { prevprev = { auto_move_to_planet = { target = prev clear_auto_move_on_arrival = yes } } }
+					}
+				}
+			}
+		}
+	}
+}
+crisis_jump_attitude_planet_fleet_action = {
+	optimize_memory
+	random_list = {
+		90 = { prevprev = { auto_move_to_planet = { target = prev clear_auto_move_on_arrival = yes } } }
+		10 = {
+			modifier = {
+				factor = 0
+				prevprev = { any_owned_ship = { has_ship_flag = crisis_fleet_jump_drive_cooldown } }
+			}
+			prevprev = {
+				clear_orders = yes
+				clear_fleet_actions = this
+				set_location = { target = prev distance = 200 angle = random }
+				if = {
+					limit = {
+						exists = owner owner = {
+							OR = {
+								is_country_type = fengraomin_crisis
+							}
+						}
+					}
+					while = {
+						limit = { any_owned_ship = { NOT = { has_ship_flag = crisis_fleet_jump_drive_cooldown } } }
+						random_owned_ship = {
+							limit = { NOT = { has_ship_flag = crisis_fleet_jump_drive_cooldown } }
+							set_timed_ship_flag = { flag = crisis_fleet_jump_drive_cooldown days = 60 }
+						}
+					}
+				}
+				else = {
+					while = {
+						limit = { any_owned_ship = { NOT = { has_ship_flag = crisis_fleet_jump_drive_cooldown } } }
+						random_owned_ship = {
+							limit = { NOT = { has_ship_flag = crisis_fleet_jump_drive_cooldown } }
+							set_timed_ship_flag = { flag = crisis_fleet_jump_drive_cooldown days = 180 }
+						}
+					}
+				}
+				auto_move_to_planet = { target = prev clear_auto_move_on_arrival = yes }
+			}
+		}
+	}
+}
+crisis_jump_fleet_attack_action = {
+	optimize_memory
+	random_list = {
+		70 = { prevprev = { auto_follow_fleet = { target = prev attack_fleet = yes } } }
+		30 = {
+			modifier = {
+				factor = 0
+				prevprev = { any_owned_ship = { has_ship_flag = crisis_fleet_jump_drive_cooldown } }
+			}
+			prevprev = {
+				clear_orders = yes
+				clear_fleet_actions = this
+				set_location = { target = prev distance = 200 angle = random }
+				while = {
+					limit = { any_owned_ship = { NOT = { has_ship_flag = crisis_fleet_jump_drive_cooldown } } }
+					random_owned_ship = {
+						limit = { NOT = { has_ship_flag = crisis_fleet_jump_drive_cooldown } }
+						set_timed_ship_flag = { flag = crisis_fleet_jump_drive_cooldown days = 180 }
+					}
+				}
+				auto_follow_fleet = { target = prev attack_fleet = yes }
 			}
 		}
 	}

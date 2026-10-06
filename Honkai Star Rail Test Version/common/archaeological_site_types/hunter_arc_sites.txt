@@ -1,0 +1,35 @@
+NAME_xianzhou_discovery = {
+	picture = GFX_evt_DOT_SR_002 #图片，跟事件类似，需要注册路径
+	desc = NAME_xianzhou_discovery_desc
+	max_instances = 1
+	weight = 1
+	stages = 3
+	potential = { always = yes } #潜在的，不满足条件不出现在 UI.范围为： this=舰队， from=坟头
+	allow = {
+		always = yes
+	} 
+	visible = {
+		always = yes
+	}
+	stage = {
+		difficulty = 2
+		icon = GFX_archaeology_runes_C1
+		event = spec_path.1
+	}
+	stage = {
+		difficulty = 2
+		icon = GFX_archaeology_runes_C2
+		event = spec_path.2
+	}
+	stage = {
+		difficulty = 1
+		icon = GFX_archaeology_runes_C3
+		event = spec_path.3
+	}
+	on_roll_failed = {
+		from = {
+			standard_archaeological_site_on_roll_failed = { RANDOM_EVENTS = all_random_events }
+		}
+	}
+
+}

@@ -1,0 +1,253 @@
+# ====================
+# 星穹列车 · 恒星基地解锁 BY WorkBuddy
+# ====================
+# 目的：origin_Astral_Express 是游牧起源（预设 DOT_SR_humans1 里 is_nomadic = yes），
+# 而原版把「游牧」与「普通恒星基地」写死互斥：
+#   1) 建造船 constructor 的 potential_country = { is_nomadic = no }
+#   2) 前哨站 starbase_outpost 的 potential_country = { is_nomadic = no }
+# 这里为星穹列车起源开一个例外（其他游牧势力不受影响）。
+#
+# 注意：本文件是【整块复制原版再改一处】，不要精简，否则会丢字段。
+# 原版出处：common/ship_sizes/00_ship_sizes.txt / 00_starbases.txt
+
+@build_block_radius_starbase = 20
+@starbase_formation_priority = 1
+
+# ---------------------------------------------------------------
+# 建造船：让星穹列车也能建造 / 设计建造船
+# 原版 potential_country = { is_nomadic = no ... }
+# ---------------------------------------------------------------
+constructor = {
+	max_speed = @speed_fast
+	acceleration = 0.3
+	rotation_speed = 0.2
+	max_hitpoints = @construction_hp
+	modifier = {
+		ship_evasion_add = @construction_evasion
+	}
+	size_multiplier = 1
+	map_counter_icon = ship_counter_4
+	icon = ship_size_constructor
+	fleet_slot_size = 1
+	section_slots = { "mid" = { locator = "part1" } }
+	num_target_locators = 0
+	is_space_station = no
+	base_buildtime = @construction_build_time
+
+	combat_disengage_chance = 1.0
+
+	enable_default_design = yes	#if yes, countries will have an auto-generated design at start
+	enable_3dview_in_ship_browser = yes #if yes, ship design will have a 3d view in the ship browser
+#	prerequisites = { "tech_space_construction" }	# Commented out to hide from the technology card
+	is_civilian = yes
+	is_designable = no
+	components_add_to_cost = no
+	class = shipclass_constructor
+	construction_type = { starbase_shipyard starbase_beastport }
+	required_component_set = "power_core"
+	required_component_set = "ftl_components"
+	required_component_set = "thruster_components"
+	required_component_set = "sensor_components"
+	valid_target_aggressive_stance = no
+	auto_upgrade = yes
+
+	construction_capabilities = {
+		starbase
+		mining_station
+		research_station
+		observation_station
+		automated_construction
+		megastructure
+	}
+
+	resources = {
+		category = ships
+		cost = {
+			trigger = {
+				from = {
+					country_uses_bio_ships = no
+				}
+			}
+			alloys = @construction_ship_cost
+		}
+		cost = {
+			trigger = {
+				from = {
+					country_uses_bio_ships = yes
+				}
+			}
+			alloys = @construction_ship_cost
+			mult = 0.5
+		}
+		cost = {
+			trigger = {
+				from = {
+					country_uses_bio_ships = yes
+				}
+			}
+			food = @construction_ship_cost
+			mult = @halved_alloy_to_food_cost_ratio
+		}
+
+		upkeep = {
+			energy = @construction_upkeep_energy
+			alloys = @construction_upkeep_alloys
+		}
+	}
+
+	potential_country = {
+		OR = {
+			is_nomadic = no
+			has_origin = origin_Astral_Express	# ← 星穹列车例外
+		}
+		OR = {
+			has_technology = tech_hyper_drive_1
+			has_technology = tech_hyper_drive_2
+			has_technology = tech_hyper_drive_3
+			has_technology = tech_jump_drive_1
+			has_technology = tech_psi_jump_drive_1
+		}
+	}
+
+	available_to_everyone = yes
+
+	ai_ship_data = {
+		min = value:desired_constructors_min
+		system_mult = 0.15
+		max = value:desired_constructors_max
+	}
+}
+
+# ---------------------------------------------------------------
+# 前哨站（恒星基地 1 级）：让星穹列车的建造船能盖
+# 原版 potential_country = { is_nomadic = no }
+# ---------------------------------------------------------------
+starbase_outpost = {
+	max_speed = 0.0
+	acceleration = 0.0
+	rotation_speed = 0.0
+	modifier = {
+		starbase_defense_platform_capacity_add = 3
+		ship_sensor_range_add = 1
+	}
+	ship_modifier = {
+		ship_evasion_mult = -1
+		ship_armor_add = @outpost_armor
+		ship_fire_rate_mult = 0.50
+		ship_weapon_range_mult = 0.20
+	}
+	max_hitpoints = @outpost_hp
+	base_buildtime = 360
+	resources = {
+		category = starbases
+		cost = {
+			trigger = {
+				from = {
+					country_uses_bio_ships = no
+				}
+			}
+			alloys = @outpost_cost
+		}
+		cost = {
+			trigger = {
+				from = {
+					country_uses_bio_ships = yes
+				}
+			}
+			alloys = @outpost_cost
+			mult = 0.5
+		}
+		cost = {
+			trigger = {
+				from = {
+					country_uses_bio_ships = yes
+				}
+			}
+			food = @outpost_cost
+			mult = @halved_alloy_to_food_cost_ratio
+		}
+		cost = {
+			trigger = {
+				from = {
+					is_machine_empire = yes
+					country_uses_bio_ships = no
+				}
+			}
+			alloys = @outpost_machine_extra_cost
+		}
+		cost = {
+			trigger = {
+				from = {
+					is_machine_empire = yes
+					country_uses_bio_ships = yes
+				}
+			}
+			alloys = @outpost_machine_extra_cost
+			mult = 0.5
+		}
+		cost = {
+			trigger = {
+				from = {
+					is_machine_empire = yes
+					country_uses_bio_ships = yes
+				}
+			}
+			food = @outpost_machine_extra_cost
+			mult = @halved_alloy_to_food_cost_ratio
+		}
+		upkeep = {
+			energy = 1
+		}
+	}
+
+	potential_construction = {
+		is_scope_type = planet
+		is_primary_star = yes
+		NOT = {
+			exists = orbital_defence
+		}
+	}
+
+	possible_construction = {
+		always = yes
+	}
+
+	potential_country = {
+		OR = {
+			is_nomadic = no
+			has_origin = origin_Astral_Express	# ← 星穹列车例外
+		}
+	}
+
+	combat_size_multiplier = 20
+	size_multiplier = 20
+	map_counter_icon = ship_counter_16
+	icon = ship_size_military_station
+
+	fleet_slot_size = 2
+	section_slots = {
+		"core" = { locator = "part1" }
+	}
+
+	is_designable = no
+	num_target_locators = 0
+	is_space_station = no
+	can_have_federation_design = no
+	is_civilian = no
+	components_add_to_cost = no
+	can_disable = yes
+	flip_control_on_disable = yes
+	available_to_everyone = yes
+
+	enable_default_design = yes	#if yes, countries will have an auto-generated design at start
+	prerequisites = { "tech_starbase_1" }
+	class = shipclass_starbase
+
+	required_component_set = "power_core"
+	required_component_set = "sensor_components"
+	required_component_set = "combat_computers"
+
+	build_block_radius = @build_block_radius_starbase
+	formation_priority = @starbase_formation_priority
+	icon_frame = 1
+}

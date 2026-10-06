@@ -41,6 +41,51 @@ pc_hunter_hub = {
     is_artificial_planet = yes
     carry_cap_per_free_district = @carry_cap_high
 }
+pc_extra_hunter_hub = {
+	entity = "hsr_robot_planet"
+	preview_entity = "hsr_robot_planet"
+	entity_scale = 11
+	icon = GFX_pc_extra_hunter_hub
+	icon_large = GFX_pc_extra_hunter_hub_big
+	enable_tilt = no
+	fixed_entity_scale = yes
+	place_entity_on_planet_plane = no
+	entity_face_object = no #disable rotation towards sun or planet we orbit around
+	atmosphere_color		= hsv { 0.683 0.709 0.89 }
+	atmosphere_intensity	= 1.0
+	atmosphere_width		= 0.5
+	show_city = no
+	spawn_odds = 1
+	extra_planet_count = 5
+	city_color_lut = "gfx/portraits/misc/colorcorrection_continental.dds"
+	extra_orbit_size = 10
+	chance_of_ring = 0
+	planet_size = { min = 30 max = 45 }
+	moon_size = { min = @habitable_moon_min_size max = @habitable_moon_max_size }
+	colonizable = yes
+	district_set = pc_extra_hunter_hub
+	starting_planet = yes
+	orbit_lines = no
+	has_colonization_influence_cost = no
+	default_planet_selection = yes
+	starting_district = district_hunter_gov
+	ideal = yes
+	modifier = {
+		pop_environment_tolerance = 1
+		pop_bonus_workforce_mult = 0.15
+		job_max_workforce_mult = 0.3
+		planet_pops_upkeep_mult = -0.2
+		pop_happiness = 0.3
+		planet_orbital_bombardment_damage = -1
+		planet_storm_devastation_mult = -0.9
+		planet_max_districts_add = 10
+		ARMY_DEFENSE_DAMAGE_MULT = 0.6
+		army_defense_health_mult = 1.2
+		PLANET_BUILDING_CAPACITY_ADD = 1
+	}
+	is_artificial_planet = yes
+	carry_cap_per_free_district = @carry_cap_high
+}
 pc_hunter_ringworld = {
 	entity = "ringworld_planet"
 	icon = GFX_pc_hunter_ringworld
@@ -59,7 +104,7 @@ pc_hunter_ringworld = {
 	extra_planet_count = 0
 	planet_size = { min = 25 max = 40 }
 	colonizable = yes
-	district_set = nomad
+	district_set = pc_hunter_ring
 	uses_alternative_skies_for_moons = no
 	uses_alternative_skies_if_has_orbital_ring = no
 	is_artificial_planet = yes

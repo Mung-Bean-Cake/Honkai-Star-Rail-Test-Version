@@ -63,6 +63,11 @@ country_event = {
                 owner = root
             }
         }
+        capital_scope = {
+            create_archaeological_site = {
+                name = "NAME_xianzhou_discovery"
+                location = root.capital_scope
+        }
     }
 }
 planet_event = {
@@ -91,7 +96,9 @@ country_event = {
     desc = DOT_SR_Hunter.4.desc
     picture = aha_gift
     trigger = {
-        always = yes
+        NOT = {
+            has_origin = origin_erxiangleyuan
+        }
     }
     immediate = {
     }
@@ -99,7 +106,7 @@ country_event = {
         name = DOT_SR_Hunter.4.a
         custom_tooltip = DOT_SR_Hunter.4.tt
         owner = {
-            set_country_flag = received_aha_gift
+            set_country_flag = perhaps_gift
             add_monthly_resource_mult = {
                 resource = trade
                 value = 12
@@ -943,7 +950,7 @@ country_event = {
     is_triggered_only = yes
     picture = aha_gift
     trigger = {
-        has_country_flag = received_aha_gift
+        has_country_flag = perhaps_gift
         NOT = {has_modifier = aha_joke}
         NOT = {from = {is_special_megastructure = yes}}
     }
@@ -952,8 +959,76 @@ country_event = {
             50 = {}
             50 = {
                 owner = {
-                    every_owned_megastructure = {delete_megastructure = this}
-                    remove_country_flag = received_aha_gift
+                    every_owned_megastructure = {
+                        limit = {
+                            NOR = {
+                                is_megastructure_type = lgate_base
+                                is_megastructure_type = grand_archive_0
+                                is_megastructure_type = cosmogenesis_needle
+                                is_megastructure_type = cosmogenesis_world_0
+                                is_megastructure_type = cosmogenesis_world_ruined
+                                is_megastructure_type = crisis_sphere_0
+                                is_megastructure_type = crisis_sphere_1
+                                is_megastructure_type = crisis_sphere_2
+                                is_megastructure_type = crisis_sphere_3
+                                is_megastructure_type = crisis_sphere_4
+                                is_megastructure_type = crisis_sphere_ruined
+                                is_megastructure_type = quantum_catapult_0
+                                is_megastructure_type = quantum_catapult_1
+                                is_megastructure_type = quantum_catapult_2
+                                is_megastructure_type = quantum_catapult_3
+                                is_megastructure_type = quantum_catapult_improved_slingshot
+                                is_megastructure_type = quantum_catapult_permanently_ruined
+                                is_megastructure_type = quantum_catapult_restored
+                                is_megastructure_type = quantum_catapult_restored_slingshot
+                                is_megastructure_type = quantum_catapult_ruined
+                                is_megastructure_type = quantum_catapult_ruined_slingshot
+                                is_megastructure_type = behemoth_big_egg_ruined
+                                is_megastructure_type = behemoth_chrysalis
+                                is_megastructure_type = behemoth_chrysalis_big
+                                is_megastructure_type = behemoth_chrysalis_big_hatch
+                                is_megastructure_type = behemoth_chrysalis_hatch
+                                is_megastructure_type = behemoth_egg
+                                is_megastructure_type = behemoth_egg_hatch
+                                is_megastructure_type = behemoth_egg_ruined
+                                is_megastructure_type = behemoth_fast_egg_hatch
+                                is_megastructure_type = behemoth_fleet_egg
+                                is_megastructure_type = behemoth_slow_egg_hatch
+                                is_megastructure_type = behemoth_strong_egg_hatch
+                                is_megastructure_type = mega_shipyard_0
+                                is_megastructure_type = mega_shipyard_1
+                                is_megastructure_type = mega_shipyard_2
+                                is_megastructure_type = mega_shipyard_3
+                                is_megastructure_type = mega_shipyard_permanently_ruined
+                                is_megastructure_type = mega_shipyard_restored
+                                is_megastructure_type = mega_shipyard_ruined
+                            }
+                        }
+                        delete_megastructure = this
+                        solar_system = {
+                                remove_star_flag = ring_world_built
+                                remove_star_flag = ring_section_1
+                                remove_star_flag = ring_section_2
+                                remove_star_flag = ring_section_3
+                                remove_star_flag = dyson_sphere_construction
+                                remove_star_flag = dyson_sphere_built
+                                remove_star_flag = mega_art_installation_built
+                                remove_star_flag = spy_orb_built
+                                remove_star_flag = think_tank_built
+                                remove_star_flag = sharpbeak_starsystem
+                                remove_star_flag = matter_decompressor_built
+                                remove_star_flag = strategic_coordination_center_built
+                                remove_star_flag = mega_art_installation_built
+                                remove_star_flag = interstellar_assembly_built
+                                remove_star_flag = mega_shipyard_built
+                                remove_star_flag = quantum_catapult_built
+                                remove_star_flag = arc_furnace_construction
+                                remove_star_flag = conduit_excluded
+                                remove_star_flag = dyson_gun_built
+                                remove_star_flag = has_habitat
+                        }
+                    }
+                    remove_country_flag = perhaps_gift
                     set_country_flag = aha_joke_2
                     add_modifier = {
                         modifier = aha_joke
@@ -990,7 +1065,73 @@ country_event = {
             30 = {
                 owner = {
                     every_owned_megastructure = {
+                        limit = {
+                            NOR = {
+                                is_megastructure_type = lgate_base
+                                is_megastructure_type = grand_archive_0
+                                is_megastructure_type = cosmogenesis_needle
+                                is_megastructure_type = cosmogenesis_world_0
+                                is_megastructure_type = cosmogenesis_world_ruined
+                                is_megastructure_type = crisis_sphere_0
+                                is_megastructure_type = crisis_sphere_1
+                                is_megastructure_type = crisis_sphere_2
+                                is_megastructure_type = crisis_sphere_3
+                                is_megastructure_type = crisis_sphere_4
+                                is_megastructure_type = crisis_sphere_ruined
+                                is_megastructure_type = quantum_catapult_0
+                                is_megastructure_type = quantum_catapult_1
+                                is_megastructure_type = quantum_catapult_2
+                                is_megastructure_type = quantum_catapult_3
+                                is_megastructure_type = quantum_catapult_improved_slingshot
+                                is_megastructure_type = quantum_catapult_permanently_ruined
+                                is_megastructure_type = quantum_catapult_restored
+                                is_megastructure_type = quantum_catapult_restored_slingshot
+                                is_megastructure_type = quantum_catapult_ruined
+                                is_megastructure_type = quantum_catapult_ruined_slingshot
+                                is_megastructure_type = behemoth_big_egg_ruined
+                                is_megastructure_type = behemoth_chrysalis
+                                is_megastructure_type = behemoth_chrysalis_big
+                                is_megastructure_type = behemoth_chrysalis_big_hatch
+                                is_megastructure_type = behemoth_chrysalis_hatch
+                                is_megastructure_type = behemoth_egg
+                                is_megastructure_type = behemoth_egg_hatch
+                                is_megastructure_type = behemoth_egg_ruined
+                                is_megastructure_type = behemoth_fast_egg_hatch
+                                is_megastructure_type = behemoth_fleet_egg
+                                is_megastructure_type = behemoth_slow_egg_hatch
+                                is_megastructure_type = behemoth_strong_egg_hatch
+                                is_megastructure_type = mega_shipyard_0
+                                is_megastructure_type = mega_shipyard_1
+                                is_megastructure_type = mega_shipyard_2
+                                is_megastructure_type = mega_shipyard_3
+                                is_megastructure_type = mega_shipyard_permanently_ruined
+                                is_megastructure_type = mega_shipyard_restored
+                                is_megastructure_type = mega_shipyard_ruined
+                            }
+                        }
                         delete_megastructure = this
+                        solar_system = {
+                            remove_star_flag = ring_world_built
+                            remove_star_flag = ring_section_1
+                            remove_star_flag = ring_section_2
+                            remove_star_flag = ring_section_3
+                            remove_star_flag = dyson_sphere_construction
+                            remove_star_flag = dyson_sphere_built
+                            remove_star_flag = mega_art_installation_built
+                            remove_star_flag = spy_orb_built
+                            remove_star_flag = think_tank_built
+                            remove_star_flag = sharpbeak_starsystem
+                            remove_star_flag = matter_decompressor_built
+                            remove_star_flag = strategic_coordination_center_built
+                            remove_star_flag = mega_art_installation_built
+                            remove_star_flag = interstellar_assembly_built
+                            remove_star_flag = mega_shipyard_built
+                            remove_star_flag = quantum_catapult_built
+                            remove_star_flag = arc_furnace_construction
+                            remove_star_flag = conduit_excluded
+                            remove_star_flag = dyson_gun_built
+                            remove_star_flag = has_habitat
+                        }
                     }
                     add_monthly_resource_mult = {
                         resource = huanyudu
@@ -1123,8 +1264,29 @@ country_event = {
         add_resource = {energy = -500}
         hidden_effect = {
             random_list = {
-                80 = {country_event = {id = DOT_SR_Hunter.32}}
+                20 = {country_event = {id = DOT_SR_Hunter.32}}
                 20 = {country_event = {id = DOT_SR_Hunter.31}}
+                20 = { 
+                    modifier = { 
+                        factor = 0
+                        has_country_flag = fail_yinlang_1 
+                    } 
+                    country_event = {id = DOT_SR_Hunter.32}
+                }
+                20 = { 
+                    modifier = { 
+                        factor = 0
+                        has_country_flag = fail_yinlang_2
+                    } 
+                    country_event = {id = DOT_SR_Hunter.32}
+                }
+                20 = { 
+                    modifier = { 
+                        factor = 0
+                        has_country_flag = fail_yinlang_3
+                    } 
+                    country_event = {id = DOT_SR_Hunter.32}
+                }
             }
         }
     }
@@ -1143,6 +1305,9 @@ country_event = {
     }
     immediate = {
         set_country_flag = got_cyber_miner_1
+        remove_country_flag = fail_yinlang_1
+        remove_country_flag = fail_yinlang_2
+        remove_country_flag = fail_yinlang_3
     }
     option = {
         name = DOT_SR_Hunter.31.a
@@ -1159,6 +1324,29 @@ country_event = {
     trigger = {
     }
     immediate = {
+        if = {
+            limit = {
+                NOT = {
+                    has_country_flag = fail_yinlang_1
+                }
+            }
+        }
+        set_country_flag = fail_yinlang_1
+        if = {
+            limit = {
+                has_country_flag = fail_yinlang_1
+            }
+            set_country_flag = fail_yinlang_2
+        }
+        if = {
+            limit = {
+                has_country_flag = fail_yinlang_2
+            }
+            random_list = {
+                50 = {}
+                50 = { set_country_flag = fail_yinlang_3 }
+            }
+        }
     }
     option = {
         name = DOT_SR_Hunter.32.a
@@ -1215,8 +1403,29 @@ country_event = {
         add_resource = {consumer_goods = -2500}
         hidden_effect = {
             random_list = {
-                30 = {country_event = {id = DOT_SR_Hunter.35}}
-                70 = {country_event = {id = DOT_SR_Hunter.36}}
+                25 = {country_event = {id = DOT_SR_Hunter.35}}
+                15 = {country_event = {id = DOT_SR_Hunter.36}}
+                20 = { 
+                    modifier = { 
+                        factor = 0
+                        has_country_flag = failed_yinlang_1 
+                    } 
+                    country_event = {id = DOT_SR_Hunter.36}
+                }
+                20 = { 
+                    modifier = { 
+                        factor = 0
+                        has_country_flag = failed_yinlang_2
+                    } 
+                    country_event = {id = DOT_SR_Hunter.36}
+                }
+                20 = { 
+                    modifier = { 
+                        factor = 0
+                        has_country_flag = failed_yinlang_3
+                    } 
+                    country_event = {id = DOT_SR_Hunter.36}
+                }
             }
         }
     }
@@ -1236,6 +1445,9 @@ country_event = {
     immediate = {
         remove_country_flag = got_cyber_miner_2
         set_country_flag = got_cyber_miner_3
+        remove_country_flag = failed_yinlang_1
+        remove_country_flag = failed_yinlang_2
+        remove_country_flag = failed_yinlang_3
     }
     option = {
         name = DOT_SR_Hunter.35.a
@@ -1251,6 +1463,29 @@ country_event = {
     trigger = {
     }
     immediate = {
+        if = {
+            limit = {
+                NOT = {
+                    has_country_flag = failed_yinlang_1
+                }
+            }
+        }
+        set_country_flag = failed_yinlang_1
+        if = {
+            limit = {
+                has_country_flag = failed_yinlang_1
+            }
+            set_country_flag = failed_yinlang_2
+        }
+        if = {
+            limit = {
+                has_country_flag = failed_yinlang_2
+            }
+            random_list = {
+                50 = {}
+                50 = { set_country_flag = failed_yinlang_3 }
+            }
+        }
     }
     option = {
         name = DOT_SR_Hunter.36.a
@@ -1298,11 +1533,11 @@ country_event = {
     trigger = {
         has_deficit = huanyudu
         NOR = {
-            has_country_flag = received_aha_gift
+            has_country_flag = perhaps_gift
         }
     }
     immediate = {
-        set_country_flag = received_aha_gift
+        set_country_flag = perhaps_gift
         add_resource = { alloys = -5000 }
         add_resource = { energy = -10000 }
         add_resource = { trade = -5000 } 

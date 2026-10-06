@@ -1,0 +1,87 @@
+namespace = crisis_fleet_action
+fleet_event = {
+    id = crisis_fleet_action.1
+    hide_window = yes
+    is_triggered_only = yes
+    trigger = {
+        exists = this
+        has_global_flag = fengrao_crisis_started
+        owner = {
+            is_same_value = event_target:crisis_country
+        }
+    }
+    immediate = {
+        if = {
+            limit = { has_fleet_order = return_fleet_order }
+        }
+        else_if = {
+            limit = {
+                any_combatant_fleet = {
+                    always = yes
+                }
+            }
+        }
+        else_if = {
+            limit = {
+                OR = {
+                    has_fleet_order = move_to_system_point_order
+                    has_fleet_order = orbit_planet_order
+                    has_fleet_order = follow_order
+                }
+            }
+        }
+        else = {
+            crisis_fleet_move_toward_colony = yes
+            crisis_fleet_action = yes
+        }
+        fleet_event = {
+            id = crisis_fleet_action.1 days = 60 random = 15
+        }
+    }
+}
+event = {
+    id = crisis_fleet_action.2
+    hide_window = yes
+    is_triggered_only = yes
+    trigger = {
+        exists = event_target:yuhuang_fengrao_country
+        has_global_flag = fengrao_crisis_started
+    }
+    immediate = {
+        event_target:yuhuang_fengrao_country = {
+            every_owned_fleet = {
+                limit = {
+                    NOT = { has_fleet_flag = crisis_build_cooldown } # 没有建造冷却
+                    is_ship_class = shipclass_military
+                }
+                # 检查当前星系是否为无主星系且没有空间站
+                if = {
+                    limit = {
+                        solar_system = {
+                            NOT = { exists = starbase }
+                        }
+                    }
+                    # 设置 120 天冷却，防止瞬间重复建造
+                    set_timed_fleet_flag = {
+                        flag = crisis_build_cooldown
+                        days = 120
+                    }
+                    # 在当前位置创建空间站
+                    solar_system = {
+                        create_starbase = {
+                            owner = event_target:yuhuang_fengrao_country
+                            size = starbase_outpost
+                            # 空间站建好后，立即在其舰队中添加防御平台
+                            effect = {
+                                # 注意：crisis_defense_platform 需要你提前在 global_ship_designs 中定义好
+                                create_ship = { design = NAME_Devastator prefix = no suffix = no }
+                                create_ship = { design = NAME_Devastator prefix = no suffix = no }
+                                create_ship = { design = NAME_Devastator prefix = no suffix = no }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
