@@ -227,9 +227,30 @@ d_colony_credits_slot = {
     }
     triggered_planet_modifier = {
         potential = {
-            check_variable = {
-                which = hsr_planet_military
-                value = 3
+            if = {
+                limit = {
+                    check_variable = {
+                        which = hsr_credits_planet_trade_storage
+                        value >= 1000000
+                    }
+                }
+            }
+        }
+        planet_stability_add = 1
+        planet_amenities_mult = 0.05
+        pop_bonus_workforce_mult = 0.05
+        planet_building_build_speed_mult = 0.05
+        mult = 10
+    }
+    triggered_planet_modifier = {
+        potential = {
+            if = {
+                limit = {
+                    check_variable = {
+                        which = hsr_credits_planet_trade_storage
+                        value < 1000000
+                    }
+                }
             }
         }
         planet_stability_add = 1
