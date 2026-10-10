@@ -1811,3 +1811,60 @@ ship_event = {
         }
     }
 }
+country_event = {
+    id = path_country.21
+    hide_window = yes
+    is_triggered_only = yes
+    trigger = {
+        has_origin = origin_StellaronHunter
+        NOT = { has_global_flag = xianzhou_created }
+    }
+    immediate = {
+        set_global_flag = xianzhou_created
+        capital_scope = {
+            solar_system = {
+                spawn_system = {
+                    min_distance >= 5
+                    max_distance <= 20
+                    min_orientation_angle = 24
+                    max_orientation_angle = 90
+                    initializer = xianzhou_ancestral_land
+                    hyperlane = yes
+                }
+            }
+        }
+        xunlie_created_effect = yes
+    }
+}
+espionage_operation_event = {
+    id = path_country.22
+    title = path_country.22.title
+    desc = path_country.22.desc
+    diplomatic = yes
+    espionage_operation = yes
+    is_triggered_only = yes
+    trigger = {
+        exists = from
+    }
+    immediate = {
+        owner = {
+            country_event = {
+                id = path_country.23
+            }
+        }
+    }
+}
+country_event = {
+    id = path_country.23
+    title = path_country.23.title
+    desc = path_country.23.desc
+    is_triggered_only = yes
+    diplomatic = yes
+    custom_gui = xianzhoumarket
+    immediate = {
+    }
+    option = {
+        name = OK
+        default_hide_option = yes
+    } 
+}
