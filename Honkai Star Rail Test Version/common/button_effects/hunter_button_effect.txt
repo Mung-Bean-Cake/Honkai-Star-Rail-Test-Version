@@ -142,6 +142,106 @@ xianzhou_market_9_effect = {
 		}
 	}
 }
+xianzhou_market_prev_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_prev_effect_disabled
+			hidden_trigger = {
+				from = {
+					OR = {
+						AND = {
+							check_variable = {
+								which = xianzhou_market_page
+								value = 4
+							}
+							NOT = {
+								check_variable = {
+									which = xianzhou_extra_page
+									value = 1
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_no_effect_disabled
+			hidden_trigger = {
+				from = {
+					OR = {
+						check_variable = {
+							which = xianzhou_market_page
+							value = 4
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+	}
+	effect = {
+		hidden_effect = {
+			owner = {
+				change_variable = {
+					which = xianzhou_extra_page
+					value = -1
+				}
+			}
+		}
+	}
+}
+xianzhou_market_next_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_next_effect_disabled
+			hidden_trigger = {
+				from = {
+					OR = {
+						AND = {
+							check_variable = {
+								which = xianzhou_market_page
+								value = 4
+							}
+							NOT = {
+								check_variable = {
+									which = xianzhou_extra_page
+									value = 2
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_no_effect_disabled
+			hidden_trigger = {
+				from = {
+					OR = {
+						check_variable = {
+							which = xianzhou_market_page
+							value = 4
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+	}
+	effect = {
+		hidden_effect = {
+			owner = {
+				change_variable = {
+					which = xianzhou_extra_page
+					value = 1
+				}
+			}
+		}
+	}
+}
 market_check_1_effect = {
 	allow = {	
 	}
@@ -180,6 +280,44 @@ market_check_3_effect = {
 			check_variable = {
 				which = xianzhou_market_page
 				value = 3
+			}
+		}
+	}
+	effect = {
+
+	}
+}
+market_check_4_effect = {
+	allow = {	
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 4
+			}
+			check_variable = {
+				which = xianzhou_extra_page
+				value = 1
+			}
+		}
+	}
+	effect = {
+
+	}
+}
+market_check_4_2_effect = {
+	allow = {	
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 4
+			}
+			check_variable = {
+				which = xianzhou_extra_page
+				value = 2
 			}
 		}
 	}
@@ -1380,6 +1518,1899 @@ market_confirm_25_effect = {
 				add_opinion_modifier = {
 					who = event_target:origin_Xianzhou
 					modifier = opinion_qiongguan_favorability
+				}
+			}
+		}
+	}
+}
+market_confirm_26_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_meal_1_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 800
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_has_meal_1_effect_disabled
+			hidden_trigger = {
+				NOT = {
+					from = {
+						count_owned_leader = {
+							limit = {
+								NOT = {
+									has_trait = trait_xz_mingou_cake	
+								}
+							}
+							count = 0
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 4
+			}
+			check_variable = {
+				which = xianzhou_extra_page
+				value = 1
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -800
+				}
+				random_owned_leader = {
+					limit = {
+						NOT = { has_trait = trait_xz_mingou_cake }
+					}
+					add_trait = trait_xz_mingou_cake
+					set_timed_leader_flag = {
+						flag = trait_xz_mingou_cake
+						days = 1800
+					}
+				}
+				add_opinion_modifier = {
+					who = event_target:origin_Xianzhou
+					modifier = opinion_meal_favorability
+				}
+			}
+		}
+	}
+}
+market_confirm_27_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_meal_2_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 800
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_has_meal_2_effect_disabled
+			hidden_trigger = {
+				NOT = {
+					from = {
+						count_owned_leader = {
+							limit = {
+								NOT = {
+									has_trait = trait_xz_momo_roll
+								}
+							}
+							count = 0
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 4
+			}
+			check_variable = {
+				which = xianzhou_extra_page
+				value = 1
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -800
+				}
+				random_owned_leader = {
+					limit = {
+						NOT = { has_trait = trait_xz_momo_roll }
+					}
+					add_trait = trait_xz_momo_roll
+					set_timed_leader_flag = {
+						flag = trait_xz_momo_roll
+						days = 1800
+					}
+				}
+				add_opinion_modifier = {
+					who = event_target:origin_Xianzhou
+					modifier = opinion_meal_favorability
+				}
+			}
+		}
+	}
+}
+market_confirm_28_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_meal_3_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 800
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_has_meal_3_effect_disabled
+			hidden_trigger = {
+				NOT = {
+					from = {
+						count_owned_leader = {
+							limit = {
+								NOT = {
+									has_trait = trait_xz_qiongshi_skewer
+								}
+							}
+							count = 0
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 4
+			}
+			check_variable = {
+				which = xianzhou_extra_page
+				value = 1
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -800
+				}
+				random_owned_leader = {
+					limit = {
+						NOT = { has_trait = trait_xz_qiongshi_skewer }
+					}
+					add_trait = trait_xz_qiongshi_skewer
+					set_timed_leader_flag = {
+						flag = trait_xz_qiongshi_skewer
+						days = 1800
+					}
+				}
+				add_opinion_modifier = {
+					who = event_target:origin_Xianzhou
+					modifier = opinion_meal_favorability
+				}
+			}
+		}
+	}
+}
+market_confirm_29_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_meal_4_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 800
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_has_meal_4_effect_disabled
+			hidden_trigger = {
+				NOT = {
+					from = {
+						count_owned_leader = {
+							limit = {
+								NOT = {
+									has_trait = trait_xz_hot_sheep_milk
+								}
+							}
+							count = 0
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 4
+			}
+			check_variable = {
+				which = xianzhou_extra_page
+				value = 1
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -800
+				}
+				random_owned_leader = {
+					limit = {
+						NOT = { has_trait = trait_xz_hot_sheep_milk }
+					}
+					add_trait = trait_xz_hot_sheep_milk
+					set_timed_leader_flag = {
+						flag = trait_xz_hot_sheep_milk
+						days = 1800
+					}
+				}
+				add_opinion_modifier = {
+					who = event_target:origin_Xianzhou
+					modifier = opinion_meal_favorability
+				}
+			}
+		}
+	}
+}
+market_confirm_30_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_meal_5_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 800
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_has_meal_5_effect_disabled
+			hidden_trigger = {
+				NOT = {
+					from = {
+						count_owned_leader = {
+							limit = {
+								NOT = {
+									has_trait = trait_xz_soda_douzhir
+								}
+							}
+							count = 0
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 4
+			}
+			check_variable = {
+				which = xianzhou_extra_page
+				value = 1
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -800
+				}
+				random_owned_leader = {
+					limit = {
+						NOT = { has_trait = trait_xz_soda_douzhir }
+					}
+					add_trait = trait_xz_soda_douzhir
+					set_timed_leader_flag = {
+						flag = trait_xz_soda_douzhir
+						days = 1800
+					}
+				}
+				add_opinion_modifier = {
+					who = event_target:origin_Xianzhou
+					modifier = opinion_meal_favorability
+				}
+			}
+		}
+	}
+}
+
+market_confirm_31_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_meal_6_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 800
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_has_meal_6_effect_disabled
+			hidden_trigger = {
+				NOT = {
+					from = {
+						count_owned_leader = {
+							limit = {
+								NOT = {
+									has_trait = trait_xz_abyss_ice_spring
+								}
+							}
+							count = 0
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 4
+			}
+			check_variable = {
+				which = xianzhou_extra_page
+				value = 1
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -800
+				}
+				random_owned_leader = {
+					limit = {
+						NOT = { has_trait = trait_xz_abyss_ice_spring }
+					}
+					add_trait = trait_xz_abyss_ice_spring
+					set_timed_leader_flag = {
+						flag = trait_xz_abyss_ice_spring
+						days = 1800
+					}
+				}
+				add_opinion_modifier = {
+					who = event_target:origin_Xianzhou
+					modifier = opinion_meal_favorability
+				}
+			}
+		}
+	}
+}
+
+market_confirm_32_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_meal_7_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 800
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_has_meal_7_effect_disabled
+			hidden_trigger = {
+				NOT = {
+					from = {
+						count_owned_leader = {
+							limit = {
+								NOT = {
+									has_trait = trait_xz_garlic_pork
+								}
+							}
+							count = 0
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 4
+			}
+			check_variable = {
+				which = xianzhou_extra_page
+				value = 1
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -800
+				}
+				random_owned_leader = {
+					limit = {
+						NOT = { has_trait = trait_xz_garlic_pork }
+					}
+					add_trait = trait_xz_garlic_pork
+					set_timed_leader_flag = {
+						flag = trait_xz_garlic_pork
+						days = 1800
+					}
+				}
+				add_opinion_modifier = {
+					who = event_target:origin_Xianzhou
+					modifier = opinion_meal_favorability
+				}
+			}
+		}
+	}
+}
+market_confirm_33_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_meal_8_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 800
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_has_meal_8_effect_disabled
+			hidden_trigger = {
+				NOT = {
+					from = {
+						count_owned_leader = {
+							limit = {
+								NOT = {
+									has_trait = trait_xz_cucumber_chicken
+								}
+							}
+							count = 0
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 4
+			}
+			check_variable = {
+				which = xianzhou_extra_page
+				value = 1
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -800
+				}
+				random_owned_leader = {
+					limit = {
+						NOT = { has_trait = trait_xz_cucumber_chicken }
+					}
+					add_trait = trait_xz_cucumber_chicken
+					set_timed_leader_flag = {
+						flag = trait_xz_cucumber_chicken
+						days = 1800
+					}
+				}
+				add_opinion_modifier = {
+					who = event_target:origin_Xianzhou
+					modifier = opinion_meal_favorability
+				}
+			}
+		}
+	}
+}
+market_confirm_34_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_meal_9_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 800
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_has_meal_9_effect_disabled
+			hidden_trigger = {
+				NOT = {
+					from = {
+						count_owned_leader = {
+							limit = {
+								NOT = {
+									has_trait = trait_xz_jiyu_pork
+								}
+							}
+							count = 0
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 4
+			}
+			check_variable = {
+				which = xianzhou_extra_page
+				value = 1
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -800
+				}
+				random_owned_leader = {
+					limit = {
+						NOT = { has_trait = trait_xz_jiyu_pork }
+					}
+					add_trait = trait_xz_jiyu_pork
+					set_timed_leader_flag = {
+						flag = trait_xz_jiyu_pork
+						days = 1800
+					}
+				}
+				add_opinion_modifier = {
+					who = event_target:origin_Xianzhou
+					modifier = opinion_meal_favorability
+				}
+			}
+		}
+	}
+}
+
+market_confirm_35_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_meal_10_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 800
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_has_meal_10_effect_disabled
+			hidden_trigger = {
+				NOT = {
+					from = {
+						count_owned_leader = {
+							limit = {
+								NOT = {
+									has_trait = trait_xz_spicy_beef_offal
+								}
+							}
+							count = 0
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 4
+			}
+			check_variable = {
+				which = xianzhou_extra_page
+				value = 1
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -800
+				}
+				random_owned_leader = {
+					limit = {
+						NOT = { has_trait = trait_xz_spicy_beef_offal }
+					}
+					add_trait = trait_xz_spicy_beef_offal
+					set_timed_leader_flag = {
+						flag = trait_xz_spicy_beef_offal
+						days = 1800
+					}
+				}
+				add_opinion_modifier = {
+					who = event_target:origin_Xianzhou
+					modifier = opinion_meal_favorability
+				}
+			}
+		}
+	}
+}
+
+market_confirm_36_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_meal_11_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 800
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_has_meal_11_effect_disabled
+			hidden_trigger = {
+				NOT = {
+					from = {
+						count_owned_leader = {
+							limit = {
+								NOT = {
+									has_trait = trait_xz_grandma_tofu
+								}
+							}
+							count = 0
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 4
+			}
+			check_variable = {
+				which = xianzhou_extra_page
+				value = 1
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -800
+				}
+				random_owned_leader = {
+					limit = {
+						NOT = { has_trait = trait_xz_grandma_tofu }
+					}
+					add_trait = trait_xz_grandma_tofu
+					set_timed_leader_flag = {
+						flag = trait_xz_grandma_tofu
+						days = 1800
+					}
+				}
+				add_opinion_modifier = {
+					who = event_target:origin_Xianzhou
+					modifier = opinion_meal_favorability
+				}
+			}
+		}
+	}
+}
+
+market_confirm_37_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_meal_12_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 800
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_has_meal_12_effect_disabled
+			hidden_trigger = {
+				NOT = {
+					from = {
+						count_owned_leader = {
+							limit = {
+								NOT = {
+									has_trait = trait_xz_999_meatball
+								}
+							}
+							count = 0
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 4
+			}
+			check_variable = {
+				which = xianzhou_extra_page
+				value = 1
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -800
+				}
+				random_owned_leader = {
+					limit = {
+						NOT = { has_trait = trait_xz_999_meatball }
+					}
+					add_trait = trait_xz_999_meatball
+					set_timed_leader_flag = {
+						flag = trait_xz_999_meatball
+						days = 1800
+					}
+				}
+				add_opinion_modifier = {
+					who = event_target:origin_Xianzhou
+					modifier = opinion_meal_favorability
+				}
+			}
+		}
+	}
+}
+
+market_confirm_38_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_meal_13_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 800
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_has_meal_13_effect_disabled
+			hidden_trigger = {
+				NOT = {
+					from = {
+						count_owned_leader = {
+							limit = {
+								NOT = {
+									has_trait = trait_xz_moon_rice
+								}
+							}
+							count = 0
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 4
+			}
+			check_variable = {
+				which = xianzhou_extra_page
+				value = 1
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -800
+				}
+				random_owned_leader = {
+					limit = {
+						NOT = { has_trait = trait_xz_moon_rice }
+					}
+					add_trait = trait_xz_moon_rice
+					set_timed_leader_flag = {
+						flag = trait_xz_moon_rice
+						days = 1800
+					}
+				}
+				add_opinion_modifier = {
+					who = event_target:origin_Xianzhou
+					modifier = opinion_meal_favorability
+				}
+			}
+		}
+	}
+}
+market_confirm_39_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_meal_14_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 800
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_has_meal_14_effect_disabled
+			hidden_trigger = {
+				NOT = {
+					from = {
+						count_owned_leader = {
+							limit = {
+								NOT = {
+									has_trait = trait_xz_soy_chicken
+								}
+							}
+							count = 0
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 4
+			}
+			check_variable = {
+				which = xianzhou_extra_page
+				value = 1
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -800
+				}
+				random_owned_leader = {
+					limit = {
+						NOT = { has_trait = trait_xz_soy_chicken }
+					}
+					add_trait = trait_xz_soy_chicken
+					set_timed_leader_flag = {
+						flag = trait_xz_soy_chicken
+						days = 1800
+					}
+				}
+				add_opinion_modifier = {
+					who = event_target:origin_Xianzhou
+					modifier = opinion_meal_favorability
+				}
+			}
+		}
+	}
+}
+market_confirm_40_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_meal_15_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 1800
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_has_meal_15_effect_disabled
+			hidden_trigger = {
+				NOT = {
+					from = {
+						count_owned_leader = {
+							limit = {
+								NOT = {
+									has_trait = trait_xz_cinnamon_rib_rice
+								}
+							}
+							count = 0
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 4
+			}
+			check_variable = {
+				which = xianzhou_extra_page
+				value = 2
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -1800
+				}
+				random_owned_leader = {
+					limit = {
+						NOT = { has_trait = trait_xz_cinnamon_rib_rice }
+					}
+					add_trait = trait_xz_cinnamon_rib_rice
+					set_timed_leader_flag = {
+						flag = trait_xz_cinnamon_rib_rice
+						days = 3600
+					}
+				}
+				add_opinion_modifier = {
+					who = event_target:origin_Xianzhou
+					modifier = opinion_meal_favorability
+				}
+			}
+		}
+	}
+}
+market_confirm_41_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_meal_16_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 1800
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_has_meal_16_effect_disabled
+			hidden_trigger = {
+				NOT = {
+					from = {
+						count_owned_leader = {
+							limit = {
+								NOT = {
+									has_trait = trait_xz_jiuhe_banquet
+								}
+							}
+							count = 0
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 4
+			}
+			check_variable = {
+				which = xianzhou_extra_page
+				value = 2
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -1800
+				}
+				random_owned_leader = {
+					limit = {
+						NOT = { has_trait = trait_xz_jiuhe_banquet }
+					}
+					add_trait = trait_xz_jiuhe_banquet
+					set_timed_leader_flag = {
+						flag = trait_xz_jiuhe_banquet
+						days = 3600
+					}
+				}
+				add_opinion_modifier = {
+					who = event_target:origin_Xianzhou
+					modifier = opinion_meal_favorability
+				}
+			}
+		}
+	}
+}
+market_confirm_42_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_meal_17_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 1800
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_has_meal_17_effect_disabled
+			hidden_trigger = {
+				NOT = {
+					from = {
+						count_owned_leader = {
+							limit = {
+								NOT = {
+									has_trait = trait_xz_stone_soup
+								}
+							}
+							count = 0
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 4
+			}
+			check_variable = {
+				which = xianzhou_extra_page
+				value = 2
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -1800
+				}
+				random_owned_leader = {
+					limit = {
+						NOT = { has_trait = trait_xz_stone_soup }
+					}
+					add_trait = trait_xz_stone_soup
+					set_timed_leader_flag = {
+						flag = trait_xz_stone_soup
+						days = 3600
+					}
+				}
+				add_opinion_modifier = {
+					who = event_target:origin_Xianzhou
+					modifier = opinion_meal_favorability
+				}
+			}
+		}
+	}
+}
+
+market_confirm_43_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_meal_18_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 1800
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_has_meal_18_effect_disabled
+			hidden_trigger = {
+				NOT = {
+					from = {
+						count_owned_leader = {
+							limit = {
+								NOT = {
+									has_trait = trait_xz_glass_boat
+								}
+							}
+							count = 0
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 4
+			}
+			check_variable = {
+				which = xianzhou_extra_page
+				value = 2
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -1800
+				}
+				random_owned_leader = {
+					limit = {
+						NOT = { has_trait = trait_xz_glass_boat }
+					}
+					add_trait = trait_xz_glass_boat
+					set_timed_leader_flag = {
+						flag = trait_xz_glass_boat
+						days = 3600
+					}
+				}
+				add_opinion_modifier = {
+					who = event_target:origin_Xianzhou
+					modifier = opinion_meal_favorability
+				}
+			}
+		}
+	}
+}
+
+market_confirm_44_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_meal_19_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 1800
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_has_meal_19_effect_disabled
+			hidden_trigger = {
+				NOT = {
+					from = {
+						count_owned_leader = {
+							limit = {
+								NOT = {
+									has_trait = trait_xz_drunk_red_stream
+								}
+							}
+							count = 0
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 4
+			}
+			check_variable = {
+				which = xianzhou_extra_page
+				value = 2
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -1800
+				}
+				random_owned_leader = {
+					limit = {
+						NOT = { has_trait = trait_xz_drunk_red_stream }
+					}
+					add_trait = trait_xz_drunk_red_stream
+					set_timed_leader_flag = {
+						flag = trait_xz_drunk_red_stream
+						days = 3600
+					}
+				}
+				add_opinion_modifier = {
+					who = event_target:origin_Xianzhou
+					modifier = opinion_meal_favorability
+				}
+			}
+		}
+	}
+}
+
+market_confirm_45_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_meal_20_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 1800
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_has_meal_20_effect_disabled
+			hidden_trigger = {
+				NOT = {
+					from = {
+						count_owned_leader = {
+							limit = {
+								NOT = {
+									has_trait = trait_xz_immortal_happy_tea
+								}
+							}
+							count = 0
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 4
+			}
+			check_variable = {
+				which = xianzhou_extra_page
+				value = 2
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -1800
+				}
+				random_owned_leader = {
+					limit = {
+						NOT = { has_trait = trait_xz_immortal_happy_tea }
+					}
+					add_trait = trait_xz_immortal_happy_tea
+					set_timed_leader_flag = {
+						flag = trait_xz_immortal_happy_tea
+						days = 3600
+					}
+				}
+				add_opinion_modifier = {
+					who = event_target:origin_Xianzhou
+					modifier = opinion_meal_favorability
+				}
+			}
+		}
+	}
+}
+
+market_confirm_46_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_meal_21_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 1800
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_has_meal_21_effect_disabled
+			hidden_trigger = {
+				NOT = {
+					from = {
+						count_owned_leader = {
+							limit = {
+								NOT = {
+									has_trait = trait_xz_stomach_soup
+								}
+							}
+							count = 0
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 4
+			}
+			check_variable = {
+				which = xianzhou_extra_page
+				value = 2
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -1800
+				}
+				random_owned_leader = {
+					limit = {
+						NOT = { has_trait = trait_xz_stomach_soup }
+					}
+					add_trait = trait_xz_stomach_soup
+					set_timed_leader_flag = {
+						flag = trait_xz_stomach_soup
+						days = 3600
+					}
+				}
+				add_opinion_modifier = {
+					who = event_target:origin_Xianzhou
+					modifier = opinion_meal_favorability
+				}
+			}
+		}
+	}
+}
+
+market_confirm_47_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_meal_22_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 1800
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_has_meal_22_effect_disabled
+			hidden_trigger = {
+				NOT = {
+					from = {
+						count_owned_leader = {
+							limit = {
+								NOT = {
+									has_trait = trait_xz_soul_pill
+								}
+							}
+							count = 0
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 4
+			}
+			check_variable = {
+				which = xianzhou_extra_page
+				value = 2
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -1800
+				}
+				random_owned_leader = {
+					limit = {
+						NOT = { has_trait = trait_xz_soul_pill }
+					}
+					add_trait = trait_xz_soul_pill
+					set_timed_leader_flag = {
+						flag = trait_xz_soul_pill
+						days = 3600
+					}
+				}
+				add_opinion_modifier = {
+					who = event_target:origin_Xianzhou
+					modifier = opinion_meal_favorability
+				}
+			}
+		}
+	}
+}
+
+market_confirm_48_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_meal_23_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 1800
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_has_meal_23_effect_disabled
+			hidden_trigger = {
+				NOT = {
+					from = {
+						count_owned_leader = {
+							limit = {
+								NOT = {
+									has_trait = trait_xz_flame_tea
+								}
+							}
+							count = 0
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 4
+			}
+			check_variable = {
+				which = xianzhou_extra_page
+				value = 2
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -1800
+				}
+				random_owned_leader = {
+					limit = {
+						NOT = { has_trait = trait_xz_flame_tea }
+					}
+					add_trait = trait_xz_flame_tea
+					set_timed_leader_flag = {
+						flag = trait_xz_flame_tea
+						days = 3600
+					}
+				}
+				add_opinion_modifier = {
+					who = event_target:origin_Xianzhou
+					modifier = opinion_meal_favorability
+				}
+			}
+		}
+	}
+}
+
+market_confirm_49_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_meal_24_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 1800
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_has_meal_24_effect_disabled
+			hidden_trigger = {
+				NOT = {
+					from = {
+						count_owned_leader = {
+							limit = {
+								NOT = {
+									has_trait = trait_xz_dragon_well_wine
+								}
+							}
+							count = 0
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 4
+			}
+			check_variable = {
+				which = xianzhou_extra_page
+				value = 2
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -1800
+				}
+				random_owned_leader = {
+					limit = {
+						NOT = { has_trait = trait_xz_dragon_well_wine }
+					}
+					add_trait = trait_xz_dragon_well_wine
+					set_timed_leader_flag = {
+						flag = trait_xz_dragon_well_wine
+						days = 3600
+					}
+				}
+				add_opinion_modifier = {
+					who = event_target:origin_Xianzhou
+					modifier = opinion_meal_favorability
+				}
+			}
+		}
+	}
+}
+
+market_confirm_50_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_meal_25_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 1800
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_has_meal_25_effect_disabled
+			hidden_trigger = {
+				NOT = {
+					from = {
+						count_owned_leader = {
+							limit = {
+								NOT = {
+									has_trait = trait_xz_willow_nectar
+								}
+							}
+							count = 0
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 4
+			}
+			check_variable = {
+				which = xianzhou_extra_page
+				value = 2
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -1800
+				}
+				random_owned_leader = {
+					limit = {
+						NOT = { has_trait = trait_xz_willow_nectar }
+					}
+					add_trait = trait_xz_willow_nectar
+					set_timed_leader_flag = {
+						flag = trait_xz_willow_nectar
+						days = 3600
+					}
+				}
+				add_opinion_modifier = {
+					who = event_target:origin_Xianzhou
+					modifier = opinion_meal_favorability
+				}
+			}
+		}
+	}
+}
+
+market_confirm_51_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_meal_26_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 1800
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_has_meal_26_effect_disabled
+			hidden_trigger = {
+				NOT = {
+					from = {
+						count_owned_leader = {
+							limit = {
+								NOT = {
+									has_trait = trait_xz_energy_drink
+								}
+							}
+							count = 0
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 4
+			}
+			check_variable = {
+				which = xianzhou_extra_page
+				value = 2
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -1800
+				}
+				random_owned_leader = {
+					limit = {
+						NOT = { has_trait = trait_xz_energy_drink }
+					}
+					add_trait = trait_xz_energy_drink
+					set_timed_leader_flag = {
+						flag = trait_xz_energy_drink
+						days = 3600
+					}
+				}
+				add_opinion_modifier = {
+					who = event_target:origin_Xianzhou
+					modifier = opinion_meal_favorability
+				}
+			}
+		}
+	}
+}
+
+market_confirm_52_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_meal_27_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 1800
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_has_meal_27_effect_disabled
+			hidden_trigger = {
+				NOT = {
+					from = {
+						count_owned_leader = {
+							limit = {
+								NOT = {
+									has_trait = trait_xz_buliren_skewer
+								}
+							}
+							count = 0
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 4
+			}
+			check_variable = {
+				which = xianzhou_extra_page
+				value = 2
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -1800
+				}
+				random_owned_leader = {
+					limit = {
+						NOT = { has_trait = trait_xz_buliren_skewer }
+					}
+					add_trait = trait_xz_buliren_skewer
+					set_timed_leader_flag = {
+						flag = trait_xz_buliren_skewer
+						days = 3600
+					}
+				}
+				add_opinion_modifier = {
+					who = event_target:origin_Xianzhou
+					modifier = opinion_meal_favorability
+				}
+			}
+		}
+	}
+}
+
+market_confirm_53_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_meal_28_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 1800
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_has_meal_28_effect_disabled
+			hidden_trigger = {
+				NOT = {
+					from = {
+						count_owned_leader = {
+							limit = {
+								NOT = {
+									has_trait = trait_xz_vidya_dragon_tea
+								}
+							}
+							count = 0
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 4
+			}
+			check_variable = {
+				which = xianzhou_extra_page
+				value = 2
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -1800
+				}
+				random_owned_leader = {
+					limit = {
+						NOT = { has_trait = trait_xz_vidya_dragon_tea }
+					}
+					add_trait = trait_xz_vidya_dragon_tea
+					set_timed_leader_flag = {
+						flag = trait_xz_vidya_dragon_tea
+						days = 3600
+					}
+				}
+				add_opinion_modifier = {
+					who = event_target:origin_Xianzhou
+					modifier = opinion_meal_favorability
 				}
 			}
 		}
