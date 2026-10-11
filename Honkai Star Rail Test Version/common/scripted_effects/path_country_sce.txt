@@ -1,0 +1,546 @@
+xunlie_created_effect = {
+	every_system = {
+		limit = {
+			has_star_flag = xianzhou_home
+		}
+		create_species = {
+			name = "xianzhoumin"
+			plural = "xianzhoumin"
+			adjective = "xianzhoumin"
+			class = "HUM"
+			portrait = Star_Rail
+			homeworld = event_target:xianzhou_position
+			traits = {
+				trait = trait_intelligent
+				trait = trait_rapid_breeders
+				trait = trait_robot_exotic_fuel_consumption
+				trait = trait_nomadic
+				trait = trait_extremely_adaptive
+				trait = trait_IPC_Life_Saver
+				trait = trait_Honkai
+			}
+			effect = {save_event_target_as = xianzhoumin_species}
+		}
+		create_country = {
+			name = {
+				key = Xianzhou_Alliance
+				variable_string = "[xianzhoumin_species.GetNamePlural]"
+			}
+			authority = auth_imperial
+			species = last_created_species
+			civics = {
+				civic = civic_zhuxing
+				civic = civic_The_Hunt
+			}
+			ethos = {
+				ethic = ethic_fanatic_spiritualist
+				ethic = ethic_xenophile
+			}
+			flag = {
+				icon =  {
+					category = "DOT_SR"
+					file = "DOT_SR_06.dds"
+				}
+				background =  {
+					category = "backgrounds"
+					file = "00_solid.dds"
+				}
+				colors = {
+					"red"
+					"red"
+					"null"
+					"null"
+				}
+			}
+			origin = origin_Xianzhou
+			effect = {
+				give_technology = {
+					tech = tech_honkai_star_rail_aux_t1
+				}
+				save_global_event_target_as = origin_Xianzhou
+				every_playable_country = {
+					limit = {
+						has_origin = origin_StellaronHunter
+					}
+					establish_communications_no_message = event_target:origin_Xianzhou
+				}
+				create_fleet = {
+					effect = {
+						set_owner = event_target:origin_Xianzhou
+						create_ship = {
+							name = random
+							design = nomads_constructor
+						}
+						set_location = event_target:origin_Xianzhou.capital_star
+					}
+				}
+				create_fleet = {
+					effect = {
+						set_owner = event_target:origin_Xianzhou
+						create_ship = {
+							name = random
+							random_existing_design = science
+						}
+						set_location = event_target:origin_Xianzhou.capital_star
+						save_event_target_as = new_science_ship_target
+					}
+				}
+				create_fleet = {
+					name = "NAME_XIANZHOU_ALLIANCE_LUOFU"
+					effect = {
+						set_owner = event_target:origin_Xianzhou
+						create_ship = {
+							name = "NAME_XIANZHOU_ALLIANCE_LUOFU"
+							design = "xianzhou_planet_fleet_1"
+							effect = {
+								starbase = {
+									set_starbase_building = {
+										slot = 1
+										building = arkship_hsr_base_hub
+									}
+									set_starbase_building = {
+										slot = 2
+										building = arkship_hsr_advanced_hub
+									}
+									set_starbase_building = {
+										slot = 3
+										building = arkship_hsr_unity_hub
+									}
+									set_starbase_building = {
+										slot = 4
+										building = arkship_hsr_shield_generator
+									}
+								}
+								fleet = {
+
+								}
+								colony = {
+									remove_building = building_colony_shelter
+									clear_blockers = yes
+									clear_deposits = yes
+									clear_planet_modifiers = yes#防止出现原版殖民地的各种奇怪事件
+									remove_district = district_city
+									add_district = district_xz_city
+									add_district = district_xz_city
+									add_district = district_xz_industrial
+									add_district = district_xz_science
+									add_district = district_xz_trade
+									add_district = district_xz_yunqi
+									add_district = district_xz_danding
+									remove_building = building_commercial_zone
+									add_building = building_capital
+									add_building = building_holo_theatres
+									while = {
+										count = 80
+										create_pop_group = {
+											size = 100
+											species = owner_main_species
+										}
+									}
+								}
+							}
+						}
+						set_fleet_stance = evasive
+						set_fleet_flag = xianzhuo_luofu_fleet
+						set_location = {
+							target = event_target:xianzhou_position
+							distance = 20
+							angle = random
+						}
+					}
+				}
+				create_fleet = {
+					name = "NAME_XIANZHOU_ALLIANCE_FANGHU"
+					effect = {
+						set_owner = event_target:origin_Xianzhou
+						create_ship = {
+							name = "NAME_XIANZHOU_ALLIANCE_FANGHU"
+							design = "xianzhou_planet_fleet_1"
+							effect = {
+								starbase = {
+									set_starbase_building = {
+										slot = 1
+										building = arkship_hsr_base_hub
+									}
+									set_starbase_building = {
+										slot = 2
+										building = arkship_hsr_advanced_hub
+									}
+									set_starbase_building = {
+										slot = 3
+										building = arkship_hsr_unity_hub
+									}
+									set_starbase_building = {
+										slot = 4
+										building = arkship_hsr_shield_generator
+									}
+								}
+								fleet = {
+
+								}
+								colony = {
+									remove_building = building_colony_shelter
+									clear_blockers = yes
+									clear_deposits = yes
+									clear_planet_modifiers = yes#防止出现原版殖民地的各种奇怪事件
+									remove_district = district_city
+									add_district = district_xz_city
+									add_district = district_xz_city
+									add_district = district_xz_industrial
+									add_district = district_xz_science
+									add_district = district_xz_trade
+									add_district = district_xz_yunqi
+									add_district = district_xz_danding
+									remove_building = building_commercial_zone
+									add_building = building_capital
+									add_building = building_holo_theatres
+									while = {
+										count = 20
+										create_pop_group = {
+											size = 100
+											species = owner_main_species
+										}
+									}
+								}
+							}
+						}
+						set_fleet_stance = evasive
+						set_fleet_flag = xianzhuo_fanghu_fleet
+						set_location = {
+							target = event_target:xianzhou_position
+							distance = 160
+							angle = random
+						}
+					}
+				}
+				create_fleet = {
+					name = "NAME_XIANZHOU_ALLIANCE_XULING"
+					effect = {
+						set_owner = event_target:origin_Xianzhou
+						create_ship = {
+							name = "NAME_XIANZHOU_ALLIANCE_XULING"
+							design = "xianzhou_planet_fleet_1"
+							effect = {
+								starbase = {
+									set_starbase_building = {
+										slot = 1
+										building = arkship_hsr_base_hub
+									}
+									set_starbase_building = {
+										slot = 2
+										building = arkship_hsr_advanced_hub
+									}
+									set_starbase_building = {
+										slot = 3
+										building = arkship_hsr_unity_hub
+									}
+									set_starbase_building = {
+										slot = 4
+										building = arkship_hsr_shield_generator
+									}
+								}
+								fleet = {
+
+								}
+								colony = {
+									remove_building = building_colony_shelter
+									clear_blockers = yes
+									clear_deposits = yes
+									clear_planet_modifiers = yes#防止出现原版殖民地的各种奇怪事件
+									remove_district = district_city
+									add_district = district_xz_city
+									add_district = district_xz_city
+									add_district = district_xz_industrial
+									add_district = district_xz_science
+									add_district = district_xz_trade
+									add_district = district_xz_yunqi
+									add_district = district_xz_danding
+									remove_building = building_commercial_zone
+									add_building = building_capital
+									add_building = building_holo_theatres
+									while = {
+										count = 25
+										create_pop_group = {
+											size = 100
+											species = owner_main_species
+										}
+									}
+								}
+							}
+						}
+						set_fleet_stance = evasive
+						set_fleet_flag = xianzhuo_xuling_fleet
+						set_location = {
+							target = event_target:xianzhou_position
+							distance = 50
+							angle = random
+						}
+					}
+				}
+				create_fleet = {
+					name = "NAME_XIANZHOU_ALLIANCE_YAOQING"
+					effect = {
+						set_owner = event_target:origin_Xianzhou
+						create_ship = {
+							name = "NAME_XIANZHOU_ALLIANCE_YAOQING"
+							design = "xianzhou_planet_fleet_1"
+							effect = {
+								starbase = {
+									set_starbase_building = {
+										slot = 1
+										building = arkship_hsr_base_hub
+									}
+									set_starbase_building = {
+										slot = 2
+										building = arkship_hsr_advanced_hub
+									}
+									set_starbase_building = {
+										slot = 3
+										building = arkship_hsr_unity_hub
+									}
+									set_starbase_building = {
+										slot = 4
+										building = arkship_hsr_shield_generator
+									}
+								}
+								fleet = {
+
+								}
+								colony = {
+									remove_building = building_colony_shelter
+									clear_blockers = yes
+									clear_deposits = yes
+									clear_planet_modifiers = yes#防止出现原版殖民地的各种奇怪事件
+									remove_district = district_city
+									add_district = district_xz_city
+									add_district = district_xz_city
+									add_district = district_xz_industrial
+									add_district = district_xz_science
+									add_district = district_xz_trade
+									add_district = district_xz_yunqi
+									add_district = district_xz_danding
+									remove_building = building_commercial_zone
+									add_building = building_capital
+									add_building = building_holo_theatres
+									while = {
+										count = 80
+										create_pop_group = {
+											size = 100
+											species = owner_main_species
+										}
+									}
+								}
+							}
+						}
+						set_fleet_stance = evasive
+						set_fleet_flag = xianzhuo_yaoqing_fleet
+						set_location = {
+							target = event_target:xianzhou_position
+							distance = 800
+							angle = random
+						}
+					}
+				}
+				create_fleet = {
+					name = "NAME_XIANZHOU_ALLIANCE_ZHUMING"
+					effect = {
+						set_owner = event_target:origin_Xianzhou
+						create_ship = {
+							name = "NAME_XIANZHOU_ALLIANCE_ZHUMING"
+							design = "xianzhou_planet_fleet_1"
+							effect = {
+								starbase = {
+									set_starbase_building = {
+										slot = 1
+										building = arkship_hsr_base_hub
+									}
+									set_starbase_building = {
+										slot = 2
+										building = arkship_hsr_advanced_hub
+									}
+									set_starbase_building = {
+										slot = 3
+										building = arkship_hsr_unity_hub
+									}
+									set_starbase_building = {
+										slot = 4
+										building = arkship_hsr_shield_generator
+									}
+								}
+								fleet = {
+
+								}
+								colony = {
+									remove_building = building_colony_shelter
+									clear_blockers = yes
+									clear_deposits = yes
+									clear_planet_modifiers = yes#防止出现原版殖民地的各种奇怪事件
+									remove_district = district_city
+									add_district = district_xz_city
+									add_district = district_xz_city
+									add_district = district_xz_industrial
+									add_district = district_xz_science
+									add_district = district_xz_trade
+									add_district = district_xz_yunqi
+									add_district = district_xz_danding
+									remove_building = building_commercial_zone
+									add_building = building_capital
+									add_building = building_holo_theatres
+									while = {
+										count = 75
+										create_pop_group = {
+											size = 100
+											species = owner_main_species
+										}
+									}
+								}
+							}
+						}
+						set_fleet_stance = evasive
+						set_fleet_flag = xianzhuo_zhuming_fleet
+						set_location = {
+							target = event_target:xianzhou_position
+							distance = 240
+							angle = random
+						}
+					}
+				}
+				create_fleet = {
+					name = "NAME_XIANZHOU_ALLIANCE_YUQUE"
+					effect = {
+						set_owner = event_target:origin_Xianzhou
+						create_ship = {
+							name = "NAME_XIANZHOU_ALLIANCE_YUQUE"
+							design = xianzhou_planet_fleet_1
+							effect = {
+								starbase = {
+									set_starbase_building = {
+										slot = 1
+										building = arkship_hsr_base_hub
+									}
+									set_starbase_building = {
+										slot = 2
+										building = arkship_hsr_advanced_hub
+									}
+									set_starbase_building = {
+										slot = 3
+										building = arkship_hsr_unity_hub
+									}
+									set_starbase_building = {
+										slot = 4
+										building = arkship_hsr_shield_generator
+									}
+								}
+								fleet = {
+
+								}
+								colony = {
+									remove_building = building_colony_shelter
+									clear_blockers = yes
+									clear_deposits = yes
+									clear_planet_modifiers = yes#防止出现原版殖民地的各种奇怪事件
+									remove_district = district_city
+									add_district = district_xz_city
+									add_district = district_xz_city
+									add_district = district_xz_industrial
+									add_district = district_xz_science
+									add_district = district_xz_trade
+									add_district = district_xz_yunqi
+									add_district = district_xz_danding
+									remove_building = building_commercial_zone
+									add_building = building_capital
+									add_building = building_holo_theatres
+									while = {
+										count = 100
+										create_pop_group = {
+											size = 100
+											species = owner_main_species
+										}
+									}
+								}
+							}
+						}
+						set_fleet_stance = evasive
+						set_fleet_flag = xianzhuo_yuque_fleet
+						set_location = {
+							target = event_target:xianzhou_position
+							distance = 180
+							angle = random
+						}
+					}
+				}
+				create_leader = {
+					name = random
+					species = event_target:origin_Xianzhou.species
+					class = scientist
+					skill = 5
+				}
+				event_target:new_science_ship_target = {
+					assign_leader = last_created_leader
+				}
+				add_basic_resources_effect = { VALUE = 1000 }
+				add_manufactured_resources_effect = { VALUE = 500 }
+				add_advanced_resources_effect = { VALUE = 25 }
+				set_policy = {
+					policy = diplomatic_stance
+					option = diplo_stance_isolationist
+					cooldown = yes
+				}
+				set_policy = {
+					policy = war_philosophy
+					option = no_wars
+					cooldown = yes
+				}
+				set_policy = {
+					policy = orbital_bombardment
+					option = orbital_bombardment_indiscriminate
+					cooldown = yes
+				}
+				set_policy = {
+					policy = resettlement
+					option = resettlement_allowed
+					cooldown = yes
+				}
+				set_policy = {
+					policy = first_contact_protocol
+					option = first_contact_proactive
+					cooldown = yes
+				}
+				set_policy = {
+					policy = border_policy
+					option = border_policy_closed
+					cooldown = yes
+				}
+				set_policy = {
+					policy = economic_policy
+					option = economic_policy_military
+					cooldown = yes
+				}
+				set_policy = {
+					policy = robot_pop_policy
+					option = robot_pops_allowed
+					cooldown = yes
+				}
+				set_policy = {
+					policy = population_controls
+					option = population_controls_allowed
+					cooldown = yes
+				}
+				set_policy = {
+					policy = slavery
+					option = slavery_not_allowed
+					cooldown = yes
+				}
+				set_policy = {
+					policy = purge
+					option = purge_allowed
+					cooldown = yes
+				}
+			}
+		}
+	}
+	set_owner = event_target:origin_Xianzhou
+	set_controller = event_target:origin_Xianzhou
+	set_capital = yes
+
+}
