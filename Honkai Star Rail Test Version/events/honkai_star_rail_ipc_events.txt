@@ -437,6 +437,41 @@ country_event = {
                 set_council_position = councilor_marketing_expansion_department
             }
         }
+        ##真珠
+        SR_leader_creator = {
+            SPECIES_NAME = star_rail_leader
+            SPECIES_CLASS = Star_Rail
+            LEADER_PORTRAIT = zhenzhu
+            SKILL = 1
+            CLASS = official
+            NAME = NAME_zhenzhu
+            GENDER = female
+            HIDEAGE = yes
+            ETHIC = ethic_xenophile
+            CATCH_PHRASE = zhenzhu_catch_phrase
+            DESC = zhenzhu_backstory
+            EVENT_TARGET = zhenzhu_leader
+        }
+        last_created_leader = {
+            remove_all_positive_traits = yes
+            add_trait = {trait = leader_zhenzhu_t1 show_message = no}
+            add_trait = {trait = leader_zhenzhu_t2 show_message = no}
+            add_trait = {trait = leader_zhenzhu_t3 show_message = no}
+            change_background_job = politician
+        }
+        hidden_effect = {
+            SR_hire_leader = {
+                EVENT_TARGET = zhenzhu_leader
+            }
+            set_country_flag = zhenzhu_set
+            last_created_leader = {
+                set_leader_flag = legendary_leader
+                save_global_event_target_as = zhenzhu_leader
+                set_leader_flag = immune_to_negative_traits
+                set_leader_flag = zhenzhu
+                set_council_position = councilor_techniques_developing_department
+            }
+        }
         capital_scope = {
             solar_system = {
                 save_event_target_as = ipc_home_system
@@ -582,6 +617,7 @@ country_event = {
             }
         }
         country_event = { id = hsr_ipc.2020 days = 30 }
+        country_event = { id = hsr_ipc.2050 days = 60 }
     }
 }
 country_event = {
@@ -1051,9 +1087,16 @@ situation_event = {
     }
 	option = {
 		name = hsr_ipc.2021.a
+        custom_tooltip = hsr_ipc.2021.a.desc
         root.owner = {
             add_resource = {
                 influence = 10
+            }
+            hidden_effect = {
+                change_variable = {
+                    which = marketing_expansion_department_influence
+                    value = 0.5
+                }
             }
         }
 	}
@@ -1072,25 +1115,13 @@ country_event = {
     }
 	option = {
 		name = hsr_ipc.2022.a
+        custom_tooltip = hsr_ipc.2022.a.desc
         hidden_effect = {
-            country_event = { id = hsr_ipc.2023 days = 40 }
+            change_variable = {
+                which = techniques_developing_department_influence
+                value = 0.1
+            }
         }
-	}
-}
-country_event = {
-	id = hsr_ipc.2023
-	is_triggered_only = yes
-	title = hsr_ipc.2023.title
-	desc = hsr_ipc.2023.desc
-	picture = GFX_evt_ipc_npc_adventure_1
-	trigger = {
-
-	}
-    immediate = {
-
-    }
-	option = {
-		name = hsr_ipc.2023.a
 	}
 }
 situation_event = {
@@ -1109,6 +1140,7 @@ situation_event = {
     }
 	option = {
 		name = hsr_ipc.2024.a
+        custom_tooltip = hsr_ipc.2024.a.desc
         root.owner = {
             add_resource = {
                 influence = 50
@@ -1126,6 +1158,10 @@ situation_event = {
 				max = @tier3unitymax
 			}
             hidden_effect = {
+                change_variable = {
+                    which = techniques_developing_department_influence
+                    value = 0.1
+                }
                 country_event = { id = hsr_ipc.2025  days = 30}
             }
         }
@@ -1145,6 +1181,7 @@ country_event = {
     }
 	option = {
 		name = hsr_ipc.2025.a
+        custom_tooltip = hsr_ipc.2025.a.desc
         add_monthly_resource_mult = {
             resource = trade
             value = @tier1unityreward
@@ -1155,6 +1192,12 @@ country_event = {
             unity = -500
         }
         hidden_effect = {
+            root.owner = {
+                change_variable = {
+                    which = strategic_investment_department_influence
+                    value = 0.3
+                }
+            }
             event_target:origin_ipc_erxiangleyuan_country = {
                 country_event = { id = hsr_planarcadia.1002 }
             }
@@ -1210,6 +1253,7 @@ situation_event = {
     }
 	option = {
 		name = hsr_ipc.2027.a
+        custom_tooltip = hsr_ipc.2027.a.desc
         root.owner = {
             add_resource = {
                 influence = 50
@@ -1226,6 +1270,16 @@ situation_event = {
 				min = @tier3unitymin
 				max = @tier3unitymax
 			}
+            hidden_effect = {
+                change_variable = {
+                    which = strategic_investment_department_influence
+                    value = 0.3
+                }
+                change_variable = {
+                    which = marketing_expansion_department_influence
+                    value = -0.3
+                }
+            }
         }
 	}
 }
@@ -1246,6 +1300,7 @@ situation_event = {
     option = {
         name = hsr_ipc.2028.a
         custom_tooltip = hsr_ipc.2028.a.desc
+        custom_tooltip = hsr_ipc.2024.a.desc
         root.owner = {
             random_owned_planet = {
                 limit = {
@@ -1254,6 +1309,12 @@ situation_event = {
                 add_modifier = {
                     modifier = ipc_shengyanyuan
                     days = -1
+                }
+            }
+            hidden_effect = {
+                change_variable = {
+                    which = techniques_developing_department_influence
+                    value = 0.1
                 }
             }
         }
@@ -1329,5 +1390,93 @@ situation_event = {
     }
     after = {
         destroy_situation = this
+    }
+}
+#2050
+country_event = {
+    id = hsr_ipc.2050
+    is_triggered_only = yes
+    title = hsr_ipc.2050.title
+    desc = hsr_ipc.2050.desc
+    picture = GFX_evt_conservation_of_two_phase_cunhu
+    trigger = {
+
+    }
+    immediate = {
+        set_variable = {
+            which = marketing_expansion_department_influence
+            value = 3
+        }
+        set_variable = {
+            which = business_consolidation_department_influence
+            value = 3
+        }
+        set_variable = {
+            which = strategic_investment_department_influence
+            value = 3
+        }
+        set_variable = {
+            which = building_materials_logistics_department_influence
+            value = 3
+        }
+        set_variable = {
+            which = techniques_developing_department_influence
+            value = 2
+        }
+        set_variable = {
+            which = human_resources_incentive_department_influence
+            value = 2
+        }
+        set_variable = {
+            which = traditional_project_department_influence
+            value = 2
+        }
+    }
+    option = {
+        name = hsr_ipc.2050.a
+        custom_tooltip = hsr_ipc.2050.a.desc
+        start_situation = {
+            type = situation_conservation_of_two_phase_cunhu
+        }
+        hidden_effect = {
+            random_situation = {
+                limit = {
+                    is_situation_type = situation_conservation_of_two_phase_cunhu
+                }
+                set_situation_approach = situation_conservation_of_two_phase_cunhu_left
+                set_situation_progress = 270
+            }
+        }
+    }
+    option = {
+        name = hsr_ipc.2050.b
+        custom_tooltip = hsr_ipc.2050.b.desc
+        start_situation = {
+            type = situation_conservation_of_two_phase_cunhu
+        }
+        hidden_effect = {
+            random_situation = {
+                limit = {
+                    is_situation_type = situation_conservation_of_two_phase_cunhu
+                }
+                set_situation_approach = situation_conservation_of_two_phase_cunhu_right
+                set_situation_progress = 330
+            }
+        }
+    }
+    option = {
+        name = hsr_ipc.2050.c
+        start_situation = {
+            type = situation_conservation_of_two_phase_cunhu
+        }
+        hidden_effect = {
+            random_situation = {
+                limit = {
+                    is_situation_type = situation_conservation_of_two_phase_cunhu
+                }
+                set_situation_approach = situation_conservation_of_two_phase_cunhu_neutral
+                set_situation_progress = 300
+            }
+        }
     }
 }
