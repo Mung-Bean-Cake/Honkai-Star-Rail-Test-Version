@@ -2143,3 +2143,180 @@ country_event = {
         }
     }
 }
+country_event = {
+    id = path_country.25
+    title = path_country.25.title
+    desc = {
+        trigger = {
+            has_country_flag = dandingsi_win
+        }
+        text = "dandingsi_win_desc"
+    }
+    desc = {
+        trigger = {
+            has_country_flag = dandingsi_failure
+        }
+        text = "dandingsi_failure_desc"
+    }
+    desc = {
+        trigger = {
+            has_country_flag = rough_melting_furnace_win
+        }
+        text = "rough_melting_furnace_win_desc"
+    }
+    desc = {
+        trigger = {
+            has_country_flag = rough_melting_furnace_failure
+        }
+        text = "rough_melting_furnace_failure_desc"
+    }
+    desc = {
+        trigger = {
+            has_country_flag = xianzhou_melting_furnace_win
+        }
+        text = "xianzhou_melting_furnace_win_desc"
+    }
+    desc = {
+        trigger = {
+            has_country_flag = xianzhou_melting_furnace_failure
+        }
+        text = "xianzhou_melting_furnace_failure_desc"
+    }
+    desc = {
+        trigger = {
+            has_country_flag = cloud_knight_training_center_win
+        }
+        text = "cloud_knight_training_center_win_desc"
+    }
+    desc = {
+        trigger = {
+            has_country_flag = cloud_knight_training_center_failure
+        }
+        text = "cloud_knight_training_center_failure_desc"
+    }
+    desc = {
+        trigger = {
+            has_country_flag = dongtian_win
+        }
+        text = "dongtian_win_desc"
+    }
+    desc = {
+        trigger = {
+            has_country_flag = dongtian_failure
+        }
+        text = "dongtian_failure_desc"
+    }
+    picture = xz_market_eve
+    is_triggered_only = yes
+    trigger = {
+        OR = {
+            has_country_flag = xianzhou_dandingsi
+            has_country_flag = rough_melting_furnace
+            has_country_flag = xianzhou_melting_furnace
+            has_country_flag = cloud_knight_training_center
+            has_country_flag = dongtian
+        }
+    }
+    immediate = {
+        remove_country_flag = dandingsi_win
+        remove_country_flag = dandingsi_failure
+        remove_country_flag = rough_melting_furnace_win
+        remove_country_flag = rough_melting_furnace_failure
+        remove_country_flag = xianzhou_melting_furnace_win
+        remove_country_flag = xianzhou_melting_furnace_failure
+        remove_country_flag = cloud_knight_training_center_win
+        remove_country_flag = cloud_knight_training_center_failure
+        remove_country_flag = dongtian_win
+        remove_country_flag = dongtian_failure
+        if = {
+            limit = {
+                has_country_flag = xianzhou_dandingsi
+                NOT = {
+                    has_technology = tech_xianzhou_dandingsi
+                }
+            }
+            remove_country_flag = xianzhou_dandingsi
+            random_list = {
+                50 = {
+                    add_research_option = tech_xianzhou_dandingsi
+                    set_country_flag = dandingsi_win
+                }
+                50 = {
+                    set_country_flag = dandingsi_failure
+                }
+            }
+        }   
+        if = {
+            limit = {
+                has_country_flag = rough_melting_furnace
+                NOT = {
+                    has_technology = tech_rough_melting_furnace
+                }
+            }
+            remove_country_flag = rough_melting_furnace
+            random_list = {
+                50 = {
+                    add_research_option = tech_rough_melting_furnace
+                    set_country_flag = rough_melting_furnace_win
+                }
+                50 = {
+                    set_country_flag = rough_melting_furnace_failure
+                }
+            }
+        }
+        if = {
+            limit = {
+                has_country_flag = xianzhou_melting_furnace
+                NOT = {
+                    has_technology = tech_xianzhou_melting_furnace
+                }
+            }
+            remove_country_flag = xianzhou_melting_furnace
+            random_list = {
+                50 = {
+                    add_research_option = tech_xianzhou_melting_furnace
+                    set_country_flag = xianzhou_melting_furnace_win
+                }
+                50 = {
+                    set_country_flag = xianzhou_melting_furnace_failure
+                }
+            }
+        }
+        if = {
+            limit = {
+                has_country_flag = cloud_knight_training_center
+                NOT = {
+                    has_technology = tech_cloud_knight_training_center
+                }
+            }
+            remove_country_flag = cloud_knight_training_center
+            random_list = {
+                50 = {
+                    add_research_option = tech_cloud_knight_training_center
+                    set_country_flag = cloud_knight_training_center_win
+                }
+                50 = {
+                    set_country_flag = cloud_knight_training_center_failure
+                }
+            }
+        }
+        if = {
+            limit = {
+                has_country_flag = dongtian
+                NOT = {
+                    has_technology = tech_dongtian
+                }
+            }
+            remove_country_flag = dongtian
+            random_list = {
+                50 = {
+                    add_research_option = tech_dongtian
+                    set_country_flag = dongtian_win
+                }
+                50 = {
+                    set_country_flag = dongtian_failure
+                }
+            }
+        }     
+    }
+}
