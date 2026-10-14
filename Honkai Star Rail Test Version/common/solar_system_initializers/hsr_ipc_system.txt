@@ -634,6 +634,9 @@ erxiangleyuan_sysytem = {
     flags = {
         erxiangleyuan_sysytem
     }
+    init_effect = {
+        save_global_event_target_as = erxiangleyuan_sysytem
+    }
     
     usage = origin
     prevent_anomalies = yes
@@ -685,7 +688,7 @@ erxiangleyuan_sysytem = {
 			}
             set_variable = {
                 which = planet_huanyu_pleasure
-                value = this.trigger:free_amenities
+                value = 0
             }
         }
         moon = {
@@ -726,4 +729,42 @@ erxiangleyuan_sysytem = {
         orbit_angle = { min = 90 max = 270 }
         orbit_distance = 70
     }
+}
+DOT_SR_system_ss1 = {
+	name = "craze_system"
+	class = "sc_binary_8"
+	max_instances = 1
+	asteroid_belt = {
+		type = rocky_asteroid_belt
+		radius = 125
+	}
+	usage = custom_empire
+	flags = {  }
+	init_effect = {
+		save_global_event_target_as = tantao_system
+	}
+	planet = {
+		class = star
+		orbit_distance = 0
+		
+	}
+	planet = {
+		name = "craze_planet_0" 
+		class = pc_gaia
+			
+		orbit_angle = { min = 90 max = 270 }
+		orbit_distance = 20
+			
+		size = 40
+		starting_planet = no
+		init_effect = { 
+            set_planet_flag = craze_planet_1
+			save_global_event_target_as = craze_planet_1
+			set_planet_entity = { entity = "gaia_Planet_entity" }
+			clear_blockers = yes
+		}		
+		deposit_blockers = none
+		
+		
+	}
 }

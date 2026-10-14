@@ -1,7 +1,6 @@
 building_phantasmoon_court = {
 	base_buildtime = 1800
-	empire_limit = 1
-	can_build = yes
+	can_build = no
 	can_demolish = no
 	can_be_disabled = yes
 	category = research
@@ -14,7 +13,6 @@ building_phantasmoon_court = {
 	potential = {
 		owner = {has_origin = origin_erxiangleyuan}
 		exists = planet
-		owner = {has_country_flag = haimeixiewan}
 		is_planet_class = pc_erxiangleyuan
 	}
 	destroy_trigger = {
@@ -319,9 +317,11 @@ building_phantasmoon_court = {
 	
 	
 }
+
 building_phantasmoon_court_1 = {
 	base_buildtime = 1800
-	empire_limit = 12
+	empire_limit = 9
+	planet_limit = 1
 	can_build = yes
 	can_demolish = no
 	can_be_disabled = yes
@@ -340,7 +340,14 @@ building_phantasmoon_court_1 = {
 				has_building = building_phantasmoon_court
 			}
 		}
-		is_planet_class = pc_erxiangleyuan
+		owner ={
+			check_variable = {
+			    which = building_phantasmoon_court_1_amount
+			    value < 3
+		}
+		has_technology = tech_building_phantasmoon_court_1
+		}
+		
 	}
 	destroy_trigger = {
 		exists = owner
