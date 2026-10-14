@@ -1811,3 +1811,512 @@ ship_event = {
         }
     }
 }
+country_event = {
+    id = path_country.21
+    hide_window = yes
+    is_triggered_only = yes
+    trigger = {
+        has_origin = origin_StellaronHunter
+        NOT = { has_global_flag = xianzhou_created }
+    }
+    immediate = {
+        set_global_flag = xianzhou_created
+        capital_scope = {
+            solar_system = {
+                spawn_system = {
+                    min_distance >= 5
+                    max_distance <= 20
+                    min_orientation_angle = 24
+                    max_orientation_angle = 90
+                    initializer = xianzhou_ancestral_land
+                    hyperlane = yes
+                }
+            }
+        }
+        xunlie_created_effect = yes
+    }
+}
+espionage_operation_event = {
+    id = path_country.22
+    title = path_country.22.title
+    desc = path_country.22.desc
+    diplomatic = yes
+    espionage_operation = yes
+    is_triggered_only = yes
+    trigger = {
+        exists = from
+    }
+    immediate = {
+        owner = {
+            country_event = {
+                id = path_country.23
+            }
+        }
+    }
+}
+country_event = {
+    id = path_country.23
+    title = path_country.23.title
+    desc = path_country.23.desc
+    is_triggered_only = yes
+    diplomatic = yes
+    custom_gui = xianzhoumarket
+    immediate = {
+        set_variable = {
+            which = xianzhou_market_page
+            value = 1
+        }
+        set_variable = {
+            which = xianzhou_extra_page
+            value = 1
+        }
+    }
+    option = {
+        name = OK
+        default_hide_option = yes
+    } 
+}
+country_event = {
+    id = path_country.24
+    hide_window = yes
+    is_triggered_only = yes
+    trigger = {
+        any_owned_leader = {
+            OR = {
+                has_trait = trait_xz_mingou_cake
+                has_trait = trait_xz_momo_roll
+                has_trait = trait_xz_qiongshi_skewer
+                has_trait = trait_xz_hot_sheep_milk
+                has_trait = trait_xz_soda_douzhir
+                has_trait = trait_xz_abyss_ice_spring
+                has_trait = trait_xz_garlic_pork
+                has_trait = trait_xz_cucumber_chicken
+                has_trait = trait_xz_jiyu_pork
+                has_trait = trait_xz_spicy_beef_offal
+                has_trait = trait_xz_grandma_tofu
+                has_trait = trait_xz_999_meatball
+                has_trait = trait_xz_moon_rice
+                has_trait = trait_xz_soy_chicken
+                has_trait = trait_xz_cinnamon_rib_rice
+                has_trait = trait_xz_jiuhe_banquet
+                has_trait = trait_xz_stone_soup
+                has_trait = trait_xz_glass_boat
+                has_trait = trait_xz_drunk_red_stream
+                has_trait = trait_xz_immortal_happy_tea
+                has_trait = trait_xz_stomach_soup
+                has_trait = trait_xz_soul_pill
+                has_trait = trait_xz_flame_tea
+                has_trait = trait_xz_dragon_well_wine
+                has_trait = trait_xz_willow_nectar
+                has_trait = trait_xz_energy_drink
+                has_trait = trait_xz_buliren_skewer
+                has_trait = trait_xz_vidya_dragon_tea
+            }
+        }
+    }
+    immediate = {
+        every_owned_leader = {
+            # ---- 鸣藕糕 ----
+            if = {
+                limit = {
+                    NOT = { has_leader_flag = trait_xz_mingou_cake }
+                    has_trait = trait_xz_mingou_cake 
+                }
+                remove_trait = trait_xz_mingou_cake
+            }
+            # ---- 貘貘卷 ----
+            if = {
+                limit = {
+                    NOT = { has_leader_flag = trait_xz_momo_roll }
+                    has_trait = trait_xz_momo_roll
+                }
+                remove_trait = trait_xz_momo_roll
+            }
+            # ---- 琼实鸟串 ----
+            if = {
+                limit = {
+                    NOT = { has_leader_flag = trait_xz_qiongshi_skewer }
+                    has_trait = trait_xz_qiongshi_skewer
+                }
+                remove_trait = trait_xz_qiongshi_skewer
+            }
+            # ---- 热浮羊奶 ----
+            if = {
+                limit = {
+                    NOT = { has_leader_flag = trait_xz_hot_sheep_milk }
+                    has_trait = trait_xz_hot_sheep_milk
+                }
+                remove_trait = trait_xz_hot_sheep_milk
+            }
+            # ---- 苏打豆汁儿 ----
+            if = {
+                limit = {
+                    NOT = { has_leader_flag = trait_xz_soda_douzhir }
+                    has_trait = trait_xz_soda_douzhir
+                }
+                remove_trait = trait_xz_soda_douzhir
+            }
+            # ---- 鳞渊冰泉 ----
+            if = {
+                limit = {
+                    NOT = { has_leader_flag = trait_xz_abyss_ice_spring }
+                    has_trait = trait_xz_abyss_ice_spring
+                }
+                remove_trait = trait_xz_abyss_ice_spring
+            }
+            # ---- 蒜苗五花肉 ----
+            if = {
+                limit = {
+                    NOT = { has_leader_flag = trait_xz_garlic_pork }
+                    has_trait = trait_xz_garlic_pork
+                }
+                remove_trait = trait_xz_garlic_pork
+            }
+            # ---- 脆瓜胡辣鸡丁 ----
+            if = {
+                limit = {
+                    NOT = { has_leader_flag = trait_xz_cucumber_chicken }
+                    has_trait = trait_xz_cucumber_chicken
+                }
+                remove_trait = trait_xz_cucumber_chicken
+            }
+            # ---- 鲫香肉丝 ----
+            if = {
+                limit = {
+                    NOT = { has_leader_flag = trait_xz_jiyu_pork }
+                    has_trait = trait_xz_jiyu_pork
+                }
+                remove_trait = trait_xz_jiyu_pork
+            }
+            # ---- 红油乱斩牛杂 ----
+            if = {
+                limit = {
+                    NOT = { has_leader_flag = trait_xz_spicy_beef_offal }
+                    has_trait = trait_xz_spicy_beef_offal
+                }
+                remove_trait = trait_xz_spicy_beef_offal
+            }
+            # ---- 陈婆豆腐 ----
+            if = {
+                limit = {
+                    NOT = { has_leader_flag = trait_xz_grandma_tofu }
+                    has_trait = trait_xz_grandma_tofu
+                }
+                remove_trait = trait_xz_grandma_tofu
+            }
+            # ---- 九九九手打肉丸 ----
+            if = {
+                limit = {
+                    NOT = { has_leader_flag = trait_xz_999_meatball }
+                    has_trait = trait_xz_999_meatball
+                }
+                remove_trait = trait_xz_999_meatball
+            }
+            # ---- 月华饭 ----
+            if = {
+                limit = {
+                    NOT = { has_leader_flag = trait_xz_moon_rice }
+                    has_trait = trait_xz_moon_rice
+                }
+                remove_trait = trait_xz_moon_rice
+            }
+            # ---- 豉油蒸鸡 ----
+            if = {
+                limit = {
+                    NOT = { has_leader_flag = trait_xz_soy_chicken }
+                    has_trait = trait_xz_soy_chicken
+                }
+                remove_trait = trait_xz_soy_chicken
+            }
+            # ---- 肉桂香排盖饭 ----
+            if = {
+                limit = {
+                    NOT = { has_leader_flag = trait_xz_cinnamon_rib_rice }
+                    has_trait = trait_xz_cinnamon_rib_rice
+                }
+                remove_trait = trait_xz_cinnamon_rib_rice
+            }
+            # ---- 至味盛苑「九和宴」 ----
+            if = {
+                limit = {
+                    NOT = { has_leader_flag = trait_xz_jiuhe_banquet }
+                    has_trait = trait_xz_jiuhe_banquet
+                }
+                remove_trait = trait_xz_jiuhe_banquet
+            }
+            # ---- 巧石三味 ----
+            if = {
+                limit = {
+                    NOT = { has_leader_flag = trait_xz_stone_soup }
+                    has_trait = trait_xz_stone_soup
+                }
+                remove_trait = trait_xz_stone_soup
+            }
+            # ---- 琉璃舟 ----
+            if = {
+                limit = {
+                    NOT = { has_leader_flag = trait_xz_glass_boat }
+                    has_trait = trait_xz_glass_boat
+                }
+                remove_trait = trait_xz_glass_boat
+            }
+            # ---- 醉红溪 ----
+            if = {
+                limit = {
+                    NOT = { has_leader_flag = trait_xz_drunk_red_stream }
+                    has_trait = trait_xz_drunk_red_stream
+                }
+                remove_trait = trait_xz_drunk_red_stream
+            }
+            # ---- 仙人快乐茶 ----
+            if = {
+                limit = {
+                    NOT = { has_leader_flag = trait_xz_immortal_happy_tea }
+                    has_trait = trait_xz_immortal_happy_tea
+                }
+                remove_trait = trait_xz_immortal_happy_tea
+            }
+            # ---- 浮羊和胃汤 ----
+            if = {
+                limit = {
+                    NOT = { has_leader_flag = trait_xz_stomach_soup }
+                    has_trait = trait_xz_stomach_soup
+                }
+                remove_trait = trait_xz_stomach_soup
+            }
+            # ---- 养心返魂丹 ----
+            if = {
+                limit = {
+                    NOT = { has_leader_flag = trait_xz_soul_pill }
+                    has_trait = trait_xz_soul_pill
+                }
+                remove_trait = trait_xz_soul_pill
+            }
+            # ---- 烈焰浓茶 ----
+            if = {
+                limit = {
+                    NOT = { has_leader_flag = trait_xz_flame_tea }
+                    has_trait = trait_xz_flame_tea
+                }
+                remove_trait = trait_xz_flame_tea
+            }
+            # ---- 龙泉老窖 ----
+            if = {
+                limit = {
+                    NOT = { has_leader_flag = trait_xz_dragon_well_wine }
+                    has_trait = trait_xz_dragon_well_wine
+                }
+                remove_trait = trait_xz_dragon_well_wine
+            }
+            # ---- 柳林琼浆 ----
+            if = {
+                limit = {
+                    NOT = { has_leader_flag = trait_xz_willow_nectar }
+                    has_trait = trait_xz_willow_nectar
+                }
+                remove_trait = trait_xz_willow_nectar
+            }
+            # ---- 西鹏特饮 ----
+            if = {
+                limit = {
+                    NOT = { has_leader_flag = trait_xz_energy_drink }
+                    has_trait = trait_xz_energy_drink
+                }
+                remove_trait = trait_xz_energy_drink
+            }
+            # ---- 步离人烤串 ----
+            if = {
+                limit = {
+                    NOT = { has_leader_flag = trait_xz_buliren_skewer }
+                    has_trait = trait_xz_buliren_skewer
+                }
+                remove_trait = trait_xz_buliren_skewer
+            }
+            # ---- 持明龙髓茶 ----
+            if = {
+                limit = {
+                    NOT = { has_leader_flag = trait_xz_vidya_dragon_tea }
+                    has_trait = trait_xz_vidya_dragon_tea
+                }
+                remove_trait = trait_xz_vidya_dragon_tea
+            }
+        }
+    }
+}
+country_event = {
+    id = path_country.25
+    title = path_country.25.title
+    desc = {
+        trigger = {
+            has_country_flag = dandingsi_win
+        }
+        text = "dandingsi_win_desc"
+    }
+    desc = {
+        trigger = {
+            has_country_flag = dandingsi_failure
+        }
+        text = "dandingsi_failure_desc"
+    }
+    desc = {
+        trigger = {
+            has_country_flag = rough_melting_furnace_win
+        }
+        text = "rough_melting_furnace_win_desc"
+    }
+    desc = {
+        trigger = {
+            has_country_flag = rough_melting_furnace_failure
+        }
+        text = "rough_melting_furnace_failure_desc"
+    }
+    desc = {
+        trigger = {
+            has_country_flag = xianzhou_melting_furnace_win
+        }
+        text = "xianzhou_melting_furnace_win_desc"
+    }
+    desc = {
+        trigger = {
+            has_country_flag = xianzhou_melting_furnace_failure
+        }
+        text = "xianzhou_melting_furnace_failure_desc"
+    }
+    desc = {
+        trigger = {
+            has_country_flag = cloud_knight_training_center_win
+        }
+        text = "cloud_knight_training_center_win_desc"
+    }
+    desc = {
+        trigger = {
+            has_country_flag = cloud_knight_training_center_failure
+        }
+        text = "cloud_knight_training_center_failure_desc"
+    }
+    desc = {
+        trigger = {
+            has_country_flag = dongtian_win
+        }
+        text = "dongtian_win_desc"
+    }
+    desc = {
+        trigger = {
+            has_country_flag = dongtian_failure
+        }
+        text = "dongtian_failure_desc"
+    }
+    picture = xz_market_eve
+    is_triggered_only = yes
+    trigger = {
+        OR = {
+            has_country_flag = xianzhou_dandingsi
+            has_country_flag = rough_melting_furnace
+            has_country_flag = xianzhou_melting_furnace
+            has_country_flag = cloud_knight_training_center
+            has_country_flag = dongtian
+        }
+    }
+    immediate = {
+        remove_country_flag = dandingsi_win
+        remove_country_flag = dandingsi_failure
+        remove_country_flag = rough_melting_furnace_win
+        remove_country_flag = rough_melting_furnace_failure
+        remove_country_flag = xianzhou_melting_furnace_win
+        remove_country_flag = xianzhou_melting_furnace_failure
+        remove_country_flag = cloud_knight_training_center_win
+        remove_country_flag = cloud_knight_training_center_failure
+        remove_country_flag = dongtian_win
+        remove_country_flag = dongtian_failure
+        if = {
+            limit = {
+                has_country_flag = xianzhou_dandingsi
+                NOT = {
+                    has_technology = tech_xianzhou_dandingsi
+                }
+            }
+            remove_country_flag = xianzhou_dandingsi
+            random_list = {
+                50 = {
+                    add_research_option = tech_xianzhou_dandingsi
+                    set_country_flag = dandingsi_win
+                }
+                50 = {
+                    set_country_flag = dandingsi_failure
+                }
+            }
+        }   
+        if = {
+            limit = {
+                has_country_flag = rough_melting_furnace
+                NOT = {
+                    has_technology = tech_rough_melting_furnace
+                }
+            }
+            remove_country_flag = rough_melting_furnace
+            random_list = {
+                50 = {
+                    add_research_option = tech_rough_melting_furnace
+                    set_country_flag = rough_melting_furnace_win
+                }
+                50 = {
+                    set_country_flag = rough_melting_furnace_failure
+                }
+            }
+        }
+        if = {
+            limit = {
+                has_country_flag = xianzhou_melting_furnace
+                NOT = {
+                    has_technology = tech_xianzhou_melting_furnace
+                }
+            }
+            remove_country_flag = xianzhou_melting_furnace
+            random_list = {
+                50 = {
+                    add_research_option = tech_xianzhou_melting_furnace
+                    set_country_flag = xianzhou_melting_furnace_win
+                }
+                50 = {
+                    set_country_flag = xianzhou_melting_furnace_failure
+                }
+            }
+        }
+        if = {
+            limit = {
+                has_country_flag = cloud_knight_training_center
+                NOT = {
+                    has_technology = tech_cloud_knight_training_center
+                }
+            }
+            remove_country_flag = cloud_knight_training_center
+            random_list = {
+                50 = {
+                    add_research_option = tech_cloud_knight_training_center
+                    set_country_flag = cloud_knight_training_center_win
+                }
+                50 = {
+                    set_country_flag = cloud_knight_training_center_failure
+                }
+            }
+        }
+        if = {
+            limit = {
+                has_country_flag = dongtian
+                NOT = {
+                    has_technology = tech_dongtian
+                }
+            }
+            remove_country_flag = dongtian
+            random_list = {
+                50 = {
+                    add_research_option = tech_dongtian
+                    set_country_flag = dongtian_win
+                }
+                50 = {
+                    set_country_flag = dongtian_failure
+                }
+            }
+        }     
+    }
+}

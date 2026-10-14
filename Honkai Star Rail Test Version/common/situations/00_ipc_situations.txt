@@ -570,3 +570,208 @@ situation_various_world_reconstruction_plans_erxiangleyuan = {
 		}
 	}
 }
+situation_conservation_of_two_phase_cunhu = {
+	picture = GFX_evt_conservation_of_two_phase_cunhu
+	#complete_icon_frame = GFX_situation_outcome_frame_red
+	complete_icon = GFX_situation_weapon_cunhu
+	#fail_icon_frame = GFX_situation_outcome_frame_red
+	fail_icon = GFX_situation_order_cunhu
+	category = neutral
+	progress_direction = bidirectional
+	permanent = yes
+	situation_log_category = empire_concerns
+	initial_progress = 300
+	on_fail = {
+		hidden_effect = {
+			# This is here just to silence the error log
+		}
+	}
+
+	on_progress_complete = {
+		hidden_effect = {
+			# This is here just to silence the error log
+		}
+	}
+	stages = {
+		stage_left_3 = {
+			icon = GFX_situation_stage_3
+			icon_background = GFX_situation_stage_frame_blue
+			end = 50
+			modifier = {
+				branch_office_value_mult = 0.5
+				commercial_pact_mult = 0.5
+				country_border_friction_mult = -0.25
+				country_trust_cap_add = 50
+				country_trust_growth = 0.33
+				country_subject_trust_cap_add = 50
+				country_subject_acceptance_add = 25
+				diplo_weight_mult = 0.25
+				country_produces_mult = 0.2
+				divided_patrongage_max_subjects = 3
+				country_naval_capacity_contribution_from_subjects_mult = 0.15
+				specialist_subject_conversion_time_mult = -0.2
+			}
+		}
+		stage_left_2 = {
+			icon = GFX_situation_stage_2
+			icon_background = GFX_situation_stage_frame_blue
+			end = 150
+			modifier = {
+				country_border_friction_mult = -0.15
+				country_trust_cap_add = 25
+				country_trust_growth = 0.15
+				country_subject_trust_cap_add = 25
+				country_subject_acceptance_add = 15
+				diplo_weight_mult = 0.15
+				country_produces_mult = 0.1
+				divided_patrongage_max_subjects = 1
+			}
+		}
+		stage_left_1 = {
+			icon = GFX_situation_stage_1
+			icon_background = GFX_situation_stage_frame_blue
+			end = 250
+			modifier = {
+				country_border_friction_mult = -0.15
+				country_trust_cap_add = 25
+				country_trust_growth = 0.15
+				diplo_weight_mult = 0.1
+				country_produces_mult = 0.05
+			}
+		}
+		stage_neutral = {
+			icon = GFX_situation_stage_balanced
+			icon_background = GFX_situation_stage_frame_yellow
+			end = 350
+		}
+		stage_right_1 = {
+			icon = GFX_situation_stage_1
+			icon_background = GFX_situation_stage_frame_orange
+			end = 450
+			modifier = {
+				ships_upkeep_mult = -0.1
+				country_naval_cap_mult = 0.1
+				command_limit_mult = 0.1
+				starbase_shipyard_build_speed_mult = 0.1
+				empire_size_systems_mult = -0.2
+			}
+		}
+		stage_right_2 = {
+			icon = GFX_situation_stage_2
+			icon_background = GFX_situation_stage_frame_orange
+			end = 550
+			modifier = {
+				damage_vs_rival_mult = 0.2
+				country_naval_cap_mult = 0.2
+				command_limit_mult = 0.2
+				starbase_shipyard_build_speed_mult = 0.1
+				starbase_shipyard_build_cost_mult = -0.1
+				empire_size_systems_mult = -0.2
+				ships_upkeep_mult = -0.15
+				ship_experience_gain_mult = 0.3
+			}
+		}
+		stage_right_3 = {
+			icon = GFX_situation_stage_3
+			icon_background = GFX_situation_stage_frame_orange
+			end = 600
+			modifier = {
+				damage_vs_rival_mult = 0.3
+				country_naval_cap_mult = 0.3
+				command_limit_mult = 0.3
+				starbase_shipyard_build_speed_mult = 0.15
+				starbase_shipyard_build_cost_mult = -0.15
+				empire_size_systems_mult = -0.25
+				ships_upkeep_mult = -0.2
+				ship_experience_gain_mult = 0.5
+				ship_weapon_damage = 0.25
+				ship_fire_rate_mult = 0.25
+				ship_orbital_bombardment_mult = 0.25
+				ship_damage_against_starbases_mult = 0.25
+			}
+		}
+	}
+	approach = {
+		name = situation_conservation_of_two_phase_cunhu_left
+		icon = GFX_situation_approach_handshake
+		icon_background = GFX_situation_approach_bg_green
+		on_select = {
+
+		}
+		potential = {
+
+		}
+		modifier = {
+			country_base_influence_produces_add = 1
+			diplo_weight_mult = 0.1
+			country_trade_produces_mult = 0.1
+			country_phase_order_cunhu_mult = 0.5
+		}
+		default = yes
+	}
+	approach = {
+		name = situation_conservation_of_two_phase_cunhu_neutral
+		icon = GFX_situation_approach_balance_sheet
+		icon_background = GFX_situation_approach_bg_green
+		on_select = {
+
+		}
+		potential = {
+
+		}
+		modifier = {
+
+		}
+	}
+	approach = {
+		name = situation_conservation_of_two_phase_cunhu_right
+		icon = GFX_situation_approach_fleet
+		icon_background = GFX_situation_approach_bg_red
+		on_select = {
+
+		}
+		potential = {
+
+		}
+		modifier = {
+			country_war_exhaustion_mult = -0.10
+			ship_weapon_damage = 0.1
+			country_claim_influence_cost_mult = -0.1
+			country_phase_weapon_cunhu_mult = 0.5
+		}
+	}
+	on_monthly = {
+		events = {
+
+		}
+		random_events = {
+			1200 = 0
+		}
+	}
+	monthly_progress = {
+		base = 0
+		modifier = {
+			add = -1
+			desc = situation_conservation_of_two_phase_cunhu_left
+			current_situation_approach = situation_conservation_of_two_phase_cunhu_left
+		}
+		modifier = {
+			add = owner.value:hsr_add_mult_value|BASEVAR|modifier:country_phase_order_cunhu_mult|VAR1|-1|
+			desc = mod_country_phase_order_cunhu_mult
+		}
+		modifier = {
+			add = owner.modifier:country_phase_weapon_cunhu_mult
+			desc = mod_country_phase_weapon_cunhu_mult
+		}
+		modifier = {
+			add = 1
+			desc = situation_conservation_of_two_phase_cunhu_right
+			current_situation_approach = situation_conservation_of_two_phase_cunhu_right
+		}
+		modifier = {
+			add = 0
+			desc = situation_conservation_of_two_phase_cunhu_neutral
+			current_situation_approach = situation_conservation_of_two_phase_cunhu_neutral
+		}
+	}
+}
