@@ -1,0 +1,254 @@
+namespace = craze
+#10次汇聚愿力
+country_event = {
+	id = craze.1
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		
+		check_variable = {
+			which = the_craze_variable
+			value >=10
+		}
+	}
+
+	immediate = {
+		set_country_flag = the_craze_crisis_1
+		random_owned_planet = {
+			limit = {is_capital = yes}
+			add_modifier = {
+				modifier = planet_tantao_pollution_1
+				days = -1
+			}
+		}
+		country_event = {
+			id = craze.2
+		}
+	}
+}
+
+country_event = {
+	id = craze.2
+	title = craze.2_title
+	desc = craze.2_desc
+	picture = GFX_craze_pollute
+	is_triggered_only = yes
+
+	option = {
+		name = craze.2_op_1
+		start_situation = {
+			type = situation_craze_situation_1
+		}
+	}
+
+	option = {
+		name = craze.2_op_2
+		set_country_flag = flag_craze.2_op_2
+		country_event = {
+			id = craze.3
+			days = 180
+		}
+	}
+	
+}
+
+country_event = {
+	id = craze.3
+	title = craze.3_title
+	desc = craze.3_desc
+	picture = GFX_craze_pollute
+	is_triggered_only = yes
+
+	immediate = {
+		random_owned_planet = {
+			limit = {is_capital = yes}
+			hidden_effect = {remove_modifier = planet_tantao_pollution_1}
+			add_modifier = {
+				modifier = planet_tantao_pollution_2
+				days = -1
+			}
+		}
+		start_situation = {
+			type = situation_craze_situation_1
+		}
+	}
+}
+#————————二阶段
+country_event = {
+	id = craze.4
+	hide_window = yes
+	is_triggered_only = yes
+
+	immediate = {
+		#已有殖民星球，否则殖民下方星球
+		random_system = {
+			limit = {
+				owner = {
+					is_ai = no
+					has_origin = origin_erxiangleyuan
+				}
+			    has_planet_class = pc_erxiangleyuan
+			}
+			spawn_system = {
+			    initializer = DOT_SR_system_ss1
+			        max_distance = 130
+			        min_distance = 70
+			        hyperlane = yes
+			        direction = rimwards
+		    }
+		}
+		
+
+		random_owned_planet = {
+			limit= {
+				is_capital = no
+				distance = {
+					source = event_target:erxiangleyuan_sysytem
+					min_jumps = 1
+					max_jumps = 15
+				}
+			}
+			hidden_effect = {
+				save_global_event_target_as = craze_planet_0
+				set_planet_flag = craze_planet_0
+			}
+		}	
+	}
+}
+country_event = {
+	id = craze.5
+	title = craze.5_title
+	desc = craze.5_desc
+	picture = GFX_evt_arena
+	is_triggered_only = yes
+
+	trigger = {
+		any_owned_planet = {
+			has_planet_flag = craze_planet_0
+		}
+		owner = {
+			not = {has_country_flag = craze_planet_1}
+		}
+	}
+
+	immediate = {
+		set_country_flag = craze_planet_1
+		enable_special_project = {
+			name = the_craze_planet
+			location = event_target:craze_planet_0
+			owner = root
+		}
+		event_target:craze_planet_0 = {
+			add_modifier = {
+				modifier = planet_tantao_pollution_6
+				days = -1
+			}
+		}
+	}
+}
+country_event = {
+	id = craze.6
+	title = craze.5_title
+	desc = craze.5_desc
+	picture = GFX_evt_arena
+	is_triggered_only = yes
+
+	trigger = {
+		any_owned_planet = {
+			has_planet_flag = craze_planet_1
+		}
+		owner = {
+			not = {has_country_flag = craze_planet_1}
+		}
+	}
+	immediate = {
+		set_country_flag = craze_planet_1
+		enable_special_project = {
+			name = the_craze_planet
+			location = event_target:craze_planet_1
+			owner = root
+		}
+		event_target:craze_planet_1 = {
+			add_modifier = {
+				modifier = planet_tantao_pollution_6
+				days = -1
+			}
+		}
+	}
+}
+
+country_event = {
+	id = craze.7
+	title = craze.7_title
+	desc = craze.7_desc
+	picture = GFX_evt_smugglers_in_bar
+	is_triggered_only = yes
+
+	
+	immediate = {
+		set_variable = {
+			which = building_phantasmoon_court_1_amount
+			value = 0
+		}
+	}
+
+	option = {
+		name = craze.7_op_1
+		add_tech_progress = {
+			tech = tech_building_phantasmoon_court_1
+			progress = 0.1
+		}
+		
+	}
+	option = {
+		name = craze.7_op_2
+		add_tech_progress = {
+			tech = tech_building_phantasmoon_court_1
+			progress = 0.1
+		}
+		enable_special_project = {
+			name = the_tantao_power
+			location = event_target:craze_planet_1
+			owner = root
+		}
+	}
+}
+
+planet_event = {
+	id = craze.8
+	title = craze.8_title
+	desc = craze.8_desc
+	picture = GFX_evt_news_room
+	fire_only_once = yes
+
+	trigger = {
+		has_building = building_phantasmoon_court_1
+	}
+
+	immediate = {
+		remove_modifier = planet_tantao_pollution_6
+	}
+	option = {
+		name = craze.8_op_1
+		owner = {
+			country_event = {id = craze.9 days = 1}
+		}
+	}
+}
+country_event = {
+	id = craze.9
+	title = craze.9_title
+	desc = craze.9_desc
+	picture = GFX_evt_nomad_contracts
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = craze.9_op_1
+		set_variable = {
+			which = the_craze_crisis_name_0
+			value = 0
+		}
+	}
+}

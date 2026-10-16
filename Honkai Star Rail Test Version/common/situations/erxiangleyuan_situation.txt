@@ -1,0 +1,270 @@
+situation_craze_situation_1 = {
+	picture = GFX_craze_pollute
+	complete_icon_frame = GFX_situation_outcome_frame_blue
+	complete_icon = GFX_situation_outcome_positive
+	on_progress_complete = {
+		custom_tooltip = situation_craze_situation_1_finish
+		hidden_effect = {
+			hidden_effect = { destroy_situation = this }
+			
+		}
+		set_situation_locked = yes
+	}
+	stages = {
+		situation_craze_situation_1 = {
+			icon = GFX_situation_stage_1
+			icon_background = GFX_situation_stage_frame_blue
+			end = 5
+			
+			custom_tooltip = situation_craze_situation_1_desc
+		}
+		situation_craze_situation_1 = {
+			icon = GFX_situation_stage_2
+			icon_background = GFX_situation_stage_frame_blue
+			end = 15
+			on_first_enter = {
+				owner = {
+				if = {
+					limit = {owner = {has_country_flag = flag_craze.2_op_2}}
+					if = {
+						limit = {owner = {has_country_flag = craze_situation_1_approach_2}}
+						random_owned_planet = {
+							limit = {is_capital = yes}
+							hidden_effect = {remove_modifier = planet_tantao_pollution_2}
+							add_modifier = {modifier = planet_tantao_pollution_1 days = -1}
+						}
+					}
+					if = {
+						limit = {owner = {has_country_flag = craze_situation_1_approach_3}}
+						random_owned_planet = {
+							limit = {is_capital = yes}
+							hidden_effect = {remove_modifier = planet_tantao_pollution_2}
+							add_modifier = {modifier = planet_tantao_pollution_3 days = -1}
+						}
+					}
+				}
+				else_if = {
+					limit = {owner = {not = {has_country_flag = flag_craze.2_op_2}}}
+					if = {
+						limit = {owner = {has_country_flag = craze_situation_1_approach_2}}
+						random_owned_planet = {
+							limit = {is_capital = yes}
+							hidden_effect = {remove_modifier = planet_tantao_pollution_1}
+						}
+						owner = {
+							remove_country_flag = the_craze_crisis_1
+							random_situation = {
+								limit = {is_situation_type = situation_craze_situation_1}
+								destroy_situation = this
+							}
+							set_variable = {
+								which = the_craze_variable
+								value = 0
+							}
+						}
+					}
+					if = {
+						limit = {owner = {has_country_flag = craze_situation_1_approach_3}}
+						random_owned_planet = {
+							limit = {is_capital = yes}
+							hidden_effect = {remove_modifier = planet_tantao_pollution_1}
+							add_modifier = {modifier = planet_tantao_pollution_2 days = -1}
+						}
+					}
+				}
+				}
+				
+			}
+			
+			custom_tooltip = situation_craze_situation_1_desc
+		}
+		situation_craze_situation_1 = {
+			icon = GFX_situation_stage_3
+			icon_background = GFX_situation_stage_frame_blue
+			end = 20
+			on_first_enter = {
+				owner = {
+				if = {
+					limit = {owner = {has_country_flag = flag_craze.2_op_2}}
+					if = {
+						limit = {owner = {has_country_flag = craze_situation_1_approach_2}}
+						random_owned_planet = {
+							limit = {is_capital = yes}
+							hidden_effect = {remove_modifier = planet_tantao_pollution_1}
+						}
+						owner = {
+							remove_country_flag = the_craze_crisis_1
+							random_situation = {
+								limit = {is_situation_type = situation_craze_situation_1}
+								destroy_situation = this
+							}
+							set_variable = {
+								which = the_craze_variable
+								value = 0
+							}
+						}
+					}
+					if = {
+						limit = {owner = {has_country_flag = craze_situation_1_approach_3}}
+						random_owned_planet = {
+							limit = {is_capital = yes}
+							hidden_effect = {remove_modifier = planet_tantao_pollution_3}
+							add_modifier = {modifier = planet_tantao_pollution_4 days = -1}
+						}
+					}
+				}
+				else_if = {
+					limit = {owner = {not = {has_country_flag = flag_craze.2_op_2}}}
+					limit = {owner = {has_country_flag = craze_situation_1_approach_3}}
+					random_owned_planet = {
+						limit = {is_capital = yes}
+						hidden_effect = {remove_modifier = planet_tantao_pollution_2}
+						add_modifier = {modifier = planet_tantao_pollution_3 days = -1}
+					}
+				}
+				}
+				
+			}
+			
+			custom_tooltip = situation_craze_situation_1_desc
+		}
+		situation_craze_situation_1 = {
+			icon = GFX_situation_stage_4
+			icon_background = GFX_situation_stage_frame_blue
+			end = 30
+			on_first_enter = {
+				owner = {
+				if = {
+					limit = {owner = {has_country_flag = flag_craze.2_op_2} owner = {has_country_flag = craze_situation_1_approach_3}}
+					random_owned_planet = {
+						limit = {is_capital = yes}
+						hidden_effect = {remove_modifier = planet_tantao_pollution_4}
+						add_modifier = {modifier = planet_tantao_pollution_4 days = -1}
+					}
+					
+				}
+				else_if = {
+					limit = {owner = {not = {has_country_flag = flag_craze.2_op_2}}owner = {has_country_flag = craze_situation_1_approach_3}}
+					random_owned_planet = {
+							limit = {is_capital = yes}
+							hidden_effect = {remove_modifier = planet_tantao_pollution_3}
+							add_modifier = {modifier = planet_tantao_pollution_4 days = -1}
+					}
+				}
+				}
+				
+			}
+			
+			custom_tooltip = situation_craze_situation_1_desc
+		}
+		situation_craze_situation_1 = {
+			icon = GFX_situation_stage_5
+			icon_background = GFX_situation_stage_frame_blue
+			end = 40
+			on_first_enter = {
+				owner = {
+				if = {
+					limit = {owner = {has_country_flag = flag_craze.2_op_2} owner = {has_country_flag = craze_situation_1_approach_3}}
+					random_owned_planet = {
+						limit = {is_capital = yes}
+						hidden_effect = {remove_modifier = planet_tantao_pollution_4}
+						add_modifier = {modifier = planet_tantao_pollution_5 days = -1}
+					}
+					owner = {
+						country_event = {
+							id = craze.4
+						}
+					}
+				}
+				else_if = {
+					limit = {owner = {not = {has_country_flag = flag_craze.2_op_2}} owner = {has_country_flag = craze_situation_1_approach_3}}
+					random_owned_planet = {
+						limit = {is_capital = yes}
+						hidden_effect = {remove_modifier = planet_tantao_pollution_4}
+						add_modifier = {modifier = planet_tantao_pollution_5 days = -1}
+					}
+					owner = {
+						country_event = {
+							id = craze.4
+						}
+					}
+				}
+				}
+				
+			}
+			
+			custom_tooltip = situation_craze_situation_1_desc
+		}
+		
+		
+	}
+	
+
+	approach = {
+		name = craze_situation_1_approach_1
+		icon = GFX_situation_approach_balance_sheet
+		icon_background = GFX_situation_approach_bg_red
+		
+		allow = {
+			owner= {
+				not = {
+					or = {
+						has_country_flag = craze_situation_1_approach_2
+						has_country_flag = craze_situation_1_approach_3
+					}
+				}
+			}
+		}
+		
+	}
+	approach = {
+		name = craze_situation_1_approach_2
+		icon = GFX_situation_approach_balance_sheet
+		icon_background = GFX_situation_approach_bg_green
+		on_select = {
+			owner = {set_country_flag = craze_situation_1_approach_2}
+		}
+		
+		allow = {
+			custom_tooltip = {
+				fail_text = craze_situation_1_approach_fail
+				owner= {not = {has_country_flag = craze_situation_1_approach_3}}
+			}
+			
+		}
+	}
+	approach = {
+		name = craze_situation_1_approach_3
+		icon = GFX_situation_approach_balance_sheet
+		icon_background = GFX_situation_approach_bg_green
+		on_select = {
+			owner = {set_country_flag = craze_situation_1_approach_3}
+			
+		}
+		
+		allow = {
+			custom_tooltip = {
+				fail_text = craze_situation_1_approach_fail
+				owner= {not = {has_country_flag = craze_situation_1_approach_2}}
+			}
+			
+		}
+	}
+
+	on_monthly = {
+		
+	}
+	monthly_progress = {
+		base = 0
+		modifier = {
+			add = 5
+			desc = string_current_approach
+			current_situation_approach = craze_situation_1_approach_2
+		}
+		 modifier = {
+			add = 5
+			desc = string_current_approach
+			current_situation_approach = craze_situation_1_approach_3
+		}
+	}
+}

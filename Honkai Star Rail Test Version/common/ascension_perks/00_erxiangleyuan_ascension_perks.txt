@@ -1,0 +1,49 @@
+ap_the_craze_crisis = {
+	potential = {
+		has_nemesis = yes
+		has_origin = origin_erxiangleyuan
+		is_wilderness_empire = no
+	}
+
+	possible = {
+		owner = {
+			has_country_flag = haimeixiewan
+		}
+		custom_tooltip = {
+			fail_text = "requires_independence"
+			is_subject = no
+		}
+		if = {	
+				OR = {
+					owner = { has_origin = origin_erxiangleyuan}
+					
+				}	
+			custom_tooltip = {
+				fail_text = "requires_ascension_perks_3"
+				#num_ascension_perks > 2
+			}
+			NOR = {
+				is_pacifist = yes
+				has_civic = civic_machine_servitor
+				has_valid_civic = civic_hive_familiar_face
+			}
+		}
+	}
+
+	on_enabled = {
+		hidden_effect = {
+			#set_ai_personality = became_the_crisis
+			#country_event = { id = timeline.69 } # Timeline Become the crisis
+		}
+		activate_crisis_progression = endless_party 
+	}
+
+	modifier = {
+		
+	}
+
+	ai_weight= {
+		factor = 0
+	}
+		
+}

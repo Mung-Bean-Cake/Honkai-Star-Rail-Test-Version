@@ -1,0 +1,489 @@
+###############
+#
+# CRISIS OBJECTIVES
+# (Previously 'MEANS')
+#
+###############
+
+# crisobj_name = {
+#	reward = 1			# The menace reward given when this objective is completed
+# }
+#
+# OR
+#
+# crisobj_name = {
+#	potential = {}		# Potential trigger (This = country). Defines availability of this objective to the country. The trigger is evaluated daily.
+#	reward = {			# The base menace reward given when this objective is completed
+#		base = 100
+#
+#		modifier = {	# Modifier(s) that adjust the reward amount
+#			factor = 2
+#			owner = { is_xenophobe = yes }
+#		}
+#	}
+# }
+
+### Galactic Nemesis ###
+
+crisobj_destroy_empires = {
+	reward = {
+		base = 700
+		complex_trigger_modifier = { #subtract 25 for each playable country that exists
+			trigger = count_playable_country
+			mode = subtract
+			mult = 25
+		}
+		round_to = 50 	#we want a solid number
+		min = 100 		#and we don't want less than 100
+	}
+}
+
+crisobj_destroy_enemy_ships = {
+	reward = {
+		base = 3000
+		divide = trigger:num_galaxy_systems 	#on huge, this is 3. On smallest, it is 15
+		round = yes 							#we don't want 3.124 menace
+		min = 3									#just in case
+	}
+}
+
+crisobj_destroy_starbases = {
+	reward = {
+		base = 3000
+		divide = trigger:num_galaxy_systems 	#on huge, this is 3. On smallest, it is 15
+		round = yes 							#we don't want 3.124 menace
+		min = 3									#just in case
+	}
+}
+
+crisobj_purge_pops = {
+	reward = {
+		base = 3000
+		divide = trigger:num_galaxy_systems 	#on huge, this is 3. On smallest, it is 15
+		complex_trigger_modifier = { 			#fewer worlds => more menace from purging
+			trigger = check_galaxy_setup_value
+			parameters = { setting = habitable_worlds_scale }
+			mode = divide
+		}
+		round = yes 							#we don't want 3.124 menace
+		min = 3									#just in case
+	}
+}
+
+crisobj_destroy_worlds = {
+	reward = {
+		base = 150000
+		divide = trigger:num_galaxy_systems 	#on huge, this is 100. On smallest, it is 500
+		complex_trigger_modifier = { 			#fewer worlds => more menace from destroying one
+			trigger = check_galaxy_setup_value
+			parameters = { setting = habitable_worlds_scale }
+			mode = divide
+		}
+		round_to = 50 								#we don't want 127.5 menace
+		min = 150									#just in case
+	}
+}
+
+crisobj_conquer_worlds = {
+	reward = {
+		base = 100000
+		divide = trigger:num_galaxy_systems 	#on huge, this is 150. On smallest, it is 750
+		complex_trigger_modifier = { 			#fewer worlds => more menace from taking one
+			trigger = check_galaxy_setup_value
+			parameters = { setting = habitable_worlds_scale }
+			mode = divide
+		}
+		round_to = 50 								#we don't want 127.5 menace
+		min = 100									#just in case
+	}
+}
+
+crisobj_vassalise_empires = {
+	reward = {
+		base = 300
+		complex_trigger_modifier = { #subtract 25 for each playable country that exists
+			trigger = count_playable_country
+			mode = subtract
+			mult = 25
+		}
+		round_to = 50 	#we want a solid number
+		min = 100 		#and we don't want less than 100
+	}
+}
+
+crisobj_have_vassals = {
+	reward = {
+		base = 35
+		complex_trigger_modifier = { #subtract 2.5 for each playable country that exists
+			trigger = count_playable_country
+			mode = subtract
+			mult = 2.5
+		}
+		round_to = 5 	#we want a solid number
+		min = 10 		#and we don't want less than 10
+	}
+	recurring = yes
+}
+
+crisobj_perform_upsetting_operations = {
+	reward = {
+		base = 50
+		complex_trigger_modifier = { #subtract 2.5 for each playable country that exists
+			trigger = count_playable_country
+			mode = subtract
+			mult = 2.5
+		}
+		round_to = 5 	#we want a solid number
+		min = 10 		#and we don't want less than 10
+	}
+}
+
+crisobj_be_in_breach_of_galcom_law = {
+	reward = {
+		base = 200
+		complex_trigger_modifier = { #subtract a bunch for each playable country that exists
+			trigger = count_playable_country
+			mode = subtract
+			mult = 18
+		}
+		complex_trigger_modifier = { #but refund a bit for each member of the galcom that you are annoying
+			trigger = count_galcom_member
+			mode = add
+			mult = 8
+		}
+		round_to = 10 	#we want a solid number
+		min = 50 		#and we don't want less than 50
+	}
+	recurring = yes
+}
+
+
+### Cosmogenesis Objectives ###
+
+crisobj_neural_chips = { #Fire on Monthly?
+	reward = {
+		base = 0
+		add = cosmogenesis_world_advanced_logic_produced
+		round = yes 							#we don't want 3.124 menace
+		min = 0								#just in case
+	}
+	recurring = yes
+}
+
+crisobj_research_tech = {
+	reward = {
+		base = 100
+		complex_trigger_modifier = { #subtract 10 for each playable country that exists
+			trigger = count_playable_country
+			mode = subtract
+			mult = 10
+		}
+		round_to = 5	#we want a solid number
+		min = 10		#and we don't want less than 50
+	}
+}
+
+crisobj_research_thesis = { #Also use for the Vultaum Projects
+	reward = {
+		base = 8000
+		complex_trigger_modifier = { #subtract 400 for each playable country that exists
+			trigger = count_playable_country
+			mode = subtract
+			mult = 400
+		}
+		round_to = 500 	#we want a solid number
+		min = 1000 		#and we don't want less than 1000
+	}
+}
+
+crisobj_have_scholarium_vassals = {
+	potential = {
+		has_overlord_dlc = yes
+	}
+	reward = {
+		base = 150
+		complex_trigger_modifier = { #subtract 10 for each playable country that exists
+			trigger = count_playable_country
+			mode = subtract
+			mult = 10
+		}
+		round_to = 30 	#we want a solid number
+		min = 30		#and we don't want less than 30
+	}
+	recurring = yes
+}
+
+crisobj_have_science_nexuses = {
+	reward = {
+		base = 600
+		complex_trigger_modifier = { #subtract 50 for each playable country that exists
+			trigger = count_playable_country
+			mode = subtract
+			mult = 50
+		}
+		round_to = 200 	#we want a solid number
+		min = 200		#and we don't want less than 200
+	}
+	recurring = yes
+}
+
+crisobj_galcom_science_resolution = {
+	potential = {
+		has_federations_dlc = yes
+	}
+	reward = {
+		base = 100
+		complex_trigger_modifier = { #subtract 2.5 for each playable country that exists
+			trigger = count_playable_country
+			mode = subtract
+			mult = 2.5
+		}
+		round_to = 10 	#we want a solid number
+		min = 50 		#and we don't want less than 50
+	}
+	recurring = yes
+}
+
+### Behemoth Objectives ###
+
+crisobj_build_bioships = {
+	reward = {
+		base = 35
+		complex_trigger_modifier = {
+			trigger = count_playable_country
+			mode = subtract
+			mult = 0.5
+		}
+		round_to = 5
+		min = 5
+	}
+}
+
+crisobj_breed_fauna = {
+	potential = {
+		is_homicidal = no # Genocidal empires can't capture/breed space fauna
+		has_grand_archive_dlc = yes
+	}
+	reward = {
+		base = 50
+		complex_trigger_modifier = {
+			trigger = count_playable_country
+			mode = subtract
+			mult = 0.5
+		}
+		round_to = 5
+		min = 10
+	}
+}
+
+crisobj_kill_bioships = {
+	# Reward is 5 × (Num Playable Countries) ÷ Num Playable Countries with Bioships
+	# This means the fewer empires with bioships in the galaxy, the greater the reward
+	reward = {
+		base = 3.5
+		complex_trigger_modifier = {
+			trigger = count_playable_country
+			mode = mult
+		}
+		complex_trigger_modifier = {
+			trigger = count_playable_country
+			parameters = {
+				limit = { country_uses_bio_ships = yes }
+			}
+			mode = divide
+		}
+		round_to = 3
+	}
+}
+
+crisobj_kill_space_fauna = {
+	reward = {
+		base = 20000
+		divide = trigger:num_galaxy_systems
+		round_to = 5
+		min = 10
+	}
+}
+
+crisobj_cap_fauna = {
+	potential = {
+		is_homicidal = no # Genocidal empires can't capture/breed space fauna
+		has_grand_archive_dlc = yes
+	}
+	reward = {
+		base = 20000
+		divide = trigger:num_galaxy_systems
+		round_to = 5
+		min = 10
+	}
+}
+
+crisobj_build_behemoth_egg = {
+	reward = {
+		base = 350
+		complex_trigger_modifier = {
+			trigger = count_playable_country
+			mode = subtract
+			mult = 25.0
+		}
+		round_to = 25
+		min = 150
+	}
+}
+
+crisobj_birth_behemoth = {
+	reward = {
+		base = 2000
+		complex_trigger_modifier = {
+			trigger = count_playable_country
+			mode = subtract
+			mult = 50.0
+		}
+		round_to = 100
+		min = 1000
+	}
+}
+
+crisobj_behemoth_rage = {
+	reward = {
+		base = 250
+		complex_trigger_modifier = {
+			trigger = count_playable_country
+			mode = subtract
+			mult = 25.0
+		}
+		round_to = 25
+		min = 75
+	}
+}
+
+### HYPERTHERMIA Objectives ###
+
+crisobj_own_volcanics = {
+	reward = {
+		base = 15
+		mult = root.hyperthermia_volcanic_var
+	}
+}
+
+crisobj_create_volcanics = {
+	reward = {
+		base = 350
+	}
+}
+
+crisobj_own_red_stars = {
+	reward = {
+		base = 2000
+		divide = trigger:num_galaxy_systems
+		mult = 0.5
+		mult = root.hyperthermia_red_var
+		round = yes
+		min = 3
+	}
+}
+
+crisobj_create_red_stars = {
+	reward = {
+		base = 10000
+		divide = trigger:num_galaxy_systems
+		mult = 3
+		round = yes
+	}
+}
+
+crisobj_planet_firestorm = {
+	reward = {
+		base = 100
+	}
+}
+
+crisobj_lens_beam_impact = {
+	reward = {
+		base = 1
+	}
+}
+
+crisobj_entropy_starbase = {
+	reward = {
+		base = @inf_crisis_obj
+	}
+}
+
+### Defenders of the Galaxy Objectives ###
+
+crisobj_defensive_pacts = { #yearly, for each
+	reward = {
+		base = 50
+		complex_trigger_modifier = { #subtract 2.5 for each playable country that exists
+			trigger = count_playable_country
+			mode = subtract
+			mult = 2.5
+		}
+		round_to = 5 	#we want a solid number
+		min = 10 		#and we don't want less than 10
+	}
+	recurring = yes
+} 
+
+crisobj_federated = { #yearly
+	reward = {
+		base = 100
+		complex_trigger_modifier = { #subtract 5 for each playable country that exists
+			trigger = count_playable_country
+			mode = subtract
+			mult = 5
+		}
+		round_to = 5 	#we want a solid number
+		min = 25		#and we don't want less than 25
+	}
+	recurring = yes
+} 
+
+crisobj_not_in_aggressive_war = { #monthly
+	reward = {
+		base = 25
+		complex_trigger_modifier = { #subtract 1 for each playable country that exists
+			trigger = count_playable_country
+			mode = subtract
+			mult = 1
+		}
+		min = 5 		#and we don't want less than 5
+	}
+	recurring = yes
+} 
+
+crisobj_galcom_activity = {
+	reward = {
+		base = 300
+		complex_trigger_modifier = { #subtract 10 for each playable country that exists
+			trigger = count_playable_country
+			mode = subtract
+			mult = 10
+		}
+		round_to = 5 	#we want a solid number
+		min = 100 		#and we don't want less than 100
+	}
+}
+
+crisobj_destroy_crisis_ships = {
+	reward = {
+		base = 30000
+		divide = trigger:num_galaxy_systems 	#on huge, this is 30. On smallest, it is 150
+		round = yes 							#we don't want 3.124 menace
+		min = 3									#just in case
+	}
+}
+
+crisobj_destroy_crisis_countries = {
+	reward = {
+		base = 9000
+		complex_trigger_modifier = { #subtract 200 for each playable country that exists
+			trigger = count_playable_country
+			mode = subtract
+			mult = 200
+		}
+		round_to = 100 	#we want a solid number
+		min = 1000 		#and we don't want less than 1000
+	}
+}
