@@ -138,7 +138,7 @@ utility_component_template = {
     }
     component_set = "aha_power_reactor"
     prerequisites = {  }
-    ai_weight = { weight = 0 }
+    ai_weight = { weight = 1 }
 }
 utility_component_template = {
     key = "aha_power_reactor_2"
@@ -160,7 +160,23 @@ utility_component_template = {
     }
     component_set = "aha_power_reactor"
     prerequisites = { tech_aha_power_reactor }
-    ai_weight = { weight = 0 }
+    ai_weight = { weight = 2 }
+}
+utility_component_template = {
+    key = "xz_power_core_1"
+    size = small
+    icon = "GFX_ship_part_reactor_1"
+    icon_frame = 1
+    power = 1000
+    resources = {
+        category = ship_components
+        cost = { xundi = 20 }
+        upkeep = {}
+    }
+    component_set = "xz_power_core"
+    prerequisites = {  }
+    show_tech_unlock_if = {}
+    ai_weight = { weight = 1 }
 }
 ######################################
 ###  推进器  dawn_thruster_components ###
@@ -269,6 +285,25 @@ utility_component_template = {
     prerequisites = {  }
     show_tech_unlock_if = { country_uses_bio_ships = no }
     ai_weight = { weight = 4 }
+}
+utility_component_template = {
+    key = "xz_THRUSTER_1"
+    size = small
+    icon = "GFX_ship_part_thruster_1"
+    icon_frame = 1
+    power = -60
+    resources = {
+        category = ship_components
+        cost = { xundi = 5 }
+    }
+    modifier = {
+        ship_base_speed_mult = 0.15
+        ship_accuracy_add = 2
+    }
+    component_set = "xz_thruster_components"
+    prerequisites = {  }
+    show_tech_unlock_if = { country_uses_bio_ships = no }
+    ai_weight = { weight = 1 }
 }
 ######################################
 ###  超光速部件  dawn_ftl_components ###
@@ -385,6 +420,27 @@ utility_component_template = {
     show_tech_unlock_if = { country_uses_bio_ships = no }
     ai_weight = { weight = 10 }
 }
+utility_component_template = {
+    key = "xz_HYPERDRIVE_1"
+    size = small
+    icon = "GFX_ship_part_bioship_hyper_drive_1"
+    icon_frame = 1
+    power = -60
+    resources = {
+        category = ship_components
+        cost = { xundi = 20 }
+    }
+    ftl = yes
+    ship_modifier = {
+        ship_windup_mult = -0.20
+        ship_jumpdrive_cooldown_mult = -0.05
+        ship_tracking_add = 5
+    }
+    component_set = "xz_ftl_components"
+    prerequisites = {  }
+    show_tech_unlock_if = { country_uses_bio_ships = no }
+    ai_weight = { weight = 1 }
+}
 ######################################
 ###  传感器  dawn_sensor_components ###
 ######################################
@@ -474,6 +530,28 @@ utility_component_template = {
     ai_weight = { weight = 1000 }
 }
 utility_component_template = {
+    key = "xz_SENSOR_1"
+    size = medium
+    icon = "GFX_ship_part_sensor_1"
+    icon_frame = 1
+    power = -80
+    resources = {
+        category = ship_components
+        cost = { xundi = 25 }
+    }
+    sensor_range = 2
+    hyperlane_range = 2
+    ship_modifier = {
+        ship_tracking_add = 10
+        ship_fire_rate_mult = 0.2
+        ship_hull_add = 1000
+    }
+    component_set = "xz_sensor_components"
+    prerequisites = { }
+    show_tech_unlock_if = { country_uses_bio_ships = no }
+    ai_weight = { weight = 2 }
+}
+utility_component_template = {
     key = "DAWN_COMPUTER_LINE_BASIC"
     size = small
     icon = "GFX_ship_part_computer_line_basic"
@@ -545,6 +623,30 @@ utility_component_template = {
     ai_weight = { weight = 3 }
 }
 utility_component_template = {
+    key = "xz_COMPUTER_LINE_BASIC"
+    size = small
+    icon = "GFX_ship_part_computer_line_basic"
+    icon_frame = 1
+    power = -25
+    resources = {
+        category = ship_components
+        cost = { xundi = 10 }
+    }
+    class_restriction = { shipclass_military shipclass_transport shipclass_military_special shipclass_starbase }
+    component_set = "xz_combat_computers"
+    ship_behavior = "line"
+    prerequisites = {  }
+    ai_tags = { gunship }
+    ai_tag_weight = 0
+    ship_modifier = {
+        ship_fire_rate_mult = 0.1
+        ship_accuracy_add = 10
+        ship_evasion_add = 2
+    }
+    show_tech_unlock_if = { country_uses_bio_ships = no }
+    ai_weight = { weight = 1 }
+}
+utility_component_template = {
     key = "DAWN_COMPUTER_ARTILLERY_BASIC"
     size = small
     icon = "GFX_ship_part_computer_artillery_basic"
@@ -606,7 +708,6 @@ utility_component_template = {
     component_set = "dawn_combat_computers"
     ship_behavior = "artillery"
     prerequisites = { "tech_combat_computers_2" }
-    upgrades_to = "DAWN_COMPUTER_ARTILLERY_ADVANCED"
     ai_tags = { artillery }
     ai_tag_weight = 0
     ship_modifier = {
@@ -615,6 +716,30 @@ utility_component_template = {
     }
     show_tech_unlock_if = { country_uses_bio_ships = no }
     ai_weight = { weight = 3 }
+}
+utility_component_template = {
+    key = "xz_COMPUTER_ARTILLERY_BASIC"
+    size = small
+    icon = "GFX_ship_part_computer_artillery_basic"
+    icon_frame = 1
+    power = -25
+    resources = {
+        category = ship_components
+        cost = { xundi = 10 }
+    }
+    class_restriction = { shipclass_military shipclass_transport shipclass_military_special shipclass_starbase }
+    component_set = "xz_combat_computers"
+    ship_behavior = "artillery"
+    prerequisites = {  }
+    ai_tags = { artillery }
+    ai_tag_weight = 0
+    ship_modifier = {
+        ship_fire_rate_mult = 0.06
+        ship_weapon_range_mult = 0.15
+        ship_accuracy_add = 2
+    }
+    show_tech_unlock_if = { country_uses_bio_ships = no }
+    ai_weight = { weight = 1 }
 }
 utility_component_template = {
     key = "DAWN_COMPUTER_PICKET_BASIC"
@@ -688,6 +813,30 @@ utility_component_template = {
     ai_weight = { weight = 3 }
 }
 utility_component_template = {
+    key = "xz_COMPUTER_PICKET_BASIC"
+    size = small
+    icon = "GFX_ship_part_computer_picket_basic"
+    icon_frame = 1
+    power = -25
+    resources = {
+        category = ship_components
+        cost = { xundi = 10 }
+    }
+    class_restriction = { shipclass_military shipclass_transport shipclass_military_special shipclass_starbase }
+    component_set = "xz_combat_computers"
+    ship_behavior = "picket"
+    prerequisites = {  }
+    ai_tags = { screen }
+    ai_tag_weight = 0
+    ship_modifier = {
+        ship_fire_rate_mult = 0.05
+        ship_tracking_add = 10
+        ship_evasion_add = 2
+    }
+    show_tech_unlock_if = { country_uses_bio_ships = no }
+    ai_weight = { weight = 2 }
+}
+utility_component_template = {
     key = "DAWN_COMPUTER_CARRIER_BASIC"
     size = small
     icon = "GFX_ship_part_computer_carrier_basic"
@@ -754,6 +903,29 @@ utility_component_template = {
     }
     show_tech_unlock_if = { country_uses_bio_ships = no }
     ai_weight = { weight = 3 }
+}
+utility_component_template = {
+    key = "xz_COMPUTER_CARRIER_BASIC"
+    size = small
+    icon = "GFX_ship_part_computer_carrier_basic"
+    icon_frame = 1
+    power = -12
+    resources = {
+        category = ship_components
+        cost = { xundi = 20 }
+    }
+    class_restriction = { shipclass_military shipclass_transport shipclass_military_special shipclass_starbase }
+    component_set = "xz_combat_computers"
+    ship_behavior = "carrier"
+    prerequisites = { }
+    ai_tags = { carrier }
+    ai_tag_weight = 0
+    ship_modifier = {
+        ship_engagement_range_mult = 0.20
+        ship_shield_penetration_add = 0.2
+    }
+    show_tech_unlock_if = { country_uses_bio_ships = no }
+    ai_weight = { weight = 1 }
 }
 utility_component_template = {
     key = "DAWN_COMPUTER_SWARM_BASIC"
@@ -833,6 +1005,30 @@ utility_component_template = {
     show_tech_unlock_if = { country_uses_bio_ships = no }
     ai_weight = { weight = 3 }
 }
+utility_component_template = {
+    key = "xz_COMPUTER_SWARM_BASIC"
+    size = small
+    icon = "GFX_ship_part_computer_swarm_basic"
+    icon_frame = 1
+    power = -25
+    resources = {
+        category = ship_components
+        cost = { xundi = 15 }
+    }
+    class_restriction = { shipclass_military shipclass_transport shipclass_military_special shipclass_starbase }
+    component_set = "xz_combat_computers"
+    ship_behavior = "swarm"
+    prerequisites = {  }
+    ai_tags = { gunship }
+    ai_tag_weight = 0
+    modifier = {
+        ship_evasion_mult = 0.05
+        ship_fire_rate_mult = 0.02
+        ship_armor_damage_mult = 0.25
+    }
+    show_tech_unlock_if = { country_uses_bio_ships = no }
+    ai_weight = { weight = 2 }
+}
 #丰饶//裂爆丰饶盾
 utility_component_template = {
     key = "fengrao_burst_shield_small"
@@ -858,7 +1054,7 @@ utility_component_template = {
     }
     prerequisites = { tech_fengrao_burst_shield }
     show_tech_unlock_if = { country_uses_bio_ships = no }
-    ai_weight = { weight = 0 }
+    ai_weight = { weight = 2 }
 }
 utility_component_template = {
     key = "fengrao_burst_shield_medium"
@@ -886,7 +1082,7 @@ utility_component_template = {
     }
     prerequisites = { tech_fengrao_burst_shield }
     show_tech_unlock_if = { country_uses_bio_ships = no }
-    ai_weight = { weight = 0 }
+    ai_weight = { weight = 2 }
 }
 utility_component_template = {
     key = "fengrao_burst_shield_large"
@@ -916,7 +1112,7 @@ utility_component_template = {
     }
     prerequisites = { tech_fengrao_burst_shield_extra }
     show_tech_unlock_if = { country_uses_bio_ships = no }
-    ai_weight = { weight = 0 }
+    ai_weight = { weight = 2 }
 }
 utility_component_template = {
     key = "fengrao_burst_shield_extra_large"
@@ -946,7 +1142,7 @@ utility_component_template = {
     }
     prerequisites = { tech_fengrao_burst_shield_extra }
     show_tech_unlock_if = { country_uses_bio_ships = no }
-    ai_weight = { weight = 0 }
+    ai_weight = { weight = 3 }
 }
 #阿哈舰载机
 strike_craft_component_template = {
@@ -993,6 +1189,7 @@ strike_craft_component_template = {
     ai_tags = { weapon_role_point_defense carrier }
     point_defence_targets = { "strike_craft" }
     prerequisites = { tech_aha_strike_craft }
+    ai_weight = { weight = 3 }
 }
 #阿哈导弹
 weapon_component_template = {
@@ -1030,7 +1227,7 @@ weapon_component_template = {
     projectile_gfx = "swarmer_missiles"
     tags = { weapon_type_explosive g_slot }
     ai_tags = { weapon_role_artillery artillery artillery_stealth }
-    ai_tag_weight = 0
+    ai_weight = { weight = 3 }
     resources = {
         category = ship_components
         cost = {
@@ -1077,7 +1274,7 @@ weapon_component_template = {
     projectile_gfx = "swarmer_missiles"
     tags = { weapon_type_explosive g_slot energy_torpedoes }
     ai_tags = { weapon_role_artillery artillery artillery_stealth }
-    ai_tag_weight = 0
+    ai_weight = { weight = 3 }
     resources = {
         category = ship_components
         cost = {
@@ -1127,7 +1324,7 @@ weapon_component_template = {
     projectile_gfx = "swarmer_missiles"
     tags = { weapon_type_explosive g_slot energy_torpedoes }
     ai_tags = { weapon_role_artillery artillery artillery_stealth }
-    ai_tag_weight = 0
+    ai_weight = { weight = 3 }
     resources = {
         category = ship_components
         cost = {
@@ -1174,6 +1371,7 @@ utility_component_template = {
             }
         }
     }
+    ai_weight = { weight = 3 }
     prerequisites = { tech_fengrao_burst_shield_extra }
 }
 utility_component_template = {
@@ -1213,6 +1411,7 @@ utility_component_template = {
             }
         }
     }
+    ai_weight = { weight = 3 }
     prerequisites = { tech_fengrao_burst_shield_extra }
 }
 utility_component_template = {
@@ -1249,5 +1448,6 @@ utility_component_template = {
             }
         }
     }
+    ai_weight = { weight = 3 }
     prerequisites = { tech_fengrao_burst_shield_extra }
 }
