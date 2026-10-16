@@ -6,39 +6,21 @@ ap_the_craze_crisis = {
 	}
 
 	possible = {
+		owner = {
+			has_country_flag = haimeixiewan
+		}
 		custom_tooltip = {
 			fail_text = "requires_independence"
 			is_subject = no
 		}
-		custom_tooltip = {
-			fail_text = "must_finish_shroud_forged_situation"
-			OR = {
-				NOT = { has_origin = origin_shroud_forged }
-				NOT = {
-					any_situation = {
-						is_situation_type = situation_shroud_forged
-					}
-				}
-			}
-		}
-		custom_tooltip = {
-			fail_text = "locked_by_shroud_forged_situation"
-			OR = {
-				NOT = { has_origin = origin_shroud_forged }
-				NOT = { has_country_flag = finish_shroud_forged_liberation_flag }
-			}
-		}
-
-		if = {
-			limit = {
+		if = {	
 				OR = {
-					NOT = { has_origin = origin_shroud_forged }
-					NOT = { has_country_flag = shroud_forged_can_become_the_crisis }
-				}
-			}
+					owner = { has_origin = origin_erxiangleyuan}
+					
+				}	
 			custom_tooltip = {
 				fail_text = "requires_ascension_perks_3"
-				num_ascension_perks > 2
+				#num_ascension_perks > 2
 			}
 			NOR = {
 				is_pacifist = yes
@@ -50,66 +32,18 @@ ap_the_craze_crisis = {
 
 	on_enabled = {
 		hidden_effect = {
-			set_ai_personality = became_the_crisis
-			country_event = { id = timeline.69 } # Timeline Become the crisis
+			#set_ai_personality = became_the_crisis
+			#country_event = { id = timeline.69 } # Timeline Become the crisis
 		}
-		#activate_crisis_progression = nemesis_path
+		activate_crisis_progression = endless_party 
 	}
 
 	modifier = {
-		refugee_attraction = -0.50
+		
 	}
 
-	ai_weight = {
-		factor = 7.5
-		modifier = {
-			factor = 0
-			NOR = {
-				is_militarist = yes
-				is_xenophobe = yes
-				is_gestalt = yes
-			}
-		}
-		modifier = {
-			factor = 10
-			is_homicidal = yes
-		}
-		modifier = {
-			factor = 5
-			any_playable_country = {
-				has_ascension_perk = ap_defender_of_the_galaxy
-			}
-			NOT = {
-				any_playable_country = {
-					has_ascension_perk = ap_become_the_crisis
-				}
-			}
-		}
-		modifier = {
-			factor = 2
-			has_tradition = tr_supremacy_finish
-		}
-		modifier = {
-			factor = 0
-			galaxy_percentage < 0.1
-		}
-		
-		modifier = {
-			factor = 2
-			galaxy_percentage > 0.2
-		}
-		modifier = {
-			factor = 0
-			count_playable_country = {
-				count > 1
-				limit = {
-					has_ascension_perk = ap_become_the_crisis
-				}
-			}
-		}
-		modifier = {
-			factor = 0
-			blocks_disruptive_gameplay = yes
-		}
+	ai_weight= {
+		factor = 0
 	}
+		
 }
