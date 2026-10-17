@@ -1,0 +1,35 @@
+# Model and all native locators scale together.
+entity = {
+    name = "herta_station_entity"
+    pdxmesh = "herta_station_mesh"
+    scale = 6.0
+    cull_radius = 600.0
+    locator = { name = "engine_trail_left" position = { -0.75 0.10 10.87 } rotation = { 180 0 0 } }
+    locator = { name = "engine_trail_right" position = { 0.75 0.10 10.87 } rotation = { 180 0 0 } }
+    default_state = "idle"
+    state = {
+        name = "idle"
+        animation = "ring_slow"
+        animation_blend_time = 0
+        looping = yes
+        state_time = 90
+        event = { time = 0 node = "engine_01" particle = "herta_station_engine_idle" trigger_once = yes keep_particle = yes }
+    }
+    state = {
+        name = "moving"
+        animation = "ring_slow"
+        animation_blend_time = 0
+        looping = yes
+        state_time = 90
+        event = { time = 0 node = "engine_01" particle = "herta_station_engine_moving" trigger_once = yes keep_particle = yes }
+    }
+    state = { name = "death" state_time = 5 }
+    game_data = {
+        trail_locators = {
+            # Stellaris uses the native key spelling "lenght".
+            "engine_01" = { width = 12.0 lenght = 160.0 }
+            "engine_trail_left" = { width = 2.0 lenght = 100.0 }
+            "engine_trail_right" = { width = 2.0 lenght = 100.0 }
+        }
+    }
+}
