@@ -359,7 +359,6 @@ xz_xingcha = {
     num_target_locators = 0
     is_space_station = no
     icon = ship_size_military_2
-    entity = "xz_xingcha_entity"
     construction_type = starbase_shipyard
     base_buildtime = 100
     can_have_federation_design = no
@@ -386,5 +385,55 @@ xz_xingcha = {
     }
     min_upgrade_cost = {
         xundi = 20
+    }
+}
+xz_jingfengjian = {
+    formation_priority = @battleship_formation_priority
+    max_speed = 115
+    acceleration = 0.7
+    rotation_speed = 0.3
+    collision_radius = 4
+    modifier = {
+        ship_weapon_range_mult = 0.2
+    }
+    ship_modifier = {
+        ship_shield_penetration_add = 0.5
+        ship_hull_damage_mult = 0.75
+        ship_tracking_add = 5
+    }
+    max_hitpoints = 250000
+    size_multiplier = 25
+    map_counter_icon = ship_counter_32
+    fleet_slot_size = 25
+    section_slots = { "bow" = { locator = "bow" }  "mid" = { locator = "mid" }  }
+    num_target_locators = 0
+    is_space_station = no
+    icon = ship_size_military_8
+    construction_type = starbase_shipyard
+    base_buildtime = 400
+    can_have_federation_design = no
+    components_add_to_cost = no
+    default_behavior = artillery
+    role_background = "GFX_role_selection_battleship"
+    combat_disengage_chance = 1.05
+    ship_roles = { brawler debuffer_role artillery }
+    class = shipclass_military
+    enable_default_design = yes
+    enable_3dview_in_ship_browser = yes
+    use_shipnames_from = battleship
+    prerequisites = { tech_xz_jingfengjian }
+    required_component_set = "xz_power_core"
+    required_component_set = "xz_ftl_components"
+    required_component_set = "xz_thruster_components"
+    required_component_set = "xz_sensor_components"
+    required_component_set = "xz_combat_computers"
+    resources = {
+        category = ships
+        cost = {
+            xundi = 720
+        }
+    }
+    min_upgrade_cost = {
+        xundi = 100
     }
 }
