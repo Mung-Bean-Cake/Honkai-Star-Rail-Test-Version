@@ -2328,9 +2328,32 @@ country_event = {
     immediate = {
         if = {
             every_owned_fleet = {
-                limit = { has_fleet_flag = xz_fleet_1 }
-                set_owner = event_target:origin_Xianzhou
-                remove_fleet_flag = xz_fleet_1
+                if = {
+                    limit = {
+                        check_variable = { which = xz_fleet_timer value <= 0 }
+                    }
+                    if = {
+                        limit = {
+                            has_fleet_flag = xz_fleet_1
+                        }
+                        set_owner = event_target:origin_Xianzhou
+                        remove_fleet_flag = xz_fleet_1
+                    }
+                    if = {
+                        limit = {
+                            has_fleet_flag = xz_fleet_2
+                        }
+                        set_owner = event_target:origin_Xianzhou
+                        remove_fleet_flag = xz_fleet_2
+                    }
+                    if = {
+                        limit = {
+                            has_fleet_flag = xz_fleet_3
+                        }
+                        set_owner = event_target:origin_Xianzhou
+                        remove_fleet_flag = xz_fleet_3
+                    }
+                }
             }
         }
     }
@@ -2340,37 +2363,26 @@ country_event = {
 }
 country_event = {
     id = path_country.27
-    title = path_country.26.title
-    desc = path_country.26.desc
+    hide_window = yes
     is_triggered_only = yes
     immediate = {
         if = {
             every_owned_fleet = {
-                limit = { has_fleet_flag = xz_fleet_2 }
-                set_owner = event_target:origin_Xianzhou
-                remove_fleet_flag = xz_fleet_2
+                limit = {
+                    check_variable = { which = xz_fleet_timer value > 0 }
+                }
+                subtract_variable = { which = xz_fleet_timer value = 30 }
+                if = {
+                    limit = {
+                        check_variable = { which = xz_fleet_timer value <= 0 }
+                    }
+                    owner = {
+                        country_event = {
+                            id = path_country.26
+                        }
+                    }
+                }
             }
         }
-    }
-    option = {
-        name = "path_country.26.a"
-    }
-}
-country_event = {
-    id = path_country.28
-    title = path_country.26.title
-    desc = path_country.26.desc
-    is_triggered_only = yes
-    immediate = {
-        if = {
-            every_owned_fleet = {
-                limit = { has_fleet_flag = xz_fleet_3 }
-                set_owner = event_target:origin_Xianzhou
-                remove_fleet_flag = xz_fleet_3
-            }
-        }
-    }
-    option = {
-        name = "path_country.26.a"
     }
 }
