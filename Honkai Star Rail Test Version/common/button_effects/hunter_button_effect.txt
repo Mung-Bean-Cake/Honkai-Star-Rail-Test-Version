@@ -370,6 +370,36 @@ market_check_7_effect = {
 
 	}
 }
+market_check_8_effect = {
+	allow = {	
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 8
+			}
+		}
+	}
+	effect = {
+
+	}
+}
+market_check_9_effect = {
+	allow = {	
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 9
+			}
+		}
+	}
+	effect = {
+
+	}
+}
 market_confirm_1_effect = {
 	allow = {
 		custom_tooltip = {
@@ -4241,7 +4271,10 @@ market_confirm_56_effect = {
 						resource = xundi
 						value >= 3600
 					}
-					has_tech_option = tech_rough_melting_furnace
+					OR = {
+						has_tech_option = tech_rough_melting_furnace
+						has_technology = tech_rough_melting_furnace
+					}
 				}
 			}
 		}
@@ -5038,6 +5071,822 @@ market_confirm_67_effect = {
 						}
 						add_resource = {
 							xundi = 12500
+						}
+					}
+				}
+			}
+		}
+	}
+}
+market_confirm_68_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_weapon_1_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 7200
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_has_weapon_1_effect_disabled
+			hidden_trigger = {
+				NOT = {
+					from = {
+						OR = {
+							has_tech_option = tech_xz_kanxingqian
+							has_technology = tech_xz_kanxingqian
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 8
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -7200
+				}
+				add_research_option = tech_xz_kanxingqian
+				add_opinion_modifier = {
+					who = event_target:origin_Xianzhou
+					modifier = opinion_xianzhou_weapon_trade_favorability
+				}
+				if = {
+					limit = { exists = event_target:origin_Xianzhou }
+					event_target:origin_Xianzhou = {
+						add_opinion_modifier = {
+							who = from
+							modifier = opinion_xianzhou_weapon_trade_favorability
+						}
+						add_resource = {
+							xundi = 7200
+						}
+					}
+				}
+			}
+		}
+	}
+}
+market_confirm_69_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_weapon_2_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 8400
+					}
+					OR = {
+						has_tech_option = tech_xz_kanxingqian
+						has_technology = tech_xz_kanxingqian
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_has_weapon_2_effect_disabled
+			hidden_trigger = {
+				NOT = {
+					from = {
+						OR = {
+							has_tech_option = tech_xz_xingcha
+							has_technology = tech_xz_xingcha
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 8
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -8400
+				}
+				add_research_option = tech_xz_xingcha
+				add_opinion_modifier = {
+					who = event_target:origin_Xianzhou
+					modifier = opinion_xianzhou_weapon_trade_favorability
+				}
+				if = {
+					limit = { exists = event_target:origin_Xianzhou }
+					event_target:origin_Xianzhou = {
+						add_opinion_modifier = {
+							who = from
+							modifier = opinion_xianzhou_weapon_trade_favorability
+						}
+						add_resource = {
+							xundi = 8400
+						}
+					}
+				}
+			}
+		}
+	}
+}
+market_confirm_70_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_weapon_3_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 6000
+					}
+					OR = {
+						has_tech_option = tech_xz_xingcha
+						has_technology = tech_xz_xingcha
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_has_weapon_3_effect_disabled
+			hidden_trigger = {
+				NOT = {
+					from = {
+						OR = {
+							has_tech_option = tech_xz_lianshijian
+							has_technology = tech_xz_lianshijian
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 8
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -6000
+				}
+				add_research_option = tech_xz_lianshijian
+				add_opinion_modifier = {
+					who = event_target:origin_Xianzhou
+					modifier = opinion_xianzhou_weapon_trade_favorability
+				}
+				if = {
+					limit = { exists = event_target:origin_Xianzhou }
+					event_target:origin_Xianzhou = {
+						add_opinion_modifier = {
+							who = from
+							modifier = opinion_xianzhou_weapon_trade_favorability
+						}
+						add_resource = {
+							xundi = 6000
+						}
+					}
+				}
+			}
+		}
+	}
+}
+market_confirm_71_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_weapon_4_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 9000
+					}
+					OR = {
+						has_tech_option = tech_xz_lianshijian
+						has_technology = tech_xz_lianshijian
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_has_weapon_4_effect_disabled
+			hidden_trigger = {
+				NOT = {
+					from = {
+						OR = {
+							has_tech_option = tech_xz_chihuonu
+							has_technology = tech_xz_chihuonu
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 8
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -9000
+				}
+				add_research_option = tech_xz_chihuonu
+				add_opinion_modifier = {
+					who = event_target:origin_Xianzhou
+					modifier = opinion_xianzhou_weapon_trade_favorability
+				}
+				if = {
+					limit = { exists = event_target:origin_Xianzhou }
+					event_target:origin_Xianzhou = {
+						add_opinion_modifier = {
+							who = from
+							modifier = opinion_xianzhou_weapon_trade_favorability
+						}
+						add_resource = {
+							xundi = 9000
+						}
+					}
+				}
+			}
+		}
+	}
+}
+market_confirm_72_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_weapon_5_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 11400
+					}
+					OR = {
+						has_tech_option = tech_xz_chihuonu
+						has_technology = tech_xz_chihuonu
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_has_weapon_5_effect_disabled
+			hidden_trigger = {
+				NOT = {
+					from = {
+						OR = {
+							has_tech_option = tech_xz_kanxingqian_large
+							has_technology = tech_xz_kanxingqian_large
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 8
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -11400
+				}
+				add_research_option = tech_xz_kanxingqian_large
+				add_opinion_modifier = {
+					who = event_target:origin_Xianzhou
+					modifier = opinion_xianzhou_weapon_trade_favorability
+				}
+				if = {
+					limit = { exists = event_target:origin_Xianzhou }
+					event_target:origin_Xianzhou = {
+						add_opinion_modifier = {
+							who = from
+							modifier = opinion_xianzhou_weapon_trade_favorability
+						}
+						add_resource = {
+							xundi = 11400
+						}
+					}
+				}
+			}
+		}
+	}
+}
+market_confirm_73_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_weapon_6_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 13800
+					}
+					OR = {
+						has_tech_option = tech_xz_kanxingqian_large
+						has_technology = tech_xz_kanxingqian_large
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_has_weapon_6_effect_disabled
+			hidden_trigger = {
+				NOT = {
+					from = {
+						OR = {
+							has_tech_option = tech_xz_jingfengjian
+							has_technology = tech_xz_jingfengjian
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 8
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -13800
+				}
+				add_research_option = tech_xz_jingfengjian
+				add_opinion_modifier = {
+					who = event_target:origin_Xianzhou
+					modifier = opinion_xianzhou_weapon_trade_favorability
+				}
+				if = {
+					limit = { exists = event_target:origin_Xianzhou }
+					event_target:origin_Xianzhou = {
+						add_opinion_modifier = {
+							who = from
+							modifier = opinion_xianzhou_weapon_trade_favorability
+						}
+						add_resource = {
+							xundi = 13800
+						}
+					}
+				}
+			}
+		}
+	}
+}
+market_confirm_74_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_weapon_7_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 16200
+					}
+					OR = {
+						has_tech_option = tech_xz_jingfengjian
+						has_technology = tech_xz_jingfengjian
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_has_weapon_7_effect_disabled
+			hidden_trigger = {
+				NOT = {
+					from = {
+						OR = {
+							has_tech_option = tech_xz_power_core_yuzhao
+							has_technology = tech_xz_power_core_yuzhao
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 8
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -16200
+				}
+				add_research_option = tech_xz_power_core_yuzhao
+				add_opinion_modifier = {
+					who = event_target:origin_Xianzhou
+					modifier = opinion_xianzhou_weapon_trade_favorability
+				}
+				if = {
+					limit = { exists = event_target:origin_Xianzhou }
+					event_target:origin_Xianzhou = {
+						add_opinion_modifier = {
+							who = from
+							modifier = opinion_xianzhou_weapon_trade_favorability
+						}
+						add_resource = {
+							xundi = 16200
+						}
+					}
+				}
+			}
+		}
+	}
+}
+market_confirm_75_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_weapon_8_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 18600
+					}
+					OR = {
+						has_tech_option = tech_xz_power_core_yuzhao
+						has_technology = tech_xz_power_core_yuzhao
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_has_weapon_8_effect_disabled
+			hidden_trigger = {
+				NOT = {
+					from = {
+						OR = {
+							has_tech_option = tech_xz_THRUSTER_youling
+							has_technology = tech_xz_THRUSTER_youling
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 8
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -18600
+				}
+				add_research_option = tech_xz_THRUSTER_youling
+				add_opinion_modifier = {
+					who = event_target:origin_Xianzhou
+					modifier = opinion_xianzhou_weapon_trade_favorability
+				}
+				if = {
+					limit = { exists = event_target:origin_Xianzhou }
+					event_target:origin_Xianzhou = {
+						add_opinion_modifier = {
+							who = from
+							modifier = opinion_xianzhou_weapon_trade_favorability
+						}
+						add_resource = {
+							xundi = 18600
+						}
+					}
+				}
+			}
+		}
+	}
+}
+market_confirm_76_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_weapon_9_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 21000
+					}
+					OR = {
+						has_tech_option = tech_xz_THRUSTER_youling
+						has_technology = tech_xz_THRUSTER_youling
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_has_weapon_9_effect_disabled
+			hidden_trigger = {
+				NOT = {
+					from = {
+						OR = {
+							has_tech_option = tech_xz_HYPERDRIVE_tiantong
+							has_technology = tech_xz_HYPERDRIVE_tiantong
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 8
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -21000
+				}
+				add_research_option = tech_xz_HYPERDRIVE_tiantong
+				add_opinion_modifier = {
+					who = event_target:origin_Xianzhou
+					modifier = opinion_xianzhou_weapon_trade_favorability
+				}
+				if = {
+					limit = { exists = event_target:origin_Xianzhou }
+					event_target:origin_Xianzhou = {
+						add_opinion_modifier = {
+							who = from
+							modifier = opinion_xianzhou_weapon_trade_favorability
+						}
+						add_resource = {
+							xundi = 21000
+						}
+					}
+				}
+			}
+		}
+	}
+}
+market_confirm_77_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_weapon_10_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 23400
+					}
+					OR = {
+						has_tech_option = tech_xz_HYPERDRIVE_tiantong
+						has_technology = tech_xz_HYPERDRIVE_tiantong
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_has_weapon_10_effect_disabled
+			hidden_trigger = {
+				NOT = {
+					from = {
+						OR = {
+							has_tech_option = tech_xz_SENSOR_sitian
+							has_technology = tech_xz_SENSOR_sitian
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 8
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -23400
+				}
+				add_research_option = tech_xz_SENSOR_sitian
+				add_opinion_modifier = {
+					who = event_target:origin_Xianzhou
+					modifier = opinion_xianzhou_weapon_trade_favorability
+				}
+				if = {
+					limit = { exists = event_target:origin_Xianzhou }
+					event_target:origin_Xianzhou = {
+						add_opinion_modifier = {
+							who = from
+							modifier = opinion_xianzhou_weapon_trade_favorability
+						}
+						add_resource = {
+							xundi = 23400
+						}
+					}
+				}
+			}
+		}
+	}
+}
+market_confirm_78_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_tech_1_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 12000
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_has_tech_1_effect_disabled
+			hidden_trigger = {
+				NOT = {
+					from = {
+						AND = {
+							OR = {
+								has_tech_option = tech_cloudknight_garrison
+								has_technology = tech_cloudknight_garrison
+							}
+							OR = {
+								has_tech_option = tech_cloudknight_breakthrough_vanguard
+								has_technology = tech_cloudknight_breakthrough_vanguard
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 9
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -12000
+				}
+				country_event = {
+					id = path_country.28
+				}
+				add_opinion_modifier = {
+					who = event_target:origin_Xianzhou
+					modifier = opinion_xianzhou_tech_trade_favorability
+				}
+				if = {
+					limit = { exists = event_target:origin_Xianzhou }
+					event_target:origin_Xianzhou = {
+						add_opinion_modifier = {
+							who = from
+							modifier = opinion_xianzhou_tech_trade_favorability
+						}
+						add_resource = {
+							xundi = 12000
+						}
+					}
+				}
+			}
+		}
+	}
+}
+market_confirm_79_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_tech_2_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 14000
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_has_tech_2_effect_disabled
+			hidden_trigger = {
+				NOT = {
+					from = {
+						AND = {
+							OR = {
+								has_tech_option = tech_trait_moyinshen
+								has_technology = tech_trait_moyinshen
+							}
+							OR = {
+								has_tech_option = tech_trait_foxian_fleetfoot
+								has_technology = tech_trait_foxian_fleetfoot
+							}
+							OR = {
+								has_tech_option = tech_trait_chiming_rebirth
+								has_technology = tech_trait_chiming_rebirth
+							}
+							OR = {
+								has_tech_option = tech_trait_xz_cloud_knights
+								has_technology = tech_trait_xz_cloud_knights
+							}
+							OR = {
+								has_tech_option = tech_trait_xz_ten_lords_writ
+								has_technology = tech_trait_xz_ten_lords_writ
+							}
+							OR = {
+								has_tech_option = tech_trait_xz_danding
+								has_technology = tech_trait_xz_danding
+							}
+							OR = {
+								has_tech_option = tech_trait_xz_hunt_decree
+								has_technology = tech_trait_xz_hunt_decree
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 9
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -14000
+				}
+				country_event = {
+					id = path_country.29
+				}
+				add_opinion_modifier = {
+					who = event_target:origin_Xianzhou
+					modifier = opinion_xianzhou_tech_trade_favorability
+				}
+				if = {
+					limit = { exists = event_target:origin_Xianzhou }
+					event_target:origin_Xianzhou = {
+						add_opinion_modifier = {
+							who = from
+							modifier = opinion_xianzhou_tech_trade_favorability
+						}
+						add_resource = {
+							xundi = 14000
 						}
 					}
 				}
