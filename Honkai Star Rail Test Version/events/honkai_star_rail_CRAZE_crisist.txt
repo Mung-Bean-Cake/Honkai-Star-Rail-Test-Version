@@ -220,6 +220,7 @@ planet_event = {
 	title = craze.8_title
 	desc = craze.8_desc
 	picture = GFX_evt_news_room
+	is_triggered_only = yes
 	fire_only_once = yes
 
 	trigger = {
@@ -236,6 +237,7 @@ planet_event = {
 		}
 	}
 }
+#天灾
 country_event = {
 	id = craze.9
 	title = craze.9_title
@@ -244,11 +246,62 @@ country_event = {
 	is_triggered_only = yes
 	fire_only_once = yes
 
-	option = {
-		name = craze.9_op_1
+	immediate = {
 		set_variable = {
 			which = the_craze_crisis_name_0
 			value = 0
+		}
+		
+	}
+
+	option = {
+		name = craze.9_op_1
+		set_country_flag = is_time_to_become_crisis
+		
+	}
+}
+#——————————天灾目标
+#建造节点
+planet_event = {
+	id = craze.1000
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		has_building = building_phantasmoon_court_1
+	}
+
+	immediate = {
+		owner = {
+			complete_crisis_objective = crisobj_build_court
+		}
+	}	
+}
+
+country_event = {
+	id = craze.1001
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		owner = {has_origin = origin_erxiangleyuan}
+	}
+
+	immediate = {
+		owner = {complete_crisis_objective = crisobj_serve_banquet}
+	}
+	after = {
+		if = {
+			limit = {owner = {has_country_flag = decision_craze_party_1}}
+			remove_country_flag = decision_craze_party_1
+		}
+		if = {
+			limit = {owner = {has_country_flag = decision_craze_party_2}}
+			remove_country_flag = decision_craze_party_2
+		}
+		if = {
+			limit = {owner = {has_country_flag = decision_craze_party_3}}
+			remove_country_flag = decision_craze_party_3
 		}
 	}
 }
