@@ -1,0 +1,54 @@
+yuhuang_crisis_difficulty_toggle = {
+	length = 0
+	edict_cap_usage = 0
+	resources = {
+		category = edicts
+		cost = { }
+	}
+	potential = {
+		NOT = {
+			exists = event_target:yuhuang_fengrao_country
+		}
+	}
+	allow = {
+		is_ai = no
+		has_origin = origin_StellaronHunter
+	}
+	effect = {
+		if = {
+			limit = { check_variable = { which = yuhuang_crisis_level value = 2 } }
+			custom_tooltip = yuhuang_crisis_difficulty_now_2
+		}
+		else_if = {
+			limit = { check_variable = { which = yuhuang_crisis_level value = 3 } }
+			custom_tooltip = yuhuang_crisis_difficulty_now_3
+		}
+		else_if = {
+			limit = { check_variable = { which = yuhuang_crisis_level value = 4 } }
+			custom_tooltip = yuhuang_crisis_difficulty_now_4
+		}
+		else_if = {
+			limit = { check_variable = { which = yuhuang_crisis_level value = 5 } }
+			custom_tooltip = yuhuang_crisis_difficulty_now_5
+		}
+		else = {
+			custom_tooltip = yuhuang_crisis_difficulty_now_1
+		}
+		hidden_effect = {
+			if = {
+				limit = { NOT = { is_variable_set = yuhuang_crisis_level } }
+				set_variable = { which = yuhuang_crisis_level value = 1 }
+			}
+			else = {
+				change_variable = { which = yuhuang_crisis_level value = 1 }
+			}
+			if = {
+				limit = { check_variable = { which = yuhuang_crisis_level value > 5 } }
+				set_variable = { which = yuhuang_crisis_level value = 1 }
+			}
+		}
+	}
+	ai_weight = {
+		weight = 0
+	}
+}

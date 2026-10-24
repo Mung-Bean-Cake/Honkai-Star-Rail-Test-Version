@@ -10,9 +10,59 @@ country_event = {
         }
         has_global_flag = fengrao_middle_crisis
         has_country_flag = fengraomin
+        any_playable_country = {
+		has_origin = origin_StellaronHunter
+	    }
     }
     immediate = {
         fengrao_middle_crisis_effect = yes
+        event_target:yuhuang_fengrao_country = {
+            if = {
+                limit = {
+                    any_country = {
+                        is_ai = no
+                        check_variable = { which = yuhuang_crisis_level value = 2 }
+                    }
+                }
+                add_modifier = { modifier = yuhuang_crisis_L2 days = -1 }
+            }
+            else_if = {
+                limit = {
+                    any_country = {
+                        is_ai = no
+                        check_variable = { which = yuhuang_crisis_level value = 3 }
+                    }
+                }
+                add_modifier = { modifier = yuhuang_crisis_L3 days = -1 }
+            }
+            else_if = {
+                limit = {
+                    any_country = {
+                        is_ai = no
+                        check_variable = { which = yuhuang_crisis_level value = 4 }
+                    }
+                }
+                add_modifier = { modifier = yuhuang_crisis_L4 days = -1 }
+            }
+            else_if = {
+                limit = {
+                    any_country = {
+                        is_ai = no
+                        check_variable = { which = yuhuang_crisis_level value = 5 }
+                    }
+                }
+                add_modifier = { modifier = yuhuang_crisis_L5 days = -1 }
+            }
+            else = {
+                limit = {
+                    any_country = {
+                        is_ai = no
+                        check_variable = { which = yuhuang_crisis_level value = 1 }
+                    }
+                }
+                add_modifier = { modifier = yuhuang_crisis_L1 days = -1 }
+            }
+        }
         every_country = {
             limit = {
                 is_ai = no
@@ -39,6 +89,9 @@ country_event = {
             has_global_flag = fengrao_middle_crisis
         }
         has_country_flag = fengraomin
+        any_playable_country = {
+		has_origin = origin_StellaronHunter
+	    }
     }
     mean_time_to_happen = {
         years = 20
@@ -56,6 +109,53 @@ country_event = {
     }
     immediate = {
         fengrao_middle_crisis_effect = yes
+        event_target:yuhuang_fengrao_country = {
+            if = {
+                limit = {
+                    any_country = {
+                        is_ai = no
+                        check_variable = { which = yuhuang_crisis_level value = 1 }
+                    }
+                }
+                add_modifier = { modifier = yuhuang_crisis_L1 days = -1 }
+            }
+            else_if = {
+                limit = {
+                    any_country = {
+                        is_ai = no
+                        check_variable = { which = yuhuang_crisis_level value = 2 }
+                    }
+                }
+                add_modifier = { modifier = yuhuang_crisis_L2 days = -1 }
+            }
+            else_if = {
+                limit = {
+                    any_country = {
+                        is_ai = no
+                        check_variable = { which = yuhuang_crisis_level value = 3 }
+                    }
+                }
+                add_modifier = { modifier = yuhuang_crisis_L3 days = -1 }
+            }
+            else_if = {
+                limit = {
+                    any_country = {
+                        is_ai = no
+                        check_variable = { which = yuhuang_crisis_level value = 4 }
+                    }
+                }
+                add_modifier = { modifier = yuhuang_crisis_L4 days = -1 }
+            }
+            else_if = {
+                limit = {
+                    any_country = {
+                        is_ai = no
+                        check_variable = { which = yuhuang_crisis_level value = 5 }
+                    }
+                }
+                add_modifier = { modifier = yuhuang_crisis_L5 days = -1 }
+            }
+        }
         every_country = {
             limit = {
                 NOT = {
@@ -141,26 +241,53 @@ country_event = {
     is_triggered_only = yes
     trigger = {
         has_global_flag = fengrao_crisis_started
+        any_playable_country = {
+		has_origin = origin_StellaronHunter
+	    }
     }
     immediate = {
-        random_list = {
-            20 = {
-                create_extra_yuhuang_fleet = yes
+        if = {
+            limit = {
+                has_modifier = fengraomin_crisis_tier_5
             }
-            30 = {
-                create_leader_yuhuang_fleet = yes
+            random_list = {
+                10 = {
+                    create_extra_yuhuang_fleet = yes
+                }
+                20 = {
+                    create_leader_yuhuang_fleet = yes
+                }
+                70 = {
+                    create_normal_yuhuang_fleet = yes
+                }
             }
-            50 = {
-                create_normal_yuhuang_fleet = yes
-            }
+            country_event = { id = script_crisis.6 days = 120 }   
         }
-        country_event = { id = script_crisis.6 days = 150 }
+        else = {
+            random_list = {
+                30 = {
+                    create_extra_yuhuang_fleet = yes
+                }
+                40 = {
+                    create_leader_yuhuang_fleet = yes
+                }
+                30 = {
+                    create_normal_yuhuang_fleet = yes
+                }
+            }
+            country_event = { id = script_crisis.6 days = 210 }   
+        }
     }
 }
 country_event = {
     id = script_crisis.7
     hide_window = yes
     is_triggered_only = yes
+    trigger = {
+        any_playable_country = {
+		has_origin = origin_StellaronHunter
+	    }
+    }
     immediate = {
         if = {
             limit = { exists = event_target:yuhuang_fengrao_country }
@@ -194,6 +321,9 @@ country_event = {
                 has_fleet_flag = yuhuang_fleet
             }
         }
+        any_playable_country = {
+		has_origin = origin_StellaronHunter
+	    }
     }
     immediate = {
         set_global_flag = yuhuang_defeated_once
@@ -224,6 +354,11 @@ country_event = {
     id = script_crisis.10
     hide_window = yes
     is_triggered_only = yes
+    trigger = {
+        any_playable_country = {
+		has_origin = origin_StellaronHunter
+	    }
+    }
     immediate = {
         if = {
             limit = { exists = event_target:yuhuang_fengrao_country }
@@ -242,6 +377,11 @@ country_event = {
     id = script_crisis.11
     hide_window = yes
     is_triggered_only = yes
+    trigger = {
+        any_playable_country = {
+		has_origin = origin_StellaronHunter
+	    }
+    }
     immediate = {
         create_2nd_yuhuang_fleet = yes
         while = {
@@ -266,6 +406,9 @@ country_event = {
     show_sound = event_airlock
     is_triggered_only = yes
     trigger = {
+        any_playable_country = {
+		has_origin = origin_StellaronHunter
+	    }
         NOT = {
             has_country_flag = kill_yuhuang
         }
@@ -332,6 +475,9 @@ country_event = {
     hide_window = yes
     is_triggered_only = yes
     trigger = {
+        any_playable_country = {
+		has_origin = origin_StellaronHunter
+	    }
         is_country_type = fengraomin_crisis
         exists = this
         has_global_flag = yuhuang_defeated_once
@@ -380,6 +526,9 @@ country_event = {
     hide_window = yes
     is_triggered_only = yes
     trigger = {
+        any_playable_country = {
+		has_origin = origin_StellaronHunter
+	    }
         is_country = event_target:yuhuang_fengrao_country
         count_owned_ship = {
             count = 0
@@ -405,6 +554,11 @@ country_event = {
     id = script_crisis.17
     hide_window = yes
     is_triggered_only = yes
+    trigger = {
+        any_playable_country = {
+		has_origin = origin_StellaronHunter
+	    }
+    }
     immediate = {
         save_event_target_as = failure_yuhuang_country
         create_species = {
@@ -560,6 +714,9 @@ country_event = {
     hide_window = yes
     is_triggered_only = yes
     trigger = {
+        any_playable_country = {
+		has_origin = origin_StellaronHunter
+	    }
         has_global_flag = fengrao_crisis_ongoing
         NOT = {
             exists = event_target:yuhuang_fengrao_country
@@ -572,5 +729,75 @@ country_event = {
             }
             country_event = { id = script_crisis.12 }
         }
+    }
+}
+country_event = {
+    id = script_crisis.19
+    hide_window = yes
+    is_triggered_only = yes
+    trigger = {
+        any_playable_country = {
+            has_origin = origin_StellaronHunter
+        }
+    }
+    immediate = {
+        every_owned_planet = {
+            limit = { 
+                is_colony = yes
+            }
+            planet = {
+                planet_event = { id = script_crisis.20 }
+            }
+        }
+    }
+}
+
+planet_event = {
+    id = script_crisis.20
+    hide_window = yes
+    is_triggered_only = yes
+    trigger = {
+        exists = event_target:yuhuang_fengrao_country
+        is_colony = yes
+        solar_system = {
+            any_ship_in_system = {
+                is_ship_class = shipclass_starbase
+                owner = {
+                    is_country_type = fengraomin_crisis
+                }
+            }
+        }
+    }
+    immediate = {
+        random_list = {
+            60 = {
+                every_owned_pop_group = {
+                    sacrifice_pop_group = {
+                        pop_group = this
+                        percentage = 0.3  # 消灭30%的人口
+                    }
+                }
+                owner = {country_event = { id = script_crisis.21 }}
+            }
+            40 = {}
+        }
+    }
+}
+country_event = {
+    id = script_crisis.21
+    title = script_crisis.21.title
+    desc = script_crisis.21.desc
+    picture = fengraowuran
+    is_triggered_only = yes
+    trigger = {
+        any_playable_country = {
+		    has_origin = origin_StellaronHunter
+	    }
+        exists = event_target:yuhuang_fengrao_country
+    }
+    immediate = {
+    }
+    option = {
+        name = script_crisis.21.a
     }
 }

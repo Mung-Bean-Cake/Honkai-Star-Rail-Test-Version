@@ -1,5 +1,6 @@
 ap_the_craze_crisis = {
 	potential = {
+		has_country_flag = haimeixiewan
 		has_nemesis = yes
 		has_origin = origin_erxiangleyuan
 		is_wilderness_empire = no
@@ -7,17 +8,16 @@ ap_the_craze_crisis = {
 
 	possible = {
 		owner = {
-			has_country_flag = haimeixiewan
+			has_country_flag = is_time_to_become_crisis
 		}
 		custom_tooltip = {
 			fail_text = "requires_independence"
 			is_subject = no
 		}
 		if = {	
-				OR = {
-					owner = { has_origin = origin_erxiangleyuan}
-					
-				}	
+			OR = {
+				owner = { has_origin = origin_erxiangleyuan}	
+			}	
 			custom_tooltip = {
 				fail_text = "requires_ascension_perks_3"
 				#num_ascension_perks > 2
@@ -36,6 +36,58 @@ ap_the_craze_crisis = {
 			#country_event = { id = timeline.69 } # Timeline Become the crisis
 		}
 		activate_crisis_progression = endless_party 
+	}
+
+	modifier = {
+		
+	}
+
+	ai_weight= {
+		factor = 0
+	}
+		
+}
+ap_no_craze_crisis = {
+	potential = {
+		always = no
+	}
+
+	possible = {
+		always = no
+	}
+
+	on_enabled = {
+		hidden_effect = {
+			#set_ai_personality = became_the_crisis
+			#country_event = { id = timeline.69 } # Timeline Become the crisis
+		}
+		activate_crisis_progression = fun_party 
+	}
+
+	modifier = {
+		
+	}
+
+	ai_weight= {
+		factor = 0
+	}
+		
+}
+ap_max_craze_crisis = {
+	potential = {
+		always = no
+	}
+
+	possible = {
+		always = no
+	}
+
+	on_enabled = {
+		hidden_effect = {
+			#set_ai_personality = became_the_crisis
+			#country_event = { id = timeline.69 } # Timeline Become the crisis
+		}
+		activate_crisis_progression = bad_party 
 	}
 
 	modifier = {

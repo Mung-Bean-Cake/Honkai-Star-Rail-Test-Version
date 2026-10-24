@@ -1,35 +1,15 @@
-# CRISIS LEVELS
-# Levels can be unlocked in the order they are written in this file. A later listed level with lower requirements will not be unlocked until the previous levels have been unlocked.
-#
-# level_name = {
-#	perks = {
-#		menp_undertaker		# The menace perks that will be applied when the level is unlocked.
-#		menp_ship_chipper
-#	}
-#	required_menace = 0		# The required amount of Menace to unlock the level
-#	allow = { has_completed_special_project_in_log = CRISIS_SPECIAL_PROJECT_1 }	# You can only unlock this level when this trigger returns true
-#																			# scope COUNTRY, This = country trying to unlock the level
-#	on_unlock = { set_country_flag = CRISIS_LEVEL_FLAG }	# an effect that is triggered when you unlock the level
-#															# scope COUNTRY, This = country the level is being unlocked for
-# }
-
 party_level_1 = {
 	# REQUIREMENTS
 	required_crisis_currency = 0
 
 	# REWARDS
 	perks = {
-		menp_objectives
-		menp_undertaker
-		menp_intimidation
+		menp_party_level_1
+		menp_phantasmoon_court_1
+		menp_1_test_2
 	}
 
 	on_unlock = {
-		hidden_effect = {
-			owner = {
-				country_event = { id = crisis.4140 }
-			}
-		}
 	}
 }
 
@@ -37,19 +17,14 @@ party_level_2 = {
 	# REQUIREMENTS
 	allow = {
 		custom_tooltip = {
-			success_text = crisis_level_2_req_clear_tooltip
-			fail_text =	crisis_level_2_req_tooltip
-			has_country_flag = crisis_special_project_1_complete
+			fail_text =	party_level_2_req_tooltip
+			has_country_flag = menp_1_test_2
 		}
 		hidden_trigger = {
-			NOT = {
-				has_active_event = {
-					crisis.4120
-				}
-			}
+			
 		}
 	}
-	required_crisis_currency = 1000
+	required_crisis_currency = 240
 
 	# REWARDS
 	perks = {
@@ -59,16 +34,7 @@ party_level_2 = {
 	}
 
 	on_unlock = {
-		hidden_effect = {
-			owner = {
-				add_event_chain_counter = {
-					event_chain = "become_the_crisis_chain"
-					counter = "crisis_level_reached"
-					amount = 1
-				}
-				country_event = { id = crisis.4145 days = 3 }
-			}
-		}
+		
 	}
 }
 
@@ -88,7 +54,7 @@ party_level_3 = {
 			}
 		}
 	}
-	required_crisis_currency = 2000
+	required_crisis_currency = 1000
 
 	# REWARDS
 	perks = {
@@ -128,7 +94,7 @@ party_level_4 = {
 			}
 		}
 	}
-	required_crisis_currency = 5000
+	required_crisis_currency = 1500
 
 	# REWARDS
 	perks = {
@@ -153,6 +119,7 @@ party_level_4 = {
 
 party_level_5 = {
 	# REQUIREMENTS
+	
 	allow = {
 		custom_tooltip = {
 			success_text = crisis_level_5_req_clear_tooltip
@@ -178,7 +145,7 @@ party_level_5 = {
 			}
 		}
 	}
-	required_crisis_currency = 10000
+	required_crisis_currency = 1800
 
 	# REWARDS
 	perks = {
@@ -219,6 +186,142 @@ party_level_5 = {
 				country_event = { id = crisis.6000 days = 5 }
 			}
 		}
+	}
+}
+
+
+party1_level_1 = {
+	# REQUIREMENTS
+	required_crisis_currency = 0
+
+	# REWARDS
+	perks = {
+		menp_objectives
+		menp_undertaker
+		menp_intimidation
+	}
+
+	on_unlock = {
+		hidden_effect = {
+			owner = {
+				country_event = { id = crisis.4140 }
+			}
+		}
+	}
+}
+
+party1_level_2 = {
+	allow = {	
+	}
+	required_crisis_currency = 400
+	# REWARDS
+	perks = {
+	}
+
+	on_unlock = {
+	}
+}
+
+party1_level_3 = {
+	allow = {	
+	}
+	required_crisis_currency = 1000
+	# REWARDS
+	perks = {
+	}
+
+	on_unlock = {
+	}
+}
+#写事件，+锁防止倒退？其实·
+party1_level_4 = {
+	allow = {	
+	}
+	required_crisis_currency = 1500
+	# REWARDS
+	perks = {
+	}
+
+	on_unlock = {
+	}
+}
+
+party1_level_5 = {
+	allow = {	
+	}
+	required_crisis_currency = 1800
+	# REWARDS
+	perks = {
+	}
+
+	on_unlock = {
+	}
+}
+party2_level_1 = {
+	# REQUIREMENTS
+	required_crisis_currency = 0
+
+	# REWARDS
+	perks = {
+		menp_objectives
+		menp_undertaker
+		menp_intimidation
+	}
+
+	on_unlock = {
+		hidden_effect = {
+			owner = {
+				country_event = { id = crisis.4140 }
+			}
+		}
+	}
+}
+
+party2_level_2 = {
+	allow = {	
+	}
+	required_crisis_currency = 400
+	# REWARDS
+	perks = {
+	}
+
+	on_unlock = {
+	}
+}
+
+party2_level_3 = {
+	allow = {	
+	}
+	required_crisis_currency = 1000
+	# REWARDS
+	perks = {
+	}
+
+	on_unlock = {
+	}
+}
+#写事件，+锁防止倒退？其实·
+party2_level_4 = {
+	allow = {	
+	}
+	required_crisis_currency = 1500
+	# REWARDS
+	perks = {
+	}
+
+	on_unlock = {
+	}
+}
+
+party2_level_5 = {
+	allow = {	
+	}
+	required_crisis_currency = 1800
+	# REWARDS
+	perks = {
+	}
+
+	on_unlock = {
 	}
 }
 

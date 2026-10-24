@@ -1157,75 +1157,43 @@ country_event = {
             limit = {
                 exists = fromfrom
                 fromfrom = {
-                    has_component = fengrao_burst_shield_small
+                    has_component = fengrao_burst_shield_large
                 }
             }
             fromfrom = {
                 save_event_target_as = fengrao_burst_center
-            }
-            fromfrom = {
-                owner = {
-                    save_event_target_as = fengrao_burst_owner
-                }
-            }
-            fengrao_shield_burst_small_effect = { RADIUS = 100 DAMAGE = 20000 SHIELD_DAMAGE = 40000}
-        }
-        else_if = {
-            limit = {
-                exists = fromfrom
-                fromfrom = {
-                    fromfrom = {
-                        has_component = fengrao_burst_shield_medium
-                    }
+                solar_system = {
+                    save_event_target_as = fengrao_burst_system
                 }
             }
             fromfrom = {
-                save_event_target_as = fengrao_burst_center
+                owner = { save_event_target_as = fengrao_burst_owner }
             }
-            fromfrom = {
-                owner = {
-                    save_event_target_as = fengrao_burst_owner
-                }
+
+            event_target:fengrao_burst_system = {
+                fengrao_shield_burst_large_effect = { RADIUS = 300 DAMAGE = 200000 SHIELD_DAMAGE = 400000 }
             }
-            fengrao_shield_burst_medium_effect = { RADIUS = 300 DAMAGE = 80000 SHIELD_DAMAGE = 200000}
-        }
-        else_if = {
-            limit = {
-                exists = fromfrom
-                fromfrom = {
-                    fromfrom = {
-                        has_component = fengrao_burst_shield_large
-                    }
-                }
-            }
-            fromfrom = {
-                save_event_target_as = fengrao_burst_center
-            }
-            fromfrom = {
-                owner = {
-                    save_event_target_as = fengrao_burst_owner
-                }
-            }
-            fengrao_shield_burst_large_effect = { RADIUS = 450 DAMAGE = 200000 SHIELD_DAMAGE = 500000}
         }  
         else_if = {
             limit = {
                 exists = fromfrom
                 fromfrom = {
-                    fromfrom = {
-                        has_component = fengrao_burst_shield_extra_large
-                    }
+                    has_component = fengrao_burst_shield_extra_large
                 }
             }
             fromfrom = {
                 save_event_target_as = fengrao_burst_center
-            }
-            fromfrom = {
-                owner = {
-                    save_event_target_as = fengrao_burst_owner
+                solar_system = {
+                    save_event_target_as = fengrao_burst_system
                 }
             }
-            fengrao_shield_burst_extra_large_effect = { RADIUS = 600 DAMAGE = 1800000 SHIELD_DAMAGE = 2400000}
+            fromfrom = {
+                owner = { save_event_target_as = fengrao_burst_owner }
+            }
+
+            event_target:fengrao_burst_system = {
+                fengrao_shield_burst_large_effect = { RADIUS = 400 DAMAGE = 1500000 SHIELD_DAMAGE = 2000000 }
+            }
         }
     }
 }
