@@ -1,0 +1,225 @@
+# 货币战争公司系统 v1.4；独立扩展文件，中文说明见 docs/货币战争。
+# 状态：0空、1建设、2活动、3危机、4清算。未经完整游戏验收。
+# 原版4.5.2 arkship_settle_planet_effect 的原样副本，仅增加公司转换前/后两行钩子。
+arkship_settle_planet_effect = {
+    optimize_memory
+    hidden_effect = {
+        $SETTLING_COUNTRY$ = {
+            set_country_as_nomad_effect = { IS_NOMAD = no }
+            set_resource_converter = none
+            set_country_flag = settled_as_nomadic_empire
+            set_faction_properties = {
+                needs_border_access = yes
+            }
+            set_resource_converter = none
+            # Grant starting techs that are blocked for nomadic empires via starting_potential.
+            give_technology = {
+                tech = tech_colonization_1
+                message = no
+            }
+            give_technology = {
+                tech = tech_starbase_1
+                message = no
+            }
+            give_technology = {
+                tech = tech_starbase_2
+                message = no
+            }
+            give_technology = {
+                tech = tech_space_defense_station_1
+                message = no
+            }
+            give_technology = {
+                tech = tech_solar_panel_network
+                message = no
+            }
+            give_technology = {
+                tech = tech_mechanized_mining
+                message = no
+            }
+            # Grant higher-tier starbase techs if the empire has researched equivalent waystation technologies.
+            if = {
+                limit = {
+                    has_technology = tech_waystation_2
+                }
+                give_technology = {
+                    tech = tech_starbase_3
+                    message = no
+                }
+            }
+            if = {
+                limit = {
+                    has_technology = tech_waystation_3
+                }
+                give_technology = {
+                    tech = tech_starbase_4
+                    message = no
+                }
+            }
+            refresh_auto_generated_ship_designs = yes
+            every_issued_mission = {
+                cancel_contract = {
+                    refund = no
+                    show_message = no
+                }
+            }
+            every_owned_contract = {
+                cancel_contract = {
+                    refund = no
+                }
+            }
+            if = {
+                limit = {
+                    has_country_flag = has_arkship_grand_archive_module
+                }
+                remove_country_flag = ga_destroyed_contains_space_fauna
+                if = {
+                    limit = {
+                        num_vivarium_slots > 0
+                    }
+                    set_country_flag = ga_destroyed_contains_space_fauna
+                    release_all_vivarium_fauna = { LOCATION = $SETTLED_SYSTEM$ }
+                }
+                set_country_flag = grand_archive_destroyed
+                remove_country_flag = has_arkship_grand_archive_module
+            }
+            if = {
+                limit = {
+                    has_ascension_perk = ap_eternal_vigilance_nomads
+                }
+                remove_ascension_perk = ap_eternal_vigilance_nomads
+                add_ascension_perk = ap_eternal_vigilance
+            }
+        }
+        $SETTLED_SYSTEM$ = {
+            remove_star_flag = nomad_settling_in_progress
+            create_starbase = {
+                size = starbase_starport
+                module = shipyard
+                module = solar_panel_network
+                building = crew_quarters
+                owner = $SETTLING_COUNTRY$
+            }
+            every_system_planet = {
+                limit = {
+                    has_deposit_for = shipclass_mining_station
+                }
+                create_mining_station = {
+                    owner = $SETTLING_COUNTRY$
+                }
+            }
+            every_system_planet = {
+                limit = {
+                    has_deposit_for = shipclass_research_station
+                }
+                create_research_station = {
+                    owner = $SETTLING_COUNTRY$
+                }
+            }
+        }
+        $SETTLED_PLANET$ = {
+            set_timed_carrier_flag = { flag = nomad_recently_settled_flag days = 1 }
+            if = {
+                limit = {
+                    $SETTLING_COUNTRY$ = {
+                        has_origin = origin_toxic_knights
+                    }
+                }
+                $SETTLING_COUNTRY$ = {
+                    remove_modifier = knights_detox_unlocked
+                }
+                if = {
+                    limit = {
+                        $SETTLING_ARKSHIP$ = {
+                            has_carrier_flag = toxic_knights_arkship
+                        }
+                    }
+                    if = {
+                        limit = {
+                            uses_district_set = habitat
+                        }
+                        set_planet_flag = toxic_knights_habitat
+                    }
+                    else = {
+                        set_planet_flag = toxic_knights_settled_world
+                    }
+                }
+                copy_deposit_from = { SCOPE = $SETTLING_ARKSHIP$ DEPOSIT = d_toxic_god_pools_most_venemous_upgraded }
+                copy_deposit_from = { SCOPE = $SETTLING_ARKSHIP$ DEPOSIT = d_toxic_god_blight_upon_the_land_upgraded }
+                copy_deposit_from = { SCOPE = $SETTLING_ARKSHIP$ DEPOSIT = d_toxic_god_pestilential_wasteland_upgraded }
+                copy_deposit_from = { SCOPE = $SETTLING_ARKSHIP$ DEPOSIT = d_toxic_god_deitys_swarms_upgraded }
+                copy_deposit_from = { SCOPE = $SETTLING_ARKSHIP$ DEPOSIT = d_toxic_god_envenomed_seas_upgraded }
+                if = {
+                    limit = {
+                        has_carrier_flag = toxic_knights_homeworld
+                    }
+                    $SETTLING_COUNTRY$ = {
+                        country_event = {
+                            id = toxoids.8030
+                        }
+                    }
+                }
+            }
+            hsr_corp_begin_carrier_transfer = { SOURCE = $SETTLING_ARKSHIP$ }
+            transfer_carrier = {
+                source = $SETTLING_ARKSHIP$
+                target = this
+                transfer_ownership = yes
+                transfer_controller = yes
+                merge_pops = yes
+                destroy_colony = yes
+            }
+            hsr_corp_finish_carrier_transfer = yes
+            create_sector = yes
+        }
+        $SETTLING_ARKSHIP$.fleet? = {
+            destroy_fleet = {
+                target = this
+                kill_leader = no
+            }
+        }
+        create_fleet = {
+            effect = {
+                set_owner = $SETTLING_COUNTRY$
+                create_ship = {
+                    name = random
+                    random_existing_design = constructor
+                }
+                set_fleet_stance = evasive
+                set_location = $SETTLED_PLANET$
+            }
+        }
+        create_ambient_object = {
+            type = ambient_arkship_destroyed
+        }
+    }
+    $SETTLED_PLANET$ = {
+        add_modifier = {
+            modifier = arkship_parts
+        }
+    }
+}
+
+# 原版4.5.2 embark_planet_effect 的原样副本，仅增加公司转换前/后两行钩子。
+embark_planet_effect = {
+    optimize_memory
+    hidden_effect = {
+        $NEW_ARKSHIP$ = {
+            hsr_corp_begin_carrier_transfer = { SOURCE = $EMBARKING_PLANET$ }
+            transfer_carrier = {
+                source = $EMBARKING_PLANET$
+                target = this
+                transfer_ownership = no
+                merge_pops = no
+                destroy_colony = yes
+            }
+            hsr_corp_finish_carrier_transfer = yes
+        }
+    }
+    $EMBARKING_PLANET$ = {
+        add_modifier = {
+            modifier = stripped_planet
+        }
+        add_planet_devastation = 90
+    }
+}

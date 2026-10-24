@@ -1,0 +1,66 @@
+# 货币战争公司系统 v1.4；独立扩展文件，中文说明见 docs/货币战争。
+# 状态：0空、1建设、2活动、3危机、4清算。未经完整游戏验收。
+cb_hsr_corp_currency_war = {
+    show_in_diplomacy = yes
+    show_notification = no
+    potential = {
+        # HSR_SYSTEM_SWITCH_BEGIN
+        NOT = {
+            has_global_flag = hsr_currency_war_disabled
+        }
+        # HSR_SYSTEM_SWITCH_END
+        is_country_type = default
+        has_origin = origin_hsr_ipc
+        has_ascension_perk = ap_hsr_corp_currency_war
+        is_subject = no
+    }
+    is_valid = {
+        NOT = {
+            is_same_value = from
+        }
+        NOT = {
+            is_in_federation_with = from
+        }
+        from = {
+            is_country_type = default
+            is_subject = no
+            is_galactic_emperor = no
+            is_galactic_custodian = no
+            any_owned_colony = {
+                carrier = {
+                    has_carrier_flag = hsr_corp_has_records
+                }
+            }
+        }
+    }
+}
+
+cb_hsr_corp_protect_assets = {
+    show_in_diplomacy = yes
+    show_notification = yes
+    potential = {
+        # HSR_SYSTEM_SWITCH_BEGIN
+        NOT = {
+            has_global_flag = hsr_currency_war_disabled
+        }
+        # HSR_SYSTEM_SWITCH_END
+        is_country_type = default
+    }
+    is_valid = {
+        has_country_flag = hsr_corp_loss@from
+        check_variable = { which = hsr_corp_damage_claim value > 0 }
+        NOT = {
+            is_at_war_with = from
+        }
+        exists = event_target:hsr_corp_offender@this
+        event_target:hsr_corp_offender@this = {
+            is_same_value = from
+        }
+        NOT = {
+            is_in_federation_with = from
+        }
+        from = {
+            is_country_type = default
+        }
+    }
+}

@@ -1,0 +1,50 @@
+# 货币战争公司系统 v1.4；独立扩展文件，中文说明见 docs/货币战争。
+# 状态：0空、1建设、2活动、3危机、4清算。未经完整游戏验收。
+defined_text = {
+    name = GetHsrFinanceDebtState
+    random = no
+    text = {
+        trigger = {
+            has_country_flag = hsr_finance_overdue
+            check_variable = { which = hsr_finance_unpaid_interest value > 0 }
+        }
+        localization_key = hsr_finance_overdue_state
+    }
+    text = {
+        trigger = {
+            has_country_flag = hsr_finance_overdue
+        }
+        localization_key = hsr_finance_wait_state
+    }
+    text = {
+        localization_key = hsr_finance_normal_state
+    }
+}
+
+defined_text = {
+    name = GetHsrFinanceIncome
+    random = no
+    text = {
+        trigger = {
+            check_variable = { which = hsr_credits_country_year_income_gross value < 0 }
+        }
+        localization_key = hsr_finance_income_negative
+    }
+    text = {
+        localization_key = hsr_finance_income_positive
+    }
+}
+
+defined_text = {
+    name = GetHsrFinanceExpense
+    random = no
+    text = {
+        trigger = {
+            check_variable = { which = hsr_finance_annual_expense value < 0 }
+        }
+        localization_key = hsr_finance_expense_negative
+    }
+    text = {
+        localization_key = hsr_finance_expense_positive
+    }
+}

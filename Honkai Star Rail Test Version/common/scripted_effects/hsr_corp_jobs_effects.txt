@@ -1,0 +1,358 @@
+# 货币战争公司系统 v1.4；独立扩展文件，中文说明见 docs/货币战争。
+# 状态：0空、1建设、2活动、3危机、4清算。未经完整游戏验收。
+# 年度只更新三槽财政汇总；不重算岗位或触碰deposit。
+hsr_corp_refresh_local_accounts = {
+    optimize_memory
+    set_variable = { which = hsr_corp_occupied value = 0 }
+    set_variable = { which = hsr_corp_local_tax value = 0 }
+    set_variable = { which = hsr_corp_local_dividend value = 0 }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_s1_state value > 0 }
+            check_variable = { which = hsr_corp_s1_state value < 4 }
+        }
+        change_variable = { which = hsr_corp_occupied value = 1 }
+        change_variable = { which = hsr_corp_local_tax value = hsr_corp_s1_last_tax }
+        change_variable = { which = hsr_corp_local_dividend value = hsr_corp_s1_last_dividend }
+    }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_s2_state value > 0 }
+            check_variable = { which = hsr_corp_s2_state value < 4 }
+        }
+        change_variable = { which = hsr_corp_occupied value = 1 }
+        change_variable = { which = hsr_corp_local_tax value = hsr_corp_s2_last_tax }
+        change_variable = { which = hsr_corp_local_dividend value = hsr_corp_s2_last_dividend }
+    }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_s3_state value > 0 }
+            check_variable = { which = hsr_corp_s3_state value < 4 }
+        }
+        change_variable = { which = hsr_corp_occupied value = 1 }
+        change_variable = { which = hsr_corp_local_tax value = hsr_corp_s3_last_tax }
+        change_variable = { which = hsr_corp_local_dividend value = hsr_corp_s3_last_dividend }
+    }
+}
+
+# 结构变化时重算三槽岗位；财政年度刷新使用轻量汇总。
+hsr_corp_refresh_jobs = {
+    optimize_memory
+    hsr_corp_initialize = yes
+    set_variable = { which = hsr_corp_total_jobs value = 0 }
+    set_variable = { which = hsr_corp_count value = 0 }
+    set_variable = { which = hsr_corp_defense value = 0 }
+    hsr_corp_refresh_local_accounts = yes
+    set_variable = { which = hsr_corp_total_job_artisan value = 0 }
+    set_variable = { which = hsr_corp_total_job_bureaucrat value = 0 }
+    set_variable = { which = hsr_corp_total_job_entertainer value = 0 }
+    set_variable = { which = hsr_corp_total_job_farmer value = 0 }
+    set_variable = { which = hsr_corp_total_job_foundry value = 0 }
+    set_variable = { which = hsr_corp_total_job_healthcare value = 0 }
+    set_variable = { which = hsr_corp_total_job_miner value = 0 }
+    set_variable = { which = hsr_corp_total_job_researcher value = 0 }
+    set_variable = { which = hsr_corp_total_job_roboticist value = 0 }
+    set_variable = { which = hsr_corp_total_job_soldier value = 0 }
+    set_variable = { which = hsr_corp_total_job_technician value = 0 }
+    set_variable = { which = hsr_corp_total_job_trader value = 0 }
+    set_variable = { which = hsr_corp_industry_1 value = 0 }
+    set_variable = { which = hsr_corp_industry_2 value = 0 }
+    set_variable = { which = hsr_corp_industry_3 value = 0 }
+    set_variable = { which = hsr_corp_industry_4 value = 0 }
+    set_variable = { which = hsr_corp_industry_5 value = 0 }
+    set_variable = { which = hsr_corp_industry_6 value = 0 }
+    set_variable = { which = hsr_corp_industry_7 value = 0 }
+    set_variable = { which = hsr_corp_industry_8 value = 0 }
+    set_variable = { which = hsr_corp_industry_9 value = 0 }
+    set_variable = { which = hsr_corp_s1_jobs value = 0 }
+    if = {
+        limit = {
+            hsr_corp_slot_operating = { SLOT = 1 }
+        }
+        hsr_corp_tally_slot = { SLOT = 1 }
+    }
+    set_variable = { which = hsr_corp_s2_jobs value = 0 }
+    if = {
+        limit = {
+            hsr_corp_slot_operating = { SLOT = 2 }
+        }
+        hsr_corp_tally_slot = { SLOT = 2 }
+    }
+    set_variable = { which = hsr_corp_s3_jobs value = 0 }
+    if = {
+        limit = {
+            hsr_corp_slot_operating = { SLOT = 3 }
+        }
+        hsr_corp_tally_slot = { SLOT = 3 }
+    }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_defense value > 25 }
+        }
+        set_variable = { which = hsr_corp_defense value = 25 }
+    }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_occupied value = 0 }
+        }
+        remove_carrier_flag = hsr_corp_has_records
+    }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_occupied value > 0 }
+            NOT = {
+                has_deposit = d_hsr_corp_enterprise
+            }
+        }
+        add_deposit = d_hsr_corp_enterprise
+    }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_occupied value = 0 }
+            has_deposit = d_hsr_corp_enterprise
+        }
+        remove_deposit = d_hsr_corp_enterprise
+    }
+}
+
+# 体制加成对公司总岗位取整一次；余数固定归主营，避免读档后随机变化。
+hsr_corp_tally_slot = {
+    optimize_memory
+    change_variable = { which = hsr_corp_count value = 1 }
+    change_variable = { which = hsr_corp_defense value = hsr_corp_s$SLOT$_level }
+    set_variable = { which = hsr_corp_main_jobs value = hsr_corp_s$SLOT$_level }
+    divide_variable = { which = hsr_corp_main_jobs value = 2 }
+    ceiling_variable = hsr_corp_main_jobs
+    set_variable = { which = hsr_corp_side_jobs value = hsr_corp_s$SLOT$_level }
+    divide_variable = { which = hsr_corp_side_jobs value = 4 }
+    floor_variable = hsr_corp_side_jobs
+    set_variable = { which = hsr_corp_s$SLOT$_jobs value = hsr_corp_main_jobs }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_s$SLOT$_level value >= 4 }
+            check_variable = { which = hsr_corp_s$SLOT$_secondary_1 value > 0 }
+        }
+        change_variable = { which = hsr_corp_s$SLOT$_jobs value = hsr_corp_side_jobs }
+    }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_s$SLOT$_level value >= 7 }
+            check_variable = { which = hsr_corp_s$SLOT$_secondary_2 value > 0 }
+        }
+        change_variable = { which = hsr_corp_s$SLOT$_jobs value = hsr_corp_side_jobs }
+    }
+    set_variable = { which = hsr_corp_extra_jobs value = 0 }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_s$SLOT$_regime value = 1 }
+        }
+        set_variable = { which = hsr_corp_extra_jobs value = hsr_corp_s$SLOT$_jobs }
+        multiply_variable = { which = hsr_corp_extra_jobs value = 0.2 }
+    }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_s$SLOT$_regime value = 2 }
+        }
+        set_variable = { which = hsr_corp_extra_jobs value = hsr_corp_s$SLOT$_jobs }
+        multiply_variable = { which = hsr_corp_extra_jobs value = 0.5 }
+    }
+    floor_variable = hsr_corp_extra_jobs
+    change_variable = { which = hsr_corp_main_jobs value = hsr_corp_extra_jobs }
+    change_variable = { which = hsr_corp_s$SLOT$_jobs value = hsr_corp_extra_jobs }
+    change_variable = { which = hsr_corp_total_jobs value = hsr_corp_s$SLOT$_jobs }
+    set_variable = { which = hsr_corp_map_industry value = hsr_corp_s$SLOT$_primary }
+    set_variable = { which = hsr_corp_map_jobs value = hsr_corp_main_jobs }
+    hsr_corp_map_industry_jobs = yes
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_s$SLOT$_level value >= 4 }
+            check_variable = { which = hsr_corp_s$SLOT$_secondary_1 value > 0 }
+        }
+        set_variable = { which = hsr_corp_map_industry value = hsr_corp_s$SLOT$_secondary_1 }
+        set_variable = { which = hsr_corp_map_jobs value = hsr_corp_side_jobs }
+        hsr_corp_map_industry_jobs = yes
+    }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_s$SLOT$_level value >= 7 }
+            check_variable = { which = hsr_corp_s$SLOT$_secondary_2 value > 0 }
+        }
+        set_variable = { which = hsr_corp_map_industry value = hsr_corp_s$SLOT$_secondary_2 }
+        set_variable = { which = hsr_corp_map_jobs value = hsr_corp_side_jobs }
+        hsr_corp_map_industry_jobs = yes
+    }
+    if = {
+        limit = {
+            OR = {
+                check_variable = { which = hsr_corp_s$SLOT$_primary value = 1 }
+                check_variable = { which = hsr_corp_s$SLOT$_secondary_1 value = 1 }
+                check_variable = { which = hsr_corp_s$SLOT$_secondary_2 value = 1 }
+            }
+        }
+        change_variable = { which = hsr_corp_industry_1 value = hsr_corp_s$SLOT$_level }
+    }
+    if = {
+        limit = {
+            OR = {
+                check_variable = { which = hsr_corp_s$SLOT$_primary value = 2 }
+                check_variable = { which = hsr_corp_s$SLOT$_secondary_1 value = 2 }
+                check_variable = { which = hsr_corp_s$SLOT$_secondary_2 value = 2 }
+            }
+        }
+        change_variable = { which = hsr_corp_industry_2 value = hsr_corp_s$SLOT$_level }
+    }
+    if = {
+        limit = {
+            OR = {
+                check_variable = { which = hsr_corp_s$SLOT$_primary value = 3 }
+                check_variable = { which = hsr_corp_s$SLOT$_secondary_1 value = 3 }
+                check_variable = { which = hsr_corp_s$SLOT$_secondary_2 value = 3 }
+            }
+        }
+        change_variable = { which = hsr_corp_industry_3 value = hsr_corp_s$SLOT$_level }
+    }
+    if = {
+        limit = {
+            OR = {
+                check_variable = { which = hsr_corp_s$SLOT$_primary value = 4 }
+                check_variable = { which = hsr_corp_s$SLOT$_secondary_1 value = 4 }
+                check_variable = { which = hsr_corp_s$SLOT$_secondary_2 value = 4 }
+            }
+        }
+        change_variable = { which = hsr_corp_industry_4 value = hsr_corp_s$SLOT$_level }
+    }
+    if = {
+        limit = {
+            OR = {
+                check_variable = { which = hsr_corp_s$SLOT$_primary value = 5 }
+                check_variable = { which = hsr_corp_s$SLOT$_secondary_1 value = 5 }
+                check_variable = { which = hsr_corp_s$SLOT$_secondary_2 value = 5 }
+            }
+        }
+        change_variable = { which = hsr_corp_industry_5 value = hsr_corp_s$SLOT$_level }
+    }
+    if = {
+        limit = {
+            OR = {
+                check_variable = { which = hsr_corp_s$SLOT$_primary value = 6 }
+                check_variable = { which = hsr_corp_s$SLOT$_secondary_1 value = 6 }
+                check_variable = { which = hsr_corp_s$SLOT$_secondary_2 value = 6 }
+            }
+        }
+        change_variable = { which = hsr_corp_industry_6 value = hsr_corp_s$SLOT$_level }
+    }
+    if = {
+        limit = {
+            OR = {
+                check_variable = { which = hsr_corp_s$SLOT$_primary value = 7 }
+                check_variable = { which = hsr_corp_s$SLOT$_secondary_1 value = 7 }
+                check_variable = { which = hsr_corp_s$SLOT$_secondary_2 value = 7 }
+            }
+        }
+        change_variable = { which = hsr_corp_industry_7 value = hsr_corp_s$SLOT$_level }
+    }
+    if = {
+        limit = {
+            OR = {
+                check_variable = { which = hsr_corp_s$SLOT$_primary value = 8 }
+                check_variable = { which = hsr_corp_s$SLOT$_secondary_1 value = 8 }
+                check_variable = { which = hsr_corp_s$SLOT$_secondary_2 value = 8 }
+            }
+        }
+        change_variable = { which = hsr_corp_industry_8 value = hsr_corp_s$SLOT$_level }
+    }
+    if = {
+        limit = {
+            OR = {
+                check_variable = { which = hsr_corp_s$SLOT$_primary value = 9 }
+                check_variable = { which = hsr_corp_s$SLOT$_secondary_1 value = 9 }
+                check_variable = { which = hsr_corp_s$SLOT$_secondary_2 value = 9 }
+            }
+        }
+        change_variable = { which = hsr_corp_industry_9 value = hsr_corp_s$SLOT$_level }
+    }
+}
+
+# 4.5.2实际冶金ID为foundry；每个显示岗位在静态修正中折算100人口容量。
+hsr_corp_map_industry_jobs = {
+    optimize_memory
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_map_industry value = 1 }
+        }
+        set_variable = { which = hsr_corp_half value = hsr_corp_map_jobs }
+        divide_variable = { which = hsr_corp_half value = 2 }
+        floor_variable = hsr_corp_half
+        change_variable = { which = hsr_corp_total_job_miner value = hsr_corp_half }
+        subtract_variable = { which = hsr_corp_map_jobs value = hsr_corp_half }
+        change_variable = { which = hsr_corp_total_job_technician value = hsr_corp_map_jobs }
+    }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_map_industry value = 2 }
+        }
+        change_variable = { which = hsr_corp_total_job_trader value = hsr_corp_map_jobs }
+    }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_map_industry value = 3 }
+        }
+        set_variable = { which = hsr_corp_half value = hsr_corp_map_jobs }
+        divide_variable = { which = hsr_corp_half value = 2 }
+        floor_variable = hsr_corp_half
+        change_variable = { which = hsr_corp_total_job_farmer value = hsr_corp_half }
+        subtract_variable = { which = hsr_corp_map_jobs value = hsr_corp_half }
+        change_variable = { which = hsr_corp_total_job_artisan value = hsr_corp_map_jobs }
+    }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_map_industry value = 4 }
+        }
+        change_variable = { which = hsr_corp_total_job_foundry value = hsr_corp_map_jobs }
+    }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_map_industry value = 5 }
+        }
+        change_variable = { which = hsr_corp_total_job_researcher value = hsr_corp_map_jobs }
+    }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_map_industry value = 6 }
+        }
+        set_variable = { which = hsr_corp_half value = hsr_corp_map_jobs }
+        divide_variable = { which = hsr_corp_half value = 2 }
+        floor_variable = hsr_corp_half
+        change_variable = { which = hsr_corp_total_job_soldier value = hsr_corp_half }
+        subtract_variable = { which = hsr_corp_map_jobs value = hsr_corp_half }
+        change_variable = { which = hsr_corp_total_job_foundry value = hsr_corp_map_jobs }
+    }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_map_industry value = 7 }
+        }
+        set_variable = { which = hsr_corp_half value = hsr_corp_map_jobs }
+        divide_variable = { which = hsr_corp_half value = 2 }
+        floor_variable = hsr_corp_half
+        change_variable = { which = hsr_corp_total_job_bureaucrat value = hsr_corp_half }
+        subtract_variable = { which = hsr_corp_map_jobs value = hsr_corp_half }
+        change_variable = { which = hsr_corp_total_job_entertainer value = hsr_corp_map_jobs }
+    }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_map_industry value = 8 }
+        }
+        set_variable = { which = hsr_corp_half value = hsr_corp_map_jobs }
+        divide_variable = { which = hsr_corp_half value = 2 }
+        floor_variable = hsr_corp_half
+        change_variable = { which = hsr_corp_total_job_researcher value = hsr_corp_half }
+        subtract_variable = { which = hsr_corp_map_jobs value = hsr_corp_half }
+        change_variable = { which = hsr_corp_total_job_healthcare value = hsr_corp_map_jobs }
+    }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_map_industry value = 9 }
+        }
+        change_variable = { which = hsr_corp_total_job_roboticist value = hsr_corp_map_jobs }
+    }
+}

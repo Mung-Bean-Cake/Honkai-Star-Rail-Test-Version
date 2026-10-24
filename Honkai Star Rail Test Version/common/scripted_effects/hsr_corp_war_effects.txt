@@ -1,0 +1,974 @@
+# 货币战争公司系统 v1.4；独立扩展文件，中文说明见 docs/货币战争。
+# 状态：0空、1建设、2活动、3危机、4清算。未经完整游戏验收。
+# 仅防御战争或境内实际天灾威胁提供产业援助。
+hsr_corp_aid = {
+    optimize_memory
+    hsr_corp_resolve_parties = { SLOT = $SLOT$ }
+    if = {
+        limit = {
+            hsr_corp_can_manage_slot = { SLOT = $SLOT$ }
+            hsr_corp_slot_active = { SLOT = $SLOT$ }
+            check_variable = { which = hsr_corp_s$SLOT$_loyalty value >= 20 }
+            check_variable = { which = hsr_corp_s$SLOT$_cash value >= value:hsr_corp_aid_cost }
+            NOT = {
+                has_carrier_flag = hsr_corp_aid_cd_s$SLOT$
+            }
+            OR = {
+                check_variable = { which = hsr_corp_s$SLOT$_primary value = hsr_corp_choose_industry }
+                check_variable = { which = hsr_corp_s$SLOT$_secondary_1 value = hsr_corp_choose_industry }
+                check_variable = { which = hsr_corp_s$SLOT$_secondary_2 value = hsr_corp_choose_industry }
+            }
+            event_target:hsr_corp_controller = {
+                OR = {
+                    any_war = {
+                        any_defender = {
+                            is_same_value = event_target:hsr_corp_controller
+                        }
+                        NOT = {
+                            has_war_flag = "hsr_corp_aid_s$SLOT$@event_target:hsr_corp_hq"
+                        }
+                    }
+                    AND = {
+                        NOT = {
+                            has_country_flag = "hsr_corp_crisis_aid_s$SLOT$@event_target:hsr_corp_hq"
+                        }
+                        any_system_within_border = {
+                            any_fleet_in_system = {
+                                exists = owner
+                                owner = {
+                                    is_crisis_faction = yes
+                                    is_hostile = event_target:hsr_corp_controller
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        # 选择一场尚未援助的防御战争，付款前先锁定此场；天灾按实际威胁期记账。
+        set_variable = { which = hsr_corp_aid_locked value = 0 }
+        event_target:hsr_corp_controller = {
+            random_war = {
+                limit = {
+                    any_defender = {
+                        is_same_value = event_target:hsr_corp_controller
+                    }
+                    NOT = {
+                        has_war_flag = "hsr_corp_aid_s$SLOT$@event_target:hsr_corp_hq"
+                    }
+                }
+                set_war_flag = "hsr_corp_aid_s$SLOT$@event_target:hsr_corp_hq"
+                event_target:hsr_corp_hq = {
+                    set_variable = { which = hsr_corp_aid_locked value = 1 }
+                }
+            }
+            if = {
+                limit = {
+                    event_target:hsr_corp_hq = {
+                        check_variable = { which = hsr_corp_aid_locked value = 0 }
+                    }
+                }
+                set_country_flag = "hsr_corp_crisis_aid_s$SLOT$@event_target:hsr_corp_hq"
+            }
+        }
+        set_timed_carrier_flag = { flag = hsr_corp_aid_cd_s$SLOT$ days = value:hsr_corp_aid_cooldown }
+        subtract_variable = { which = hsr_corp_s$SLOT$_cash value = value:hsr_corp_aid_cost }
+        # 接收国即实际经营控制国；一次申请仅读取一次产出倍率。
+        set_variable = {
+            which = hsr_corp_aid_output_factor
+            value = event_target:hsr_corp_controller.value:hsr_corp_aid_output_factor
+        }
+        if = {
+            limit = {
+                check_variable = { which = hsr_corp_choose_industry value = 1 }
+            }
+            event_target:hsr_corp_controller = {
+                add_resource = { energy = 500 minerals = 500 mult = prev.hsr_corp_aid_output_factor }
+            }
+        }
+        if = {
+            limit = {
+                check_variable = { which = hsr_corp_choose_industry value = 2 }
+            }
+            event_target:hsr_corp_controller = {
+                add_resource = { trade = 1000 mult = prev.hsr_corp_aid_output_factor }
+            }
+        }
+        if = {
+            limit = {
+                check_variable = { which = hsr_corp_choose_industry value = 3 }
+            }
+            event_target:hsr_corp_controller = {
+                add_resource = { consumer_goods = 250 food = 500 mult = prev.hsr_corp_aid_output_factor }
+            }
+        }
+        if = {
+            limit = {
+                check_variable = { which = hsr_corp_choose_industry value = 4 }
+            }
+            event_target:hsr_corp_controller = {
+                add_resource = { alloys = 250 mult = prev.hsr_corp_aid_output_factor }
+            }
+        }
+        if = {
+            limit = {
+                check_variable = { which = hsr_corp_choose_industry value = 5 }
+            }
+            event_target:hsr_corp_controller = {
+                add_resource = {
+                    physics_research = 333
+                    society_research = 333
+                    engineering_research = 334
+                    mult = prev.hsr_corp_aid_output_factor
+                }
+            }
+        }
+        if = {
+            limit = {
+                check_variable = { which = hsr_corp_choose_industry value = 6 }
+            }
+            event_target:hsr_corp_controller = {
+                add_resource = { alloys = 250 mult = prev.hsr_corp_aid_output_factor }
+            }
+        }
+        if = {
+            limit = {
+                check_variable = { which = hsr_corp_choose_industry value = 7 }
+            }
+            event_target:hsr_corp_controller = {
+                add_resource = { unity = 1000 mult = prev.hsr_corp_aid_output_factor }
+            }
+        }
+        if = {
+            limit = {
+                check_variable = { which = hsr_corp_choose_industry value = 8 }
+            }
+            event_target:hsr_corp_controller = {
+                add_resource = { food = 500 society_research = 500 mult = prev.hsr_corp_aid_output_factor }
+            }
+        }
+        if = {
+            limit = {
+                check_variable = { which = hsr_corp_choose_industry value = 9 }
+            }
+            event_target:hsr_corp_controller = {
+                add_resource = { alloys = 125 engineering_research = 500 mult = prev.hsr_corp_aid_output_factor }
+            }
+        }
+        if = {
+            limit = {
+                check_variable = { which = hsr_corp_choose_industry value = 6 }
+                check_variable = { which = hsr_corp_s$SLOT$_level value >= 7 }
+                check_variable = { which = hsr_corp_s$SLOT$_loyalty value >= 50 }
+                check_variable = { which = hsr_corp_s$SLOT$_cash value >= 4000 }
+            }
+            subtract_variable = { which = hsr_corp_s$SLOT$_cash value = 4000 }
+            event_target:hsr_corp_controller = {
+                create_fleet = {
+                    name = hsr_corp_support_fleet
+                    effect = {
+                        set_owner = event_target:hsr_corp_controller
+                        set_fleet_flag = hsr_corp_temporary_support
+                        create_ship = {
+                            name = random
+                            random_existing_design = corvette
+                        }
+                        create_ship = {
+                            name = random
+                            random_existing_design = corvette
+                        }
+                        set_location = {
+                            target = event_target:hsr_corp_hq
+                            distance = 10
+                        }
+                        fleet_event = {
+                            id = hsr_corp.700
+                            days = 720
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+# 每个槽位最多一个未读选择事件；通知消化前不复用槽位，避免延迟选项污染新公司。
+hsr_corp_queue_crisis = {
+    optimize_memory
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_s$SLOT$_state value = 3 }
+            check_variable = { which = hsr_corp_s$SLOT$_crisis_decided value = 0 }
+            NOT = {
+                has_carrier_flag = hsr_corp_notice_s$SLOT$
+            }
+        }
+        save_event_target_as = hsr_corp_hq
+        set_variable = { which = hsr_corp_negotiate_cost_$SLOT$ value = hsr_corp_s$SLOT$_level }
+        multiply_variable = { which = hsr_corp_negotiate_cost_$SLOT$ value = value:hsr_corp_negotiate_per_level }
+        set_variable = { which = hsr_corp_regulate_cost_$SLOT$ value = hsr_corp_s$SLOT$_level }
+        multiply_variable = { which = hsr_corp_regulate_cost_$SLOT$ value = value:hsr_corp_regulate_per_level }
+        set_variable = { which = hsr_corp_s$SLOT$_notice_id value = hsr_corp_s$SLOT$_id }
+        set_carrier_flag = hsr_corp_notice_s$SLOT$
+        owner = {
+            country_event = {
+                id = hsr_corp.31$SLOT$
+            }
+        }
+    }
+}
+
+# 资本外逃只扣公司现有现金，不给任何国家生成收入；重复调用不再次扣款。
+hsr_corp_begin_crisis = {
+    optimize_memory
+    if = {
+        limit = {
+            hsr_corp_slot_active = { SLOT = $SLOT$ }
+            check_variable = { which = hsr_corp_s$SLOT$_loyalty value < -50 }
+            NOT = {
+                has_carrier_flag = hsr_corp_crisis_cd_s$SLOT$
+            }
+        }
+        hsr_corp_resolve_parties = { SLOT = $SLOT$ }
+        set_variable = { which = hsr_corp_s$SLOT$_state value = 3 }
+        set_variable = { which = hsr_corp_s$SLOT$_crisis_decided value = 0 }
+        random_list = {
+            25 = {
+                set_variable = { which = hsr_corp_s$SLOT$_crisis_kind value = 1 }
+            }
+            25 = {
+                set_variable = { which = hsr_corp_s$SLOT$_crisis_kind value = 2 }
+            }
+            25 = {
+                set_variable = { which = hsr_corp_s$SLOT$_crisis_kind value = 3 }
+            }
+            25 = {
+                set_variable = { which = hsr_corp_s$SLOT$_crisis_kind value = 4 }
+            }
+        }
+        set_timed_carrier_flag = {
+            flag = hsr_corp_crisis_active_s$SLOT$
+            days = event_target:hsr_corp_controller.value:hsr_corp_crisis_days
+        }
+        set_timed_carrier_flag = { flag = hsr_corp_crisis_cd_s$SLOT$ days = value:hsr_corp_crisis_cooldown }
+        if = {
+            limit = {
+                check_variable = { which = hsr_corp_s$SLOT$_crisis_kind value = 2 }
+            }
+            set_variable = { which = hsr_corp_flight value = hsr_corp_s$SLOT$_cash }
+            multiply_variable = { which = hsr_corp_flight value = value:hsr_corp_crisis_flight_cash }
+            subtract_variable = { which = hsr_corp_s$SLOT$_cash value = hsr_corp_flight }
+            multiply_variable = { which = hsr_corp_s$SLOT$_share_price value = value:hsr_corp_crisis_flight_price }
+            if = {
+                limit = {
+                    check_variable = { which = hsr_corp_s$SLOT$_share_price value < 1 }
+                }
+                set_variable = { which = hsr_corp_s$SLOT$_share_price value = 1 }
+            }
+        }
+        hsr_corp_queue_crisis = { SLOT = $SLOT$ }
+    }
+}
+
+# 协商使用总部国家财政，费用全额进入公司，恢复忠诚并解除惩罚。
+hsr_corp_crisis_appease = {
+    optimize_memory
+    set_variable = { which = hsr_corp_crisis_cost value = hsr_corp_s$SLOT$_level }
+    multiply_variable = { which = hsr_corp_crisis_cost value = value:hsr_corp_negotiate_per_level }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_s$SLOT$_state value = 3 }
+            check_variable = { which = hsr_corp_s$SLOT$_crisis_decided value = 0 }
+            owner = {
+                check_variable = { which = hsr_credits_country_trade_storage value >= prev.hsr_corp_crisis_cost }
+            }
+        }
+        owner = {
+            subtract_variable = { which = hsr_credits_country_trade_storage value = prev.hsr_corp_crisis_cost }
+        }
+        change_variable = { which = hsr_corp_s$SLOT$_cash value = hsr_corp_crisis_cost }
+        change_variable = { which = hsr_corp_s$SLOT$_loyalty value = owner.value:hsr_corp_negotiate_loyalty }
+        if = {
+            limit = {
+                check_variable = { which = hsr_corp_s$SLOT$_loyalty value > 100 }
+            }
+            set_variable = { which = hsr_corp_s$SLOT$_loyalty value = 100 }
+        }
+        set_variable = { which = hsr_corp_s$SLOT$_state value = 2 }
+        set_variable = { which = hsr_corp_s$SLOT$_crisis_kind value = 0 }
+        set_variable = { which = hsr_corp_s$SLOT$_crisis_decided value = 1 }
+        remove_carrier_flag = hsr_corp_crisis_active_s$SLOT$
+    }
+}
+
+# 监管费作为行政支出退出经济；不没收股票，不改变控制国或总部主权。
+hsr_corp_crisis_takeover = {
+    optimize_memory
+    hsr_corp_resolve_parties = { SLOT = $SLOT$ }
+    set_variable = { which = hsr_corp_crisis_cost value = hsr_corp_s$SLOT$_level }
+    multiply_variable = { which = hsr_corp_crisis_cost value = value:hsr_corp_regulate_per_level }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_s$SLOT$_state value = 3 }
+            check_variable = { which = hsr_corp_s$SLOT$_crisis_decided value = 0 }
+            owner = {
+                check_variable = { which = hsr_credits_country_trade_storage value >= prev.hsr_corp_crisis_cost }
+            }
+        }
+        owner = {
+            subtract_variable = { which = hsr_credits_country_trade_storage value = prev.hsr_corp_crisis_cost }
+        }
+        subtract_variable = { which = hsr_corp_s$SLOT$_loyalty value = value:hsr_corp_regulate_loyalty }
+        if = {
+            limit = {
+                check_variable = { which = hsr_corp_s$SLOT$_loyalty value < -100 }
+            }
+            set_variable = { which = hsr_corp_s$SLOT$_loyalty value = -100 }
+        }
+        set_variable = { which = hsr_corp_s$SLOT$_crisis_kind value = 5 }
+        set_variable = { which = hsr_corp_s$SLOT$_crisis_decided value = 1 }
+        set_timed_carrier_flag = {
+            flag = hsr_corp_crisis_active_s$SLOT$
+            days = event_target:hsr_corp_controller.value:hsr_corp_regulation_days
+        }
+    }
+}
+
+# 放任仅确认当前有期限危机，不重复抽取或重新扣款。
+hsr_corp_crisis_release = {
+    optimize_memory
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_s$SLOT$_state value = 3 }
+            check_variable = { which = hsr_corp_s$SLOT$_crisis_decided value = 0 }
+        }
+        set_variable = { which = hsr_corp_s$SLOT$_crisis_decided value = 1 }
+    }
+}
+
+# 到期自动解除经营惩罚；只有连续亏损且现金枯竭、有债务才破产，不因低忠诚直接删除。
+hsr_corp_finish_crisis = {
+    optimize_memory
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_s$SLOT$_state value = 3 }
+            NOT = {
+                has_carrier_flag = hsr_corp_crisis_active_s$SLOT$
+            }
+        }
+        if = {
+            limit = {
+                check_variable = { which = hsr_corp_s$SLOT$_losses value >= 3 }
+                check_variable = { which = hsr_corp_s$SLOT$_cash value <= 0 }
+                check_variable = { which = hsr_corp_s$SLOT$_debt value > 0 }
+            }
+            hsr_corp_close_slot = { SLOT = $SLOT$ }
+        }
+        else = {
+            set_variable = { which = hsr_corp_s$SLOT$_state value = 2 }
+            set_variable = { which = hsr_corp_s$SLOT$_crisis_kind value = 0 }
+            set_variable = { which = hsr_corp_s$SLOT$_crisis_decided value = 1 }
+        }
+    }
+}
+
+# 只记录显式非法现金没收中实际受损的外国持股国；战争中仅记损害，不设置战争目标或新理由。
+hsr_corp_record_economic_damage = {
+    optimize_memory
+    if = {
+        limit = {
+            exists = "event_target:hsr_corp_$ROLE$_s$SLOT$@this"
+            check_variable = { which = hsr_corp_s$SLOT$_$ROLE$_shares value > 0 }
+            "event_target:hsr_corp_$ROLE$_s$SLOT$@this" = {
+                is_country_type = default
+                NOT = {
+                    is_same_value = event_target:hsr_corp_hq.owner
+                }
+                has_communications = event_target:hsr_corp_hq.owner
+            }
+        }
+        set_variable = { which = hsr_corp_claim value = hsr_corp_seized }
+        multiply_variable = { which = hsr_corp_claim value = hsr_corp_s$SLOT$_$ROLE$_shares }
+        divide_variable = { which = hsr_corp_claim value = 100 }
+        if = {
+            limit = {
+                check_variable = { which = hsr_corp_claim value > 0 }
+            }
+            "event_target:hsr_corp_$ROLE$_s$SLOT$@this" = {
+                save_event_target_as = hsr_corp_claimant
+                if = {
+                    limit = {
+                        OR = {
+                            NOT = {
+                                exists = event_target:hsr_corp_offender@this
+                            }
+                            event_target:hsr_corp_offender@this = {
+                                NOT = {
+                                    is_same_value = event_target:hsr_corp_hq.owner
+                                }
+                            }
+                        }
+                    }
+                    set_variable = { which = hsr_corp_damage_claim value = 0 }
+                }
+                change_variable = { which = hsr_corp_damage_claim value = prev.hsr_corp_claim }
+                if = {
+                    limit = {
+                        NOT = {
+                            is_at_war_with = event_target:hsr_corp_hq.owner
+                        }
+                    }
+                    set_timed_country_flag = { flag = hsr_corp_loss@event_target:hsr_corp_hq.owner days = 3600 }
+                }
+            }
+            owner = {
+                save_global_event_target_as = hsr_corp_offender@event_target:hsr_corp_claimant
+            }
+        }
+    }
+}
+
+# 非法现金征用为明确的两次确认行为；现金一扣一加、股权不变，不会由破产或合法交易触发。
+hsr_corp_illegal_seize = {
+    optimize_memory
+    hsr_corp_resolve_parties = { SLOT = $SLOT$ }
+    if = {
+        limit = {
+            hsr_corp_slot_operating = { SLOT = $SLOT$ }
+            owner = {
+                is_same_value = event_target:hsr_corp_actor
+            }
+            check_variable = { which = hsr_corp_s$SLOT$_cash value > 0 }
+            NOT = {
+                has_carrier_flag = hsr_corp_illegal_cd_s$SLOT$
+            }
+            OR = {
+                AND = {
+                    exists = "event_target:hsr_corp_founder_s$SLOT$@this"
+                    check_variable = { which = hsr_corp_s$SLOT$_founder_shares value > 0 }
+                    "event_target:hsr_corp_founder_s$SLOT$@this" = {
+                        NOT = {
+                            is_same_value = event_target:hsr_corp_hq.owner
+                        }
+                    }
+                }
+                AND = {
+                    exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
+                    check_variable = { which = hsr_corp_s$SLOT$_foreign_shares value > 0 }
+                    "event_target:hsr_corp_foreign_s$SLOT$@this" = {
+                        NOT = {
+                            is_same_value = event_target:hsr_corp_hq.owner
+                        }
+                    }
+                }
+            }
+        }
+        set_variable = { which = hsr_corp_seized value = hsr_corp_s$SLOT$_level }
+        multiply_variable = { which = hsr_corp_seized value = value:hsr_corp_illegal_per_level }
+        if = {
+            limit = {
+                check_variable = { which = hsr_corp_seized value > hsr_corp_s$SLOT$_cash }
+            }
+            set_variable = { which = hsr_corp_seized value = hsr_corp_s$SLOT$_cash }
+        }
+        subtract_variable = { which = hsr_corp_s$SLOT$_cash value = hsr_corp_seized }
+        owner = {
+            change_variable = { which = hsr_credits_country_trade_storage value = prev.hsr_corp_seized }
+        }
+        subtract_variable = { which = hsr_corp_s$SLOT$_loyalty value = value:hsr_corp_illegal_loyalty_loss }
+        if = {
+            limit = {
+                check_variable = { which = hsr_corp_s$SLOT$_loyalty value < -100 }
+            }
+            set_variable = { which = hsr_corp_s$SLOT$_loyalty value = -100 }
+        }
+        set_timed_carrier_flag = { flag = hsr_corp_illegal_cd_s$SLOT$ days = 360 }
+        hsr_corp_record_economic_damage = { SLOT = $SLOT$ ROLE = founder }
+        hsr_corp_record_economic_damage = { SLOT = $SLOT$ ROLE = foreign }
+    }
+}
+
+# 只转让败方实际持有的股权包；第三方全球引用与股份完全保留。
+hsr_corp_transfer_defeated_shares = {
+    optimize_memory
+    hsr_corp_resolve_parties = { SLOT = $SLOT$ }
+    set_variable = { which = hsr_corp_shares_transferred value = 0 }
+    if = {
+        limit = {
+            exists = "event_target:hsr_corp_founder_s$SLOT$@this"
+            event_target:hsr_corp_founder = {
+                is_same_value = event_target:hsr_corp_defeated
+            }
+        }
+        hsr_corp_refund_offer = { SLOT = $SLOT$ }
+        set_variable = { which = hsr_corp_shares_transferred value = 1 }
+        set_variable = { which = hsr_corp_s$SLOT$_founder_basis value = hsr_corp_s$SLOT$_share_price }
+        event_target:hsr_corp_victor = {
+            save_global_event_target_as = "hsr_corp_founder_s$SLOT$@event_target:hsr_corp_hq"
+        }
+    }
+    if = {
+        limit = {
+            exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
+            event_target:hsr_corp_foreign = {
+                is_same_value = event_target:hsr_corp_defeated
+            }
+        }
+        hsr_corp_refund_offer = { SLOT = $SLOT$ }
+        set_variable = { which = hsr_corp_shares_transferred value = 1 }
+        set_variable = { which = hsr_corp_s$SLOT$_foreign_basis value = hsr_corp_s$SLOT$_share_price }
+        if = {
+            limit = {
+                "event_target:hsr_corp_founder_s$SLOT$@this" = {
+                    is_same_value = event_target:hsr_corp_victor
+                }
+            }
+            change_variable = { which = hsr_corp_s$SLOT$_founder_shares value = hsr_corp_s$SLOT$_foreign_shares }
+            set_variable = { which = hsr_corp_s$SLOT$_foreign_shares value = 0 }
+            clear_global_event_target = "hsr_corp_foreign_s$SLOT$@this"
+        }
+        else = {
+            event_target:hsr_corp_victor = {
+                save_global_event_target_as = "hsr_corp_foreign_s$SLOT$@event_target:hsr_corp_hq"
+            }
+        }
+    }
+    if = {
+        limit = {
+            exists = "event_target:hsr_corp_founder_s$SLOT$@this"
+            exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
+            "event_target:hsr_corp_founder_s$SLOT$@this" = {
+                is_same_value = "event_target:hsr_corp_foreign_s$SLOT$@event_target:hsr_corp_hq"
+            }
+        }
+        change_variable = { which = hsr_corp_s$SLOT$_founder_shares value = hsr_corp_s$SLOT$_foreign_shares }
+        set_variable = { which = hsr_corp_s$SLOT$_foreign_shares value = 0 }
+        set_variable = { which = hsr_corp_s$SLOT$_founder_basis value = hsr_corp_s$SLOT$_share_price }
+        clear_global_event_target = "hsr_corp_foreign_s$SLOT$@this"
+    }
+    hsr_corp_recheck_control = { SLOT = $SLOT$ }
+}
+
+# 只有自定义战争目标胜利分支调用；转移败方实际股权，赔偿走单独的有限余额入口。
+hsr_corp_war_settlement = {
+    optimize_memory
+    save_event_target_as = hsr_corp_victor
+    from = {
+        save_event_target_as = hsr_corp_defeated
+    }
+    every_country = {
+        every_owned_colony = {
+            carrier = {
+                if = {
+                    limit = {
+                        has_carrier_flag = hsr_corp_has_records
+                    }
+                    hsr_corp_transfer_defeated_shares = { SLOT = 1 }
+                    hsr_corp_transfer_defeated_shares = { SLOT = 2 }
+                    hsr_corp_transfer_defeated_shares = { SLOT = 3 }
+                }
+            }
+        }
+    }
+    hsr_corp_compensate = { LIMIT = value:hsr_corp_max_compensation }
+}
+
+# 赔款一扣一加，受请求金额、5000配置上限和实际trade库存共同约束。
+hsr_corp_compensate = {
+    optimize_memory
+    save_event_target_as = hsr_corp_victor
+    from = {
+        save_event_target_as = hsr_corp_defeated
+    }
+    set_variable = { which = hsr_corp_compensation_cap value = $LIMIT$ }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_compensation_cap value > value:hsr_corp_max_compensation }
+        }
+        set_variable = { which = hsr_corp_compensation_cap value = value:hsr_corp_max_compensation }
+    }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_compensation_cap value < 0 }
+        }
+        set_variable = { which = hsr_corp_compensation_cap value = 0 }
+    }
+    # 赔偿不超过败方现有trade和配置上限；没有清算第三国资产。
+    event_target:hsr_corp_defeated = {
+        export_resource_stockpile_to_variable = {
+            resource = trade
+            variable = hsr_corp_compensation
+        }
+        if = {
+            limit = {
+                check_variable = {
+                    which = hsr_corp_compensation
+                    value > event_target:hsr_corp_victor.hsr_corp_compensation_cap
+                }
+            }
+            set_variable = {
+                which = hsr_corp_compensation
+                value = event_target:hsr_corp_victor.hsr_corp_compensation_cap
+            }
+        }
+        set_variable = { which = hsr_corp_compensation_debit value = hsr_corp_compensation }
+        multiply_variable = { which = hsr_corp_compensation_debit value = -1 }
+        add_resource = { trade = 1 mult = hsr_corp_compensation_debit }
+    }
+    add_resource = { trade = 1 mult = event_target:hsr_corp_defeated.hsr_corp_compensation }
+}
+
+# 只有玩家明确确认的非法行为才记录损害；不删除舰船，不改现有战争目标。
+hsr_corp_illegal_action = {
+    optimize_memory
+    hsr_corp_resolve_parties = { SLOT = $SLOT$ }
+    if = {
+        limit = {
+            hsr_corp_slot_operating = { SLOT = $SLOT$ }
+            owner = {
+                is_same_value = event_target:hsr_corp_actor
+            }
+            NOT = {
+                has_carrier_flag = hsr_corp_illegal_cd_s$SLOT$
+            }
+            check_variable = { which = hsr_corp_s$SLOT$_offer_escrow value = 0 }
+            OR = {
+                AND = {
+                    exists = "event_target:hsr_corp_founder_s$SLOT$@this"
+                    check_variable = { which = hsr_corp_s$SLOT$_founder_shares value > 0 }
+                    "event_target:hsr_corp_founder_s$SLOT$@this" = {
+                        NOT = {
+                            is_same_value = event_target:hsr_corp_hq.owner
+                        }
+                    }
+                }
+                AND = {
+                    exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
+                    check_variable = { which = hsr_corp_s$SLOT$_foreign_shares value > 0 }
+                    "event_target:hsr_corp_foreign_s$SLOT$@this" = {
+                        NOT = {
+                            is_same_value = event_target:hsr_corp_hq.owner
+                        }
+                    }
+                }
+            }
+            OR = {
+                NOT = {
+                    check_variable = { which = hsr_corp_illegal_kind value = 3 }
+                }
+                event_target:hsr_corp_controller = {
+                    NOT = {
+                        is_same_value = event_target:hsr_corp_hq.owner
+                    }
+                }
+            }
+        }
+        if = {
+            limit = {
+                check_variable = { which = hsr_corp_illegal_kind value = 1 }
+            }
+            hsr_corp_illegal_seize = { SLOT = $SLOT$ }
+        }
+        if = {
+            limit = {
+                check_variable = { which = hsr_corp_illegal_kind value >= 2 }
+                check_variable = { which = hsr_corp_illegal_kind value <= 4 }
+            }
+            set_variable = { which = hsr_corp_seized value = hsr_corp_s$SLOT$_cash }
+            change_variable = { which = hsr_corp_seized value = hsr_corp_s$SLOT$_market_reserve }
+            subtract_variable = { which = hsr_corp_seized value = hsr_corp_s$SLOT$_debt }
+            if = {
+                limit = {
+                    check_variable = { which = hsr_corp_seized value < 0 }
+                }
+                set_variable = { which = hsr_corp_seized value = 0 }
+            }
+            if = {
+                limit = {
+                    check_variable = { which = hsr_corp_illegal_kind value = 3 }
+                }
+                set_variable = { which = hsr_corp_seized value = hsr_corp_s$SLOT$_last_dividend }
+            }
+            hsr_corp_record_economic_damage = { SLOT = $SLOT$ ROLE = founder }
+            hsr_corp_record_economic_damage = { SLOT = $SLOT$ ROLE = foreign }
+            set_timed_carrier_flag = { flag = hsr_corp_illegal_cd_s$SLOT$ days = value:hsr_corp_illegal_days }
+            subtract_variable = { which = hsr_corp_s$SLOT$_loyalty value = value:hsr_corp_illegal_loyalty_loss }
+            if = {
+                limit = {
+                    check_variable = { which = hsr_corp_s$SLOT$_loyalty value < -100 }
+                }
+                set_variable = { which = hsr_corp_s$SLOT$_loyalty value = -100 }
+            }
+            if = {
+                limit = {
+                    check_variable = { which = hsr_corp_illegal_kind value = 2 }
+                }
+                set_variable = { which = hsr_corp_expropriated_shares value = 0 }
+                set_variable = { which = hsr_corp_host_basis value = 0 }
+                if = {
+                    limit = {
+                        exists = "event_target:hsr_corp_founder_s$SLOT$@this"
+                        "event_target:hsr_corp_founder_s$SLOT$@this" = {
+                            is_same_value = event_target:hsr_corp_hq.owner
+                        }
+                    }
+                    set_variable = { which = hsr_corp_host_part value = hsr_corp_s$SLOT$_founder_basis }
+                    multiply_variable = { which = hsr_corp_host_part value = hsr_corp_s$SLOT$_founder_shares }
+                    change_variable = { which = hsr_corp_host_basis value = hsr_corp_host_part }
+                }
+                if = {
+                    limit = {
+                        exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
+                        "event_target:hsr_corp_foreign_s$SLOT$@this" = {
+                            is_same_value = event_target:hsr_corp_hq.owner
+                        }
+                    }
+                    set_variable = { which = hsr_corp_host_part value = hsr_corp_s$SLOT$_foreign_basis }
+                    multiply_variable = { which = hsr_corp_host_part value = hsr_corp_s$SLOT$_foreign_shares }
+                    change_variable = { which = hsr_corp_host_basis value = hsr_corp_host_part }
+                }
+                if = {
+                    limit = {
+                        exists = "event_target:hsr_corp_founder_s$SLOT$@this"
+                        "event_target:hsr_corp_founder_s$SLOT$@this" = {
+                            NOT = {
+                                is_same_value = event_target:hsr_corp_hq.owner
+                            }
+                        }
+                    }
+                    change_variable = { which = hsr_corp_expropriated_shares value = hsr_corp_s$SLOT$_founder_shares }
+                    set_variable = { which = hsr_corp_s$SLOT$_founder_shares value = 0 }
+                    clear_global_event_target = "hsr_corp_founder_s$SLOT$@this"
+                }
+                if = {
+                    limit = {
+                        exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
+                        "event_target:hsr_corp_foreign_s$SLOT$@this" = {
+                            NOT = {
+                                is_same_value = event_target:hsr_corp_hq.owner
+                            }
+                        }
+                    }
+                    change_variable = { which = hsr_corp_expropriated_shares value = hsr_corp_s$SLOT$_foreign_shares }
+                    set_variable = { which = hsr_corp_s$SLOT$_foreign_shares value = 0 }
+                    clear_global_event_target = "hsr_corp_foreign_s$SLOT$@this"
+                }
+                change_variable = { which = hsr_corp_s$SLOT$_founder_shares value = hsr_corp_expropriated_shares }
+                owner = {
+                    save_global_event_target_as = "hsr_corp_founder_s$SLOT$@event_target:hsr_corp_hq"
+                }
+                if = {
+                    limit = {
+                        exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
+                        "event_target:hsr_corp_foreign_s$SLOT$@this" = {
+                            is_same_value = event_target:hsr_corp_hq.owner
+                        }
+                    }
+                    change_variable = {
+                        which = hsr_corp_s$SLOT$_founder_shares
+                        value = hsr_corp_s$SLOT$_foreign_shares
+                    }
+                    set_variable = { which = hsr_corp_s$SLOT$_foreign_shares value = 0 }
+                    clear_global_event_target = "hsr_corp_foreign_s$SLOT$@this"
+                }
+                if = {
+                    limit = {
+                        check_variable = { which = hsr_corp_s$SLOT$_founder_shares value > 0 }
+                    }
+                    set_variable = { which = hsr_corp_s$SLOT$_founder_basis value = hsr_corp_host_basis }
+                    divide_variable = { which = hsr_corp_s$SLOT$_founder_basis value = hsr_corp_s$SLOT$_founder_shares }
+                }
+                hsr_corp_recheck_control = { SLOT = $SLOT$ }
+            }
+            if = {
+                limit = {
+                    check_variable = { which = hsr_corp_illegal_kind value = 3 }
+                }
+                set_variable = { which = hsr_corp_s$SLOT$_rights_denied value = 1 }
+                set_variable = { which = hsr_corp_s$SLOT$_foreign_control value = 0 }
+                set_timed_carrier_flag = { flag = hsr_corp_rights_suspended_s$SLOT$ days = value:hsr_corp_rights_days }
+                hsr_corp_recheck_control = { SLOT = $SLOT$ }
+            }
+            if = {
+                limit = {
+                    check_variable = { which = hsr_corp_illegal_kind value = 4 }
+                }
+                owner = {
+                    change_variable = { which = hsr_credits_country_trade_storage value = prev.hsr_corp_seized }
+                }
+                set_variable = { which = hsr_corp_seize_cash value = hsr_corp_seized }
+                if = {
+                    limit = {
+                        check_variable = { which = hsr_corp_seize_cash value > hsr_corp_s$SLOT$_cash }
+                    }
+                    set_variable = { which = hsr_corp_seize_cash value = hsr_corp_s$SLOT$_cash }
+                }
+                subtract_variable = { which = hsr_corp_s$SLOT$_cash value = hsr_corp_seize_cash }
+                set_variable = { which = hsr_corp_seize_pool value = hsr_corp_seized }
+                subtract_variable = { which = hsr_corp_seize_pool value = hsr_corp_seize_cash }
+                subtract_variable = { which = hsr_corp_s$SLOT$_market_reserve value = hsr_corp_seize_pool }
+                hsr_corp_close_slot = { SLOT = $SLOT$ }
+            }
+        }
+    }
+}
+
+# 合法全额收购不调用损害记录；资金从国家财政扣除并实际付给原股东，不凭空发钱。
+hsr_corp_nationalize = {
+    optimize_memory
+    hsr_corp_resolve_parties = { SLOT = $SLOT$ }
+    if = {
+        limit = {
+            hsr_corp_slot_active = { SLOT = $SLOT$ }
+            owner = {
+                is_same_value = event_target:hsr_corp_actor
+                is_at_war = no
+            }
+            check_variable = { which = hsr_corp_s$SLOT$_offer_escrow value = 0 }
+            check_variable = { which = hsr_corp_s$SLOT$_pending_regime value = 0 }
+            NOT = {
+                has_carrier_flag = hsr_corp_control_adapt_s$SLOT$
+            }
+            NOT = {
+                has_carrier_flag = hsr_corp_illegal_cd_s$SLOT$
+            }
+            OR = {
+                AND = {
+                    exists = "event_target:hsr_corp_founder_s$SLOT$@this"
+                    check_variable = { which = hsr_corp_s$SLOT$_founder_shares value > 0 }
+                    "event_target:hsr_corp_founder_s$SLOT$@this" = {
+                        NOT = {
+                            is_same_value = event_target:hsr_corp_hq.owner
+                        }
+                    }
+                }
+                AND = {
+                    exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
+                    check_variable = { which = hsr_corp_s$SLOT$_foreign_shares value > 0 }
+                    "event_target:hsr_corp_foreign_s$SLOT$@this" = {
+                        NOT = {
+                            is_same_value = event_target:hsr_corp_hq.owner
+                        }
+                    }
+                }
+            }
+        }
+        set_variable = { which = hsr_corp_nationalize_cost value = 0 }
+        set_variable = { which = hsr_corp_purchase_founder value = 0 }
+        if = {
+            limit = {
+                exists = "event_target:hsr_corp_founder_s$SLOT$@this"
+                "event_target:hsr_corp_founder_s$SLOT$@this" = {
+                    NOT = {
+                        is_same_value = event_target:hsr_corp_hq.owner
+                    }
+                }
+            }
+            set_variable = { which = hsr_corp_purchase_founder value = hsr_corp_s$SLOT$_founder_shares }
+            multiply_variable = { which = hsr_corp_purchase_founder value = hsr_corp_s$SLOT$_share_price }
+            change_variable = { which = hsr_corp_nationalize_cost value = hsr_corp_purchase_founder }
+        }
+        set_variable = { which = hsr_corp_purchase_foreign value = 0 }
+        if = {
+            limit = {
+                exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
+                "event_target:hsr_corp_foreign_s$SLOT$@this" = {
+                    NOT = {
+                        is_same_value = event_target:hsr_corp_hq.owner
+                    }
+                }
+            }
+            set_variable = { which = hsr_corp_purchase_foreign value = hsr_corp_s$SLOT$_foreign_shares }
+            multiply_variable = { which = hsr_corp_purchase_foreign value = hsr_corp_s$SLOT$_share_price }
+            change_variable = { which = hsr_corp_nationalize_cost value = hsr_corp_purchase_foreign }
+        }
+        if = {
+            limit = {
+                check_variable = { which = hsr_corp_nationalize_cost value > 0 }
+                owner = {
+                    check_variable = {
+                        which = hsr_credits_country_trade_storage
+                        value >= prev.hsr_corp_nationalize_cost
+                    }
+                }
+            }
+            owner = {
+                subtract_variable = { which = hsr_credits_country_trade_storage value = prev.hsr_corp_nationalize_cost }
+            }
+            set_variable = { which = hsr_corp_purchased_shares value = 0 }
+            set_variable = { which = hsr_corp_host_basis value = 0 }
+            if = {
+                limit = {
+                    exists = "event_target:hsr_corp_founder_s$SLOT$@this"
+                    "event_target:hsr_corp_founder_s$SLOT$@this" = {
+                        is_same_value = event_target:hsr_corp_hq.owner
+                    }
+                }
+                set_variable = { which = hsr_corp_host_part value = hsr_corp_s$SLOT$_founder_basis }
+                multiply_variable = { which = hsr_corp_host_part value = hsr_corp_s$SLOT$_founder_shares }
+                change_variable = { which = hsr_corp_host_basis value = hsr_corp_host_part }
+            }
+            if = {
+                limit = {
+                    exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
+                    "event_target:hsr_corp_foreign_s$SLOT$@this" = {
+                        is_same_value = event_target:hsr_corp_hq.owner
+                    }
+                }
+                set_variable = { which = hsr_corp_host_part value = hsr_corp_s$SLOT$_foreign_basis }
+                multiply_variable = { which = hsr_corp_host_part value = hsr_corp_s$SLOT$_foreign_shares }
+                change_variable = { which = hsr_corp_host_basis value = hsr_corp_host_part }
+            }
+            change_variable = { which = hsr_corp_host_basis value = hsr_corp_nationalize_cost }
+            if = {
+                limit = {
+                    check_variable = { which = hsr_corp_purchase_founder value > 0 }
+                    exists = "event_target:hsr_corp_founder_s$SLOT$@this"
+                }
+                "event_target:hsr_corp_founder_s$SLOT$@this" = {
+                    add_resource = { trade = 1 mult = prev.hsr_corp_purchase_founder }
+                }
+                change_variable = { which = hsr_corp_purchased_shares value = hsr_corp_s$SLOT$_founder_shares }
+                set_variable = { which = hsr_corp_s$SLOT$_founder_shares value = 0 }
+                clear_global_event_target = "hsr_corp_founder_s$SLOT$@this"
+            }
+            if = {
+                limit = {
+                    check_variable = { which = hsr_corp_purchase_foreign value > 0 }
+                    exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
+                }
+                "event_target:hsr_corp_foreign_s$SLOT$@this" = {
+                    add_resource = { trade = 1 mult = prev.hsr_corp_purchase_foreign }
+                }
+                change_variable = { which = hsr_corp_purchased_shares value = hsr_corp_s$SLOT$_foreign_shares }
+                set_variable = { which = hsr_corp_s$SLOT$_foreign_shares value = 0 }
+                clear_global_event_target = "hsr_corp_foreign_s$SLOT$@this"
+            }
+            change_variable = { which = hsr_corp_s$SLOT$_founder_shares value = hsr_corp_purchased_shares }
+            owner = {
+                save_global_event_target_as = "hsr_corp_founder_s$SLOT$@event_target:hsr_corp_hq"
+            }
+            if = {
+                limit = {
+                    exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
+                    "event_target:hsr_corp_foreign_s$SLOT$@this" = {
+                        is_same_value = event_target:hsr_corp_hq.owner
+                    }
+                }
+                change_variable = { which = hsr_corp_s$SLOT$_founder_shares value = hsr_corp_s$SLOT$_foreign_shares }
+                set_variable = { which = hsr_corp_s$SLOT$_foreign_shares value = 0 }
+                clear_global_event_target = "hsr_corp_foreign_s$SLOT$@this"
+            }
+            if = {
+                limit = {
+                    check_variable = { which = hsr_corp_s$SLOT$_founder_shares value > 0 }
+                }
+                set_variable = { which = hsr_corp_s$SLOT$_founder_basis value = hsr_corp_host_basis }
+                divide_variable = { which = hsr_corp_s$SLOT$_founder_basis value = hsr_corp_s$SLOT$_founder_shares }
+            }
+            set_variable = { which = hsr_corp_s$SLOT$_rights_denied value = 0 }
+            remove_carrier_flag = hsr_corp_rights_suspended_s$SLOT$
+            hsr_corp_recheck_control = { SLOT = $SLOT$ }
+        }
+    }
+}

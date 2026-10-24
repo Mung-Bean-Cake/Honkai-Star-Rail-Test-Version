@@ -1,0 +1,859 @@
+# 货币战争公司系统 v1.4；独立扩展文件，中文说明见 docs/货币战争。
+# 状态：0空、1建设、2活动、3危机、4清算。未经完整游戏验收。
+namespace = hsr_corp
+# 船载/固定殖民地统一carrier作用域；页内跳转只改页码，不再堆叠事件窗口。
+carrier_event = {
+    id = hsr_corp.20
+    title = hsr_corp_window_title
+    desc = hsr_corp_window_desc
+    diplomatic = yes
+    is_triggered_only = yes
+    custom_gui = hsr_corp_local_ui
+    trigger = {
+        hsr_corp_valid_hq = yes
+    }
+    immediate = {
+        if = {
+            limit = {
+                NOT = {
+                    exists = event_target:hsr_corp_actor
+                }
+            }
+            owner = {
+                save_event_target_as = hsr_corp_actor
+            }
+        }
+        set_variable = { which = hsr_corp_page value = 1 }
+        set_variable = { which = hsr_corp_local_tab value = 2 }
+        set_variable = { which = hsr_corp_local_category value = 1 }
+        hsr_corp_initialize = yes
+        hsr_corp_refresh_jobs = yes
+    }
+    option = {
+        name = OK
+        default_hide_option = yes
+        set_variable = { which = hsr_corp_page value = 1 }
+    }
+}
+
+# 船载/固定殖民地统一carrier作用域；页内跳转只改页码，不再堆叠事件窗口。
+carrier_event = {
+    id = hsr_corp.30
+    title = hsr_corp_window_title
+    desc = hsr_corp_window_desc
+    diplomatic = yes
+    is_triggered_only = yes
+    custom_gui = hsr_corp_company_ui
+    trigger = {
+        hsr_corp_valid_hq = yes
+    }
+    immediate = {
+        if = {
+            limit = {
+                NOT = {
+                    exists = event_target:hsr_corp_actor
+                }
+            }
+            owner = {
+                save_event_target_as = hsr_corp_actor
+            }
+        }
+        set_variable = { which = hsr_corp_page value = 2 }
+        set_variable = { which = hsr_corp_local_tab value = 2 }
+        set_variable = { which = hsr_corp_local_category value = 1 }
+    }
+    option = {
+        name = OK
+        default_hide_option = yes
+        set_variable = { which = hsr_corp_page value = 1 }
+    }
+}
+
+# 船载/固定殖民地统一carrier作用域；页内跳转只改页码，不再堆叠事件窗口。
+carrier_event = {
+    id = hsr_corp.40
+    title = hsr_corp_window_title
+    desc = hsr_corp_window_desc
+    diplomatic = yes
+    is_triggered_only = yes
+    custom_gui = hsr_corp_setup_ui
+    trigger = {
+        hsr_corp_valid_hq = yes
+    }
+    immediate = {
+        if = {
+            limit = {
+                NOT = {
+                    exists = event_target:hsr_corp_actor
+                }
+            }
+            owner = {
+                save_event_target_as = hsr_corp_actor
+            }
+        }
+        set_variable = { which = hsr_corp_page value = 3 }
+        set_variable = { which = hsr_corp_local_tab value = 2 }
+        set_variable = { which = hsr_corp_local_category value = 1 }
+        hsr_corp_quote_creation = yes
+    }
+    option = {
+        name = hsr_corp_confirm
+        allow = {
+            check_variable = { which = hsr_corp_page value = 3 }
+            OR = {
+                AND = {
+                    check_variable = { which = hsr_corp_setup_slot value = 1 }
+                    hsr_corp_creation_allowed = { SLOT = 1 }
+                }
+                AND = {
+                    check_variable = { which = hsr_corp_setup_slot value = 2 }
+                    hsr_corp_creation_allowed = { SLOT = 2 }
+                }
+                AND = {
+                    check_variable = { which = hsr_corp_setup_slot value = 3 }
+                    hsr_corp_creation_allowed = { SLOT = 3 }
+                }
+            }
+        }
+        hidden_effect = {
+            owner = {
+                save_event_target_as = hsr_corp_actor
+            }
+            hsr_corp_confirm_creation = yes
+            # 原生选项会结束当前事件；仅事务失败时重新打开一份设置事件供修正输入。
+            if = {
+                limit = {
+                    check_variable = { which = hsr_corp_creation_success value = 0 }
+                }
+                carrier_event = {
+                    id = hsr_corp.40
+                }
+            }
+        }
+    }
+    # default_hide_option指定关闭/X/Esc时的安全选项，不是“隐藏该选项”。
+    # 只保留一个取消选项，两行原生按钮完整容纳于78像素区域。
+    option = {
+        name = hsr_corp_cancel
+        default_hide_option = yes
+        set_variable = { which = hsr_corp_page value = 1 }
+    }
+}
+
+country_event = {
+    id = hsr_corp.10
+    title = hsr_corp_window_title
+    desc = hsr_corp_window_desc
+    diplomatic = yes
+    is_triggered_only = yes
+    custom_gui = hsr_corp_country_ui
+    immediate = {
+        save_event_target_as = hsr_corp_actor
+        set_variable = { which = hsr_corp_finance_country_page value = 1 }
+        hsr_finance_refresh = yes
+        hsr_corp_build_portfolio = yes
+    }
+    option = {
+        name = OK
+        default_hide_option = yes
+    }
+}
+
+country_event = {
+    id = hsr_corp.900
+    title = hsr_corp_window_title
+    desc = hsr_corp_welcome
+    picture = GFX_evt_galactic_market
+    is_triggered_only = yes
+    option = {
+        name = hsr_corp_open
+        save_event_target_as = hsr_corp_actor
+        capital_scope = {
+            carrier_event = {
+                id = hsr_corp.20
+            }
+        }
+    }
+    option = {
+        name = hsr_corp_cancel
+    }
+}
+
+carrier_event = {
+    id = hsr_corp.211
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = {
+        hsr_corp_finish_building = { SLOT = 1 }
+    }
+    trigger = {
+        # HSR_SYSTEM_SWITCH_BEGIN
+        NOT = {
+            has_global_flag = hsr_currency_war_disabled
+        }
+        # HSR_SYSTEM_SWITCH_END
+    }
+}
+
+carrier_event = {
+    id = hsr_corp.212
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = {
+        hsr_corp_finish_building = { SLOT = 2 }
+    }
+    trigger = {
+        # HSR_SYSTEM_SWITCH_BEGIN
+        NOT = {
+            has_global_flag = hsr_currency_war_disabled
+        }
+        # HSR_SYSTEM_SWITCH_END
+    }
+}
+
+carrier_event = {
+    id = hsr_corp.213
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = {
+        hsr_corp_finish_building = { SLOT = 3 }
+    }
+    trigger = {
+        # HSR_SYSTEM_SWITCH_BEGIN
+        NOT = {
+            has_global_flag = hsr_currency_war_disabled
+        }
+        # HSR_SYSTEM_SWITCH_END
+    }
+}
+
+carrier_event = {
+    id = hsr_corp.200
+    hide_window = yes
+    is_triggered_only = yes
+    trigger = {
+        # HSR_SYSTEM_SWITCH_BEGIN
+        NOT = {
+            has_global_flag = hsr_currency_war_disabled
+        }
+        # HSR_SYSTEM_SWITCH_END
+        hsr_corp_valid_hq = yes
+        has_carrier_flag = hsr_corp_has_records
+    }
+    immediate = {
+        hsr_corp_initialize = yes
+        if = {
+            limit = {
+                check_variable = { which = hsr_corp_s1_state value > 0 }
+            }
+            hsr_corp_finish_crisis = { SLOT = 1 }
+            hsr_corp_finish_building = { SLOT = 1 }
+            hsr_corp_begin_crisis = { SLOT = 1 }
+            hsr_corp_monthly_slot = { SLOT = 1 }
+        }
+        if = {
+            limit = {
+                check_variable = { which = hsr_corp_s2_state value > 0 }
+            }
+            hsr_corp_finish_crisis = { SLOT = 2 }
+            hsr_corp_finish_building = { SLOT = 2 }
+            hsr_corp_begin_crisis = { SLOT = 2 }
+            hsr_corp_monthly_slot = { SLOT = 2 }
+        }
+        if = {
+            limit = {
+                check_variable = { which = hsr_corp_s3_state value > 0 }
+            }
+            hsr_corp_finish_crisis = { SLOT = 3 }
+            hsr_corp_finish_building = { SLOT = 3 }
+            hsr_corp_begin_crisis = { SLOT = 3 }
+            hsr_corp_monthly_slot = { SLOT = 3 }
+        }
+    }
+}
+
+country_event = {
+    id = hsr_corp.201
+    hide_window = yes
+    is_triggered_only = yes
+    trigger = {
+        # HSR_SYSTEM_SWITCH_BEGIN
+        NOT = {
+            has_global_flag = hsr_currency_war_disabled
+        }
+        # HSR_SYSTEM_SWITCH_END
+        is_country_type = default
+    }
+    immediate = {
+        hsr_corp_prepare_year = yes
+        if = {
+            limit = {
+                is_ai = yes
+            }
+            hsr_corp_prepare_ai_budget = yes
+        }
+        every_owned_colony = {
+            carrier = {
+                if = {
+                    limit = {
+                        has_carrier_flag = hsr_corp_has_records
+                    }
+                    hsr_corp_annual_slot = { SLOT = 1 }
+                    hsr_corp_annual_slot = { SLOT = 2 }
+                    hsr_corp_annual_slot = { SLOT = 3 }
+                    hsr_corp_refresh_local_accounts = yes
+                }
+                if = {
+                    limit = {
+                        owner = {
+                            is_ai = yes
+                        }
+                    }
+                    hsr_corp_ai_create = yes
+                    hsr_corp_ai_manage_slot = { SLOT = 1 }
+                    hsr_corp_ai_manage_slot = { SLOT = 2 }
+                    hsr_corp_ai_manage_slot = { SLOT = 3 }
+                }
+            }
+        }
+        # AI一年最多一笔少量市场投资，采用和玩家相同的支付及冷却校验。
+        if = {
+            limit = {
+                is_ai = yes
+                has_resource = { type = trade amount >= 5000 }
+                is_at_war = no
+            }
+            save_event_target_as = hsr_corp_actor
+            random_country = {
+                limit = {
+                    is_country_type = default
+                    has_communications = event_target:hsr_corp_actor
+                    NOT = {
+                        is_at_war_with = event_target:hsr_corp_actor
+                    }
+                }
+                random_owned_colony = {
+                    carrier = {
+                        set_variable = { which = hsr_corp_order_qty value = 1 }
+                        hsr_corp_buy = { SLOT = 1 }
+                    }
+                }
+            }
+        }
+    }
+}
+
+carrier_event = {
+    id = hsr_corp.110
+    hide_window = yes
+    is_triggered_only = yes
+    trigger = {
+        has_carrier_flag = hsr_corp_has_records
+        NOT = {
+            has_carrier_flag = hsr_corp_transfer_in_progress
+        }
+    }
+    immediate = {
+        hsr_corp_close_slot = { SLOT = 1 }
+        hsr_corp_close_slot = { SLOT = 2 }
+        hsr_corp_close_slot = { SLOT = 3 }
+        remove_carrier_flag = hsr_corp_has_records
+    }
+}
+
+carrier_event = {
+    id = hsr_corp.120
+    hide_window = yes
+    is_triggered_only = yes
+    trigger = {
+        has_carrier_flag = hsr_corp_has_records
+        exists = owner
+    }
+    immediate = {
+        save_event_target_as = hsr_corp_hq
+        hsr_corp_refresh_jobs = yes
+        hsr_corp_recheck_control = { SLOT = 1 }
+        hsr_corp_recheck_control = { SLOT = 2 }
+        hsr_corp_recheck_control = { SLOT = 3 }
+    }
+}
+
+country_event = {
+    id = hsr_corp.906
+    hide_window = yes
+    is_triggered_only = yes
+    immediate = {
+        every_owned_colony = {
+            carrier = {
+                if = {
+                    limit = {
+                        has_carrier_flag = hsr_corp_has_records
+                    }
+                    hsr_corp_refresh_jobs = yes
+                }
+            }
+        }
+    }
+}
+
+fleet_event = {
+    id = hsr_corp.700
+    hide_window = yes
+    is_triggered_only = yes
+    trigger = {
+        has_fleet_flag = hsr_corp_temporary_support
+    }
+    immediate = {
+        delete_fleet = this
+    }
+}
+
+country_event = {
+    id = hsr_corp.311
+    title = hsr_corp_crisis_title
+    desc = hsr_corp_crisis_desc
+    picture = GFX_evt_galactic_market
+    is_triggered_only = yes
+    option = {
+        name = hsr_corp_appease
+        trigger = {
+            exists = event_target:hsr_corp_hq
+            event_target:hsr_corp_hq = {
+                check_variable = { which = hsr_corp_s1_state value = 3 }
+                check_variable = { which = hsr_corp_s1_id value = hsr_corp_s1_notice_id }
+                owner = {
+                    is_same_value = root
+                }
+            }
+            check_variable = {
+                which = hsr_credits_country_trade_storage
+                value >= event_target:hsr_corp_hq.hsr_corp_negotiate_cost_1
+            }
+        }
+        event_target:hsr_corp_hq = {
+            if = {
+                limit = {
+                    check_variable = { which = hsr_corp_s1_id value = hsr_corp_s1_notice_id }
+                    owner = {
+                        is_same_value = root
+                    }
+                }
+                hsr_corp_crisis_appease = { SLOT = 1 }
+            }
+            remove_carrier_flag = hsr_corp_notice_s1
+        }
+        ai_chance = {
+            factor = 80
+        }
+    }
+    option = {
+        name = hsr_corp_takeover
+        trigger = {
+            exists = event_target:hsr_corp_hq
+            event_target:hsr_corp_hq = {
+                check_variable = { which = hsr_corp_s1_state value = 3 }
+                check_variable = { which = hsr_corp_s1_id value = hsr_corp_s1_notice_id }
+                owner = {
+                    is_same_value = root
+                }
+            }
+            check_variable = {
+                which = hsr_credits_country_trade_storage
+                value >= event_target:hsr_corp_hq.hsr_corp_regulate_cost_1
+            }
+        }
+        event_target:hsr_corp_hq = {
+            if = {
+                limit = {
+                    check_variable = { which = hsr_corp_s1_id value = hsr_corp_s1_notice_id }
+                    owner = {
+                        is_same_value = root
+                    }
+                }
+                hsr_corp_crisis_takeover = { SLOT = 1 }
+            }
+            remove_carrier_flag = hsr_corp_notice_s1
+        }
+        ai_chance = {
+            factor = 10
+        }
+    }
+    option = {
+        name = hsr_corp_release
+        default_hide_option = no
+        if = {
+            limit = {
+                exists = event_target:hsr_corp_hq
+            }
+            event_target:hsr_corp_hq = {
+                if = {
+                    limit = {
+                        check_variable = { which = hsr_corp_s1_id value = hsr_corp_s1_notice_id }
+                        owner = {
+                            is_same_value = root
+                        }
+                    }
+                    hsr_corp_crisis_release = { SLOT = 1 }
+                }
+                remove_carrier_flag = hsr_corp_notice_s1
+            }
+        }
+        ai_chance = {
+            factor = 10
+        }
+    }
+}
+
+country_event = {
+    id = hsr_corp.411
+    title = hsr_corp_offer_title
+    desc = hsr_corp_offer_desc
+    picture = GFX_evt_galactic_market
+    is_triggered_only = yes
+    option = {
+        name = hsr_corp_offer_accept
+        trigger = {
+            exists = event_target:hsr_corp_hq
+            event_target:hsr_corp_hq = {
+                check_variable = { which = hsr_corp_s1_id value = hsr_corp_s1_notice_id }
+                has_carrier_flag = hsr_corp_offer_s1
+                exists = event_target:hsr_corp_founder_s1@this
+                event_target:hsr_corp_founder_s1@this = {
+                    is_same_value = root
+                }
+            }
+        }
+        event_target:hsr_corp_hq = {
+            if = {
+                limit = {
+                    check_variable = { which = hsr_corp_s1_id value = hsr_corp_s1_notice_id }
+                    exists = event_target:hsr_corp_founder_s1@this
+                    event_target:hsr_corp_founder_s1@this = {
+                        is_same_value = root
+                    }
+                }
+                hsr_corp_accept_offer = { SLOT = 1 }
+            }
+            hsr_corp_refund_offer = { SLOT = 1 }
+            remove_carrier_flag = hsr_corp_notice_s1
+        }
+        ai_chance = {
+            factor = 30
+        }
+    }
+    option = {
+        name = hsr_corp_offer_decline
+        if = {
+            limit = {
+                exists = event_target:hsr_corp_hq
+            }
+            event_target:hsr_corp_hq = {
+                hsr_corp_refund_offer = { SLOT = 1 }
+                remove_carrier_flag = hsr_corp_notice_s1
+            }
+        }
+        ai_chance = {
+            factor = 70
+        }
+    }
+}
+
+country_event = {
+    id = hsr_corp.312
+    title = hsr_corp_crisis_title
+    desc = hsr_corp_crisis_desc
+    picture = GFX_evt_galactic_market
+    is_triggered_only = yes
+    option = {
+        name = hsr_corp_appease
+        trigger = {
+            exists = event_target:hsr_corp_hq
+            event_target:hsr_corp_hq = {
+                check_variable = { which = hsr_corp_s2_state value = 3 }
+                check_variable = { which = hsr_corp_s2_id value = hsr_corp_s2_notice_id }
+                owner = {
+                    is_same_value = root
+                }
+            }
+            check_variable = {
+                which = hsr_credits_country_trade_storage
+                value >= event_target:hsr_corp_hq.hsr_corp_negotiate_cost_2
+            }
+        }
+        event_target:hsr_corp_hq = {
+            if = {
+                limit = {
+                    check_variable = { which = hsr_corp_s2_id value = hsr_corp_s2_notice_id }
+                    owner = {
+                        is_same_value = root
+                    }
+                }
+                hsr_corp_crisis_appease = { SLOT = 2 }
+            }
+            remove_carrier_flag = hsr_corp_notice_s2
+        }
+        ai_chance = {
+            factor = 80
+        }
+    }
+    option = {
+        name = hsr_corp_takeover
+        trigger = {
+            exists = event_target:hsr_corp_hq
+            event_target:hsr_corp_hq = {
+                check_variable = { which = hsr_corp_s2_state value = 3 }
+                check_variable = { which = hsr_corp_s2_id value = hsr_corp_s2_notice_id }
+                owner = {
+                    is_same_value = root
+                }
+            }
+            check_variable = {
+                which = hsr_credits_country_trade_storage
+                value >= event_target:hsr_corp_hq.hsr_corp_regulate_cost_2
+            }
+        }
+        event_target:hsr_corp_hq = {
+            if = {
+                limit = {
+                    check_variable = { which = hsr_corp_s2_id value = hsr_corp_s2_notice_id }
+                    owner = {
+                        is_same_value = root
+                    }
+                }
+                hsr_corp_crisis_takeover = { SLOT = 2 }
+            }
+            remove_carrier_flag = hsr_corp_notice_s2
+        }
+        ai_chance = {
+            factor = 10
+        }
+    }
+    option = {
+        name = hsr_corp_release
+        default_hide_option = no
+        if = {
+            limit = {
+                exists = event_target:hsr_corp_hq
+            }
+            event_target:hsr_corp_hq = {
+                if = {
+                    limit = {
+                        check_variable = { which = hsr_corp_s2_id value = hsr_corp_s2_notice_id }
+                        owner = {
+                            is_same_value = root
+                        }
+                    }
+                    hsr_corp_crisis_release = { SLOT = 2 }
+                }
+                remove_carrier_flag = hsr_corp_notice_s2
+            }
+        }
+        ai_chance = {
+            factor = 10
+        }
+    }
+}
+
+country_event = {
+    id = hsr_corp.412
+    title = hsr_corp_offer_title
+    desc = hsr_corp_offer_desc
+    picture = GFX_evt_galactic_market
+    is_triggered_only = yes
+    option = {
+        name = hsr_corp_offer_accept
+        trigger = {
+            exists = event_target:hsr_corp_hq
+            event_target:hsr_corp_hq = {
+                check_variable = { which = hsr_corp_s2_id value = hsr_corp_s2_notice_id }
+                has_carrier_flag = hsr_corp_offer_s2
+                exists = event_target:hsr_corp_founder_s2@this
+                event_target:hsr_corp_founder_s2@this = {
+                    is_same_value = root
+                }
+            }
+        }
+        event_target:hsr_corp_hq = {
+            if = {
+                limit = {
+                    check_variable = { which = hsr_corp_s2_id value = hsr_corp_s2_notice_id }
+                    exists = event_target:hsr_corp_founder_s2@this
+                    event_target:hsr_corp_founder_s2@this = {
+                        is_same_value = root
+                    }
+                }
+                hsr_corp_accept_offer = { SLOT = 2 }
+            }
+            hsr_corp_refund_offer = { SLOT = 2 }
+            remove_carrier_flag = hsr_corp_notice_s2
+        }
+        ai_chance = {
+            factor = 30
+        }
+    }
+    option = {
+        name = hsr_corp_offer_decline
+        if = {
+            limit = {
+                exists = event_target:hsr_corp_hq
+            }
+            event_target:hsr_corp_hq = {
+                hsr_corp_refund_offer = { SLOT = 2 }
+                remove_carrier_flag = hsr_corp_notice_s2
+            }
+        }
+        ai_chance = {
+            factor = 70
+        }
+    }
+}
+
+country_event = {
+    id = hsr_corp.313
+    title = hsr_corp_crisis_title
+    desc = hsr_corp_crisis_desc
+    picture = GFX_evt_galactic_market
+    is_triggered_only = yes
+    option = {
+        name = hsr_corp_appease
+        trigger = {
+            exists = event_target:hsr_corp_hq
+            event_target:hsr_corp_hq = {
+                check_variable = { which = hsr_corp_s3_state value = 3 }
+                check_variable = { which = hsr_corp_s3_id value = hsr_corp_s3_notice_id }
+                owner = {
+                    is_same_value = root
+                }
+            }
+            check_variable = {
+                which = hsr_credits_country_trade_storage
+                value >= event_target:hsr_corp_hq.hsr_corp_negotiate_cost_3
+            }
+        }
+        event_target:hsr_corp_hq = {
+            if = {
+                limit = {
+                    check_variable = { which = hsr_corp_s3_id value = hsr_corp_s3_notice_id }
+                    owner = {
+                        is_same_value = root
+                    }
+                }
+                hsr_corp_crisis_appease = { SLOT = 3 }
+            }
+            remove_carrier_flag = hsr_corp_notice_s3
+        }
+        ai_chance = {
+            factor = 80
+        }
+    }
+    option = {
+        name = hsr_corp_takeover
+        trigger = {
+            exists = event_target:hsr_corp_hq
+            event_target:hsr_corp_hq = {
+                check_variable = { which = hsr_corp_s3_state value = 3 }
+                check_variable = { which = hsr_corp_s3_id value = hsr_corp_s3_notice_id }
+                owner = {
+                    is_same_value = root
+                }
+            }
+            check_variable = {
+                which = hsr_credits_country_trade_storage
+                value >= event_target:hsr_corp_hq.hsr_corp_regulate_cost_3
+            }
+        }
+        event_target:hsr_corp_hq = {
+            if = {
+                limit = {
+                    check_variable = { which = hsr_corp_s3_id value = hsr_corp_s3_notice_id }
+                    owner = {
+                        is_same_value = root
+                    }
+                }
+                hsr_corp_crisis_takeover = { SLOT = 3 }
+            }
+            remove_carrier_flag = hsr_corp_notice_s3
+        }
+        ai_chance = {
+            factor = 10
+        }
+    }
+    option = {
+        name = hsr_corp_release
+        default_hide_option = no
+        if = {
+            limit = {
+                exists = event_target:hsr_corp_hq
+            }
+            event_target:hsr_corp_hq = {
+                if = {
+                    limit = {
+                        check_variable = { which = hsr_corp_s3_id value = hsr_corp_s3_notice_id }
+                        owner = {
+                            is_same_value = root
+                        }
+                    }
+                    hsr_corp_crisis_release = { SLOT = 3 }
+                }
+                remove_carrier_flag = hsr_corp_notice_s3
+            }
+        }
+        ai_chance = {
+            factor = 10
+        }
+    }
+}
+
+country_event = {
+    id = hsr_corp.413
+    title = hsr_corp_offer_title
+    desc = hsr_corp_offer_desc
+    picture = GFX_evt_galactic_market
+    is_triggered_only = yes
+    option = {
+        name = hsr_corp_offer_accept
+        trigger = {
+            exists = event_target:hsr_corp_hq
+            event_target:hsr_corp_hq = {
+                check_variable = { which = hsr_corp_s3_id value = hsr_corp_s3_notice_id }
+                has_carrier_flag = hsr_corp_offer_s3
+                exists = event_target:hsr_corp_founder_s3@this
+                event_target:hsr_corp_founder_s3@this = {
+                    is_same_value = root
+                }
+            }
+        }
+        event_target:hsr_corp_hq = {
+            if = {
+                limit = {
+                    check_variable = { which = hsr_corp_s3_id value = hsr_corp_s3_notice_id }
+                    exists = event_target:hsr_corp_founder_s3@this
+                    event_target:hsr_corp_founder_s3@this = {
+                        is_same_value = root
+                    }
+                }
+                hsr_corp_accept_offer = { SLOT = 3 }
+            }
+            hsr_corp_refund_offer = { SLOT = 3 }
+            remove_carrier_flag = hsr_corp_notice_s3
+        }
+        ai_chance = {
+            factor = 30
+        }
+    }
+    option = {
+        name = hsr_corp_offer_decline
+        if = {
+            limit = {
+                exists = event_target:hsr_corp_hq
+            }
+            event_target:hsr_corp_hq = {
+                hsr_corp_refund_offer = { SLOT = 3 }
+                remove_carrier_flag = hsr_corp_notice_s3
+            }
+        }
+        ai_chance = {
+            factor = 70
+        }
+    }
+}

@@ -1,0 +1,129 @@
+# 货币战争公司系统 v1.4；独立扩展文件，中文说明见 docs/货币战争。
+# 状态：0空、1建设、2活动、3危机、4清算。未经完整游戏验收。
+# 国家作用域；消息变量在发送时取快照，注销清槽后仍能读到原公司编号。
+hsr_corp_send_company_notice = {
+    optimize_memory
+    if = {
+        limit = {
+            is_ai = no
+        }
+        create_message = {
+            type = HSR_CORP_$KIND$
+            localization = HSR_CORP_$KIND$_DESC
+            days = 180
+            target = event_target:hsr_corp_notice_hq
+            variable = {
+                type = name
+                localization = PLANET
+                scope = event_target:hsr_corp_notice_hq
+            }
+            variable = {
+                type = variable
+                localization = COMPANY
+                varname = hsr_corp_s$SLOT$_id
+                scope = event_target:hsr_corp_notice_hq
+            }
+        }
+    }
+}
+
+# 载体作用域；总部国、创始股东、外国股东和旧控制国各收一次，取消建设也视为项目消失。
+hsr_corp_notify_lifecycle = {
+    optimize_memory
+    save_event_target_as = hsr_corp_notice_hq
+    owner = {
+        if = {
+            limit = { }
+            hsr_corp_send_company_notice = { SLOT = $SLOT$ KIND = $KIND$ }
+        }
+    }
+    "event_target:hsr_corp_founder_s$SLOT$@this" = {
+        if = {
+            limit = {
+                NOT = {
+                    is_same_value = event_target:hsr_corp_notice_hq.owner
+                }
+            }
+            hsr_corp_send_company_notice = { SLOT = $SLOT$ KIND = $KIND$ }
+        }
+    }
+    "event_target:hsr_corp_foreign_s$SLOT$@this" = {
+        if = {
+            limit = {
+                NOT = {
+                    is_same_value = event_target:hsr_corp_notice_hq.owner
+                }
+                NOT = {
+                    is_same_value = "event_target:hsr_corp_founder_s$SLOT$@event_target:hsr_corp_notice_hq"
+                }
+            }
+            hsr_corp_send_company_notice = { SLOT = $SLOT$ KIND = $KIND$ }
+        }
+    }
+    "event_target:hsr_corp_notified_controller_s$SLOT$@this" = {
+        if = {
+            limit = {
+                NOT = {
+                    is_same_value = event_target:hsr_corp_notice_hq.owner
+                }
+                NOT = {
+                    is_same_value = "event_target:hsr_corp_founder_s$SLOT$@event_target:hsr_corp_notice_hq"
+                }
+                NOT = {
+                    is_same_value = "event_target:hsr_corp_foreign_s$SLOT$@event_target:hsr_corp_notice_hq"
+                }
+            }
+            hsr_corp_send_company_notice = { SLOT = $SLOT$ KIND = $KIND$ }
+        }
+    }
+}
+
+# 比较实际国家身份而非外资控股布尔值；初次建档静默，重复校验不重复通知。
+hsr_corp_sync_control_notice = {
+    optimize_memory
+    if = {
+        limit = {
+            hsr_corp_slot_operating = { SLOT = $SLOT$ }
+        }
+        hsr_corp_resolve_parties = { SLOT = $SLOT$ }
+        save_event_target_as = hsr_corp_notice_hq
+        if = {
+            limit = {
+                exists = "event_target:hsr_corp_notified_controller_s$SLOT$@this"
+            }
+            "event_target:hsr_corp_notified_controller_s$SLOT$@this" = {
+                if = {
+                    limit = {
+                        NOT = {
+                            is_same_value = event_target:hsr_corp_controller
+                        }
+                    }
+                    hsr_corp_send_company_notice = { SLOT = $SLOT$ KIND = CONTROL_LOST }
+                }
+            }
+            event_target:hsr_corp_controller = {
+                if = {
+                    limit = {
+                        NOT = {
+                            is_same_value = "event_target:hsr_corp_notified_controller_s$SLOT$@event_target:hsr_corp_notice_hq"
+                        }
+                    }
+                    hsr_corp_send_company_notice = { SLOT = $SLOT$ KIND = CONTROL_GAINED }
+                }
+            }
+        }
+        else_if = {
+            limit = {
+                check_variable = { which = hsr_corp_s$SLOT$_control_notice_initialized value = 1 }
+            }
+            # 已有控制国消亡导致引用失效时，新接管国仍需收到获得控制权通知。
+            event_target:hsr_corp_controller = {
+                hsr_corp_send_company_notice = { SLOT = $SLOT$ KIND = CONTROL_GAINED }
+            }
+        }
+        set_variable = { which = hsr_corp_s$SLOT$_control_notice_initialized value = 1 }
+        event_target:hsr_corp_controller = {
+            save_global_event_target_as = "hsr_corp_notified_controller_s$SLOT$@event_target:hsr_corp_notice_hq"
+        }
+    }
+}

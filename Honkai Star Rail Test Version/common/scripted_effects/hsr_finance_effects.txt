@@ -1,0 +1,223 @@
+# 货币战争公司系统 v1.4；独立扩展文件，中文说明见 docs/货币战争。
+# 状态：0空、1建设、2活动、3危机、4清算。未经完整游戏验收。
+# 首次使用记录当前日历年；不在开户或打开界面时追收利息。
+hsr_finance_initialize = {
+    optimize_memory
+    if = {
+        limit = {
+            NOT = {
+                has_country_flag = hsr_finance_initialized
+            }
+        }
+        set_country_flag = hsr_finance_initialized
+        set_variable = { which = hsr_finance_last_interest_year value = value:hsr_finance_calendar_year }
+    }
+}
+
+# 只报价；0表示全部偿还，金额不超过实际债务与可用财政。
+hsr_finance_quote_repayment = {
+    optimize_memory
+    set_variable = { which = hsr_finance_repay_quote value = $AMOUNT$ }
+    if = {
+        limit = {
+            check_variable = { which = hsr_finance_repay_quote value = 0 }
+        }
+        set_variable = { which = hsr_finance_repay_quote value = hsr_credits_country_loan }
+    }
+    if = {
+        limit = {
+            check_variable = { which = hsr_finance_repay_quote value > hsr_credits_country_loan }
+        }
+        set_variable = { which = hsr_finance_repay_quote value = hsr_credits_country_loan }
+    }
+    if = {
+        limit = {
+            check_variable = { which = hsr_finance_repay_quote value > hsr_credits_country_trade_storage }
+        }
+        set_variable = { which = hsr_finance_repay_quote value = hsr_credits_country_trade_storage }
+    }
+    if = {
+        limit = {
+            check_variable = { which = hsr_finance_repay_quote value < 0 }
+        }
+        set_variable = { which = hsr_finance_repay_quote value = 0 }
+    }
+}
+
+# 仅刷新额度、预计利息和还款报价；内部变量与修正刷新不进入悬停提示，不结算利息。
+hsr_finance_refresh = {
+    optimize_memory
+    hidden_effect = {
+        hsr_finance_initialize = yes
+        if = {
+            limit = {
+                OR = {
+                    check_variable = { which = credits_exchange value < 1 }
+                    check_variable = { which = credits_exchange value > 15 }
+                }
+            }
+            set_variable = { which = credits_exchange value = 1 }
+        }
+        set_variable = { which = hsr_finance_limit value = hsr_finance_last_income }
+        multiply_variable = { which = hsr_finance_limit value = value:hsr_finance_income_factor }
+        if = {
+            limit = {
+                check_variable = { which = hsr_finance_limit value < value:hsr_finance_minimum_limit }
+            }
+            set_variable = { which = hsr_finance_limit value = value:hsr_finance_minimum_limit }
+        }
+        if = {
+            limit = {
+                check_variable = { which = hsr_finance_limit value > value:hsr_finance_maximum_limit }
+            }
+            set_variable = { which = hsr_finance_limit value = value:hsr_finance_maximum_limit }
+        }
+        set_variable = { which = hsr_finance_remaining value = hsr_finance_limit }
+        subtract_variable = { which = hsr_finance_remaining value = hsr_credits_country_loan }
+        if = {
+            limit = {
+                check_variable = { which = hsr_finance_remaining value < 0 }
+            }
+            set_variable = { which = hsr_finance_remaining value = 0 }
+        }
+        set_variable = { which = hsr_finance_interest_due value = hsr_credits_country_loan }
+        multiply_variable = { which = hsr_finance_interest_due value = value:hsr_finance_interest_rate }
+        set_variable = { which = hsr_finance_rate_percent value = value:hsr_finance_interest_rate }
+        multiply_variable = { which = hsr_finance_rate_percent value = 100 }
+        set_variable = { which = hsr_finance_fee_percent value = value:hsr_finance_financing_fee }
+        multiply_variable = { which = hsr_finance_fee_percent value = 100 }
+        set_variable = { which = hsr_finance_loan_small_amount value = value:hsr_finance_loan_small }
+        set_variable = { which = hsr_finance_loan_medium_amount value = value:hsr_finance_loan_medium }
+        set_variable = { which = hsr_finance_loan_large_amount value = value:hsr_finance_loan_large }
+        hsr_finance_quote_repayment = { AMOUNT = value:hsr_finance_loan_small }
+        set_variable = { which = hsr_finance_repay_small value = hsr_finance_repay_quote }
+        hsr_finance_quote_repayment = { AMOUNT = value:hsr_finance_loan_medium }
+        set_variable = { which = hsr_finance_repay_medium value = hsr_finance_repay_quote }
+        hsr_finance_quote_repayment = { AMOUNT = 0 }
+        set_variable = { which = hsr_finance_repay_all value = hsr_finance_repay_quote }
+        if = {
+            limit = {
+                check_variable = { which = hsr_credits_country_loan value <= 0 }
+            }
+            set_variable = { which = hsr_finance_unpaid_interest value = 0 }
+            set_variable = { which = hsr_finance_overdue_years value = 0 }
+            remove_country_flag = hsr_finance_overdue
+            remove_modifier = hsr_credits_country_loan_modifiers
+        }
+    }
+}
+
+# 债务按申请额增加，仅净到账进入财政；无政策权限、逾期、超限或非法档位均不改变任何余额。
+hsr_finance_borrow = {
+    optimize_memory
+    hsr_finance_refresh = yes
+    set_variable = { which = hsr_finance_requested value = $AMOUNT$ }
+    if = {
+        limit = {
+            OR = {
+                check_variable = { which = hsr_finance_requested value = value:hsr_finance_loan_small }
+                check_variable = { which = hsr_finance_requested value = value:hsr_finance_loan_medium }
+                check_variable = { which = hsr_finance_requested value = value:hsr_finance_loan_large }
+            }
+            check_variable = { which = hsr_finance_requested value > 0 }
+            has_policy_flag = allow_use_eco
+            NOT = {
+                has_country_flag = hsr_finance_overdue
+            }
+            check_variable = { which = hsr_finance_remaining value >= hsr_finance_requested }
+        }
+        set_variable = { which = hsr_finance_financing_cost value = hsr_finance_requested }
+        multiply_variable = { which = hsr_finance_financing_cost value = value:hsr_finance_financing_fee }
+        set_variable = { which = hsr_finance_borrow_received value = hsr_finance_requested }
+        subtract_variable = { which = hsr_finance_borrow_received value = hsr_finance_financing_cost }
+        change_variable = { which = hsr_credits_country_loan value = hsr_finance_requested }
+        change_variable = { which = hsr_credits_country_trade_storage value = hsr_finance_borrow_received }
+        hsr_finance_refresh = yes
+    }
+}
+
+# 欠息已资本化，不额外扣第二份；还款优先减少欠息。债务归零立即清除逾期，否则等后续正常付息解除。
+hsr_finance_repay = {
+    optimize_memory
+    set_variable = { which = hsr_finance_requested value = $AMOUNT$ }
+    if = {
+        limit = {
+            OR = {
+                check_variable = { which = hsr_finance_requested value = 0 }
+                check_variable = { which = hsr_finance_requested value = value:hsr_finance_loan_small }
+                check_variable = { which = hsr_finance_requested value = value:hsr_finance_loan_medium }
+            }
+            check_variable = { which = hsr_credits_country_loan value > 0 }
+            check_variable = { which = hsr_credits_country_trade_storage value > 0 }
+        }
+        hsr_finance_quote_repayment = { AMOUNT = hsr_finance_requested }
+        set_variable = { which = hsr_finance_last_repayment value = hsr_finance_repay_quote }
+        subtract_variable = { which = hsr_credits_country_trade_storage value = hsr_finance_repay_quote }
+        subtract_variable = { which = hsr_credits_country_loan value = hsr_finance_repay_quote }
+        set_variable = { which = hsr_finance_arrears_paid value = hsr_finance_repay_quote }
+        if = {
+            limit = {
+                check_variable = { which = hsr_finance_arrears_paid value > hsr_finance_unpaid_interest }
+            }
+            set_variable = { which = hsr_finance_arrears_paid value = hsr_finance_unpaid_interest }
+        }
+        subtract_variable = { which = hsr_finance_unpaid_interest value = hsr_finance_arrears_paid }
+        hsr_finance_refresh = yes
+    }
+}
+
+# 年度时点债务快照计息；先支付可用资金，欠息仅资本化一次。同年重入无付款、无重复罚息。
+hsr_finance_settle_interest = {
+    optimize_memory
+    hsr_finance_initialize = yes
+    set_variable = { which = hsr_finance_current_year value = value:hsr_finance_calendar_year }
+    if = {
+        limit = {
+            check_variable = { which = hsr_finance_last_interest_year value < hsr_finance_current_year }
+        }
+        set_variable = { which = hsr_finance_last_interest_year value = hsr_finance_current_year }
+        set_variable = { which = hsr_finance_interest_base value = hsr_credits_country_loan }
+        set_variable = { which = hsr_finance_last_interest_due value = hsr_finance_interest_base }
+        multiply_variable = { which = hsr_finance_last_interest_due value = value:hsr_finance_interest_rate }
+        set_variable = { which = hsr_finance_last_interest_paid value = hsr_finance_last_interest_due }
+        if = {
+            limit = {
+                check_variable = { which = hsr_finance_last_interest_paid value > hsr_credits_country_trade_storage }
+            }
+            set_variable = { which = hsr_finance_last_interest_paid value = hsr_credits_country_trade_storage }
+        }
+        if = {
+            limit = {
+                check_variable = { which = hsr_finance_last_interest_paid value < 0 }
+            }
+            set_variable = { which = hsr_finance_last_interest_paid value = 0 }
+        }
+        subtract_variable = { which = hsr_credits_country_trade_storage value = hsr_finance_last_interest_paid }
+        set_variable = { which = hsr_finance_new_arrears value = hsr_finance_last_interest_due }
+        subtract_variable = { which = hsr_finance_new_arrears value = hsr_finance_last_interest_paid }
+        change_variable = { which = hsr_finance_unpaid_interest value = hsr_finance_new_arrears }
+        change_variable = { which = hsr_credits_country_loan value = hsr_finance_new_arrears }
+        if = {
+            limit = {
+                check_variable = { which = hsr_finance_unpaid_interest value > 0 }
+            }
+            set_country_flag = hsr_finance_overdue
+            change_variable = { which = hsr_finance_overdue_years value = 1 }
+        }
+        else = {
+            remove_country_flag = hsr_finance_overdue
+            set_variable = { which = hsr_finance_overdue_years value = 0 }
+        }
+        remove_modifier = hsr_credits_country_loan_modifiers
+        if = {
+            limit = {
+                check_variable = { which = hsr_finance_overdue_years value >= value:hsr_finance_crisis_years }
+            }
+            add_modifier = {
+                modifier = hsr_credits_country_loan_modifiers
+                days = -1
+            }
+        }
+        hsr_finance_refresh = yes
+    }
+}

@@ -1,0 +1,271 @@
+# FROM操作者国家内调用；覆盖所有UI入口的真实余额/稀有资源资格检查。
+hsr_shell_shop_refresh = {
+    hidden_effect = {
+        set_variable = { which = hsr_shell_shop_buy_quote value = value:hsr_shell_shop_buy_unit }
+        set_variable = { which = hsr_shell_shop_sell_quote value = value:hsr_shell_shop_sell_unit }
+        multiply_variable = { which = hsr_shell_shop_buy_quote value = hsr_shell_shop_lots }
+        multiply_variable = { which = hsr_shell_shop_sell_quote value = hsr_shell_shop_lots }
+        set_variable = { which = hsr_shell_shop_resource_quantity value = 0 }
+        inline_script = {
+            script = hsr_corp/shop/quote
+            ID = 1
+            AMOUNT = 30000
+        }
+        inline_script = {
+            script = hsr_corp/shop/quote
+            ID = 2
+            AMOUNT = 30000
+        }
+        inline_script = {
+            script = hsr_corp/shop/quote
+            ID = 3
+            AMOUNT = 30000
+        }
+        inline_script = {
+            script = hsr_corp/shop/quote
+            ID = 4
+            AMOUNT = 20000
+        }
+        inline_script = {
+            script = hsr_corp/shop/quote
+            ID = 5
+            AMOUNT = 20000
+        }
+        inline_script = {
+            script = hsr_corp/shop/quote
+            ID = 6
+            AMOUNT = 10000
+        }
+        inline_script = {
+            script = hsr_corp/shop/quote
+            ID = 7
+            AMOUNT = 10000
+        }
+        inline_script = {
+            script = hsr_corp/shop/quote
+            ID = 8
+            AMOUNT = 10000
+        }
+        inline_script = {
+            script = hsr_corp/shop/quote
+            ID = 9
+            AMOUNT = 10000
+        }
+        inline_script = {
+            script = hsr_corp/shop/quote
+            ID = 10
+            AMOUNT = 10000
+        }
+        inline_script = {
+            script = hsr_corp/shop/quote
+            ID = 11
+            AMOUNT = 10000
+        }
+        set_variable = { which = hsr_shell_shop_resource_quantity_k value = hsr_shell_shop_resource_quantity }
+        divide_variable = { which = hsr_shell_shop_resource_quantity_k value = 1000 }
+        set_variable = { which = hsr_shell_shop_buy_quote_k value = hsr_shell_shop_buy_quote }
+        divide_variable = { which = hsr_shell_shop_buy_quote_k value = 1000 }
+        set_variable = { which = hsr_shell_shop_sell_quote_k value = hsr_shell_shop_sell_quote }
+        divide_variable = { which = hsr_shell_shop_sell_quote_k value = 1000 }
+    }
+}
+
+hsr_shell_shop_initialize = {
+    hidden_effect = {
+        if = {
+            limit = {
+                NOT = {
+                    is_variable_set = yuzhousuipian
+                }
+            }
+            set_variable = { which = yuzhousuipian value = 0 }
+        }
+        if = {
+            limit = {
+                NOT = {
+                    OR = {
+                        check_variable = { which = hsr_shell_shop_resource value = 1 }
+                        check_variable = { which = hsr_shell_shop_resource value = 2 }
+                        check_variable = { which = hsr_shell_shop_resource value = 3 }
+                        check_variable = { which = hsr_shell_shop_resource value = 4 }
+                        check_variable = { which = hsr_shell_shop_resource value = 5 }
+                        check_variable = { which = hsr_shell_shop_resource value = 6 }
+                        check_variable = { which = hsr_shell_shop_resource value = 7 }
+                        check_variable = { which = hsr_shell_shop_resource value = 8 }
+                        check_variable = { which = hsr_shell_shop_resource value = 9 }
+                        check_variable = { which = hsr_shell_shop_resource value = 10 }
+                        check_variable = { which = hsr_shell_shop_resource value = 11 }
+                    }
+                }
+            }
+            set_variable = { which = hsr_shell_shop_resource value = 1 }
+        }
+        if = {
+            limit = {
+                NOT = {
+                    OR = {
+                        check_variable = { which = hsr_shell_shop_lots value = 1 }
+                        check_variable = { which = hsr_shell_shop_lots value = 5 }
+                        check_variable = { which = hsr_shell_shop_lots value = 10 }
+                    }
+                }
+            }
+            set_variable = { which = hsr_shell_shop_lots value = 1 }
+        }
+        hsr_shell_shop_refresh = yes
+    }
+}
+
+hsr_shell_shop_buy = {
+    hidden_effect = {
+        hsr_shell_shop_refresh = yes
+        if = {
+            limit = {
+                hsr_shell_shop_can_buy = yes
+            }
+            inline_script = {
+                script = hsr_corp/shop/buy
+                ID = 1
+                RESOURCE = energy
+                AMOUNT = 30000
+            }
+            inline_script = {
+                script = hsr_corp/shop/buy
+                ID = 2
+                RESOURCE = minerals
+                AMOUNT = 30000
+            }
+            inline_script = {
+                script = hsr_corp/shop/buy
+                ID = 3
+                RESOURCE = food
+                AMOUNT = 30000
+            }
+            inline_script = {
+                script = hsr_corp/shop/buy
+                ID = 4
+                RESOURCE = alloys
+                AMOUNT = 20000
+            }
+            inline_script = {
+                script = hsr_corp/shop/buy
+                ID = 5
+                RESOURCE = consumer_goods
+                AMOUNT = 20000
+            }
+            inline_script = {
+                script = hsr_corp/shop/buy
+                ID = 6
+                RESOURCE = volatile_motes
+                AMOUNT = 10000
+            }
+            inline_script = {
+                script = hsr_corp/shop/buy
+                ID = 7
+                RESOURCE = exotic_gases
+                AMOUNT = 10000
+            }
+            inline_script = {
+                script = hsr_corp/shop/buy
+                ID = 8
+                RESOURCE = rare_crystals
+                AMOUNT = 10000
+            }
+            inline_script = {
+                script = hsr_corp/shop/buy
+                ID = 9
+                RESOURCE = sr_living_metal
+                AMOUNT = 10000
+            }
+            inline_script = {
+                script = hsr_corp/shop/buy
+                ID = 10
+                RESOURCE = sr_zro
+                AMOUNT = 10000
+            }
+            inline_script = {
+                script = hsr_corp/shop/buy
+                ID = 11
+                RESOURCE = sr_dark_matter
+                AMOUNT = 10000
+            }
+        }
+    }
+}
+
+hsr_shell_shop_sell = {
+    hidden_effect = {
+        hsr_shell_shop_refresh = yes
+        if = {
+            limit = {
+                hsr_shell_shop_can_sell = yes
+            }
+            inline_script = {
+                script = hsr_corp/shop/sell
+                ID = 1
+                RESOURCE = energy
+                AMOUNT = 30000
+            }
+            inline_script = {
+                script = hsr_corp/shop/sell
+                ID = 2
+                RESOURCE = minerals
+                AMOUNT = 30000
+            }
+            inline_script = {
+                script = hsr_corp/shop/sell
+                ID = 3
+                RESOURCE = food
+                AMOUNT = 30000
+            }
+            inline_script = {
+                script = hsr_corp/shop/sell
+                ID = 4
+                RESOURCE = alloys
+                AMOUNT = 20000
+            }
+            inline_script = {
+                script = hsr_corp/shop/sell
+                ID = 5
+                RESOURCE = consumer_goods
+                AMOUNT = 20000
+            }
+            inline_script = {
+                script = hsr_corp/shop/sell
+                ID = 6
+                RESOURCE = volatile_motes
+                AMOUNT = 10000
+            }
+            inline_script = {
+                script = hsr_corp/shop/sell
+                ID = 7
+                RESOURCE = exotic_gases
+                AMOUNT = 10000
+            }
+            inline_script = {
+                script = hsr_corp/shop/sell
+                ID = 8
+                RESOURCE = rare_crystals
+                AMOUNT = 10000
+            }
+            inline_script = {
+                script = hsr_corp/shop/sell
+                ID = 9
+                RESOURCE = sr_living_metal
+                AMOUNT = 10000
+            }
+            inline_script = {
+                script = hsr_corp/shop/sell
+                ID = 10
+                RESOURCE = sr_zro
+                AMOUNT = 10000
+            }
+            inline_script = {
+                script = hsr_corp/shop/sell
+                ID = 11
+                RESOURCE = sr_dark_matter
+                AMOUNT = 10000
+            }
+        }
+    }
+}

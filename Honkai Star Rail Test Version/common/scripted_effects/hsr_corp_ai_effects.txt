@@ -1,0 +1,163 @@
+# 货币战争公司系统 v1.4；独立扩展文件，中文说明见 docs/货币战争。
+# 状态：0空、1建设、2活动、3危机、4清算。未经完整游戏验收。
+# 国家年度只计算一次创建预算；保留原3000/12000/25000的资金余量策略。
+hsr_corp_prepare_ai_budget = {
+    optimize_memory
+    set_variable = { which = hsr_corp_ai_creation_factor value = value:hsr_corp_creation_cost_factor }
+    set_variable = { which = hsr_corp_ai_budget_small value = 3000 }
+    multiply_variable = { which = hsr_corp_ai_budget_small value = hsr_corp_ai_creation_factor }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_ai_budget_small value < 1 }
+        }
+        set_variable = { which = hsr_corp_ai_budget_small value = 1 }
+    }
+    ceiling_variable = hsr_corp_ai_budget_small
+    set_variable = { which = hsr_corp_ai_budget_medium value = 12000 }
+    multiply_variable = { which = hsr_corp_ai_budget_medium value = hsr_corp_ai_creation_factor }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_ai_budget_medium value < 1 }
+        }
+        set_variable = { which = hsr_corp_ai_budget_medium value = 1 }
+    }
+    ceiling_variable = hsr_corp_ai_budget_medium
+    set_variable = { which = hsr_corp_ai_budget_large value = 25000 }
+    multiply_variable = { which = hsr_corp_ai_budget_large value = hsr_corp_ai_creation_factor }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_ai_budget_large value < 1 }
+        }
+        set_variable = { which = hsr_corp_ai_budget_large value = 1 }
+    }
+    ceiling_variable = hsr_corp_ai_budget_large
+}
+
+hsr_corp_ai_create = {
+    optimize_memory
+    if = {
+        limit = {
+            owner = {
+                is_ai = yes
+                is_at_war = no
+                has_resource = { type = trade amount >= hsr_corp_ai_budget_small }
+                NOT = {
+                    has_country_flag = hsr_corp_ai_created_year
+                }
+            }
+            OR = {
+                hsr_corp_slot_empty = { SLOT = 1 }
+                hsr_corp_slot_empty = { SLOT = 2 }
+                hsr_corp_slot_empty = { SLOT = 3 }
+            }
+        }
+        owner = {
+            save_event_target_as = hsr_corp_actor
+        }
+        hsr_corp_initialize = yes
+        set_variable = { which = hsr_corp_setup_level value = 1 }
+        if = {
+            limit = {
+                owner = {
+                    has_resource = { type = trade amount >= hsr_corp_ai_budget_medium }
+                }
+            }
+            set_variable = { which = hsr_corp_setup_level value = 4 }
+        }
+        if = {
+            limit = {
+                owner = {
+                    has_resource = { type = trade amount >= hsr_corp_ai_budget_large }
+                }
+            }
+            set_variable = { which = hsr_corp_setup_level value = 7 }
+        }
+        set_variable = { which = hsr_corp_setup_regime value = 3 }
+        set_variable = { which = hsr_corp_setup_payment value = 0 }
+        set_variable = { which = hsr_corp_setup_primary value = 2 }
+        if = {
+            limit = {
+                owner = {
+                    has_resource = { type = energy amount < 1000 }
+                }
+            }
+            set_variable = { which = hsr_corp_setup_primary value = 1 }
+        }
+        if = {
+            limit = {
+                owner = {
+                    has_resource = { type = alloys amount < 500 }
+                }
+            }
+            set_variable = { which = hsr_corp_setup_primary value = 4 }
+        }
+        if = {
+            limit = {
+                owner = {
+                    has_ethic = ethic_materialist
+                }
+            }
+            set_variable = { which = hsr_corp_setup_primary value = 5 }
+        }
+        if = {
+            limit = {
+                owner = {
+                    has_ethic = ethic_fanatic_egalitarian
+                }
+            }
+            set_variable = { which = hsr_corp_setup_regime value = 2 }
+        }
+        if = {
+            limit = {
+                hsr_corp_slot_empty = { SLOT = 1 }
+            }
+            hsr_corp_create = { SLOT = 1 }
+        }
+        else_if = {
+            limit = {
+                hsr_corp_slot_empty = { SLOT = 2 }
+            }
+            hsr_corp_create = { SLOT = 2 }
+        }
+        else_if = {
+            limit = {
+                hsr_corp_slot_empty = { SLOT = 3 }
+            }
+            hsr_corp_create = { SLOT = 3 }
+        }
+        owner = {
+            set_timed_country_flag = { flag = hsr_corp_ai_created_year days = 359 }
+        }
+    }
+}
+
+hsr_corp_ai_manage_slot = {
+    optimize_memory
+    if = {
+        limit = {
+            hsr_corp_slot_active = { SLOT = $SLOT$ }
+        }
+        owner = {
+            save_event_target_as = hsr_corp_actor
+        }
+        hsr_corp_upgrade = { SLOT = $SLOT$ }
+        set_variable = { which = hsr_corp_side_choice value = 1 }
+        set_variable = { which = hsr_corp_choose_industry value = 4 }
+        if = {
+            limit = {
+                check_variable = { which = hsr_corp_s$SLOT$_primary value = 4 }
+            }
+            set_variable = { which = hsr_corp_choose_industry value = 1 }
+        }
+        hsr_corp_expand = { SLOT = $SLOT$ }
+        set_variable = { which = hsr_corp_side_choice value = 2 }
+        set_variable = { which = hsr_corp_choose_industry value = 6 }
+        if = {
+            limit = {
+                check_variable = { which = hsr_corp_s$SLOT$_primary value = 6 }
+            }
+            set_variable = { which = hsr_corp_choose_industry value = 5 }
+        }
+        hsr_corp_expand = { SLOT = $SLOT$ }
+    }
+}

@@ -1,0 +1,2738 @@
+# 货币战争公司系统 v1.4；独立扩展文件，中文说明见 docs/货币战争。
+# 状态：0空、1建设、2活动、3危机、4清算。未经完整游戏验收。
+# 只清空当前槽位数据；调用者负责先结算和释放引用。
+hsr_corp_initialize_slot = {
+    optimize_memory
+    set_variable = { which = hsr_corp_s$SLOT$_state value = 0 }
+    set_variable = { which = hsr_corp_s$SLOT$_id value = 0 }
+    set_variable = { which = hsr_corp_s$SLOT$_level value = 0 }
+    set_variable = { which = hsr_corp_s$SLOT$_primary value = 0 }
+    set_variable = { which = hsr_corp_s$SLOT$_secondary_1 value = 0 }
+    set_variable = { which = hsr_corp_s$SLOT$_secondary_2 value = 0 }
+    set_variable = { which = hsr_corp_s$SLOT$_regime value = 0 }
+    set_variable = { which = hsr_corp_s$SLOT$_jobs value = 0 }
+    set_variable = { which = hsr_corp_s$SLOT$_loyalty value = 0 }
+    set_variable = { which = hsr_corp_s$SLOT$_founder_shares value = 0 }
+    set_variable = { which = hsr_corp_s$SLOT$_foreign_shares value = 0 }
+    set_variable = { which = hsr_corp_s$SLOT$_pool_shares value = 0 }
+    set_variable = { which = hsr_corp_s$SLOT$_cash value = 0 }
+    set_variable = { which = hsr_corp_s$SLOT$_market_reserve value = 0 }
+    set_variable = { which = hsr_corp_s$SLOT$_debt value = 0 }
+    set_variable = { which = hsr_corp_s$SLOT$_last_profit value = 0 }
+    set_variable = { which = hsr_corp_s$SLOT$_last_revenue value = 0 }
+    set_variable = { which = hsr_corp_s$SLOT$_last_upkeep value = 0 }
+    set_variable = { which = hsr_corp_s$SLOT$_last_tax value = 0 }
+    set_variable = { which = hsr_corp_s$SLOT$_last_dividend value = 0 }
+    set_variable = { which = hsr_corp_s$SLOT$_share_price value = 0 }
+    set_variable = { which = hsr_corp_s$SLOT$_foreign_control value = 0 }
+    set_variable = { which = hsr_corp_s$SLOT$_listed value = 0 }
+    set_variable = { which = hsr_corp_s$SLOT$_paid_trade value = 0 }
+    set_variable = { which = hsr_corp_s$SLOT$_paid_national value = 0 }
+    set_variable = { which = hsr_corp_s$SLOT$_paid_local value = 0 }
+    set_variable = { which = hsr_corp_s$SLOT$_origin_bonus value = 0 }
+    set_variable = { which = hsr_corp_s$SLOT$_pending_regime value = 0 }
+    set_variable = { which = hsr_corp_s$SLOT$_reform_paid value = 0 }
+    set_variable = { which = hsr_corp_s$SLOT$_losses value = 0 }
+    set_variable = { which = hsr_corp_s$SLOT$_offer_id value = 0 }
+    set_variable = { which = hsr_corp_s$SLOT$_offer_escrow value = 0 }
+    set_variable = { which = hsr_corp_s$SLOT$_offer_gross value = 0 }
+    set_variable = { which = hsr_corp_s$SLOT$_founder_basis value = 0 }
+    set_variable = { which = hsr_corp_s$SLOT$_foreign_basis value = 0 }
+    set_variable = { which = hsr_corp_s$SLOT$_notice_id value = 0 }
+    set_variable = { which = hsr_corp_s$SLOT$_calendar_accounted_year value = 0 }
+    set_variable = { which = hsr_corp_s$SLOT$_crisis_kind value = 0 }
+    set_variable = { which = hsr_corp_s$SLOT$_crisis_decided value = 0 }
+    set_variable = { which = hsr_corp_s$SLOT$_price_change value = 0 }
+    set_variable = { which = hsr_corp_s$SLOT$_rights_denied value = 0 }
+    set_variable = { which = hsr_corp_s$SLOT$_control_notice_initialized value = 0 }
+}
+
+# 仅在首次打开新载体时初始化三槽；已初始化的当前公司绝不重置。
+hsr_corp_initialize = {
+    optimize_memory
+    if = {
+        limit = {
+            NOT = {
+                has_carrier_flag = hsr_corp_data_initialized
+            }
+        }
+        hsr_corp_initialize_slot = { SLOT = 1 }
+        hsr_corp_initialize_slot = { SLOT = 2 }
+        hsr_corp_initialize_slot = { SLOT = 3 }
+        set_carrier_flag = hsr_corp_data_initialized
+    }
+}
+
+# 持久引用使用原版支持的动态全局事件目标；局部目标仅用于一次事务。
+hsr_corp_resolve_parties = {
+    optimize_memory
+    save_event_target_as = hsr_corp_hq
+    owner = {
+        save_event_target_as = hsr_corp_founder
+        save_event_target_as = hsr_corp_foreign
+        save_event_target_as = hsr_corp_controller
+    }
+    if = {
+        limit = {
+            exists = "event_target:hsr_corp_founder_s$SLOT$@this"
+        }
+        "event_target:hsr_corp_founder_s$SLOT$@this" = {
+            save_event_target_as = hsr_corp_founder
+            save_event_target_as = hsr_corp_controller
+        }
+    }
+    if = {
+        limit = {
+            exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
+        }
+        "event_target:hsr_corp_foreign_s$SLOT$@this" = {
+            save_event_target_as = hsr_corp_foreign
+        }
+    }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_s$SLOT$_foreign_control value = 1 }
+            exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
+        }
+        "event_target:hsr_corp_foreign_s$SLOT$@this" = {
+            save_event_target_as = hsr_corp_controller
+        }
+    }
+    if = {
+        limit = {
+            has_carrier_flag = hsr_corp_rights_suspended_s$SLOT$
+        }
+        owner = {
+            save_event_target_as = hsr_corp_controller
+        }
+    }
+}
+
+# 升级与两档兼营共用扩张倍率，改革单独读取；实际费用至少1。
+hsr_corp_quote_operations = {
+    optimize_memory
+    hsr_corp_resolve_parties = { SLOT = $SLOT$ }
+    set_variable = {
+        which = hsr_corp_expansion_factor
+        value = event_target:hsr_corp_controller.value:hsr_corp_expansion_cost_factor
+    }
+    set_variable = { which = hsr_corp_upgrade_cost value = value:hsr_corp_upgrade_per_level }
+    multiply_variable = { which = hsr_corp_upgrade_cost value = hsr_corp_s$SLOT$_level }
+    multiply_variable = { which = hsr_corp_upgrade_cost value = hsr_corp_expansion_factor }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_upgrade_cost value < 1 }
+        }
+        set_variable = { which = hsr_corp_upgrade_cost value = 1 }
+    }
+    ceiling_variable = hsr_corp_upgrade_cost
+    set_variable = { which = hsr_corp_side_1_cost value = value:hsr_corp_side_1_cost }
+    multiply_variable = { which = hsr_corp_side_1_cost value = hsr_corp_expansion_factor }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_side_1_cost value < 1 }
+        }
+        set_variable = { which = hsr_corp_side_1_cost value = 1 }
+    }
+    ceiling_variable = hsr_corp_side_1_cost
+    set_variable = { which = hsr_corp_side_2_cost value = value:hsr_corp_side_2_cost }
+    multiply_variable = { which = hsr_corp_side_2_cost value = hsr_corp_expansion_factor }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_side_2_cost value < 1 }
+        }
+        set_variable = { which = hsr_corp_side_2_cost value = 1 }
+    }
+    ceiling_variable = hsr_corp_side_2_cost
+    set_variable = { which = hsr_corp_reform_quote value = event_target:hsr_corp_controller.value:hsr_corp_reform_cost }
+}
+
+# 报价只读重算，按钮确认时必须重新报价并校验余额。
+hsr_corp_quote_creation = {
+    optimize_memory
+    set_variable = { which = hsr_corp_quote value = value:hsr_corp_cost_small }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_setup_level value = 4 }
+        }
+        set_variable = { which = hsr_corp_quote value = value:hsr_corp_cost_medium }
+    }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_setup_level value = 7 }
+        }
+        set_variable = { which = hsr_corp_quote value = value:hsr_corp_cost_large }
+    }
+    multiply_variable = { which = hsr_corp_quote value = owner.value:hsr_corp_creation_cost_factor }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_quote value < 1 }
+        }
+        set_variable = { which = hsr_corp_quote value = 1 }
+    }
+    ceiling_variable = hsr_corp_quote
+    set_variable = { which = hsr_corp_quote_share value = 50 }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_setup_regime value = 1 }
+        }
+        set_variable = { which = hsr_corp_quote_share value = 90 }
+    }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_setup_regime value = 2 }
+        }
+        set_variable = { which = hsr_corp_quote_share value = 70 }
+    }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_setup_regime value = 4 }
+        }
+        set_variable = { which = hsr_corp_quote_share value = 10 }
+    }
+    set_variable = { which = hsr_corp_quote_national value = hsr_corp_quote }
+    multiply_variable = { which = hsr_corp_quote_national value = hsr_corp_quote_share }
+    divide_variable = { which = hsr_corp_quote_national value = 100 }
+    set_variable = { which = hsr_corp_quote_local value = hsr_corp_quote }
+    subtract_variable = { which = hsr_corp_quote_local value = hsr_corp_quote_national }
+    owner = {
+        export_resource_stockpile_to_variable = {
+            resource = trade
+            variable = hsr_corp_trade_balance
+        }
+    }
+    set_variable = { which = hsr_corp_quote_days value = owner.value:hsr_corp_build_days }
+    set_variable = { which = hsr_corp_quote_jobs value = hsr_corp_setup_level }
+    divide_variable = { which = hsr_corp_quote_jobs value = 2 }
+    ceiling_variable = hsr_corp_quote_jobs
+    set_variable = { which = hsr_corp_quote_extra value = 0 }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_setup_regime value = 1 }
+        }
+        set_variable = { which = hsr_corp_quote_extra value = hsr_corp_quote_jobs }
+        multiply_variable = { which = hsr_corp_quote_extra value = 0.2 }
+    }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_setup_regime value = 2 }
+        }
+        set_variable = { which = hsr_corp_quote_extra value = hsr_corp_quote_jobs }
+        multiply_variable = { which = hsr_corp_quote_extra value = 0.5 }
+    }
+    floor_variable = hsr_corp_quote_extra
+    change_variable = { which = hsr_corp_quote_jobs value = hsr_corp_quote_extra }
+    set_variable = { which = hsr_corp_quote_income_mult value = 1.02 }
+    change_variable = { which = hsr_corp_quote_income_mult value = value:hsr_corp_loyalty_high }
+    set_variable = { which = hsr_corp_quote_upkeep_mult value = 1 }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_setup_level value = 4 }
+        }
+        change_variable = { which = hsr_corp_quote_income_mult value = 0.1 }
+        change_variable = { which = hsr_corp_quote_upkeep_mult value = 0.1 }
+    }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_setup_level value = 7 }
+        }
+        change_variable = { which = hsr_corp_quote_income_mult value = 0.2 }
+        change_variable = { which = hsr_corp_quote_upkeep_mult value = 0.2 }
+    }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_setup_regime value = 1 }
+        }
+        change_variable = { which = hsr_corp_quote_income_mult value = 0.1 }
+    }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_setup_regime value = 2 }
+        }
+        change_variable = { which = hsr_corp_quote_income_mult value = 0.05 }
+    }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_setup_regime value = 3 }
+        }
+        change_variable = { which = hsr_corp_quote_income_mult value = 0.2 }
+    }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_setup_regime value = 4 }
+        }
+        change_variable = { which = hsr_corp_quote_income_mult value = 0.4 }
+    }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_setup_regime value = 1 }
+        }
+        subtract_variable = { which = hsr_corp_quote_upkeep_mult value = 0.1 }
+    }
+    change_variable = { which = hsr_corp_quote_income_mult value = owner.value:hsr_corp_controlled_income_bonus }
+    change_variable = { which = hsr_corp_quote_upkeep_mult value = owner.value:hsr_corp_upkeep_bonus }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_quote_income_mult value < 0 }
+        }
+        set_variable = { which = hsr_corp_quote_income_mult value = 0 }
+    }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_quote_upkeep_mult value < 0 }
+        }
+        set_variable = { which = hsr_corp_quote_upkeep_mult value = 0 }
+    }
+    set_variable = { which = hsr_corp_quote_revenue value = hsr_corp_setup_level }
+    multiply_variable = { which = hsr_corp_quote_revenue value = value:hsr_corp_revenue_per_level }
+    multiply_variable = { which = hsr_corp_quote_revenue value = hsr_corp_quote_income_mult }
+    set_variable = { which = hsr_corp_quote_upkeep value = hsr_corp_setup_level }
+    multiply_variable = { which = hsr_corp_quote_upkeep value = value:hsr_corp_upkeep_per_level }
+    multiply_variable = { which = hsr_corp_quote_upkeep value = hsr_corp_quote_upkeep_mult }
+}
+
+# 单次创建事务。支付与快照在同一个有资格/资金保护的块内完成；不自动混合账户。
+hsr_corp_create = {
+    optimize_memory
+    set_variable = { which = hsr_corp_creation_success value = 0 }
+    hsr_corp_initialize = yes
+    hsr_corp_quote_creation = yes
+    if = {
+        limit = {
+            hsr_corp_creation_allowed = { SLOT = $SLOT$ }
+        }
+        set_variable = { which = hsr_corp_creation_success value = 1 }
+        remove_carrier_flag = hsr_corp_transfer_in_progress
+        hsr_corp_initialize_slot = { SLOT = $SLOT$ }
+        set_variable = { which = hsr_corp_s$SLOT$_control_notice_initialized value = 1 }
+        save_event_target_as = hsr_corp_hq
+        every_country = {
+            every_war = {
+                remove_war_flag = "hsr_corp_aid_s$SLOT$@event_target:hsr_corp_hq"
+            }
+            remove_country_flag = "hsr_corp_crisis_aid_s$SLOT$@event_target:hsr_corp_hq"
+        }
+        event_target:global_event_country = {
+            if = {
+                limit = {
+                    NOT = {
+                        is_variable_set = hsr_corp_next_id
+                    }
+                }
+                set_variable = { which = hsr_corp_next_id value = 0 }
+            }
+            change_variable = { which = hsr_corp_next_id value = 1 }
+        }
+        set_variable = { which = hsr_corp_s$SLOT$_id value = event_target:global_event_country.hsr_corp_next_id }
+        set_variable = { which = hsr_corp_s$SLOT$_state value = 1 }
+        set_variable = { which = hsr_corp_s$SLOT$_level value = hsr_corp_setup_level }
+        set_variable = { which = hsr_corp_s$SLOT$_primary value = hsr_corp_setup_primary }
+        set_variable = { which = hsr_corp_s$SLOT$_regime value = hsr_corp_setup_regime }
+        set_variable = { which = hsr_corp_s$SLOT$_loyalty value = 50 }
+        set_variable = { which = hsr_corp_s$SLOT$_founder_shares value = hsr_corp_quote_share }
+        set_variable = { which = hsr_corp_s$SLOT$_pool_shares value = 100 }
+        subtract_variable = { which = hsr_corp_s$SLOT$_pool_shares value = hsr_corp_s$SLOT$_founder_shares }
+        set_variable = { which = hsr_corp_s$SLOT$_cash value = hsr_corp_quote }
+        multiply_variable = { which = hsr_corp_s$SLOT$_cash value = value:hsr_corp_initial_cash }
+        set_variable = { which = hsr_corp_s$SLOT$_market_reserve value = hsr_corp_quote }
+        multiply_variable = { which = hsr_corp_s$SLOT$_market_reserve value = value:hsr_corp_initial_market }
+        set_variable = { which = hsr_corp_s$SLOT$_share_price value = hsr_corp_quote }
+        divide_variable = { which = hsr_corp_s$SLOT$_share_price value = 100 }
+        set_variable = { which = hsr_corp_s$SLOT$_founder_basis value = hsr_corp_s$SLOT$_share_price }
+        owner = {
+            save_global_event_target_as = "hsr_corp_founder_s$SLOT$@event_target:hsr_corp_hq"
+            save_global_event_target_as = "hsr_corp_notified_controller_s$SLOT$@event_target:hsr_corp_hq"
+            save_global_event_target_as = "hsr_corp_payer_s$SLOT$@event_target:hsr_corp_hq"
+        }
+        clear_global_event_target = "hsr_corp_foreign_s$SLOT$@this"
+        if = {
+            limit = {
+                check_variable = { which = hsr_corp_setup_payment value = 0 }
+            }
+            set_variable = { which = hsr_corp_s$SLOT$_paid_trade value = hsr_corp_quote }
+            set_variable = { which = hsr_corp_charge value = hsr_corp_quote }
+            multiply_variable = { which = hsr_corp_charge value = -1 }
+            owner = {
+                add_resource = { trade = 1 mult = prev.hsr_corp_charge }
+            }
+        }
+        else = {
+            set_variable = { which = hsr_corp_s$SLOT$_paid_national value = hsr_corp_quote_national }
+            set_variable = { which = hsr_corp_s$SLOT$_paid_local value = hsr_corp_quote_local }
+            subtract_variable = { which = hsr_credits_planet_trade_storage value = hsr_corp_quote_local }
+            owner = {
+                subtract_variable = { which = hsr_credits_country_trade_storage value = prev.hsr_corp_quote_national }
+            }
+        }
+        if = {
+            limit = {
+                check_variable = { which = hsr_corp_setup_regime value >= 3 }
+            }
+            set_variable = { which = hsr_corp_s$SLOT$_listed value = 1 }
+        }
+        if = {
+            limit = {
+                check_variable = { which = hsr_corp_setup_level value = 4 }
+            }
+            set_variable = { which = hsr_corp_s$SLOT$_origin_bonus value = 0.1 }
+        }
+        if = {
+            limit = {
+                check_variable = { which = hsr_corp_setup_level value = 7 }
+            }
+            set_variable = { which = hsr_corp_s$SLOT$_origin_bonus value = 0.2 }
+        }
+        set_carrier_flag = hsr_corp_has_records
+        set_timed_carrier_flag = { flag = hsr_corp_building_s$SLOT$ days = hsr_corp_quote_days }
+        carrier_event = {
+            id = hsr_corp.21$SLOT$
+            days = hsr_corp_quote_days
+        }
+        hsr_corp_refresh_jobs = yes
+    }
+}
+
+# 页内确认与独立事件共用事务；成功返回地方列表，失败保留表单，不在此新开窗口。
+hsr_corp_confirm_creation = {
+    optimize_memory
+    set_variable = { which = hsr_corp_creation_success value = 0 }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_page value = 3 }
+            check_variable = { which = hsr_corp_setup_slot value = 1 }
+        }
+        hsr_corp_create = { SLOT = 1 }
+    }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_page value = 3 }
+            check_variable = { which = hsr_corp_setup_slot value = 2 }
+        }
+        hsr_corp_create = { SLOT = 2 }
+    }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_page value = 3 }
+            check_variable = { which = hsr_corp_setup_slot value = 3 }
+        }
+        hsr_corp_create = { SLOT = 3 }
+    }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_creation_success value = 1 }
+        }
+        set_variable = { which = hsr_corp_page value = 1 }
+    }
+}
+
+# 定时事件和月度修复共用完成入口；状态与到期标记使重复/旧延迟事件无效。
+hsr_corp_finish_building = {
+    optimize_memory
+    if = {
+        limit = {
+            # HSR_SYSTEM_SWITCH_BEGIN
+            NOT = {
+                has_global_flag = hsr_currency_war_disabled
+            }
+            # HSR_SYSTEM_SWITCH_END
+            hsr_corp_valid_hq = yes
+            check_variable = { which = hsr_corp_s$SLOT$_state value = 1 }
+            NOT = {
+                has_carrier_flag = hsr_corp_building_s$SLOT$
+            }
+        }
+        if = {
+            limit = {
+                exists = "event_target:hsr_corp_payer_s$SLOT$@this"
+                OR = {
+                    NOT = {
+                        check_variable = { which = hsr_corp_s$SLOT$_regime value = 2 }
+                    }
+                    hsr_corp_cooperative_allowed = yes
+                }
+            }
+            set_variable = { which = hsr_corp_s$SLOT$_state value = 2 }
+            hsr_corp_notify_lifecycle = { SLOT = $SLOT$ KIND = CREATED }
+            hsr_corp_refresh_jobs = yes
+        }
+        else = {
+            hsr_corp_close_slot = { SLOT = $SLOT$ }
+        }
+    }
+}
+
+# 返还原始快照80%；创建国失效时显式退给当前总部监管国，地方部分仍退本地。
+hsr_corp_refund_building = {
+    optimize_memory
+    hsr_corp_resolve_parties = { SLOT = $SLOT$ }
+    owner = {
+        save_event_target_as = hsr_corp_refund_country
+    }
+    if = {
+        limit = {
+            exists = "event_target:hsr_corp_payer_s$SLOT$@this"
+        }
+        "event_target:hsr_corp_payer_s$SLOT$@this" = {
+            save_event_target_as = hsr_corp_refund_country
+        }
+    }
+    set_variable = { which = hsr_corp_refund value = hsr_corp_s$SLOT$_paid_trade }
+    multiply_variable = { which = hsr_corp_refund value = value:hsr_corp_refund }
+    event_target:hsr_corp_refund_country = {
+        add_resource = { trade = 1 mult = prev.hsr_corp_refund }
+    }
+    set_variable = { which = hsr_corp_refund value = hsr_corp_s$SLOT$_paid_national }
+    multiply_variable = { which = hsr_corp_refund value = value:hsr_corp_refund }
+    event_target:hsr_corp_refund_country = {
+        change_variable = { which = hsr_credits_country_trade_storage value = prev.hsr_corp_refund }
+    }
+    set_variable = { which = hsr_corp_refund value = hsr_corp_s$SLOT$_paid_local }
+    multiply_variable = { which = hsr_corp_refund value = value:hsr_corp_refund }
+    change_variable = { which = hsr_credits_planet_trade_storage value = hsr_corp_refund }
+}
+
+# 唯一注销入口：先置清算锁，再一次结算、清槽和重算；不操作任何舰船。
+hsr_corp_close_slot = {
+    optimize_memory
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_s$SLOT$_state value > 0 }
+            NOT = {
+                check_variable = { which = hsr_corp_s$SLOT$_state value = 4 }
+            }
+        }
+        set_variable = { which = hsr_corp_closing_state value = hsr_corp_s$SLOT$_state }
+        hsr_corp_notify_lifecycle = { SLOT = $SLOT$ KIND = CLOSED }
+        set_variable = { which = hsr_corp_s$SLOT$_state value = 4 }
+        if = {
+            limit = {
+                check_variable = { which = hsr_corp_closing_state value = 1 }
+            }
+            hsr_corp_refund_building = { SLOT = $SLOT$ }
+        }
+        else = {
+            hsr_corp_liquidate_assets = { SLOT = $SLOT$ }
+        }
+        set_variable = { which = hsr_corp_s$SLOT$_state value = 4 }
+        save_event_target_as = hsr_corp_hq
+        clear_global_event_target = "hsr_corp_founder_s$SLOT$@this"
+        clear_global_event_target = "hsr_corp_payer_s$SLOT$@this"
+        clear_global_event_target = "hsr_corp_notified_controller_s$SLOT$@this"
+        clear_global_event_target = "hsr_corp_foreign_s$SLOT$@this"
+        remove_carrier_flag = hsr_corp_building_s$SLOT$
+        remove_carrier_flag = hsr_corp_reform_s$SLOT$
+        remove_carrier_flag = hsr_corp_offer_s$SLOT$
+        remove_carrier_flag = hsr_corp_upgrade_s$SLOT$
+        remove_carrier_flag = hsr_corp_crisis_cd_s$SLOT$
+        remove_carrier_flag = hsr_corp_crisis_active_s$SLOT$
+        remove_carrier_flag = hsr_corp_control_adapt_s$SLOT$
+        remove_carrier_flag = hsr_corp_illegal_cd_s$SLOT$
+        remove_carrier_flag = hsr_corp_rights_suspended_s$SLOT$
+        remove_carrier_flag = hsr_corp_aid_cd_s$SLOT$
+        if = {
+            limit = {
+                check_variable = { which = hsr_corp_selected value = $SLOT$ }
+            }
+            set_variable = { which = hsr_corp_selected value = 0 }
+            set_variable = { which = hsr_corp_session_id value = 0 }
+            set_variable = { which = hsr_corp_view_id value = 0 }
+            set_variable = { which = hsr_corp_view_state value = 0 }
+            set_variable = { which = hsr_corp_page value = 1 }
+        }
+        hsr_corp_initialize_slot = { SLOT = $SLOT$ }
+        hsr_corp_refresh_jobs = yes
+    }
+}
+
+hsr_corp_select_slot = {
+    optimize_memory
+    set_variable = { which = hsr_corp_selected value = $SLOT$ }
+    set_variable = { which = hsr_corp_session_id value = hsr_corp_s$SLOT$_id }
+    set_variable = { which = hsr_corp_confirm_close value = 0 }
+    set_variable = { which = hsr_corp_confirm_illegal value = 0 }
+    set_variable = { which = hsr_corp_confirm_legal value = 0 }
+    set_variable = { which = hsr_corp_diplomacy_mode value = 0 }
+    set_variable = { which = hsr_corp_illegal_kind value = 1 }
+    event_target:hsr_corp_actor = {
+        set_variable = { which = hsr_corp_selected_id value = prev.hsr_corp_session_id }
+    }
+    hsr_corp_update_view = { SLOT = $SLOT$ }
+}
+
+hsr_corp_update_view = {
+    optimize_memory
+    set_variable = { which = hsr_corp_view_id value = hsr_corp_s$SLOT$_id }
+    set_variable = { which = hsr_corp_view_level value = hsr_corp_s$SLOT$_level }
+    set_variable = { which = hsr_corp_view_jobs value = hsr_corp_s$SLOT$_jobs }
+    set_variable = { which = hsr_corp_view_regime value = hsr_corp_s$SLOT$_regime }
+    set_variable = { which = hsr_corp_view_primary value = hsr_corp_s$SLOT$_primary }
+    set_variable = { which = hsr_corp_view_secondary_1 value = hsr_corp_s$SLOT$_secondary_1 }
+    set_variable = { which = hsr_corp_view_secondary_2 value = hsr_corp_s$SLOT$_secondary_2 }
+    set_variable = { which = hsr_corp_view_founder_shares value = hsr_corp_s$SLOT$_founder_shares }
+    set_variable = { which = hsr_corp_view_foreign_shares value = hsr_corp_s$SLOT$_foreign_shares }
+    set_variable = { which = hsr_corp_view_pool_shares value = hsr_corp_s$SLOT$_pool_shares }
+    set_variable = { which = hsr_corp_view_cash value = hsr_corp_s$SLOT$_cash }
+    set_variable = { which = hsr_corp_view_market_reserve value = hsr_corp_s$SLOT$_market_reserve }
+    set_variable = { which = hsr_corp_view_debt value = hsr_corp_s$SLOT$_debt }
+    set_variable = { which = hsr_corp_view_last_profit value = hsr_corp_s$SLOT$_last_profit }
+    set_variable = { which = hsr_corp_view_last_revenue value = hsr_corp_s$SLOT$_last_revenue }
+    set_variable = { which = hsr_corp_view_last_upkeep value = hsr_corp_s$SLOT$_last_upkeep }
+    set_variable = { which = hsr_corp_view_last_tax value = hsr_corp_s$SLOT$_last_tax }
+    set_variable = { which = hsr_corp_view_last_dividend value = hsr_corp_s$SLOT$_last_dividend }
+    set_variable = { which = hsr_corp_view_share_price value = hsr_corp_s$SLOT$_share_price }
+    set_variable = { which = hsr_corp_view_loyalty value = hsr_corp_s$SLOT$_loyalty }
+    set_variable = { which = hsr_corp_view_state value = hsr_corp_s$SLOT$_state }
+    set_variable = { which = hsr_corp_view_listed value = hsr_corp_s$SLOT$_listed }
+    set_variable = { which = hsr_corp_view_crisis_kind value = hsr_corp_s$SLOT$_crisis_kind }
+    set_variable = { which = hsr_corp_view_crisis_decided value = hsr_corp_s$SLOT$_crisis_decided }
+    hsr_corp_quote_operations = { SLOT = $SLOT$ }
+    set_variable = {
+        which = hsr_corp_view_reform_days
+        value = event_target:hsr_corp_controller.value:hsr_corp_reform_days
+    }
+    set_variable = { which = hsr_corp_view_reform_cost value = hsr_corp_reform_quote }
+    set_variable = { which = hsr_corp_view_side_1_cost value = hsr_corp_side_1_cost }
+    set_variable = { which = hsr_corp_view_side_2_cost value = hsr_corp_side_2_cost }
+    set_variable = { which = hsr_corp_view_fee_percent value = event_target:hsr_corp_actor.value:hsr_corp_fee }
+    multiply_variable = { which = hsr_corp_view_fee_percent value = 100 }
+    set_variable = {
+        which = hsr_corp_view_aid_percent
+        value = event_target:hsr_corp_controller.value:hsr_corp_aid_output_factor
+    }
+    multiply_variable = { which = hsr_corp_view_aid_percent value = 100 }
+    set_variable = { which = hsr_corp_view_my_shares value = 0 }
+    if = {
+        limit = {
+            event_target:hsr_corp_actor = {
+                is_same_value = event_target:hsr_corp_founder
+            }
+        }
+        set_variable = { which = hsr_corp_view_my_shares value = hsr_corp_s$SLOT$_founder_shares }
+    }
+    if = {
+        limit = {
+            exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
+            event_target:hsr_corp_actor = {
+                is_same_value = event_target:hsr_corp_foreign
+            }
+        }
+        set_variable = { which = hsr_corp_view_my_shares value = hsr_corp_s$SLOT$_foreign_shares }
+    }
+    set_variable = { which = hsr_corp_view_upgrade_cost value = hsr_corp_upgrade_cost }
+}
+
+# 国家与地方列表共用；必须同时核验总部、槽位、快照编号及访问权限。
+hsr_corp_open_company = {
+    optimize_memory
+    if = {
+        limit = {
+            hsr_corp_can_visit = yes
+            check_variable = { which = hsr_corp_s$SLOT$_id value = $ID$ }
+            check_variable = { which = hsr_corp_s$SLOT$_state value > 0 }
+            check_variable = { which = hsr_corp_s$SLOT$_state value < 4 }
+        }
+        hsr_corp_select_slot = { SLOT = $SLOT$ }
+        set_variable = { which = hsr_corp_tab value = 1 }
+        set_variable = { which = hsr_corp_order_qty value = 1 }
+        set_variable = { which = hsr_corp_choose_industry value = 1 }
+        set_variable = { which = hsr_corp_page value = 2 }
+    }
+}
+
+# 转换前快照；只处理公司变量、标记和引用，不清算、不移动任何舰船。
+hsr_corp_begin_carrier_transfer = {
+    optimize_memory
+    $SOURCE$ = {
+        save_event_target_as = hsr_corp_old_hq
+    }
+    save_event_target_as = hsr_corp_new_hq
+    if = {
+        limit = {
+            event_target:hsr_corp_old_hq = {
+                has_carrier_flag = hsr_corp_has_records
+                exists = owner
+            }
+        }
+        event_target:hsr_corp_old_hq.owner = {
+            save_event_target_as = hsr_corp_transfer_bank
+            set_country_flag = hsr_corp_transfer_pending
+        }
+        event_target:hsr_corp_old_hq = {
+            set_carrier_flag = hsr_corp_transfer_in_progress
+            if = {
+                limit = {
+                    is_variable_set = hsr_credits_planet_trade_storage
+                }
+                event_target:hsr_corp_transfer_bank = {
+                    set_variable = {
+                        which = hsr_corp_transfer_local_fiscal
+                        value = prev.hsr_credits_planet_trade_storage
+                    }
+                    set_country_flag = hsr_corp_transfer_has_fiscal
+                }
+                set_variable = { which = hsr_credits_planet_trade_storage value = 0 }
+            }
+            hsr_corp_refund_offer = { SLOT = 1 }
+            set_variable = { which = hsr_corp_s1_notice_id value = 0 }
+            event_target:hsr_corp_transfer_bank = {
+                set_variable = { which = hsr_corp_transfer_s1_state value = prev.hsr_corp_s1_state }
+                set_variable = { which = hsr_corp_transfer_s1_id value = prev.hsr_corp_s1_id }
+                set_variable = { which = hsr_corp_transfer_s1_level value = prev.hsr_corp_s1_level }
+                set_variable = { which = hsr_corp_transfer_s1_primary value = prev.hsr_corp_s1_primary }
+                set_variable = { which = hsr_corp_transfer_s1_secondary_1 value = prev.hsr_corp_s1_secondary_1 }
+                set_variable = { which = hsr_corp_transfer_s1_secondary_2 value = prev.hsr_corp_s1_secondary_2 }
+                set_variable = { which = hsr_corp_transfer_s1_regime value = prev.hsr_corp_s1_regime }
+                set_variable = { which = hsr_corp_transfer_s1_jobs value = prev.hsr_corp_s1_jobs }
+                set_variable = { which = hsr_corp_transfer_s1_loyalty value = prev.hsr_corp_s1_loyalty }
+                set_variable = { which = hsr_corp_transfer_s1_founder_shares value = prev.hsr_corp_s1_founder_shares }
+                set_variable = { which = hsr_corp_transfer_s1_foreign_shares value = prev.hsr_corp_s1_foreign_shares }
+                set_variable = { which = hsr_corp_transfer_s1_pool_shares value = prev.hsr_corp_s1_pool_shares }
+                set_variable = { which = hsr_corp_transfer_s1_cash value = prev.hsr_corp_s1_cash }
+                set_variable = { which = hsr_corp_transfer_s1_market_reserve value = prev.hsr_corp_s1_market_reserve }
+                set_variable = { which = hsr_corp_transfer_s1_debt value = prev.hsr_corp_s1_debt }
+                set_variable = { which = hsr_corp_transfer_s1_last_profit value = prev.hsr_corp_s1_last_profit }
+                set_variable = { which = hsr_corp_transfer_s1_last_revenue value = prev.hsr_corp_s1_last_revenue }
+                set_variable = { which = hsr_corp_transfer_s1_last_upkeep value = prev.hsr_corp_s1_last_upkeep }
+                set_variable = { which = hsr_corp_transfer_s1_last_tax value = prev.hsr_corp_s1_last_tax }
+                set_variable = { which = hsr_corp_transfer_s1_last_dividend value = prev.hsr_corp_s1_last_dividend }
+                set_variable = { which = hsr_corp_transfer_s1_share_price value = prev.hsr_corp_s1_share_price }
+                set_variable = { which = hsr_corp_transfer_s1_foreign_control value = prev.hsr_corp_s1_foreign_control }
+                set_variable = { which = hsr_corp_transfer_s1_listed value = prev.hsr_corp_s1_listed }
+                set_variable = { which = hsr_corp_transfer_s1_paid_trade value = prev.hsr_corp_s1_paid_trade }
+                set_variable = { which = hsr_corp_transfer_s1_paid_national value = prev.hsr_corp_s1_paid_national }
+                set_variable = { which = hsr_corp_transfer_s1_paid_local value = prev.hsr_corp_s1_paid_local }
+                set_variable = { which = hsr_corp_transfer_s1_origin_bonus value = prev.hsr_corp_s1_origin_bonus }
+                set_variable = { which = hsr_corp_transfer_s1_pending_regime value = prev.hsr_corp_s1_pending_regime }
+                set_variable = { which = hsr_corp_transfer_s1_reform_paid value = prev.hsr_corp_s1_reform_paid }
+                set_variable = { which = hsr_corp_transfer_s1_losses value = prev.hsr_corp_s1_losses }
+                set_variable = { which = hsr_corp_transfer_s1_offer_id value = prev.hsr_corp_s1_offer_id }
+                set_variable = { which = hsr_corp_transfer_s1_offer_escrow value = prev.hsr_corp_s1_offer_escrow }
+                set_variable = { which = hsr_corp_transfer_s1_offer_gross value = prev.hsr_corp_s1_offer_gross }
+                set_variable = { which = hsr_corp_transfer_s1_founder_basis value = prev.hsr_corp_s1_founder_basis }
+                set_variable = { which = hsr_corp_transfer_s1_foreign_basis value = prev.hsr_corp_s1_foreign_basis }
+                set_variable = { which = hsr_corp_transfer_s1_notice_id value = prev.hsr_corp_s1_notice_id }
+                set_variable = {
+                    which = hsr_corp_transfer_s1_calendar_accounted_year
+                    value = prev.hsr_corp_s1_calendar_accounted_year
+                }
+                set_variable = { which = hsr_corp_transfer_s1_crisis_kind value = prev.hsr_corp_s1_crisis_kind }
+                set_variable = { which = hsr_corp_transfer_s1_crisis_decided value = prev.hsr_corp_s1_crisis_decided }
+                set_variable = { which = hsr_corp_transfer_s1_price_change value = prev.hsr_corp_s1_price_change }
+                set_variable = { which = hsr_corp_transfer_s1_rights_denied value = prev.hsr_corp_s1_rights_denied }
+                set_variable = {
+                    which = hsr_corp_transfer_s1_control_notice_initialized
+                    value = prev.hsr_corp_s1_control_notice_initialized
+                }
+            }
+            set_variable = { which = hsr_corp_remaining_days value = 0 }
+            if = {
+                limit = {
+                    has_carrier_flag = hsr_corp_building_s1
+                }
+                export_trigger_value_to_variable = {
+                    trigger = timed_flag_days_left
+                    parameters = {
+                        flag = hsr_corp_building_s1
+                    }
+                    variable = hsr_corp_remaining_days
+                }
+            }
+            event_target:hsr_corp_transfer_bank = {
+                set_variable = { which = hsr_corp_transfer_s1_building_days value = prev.hsr_corp_remaining_days }
+            }
+            remove_carrier_flag = hsr_corp_building_s1
+            set_variable = { which = hsr_corp_remaining_days value = 0 }
+            if = {
+                limit = {
+                    has_carrier_flag = hsr_corp_reform_s1
+                }
+                export_trigger_value_to_variable = {
+                    trigger = timed_flag_days_left
+                    parameters = {
+                        flag = hsr_corp_reform_s1
+                    }
+                    variable = hsr_corp_remaining_days
+                }
+            }
+            event_target:hsr_corp_transfer_bank = {
+                set_variable = { which = hsr_corp_transfer_s1_reform_days value = prev.hsr_corp_remaining_days }
+            }
+            remove_carrier_flag = hsr_corp_reform_s1
+            set_variable = { which = hsr_corp_remaining_days value = 0 }
+            if = {
+                limit = {
+                    has_carrier_flag = hsr_corp_upgrade_s1
+                }
+                export_trigger_value_to_variable = {
+                    trigger = timed_flag_days_left
+                    parameters = {
+                        flag = hsr_corp_upgrade_s1
+                    }
+                    variable = hsr_corp_remaining_days
+                }
+            }
+            event_target:hsr_corp_transfer_bank = {
+                set_variable = { which = hsr_corp_transfer_s1_upgrade_days value = prev.hsr_corp_remaining_days }
+            }
+            remove_carrier_flag = hsr_corp_upgrade_s1
+            set_variable = { which = hsr_corp_remaining_days value = 0 }
+            if = {
+                limit = {
+                    has_carrier_flag = hsr_corp_crisis_cd_s1
+                }
+                export_trigger_value_to_variable = {
+                    trigger = timed_flag_days_left
+                    parameters = {
+                        flag = hsr_corp_crisis_cd_s1
+                    }
+                    variable = hsr_corp_remaining_days
+                }
+            }
+            event_target:hsr_corp_transfer_bank = {
+                set_variable = { which = hsr_corp_transfer_s1_crisis_cd_days value = prev.hsr_corp_remaining_days }
+            }
+            remove_carrier_flag = hsr_corp_crisis_cd_s1
+            set_variable = { which = hsr_corp_remaining_days value = 0 }
+            if = {
+                limit = {
+                    has_carrier_flag = hsr_corp_crisis_active_s1
+                }
+                export_trigger_value_to_variable = {
+                    trigger = timed_flag_days_left
+                    parameters = {
+                        flag = hsr_corp_crisis_active_s1
+                    }
+                    variable = hsr_corp_remaining_days
+                }
+            }
+            event_target:hsr_corp_transfer_bank = {
+                set_variable = { which = hsr_corp_transfer_s1_crisis_active_days value = prev.hsr_corp_remaining_days }
+            }
+            remove_carrier_flag = hsr_corp_crisis_active_s1
+            set_variable = { which = hsr_corp_remaining_days value = 0 }
+            if = {
+                limit = {
+                    has_carrier_flag = hsr_corp_control_adapt_s1
+                }
+                export_trigger_value_to_variable = {
+                    trigger = timed_flag_days_left
+                    parameters = {
+                        flag = hsr_corp_control_adapt_s1
+                    }
+                    variable = hsr_corp_remaining_days
+                }
+            }
+            event_target:hsr_corp_transfer_bank = {
+                set_variable = { which = hsr_corp_transfer_s1_control_adapt_days value = prev.hsr_corp_remaining_days }
+            }
+            remove_carrier_flag = hsr_corp_control_adapt_s1
+            set_variable = { which = hsr_corp_remaining_days value = 0 }
+            if = {
+                limit = {
+                    has_carrier_flag = hsr_corp_illegal_cd_s1
+                }
+                export_trigger_value_to_variable = {
+                    trigger = timed_flag_days_left
+                    parameters = {
+                        flag = hsr_corp_illegal_cd_s1
+                    }
+                    variable = hsr_corp_remaining_days
+                }
+            }
+            event_target:hsr_corp_transfer_bank = {
+                set_variable = { which = hsr_corp_transfer_s1_illegal_cd_days value = prev.hsr_corp_remaining_days }
+            }
+            remove_carrier_flag = hsr_corp_illegal_cd_s1
+            set_variable = { which = hsr_corp_remaining_days value = 0 }
+            if = {
+                limit = {
+                    has_carrier_flag = hsr_corp_rights_suspended_s1
+                }
+                export_trigger_value_to_variable = {
+                    trigger = timed_flag_days_left
+                    parameters = {
+                        flag = hsr_corp_rights_suspended_s1
+                    }
+                    variable = hsr_corp_remaining_days
+                }
+            }
+            event_target:hsr_corp_transfer_bank = {
+                set_variable = {
+                    which = hsr_corp_transfer_s1_rights_suspended_days
+                    value = prev.hsr_corp_remaining_days
+                }
+            }
+            remove_carrier_flag = hsr_corp_rights_suspended_s1
+            set_variable = { which = hsr_corp_remaining_days value = 0 }
+            if = {
+                limit = {
+                    has_carrier_flag = hsr_corp_aid_cd_s1
+                }
+                export_trigger_value_to_variable = {
+                    trigger = timed_flag_days_left
+                    parameters = {
+                        flag = hsr_corp_aid_cd_s1
+                    }
+                    variable = hsr_corp_remaining_days
+                }
+            }
+            event_target:hsr_corp_transfer_bank = {
+                set_variable = { which = hsr_corp_transfer_s1_aid_cd_days value = prev.hsr_corp_remaining_days }
+            }
+            remove_carrier_flag = hsr_corp_aid_cd_s1
+            clear_global_event_target = hsr_corp_transfer_founder_s1@event_target:hsr_corp_transfer_bank
+            if = {
+                limit = {
+                    exists = event_target:hsr_corp_founder_s1@this
+                }
+                event_target:hsr_corp_founder_s1@this = {
+                    save_global_event_target_as = hsr_corp_transfer_founder_s1@event_target:hsr_corp_transfer_bank
+                }
+            }
+            clear_global_event_target = hsr_corp_founder_s1@this
+            if = {
+                limit = {
+                    exists = event_target:hsr_corp_transfer_founder_s1@event_target:hsr_corp_transfer_bank
+                }
+                event_target:hsr_corp_transfer_founder_s1@event_target:hsr_corp_transfer_bank = {
+                    if = {
+                        limit = {
+                            has_country_flag = hsr_corp_trade_s1@event_target:hsr_corp_old_hq
+                        }
+                        export_trigger_value_to_variable = {
+                            trigger = timed_flag_days_left
+                            parameters = {
+                                flag = hsr_corp_trade_s1@event_target:hsr_corp_old_hq
+                            }
+                            variable = hsr_corp_transfer_trade_days
+                        }
+                        set_timed_country_flag = {
+                            flag = hsr_corp_trade_s1@event_target:hsr_corp_new_hq
+                            days = hsr_corp_transfer_trade_days
+                        }
+                    }
+                    if = {
+                        limit = {
+                            has_country_flag = hsr_corp_crisis_aid_s1@event_target:hsr_corp_old_hq
+                        }
+                        set_country_flag = hsr_corp_crisis_aid_s1@event_target:hsr_corp_new_hq
+                    }
+                }
+            }
+            clear_global_event_target = hsr_corp_transfer_foreign_s1@event_target:hsr_corp_transfer_bank
+            if = {
+                limit = {
+                    exists = event_target:hsr_corp_foreign_s1@this
+                }
+                event_target:hsr_corp_foreign_s1@this = {
+                    save_global_event_target_as = hsr_corp_transfer_foreign_s1@event_target:hsr_corp_transfer_bank
+                }
+            }
+            clear_global_event_target = hsr_corp_foreign_s1@this
+            if = {
+                limit = {
+                    exists = event_target:hsr_corp_transfer_foreign_s1@event_target:hsr_corp_transfer_bank
+                }
+                event_target:hsr_corp_transfer_foreign_s1@event_target:hsr_corp_transfer_bank = {
+                    if = {
+                        limit = {
+                            has_country_flag = hsr_corp_trade_s1@event_target:hsr_corp_old_hq
+                        }
+                        export_trigger_value_to_variable = {
+                            trigger = timed_flag_days_left
+                            parameters = {
+                                flag = hsr_corp_trade_s1@event_target:hsr_corp_old_hq
+                            }
+                            variable = hsr_corp_transfer_trade_days
+                        }
+                        set_timed_country_flag = {
+                            flag = hsr_corp_trade_s1@event_target:hsr_corp_new_hq
+                            days = hsr_corp_transfer_trade_days
+                        }
+                    }
+                    if = {
+                        limit = {
+                            has_country_flag = hsr_corp_crisis_aid_s1@event_target:hsr_corp_old_hq
+                        }
+                        set_country_flag = hsr_corp_crisis_aid_s1@event_target:hsr_corp_new_hq
+                    }
+                }
+            }
+            clear_global_event_target = hsr_corp_transfer_payer_s1@event_target:hsr_corp_transfer_bank
+            if = {
+                limit = {
+                    exists = event_target:hsr_corp_payer_s1@this
+                }
+                event_target:hsr_corp_payer_s1@this = {
+                    save_global_event_target_as = hsr_corp_transfer_payer_s1@event_target:hsr_corp_transfer_bank
+                }
+            }
+            clear_global_event_target = hsr_corp_payer_s1@this
+            clear_global_event_target = hsr_corp_transfer_notified_controller_s1@event_target:hsr_corp_transfer_bank
+            if = {
+                limit = {
+                    exists = event_target:hsr_corp_notified_controller_s1@this
+                }
+                event_target:hsr_corp_notified_controller_s1@this = {
+                    save_global_event_target_as = hsr_corp_transfer_notified_controller_s1@event_target:hsr_corp_transfer_bank
+                }
+            }
+            clear_global_event_target = hsr_corp_notified_controller_s1@this
+            hsr_corp_refund_offer = { SLOT = 2 }
+            set_variable = { which = hsr_corp_s2_notice_id value = 0 }
+            event_target:hsr_corp_transfer_bank = {
+                set_variable = { which = hsr_corp_transfer_s2_state value = prev.hsr_corp_s2_state }
+                set_variable = { which = hsr_corp_transfer_s2_id value = prev.hsr_corp_s2_id }
+                set_variable = { which = hsr_corp_transfer_s2_level value = prev.hsr_corp_s2_level }
+                set_variable = { which = hsr_corp_transfer_s2_primary value = prev.hsr_corp_s2_primary }
+                set_variable = { which = hsr_corp_transfer_s2_secondary_1 value = prev.hsr_corp_s2_secondary_1 }
+                set_variable = { which = hsr_corp_transfer_s2_secondary_2 value = prev.hsr_corp_s2_secondary_2 }
+                set_variable = { which = hsr_corp_transfer_s2_regime value = prev.hsr_corp_s2_regime }
+                set_variable = { which = hsr_corp_transfer_s2_jobs value = prev.hsr_corp_s2_jobs }
+                set_variable = { which = hsr_corp_transfer_s2_loyalty value = prev.hsr_corp_s2_loyalty }
+                set_variable = { which = hsr_corp_transfer_s2_founder_shares value = prev.hsr_corp_s2_founder_shares }
+                set_variable = { which = hsr_corp_transfer_s2_foreign_shares value = prev.hsr_corp_s2_foreign_shares }
+                set_variable = { which = hsr_corp_transfer_s2_pool_shares value = prev.hsr_corp_s2_pool_shares }
+                set_variable = { which = hsr_corp_transfer_s2_cash value = prev.hsr_corp_s2_cash }
+                set_variable = { which = hsr_corp_transfer_s2_market_reserve value = prev.hsr_corp_s2_market_reserve }
+                set_variable = { which = hsr_corp_transfer_s2_debt value = prev.hsr_corp_s2_debt }
+                set_variable = { which = hsr_corp_transfer_s2_last_profit value = prev.hsr_corp_s2_last_profit }
+                set_variable = { which = hsr_corp_transfer_s2_last_revenue value = prev.hsr_corp_s2_last_revenue }
+                set_variable = { which = hsr_corp_transfer_s2_last_upkeep value = prev.hsr_corp_s2_last_upkeep }
+                set_variable = { which = hsr_corp_transfer_s2_last_tax value = prev.hsr_corp_s2_last_tax }
+                set_variable = { which = hsr_corp_transfer_s2_last_dividend value = prev.hsr_corp_s2_last_dividend }
+                set_variable = { which = hsr_corp_transfer_s2_share_price value = prev.hsr_corp_s2_share_price }
+                set_variable = { which = hsr_corp_transfer_s2_foreign_control value = prev.hsr_corp_s2_foreign_control }
+                set_variable = { which = hsr_corp_transfer_s2_listed value = prev.hsr_corp_s2_listed }
+                set_variable = { which = hsr_corp_transfer_s2_paid_trade value = prev.hsr_corp_s2_paid_trade }
+                set_variable = { which = hsr_corp_transfer_s2_paid_national value = prev.hsr_corp_s2_paid_national }
+                set_variable = { which = hsr_corp_transfer_s2_paid_local value = prev.hsr_corp_s2_paid_local }
+                set_variable = { which = hsr_corp_transfer_s2_origin_bonus value = prev.hsr_corp_s2_origin_bonus }
+                set_variable = { which = hsr_corp_transfer_s2_pending_regime value = prev.hsr_corp_s2_pending_regime }
+                set_variable = { which = hsr_corp_transfer_s2_reform_paid value = prev.hsr_corp_s2_reform_paid }
+                set_variable = { which = hsr_corp_transfer_s2_losses value = prev.hsr_corp_s2_losses }
+                set_variable = { which = hsr_corp_transfer_s2_offer_id value = prev.hsr_corp_s2_offer_id }
+                set_variable = { which = hsr_corp_transfer_s2_offer_escrow value = prev.hsr_corp_s2_offer_escrow }
+                set_variable = { which = hsr_corp_transfer_s2_offer_gross value = prev.hsr_corp_s2_offer_gross }
+                set_variable = { which = hsr_corp_transfer_s2_founder_basis value = prev.hsr_corp_s2_founder_basis }
+                set_variable = { which = hsr_corp_transfer_s2_foreign_basis value = prev.hsr_corp_s2_foreign_basis }
+                set_variable = { which = hsr_corp_transfer_s2_notice_id value = prev.hsr_corp_s2_notice_id }
+                set_variable = {
+                    which = hsr_corp_transfer_s2_calendar_accounted_year
+                    value = prev.hsr_corp_s2_calendar_accounted_year
+                }
+                set_variable = { which = hsr_corp_transfer_s2_crisis_kind value = prev.hsr_corp_s2_crisis_kind }
+                set_variable = { which = hsr_corp_transfer_s2_crisis_decided value = prev.hsr_corp_s2_crisis_decided }
+                set_variable = { which = hsr_corp_transfer_s2_price_change value = prev.hsr_corp_s2_price_change }
+                set_variable = { which = hsr_corp_transfer_s2_rights_denied value = prev.hsr_corp_s2_rights_denied }
+                set_variable = {
+                    which = hsr_corp_transfer_s2_control_notice_initialized
+                    value = prev.hsr_corp_s2_control_notice_initialized
+                }
+            }
+            set_variable = { which = hsr_corp_remaining_days value = 0 }
+            if = {
+                limit = {
+                    has_carrier_flag = hsr_corp_building_s2
+                }
+                export_trigger_value_to_variable = {
+                    trigger = timed_flag_days_left
+                    parameters = {
+                        flag = hsr_corp_building_s2
+                    }
+                    variable = hsr_corp_remaining_days
+                }
+            }
+            event_target:hsr_corp_transfer_bank = {
+                set_variable = { which = hsr_corp_transfer_s2_building_days value = prev.hsr_corp_remaining_days }
+            }
+            remove_carrier_flag = hsr_corp_building_s2
+            set_variable = { which = hsr_corp_remaining_days value = 0 }
+            if = {
+                limit = {
+                    has_carrier_flag = hsr_corp_reform_s2
+                }
+                export_trigger_value_to_variable = {
+                    trigger = timed_flag_days_left
+                    parameters = {
+                        flag = hsr_corp_reform_s2
+                    }
+                    variable = hsr_corp_remaining_days
+                }
+            }
+            event_target:hsr_corp_transfer_bank = {
+                set_variable = { which = hsr_corp_transfer_s2_reform_days value = prev.hsr_corp_remaining_days }
+            }
+            remove_carrier_flag = hsr_corp_reform_s2
+            set_variable = { which = hsr_corp_remaining_days value = 0 }
+            if = {
+                limit = {
+                    has_carrier_flag = hsr_corp_upgrade_s2
+                }
+                export_trigger_value_to_variable = {
+                    trigger = timed_flag_days_left
+                    parameters = {
+                        flag = hsr_corp_upgrade_s2
+                    }
+                    variable = hsr_corp_remaining_days
+                }
+            }
+            event_target:hsr_corp_transfer_bank = {
+                set_variable = { which = hsr_corp_transfer_s2_upgrade_days value = prev.hsr_corp_remaining_days }
+            }
+            remove_carrier_flag = hsr_corp_upgrade_s2
+            set_variable = { which = hsr_corp_remaining_days value = 0 }
+            if = {
+                limit = {
+                    has_carrier_flag = hsr_corp_crisis_cd_s2
+                }
+                export_trigger_value_to_variable = {
+                    trigger = timed_flag_days_left
+                    parameters = {
+                        flag = hsr_corp_crisis_cd_s2
+                    }
+                    variable = hsr_corp_remaining_days
+                }
+            }
+            event_target:hsr_corp_transfer_bank = {
+                set_variable = { which = hsr_corp_transfer_s2_crisis_cd_days value = prev.hsr_corp_remaining_days }
+            }
+            remove_carrier_flag = hsr_corp_crisis_cd_s2
+            set_variable = { which = hsr_corp_remaining_days value = 0 }
+            if = {
+                limit = {
+                    has_carrier_flag = hsr_corp_crisis_active_s2
+                }
+                export_trigger_value_to_variable = {
+                    trigger = timed_flag_days_left
+                    parameters = {
+                        flag = hsr_corp_crisis_active_s2
+                    }
+                    variable = hsr_corp_remaining_days
+                }
+            }
+            event_target:hsr_corp_transfer_bank = {
+                set_variable = { which = hsr_corp_transfer_s2_crisis_active_days value = prev.hsr_corp_remaining_days }
+            }
+            remove_carrier_flag = hsr_corp_crisis_active_s2
+            set_variable = { which = hsr_corp_remaining_days value = 0 }
+            if = {
+                limit = {
+                    has_carrier_flag = hsr_corp_control_adapt_s2
+                }
+                export_trigger_value_to_variable = {
+                    trigger = timed_flag_days_left
+                    parameters = {
+                        flag = hsr_corp_control_adapt_s2
+                    }
+                    variable = hsr_corp_remaining_days
+                }
+            }
+            event_target:hsr_corp_transfer_bank = {
+                set_variable = { which = hsr_corp_transfer_s2_control_adapt_days value = prev.hsr_corp_remaining_days }
+            }
+            remove_carrier_flag = hsr_corp_control_adapt_s2
+            set_variable = { which = hsr_corp_remaining_days value = 0 }
+            if = {
+                limit = {
+                    has_carrier_flag = hsr_corp_illegal_cd_s2
+                }
+                export_trigger_value_to_variable = {
+                    trigger = timed_flag_days_left
+                    parameters = {
+                        flag = hsr_corp_illegal_cd_s2
+                    }
+                    variable = hsr_corp_remaining_days
+                }
+            }
+            event_target:hsr_corp_transfer_bank = {
+                set_variable = { which = hsr_corp_transfer_s2_illegal_cd_days value = prev.hsr_corp_remaining_days }
+            }
+            remove_carrier_flag = hsr_corp_illegal_cd_s2
+            set_variable = { which = hsr_corp_remaining_days value = 0 }
+            if = {
+                limit = {
+                    has_carrier_flag = hsr_corp_rights_suspended_s2
+                }
+                export_trigger_value_to_variable = {
+                    trigger = timed_flag_days_left
+                    parameters = {
+                        flag = hsr_corp_rights_suspended_s2
+                    }
+                    variable = hsr_corp_remaining_days
+                }
+            }
+            event_target:hsr_corp_transfer_bank = {
+                set_variable = {
+                    which = hsr_corp_transfer_s2_rights_suspended_days
+                    value = prev.hsr_corp_remaining_days
+                }
+            }
+            remove_carrier_flag = hsr_corp_rights_suspended_s2
+            set_variable = { which = hsr_corp_remaining_days value = 0 }
+            if = {
+                limit = {
+                    has_carrier_flag = hsr_corp_aid_cd_s2
+                }
+                export_trigger_value_to_variable = {
+                    trigger = timed_flag_days_left
+                    parameters = {
+                        flag = hsr_corp_aid_cd_s2
+                    }
+                    variable = hsr_corp_remaining_days
+                }
+            }
+            event_target:hsr_corp_transfer_bank = {
+                set_variable = { which = hsr_corp_transfer_s2_aid_cd_days value = prev.hsr_corp_remaining_days }
+            }
+            remove_carrier_flag = hsr_corp_aid_cd_s2
+            clear_global_event_target = hsr_corp_transfer_founder_s2@event_target:hsr_corp_transfer_bank
+            if = {
+                limit = {
+                    exists = event_target:hsr_corp_founder_s2@this
+                }
+                event_target:hsr_corp_founder_s2@this = {
+                    save_global_event_target_as = hsr_corp_transfer_founder_s2@event_target:hsr_corp_transfer_bank
+                }
+            }
+            clear_global_event_target = hsr_corp_founder_s2@this
+            if = {
+                limit = {
+                    exists = event_target:hsr_corp_transfer_founder_s2@event_target:hsr_corp_transfer_bank
+                }
+                event_target:hsr_corp_transfer_founder_s2@event_target:hsr_corp_transfer_bank = {
+                    if = {
+                        limit = {
+                            has_country_flag = hsr_corp_trade_s2@event_target:hsr_corp_old_hq
+                        }
+                        export_trigger_value_to_variable = {
+                            trigger = timed_flag_days_left
+                            parameters = {
+                                flag = hsr_corp_trade_s2@event_target:hsr_corp_old_hq
+                            }
+                            variable = hsr_corp_transfer_trade_days
+                        }
+                        set_timed_country_flag = {
+                            flag = hsr_corp_trade_s2@event_target:hsr_corp_new_hq
+                            days = hsr_corp_transfer_trade_days
+                        }
+                    }
+                    if = {
+                        limit = {
+                            has_country_flag = hsr_corp_crisis_aid_s2@event_target:hsr_corp_old_hq
+                        }
+                        set_country_flag = hsr_corp_crisis_aid_s2@event_target:hsr_corp_new_hq
+                    }
+                }
+            }
+            clear_global_event_target = hsr_corp_transfer_foreign_s2@event_target:hsr_corp_transfer_bank
+            if = {
+                limit = {
+                    exists = event_target:hsr_corp_foreign_s2@this
+                }
+                event_target:hsr_corp_foreign_s2@this = {
+                    save_global_event_target_as = hsr_corp_transfer_foreign_s2@event_target:hsr_corp_transfer_bank
+                }
+            }
+            clear_global_event_target = hsr_corp_foreign_s2@this
+            if = {
+                limit = {
+                    exists = event_target:hsr_corp_transfer_foreign_s2@event_target:hsr_corp_transfer_bank
+                }
+                event_target:hsr_corp_transfer_foreign_s2@event_target:hsr_corp_transfer_bank = {
+                    if = {
+                        limit = {
+                            has_country_flag = hsr_corp_trade_s2@event_target:hsr_corp_old_hq
+                        }
+                        export_trigger_value_to_variable = {
+                            trigger = timed_flag_days_left
+                            parameters = {
+                                flag = hsr_corp_trade_s2@event_target:hsr_corp_old_hq
+                            }
+                            variable = hsr_corp_transfer_trade_days
+                        }
+                        set_timed_country_flag = {
+                            flag = hsr_corp_trade_s2@event_target:hsr_corp_new_hq
+                            days = hsr_corp_transfer_trade_days
+                        }
+                    }
+                    if = {
+                        limit = {
+                            has_country_flag = hsr_corp_crisis_aid_s2@event_target:hsr_corp_old_hq
+                        }
+                        set_country_flag = hsr_corp_crisis_aid_s2@event_target:hsr_corp_new_hq
+                    }
+                }
+            }
+            clear_global_event_target = hsr_corp_transfer_payer_s2@event_target:hsr_corp_transfer_bank
+            if = {
+                limit = {
+                    exists = event_target:hsr_corp_payer_s2@this
+                }
+                event_target:hsr_corp_payer_s2@this = {
+                    save_global_event_target_as = hsr_corp_transfer_payer_s2@event_target:hsr_corp_transfer_bank
+                }
+            }
+            clear_global_event_target = hsr_corp_payer_s2@this
+            clear_global_event_target = hsr_corp_transfer_notified_controller_s2@event_target:hsr_corp_transfer_bank
+            if = {
+                limit = {
+                    exists = event_target:hsr_corp_notified_controller_s2@this
+                }
+                event_target:hsr_corp_notified_controller_s2@this = {
+                    save_global_event_target_as = hsr_corp_transfer_notified_controller_s2@event_target:hsr_corp_transfer_bank
+                }
+            }
+            clear_global_event_target = hsr_corp_notified_controller_s2@this
+            hsr_corp_refund_offer = { SLOT = 3 }
+            set_variable = { which = hsr_corp_s3_notice_id value = 0 }
+            event_target:hsr_corp_transfer_bank = {
+                set_variable = { which = hsr_corp_transfer_s3_state value = prev.hsr_corp_s3_state }
+                set_variable = { which = hsr_corp_transfer_s3_id value = prev.hsr_corp_s3_id }
+                set_variable = { which = hsr_corp_transfer_s3_level value = prev.hsr_corp_s3_level }
+                set_variable = { which = hsr_corp_transfer_s3_primary value = prev.hsr_corp_s3_primary }
+                set_variable = { which = hsr_corp_transfer_s3_secondary_1 value = prev.hsr_corp_s3_secondary_1 }
+                set_variable = { which = hsr_corp_transfer_s3_secondary_2 value = prev.hsr_corp_s3_secondary_2 }
+                set_variable = { which = hsr_corp_transfer_s3_regime value = prev.hsr_corp_s3_regime }
+                set_variable = { which = hsr_corp_transfer_s3_jobs value = prev.hsr_corp_s3_jobs }
+                set_variable = { which = hsr_corp_transfer_s3_loyalty value = prev.hsr_corp_s3_loyalty }
+                set_variable = { which = hsr_corp_transfer_s3_founder_shares value = prev.hsr_corp_s3_founder_shares }
+                set_variable = { which = hsr_corp_transfer_s3_foreign_shares value = prev.hsr_corp_s3_foreign_shares }
+                set_variable = { which = hsr_corp_transfer_s3_pool_shares value = prev.hsr_corp_s3_pool_shares }
+                set_variable = { which = hsr_corp_transfer_s3_cash value = prev.hsr_corp_s3_cash }
+                set_variable = { which = hsr_corp_transfer_s3_market_reserve value = prev.hsr_corp_s3_market_reserve }
+                set_variable = { which = hsr_corp_transfer_s3_debt value = prev.hsr_corp_s3_debt }
+                set_variable = { which = hsr_corp_transfer_s3_last_profit value = prev.hsr_corp_s3_last_profit }
+                set_variable = { which = hsr_corp_transfer_s3_last_revenue value = prev.hsr_corp_s3_last_revenue }
+                set_variable = { which = hsr_corp_transfer_s3_last_upkeep value = prev.hsr_corp_s3_last_upkeep }
+                set_variable = { which = hsr_corp_transfer_s3_last_tax value = prev.hsr_corp_s3_last_tax }
+                set_variable = { which = hsr_corp_transfer_s3_last_dividend value = prev.hsr_corp_s3_last_dividend }
+                set_variable = { which = hsr_corp_transfer_s3_share_price value = prev.hsr_corp_s3_share_price }
+                set_variable = { which = hsr_corp_transfer_s3_foreign_control value = prev.hsr_corp_s3_foreign_control }
+                set_variable = { which = hsr_corp_transfer_s3_listed value = prev.hsr_corp_s3_listed }
+                set_variable = { which = hsr_corp_transfer_s3_paid_trade value = prev.hsr_corp_s3_paid_trade }
+                set_variable = { which = hsr_corp_transfer_s3_paid_national value = prev.hsr_corp_s3_paid_national }
+                set_variable = { which = hsr_corp_transfer_s3_paid_local value = prev.hsr_corp_s3_paid_local }
+                set_variable = { which = hsr_corp_transfer_s3_origin_bonus value = prev.hsr_corp_s3_origin_bonus }
+                set_variable = { which = hsr_corp_transfer_s3_pending_regime value = prev.hsr_corp_s3_pending_regime }
+                set_variable = { which = hsr_corp_transfer_s3_reform_paid value = prev.hsr_corp_s3_reform_paid }
+                set_variable = { which = hsr_corp_transfer_s3_losses value = prev.hsr_corp_s3_losses }
+                set_variable = { which = hsr_corp_transfer_s3_offer_id value = prev.hsr_corp_s3_offer_id }
+                set_variable = { which = hsr_corp_transfer_s3_offer_escrow value = prev.hsr_corp_s3_offer_escrow }
+                set_variable = { which = hsr_corp_transfer_s3_offer_gross value = prev.hsr_corp_s3_offer_gross }
+                set_variable = { which = hsr_corp_transfer_s3_founder_basis value = prev.hsr_corp_s3_founder_basis }
+                set_variable = { which = hsr_corp_transfer_s3_foreign_basis value = prev.hsr_corp_s3_foreign_basis }
+                set_variable = { which = hsr_corp_transfer_s3_notice_id value = prev.hsr_corp_s3_notice_id }
+                set_variable = {
+                    which = hsr_corp_transfer_s3_calendar_accounted_year
+                    value = prev.hsr_corp_s3_calendar_accounted_year
+                }
+                set_variable = { which = hsr_corp_transfer_s3_crisis_kind value = prev.hsr_corp_s3_crisis_kind }
+                set_variable = { which = hsr_corp_transfer_s3_crisis_decided value = prev.hsr_corp_s3_crisis_decided }
+                set_variable = { which = hsr_corp_transfer_s3_price_change value = prev.hsr_corp_s3_price_change }
+                set_variable = { which = hsr_corp_transfer_s3_rights_denied value = prev.hsr_corp_s3_rights_denied }
+                set_variable = {
+                    which = hsr_corp_transfer_s3_control_notice_initialized
+                    value = prev.hsr_corp_s3_control_notice_initialized
+                }
+            }
+            set_variable = { which = hsr_corp_remaining_days value = 0 }
+            if = {
+                limit = {
+                    has_carrier_flag = hsr_corp_building_s3
+                }
+                export_trigger_value_to_variable = {
+                    trigger = timed_flag_days_left
+                    parameters = {
+                        flag = hsr_corp_building_s3
+                    }
+                    variable = hsr_corp_remaining_days
+                }
+            }
+            event_target:hsr_corp_transfer_bank = {
+                set_variable = { which = hsr_corp_transfer_s3_building_days value = prev.hsr_corp_remaining_days }
+            }
+            remove_carrier_flag = hsr_corp_building_s3
+            set_variable = { which = hsr_corp_remaining_days value = 0 }
+            if = {
+                limit = {
+                    has_carrier_flag = hsr_corp_reform_s3
+                }
+                export_trigger_value_to_variable = {
+                    trigger = timed_flag_days_left
+                    parameters = {
+                        flag = hsr_corp_reform_s3
+                    }
+                    variable = hsr_corp_remaining_days
+                }
+            }
+            event_target:hsr_corp_transfer_bank = {
+                set_variable = { which = hsr_corp_transfer_s3_reform_days value = prev.hsr_corp_remaining_days }
+            }
+            remove_carrier_flag = hsr_corp_reform_s3
+            set_variable = { which = hsr_corp_remaining_days value = 0 }
+            if = {
+                limit = {
+                    has_carrier_flag = hsr_corp_upgrade_s3
+                }
+                export_trigger_value_to_variable = {
+                    trigger = timed_flag_days_left
+                    parameters = {
+                        flag = hsr_corp_upgrade_s3
+                    }
+                    variable = hsr_corp_remaining_days
+                }
+            }
+            event_target:hsr_corp_transfer_bank = {
+                set_variable = { which = hsr_corp_transfer_s3_upgrade_days value = prev.hsr_corp_remaining_days }
+            }
+            remove_carrier_flag = hsr_corp_upgrade_s3
+            set_variable = { which = hsr_corp_remaining_days value = 0 }
+            if = {
+                limit = {
+                    has_carrier_flag = hsr_corp_crisis_cd_s3
+                }
+                export_trigger_value_to_variable = {
+                    trigger = timed_flag_days_left
+                    parameters = {
+                        flag = hsr_corp_crisis_cd_s3
+                    }
+                    variable = hsr_corp_remaining_days
+                }
+            }
+            event_target:hsr_corp_transfer_bank = {
+                set_variable = { which = hsr_corp_transfer_s3_crisis_cd_days value = prev.hsr_corp_remaining_days }
+            }
+            remove_carrier_flag = hsr_corp_crisis_cd_s3
+            set_variable = { which = hsr_corp_remaining_days value = 0 }
+            if = {
+                limit = {
+                    has_carrier_flag = hsr_corp_crisis_active_s3
+                }
+                export_trigger_value_to_variable = {
+                    trigger = timed_flag_days_left
+                    parameters = {
+                        flag = hsr_corp_crisis_active_s3
+                    }
+                    variable = hsr_corp_remaining_days
+                }
+            }
+            event_target:hsr_corp_transfer_bank = {
+                set_variable = { which = hsr_corp_transfer_s3_crisis_active_days value = prev.hsr_corp_remaining_days }
+            }
+            remove_carrier_flag = hsr_corp_crisis_active_s3
+            set_variable = { which = hsr_corp_remaining_days value = 0 }
+            if = {
+                limit = {
+                    has_carrier_flag = hsr_corp_control_adapt_s3
+                }
+                export_trigger_value_to_variable = {
+                    trigger = timed_flag_days_left
+                    parameters = {
+                        flag = hsr_corp_control_adapt_s3
+                    }
+                    variable = hsr_corp_remaining_days
+                }
+            }
+            event_target:hsr_corp_transfer_bank = {
+                set_variable = { which = hsr_corp_transfer_s3_control_adapt_days value = prev.hsr_corp_remaining_days }
+            }
+            remove_carrier_flag = hsr_corp_control_adapt_s3
+            set_variable = { which = hsr_corp_remaining_days value = 0 }
+            if = {
+                limit = {
+                    has_carrier_flag = hsr_corp_illegal_cd_s3
+                }
+                export_trigger_value_to_variable = {
+                    trigger = timed_flag_days_left
+                    parameters = {
+                        flag = hsr_corp_illegal_cd_s3
+                    }
+                    variable = hsr_corp_remaining_days
+                }
+            }
+            event_target:hsr_corp_transfer_bank = {
+                set_variable = { which = hsr_corp_transfer_s3_illegal_cd_days value = prev.hsr_corp_remaining_days }
+            }
+            remove_carrier_flag = hsr_corp_illegal_cd_s3
+            set_variable = { which = hsr_corp_remaining_days value = 0 }
+            if = {
+                limit = {
+                    has_carrier_flag = hsr_corp_rights_suspended_s3
+                }
+                export_trigger_value_to_variable = {
+                    trigger = timed_flag_days_left
+                    parameters = {
+                        flag = hsr_corp_rights_suspended_s3
+                    }
+                    variable = hsr_corp_remaining_days
+                }
+            }
+            event_target:hsr_corp_transfer_bank = {
+                set_variable = {
+                    which = hsr_corp_transfer_s3_rights_suspended_days
+                    value = prev.hsr_corp_remaining_days
+                }
+            }
+            remove_carrier_flag = hsr_corp_rights_suspended_s3
+            set_variable = { which = hsr_corp_remaining_days value = 0 }
+            if = {
+                limit = {
+                    has_carrier_flag = hsr_corp_aid_cd_s3
+                }
+                export_trigger_value_to_variable = {
+                    trigger = timed_flag_days_left
+                    parameters = {
+                        flag = hsr_corp_aid_cd_s3
+                    }
+                    variable = hsr_corp_remaining_days
+                }
+            }
+            event_target:hsr_corp_transfer_bank = {
+                set_variable = { which = hsr_corp_transfer_s3_aid_cd_days value = prev.hsr_corp_remaining_days }
+            }
+            remove_carrier_flag = hsr_corp_aid_cd_s3
+            clear_global_event_target = hsr_corp_transfer_founder_s3@event_target:hsr_corp_transfer_bank
+            if = {
+                limit = {
+                    exists = event_target:hsr_corp_founder_s3@this
+                }
+                event_target:hsr_corp_founder_s3@this = {
+                    save_global_event_target_as = hsr_corp_transfer_founder_s3@event_target:hsr_corp_transfer_bank
+                }
+            }
+            clear_global_event_target = hsr_corp_founder_s3@this
+            if = {
+                limit = {
+                    exists = event_target:hsr_corp_transfer_founder_s3@event_target:hsr_corp_transfer_bank
+                }
+                event_target:hsr_corp_transfer_founder_s3@event_target:hsr_corp_transfer_bank = {
+                    if = {
+                        limit = {
+                            has_country_flag = hsr_corp_trade_s3@event_target:hsr_corp_old_hq
+                        }
+                        export_trigger_value_to_variable = {
+                            trigger = timed_flag_days_left
+                            parameters = {
+                                flag = hsr_corp_trade_s3@event_target:hsr_corp_old_hq
+                            }
+                            variable = hsr_corp_transfer_trade_days
+                        }
+                        set_timed_country_flag = {
+                            flag = hsr_corp_trade_s3@event_target:hsr_corp_new_hq
+                            days = hsr_corp_transfer_trade_days
+                        }
+                    }
+                    if = {
+                        limit = {
+                            has_country_flag = hsr_corp_crisis_aid_s3@event_target:hsr_corp_old_hq
+                        }
+                        set_country_flag = hsr_corp_crisis_aid_s3@event_target:hsr_corp_new_hq
+                    }
+                }
+            }
+            clear_global_event_target = hsr_corp_transfer_foreign_s3@event_target:hsr_corp_transfer_bank
+            if = {
+                limit = {
+                    exists = event_target:hsr_corp_foreign_s3@this
+                }
+                event_target:hsr_corp_foreign_s3@this = {
+                    save_global_event_target_as = hsr_corp_transfer_foreign_s3@event_target:hsr_corp_transfer_bank
+                }
+            }
+            clear_global_event_target = hsr_corp_foreign_s3@this
+            if = {
+                limit = {
+                    exists = event_target:hsr_corp_transfer_foreign_s3@event_target:hsr_corp_transfer_bank
+                }
+                event_target:hsr_corp_transfer_foreign_s3@event_target:hsr_corp_transfer_bank = {
+                    if = {
+                        limit = {
+                            has_country_flag = hsr_corp_trade_s3@event_target:hsr_corp_old_hq
+                        }
+                        export_trigger_value_to_variable = {
+                            trigger = timed_flag_days_left
+                            parameters = {
+                                flag = hsr_corp_trade_s3@event_target:hsr_corp_old_hq
+                            }
+                            variable = hsr_corp_transfer_trade_days
+                        }
+                        set_timed_country_flag = {
+                            flag = hsr_corp_trade_s3@event_target:hsr_corp_new_hq
+                            days = hsr_corp_transfer_trade_days
+                        }
+                    }
+                    if = {
+                        limit = {
+                            has_country_flag = hsr_corp_crisis_aid_s3@event_target:hsr_corp_old_hq
+                        }
+                        set_country_flag = hsr_corp_crisis_aid_s3@event_target:hsr_corp_new_hq
+                    }
+                }
+            }
+            clear_global_event_target = hsr_corp_transfer_payer_s3@event_target:hsr_corp_transfer_bank
+            if = {
+                limit = {
+                    exists = event_target:hsr_corp_payer_s3@this
+                }
+                event_target:hsr_corp_payer_s3@this = {
+                    save_global_event_target_as = hsr_corp_transfer_payer_s3@event_target:hsr_corp_transfer_bank
+                }
+            }
+            clear_global_event_target = hsr_corp_payer_s3@this
+            clear_global_event_target = hsr_corp_transfer_notified_controller_s3@event_target:hsr_corp_transfer_bank
+            if = {
+                limit = {
+                    exists = event_target:hsr_corp_notified_controller_s3@this
+                }
+                event_target:hsr_corp_notified_controller_s3@this = {
+                    save_global_event_target_as = hsr_corp_transfer_notified_controller_s3@event_target:hsr_corp_transfer_bank
+                }
+            }
+            clear_global_event_target = hsr_corp_notified_controller_s3@this
+            remove_deposit = d_hsr_corp_enterprise
+            set_variable = { which = hsr_corp_s1_state value = 0 }
+            set_variable = { which = hsr_corp_s1_id value = 0 }
+            set_variable = { which = hsr_corp_s1_level value = 0 }
+            set_variable = { which = hsr_corp_s1_primary value = 0 }
+            set_variable = { which = hsr_corp_s1_secondary_1 value = 0 }
+            set_variable = { which = hsr_corp_s1_secondary_2 value = 0 }
+            set_variable = { which = hsr_corp_s1_regime value = 0 }
+            set_variable = { which = hsr_corp_s1_jobs value = 0 }
+            set_variable = { which = hsr_corp_s1_loyalty value = 0 }
+            set_variable = { which = hsr_corp_s1_founder_shares value = 0 }
+            set_variable = { which = hsr_corp_s1_foreign_shares value = 0 }
+            set_variable = { which = hsr_corp_s1_pool_shares value = 0 }
+            set_variable = { which = hsr_corp_s1_cash value = 0 }
+            set_variable = { which = hsr_corp_s1_market_reserve value = 0 }
+            set_variable = { which = hsr_corp_s1_debt value = 0 }
+            set_variable = { which = hsr_corp_s1_last_profit value = 0 }
+            set_variable = { which = hsr_corp_s1_last_revenue value = 0 }
+            set_variable = { which = hsr_corp_s1_last_upkeep value = 0 }
+            set_variable = { which = hsr_corp_s1_last_tax value = 0 }
+            set_variable = { which = hsr_corp_s1_last_dividend value = 0 }
+            set_variable = { which = hsr_corp_s1_share_price value = 0 }
+            set_variable = { which = hsr_corp_s1_foreign_control value = 0 }
+            set_variable = { which = hsr_corp_s1_listed value = 0 }
+            set_variable = { which = hsr_corp_s1_paid_trade value = 0 }
+            set_variable = { which = hsr_corp_s1_paid_national value = 0 }
+            set_variable = { which = hsr_corp_s1_paid_local value = 0 }
+            set_variable = { which = hsr_corp_s1_origin_bonus value = 0 }
+            set_variable = { which = hsr_corp_s1_pending_regime value = 0 }
+            set_variable = { which = hsr_corp_s1_reform_paid value = 0 }
+            set_variable = { which = hsr_corp_s1_losses value = 0 }
+            set_variable = { which = hsr_corp_s1_offer_id value = 0 }
+            set_variable = { which = hsr_corp_s1_offer_escrow value = 0 }
+            set_variable = { which = hsr_corp_s1_offer_gross value = 0 }
+            set_variable = { which = hsr_corp_s1_founder_basis value = 0 }
+            set_variable = { which = hsr_corp_s1_foreign_basis value = 0 }
+            set_variable = { which = hsr_corp_s1_notice_id value = 0 }
+            set_variable = { which = hsr_corp_s1_calendar_accounted_year value = 0 }
+            set_variable = { which = hsr_corp_s1_crisis_kind value = 0 }
+            set_variable = { which = hsr_corp_s1_crisis_decided value = 0 }
+            set_variable = { which = hsr_corp_s1_price_change value = 0 }
+            set_variable = { which = hsr_corp_s1_rights_denied value = 0 }
+            set_variable = { which = hsr_corp_s1_control_notice_initialized value = 0 }
+            set_variable = { which = hsr_corp_s2_state value = 0 }
+            set_variable = { which = hsr_corp_s2_id value = 0 }
+            set_variable = { which = hsr_corp_s2_level value = 0 }
+            set_variable = { which = hsr_corp_s2_primary value = 0 }
+            set_variable = { which = hsr_corp_s2_secondary_1 value = 0 }
+            set_variable = { which = hsr_corp_s2_secondary_2 value = 0 }
+            set_variable = { which = hsr_corp_s2_regime value = 0 }
+            set_variable = { which = hsr_corp_s2_jobs value = 0 }
+            set_variable = { which = hsr_corp_s2_loyalty value = 0 }
+            set_variable = { which = hsr_corp_s2_founder_shares value = 0 }
+            set_variable = { which = hsr_corp_s2_foreign_shares value = 0 }
+            set_variable = { which = hsr_corp_s2_pool_shares value = 0 }
+            set_variable = { which = hsr_corp_s2_cash value = 0 }
+            set_variable = { which = hsr_corp_s2_market_reserve value = 0 }
+            set_variable = { which = hsr_corp_s2_debt value = 0 }
+            set_variable = { which = hsr_corp_s2_last_profit value = 0 }
+            set_variable = { which = hsr_corp_s2_last_revenue value = 0 }
+            set_variable = { which = hsr_corp_s2_last_upkeep value = 0 }
+            set_variable = { which = hsr_corp_s2_last_tax value = 0 }
+            set_variable = { which = hsr_corp_s2_last_dividend value = 0 }
+            set_variable = { which = hsr_corp_s2_share_price value = 0 }
+            set_variable = { which = hsr_corp_s2_foreign_control value = 0 }
+            set_variable = { which = hsr_corp_s2_listed value = 0 }
+            set_variable = { which = hsr_corp_s2_paid_trade value = 0 }
+            set_variable = { which = hsr_corp_s2_paid_national value = 0 }
+            set_variable = { which = hsr_corp_s2_paid_local value = 0 }
+            set_variable = { which = hsr_corp_s2_origin_bonus value = 0 }
+            set_variable = { which = hsr_corp_s2_pending_regime value = 0 }
+            set_variable = { which = hsr_corp_s2_reform_paid value = 0 }
+            set_variable = { which = hsr_corp_s2_losses value = 0 }
+            set_variable = { which = hsr_corp_s2_offer_id value = 0 }
+            set_variable = { which = hsr_corp_s2_offer_escrow value = 0 }
+            set_variable = { which = hsr_corp_s2_offer_gross value = 0 }
+            set_variable = { which = hsr_corp_s2_founder_basis value = 0 }
+            set_variable = { which = hsr_corp_s2_foreign_basis value = 0 }
+            set_variable = { which = hsr_corp_s2_notice_id value = 0 }
+            set_variable = { which = hsr_corp_s2_calendar_accounted_year value = 0 }
+            set_variable = { which = hsr_corp_s2_crisis_kind value = 0 }
+            set_variable = { which = hsr_corp_s2_crisis_decided value = 0 }
+            set_variable = { which = hsr_corp_s2_price_change value = 0 }
+            set_variable = { which = hsr_corp_s2_rights_denied value = 0 }
+            set_variable = { which = hsr_corp_s2_control_notice_initialized value = 0 }
+            set_variable = { which = hsr_corp_s3_state value = 0 }
+            set_variable = { which = hsr_corp_s3_id value = 0 }
+            set_variable = { which = hsr_corp_s3_level value = 0 }
+            set_variable = { which = hsr_corp_s3_primary value = 0 }
+            set_variable = { which = hsr_corp_s3_secondary_1 value = 0 }
+            set_variable = { which = hsr_corp_s3_secondary_2 value = 0 }
+            set_variable = { which = hsr_corp_s3_regime value = 0 }
+            set_variable = { which = hsr_corp_s3_jobs value = 0 }
+            set_variable = { which = hsr_corp_s3_loyalty value = 0 }
+            set_variable = { which = hsr_corp_s3_founder_shares value = 0 }
+            set_variable = { which = hsr_corp_s3_foreign_shares value = 0 }
+            set_variable = { which = hsr_corp_s3_pool_shares value = 0 }
+            set_variable = { which = hsr_corp_s3_cash value = 0 }
+            set_variable = { which = hsr_corp_s3_market_reserve value = 0 }
+            set_variable = { which = hsr_corp_s3_debt value = 0 }
+            set_variable = { which = hsr_corp_s3_last_profit value = 0 }
+            set_variable = { which = hsr_corp_s3_last_revenue value = 0 }
+            set_variable = { which = hsr_corp_s3_last_upkeep value = 0 }
+            set_variable = { which = hsr_corp_s3_last_tax value = 0 }
+            set_variable = { which = hsr_corp_s3_last_dividend value = 0 }
+            set_variable = { which = hsr_corp_s3_share_price value = 0 }
+            set_variable = { which = hsr_corp_s3_foreign_control value = 0 }
+            set_variable = { which = hsr_corp_s3_listed value = 0 }
+            set_variable = { which = hsr_corp_s3_paid_trade value = 0 }
+            set_variable = { which = hsr_corp_s3_paid_national value = 0 }
+            set_variable = { which = hsr_corp_s3_paid_local value = 0 }
+            set_variable = { which = hsr_corp_s3_origin_bonus value = 0 }
+            set_variable = { which = hsr_corp_s3_pending_regime value = 0 }
+            set_variable = { which = hsr_corp_s3_reform_paid value = 0 }
+            set_variable = { which = hsr_corp_s3_losses value = 0 }
+            set_variable = { which = hsr_corp_s3_offer_id value = 0 }
+            set_variable = { which = hsr_corp_s3_offer_escrow value = 0 }
+            set_variable = { which = hsr_corp_s3_offer_gross value = 0 }
+            set_variable = { which = hsr_corp_s3_founder_basis value = 0 }
+            set_variable = { which = hsr_corp_s3_foreign_basis value = 0 }
+            set_variable = { which = hsr_corp_s3_notice_id value = 0 }
+            set_variable = { which = hsr_corp_s3_calendar_accounted_year value = 0 }
+            set_variable = { which = hsr_corp_s3_crisis_kind value = 0 }
+            set_variable = { which = hsr_corp_s3_crisis_decided value = 0 }
+            set_variable = { which = hsr_corp_s3_price_change value = 0 }
+            set_variable = { which = hsr_corp_s3_rights_denied value = 0 }
+            set_variable = { which = hsr_corp_s3_control_notice_initialized value = 0 }
+            remove_carrier_flag = hsr_corp_has_records
+        }
+        every_country = {
+            every_war = {
+                if = {
+                    limit = {
+                        has_war_flag = hsr_corp_aid_s1@event_target:hsr_corp_old_hq
+                    }
+                    set_war_flag = hsr_corp_aid_s1@event_target:hsr_corp_new_hq
+                    remove_war_flag = hsr_corp_aid_s1@event_target:hsr_corp_old_hq
+                }
+                if = {
+                    limit = {
+                        has_war_flag = hsr_corp_aid_s2@event_target:hsr_corp_old_hq
+                    }
+                    set_war_flag = hsr_corp_aid_s2@event_target:hsr_corp_new_hq
+                    remove_war_flag = hsr_corp_aid_s2@event_target:hsr_corp_old_hq
+                }
+                if = {
+                    limit = {
+                        has_war_flag = hsr_corp_aid_s3@event_target:hsr_corp_old_hq
+                    }
+                    set_war_flag = hsr_corp_aid_s3@event_target:hsr_corp_new_hq
+                    remove_war_flag = hsr_corp_aid_s3@event_target:hsr_corp_old_hq
+                }
+            }
+        }
+    }
+}
+
+# 转换后恢复全部三槽与原剩余建设/改革/危机/冷却时间；原生转换仍由原版负责。
+hsr_corp_finish_carrier_transfer = {
+    optimize_memory
+    if = {
+        limit = {
+            exists = event_target:hsr_corp_transfer_bank
+            event_target:hsr_corp_transfer_bank = {
+                has_country_flag = hsr_corp_transfer_pending
+            }
+            is_colony = yes
+        }
+        set_carrier_flag = hsr_corp_data_initialized
+        set_carrier_flag = hsr_corp_has_records
+        remove_carrier_flag = hsr_corp_transfer_in_progress
+        if = {
+            limit = {
+                event_target:hsr_corp_transfer_bank = {
+                    has_country_flag = hsr_corp_transfer_has_fiscal
+                }
+            }
+            set_variable = {
+                which = hsr_credits_planet_trade_storage
+                value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_local_fiscal
+            }
+            event_target:hsr_corp_transfer_bank = {
+                remove_country_flag = hsr_corp_transfer_has_fiscal
+            }
+        }
+        set_variable = {
+            which = hsr_corp_s1_state
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_state
+        }
+        set_variable = { which = hsr_corp_s1_id value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_id }
+        set_variable = {
+            which = hsr_corp_s1_level
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_level
+        }
+        set_variable = {
+            which = hsr_corp_s1_primary
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_primary
+        }
+        set_variable = {
+            which = hsr_corp_s1_secondary_1
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_secondary_1
+        }
+        set_variable = {
+            which = hsr_corp_s1_secondary_2
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_secondary_2
+        }
+        set_variable = {
+            which = hsr_corp_s1_regime
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_regime
+        }
+        set_variable = {
+            which = hsr_corp_s1_jobs
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_jobs
+        }
+        set_variable = {
+            which = hsr_corp_s1_loyalty
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_loyalty
+        }
+        set_variable = {
+            which = hsr_corp_s1_founder_shares
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_founder_shares
+        }
+        set_variable = {
+            which = hsr_corp_s1_foreign_shares
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_foreign_shares
+        }
+        set_variable = {
+            which = hsr_corp_s1_pool_shares
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_pool_shares
+        }
+        set_variable = {
+            which = hsr_corp_s1_cash
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_cash
+        }
+        set_variable = {
+            which = hsr_corp_s1_market_reserve
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_market_reserve
+        }
+        set_variable = {
+            which = hsr_corp_s1_debt
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_debt
+        }
+        set_variable = {
+            which = hsr_corp_s1_last_profit
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_last_profit
+        }
+        set_variable = {
+            which = hsr_corp_s1_last_revenue
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_last_revenue
+        }
+        set_variable = {
+            which = hsr_corp_s1_last_upkeep
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_last_upkeep
+        }
+        set_variable = {
+            which = hsr_corp_s1_last_tax
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_last_tax
+        }
+        set_variable = {
+            which = hsr_corp_s1_last_dividend
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_last_dividend
+        }
+        set_variable = {
+            which = hsr_corp_s1_share_price
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_share_price
+        }
+        set_variable = {
+            which = hsr_corp_s1_foreign_control
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_foreign_control
+        }
+        set_variable = {
+            which = hsr_corp_s1_listed
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_listed
+        }
+        set_variable = {
+            which = hsr_corp_s1_paid_trade
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_paid_trade
+        }
+        set_variable = {
+            which = hsr_corp_s1_paid_national
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_paid_national
+        }
+        set_variable = {
+            which = hsr_corp_s1_paid_local
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_paid_local
+        }
+        set_variable = {
+            which = hsr_corp_s1_origin_bonus
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_origin_bonus
+        }
+        set_variable = {
+            which = hsr_corp_s1_pending_regime
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_pending_regime
+        }
+        set_variable = {
+            which = hsr_corp_s1_reform_paid
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_reform_paid
+        }
+        set_variable = {
+            which = hsr_corp_s1_losses
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_losses
+        }
+        set_variable = {
+            which = hsr_corp_s1_offer_id
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_offer_id
+        }
+        set_variable = {
+            which = hsr_corp_s1_offer_escrow
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_offer_escrow
+        }
+        set_variable = {
+            which = hsr_corp_s1_offer_gross
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_offer_gross
+        }
+        set_variable = {
+            which = hsr_corp_s1_founder_basis
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_founder_basis
+        }
+        set_variable = {
+            which = hsr_corp_s1_foreign_basis
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_foreign_basis
+        }
+        set_variable = {
+            which = hsr_corp_s1_notice_id
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_notice_id
+        }
+        set_variable = {
+            which = hsr_corp_s1_calendar_accounted_year
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_calendar_accounted_year
+        }
+        set_variable = {
+            which = hsr_corp_s1_crisis_kind
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_crisis_kind
+        }
+        set_variable = {
+            which = hsr_corp_s1_crisis_decided
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_crisis_decided
+        }
+        set_variable = {
+            which = hsr_corp_s1_price_change
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_price_change
+        }
+        set_variable = {
+            which = hsr_corp_s1_rights_denied
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_rights_denied
+        }
+        set_variable = {
+            which = hsr_corp_s1_control_notice_initialized
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_control_notice_initialized
+        }
+        remove_carrier_flag = hsr_corp_notice_s1
+        set_variable = { which = hsr_corp_s1_notice_id value = 0 }
+        remove_carrier_flag = hsr_corp_building_s1
+        if = {
+            limit = {
+                event_target:hsr_corp_transfer_bank = {
+                    check_variable = { which = hsr_corp_transfer_s1_building_days value > 0 }
+                }
+            }
+            set_timed_carrier_flag = {
+                flag = hsr_corp_building_s1
+                days = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_building_days
+            }
+        }
+        remove_carrier_flag = hsr_corp_reform_s1
+        if = {
+            limit = {
+                event_target:hsr_corp_transfer_bank = {
+                    check_variable = { which = hsr_corp_transfer_s1_reform_days value > 0 }
+                }
+            }
+            set_timed_carrier_flag = {
+                flag = hsr_corp_reform_s1
+                days = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_reform_days
+            }
+        }
+        remove_carrier_flag = hsr_corp_upgrade_s1
+        if = {
+            limit = {
+                event_target:hsr_corp_transfer_bank = {
+                    check_variable = { which = hsr_corp_transfer_s1_upgrade_days value > 0 }
+                }
+            }
+            set_timed_carrier_flag = {
+                flag = hsr_corp_upgrade_s1
+                days = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_upgrade_days
+            }
+        }
+        remove_carrier_flag = hsr_corp_crisis_cd_s1
+        if = {
+            limit = {
+                event_target:hsr_corp_transfer_bank = {
+                    check_variable = { which = hsr_corp_transfer_s1_crisis_cd_days value > 0 }
+                }
+            }
+            set_timed_carrier_flag = {
+                flag = hsr_corp_crisis_cd_s1
+                days = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_crisis_cd_days
+            }
+        }
+        remove_carrier_flag = hsr_corp_crisis_active_s1
+        if = {
+            limit = {
+                event_target:hsr_corp_transfer_bank = {
+                    check_variable = { which = hsr_corp_transfer_s1_crisis_active_days value > 0 }
+                }
+            }
+            set_timed_carrier_flag = {
+                flag = hsr_corp_crisis_active_s1
+                days = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_crisis_active_days
+            }
+        }
+        remove_carrier_flag = hsr_corp_control_adapt_s1
+        if = {
+            limit = {
+                event_target:hsr_corp_transfer_bank = {
+                    check_variable = { which = hsr_corp_transfer_s1_control_adapt_days value > 0 }
+                }
+            }
+            set_timed_carrier_flag = {
+                flag = hsr_corp_control_adapt_s1
+                days = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_control_adapt_days
+            }
+        }
+        remove_carrier_flag = hsr_corp_illegal_cd_s1
+        if = {
+            limit = {
+                event_target:hsr_corp_transfer_bank = {
+                    check_variable = { which = hsr_corp_transfer_s1_illegal_cd_days value > 0 }
+                }
+            }
+            set_timed_carrier_flag = {
+                flag = hsr_corp_illegal_cd_s1
+                days = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_illegal_cd_days
+            }
+        }
+        remove_carrier_flag = hsr_corp_rights_suspended_s1
+        if = {
+            limit = {
+                event_target:hsr_corp_transfer_bank = {
+                    check_variable = { which = hsr_corp_transfer_s1_rights_suspended_days value > 0 }
+                }
+            }
+            set_timed_carrier_flag = {
+                flag = hsr_corp_rights_suspended_s1
+                days = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_rights_suspended_days
+            }
+        }
+        remove_carrier_flag = hsr_corp_aid_cd_s1
+        if = {
+            limit = {
+                event_target:hsr_corp_transfer_bank = {
+                    check_variable = { which = hsr_corp_transfer_s1_aid_cd_days value > 0 }
+                }
+            }
+            set_timed_carrier_flag = {
+                flag = hsr_corp_aid_cd_s1
+                days = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_aid_cd_days
+            }
+        }
+        clear_global_event_target = hsr_corp_founder_s1@this
+        if = {
+            limit = {
+                exists = event_target:hsr_corp_transfer_founder_s1@event_target:hsr_corp_transfer_bank
+            }
+            event_target:hsr_corp_transfer_founder_s1@event_target:hsr_corp_transfer_bank = {
+                save_global_event_target_as = hsr_corp_founder_s1@event_target:hsr_corp_new_hq
+            }
+        }
+        clear_global_event_target = hsr_corp_transfer_founder_s1@event_target:hsr_corp_transfer_bank
+        clear_global_event_target = hsr_corp_foreign_s1@this
+        if = {
+            limit = {
+                exists = event_target:hsr_corp_transfer_foreign_s1@event_target:hsr_corp_transfer_bank
+            }
+            event_target:hsr_corp_transfer_foreign_s1@event_target:hsr_corp_transfer_bank = {
+                save_global_event_target_as = hsr_corp_foreign_s1@event_target:hsr_corp_new_hq
+            }
+        }
+        clear_global_event_target = hsr_corp_transfer_foreign_s1@event_target:hsr_corp_transfer_bank
+        clear_global_event_target = hsr_corp_payer_s1@this
+        if = {
+            limit = {
+                exists = event_target:hsr_corp_transfer_payer_s1@event_target:hsr_corp_transfer_bank
+            }
+            event_target:hsr_corp_transfer_payer_s1@event_target:hsr_corp_transfer_bank = {
+                save_global_event_target_as = hsr_corp_payer_s1@event_target:hsr_corp_new_hq
+            }
+        }
+        clear_global_event_target = hsr_corp_transfer_payer_s1@event_target:hsr_corp_transfer_bank
+        clear_global_event_target = hsr_corp_notified_controller_s1@this
+        if = {
+            limit = {
+                exists = event_target:hsr_corp_transfer_notified_controller_s1@event_target:hsr_corp_transfer_bank
+            }
+            event_target:hsr_corp_transfer_notified_controller_s1@event_target:hsr_corp_transfer_bank = {
+                save_global_event_target_as = hsr_corp_notified_controller_s1@event_target:hsr_corp_new_hq
+            }
+        }
+        clear_global_event_target = hsr_corp_transfer_notified_controller_s1@event_target:hsr_corp_transfer_bank
+        set_variable = {
+            which = hsr_corp_s2_state
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_state
+        }
+        set_variable = { which = hsr_corp_s2_id value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_id }
+        set_variable = {
+            which = hsr_corp_s2_level
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_level
+        }
+        set_variable = {
+            which = hsr_corp_s2_primary
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_primary
+        }
+        set_variable = {
+            which = hsr_corp_s2_secondary_1
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_secondary_1
+        }
+        set_variable = {
+            which = hsr_corp_s2_secondary_2
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_secondary_2
+        }
+        set_variable = {
+            which = hsr_corp_s2_regime
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_regime
+        }
+        set_variable = {
+            which = hsr_corp_s2_jobs
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_jobs
+        }
+        set_variable = {
+            which = hsr_corp_s2_loyalty
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_loyalty
+        }
+        set_variable = {
+            which = hsr_corp_s2_founder_shares
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_founder_shares
+        }
+        set_variable = {
+            which = hsr_corp_s2_foreign_shares
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_foreign_shares
+        }
+        set_variable = {
+            which = hsr_corp_s2_pool_shares
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_pool_shares
+        }
+        set_variable = {
+            which = hsr_corp_s2_cash
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_cash
+        }
+        set_variable = {
+            which = hsr_corp_s2_market_reserve
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_market_reserve
+        }
+        set_variable = {
+            which = hsr_corp_s2_debt
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_debt
+        }
+        set_variable = {
+            which = hsr_corp_s2_last_profit
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_last_profit
+        }
+        set_variable = {
+            which = hsr_corp_s2_last_revenue
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_last_revenue
+        }
+        set_variable = {
+            which = hsr_corp_s2_last_upkeep
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_last_upkeep
+        }
+        set_variable = {
+            which = hsr_corp_s2_last_tax
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_last_tax
+        }
+        set_variable = {
+            which = hsr_corp_s2_last_dividend
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_last_dividend
+        }
+        set_variable = {
+            which = hsr_corp_s2_share_price
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_share_price
+        }
+        set_variable = {
+            which = hsr_corp_s2_foreign_control
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_foreign_control
+        }
+        set_variable = {
+            which = hsr_corp_s2_listed
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_listed
+        }
+        set_variable = {
+            which = hsr_corp_s2_paid_trade
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_paid_trade
+        }
+        set_variable = {
+            which = hsr_corp_s2_paid_national
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_paid_national
+        }
+        set_variable = {
+            which = hsr_corp_s2_paid_local
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_paid_local
+        }
+        set_variable = {
+            which = hsr_corp_s2_origin_bonus
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_origin_bonus
+        }
+        set_variable = {
+            which = hsr_corp_s2_pending_regime
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_pending_regime
+        }
+        set_variable = {
+            which = hsr_corp_s2_reform_paid
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_reform_paid
+        }
+        set_variable = {
+            which = hsr_corp_s2_losses
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_losses
+        }
+        set_variable = {
+            which = hsr_corp_s2_offer_id
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_offer_id
+        }
+        set_variable = {
+            which = hsr_corp_s2_offer_escrow
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_offer_escrow
+        }
+        set_variable = {
+            which = hsr_corp_s2_offer_gross
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_offer_gross
+        }
+        set_variable = {
+            which = hsr_corp_s2_founder_basis
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_founder_basis
+        }
+        set_variable = {
+            which = hsr_corp_s2_foreign_basis
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_foreign_basis
+        }
+        set_variable = {
+            which = hsr_corp_s2_notice_id
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_notice_id
+        }
+        set_variable = {
+            which = hsr_corp_s2_calendar_accounted_year
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_calendar_accounted_year
+        }
+        set_variable = {
+            which = hsr_corp_s2_crisis_kind
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_crisis_kind
+        }
+        set_variable = {
+            which = hsr_corp_s2_crisis_decided
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_crisis_decided
+        }
+        set_variable = {
+            which = hsr_corp_s2_price_change
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_price_change
+        }
+        set_variable = {
+            which = hsr_corp_s2_rights_denied
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_rights_denied
+        }
+        set_variable = {
+            which = hsr_corp_s2_control_notice_initialized
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_control_notice_initialized
+        }
+        remove_carrier_flag = hsr_corp_notice_s2
+        set_variable = { which = hsr_corp_s2_notice_id value = 0 }
+        remove_carrier_flag = hsr_corp_building_s2
+        if = {
+            limit = {
+                event_target:hsr_corp_transfer_bank = {
+                    check_variable = { which = hsr_corp_transfer_s2_building_days value > 0 }
+                }
+            }
+            set_timed_carrier_flag = {
+                flag = hsr_corp_building_s2
+                days = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_building_days
+            }
+        }
+        remove_carrier_flag = hsr_corp_reform_s2
+        if = {
+            limit = {
+                event_target:hsr_corp_transfer_bank = {
+                    check_variable = { which = hsr_corp_transfer_s2_reform_days value > 0 }
+                }
+            }
+            set_timed_carrier_flag = {
+                flag = hsr_corp_reform_s2
+                days = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_reform_days
+            }
+        }
+        remove_carrier_flag = hsr_corp_upgrade_s2
+        if = {
+            limit = {
+                event_target:hsr_corp_transfer_bank = {
+                    check_variable = { which = hsr_corp_transfer_s2_upgrade_days value > 0 }
+                }
+            }
+            set_timed_carrier_flag = {
+                flag = hsr_corp_upgrade_s2
+                days = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_upgrade_days
+            }
+        }
+        remove_carrier_flag = hsr_corp_crisis_cd_s2
+        if = {
+            limit = {
+                event_target:hsr_corp_transfer_bank = {
+                    check_variable = { which = hsr_corp_transfer_s2_crisis_cd_days value > 0 }
+                }
+            }
+            set_timed_carrier_flag = {
+                flag = hsr_corp_crisis_cd_s2
+                days = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_crisis_cd_days
+            }
+        }
+        remove_carrier_flag = hsr_corp_crisis_active_s2
+        if = {
+            limit = {
+                event_target:hsr_corp_transfer_bank = {
+                    check_variable = { which = hsr_corp_transfer_s2_crisis_active_days value > 0 }
+                }
+            }
+            set_timed_carrier_flag = {
+                flag = hsr_corp_crisis_active_s2
+                days = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_crisis_active_days
+            }
+        }
+        remove_carrier_flag = hsr_corp_control_adapt_s2
+        if = {
+            limit = {
+                event_target:hsr_corp_transfer_bank = {
+                    check_variable = { which = hsr_corp_transfer_s2_control_adapt_days value > 0 }
+                }
+            }
+            set_timed_carrier_flag = {
+                flag = hsr_corp_control_adapt_s2
+                days = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_control_adapt_days
+            }
+        }
+        remove_carrier_flag = hsr_corp_illegal_cd_s2
+        if = {
+            limit = {
+                event_target:hsr_corp_transfer_bank = {
+                    check_variable = { which = hsr_corp_transfer_s2_illegal_cd_days value > 0 }
+                }
+            }
+            set_timed_carrier_flag = {
+                flag = hsr_corp_illegal_cd_s2
+                days = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_illegal_cd_days
+            }
+        }
+        remove_carrier_flag = hsr_corp_rights_suspended_s2
+        if = {
+            limit = {
+                event_target:hsr_corp_transfer_bank = {
+                    check_variable = { which = hsr_corp_transfer_s2_rights_suspended_days value > 0 }
+                }
+            }
+            set_timed_carrier_flag = {
+                flag = hsr_corp_rights_suspended_s2
+                days = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_rights_suspended_days
+            }
+        }
+        remove_carrier_flag = hsr_corp_aid_cd_s2
+        if = {
+            limit = {
+                event_target:hsr_corp_transfer_bank = {
+                    check_variable = { which = hsr_corp_transfer_s2_aid_cd_days value > 0 }
+                }
+            }
+            set_timed_carrier_flag = {
+                flag = hsr_corp_aid_cd_s2
+                days = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_aid_cd_days
+            }
+        }
+        clear_global_event_target = hsr_corp_founder_s2@this
+        if = {
+            limit = {
+                exists = event_target:hsr_corp_transfer_founder_s2@event_target:hsr_corp_transfer_bank
+            }
+            event_target:hsr_corp_transfer_founder_s2@event_target:hsr_corp_transfer_bank = {
+                save_global_event_target_as = hsr_corp_founder_s2@event_target:hsr_corp_new_hq
+            }
+        }
+        clear_global_event_target = hsr_corp_transfer_founder_s2@event_target:hsr_corp_transfer_bank
+        clear_global_event_target = hsr_corp_foreign_s2@this
+        if = {
+            limit = {
+                exists = event_target:hsr_corp_transfer_foreign_s2@event_target:hsr_corp_transfer_bank
+            }
+            event_target:hsr_corp_transfer_foreign_s2@event_target:hsr_corp_transfer_bank = {
+                save_global_event_target_as = hsr_corp_foreign_s2@event_target:hsr_corp_new_hq
+            }
+        }
+        clear_global_event_target = hsr_corp_transfer_foreign_s2@event_target:hsr_corp_transfer_bank
+        clear_global_event_target = hsr_corp_payer_s2@this
+        if = {
+            limit = {
+                exists = event_target:hsr_corp_transfer_payer_s2@event_target:hsr_corp_transfer_bank
+            }
+            event_target:hsr_corp_transfer_payer_s2@event_target:hsr_corp_transfer_bank = {
+                save_global_event_target_as = hsr_corp_payer_s2@event_target:hsr_corp_new_hq
+            }
+        }
+        clear_global_event_target = hsr_corp_transfer_payer_s2@event_target:hsr_corp_transfer_bank
+        clear_global_event_target = hsr_corp_notified_controller_s2@this
+        if = {
+            limit = {
+                exists = event_target:hsr_corp_transfer_notified_controller_s2@event_target:hsr_corp_transfer_bank
+            }
+            event_target:hsr_corp_transfer_notified_controller_s2@event_target:hsr_corp_transfer_bank = {
+                save_global_event_target_as = hsr_corp_notified_controller_s2@event_target:hsr_corp_new_hq
+            }
+        }
+        clear_global_event_target = hsr_corp_transfer_notified_controller_s2@event_target:hsr_corp_transfer_bank
+        set_variable = {
+            which = hsr_corp_s3_state
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_state
+        }
+        set_variable = { which = hsr_corp_s3_id value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_id }
+        set_variable = {
+            which = hsr_corp_s3_level
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_level
+        }
+        set_variable = {
+            which = hsr_corp_s3_primary
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_primary
+        }
+        set_variable = {
+            which = hsr_corp_s3_secondary_1
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_secondary_1
+        }
+        set_variable = {
+            which = hsr_corp_s3_secondary_2
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_secondary_2
+        }
+        set_variable = {
+            which = hsr_corp_s3_regime
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_regime
+        }
+        set_variable = {
+            which = hsr_corp_s3_jobs
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_jobs
+        }
+        set_variable = {
+            which = hsr_corp_s3_loyalty
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_loyalty
+        }
+        set_variable = {
+            which = hsr_corp_s3_founder_shares
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_founder_shares
+        }
+        set_variable = {
+            which = hsr_corp_s3_foreign_shares
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_foreign_shares
+        }
+        set_variable = {
+            which = hsr_corp_s3_pool_shares
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_pool_shares
+        }
+        set_variable = {
+            which = hsr_corp_s3_cash
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_cash
+        }
+        set_variable = {
+            which = hsr_corp_s3_market_reserve
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_market_reserve
+        }
+        set_variable = {
+            which = hsr_corp_s3_debt
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_debt
+        }
+        set_variable = {
+            which = hsr_corp_s3_last_profit
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_last_profit
+        }
+        set_variable = {
+            which = hsr_corp_s3_last_revenue
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_last_revenue
+        }
+        set_variable = {
+            which = hsr_corp_s3_last_upkeep
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_last_upkeep
+        }
+        set_variable = {
+            which = hsr_corp_s3_last_tax
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_last_tax
+        }
+        set_variable = {
+            which = hsr_corp_s3_last_dividend
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_last_dividend
+        }
+        set_variable = {
+            which = hsr_corp_s3_share_price
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_share_price
+        }
+        set_variable = {
+            which = hsr_corp_s3_foreign_control
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_foreign_control
+        }
+        set_variable = {
+            which = hsr_corp_s3_listed
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_listed
+        }
+        set_variable = {
+            which = hsr_corp_s3_paid_trade
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_paid_trade
+        }
+        set_variable = {
+            which = hsr_corp_s3_paid_national
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_paid_national
+        }
+        set_variable = {
+            which = hsr_corp_s3_paid_local
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_paid_local
+        }
+        set_variable = {
+            which = hsr_corp_s3_origin_bonus
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_origin_bonus
+        }
+        set_variable = {
+            which = hsr_corp_s3_pending_regime
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_pending_regime
+        }
+        set_variable = {
+            which = hsr_corp_s3_reform_paid
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_reform_paid
+        }
+        set_variable = {
+            which = hsr_corp_s3_losses
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_losses
+        }
+        set_variable = {
+            which = hsr_corp_s3_offer_id
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_offer_id
+        }
+        set_variable = {
+            which = hsr_corp_s3_offer_escrow
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_offer_escrow
+        }
+        set_variable = {
+            which = hsr_corp_s3_offer_gross
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_offer_gross
+        }
+        set_variable = {
+            which = hsr_corp_s3_founder_basis
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_founder_basis
+        }
+        set_variable = {
+            which = hsr_corp_s3_foreign_basis
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_foreign_basis
+        }
+        set_variable = {
+            which = hsr_corp_s3_notice_id
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_notice_id
+        }
+        set_variable = {
+            which = hsr_corp_s3_calendar_accounted_year
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_calendar_accounted_year
+        }
+        set_variable = {
+            which = hsr_corp_s3_crisis_kind
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_crisis_kind
+        }
+        set_variable = {
+            which = hsr_corp_s3_crisis_decided
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_crisis_decided
+        }
+        set_variable = {
+            which = hsr_corp_s3_price_change
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_price_change
+        }
+        set_variable = {
+            which = hsr_corp_s3_rights_denied
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_rights_denied
+        }
+        set_variable = {
+            which = hsr_corp_s3_control_notice_initialized
+            value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_control_notice_initialized
+        }
+        remove_carrier_flag = hsr_corp_notice_s3
+        set_variable = { which = hsr_corp_s3_notice_id value = 0 }
+        remove_carrier_flag = hsr_corp_building_s3
+        if = {
+            limit = {
+                event_target:hsr_corp_transfer_bank = {
+                    check_variable = { which = hsr_corp_transfer_s3_building_days value > 0 }
+                }
+            }
+            set_timed_carrier_flag = {
+                flag = hsr_corp_building_s3
+                days = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_building_days
+            }
+        }
+        remove_carrier_flag = hsr_corp_reform_s3
+        if = {
+            limit = {
+                event_target:hsr_corp_transfer_bank = {
+                    check_variable = { which = hsr_corp_transfer_s3_reform_days value > 0 }
+                }
+            }
+            set_timed_carrier_flag = {
+                flag = hsr_corp_reform_s3
+                days = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_reform_days
+            }
+        }
+        remove_carrier_flag = hsr_corp_upgrade_s3
+        if = {
+            limit = {
+                event_target:hsr_corp_transfer_bank = {
+                    check_variable = { which = hsr_corp_transfer_s3_upgrade_days value > 0 }
+                }
+            }
+            set_timed_carrier_flag = {
+                flag = hsr_corp_upgrade_s3
+                days = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_upgrade_days
+            }
+        }
+        remove_carrier_flag = hsr_corp_crisis_cd_s3
+        if = {
+            limit = {
+                event_target:hsr_corp_transfer_bank = {
+                    check_variable = { which = hsr_corp_transfer_s3_crisis_cd_days value > 0 }
+                }
+            }
+            set_timed_carrier_flag = {
+                flag = hsr_corp_crisis_cd_s3
+                days = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_crisis_cd_days
+            }
+        }
+        remove_carrier_flag = hsr_corp_crisis_active_s3
+        if = {
+            limit = {
+                event_target:hsr_corp_transfer_bank = {
+                    check_variable = { which = hsr_corp_transfer_s3_crisis_active_days value > 0 }
+                }
+            }
+            set_timed_carrier_flag = {
+                flag = hsr_corp_crisis_active_s3
+                days = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_crisis_active_days
+            }
+        }
+        remove_carrier_flag = hsr_corp_control_adapt_s3
+        if = {
+            limit = {
+                event_target:hsr_corp_transfer_bank = {
+                    check_variable = { which = hsr_corp_transfer_s3_control_adapt_days value > 0 }
+                }
+            }
+            set_timed_carrier_flag = {
+                flag = hsr_corp_control_adapt_s3
+                days = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_control_adapt_days
+            }
+        }
+        remove_carrier_flag = hsr_corp_illegal_cd_s3
+        if = {
+            limit = {
+                event_target:hsr_corp_transfer_bank = {
+                    check_variable = { which = hsr_corp_transfer_s3_illegal_cd_days value > 0 }
+                }
+            }
+            set_timed_carrier_flag = {
+                flag = hsr_corp_illegal_cd_s3
+                days = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_illegal_cd_days
+            }
+        }
+        remove_carrier_flag = hsr_corp_rights_suspended_s3
+        if = {
+            limit = {
+                event_target:hsr_corp_transfer_bank = {
+                    check_variable = { which = hsr_corp_transfer_s3_rights_suspended_days value > 0 }
+                }
+            }
+            set_timed_carrier_flag = {
+                flag = hsr_corp_rights_suspended_s3
+                days = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_rights_suspended_days
+            }
+        }
+        remove_carrier_flag = hsr_corp_aid_cd_s3
+        if = {
+            limit = {
+                event_target:hsr_corp_transfer_bank = {
+                    check_variable = { which = hsr_corp_transfer_s3_aid_cd_days value > 0 }
+                }
+            }
+            set_timed_carrier_flag = {
+                flag = hsr_corp_aid_cd_s3
+                days = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_aid_cd_days
+            }
+        }
+        clear_global_event_target = hsr_corp_founder_s3@this
+        if = {
+            limit = {
+                exists = event_target:hsr_corp_transfer_founder_s3@event_target:hsr_corp_transfer_bank
+            }
+            event_target:hsr_corp_transfer_founder_s3@event_target:hsr_corp_transfer_bank = {
+                save_global_event_target_as = hsr_corp_founder_s3@event_target:hsr_corp_new_hq
+            }
+        }
+        clear_global_event_target = hsr_corp_transfer_founder_s3@event_target:hsr_corp_transfer_bank
+        clear_global_event_target = hsr_corp_foreign_s3@this
+        if = {
+            limit = {
+                exists = event_target:hsr_corp_transfer_foreign_s3@event_target:hsr_corp_transfer_bank
+            }
+            event_target:hsr_corp_transfer_foreign_s3@event_target:hsr_corp_transfer_bank = {
+                save_global_event_target_as = hsr_corp_foreign_s3@event_target:hsr_corp_new_hq
+            }
+        }
+        clear_global_event_target = hsr_corp_transfer_foreign_s3@event_target:hsr_corp_transfer_bank
+        clear_global_event_target = hsr_corp_payer_s3@this
+        if = {
+            limit = {
+                exists = event_target:hsr_corp_transfer_payer_s3@event_target:hsr_corp_transfer_bank
+            }
+            event_target:hsr_corp_transfer_payer_s3@event_target:hsr_corp_transfer_bank = {
+                save_global_event_target_as = hsr_corp_payer_s3@event_target:hsr_corp_new_hq
+            }
+        }
+        clear_global_event_target = hsr_corp_transfer_payer_s3@event_target:hsr_corp_transfer_bank
+        clear_global_event_target = hsr_corp_notified_controller_s3@this
+        if = {
+            limit = {
+                exists = event_target:hsr_corp_transfer_notified_controller_s3@event_target:hsr_corp_transfer_bank
+            }
+            event_target:hsr_corp_transfer_notified_controller_s3@event_target:hsr_corp_transfer_bank = {
+                save_global_event_target_as = hsr_corp_notified_controller_s3@event_target:hsr_corp_new_hq
+            }
+        }
+        clear_global_event_target = hsr_corp_transfer_notified_controller_s3@event_target:hsr_corp_transfer_bank
+        set_variable = { which = hsr_corp_selected value = 0 }
+        set_variable = { which = hsr_corp_session_id value = 0 }
+        hsr_corp_refresh_jobs = yes
+        if = {
+            limit = {
+                exists = event_target:hsr_corp_old_hq
+            }
+            event_target:hsr_corp_old_hq = {
+                remove_carrier_flag = hsr_corp_transfer_in_progress
+            }
+        }
+        event_target:hsr_corp_transfer_bank = {
+            remove_country_flag = hsr_corp_transfer_pending
+        }
+    }
+}

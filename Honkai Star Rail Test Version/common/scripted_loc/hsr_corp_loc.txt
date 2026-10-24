@@ -1,0 +1,539 @@
+# 货币战争公司系统 v1.4；独立扩展文件，中文说明见 docs/货币战争。
+# 状态：0空、1建设、2活动、3危机、4清算。未经完整游戏验收。
+defined_text = {
+    name = GetHsrCorpPageTitle
+    random = no
+    text = {
+        trigger = {
+            check_variable = { which = hsr_corp_page value = 1 }
+        }
+        localization_key = hsr_corp_local_title
+    }
+    text = {
+        trigger = {
+            check_variable = { which = hsr_corp_page value = 2 }
+        }
+        localization_key = hsr_corp_company_title
+    }
+    text = {
+        trigger = {
+            check_variable = { which = hsr_corp_page value = 3 }
+        }
+        localization_key = hsr_corp_setup_title
+    }
+    text = {
+        localization_key = hsr_corp_none
+    }
+}
+
+inline_script = {
+    script = hsr_corp/loc/industry
+    NAME = GetHsrCorpViewPrimary
+    VARIABLE = hsr_corp_view_primary
+}
+
+inline_script = {
+    script = hsr_corp/loc/industry
+    NAME = GetHsrCorpViewSecondary1
+    VARIABLE = hsr_corp_view_secondary_1
+}
+
+inline_script = {
+    script = hsr_corp/loc/industry
+    NAME = GetHsrCorpViewSecondary2
+    VARIABLE = hsr_corp_view_secondary_2
+}
+
+inline_script = {
+    script = hsr_corp/loc/industry
+    NAME = GetHsrCorpSetupIndustry
+    VARIABLE = hsr_corp_setup_primary
+}
+
+inline_script = {
+    script = hsr_corp/loc/industry
+    NAME = GetHsrCorpChosenIndustry
+    VARIABLE = hsr_corp_choose_industry
+}
+
+inline_script = {
+    script = hsr_corp/loc/regime
+    NAME = GetHsrCorpViewRegime
+    VARIABLE = hsr_corp_view_regime
+}
+
+inline_script = {
+    script = hsr_corp/loc/regime
+    NAME = GetHsrCorpSetupRegime
+    VARIABLE = hsr_corp_setup_regime
+}
+
+inline_script = {
+    script = hsr_corp/loc/state
+    NAME = GetHsrCorpState1
+    VARIABLE = hsr_corp_s1_state
+}
+
+inline_script = {
+    script = hsr_corp/loc/industry
+    NAME = GetHsrCorpPrimary1
+    VARIABLE = hsr_corp_s1_primary
+}
+
+inline_script = {
+    script = hsr_corp/loc/industry
+    NAME = GetHsrCorpSideA1
+    VARIABLE = hsr_corp_s1_secondary_1
+}
+
+inline_script = {
+    script = hsr_corp/loc/industry
+    NAME = GetHsrCorpSideB1
+    VARIABLE = hsr_corp_s1_secondary_2
+}
+
+inline_script = {
+    script = hsr_corp/loc/state
+    NAME = GetHsrCorpState2
+    VARIABLE = hsr_corp_s2_state
+}
+
+inline_script = {
+    script = hsr_corp/loc/industry
+    NAME = GetHsrCorpPrimary2
+    VARIABLE = hsr_corp_s2_primary
+}
+
+inline_script = {
+    script = hsr_corp/loc/industry
+    NAME = GetHsrCorpSideA2
+    VARIABLE = hsr_corp_s2_secondary_1
+}
+
+inline_script = {
+    script = hsr_corp/loc/industry
+    NAME = GetHsrCorpSideB2
+    VARIABLE = hsr_corp_s2_secondary_2
+}
+
+inline_script = {
+    script = hsr_corp/loc/state
+    NAME = GetHsrCorpState3
+    VARIABLE = hsr_corp_s3_state
+}
+
+inline_script = {
+    script = hsr_corp/loc/industry
+    NAME = GetHsrCorpPrimary3
+    VARIABLE = hsr_corp_s3_primary
+}
+
+inline_script = {
+    script = hsr_corp/loc/industry
+    NAME = GetHsrCorpSideA3
+    VARIABLE = hsr_corp_s3_secondary_1
+}
+
+inline_script = {
+    script = hsr_corp/loc/industry
+    NAME = GetHsrCorpSideB3
+    VARIABLE = hsr_corp_s3_secondary_2
+}
+
+inline_script = {
+    script = hsr_corp/loc/state
+    NAME = GetHsrCorpRowState1
+    VARIABLE = hsr_corp_row_1_state
+}
+
+inline_script = {
+    script = hsr_corp/loc/industry
+    NAME = GetHsrCorpRowIndustry1
+    VARIABLE = hsr_corp_row_1_primary
+}
+
+defined_text = {
+    name = GetHsrCorpRowChange1
+    random = no
+    text = {
+        trigger = {
+            check_variable = { which = hsr_corp_row_1_price_change value < 0 }
+        }
+        localization_key = hsr_corp_row_change_1_negative
+    }
+    text = {
+        localization_key = hsr_corp_row_change_1_positive
+    }
+}
+
+inline_script = {
+    script = hsr_corp/loc/state
+    NAME = GetHsrCorpRowState2
+    VARIABLE = hsr_corp_row_2_state
+}
+
+inline_script = {
+    script = hsr_corp/loc/industry
+    NAME = GetHsrCorpRowIndustry2
+    VARIABLE = hsr_corp_row_2_primary
+}
+
+defined_text = {
+    name = GetHsrCorpRowChange2
+    random = no
+    text = {
+        trigger = {
+            check_variable = { which = hsr_corp_row_2_price_change value < 0 }
+        }
+        localization_key = hsr_corp_row_change_2_negative
+    }
+    text = {
+        localization_key = hsr_corp_row_change_2_positive
+    }
+}
+
+inline_script = {
+    script = hsr_corp/loc/state
+    NAME = GetHsrCorpRowState3
+    VARIABLE = hsr_corp_row_3_state
+}
+
+inline_script = {
+    script = hsr_corp/loc/industry
+    NAME = GetHsrCorpRowIndustry3
+    VARIABLE = hsr_corp_row_3_primary
+}
+
+defined_text = {
+    name = GetHsrCorpRowChange3
+    random = no
+    text = {
+        trigger = {
+            check_variable = { which = hsr_corp_row_3_price_change value < 0 }
+        }
+        localization_key = hsr_corp_row_change_3_negative
+    }
+    text = {
+        localization_key = hsr_corp_row_change_3_positive
+    }
+}
+
+inline_script = {
+    script = hsr_corp/loc/state
+    NAME = GetHsrCorpRowState4
+    VARIABLE = hsr_corp_row_4_state
+}
+
+inline_script = {
+    script = hsr_corp/loc/industry
+    NAME = GetHsrCorpRowIndustry4
+    VARIABLE = hsr_corp_row_4_primary
+}
+
+defined_text = {
+    name = GetHsrCorpRowChange4
+    random = no
+    text = {
+        trigger = {
+            check_variable = { which = hsr_corp_row_4_price_change value < 0 }
+        }
+        localization_key = hsr_corp_row_change_4_negative
+    }
+    text = {
+        localization_key = hsr_corp_row_change_4_positive
+    }
+}
+
+inline_script = {
+    script = hsr_corp/loc/state
+    NAME = GetHsrCorpRowState5
+    VARIABLE = hsr_corp_row_5_state
+}
+
+inline_script = {
+    script = hsr_corp/loc/industry
+    NAME = GetHsrCorpRowIndustry5
+    VARIABLE = hsr_corp_row_5_primary
+}
+
+defined_text = {
+    name = GetHsrCorpRowChange5
+    random = no
+    text = {
+        trigger = {
+            check_variable = { which = hsr_corp_row_5_price_change value < 0 }
+        }
+        localization_key = hsr_corp_row_change_5_negative
+    }
+    text = {
+        localization_key = hsr_corp_row_change_5_positive
+    }
+}
+
+inline_script = {
+    script = hsr_corp/loc/state
+    NAME = GetHsrCorpRowState6
+    VARIABLE = hsr_corp_row_6_state
+}
+
+inline_script = {
+    script = hsr_corp/loc/industry
+    NAME = GetHsrCorpRowIndustry6
+    VARIABLE = hsr_corp_row_6_primary
+}
+
+defined_text = {
+    name = GetHsrCorpRowChange6
+    random = no
+    text = {
+        trigger = {
+            check_variable = { which = hsr_corp_row_6_price_change value < 0 }
+        }
+        localization_key = hsr_corp_row_change_6_negative
+    }
+    text = {
+        localization_key = hsr_corp_row_change_6_positive
+    }
+}
+
+inline_script = {
+    script = hsr_corp/loc/state
+    NAME = GetHsrCorpViewState
+    VARIABLE = hsr_corp_view_state
+}
+
+defined_text = {
+    name = GetHsrCorpCrisisKind
+    random = no
+    text = {
+        trigger = {
+            check_variable = { which = hsr_corp_view_crisis_kind value = 0 }
+        }
+        localization_key = hsr_corp_crisis_kind_0
+    }
+    text = {
+        trigger = {
+            check_variable = { which = hsr_corp_view_crisis_kind value = 1 }
+        }
+        localization_key = hsr_corp_crisis_kind_1
+    }
+    text = {
+        trigger = {
+            check_variable = { which = hsr_corp_view_crisis_kind value = 2 }
+        }
+        localization_key = hsr_corp_crisis_kind_2
+    }
+    text = {
+        trigger = {
+            check_variable = { which = hsr_corp_view_crisis_kind value = 3 }
+        }
+        localization_key = hsr_corp_crisis_kind_3
+    }
+    text = {
+        trigger = {
+            check_variable = { which = hsr_corp_view_crisis_kind value = 4 }
+        }
+        localization_key = hsr_corp_crisis_kind_4
+    }
+    text = {
+        trigger = {
+            check_variable = { which = hsr_corp_view_crisis_kind value = 5 }
+        }
+        localization_key = hsr_corp_crisis_kind_5
+    }
+    text = {
+        localization_key = hsr_corp_none
+    }
+}
+
+defined_text = {
+    name = GetHsrCorpLoyaltyBand
+    random = no
+    text = {
+        trigger = {
+            check_variable = { which = hsr_corp_view_loyalty value >= 50 }
+        }
+        localization_key = hsr_corp_loyalty_high
+    }
+    text = {
+        trigger = {
+            check_variable = { which = hsr_corp_view_loyalty value >= 20 }
+        }
+        localization_key = hsr_corp_loyalty_positive
+    }
+    text = {
+        trigger = {
+            check_variable = { which = hsr_corp_view_loyalty value >= -20 }
+        }
+        localization_key = hsr_corp_loyalty_neutral
+    }
+    text = {
+        trigger = {
+            check_variable = { which = hsr_corp_view_loyalty value >= -50 }
+        }
+        localization_key = hsr_corp_loyalty_low
+    }
+    text = {
+        localization_key = hsr_corp_loyalty_hostile
+    }
+}
+
+defined_text = {
+    name = GetHsrCorpPayment
+    random = no
+    text = {
+        trigger = {
+            check_variable = { which = hsr_corp_setup_payment value = 0 }
+        }
+        localization_key = hsr_corp_pay_trade
+    }
+    text = {
+        trigger = {
+            check_variable = { which = hsr_corp_setup_payment value = 1 }
+        }
+        localization_key = hsr_corp_pay_fiscal
+    }
+    text = {
+        localization_key = hsr_corp_none
+    }
+}
+
+defined_text = {
+    name = GetHsrCorpListed
+    random = no
+    text = {
+        trigger = {
+            check_variable = { which = hsr_corp_view_listed value = 0 }
+        }
+        localization_key = hsr_corp_listed_no
+    }
+    text = {
+        trigger = {
+            check_variable = { which = hsr_corp_view_listed value = 1 }
+        }
+        localization_key = hsr_corp_listed_yes
+    }
+    text = {
+        localization_key = hsr_corp_none
+    }
+}
+
+defined_text = {
+    name = GetHsrCorpProfitText
+    random = no
+    text = {
+        trigger = {
+            check_variable = { which = hsr_corp_view_last_profit value < 0 }
+        }
+        localization_key = hsr_corp_profit_negative
+    }
+    text = {
+        localization_key = hsr_corp_profit_positive
+    }
+}
+
+defined_text = {
+    name = GetHsrCorpPortfolioPnl
+    random = no
+    text = {
+        trigger = {
+            check_variable = { which = hsr_corp_portfolio_pnl value < 0 }
+        }
+        localization_key = hsr_corp_pnl_negative
+    }
+    text = {
+        localization_key = hsr_corp_pnl_positive
+    }
+}
+
+defined_text = {
+    name = GetHsrCorpSlotProfit1
+    random = no
+    text = {
+        trigger = {
+            check_variable = { which = hsr_corp_s1_last_profit value < 0 }
+        }
+        localization_key = hsr_corp_slot_profit_1_negative
+    }
+    text = {
+        localization_key = hsr_corp_slot_profit_1_positive
+    }
+}
+
+defined_text = {
+    name = GetHsrCorpSlotProfit2
+    random = no
+    text = {
+        trigger = {
+            check_variable = { which = hsr_corp_s2_last_profit value < 0 }
+        }
+        localization_key = hsr_corp_slot_profit_2_negative
+    }
+    text = {
+        localization_key = hsr_corp_slot_profit_2_positive
+    }
+}
+
+defined_text = {
+    name = GetHsrCorpSlotProfit3
+    random = no
+    text = {
+        trigger = {
+            check_variable = { which = hsr_corp_s3_last_profit value < 0 }
+        }
+        localization_key = hsr_corp_slot_profit_3_negative
+    }
+    text = {
+        localization_key = hsr_corp_slot_profit_3_positive
+    }
+}
+
+defined_text = {
+    name = GetHsrCorpViewControl
+    random = no
+    text = {
+        trigger = {
+            check_variable = { which = hsr_corp_selected value = 1 }
+            has_carrier_flag = hsr_corp_rights_suspended_s1
+        }
+        localization_key = hsr_corp_control_host
+    }
+    text = {
+        trigger = {
+            check_variable = { which = hsr_corp_selected value = 1 }
+            check_variable = { which = hsr_corp_s1_foreign_control value = 1 }
+        }
+        localization_key = hsr_corp_control_foreign
+    }
+    text = {
+        trigger = {
+            check_variable = { which = hsr_corp_selected value = 2 }
+            has_carrier_flag = hsr_corp_rights_suspended_s2
+        }
+        localization_key = hsr_corp_control_host
+    }
+    text = {
+        trigger = {
+            check_variable = { which = hsr_corp_selected value = 2 }
+            check_variable = { which = hsr_corp_s2_foreign_control value = 1 }
+        }
+        localization_key = hsr_corp_control_foreign
+    }
+    text = {
+        trigger = {
+            check_variable = { which = hsr_corp_selected value = 3 }
+            has_carrier_flag = hsr_corp_rights_suspended_s3
+        }
+        localization_key = hsr_corp_control_host
+    }
+    text = {
+        trigger = {
+            check_variable = { which = hsr_corp_selected value = 3 }
+            check_variable = { which = hsr_corp_s3_foreign_control value = 1 }
+        }
+        localization_key = hsr_corp_control_foreign
+    }
+    text = {
+        localization_key = hsr_corp_control_founder
+    }
+}
