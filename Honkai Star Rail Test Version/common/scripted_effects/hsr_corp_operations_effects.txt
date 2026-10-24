@@ -1,0 +1,219 @@
+# 货币战争公司系统 v1.4；独立扩展文件，中文说明见 docs/货币战争。
+# 状态：0空、1建设、2活动、3危机、4清算。未经完整游戏验收。
+# 升级由公司现金支付；创建时规模加成不随等级跨档重复增加。
+hsr_corp_upgrade = {
+    optimize_memory
+    hsr_corp_quote_operations = { SLOT = $SLOT$ }
+    if = {
+        limit = {
+            hsr_corp_can_manage_slot = { SLOT = $SLOT$ }
+            hsr_corp_slot_active = { SLOT = $SLOT$ }
+            check_variable = { which = hsr_corp_s$SLOT$_level value < 10 }
+            check_variable = { which = hsr_corp_s$SLOT$_cash value >= hsr_corp_upgrade_cost }
+            NOT = {
+                has_carrier_flag = hsr_corp_upgrade_s$SLOT$
+            }
+        }
+        subtract_variable = { which = hsr_corp_s$SLOT$_cash value = hsr_corp_upgrade_cost }
+        change_variable = { which = hsr_corp_s$SLOT$_level value = 1 }
+        set_timed_carrier_flag = { flag = hsr_corp_upgrade_s$SLOT$ days = 90 }
+        hsr_corp_refresh_jobs = yes
+    }
+}
+
+# 注资全额转入公司现金，不增加股票、不将注资当利润。
+hsr_corp_inject = {
+    optimize_memory
+    hsr_corp_resolve_parties = { SLOT = $SLOT$ }
+    if = {
+        limit = {
+            hsr_corp_can_visit = yes
+            hsr_corp_slot_active = { SLOT = $SLOT$ }
+            event_target:hsr_corp_actor = {
+                has_resource = { type = trade amount >= value:hsr_corp_inject_amount }
+            }
+        }
+        set_variable = { which = hsr_corp_charge value = value:hsr_corp_inject_amount }
+        multiply_variable = { which = hsr_corp_charge value = -1 }
+        event_target:hsr_corp_actor = {
+            add_resource = { trade = 1 mult = prev.hsr_corp_charge }
+        }
+        change_variable = { which = hsr_corp_s$SLOT$_cash value = value:hsr_corp_inject_amount }
+        change_variable = { which = hsr_corp_s$SLOT$_loyalty value = 5 }
+        if = {
+            limit = {
+                check_variable = { which = hsr_corp_s$SLOT$_loyalty value > 100 }
+            }
+            set_variable = { which = hsr_corp_s$SLOT$_loyalty value = 100 }
+        }
+    }
+}
+
+# 兼营只能向空产业槽投资；不提供免费撤销/改业，从而避免反复刷岗位。
+hsr_corp_expand = {
+    optimize_memory
+    hsr_corp_quote_operations = { SLOT = $SLOT$ }
+    if = {
+        limit = {
+            hsr_corp_can_manage_slot = { SLOT = $SLOT$ }
+            hsr_corp_slot_active = { SLOT = $SLOT$ }
+            check_variable = { which = hsr_corp_choose_industry value >= 1 }
+            check_variable = { which = hsr_corp_choose_industry value <= 9 }
+            NOT = {
+                check_variable = { which = hsr_corp_s$SLOT$_primary value = hsr_corp_choose_industry }
+            }
+            NOT = {
+                check_variable = { which = hsr_corp_s$SLOT$_secondary_1 value = hsr_corp_choose_industry }
+            }
+            NOT = {
+                check_variable = { which = hsr_corp_s$SLOT$_secondary_2 value = hsr_corp_choose_industry }
+            }
+        }
+        if = {
+            limit = {
+                check_variable = { which = hsr_corp_side_choice value = 1 }
+                check_variable = { which = hsr_corp_s$SLOT$_level value >= 4 }
+                check_variable = { which = hsr_corp_s$SLOT$_secondary_1 value = 0 }
+                check_variable = { which = hsr_corp_s$SLOT$_cash value >= hsr_corp_side_1_cost }
+            }
+            subtract_variable = { which = hsr_corp_s$SLOT$_cash value = hsr_corp_side_1_cost }
+            set_variable = { which = hsr_corp_s$SLOT$_secondary_1 value = hsr_corp_choose_industry }
+            hsr_corp_refresh_jobs = yes
+        }
+        if = {
+            limit = {
+                check_variable = { which = hsr_corp_side_choice value = 2 }
+                check_variable = { which = hsr_corp_s$SLOT$_level value >= 7 }
+                check_variable = { which = hsr_corp_s$SLOT$_secondary_2 value = 0 }
+                check_variable = { which = hsr_corp_s$SLOT$_cash value >= hsr_corp_side_2_cost }
+            }
+            subtract_variable = { which = hsr_corp_s$SLOT$_cash value = hsr_corp_side_2_cost }
+            set_variable = { which = hsr_corp_s$SLOT$_secondary_2 value = hsr_corp_choose_industry }
+            hsr_corp_refresh_jobs = yes
+        }
+    }
+}
+
+# 改革收费且有时限，改变体制与上市状态，不强制重分配现有股权。
+hsr_corp_reform = {
+    optimize_memory
+    hsr_corp_quote_operations = { SLOT = $SLOT$ }
+    if = {
+        limit = {
+            hsr_corp_can_manage_slot = { SLOT = $SLOT$ }
+            hsr_corp_slot_active = { SLOT = $SLOT$ }
+            check_variable = { which = hsr_corp_s$SLOT$_pending_regime value = 0 }
+            check_variable = { which = hsr_corp_s$SLOT$_cash value >= hsr_corp_reform_quote }
+            check_variable = { which = hsr_corp_setup_regime value >= 1 }
+            check_variable = { which = hsr_corp_setup_regime value <= 4 }
+            NOT = {
+                check_variable = { which = hsr_corp_s$SLOT$_regime value = hsr_corp_setup_regime }
+            }
+            OR = {
+                NOT = {
+                    check_variable = { which = hsr_corp_setup_regime value = 2 }
+                }
+                hsr_corp_cooperative_allowed = yes
+            }
+        }
+        set_variable = { which = hsr_corp_s$SLOT$_reform_paid value = hsr_corp_reform_quote }
+        subtract_variable = { which = hsr_corp_s$SLOT$_cash value = hsr_corp_s$SLOT$_reform_paid }
+        set_variable = { which = hsr_corp_s$SLOT$_pending_regime value = hsr_corp_setup_regime }
+        set_timed_carrier_flag = {
+            flag = hsr_corp_reform_s$SLOT$
+            days = event_target:hsr_corp_controller.value:hsr_corp_reform_days
+        }
+    }
+}
+
+# 改革完成时再验证思潮；资格丧失则全额退还改革费。
+hsr_corp_finish_reform = {
+    optimize_memory
+    if = {
+        limit = {
+            hsr_corp_slot_active = { SLOT = $SLOT$ }
+            check_variable = { which = hsr_corp_s$SLOT$_pending_regime value > 0 }
+            NOT = {
+                has_carrier_flag = hsr_corp_reform_s$SLOT$
+            }
+        }
+        if = {
+            limit = {
+                OR = {
+                    NOT = {
+                        check_variable = { which = hsr_corp_s$SLOT$_pending_regime value = 2 }
+                    }
+                    hsr_corp_cooperative_allowed = yes
+                }
+            }
+            set_variable = { which = hsr_corp_s$SLOT$_regime value = hsr_corp_s$SLOT$_pending_regime }
+            set_variable = { which = hsr_corp_s$SLOT$_listed value = 0 }
+            if = {
+                limit = {
+                    check_variable = { which = hsr_corp_s$SLOT$_regime value >= 3 }
+                }
+                set_variable = { which = hsr_corp_s$SLOT$_listed value = 1 }
+            }
+        }
+        else = {
+            change_variable = { which = hsr_corp_s$SLOT$_cash value = hsr_corp_s$SLOT$_reform_paid }
+        }
+        set_variable = { which = hsr_corp_s$SLOT$_pending_regime value = 0 }
+        set_variable = { which = hsr_corp_s$SLOT$_reform_paid value = 0 }
+        hsr_corp_refresh_jobs = yes
+    }
+}
+
+# 月度只处理到期、托管与经营危机，不作重复经营入账。
+hsr_corp_monthly_slot = {
+    optimize_memory
+    hsr_corp_finish_reform = { SLOT = $SLOT$ }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_s$SLOT$_offer_escrow value > 0 }
+            NOT = {
+                has_carrier_flag = hsr_corp_offer_s$SLOT$
+            }
+        }
+        hsr_corp_refund_offer = { SLOT = $SLOT$ }
+    }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_s$SLOT$_state value = 3 }
+        }
+        hsr_corp_queue_crisis = { SLOT = $SLOT$ }
+    }
+    if = {
+        limit = {
+            hsr_corp_slot_operating = { SLOT = $SLOT$ }
+        }
+        hsr_corp_resolve_parties = { SLOT = $SLOT$ }
+        # 只有确实使用过天灾援助的公司才扫描威胁；普通公司无需逐月遍历国境舰队。
+        event_target:hsr_corp_controller = {
+            if = {
+                limit = {
+                    has_country_flag = "hsr_corp_crisis_aid_s$SLOT$@event_target:hsr_corp_hq"
+                }
+                if = {
+                    limit = {
+                        NOT = {
+                            hsr_corp_defensive_emergency = yes
+                        }
+                    }
+                    remove_country_flag = "hsr_corp_crisis_aid_s$SLOT$@event_target:hsr_corp_hq"
+                }
+            }
+        }
+        if = {
+            limit = {
+                check_variable = { which = hsr_corp_s$SLOT$_rights_denied value = 1 }
+                NOT = {
+                    has_carrier_flag = hsr_corp_rights_suspended_s$SLOT$
+                }
+            }
+            set_variable = { which = hsr_corp_s$SLOT$_rights_denied value = 0 }
+            hsr_corp_recheck_control = { SLOT = $SLOT$ }
+        }
+        # 月度仅检查三个槽位的到期和资金托管状态，不按太空实体存在性注销公司。
+    }
+}

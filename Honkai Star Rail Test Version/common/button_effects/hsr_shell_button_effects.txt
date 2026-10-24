@@ -1,0 +1,4171 @@
+# 所有页状态存放FROM玩家国家；复用效果仅追加页面potential，不改变招募/收费。
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_tab_0_0
+    VISIBLE = "NOT = { check_variable = { which = hsr_shell_page value = 0 } }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_page value = 0 }"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_tab_0_1
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 0 }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_page value = 0 }"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_tab_1_0
+    VISIBLE = "NOT = { check_variable = { which = hsr_shell_page value = 1 } }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_page value = 1 }"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_tab_1_1
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 1 }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_page value = 1 }"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_tab_2_0
+    VISIBLE = "NOT = { check_variable = { which = hsr_shell_page value = 2 } }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_page value = 2 }"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_tab_2_1
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 2 }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_page value = 2 }"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_tab_3_0
+    VISIBLE = "NOT = { check_variable = { which = hsr_shell_page value = 3 } }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_page value = 3 }"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_tab_3_1
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 3 }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_page value = 3 }"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_display
+    NAME = hsr_shell_reuse_0
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 0 }"
+}
+
+hsr_shell_reuse_1 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 0 }
+        }
+        # HSR_SHELL_PAGE_END
+        always = yes
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        hidden_effect = {
+            event_target:global_event_country = {
+                change_variable = { which = XQTD_crisis_stage value = -1 }
+                if = {
+                    limit = {
+                        check_variable = { which = XQTD_crisis_stage value < 1 }
+                    }
+                    set_variable = { which = XQTD_crisis_stage value = 1 }
+                }
+                if = {
+                    limit = {
+                        check_variable = { which = XQTD_crisis_stage value > 5 }
+                    }
+                    set_variable = { which = XQTD_crisis_stage value = 1 }
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_2 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 0 }
+        }
+        # HSR_SHELL_PAGE_END
+        always = yes
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        hidden_effect = {
+            event_target:global_event_country = {
+                change_variable = { which = XQTD_crisis_stage value = 1 }
+                if = {
+                    limit = {
+                        check_variable = { which = XQTD_crisis_stage value > 5 }
+                    }
+                    set_variable = { which = XQTD_crisis_stage value = 1 }
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_3 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 0 }
+        }
+        # HSR_SHELL_PAGE_END
+        event_target:global_event_country = {
+            OR = {
+                check_variable = { which = XQTD_crisis_stage value = 1 }
+                check_variable = { which = XQTD_crisis_stage value = 2 }
+                check_variable = { which = XQTD_crisis_stage value = 3 }
+                check_variable = { which = XQTD_crisis_stage value = 4 }
+                check_variable = { which = XQTD_crisis_stage value = 5 }
+            }
+        }
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        if = {
+            limit = {
+                event_target:global_event_country = {
+                    OR = {
+                        check_variable = { which = XQTD_crisis_stage value = 1 }
+                        check_variable = { which = XQTD_crisis_stage value = 2 }
+                        check_variable = { which = XQTD_crisis_stage value = 3 }
+                        check_variable = { which = XQTD_crisis_stage value = 4 }
+                        check_variable = { which = XQTD_crisis_stage value = 5 }
+                    }
+                }
+            }
+            custom_tooltip = XQTD_crisis1_set1_effect_custom_tooltip
+        }
+        hidden_effect = {
+            event_target:global_event_country = {
+                set_variable = { which = XQTD_crisis_stage value = 0 }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_4 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 0 }
+        }
+        # HSR_SHELL_PAGE_END
+        event_target:global_event_country = {
+            OR = {
+                check_variable = { which = XQTD_crisis_stage value = 0 }
+            }
+        }
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        if = {
+            limit = {
+                event_target:global_event_country = {
+                    OR = {
+                        check_variable = { which = XQTD_crisis_stage value = 0 }
+                    }
+                }
+            }
+            custom_tooltip = XQTD_crisis1_set2_effect_custom_tooltip
+        }
+        hidden_effect = {
+            event_target:global_event_country = {
+                set_variable = { which = XQTD_crisis_stage value = 1 }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_5 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 0 }
+        }
+        # HSR_SHELL_PAGE_END
+        always = yes
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_huimie_text_effect_custom_tooltip
+    }
+}
+
+hsr_shell_reuse_6 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 0 }
+        }
+        # HSR_SHELL_PAGE_END
+        always = yes
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                if = {
+                    limit = {
+                        has_global_flag = allow_change_pc_shield_stage5
+                    }
+                    remove_global_flag = allow_change_pc_shield_stage5
+                    set_global_flag = allow_change_pc_shield_stage4
+                }
+                else_if = {
+                    limit = {
+                        has_global_flag = allow_change_pc_shield_stage4
+                    }
+                    remove_global_flag = allow_change_pc_shield_stage4
+                    set_global_flag = allow_change_pc_shield_stage3
+                }
+                else_if = {
+                    limit = {
+                        has_global_flag = allow_change_pc_shield_stage3
+                    }
+                    remove_global_flag = allow_change_pc_shield_stage3
+                    set_global_flag = allow_change_pc_shield_stage2
+                }
+                else_if = {
+                    limit = {
+                        has_global_flag = allow_change_pc_shield_stage2
+                    }
+                    remove_global_flag = allow_change_pc_shield_stage2
+                    set_global_flag = allow_change_pc_shield_stage1
+                }
+                else_if = {
+                    limit = {
+                        has_global_flag = allow_change_pc_shield_stage1
+                    }
+                    remove_global_flag = allow_change_pc_shield_stage1
+                    set_global_flag = allow_change_pc_shield_stage5
+                }
+                else_if = {
+                    limit = {
+                        has_global_flag = no_use_hsr_cosmos
+                    }
+                    remove_global_flag = no_use_hsr_cosmos
+                    set_global_flag = allow_change_pc_shield_stage1
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_7 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 0 }
+        }
+        # HSR_SHELL_PAGE_END
+        always = yes
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                if = {
+                    limit = {
+                        has_global_flag = allow_change_pc_shield_stage1
+                    }
+                    remove_global_flag = allow_change_pc_shield_stage1
+                    set_global_flag = allow_change_pc_shield_stage2
+                }
+                else_if = {
+                    limit = {
+                        has_global_flag = allow_change_pc_shield_stage2
+                    }
+                    remove_global_flag = allow_change_pc_shield_stage2
+                    set_global_flag = allow_change_pc_shield_stage3
+                }
+                else_if = {
+                    limit = {
+                        has_global_flag = allow_change_pc_shield_stage3
+                    }
+                    remove_global_flag = allow_change_pc_shield_stage3
+                    set_global_flag = allow_change_pc_shield_stage4
+                }
+                else_if = {
+                    limit = {
+                        has_global_flag = allow_change_pc_shield_stage4
+                    }
+                    remove_global_flag = allow_change_pc_shield_stage4
+                    set_global_flag = allow_change_pc_shield_stage5
+                }
+                else_if = {
+                    limit = {
+                        has_global_flag = allow_change_pc_shield_stage5
+                    }
+                    remove_global_flag = allow_change_pc_shield_stage5
+                    set_global_flag = allow_change_pc_shield_stage1
+                }
+                else_if = {
+                    limit = {
+                        has_global_flag = no_use_hsr_cosmos
+                    }
+                    remove_global_flag = no_use_hsr_cosmos
+                    set_global_flag = allow_change_pc_shield_stage1
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_8 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 0 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            not = {
+                has_global_flag = no_use_hsr_cosmos
+            }
+        }
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_cosmos_set1_effect_custom_tooltip
+        hidden_effect = {
+            from = {
+                remove_global_flag = allow_change_pc_shield_stage1
+                remove_global_flag = allow_change_pc_shield_stage2
+                remove_global_flag = allow_change_pc_shield_stage3
+                remove_global_flag = allow_change_pc_shield_stage4
+                remove_global_flag = allow_change_pc_shield_stage5
+                set_global_flag = no_use_hsr_cosmos
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_9 = {
+    #关
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 0 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            has_global_flag = no_use_hsr_cosmos
+        }
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_cosmos_set2_effect_custom_tooltip
+        hidden_effect = {
+            from = {
+                remove_global_flag = no_use_hsr_cosmos
+                set_global_flag = allow_change_pc_shield_stage3
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_10 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 0 }
+        }
+        # HSR_SHELL_PAGE_END
+        always = yes
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_cosmos_text_effect_custom_tooltip
+    }
+}
+
+hsr_shell_reuse_11 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 0 }
+        }
+        # HSR_SHELL_PAGE_END
+        always = yes
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                if = {
+                    limit = {
+                        has_global_flag = pc_shielded_red_1
+                    }
+                    remove_global_flag = pc_shielded_red_1
+                    set_global_flag = pc_shielded_red_2
+                }
+                else_if = {
+                    limit = {
+                        has_global_flag = pc_shielded_red_2
+                    }
+                    remove_global_flag = pc_shielded_red_2
+                    set_global_flag = pc_shielded_red_3
+                }
+                else_if = {
+                    limit = {
+                        has_global_flag = pc_shielded_red_3
+                    }
+                    remove_global_flag = pc_shielded_red_3
+                }
+                else_if = {
+                    limit = { }
+                    set_global_flag = pc_shielded_red_1
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_12 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 0 }
+        }
+        # HSR_SHELL_PAGE_END
+        always = yes
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                if = {
+                    limit = {
+                        has_global_flag = pc_shielded_red_3
+                    }
+                    remove_global_flag = pc_shielded_red_3
+                    set_global_flag = pc_shielded_red_2
+                }
+                else_if = {
+                    limit = {
+                        has_global_flag = pc_shielded_red_2
+                    }
+                    remove_global_flag = pc_shielded_red_2
+                    set_global_flag = pc_shielded_red_1
+                }
+                else_if = {
+                    limit = {
+                        has_global_flag = pc_shielded_red_1
+                    }
+                    remove_global_flag = pc_shielded_red_1
+                }
+                else_if = {
+                    limit = { }
+                    set_global_flag = pc_shielded_red_3
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_13 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 0 }
+        }
+        # HSR_SHELL_PAGE_END
+        always = yes
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_huimie_red_set_show_null
+    }
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_display
+    NAME = hsr_shell_reuse_14
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 0 } NOT = { has_country_flag = use_path }"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_display
+    NAME = hsr_shell_reuse_15
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 0 } has_country_flag = use_path"
+}
+
+hsr_shell_reuse_16 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 0 }
+        }
+        # HSR_SHELL_PAGE_END
+        always = yes
+    }
+    allow = {
+        custom_tooltip = {
+            fail_text = use_path
+            hidden_trigger = {
+                from = {
+                    not = {
+                        has_country_flag = use_path
+                    }
+                }
+            }
+        }
+    }
+    effect = {
+        custom_tooltip = hsr_path_set_effect
+        hidden_effect = {
+            from = {
+                set_country_flag = use_path
+            }
+            if = {
+                limit = {
+                    from = {
+                        not = {
+                            has_technology = tech_path_civic_1
+                        }
+                    }
+                }
+                from = {
+                    add_research_option = tech_path_civic_1
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_17 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 0 }
+        }
+        # HSR_SHELL_PAGE_END
+        always = yes
+    }
+    allow = {
+        custom_tooltip = {
+            fail_text = use_path
+            hidden_trigger = {
+                from = {
+                    has_country_flag = use_path
+                }
+            }
+        }
+    }
+    effect = {
+        custom_tooltip = hsr_path_set_effect
+        hidden_effect = {
+            from = {
+                remove_country_flag = use_path
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_18 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 0 }
+        }
+        # HSR_SHELL_PAGE_END
+        always = yes
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                country_event = {
+                    id = hsr_on.10000
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_19 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 0 }
+        }
+        # HSR_SHELL_PAGE_END
+        has_global_flag = hsr_credit_system_disabled
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_settings_credit_help
+        hidden_effect = {
+            remove_global_flag = hsr_credit_system_disabled
+        }
+    }
+}
+
+hsr_shell_reuse_20 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 0 }
+        }
+        # HSR_SHELL_PAGE_END
+        NOT = {
+            has_global_flag = hsr_credit_system_disabled
+        }
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_settings_credit_help
+        hidden_effect = {
+            remove_global_flag = hsr_credit_system_disabled
+        }
+    }
+}
+
+hsr_shell_reuse_21 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 0 }
+        }
+        # HSR_SHELL_PAGE_END
+        NOT = {
+            has_global_flag = hsr_credit_system_disabled
+        }
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_settings_credit_help
+        hidden_effect = {
+            set_global_flag = hsr_credit_system_disabled
+        }
+    }
+}
+
+hsr_shell_reuse_22 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 0 }
+        }
+        # HSR_SHELL_PAGE_END
+        has_global_flag = hsr_credit_system_disabled
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_settings_credit_help
+        hidden_effect = {
+            set_global_flag = hsr_credit_system_disabled
+        }
+    }
+}
+
+hsr_shell_reuse_23 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 0 }
+        }
+        # HSR_SHELL_PAGE_END
+        has_global_flag = hsr_currency_war_disabled
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_settings_currency_help
+        hidden_effect = {
+            remove_global_flag = hsr_currency_war_disabled
+            every_country = {
+                every_owned_colony = {
+                    carrier = {
+                        if = {
+                            limit = {
+                                has_carrier_flag = hsr_corp_has_records
+                            }
+                            hsr_corp_refresh_jobs = yes
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_24 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 0 }
+        }
+        # HSR_SHELL_PAGE_END
+        NOT = {
+            has_global_flag = hsr_currency_war_disabled
+        }
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_settings_currency_help
+        hidden_effect = {
+            remove_global_flag = hsr_currency_war_disabled
+            every_country = {
+                every_owned_colony = {
+                    carrier = {
+                        if = {
+                            limit = {
+                                has_carrier_flag = hsr_corp_has_records
+                            }
+                            hsr_corp_refresh_jobs = yes
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_25 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 0 }
+        }
+        # HSR_SHELL_PAGE_END
+        NOT = {
+            has_global_flag = hsr_currency_war_disabled
+        }
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_settings_currency_help
+        hidden_effect = {
+            set_global_flag = hsr_currency_war_disabled
+            every_country = {
+                every_owned_colony = {
+                    carrier = {
+                        if = {
+                            limit = {
+                                has_carrier_flag = hsr_corp_has_records
+                            }
+                            hsr_corp_refresh_jobs = yes
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_26 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 0 }
+        }
+        # HSR_SHELL_PAGE_END
+        has_global_flag = hsr_currency_war_disabled
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_settings_currency_help
+        hidden_effect = {
+            set_global_flag = hsr_currency_war_disabled
+            every_country = {
+                every_owned_colony = {
+                    carrier = {
+                        if = {
+                            limit = {
+                                has_carrier_flag = hsr_corp_has_records
+                            }
+                            hsr_corp_refresh_jobs = yes
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_settings_category_0_0
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 1 } NOT = { check_variable = { which = hsr_shell_settings_section value = 0 } }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_settings_section value = 0 }"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_settings_category_0_1
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 1 } check_variable = { which = hsr_shell_settings_section value = 0 }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_settings_section value = 0 }"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_settings_category_1_0
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 1 } NOT = { check_variable = { which = hsr_shell_settings_section value = 1 } }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_settings_section value = 1 }"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_settings_category_1_1
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 1 } check_variable = { which = hsr_shell_settings_section value = 1 }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_settings_section value = 1 }"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_settings_category_2_0
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 1 } NOT = { check_variable = { which = hsr_shell_settings_section value = 2 } }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_settings_section value = 2 }"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_settings_category_2_1
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 1 } check_variable = { which = hsr_shell_settings_section value = 2 }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_settings_section value = 2 }"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_settings_category_3_0
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 1 } NOT = { check_variable = { which = hsr_shell_settings_section value = 3 } }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_settings_section value = 3 }"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_settings_category_3_1
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 1 } check_variable = { which = hsr_shell_settings_section value = 3 }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_settings_section value = 3 }"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_settings_category_4_0
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 1 } NOT = { check_variable = { which = hsr_shell_settings_section value = 4 } }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_settings_section value = 4 }"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_settings_category_4_1
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 1 } check_variable = { which = hsr_shell_settings_section value = 4 }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_settings_section value = 4 }"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_display
+    NAME = hsr_shell_reuse_27
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 1 }"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_display
+    NAME = hsr_shell_reuse_28
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 1 } check_variable = { which = hsr_shell_settings_section value = 0 }"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_display
+    NAME = hsr_shell_reuse_29
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 1 } check_variable = { which = hsr_shell_settings_section value = 1 }"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_display
+    NAME = hsr_shell_reuse_30
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 1 } check_variable = { which = hsr_shell_settings_section value = 2 }"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_display
+    NAME = hsr_shell_reuse_31
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 1 } check_variable = { which = hsr_shell_settings_section value = 3 }"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_display
+    NAME = hsr_shell_reuse_32
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 1 } check_variable = { which = hsr_shell_settings_section value = 4 }"
+}
+
+hsr_shell_reuse_33 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 1 }
+            check_variable = { which = hsr_shell_settings_section value = 1 }
+        }
+        # HSR_SHELL_PAGE_END
+        always = yes
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        hidden_effect = {
+            event_target:global_event_country = {
+                change_variable = { which = XQTD_crisis_stage value = -1 }
+                if = {
+                    limit = {
+                        check_variable = { which = XQTD_crisis_stage value < 1 }
+                    }
+                    set_variable = { which = XQTD_crisis_stage value = 1 }
+                }
+                if = {
+                    limit = {
+                        check_variable = { which = XQTD_crisis_stage value > 5 }
+                    }
+                    set_variable = { which = XQTD_crisis_stage value = 1 }
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_34 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 1 }
+            check_variable = { which = hsr_shell_settings_section value = 1 }
+        }
+        # HSR_SHELL_PAGE_END
+        always = yes
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        hidden_effect = {
+            event_target:global_event_country = {
+                change_variable = { which = XQTD_crisis_stage value = 1 }
+                if = {
+                    limit = {
+                        check_variable = { which = XQTD_crisis_stage value > 5 }
+                    }
+                    set_variable = { which = XQTD_crisis_stage value = 1 }
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_35 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 1 }
+            check_variable = { which = hsr_shell_settings_section value = 1 }
+        }
+        # HSR_SHELL_PAGE_END
+        event_target:global_event_country = {
+            OR = {
+                check_variable = { which = XQTD_crisis_stage value = 1 }
+                check_variable = { which = XQTD_crisis_stage value = 2 }
+                check_variable = { which = XQTD_crisis_stage value = 3 }
+                check_variable = { which = XQTD_crisis_stage value = 4 }
+                check_variable = { which = XQTD_crisis_stage value = 5 }
+            }
+        }
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        if = {
+            limit = {
+                event_target:global_event_country = {
+                    OR = {
+                        check_variable = { which = XQTD_crisis_stage value = 1 }
+                        check_variable = { which = XQTD_crisis_stage value = 2 }
+                        check_variable = { which = XQTD_crisis_stage value = 3 }
+                        check_variable = { which = XQTD_crisis_stage value = 4 }
+                        check_variable = { which = XQTD_crisis_stage value = 5 }
+                    }
+                }
+            }
+            custom_tooltip = XQTD_crisis1_set1_effect_custom_tooltip
+        }
+        hidden_effect = {
+            event_target:global_event_country = {
+                set_variable = { which = XQTD_crisis_stage value = 0 }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_36 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 1 }
+            check_variable = { which = hsr_shell_settings_section value = 1 }
+        }
+        # HSR_SHELL_PAGE_END
+        event_target:global_event_country = {
+            OR = {
+                check_variable = { which = XQTD_crisis_stage value = 0 }
+            }
+        }
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        if = {
+            limit = {
+                event_target:global_event_country = {
+                    OR = {
+                        check_variable = { which = XQTD_crisis_stage value = 0 }
+                    }
+                }
+            }
+            custom_tooltip = XQTD_crisis1_set2_effect_custom_tooltip
+        }
+        hidden_effect = {
+            event_target:global_event_country = {
+                set_variable = { which = XQTD_crisis_stage value = 1 }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_37 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 1 }
+            check_variable = { which = hsr_shell_settings_section value = 1 }
+        }
+        # HSR_SHELL_PAGE_END
+        always = yes
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_huimie_text_effect_custom_tooltip
+    }
+}
+
+hsr_shell_reuse_38 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 1 }
+            check_variable = { which = hsr_shell_settings_section value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        always = yes
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                if = {
+                    limit = {
+                        has_global_flag = allow_change_pc_shield_stage5
+                    }
+                    remove_global_flag = allow_change_pc_shield_stage5
+                    set_global_flag = allow_change_pc_shield_stage4
+                }
+                else_if = {
+                    limit = {
+                        has_global_flag = allow_change_pc_shield_stage4
+                    }
+                    remove_global_flag = allow_change_pc_shield_stage4
+                    set_global_flag = allow_change_pc_shield_stage3
+                }
+                else_if = {
+                    limit = {
+                        has_global_flag = allow_change_pc_shield_stage3
+                    }
+                    remove_global_flag = allow_change_pc_shield_stage3
+                    set_global_flag = allow_change_pc_shield_stage2
+                }
+                else_if = {
+                    limit = {
+                        has_global_flag = allow_change_pc_shield_stage2
+                    }
+                    remove_global_flag = allow_change_pc_shield_stage2
+                    set_global_flag = allow_change_pc_shield_stage1
+                }
+                else_if = {
+                    limit = {
+                        has_global_flag = allow_change_pc_shield_stage1
+                    }
+                    remove_global_flag = allow_change_pc_shield_stage1
+                    set_global_flag = allow_change_pc_shield_stage5
+                }
+                else_if = {
+                    limit = {
+                        has_global_flag = no_use_hsr_cosmos
+                    }
+                    remove_global_flag = no_use_hsr_cosmos
+                    set_global_flag = allow_change_pc_shield_stage1
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_39 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 1 }
+            check_variable = { which = hsr_shell_settings_section value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        always = yes
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                if = {
+                    limit = {
+                        has_global_flag = allow_change_pc_shield_stage1
+                    }
+                    remove_global_flag = allow_change_pc_shield_stage1
+                    set_global_flag = allow_change_pc_shield_stage2
+                }
+                else_if = {
+                    limit = {
+                        has_global_flag = allow_change_pc_shield_stage2
+                    }
+                    remove_global_flag = allow_change_pc_shield_stage2
+                    set_global_flag = allow_change_pc_shield_stage3
+                }
+                else_if = {
+                    limit = {
+                        has_global_flag = allow_change_pc_shield_stage3
+                    }
+                    remove_global_flag = allow_change_pc_shield_stage3
+                    set_global_flag = allow_change_pc_shield_stage4
+                }
+                else_if = {
+                    limit = {
+                        has_global_flag = allow_change_pc_shield_stage4
+                    }
+                    remove_global_flag = allow_change_pc_shield_stage4
+                    set_global_flag = allow_change_pc_shield_stage5
+                }
+                else_if = {
+                    limit = {
+                        has_global_flag = allow_change_pc_shield_stage5
+                    }
+                    remove_global_flag = allow_change_pc_shield_stage5
+                    set_global_flag = allow_change_pc_shield_stage1
+                }
+                else_if = {
+                    limit = {
+                        has_global_flag = no_use_hsr_cosmos
+                    }
+                    remove_global_flag = no_use_hsr_cosmos
+                    set_global_flag = allow_change_pc_shield_stage1
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_40 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 1 }
+            check_variable = { which = hsr_shell_settings_section value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            not = {
+                has_global_flag = no_use_hsr_cosmos
+            }
+        }
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_cosmos_set1_effect_custom_tooltip
+        hidden_effect = {
+            from = {
+                remove_global_flag = allow_change_pc_shield_stage1
+                remove_global_flag = allow_change_pc_shield_stage2
+                remove_global_flag = allow_change_pc_shield_stage3
+                remove_global_flag = allow_change_pc_shield_stage4
+                remove_global_flag = allow_change_pc_shield_stage5
+                set_global_flag = no_use_hsr_cosmos
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_41 = {
+    #关
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 1 }
+            check_variable = { which = hsr_shell_settings_section value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            has_global_flag = no_use_hsr_cosmos
+        }
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_cosmos_set2_effect_custom_tooltip
+        hidden_effect = {
+            from = {
+                remove_global_flag = no_use_hsr_cosmos
+                set_global_flag = allow_change_pc_shield_stage3
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_42 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 1 }
+            check_variable = { which = hsr_shell_settings_section value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        always = yes
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_cosmos_text_effect_custom_tooltip
+    }
+}
+
+hsr_shell_reuse_43 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 1 }
+            check_variable = { which = hsr_shell_settings_section value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        always = yes
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                if = {
+                    limit = {
+                        has_global_flag = pc_shielded_red_1
+                    }
+                    remove_global_flag = pc_shielded_red_1
+                    set_global_flag = pc_shielded_red_2
+                }
+                else_if = {
+                    limit = {
+                        has_global_flag = pc_shielded_red_2
+                    }
+                    remove_global_flag = pc_shielded_red_2
+                    set_global_flag = pc_shielded_red_3
+                }
+                else_if = {
+                    limit = {
+                        has_global_flag = pc_shielded_red_3
+                    }
+                    remove_global_flag = pc_shielded_red_3
+                }
+                else_if = {
+                    limit = { }
+                    set_global_flag = pc_shielded_red_1
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_44 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 1 }
+            check_variable = { which = hsr_shell_settings_section value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        always = yes
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                if = {
+                    limit = {
+                        has_global_flag = pc_shielded_red_3
+                    }
+                    remove_global_flag = pc_shielded_red_3
+                    set_global_flag = pc_shielded_red_2
+                }
+                else_if = {
+                    limit = {
+                        has_global_flag = pc_shielded_red_2
+                    }
+                    remove_global_flag = pc_shielded_red_2
+                    set_global_flag = pc_shielded_red_1
+                }
+                else_if = {
+                    limit = {
+                        has_global_flag = pc_shielded_red_1
+                    }
+                    remove_global_flag = pc_shielded_red_1
+                }
+                else_if = {
+                    limit = { }
+                    set_global_flag = pc_shielded_red_3
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_45 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 1 }
+            check_variable = { which = hsr_shell_settings_section value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        always = yes
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_huimie_red_set_show_null
+    }
+}
+
+hsr_shell_reuse_46 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 1 }
+            check_variable = { which = hsr_shell_settings_section value = 0 }
+        }
+        # HSR_SHELL_PAGE_END
+        always = yes
+    }
+    allow = {
+        custom_tooltip = {
+            fail_text = use_path
+            hidden_trigger = {
+                from = {
+                    not = {
+                        has_country_flag = use_path
+                    }
+                }
+            }
+        }
+    }
+    effect = {
+        custom_tooltip = hsr_path_set_effect
+        hidden_effect = {
+            from = {
+                set_country_flag = use_path
+            }
+            if = {
+                limit = {
+                    from = {
+                        not = {
+                            has_technology = tech_path_civic_1
+                        }
+                    }
+                }
+                from = {
+                    add_research_option = tech_path_civic_1
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_47 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 1 }
+            check_variable = { which = hsr_shell_settings_section value = 0 }
+        }
+        # HSR_SHELL_PAGE_END
+        always = yes
+    }
+    allow = {
+        custom_tooltip = {
+            fail_text = use_path
+            hidden_trigger = {
+                from = {
+                    has_country_flag = use_path
+                }
+            }
+        }
+    }
+    effect = {
+        custom_tooltip = hsr_path_set_effect
+        hidden_effect = {
+            from = {
+                remove_country_flag = use_path
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_48 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 1 }
+            check_variable = { which = hsr_shell_settings_section value = 0 }
+        }
+        # HSR_SHELL_PAGE_END
+        has_global_flag = hsr_credit_system_disabled
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_settings_credit_help
+        hidden_effect = {
+            remove_global_flag = hsr_credit_system_disabled
+        }
+    }
+}
+
+hsr_shell_reuse_49 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 1 }
+            check_variable = { which = hsr_shell_settings_section value = 0 }
+        }
+        # HSR_SHELL_PAGE_END
+        NOT = {
+            has_global_flag = hsr_credit_system_disabled
+        }
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_settings_credit_help
+        hidden_effect = {
+            remove_global_flag = hsr_credit_system_disabled
+        }
+    }
+}
+
+hsr_shell_reuse_50 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 1 }
+            check_variable = { which = hsr_shell_settings_section value = 0 }
+        }
+        # HSR_SHELL_PAGE_END
+        NOT = {
+            has_global_flag = hsr_credit_system_disabled
+        }
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_settings_credit_help
+        hidden_effect = {
+            set_global_flag = hsr_credit_system_disabled
+        }
+    }
+}
+
+hsr_shell_reuse_51 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 1 }
+            check_variable = { which = hsr_shell_settings_section value = 0 }
+        }
+        # HSR_SHELL_PAGE_END
+        has_global_flag = hsr_credit_system_disabled
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_settings_credit_help
+        hidden_effect = {
+            set_global_flag = hsr_credit_system_disabled
+        }
+    }
+}
+
+hsr_shell_reuse_52 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 1 }
+            check_variable = { which = hsr_shell_settings_section value = 0 }
+        }
+        # HSR_SHELL_PAGE_END
+        has_global_flag = hsr_currency_war_disabled
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_settings_currency_help
+        hidden_effect = {
+            remove_global_flag = hsr_currency_war_disabled
+            every_country = {
+                every_owned_colony = {
+                    carrier = {
+                        if = {
+                            limit = {
+                                has_carrier_flag = hsr_corp_has_records
+                            }
+                            hsr_corp_refresh_jobs = yes
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_53 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 1 }
+            check_variable = { which = hsr_shell_settings_section value = 0 }
+        }
+        # HSR_SHELL_PAGE_END
+        NOT = {
+            has_global_flag = hsr_currency_war_disabled
+        }
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_settings_currency_help
+        hidden_effect = {
+            remove_global_flag = hsr_currency_war_disabled
+            every_country = {
+                every_owned_colony = {
+                    carrier = {
+                        if = {
+                            limit = {
+                                has_carrier_flag = hsr_corp_has_records
+                            }
+                            hsr_corp_refresh_jobs = yes
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_54 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 1 }
+            check_variable = { which = hsr_shell_settings_section value = 0 }
+        }
+        # HSR_SHELL_PAGE_END
+        NOT = {
+            has_global_flag = hsr_currency_war_disabled
+        }
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_settings_currency_help
+        hidden_effect = {
+            set_global_flag = hsr_currency_war_disabled
+            every_country = {
+                every_owned_colony = {
+                    carrier = {
+                        if = {
+                            limit = {
+                                has_carrier_flag = hsr_corp_has_records
+                            }
+                            hsr_corp_refresh_jobs = yes
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_55 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 1 }
+            check_variable = { which = hsr_shell_settings_section value = 0 }
+        }
+        # HSR_SHELL_PAGE_END
+        has_global_flag = hsr_currency_war_disabled
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_settings_currency_help
+        hidden_effect = {
+            set_global_flag = hsr_currency_war_disabled
+            every_country = {
+                every_owned_colony = {
+                    carrier = {
+                        if = {
+                            limit = {
+                                has_carrier_flag = hsr_corp_has_records
+                            }
+                            hsr_corp_refresh_jobs = yes
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_56 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 1 }
+            check_variable = { which = hsr_shell_settings_section value = 3 }
+        }
+        # HSR_SHELL_PAGE_END
+        always = yes
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                country_event = {
+                    id = hsr_on.10000
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_57 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 1 }
+            check_variable = { which = hsr_shell_settings_section value = 4 }
+        }
+        # HSR_SHELL_PAGE_END
+        always = yes
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_thank_you_list_custom_tooltip
+    }
+}
+
+hsr_shell_reuse_58 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 1 }
+            check_variable = { which = hsr_shell_settings_section value = 4 }
+        }
+        # HSR_SHELL_PAGE_END
+        always = yes
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = XQTT_right_side_bar2_custom_tooltip
+    }
+}
+
+hsr_shell_reuse_59 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 1 }
+            check_variable = { which = hsr_shell_settings_section value = 4 }
+        }
+        # HSR_SHELL_PAGE_END
+        always = yes
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = XQTT_right_side_bar1_custom_tooltip
+    }
+}
+
+hsr_shell_reuse_60 = {
+    allow = { }
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+            NOT = {
+                check_variable = { which = hsr_star_leader_change value = 1 }
+            }
+        }
+        # HSR_SHELL_PAGE_END
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                set_variable = { which = hsr_star_leader_change value = 1 }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_61 = {
+    allow = { }
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+            check_variable = { which = hsr_star_leader_change value = 1 }
+        }
+        # HSR_SHELL_PAGE_END
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                set_variable = { which = hsr_star_leader_change value = 1 }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_62 = {
+    allow = { }
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+            NOT = {
+                check_variable = { which = hsr_star_leader_change value = 2 }
+            }
+        }
+        # HSR_SHELL_PAGE_END
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                set_variable = { which = hsr_star_leader_change value = 2 }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_63 = {
+    allow = { }
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+            check_variable = { which = hsr_star_leader_change value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                set_variable = { which = hsr_star_leader_change value = 2 }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_64 = {
+    allow = { }
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+            NOT = {
+                check_variable = { which = hsr_star_leader_change value = 3 }
+            }
+        }
+        # HSR_SHELL_PAGE_END
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                set_variable = { which = hsr_star_leader_change value = 3 }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_65 = {
+    allow = { }
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+            check_variable = { which = hsr_star_leader_change value = 3 }
+        }
+        # HSR_SHELL_PAGE_END
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                set_variable = { which = hsr_star_leader_change value = 3 }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_66 = {
+    allow = { }
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+            NOT = {
+                check_variable = { which = hsr_star_leader_change value = 4 }
+            }
+        }
+        # HSR_SHELL_PAGE_END
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                set_variable = { which = hsr_star_leader_change value = 4 }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_67 = {
+    allow = { }
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+            check_variable = { which = hsr_star_leader_change value = 4 }
+        }
+        # HSR_SHELL_PAGE_END
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                set_variable = { which = hsr_star_leader_change value = 4 }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_68 = {
+    allow = { }
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+            NOT = {
+                check_variable = { which = hsr_star_leader_change value = 5 }
+            }
+        }
+        # HSR_SHELL_PAGE_END
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                set_variable = { which = hsr_star_leader_change value = 5 }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_69 = {
+    allow = { }
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+            check_variable = { which = hsr_star_leader_change value = 5 }
+        }
+        # HSR_SHELL_PAGE_END
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                set_variable = { which = hsr_star_leader_change value = 5 }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_70 = {
+    allow = { }
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+            NOT = {
+                check_variable = { which = hsr_star_leader_change value = 6 }
+            }
+        }
+        # HSR_SHELL_PAGE_END
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                set_variable = { which = hsr_star_leader_change value = 6 }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_71 = {
+    allow = { }
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+            check_variable = { which = hsr_star_leader_change value = 6 }
+        }
+        # HSR_SHELL_PAGE_END
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                set_variable = { which = hsr_star_leader_change value = 6 }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_72 = {
+    allow = { }
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+            NOT = {
+                check_variable = { which = hsr_star_leader_change value = 8 }
+            }
+        }
+        # HSR_SHELL_PAGE_END
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                set_variable = { which = hsr_star_leader_change value = 8 }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_73 = {
+    allow = { }
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+            check_variable = { which = hsr_star_leader_change value = 8 }
+        }
+        # HSR_SHELL_PAGE_END
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                set_variable = { which = hsr_star_leader_change value = 8 }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_74 = {
+    allow = { }
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+            NOT = {
+                check_variable = { which = hsr_star_leader_change value = 7 }
+            }
+        }
+        # HSR_SHELL_PAGE_END
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                set_variable = { which = hsr_star_leader_change value = 7 }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_75 = {
+    allow = { }
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+            check_variable = { which = hsr_star_leader_change value = 7 }
+        }
+        # HSR_SHELL_PAGE_END
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                set_variable = { which = hsr_star_leader_change value = 7 }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_76 = {
+    allow = { }
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+            NOT = {
+                check_variable = { which = hsr_star_leader_change value = 9 }
+            }
+        }
+        # HSR_SHELL_PAGE_END
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                set_variable = { which = hsr_star_leader_change value = 9 }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_77 = {
+    allow = { }
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+            check_variable = { which = hsr_star_leader_change value = 9 }
+        }
+        # HSR_SHELL_PAGE_END
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                set_variable = { which = hsr_star_leader_change value = 9 }
+            }
+        }
+    }
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_display
+    NAME = hsr_shell_reuse_78
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 2 }"
+}
+
+hsr_shell_reuse_79 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 1 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_ui.2.a.desc
+        hidden_effect = {
+            from = {
+                country_event = {
+                    id = hsr_ui.2
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_80 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 1 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_ui.1.a.desc
+        hidden_effect = {
+            from = {
+                country_event = {
+                    id = hsr_ui.1
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_81 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 1 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_ui.3.a.desc
+        hidden_effect = {
+            from = {
+                country_event = {
+                    id = hsr_ui.3
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_82 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 1 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_ui.4.a.desc
+        hidden_effect = {
+            from = {
+                country_event = {
+                    id = hsr_ui.4
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_83 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 1 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_ui.5.a.desc
+        hidden_effect = {
+            from = {
+                country_event = {
+                    id = hsr_ui.5
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_84 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 1 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_ui.6.a.desc
+        hidden_effect = {
+            from = {
+                country_event = {
+                    id = hsr_ui.6
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_85 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 2 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_86 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 2 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_87 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 2 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_88 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 2 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_89 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 2 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_90 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 2 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_91 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 2 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_92 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 2 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_93 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 2 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_94 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 2 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_95 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 2 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_96 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 3 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_97 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 3 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_98 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 3 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_99 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 3 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_100 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 3 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_101 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 3 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_102 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 3 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_103 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 3 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_104 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 3 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_105 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 3 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_106 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 3 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_107 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 3 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_108 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 3 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_109 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 3 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_110 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 3 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_111 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 3 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_112 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 3 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_113 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 3 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_114 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 3 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_115 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 3 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_116 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 4 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_ui.38.a.desc
+        hidden_effect = {
+            from = {
+                country_event = {
+                    id = hsr_ui.38
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_117 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 4 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_ui.39.a.desc
+        hidden_effect = {
+            from = {
+                country_event = {
+                    id = hsr_ui.39
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_118 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 4 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_ui.40.a.desc
+        hidden_effect = {
+            from = {
+                country_event = {
+                    id = hsr_ui.40
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_119 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 4 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_ui.41.a.desc
+        hidden_effect = {
+            from = {
+                country_event = {
+                    id = hsr_ui.41
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_120 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 4 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_ui.42.a.desc
+        hidden_effect = {
+            from = {
+                country_event = {
+                    id = hsr_ui.42
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_121 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 5 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_122 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 5 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_123 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 5 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_124 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 5 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_125 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 5 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_126 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 5 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_127 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 5 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_128 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 5 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_129 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 5 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_130 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 5 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_131 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 5 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_132 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 6 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_ui.54.a.desc
+        hidden_effect = {
+            from = {
+                country_event = {
+                    id = hsr_ui.54
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_133 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 6 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_ui.55.a.desc
+        hidden_effect = {
+            from = {
+                country_event = {
+                    id = hsr_ui.55
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_134 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 6 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_ui.56.a.desc
+        hidden_effect = {
+            from = {
+                country_event = {
+                    id = hsr_ui.56
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_135 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 6 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_ui.57.a.desc
+        hidden_effect = {
+            from = {
+                country_event = {
+                    id = hsr_ui.57
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_136 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 8 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_ui.65.a.desc
+        hidden_effect = {
+            from = {
+                country_event = {
+                    id = hsr_ui.65
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_137 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 8 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_ui.68.a.desc
+        hidden_effect = {
+            from = {
+                country_event = {
+                    id = hsr_ui.68
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_138 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 8 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_ui.67.a.desc
+        hidden_effect = {
+            from = {
+                country_event = {
+                    id = hsr_ui.67
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_139 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 8 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_ui.66.a.desc
+        hidden_effect = {
+            from = {
+                country_event = {
+                    id = hsr_ui.66
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_140 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 8 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_ui.69.a.desc
+        hidden_effect = {
+            from = {
+                country_event = {
+                    id = hsr_ui.69
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_141 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 8 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_ui.70.a.desc
+        hidden_effect = {
+            from = {
+                country_event = {
+                    id = hsr_ui.70
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_142 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 8 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_ui.71.a.desc
+        hidden_effect = {
+            from = {
+                country_event = {
+                    id = hsr_ui.71
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_143 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 8 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_ui.72.a.desc
+        hidden_effect = {
+            from = {
+                country_event = {
+                    id = hsr_ui.72
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_144 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 8 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_ui.73.a.desc
+        hidden_effect = {
+            from = {
+                country_event = {
+                    id = hsr_ui.73
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_145 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 8 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_ui.74.a.desc
+        hidden_effect = {
+            from = {
+                country_event = {
+                    id = hsr_ui.74
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_146 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 8 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_ui.75.a.desc
+        hidden_effect = {
+            from = {
+                country_event = {
+                    id = hsr_ui.75
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_147 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 7 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_ui.1001.a.desc
+        hidden_effect = {
+            from = {
+                country_event = {
+                    id = hsr_ui.1001
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_148 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 7 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_ui.1002.a.desc
+        hidden_effect = {
+            from = {
+                country_event = {
+                    id = hsr_ui.1002
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_149 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 7 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_ui.1003.a.desc
+        hidden_effect = {
+            from = {
+                country_event = {
+                    id = hsr_ui.1003
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_150 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 9 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_ui.58.a.desc
+        hidden_effect = {
+            from = {
+                country_event = {
+                    id = hsr_ui.58
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_151 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 9 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_ui.59.a.desc
+        hidden_effect = {
+            from = {
+                country_event = {
+                    id = hsr_ui.59
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_152 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 9 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_ui.60.a.desc
+        hidden_effect = {
+            from = {
+                country_event = {
+                    id = hsr_ui.60
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_153 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 9 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_ui.61.a.desc
+        hidden_effect = {
+            from = {
+                country_event = {
+                    id = hsr_ui.61
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_154 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 9 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_ui.62.a.desc
+        hidden_effect = {
+            from = {
+                country_event = {
+                    id = hsr_ui.62
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_155 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 9 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_ui.64.a.desc
+        hidden_effect = {
+            from = {
+                country_event = {
+                    id = hsr_ui.64
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_156 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 9 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_157 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 9 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_158 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 9 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_159 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 9 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_160 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 9 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_161 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 9 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_162 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 9 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+hsr_shell_reuse_163 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 2 }
+        }
+        # HSR_SHELL_PAGE_END
+        from = {
+            check_variable = { which = hsr_star_leader_change value = 9 }
+        }
+    }
+    allow = { }
+    effect = {
+        custom_tooltip = hsr_no_write
+    }
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_display
+    NAME = hsr_shell_reuse_164
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 3 }"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_exchange_resource_1_0
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 3 } NOT = { check_variable = { which = hsr_shell_shop_resource value = 1 } }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_shop_resource value = 1 } hsr_shell_shop_refresh = yes"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_exchange_resource_1_1
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 3 } check_variable = { which = hsr_shell_shop_resource value = 1 }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_shop_resource value = 1 } hsr_shell_shop_refresh = yes"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_exchange_resource_2_0
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 3 } NOT = { check_variable = { which = hsr_shell_shop_resource value = 2 } }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_shop_resource value = 2 } hsr_shell_shop_refresh = yes"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_exchange_resource_2_1
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 3 } check_variable = { which = hsr_shell_shop_resource value = 2 }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_shop_resource value = 2 } hsr_shell_shop_refresh = yes"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_exchange_resource_3_0
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 3 } NOT = { check_variable = { which = hsr_shell_shop_resource value = 3 } }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_shop_resource value = 3 } hsr_shell_shop_refresh = yes"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_exchange_resource_3_1
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 3 } check_variable = { which = hsr_shell_shop_resource value = 3 }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_shop_resource value = 3 } hsr_shell_shop_refresh = yes"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_exchange_resource_4_0
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 3 } NOT = { check_variable = { which = hsr_shell_shop_resource value = 4 } }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_shop_resource value = 4 } hsr_shell_shop_refresh = yes"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_exchange_resource_4_1
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 3 } check_variable = { which = hsr_shell_shop_resource value = 4 }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_shop_resource value = 4 } hsr_shell_shop_refresh = yes"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_exchange_resource_5_0
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 3 } NOT = { check_variable = { which = hsr_shell_shop_resource value = 5 } }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_shop_resource value = 5 } hsr_shell_shop_refresh = yes"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_exchange_resource_5_1
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 3 } check_variable = { which = hsr_shell_shop_resource value = 5 }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_shop_resource value = 5 } hsr_shell_shop_refresh = yes"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_exchange_resource_6_0
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 3 } NOT = { check_variable = { which = hsr_shell_shop_resource value = 6 } }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_shop_resource value = 6 } hsr_shell_shop_refresh = yes"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_exchange_resource_6_1
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 3 } check_variable = { which = hsr_shell_shop_resource value = 6 }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_shop_resource value = 6 } hsr_shell_shop_refresh = yes"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_exchange_resource_7_0
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 3 } NOT = { check_variable = { which = hsr_shell_shop_resource value = 7 } }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_shop_resource value = 7 } hsr_shell_shop_refresh = yes"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_exchange_resource_7_1
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 3 } check_variable = { which = hsr_shell_shop_resource value = 7 }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_shop_resource value = 7 } hsr_shell_shop_refresh = yes"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_exchange_resource_8_0
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 3 } NOT = { check_variable = { which = hsr_shell_shop_resource value = 8 } }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_shop_resource value = 8 } hsr_shell_shop_refresh = yes"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_exchange_resource_8_1
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 3 } check_variable = { which = hsr_shell_shop_resource value = 8 }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_shop_resource value = 8 } hsr_shell_shop_refresh = yes"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_exchange_resource_9_0
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 3 } NOT = { check_variable = { which = hsr_shell_shop_resource value = 9 } }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_shop_resource value = 9 } hsr_shell_shop_refresh = yes"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_exchange_resource_9_1
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 3 } check_variable = { which = hsr_shell_shop_resource value = 9 }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_shop_resource value = 9 } hsr_shell_shop_refresh = yes"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_exchange_resource_10_0
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 3 } NOT = { check_variable = { which = hsr_shell_shop_resource value = 10 } }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_shop_resource value = 10 } hsr_shell_shop_refresh = yes"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_exchange_resource_10_1
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 3 } check_variable = { which = hsr_shell_shop_resource value = 10 }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_shop_resource value = 10 } hsr_shell_shop_refresh = yes"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_exchange_resource_11_0
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 3 } NOT = { check_variable = { which = hsr_shell_shop_resource value = 11 } }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_shop_resource value = 11 } hsr_shell_shop_refresh = yes"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_exchange_resource_11_1
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 3 } check_variable = { which = hsr_shell_shop_resource value = 11 }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_shop_resource value = 11 } hsr_shell_shop_refresh = yes"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_exchange_lots_1_0
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 3 } NOT = { check_variable = { which = hsr_shell_shop_lots value = 1 } }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_shop_lots value = 1 } hsr_shell_shop_refresh = yes"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_exchange_lots_1_1
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 3 } check_variable = { which = hsr_shell_shop_lots value = 1 }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_shop_lots value = 1 } hsr_shell_shop_refresh = yes"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_exchange_lots_5_0
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 3 } NOT = { check_variable = { which = hsr_shell_shop_lots value = 5 } }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_shop_lots value = 5 } hsr_shell_shop_refresh = yes"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_exchange_lots_5_1
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 3 } check_variable = { which = hsr_shell_shop_lots value = 5 }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_shop_lots value = 5 } hsr_shell_shop_refresh = yes"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_exchange_lots_10_0
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 3 } NOT = { check_variable = { which = hsr_shell_shop_lots value = 10 } }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_shop_lots value = 10 } hsr_shell_shop_refresh = yes"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_exchange_lots_10_1
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 3 } check_variable = { which = hsr_shell_shop_lots value = 10 }"
+    ALLOW = "always = yes"
+    ACTION = "set_variable = { which = hsr_shell_shop_lots value = 10 } hsr_shell_shop_refresh = yes"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_exchange_buy
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 3 }"
+    ALLOW = "custom_tooltip = { fail_text = hsr_shell_exchange_buy_fail hidden_trigger = { hsr_shell_shop_can_buy = yes } }"
+    ACTION = "hsr_shell_shop_buy = yes"
+}
+
+inline_script = {
+    script = hsr_corp/button/shell_action
+    NAME = hsr_shell_exchange_sell
+    VISIBLE = "check_variable = { which = hsr_shell_page value = 3 }"
+    ALLOW = "custom_tooltip = { fail_text = hsr_shell_exchange_sell_fail hidden_trigger = { hsr_shell_shop_can_sell = yes } }"
+    ACTION = "hsr_shell_shop_sell = yes"
+}
+
+hsr_shell_reuse_165 = {
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 3 }
+        }
+        # HSR_SHELL_PAGE_END
+        always = yes
+    }
+    allow = {
+        custom_tooltip = {
+            fail_text = use_path
+            hidden_trigger = {
+                from = {
+                    has_country_flag = use_path
+                }
+            }
+        }
+    }
+    effect = {
+        hidden_effect = {
+            from = {
+                country_event = {
+                    id = hsr_path.200
+                }
+            }
+        }
+    }
+}
+
+hsr_shell_reuse_166 = {
+    allow = {
+        from = {
+            has_country_flag = haimeixiewan
+        }
+    }
+    potential = {
+        # HSR_SHELL_PAGE_BEGIN
+        from = {
+            check_variable = { which = hsr_shell_page value = 3 }
+        }
+        # HSR_SHELL_PAGE_END
+    }
+    effect = {
+        custom_tooltip = hsr_show_effect_txt
+        hidden_effect = {
+            from = {
+                country_event = {
+                    id = hsr_ui.10002
+                }
+            }
+        }
+    }
+}

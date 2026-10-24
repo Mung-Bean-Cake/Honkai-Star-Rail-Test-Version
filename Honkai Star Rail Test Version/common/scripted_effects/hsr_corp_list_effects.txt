@@ -1,0 +1,249 @@
+# 货币战争公司系统 v1.4；独立扩展文件，中文说明见 docs/货币战争。
+# 状态：0空、1建设、2活动、3危机、4清算。未经完整游戏验收。
+# 只在打开、筛选、翻页时构建六行缓存；从真实持久股东引用取持仓，行号不是公司身份。
+hsr_corp_build_portfolio = {
+    optimize_memory
+    hidden_effect = {
+        save_event_target_as = hsr_corp_actor
+        if = {
+            limit = {
+                NOT = {
+                    is_variable_set = hsr_corp_list_page
+                }
+            }
+            set_variable = { which = hsr_corp_list_page value = 0 }
+        }
+        if = {
+            limit = {
+                NOT = {
+                    is_variable_set = hsr_corp_list_mode
+                }
+            }
+            set_variable = { which = hsr_corp_list_mode value = 0 }
+        }
+        if = {
+            limit = {
+                NOT = {
+                    is_variable_set = hsr_corp_compact_half
+                }
+            }
+            set_variable = { which = hsr_corp_compact_half value = 0 }
+        }
+        hsr_corp_prepare_year = yes
+        set_variable = { which = hsr_corp_list_index value = 0 }
+        set_variable = { which = hsr_corp_portfolio_value value = 0 }
+        set_variable = { which = hsr_corp_portfolio_pnl value = 0 }
+        set_variable = { which = hsr_corp_portfolio_count value = 0 }
+        set_variable = { which = hsr_corp_portfolio_shares value = 0 }
+        set_variable = { which = hsr_corp_investable_count value = 0 }
+        set_variable = { which = hsr_corp_list_offset value = hsr_corp_list_page }
+        multiply_variable = { which = hsr_corp_list_offset value = 6 }
+        set_variable = { which = hsr_corp_list_next value = hsr_corp_list_offset }
+        change_variable = { which = hsr_corp_list_next value = 6 }
+        set_variable = { which = hsr_corp_row_1_id value = 0 }
+        clear_global_event_target = hsr_corp_row_1@this
+        set_variable = { which = hsr_corp_row_2_id value = 0 }
+        clear_global_event_target = hsr_corp_row_2@this
+        set_variable = { which = hsr_corp_row_3_id value = 0 }
+        clear_global_event_target = hsr_corp_row_3@this
+        set_variable = { which = hsr_corp_row_4_id value = 0 }
+        clear_global_event_target = hsr_corp_row_4@this
+        set_variable = { which = hsr_corp_row_5_id value = 0 }
+        clear_global_event_target = hsr_corp_row_5@this
+        set_variable = { which = hsr_corp_row_6_id value = 0 }
+        clear_global_event_target = hsr_corp_row_6@this
+        every_country = {
+            every_owned_colony = {
+                carrier = {
+                    if = {
+                        limit = {
+                            has_carrier_flag = hsr_corp_has_records
+                        }
+                        hsr_corp_consider_row = { SLOT = 1 }
+                        hsr_corp_consider_row = { SLOT = 2 }
+                        hsr_corp_consider_row = { SLOT = 3 }
+                    }
+                }
+            }
+        }
+        set_variable = { which = hsr_corp_list_total value = hsr_corp_list_index }
+        set_variable = { which = hsr_corp_compact_next value = hsr_corp_compact_half }
+        multiply_variable = { which = hsr_corp_compact_next value = 3 }
+        change_variable = { which = hsr_corp_compact_next value = hsr_corp_list_offset }
+        change_variable = { which = hsr_corp_compact_next value = 3 }
+        set_variable = { which = hsr_corp_compact_page value = hsr_corp_list_page }
+        multiply_variable = { which = hsr_corp_compact_page value = 2 }
+        change_variable = { which = hsr_corp_compact_page value = hsr_corp_compact_half }
+        change_variable = { which = hsr_corp_compact_page value = 1 }
+        set_variable = { which = hsr_corp_page_display value = hsr_corp_list_page }
+        change_variable = { which = hsr_corp_page_display value = 1 }
+    }
+}
+
+hsr_corp_consider_row = {
+    optimize_memory
+    set_variable = { which = hsr_corp_row_holding value = 0 }
+    set_variable = { which = hsr_corp_row_basis value = 0 }
+    if = {
+        limit = {
+            exists = "event_target:hsr_corp_founder_s$SLOT$@this"
+            "event_target:hsr_corp_founder_s$SLOT$@this" = {
+                is_same_value = event_target:hsr_corp_actor
+            }
+        }
+        set_variable = { which = hsr_corp_row_holding value = hsr_corp_s$SLOT$_founder_shares }
+        set_variable = { which = hsr_corp_row_basis value = hsr_corp_s$SLOT$_founder_basis }
+    }
+    if = {
+        limit = {
+            exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
+            "event_target:hsr_corp_foreign_s$SLOT$@this" = {
+                is_same_value = event_target:hsr_corp_actor
+            }
+        }
+        set_variable = { which = hsr_corp_row_holding value = hsr_corp_s$SLOT$_foreign_shares }
+        set_variable = { which = hsr_corp_row_basis value = hsr_corp_s$SLOT$_foreign_basis }
+    }
+    set_variable = { which = hsr_corp_row_investable value = 0 }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_s$SLOT$_state value > 0 }
+            NOT = {
+                check_variable = { which = hsr_corp_s$SLOT$_state value = 4 }
+            }
+            hsr_corp_can_visit = yes
+            OR = {
+                check_variable = { which = hsr_corp_s$SLOT$_listed value = 1 }
+                owner = {
+                    is_same_value = event_target:hsr_corp_actor
+                }
+            }
+        }
+        set_variable = { which = hsr_corp_row_investable value = 1 }
+    }
+    event_target:hsr_corp_actor = {
+        if = {
+            limit = {
+                prev = {
+                    check_variable = { which = hsr_corp_row_investable value = 1 }
+                }
+            }
+            change_variable = { which = hsr_corp_investable_count value = 1 }
+        }
+        if = {
+            limit = {
+                prev = {
+                    check_variable = { which = hsr_corp_s$SLOT$_state value > 0 }
+                    NOT = {
+                        check_variable = { which = hsr_corp_s$SLOT$_state value = 4 }
+                    }
+                    check_variable = { which = hsr_corp_row_holding value > 0 }
+                }
+            }
+            change_variable = { which = hsr_corp_portfolio_shares value = prev.hsr_corp_row_holding }
+        }
+    }
+    if = {
+        limit = {
+            check_variable = { which = hsr_corp_s$SLOT$_state value > 0 }
+            NOT = {
+                check_variable = { which = hsr_corp_s$SLOT$_state value = 4 }
+            }
+            OR = {
+                check_variable = { which = hsr_corp_row_holding value > 0 }
+                AND = {
+                    event_target:hsr_corp_actor = {
+                        check_variable = { which = hsr_corp_list_mode value = 1 }
+                    }
+                    check_variable = { which = hsr_corp_row_investable value = 1 }
+                }
+            }
+        }
+        set_variable = { which = hsr_corp_row_value value = hsr_corp_s$SLOT$_share_price }
+        multiply_variable = { which = hsr_corp_row_value value = hsr_corp_row_holding }
+        set_variable = { which = hsr_corp_row_pnl value = hsr_corp_s$SLOT$_share_price }
+        subtract_variable = { which = hsr_corp_row_pnl value = hsr_corp_row_basis }
+        multiply_variable = { which = hsr_corp_row_pnl value = hsr_corp_row_holding }
+        event_target:hsr_corp_actor = {
+            change_variable = { which = hsr_corp_list_index value = 1 }
+            if = {
+                limit = {
+                    prev = {
+                        check_variable = { which = hsr_corp_row_holding value > 0 }
+                    }
+                }
+                change_variable = { which = hsr_corp_portfolio_count value = 1 }
+            }
+            change_variable = { which = hsr_corp_portfolio_value value = prev.hsr_corp_row_value }
+            change_variable = { which = hsr_corp_portfolio_pnl value = prev.hsr_corp_row_pnl }
+            set_variable = { which = hsr_corp_row_position value = hsr_corp_list_index }
+            subtract_variable = { which = hsr_corp_row_position value = hsr_corp_list_offset }
+        }
+        if = {
+            limit = {
+                event_target:hsr_corp_actor = {
+                    check_variable = { which = hsr_corp_row_position value = 1 }
+                }
+            }
+            hsr_corp_store_row = { SLOT = $SLOT$ ROW = 1 }
+        }
+        if = {
+            limit = {
+                event_target:hsr_corp_actor = {
+                    check_variable = { which = hsr_corp_row_position value = 2 }
+                }
+            }
+            hsr_corp_store_row = { SLOT = $SLOT$ ROW = 2 }
+        }
+        if = {
+            limit = {
+                event_target:hsr_corp_actor = {
+                    check_variable = { which = hsr_corp_row_position value = 3 }
+                }
+            }
+            hsr_corp_store_row = { SLOT = $SLOT$ ROW = 3 }
+        }
+        if = {
+            limit = {
+                event_target:hsr_corp_actor = {
+                    check_variable = { which = hsr_corp_row_position value = 4 }
+                }
+            }
+            hsr_corp_store_row = { SLOT = $SLOT$ ROW = 4 }
+        }
+        if = {
+            limit = {
+                event_target:hsr_corp_actor = {
+                    check_variable = { which = hsr_corp_row_position value = 5 }
+                }
+            }
+            hsr_corp_store_row = { SLOT = $SLOT$ ROW = 5 }
+        }
+        if = {
+            limit = {
+                event_target:hsr_corp_actor = {
+                    check_variable = { which = hsr_corp_row_position value = 6 }
+                }
+            }
+            hsr_corp_store_row = { SLOT = $SLOT$ ROW = 6 }
+        }
+    }
+}
+
+hsr_corp_store_row = {
+    optimize_memory
+    save_global_event_target_as = "hsr_corp_row_$ROW$@event_target:hsr_corp_actor"
+    save_event_target_as = hsr_corp_row_hq_$ROW$
+    event_target:hsr_corp_actor = {
+        set_variable = { which = hsr_corp_row_$ROW$_slot value = $SLOT$ }
+        set_variable = { which = hsr_corp_row_$ROW$_id value = prev.hsr_corp_s$SLOT$_id }
+        set_variable = { which = hsr_corp_row_$ROW$_level value = prev.hsr_corp_s$SLOT$_level }
+        set_variable = { which = hsr_corp_row_$ROW$_share_price value = prev.hsr_corp_s$SLOT$_share_price }
+        set_variable = { which = hsr_corp_row_$ROW$_last_dividend value = prev.hsr_corp_s$SLOT$_last_dividend }
+        set_variable = { which = hsr_corp_row_$ROW$_state value = prev.hsr_corp_s$SLOT$_state }
+        set_variable = { which = hsr_corp_row_$ROW$_price_change value = prev.hsr_corp_s$SLOT$_price_change }
+        set_variable = { which = hsr_corp_row_$ROW$_primary value = prev.hsr_corp_s$SLOT$_primary }
+        set_variable = { which = hsr_corp_row_$ROW$_holding value = prev.hsr_corp_row_holding }
+        set_variable = { which = hsr_corp_row_$ROW$_my_shares value = prev.hsr_corp_row_holding }
+    }
+}

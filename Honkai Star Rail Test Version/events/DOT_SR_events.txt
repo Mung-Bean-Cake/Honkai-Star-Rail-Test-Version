@@ -21,108 +21,114 @@ country_event = {
 }
 #reload honkai_star_rail_main.gui
 country_event = {
-	id = DOT_SR.1
-	title = "DOT_SR.1.name"
-	desc = DOT_SR.1.desc
-	is_triggered_only = yes
-	diplomatic = yes
-	custom_gui = honkai_star_rail_main_ui
-	custom_gui_option = honkai_star_rail_main_ui_option
-	picture_event_data = { room = astral_express_1_room }
-	immediate = {
-		set_global_flag = allow_change_pc_shield_stage3
-	}
-	option = {
-		name = hsr_star_ui_select_1
-		is_dialog_only = yes
-		response_text = DOT_SR.1.desc
-	}
-	option = {
-		name = hsr_star_ui_select_2
-		trigger = {
-			hidden_trigger = {
-				has_origin = origin_Astral_Express
-			}
-		}
-		is_dialog_only = yes
-		response_text = hsr_star_ui_select_2_lieche
-	}
-	option = {
-		name = hsr_star_ui_select_2
-		trigger = {
-			hidden_trigger = {
-				has_origin = origin_Herta_Space_Station
-			}
-		}
-		is_dialog_only = yes
-		response_text = hsr_star_ui_select_2_heita
-	}
-	option = {
-		name = hsr_star_ui_select_2
-		trigger = {
-			hidden_trigger = {
-				has_origin = origin_luosi_star
-			}
-		}
-		is_dialog_only = yes
-		response_text = hsr_star_ui_select_2_luosi
-	}
-	option = {
-		name = hsr_star_ui_select_2
-		trigger = {
-			hidden_trigger = {
-				has_origin = origin_Xianzhou
-			}
-		}
-		is_dialog_only = yes
-		response_text = hsr_star_ui_select_2_xianzhou
-	}
-	option = {
-		name = hsr_star_ui_select_2
-		trigger = {
-			hidden_trigger = {
-				has_origin = origin_Penacony
-			}
-		}
-		is_dialog_only = yes
-		response_text = hsr_star_ui_select_2_piluokangni
-	}
-	option = {
-		name = hsr_star_ui_select_2
-		trigger = {
-			hidden_trigger = {
-				has_origin = origin_erxiangleyuan
-			}
-		}
-		is_dialog_only = yes
-		response_text = hsr_star_ui_select_2_erxiangleyuan
-	}
-	option = {
-		name = hsr_star_ui_select_2
-		trigger = {
-			hidden_trigger = {
-				not = {
-					is_honkai_star_mod = yes
-				}
-			}
-		}
-		is_dialog_only = yes
-		response_text = hsr_star_ui_select_2_null
-	}
-	option = {
-		name = hsr_star_ui_select_3
-		is_dialog_only = yes
-		response_text = hsr_star_ui_select_3_tt
-	}
-	option = {
-		name = hsr_star_ui_select_4
-		is_dialog_only = yes
-		response_text = concept_path_effect_desc
-	}
-	option = {
-		name = tuichu
-		default_hide_option = yes
-	}
+    id = DOT_SR.1
+    title = "DOT_SR.1.name"
+    desc = DOT_SR.1.desc
+    is_triggered_only = yes
+    diplomatic = yes
+    custom_gui = honkai_star_rail_main_ui
+    custom_gui_option = honkai_star_rail_main_ui_option
+    picture_event_data = {
+        room = astral_express_1_room
+    }
+    immediate = {
+        # 只初始化本国导航和商店报价，不改星核、天灾或余额。
+        set_variable = { which = hsr_shell_page value = 0 }
+        set_variable = { which = hsr_shell_settings_section value = 0 }
+        set_variable = { which = hsr_star_leader_change value = 1 }
+        hsr_shell_shop_initialize = yes
+    }
+    option = {
+        name = hsr_star_ui_select_1
+        is_dialog_only = yes
+        response_text = DOT_SR.1.desc
+    }
+    option = {
+        name = hsr_star_ui_select_2
+        trigger = {
+            hidden_trigger = {
+                has_origin = origin_Astral_Express
+            }
+        }
+        is_dialog_only = yes
+        response_text = hsr_star_ui_select_2_lieche
+    }
+    option = {
+        name = hsr_star_ui_select_2
+        trigger = {
+            hidden_trigger = {
+                has_origin = origin_Herta_Space_Station
+            }
+        }
+        is_dialog_only = yes
+        response_text = hsr_star_ui_select_2_heita
+    }
+    option = {
+        name = hsr_star_ui_select_2
+        trigger = {
+            hidden_trigger = {
+                has_origin = origin_luosi_star
+            }
+        }
+        is_dialog_only = yes
+        response_text = hsr_star_ui_select_2_luosi
+    }
+    option = {
+        name = hsr_star_ui_select_2
+        trigger = {
+            hidden_trigger = {
+                has_origin = origin_Xianzhou
+            }
+        }
+        is_dialog_only = yes
+        response_text = hsr_star_ui_select_2_xianzhou
+    }
+    option = {
+        name = hsr_star_ui_select_2
+        trigger = {
+            hidden_trigger = {
+                has_origin = origin_Penacony
+            }
+        }
+        is_dialog_only = yes
+        response_text = hsr_star_ui_select_2_piluokangni
+    }
+    option = {
+        name = hsr_star_ui_select_2
+        trigger = {
+            hidden_trigger = {
+                has_origin = origin_erxiangleyuan
+            }
+        }
+        is_dialog_only = yes
+        response_text = hsr_star_ui_select_2_erxiangleyuan
+    }
+    option = {
+        name = hsr_star_ui_select_2
+        trigger = {
+            hidden_trigger = {
+                not = {
+                    is_honkai_star_mod = yes
+                }
+            }
+        }
+        is_dialog_only = yes
+        response_text = hsr_star_ui_select_2_null
+    }
+    option = {
+        name = hsr_star_ui_select_3
+        is_dialog_only = yes
+        response_text = hsr_star_ui_select_3_tt
+    }
+    option = {
+        name = hsr_star_ui_select_4
+        is_dialog_only = yes
+        response_text = concept_path_effect_desc
+    }
+    option = {
+        name = tuichu
+        default_hide_option = yes
+    }
 }
 country_event = {
 	id = DOT_SR.2

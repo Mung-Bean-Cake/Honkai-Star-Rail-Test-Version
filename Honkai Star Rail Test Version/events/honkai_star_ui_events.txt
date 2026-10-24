@@ -9606,143 +9606,30 @@ country_event = {
 }
 #ui模块
 country_event = {
-	id = hsr_ui.10000
-	title = "hsr_ui.10000.title"
-	desc = "hsr_ui.10000.desc"
-	diplomatic = yes
-	custom_gui = honkai_star_rail_leader_show_main
-	custom_gui_option = hsr_leader_show_option
-	picture_event_data = {
-		portrait = shajin
-		room = hsr_leader_room
-	}
-	is_triggered_only = yes
-	option = {
-		name = hsr_ui.10000.a
-		is_dialog_only = yes
-		allow = {
-			resource_stockpile_compare = { resource = alloys value >= 800 }
-		}
-		hidden_effect = {
-			change_variable = {
-				which = yuzhousuipian
-				value = 750
-			}
-		}
-		add_resource = { alloys = -800 }
-		response_text = DOT_SR_money_show
-	}
-	option = {
-		name = hsr_ui.10000.b
-		is_dialog_only = yes
-		allow = {
-			resource_stockpile_compare = { resource = alloys value >= 3200 }
-		}
-		hidden_effect = {
-			change_variable = {
-				which = yuzhousuipian
-				value = 3200
-			}
-		}
-		add_resource = { alloys = -3000 }
-		response_text = DOT_SR_money_show
-	}
-	option = {
-		name = hsr_ui.10000.c
-		is_dialog_only = yes
-		allow = {
-			custom_tooltip = {
-				fail_text = yuzhousuipian_short_2_txt
-				hidden_trigger = {
-					check_variable = {
-						which = yuzhousuipian
-						value >= 150
-					}
-				}
-			}
-		}
-		hidden_effect = {
-			change_variable = {
-				which = yuzhousuipian
-				value = -150
-			}
-		}
-		add_resource = { energy = 400 minerals = 400 food = 400 }
-		response_text = DOT_SR_money_show
-	}
-	option = {
-		name = hsr_ui.10000.d
-		is_dialog_only = yes
-		allow = {
-			custom_tooltip = {
-				fail_text = yuzhousuipian_short_2_txt
-				hidden_trigger = {
-					check_variable = {
-						which = yuzhousuipian
-						value >= 300
-					}
-				}
-			}
-		}
-		hidden_effect = {
-			change_variable = {
-				which = yuzhousuipian
-				value = -300
-			}
-		}
-		add_resource = { sr_zro = 200 }
-		response_text = DOT_SR_money_show
-	}
-	option = {
-		name = hsr_ui.10000.e
-		is_dialog_only = yes
-		allow = {
-			custom_tooltip = {
-				fail_text = yuzhousuipian_short_2_txt
-				hidden_trigger = {
-					check_variable = {
-						which = yuzhousuipian
-						value >= 150
-					}
-				}
-			}
-		}
-		hidden_effect = {
-			change_variable = {
-				which = yuzhousuipian
-				value = -150
-			}
-		}
-		add_resource = { consumer_goods = 800 }
-		response_text = DOT_SR_money_show
-	}
-	option = {
-		name = hsr_ui.10000.f
-		is_dialog_only = yes
-		allow = {
-			custom_tooltip = {
-				fail_text = yuzhousuipian_short_2_txt
-				hidden_trigger = {
-					check_variable = {
-						which = yuzhousuipian
-						value >= 150
-					}
-				}
-			}
-		}
-		hidden_effect = {
-			change_variable = {
-				which = yuzhousuipian
-				value = -150
-			}
-		}
-		add_resource = { volatile_motes = 200 exotic_gases = 200  rare_crystals = 200 sr_dark_matter = 200 }
-		response_text = DOT_SR_money_show
-	}
-	option = {
-		name = CLOSE
-		default_hide_option = yes
-	}
+    id = hsr_ui.10000
+    title = hsr_ui.10000.title
+    desc = hsr_ui.10000.desc
+    diplomatic = yes
+    is_triggered_only = yes
+    custom_gui = honkai_star_rail_main_ui
+    # 兼容原hsr_shop_effect，使用同一双向报价；不再提供旧低价套餐。
+    immediate = {
+        set_variable = { which = hsr_shell_page value = 3 }
+        set_variable = { which = hsr_shell_settings_section value = 0 }
+        if = {
+            limit = {
+                NOT = {
+                    is_variable_set = hsr_star_leader_change
+                }
+            }
+            set_variable = { which = hsr_star_leader_change value = 1 }
+        }
+        hsr_shell_shop_initialize = yes
+    }
+    option = {
+        name = CLOSE
+        default_hide_option = yes
+    }
 }
 country_event = {
     id = hsr_ui.10001

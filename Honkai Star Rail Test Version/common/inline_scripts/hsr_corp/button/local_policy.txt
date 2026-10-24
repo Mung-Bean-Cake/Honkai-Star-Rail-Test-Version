@@ -1,0 +1,43 @@
+$NAME$ = {
+    allow = {
+        # HSR_FINANCE_TOOLTIP
+        custom_tooltip = {
+            fail_text = hsr_finance_requirements
+            hidden_trigger = {
+                # HSR_SYSTEM_SWITCH_BEGIN
+                NOT = { has_global_flag = hsr_credit_system_disabled }
+                # HSR_SYSTEM_SWITCH_END
+                # HSR_LOCAL_ALLOW_BEGIN
+                owner = { is_same_value = from }
+                # HSR_LOCAL_ALLOW_END
+                custom_tooltip = {
+                    text = need_more_credits
+                    hidden_trigger = {
+                        check_variable = { which = hsr_credits_planet_trade_storage value >= $COST$ }
+                    }
+                }
+                custom_tooltip = {
+                    text = has_use_policy
+                    hidden_trigger = { not = { has_modifier = $MODIFIER$ } }
+                }
+            }
+        }
+    }
+    potential = {
+        # HSR_LOCAL_VISIBILITY_BEGIN
+        $VISIBLE$
+        # HSR_LOCAL_VISIBILITY_END
+    }
+    effect = {
+        from = { save_event_target_as = hsr_corp_actor }
+        custom_tooltip = $MODIFIER$_effect_text
+        hidden_effect = {
+            change_variable = { which = hsr_credits_planet_trade_storage value = -$COST$ }
+            add_modifier = {
+                modifier = $MODIFIER$
+                days = $DAYS$
+                mult = value:hsr_add_mult_value|BASEVAR|0.5|VAR1|$POLICY$|
+            }
+        }
+    }
+}

@@ -1,0 +1,136 @@
+hsr_shell_shop_can_buy = {
+    OR = {
+        check_variable = { which = hsr_shell_shop_lots value = 1 }
+        check_variable = { which = hsr_shell_shop_lots value = 5 }
+        check_variable = { which = hsr_shell_shop_lots value = 10 }
+    }
+    check_variable = { which = hsr_shell_shop_resource_quantity value > 0 }
+    check_variable = { which = hsr_shell_shop_buy_quote value > hsr_shell_shop_sell_quote }
+    check_variable = { which = hsr_shell_shop_sell_quote value > 0 }
+    check_variable = { which = yuzhousuipian value >= hsr_shell_shop_buy_quote }
+    OR = {
+        inline_script = {
+            script = hsr_corp/shop/can_buy
+            ID = 1
+            QUALIFIED = "always = yes"
+        }
+        inline_script = {
+            script = hsr_corp/shop/can_buy
+            ID = 2
+            QUALIFIED = "always = yes"
+        }
+        inline_script = {
+            script = hsr_corp/shop/can_buy
+            ID = 3
+            QUALIFIED = "always = yes"
+        }
+        inline_script = {
+            script = hsr_corp/shop/can_buy
+            ID = 4
+            QUALIFIED = "always = yes"
+        }
+        inline_script = {
+            script = hsr_corp/shop/can_buy
+            ID = 5
+            QUALIFIED = "always = yes"
+        }
+        inline_script = {
+            script = hsr_corp/shop/can_buy
+            ID = 6
+            QUALIFIED = "OR = { has_technology = tech_mine_volatile_motes has_resource = { type = volatile_motes amount > 0 } }"
+        }
+        inline_script = {
+            script = hsr_corp/shop/can_buy
+            ID = 7
+            QUALIFIED = "OR = { has_technology = tech_mine_exotic_gases has_resource = { type = exotic_gases amount > 0 } }"
+        }
+        inline_script = {
+            script = hsr_corp/shop/can_buy
+            ID = 8
+            QUALIFIED = "OR = { has_technology = tech_mine_rare_crystals has_resource = { type = rare_crystals amount > 0 } }"
+        }
+        inline_script = {
+            script = hsr_corp/shop/can_buy
+            ID = 9
+            QUALIFIED = "OR = { has_technology = tech_mine_living_metal has_resource = { type = sr_living_metal amount > 0 } }"
+        }
+        inline_script = {
+            script = hsr_corp/shop/can_buy
+            ID = 10
+            QUALIFIED = "OR = { has_technology = tech_mine_zro has_resource = { type = sr_zro amount > 0 } }"
+        }
+        inline_script = {
+            script = hsr_corp/shop/can_buy
+            ID = 11
+            QUALIFIED = "OR = { has_technology = tech_mine_dark_matter has_resource = { type = sr_dark_matter amount > 0 } }"
+        }
+    }
+}
+
+hsr_shell_shop_can_sell = {
+    OR = {
+        check_variable = { which = hsr_shell_shop_lots value = 1 }
+        check_variable = { which = hsr_shell_shop_lots value = 5 }
+        check_variable = { which = hsr_shell_shop_lots value = 10 }
+    }
+    check_variable = { which = hsr_shell_shop_resource_quantity value > 0 }
+    check_variable = { which = hsr_shell_shop_buy_quote value > hsr_shell_shop_sell_quote }
+    check_variable = { which = hsr_shell_shop_sell_quote value > 0 }
+    OR = {
+        inline_script = {
+            script = hsr_corp/shop/can_sell
+            ID = 1
+            RESOURCE = energy
+        }
+        inline_script = {
+            script = hsr_corp/shop/can_sell
+            ID = 2
+            RESOURCE = minerals
+        }
+        inline_script = {
+            script = hsr_corp/shop/can_sell
+            ID = 3
+            RESOURCE = food
+        }
+        inline_script = {
+            script = hsr_corp/shop/can_sell
+            ID = 4
+            RESOURCE = alloys
+        }
+        inline_script = {
+            script = hsr_corp/shop/can_sell
+            ID = 5
+            RESOURCE = consumer_goods
+        }
+        inline_script = {
+            script = hsr_corp/shop/can_sell
+            ID = 6
+            RESOURCE = volatile_motes
+        }
+        inline_script = {
+            script = hsr_corp/shop/can_sell
+            ID = 7
+            RESOURCE = exotic_gases
+        }
+        inline_script = {
+            script = hsr_corp/shop/can_sell
+            ID = 8
+            RESOURCE = rare_crystals
+        }
+        inline_script = {
+            script = hsr_corp/shop/can_sell
+            ID = 9
+            RESOURCE = sr_living_metal
+        }
+        inline_script = {
+            script = hsr_corp/shop/can_sell
+            ID = 10
+            RESOURCE = sr_zro
+        }
+        inline_script = {
+            script = hsr_corp/shop/can_sell
+            ID = 11
+            RESOURCE = sr_dark_matter
+        }
+    }
+}

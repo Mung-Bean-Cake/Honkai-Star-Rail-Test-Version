@@ -1,0 +1,277 @@
+# 货币战争公司系统 v1.4；独立扩展文件，中文说明见 docs/货币战争。
+# 状态：0空、1建设、2活动、3危机、4清算。未经完整游戏验收。
+# 所有可调经济参数集中在本表；收入是独立公司经营产出，不读取岗位资源再重复入账。
+hsr_corp_cost_small = {
+    base = 1000
+}
+
+hsr_corp_cost_medium = {
+    base = 5000
+}
+
+hsr_corp_cost_large = {
+    base = 10000
+}
+
+hsr_corp_refund = {
+    base = 0.8
+}
+
+hsr_corp_initial_cash = {
+    base = 0.6
+}
+
+hsr_corp_initial_market = {
+    base = 0.2
+}
+
+hsr_corp_revenue_per_level = {
+    base = 400
+}
+
+hsr_corp_upkeep_per_level = {
+    base = 180
+}
+
+hsr_corp_dividend_ratio = {
+    base = 0.3
+}
+
+hsr_corp_upgrade_per_level = {
+    base = 500
+}
+
+hsr_corp_side_1_cost = {
+    base = 1500
+}
+
+hsr_corp_side_2_cost = {
+    base = 4000
+}
+
+hsr_corp_inject_amount = {
+    base = 1000
+}
+
+hsr_corp_aid_cost = {
+    base = 1000
+}
+
+hsr_corp_max_compensation = {
+    base = 5000
+}
+
+hsr_corp_loyalty_high = {
+    base = 0.05
+}
+
+hsr_corp_loyalty_low = {
+    base = -0.1
+}
+
+hsr_corp_loyalty_hostile = {
+    base = -0.2
+}
+
+hsr_corp_crisis_cooldown = {
+    base = 1800
+}
+
+hsr_corp_crisis_flight_cash = {
+    base = 0.2
+}
+
+hsr_corp_crisis_flight_price = {
+    base = 0.9
+}
+
+hsr_corp_negotiate_per_level = {
+    base = 100
+}
+
+hsr_corp_regulate_per_level = {
+    base = 25
+}
+
+hsr_corp_regulate_loyalty = {
+    base = 10
+}
+
+hsr_corp_illegal_per_level = {
+    base = 250
+}
+
+hsr_corp_illegal_loyalty_loss = {
+    base = 20
+}
+
+hsr_corp_aid_cooldown = {
+    base = 360
+}
+
+hsr_corp_illegal_days = {
+    base = 360
+}
+
+hsr_corp_rights_days = {
+    base = 360
+}
+
+hsr_corp_wartime_income = {
+    base = 0.85
+}
+
+hsr_corp_battle_income = {
+    base = 0.25
+}
+
+hsr_corp_wartime_loyalty_loss = {
+    base = 2
+}
+
+# 以下数值均在国家作用域读取；负耗时修正加速，最终至少一天，向上取整。
+hsr_corp_build_days = {
+    base = 1
+    add = modifier:country_hsr_corp_build_time_mult
+    min = 0
+    multiply = 180
+    min = 1
+    ceiling = yes
+}
+
+hsr_corp_reform_days = {
+    base = 1
+    add = modifier:country_hsr_corp_reform_time_mult
+    min = 0
+    multiply = 180
+    min = 1
+    ceiling = yes
+}
+
+# 收入/维护加成先与规模、体制等相加，最终倍率由结算入口封底为零。
+hsr_corp_controlled_income_bonus = {
+    base = 0
+    add = modifier:country_hsr_corp_controlled_income_mult
+}
+
+hsr_corp_upkeep_bonus = {
+    base = 0
+    add = modifier:country_hsr_corp_upkeep_mult
+}
+
+# 总部所属国作用域：相对调整基础20%企业税率；+50%变为30%，最终税率0～100%。
+hsr_corp_tax_rate = {
+    base = 1
+    add = modifier:country_hsr_corp_tax_rate_mult
+    min = 0
+    multiply = 0.2
+    max = 1
+}
+
+# 股息倍率同时参与现金总上限和实际付款；公众池固定1倍，不受国家修正影响。
+hsr_corp_dividend_factor = {
+    base = 1
+    add = modifier:country_hsr_corp_dividend_mult
+    min = 0
+}
+
+# 每年一次的持续忠诚变化；协商、处罚、控制权重置等一次性操作仍保留原数值。
+hsr_corp_loyalty_change = {
+    base = 0
+    add = modifier:country_hsr_corp_loyalty_add
+}
+
+# 费用的倍率最低为零；最终创建、升级、兼营金额另以至少1且向上取整封底。
+hsr_corp_creation_cost_factor = {
+    base = 1
+    add = modifier:country_hsr_corp_creation_cost_mult
+    min = 0
+}
+
+hsr_corp_expansion_cost_factor = {
+    base = 1
+    add = modifier:country_hsr_corp_expansion_cost_mult
+    min = 0
+}
+
+hsr_corp_reform_cost = {
+    base = 1
+    add = modifier:country_hsr_corp_reform_cost_mult
+    min = 0
+    multiply = 2000
+    min = 1
+    ceiling = yes
+}
+
+# 相对调整基础2%手续费，最终费率0～100%；负修正不会倒贴交易款。
+hsr_corp_fee = {
+    base = 1
+    add = modifier:country_hsr_corp_transaction_fee_mult
+    min = 0
+    multiply = 0.02
+    max = 1
+}
+
+# 普通危机与强制监管分别计时；开始后保留原剩余期限，不逐月重新计算。
+hsr_corp_crisis_days = {
+    base = 1
+    add = modifier:country_hsr_corp_crisis_time_mult
+    min = 0
+    multiply = 360
+    min = 1
+    ceiling = yes
+}
+
+hsr_corp_regulation_days = {
+    base = 1
+    add = modifier:country_hsr_corp_crisis_time_mult
+    min = 0
+    multiply = 180
+    min = 1
+    ceiling = yes
+}
+
+# 减轻的是25%/30%的收入损失，+50%对应倍率0.875/0.85；最终0～1。
+hsr_corp_crisis_income = {
+    base = 1
+    subtract = modifier:country_hsr_corp_crisis_loss_reduction
+    min = 0
+    multiply = -0.25
+    add = 1
+    min = 0
+    max = 1
+}
+
+hsr_corp_regulation_income = {
+    base = 1
+    subtract = modifier:country_hsr_corp_crisis_loss_reduction
+    min = 0
+    multiply = -0.3
+    add = 1
+    min = 0
+    max = 1
+}
+
+hsr_corp_negotiate_loyalty = {
+    base = 1
+    add = modifier:country_hsr_corp_negotiate_loyalty_mult
+    min = 0
+    multiply = 40
+    max = 200
+}
+
+# 资源产出倍率不改变援助支出、逐战锁、冷却或临时舰队数量。
+hsr_corp_aid_output_factor = {
+    base = 1
+    add = modifier:country_hsr_corp_aid_output_mult
+    min = 0
+}
+
+hsr_corp_calendar_year = {
+    base = 2200
+    complex_trigger_modifier = {
+        trigger = years_passed
+        mode = add
+    }
+    floor = yes
+}

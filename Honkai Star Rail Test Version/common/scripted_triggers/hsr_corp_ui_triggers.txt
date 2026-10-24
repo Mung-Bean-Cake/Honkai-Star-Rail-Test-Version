@@ -1,0 +1,203 @@
+# 货币战争公司系统 v1.4；独立扩展文件，中文说明见 docs/货币战争。
+# 状态：0空、1建设、2活动、3危机、4清算。未经完整游戏验收。
+# 仅供按钮条件使用，FROM为当前玩家；非GUI经营/AI不得调用本组条件。
+hsr_corp_ui_valid_hq = {
+    is_colony = yes
+    exists = owner
+}
+
+hsr_corp_ui_slot_empty = {
+    NOT = {
+        check_variable = { which = hsr_corp_s$SLOT$_state value > 0 }
+    }
+    NOT = {
+        has_carrier_flag = hsr_corp_notice_s$SLOT$
+    }
+}
+
+hsr_corp_ui_cooperative_allowed = {
+    owner = {
+        OR = {
+            has_ethic = ethic_egalitarian
+            has_ethic = ethic_fanatic_egalitarian
+        }
+    }
+}
+
+hsr_corp_ui_session_valid = {
+    # HSR_SYSTEM_SWITCH_BEGIN
+    NOT = {
+        has_global_flag = hsr_currency_war_disabled
+    }
+    # HSR_SYSTEM_SWITCH_END
+    hsr_corp_ui_valid_hq = yes
+    exists = from
+    check_variable = { which = hsr_corp_session_id value = from.hsr_corp_selected_id }
+    OR = {
+        AND = {
+            check_variable = { which = hsr_corp_selected value = 1 }
+            check_variable = { which = hsr_corp_s1_id value = hsr_corp_session_id }
+            check_variable = { which = hsr_corp_s1_state value > 0 }
+            NOT = {
+                check_variable = { which = hsr_corp_s1_state value = 4 }
+            }
+        }
+        AND = {
+            check_variable = { which = hsr_corp_selected value = 2 }
+            check_variable = { which = hsr_corp_s2_id value = hsr_corp_session_id }
+            check_variable = { which = hsr_corp_s2_state value > 0 }
+            NOT = {
+                check_variable = { which = hsr_corp_s2_state value = 4 }
+            }
+        }
+        AND = {
+            check_variable = { which = hsr_corp_selected value = 3 }
+            check_variable = { which = hsr_corp_s3_id value = hsr_corp_session_id }
+            check_variable = { which = hsr_corp_s3_state value > 0 }
+            NOT = {
+                check_variable = { which = hsr_corp_s3_state value = 4 }
+            }
+        }
+    }
+}
+
+hsr_corp_ui_can_manage_slot = {
+    hsr_corp_ui_valid_hq = yes
+    exists = from
+    OR = {
+        AND = {
+            has_carrier_flag = hsr_corp_rights_suspended_s$SLOT$
+            owner = {
+                is_same_value = from
+            }
+        }
+        AND = {
+            NOT = {
+                has_carrier_flag = hsr_corp_rights_suspended_s$SLOT$
+            }
+            OR = {
+                AND = {
+                    check_variable = { which = hsr_corp_s$SLOT$_foreign_control value = 1 }
+                    exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
+                    "event_target:hsr_corp_foreign_s$SLOT$@this" = {
+                        is_same_value = from
+                    }
+                }
+                AND = {
+                    NOT = {
+                        check_variable = { which = hsr_corp_s$SLOT$_foreign_control value = 1 }
+                    }
+                    OR = {
+                        AND = {
+                            exists = "event_target:hsr_corp_founder_s$SLOT$@this"
+                            "event_target:hsr_corp_founder_s$SLOT$@this" = {
+                                is_same_value = from
+                            }
+                        }
+                        AND = {
+                            NOT = {
+                                exists = "event_target:hsr_corp_founder_s$SLOT$@this"
+                            }
+                            owner = {
+                                is_same_value = from
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+hsr_corp_ui_can_manage = {
+    hsr_corp_ui_session_valid = yes
+    OR = {
+        AND = {
+            check_variable = { which = hsr_corp_selected value = 1 }
+            hsr_corp_ui_can_manage_slot = { SLOT = 1 }
+        }
+        AND = {
+            check_variable = { which = hsr_corp_selected value = 2 }
+            hsr_corp_ui_can_manage_slot = { SLOT = 2 }
+        }
+        AND = {
+            check_variable = { which = hsr_corp_selected value = 3 }
+            hsr_corp_ui_can_manage_slot = { SLOT = 3 }
+        }
+    }
+}
+
+hsr_corp_ui_can_visit = {
+    # HSR_SYSTEM_SWITCH_BEGIN
+    NOT = {
+        has_global_flag = hsr_currency_war_disabled
+    }
+    # HSR_SYSTEM_SWITCH_END
+    hsr_corp_ui_valid_hq = yes
+    exists = from
+    OR = {
+        owner = {
+            is_same_value = from
+        }
+        AND = {
+            from = {
+                has_communications = prev.owner
+                NOT = {
+                    is_at_war_with = prev.owner
+                }
+            }
+            owner = {
+                is_country_type = default
+            }
+        }
+    }
+}
+
+hsr_corp_ui_creation_allowed = {
+    # HSR_SYSTEM_SWITCH_BEGIN
+    NOT = {
+        has_global_flag = hsr_currency_war_disabled
+    }
+    # HSR_SYSTEM_SWITCH_END
+    hsr_corp_ui_valid_hq = yes
+    hsr_corp_ui_slot_empty = { SLOT = $SLOT$ }
+    NOT = {
+        has_carrier_flag = hsr_corp_notice_s$SLOT$
+    }
+    exists = from
+    owner = {
+        is_same_value = from
+    }
+    exists = event_target:global_event_country
+    OR = {
+        check_variable = { which = hsr_corp_setup_level value = 1 }
+        check_variable = { which = hsr_corp_setup_level value = 4 }
+        check_variable = { which = hsr_corp_setup_level value = 7 }
+    }
+    check_variable = { which = hsr_corp_setup_primary value >= 1 }
+    check_variable = { which = hsr_corp_setup_primary value <= 9 }
+    check_variable = { which = hsr_corp_setup_regime value >= 1 }
+    check_variable = { which = hsr_corp_setup_regime value <= 4 }
+    OR = {
+        NOT = {
+            check_variable = { which = hsr_corp_setup_regime value = 2 }
+        }
+        hsr_corp_ui_cooperative_allowed = yes
+    }
+    OR = {
+        AND = {
+            check_variable = { which = hsr_corp_setup_payment value = 0 }
+            owner = {
+                has_resource = { type = trade amount >= prev.hsr_corp_quote }
+            }
+        }
+        AND = {
+            check_variable = { which = hsr_corp_setup_payment value = 1 }
+            owner = {
+                has_ascension_perk = ap_hsr_corp_currency_war
+                check_variable = { which = hsr_credits_country_trade_storage value >= prev.hsr_corp_quote_national }
+            }
+            check_variable = { which = hsr_credits_planet_trade_storage value >= hsr_corp_quote_local }
+        }
+    }
+}

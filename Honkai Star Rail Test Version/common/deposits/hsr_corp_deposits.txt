@@ -1,0 +1,173 @@
+# 货币战争公司系统 v1.4；独立扩展文件，中文说明见 docs/货币战争。
+# 状态：0空、1建设、2活动、3危机、4清算。未经完整游戏验收。
+# 一份企业产业网络承载三槽汇总。mult读取同一殖民地/carrier的变量，不叠加多份deposit。
+# 本机4.5.2：每个显示岗位折算100人口容量；经营危机仍计入岗位。
+d_hsr_corp_enterprise = {
+    is_for_colonizable = yes
+    icon = d_central_spire
+    category = deposit_cat_rare
+    potential = {
+        always = no
+    }
+    # 岗位：倍率为各职业汇总份数，0时不提供修正。
+    triggered_planet_modifier = {
+        potential = {
+            check_variable = { which = hsr_corp_total_job_artisan value > 0 }
+        }
+        mult = hsr_corp_total_job_artisan
+        job_artisan_add = 100
+    }
+    triggered_planet_modifier = {
+        potential = {
+            check_variable = { which = hsr_corp_total_job_bureaucrat value > 0 }
+        }
+        mult = hsr_corp_total_job_bureaucrat
+        job_bureaucrat_add = 100
+    }
+    triggered_planet_modifier = {
+        potential = {
+            check_variable = { which = hsr_corp_total_job_entertainer value > 0 }
+        }
+        mult = hsr_corp_total_job_entertainer
+        job_entertainer_add = 100
+    }
+    triggered_planet_modifier = {
+        potential = {
+            check_variable = { which = hsr_corp_total_job_farmer value > 0 }
+        }
+        mult = hsr_corp_total_job_farmer
+        job_farmer_add = 100
+    }
+    triggered_planet_modifier = {
+        potential = {
+            check_variable = { which = hsr_corp_total_job_foundry value > 0 }
+        }
+        mult = hsr_corp_total_job_foundry
+        job_foundry_add = 100
+    }
+    triggered_planet_modifier = {
+        potential = {
+            check_variable = { which = hsr_corp_total_job_healthcare value > 0 }
+        }
+        mult = hsr_corp_total_job_healthcare
+        job_healthcare_add = 100
+    }
+    triggered_planet_modifier = {
+        potential = {
+            check_variable = { which = hsr_corp_total_job_miner value > 0 }
+        }
+        mult = hsr_corp_total_job_miner
+        job_miner_add = 100
+    }
+    triggered_planet_modifier = {
+        potential = {
+            check_variable = { which = hsr_corp_total_job_researcher value > 0 }
+        }
+        mult = hsr_corp_total_job_researcher
+        job_researcher_add = 100
+    }
+    triggered_planet_modifier = {
+        potential = {
+            check_variable = { which = hsr_corp_total_job_roboticist value > 0 }
+        }
+        mult = hsr_corp_total_job_roboticist
+        job_roboticist_add = 100
+    }
+    triggered_planet_modifier = {
+        potential = {
+            check_variable = { which = hsr_corp_total_job_soldier value > 0 }
+        }
+        mult = hsr_corp_total_job_soldier
+        job_soldier_add = 100
+    }
+    triggered_planet_modifier = {
+        potential = {
+            check_variable = { which = hsr_corp_total_job_technician value > 0 }
+        }
+        mult = hsr_corp_total_job_technician
+        job_technician_add = 100
+    }
+    triggered_planet_modifier = {
+        potential = {
+            check_variable = { which = hsr_corp_total_job_trader value > 0 }
+        }
+        mult = hsr_corp_total_job_trader
+        job_trader_add = 100
+    }
+    # 防御：汇总有效公司等级，上游统一封顶25份，每份1%。
+    triggered_planet_modifier = {
+        potential = {
+            check_variable = { which = hsr_corp_defense value > 0 }
+        }
+        mult = hsr_corp_defense
+        army_defense_damage_mult = 0.01
+    }
+    # 产业：倍率是实际启用该产业的有效公司等级和。
+    triggered_planet_modifier = {
+        potential = {
+            check_variable = { which = hsr_corp_industry_1 value > 0 }
+        }
+        mult = hsr_corp_industry_1
+        planet_jobs_energy_produces_mult = 0.005
+        planet_jobs_minerals_produces_mult = 0.005
+    }
+    triggered_planet_modifier = {
+        potential = {
+            check_variable = { which = hsr_corp_industry_2 value > 0 }
+        }
+        mult = hsr_corp_industry_2
+        planet_jobs_trade_produces_mult = 0.005
+    }
+    triggered_planet_modifier = {
+        potential = {
+            check_variable = { which = hsr_corp_industry_3 value > 0 }
+        }
+        mult = hsr_corp_industry_3
+        planet_jobs_food_produces_mult = 0.005
+        planet_jobs_consumer_goods_produces_mult = 0.005
+    }
+    triggered_planet_modifier = {
+        potential = {
+            check_variable = { which = hsr_corp_industry_4 value > 0 }
+        }
+        mult = hsr_corp_industry_4
+        planet_jobs_alloys_produces_mult = 0.005
+    }
+    triggered_planet_modifier = {
+        potential = {
+            check_variable = { which = hsr_corp_industry_5 value > 0 }
+        }
+        mult = hsr_corp_industry_5
+        planet_jobs_physics_research_produces_mult = 0.003
+        planet_jobs_society_research_produces_mult = 0.003
+        planet_jobs_engineering_research_produces_mult = 0.003
+    }
+    triggered_planet_modifier = {
+        potential = {
+            check_variable = { which = hsr_corp_industry_6 value > 0 }
+        }
+        mult = hsr_corp_industry_6
+        planet_jobs_alloys_produces_mult = 0.005
+    }
+    triggered_planet_modifier = {
+        potential = {
+            check_variable = { which = hsr_corp_industry_7 value > 0 }
+        }
+        mult = hsr_corp_industry_7
+        planet_jobs_unity_produces_mult = 0.005
+    }
+    triggered_planet_modifier = {
+        potential = {
+            check_variable = { which = hsr_corp_industry_8 value > 0 }
+        }
+        mult = hsr_corp_industry_8
+        bonus_pop_growth_mult = 0.003
+    }
+    triggered_planet_modifier = {
+        potential = {
+            check_variable = { which = hsr_corp_industry_9 value > 0 }
+        }
+        mult = hsr_corp_industry_9
+        planet_pop_assembly_mult = 0.005
+    }
+}

@@ -1,0 +1,31 @@
+# 货币战争公司系统 v1.4；独立扩展文件，中文说明见 docs/货币战争。
+# 状态：0空、1建设、2活动、3危机、4清算。未经完整游戏验收。
+ap_hsr_corp_currency_war = {
+    potential = {
+        is_country_type = default
+        NOT = {
+            has_ascension_perk = ap_hsr_corp_currency_war
+        }
+    }
+    possible = {
+        num_ascension_perks > 0
+    }
+    modifier = {
+        country_hsr_corp_build_time_mult = -0.25
+        country_hsr_corp_controlled_income_mult = 0.1
+        country_hsr_corp_dividend_mult = 0.1
+        country_hsr_corp_reform_time_mult = -0.5
+    }
+    custom_tooltip = ap_hsr_corp_currency_war_effect
+    on_enabled = {
+        if = {
+            limit = {
+                has_origin = origin_hsr_ipc
+            }
+            custom_tooltip = ap_hsr_corp_currency_war_ipc_effect
+        }
+    }
+    ai_weight = {
+        factor = 15
+    }
+}

@@ -1,0 +1,175 @@
+hsr_settings_credit_on_idle = {
+    potential = {
+        has_global_flag = hsr_credit_system_disabled
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_settings_credit_help
+        hidden_effect = {
+            remove_global_flag = hsr_credit_system_disabled
+        }
+    }
+}
+
+hsr_settings_credit_on_active = {
+    potential = {
+        NOT = {
+            has_global_flag = hsr_credit_system_disabled
+        }
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_settings_credit_help
+        hidden_effect = {
+            remove_global_flag = hsr_credit_system_disabled
+        }
+    }
+}
+
+hsr_settings_credit_off_idle = {
+    potential = {
+        NOT = {
+            has_global_flag = hsr_credit_system_disabled
+        }
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_settings_credit_help
+        hidden_effect = {
+            set_global_flag = hsr_credit_system_disabled
+        }
+    }
+}
+
+hsr_settings_credit_off_active = {
+    potential = {
+        has_global_flag = hsr_credit_system_disabled
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_settings_credit_help
+        hidden_effect = {
+            set_global_flag = hsr_credit_system_disabled
+        }
+    }
+}
+
+hsr_settings_currency_on_idle = {
+    potential = {
+        has_global_flag = hsr_currency_war_disabled
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_settings_currency_help
+        hidden_effect = {
+            remove_global_flag = hsr_currency_war_disabled
+            every_country = {
+                every_owned_colony = {
+                    carrier = {
+                        if = {
+                            limit = {
+                                has_carrier_flag = hsr_corp_has_records
+                            }
+                            hsr_corp_refresh_jobs = yes
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+hsr_settings_currency_on_active = {
+    potential = {
+        NOT = {
+            has_global_flag = hsr_currency_war_disabled
+        }
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_settings_currency_help
+        hidden_effect = {
+            remove_global_flag = hsr_currency_war_disabled
+            every_country = {
+                every_owned_colony = {
+                    carrier = {
+                        if = {
+                            limit = {
+                                has_carrier_flag = hsr_corp_has_records
+                            }
+                            hsr_corp_refresh_jobs = yes
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+hsr_settings_currency_off_idle = {
+    potential = {
+        NOT = {
+            has_global_flag = hsr_currency_war_disabled
+        }
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_settings_currency_help
+        hidden_effect = {
+            set_global_flag = hsr_currency_war_disabled
+            every_country = {
+                every_owned_colony = {
+                    carrier = {
+                        if = {
+                            limit = {
+                                has_carrier_flag = hsr_corp_has_records
+                            }
+                            hsr_corp_refresh_jobs = yes
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+hsr_settings_currency_off_active = {
+    potential = {
+        has_global_flag = hsr_currency_war_disabled
+    }
+    allow = {
+        always = yes
+    }
+    effect = {
+        custom_tooltip = hsr_settings_currency_help
+        hidden_effect = {
+            set_global_flag = hsr_currency_war_disabled
+            every_country = {
+                every_owned_colony = {
+                    carrier = {
+                        if = {
+                            limit = {
+                                has_carrier_flag = hsr_corp_has_records
+                            }
+                            hsr_corp_refresh_jobs = yes
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

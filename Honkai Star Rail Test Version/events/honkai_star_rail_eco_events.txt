@@ -1,5 +1,6 @@
 namespace = hsr_eco
-carrier_event = {#reload honkai_star_rail_eco.gui
+carrier_event = {
+    #reload honkai_star_rail_eco.gui
     id = hsr_eco.1
     title = ""
     desc = ""
@@ -7,13 +8,22 @@ carrier_event = {#reload honkai_star_rail_eco.gui
     diplomatic = yes
     custom_gui = honkai_star_rail_planet_credits_ui
     immediate = {
-
+        # HSR_CORP_LOCAL_ENTRY_BEGIN 地方财政与企业共用窗口
+        owner = {
+            save_event_target_as = hsr_corp_actor
+        }
+        set_variable = { which = hsr_corp_page value = 1 }
+        set_variable = { which = hsr_corp_local_tab value = 0 }
+        set_variable = { which = hsr_corp_local_category value = 1 }
+        hsr_corp_refresh_jobs = yes
+        # HSR_CORP_LOCAL_ENTRY_END
     }
     option = {
         name = OK
         default_hide_option = yes
     }
 }
+
 country_event = {
     id = hsr_eco.10
     title = ""
@@ -22,230 +32,275 @@ country_event = {
     diplomatic = yes
     custom_gui = honkai_star_rail_country_credits_ui
     immediate = {
-
+        save_event_target_as = hsr_corp_actor
+        set_variable = { which = hsr_corp_finance_country_page value = 0 }
+        hsr_finance_refresh = yes
+        hsr_corp_build_portfolio = yes
+        if = {
+            limit = {
+                OR = {
+                    check_variable = { which = credits_exchange value < 1 }
+                    check_variable = { which = credits_exchange value > 15 }
+                }
+            }
+            set_variable = { which = credits_exchange value = 1 }
+        }
     }
     option = {
         name = OK
         default_hide_option = yes
     }
 }
+
 country_event = {
     id = hsr_eco.100
-    is_triggered_only = yes
     hide_window = yes
-    trigger = {
-        #has_country_flag = hsr_credit_open
-    }
+    is_triggered_only = yes
     immediate = {
-        every_owned_colony = {
-            limit = { hsr_credits_is_live_colony = yes }
-            #地方政策
-            if = {
-                limit = {
-                    not = {
-                        has_deposit = d_colony_credits_slot
+        # HSR_FINANCE_YEAR_BEGIN 年度唯一时点：先结息，再发税收，最后更新下一年度额度。
+        set_variable = { which = hsr_finance_current_year value = value:hsr_finance_calendar_year }
+        if = {
+            limit = {
+                OR = {
+                    NOT = {
+                        has_country_flag = hsr_finance_year_initialized
                     }
+                    check_variable = { which = hsr_finance_last_settlement_year value < hsr_finance_current_year }
                 }
-                add_deposit = d_colony_credits_slot
             }
-            if = {
+            set_country_flag = hsr_finance_year_initialized
+            set_variable = { which = hsr_finance_last_settlement_year value = hsr_finance_current_year }
+            hsr_finance_settle_interest = yes
+            set_variable = { which = hsr_credits_country_year_income_gross value = 0 }
+            every_owned_colony = {
                 limit = {
-                    or = {
-                        check_variable = { which = hsr_planet_social value < 1 }
-                        check_variable = { which = hsr_planet_social value > 3 }
-                    }
+                    hsr_credits_is_live_colony = yes
                 }
-                set_variable = { which = hsr_planet_social value = 2 }
-            }
-            if = {
-                limit = {
-                    or = {
-                        check_variable = { which = hsr_planet_governance value < 1 }
-                        check_variable = { which = hsr_planet_governance value > 3 }
+                #地方政策
+                if = {
+                    limit = {
+                        not = {
+                            has_deposit = d_colony_credits_slot
+                        }
                     }
-                }
-                set_variable = { which = hsr_planet_governance value = 2 }
-            }
-            if = {
-                limit = {
-                    or = {
-                        check_variable = { which = hsr_planet_military value < 1 }
-                        check_variable = { which = hsr_planet_military value > 3 }
-                    }
-                }
-                set_variable = { which = hsr_planet_military value = 2 }
-            }
-            if = {
-                limit = {
-                    or = {
-                        check_variable = { which = hsr_planet_industrial value < 1 }
-                        check_variable = { which = hsr_planet_industrial value > 3 }
-                    }
-                }
-                set_variable = { which = hsr_planet_industrial value = 2 }
-            }
-            #读取数据
-            hsr_credits_read_production = yes
-            #计算数据
-            if = {
-                limit = {
-                    check_variable = {
-                        which = hsr_credits_net
-                        value > 0
-                    }
+                    add_deposit = d_colony_credits_slot
                 }
                 if = {
                     limit = {
-                        root = {has_policy_flag = hsr_basics_tax_revenue_captial}
+                        or = {
+                            check_variable = { which = hsr_planet_social value < 1 }
+                            check_variable = { which = hsr_planet_social value > 3 }
+                        }
                     }
-                    set_variable = { which = hsr_credits_planet_year_value value = value:hsr_add_mult_value|BASEVAR|0.3|VAR1|hsr_credits_net|  }
-                    set_variable = { which = hsr_credits_country_year_value value = value:hsr_add_mult_value|BASEVAR|0.7|VAR1|hsr_credits_net|  }
+                    set_variable = { which = hsr_planet_social value = 2 }
+                }
+                if = {
+                    limit = {
+                        or = {
+                            check_variable = { which = hsr_planet_governance value < 1 }
+                            check_variable = { which = hsr_planet_governance value > 3 }
+                        }
+                    }
+                    set_variable = { which = hsr_planet_governance value = 2 }
+                }
+                if = {
+                    limit = {
+                        or = {
+                            check_variable = { which = hsr_planet_military value < 1 }
+                            check_variable = { which = hsr_planet_military value > 3 }
+                        }
+                    }
+                    set_variable = { which = hsr_planet_military value = 2 }
+                }
+                if = {
+                    limit = {
+                        or = {
+                            check_variable = { which = hsr_planet_industrial value < 1 }
+                            check_variable = { which = hsr_planet_industrial value > 3 }
+                        }
+                    }
+                    set_variable = { which = hsr_planet_industrial value = 2 }
+                }
+                #读取数据
+                hsr_credits_read_production = yes
+                #计算数据
+                if = {
+                    limit = {
+                        check_variable = { which = hsr_credits_net value > 0 }
+                    }
+                    if = {
+                        limit = {
+                            root = {
+                                has_policy_flag = hsr_basics_tax_revenue_captial
+                            }
+                        }
+                        set_variable = {
+                            which = hsr_credits_planet_year_value
+                            value = value:hsr_add_mult_value|BASEVAR|0.3|VAR1|hsr_credits_net|
+                        }
+                        set_variable = {
+                            which = hsr_credits_country_year_value
+                            value = value:hsr_add_mult_value|BASEVAR|0.7|VAR1|hsr_credits_net|
+                        }
+                    }
+                    else_if = {
+                        limit = {
+                            root = {
+                                has_policy_flag = hsr_basics_tax_revenue_local
+                            }
+                        }
+                        set_variable = {
+                            which = hsr_credits_planet_year_value
+                            value = value:hsr_add_mult_value|BASEVAR|0.7|VAR1|hsr_credits_net|
+                        }
+                        set_variable = {
+                            which = hsr_credits_country_year_value
+                            value = value:hsr_add_mult_value|BASEVAR|0.3|VAR1|hsr_credits_net|
+                        }
+                    }
+                    else_if = {
+                        limit = {
+                            root = {
+                                has_policy_flag = hsr_basics_tax_revenue_average
+                            }
+                        }
+                        set_variable = {
+                            which = hsr_credits_planet_year_value
+                            value = value:hsr_add_mult_value|BASEVAR|0.5|VAR1|hsr_credits_net|
+                        }
+                        set_variable = {
+                            which = hsr_credits_country_year_value
+                            value = value:hsr_add_mult_value|BASEVAR|0.5|VAR1|hsr_credits_net|
+                        }
+                    }
+                    change_variable = { which = hsr_credits_planet_trade_storage value = hsr_credits_planet_year_value }
+                    prev = {
+                        change_variable = {
+                            which = hsr_credits_country_trade_storage
+                            value = prev.hsr_credits_country_year_value
+                        }
+                        #总存储
+                        change_variable = {
+                            which = hsr_credits_country_year_income_gross
+                            value = prev.hsr_credits_country_year_value
+                        }
+                        #年收入
+                    }
                 }
                 else_if = {
                     limit = {
-                        root = {has_policy_flag = hsr_basics_tax_revenue_local}
+                        check_variable = { which = hsr_credits_net value < 0 }
                     }
-                    set_variable = { which = hsr_credits_planet_year_value value = value:hsr_add_mult_value|BASEVAR|0.7|VAR1|hsr_credits_net|  }
-                    set_variable = { which = hsr_credits_country_year_value value = value:hsr_add_mult_value|BASEVAR|0.3|VAR1|hsr_credits_net|  }
+                    change_variable = { which = hsr_credits_planet_trade_storage value = hsr_credits_net }
                 }
-                else_if = {
+                #建议显示
+                if = {
                     limit = {
-                        root = {has_policy_flag = hsr_basics_tax_revenue_average}
+                        not = {
+                            has_modifier = hsr_credits_planet_modifiers
+                        }
                     }
-                    set_variable = { which = hsr_credits_planet_year_value value = value:hsr_add_mult_value|BASEVAR|0.5|VAR1|hsr_credits_net|  }
-                    set_variable = { which = hsr_credits_country_year_value value = value:hsr_add_mult_value|BASEVAR|0.5|VAR1|hsr_credits_net|  }
-                }
-                change_variable = { which = hsr_credits_planet_trade_storage value = hsr_credits_planet_year_value }
-                prev = {
-                    change_variable = { which = hsr_credits_country_trade_storage value = prev.hsr_credits_country_year_value }#总存储
-                    change_variable = { which = hsr_credits_country_year_income_gross value = prev.hsr_credits_country_year_value }#年收入
-                }
-            }
-            else_if = {
-                limit = {
-                    check_variable = {
-                        which = hsr_credits_net
-                        value < 0
+                    add_modifier = {
+                        modifier = hsr_credits_planet_modifiers
+                        years = -1
                     }
                 }
-                change_variable = { which = hsr_credits_planet_trade_storage value = hsr_credits_net }
             }
-            #建议显示
+            # 固定年度经营性口径：殖民地税收加原国家财政收入修正；不读余额差或投资市值。
+            change_variable = {
+                which = hsr_credits_country_year_income_gross
+                value = modifier:country_credit_gross_other_mult
+            }
+            change_variable = { which = hsr_credits_country_trade_storage value = value:mod_year_credits_add }
+            set_variable = { which = hsr_finance_last_income value = hsr_credits_country_year_income_gross }
             if = {
                 limit = {
-                    not = {
-                        has_modifier = hsr_credits_planet_modifiers
-                    }
+                    check_variable = { which = hsr_finance_last_income value < 0 }
+                }
+                set_variable = { which = hsr_finance_last_income value = 0 }
+            }
+            set_variable = { which = hsr_finance_annual_expense value = modifier:country_credit_expenses_other_mult }
+            change_variable = { which = hsr_finance_annual_expense value = hsr_finance_last_interest_paid }
+            hsr_finance_refresh = yes
+            remove_modifier = hsr_credits_country_modifiers
+            if = {
+                limit = {
+                    check_variable = { which = hsr_credits_country_trade_storage value >= 1000000 }
                 }
                 add_modifier = {
-                    modifier = hsr_credits_planet_modifiers
+                    modifier = hsr_credits_country_modifiers
                     years = -1
+                    mult = 10
+                }
+            }
+            else = {
+                add_modifier = {
+                    modifier = hsr_credits_country_modifiers
+                    years = -1
+                    mult = value:hsr_add_mult_value|BASEVAR|0.00001|VAR1|hsr_credits_country_trade_storage|
                 }
             }
         }
-        #中央财政结算
-        if = {
-            limit = {
-                check_variable = {
-                    which = hsr_credits_country_loan_coefficient
-                    value > 1
-                }
-            }
-            random_list = {
-                1 = { change_variable = { which = hsr_credits_country_loan_coefficient value = -0.05 } }
-                1 = { change_variable = { which = hsr_credits_country_loan_coefficient value = -0.1 } }
-                1 = { change_variable = { which = hsr_credits_country_loan_coefficient value = -0.15 } }
-                1 = { change_variable = { which = hsr_credits_country_loan_coefficient value = -0.2 } }
-            }
+        # HSR_FINANCE_YEAR_END
+    }
+    trigger = {
+        # HSR_SYSTEM_SWITCH_BEGIN
+        NOT = {
+            has_global_flag = hsr_credit_system_disabled
         }
-        else = {
-            random_list = {
-                1 = { change_variable = { which = hsr_credits_country_loan_coefficient value = 0.05 } }
-                1 = { change_variable = { which = hsr_credits_country_loan_coefficient value = 0.1 } }
-                1 = { change_variable = { which = hsr_credits_country_loan_coefficient value = 0.15 } }
-                1 = { change_variable = { which = hsr_credits_country_loan_coefficient value = 0.2 } }
-            }
-        }
-        random_list = {
-            1 = { change_variable = { which = hsr_credits_country_investment_coefficient value = -0.05 } }
-            1 = { change_variable = { which = hsr_credits_country_investment_coefficient value = -0.1 } }
-            1 = { change_variable = { which = hsr_credits_country_investment_coefficient value = -0.15 } }
-            1 = { change_variable = { which = hsr_credits_country_investment_coefficient value = -0.2 } }
-            1 = { change_variable = { which = hsr_credits_country_investment_coefficient value = 0.05 } }
-            1 = { change_variable = { which = hsr_credits_country_investment_coefficient value = 0.1 } }
-            1 = { change_variable = { which = hsr_credits_country_investment_coefficient value = 0.15 } }
-            1 = { change_variable = { which = hsr_credits_country_investment_coefficient value = 0.2 } }
-        }
-        change_variable = {
-            which = hsr_credits_country_trade_storage
-            value = value:mod_year_credits_add
-        }
-        change_variable = {
-            which = hsr_credits_country_investment
-            value = value:hsr_add_mult_value|BASEVAR|hsr_credits_country_investment_coefficient|VAR1|hsr_credits_country_investment|
-        }
-        change_variable = {
-            which = hsr_credits_country_loan
-            value = value:hsr_add_mult_value|BASEVAR|hsr_credits_country_loan_coefficient|VAR1|hsr_credits_country_loan|
-        }
-        remove_modifier = hsr_credits_country_modifiers
-        if = {
-            limit = {
-                check_variable = {
-                    which = hsr_credits_country_trade_storage
-                    value >=1000000
-                }
-            }
-            add_modifier = {
-                modifier = hsr_credits_country_modifiers
-                years = -1
-                mult = 10
-            }
-        }
-        else = {
-            add_modifier = {
-                modifier = hsr_credits_country_modifiers
-                years = -1
-                mult = value:hsr_add_mult_value|BASEVAR|0.00001|VAR1|hsr_credits_country_trade_storage|
-            }
-        }
-        remove_modifier = hsr_credits_country_loan_modifiers
-        if = {
-            limit = {
-                check_variable = {
-                    which = hsr_credits_country_loan
-                    value > 0
-                }
-            }
-            add_modifier = {
-                modifier = hsr_credits_country_loan_modifiers
-                years = -1
-                mult = value:hsr_add_mult_value|BASEVAR|0.00001|VAR1|hsr_credits_country_loan|
-            }
-        }
+        # HSR_SYSTEM_SWITCH_END
     }
 }
+
 #大乐透
 country_event = {
     id = hsr_eco.200
     title = "hsr_eco.200.name"
-    desc =  hsr_eco.200.desc
+    desc = hsr_eco.200.desc
     picture = GFX_evt_engineering_research
-#treasure_pile
+    #treasure_pile
     is_triggered_only = yes
-    trigger = {
-
-    }
+    trigger = { }
     option = {
         name = hsr_eco.200.a
         custom_tooltip = hsr_eco.200.a.loc
         hidden_effect = {
             random_list = {
-                1 = { add_monthly_resource_mult = { resource = energy value = 4 min = 2000 } }
-                1 = { add_monthly_resource_mult = { resource = minerals value = 4 min = 2000 } }
-                1 = { add_monthly_resource_mult = { resource = food value = 4 min = 2000 } }
-                1 = { add_monthly_resource_mult = { resource = alloys value = 4 min = 2000 } }
-                1 = { add_monthly_resource_mult = { resource = consumer_goods value = 4 min = 2000 } }
+                1 = {
+                    add_monthly_resource_mult = {
+                        resource = energy
+                        value = 4
+                        min = 2000
+                    }
+                }
+                1 = {
+                    add_monthly_resource_mult = {
+                        resource = minerals
+                        value = 4
+                        min = 2000
+                    }
+                }
+                1 = {
+                    add_monthly_resource_mult = {
+                        resource = food
+                        value = 4
+                        min = 2000
+                    }
+                }
+                1 = {
+                    add_monthly_resource_mult = {
+                        resource = alloys
+                        value = 4
+                        min = 2000
+                    }
+                }
+                1 = {
+                    add_monthly_resource_mult = {
+                        resource = consumer_goods
+                        value = 4
+                        min = 2000
+                    }
+                }
                 1 = {
                     hidden_effect = {
                         change_variable = { which = hsr_credits_country_trade_storage value = 10000 }
@@ -255,26 +310,55 @@ country_event = {
         }
     }
 }
+
 country_event = {
     id = hsr_eco.201
     title = "hsr_eco.201.name"
-    desc =  hsr_eco.200.desc
+    desc = hsr_eco.200.desc
     picture = GFX_evt_engineering_research
     #treasure_pile
     is_triggered_only = yes
-    trigger = {
-
-    }
+    trigger = { }
     option = {
         name = hsr_eco.200.a
         custom_tooltip = hsr_eco.201.a.loc
         hidden_effect = {
             random_list = {
-                1 = { add_monthly_resource_mult = { resource = energy value = 8 min = 4000 } }
-                1 = { add_monthly_resource_mult = { resource = minerals value = 8 min = 4000 } }
-                1 = { add_monthly_resource_mult = { resource = food value = 8 min = 4000 } }
-                1 = { add_monthly_resource_mult = { resource = alloys value = 8 min = 4000 } }
-                1 = { add_monthly_resource_mult = { resource = consumer_goods value = 8 min = 4000 } }
+                1 = {
+                    add_monthly_resource_mult = {
+                        resource = energy
+                        value = 8
+                        min = 4000
+                    }
+                }
+                1 = {
+                    add_monthly_resource_mult = {
+                        resource = minerals
+                        value = 8
+                        min = 4000
+                    }
+                }
+                1 = {
+                    add_monthly_resource_mult = {
+                        resource = food
+                        value = 8
+                        min = 4000
+                    }
+                }
+                1 = {
+                    add_monthly_resource_mult = {
+                        resource = alloys
+                        value = 8
+                        min = 4000
+                    }
+                }
+                1 = {
+                    add_monthly_resource_mult = {
+                        resource = consumer_goods
+                        value = 8
+                        min = 4000
+                    }
+                }
                 1 = {
                     hidden_effect = {
                         change_variable = { which = hsr_credits_country_trade_storage value = 20000 }
@@ -326,26 +410,55 @@ country_event = {
         }
     }
 }
+
 country_event = {
     id = hsr_eco.202
     title = "hsr_eco.202.name"
-    desc =  hsr_eco.200.desc
+    desc = hsr_eco.200.desc
     picture = GFX_evt_engineering_research
     #treasure_pile
     is_triggered_only = yes
-    trigger = {
-
-    }
+    trigger = { }
     option = {
         name = hsr_eco.200.a
         custom_tooltip = hsr_eco.202.a.loc
         hidden_effect = {
             random_list = {
-                1 = { add_monthly_resource_mult = { resource = energy value = 12 min = 4000 } }
-                1 = { add_monthly_resource_mult = { resource = minerals value = 12 min = 4000 } }
-                1 = { add_monthly_resource_mult = { resource = food value = 12 min = 4000 } }
-                1 = { add_monthly_resource_mult = { resource = alloys value = 12 min = 4000 } }
-                1 = { add_monthly_resource_mult = { resource = consumer_goods value = 12 min = 4000 } }
+                1 = {
+                    add_monthly_resource_mult = {
+                        resource = energy
+                        value = 12
+                        min = 4000
+                    }
+                }
+                1 = {
+                    add_monthly_resource_mult = {
+                        resource = minerals
+                        value = 12
+                        min = 4000
+                    }
+                }
+                1 = {
+                    add_monthly_resource_mult = {
+                        resource = food
+                        value = 12
+                        min = 4000
+                    }
+                }
+                1 = {
+                    add_monthly_resource_mult = {
+                        resource = alloys
+                        value = 12
+                        min = 4000
+                    }
+                }
+                1 = {
+                    add_monthly_resource_mult = {
+                        resource = consumer_goods
+                        value = 12
+                        min = 4000
+                    }
+                }
                 1 = {
                     hidden_effect = {
                         change_variable = { which = hsr_credits_country_trade_storage value = 40000 }
@@ -360,12 +473,42 @@ country_event = {
                             }
                         }
                         random_list = {
-                            1 = { while = { count = 10 add_deposit = d_energy_10 } }
-                            1 = { while = { count = 10 add_deposit = d_minerals_10 } }
-                            1 = { while = { count = 10 add_deposit = d_alloys_10 } }
-                            1 = { while = { count = 10 add_deposit = d_rare_crystals_5 } }
-                            1 = { while = { count = 10 add_deposit = d_exotic_gases_5 } }
-                            1 = { while = { count = 10 add_deposit = d_volatile_motes_5 } }
+                            1 = {
+                                while = {
+                                    count = 10
+                                    add_deposit = d_energy_10
+                                }
+                            }
+                            1 = {
+                                while = {
+                                    count = 10
+                                    add_deposit = d_minerals_10
+                                }
+                            }
+                            1 = {
+                                while = {
+                                    count = 10
+                                    add_deposit = d_alloys_10
+                                }
+                            }
+                            1 = {
+                                while = {
+                                    count = 10
+                                    add_deposit = d_rare_crystals_5
+                                }
+                            }
+                            1 = {
+                                while = {
+                                    count = 10
+                                    add_deposit = d_exotic_gases_5
+                                }
+                            }
+                            1 = {
+                                while = {
+                                    count = 10
+                                    add_deposit = d_volatile_motes_5
+                                }
+                            }
                         }
                     }
                 }
@@ -373,30 +516,31 @@ country_event = {
         }
     }
 }
+
 country_event = {
     id = hsr_eco.203
     title = "hsr_eco.203.name"
-    desc =  hsr_eco.200.desc
+    desc = hsr_eco.200.desc
     picture = GFX_evt_treasure_pile
     is_triggered_only = yes
-    trigger = {
-
-    }
+    trigger = { }
     option = {
         name = hsr_eco.200.a
-        give_specimen = { key = yinhedaletou origin = hsr_eco_produce_3_name }
+        give_specimen = {
+            key = yinhedaletou
+            origin = hsr_eco_produce_3_name
+        }
     }
 }
+
 country_event = {
     id = hsr_eco.204
     title = "hsr_eco.204.name"
-    desc =  hsr_eco.200.desc
+    desc = hsr_eco.200.desc
     picture = GFX_evt_engineering_research
     #treasure_pile
     is_triggered_only = yes
-    trigger = {
-
-    }
+    trigger = { }
     option = {
         name = hsr_eco.200.a
         custom_tooltip = r_the_pattern_maker_effect_tt
@@ -413,7 +557,9 @@ country_event = {
                 effect = {
                     set_owner = root
                     if = {
-                        limit = { has_first_contact_dlc = yes }
+                        limit = {
+                            has_first_contact_dlc = yes
+                        }
                         create_ship = {
                             name = "NAME_Patternwalker"
                             design = "NAME_Patternwalker_Cloak"
@@ -431,19 +577,17 @@ country_event = {
                 }
             }
         }
-
     }
 }
+
 country_event = {
     id = hsr_eco.205
     title = "hsr_eco.205.name"
-    desc =  hsr_eco.200.desc
+    desc = hsr_eco.200.desc
     picture = GFX_evt_engineering_research
     #treasure_pile
     is_triggered_only = yes
-    trigger = {
-
-    }
+    trigger = { }
     option = {
         name = hsr_eco.200.a
         hidden_effect = {
@@ -506,16 +650,15 @@ country_event = {
         }
     }
 }
+
 country_event = {
     id = hsr_eco.206
     title = "hsr_eco.206.name"
-    desc =  hsr_eco.200.desc
+    desc = hsr_eco.200.desc
     picture = GFX_evt_engineering_research
     #treasure_pile
     is_triggered_only = yes
-    trigger = {
-
-    }
+    trigger = { }
     option = {
         name = hsr_eco.200.a
         custom_tooltip = hsr_eco.206.a.loc
@@ -534,7 +677,8 @@ country_event = {
                     while = {
                         count = 2
                         create_ship = {
-                            fleet_cache_recalc = no #skip fleet cache recalculation on each individual ship being added. Effect create_fleet will recalculate everything once after all the ships are in.
+                            fleet_cache_recalc = no
+                            #skip fleet cache recalculation on each individual ship being added. Effect create_fleet will recalculate everything once after all the ships are in.
                             name = "NAME_Astral_Avatar"
                             design = "NAME_Astral_Avatar"
                             upgradable = no
@@ -544,7 +688,8 @@ country_event = {
                     while = {
                         count = 5
                         create_ship = {
-                            fleet_cache_recalc = no #skip fleet cache recalculation on each individual ship being added. Effect create_fleet will recalculate everything once after all the ships are in.
+                            fleet_cache_recalc = no
+                            #skip fleet cache recalculation on each individual ship being added. Effect create_fleet will recalculate everything once after all the ships are in.
                             name = "NAME_Astral_Avatar_Small"
                             design = "NAME_Astral_Avatar_Small"
                             upgradable = no
@@ -557,30 +702,31 @@ country_event = {
         }
     }
 }
+
 country_event = {
     id = hsr_eco.207
     title = "hsr_eco.207.name"
-    desc =  hsr_eco.200.desc
+    desc = hsr_eco.200.desc
     picture = GFX_evt_treasure_pile
     is_triggered_only = yes
-    trigger = {
-
-    }
+    trigger = { }
     option = {
         name = hsr_eco.200.a
-        give_specimen = { key = xingjidaletou origin = hsr_eco_produce_3_name }
+        give_specimen = {
+            key = xingjidaletou
+            origin = hsr_eco_produce_3_name
+        }
     }
 }
+
 country_event = {
     id = hsr_eco.208
     title = "hsr_eco.208.name"
-    desc =  hsr_eco.200.desc
+    desc = hsr_eco.200.desc
     picture = GFX_evt_engineering_research
     #treasure_pile
     is_triggered_only = yes
-    trigger = {
-
-    }
+    trigger = { }
     option = {
         name = hsr_eco.200.a
         custom_tooltip = random_common_curiosity_get
@@ -589,16 +735,15 @@ country_event = {
         }
     }
 }
+
 country_event = {
     id = hsr_eco.209
     title = "hsr_eco.209.name"
-    desc =  hsr_eco.200.desc
+    desc = hsr_eco.200.desc
     picture = GFX_evt_engineering_research
     #treasure_pile
     is_triggered_only = yes
-    trigger = {
-
-    }
+    trigger = { }
     option = {
         name = hsr_eco.200.a
         custom_tooltip = random_rare_curiosity_get
@@ -607,16 +752,15 @@ country_event = {
         }
     }
 }
+
 country_event = {
     id = hsr_eco.210
     title = "hsr_eco.210.name"
-    desc =  hsr_eco.200.desc
+    desc = hsr_eco.200.desc
     picture = GFX_evt_engineering_research
     #treasure_pile
     is_triggered_only = yes
-    trigger = {
-
-    }
+    trigger = { }
     option = {
         name = hsr_eco.200.a
         custom_tooltip = random_epic_curiosity_get
@@ -625,17 +769,19 @@ country_event = {
         }
     }
 }
+
 country_event = {
     id = hsr_eco.211
     title = "hsr_eco.211.name"
-    desc =  hsr_eco.200.desc
+    desc = hsr_eco.200.desc
     picture = GFX_evt_treasure_pile
     is_triggered_only = yes
-    trigger = {
-
-    }
+    trigger = { }
     option = {
         name = hsr_eco.200.a
-        give_specimen = { key = liangzidaletou origin = hsr_eco_produce_3_name }
+        give_specimen = {
+            key = liangzidaletou
+            origin = hsr_eco_produce_3_name
+        }
     }
 }

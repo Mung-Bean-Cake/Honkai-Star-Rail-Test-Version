@@ -1,0 +1,4378 @@
+# 货币战争公司系统 v1.4；独立扩展文件，中文说明见 docs/货币战争。
+# 状态：0空、1建设、2活动、3危机、4清算。未经完整游戏验收。
+guiTypes = {
+    containerWindowType = {
+        name = "hsr_corp_company_ui"
+        size = { width = 1240 height = 700 }
+        orientation = center
+        origo = center
+        moveable = yes
+        clipping = no
+        background = {
+            name = "hsr_corp_background"
+            quadTextureSprite = "GFX_hsr_corp_local_window"
+        }
+        # 页内控件仅通过 potential 切换，不重新创建外交事件窗口。
+        effectButtonType = {
+            name = "hsr_corp_local_header"
+            position = { x = 24 y = 18 }
+            size = { x = 1192 y = 68 }
+            spriteType = "GFX_hsr_corp_header_1192x68"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_header"
+            effect = "hsr_corp_local_header"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_emblem"
+            position = { x = 40 y = 28 }
+            size = { x = 48 y = 48 }
+            spriteType = "GFX_hsr_corp_emblem_48x48"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_emblem"
+            effect = "hsr_corp_local_emblem"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_window_title"
+            position = { x = 108 y = 24 }
+            size = { x = 1070 y = 30 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "malgun_goth_24"
+            format = left
+            text = "hsr_corp_local_window_title"
+            effect = "hsr_corp_local_window_title"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_tab_0"
+            position = { x = 24 y = 98 }
+            size = { x = 208 y = 32 }
+            spriteType = "GFX_hsr_corp_button_208x32"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_tab_0"
+            effect = "hsr_corp_local_tab_0"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_tab_0_selected"
+            position = { x = 24 y = 98 }
+            size = { x = 208 y = 32 }
+            spriteType = "GFX_hsr_corp_gold_208x32"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_tab_0_selected"
+            effect = "hsr_corp_local_tab_0_selected"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_tab_1"
+            position = { x = 242 y = 98 }
+            size = { x = 208 y = 32 }
+            spriteType = "GFX_hsr_corp_button_208x32"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_tab_1"
+            effect = "hsr_corp_local_tab_1"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_tab_1_selected"
+            position = { x = 242 y = 98 }
+            size = { x = 208 y = 32 }
+            spriteType = "GFX_hsr_corp_gold_208x32"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_tab_1_selected"
+            effect = "hsr_corp_local_tab_1_selected"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_tab_2"
+            position = { x = 460 y = 98 }
+            size = { x = 208 y = 32 }
+            spriteType = "GFX_hsr_corp_button_208x32"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_tab_2"
+            effect = "hsr_corp_local_tab_2"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_tab_2_selected"
+            position = { x = 460 y = 98 }
+            size = { x = 208 y = 32 }
+            spriteType = "GFX_hsr_corp_gold_208x32"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_tab_2_selected"
+            effect = "hsr_corp_local_tab_2_selected"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_metric_bg_0"
+            position = { x = 24 y = 142 }
+            size = { x = 188 y = 68 }
+            spriteType = "GFX_hsr_corp_metric_188x68"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_metric_bg_0"
+            effect = "hsr_corp_local_metric_bg_0"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_metric_label_0"
+            position = { x = 32 y = 149 }
+            size = { x = 172 y = 22 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_metric_label_0"
+            effect = "hsr_corp_legacy_local__honkai_star_rail_colony_credits_years_effect"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_metric_value_0"
+            position = { x = 36 y = 177 }
+            size = { x = 164 y = 26 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_metric_value_0"
+            effect = "hsr_corp_legacy_local__honkai_star_rail_colony_credits_years_effect"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_metric_bg_1"
+            position = { x = 224 y = 142 }
+            size = { x = 188 y = 68 }
+            spriteType = "GFX_hsr_corp_metric_188x68"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_metric_bg_1"
+            effect = "hsr_corp_local_metric_bg_1"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_metric_label_1"
+            position = { x = 232 y = 149 }
+            size = { x = 172 y = 22 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_metric_label_1"
+            effect = "hsr_corp_legacy_local__honkai_star_rail_colony_usage_credits_years_effect"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_metric_value_1"
+            position = { x = 236 y = 177 }
+            size = { x = 164 y = 26 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_metric_value_1"
+            effect = "hsr_corp_legacy_local__honkai_star_rail_colony_usage_credits_years_effect"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_metric_bg_2"
+            position = { x = 424 y = 142 }
+            size = { x = 188 y = 68 }
+            spriteType = "GFX_hsr_corp_metric_188x68"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_metric_bg_2"
+            effect = "hsr_corp_local_metric_bg_2"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_metric_label_2"
+            position = { x = 432 y = 149 }
+            size = { x = 172 y = 22 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_metric_label_2"
+            effect = "hsr_corp_legacy_local__honkai_star_rail_colony_storage_credits_years_effect"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_metric_value_2"
+            position = { x = 436 y = 177 }
+            size = { x = 164 y = 26 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_metric_value_2"
+            effect = "hsr_corp_legacy_local__honkai_star_rail_colony_storage_credits_years_effect"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_metric_bg_3"
+            position = { x = 624 y = 142 }
+            size = { x = 188 y = 68 }
+            spriteType = "GFX_hsr_corp_metric_188x68"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_metric_bg_3"
+            effect = "hsr_corp_local_metric_bg_3"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_metric_label_3"
+            position = { x = 632 y = 149 }
+            size = { x = 172 y = 22 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_metric_label_3"
+            effect = "hsr_corp_legacy_local__honkai_star_rail_colony_tax_credits_years_effect"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_metric_value_3"
+            position = { x = 636 y = 177 }
+            size = { x = 164 y = 26 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_metric_value_3"
+            effect = "hsr_corp_legacy_local__honkai_star_rail_colony_tax_credits_years_effect"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_metric_bg_4"
+            position = { x = 824 y = 142 }
+            size = { x = 188 y = 68 }
+            spriteType = "GFX_hsr_corp_metric_188x68"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_metric_bg_4"
+            effect = "hsr_corp_local_metric_bg_4"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_metric_label_4"
+            position = { x = 832 y = 149 }
+            size = { x = 172 y = 22 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_metric_label_4"
+            effect = "hsr_corp_legacy_local__honkai_star_rail_colony_country_tax_credits_years_effect"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_metric_value_4"
+            position = { x = 836 y = 177 }
+            size = { x = 164 y = 26 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_metric_value_4"
+            effect = "hsr_corp_legacy_local__honkai_star_rail_colony_country_tax_credits_years_effect"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_metric_bg_5"
+            position = { x = 1024 y = 142 }
+            size = { x = 188 y = 68 }
+            spriteType = "GFX_hsr_corp_metric_188x68"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_metric_bg_5"
+            effect = "hsr_corp_local_metric_bg_5"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_metric_label_5"
+            position = { x = 1032 y = 149 }
+            size = { x = 172 y = 22 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_metric_label_5"
+            effect = "hsr_corp_legacy_local__honkai_star_rail_colony_storage_credits_coefficient_effect"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_metric_value_5"
+            position = { x = 1036 y = 177 }
+            size = { x = 164 y = 26 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_metric_value_5"
+            effect = "hsr_corp_legacy_local__honkai_star_rail_colony_storage_credits_coefficient_effect"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_group_0"
+            position = { x = 24 y = 226 }
+            size = { x = 244 y = 208 }
+            spriteType = "GFX_hsr_corp_civic_244x208"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_group_0"
+            effect = "hsr_corp_local_group_0"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_group_title_0"
+            position = { x = 38 y = 234 }
+            size = { x = 216 y = 26 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_group_title_0"
+            effect = "hsr_corp_local_group_title_0"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_group_subtitle_0"
+            position = { x = 38 y = 261 }
+            size = { x = 216 y = 20 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_group_subtitle_0"
+            effect = "hsr_corp_local_group_subtitle_0"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_nav_0_0"
+            position = { x = 36 y = 298 }
+            size = { x = 220 y = 48 }
+            spriteType = "GFX_hsr_corp_button_220x48"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_nav_0_0"
+            effect = "hsr_corp_local_nav_0_0"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_nav_0_1"
+            position = { x = 36 y = 358 }
+            size = { x = 220 y = 48 }
+            spriteType = "GFX_hsr_corp_button_220x48"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_nav_0_1"
+            effect = "hsr_corp_local_nav_0_1"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_group_1"
+            position = { x = 24 y = 442 }
+            size = { x = 244 y = 208 }
+            spriteType = "GFX_hsr_corp_industrial_244x208"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_group_1"
+            effect = "hsr_corp_local_group_1"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_group_title_1"
+            position = { x = 38 y = 450 }
+            size = { x = 216 y = 26 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_group_title_1"
+            effect = "hsr_corp_local_group_title_1"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_group_subtitle_1"
+            position = { x = 38 y = 477 }
+            size = { x = 216 y = 20 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_group_subtitle_1"
+            effect = "hsr_corp_local_group_subtitle_1"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_nav_1_0"
+            position = { x = 36 y = 514 }
+            size = { x = 220 y = 48 }
+            spriteType = "GFX_hsr_corp_button_220x48"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_nav_1_0"
+            effect = "hsr_corp_local_nav_1_0"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_nav_1_1"
+            position = { x = 36 y = 574 }
+            size = { x = 220 y = 48 }
+            spriteType = "GFX_hsr_corp_button_220x48"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_nav_1_1"
+            effect = "hsr_corp_local_nav_1_1"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_funding"
+            position = { x = 24 y = 666 }
+            size = { x = 244 y = 26 }
+            spriteType = "GFX_hsr_corp_button_244x26"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_funding"
+            effect = "hsr_corp_legacy_local__country_planet_charge_effect"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_content"
+            position = { x = 284 y = 226 }
+            size = { x = 932 y = 426 }
+            spriteType = "GFX_hsr_corp_content_932x426"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_content"
+            effect = "hsr_corp_local_content"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_overview_header"
+            position = { x = 296 y = 236 }
+            size = { x = 908 y = 48 }
+            spriteType = "GFX_hsr_corp_header_908x48"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_overview_header"
+            effect = "hsr_corp_local_overview_header"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_overview_title"
+            position = { x = 312 y = 242 }
+            size = { x = 876 y = 26 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_overview_title"
+            effect = "hsr_corp_local_overview_title"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_overview_card_1"
+            position = { x = 300 y = 296 }
+            size = { x = 446 y = 96 }
+            spriteType = "GFX_hsr_corp_action_446x96"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_overview_card_1"
+            effect = "hsr_corp_local_overview_card_1"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_overview_category_1"
+            position = { x = 314 y = 306 }
+            size = { x = 260 y = 26 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_overview_category_1"
+            effect = "hsr_corp_local_overview_category_1"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_overview_level_1"
+            position = { x = 314 y = 344 }
+            size = { x = 260 y = 24 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_overview_level_1"
+            effect = "hsr_corp_local_overview_level_1"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_overview_open_1"
+            position = { x = 590 y = 328 }
+            size = { x = 140 y = 32 }
+            spriteType = "GFX_hsr_corp_gold_140x32"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_overview_open_1"
+            effect = "hsr_corp_local_overview_open_1"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_overview_card_2"
+            position = { x = 758 y = 296 }
+            size = { x = 446 y = 96 }
+            spriteType = "GFX_hsr_corp_action_446x96"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_overview_card_2"
+            effect = "hsr_corp_local_overview_card_2"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_overview_category_2"
+            position = { x = 772 y = 306 }
+            size = { x = 260 y = 26 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_overview_category_2"
+            effect = "hsr_corp_local_overview_category_2"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_overview_level_2"
+            position = { x = 772 y = 344 }
+            size = { x = 260 y = 24 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_overview_level_2"
+            effect = "hsr_corp_local_overview_level_2"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_overview_open_2"
+            position = { x = 1048 y = 328 }
+            size = { x = 140 y = 32 }
+            spriteType = "GFX_hsr_corp_gold_140x32"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_overview_open_2"
+            effect = "hsr_corp_local_overview_open_2"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_overview_card_3"
+            position = { x = 300 y = 404 }
+            size = { x = 446 y = 96 }
+            spriteType = "GFX_hsr_corp_action_446x96"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_overview_card_3"
+            effect = "hsr_corp_local_overview_card_3"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_overview_category_3"
+            position = { x = 314 y = 414 }
+            size = { x = 260 y = 26 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_overview_category_3"
+            effect = "hsr_corp_local_overview_category_3"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_overview_level_3"
+            position = { x = 314 y = 452 }
+            size = { x = 260 y = 24 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_overview_level_3"
+            effect = "hsr_corp_local_overview_level_3"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_overview_open_3"
+            position = { x = 590 y = 436 }
+            size = { x = 140 y = 32 }
+            spriteType = "GFX_hsr_corp_gold_140x32"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_overview_open_3"
+            effect = "hsr_corp_local_overview_open_3"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_overview_card_4"
+            position = { x = 758 y = 404 }
+            size = { x = 446 y = 96 }
+            spriteType = "GFX_hsr_corp_action_446x96"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_overview_card_4"
+            effect = "hsr_corp_local_overview_card_4"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_overview_category_4"
+            position = { x = 772 y = 414 }
+            size = { x = 260 y = 26 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_overview_category_4"
+            effect = "hsr_corp_local_overview_category_4"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_overview_level_4"
+            position = { x = 772 y = 452 }
+            size = { x = 260 y = 24 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_overview_level_4"
+            effect = "hsr_corp_local_overview_level_4"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_overview_open_4"
+            position = { x = 1048 y = 436 }
+            size = { x = 140 y = 32 }
+            spriteType = "GFX_hsr_corp_gold_140x32"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_overview_open_4"
+            effect = "hsr_corp_local_overview_open_4"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_overview_assets"
+            position = { x = 312 y = 528 }
+            size = { x = 872 y = 28 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_overview_assets"
+            effect = "hsr_corp_local_overview_assets"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_overview_companies"
+            position = { x = 312 y = 568 }
+            size = { x = 872 y = 28 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_overview_companies"
+            effect = "hsr_corp_local_overview_companies"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_header_1"
+            position = { x = 296 y = 236 }
+            size = { x = 908 y = 48 }
+            spriteType = "GFX_hsr_corp_header_908x48"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_header_1"
+            effect = "hsr_corp_local_policy_header_1"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_title_1"
+            position = { x = 312 y = 242 }
+            size = { x = 590 y = 26 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_title_1"
+            effect = "hsr_corp_local_policy_title_1"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_level_1"
+            position = { x = 908 y = 247 }
+            size = { x = 128 y = 24 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_level_1"
+            effect = "hsr_corp_local_policy_level_1"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_down_1"
+            position = { x = 1048 y = 245 }
+            size = { x = 64 y = 30 }
+            spriteType = "GFX_hsr_corp_button_64x30"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_down_1"
+            effect = "hsr_corp_legacy_local__hsr_planet_policy_1_level_down_effect"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_up_1"
+            position = { x = 1124 y = 245 }
+            size = { x = 64 y = 30 }
+            spriteType = "GFX_hsr_corp_button_64x30"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_up_1"
+            effect = "hsr_corp_legacy_local__hsr_planet_policy_1_level_up_effect"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_card_1_1"
+            position = { x = 300 y = 298 }
+            size = { x = 446 y = 94 }
+            spriteType = "GFX_hsr_corp_action_446x94"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_card_1_1"
+            effect = "hsr_corp_local_policy_card_1_1"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_icon_1_1"
+            position = { x = 312 y = 312 }
+            size = { x = 42 y = 42 }
+            spriteType = "GFX_tr_harmony_harmonious_directives"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_icon_1_1"
+            effect = "hsr_corp_local_policy_icon_1_1"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_label_1_1"
+            position = { x = 364 y = 307 }
+            size = { x = 364 y = 26 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_label_1_1"
+            effect = "hsr_corp_local_policy_label_1_1"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_state_1_1"
+            position = { x = 364 y = 341 }
+            size = { x = 192 y = 24 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_state_1_1"
+            effect = "hsr_corp_local_policy_state_1_1"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_apply_1_1"
+            position = { x = 580 y = 346 }
+            size = { x = 148 y = 30 }
+            spriteType = "GFX_hsr_corp_gold_148x30"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_apply_1_1"
+            effect = "hsr_corp_legacy_local__hsr_planet_policy_1_1_effect"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_card_1_2"
+            position = { x = 758 y = 298 }
+            size = { x = 446 y = 94 }
+            spriteType = "GFX_hsr_corp_action_446x94"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_card_1_2"
+            effect = "hsr_corp_local_policy_card_1_2"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_icon_1_2"
+            position = { x = 770 y = 312 }
+            size = { x = 42 y = 42 }
+            spriteType = "GFX_tr_adaptability_appropriation"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_icon_1_2"
+            effect = "hsr_corp_local_policy_icon_1_2"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_label_1_2"
+            position = { x = 822 y = 307 }
+            size = { x = 364 y = 26 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_label_1_2"
+            effect = "hsr_corp_local_policy_label_1_2"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_state_1_2"
+            position = { x = 822 y = 341 }
+            size = { x = 192 y = 24 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_state_1_2"
+            effect = "hsr_corp_local_policy_state_1_2"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_apply_1_2"
+            position = { x = 1038 y = 346 }
+            size = { x = 148 y = 30 }
+            spriteType = "GFX_hsr_corp_gold_148x30"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_apply_1_2"
+            effect = "hsr_corp_legacy_local__hsr_planet_policy_1_2_effect"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_card_1_3"
+            position = { x = 300 y = 402 }
+            size = { x = 446 y = 94 }
+            spriteType = "GFX_hsr_corp_action_446x94"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_card_1_3"
+            effect = "hsr_corp_local_policy_card_1_3"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_icon_1_3"
+            position = { x = 312 y = 416 }
+            size = { x = 42 y = 42 }
+            spriteType = "GFX_tr_expansion_courier_network_nomad"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_icon_1_3"
+            effect = "hsr_corp_local_policy_icon_1_3"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_label_1_3"
+            position = { x = 364 y = 411 }
+            size = { x = 364 y = 26 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_label_1_3"
+            effect = "hsr_corp_local_policy_label_1_3"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_state_1_3"
+            position = { x = 364 y = 445 }
+            size = { x = 192 y = 24 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_state_1_3"
+            effect = "hsr_corp_local_policy_state_1_3"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_apply_1_3"
+            position = { x = 580 y = 450 }
+            size = { x = 148 y = 30 }
+            spriteType = "GFX_hsr_corp_gold_148x30"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_apply_1_3"
+            effect = "hsr_corp_legacy_local__hsr_planet_policy_1_3_effect"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_card_1_4"
+            position = { x = 758 y = 402 }
+            size = { x = 446 y = 94 }
+            spriteType = "GFX_hsr_corp_action_446x94"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_card_1_4"
+            effect = "hsr_corp_local_policy_card_1_4"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_icon_1_4"
+            position = { x = 770 y = 416 }
+            size = { x = 42 y = 42 }
+            spriteType = "GFX_tr_enmity_consumate_contrarian"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_icon_1_4"
+            effect = "hsr_corp_local_policy_icon_1_4"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_label_1_4"
+            position = { x = 822 y = 411 }
+            size = { x = 364 y = 26 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_label_1_4"
+            effect = "hsr_corp_local_policy_label_1_4"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_state_1_4"
+            position = { x = 822 y = 445 }
+            size = { x = 192 y = 24 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_state_1_4"
+            effect = "hsr_corp_local_policy_state_1_4"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_apply_1_4"
+            position = { x = 1038 y = 450 }
+            size = { x = 148 y = 30 }
+            spriteType = "GFX_hsr_corp_gold_148x30"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_apply_1_4"
+            effect = "hsr_corp_legacy_local__hsr_planet_policy_1_4_effect"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_card_1_5"
+            position = { x = 300 y = 506 }
+            size = { x = 446 y = 94 }
+            spriteType = "GFX_hsr_corp_action_446x94"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_card_1_5"
+            effect = "hsr_corp_local_policy_card_1_5"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_icon_1_5"
+            position = { x = 312 y = 520 }
+            size = { x = 42 y = 42 }
+            spriteType = "GFX_tr_domination_grand_council"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_icon_1_5"
+            effect = "hsr_corp_local_policy_icon_1_5"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_label_1_5"
+            position = { x = 364 y = 515 }
+            size = { x = 364 y = 26 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_label_1_5"
+            effect = "hsr_corp_local_policy_label_1_5"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_state_1_5"
+            position = { x = 364 y = 549 }
+            size = { x = 192 y = 24 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_state_1_5"
+            effect = "hsr_corp_local_policy_state_1_5"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_apply_1_5"
+            position = { x = 580 y = 554 }
+            size = { x = 148 y = 30 }
+            spriteType = "GFX_hsr_corp_gold_148x30"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_apply_1_5"
+            effect = "hsr_corp_legacy_local__hsr_planet_policy_1_5_effect"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_header_2"
+            position = { x = 296 y = 236 }
+            size = { x = 908 y = 48 }
+            spriteType = "GFX_hsr_corp_header_908x48"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_header_2"
+            effect = "hsr_corp_local_policy_header_2"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_title_2"
+            position = { x = 312 y = 242 }
+            size = { x = 590 y = 26 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_title_2"
+            effect = "hsr_corp_local_policy_title_2"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_level_2"
+            position = { x = 908 y = 247 }
+            size = { x = 128 y = 24 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_level_2"
+            effect = "hsr_corp_local_policy_level_2"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_down_2"
+            position = { x = 1048 y = 245 }
+            size = { x = 64 y = 30 }
+            spriteType = "GFX_hsr_corp_button_64x30"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_down_2"
+            effect = "hsr_corp_legacy_local__hsr_planet_policy_2_level_down_effect"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_up_2"
+            position = { x = 1124 y = 245 }
+            size = { x = 64 y = 30 }
+            spriteType = "GFX_hsr_corp_button_64x30"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_up_2"
+            effect = "hsr_corp_legacy_local__hsr_planet_policy_2_level_up_effect"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_card_2_1"
+            position = { x = 300 y = 298 }
+            size = { x = 446 y = 94 }
+            spriteType = "GFX_hsr_corp_action_446x94"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_card_2_1"
+            effect = "hsr_corp_local_policy_card_2_1"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_icon_2_1"
+            position = { x = 312 y = 312 }
+            size = { x = 42 y = 42 }
+            spriteType = "GFX_tr_adaptability_dietary_enrichment"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_icon_2_1"
+            effect = "hsr_corp_local_policy_icon_2_1"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_label_2_1"
+            position = { x = 364 y = 307 }
+            size = { x = 364 y = 26 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_label_2_1"
+            effect = "hsr_corp_local_policy_label_2_1"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_state_2_1"
+            position = { x = 364 y = 341 }
+            size = { x = 192 y = 24 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_state_2_1"
+            effect = "hsr_corp_local_policy_state_2_1"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_apply_2_1"
+            position = { x = 580 y = 346 }
+            size = { x = 148 y = 30 }
+            spriteType = "GFX_hsr_corp_gold_148x30"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_apply_2_1"
+            effect = "hsr_corp_legacy_local__hsr_planet_policy_2_1_effect"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_card_2_2"
+            position = { x = 758 y = 298 }
+            size = { x = 446 y = 94 }
+            spriteType = "GFX_hsr_corp_action_446x94"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_card_2_2"
+            effect = "hsr_corp_local_policy_card_2_2"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_icon_2_2"
+            position = { x = 770 y = 312 }
+            size = { x = 42 y = 42 }
+            spriteType = "GFX_tr_genetics_creation"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_icon_2_2"
+            effect = "hsr_corp_local_policy_icon_2_2"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_label_2_2"
+            position = { x = 822 y = 307 }
+            size = { x = 364 y = 26 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_label_2_2"
+            effect = "hsr_corp_local_policy_label_2_2"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_state_2_2"
+            position = { x = 822 y = 341 }
+            size = { x = 192 y = 24 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_state_2_2"
+            effect = "hsr_corp_local_policy_state_2_2"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_apply_2_2"
+            position = { x = 1038 y = 346 }
+            size = { x = 148 y = 30 }
+            spriteType = "GFX_hsr_corp_gold_148x30"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_apply_2_2"
+            effect = "hsr_corp_legacy_local__hsr_planet_policy_2_2_effect"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_card_2_3"
+            position = { x = 300 y = 402 }
+            size = { x = 446 y = 94 }
+            spriteType = "GFX_hsr_corp_action_446x94"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_card_2_3"
+            effect = "hsr_corp_local_policy_card_2_3"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_icon_2_3"
+            position = { x = 312 y = 416 }
+            size = { x = 42 y = 42 }
+            spriteType = "GFX_tr_discovery_polytechnic_education"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_icon_2_3"
+            effect = "hsr_corp_local_policy_icon_2_3"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_label_2_3"
+            position = { x = 364 y = 411 }
+            size = { x = 364 y = 26 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_label_2_3"
+            effect = "hsr_corp_local_policy_label_2_3"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_state_2_3"
+            position = { x = 364 y = 445 }
+            size = { x = 192 y = 24 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_state_2_3"
+            effect = "hsr_corp_local_policy_state_2_3"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_apply_2_3"
+            position = { x = 580 y = 450 }
+            size = { x = 148 y = 30 }
+            spriteType = "GFX_hsr_corp_gold_148x30"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_apply_2_3"
+            effect = "hsr_corp_legacy_local__hsr_planet_policy_2_3_effect"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_card_2_4"
+            position = { x = 758 y = 402 }
+            size = { x = 446 y = 94 }
+            spriteType = "GFX_hsr_corp_action_446x94"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_card_2_4"
+            effect = "hsr_corp_local_policy_card_2_4"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_icon_2_4"
+            position = { x = 770 y = 416 }
+            size = { x = 42 y = 42 }
+            spriteType = "GFX_tr_discovery_science_division"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_icon_2_4"
+            effect = "hsr_corp_local_policy_icon_2_4"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_label_2_4"
+            position = { x = 822 y = 411 }
+            size = { x = 364 y = 26 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_label_2_4"
+            effect = "hsr_corp_local_policy_label_2_4"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_state_2_4"
+            position = { x = 822 y = 445 }
+            size = { x = 192 y = 24 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_state_2_4"
+            effect = "hsr_corp_local_policy_state_2_4"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_apply_2_4"
+            position = { x = 1038 y = 450 }
+            size = { x = 148 y = 30 }
+            spriteType = "GFX_hsr_corp_gold_148x30"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_apply_2_4"
+            effect = "hsr_corp_legacy_local__hsr_planet_policy_2_4_effect"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_card_2_5"
+            position = { x = 300 y = 506 }
+            size = { x = 446 y = 94 }
+            spriteType = "GFX_hsr_corp_action_446x94"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_card_2_5"
+            effect = "hsr_corp_local_policy_card_2_5"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_icon_2_5"
+            position = { x = 312 y = 520 }
+            size = { x = 42 y = 42 }
+            spriteType = "GFX_tr_diplomacy_direct_diplomacy"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_icon_2_5"
+            effect = "hsr_corp_local_policy_icon_2_5"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_label_2_5"
+            position = { x = 364 y = 515 }
+            size = { x = 364 y = 26 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_label_2_5"
+            effect = "hsr_corp_local_policy_label_2_5"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_state_2_5"
+            position = { x = 364 y = 549 }
+            size = { x = 192 y = 24 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_state_2_5"
+            effect = "hsr_corp_local_policy_state_2_5"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_apply_2_5"
+            position = { x = 580 y = 554 }
+            size = { x = 148 y = 30 }
+            spriteType = "GFX_hsr_corp_gold_148x30"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_apply_2_5"
+            effect = "hsr_corp_legacy_local__hsr_planet_policy_2_5_effect"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_header_3"
+            position = { x = 296 y = 236 }
+            size = { x = 908 y = 48 }
+            spriteType = "GFX_hsr_corp_header_908x48"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_header_3"
+            effect = "hsr_corp_local_policy_header_3"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_title_3"
+            position = { x = 312 y = 242 }
+            size = { x = 590 y = 26 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_title_3"
+            effect = "hsr_corp_local_policy_title_3"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_level_3"
+            position = { x = 908 y = 247 }
+            size = { x = 128 y = 24 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_level_3"
+            effect = "hsr_corp_local_policy_level_3"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_down_3"
+            position = { x = 1048 y = 245 }
+            size = { x = 64 y = 30 }
+            spriteType = "GFX_hsr_corp_button_64x30"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_down_3"
+            effect = "hsr_corp_legacy_local__hsr_planet_policy_3_level_down_effect"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_up_3"
+            position = { x = 1124 y = 245 }
+            size = { x = 64 y = 30 }
+            spriteType = "GFX_hsr_corp_button_64x30"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_up_3"
+            effect = "hsr_corp_legacy_local__hsr_planet_policy_3_level_up_effect"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_card_3_1"
+            position = { x = 300 y = 298 }
+            size = { x = 446 y = 94 }
+            spriteType = "GFX_hsr_corp_action_446x94"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_card_3_1"
+            effect = "hsr_corp_local_policy_card_3_1"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_icon_3_1"
+            position = { x = 312 y = 312 }
+            size = { x = 42 y = 42 }
+            spriteType = "GFX_tr_adaptability_recycling"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_icon_3_1"
+            effect = "hsr_corp_local_policy_icon_3_1"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_label_3_1"
+            position = { x = 364 y = 307 }
+            size = { x = 364 y = 26 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_label_3_1"
+            effect = "hsr_corp_local_policy_label_3_1"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_state_3_1"
+            position = { x = 364 y = 341 }
+            size = { x = 192 y = 24 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_state_3_1"
+            effect = "hsr_corp_local_policy_state_3_1"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_apply_3_1"
+            position = { x = 580 y = 346 }
+            size = { x = 148 y = 30 }
+            spriteType = "GFX_hsr_corp_gold_148x30"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_apply_3_1"
+            effect = "hsr_corp_legacy_local__hsr_planet_policy_3_1_effect"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_card_3_2"
+            position = { x = 758 y = 298 }
+            size = { x = 446 y = 94 }
+            spriteType = "GFX_hsr_corp_action_446x94"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_card_3_2"
+            effect = "hsr_corp_local_policy_card_3_2"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_icon_3_2"
+            position = { x = 770 y = 312 }
+            size = { x = 42 y = 42 }
+            spriteType = "GFX_tr_prosperity_pursuit_of_profit"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_icon_3_2"
+            effect = "hsr_corp_local_policy_icon_3_2"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_label_3_2"
+            position = { x = 822 y = 307 }
+            size = { x = 364 y = 26 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_label_3_2"
+            effect = "hsr_corp_local_policy_label_3_2"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_state_3_2"
+            position = { x = 822 y = 341 }
+            size = { x = 192 y = 24 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_state_3_2"
+            effect = "hsr_corp_local_policy_state_3_2"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_apply_3_2"
+            position = { x = 1038 y = 346 }
+            size = { x = 148 y = 30 }
+            spriteType = "GFX_hsr_corp_gold_148x30"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_apply_3_2"
+            effect = "hsr_corp_legacy_local__hsr_planet_policy_3_2_effect"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_card_3_3"
+            position = { x = 300 y = 402 }
+            size = { x = 446 y = 94 }
+            spriteType = "GFX_hsr_corp_action_446x94"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_card_3_3"
+            effect = "hsr_corp_local_policy_card_3_3"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_icon_3_3"
+            position = { x = 312 y = 416 }
+            size = { x = 42 y = 42 }
+            spriteType = "GFX_tr_harmony_the_greater_good"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_icon_3_3"
+            effect = "hsr_corp_local_policy_icon_3_3"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_label_3_3"
+            position = { x = 364 y = 411 }
+            size = { x = 364 y = 26 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_label_3_3"
+            effect = "hsr_corp_local_policy_label_3_3"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_state_3_3"
+            position = { x = 364 y = 445 }
+            size = { x = 192 y = 24 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_state_3_3"
+            effect = "hsr_corp_local_policy_state_3_3"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_apply_3_3"
+            position = { x = 580 y = 450 }
+            size = { x = 148 y = 30 }
+            spriteType = "GFX_hsr_corp_gold_148x30"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_apply_3_3"
+            effect = "hsr_corp_legacy_local__hsr_planet_policy_3_3_effect"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_card_3_4"
+            position = { x = 758 y = 402 }
+            size = { x = 446 y = 94 }
+            spriteType = "GFX_hsr_corp_action_446x94"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_card_3_4"
+            effect = "hsr_corp_local_policy_card_3_4"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_icon_3_4"
+            position = { x = 770 y = 416 }
+            size = { x = 42 y = 42 }
+            spriteType = "GFX_tr_harmony_utopian_dream"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_icon_3_4"
+            effect = "hsr_corp_local_policy_icon_3_4"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_label_3_4"
+            position = { x = 822 y = 411 }
+            size = { x = 364 y = 26 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_label_3_4"
+            effect = "hsr_corp_local_policy_label_3_4"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_state_3_4"
+            position = { x = 822 y = 445 }
+            size = { x = 192 y = 24 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_state_3_4"
+            effect = "hsr_corp_local_policy_state_3_4"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_apply_3_4"
+            position = { x = 1038 y = 450 }
+            size = { x = 148 y = 30 }
+            spriteType = "GFX_hsr_corp_gold_148x30"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_apply_3_4"
+            effect = "hsr_corp_legacy_local__hsr_planet_policy_3_4_effect"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_card_3_5"
+            position = { x = 300 y = 506 }
+            size = { x = 446 y = 94 }
+            spriteType = "GFX_hsr_corp_action_446x94"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_card_3_5"
+            effect = "hsr_corp_local_policy_card_3_5"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_icon_3_5"
+            position = { x = 312 y = 520 }
+            size = { x = 42 y = 42 }
+            spriteType = "GFX_tr_mercantile_adaptive_economic_policies"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_icon_3_5"
+            effect = "hsr_corp_local_policy_icon_3_5"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_label_3_5"
+            position = { x = 364 y = 515 }
+            size = { x = 364 y = 26 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_label_3_5"
+            effect = "hsr_corp_local_policy_label_3_5"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_state_3_5"
+            position = { x = 364 y = 549 }
+            size = { x = 192 y = 24 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_state_3_5"
+            effect = "hsr_corp_local_policy_state_3_5"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_apply_3_5"
+            position = { x = 580 y = 554 }
+            size = { x = 148 y = 30 }
+            spriteType = "GFX_hsr_corp_gold_148x30"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_apply_3_5"
+            effect = "hsr_corp_legacy_local__hsr_planet_policy_3_5_effect"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_header_4"
+            position = { x = 296 y = 236 }
+            size = { x = 908 y = 48 }
+            spriteType = "GFX_hsr_corp_header_908x48"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_header_4"
+            effect = "hsr_corp_local_policy_header_4"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_title_4"
+            position = { x = 312 y = 242 }
+            size = { x = 590 y = 26 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_title_4"
+            effect = "hsr_corp_local_policy_title_4"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_level_4"
+            position = { x = 908 y = 247 }
+            size = { x = 128 y = 24 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_level_4"
+            effect = "hsr_corp_local_policy_level_4"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_down_4"
+            position = { x = 1048 y = 245 }
+            size = { x = 64 y = 30 }
+            spriteType = "GFX_hsr_corp_button_64x30"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_down_4"
+            effect = "hsr_corp_legacy_local__hsr_planet_policy_4_level_down_effect"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_up_4"
+            position = { x = 1124 y = 245 }
+            size = { x = 64 y = 30 }
+            spriteType = "GFX_hsr_corp_button_64x30"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_up_4"
+            effect = "hsr_corp_legacy_local__hsr_planet_policy_4_level_up_effect"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_card_4_1"
+            position = { x = 300 y = 298 }
+            size = { x = 446 y = 94 }
+            spriteType = "GFX_hsr_corp_action_446x94"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_card_4_1"
+            effect = "hsr_corp_local_policy_card_4_1"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_icon_4_1"
+            position = { x = 312 y = 312 }
+            size = { x = 42 y = 42 }
+            spriteType = "GFX_tr_aptitude_champions_of_the_empire"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_icon_4_1"
+            effect = "hsr_corp_local_policy_icon_4_1"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_label_4_1"
+            position = { x = 364 y = 307 }
+            size = { x = 364 y = 26 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_label_4_1"
+            effect = "hsr_corp_local_policy_label_4_1"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_state_4_1"
+            position = { x = 364 y = 341 }
+            size = { x = 192 y = 24 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_state_4_1"
+            effect = "hsr_corp_local_policy_state_4_1"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_apply_4_1"
+            position = { x = 580 y = 346 }
+            size = { x = 148 y = 30 }
+            spriteType = "GFX_hsr_corp_gold_148x30"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_apply_4_1"
+            effect = "hsr_corp_legacy_local__hsr_planet_policy_4_1_effect"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_card_4_2"
+            position = { x = 758 y = 298 }
+            size = { x = 446 y = 94 }
+            spriteType = "GFX_hsr_corp_action_446x94"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_card_4_2"
+            effect = "hsr_corp_local_policy_card_4_2"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_icon_4_2"
+            position = { x = 770 y = 312 }
+            size = { x = 42 y = 42 }
+            spriteType = "GFX_tr_unyielding_never_surrender"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_icon_4_2"
+            effect = "hsr_corp_local_policy_icon_4_2"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_label_4_2"
+            position = { x = 822 y = 307 }
+            size = { x = 364 y = 26 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_label_4_2"
+            effect = "hsr_corp_local_policy_label_4_2"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_state_4_2"
+            position = { x = 822 y = 341 }
+            size = { x = 192 y = 24 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_state_4_2"
+            effect = "hsr_corp_local_policy_state_4_2"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_apply_4_2"
+            position = { x = 1038 y = 346 }
+            size = { x = 148 y = 30 }
+            spriteType = "GFX_hsr_corp_gold_148x30"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_apply_4_2"
+            effect = "hsr_corp_legacy_local__hsr_planet_policy_4_2_effect"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_card_4_3"
+            position = { x = 300 y = 402 }
+            size = { x = 446 y = 94 }
+            spriteType = "GFX_hsr_corp_action_446x94"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_card_4_3"
+            effect = "hsr_corp_local_policy_card_4_3"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_icon_4_3"
+            position = { x = 312 y = 416 }
+            size = { x = 42 y = 42 }
+            spriteType = "GFX_tr_unyielding_fortress_doctrine"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_icon_4_3"
+            effect = "hsr_corp_local_policy_icon_4_3"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_label_4_3"
+            position = { x = 364 y = 411 }
+            size = { x = 364 y = 26 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_label_4_3"
+            effect = "hsr_corp_local_policy_label_4_3"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_state_4_3"
+            position = { x = 364 y = 445 }
+            size = { x = 192 y = 24 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_state_4_3"
+            effect = "hsr_corp_local_policy_state_4_3"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_apply_4_3"
+            position = { x = 580 y = 450 }
+            size = { x = 148 y = 30 }
+            spriteType = "GFX_hsr_corp_gold_148x30"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_apply_4_3"
+            effect = "hsr_corp_legacy_local__hsr_planet_policy_4_3_effect"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_card_4_4"
+            position = { x = 758 y = 402 }
+            size = { x = 446 y = 94 }
+            spriteType = "GFX_hsr_corp_action_446x94"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_card_4_4"
+            effect = "hsr_corp_local_policy_card_4_4"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_icon_4_4"
+            position = { x = 770 y = 416 }
+            size = { x = 42 y = 42 }
+            spriteType = "GFX_tr_unyielding_bulwark_of_harmony"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_icon_4_4"
+            effect = "hsr_corp_local_policy_icon_4_4"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_label_4_4"
+            position = { x = 822 y = 411 }
+            size = { x = 364 y = 26 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_label_4_4"
+            effect = "hsr_corp_local_policy_label_4_4"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_state_4_4"
+            position = { x = 822 y = 445 }
+            size = { x = 192 y = 24 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_state_4_4"
+            effect = "hsr_corp_local_policy_state_4_4"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_apply_4_4"
+            position = { x = 1038 y = 450 }
+            size = { x = 148 y = 30 }
+            spriteType = "GFX_hsr_corp_gold_148x30"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_apply_4_4"
+            effect = "hsr_corp_legacy_local__hsr_planet_policy_4_4_effect"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_card_4_5"
+            position = { x = 300 y = 506 }
+            size = { x = 446 y = 94 }
+            spriteType = "GFX_hsr_corp_action_446x94"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_card_4_5"
+            effect = "hsr_corp_local_policy_card_4_5"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_icon_4_5"
+            position = { x = 312 y = 520 }
+            size = { x = 42 y = 42 }
+            spriteType = "GFX_tr_domination_judgment_corps"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_icon_4_5"
+            effect = "hsr_corp_local_policy_icon_4_5"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_label_4_5"
+            position = { x = 364 y = 515 }
+            size = { x = 364 y = 26 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_label_4_5"
+            effect = "hsr_corp_local_policy_label_4_5"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_state_4_5"
+            position = { x = 364 y = 549 }
+            size = { x = 192 y = 24 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_policy_state_4_5"
+            effect = "hsr_corp_local_policy_state_4_5"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_policy_apply_4_5"
+            position = { x = 580 y = 554 }
+            size = { x = 148 y = 30 }
+            spriteType = "GFX_hsr_corp_gold_148x30"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_policy_apply_4_5"
+            effect = "hsr_corp_legacy_local__hsr_planet_policy_4_5_effect"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_enterprise_header"
+            position = { x = 296 y = 236 }
+            size = { x = 908 y = 48 }
+            spriteType = "GFX_hsr_corp_header_908x48"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_enterprise_header"
+            effect = "hsr_corp_local_enterprise_header"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_enterprise_title"
+            position = { x = 312 y = 242 }
+            size = { x = 876 y = 26 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_enterprise_title"
+            effect = "hsr_corp_local_enterprise_title"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_enterprise_metric_bg_0"
+            position = { x = 300 y = 292 }
+            size = { x = 294 y = 42 }
+            spriteType = "GFX_hsr_corp_metric_294x42"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_enterprise_metric_bg_0"
+            effect = "hsr_corp_local_enterprise_metric_bg_0"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_enterprise_metric_0"
+            position = { x = 312 y = 302 }
+            size = { x = 270 y = 24 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_enterprise_metric_0"
+            effect = "hsr_corp_local_enterprise_metric_0"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_enterprise_metric_bg_1"
+            position = { x = 604 y = 292 }
+            size = { x = 294 y = 42 }
+            spriteType = "GFX_hsr_corp_metric_294x42"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_enterprise_metric_bg_1"
+            effect = "hsr_corp_local_enterprise_metric_bg_1"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_enterprise_metric_1"
+            position = { x = 616 y = 302 }
+            size = { x = 270 y = 24 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_enterprise_metric_1"
+            effect = "hsr_corp_local_enterprise_metric_1"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_enterprise_metric_bg_2"
+            position = { x = 908 y = 292 }
+            size = { x = 294 y = 42 }
+            spriteType = "GFX_hsr_corp_metric_294x42"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_enterprise_metric_bg_2"
+            effect = "hsr_corp_local_enterprise_metric_bg_2"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_enterprise_metric_2"
+            position = { x = 920 y = 302 }
+            size = { x = 270 y = 24 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_enterprise_metric_2"
+            effect = "hsr_corp_local_enterprise_metric_2"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_enterprise_card_1"
+            position = { x = 300 y = 344 }
+            size = { x = 902 y = 82 }
+            spriteType = "GFX_hsr_corp_row_902x82"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_enterprise_card_1"
+            effect = "hsr_corp_local_enterprise_card_1"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_enterprise_emblem_1"
+            position = { x = 316 y = 361 }
+            size = { x = 48 y = 48 }
+            spriteType = "GFX_hsr_corp_emblem_48x48"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_enterprise_emblem_1"
+            effect = "hsr_corp_local_enterprise_emblem_1"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_enterprise_name_1"
+            position = { x = 382 y = 351 }
+            size = { x = 584 y = 25 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_enterprise_name_1"
+            effect = "hsr_corp_local_enterprise_name_1"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_enterprise_summary_1"
+            position = { x = 382 y = 377 }
+            size = { x = 584 y = 22 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_enterprise_summary_1"
+            effect = "hsr_corp_local_enterprise_summary_1"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_enterprise_side_1"
+            position = { x = 382 y = 401 }
+            size = { x = 584 y = 20 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_enterprise_side_1"
+            effect = "hsr_corp_local_enterprise_side_1"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_manage_1"
+            position = { x = 982 y = 368 }
+            size = { x = 200 y = 34 }
+            spriteType = "GFX_hsr_corp_button_200x34"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_manage_1"
+            effect = "hsr_corp_local_manage_1"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_empty_1"
+            position = { x = 382 y = 364 }
+            size = { x = 584 y = 26 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_empty_1"
+            effect = "hsr_corp_local_empty_1"
+        }
+        effectButtonType = {
+            name = "hsr_corp_setup_1"
+            position = { x = 982 y = 368 }
+            size = { x = 200 y = 34 }
+            spriteType = "GFX_hsr_corp_gold_200x34"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_setup_1"
+            effect = "hsr_corp_setup_1"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_pending_1"
+            position = { x = 382 y = 372 }
+            size = { x = 782 y = 24 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_pending_1"
+            effect = "hsr_corp_local_pending_1"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_enterprise_card_2"
+            position = { x = 300 y = 432 }
+            size = { x = 902 y = 82 }
+            spriteType = "GFX_hsr_corp_row_902x82"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_enterprise_card_2"
+            effect = "hsr_corp_local_enterprise_card_2"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_enterprise_emblem_2"
+            position = { x = 316 y = 449 }
+            size = { x = 48 y = 48 }
+            spriteType = "GFX_hsr_corp_emblem_48x48"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_enterprise_emblem_2"
+            effect = "hsr_corp_local_enterprise_emblem_2"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_enterprise_name_2"
+            position = { x = 382 y = 439 }
+            size = { x = 584 y = 25 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_enterprise_name_2"
+            effect = "hsr_corp_local_enterprise_name_2"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_enterprise_summary_2"
+            position = { x = 382 y = 465 }
+            size = { x = 584 y = 22 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_enterprise_summary_2"
+            effect = "hsr_corp_local_enterprise_summary_2"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_enterprise_side_2"
+            position = { x = 382 y = 489 }
+            size = { x = 584 y = 20 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_enterprise_side_2"
+            effect = "hsr_corp_local_enterprise_side_2"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_manage_2"
+            position = { x = 982 y = 456 }
+            size = { x = 200 y = 34 }
+            spriteType = "GFX_hsr_corp_button_200x34"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_manage_2"
+            effect = "hsr_corp_local_manage_2"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_empty_2"
+            position = { x = 382 y = 452 }
+            size = { x = 584 y = 26 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_empty_2"
+            effect = "hsr_corp_local_empty_2"
+        }
+        effectButtonType = {
+            name = "hsr_corp_setup_2"
+            position = { x = 982 y = 456 }
+            size = { x = 200 y = 34 }
+            spriteType = "GFX_hsr_corp_gold_200x34"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_setup_2"
+            effect = "hsr_corp_setup_2"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_pending_2"
+            position = { x = 382 y = 460 }
+            size = { x = 782 y = 24 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_pending_2"
+            effect = "hsr_corp_local_pending_2"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_enterprise_card_3"
+            position = { x = 300 y = 520 }
+            size = { x = 902 y = 82 }
+            spriteType = "GFX_hsr_corp_row_902x82"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_enterprise_card_3"
+            effect = "hsr_corp_local_enterprise_card_3"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_enterprise_emblem_3"
+            position = { x = 316 y = 537 }
+            size = { x = 48 y = 48 }
+            spriteType = "GFX_hsr_corp_emblem_48x48"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_enterprise_emblem_3"
+            effect = "hsr_corp_local_enterprise_emblem_3"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_enterprise_name_3"
+            position = { x = 382 y = 527 }
+            size = { x = 584 y = 25 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_enterprise_name_3"
+            effect = "hsr_corp_local_enterprise_name_3"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_enterprise_summary_3"
+            position = { x = 382 y = 553 }
+            size = { x = 584 y = 22 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_enterprise_summary_3"
+            effect = "hsr_corp_local_enterprise_summary_3"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_enterprise_side_3"
+            position = { x = 382 y = 577 }
+            size = { x = 584 y = 20 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_enterprise_side_3"
+            effect = "hsr_corp_local_enterprise_side_3"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_manage_3"
+            position = { x = 982 y = 544 }
+            size = { x = 200 y = 34 }
+            spriteType = "GFX_hsr_corp_button_200x34"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_manage_3"
+            effect = "hsr_corp_local_manage_3"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_empty_3"
+            position = { x = 382 y = 540 }
+            size = { x = 584 y = 26 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_empty_3"
+            effect = "hsr_corp_local_empty_3"
+        }
+        effectButtonType = {
+            name = "hsr_corp_setup_3"
+            position = { x = 982 y = 544 }
+            size = { x = 200 y = 34 }
+            spriteType = "GFX_hsr_corp_gold_200x34"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_setup_3"
+            effect = "hsr_corp_setup_3"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_pending_3"
+            position = { x = 382 y = 548 }
+            size = { x = 782 y = 24 }
+            spriteType = "GFX_tiled_window_transparent"
+            buttonFont = "cg_16b"
+            format = left
+            text = "hsr_corp_local_pending_3"
+            effect = "hsr_corp_local_pending_3"
+        }
+        effectButtonType = {
+            name = "hsr_corp_local_combined_refresh"
+            position = { x = 1076 y = 664 }
+            size = { x = 140 y = 28 }
+            spriteType = "GFX_hsr_corp_button_140x28"
+            buttonFont = "cg_16b"
+            format = center
+            text = "hsr_corp_local_combined_refresh"
+            effect = "hsr_corp_local_combined_refresh"
+        }
+        containerWindowType = {
+            name = "hsr_corp_detail_pages"
+            position = { x = 0 y = 0 }
+            size = { width = 1240 height = 700 }
+            effectButtonType = {
+                name = "hsr_corp_header"
+                position = { x = 24 y = 18 }
+                size = { x = 1192 y = 73 }
+                spriteType = "GFX_hsr_corp_header_1192x73"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_header"
+                effect = "hsr_corp_header"
+            }
+            effectButtonType = {
+                name = "hsr_corp_emblem"
+                position = { x = 43 y = 29 }
+                size = { x = 64 y = 52 }
+                spriteType = "GFX_hsr_corp_emblem_64x52"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_emblem"
+                effect = "hsr_corp_emblem"
+            }
+            effectButtonType = {
+                name = "hsr_corp_title"
+                position = { x = 131 y = 24 }
+                size = { x = 989 y = 32 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "malgun_goth_24"
+                format = left
+                text = "hsr_corp_title"
+                effect = "hsr_corp_title"
+            }
+            effectButtonType = {
+                name = "hsr_corp_subtitle"
+                position = { x = 131 y = 59 }
+                size = { x = 989 y = 24 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_subtitle"
+                effect = "hsr_corp_subtitle"
+            }
+            effectButtonType = {
+                name = "hsr_corp_company_sidebar"
+                position = { x = 24 y = 147 }
+                size = { x = 380 y = 481 }
+                spriteType = "GFX_hsr_corp_sidebar_380x481"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_company_sidebar"
+                effect = "hsr_corp_company_sidebar"
+            }
+            effectButtonType = {
+                name = "hsr_corp_sidebar_heading"
+                position = { x = 40 y = 160 }
+                size = { x = 347 y = 28 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_sidebar_heading"
+                effect = "hsr_corp_sidebar_heading"
+            }
+            effectButtonType = {
+                name = "hsr_corp_sidebar_0"
+                position = { x = 40 y = 201 }
+                size = { x = 347 y = 26 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_sidebar_0"
+                effect = "hsr_corp_sidebar_0"
+            }
+            effectButtonType = {
+                name = "hsr_corp_sidebar_1"
+                position = { x = 40 y = 228 }
+                size = { x = 347 y = 26 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_sidebar_1"
+                effect = "hsr_corp_sidebar_1"
+            }
+            effectButtonType = {
+                name = "hsr_corp_sidebar_2"
+                position = { x = 40 y = 255 }
+                size = { x = 347 y = 26 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_sidebar_2"
+                effect = "hsr_corp_sidebar_2"
+            }
+            effectButtonType = {
+                name = "hsr_corp_sidebar_3"
+                position = { x = 40 y = 282 }
+                size = { x = 347 y = 26 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_sidebar_3"
+                effect = "hsr_corp_sidebar_3"
+            }
+            effectButtonType = {
+                name = "hsr_corp_sidebar_4"
+                position = { x = 40 y = 309 }
+                size = { x = 347 y = 26 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_sidebar_4"
+                effect = "hsr_corp_sidebar_4"
+            }
+            effectButtonType = {
+                name = "hsr_corp_sidebar_5"
+                position = { x = 40 y = 336 }
+                size = { x = 347 y = 26 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_sidebar_5"
+                effect = "hsr_corp_sidebar_5"
+            }
+            effectButtonType = {
+                name = "hsr_corp_sidebar_6"
+                position = { x = 40 y = 363 }
+                size = { x = 347 y = 26 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_sidebar_6"
+                effect = "hsr_corp_sidebar_6"
+            }
+            effectButtonType = {
+                name = "hsr_corp_sidebar_7"
+                position = { x = 40 y = 390 }
+                size = { x = 347 y = 26 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_sidebar_7"
+                effect = "hsr_corp_sidebar_7"
+            }
+            effectButtonType = {
+                name = "hsr_corp_sidebar_finance_heading"
+                position = { x = 40 y = 438 }
+                size = { x = 347 y = 28 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_sidebar_finance_heading"
+                effect = "hsr_corp_sidebar_finance_heading"
+            }
+            effectButtonType = {
+                name = "hsr_corp_sidebar_finance_0"
+                position = { x = 40 y = 477 }
+                size = { x = 347 y = 26 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_sidebar_finance_0"
+                effect = "hsr_corp_sidebar_finance_0"
+            }
+            effectButtonType = {
+                name = "hsr_corp_sidebar_finance_1"
+                position = { x = 40 y = 504 }
+                size = { x = 347 y = 26 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_sidebar_finance_1"
+                effect = "hsr_corp_sidebar_finance_1"
+            }
+            effectButtonType = {
+                name = "hsr_corp_sidebar_finance_2"
+                position = { x = 40 y = 531 }
+                size = { x = 347 y = 26 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_sidebar_finance_2"
+                effect = "hsr_corp_sidebar_finance_2"
+            }
+            effectButtonType = {
+                name = "hsr_corp_sidebar_finance_3"
+                position = { x = 40 y = 558 }
+                size = { x = 347 y = 26 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_sidebar_finance_3"
+                effect = "hsr_corp_sidebar_finance_3"
+            }
+            effectButtonType = {
+                name = "hsr_corp_sidebar_finance_4"
+                position = { x = 40 y = 585 }
+                size = { x = 347 y = 26 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_sidebar_finance_4"
+                effect = "hsr_corp_sidebar_finance_4"
+            }
+            effectButtonType = {
+                name = "hsr_corp_tab_1"
+                position = { x = 425 y = 106 }
+                size = { x = 194 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_194x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_tab_1"
+                effect = "hsr_corp_tab_1"
+            }
+            effectButtonType = {
+                name = "hsr_corp_tab_1_selected"
+                position = { x = 425 y = 106 }
+                size = { x = 194 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_194x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_tab_1_selected"
+                effect = "hsr_corp_tab_1_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_tab_2"
+                position = { x = 624 y = 106 }
+                size = { x = 194 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_194x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_tab_2"
+                effect = "hsr_corp_tab_2"
+            }
+            effectButtonType = {
+                name = "hsr_corp_tab_2_selected"
+                position = { x = 624 y = 106 }
+                size = { x = 194 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_194x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_tab_2_selected"
+                effect = "hsr_corp_tab_2_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_tab_3"
+                position = { x = 823 y = 106 }
+                size = { x = 194 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_194x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_tab_3"
+                effect = "hsr_corp_tab_3"
+            }
+            effectButtonType = {
+                name = "hsr_corp_tab_3_selected"
+                position = { x = 823 y = 106 }
+                size = { x = 194 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_194x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_tab_3_selected"
+                effect = "hsr_corp_tab_3_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_tab_4"
+                position = { x = 1022 y = 106 }
+                size = { x = 194 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_194x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_tab_4"
+                effect = "hsr_corp_tab_4"
+            }
+            effectButtonType = {
+                name = "hsr_corp_tab_4_selected"
+                position = { x = 1022 y = 106 }
+                size = { x = 194 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_194x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_tab_4_selected"
+                effect = "hsr_corp_tab_4_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_company_content"
+                position = { x = 425 y = 152 }
+                size = { x = 791 y = 476 }
+                spriteType = "GFX_hsr_corp_content_791x476"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_company_content"
+                effect = "hsr_corp_company_content"
+            }
+            effectButtonType = {
+                name = "hsr_corp_back_local"
+                position = { x = 24 y = 648 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_button_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_back_local"
+                effect = "hsr_corp_back_local"
+            }
+            effectButtonType = {
+                name = "hsr_corp_company_refresh"
+                position = { x = 281 y = 648 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_button_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_company_refresh"
+                effect = "hsr_corp_company_refresh"
+            }
+            effectButtonType = {
+                name = "hsr_corp_company_control"
+                position = { x = 553 y = 652 }
+                size = { x = 663 y = 26 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_company_control"
+                effect = "hsr_corp_company_control"
+            }
+            effectButtonType = {
+                name = "hsr_corp_action_card_upgrade"
+                position = { x = 446 y = 165 }
+                size = { x = 748 y = 80 }
+                spriteType = "GFX_hsr_corp_action_748x80"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_action_card_upgrade"
+                effect = "hsr_corp_action_card_upgrade"
+            }
+            effectButtonType = {
+                name = "hsr_corp_action_title_upgrade"
+                position = { x = 465 y = 168 }
+                size = { x = 441 y = 26 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_action_title_upgrade"
+                effect = "hsr_corp_action_title_upgrade"
+            }
+            effectButtonType = {
+                name = "hsr_corp_action_desc_upgrade"
+                position = { x = 465 y = 194 }
+                size = { x = 441 y = 22 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_action_desc_upgrade"
+                effect = "hsr_corp_action_desc_upgrade"
+            }
+            effectButtonType = {
+                name = "hsr_corp_action_cost_upgrade"
+                position = { x = 465 y = 217 }
+                size = { x = 441 y = 22 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_action_cost_upgrade"
+                effect = "hsr_corp_action_cost_upgrade"
+            }
+            effectButtonType = {
+                name = "hsr_corp_upgrade_button"
+                position = { x = 967 y = 185 }
+                size = { x = 206 y = 37 }
+                spriteType = "GFX_hsr_corp_gold_206x37"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_upgrade_button"
+                effect = "hsr_corp_upgrade_button"
+            }
+            effectButtonType = {
+                name = "hsr_corp_action_card_inject"
+                position = { x = 446 y = 256 }
+                size = { x = 748 y = 80 }
+                spriteType = "GFX_hsr_corp_action_748x80"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_action_card_inject"
+                effect = "hsr_corp_action_card_inject"
+            }
+            effectButtonType = {
+                name = "hsr_corp_action_title_inject"
+                position = { x = 465 y = 259 }
+                size = { x = 441 y = 26 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_action_title_inject"
+                effect = "hsr_corp_action_title_inject"
+            }
+            effectButtonType = {
+                name = "hsr_corp_action_desc_inject"
+                position = { x = 465 y = 285 }
+                size = { x = 441 y = 22 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_action_desc_inject"
+                effect = "hsr_corp_action_desc_inject"
+            }
+            effectButtonType = {
+                name = "hsr_corp_action_cost_inject"
+                position = { x = 465 y = 309 }
+                size = { x = 441 y = 22 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_action_cost_inject"
+                effect = "hsr_corp_action_cost_inject"
+            }
+            effectButtonType = {
+                name = "hsr_corp_inject_button"
+                position = { x = 967 y = 277 }
+                size = { x = 206 y = 37 }
+                spriteType = "GFX_hsr_corp_gold_206x37"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_inject_button"
+                effect = "hsr_corp_inject_button"
+            }
+            effectButtonType = {
+                name = "hsr_corp_action_card_crisis"
+                position = { x = 446 y = 348 }
+                size = { x = 748 y = 80 }
+                spriteType = "GFX_hsr_corp_action_748x80"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_action_card_crisis"
+                effect = "hsr_corp_action_card_crisis"
+            }
+            effectButtonType = {
+                name = "hsr_corp_action_title_crisis"
+                position = { x = 465 y = 351 }
+                size = { x = 441 y = 26 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_action_title_crisis"
+                effect = "hsr_corp_action_title_crisis"
+            }
+            effectButtonType = {
+                name = "hsr_corp_action_desc_crisis"
+                position = { x = 465 y = 377 }
+                size = { x = 441 y = 22 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_action_desc_crisis"
+                effect = "hsr_corp_action_desc_crisis"
+            }
+            effectButtonType = {
+                name = "hsr_corp_action_cost_crisis"
+                position = { x = 465 y = 401 }
+                size = { x = 441 y = 22 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_action_cost_crisis"
+                effect = "hsr_corp_action_cost_crisis"
+            }
+            effectButtonType = {
+                name = "hsr_corp_crisis_button"
+                position = { x = 967 y = 368 }
+                size = { x = 206 y = 37 }
+                spriteType = "GFX_hsr_corp_gold_206x37"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_crisis_button"
+                effect = "hsr_corp_crisis_button"
+            }
+            effectButtonType = {
+                name = "hsr_corp_action_card_close"
+                position = { x = 446 y = 439 }
+                size = { x = 748 y = 80 }
+                spriteType = "GFX_hsr_corp_action_748x80"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_action_card_close"
+                effect = "hsr_corp_action_card_close"
+            }
+            effectButtonType = {
+                name = "hsr_corp_action_title_close"
+                position = { x = 465 y = 443 }
+                size = { x = 441 y = 26 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_action_title_close"
+                effect = "hsr_corp_action_title_close"
+            }
+            effectButtonType = {
+                name = "hsr_corp_action_desc_close"
+                position = { x = 465 y = 469 }
+                size = { x = 441 y = 22 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_action_desc_close"
+                effect = "hsr_corp_action_desc_close"
+            }
+            effectButtonType = {
+                name = "hsr_corp_action_cost_close"
+                position = { x = 465 y = 492 }
+                size = { x = 441 y = 22 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_action_cost_close"
+                effect = "hsr_corp_action_cost_close"
+            }
+            effectButtonType = {
+                name = "hsr_corp_close_button"
+                position = { x = 967 y = 460 }
+                size = { x = 206 y = 37 }
+                spriteType = "GFX_hsr_corp_danger_206x37"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_close_button"
+                effect = "hsr_corp_close_button"
+            }
+            effectButtonType = {
+                name = "hsr_corp_close_confirm"
+                position = { x = 446 y = 542 }
+                size = { x = 347 y = 37 }
+                spriteType = "GFX_hsr_corp_danger_347x37"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_close_confirm"
+                effect = "hsr_corp_close_confirm"
+            }
+            effectButtonType = {
+                name = "hsr_corp_close_cancel"
+                position = { x = 820 y = 542 }
+                size = { x = 374 y = 37 }
+                spriteType = "GFX_hsr_corp_button_374x37"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_close_cancel"
+                effect = "hsr_corp_close_cancel"
+            }
+            effectButtonType = {
+                name = "hsr_corp_annual_summary"
+                position = { x = 446 y = 587 }
+                size = { x = 748 y = 26 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_annual_summary"
+                effect = "hsr_corp_annual_summary"
+            }
+            effectButtonType = {
+                name = "hsr_corp_industry_heading"
+                position = { x = 446 y = 165 }
+                size = { x = 748 y = 30 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_industry_heading"
+                effect = "hsr_corp_industry_heading"
+            }
+            effectButtonType = {
+                name = "hsr_corp_industry_1_choice"
+                position = { x = 446 y = 208 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_industry_1_choice"
+                effect = "hsr_corp_industry_1_choice"
+            }
+            effectButtonType = {
+                name = "hsr_corp_industry_1_choice_selected"
+                position = { x = 446 y = 208 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_industry_1_choice_selected"
+                effect = "hsr_corp_industry_1_choice_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_industry_2_choice"
+                position = { x = 698 y = 208 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_industry_2_choice"
+                effect = "hsr_corp_industry_2_choice"
+            }
+            effectButtonType = {
+                name = "hsr_corp_industry_2_choice_selected"
+                position = { x = 698 y = 208 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_industry_2_choice_selected"
+                effect = "hsr_corp_industry_2_choice_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_industry_3_choice"
+                position = { x = 949 y = 208 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_industry_3_choice"
+                effect = "hsr_corp_industry_3_choice"
+            }
+            effectButtonType = {
+                name = "hsr_corp_industry_3_choice_selected"
+                position = { x = 949 y = 208 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_industry_3_choice_selected"
+                effect = "hsr_corp_industry_3_choice_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_industry_4_choice"
+                position = { x = 446 y = 255 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_industry_4_choice"
+                effect = "hsr_corp_industry_4_choice"
+            }
+            effectButtonType = {
+                name = "hsr_corp_industry_4_choice_selected"
+                position = { x = 446 y = 255 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_industry_4_choice_selected"
+                effect = "hsr_corp_industry_4_choice_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_industry_5_choice"
+                position = { x = 698 y = 255 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_industry_5_choice"
+                effect = "hsr_corp_industry_5_choice"
+            }
+            effectButtonType = {
+                name = "hsr_corp_industry_5_choice_selected"
+                position = { x = 698 y = 255 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_industry_5_choice_selected"
+                effect = "hsr_corp_industry_5_choice_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_industry_6_choice"
+                position = { x = 949 y = 255 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_industry_6_choice"
+                effect = "hsr_corp_industry_6_choice"
+            }
+            effectButtonType = {
+                name = "hsr_corp_industry_6_choice_selected"
+                position = { x = 949 y = 255 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_industry_6_choice_selected"
+                effect = "hsr_corp_industry_6_choice_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_industry_7_choice"
+                position = { x = 446 y = 303 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_industry_7_choice"
+                effect = "hsr_corp_industry_7_choice"
+            }
+            effectButtonType = {
+                name = "hsr_corp_industry_7_choice_selected"
+                position = { x = 446 y = 303 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_industry_7_choice_selected"
+                effect = "hsr_corp_industry_7_choice_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_industry_8_choice"
+                position = { x = 698 y = 303 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_industry_8_choice"
+                effect = "hsr_corp_industry_8_choice"
+            }
+            effectButtonType = {
+                name = "hsr_corp_industry_8_choice_selected"
+                position = { x = 698 y = 303 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_industry_8_choice_selected"
+                effect = "hsr_corp_industry_8_choice_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_industry_9_choice"
+                position = { x = 949 y = 303 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_industry_9_choice"
+                effect = "hsr_corp_industry_9_choice"
+            }
+            effectButtonType = {
+                name = "hsr_corp_industry_9_choice_selected"
+                position = { x = 949 y = 303 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_industry_9_choice_selected"
+                effect = "hsr_corp_industry_9_choice_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_industry_selected"
+                position = { x = 446 y = 359 }
+                size = { x = 748 y = 30 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_industry_selected"
+                effect = "hsr_corp_industry_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_expand_card_1"
+                position = { x = 446 y = 408 }
+                size = { x = 748 y = 69 }
+                spriteType = "GFX_hsr_corp_action_748x69"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_expand_card_1"
+                effect = "hsr_corp_expand_card_1"
+            }
+            effectButtonType = {
+                name = "hsr_corp_expand_cost_1"
+                position = { x = 462 y = 427 }
+                size = { x = 461 y = 26 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_expand_cost_1"
+                effect = "hsr_corp_expand_cost_1"
+            }
+            effectButtonType = {
+                name = "hsr_corp_expand_1"
+                position = { x = 957 y = 424 }
+                size = { x = 219 y = 37 }
+                spriteType = "GFX_hsr_corp_gold_219x37"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_expand_1"
+                effect = "hsr_corp_expand_1"
+            }
+            effectButtonType = {
+                name = "hsr_corp_expand_card_2"
+                position = { x = 446 y = 489 }
+                size = { x = 748 y = 69 }
+                spriteType = "GFX_hsr_corp_action_748x69"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_expand_card_2"
+                effect = "hsr_corp_expand_card_2"
+            }
+            effectButtonType = {
+                name = "hsr_corp_expand_cost_2"
+                position = { x = 462 y = 507 }
+                size = { x = 461 y = 26 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_expand_cost_2"
+                effect = "hsr_corp_expand_cost_2"
+            }
+            effectButtonType = {
+                name = "hsr_corp_expand_2"
+                position = { x = 957 y = 505 }
+                size = { x = 219 y = 37 }
+                spriteType = "GFX_hsr_corp_gold_219x37"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_expand_2"
+                effect = "hsr_corp_expand_2"
+            }
+            effectButtonType = {
+                name = "hsr_corp_industry_rule"
+                position = { x = 446 y = 589 }
+                size = { x = 748 y = 26 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_industry_rule"
+                effect = "hsr_corp_industry_rule"
+            }
+            effectButtonType = {
+                name = "hsr_corp_equity_line_0"
+                position = { x = 446 y = 169 }
+                size = { x = 748 y = 30 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_equity_line_0"
+                effect = "hsr_corp_equity_line_0"
+            }
+            effectButtonType = {
+                name = "hsr_corp_equity_line_1"
+                position = { x = 446 y = 208 }
+                size = { x = 748 y = 30 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_equity_line_1"
+                effect = "hsr_corp_equity_line_1"
+            }
+            effectButtonType = {
+                name = "hsr_corp_equity_line_2"
+                position = { x = 446 y = 247 }
+                size = { x = 748 y = 30 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_equity_line_2"
+                effect = "hsr_corp_equity_line_2"
+            }
+            effectButtonType = {
+                name = "hsr_corp_qty_1"
+                position = { x = 446 y = 305 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_qty_1"
+                effect = "hsr_corp_qty_1"
+            }
+            effectButtonType = {
+                name = "hsr_corp_qty_1_selected"
+                position = { x = 446 y = 305 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_qty_1_selected"
+                effect = "hsr_corp_qty_1_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_qty_5"
+                position = { x = 698 y = 305 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_qty_5"
+                effect = "hsr_corp_qty_5"
+            }
+            effectButtonType = {
+                name = "hsr_corp_qty_5_selected"
+                position = { x = 698 y = 305 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_qty_5_selected"
+                effect = "hsr_corp_qty_5_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_qty_10"
+                position = { x = 949 y = 305 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_qty_10"
+                effect = "hsr_corp_qty_10"
+            }
+            effectButtonType = {
+                name = "hsr_corp_qty_10_selected"
+                position = { x = 949 y = 305 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_qty_10_selected"
+                effect = "hsr_corp_qty_10_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_order_preview"
+                position = { x = 446 y = 359 }
+                size = { x = 748 y = 26 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_order_preview"
+                effect = "hsr_corp_order_preview"
+            }
+            effectButtonType = {
+                name = "hsr_corp_buy_button"
+                position = { x = 446 y = 408 }
+                size = { x = 363 y = 41 }
+                spriteType = "GFX_hsr_corp_gold_363x41"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_buy_button"
+                effect = "hsr_corp_buy_button"
+            }
+            effectButtonType = {
+                name = "hsr_corp_sell_button"
+                position = { x = 831 y = 408 }
+                size = { x = 363 y = 41 }
+                spriteType = "GFX_hsr_corp_gold_363x41"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_sell_button"
+                effect = "hsr_corp_sell_button"
+            }
+            effectButtonType = {
+                name = "hsr_corp_offer_button"
+                position = { x = 446 y = 471 }
+                size = { x = 748 y = 41 }
+                spriteType = "GFX_hsr_corp_button_748x41"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_offer_button"
+                effect = "hsr_corp_offer_button"
+            }
+            effectButtonType = {
+                name = "hsr_corp_equity_rule"
+                position = { x = 446 y = 533 }
+                size = { x = 748 y = 26 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_equity_rule"
+                effect = "hsr_corp_equity_rule"
+            }
+            effectButtonType = {
+                name = "hsr_corp_equity_cooldown"
+                position = { x = 446 y = 579 }
+                size = { x = 748 y = 26 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_equity_cooldown"
+                effect = "hsr_corp_equity_cooldown"
+            }
+            effectButtonType = {
+                name = "hsr_corp_diplomacy_mode_0"
+                position = { x = 446 y = 165 }
+                size = { x = 363 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_363x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_diplomacy_mode_0"
+                effect = "hsr_corp_diplomacy_mode_0"
+            }
+            effectButtonType = {
+                name = "hsr_corp_diplomacy_mode_0_selected"
+                position = { x = 446 y = 165 }
+                size = { x = 363 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_363x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_diplomacy_mode_0_selected"
+                effect = "hsr_corp_diplomacy_mode_0_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_diplomacy_mode_1"
+                position = { x = 831 y = 165 }
+                size = { x = 363 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_363x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_diplomacy_mode_1"
+                effect = "hsr_corp_diplomacy_mode_1"
+            }
+            effectButtonType = {
+                name = "hsr_corp_diplomacy_mode_1_selected"
+                position = { x = 831 y = 165 }
+                size = { x = 363 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_363x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_diplomacy_mode_1_selected"
+                effect = "hsr_corp_diplomacy_mode_1_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_aid_industry_1"
+                position = { x = 446 y = 216 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_aid_industry_1"
+                effect = "hsr_corp_aid_industry_1"
+            }
+            effectButtonType = {
+                name = "hsr_corp_aid_industry_1_selected"
+                position = { x = 446 y = 216 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_aid_industry_1_selected"
+                effect = "hsr_corp_aid_industry_1_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_aid_industry_2"
+                position = { x = 698 y = 216 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_aid_industry_2"
+                effect = "hsr_corp_aid_industry_2"
+            }
+            effectButtonType = {
+                name = "hsr_corp_aid_industry_2_selected"
+                position = { x = 698 y = 216 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_aid_industry_2_selected"
+                effect = "hsr_corp_aid_industry_2_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_aid_industry_3"
+                position = { x = 949 y = 216 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_aid_industry_3"
+                effect = "hsr_corp_aid_industry_3"
+            }
+            effectButtonType = {
+                name = "hsr_corp_aid_industry_3_selected"
+                position = { x = 949 y = 216 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_aid_industry_3_selected"
+                effect = "hsr_corp_aid_industry_3_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_aid_industry_4"
+                position = { x = 446 y = 259 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_aid_industry_4"
+                effect = "hsr_corp_aid_industry_4"
+            }
+            effectButtonType = {
+                name = "hsr_corp_aid_industry_4_selected"
+                position = { x = 446 y = 259 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_aid_industry_4_selected"
+                effect = "hsr_corp_aid_industry_4_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_aid_industry_5"
+                position = { x = 698 y = 259 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_aid_industry_5"
+                effect = "hsr_corp_aid_industry_5"
+            }
+            effectButtonType = {
+                name = "hsr_corp_aid_industry_5_selected"
+                position = { x = 698 y = 259 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_aid_industry_5_selected"
+                effect = "hsr_corp_aid_industry_5_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_aid_industry_6"
+                position = { x = 949 y = 259 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_aid_industry_6"
+                effect = "hsr_corp_aid_industry_6"
+            }
+            effectButtonType = {
+                name = "hsr_corp_aid_industry_6_selected"
+                position = { x = 949 y = 259 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_aid_industry_6_selected"
+                effect = "hsr_corp_aid_industry_6_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_aid_industry_7"
+                position = { x = 446 y = 303 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_aid_industry_7"
+                effect = "hsr_corp_aid_industry_7"
+            }
+            effectButtonType = {
+                name = "hsr_corp_aid_industry_7_selected"
+                position = { x = 446 y = 303 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_aid_industry_7_selected"
+                effect = "hsr_corp_aid_industry_7_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_aid_industry_8"
+                position = { x = 698 y = 303 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_aid_industry_8"
+                effect = "hsr_corp_aid_industry_8"
+            }
+            effectButtonType = {
+                name = "hsr_corp_aid_industry_8_selected"
+                position = { x = 698 y = 303 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_aid_industry_8_selected"
+                effect = "hsr_corp_aid_industry_8_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_aid_industry_9"
+                position = { x = 949 y = 303 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_aid_industry_9"
+                effect = "hsr_corp_aid_industry_9"
+            }
+            effectButtonType = {
+                name = "hsr_corp_aid_industry_9_selected"
+                position = { x = 949 y = 303 }
+                size = { x = 241 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_241x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_aid_industry_9_selected"
+                effect = "hsr_corp_aid_industry_9_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_aid_button"
+                position = { x = 446 y = 356 }
+                size = { x = 748 y = 39 }
+                spriteType = "GFX_hsr_corp_gold_748x39"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_aid_button"
+                effect = "hsr_corp_aid_button"
+            }
+            effectButtonType = {
+                name = "hsr_corp_reform_choice_1"
+                position = { x = 446 y = 419 }
+                size = { x = 369 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_369x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_reform_choice_1"
+                effect = "hsr_corp_reform_choice_1"
+            }
+            effectButtonType = {
+                name = "hsr_corp_reform_choice_1_selected"
+                position = { x = 446 y = 419 }
+                size = { x = 369 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_369x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_reform_choice_1_selected"
+                effect = "hsr_corp_reform_choice_1_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_reform_choice_2"
+                position = { x = 826 y = 419 }
+                size = { x = 369 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_369x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_reform_choice_2"
+                effect = "hsr_corp_reform_choice_2"
+            }
+            effectButtonType = {
+                name = "hsr_corp_reform_choice_2_selected"
+                position = { x = 826 y = 419 }
+                size = { x = 369 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_369x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_reform_choice_2_selected"
+                effect = "hsr_corp_reform_choice_2_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_reform_choice_3"
+                position = { x = 446 y = 462 }
+                size = { x = 369 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_369x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_reform_choice_3"
+                effect = "hsr_corp_reform_choice_3"
+            }
+            effectButtonType = {
+                name = "hsr_corp_reform_choice_3_selected"
+                position = { x = 446 y = 462 }
+                size = { x = 369 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_369x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_reform_choice_3_selected"
+                effect = "hsr_corp_reform_choice_3_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_reform_choice_4"
+                position = { x = 826 y = 462 }
+                size = { x = 369 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_369x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_reform_choice_4"
+                effect = "hsr_corp_reform_choice_4"
+            }
+            effectButtonType = {
+                name = "hsr_corp_reform_choice_4_selected"
+                position = { x = 826 y = 462 }
+                size = { x = 369 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_369x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_reform_choice_4_selected"
+                effect = "hsr_corp_reform_choice_4_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_reform_button"
+                position = { x = 446 y = 516 }
+                size = { x = 748 y = 39 }
+                spriteType = "GFX_hsr_corp_button_748x39"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_reform_button"
+                effect = "hsr_corp_reform_button"
+            }
+            effectButtonType = {
+                name = "hsr_corp_aid_rule"
+                position = { x = 446 y = 572 }
+                size = { x = 748 y = 26 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_aid_rule"
+                effect = "hsr_corp_aid_rule"
+            }
+            effectButtonType = {
+                name = "hsr_corp_reform_rule"
+                position = { x = 446 y = 600 }
+                size = { x = 748 y = 26 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_reform_rule"
+                effect = "hsr_corp_reform_rule"
+            }
+            effectButtonType = {
+                name = "hsr_corp_assets_warning"
+                position = { x = 446 y = 214 }
+                size = { x = 748 y = 26 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_assets_warning"
+                effect = "hsr_corp_assets_warning"
+            }
+            effectButtonType = {
+                name = "hsr_corp_illegal_kind_1"
+                position = { x = 446 y = 259 }
+                size = { x = 363 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_363x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_illegal_kind_1"
+                effect = "hsr_corp_illegal_kind_1"
+            }
+            effectButtonType = {
+                name = "hsr_corp_illegal_kind_1_selected"
+                position = { x = 446 y = 259 }
+                size = { x = 363 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_363x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_illegal_kind_1_selected"
+                effect = "hsr_corp_illegal_kind_1_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_illegal_kind_2"
+                position = { x = 831 y = 259 }
+                size = { x = 363 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_363x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_illegal_kind_2"
+                effect = "hsr_corp_illegal_kind_2"
+            }
+            effectButtonType = {
+                name = "hsr_corp_illegal_kind_2_selected"
+                position = { x = 831 y = 259 }
+                size = { x = 363 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_363x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_illegal_kind_2_selected"
+                effect = "hsr_corp_illegal_kind_2_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_illegal_kind_3"
+                position = { x = 446 y = 307 }
+                size = { x = 363 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_363x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_illegal_kind_3"
+                effect = "hsr_corp_illegal_kind_3"
+            }
+            effectButtonType = {
+                name = "hsr_corp_illegal_kind_3_selected"
+                position = { x = 446 y = 307 }
+                size = { x = 363 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_363x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_illegal_kind_3_selected"
+                effect = "hsr_corp_illegal_kind_3_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_illegal_kind_4"
+                position = { x = 831 y = 307 }
+                size = { x = 363 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_363x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_illegal_kind_4"
+                effect = "hsr_corp_illegal_kind_4"
+            }
+            effectButtonType = {
+                name = "hsr_corp_illegal_kind_4_selected"
+                position = { x = 831 y = 307 }
+                size = { x = 363 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_363x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_illegal_kind_4_selected"
+                effect = "hsr_corp_illegal_kind_4_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_illegal_prepare"
+                position = { x = 446 y = 372 }
+                size = { x = 748 y = 37 }
+                spriteType = "GFX_hsr_corp_danger_748x37"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_illegal_prepare"
+                effect = "hsr_corp_illegal_prepare"
+            }
+            effectButtonType = {
+                name = "hsr_corp_illegal_confirm"
+                position = { x = 446 y = 423 }
+                size = { x = 748 y = 37 }
+                spriteType = "GFX_hsr_corp_danger_748x37"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_illegal_confirm"
+                effect = "hsr_corp_illegal_confirm"
+            }
+            effectButtonType = {
+                name = "hsr_corp_nationalize_prepare"
+                position = { x = 446 y = 490 }
+                size = { x = 748 y = 37 }
+                spriteType = "GFX_hsr_corp_button_748x37"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_nationalize_prepare"
+                effect = "hsr_corp_nationalize_prepare"
+            }
+            effectButtonType = {
+                name = "hsr_corp_nationalize_confirm"
+                position = { x = 446 y = 538 }
+                size = { x = 748 y = 37 }
+                spriteType = "GFX_hsr_corp_gold_748x37"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_nationalize_confirm"
+                effect = "hsr_corp_nationalize_confirm"
+            }
+            effectButtonType = {
+                name = "hsr_corp_legal_rule"
+                position = { x = 446 y = 591 }
+                size = { x = 748 y = 26 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_legal_rule"
+                effect = "hsr_corp_legal_rule"
+            }
+            effectButtonType = {
+                name = "hsr_corp_setup_form"
+                position = { x = 24 y = 111 }
+                size = { x = 1192 y = 507 }
+                spriteType = "GFX_hsr_corp_setup_right_1192x507"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_setup_form"
+                effect = "hsr_corp_setup_form"
+            }
+            effectButtonType = {
+                name = "hsr_corp_setup_scale_label"
+                position = { x = 45 y = 121 }
+                size = { x = 192 y = 26 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_setup_scale_label"
+                effect = "hsr_corp_setup_scale_label"
+            }
+            effectButtonType = {
+                name = "hsr_corp_size_1"
+                position = { x = 259 y = 117 }
+                size = { x = 305 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_305x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_size_1"
+                effect = "hsr_corp_size_1"
+            }
+            effectButtonType = {
+                name = "hsr_corp_size_1_selected"
+                position = { x = 259 y = 117 }
+                size = { x = 305 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_305x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_size_1_selected"
+                effect = "hsr_corp_size_1_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_size_4"
+                position = { x = 572 y = 117 }
+                size = { x = 305 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_305x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_size_4"
+                effect = "hsr_corp_size_4"
+            }
+            effectButtonType = {
+                name = "hsr_corp_size_4_selected"
+                position = { x = 572 y = 117 }
+                size = { x = 305 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_305x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_size_4_selected"
+                effect = "hsr_corp_size_4_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_size_7"
+                position = { x = 885 y = 117 }
+                size = { x = 305 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_305x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_size_7"
+                effect = "hsr_corp_size_7"
+            }
+            effectButtonType = {
+                name = "hsr_corp_size_7_selected"
+                position = { x = 885 y = 117 }
+                size = { x = 305 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_305x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_size_7_selected"
+                effect = "hsr_corp_size_7_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_setup_industry_label"
+                position = { x = 45 y = 165 }
+                size = { x = 1144 y = 26 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_setup_industry_label"
+                effect = "hsr_corp_setup_industry_label"
+            }
+            effectButtonType = {
+                name = "hsr_corp_create_industry_1"
+                position = { x = 45 y = 201 }
+                size = { x = 374 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_374x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_create_industry_1"
+                effect = "hsr_corp_create_industry_1"
+            }
+            effectButtonType = {
+                name = "hsr_corp_create_industry_1_selected"
+                position = { x = 45 y = 201 }
+                size = { x = 374 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_374x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_create_industry_1_selected"
+                effect = "hsr_corp_create_industry_1_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_create_industry_2"
+                position = { x = 430 y = 201 }
+                size = { x = 374 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_374x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_create_industry_2"
+                effect = "hsr_corp_create_industry_2"
+            }
+            effectButtonType = {
+                name = "hsr_corp_create_industry_2_selected"
+                position = { x = 430 y = 201 }
+                size = { x = 374 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_374x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_create_industry_2_selected"
+                effect = "hsr_corp_create_industry_2_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_create_industry_3"
+                position = { x = 815 y = 201 }
+                size = { x = 374 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_374x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_create_industry_3"
+                effect = "hsr_corp_create_industry_3"
+            }
+            effectButtonType = {
+                name = "hsr_corp_create_industry_3_selected"
+                position = { x = 815 y = 201 }
+                size = { x = 374 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_374x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_create_industry_3_selected"
+                effect = "hsr_corp_create_industry_3_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_create_industry_4"
+                position = { x = 45 y = 242 }
+                size = { x = 374 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_374x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_create_industry_4"
+                effect = "hsr_corp_create_industry_4"
+            }
+            effectButtonType = {
+                name = "hsr_corp_create_industry_4_selected"
+                position = { x = 45 y = 242 }
+                size = { x = 374 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_374x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_create_industry_4_selected"
+                effect = "hsr_corp_create_industry_4_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_create_industry_5"
+                position = { x = 430 y = 242 }
+                size = { x = 374 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_374x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_create_industry_5"
+                effect = "hsr_corp_create_industry_5"
+            }
+            effectButtonType = {
+                name = "hsr_corp_create_industry_5_selected"
+                position = { x = 430 y = 242 }
+                size = { x = 374 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_374x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_create_industry_5_selected"
+                effect = "hsr_corp_create_industry_5_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_create_industry_6"
+                position = { x = 815 y = 242 }
+                size = { x = 374 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_374x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_create_industry_6"
+                effect = "hsr_corp_create_industry_6"
+            }
+            effectButtonType = {
+                name = "hsr_corp_create_industry_6_selected"
+                position = { x = 815 y = 242 }
+                size = { x = 374 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_374x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_create_industry_6_selected"
+                effect = "hsr_corp_create_industry_6_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_create_industry_7"
+                position = { x = 45 y = 283 }
+                size = { x = 374 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_374x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_create_industry_7"
+                effect = "hsr_corp_create_industry_7"
+            }
+            effectButtonType = {
+                name = "hsr_corp_create_industry_7_selected"
+                position = { x = 45 y = 283 }
+                size = { x = 374 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_374x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_create_industry_7_selected"
+                effect = "hsr_corp_create_industry_7_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_create_industry_8"
+                position = { x = 430 y = 283 }
+                size = { x = 374 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_374x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_create_industry_8"
+                effect = "hsr_corp_create_industry_8"
+            }
+            effectButtonType = {
+                name = "hsr_corp_create_industry_8_selected"
+                position = { x = 430 y = 283 }
+                size = { x = 374 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_374x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_create_industry_8_selected"
+                effect = "hsr_corp_create_industry_8_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_create_industry_9"
+                position = { x = 815 y = 283 }
+                size = { x = 374 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_374x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_create_industry_9"
+                effect = "hsr_corp_create_industry_9"
+            }
+            effectButtonType = {
+                name = "hsr_corp_create_industry_9_selected"
+                position = { x = 815 y = 283 }
+                size = { x = 374 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_374x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_create_industry_9_selected"
+                effect = "hsr_corp_create_industry_9_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_setup_regime_label"
+                position = { x = 45 y = 331 }
+                size = { x = 192 y = 26 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_setup_regime_label"
+                effect = "hsr_corp_setup_regime_label"
+            }
+            effectButtonType = {
+                name = "hsr_corp_create_regime_1"
+                position = { x = 259 y = 326 }
+                size = { x = 460 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_460x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_create_regime_1"
+                effect = "hsr_corp_create_regime_1"
+            }
+            effectButtonType = {
+                name = "hsr_corp_create_regime_1_selected"
+                position = { x = 259 y = 326 }
+                size = { x = 460 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_460x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_create_regime_1_selected"
+                effect = "hsr_corp_create_regime_1_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_create_regime_2"
+                position = { x = 730 y = 326 }
+                size = { x = 460 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_460x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_create_regime_2"
+                effect = "hsr_corp_create_regime_2"
+            }
+            effectButtonType = {
+                name = "hsr_corp_create_regime_2_selected"
+                position = { x = 730 y = 326 }
+                size = { x = 460 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_460x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_create_regime_2_selected"
+                effect = "hsr_corp_create_regime_2_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_create_regime_3"
+                position = { x = 259 y = 367 }
+                size = { x = 460 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_460x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_create_regime_3"
+                effect = "hsr_corp_create_regime_3"
+            }
+            effectButtonType = {
+                name = "hsr_corp_create_regime_3_selected"
+                position = { x = 259 y = 367 }
+                size = { x = 460 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_460x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_create_regime_3_selected"
+                effect = "hsr_corp_create_regime_3_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_create_regime_4"
+                position = { x = 730 y = 367 }
+                size = { x = 460 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_460x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_create_regime_4"
+                effect = "hsr_corp_create_regime_4"
+            }
+            effectButtonType = {
+                name = "hsr_corp_create_regime_4_selected"
+                position = { x = 730 y = 367 }
+                size = { x = 460 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_460x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_create_regime_4_selected"
+                effect = "hsr_corp_create_regime_4_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_payment_trade"
+                position = { x = 45 y = 419 }
+                size = { x = 556 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_556x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_payment_trade"
+                effect = "hsr_corp_payment_trade"
+            }
+            effectButtonType = {
+                name = "hsr_corp_payment_trade_selected"
+                position = { x = 45 y = 419 }
+                size = { x = 556 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_556x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_payment_trade_selected"
+                effect = "hsr_corp_payment_trade_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_payment_fiscal"
+                position = { x = 633 y = 419 }
+                size = { x = 556 y = 34 }
+                spriteType = "GFX_hsr_corp_choice_556x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_payment_fiscal"
+                effect = "hsr_corp_payment_fiscal"
+            }
+            effectButtonType = {
+                name = "hsr_corp_payment_fiscal_selected"
+                position = { x = 633 y = 419 }
+                size = { x = 556 y = 34 }
+                spriteType = "GFX_hsr_corp_gold_556x34"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_payment_fiscal_selected"
+                effect = "hsr_corp_payment_fiscal_selected"
+            }
+            effectButtonType = {
+                name = "hsr_corp_setup_quote"
+                position = { x = 45 y = 471 }
+                size = { x = 1144 y = 136 }
+                spriteType = "GFX_hsr_corp_summary_1144x136"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_setup_quote"
+                effect = "hsr_corp_setup_quote"
+            }
+            effectButtonType = {
+                name = "hsr_corp_preview_0"
+                position = { x = 61 y = 482 }
+                size = { x = 1106 y = 26 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_preview_0"
+                effect = "hsr_corp_preview_0"
+            }
+            effectButtonType = {
+                name = "hsr_corp_preview_1"
+                position = { x = 61 y = 513 }
+                size = { x = 1106 y = 26 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_preview_1"
+                effect = "hsr_corp_preview_1"
+            }
+            effectButtonType = {
+                name = "hsr_corp_preview_2"
+                position = { x = 61 y = 544 }
+                size = { x = 1106 y = 26 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_preview_2"
+                effect = "hsr_corp_preview_2"
+            }
+            effectButtonType = {
+                name = "hsr_corp_preview_3"
+                position = { x = 61 y = 575 }
+                size = { x = 1106 y = 26 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_preview_3"
+                effect = "hsr_corp_preview_3"
+            }
+            effectButtonType = {
+                name = "hsr_corp_setup_balance"
+                position = { x = 24 y = 653 }
+                size = { x = 548 y = 26 }
+                spriteType = "GFX_tiled_window_transparent"
+                buttonFont = "cg_16b"
+                format = left
+                text = "hsr_corp_setup_balance"
+                effect = "hsr_corp_setup_balance"
+            }
+            effectButtonType = {
+                name = "hsr_corp_inline_confirm"
+                position = { x = 591 y = 622 }
+                size = { x = 604 y = 32 }
+                spriteType = "GFX_hsr_corp_gold_604x32"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_inline_confirm"
+                effect = "hsr_corp_inline_confirm"
+            }
+            effectButtonType = {
+                name = "hsr_corp_inline_cancel"
+                position = { x = 591 y = 658 }
+                size = { x = 604 y = 32 }
+                spriteType = "GFX_hsr_corp_button_604x32"
+                buttonFont = "cg_16b"
+                format = center
+                text = "hsr_corp_inline_cancel"
+                effect = "hsr_corp_inline_cancel"
+            }
+        }
+        # 引擎保留底座，必须保留以下完整控件结构。
+        buttonType = {
+            position = { x = -10000 y = -10000 }
+            name = "focus_button"
+            orientation = "UPPER_RIGHT"
+            spriteType = "GFX_fleetview_focus"
+            buttonFont = "cg_16b"
+            shortcut = "q"
+        }
+        instantTextBoxType = {
+            position = { x = -10000 y = -10000 }
+            name = "heading"
+            font = "malgun_goth_24"
+            text = "DIPLOMACY"
+            maxWidth = 543
+            maxHeight = 22
+            fixedSize = yes
+            alwaysTransparent = yes
+        }
+        buttonType = {
+            position = { x = -10000 y = -10000 }
+            name = "tts_button"
+            spriteType = "GFX_button_tts_start"
+            buttonFont = "cg_16b"
+            shortCut = "t"
+        }
+        buttonType = {
+            position = { x = -10000 y = -10000 }
+            name = "alien_message_background"
+            size = { x = 485 y = 240 }
+            spriteType = "GFX_tiles_dark_area_cut_8"
+            alwaysTransparent = yes
+        }
+        instantTextBoxType = {
+            position = { x = -10000 y = -10000 }
+            name = "alien_message"
+            font = "cg_16b"
+            maxWidth = 465
+            maxHeight = 220
+            format = left
+            scrollbartype = "standardtext_slider"
+        }
+        buttonType = {
+            position = { x = -10000 y = -10000 }
+            name = "confirm_button"
+            quadTextureSprite = "GFX_standard_button_142_34_button"
+            Orientation = "UPPER_RIGHT"
+            font = "cg_16b"
+            text = "MESSAGE_OK"
+            clicksound = "confirmation"
+        }
+        containerWindowType = {
+            position = { x = -10000 y = -10000 }
+            name = "portrait_background"
+            size = { width = 964 height = 350 }
+            clipping = yes
+            iconType = {
+                name = "event_picture"
+                spriteType = "GFX_diplomacy_portrait_frame"
+                position = { x = -6 y = -5 }
+            }
+            iconType = {
+                name = "portrait"
+                position = { x = 250 y = 0 }
+                spriteType = "GFX_portrait_character"
+            }
+        }
+        containerWindowType = {
+            position = { x = -10000 y = -10000 }
+            name = "portrait"
+            size = { width = 964 height = 350 }
+            clipping = yes
+            iconType = {
+                name = "portrait"
+                spriteType = "GFX_portrait_gamesetup_mask"
+                alwaysTransparent = yes
+            }
+            iconType = {
+                name = "black_frame"
+                spriteType = "GFX_diplomacy_portrait_shadow_frame"
+                position = { x = -4 y = -5 }
+                alwaysTransparent = yes
+            }
+            iconType = {
+                name = "stripes_1"
+                spriteType = "GFX_diplomacy_stripes_2"
+                alwaysTransparent = yes
+            }
+            iconType = {
+                name = "city_frame"
+                spriteType = "GFX_diplomacy_portrait_frame"
+                position = { x = -6 y = -5 }
+                alwaysTransparent = yes
+            }
+        }
+        iconType = {
+            position = { x = -10000 y = -10000 }
+            name = "empire_info_bg"
+            spriteType = "GFX_diplomacy_dark_fade_bg"
+            alwaysTransparent = yes
+        }
+        instantTextBoxType = {
+            position = { x = -10000 y = -10000 }
+            name = "empire_name"
+            font = "malgun_goth_24"
+            text = "Kammarian Galactic Concordat"
+            maxWidth = 450
+            maxHeight = 16
+            format = LEFT
+            text_color_code = "E"
+            fixedsize = yes
+        }
+        instantTextBoxType = {
+            position = { x = -10000 y = -10000 }
+            name = "empire_government_type"
+            font = "cg_16b"
+            text = "Autocracy"
+            maxWidth = 250
+            maxHeight = 16
+            format = LEFT
+            fixedsize = yes
+            text_color_code = "Y"
+        }
+        instantTextBoxType = {
+            position = { x = -10000 y = -10000 }
+            name = "empire_personality_type"
+            font = "cg_16b"
+            text = "Despicable Neutrals"
+            maxWidth = 250
+            maxHeight = 16
+            format = LEFT
+            fixedsize = yes
+        }
+        OverlappingElementsBoxType = {
+            position = { x = -10000 y = -10000 }
+            name = "empire_ethics_icons"
+            size = { x = 240 y = 30 }
+            spacing = 2.0
+            format = left
+        }
+        buttonType = {
+            position = { x = -10000 y = -10000 }
+            name = "empire_flag"
+            quadTextureSprite = "GFX_empire_flag_128"
+            orientation = UPPER_LEFT
+        }
+        containerWindowType = {
+            position = { x = -10000 y = -10000 }
+            name = "leader_details"
+            containerWindowType = {
+                name = "leader_traits_box"
+                position = { x = 0 y = -5 }
+                size = { width = 210 height = 75 }
+                background = {
+                    name = "ethics_bg"
+                    spriteType = "GFX_tiles_dark_area_cut_8"
+                }
+            }
+            instantTextBoxType = {
+                name = "empire_traits_label"
+                position = { x = 835 y = 95 }
+                font = "cg_16b"
+                maxWidth = 230
+                maxHeight = 20
+                fixedSize = yes
+                format = left
+                #text_color_code = "E"
+                text = "RULER_TRAITS"
+                alwaysTransparent = yes
+            }
+            instantTextBoxType = {
+                name = "leader_traits_label"
+                position = { x = 214 y = 37 }
+                font = "cg_16b"
+                maxWidth = 230
+                maxHeight = 20
+                fixedSize = yes
+                format = left
+                #text_color_code = "E"
+                text = "RULER_TRAITS"
+                alwaysTransparent = yes
+            }
+            overlappingElementsBoxType = {
+                name = "leader_traits"
+                position = { x = 215 y = 55 }
+                size = { x = 125 y = 330 }
+            }
+            instantTextBoxType = {
+                name = "leader_name"
+                position = { x = 10 y = 0 }
+                font = "cg_16b"
+                maxWidth = 330
+                maxHeight = 20
+                fixedSize = yes
+                format = left
+                text = "Leader Name"
+                text_color_code = "E"
+            }
+            instantTextBoxType = {
+                name = "leader_species"
+                position = { x = 10 y = 18 }
+                font = "cg_16b"
+                maxWidth = 330
+                maxHeight = 20
+                fixedSize = yes
+                text = "Leader Species"
+                format = left
+            }
+        }
+        containerWindowType = {
+            position = { x = -10000 y = -10000 }
+            name = "opinion_window"
+            size = { width = 94 height = 30 }
+            # Use this for tooltip area, picture comes from somewhere else
+            background = {
+                name = "opinion_bg"
+                spriteType = "GFX_tiled_window_transparent"
+            }
+            iconType = {
+                name = "their_opinion_icon"
+                spriteType = "GFX_diplomacy_opinion"
+                position = { x = 7 y = 4 }
+                alwaysTransparent = yes
+            }
+            instantTextBoxType = {
+                name = "their_opinion"
+                font = "cg_16b"
+                maxWidth = 40
+                position = { x = 40 y = 7 }
+                format = left
+                text = "100"
+                alwaysTransparent = yes
+            }
+        }
+        containerWindowType = {
+            position = { x = -10000 y = -10000 }
+            name = "EVENT_DIPLO"
+            size = { width = 563 height = 220 }
+            moveable = no
+            instantTextBoxType = {
+                name = "action_title"
+                font = "malgun_goth_24"
+                position = { x = 20 y = 0 }
+                maxWidth = 450
+                alwaysTransparent = yes
+            }
+            instantTextBoxType = {
+                name = "action_desc"
+                font = "malgun_goth_24"
+                position = { x = 490 y = 0 }
+                maxWidth = 500
+                maxHeight = 180
+                Orientation = "UPPER_LEFT"
+                format = center
+                alwaysTransparent = yes
+                text_color_code = "H"
+            }
+            listboxType = {
+                name = "option_list"
+                position = { x = 500 y = 20 }
+                backGround = ""
+                size = { x = 462 y = 200 }
+                spacing = 1
+                scrollbartype = "standardlistbox_slider"
+                borderSize = { x = 0 y = 0 }
+                Orientation = "UPPER_LEFT"
+            }
+        }
+        buttonType = {
+            name = "close"
+            position = { x = -40 y = 0 }
+            Orientation = UPPER_RIGHT
+            quadTextureSprite = "GFX_main_close_button"
+            clicksound = "back_click"
+            shortcut = "ESCAPE"
+        }
+    }
+}
