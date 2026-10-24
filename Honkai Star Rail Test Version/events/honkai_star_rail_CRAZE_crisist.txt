@@ -104,7 +104,7 @@ country_event = {
 			limit= {
 				is_capital = no
 				distance = {
-					source = event_target:erxiangleyuan_sysytem
+					source = event_target:erxiangleyuan_system
 					min_jumps = 1
 					max_jumps = 15
 				}
@@ -182,7 +182,7 @@ country_event = {
 	id = craze.7
 	title = craze.7_title
 	desc = craze.7_desc
-	picture = GFX_evt_smugglers_in_bar
+	picture = GFX_evt_shroud_spacemadness
 	is_triggered_only = yes
 
 	
@@ -238,6 +238,7 @@ planet_event = {
 	}
 }
 #天灾
+#1-2考验
 country_event = {
 	id = craze.9
 	title = craze.9_title
@@ -246,12 +247,7 @@ country_event = {
 	is_triggered_only = yes
 	fire_only_once = yes
 
-	immediate = {
-		set_variable = {
-			which = the_craze_crisis_name_0
-			value = 0
-		}
-		
+	immediate = {	
 	}
 
 	option = {
@@ -259,6 +255,170 @@ country_event = {
 		set_country_flag = is_time_to_become_crisis
 		
 	}
+}
+#舰队逻辑
+country_event = {
+	id = craze.10
+	title = craze.10_title
+	desc = craze.10_desc
+	picture = GFX_evt_astral_rift_rockworms_2
+	is_triggered_only = yes
+
+	immediate = {	
+		create_country = {
+            name = "NAME_tz_menp_1_test_2" 
+            species = from
+            authority = auth_imperial
+            ethos = {
+                ethic = ethic_gestalt_consciousness
+            }
+            type = "Hostile_mid_crisis_country"
+            name_list = "DOT_SR_HUMAN1"
+            flag = random
+
+			effect = {
+				save_global_event_target_as = NAME_tz_menp_1_test_2
+			}
+		}
+
+
+		random_system = {
+			limit = {
+				owner = {
+					is_ai = no
+					has_origin = origin_erxiangleyuan
+				}
+			    has_planet_class = pc_erxiangleyuan
+			}
+			random_system = {
+				limit = {
+					distance = {
+					    source = event_target:erxiangleyuan_system
+					    min_jumps = 4
+					    max_jumps = 9
+				}
+				}
+				while = {
+					count= 3
+				create_fleet = {
+					effect = {
+						set_fleet_flag = NAME_tz_menp_1_test_2
+						set_owner = event_target:NAME_tz_menp_1_test_2
+						while = {
+							count = 20
+							create_ship = {
+								name = random
+								design = tantao_peitai_ship_design
+								graphical_culture = humanoid_01
+							}
+						}
+						fleet_event = { id = craze.11 }
+						set_location = {
+							target = prev
+							distance = 45
+							angle = random
+						}
+					}				
+				}
+				}
+				
+				
+			}			
+		}
+	}
+
+	option = {
+		name = craze.10_op_1
+		set_variable = { 
+			which = tz_menp_1_test_2_defeated_count 
+			value = 0 
+		}
+	}
+}
+
+fleet_event = {
+    id = craze.11
+    hide_window = yes
+    is_triggered_only = yes
+
+    immediate = {
+        every_country = {
+            limit = {
+                is_ai = no
+                is_country_type = default
+				has_origin = origin_erxiangleyuan
+            }
+            save_global_event_target_as = erxiangleyuan_target_country
+        }
+
+		event_target:NAME_tz_menp_1_test_2 = {
+			set_hostile = event_target:erxiangleyuan_target_country
+		}
+        
+        if = {
+            limit = {
+                event_target:erxiangleyuan_target_country = {
+                    any_owned_fleet = { is_ship_class = shipclass_military }
+                }
+            }
+            event_target:erxiangleyuan_target_country = {
+                random_owned_fleet = {
+                    limit = { is_ship_class = shipclass_military }
+                    save_event_target_as = erxiangleyuan_fleet_target
+                }
+            }
+            auto_follow_fleet = {
+                target = event_target:erxiangleyuan_fleet_target
+                attack_fleet = yes
+            }
+        }
+
+        else = {
+            event_target:erxiangleyuan_target_country = {
+                capital_scope = {
+                    save_event_target_as = erxiangleyuan_capital_planet
+                }
+            }
+            auto_move_to_planet = {
+                target = event_target:erxiangleyuan_capital_planet
+				clear_auto_move_on_arrival = yes	
+            }
+        }
+    }
+}
+#击败后天灾进阶
+country_event = {
+    id = craze.12
+    hide_window = yes
+    is_triggered_only = yes
+
+    trigger = {    
+		fromfrom = { has_fleet_flag = NAME_tz_menp_1_test_2}
+       
+    }
+
+    immediate = {
+		from = {
+			change_variable = { which = tz_menp_1_test_2_defeated_count value = 1 }
+			if = {
+				limit = { check_variable = { which = tz_menp_1_test_2_defeated_count value >= 3 }  NOT = { has_country_flag = crisis_reward_given_flag } }
+				country_event = { id = craze.13 days = 1 } 
+			}
+        }
+	}   
+}
+
+country_event = {
+    id = craze.13
+    title = "craze.13.name"
+    desc = "craze.13.desc"
+    picture = GFX_evt_ship_in_orbit 
+    is_triggered_only = yes
+
+    option = {
+        name = craze.13_op_1
+		set_country_flag = achieve_menp_1_test_2
+    }
 }
 #——————————天灾目标
 #建造节点
@@ -275,9 +435,13 @@ planet_event = {
 		owner = {
 			complete_crisis_objective = crisobj_build_court
 		}
+		change_variable = {
+			which = building_phantasmoon_court_1_amount
+			value = 1
+		}
 	}	
 }
-
+#举办宴会
 country_event = {
 	id = craze.1001
 	hide_window = yes
