@@ -1,0 +1,143 @@
+entity = {
+	name = "xunlie_colossus_entity"
+	pdxmesh = "necroid_01_colossus_mesh"
+	locator = { name = "ship"	position = { 0 0 0 }	rotation = { 0 0 0 } }
+	scale = 1.15
+	default_state = "idle"
+	state = { name = "idle" animation = "idle" looping = yes next_state = "idle" animation_blend_time = 5
+		chance = {
+			if_current_state = {
+				"idle" = 100
+				"moving" = 100
+				"death" = 0
+				"working" = 100
+				"working_looping" = 0
+			}
+		}
+		event = { time = 0 node = "light_locator_01" particle = "necroid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "light_locator_02" particle = "necroid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "light_locator_03" particle = "necroid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "engine_large_01" particle = "generic_1_75_exhaust_circle_idle" keep_particle = yes trigger_once = yes}
+		start_event = { trigger_once = yes sound = { soundeffect = "necroid_colossus_idle" stop_on_state_change = yes } }
+	}
+	state = { name = "idle" animation = "closing" looping = no next_state = "idle" 
+		chance = {
+			if_current_state = {
+				"idle" = 0
+				"moving" = 0
+				"death" = 0
+				"working" = 0
+				"working_looping" = 100
+			}
+		}
+		event = { time = 0 node = "light_locator_01" particle = "necroid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "light_locator_02" particle = "necroid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "light_locator_03" particle = "necroid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "engine_large_01" particle = "generic_1_75_exhaust_circle_idle" keep_particle = yes trigger_once = yes}
+		event = { trigger_once = yes sound = { soundeffect = "necroid_colossus_closing" stop_on_state_change = no } }
+	}
+	state = { name = "moving" animation = "idle" looping = yes next_state = "moving"
+		chance = {
+			if_current_state = {
+				"idle" = 100
+				"moving" = 100
+				"death" = 0
+				"working" = 100
+				"working_looping" = 0
+			}
+		}
+		event = { time = 0 node = "light_locator_01" particle = "necroid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "light_locator_02" particle = "necroid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "light_locator_03" particle = "necroid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "engine_large_01" particle = "necroid_01_700_ship_exhaust" keep_particle = yes trigger_once = yes}
+		event = { trigger_once = yes sound = { soundeffect = "necroid_moving_out_colossus" } }
+		start_event = { trigger_once = yes sound = { soundeffect = "lithoid_colossus_idle" stop_on_state_change = yes } }
+	}
+	state = { name = "moving" animation = "closing" looping = no next_state = "moving"
+		chance = {
+			if_current_state = {
+				"idle" = 0
+				"moving" = 0
+				"death" = 0
+				"working" = 0
+				"working_looping" = 100
+			}
+		}
+		event = { time = 0 node = "light_locator_01" particle = "necroid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "light_locator_02" particle = "necroid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "light_locator_03" particle = "necroid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "engine_large_01" particle = "necroid_01_700_ship_exhaust" keep_particle = yes trigger_once = yes}
+		event = { trigger_once = yes sound = { soundeffect = "lithoid_colossus_closing" stop_on_state_change = no } }
+	}
+	state = { name = "working_looping" animation = "open" 
+		event = { time = 0	id = "beam_start" }
+		event = { time = 0 node = "light_locator_01" particle = "necroid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "light_locator_02" particle = "necroid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "light_locator_03" particle = "necroid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+		start_event = { trigger_once = yes sound = { soundeffect = "lithoid_colossus_idle" stop_on_state_change = yes } }
+	}
+	state = { name = "working" animation = "opening" looping = no next_state = "working_looping" 
+		event = { trigger_once = yes sound = { soundeffect = "necroid_colossus_opening" stop_on_state_change = no } }
+		event = { time = 0 node = "light_locator_01" particle = "necroid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "light_locator_02" particle = "necroid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "light_locator_03" particle = "necroid_01_ship_light_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 1000 id = "beam_start" } #will never fire, but lets the game know that an event with this ID exists
+	}
+	state = { name = "death" animation = "idle" looping = no
+		chance = {
+			if_current_state = {
+				"idle" = 100
+				"moving" = 100
+				"death" = 0
+				"working" = 0
+				"working_looping" = 0
+			}
+		}
+		event = { time = 0.0 node = "explosion_locator_01" particle = "necroid_01_3_ship_explosion_effect" sound = { soundeffect = "ship_destroyed" } keep_particle = yes trigger_once = yes }
+		event = { time = 3.0 node = "explosion_locator_02" particle = "necroid_01_3_ship_explosion_effect" sound = { soundeffect = "ship_destroyed" } keep_particle = yes trigger_once = yes }
+		event = { time = 4.0 node = "explosion_locator_03" particle = "necroid_01_3_ship_explosion_effect" sound = { soundeffect = "ship_destroyed" } keep_particle = yes trigger_once = yes }
+		event = { time = 4.3 node = "explosion_locator_04" particle = "necroid_01_3_ship_explosion_effect" sound = { soundeffect = "ship_destroyed" } keep_particle = yes trigger_once = yes }
+		event = { time = 4.4 node = "explosion_locator_05" particle = "necroid_01_3_ship_explosion_effect" sound = { soundeffect = "ship_destroyed" } keep_particle = yes trigger_once = yes }
+	}
+	state = { name = "death" animation = "open" looping = no animation_blend_time = 2
+		chance = {
+			if_current_state = {
+				"idle" = 0
+				"moving" = 0
+				"death" = 0
+				"working" = 100
+				"working_looping" = 100
+			}
+		}
+		event = { time = 0.0 node = "explosion_locator_01" particle = "necroid_01_3_ship_explosion_effect" sound = { soundeffect = "ship_destroyed" } keep_particle = yes trigger_once = yes }
+		event = { time = 3.0 node = "explosion_locator_02" particle = "necroid_01_3_ship_explosion_effect" sound = { soundeffect = "ship_destroyed" } keep_particle = yes trigger_once = yes }
+		event = { time = 4.0 node = "explosion_locator_03" particle = "necroid_01_3_ship_explosion_effect" sound = { soundeffect = "ship_destroyed" } keep_particle = yes trigger_once = yes }
+		event = { time = 4.4 node = "explosion_locator_04" particle = "necroid_01_3_ship_explosion_effect" sound = { soundeffect = "ship_destroyed" } keep_particle = yes trigger_once = yes }
+		event = { time = 4.7 node = "explosion_locator_05" particle = "necroid_01_3_ship_explosion_effect" sound = { soundeffect = "ship_destroyed" } keep_particle = yes trigger_once = yes }
+	}
+	attach = { effect_core = "necroid_01_colossus_core_effect_entity"}
+}
+entity = {
+	name = "xunlie_colossus_section_entity"
+	pdxmesh = aquatic_01_battleship_frame_mesh
+	locator = { name = "planet_killer_gun_01" position = { 0 0 0 } }
+	locator = { name = "extra_large_gun_01" position = { 0 10 10 } }
+	default_state = "idle"
+	state = {
+		name = "idle"
+		animation = "idle"
+		animation_blend_time = 4
+	}
+	state = {
+		name = "moving"
+		animation = "idle"
+		animation_blend_time = 2
+	}
+	state = {
+		name = "death"
+		animation = "death"
+		animation_blend_time = 0.0
+		chance = 1
+		looping = no
+	}
+}
