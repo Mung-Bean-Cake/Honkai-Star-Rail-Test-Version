@@ -96,8 +96,8 @@ hsr_corp_can_manage_slot = {
             OR = {
                 AND = {
                     check_variable = { which = hsr_corp_s$SLOT$_foreign_control value = 1 }
-                    exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
-                    "event_target:hsr_corp_foreign_s$SLOT$@this" = {
+                    exists = event_target:hsr_corp_foreign_s$SLOT$@this
+                    event_target:hsr_corp_foreign_s$SLOT$@this = {
                         is_same_value = event_target:hsr_corp_actor
                     }
                 }
@@ -107,14 +107,14 @@ hsr_corp_can_manage_slot = {
                     }
                     OR = {
                         AND = {
-                            exists = "event_target:hsr_corp_founder_s$SLOT$@this"
-                            "event_target:hsr_corp_founder_s$SLOT$@this" = {
+                            exists = event_target:hsr_corp_founder_s$SLOT$@this
+                            event_target:hsr_corp_founder_s$SLOT$@this = {
                                 is_same_value = event_target:hsr_corp_actor
                             }
                         }
                         AND = {
                             NOT = {
-                                exists = "event_target:hsr_corp_founder_s$SLOT$@this"
+                                exists = event_target:hsr_corp_founder_s$SLOT$@this
                             }
                             owner = {
                                 is_same_value = event_target:hsr_corp_actor
@@ -226,26 +226,230 @@ hsr_corp_market_allowed = {
     hsr_corp_slot_active = { SLOT = $SLOT$ }
     hsr_corp_can_visit = yes
     check_variable = { which = hsr_corp_s$SLOT$_listed value = 1 }
-    check_variable = { which = hsr_corp_share_sum value = 100 }
+    check_variable = { which = hsr_corp_s$SLOT$_pool_shares value = value:hsr_corp_expected_pool_s$SLOT$ }
     OR = {
         check_variable = { which = hsr_corp_order_qty value = 1 }
         check_variable = { which = hsr_corp_order_qty value = 5 }
         check_variable = { which = hsr_corp_order_qty value = 10 }
     }
-    event_target:hsr_corp_actor = {
-        NOT = {
-            has_country_flag = "hsr_corp_trade_s$SLOT$@event_target:hsr_corp_hq"
+    event_target:hsr_corp_actor = { NOT = { has_country_flag = hsr_corp_trade_s$SLOT$@event_target:hsr_corp_hq } }
+    OR = {
+        AND = {
+            exists = event_target:hsr_corp_founder_s$SLOT$@this
+            event_target:hsr_corp_founder_s$SLOT$@this = { is_same_value = event_target:hsr_corp_actor }
+        }
+        AND = {
+            NOT = { exists = event_target:hsr_corp_founder_s$SLOT$@this }
+            owner = { is_same_value = event_target:hsr_corp_actor }
+        }
+        NOT = { exists = event_target:hsr_corp_foreign_s$SLOT$@this }
+        AND = {
+            exists = event_target:hsr_corp_foreign_s$SLOT$@this
+            event_target:hsr_corp_foreign_s$SLOT$@this = { is_same_value = event_target:hsr_corp_actor }
         }
     }
+}
+
+
+# 操作条件使用普通 scripted_trigger 定义；按钮与执行入口分别核验当前真实状态。
+hsr_corp_upgrade_allowed = {
+    hsr_corp_can_manage_slot = { SLOT = $SLOT$ }
+    hsr_corp_slot_active = { SLOT = $SLOT$ }
+    check_variable = { which = hsr_corp_s$SLOT$_level value < 10 }
+    check_variable = { which = hsr_corp_s$SLOT$_cash value >= hsr_corp_upgrade_cost }
+    NOT = { has_carrier_flag = hsr_corp_upgrade_s$SLOT$ }
+}
+
+hsr_corp_expand_allowed = {
+    hsr_corp_can_manage_slot = { SLOT = $SLOT$ }
+    hsr_corp_slot_active = { SLOT = $SLOT$ }
+    check_variable = { which = hsr_corp_choose_industry value >= 1 }
+    check_variable = { which = hsr_corp_choose_industry value <= 9 }
+    NOT = { check_variable = { which = hsr_corp_s$SLOT$_primary value = hsr_corp_choose_industry } }
+    NOT = { check_variable = { which = hsr_corp_s$SLOT$_secondary_1 value = hsr_corp_choose_industry } }
+    NOT = { check_variable = { which = hsr_corp_s$SLOT$_secondary_2 value = hsr_corp_choose_industry } }
+    check_variable = { which = hsr_corp_s$SLOT$_level value >= $LEVEL$ }
+    check_variable = { which = hsr_corp_s$SLOT$_secondary_$SIDE$ value = 0 }
+    check_variable = { which = hsr_corp_s$SLOT$_cash value >= hsr_corp_side_$SIDE$_cost }
+}
+
+hsr_corp_reform_allowed = {
+    hsr_corp_can_manage_slot = { SLOT = $SLOT$ }
+    hsr_corp_slot_active = { SLOT = $SLOT$ }
+    check_variable = { which = hsr_corp_s$SLOT$_pending_regime value = 0 }
+    check_variable = { which = hsr_corp_s$SLOT$_cash value >= hsr_corp_reform_quote }
+    check_variable = { which = hsr_corp_setup_regime value >= 1 }
+    check_variable = { which = hsr_corp_setup_regime value <= 4 }
+    NOT = { check_variable = { which = hsr_corp_s$SLOT$_regime value = hsr_corp_setup_regime } }
     OR = {
-        event_target:hsr_corp_actor = {
-            is_same_value = event_target:hsr_corp_founder
+        NOT = { check_variable = { which = hsr_corp_setup_regime value = 2 } }
+        hsr_corp_cooperative_allowed = yes
+    }
+}
+
+hsr_corp_inject_allowed = {
+    hsr_corp_can_visit = yes
+    hsr_corp_slot_active = { SLOT = $SLOT$ }
+    event_target:hsr_corp_actor = { has_resource = { type = trade amount >= value:hsr_corp_inject_amount } }
+}
+
+hsr_corp_buy_allowed = {
+    hsr_corp_market_allowed = { SLOT = $SLOT$ }
+    check_variable = { which = hsr_corp_s$SLOT$_pool_shares value >= hsr_corp_order_qty }
+    event_target:hsr_corp_actor = { has_resource = { type = trade amount >= prev.hsr_corp_order_total } }
+}
+
+hsr_corp_sell_allowed = {
+    hsr_corp_market_allowed = { SLOT = $SLOT$ }
+    check_variable = { which = hsr_corp_s$SLOT$_market_reserve value >= hsr_corp_order_gross }
+    OR = {
+        AND = {
+            exists = event_target:hsr_corp_founder_s$SLOT$@this
+            event_target:hsr_corp_founder_s$SLOT$@this = { is_same_value = event_target:hsr_corp_actor }
+            check_variable = { which = hsr_corp_s$SLOT$_founder_shares value >= hsr_corp_order_qty }
         }
-        NOT = {
-            exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
+        AND = {
+            NOT = { exists = event_target:hsr_corp_founder_s$SLOT$@this }
+            owner = { is_same_value = event_target:hsr_corp_actor }
+            check_variable = { which = hsr_corp_s$SLOT$_founder_shares value >= hsr_corp_order_qty }
         }
-        event_target:hsr_corp_actor = {
-            is_same_value = event_target:hsr_corp_foreign
+        AND = {
+            exists = event_target:hsr_corp_foreign_s$SLOT$@this
+            event_target:hsr_corp_foreign_s$SLOT$@this = { is_same_value = event_target:hsr_corp_actor }
+            check_variable = { which = hsr_corp_s$SLOT$_foreign_shares value >= hsr_corp_order_qty }
+        }
+    }
+}
+
+hsr_corp_offer_allowed = {
+    hsr_corp_slot_active = { SLOT = $SLOT$ }
+    hsr_corp_can_visit = yes
+    check_variable = { which = hsr_corp_s$SLOT$_listed value = 1 }
+    check_variable = { which = hsr_corp_s$SLOT$_founder_shares value >= 20 }
+    NOT = { has_carrier_flag = hsr_corp_offer_s$SLOT$ }
+    NOT = { has_carrier_flag = hsr_corp_notice_s$SLOT$ }
+    exists = event_target:hsr_corp_founder_s$SLOT$@this
+    event_target:hsr_corp_actor = {
+        NOT = { is_same_value = event_target:hsr_corp_founder_s$SLOT$@event_target:hsr_corp_hq }
+        has_resource = { type = trade amount >= prev.hsr_corp_offer_cost }
+        NOT = { has_country_flag = hsr_corp_trade_s$SLOT$@event_target:hsr_corp_hq }
+    }
+    OR = {
+        NOT = { exists = event_target:hsr_corp_foreign_s$SLOT$@this }
+        AND = {
+            exists = event_target:hsr_corp_foreign_s$SLOT$@this
+            event_target:hsr_corp_foreign_s$SLOT$@this = { is_same_value = event_target:hsr_corp_actor }
+        }
+    }
+}
+
+hsr_corp_aid_allowed = {
+    hsr_corp_can_manage_slot = { SLOT = $SLOT$ }
+    hsr_corp_slot_active = { SLOT = $SLOT$ }
+    check_variable = { which = hsr_corp_choose_industry value >= 1 }
+    check_variable = { which = hsr_corp_choose_industry value <= 9 }
+    check_variable = { which = hsr_corp_s$SLOT$_loyalty value >= 20 }
+    check_variable = { which = hsr_corp_s$SLOT$_cash value >= value:hsr_corp_aid_cost }
+    NOT = { has_carrier_flag = hsr_corp_aid_cd_s$SLOT$ }
+    OR = {
+        check_variable = { which = hsr_corp_s$SLOT$_primary value = hsr_corp_choose_industry }
+        check_variable = { which = hsr_corp_s$SLOT$_secondary_1 value = hsr_corp_choose_industry }
+        check_variable = { which = hsr_corp_s$SLOT$_secondary_2 value = hsr_corp_choose_industry }
+    }
+    event_target:hsr_corp_actor = {
+        OR = {
+            any_war = {
+                any_defender = { is_same_value = event_target:hsr_corp_actor }
+                NOT = { has_war_flag = hsr_corp_aid_s$SLOT$@event_target:hsr_corp_hq }
+            }
+            AND = {
+                NOT = { has_country_flag = hsr_corp_crisis_aid_s$SLOT$@event_target:hsr_corp_hq }
+                any_system_within_border = {
+                    any_fleet_in_system = {
+                        exists = owner
+                        owner = {
+                            is_crisis_faction = yes
+                            is_hostile = event_target:hsr_corp_actor
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+# 总部载体作用域；仅统计仍存在且实际持有股份的外部国家。
+hsr_corp_outside_shareholder = {
+    exists = event_target:hsr_corp_$ROLE$_s$SLOT$@this
+    check_variable = { which = hsr_corp_s$SLOT$_$ROLE$_shares value > 0 }
+    event_target:hsr_corp_$ROLE$_s$SLOT$@this = {
+        NOT = { is_same_value = prev.owner }
+    }
+}
+
+hsr_corp_controller_outside = {
+    NOT = { has_carrier_flag = hsr_corp_rights_suspended_s$SLOT$ }
+    OR = {
+        AND = {
+            check_variable = { which = hsr_corp_s$SLOT$_foreign_control value = 1 }
+            exists = event_target:hsr_corp_foreign_s$SLOT$@this
+            event_target:hsr_corp_foreign_s$SLOT$@this = { NOT = { is_same_value = prev.owner } }
+        }
+        AND = {
+            NOT = {
+                check_variable = { which = hsr_corp_s$SLOT$_foreign_control value = 1 }
+                exists = event_target:hsr_corp_foreign_s$SLOT$@this
+            }
+            exists = event_target:hsr_corp_founder_s$SLOT$@this
+            event_target:hsr_corp_founder_s$SLOT$@this = { NOT = { is_same_value = prev.owner } }
+        }
+    }
+}
+
+hsr_corp_illegal_allowed = {
+    hsr_corp_slot_operating = { SLOT = $SLOT$ }
+    owner = { is_same_value = event_target:hsr_corp_actor }
+    NOT = { has_carrier_flag = hsr_corp_illegal_cd_s$SLOT$ }
+    check_variable = { which = hsr_corp_s$SLOT$_offer_escrow value = 0 }
+    check_variable = { which = hsr_corp_illegal_kind value >= 1 }
+    check_variable = { which = hsr_corp_illegal_kind value <= 4 }
+    OR = {
+        hsr_corp_outside_shareholder = { SLOT = $SLOT$ ROLE = founder }
+        hsr_corp_outside_shareholder = { SLOT = $SLOT$ ROLE = foreign }
+    }
+    OR = {
+        NOT = { check_variable = { which = hsr_corp_illegal_kind value = 1 } }
+        check_variable = { which = hsr_corp_s$SLOT$_cash value > 0 }
+    }
+    OR = {
+        NOT = { check_variable = { which = hsr_corp_illegal_kind value = 3 } }
+        hsr_corp_controller_outside = { SLOT = $SLOT$ }
+    }
+}
+
+hsr_corp_nationalize_allowed = {
+    hsr_corp_slot_active = { SLOT = $SLOT$ }
+    owner = { is_same_value = event_target:hsr_corp_actor is_at_war = no }
+    check_variable = { which = hsr_corp_s$SLOT$_offer_escrow value = 0 }
+    check_variable = { which = hsr_corp_s$SLOT$_pending_regime value = 0 }
+    check_variable = { which = hsr_corp_s$SLOT$_share_price value > 0 }
+    NOT = { has_carrier_flag = hsr_corp_control_adapt_s$SLOT$ }
+    NOT = { has_carrier_flag = hsr_corp_illegal_cd_s$SLOT$ }
+    OR = {
+        AND = {
+            hsr_corp_outside_shareholder = { SLOT = $SLOT$ ROLE = founder }
+            hsr_corp_outside_shareholder = { SLOT = $SLOT$ ROLE = foreign }
+            owner = { check_variable = { which = hsr_credits_country_trade_storage value >= prev.hsr_corp_nationalize_cost } }
+        }
+        AND = {
+            hsr_corp_outside_shareholder = { SLOT = $SLOT$ ROLE = founder }
+            NOT = { hsr_corp_outside_shareholder = { SLOT = $SLOT$ ROLE = foreign } }
+            owner = { check_variable = { which = hsr_credits_country_trade_storage value >= prev.hsr_corp_nationalize_cost } }
+        }
+        AND = {
+            NOT = { hsr_corp_outside_shareholder = { SLOT = $SLOT$ ROLE = founder } }
+            hsr_corp_outside_shareholder = { SLOT = $SLOT$ ROLE = foreign }
+            owner = { check_variable = { which = hsr_credits_country_trade_storage value >= prev.hsr_corp_nationalize_cost } }
         }
     }
 }

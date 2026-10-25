@@ -28,7 +28,7 @@ hsr_corp_recheck_control = {
     if = {
         limit = {
             check_variable = { which = hsr_corp_s$SLOT$_foreign_shares value >= 70 }
-            exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
+            exists = event_target:hsr_corp_foreign_s$SLOT$@this
             NOT = {
                 has_carrier_flag = hsr_corp_rights_suspended_s$SLOT$
             }
@@ -40,7 +40,7 @@ hsr_corp_recheck_control = {
             OR = {
                 check_variable = { which = hsr_corp_s$SLOT$_foreign_shares value < 50 }
                 NOT = {
-                    exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
+                    exists = event_target:hsr_corp_foreign_s$SLOT$@this
                 }
                 has_carrier_flag = hsr_corp_rights_suspended_s$SLOT$
             }
@@ -108,11 +108,11 @@ hsr_corp_pay_shareholders = {
     }
     if = {
         limit = {
-            exists = "event_target:hsr_corp_founder_s$SLOT$@this"
+            exists = event_target:hsr_corp_founder_s$SLOT$@this
         }
         subtract_variable = { which = hsr_corp_s$SLOT$_cash value = hsr_corp_payout }
         change_variable = { which = hsr_corp_s$SLOT$_last_dividend value = hsr_corp_payout }
-        "event_target:hsr_corp_founder_s$SLOT$@this" = {
+        event_target:hsr_corp_founder_s$SLOT$@this = {
             hsr_corp_prepare_year = yes
             add_resource = { trade = 1 mult = prev.hsr_corp_payout }
             change_variable = { which = hsr_corp_received_dividends value = prev.hsr_corp_payout }
@@ -138,11 +138,11 @@ hsr_corp_pay_shareholders = {
     }
     if = {
         limit = {
-            exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
+            exists = event_target:hsr_corp_foreign_s$SLOT$@this
         }
         subtract_variable = { which = hsr_corp_s$SLOT$_cash value = hsr_corp_payout }
         change_variable = { which = hsr_corp_s$SLOT$_last_dividend value = hsr_corp_payout }
-        "event_target:hsr_corp_foreign_s$SLOT$@this" = {
+        event_target:hsr_corp_foreign_s$SLOT$@this = {
             hsr_corp_prepare_year = yes
             add_resource = { trade = 1 mult = prev.hsr_corp_payout }
             change_variable = { which = hsr_corp_received_dividends value = prev.hsr_corp_payout }
@@ -181,9 +181,9 @@ hsr_corp_refund_offer = {
         set_variable = { which = hsr_corp_s$SLOT$_offer_escrow value = 0 }
         if = {
             limit = {
-                exists = "event_target:hsr_corp_bidder_s$SLOT$@this"
+                exists = event_target:hsr_corp_bidder_s$SLOT$@this
             }
-            "event_target:hsr_corp_bidder_s$SLOT$@this" = {
+            event_target:hsr_corp_bidder_s$SLOT$@this = {
                 add_resource = { trade = 1 mult = prev.hsr_corp_offer_refund }
             }
         }
@@ -192,7 +192,10 @@ hsr_corp_refund_offer = {
         }
     }
     remove_carrier_flag = hsr_corp_offer_s$SLOT$
-    clear_global_event_target = "hsr_corp_bidder_s$SLOT$@this"
+    if = {
+        limit = { exists = event_target:hsr_corp_bidder_s$SLOT$@this }
+        clear_global_event_target = hsr_corp_bidder_s$SLOT$@this
+    }
 }
 
 # 净资产先偿债再清算；第三方股票只按实际份额获得清算款，绝不没收。
@@ -217,7 +220,7 @@ hsr_corp_liquidate_assets = {
     divide_variable = { which = hsr_corp_payout value = 100 }
     if = {
         limit = {
-            exists = "event_target:hsr_corp_founder_s$SLOT$@this"
+            exists = event_target:hsr_corp_founder_s$SLOT$@this
         }
         event_target:hsr_corp_founder = {
             add_resource = { trade = 1 mult = prev.hsr_corp_payout }
@@ -228,7 +231,7 @@ hsr_corp_liquidate_assets = {
     divide_variable = { which = hsr_corp_payout value = 100 }
     if = {
         limit = {
-            exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
+            exists = event_target:hsr_corp_foreign_s$SLOT$@this
         }
         event_target:hsr_corp_foreign = {
             add_resource = { trade = 1 mult = prev.hsr_corp_payout }
@@ -257,7 +260,7 @@ hsr_corp_annual_slot = {
         if = {
             limit = {
                 NOT = {
-                    exists = "event_target:hsr_corp_founder_s$SLOT$@this"
+                    exists = event_target:hsr_corp_founder_s$SLOT$@this
                 }
             }
             change_variable = { which = hsr_corp_s$SLOT$_pool_shares value = hsr_corp_s$SLOT$_founder_shares }
@@ -266,7 +269,7 @@ hsr_corp_annual_slot = {
         if = {
             limit = {
                 NOT = {
-                    exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
+                    exists = event_target:hsr_corp_foreign_s$SLOT$@this
                 }
             }
             change_variable = { which = hsr_corp_s$SLOT$_pool_shares value = hsr_corp_s$SLOT$_foreign_shares }
@@ -498,20 +501,20 @@ hsr_corp_annual_slot = {
         set_variable = { which = hsr_corp_foreign_dividend_factor value = 0 }
         if = {
             limit = {
-                exists = "event_target:hsr_corp_founder_s$SLOT$@this"
+                exists = event_target:hsr_corp_founder_s$SLOT$@this
             }
             set_variable = {
                 which = hsr_corp_founder_dividend_factor
-                value = "event_target:hsr_corp_founder_s$SLOT$@this.value:hsr_corp_dividend_factor"
+                value = event_target:hsr_corp_founder_s$SLOT$@this.value:hsr_corp_dividend_factor
             }
         }
         if = {
             limit = {
-                exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
+                exists = event_target:hsr_corp_foreign_s$SLOT$@this
             }
             set_variable = {
                 which = hsr_corp_foreign_dividend_factor
-                value = "event_target:hsr_corp_foreign_s$SLOT$@this.value:hsr_corp_dividend_factor"
+                value = event_target:hsr_corp_foreign_s$SLOT$@this.value:hsr_corp_dividend_factor
             }
         }
         set_variable = { which = hsr_corp_dividend_weight value = hsr_corp_s$SLOT$_pool_shares }
@@ -664,7 +667,7 @@ hsr_corp_quote_order = {
     }
     if = {
         limit = {
-            exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
+            exists = event_target:hsr_corp_foreign_s$SLOT$@this
             event_target:hsr_corp_actor = {
                 is_same_value = event_target:hsr_corp_foreign
             }
@@ -682,17 +685,13 @@ hsr_corp_buy = {
     hsr_corp_quote_order = { SLOT = $SLOT$ }
     if = {
         limit = {
-            hsr_corp_market_allowed = { SLOT = $SLOT$ }
-            check_variable = { which = hsr_corp_s$SLOT$_pool_shares value >= hsr_corp_order_qty }
-            event_target:hsr_corp_actor = {
-                has_resource = { type = trade amount >= prev.hsr_corp_order_total }
-            }
+            hsr_corp_buy_allowed = { SLOT = $SLOT$ }
         }
         set_variable = { which = hsr_corp_charge value = hsr_corp_order_total }
         multiply_variable = { which = hsr_corp_charge value = -1 }
         event_target:hsr_corp_actor = {
             add_resource = { trade = 1 mult = prev.hsr_corp_charge }
-            set_timed_country_flag = { flag = "hsr_corp_trade_s$SLOT$@event_target:hsr_corp_hq" days = 30 }
+            set_timed_country_flag = { flag = hsr_corp_trade_s$SLOT$@event_target:hsr_corp_hq days = 30 }
         }
         subtract_variable = { which = hsr_corp_s$SLOT$_pool_shares value = hsr_corp_order_qty }
         change_variable = { which = hsr_corp_s$SLOT$_market_reserve value = hsr_corp_order_gross }
@@ -707,7 +706,7 @@ hsr_corp_buy = {
         }
         else = {
             event_target:hsr_corp_actor = {
-                save_global_event_target_as = "hsr_corp_foreign_s$SLOT$@event_target:hsr_corp_hq"
+                save_global_event_target_as = hsr_corp_foreign_s$SLOT$@event_target:hsr_corp_hq
             }
             hsr_corp_add_basis = { SLOT = $SLOT$ ROLE = foreign QTY = hsr_corp_order_qty COST = hsr_corp_order_total }
             change_variable = { which = hsr_corp_s$SLOT$_foreign_shares value = hsr_corp_order_qty }
@@ -722,13 +721,11 @@ hsr_corp_sell = {
     hsr_corp_quote_order = { SLOT = $SLOT$ }
     if = {
         limit = {
-            hsr_corp_market_allowed = { SLOT = $SLOT$ }
-            check_variable = { which = hsr_corp_order_holding value >= hsr_corp_order_qty }
-            check_variable = { which = hsr_corp_s$SLOT$_market_reserve value >= hsr_corp_order_gross }
+            hsr_corp_sell_allowed = { SLOT = $SLOT$ }
         }
         event_target:hsr_corp_actor = {
             add_resource = { trade = 1 mult = prev.hsr_corp_order_net }
-            set_timed_country_flag = { flag = "hsr_corp_trade_s$SLOT$@event_target:hsr_corp_hq" days = 30 }
+            set_timed_country_flag = { flag = hsr_corp_trade_s$SLOT$@event_target:hsr_corp_hq days = 30 }
         }
         subtract_variable = { which = hsr_corp_s$SLOT$_market_reserve value = hsr_corp_order_gross }
         change_variable = { which = hsr_corp_s$SLOT$_pool_shares value = hsr_corp_order_qty }
@@ -748,7 +745,10 @@ hsr_corp_sell = {
             limit = {
                 check_variable = { which = hsr_corp_s$SLOT$_foreign_shares value = 0 }
             }
-            clear_global_event_target = "hsr_corp_foreign_s$SLOT$@this"
+            if = {
+                limit = { exists = event_target:hsr_corp_foreign_s$SLOT$@this }
+                clear_global_event_target = hsr_corp_foreign_s$SLOT$@this
+            }
         }
     }
 }
@@ -766,34 +766,7 @@ hsr_corp_offer = {
     multiply_variable = { which = hsr_corp_offer_cost value = hsr_corp_buy_factor }
     if = {
         limit = {
-            hsr_corp_slot_active = { SLOT = $SLOT$ }
-            hsr_corp_can_visit = yes
-            check_variable = { which = hsr_corp_s$SLOT$_listed value = 1 }
-            check_variable = { which = hsr_corp_s$SLOT$_founder_shares value >= 20 }
-            NOT = {
-                has_carrier_flag = hsr_corp_offer_s$SLOT$
-            }
-            NOT = {
-                has_carrier_flag = hsr_corp_notice_s$SLOT$
-            }
-            exists = "event_target:hsr_corp_founder_s$SLOT$@this"
-            event_target:hsr_corp_actor = {
-                NOT = {
-                    is_same_value = event_target:hsr_corp_founder
-                }
-                has_resource = { type = trade amount >= prev.hsr_corp_offer_cost }
-                NOT = {
-                    has_country_flag = "hsr_corp_trade_s$SLOT$@event_target:hsr_corp_hq"
-                }
-            }
-            OR = {
-                NOT = {
-                    exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
-                }
-                event_target:hsr_corp_actor = {
-                    is_same_value = event_target:hsr_corp_foreign
-                }
-            }
+            hsr_corp_offer_allowed = { SLOT = $SLOT$ }
         }
         set_variable = { which = hsr_corp_s$SLOT$_offer_id value = hsr_corp_s$SLOT$_id }
         set_variable = { which = hsr_corp_s$SLOT$_offer_escrow value = hsr_corp_offer_cost }
@@ -804,7 +777,7 @@ hsr_corp_offer = {
         multiply_variable = { which = hsr_corp_charge value = -1 }
         event_target:hsr_corp_actor = {
             add_resource = { trade = 1 mult = prev.hsr_corp_charge }
-            save_global_event_target_as = "hsr_corp_bidder_s$SLOT$@event_target:hsr_corp_hq"
+            save_global_event_target_as = hsr_corp_bidder_s$SLOT$@event_target:hsr_corp_hq
         }
         set_timed_carrier_flag = { flag = hsr_corp_offer_s$SLOT$ days = 30 }
         event_target:hsr_corp_founder = {
@@ -821,9 +794,9 @@ hsr_corp_accept_offer = {
     hsr_corp_resolve_parties = { SLOT = $SLOT$ }
     if = {
         limit = {
-            exists = "event_target:hsr_corp_bidder_s$SLOT$@this"
+            exists = event_target:hsr_corp_bidder_s$SLOT$@this
         }
-        "event_target:hsr_corp_bidder_s$SLOT$@this" = {
+        event_target:hsr_corp_bidder_s$SLOT$@this = {
             save_event_target_as = hsr_corp_actor
         }
     }
@@ -835,14 +808,14 @@ hsr_corp_accept_offer = {
             check_variable = { which = hsr_corp_s$SLOT$_offer_escrow value > 0 }
             check_variable = { which = hsr_corp_s$SLOT$_founder_shares value >= 20 }
             hsr_corp_can_visit = yes
-            exists = "event_target:hsr_corp_bidder_s$SLOT$@this"
-            exists = "event_target:hsr_corp_founder_s$SLOT$@this"
+            exists = event_target:hsr_corp_bidder_s$SLOT$@this
+            exists = event_target:hsr_corp_founder_s$SLOT$@this
             OR = {
                 NOT = {
-                    exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
+                    exists = event_target:hsr_corp_foreign_s$SLOT$@this
                 }
-                "event_target:hsr_corp_foreign_s$SLOT$@this" = {
-                    is_same_value = "event_target:hsr_corp_bidder_s$SLOT$@event_target:hsr_corp_hq"
+                event_target:hsr_corp_foreign_s$SLOT$@this = {
+                    is_same_value = event_target:hsr_corp_bidder_s$SLOT$@event_target:hsr_corp_hq
                 }
             }
         }
@@ -852,15 +825,18 @@ hsr_corp_accept_offer = {
         event_target:hsr_corp_founder = {
             add_resource = { trade = 1 mult = prev.hsr_corp_offer_payment }
         }
-        "event_target:hsr_corp_bidder_s$SLOT$@this" = {
-            save_global_event_target_as = "hsr_corp_foreign_s$SLOT$@event_target:hsr_corp_hq"
-            set_timed_country_flag = { flag = "hsr_corp_trade_s$SLOT$@event_target:hsr_corp_hq" days = 30 }
+        event_target:hsr_corp_bidder_s$SLOT$@this = {
+            save_global_event_target_as = hsr_corp_foreign_s$SLOT$@event_target:hsr_corp_hq
+            set_timed_country_flag = { flag = hsr_corp_trade_s$SLOT$@event_target:hsr_corp_hq days = 30 }
         }
         hsr_corp_add_basis = { SLOT = $SLOT$ ROLE = foreign QTY = 20 COST = hsr_corp_offer_basis }
         subtract_variable = { which = hsr_corp_s$SLOT$_founder_shares value = 20 }
         change_variable = { which = hsr_corp_s$SLOT$_foreign_shares value = 20 }
         remove_carrier_flag = hsr_corp_offer_s$SLOT$
-        clear_global_event_target = "hsr_corp_bidder_s$SLOT$@this"
+        if = {
+            limit = { exists = event_target:hsr_corp_bidder_s$SLOT$@this }
+            clear_global_event_target = hsr_corp_bidder_s$SLOT$@this
+        }
         hsr_corp_recheck_control = { SLOT = $SLOT$ }
     }
 }

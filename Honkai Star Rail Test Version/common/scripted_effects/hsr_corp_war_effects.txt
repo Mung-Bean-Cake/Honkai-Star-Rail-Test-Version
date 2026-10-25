@@ -6,44 +6,7 @@ hsr_corp_aid = {
     hsr_corp_resolve_parties = { SLOT = $SLOT$ }
     if = {
         limit = {
-            hsr_corp_can_manage_slot = { SLOT = $SLOT$ }
-            hsr_corp_slot_active = { SLOT = $SLOT$ }
-            check_variable = { which = hsr_corp_s$SLOT$_loyalty value >= 20 }
-            check_variable = { which = hsr_corp_s$SLOT$_cash value >= value:hsr_corp_aid_cost }
-            NOT = {
-                has_carrier_flag = hsr_corp_aid_cd_s$SLOT$
-            }
-            OR = {
-                check_variable = { which = hsr_corp_s$SLOT$_primary value = hsr_corp_choose_industry }
-                check_variable = { which = hsr_corp_s$SLOT$_secondary_1 value = hsr_corp_choose_industry }
-                check_variable = { which = hsr_corp_s$SLOT$_secondary_2 value = hsr_corp_choose_industry }
-            }
-            event_target:hsr_corp_controller = {
-                OR = {
-                    any_war = {
-                        any_defender = {
-                            is_same_value = event_target:hsr_corp_controller
-                        }
-                        NOT = {
-                            has_war_flag = "hsr_corp_aid_s$SLOT$@event_target:hsr_corp_hq"
-                        }
-                    }
-                    AND = {
-                        NOT = {
-                            has_country_flag = "hsr_corp_crisis_aid_s$SLOT$@event_target:hsr_corp_hq"
-                        }
-                        any_system_within_border = {
-                            any_fleet_in_system = {
-                                exists = owner
-                                owner = {
-                                    is_crisis_faction = yes
-                                    is_hostile = event_target:hsr_corp_controller
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+            hsr_corp_aid_allowed = { SLOT = $SLOT$ }
         }
         # 选择一场尚未援助的防御战争，付款前先锁定此场；天灾按实际威胁期记账。
         set_variable = { which = hsr_corp_aid_locked value = 0 }
@@ -54,10 +17,10 @@ hsr_corp_aid = {
                         is_same_value = event_target:hsr_corp_controller
                     }
                     NOT = {
-                        has_war_flag = "hsr_corp_aid_s$SLOT$@event_target:hsr_corp_hq"
+                        has_war_flag = hsr_corp_aid_s$SLOT$@event_target:hsr_corp_hq
                     }
                 }
-                set_war_flag = "hsr_corp_aid_s$SLOT$@event_target:hsr_corp_hq"
+                set_war_flag = hsr_corp_aid_s$SLOT$@event_target:hsr_corp_hq
                 event_target:hsr_corp_hq = {
                     set_variable = { which = hsr_corp_aid_locked value = 1 }
                 }
@@ -68,7 +31,7 @@ hsr_corp_aid = {
                         check_variable = { which = hsr_corp_aid_locked value = 0 }
                     }
                 }
-                set_country_flag = "hsr_corp_crisis_aid_s$SLOT$@event_target:hsr_corp_hq"
+                set_country_flag = hsr_corp_crisis_aid_s$SLOT$@event_target:hsr_corp_hq
             }
         }
         set_timed_carrier_flag = { flag = hsr_corp_aid_cd_s$SLOT$ days = value:hsr_corp_aid_cooldown }
@@ -377,9 +340,9 @@ hsr_corp_record_economic_damage = {
     optimize_memory
     if = {
         limit = {
-            exists = "event_target:hsr_corp_$ROLE$_s$SLOT$@this"
+            exists = event_target:hsr_corp_$ROLE$_s$SLOT$@this
             check_variable = { which = hsr_corp_s$SLOT$_$ROLE$_shares value > 0 }
-            "event_target:hsr_corp_$ROLE$_s$SLOT$@this" = {
+            event_target:hsr_corp_$ROLE$_s$SLOT$@this = {
                 is_country_type = default
                 NOT = {
                     is_same_value = event_target:hsr_corp_hq.owner
@@ -394,7 +357,7 @@ hsr_corp_record_economic_damage = {
             limit = {
                 check_variable = { which = hsr_corp_claim value > 0 }
             }
-            "event_target:hsr_corp_$ROLE$_s$SLOT$@this" = {
+            event_target:hsr_corp_$ROLE$_s$SLOT$@this = {
                 save_event_target_as = hsr_corp_claimant
                 if = {
                     limit = {
@@ -444,18 +407,18 @@ hsr_corp_illegal_seize = {
             }
             OR = {
                 AND = {
-                    exists = "event_target:hsr_corp_founder_s$SLOT$@this"
+                    exists = event_target:hsr_corp_founder_s$SLOT$@this
                     check_variable = { which = hsr_corp_s$SLOT$_founder_shares value > 0 }
-                    "event_target:hsr_corp_founder_s$SLOT$@this" = {
+                    event_target:hsr_corp_founder_s$SLOT$@this = {
                         NOT = {
                             is_same_value = event_target:hsr_corp_hq.owner
                         }
                     }
                 }
                 AND = {
-                    exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
+                    exists = event_target:hsr_corp_foreign_s$SLOT$@this
                     check_variable = { which = hsr_corp_s$SLOT$_foreign_shares value > 0 }
-                    "event_target:hsr_corp_foreign_s$SLOT$@this" = {
+                    event_target:hsr_corp_foreign_s$SLOT$@this = {
                         NOT = {
                             is_same_value = event_target:hsr_corp_hq.owner
                         }
@@ -495,7 +458,7 @@ hsr_corp_transfer_defeated_shares = {
     set_variable = { which = hsr_corp_shares_transferred value = 0 }
     if = {
         limit = {
-            exists = "event_target:hsr_corp_founder_s$SLOT$@this"
+            exists = event_target:hsr_corp_founder_s$SLOT$@this
             event_target:hsr_corp_founder = {
                 is_same_value = event_target:hsr_corp_defeated
             }
@@ -504,12 +467,12 @@ hsr_corp_transfer_defeated_shares = {
         set_variable = { which = hsr_corp_shares_transferred value = 1 }
         set_variable = { which = hsr_corp_s$SLOT$_founder_basis value = hsr_corp_s$SLOT$_share_price }
         event_target:hsr_corp_victor = {
-            save_global_event_target_as = "hsr_corp_founder_s$SLOT$@event_target:hsr_corp_hq"
+            save_global_event_target_as = hsr_corp_founder_s$SLOT$@event_target:hsr_corp_hq
         }
     }
     if = {
         limit = {
-            exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
+            exists = event_target:hsr_corp_foreign_s$SLOT$@this
             event_target:hsr_corp_foreign = {
                 is_same_value = event_target:hsr_corp_defeated
             }
@@ -519,32 +482,38 @@ hsr_corp_transfer_defeated_shares = {
         set_variable = { which = hsr_corp_s$SLOT$_foreign_basis value = hsr_corp_s$SLOT$_share_price }
         if = {
             limit = {
-                "event_target:hsr_corp_founder_s$SLOT$@this" = {
+                event_target:hsr_corp_founder_s$SLOT$@this = {
                     is_same_value = event_target:hsr_corp_victor
                 }
             }
             change_variable = { which = hsr_corp_s$SLOT$_founder_shares value = hsr_corp_s$SLOT$_foreign_shares }
             set_variable = { which = hsr_corp_s$SLOT$_foreign_shares value = 0 }
-            clear_global_event_target = "hsr_corp_foreign_s$SLOT$@this"
+            if = {
+                limit = { exists = event_target:hsr_corp_foreign_s$SLOT$@this }
+                clear_global_event_target = hsr_corp_foreign_s$SLOT$@this
+            }
         }
         else = {
             event_target:hsr_corp_victor = {
-                save_global_event_target_as = "hsr_corp_foreign_s$SLOT$@event_target:hsr_corp_hq"
+                save_global_event_target_as = hsr_corp_foreign_s$SLOT$@event_target:hsr_corp_hq
             }
         }
     }
     if = {
         limit = {
-            exists = "event_target:hsr_corp_founder_s$SLOT$@this"
-            exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
-            "event_target:hsr_corp_founder_s$SLOT$@this" = {
-                is_same_value = "event_target:hsr_corp_foreign_s$SLOT$@event_target:hsr_corp_hq"
+            exists = event_target:hsr_corp_founder_s$SLOT$@this
+            exists = event_target:hsr_corp_foreign_s$SLOT$@this
+            event_target:hsr_corp_founder_s$SLOT$@this = {
+                is_same_value = event_target:hsr_corp_foreign_s$SLOT$@event_target:hsr_corp_hq
             }
         }
         change_variable = { which = hsr_corp_s$SLOT$_founder_shares value = hsr_corp_s$SLOT$_foreign_shares }
         set_variable = { which = hsr_corp_s$SLOT$_foreign_shares value = 0 }
         set_variable = { which = hsr_corp_s$SLOT$_founder_basis value = hsr_corp_s$SLOT$_share_price }
-        clear_global_event_target = "hsr_corp_foreign_s$SLOT$@this"
+        if = {
+            limit = { exists = event_target:hsr_corp_foreign_s$SLOT$@this }
+            clear_global_event_target = hsr_corp_foreign_s$SLOT$@this
+        }
     }
     hsr_corp_recheck_control = { SLOT = $SLOT$ }
 }
@@ -624,44 +593,7 @@ hsr_corp_illegal_action = {
     hsr_corp_resolve_parties = { SLOT = $SLOT$ }
     if = {
         limit = {
-            hsr_corp_slot_operating = { SLOT = $SLOT$ }
-            owner = {
-                is_same_value = event_target:hsr_corp_actor
-            }
-            NOT = {
-                has_carrier_flag = hsr_corp_illegal_cd_s$SLOT$
-            }
-            check_variable = { which = hsr_corp_s$SLOT$_offer_escrow value = 0 }
-            OR = {
-                AND = {
-                    exists = "event_target:hsr_corp_founder_s$SLOT$@this"
-                    check_variable = { which = hsr_corp_s$SLOT$_founder_shares value > 0 }
-                    "event_target:hsr_corp_founder_s$SLOT$@this" = {
-                        NOT = {
-                            is_same_value = event_target:hsr_corp_hq.owner
-                        }
-                    }
-                }
-                AND = {
-                    exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
-                    check_variable = { which = hsr_corp_s$SLOT$_foreign_shares value > 0 }
-                    "event_target:hsr_corp_foreign_s$SLOT$@this" = {
-                        NOT = {
-                            is_same_value = event_target:hsr_corp_hq.owner
-                        }
-                    }
-                }
-            }
-            OR = {
-                NOT = {
-                    check_variable = { which = hsr_corp_illegal_kind value = 3 }
-                }
-                event_target:hsr_corp_controller = {
-                    NOT = {
-                        is_same_value = event_target:hsr_corp_hq.owner
-                    }
-                }
-            }
+            hsr_corp_illegal_allowed = { SLOT = $SLOT$ }
         }
         if = {
             limit = {
@@ -707,8 +639,8 @@ hsr_corp_illegal_action = {
                 set_variable = { which = hsr_corp_host_basis value = 0 }
                 if = {
                     limit = {
-                        exists = "event_target:hsr_corp_founder_s$SLOT$@this"
-                        "event_target:hsr_corp_founder_s$SLOT$@this" = {
+                        exists = event_target:hsr_corp_founder_s$SLOT$@this
+                        event_target:hsr_corp_founder_s$SLOT$@this = {
                             is_same_value = event_target:hsr_corp_hq.owner
                         }
                     }
@@ -718,8 +650,8 @@ hsr_corp_illegal_action = {
                 }
                 if = {
                     limit = {
-                        exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
-                        "event_target:hsr_corp_foreign_s$SLOT$@this" = {
+                        exists = event_target:hsr_corp_foreign_s$SLOT$@this
+                        event_target:hsr_corp_foreign_s$SLOT$@this = {
                             is_same_value = event_target:hsr_corp_hq.owner
                         }
                     }
@@ -729,8 +661,8 @@ hsr_corp_illegal_action = {
                 }
                 if = {
                     limit = {
-                        exists = "event_target:hsr_corp_founder_s$SLOT$@this"
-                        "event_target:hsr_corp_founder_s$SLOT$@this" = {
+                        exists = event_target:hsr_corp_founder_s$SLOT$@this
+                        event_target:hsr_corp_founder_s$SLOT$@this = {
                             NOT = {
                                 is_same_value = event_target:hsr_corp_hq.owner
                             }
@@ -738,12 +670,15 @@ hsr_corp_illegal_action = {
                     }
                     change_variable = { which = hsr_corp_expropriated_shares value = hsr_corp_s$SLOT$_founder_shares }
                     set_variable = { which = hsr_corp_s$SLOT$_founder_shares value = 0 }
-                    clear_global_event_target = "hsr_corp_founder_s$SLOT$@this"
+                    if = {
+                        limit = { exists = event_target:hsr_corp_founder_s$SLOT$@this }
+                        clear_global_event_target = hsr_corp_founder_s$SLOT$@this
+                    }
                 }
                 if = {
                     limit = {
-                        exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
-                        "event_target:hsr_corp_foreign_s$SLOT$@this" = {
+                        exists = event_target:hsr_corp_foreign_s$SLOT$@this
+                        event_target:hsr_corp_foreign_s$SLOT$@this = {
                             NOT = {
                                 is_same_value = event_target:hsr_corp_hq.owner
                             }
@@ -751,16 +686,19 @@ hsr_corp_illegal_action = {
                     }
                     change_variable = { which = hsr_corp_expropriated_shares value = hsr_corp_s$SLOT$_foreign_shares }
                     set_variable = { which = hsr_corp_s$SLOT$_foreign_shares value = 0 }
-                    clear_global_event_target = "hsr_corp_foreign_s$SLOT$@this"
+                    if = {
+                        limit = { exists = event_target:hsr_corp_foreign_s$SLOT$@this }
+                        clear_global_event_target = hsr_corp_foreign_s$SLOT$@this
+                    }
                 }
                 change_variable = { which = hsr_corp_s$SLOT$_founder_shares value = hsr_corp_expropriated_shares }
                 owner = {
-                    save_global_event_target_as = "hsr_corp_founder_s$SLOT$@event_target:hsr_corp_hq"
+                    save_global_event_target_as = hsr_corp_founder_s$SLOT$@event_target:hsr_corp_hq
                 }
                 if = {
                     limit = {
-                        exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
-                        "event_target:hsr_corp_foreign_s$SLOT$@this" = {
+                        exists = event_target:hsr_corp_foreign_s$SLOT$@this
+                        event_target:hsr_corp_foreign_s$SLOT$@this = {
                             is_same_value = event_target:hsr_corp_hq.owner
                         }
                     }
@@ -769,7 +707,10 @@ hsr_corp_illegal_action = {
                         value = hsr_corp_s$SLOT$_foreign_shares
                     }
                     set_variable = { which = hsr_corp_s$SLOT$_foreign_shares value = 0 }
-                    clear_global_event_target = "hsr_corp_foreign_s$SLOT$@this"
+                    if = {
+                        limit = { exists = event_target:hsr_corp_foreign_s$SLOT$@this }
+                        clear_global_event_target = hsr_corp_foreign_s$SLOT$@this
+                    }
                 }
                 if = {
                     limit = {
@@ -817,70 +758,10 @@ hsr_corp_illegal_action = {
 hsr_corp_nationalize = {
     optimize_memory
     hsr_corp_resolve_parties = { SLOT = $SLOT$ }
+    hsr_corp_quote_nationalization = { SLOT = $SLOT$ }
     if = {
         limit = {
-            hsr_corp_slot_active = { SLOT = $SLOT$ }
-            owner = {
-                is_same_value = event_target:hsr_corp_actor
-                is_at_war = no
-            }
-            check_variable = { which = hsr_corp_s$SLOT$_offer_escrow value = 0 }
-            check_variable = { which = hsr_corp_s$SLOT$_pending_regime value = 0 }
-            NOT = {
-                has_carrier_flag = hsr_corp_control_adapt_s$SLOT$
-            }
-            NOT = {
-                has_carrier_flag = hsr_corp_illegal_cd_s$SLOT$
-            }
-            OR = {
-                AND = {
-                    exists = "event_target:hsr_corp_founder_s$SLOT$@this"
-                    check_variable = { which = hsr_corp_s$SLOT$_founder_shares value > 0 }
-                    "event_target:hsr_corp_founder_s$SLOT$@this" = {
-                        NOT = {
-                            is_same_value = event_target:hsr_corp_hq.owner
-                        }
-                    }
-                }
-                AND = {
-                    exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
-                    check_variable = { which = hsr_corp_s$SLOT$_foreign_shares value > 0 }
-                    "event_target:hsr_corp_foreign_s$SLOT$@this" = {
-                        NOT = {
-                            is_same_value = event_target:hsr_corp_hq.owner
-                        }
-                    }
-                }
-            }
-        }
-        set_variable = { which = hsr_corp_nationalize_cost value = 0 }
-        set_variable = { which = hsr_corp_purchase_founder value = 0 }
-        if = {
-            limit = {
-                exists = "event_target:hsr_corp_founder_s$SLOT$@this"
-                "event_target:hsr_corp_founder_s$SLOT$@this" = {
-                    NOT = {
-                        is_same_value = event_target:hsr_corp_hq.owner
-                    }
-                }
-            }
-            set_variable = { which = hsr_corp_purchase_founder value = hsr_corp_s$SLOT$_founder_shares }
-            multiply_variable = { which = hsr_corp_purchase_founder value = hsr_corp_s$SLOT$_share_price }
-            change_variable = { which = hsr_corp_nationalize_cost value = hsr_corp_purchase_founder }
-        }
-        set_variable = { which = hsr_corp_purchase_foreign value = 0 }
-        if = {
-            limit = {
-                exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
-                "event_target:hsr_corp_foreign_s$SLOT$@this" = {
-                    NOT = {
-                        is_same_value = event_target:hsr_corp_hq.owner
-                    }
-                }
-            }
-            set_variable = { which = hsr_corp_purchase_foreign value = hsr_corp_s$SLOT$_foreign_shares }
-            multiply_variable = { which = hsr_corp_purchase_foreign value = hsr_corp_s$SLOT$_share_price }
-            change_variable = { which = hsr_corp_nationalize_cost value = hsr_corp_purchase_foreign }
+            hsr_corp_nationalize_allowed = { SLOT = $SLOT$ }
         }
         if = {
             limit = {
@@ -899,8 +780,8 @@ hsr_corp_nationalize = {
             set_variable = { which = hsr_corp_host_basis value = 0 }
             if = {
                 limit = {
-                    exists = "event_target:hsr_corp_founder_s$SLOT$@this"
-                    "event_target:hsr_corp_founder_s$SLOT$@this" = {
+                    exists = event_target:hsr_corp_founder_s$SLOT$@this
+                    event_target:hsr_corp_founder_s$SLOT$@this = {
                         is_same_value = event_target:hsr_corp_hq.owner
                     }
                 }
@@ -910,8 +791,8 @@ hsr_corp_nationalize = {
             }
             if = {
                 limit = {
-                    exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
-                    "event_target:hsr_corp_foreign_s$SLOT$@this" = {
+                    exists = event_target:hsr_corp_foreign_s$SLOT$@this
+                    event_target:hsr_corp_foreign_s$SLOT$@this = {
                         is_same_value = event_target:hsr_corp_hq.owner
                     }
                 }
@@ -923,41 +804,50 @@ hsr_corp_nationalize = {
             if = {
                 limit = {
                     check_variable = { which = hsr_corp_purchase_founder value > 0 }
-                    exists = "event_target:hsr_corp_founder_s$SLOT$@this"
+                    exists = event_target:hsr_corp_founder_s$SLOT$@this
                 }
-                "event_target:hsr_corp_founder_s$SLOT$@this" = {
+                event_target:hsr_corp_founder_s$SLOT$@this = {
                     add_resource = { trade = 1 mult = prev.hsr_corp_purchase_founder }
                 }
                 change_variable = { which = hsr_corp_purchased_shares value = hsr_corp_s$SLOT$_founder_shares }
                 set_variable = { which = hsr_corp_s$SLOT$_founder_shares value = 0 }
-                clear_global_event_target = "hsr_corp_founder_s$SLOT$@this"
+                if = {
+                    limit = { exists = event_target:hsr_corp_founder_s$SLOT$@this }
+                    clear_global_event_target = hsr_corp_founder_s$SLOT$@this
+                }
             }
             if = {
                 limit = {
                     check_variable = { which = hsr_corp_purchase_foreign value > 0 }
-                    exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
+                    exists = event_target:hsr_corp_foreign_s$SLOT$@this
                 }
-                "event_target:hsr_corp_foreign_s$SLOT$@this" = {
+                event_target:hsr_corp_foreign_s$SLOT$@this = {
                     add_resource = { trade = 1 mult = prev.hsr_corp_purchase_foreign }
                 }
                 change_variable = { which = hsr_corp_purchased_shares value = hsr_corp_s$SLOT$_foreign_shares }
                 set_variable = { which = hsr_corp_s$SLOT$_foreign_shares value = 0 }
-                clear_global_event_target = "hsr_corp_foreign_s$SLOT$@this"
+                if = {
+                    limit = { exists = event_target:hsr_corp_foreign_s$SLOT$@this }
+                    clear_global_event_target = hsr_corp_foreign_s$SLOT$@this
+                }
             }
             change_variable = { which = hsr_corp_s$SLOT$_founder_shares value = hsr_corp_purchased_shares }
             owner = {
-                save_global_event_target_as = "hsr_corp_founder_s$SLOT$@event_target:hsr_corp_hq"
+                save_global_event_target_as = hsr_corp_founder_s$SLOT$@event_target:hsr_corp_hq
             }
             if = {
                 limit = {
-                    exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
-                    "event_target:hsr_corp_foreign_s$SLOT$@this" = {
+                    exists = event_target:hsr_corp_foreign_s$SLOT$@this
+                    event_target:hsr_corp_foreign_s$SLOT$@this = {
                         is_same_value = event_target:hsr_corp_hq.owner
                     }
                 }
                 change_variable = { which = hsr_corp_s$SLOT$_founder_shares value = hsr_corp_s$SLOT$_foreign_shares }
                 set_variable = { which = hsr_corp_s$SLOT$_foreign_shares value = 0 }
-                clear_global_event_target = "hsr_corp_foreign_s$SLOT$@this"
+                if = {
+                    limit = { exists = event_target:hsr_corp_foreign_s$SLOT$@this }
+                    clear_global_event_target = hsr_corp_foreign_s$SLOT$@this
+                }
             }
             if = {
                 limit = {
@@ -970,5 +860,38 @@ hsr_corp_nationalize = {
             remove_carrier_flag = hsr_corp_rights_suspended_s$SLOT$
             hsr_corp_recheck_control = { SLOT = $SLOT$ }
         }
+    }
+}
+
+hsr_corp_quote_nationalization = {
+    optimize_memory
+    set_variable = { which = hsr_corp_nationalize_cost value = 0 }
+    set_variable = { which = hsr_corp_purchase_founder value = 0 }
+    if = {
+        limit = {
+            exists = event_target:hsr_corp_founder_s$SLOT$@this
+            event_target:hsr_corp_founder_s$SLOT$@this = {
+                NOT = {
+                    is_same_value = event_target:hsr_corp_hq.owner
+                }
+            }
+        }
+        set_variable = { which = hsr_corp_purchase_founder value = hsr_corp_s$SLOT$_founder_shares }
+        multiply_variable = { which = hsr_corp_purchase_founder value = hsr_corp_s$SLOT$_share_price }
+        change_variable = { which = hsr_corp_nationalize_cost value = hsr_corp_purchase_founder }
+    }
+    set_variable = { which = hsr_corp_purchase_foreign value = 0 }
+    if = {
+        limit = {
+            exists = event_target:hsr_corp_foreign_s$SLOT$@this
+            event_target:hsr_corp_foreign_s$SLOT$@this = {
+                NOT = {
+                    is_same_value = event_target:hsr_corp_hq.owner
+                }
+            }
+        }
+        set_variable = { which = hsr_corp_purchase_foreign value = hsr_corp_s$SLOT$_foreign_shares }
+        multiply_variable = { which = hsr_corp_purchase_foreign value = hsr_corp_s$SLOT$_share_price }
+        change_variable = { which = hsr_corp_nationalize_cost value = hsr_corp_purchase_foreign }
     }
 }

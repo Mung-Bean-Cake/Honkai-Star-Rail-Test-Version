@@ -3,6 +3,39 @@
 # 首次使用记录当前日历年；不在开户或打开界面时追收利息。
 hsr_finance_initialize = {
     optimize_memory
+    # 首次使用时补齐财政字段，已有余额和年度记录保持原值。
+    if = {
+        limit = { NOT = { is_variable_set = hsr_credits_country_loan } }
+        set_variable = { which = hsr_credits_country_loan value = 0 }
+    }
+    if = {
+        limit = { NOT = { is_variable_set = hsr_credits_country_trade_storage } }
+        set_variable = { which = hsr_credits_country_trade_storage value = 0 }
+    }
+    if = {
+        limit = { NOT = { is_variable_set = hsr_finance_last_income } }
+        set_variable = { which = hsr_finance_last_income value = 0 }
+    }
+    if = {
+        limit = { NOT = { is_variable_set = hsr_finance_unpaid_interest } }
+        set_variable = { which = hsr_finance_unpaid_interest value = 0 }
+    }
+    if = {
+        limit = { NOT = { is_variable_set = hsr_finance_overdue_years } }
+        set_variable = { which = hsr_finance_overdue_years value = 0 }
+    }
+    if = {
+        limit = { NOT = { is_variable_set = hsr_finance_last_interest_due } }
+        set_variable = { which = hsr_finance_last_interest_due value = 0 }
+    }
+    if = {
+        limit = { NOT = { is_variable_set = hsr_finance_last_interest_paid } }
+        set_variable = { which = hsr_finance_last_interest_paid value = 0 }
+    }
+    if = {
+        limit = { NOT = { is_variable_set = hsr_finance_last_repayment } }
+        set_variable = { which = hsr_finance_last_repayment value = 0 }
+    }
     if = {
         limit = {
             NOT = {

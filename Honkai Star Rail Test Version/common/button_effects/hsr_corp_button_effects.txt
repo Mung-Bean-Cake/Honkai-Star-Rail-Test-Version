@@ -333,12 +333,23 @@ hsr_corp_upgrade_button = {
     }
     allow = {
         custom_tooltip = {
-            fail_text = hsr_corp_action_blocked
+            fail_text = hsr_corp_upgrade_blocked
             hidden_trigger = {
-                hsr_corp_ui_can_manage = yes
-                check_variable = { which = hsr_corp_view_state value = 2 }
-                check_variable = { which = hsr_corp_view_level value < 10 }
-                check_variable = { which = hsr_corp_view_cash value >= hsr_corp_view_upgrade_cost }
+                hsr_corp_ui_session_valid = yes
+                OR = {
+                    AND = {
+                        check_variable = { which = hsr_corp_selected value = 1 }
+                        hsr_corp_ui_upgrade_allowed = { SLOT = 1 }
+                    }
+                    AND = {
+                        check_variable = { which = hsr_corp_selected value = 2 }
+                        hsr_corp_ui_upgrade_allowed = { SLOT = 2 }
+                    }
+                    AND = {
+                        check_variable = { which = hsr_corp_selected value = 3 }
+                        hsr_corp_ui_upgrade_allowed = { SLOT = 3 }
+                    }
+                }
             }
         }
     }
@@ -426,11 +437,22 @@ hsr_corp_inject_button = {
     }
     allow = {
         custom_tooltip = {
-            fail_text = hsr_corp_action_blocked
+            fail_text = hsr_corp_inject_blocked
             hidden_trigger = {
                 hsr_corp_ui_session_valid = yes
-                from = {
-                    has_resource = { type = trade amount >= 1000 }
+                OR = {
+                    AND = {
+                        check_variable = { which = hsr_corp_selected value = 1 }
+                        hsr_corp_ui_inject_allowed = { SLOT = 1 }
+                    }
+                    AND = {
+                        check_variable = { which = hsr_corp_selected value = 2 }
+                        hsr_corp_ui_inject_allowed = { SLOT = 2 }
+                    }
+                    AND = {
+                        check_variable = { which = hsr_corp_selected value = 3 }
+                        hsr_corp_ui_inject_allowed = { SLOT = 3 }
+                    }
                 }
             }
         }
@@ -896,12 +918,23 @@ hsr_corp_expand_1 = {
     }
     allow = {
         custom_tooltip = {
-            fail_text = hsr_corp_action_blocked
+            fail_text = hsr_corp_expand_blocked
             hidden_trigger = {
-                hsr_corp_ui_can_manage = yes
-                check_variable = { which = hsr_corp_view_state value = 2 }
-                check_variable = { which = hsr_corp_view_level value >= 4 }
-                check_variable = { which = hsr_corp_view_cash value >= hsr_corp_view_side_1_cost }
+                hsr_corp_ui_session_valid = yes
+                OR = {
+                    AND = {
+                        check_variable = { which = hsr_corp_selected value = 1 }
+                        hsr_corp_ui_expand_allowed = { SLOT = 1 SIDE = 1 LEVEL = 4 }
+                    }
+                    AND = {
+                        check_variable = { which = hsr_corp_selected value = 2 }
+                        hsr_corp_ui_expand_allowed = { SLOT = 2 SIDE = 1 LEVEL = 4 }
+                    }
+                    AND = {
+                        check_variable = { which = hsr_corp_selected value = 3 }
+                        hsr_corp_ui_expand_allowed = { SLOT = 3 SIDE = 1 LEVEL = 4 }
+                    }
+                }
             }
         }
     }
@@ -978,12 +1011,23 @@ hsr_corp_expand_2 = {
     }
     allow = {
         custom_tooltip = {
-            fail_text = hsr_corp_action_blocked
+            fail_text = hsr_corp_expand_blocked
             hidden_trigger = {
-                hsr_corp_ui_can_manage = yes
-                check_variable = { which = hsr_corp_view_state value = 2 }
-                check_variable = { which = hsr_corp_view_level value >= 7 }
-                check_variable = { which = hsr_corp_view_cash value >= hsr_corp_view_side_2_cost }
+                hsr_corp_ui_session_valid = yes
+                OR = {
+                    AND = {
+                        check_variable = { which = hsr_corp_selected value = 1 }
+                        hsr_corp_ui_expand_allowed = { SLOT = 1 SIDE = 2 LEVEL = 7 }
+                    }
+                    AND = {
+                        check_variable = { which = hsr_corp_selected value = 2 }
+                        hsr_corp_ui_expand_allowed = { SLOT = 2 SIDE = 2 LEVEL = 7 }
+                    }
+                    AND = {
+                        check_variable = { which = hsr_corp_selected value = 3 }
+                        hsr_corp_ui_expand_allowed = { SLOT = 3 SIDE = 2 LEVEL = 7 }
+                    }
+                }
             }
         }
     }
@@ -1132,10 +1176,23 @@ hsr_corp_buy_button = {
     }
     allow = {
         custom_tooltip = {
-            fail_text = hsr_corp_action_blocked
+            fail_text = hsr_corp_buy_blocked
             hidden_trigger = {
                 hsr_corp_ui_session_valid = yes
-                check_variable = { which = hsr_corp_view_listed value = 1 }
+                OR = {
+                    AND = {
+                        check_variable = { which = hsr_corp_selected value = 1 }
+                        hsr_corp_ui_buy_allowed = { SLOT = 1 }
+                    }
+                    AND = {
+                        check_variable = { which = hsr_corp_selected value = 2 }
+                        hsr_corp_ui_buy_allowed = { SLOT = 2 }
+                    }
+                    AND = {
+                        check_variable = { which = hsr_corp_selected value = 3 }
+                        hsr_corp_ui_buy_allowed = { SLOT = 3 }
+                    }
+                }
             }
         }
     }
@@ -1199,10 +1256,23 @@ hsr_corp_sell_button = {
     }
     allow = {
         custom_tooltip = {
-            fail_text = hsr_corp_action_blocked
+            fail_text = hsr_corp_sell_blocked
             hidden_trigger = {
                 hsr_corp_ui_session_valid = yes
-                check_variable = { which = hsr_corp_view_listed value = 1 }
+                OR = {
+                    AND = {
+                        check_variable = { which = hsr_corp_selected value = 1 }
+                        hsr_corp_ui_sell_allowed = { SLOT = 1 }
+                    }
+                    AND = {
+                        check_variable = { which = hsr_corp_selected value = 2 }
+                        hsr_corp_ui_sell_allowed = { SLOT = 2 }
+                    }
+                    AND = {
+                        check_variable = { which = hsr_corp_selected value = 3 }
+                        hsr_corp_ui_sell_allowed = { SLOT = 3 }
+                    }
+                }
             }
         }
     }
@@ -1266,10 +1336,23 @@ hsr_corp_offer_button = {
     }
     allow = {
         custom_tooltip = {
-            fail_text = hsr_corp_action_blocked
+            fail_text = hsr_corp_offer_blocked
             hidden_trigger = {
                 hsr_corp_ui_session_valid = yes
-                check_variable = { which = hsr_corp_view_listed value = 1 }
+                OR = {
+                    AND = {
+                        check_variable = { which = hsr_corp_selected value = 1 }
+                        hsr_corp_ui_offer_allowed = { SLOT = 1 }
+                    }
+                    AND = {
+                        check_variable = { which = hsr_corp_selected value = 2 }
+                        hsr_corp_ui_offer_allowed = { SLOT = 2 }
+                    }
+                    AND = {
+                        check_variable = { which = hsr_corp_selected value = 3 }
+                        hsr_corp_ui_offer_allowed = { SLOT = 3 }
+                    }
+                }
             }
         }
     }
@@ -1544,12 +1627,23 @@ hsr_corp_aid_button = {
     }
     allow = {
         custom_tooltip = {
-            fail_text = hsr_corp_action_blocked
+            fail_text = hsr_corp_aid_blocked
             hidden_trigger = {
-                hsr_corp_ui_can_manage = yes
-                check_variable = { which = hsr_corp_view_state value = 2 }
-                check_variable = { which = hsr_corp_view_loyalty value >= 20 }
-                check_variable = { which = hsr_corp_view_cash value >= 1000 }
+                hsr_corp_ui_session_valid = yes
+                OR = {
+                    AND = {
+                        check_variable = { which = hsr_corp_selected value = 1 }
+                        hsr_corp_ui_aid_allowed = { SLOT = 1 }
+                    }
+                    AND = {
+                        check_variable = { which = hsr_corp_selected value = 2 }
+                        hsr_corp_ui_aid_allowed = { SLOT = 2 }
+                    }
+                    AND = {
+                        check_variable = { which = hsr_corp_selected value = 3 }
+                        hsr_corp_ui_aid_allowed = { SLOT = 3 }
+                    }
+                }
             }
         }
     }
@@ -1628,7 +1722,7 @@ inline_script = {
     script = hsr_corp/button/action
     NAME = hsr_corp_reform_choice_2
     VISIBLE = "check_variable = { which = hsr_corp_page value = 2 } check_variable = { which = hsr_corp_tab value = 4 } check_variable = { which = hsr_corp_diplomacy_mode value = 0 } NOT = { check_variable = { which = hsr_corp_setup_regime value = 2 } }"
-    ALLOW = "always = yes"
+    ALLOW = "hsr_corp_ui_cooperative_allowed = yes"
     REASON = hsr_corp_action_blocked
     ACTION = "set_variable = { which = hsr_corp_setup_regime value = 2 }"
 }
@@ -1637,7 +1731,7 @@ inline_script = {
     script = hsr_corp/button/action
     NAME = hsr_corp_reform_choice_2_selected
     VISIBLE = "check_variable = { which = hsr_corp_page value = 2 } check_variable = { which = hsr_corp_tab value = 4 } check_variable = { which = hsr_corp_diplomacy_mode value = 0 } check_variable = { which = hsr_corp_setup_regime value = 2 }"
-    ALLOW = "always = yes"
+    ALLOW = "hsr_corp_ui_cooperative_allowed = yes"
     REASON = hsr_corp_action_blocked
     ACTION = "set_variable = { which = hsr_corp_setup_regime value = 2 }"
 }
@@ -1686,11 +1780,23 @@ hsr_corp_reform_button = {
     }
     allow = {
         custom_tooltip = {
-            fail_text = hsr_corp_action_blocked
+            fail_text = hsr_corp_reform_blocked
             hidden_trigger = {
-                hsr_corp_ui_can_manage = yes
-                check_variable = { which = hsr_corp_view_state value = 2 }
-                check_variable = { which = hsr_corp_view_cash value >= hsr_corp_view_reform_cost }
+                hsr_corp_ui_session_valid = yes
+                OR = {
+                    AND = {
+                        check_variable = { which = hsr_corp_selected value = 1 }
+                        hsr_corp_ui_reform_allowed = { SLOT = 1 }
+                    }
+                    AND = {
+                        check_variable = { which = hsr_corp_selected value = 2 }
+                        hsr_corp_ui_reform_allowed = { SLOT = 2 }
+                    }
+                    AND = {
+                        check_variable = { which = hsr_corp_selected value = 3 }
+                        hsr_corp_ui_reform_allowed = { SLOT = 3 }
+                    }
+                }
             }
         }
     }
@@ -1841,8 +1947,8 @@ inline_script = {
     script = hsr_corp/button/action
     NAME = hsr_corp_illegal_prepare
     VISIBLE = "check_variable = { which = hsr_corp_page value = 2 } check_variable = { which = hsr_corp_tab value = 4 } check_variable = { which = hsr_corp_diplomacy_mode value = 1 }"
-    ALLOW = "hsr_corp_ui_session_valid = yes owner = { is_same_value = from } check_variable = { which = hsr_corp_view_state value >= 2 }"
-    REASON = hsr_corp_action_blocked
+    ALLOW = "hsr_corp_ui_session_valid = yes OR = { AND = { check_variable = { which = hsr_corp_selected value = 1 } hsr_corp_ui_illegal_allowed = { SLOT = 1 } } AND = { check_variable = { which = hsr_corp_selected value = 2 } hsr_corp_ui_illegal_allowed = { SLOT = 2 } } AND = { check_variable = { which = hsr_corp_selected value = 3 } hsr_corp_ui_illegal_allowed = { SLOT = 3 } } }"
+    REASON = hsr_corp_illegal_blocked
     ACTION = "set_variable = { which = hsr_corp_confirm_illegal value = hsr_corp_session_id }"
 }
 
@@ -1855,13 +1961,9 @@ hsr_corp_illegal_confirm = {
     }
     allow = {
         custom_tooltip = {
-            fail_text = hsr_corp_action_blocked
+            fail_text = hsr_corp_illegal_blocked
             hidden_trigger = {
-                hsr_corp_ui_session_valid = yes
-                owner = {
-                    is_same_value = from
-                }
-                check_variable = { which = hsr_corp_view_state value >= 2 }
+                hsr_corp_ui_session_valid = yes OR = { AND = { check_variable = { which = hsr_corp_selected value = 1 } hsr_corp_ui_illegal_allowed = { SLOT = 1 } } AND = { check_variable = { which = hsr_corp_selected value = 2 } hsr_corp_ui_illegal_allowed = { SLOT = 2 } } AND = { check_variable = { which = hsr_corp_selected value = 3 } hsr_corp_ui_illegal_allowed = { SLOT = 3 } } }
             }
         }
     }
@@ -1923,8 +2025,8 @@ inline_script = {
     script = hsr_corp/button/action
     NAME = hsr_corp_nationalize_prepare
     VISIBLE = "check_variable = { which = hsr_corp_page value = 2 } check_variable = { which = hsr_corp_tab value = 4 } check_variable = { which = hsr_corp_diplomacy_mode value = 1 }"
-    ALLOW = "hsr_corp_ui_session_valid = yes owner = { is_same_value = from } check_variable = { which = hsr_corp_view_state value >= 2 }"
-    REASON = hsr_corp_action_blocked
+    ALLOW = "hsr_corp_ui_session_valid = yes OR = { AND = { check_variable = { which = hsr_corp_selected value = 1 } hsr_corp_ui_nationalize_allowed = { SLOT = 1 } } AND = { check_variable = { which = hsr_corp_selected value = 2 } hsr_corp_ui_nationalize_allowed = { SLOT = 2 } } AND = { check_variable = { which = hsr_corp_selected value = 3 } hsr_corp_ui_nationalize_allowed = { SLOT = 3 } } }"
+    REASON = hsr_corp_nationalize_blocked
     ACTION = "set_variable = { which = hsr_corp_confirm_legal value = hsr_corp_session_id }"
 }
 
@@ -1937,13 +2039,9 @@ hsr_corp_nationalize_confirm = {
     }
     allow = {
         custom_tooltip = {
-            fail_text = hsr_corp_action_blocked
+            fail_text = hsr_corp_nationalize_blocked
             hidden_trigger = {
-                hsr_corp_ui_session_valid = yes
-                owner = {
-                    is_same_value = from
-                }
-                check_variable = { which = hsr_corp_view_state value >= 2 }
+                hsr_corp_ui_session_valid = yes OR = { AND = { check_variable = { which = hsr_corp_selected value = 1 } hsr_corp_ui_nationalize_allowed = { SLOT = 1 } } AND = { check_variable = { which = hsr_corp_selected value = 2 } hsr_corp_ui_nationalize_allowed = { SLOT = 2 } } AND = { check_variable = { which = hsr_corp_selected value = 3 } hsr_corp_ui_nationalize_allowed = { SLOT = 3 } } }
             }
         }
     }
@@ -4448,171 +4546,171 @@ hsr_corp_portfolio_open_1 = {
     effect = {
         from = {
             hidden_effect = {
-                from = {
-                    save_event_target_as = hsr_corp_actor
-                }
                 save_event_target_as = hsr_corp_actor
-                set_variable = { which = hsr_corp_portfolio_opened value = 0 }
                 if = {
-                    limit = {
-                        exists = event_target:hsr_corp_row_1@this
-                    }
-                    event_target:hsr_corp_row_1@this = {
-                        if = {
-                            limit = {
+                    limit = { exists = event_target:hsr_corp_actor }
+                    set_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                    if = {
+                        limit = {
+                            exists = event_target:hsr_corp_row_1@this
+                        }
+                        event_target:hsr_corp_row_1@this = {
+                            if = {
+                                limit = {
+                                    event_target:hsr_corp_actor = {
+                                        check_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                                        check_variable = { which = hsr_corp_row_1_slot value = 1 }
+                                    }
+                                    check_variable = {
+                                        which = hsr_corp_s1_id
+                                        value = event_target:hsr_corp_actor.hsr_corp_row_1_id
+                                    }
+                                    check_variable = { which = hsr_corp_s1_state value > 0 }
+                                    check_variable = { which = hsr_corp_s1_state value < 4 }
+                                    hsr_corp_can_visit = yes
+                                }
+                                save_global_event_target_as = hsr_corp_row_1@event_target:hsr_corp_actor
                                 event_target:hsr_corp_actor = {
-                                    check_variable = { which = hsr_corp_portfolio_opened value = 0 }
-                                    check_variable = { which = hsr_corp_row_1_slot value = 1 }
+                                    set_variable = { which = hsr_corp_portfolio_opened value = 1 }
                                 }
-                                check_variable = {
-                                    which = hsr_corp_s1_id
-                                    value = event_target:hsr_corp_actor.hsr_corp_row_1_id
+                                hsr_corp_open_company = { SLOT = 1 ID = event_target:hsr_corp_actor.hsr_corp_row_1_id }
+                                carrier_event = {
+                                    id = hsr_corp.30
                                 }
-                                check_variable = { which = hsr_corp_s1_state value > 0 }
-                                check_variable = { which = hsr_corp_s1_state value < 4 }
-                                hsr_corp_can_visit = yes
                             }
-                            save_global_event_target_as = hsr_corp_row_1@event_target:hsr_corp_actor
-                            event_target:hsr_corp_actor = {
-                                set_variable = { which = hsr_corp_portfolio_opened value = 1 }
+                            if = {
+                                limit = {
+                                    event_target:hsr_corp_actor = {
+                                        check_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                                        check_variable = { which = hsr_corp_row_1_slot value = 2 }
+                                    }
+                                    check_variable = {
+                                        which = hsr_corp_s2_id
+                                        value = event_target:hsr_corp_actor.hsr_corp_row_1_id
+                                    }
+                                    check_variable = { which = hsr_corp_s2_state value > 0 }
+                                    check_variable = { which = hsr_corp_s2_state value < 4 }
+                                    hsr_corp_can_visit = yes
+                                }
+                                save_global_event_target_as = hsr_corp_row_1@event_target:hsr_corp_actor
+                                event_target:hsr_corp_actor = {
+                                    set_variable = { which = hsr_corp_portfolio_opened value = 1 }
+                                }
+                                hsr_corp_open_company = { SLOT = 2 ID = event_target:hsr_corp_actor.hsr_corp_row_1_id }
+                                carrier_event = {
+                                    id = hsr_corp.30
+                                }
                             }
-                            hsr_corp_open_company = { SLOT = 1 ID = event_target:hsr_corp_actor.hsr_corp_row_1_id }
-                            carrier_event = {
-                                id = hsr_corp.30
+                            if = {
+                                limit = {
+                                    event_target:hsr_corp_actor = {
+                                        check_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                                        check_variable = { which = hsr_corp_row_1_slot value = 3 }
+                                    }
+                                    check_variable = {
+                                        which = hsr_corp_s3_id
+                                        value = event_target:hsr_corp_actor.hsr_corp_row_1_id
+                                    }
+                                    check_variable = { which = hsr_corp_s3_state value > 0 }
+                                    check_variable = { which = hsr_corp_s3_state value < 4 }
+                                    hsr_corp_can_visit = yes
+                                }
+                                save_global_event_target_as = hsr_corp_row_1@event_target:hsr_corp_actor
+                                event_target:hsr_corp_actor = {
+                                    set_variable = { which = hsr_corp_portfolio_opened value = 1 }
+                                }
+                                hsr_corp_open_company = { SLOT = 3 ID = event_target:hsr_corp_actor.hsr_corp_row_1_id }
+                                carrier_event = {
+                                    id = hsr_corp.30
+                                }
                             }
                         }
-                        if = {
-                            limit = {
-                                event_target:hsr_corp_actor = {
-                                    check_variable = { which = hsr_corp_portfolio_opened value = 0 }
-                                    check_variable = { which = hsr_corp_row_1_slot value = 2 }
-                                }
-                                check_variable = {
-                                    which = hsr_corp_s2_id
-                                    value = event_target:hsr_corp_actor.hsr_corp_row_1_id
-                                }
-                                check_variable = { which = hsr_corp_s2_state value > 0 }
-                                check_variable = { which = hsr_corp_s2_state value < 4 }
-                                hsr_corp_can_visit = yes
-                            }
-                            save_global_event_target_as = hsr_corp_row_1@event_target:hsr_corp_actor
-                            event_target:hsr_corp_actor = {
-                                set_variable = { which = hsr_corp_portfolio_opened value = 1 }
-                            }
-                            hsr_corp_open_company = { SLOT = 2 ID = event_target:hsr_corp_actor.hsr_corp_row_1_id }
-                            carrier_event = {
-                                id = hsr_corp.30
-                            }
-                        }
-                        if = {
-                            limit = {
-                                event_target:hsr_corp_actor = {
-                                    check_variable = { which = hsr_corp_portfolio_opened value = 0 }
-                                    check_variable = { which = hsr_corp_row_1_slot value = 3 }
-                                }
-                                check_variable = {
-                                    which = hsr_corp_s3_id
-                                    value = event_target:hsr_corp_actor.hsr_corp_row_1_id
-                                }
-                                check_variable = { which = hsr_corp_s3_state value > 0 }
-                                check_variable = { which = hsr_corp_s3_state value < 4 }
-                                hsr_corp_can_visit = yes
-                            }
-                            save_global_event_target_as = hsr_corp_row_1@event_target:hsr_corp_actor
-                            event_target:hsr_corp_actor = {
-                                set_variable = { which = hsr_corp_portfolio_opened value = 1 }
-                            }
-                            hsr_corp_open_company = { SLOT = 3 ID = event_target:hsr_corp_actor.hsr_corp_row_1_id }
-                            carrier_event = {
-                                id = hsr_corp.30
-                            }
-                        }
                     }
-                }
-                if = {
-                    limit = {
-                        check_variable = { which = hsr_corp_portfolio_opened value = 0 }
-                        check_variable = { which = hsr_corp_row_1_id value > 0 }
-                    }
-                    every_country = {
-                        every_owned_colony = {
-                            carrier = {
-                                if = {
-                                    limit = {
+                    if = {
+                        limit = {
+                            check_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                            check_variable = { which = hsr_corp_row_1_id value > 0 }
+                        }
+                        every_country = {
+                            every_owned_colony = {
+                                carrier = {
+                                    if = {
+                                        limit = {
+                                            event_target:hsr_corp_actor = {
+                                                check_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                                                check_variable = { which = hsr_corp_row_1_slot value = 1 }
+                                            }
+                                            check_variable = {
+                                                which = hsr_corp_s1_id
+                                                value = event_target:hsr_corp_actor.hsr_corp_row_1_id
+                                            }
+                                            check_variable = { which = hsr_corp_s1_state value > 0 }
+                                            check_variable = { which = hsr_corp_s1_state value < 4 }
+                                            hsr_corp_can_visit = yes
+                                        }
+                                        save_global_event_target_as = hsr_corp_row_1@event_target:hsr_corp_actor
                                         event_target:hsr_corp_actor = {
-                                            check_variable = { which = hsr_corp_portfolio_opened value = 0 }
-                                            check_variable = { which = hsr_corp_row_1_slot value = 1 }
+                                            set_variable = { which = hsr_corp_portfolio_opened value = 1 }
                                         }
-                                        check_variable = {
-                                            which = hsr_corp_s1_id
-                                            value = event_target:hsr_corp_actor.hsr_corp_row_1_id
+                                        hsr_corp_open_company = {
+                                            SLOT = 1
+                                            ID = event_target:hsr_corp_actor.hsr_corp_row_1_id
                                         }
-                                        check_variable = { which = hsr_corp_s1_state value > 0 }
-                                        check_variable = { which = hsr_corp_s1_state value < 4 }
-                                        hsr_corp_can_visit = yes
+                                        carrier_event = {
+                                            id = hsr_corp.30
+                                        }
                                     }
-                                    save_global_event_target_as = hsr_corp_row_1@event_target:hsr_corp_actor
-                                    event_target:hsr_corp_actor = {
-                                        set_variable = { which = hsr_corp_portfolio_opened value = 1 }
-                                    }
-                                    hsr_corp_open_company = {
-                                        SLOT = 1
-                                        ID = event_target:hsr_corp_actor.hsr_corp_row_1_id
-                                    }
-                                    carrier_event = {
-                                        id = hsr_corp.30
-                                    }
-                                }
-                                if = {
-                                    limit = {
+                                    if = {
+                                        limit = {
+                                            event_target:hsr_corp_actor = {
+                                                check_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                                                check_variable = { which = hsr_corp_row_1_slot value = 2 }
+                                            }
+                                            check_variable = {
+                                                which = hsr_corp_s2_id
+                                                value = event_target:hsr_corp_actor.hsr_corp_row_1_id
+                                            }
+                                            check_variable = { which = hsr_corp_s2_state value > 0 }
+                                            check_variable = { which = hsr_corp_s2_state value < 4 }
+                                            hsr_corp_can_visit = yes
+                                        }
+                                        save_global_event_target_as = hsr_corp_row_1@event_target:hsr_corp_actor
                                         event_target:hsr_corp_actor = {
-                                            check_variable = { which = hsr_corp_portfolio_opened value = 0 }
-                                            check_variable = { which = hsr_corp_row_1_slot value = 2 }
+                                            set_variable = { which = hsr_corp_portfolio_opened value = 1 }
                                         }
-                                        check_variable = {
-                                            which = hsr_corp_s2_id
-                                            value = event_target:hsr_corp_actor.hsr_corp_row_1_id
+                                        hsr_corp_open_company = {
+                                            SLOT = 2
+                                            ID = event_target:hsr_corp_actor.hsr_corp_row_1_id
                                         }
-                                        check_variable = { which = hsr_corp_s2_state value > 0 }
-                                        check_variable = { which = hsr_corp_s2_state value < 4 }
-                                        hsr_corp_can_visit = yes
+                                        carrier_event = {
+                                            id = hsr_corp.30
+                                        }
                                     }
-                                    save_global_event_target_as = hsr_corp_row_1@event_target:hsr_corp_actor
-                                    event_target:hsr_corp_actor = {
-                                        set_variable = { which = hsr_corp_portfolio_opened value = 1 }
-                                    }
-                                    hsr_corp_open_company = {
-                                        SLOT = 2
-                                        ID = event_target:hsr_corp_actor.hsr_corp_row_1_id
-                                    }
-                                    carrier_event = {
-                                        id = hsr_corp.30
-                                    }
-                                }
-                                if = {
-                                    limit = {
+                                    if = {
+                                        limit = {
+                                            event_target:hsr_corp_actor = {
+                                                check_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                                                check_variable = { which = hsr_corp_row_1_slot value = 3 }
+                                            }
+                                            check_variable = {
+                                                which = hsr_corp_s3_id
+                                                value = event_target:hsr_corp_actor.hsr_corp_row_1_id
+                                            }
+                                            check_variable = { which = hsr_corp_s3_state value > 0 }
+                                            check_variable = { which = hsr_corp_s3_state value < 4 }
+                                            hsr_corp_can_visit = yes
+                                        }
+                                        save_global_event_target_as = hsr_corp_row_1@event_target:hsr_corp_actor
                                         event_target:hsr_corp_actor = {
-                                            check_variable = { which = hsr_corp_portfolio_opened value = 0 }
-                                            check_variable = { which = hsr_corp_row_1_slot value = 3 }
+                                            set_variable = { which = hsr_corp_portfolio_opened value = 1 }
                                         }
-                                        check_variable = {
-                                            which = hsr_corp_s3_id
-                                            value = event_target:hsr_corp_actor.hsr_corp_row_1_id
+                                        hsr_corp_open_company = {
+                                            SLOT = 3
+                                            ID = event_target:hsr_corp_actor.hsr_corp_row_1_id
                                         }
-                                        check_variable = { which = hsr_corp_s3_state value > 0 }
-                                        check_variable = { which = hsr_corp_s3_state value < 4 }
-                                        hsr_corp_can_visit = yes
-                                    }
-                                    save_global_event_target_as = hsr_corp_row_1@event_target:hsr_corp_actor
-                                    event_target:hsr_corp_actor = {
-                                        set_variable = { which = hsr_corp_portfolio_opened value = 1 }
-                                    }
-                                    hsr_corp_open_company = {
-                                        SLOT = 3
-                                        ID = event_target:hsr_corp_actor.hsr_corp_row_1_id
-                                    }
-                                    carrier_event = {
-                                        id = hsr_corp.30
+                                        carrier_event = {
+                                            id = hsr_corp.30
+                                        }
                                     }
                                 }
                             }
@@ -4695,171 +4793,171 @@ hsr_corp_portfolio_open_2 = {
     effect = {
         from = {
             hidden_effect = {
-                from = {
-                    save_event_target_as = hsr_corp_actor
-                }
                 save_event_target_as = hsr_corp_actor
-                set_variable = { which = hsr_corp_portfolio_opened value = 0 }
                 if = {
-                    limit = {
-                        exists = event_target:hsr_corp_row_2@this
-                    }
-                    event_target:hsr_corp_row_2@this = {
-                        if = {
-                            limit = {
+                    limit = { exists = event_target:hsr_corp_actor }
+                    set_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                    if = {
+                        limit = {
+                            exists = event_target:hsr_corp_row_2@this
+                        }
+                        event_target:hsr_corp_row_2@this = {
+                            if = {
+                                limit = {
+                                    event_target:hsr_corp_actor = {
+                                        check_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                                        check_variable = { which = hsr_corp_row_2_slot value = 1 }
+                                    }
+                                    check_variable = {
+                                        which = hsr_corp_s1_id
+                                        value = event_target:hsr_corp_actor.hsr_corp_row_2_id
+                                    }
+                                    check_variable = { which = hsr_corp_s1_state value > 0 }
+                                    check_variable = { which = hsr_corp_s1_state value < 4 }
+                                    hsr_corp_can_visit = yes
+                                }
+                                save_global_event_target_as = hsr_corp_row_2@event_target:hsr_corp_actor
                                 event_target:hsr_corp_actor = {
-                                    check_variable = { which = hsr_corp_portfolio_opened value = 0 }
-                                    check_variable = { which = hsr_corp_row_2_slot value = 1 }
+                                    set_variable = { which = hsr_corp_portfolio_opened value = 1 }
                                 }
-                                check_variable = {
-                                    which = hsr_corp_s1_id
-                                    value = event_target:hsr_corp_actor.hsr_corp_row_2_id
+                                hsr_corp_open_company = { SLOT = 1 ID = event_target:hsr_corp_actor.hsr_corp_row_2_id }
+                                carrier_event = {
+                                    id = hsr_corp.30
                                 }
-                                check_variable = { which = hsr_corp_s1_state value > 0 }
-                                check_variable = { which = hsr_corp_s1_state value < 4 }
-                                hsr_corp_can_visit = yes
                             }
-                            save_global_event_target_as = hsr_corp_row_2@event_target:hsr_corp_actor
-                            event_target:hsr_corp_actor = {
-                                set_variable = { which = hsr_corp_portfolio_opened value = 1 }
+                            if = {
+                                limit = {
+                                    event_target:hsr_corp_actor = {
+                                        check_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                                        check_variable = { which = hsr_corp_row_2_slot value = 2 }
+                                    }
+                                    check_variable = {
+                                        which = hsr_corp_s2_id
+                                        value = event_target:hsr_corp_actor.hsr_corp_row_2_id
+                                    }
+                                    check_variable = { which = hsr_corp_s2_state value > 0 }
+                                    check_variable = { which = hsr_corp_s2_state value < 4 }
+                                    hsr_corp_can_visit = yes
+                                }
+                                save_global_event_target_as = hsr_corp_row_2@event_target:hsr_corp_actor
+                                event_target:hsr_corp_actor = {
+                                    set_variable = { which = hsr_corp_portfolio_opened value = 1 }
+                                }
+                                hsr_corp_open_company = { SLOT = 2 ID = event_target:hsr_corp_actor.hsr_corp_row_2_id }
+                                carrier_event = {
+                                    id = hsr_corp.30
+                                }
                             }
-                            hsr_corp_open_company = { SLOT = 1 ID = event_target:hsr_corp_actor.hsr_corp_row_2_id }
-                            carrier_event = {
-                                id = hsr_corp.30
+                            if = {
+                                limit = {
+                                    event_target:hsr_corp_actor = {
+                                        check_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                                        check_variable = { which = hsr_corp_row_2_slot value = 3 }
+                                    }
+                                    check_variable = {
+                                        which = hsr_corp_s3_id
+                                        value = event_target:hsr_corp_actor.hsr_corp_row_2_id
+                                    }
+                                    check_variable = { which = hsr_corp_s3_state value > 0 }
+                                    check_variable = { which = hsr_corp_s3_state value < 4 }
+                                    hsr_corp_can_visit = yes
+                                }
+                                save_global_event_target_as = hsr_corp_row_2@event_target:hsr_corp_actor
+                                event_target:hsr_corp_actor = {
+                                    set_variable = { which = hsr_corp_portfolio_opened value = 1 }
+                                }
+                                hsr_corp_open_company = { SLOT = 3 ID = event_target:hsr_corp_actor.hsr_corp_row_2_id }
+                                carrier_event = {
+                                    id = hsr_corp.30
+                                }
                             }
                         }
-                        if = {
-                            limit = {
-                                event_target:hsr_corp_actor = {
-                                    check_variable = { which = hsr_corp_portfolio_opened value = 0 }
-                                    check_variable = { which = hsr_corp_row_2_slot value = 2 }
-                                }
-                                check_variable = {
-                                    which = hsr_corp_s2_id
-                                    value = event_target:hsr_corp_actor.hsr_corp_row_2_id
-                                }
-                                check_variable = { which = hsr_corp_s2_state value > 0 }
-                                check_variable = { which = hsr_corp_s2_state value < 4 }
-                                hsr_corp_can_visit = yes
-                            }
-                            save_global_event_target_as = hsr_corp_row_2@event_target:hsr_corp_actor
-                            event_target:hsr_corp_actor = {
-                                set_variable = { which = hsr_corp_portfolio_opened value = 1 }
-                            }
-                            hsr_corp_open_company = { SLOT = 2 ID = event_target:hsr_corp_actor.hsr_corp_row_2_id }
-                            carrier_event = {
-                                id = hsr_corp.30
-                            }
-                        }
-                        if = {
-                            limit = {
-                                event_target:hsr_corp_actor = {
-                                    check_variable = { which = hsr_corp_portfolio_opened value = 0 }
-                                    check_variable = { which = hsr_corp_row_2_slot value = 3 }
-                                }
-                                check_variable = {
-                                    which = hsr_corp_s3_id
-                                    value = event_target:hsr_corp_actor.hsr_corp_row_2_id
-                                }
-                                check_variable = { which = hsr_corp_s3_state value > 0 }
-                                check_variable = { which = hsr_corp_s3_state value < 4 }
-                                hsr_corp_can_visit = yes
-                            }
-                            save_global_event_target_as = hsr_corp_row_2@event_target:hsr_corp_actor
-                            event_target:hsr_corp_actor = {
-                                set_variable = { which = hsr_corp_portfolio_opened value = 1 }
-                            }
-                            hsr_corp_open_company = { SLOT = 3 ID = event_target:hsr_corp_actor.hsr_corp_row_2_id }
-                            carrier_event = {
-                                id = hsr_corp.30
-                            }
-                        }
                     }
-                }
-                if = {
-                    limit = {
-                        check_variable = { which = hsr_corp_portfolio_opened value = 0 }
-                        check_variable = { which = hsr_corp_row_2_id value > 0 }
-                    }
-                    every_country = {
-                        every_owned_colony = {
-                            carrier = {
-                                if = {
-                                    limit = {
+                    if = {
+                        limit = {
+                            check_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                            check_variable = { which = hsr_corp_row_2_id value > 0 }
+                        }
+                        every_country = {
+                            every_owned_colony = {
+                                carrier = {
+                                    if = {
+                                        limit = {
+                                            event_target:hsr_corp_actor = {
+                                                check_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                                                check_variable = { which = hsr_corp_row_2_slot value = 1 }
+                                            }
+                                            check_variable = {
+                                                which = hsr_corp_s1_id
+                                                value = event_target:hsr_corp_actor.hsr_corp_row_2_id
+                                            }
+                                            check_variable = { which = hsr_corp_s1_state value > 0 }
+                                            check_variable = { which = hsr_corp_s1_state value < 4 }
+                                            hsr_corp_can_visit = yes
+                                        }
+                                        save_global_event_target_as = hsr_corp_row_2@event_target:hsr_corp_actor
                                         event_target:hsr_corp_actor = {
-                                            check_variable = { which = hsr_corp_portfolio_opened value = 0 }
-                                            check_variable = { which = hsr_corp_row_2_slot value = 1 }
+                                            set_variable = { which = hsr_corp_portfolio_opened value = 1 }
                                         }
-                                        check_variable = {
-                                            which = hsr_corp_s1_id
-                                            value = event_target:hsr_corp_actor.hsr_corp_row_2_id
+                                        hsr_corp_open_company = {
+                                            SLOT = 1
+                                            ID = event_target:hsr_corp_actor.hsr_corp_row_2_id
                                         }
-                                        check_variable = { which = hsr_corp_s1_state value > 0 }
-                                        check_variable = { which = hsr_corp_s1_state value < 4 }
-                                        hsr_corp_can_visit = yes
+                                        carrier_event = {
+                                            id = hsr_corp.30
+                                        }
                                     }
-                                    save_global_event_target_as = hsr_corp_row_2@event_target:hsr_corp_actor
-                                    event_target:hsr_corp_actor = {
-                                        set_variable = { which = hsr_corp_portfolio_opened value = 1 }
-                                    }
-                                    hsr_corp_open_company = {
-                                        SLOT = 1
-                                        ID = event_target:hsr_corp_actor.hsr_corp_row_2_id
-                                    }
-                                    carrier_event = {
-                                        id = hsr_corp.30
-                                    }
-                                }
-                                if = {
-                                    limit = {
+                                    if = {
+                                        limit = {
+                                            event_target:hsr_corp_actor = {
+                                                check_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                                                check_variable = { which = hsr_corp_row_2_slot value = 2 }
+                                            }
+                                            check_variable = {
+                                                which = hsr_corp_s2_id
+                                                value = event_target:hsr_corp_actor.hsr_corp_row_2_id
+                                            }
+                                            check_variable = { which = hsr_corp_s2_state value > 0 }
+                                            check_variable = { which = hsr_corp_s2_state value < 4 }
+                                            hsr_corp_can_visit = yes
+                                        }
+                                        save_global_event_target_as = hsr_corp_row_2@event_target:hsr_corp_actor
                                         event_target:hsr_corp_actor = {
-                                            check_variable = { which = hsr_corp_portfolio_opened value = 0 }
-                                            check_variable = { which = hsr_corp_row_2_slot value = 2 }
+                                            set_variable = { which = hsr_corp_portfolio_opened value = 1 }
                                         }
-                                        check_variable = {
-                                            which = hsr_corp_s2_id
-                                            value = event_target:hsr_corp_actor.hsr_corp_row_2_id
+                                        hsr_corp_open_company = {
+                                            SLOT = 2
+                                            ID = event_target:hsr_corp_actor.hsr_corp_row_2_id
                                         }
-                                        check_variable = { which = hsr_corp_s2_state value > 0 }
-                                        check_variable = { which = hsr_corp_s2_state value < 4 }
-                                        hsr_corp_can_visit = yes
+                                        carrier_event = {
+                                            id = hsr_corp.30
+                                        }
                                     }
-                                    save_global_event_target_as = hsr_corp_row_2@event_target:hsr_corp_actor
-                                    event_target:hsr_corp_actor = {
-                                        set_variable = { which = hsr_corp_portfolio_opened value = 1 }
-                                    }
-                                    hsr_corp_open_company = {
-                                        SLOT = 2
-                                        ID = event_target:hsr_corp_actor.hsr_corp_row_2_id
-                                    }
-                                    carrier_event = {
-                                        id = hsr_corp.30
-                                    }
-                                }
-                                if = {
-                                    limit = {
+                                    if = {
+                                        limit = {
+                                            event_target:hsr_corp_actor = {
+                                                check_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                                                check_variable = { which = hsr_corp_row_2_slot value = 3 }
+                                            }
+                                            check_variable = {
+                                                which = hsr_corp_s3_id
+                                                value = event_target:hsr_corp_actor.hsr_corp_row_2_id
+                                            }
+                                            check_variable = { which = hsr_corp_s3_state value > 0 }
+                                            check_variable = { which = hsr_corp_s3_state value < 4 }
+                                            hsr_corp_can_visit = yes
+                                        }
+                                        save_global_event_target_as = hsr_corp_row_2@event_target:hsr_corp_actor
                                         event_target:hsr_corp_actor = {
-                                            check_variable = { which = hsr_corp_portfolio_opened value = 0 }
-                                            check_variable = { which = hsr_corp_row_2_slot value = 3 }
+                                            set_variable = { which = hsr_corp_portfolio_opened value = 1 }
                                         }
-                                        check_variable = {
-                                            which = hsr_corp_s3_id
-                                            value = event_target:hsr_corp_actor.hsr_corp_row_2_id
+                                        hsr_corp_open_company = {
+                                            SLOT = 3
+                                            ID = event_target:hsr_corp_actor.hsr_corp_row_2_id
                                         }
-                                        check_variable = { which = hsr_corp_s3_state value > 0 }
-                                        check_variable = { which = hsr_corp_s3_state value < 4 }
-                                        hsr_corp_can_visit = yes
-                                    }
-                                    save_global_event_target_as = hsr_corp_row_2@event_target:hsr_corp_actor
-                                    event_target:hsr_corp_actor = {
-                                        set_variable = { which = hsr_corp_portfolio_opened value = 1 }
-                                    }
-                                    hsr_corp_open_company = {
-                                        SLOT = 3
-                                        ID = event_target:hsr_corp_actor.hsr_corp_row_2_id
-                                    }
-                                    carrier_event = {
-                                        id = hsr_corp.30
+                                        carrier_event = {
+                                            id = hsr_corp.30
+                                        }
                                     }
                                 }
                             }
@@ -4942,171 +5040,171 @@ hsr_corp_portfolio_open_3 = {
     effect = {
         from = {
             hidden_effect = {
-                from = {
-                    save_event_target_as = hsr_corp_actor
-                }
                 save_event_target_as = hsr_corp_actor
-                set_variable = { which = hsr_corp_portfolio_opened value = 0 }
                 if = {
-                    limit = {
-                        exists = event_target:hsr_corp_row_3@this
-                    }
-                    event_target:hsr_corp_row_3@this = {
-                        if = {
-                            limit = {
+                    limit = { exists = event_target:hsr_corp_actor }
+                    set_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                    if = {
+                        limit = {
+                            exists = event_target:hsr_corp_row_3@this
+                        }
+                        event_target:hsr_corp_row_3@this = {
+                            if = {
+                                limit = {
+                                    event_target:hsr_corp_actor = {
+                                        check_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                                        check_variable = { which = hsr_corp_row_3_slot value = 1 }
+                                    }
+                                    check_variable = {
+                                        which = hsr_corp_s1_id
+                                        value = event_target:hsr_corp_actor.hsr_corp_row_3_id
+                                    }
+                                    check_variable = { which = hsr_corp_s1_state value > 0 }
+                                    check_variable = { which = hsr_corp_s1_state value < 4 }
+                                    hsr_corp_can_visit = yes
+                                }
+                                save_global_event_target_as = hsr_corp_row_3@event_target:hsr_corp_actor
                                 event_target:hsr_corp_actor = {
-                                    check_variable = { which = hsr_corp_portfolio_opened value = 0 }
-                                    check_variable = { which = hsr_corp_row_3_slot value = 1 }
+                                    set_variable = { which = hsr_corp_portfolio_opened value = 1 }
                                 }
-                                check_variable = {
-                                    which = hsr_corp_s1_id
-                                    value = event_target:hsr_corp_actor.hsr_corp_row_3_id
+                                hsr_corp_open_company = { SLOT = 1 ID = event_target:hsr_corp_actor.hsr_corp_row_3_id }
+                                carrier_event = {
+                                    id = hsr_corp.30
                                 }
-                                check_variable = { which = hsr_corp_s1_state value > 0 }
-                                check_variable = { which = hsr_corp_s1_state value < 4 }
-                                hsr_corp_can_visit = yes
                             }
-                            save_global_event_target_as = hsr_corp_row_3@event_target:hsr_corp_actor
-                            event_target:hsr_corp_actor = {
-                                set_variable = { which = hsr_corp_portfolio_opened value = 1 }
+                            if = {
+                                limit = {
+                                    event_target:hsr_corp_actor = {
+                                        check_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                                        check_variable = { which = hsr_corp_row_3_slot value = 2 }
+                                    }
+                                    check_variable = {
+                                        which = hsr_corp_s2_id
+                                        value = event_target:hsr_corp_actor.hsr_corp_row_3_id
+                                    }
+                                    check_variable = { which = hsr_corp_s2_state value > 0 }
+                                    check_variable = { which = hsr_corp_s2_state value < 4 }
+                                    hsr_corp_can_visit = yes
+                                }
+                                save_global_event_target_as = hsr_corp_row_3@event_target:hsr_corp_actor
+                                event_target:hsr_corp_actor = {
+                                    set_variable = { which = hsr_corp_portfolio_opened value = 1 }
+                                }
+                                hsr_corp_open_company = { SLOT = 2 ID = event_target:hsr_corp_actor.hsr_corp_row_3_id }
+                                carrier_event = {
+                                    id = hsr_corp.30
+                                }
                             }
-                            hsr_corp_open_company = { SLOT = 1 ID = event_target:hsr_corp_actor.hsr_corp_row_3_id }
-                            carrier_event = {
-                                id = hsr_corp.30
+                            if = {
+                                limit = {
+                                    event_target:hsr_corp_actor = {
+                                        check_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                                        check_variable = { which = hsr_corp_row_3_slot value = 3 }
+                                    }
+                                    check_variable = {
+                                        which = hsr_corp_s3_id
+                                        value = event_target:hsr_corp_actor.hsr_corp_row_3_id
+                                    }
+                                    check_variable = { which = hsr_corp_s3_state value > 0 }
+                                    check_variable = { which = hsr_corp_s3_state value < 4 }
+                                    hsr_corp_can_visit = yes
+                                }
+                                save_global_event_target_as = hsr_corp_row_3@event_target:hsr_corp_actor
+                                event_target:hsr_corp_actor = {
+                                    set_variable = { which = hsr_corp_portfolio_opened value = 1 }
+                                }
+                                hsr_corp_open_company = { SLOT = 3 ID = event_target:hsr_corp_actor.hsr_corp_row_3_id }
+                                carrier_event = {
+                                    id = hsr_corp.30
+                                }
                             }
                         }
-                        if = {
-                            limit = {
-                                event_target:hsr_corp_actor = {
-                                    check_variable = { which = hsr_corp_portfolio_opened value = 0 }
-                                    check_variable = { which = hsr_corp_row_3_slot value = 2 }
-                                }
-                                check_variable = {
-                                    which = hsr_corp_s2_id
-                                    value = event_target:hsr_corp_actor.hsr_corp_row_3_id
-                                }
-                                check_variable = { which = hsr_corp_s2_state value > 0 }
-                                check_variable = { which = hsr_corp_s2_state value < 4 }
-                                hsr_corp_can_visit = yes
-                            }
-                            save_global_event_target_as = hsr_corp_row_3@event_target:hsr_corp_actor
-                            event_target:hsr_corp_actor = {
-                                set_variable = { which = hsr_corp_portfolio_opened value = 1 }
-                            }
-                            hsr_corp_open_company = { SLOT = 2 ID = event_target:hsr_corp_actor.hsr_corp_row_3_id }
-                            carrier_event = {
-                                id = hsr_corp.30
-                            }
-                        }
-                        if = {
-                            limit = {
-                                event_target:hsr_corp_actor = {
-                                    check_variable = { which = hsr_corp_portfolio_opened value = 0 }
-                                    check_variable = { which = hsr_corp_row_3_slot value = 3 }
-                                }
-                                check_variable = {
-                                    which = hsr_corp_s3_id
-                                    value = event_target:hsr_corp_actor.hsr_corp_row_3_id
-                                }
-                                check_variable = { which = hsr_corp_s3_state value > 0 }
-                                check_variable = { which = hsr_corp_s3_state value < 4 }
-                                hsr_corp_can_visit = yes
-                            }
-                            save_global_event_target_as = hsr_corp_row_3@event_target:hsr_corp_actor
-                            event_target:hsr_corp_actor = {
-                                set_variable = { which = hsr_corp_portfolio_opened value = 1 }
-                            }
-                            hsr_corp_open_company = { SLOT = 3 ID = event_target:hsr_corp_actor.hsr_corp_row_3_id }
-                            carrier_event = {
-                                id = hsr_corp.30
-                            }
-                        }
                     }
-                }
-                if = {
-                    limit = {
-                        check_variable = { which = hsr_corp_portfolio_opened value = 0 }
-                        check_variable = { which = hsr_corp_row_3_id value > 0 }
-                    }
-                    every_country = {
-                        every_owned_colony = {
-                            carrier = {
-                                if = {
-                                    limit = {
+                    if = {
+                        limit = {
+                            check_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                            check_variable = { which = hsr_corp_row_3_id value > 0 }
+                        }
+                        every_country = {
+                            every_owned_colony = {
+                                carrier = {
+                                    if = {
+                                        limit = {
+                                            event_target:hsr_corp_actor = {
+                                                check_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                                                check_variable = { which = hsr_corp_row_3_slot value = 1 }
+                                            }
+                                            check_variable = {
+                                                which = hsr_corp_s1_id
+                                                value = event_target:hsr_corp_actor.hsr_corp_row_3_id
+                                            }
+                                            check_variable = { which = hsr_corp_s1_state value > 0 }
+                                            check_variable = { which = hsr_corp_s1_state value < 4 }
+                                            hsr_corp_can_visit = yes
+                                        }
+                                        save_global_event_target_as = hsr_corp_row_3@event_target:hsr_corp_actor
                                         event_target:hsr_corp_actor = {
-                                            check_variable = { which = hsr_corp_portfolio_opened value = 0 }
-                                            check_variable = { which = hsr_corp_row_3_slot value = 1 }
+                                            set_variable = { which = hsr_corp_portfolio_opened value = 1 }
                                         }
-                                        check_variable = {
-                                            which = hsr_corp_s1_id
-                                            value = event_target:hsr_corp_actor.hsr_corp_row_3_id
+                                        hsr_corp_open_company = {
+                                            SLOT = 1
+                                            ID = event_target:hsr_corp_actor.hsr_corp_row_3_id
                                         }
-                                        check_variable = { which = hsr_corp_s1_state value > 0 }
-                                        check_variable = { which = hsr_corp_s1_state value < 4 }
-                                        hsr_corp_can_visit = yes
+                                        carrier_event = {
+                                            id = hsr_corp.30
+                                        }
                                     }
-                                    save_global_event_target_as = hsr_corp_row_3@event_target:hsr_corp_actor
-                                    event_target:hsr_corp_actor = {
-                                        set_variable = { which = hsr_corp_portfolio_opened value = 1 }
-                                    }
-                                    hsr_corp_open_company = {
-                                        SLOT = 1
-                                        ID = event_target:hsr_corp_actor.hsr_corp_row_3_id
-                                    }
-                                    carrier_event = {
-                                        id = hsr_corp.30
-                                    }
-                                }
-                                if = {
-                                    limit = {
+                                    if = {
+                                        limit = {
+                                            event_target:hsr_corp_actor = {
+                                                check_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                                                check_variable = { which = hsr_corp_row_3_slot value = 2 }
+                                            }
+                                            check_variable = {
+                                                which = hsr_corp_s2_id
+                                                value = event_target:hsr_corp_actor.hsr_corp_row_3_id
+                                            }
+                                            check_variable = { which = hsr_corp_s2_state value > 0 }
+                                            check_variable = { which = hsr_corp_s2_state value < 4 }
+                                            hsr_corp_can_visit = yes
+                                        }
+                                        save_global_event_target_as = hsr_corp_row_3@event_target:hsr_corp_actor
                                         event_target:hsr_corp_actor = {
-                                            check_variable = { which = hsr_corp_portfolio_opened value = 0 }
-                                            check_variable = { which = hsr_corp_row_3_slot value = 2 }
+                                            set_variable = { which = hsr_corp_portfolio_opened value = 1 }
                                         }
-                                        check_variable = {
-                                            which = hsr_corp_s2_id
-                                            value = event_target:hsr_corp_actor.hsr_corp_row_3_id
+                                        hsr_corp_open_company = {
+                                            SLOT = 2
+                                            ID = event_target:hsr_corp_actor.hsr_corp_row_3_id
                                         }
-                                        check_variable = { which = hsr_corp_s2_state value > 0 }
-                                        check_variable = { which = hsr_corp_s2_state value < 4 }
-                                        hsr_corp_can_visit = yes
+                                        carrier_event = {
+                                            id = hsr_corp.30
+                                        }
                                     }
-                                    save_global_event_target_as = hsr_corp_row_3@event_target:hsr_corp_actor
-                                    event_target:hsr_corp_actor = {
-                                        set_variable = { which = hsr_corp_portfolio_opened value = 1 }
-                                    }
-                                    hsr_corp_open_company = {
-                                        SLOT = 2
-                                        ID = event_target:hsr_corp_actor.hsr_corp_row_3_id
-                                    }
-                                    carrier_event = {
-                                        id = hsr_corp.30
-                                    }
-                                }
-                                if = {
-                                    limit = {
+                                    if = {
+                                        limit = {
+                                            event_target:hsr_corp_actor = {
+                                                check_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                                                check_variable = { which = hsr_corp_row_3_slot value = 3 }
+                                            }
+                                            check_variable = {
+                                                which = hsr_corp_s3_id
+                                                value = event_target:hsr_corp_actor.hsr_corp_row_3_id
+                                            }
+                                            check_variable = { which = hsr_corp_s3_state value > 0 }
+                                            check_variable = { which = hsr_corp_s3_state value < 4 }
+                                            hsr_corp_can_visit = yes
+                                        }
+                                        save_global_event_target_as = hsr_corp_row_3@event_target:hsr_corp_actor
                                         event_target:hsr_corp_actor = {
-                                            check_variable = { which = hsr_corp_portfolio_opened value = 0 }
-                                            check_variable = { which = hsr_corp_row_3_slot value = 3 }
+                                            set_variable = { which = hsr_corp_portfolio_opened value = 1 }
                                         }
-                                        check_variable = {
-                                            which = hsr_corp_s3_id
-                                            value = event_target:hsr_corp_actor.hsr_corp_row_3_id
+                                        hsr_corp_open_company = {
+                                            SLOT = 3
+                                            ID = event_target:hsr_corp_actor.hsr_corp_row_3_id
                                         }
-                                        check_variable = { which = hsr_corp_s3_state value > 0 }
-                                        check_variable = { which = hsr_corp_s3_state value < 4 }
-                                        hsr_corp_can_visit = yes
-                                    }
-                                    save_global_event_target_as = hsr_corp_row_3@event_target:hsr_corp_actor
-                                    event_target:hsr_corp_actor = {
-                                        set_variable = { which = hsr_corp_portfolio_opened value = 1 }
-                                    }
-                                    hsr_corp_open_company = {
-                                        SLOT = 3
-                                        ID = event_target:hsr_corp_actor.hsr_corp_row_3_id
-                                    }
-                                    carrier_event = {
-                                        id = hsr_corp.30
+                                        carrier_event = {
+                                            id = hsr_corp.30
+                                        }
                                     }
                                 }
                             }
@@ -5189,171 +5287,171 @@ hsr_corp_portfolio_open_4 = {
     effect = {
         from = {
             hidden_effect = {
-                from = {
-                    save_event_target_as = hsr_corp_actor
-                }
                 save_event_target_as = hsr_corp_actor
-                set_variable = { which = hsr_corp_portfolio_opened value = 0 }
                 if = {
-                    limit = {
-                        exists = event_target:hsr_corp_row_4@this
-                    }
-                    event_target:hsr_corp_row_4@this = {
-                        if = {
-                            limit = {
+                    limit = { exists = event_target:hsr_corp_actor }
+                    set_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                    if = {
+                        limit = {
+                            exists = event_target:hsr_corp_row_4@this
+                        }
+                        event_target:hsr_corp_row_4@this = {
+                            if = {
+                                limit = {
+                                    event_target:hsr_corp_actor = {
+                                        check_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                                        check_variable = { which = hsr_corp_row_4_slot value = 1 }
+                                    }
+                                    check_variable = {
+                                        which = hsr_corp_s1_id
+                                        value = event_target:hsr_corp_actor.hsr_corp_row_4_id
+                                    }
+                                    check_variable = { which = hsr_corp_s1_state value > 0 }
+                                    check_variable = { which = hsr_corp_s1_state value < 4 }
+                                    hsr_corp_can_visit = yes
+                                }
+                                save_global_event_target_as = hsr_corp_row_4@event_target:hsr_corp_actor
                                 event_target:hsr_corp_actor = {
-                                    check_variable = { which = hsr_corp_portfolio_opened value = 0 }
-                                    check_variable = { which = hsr_corp_row_4_slot value = 1 }
+                                    set_variable = { which = hsr_corp_portfolio_opened value = 1 }
                                 }
-                                check_variable = {
-                                    which = hsr_corp_s1_id
-                                    value = event_target:hsr_corp_actor.hsr_corp_row_4_id
+                                hsr_corp_open_company = { SLOT = 1 ID = event_target:hsr_corp_actor.hsr_corp_row_4_id }
+                                carrier_event = {
+                                    id = hsr_corp.30
                                 }
-                                check_variable = { which = hsr_corp_s1_state value > 0 }
-                                check_variable = { which = hsr_corp_s1_state value < 4 }
-                                hsr_corp_can_visit = yes
                             }
-                            save_global_event_target_as = hsr_corp_row_4@event_target:hsr_corp_actor
-                            event_target:hsr_corp_actor = {
-                                set_variable = { which = hsr_corp_portfolio_opened value = 1 }
+                            if = {
+                                limit = {
+                                    event_target:hsr_corp_actor = {
+                                        check_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                                        check_variable = { which = hsr_corp_row_4_slot value = 2 }
+                                    }
+                                    check_variable = {
+                                        which = hsr_corp_s2_id
+                                        value = event_target:hsr_corp_actor.hsr_corp_row_4_id
+                                    }
+                                    check_variable = { which = hsr_corp_s2_state value > 0 }
+                                    check_variable = { which = hsr_corp_s2_state value < 4 }
+                                    hsr_corp_can_visit = yes
+                                }
+                                save_global_event_target_as = hsr_corp_row_4@event_target:hsr_corp_actor
+                                event_target:hsr_corp_actor = {
+                                    set_variable = { which = hsr_corp_portfolio_opened value = 1 }
+                                }
+                                hsr_corp_open_company = { SLOT = 2 ID = event_target:hsr_corp_actor.hsr_corp_row_4_id }
+                                carrier_event = {
+                                    id = hsr_corp.30
+                                }
                             }
-                            hsr_corp_open_company = { SLOT = 1 ID = event_target:hsr_corp_actor.hsr_corp_row_4_id }
-                            carrier_event = {
-                                id = hsr_corp.30
+                            if = {
+                                limit = {
+                                    event_target:hsr_corp_actor = {
+                                        check_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                                        check_variable = { which = hsr_corp_row_4_slot value = 3 }
+                                    }
+                                    check_variable = {
+                                        which = hsr_corp_s3_id
+                                        value = event_target:hsr_corp_actor.hsr_corp_row_4_id
+                                    }
+                                    check_variable = { which = hsr_corp_s3_state value > 0 }
+                                    check_variable = { which = hsr_corp_s3_state value < 4 }
+                                    hsr_corp_can_visit = yes
+                                }
+                                save_global_event_target_as = hsr_corp_row_4@event_target:hsr_corp_actor
+                                event_target:hsr_corp_actor = {
+                                    set_variable = { which = hsr_corp_portfolio_opened value = 1 }
+                                }
+                                hsr_corp_open_company = { SLOT = 3 ID = event_target:hsr_corp_actor.hsr_corp_row_4_id }
+                                carrier_event = {
+                                    id = hsr_corp.30
+                                }
                             }
                         }
-                        if = {
-                            limit = {
-                                event_target:hsr_corp_actor = {
-                                    check_variable = { which = hsr_corp_portfolio_opened value = 0 }
-                                    check_variable = { which = hsr_corp_row_4_slot value = 2 }
-                                }
-                                check_variable = {
-                                    which = hsr_corp_s2_id
-                                    value = event_target:hsr_corp_actor.hsr_corp_row_4_id
-                                }
-                                check_variable = { which = hsr_corp_s2_state value > 0 }
-                                check_variable = { which = hsr_corp_s2_state value < 4 }
-                                hsr_corp_can_visit = yes
-                            }
-                            save_global_event_target_as = hsr_corp_row_4@event_target:hsr_corp_actor
-                            event_target:hsr_corp_actor = {
-                                set_variable = { which = hsr_corp_portfolio_opened value = 1 }
-                            }
-                            hsr_corp_open_company = { SLOT = 2 ID = event_target:hsr_corp_actor.hsr_corp_row_4_id }
-                            carrier_event = {
-                                id = hsr_corp.30
-                            }
-                        }
-                        if = {
-                            limit = {
-                                event_target:hsr_corp_actor = {
-                                    check_variable = { which = hsr_corp_portfolio_opened value = 0 }
-                                    check_variable = { which = hsr_corp_row_4_slot value = 3 }
-                                }
-                                check_variable = {
-                                    which = hsr_corp_s3_id
-                                    value = event_target:hsr_corp_actor.hsr_corp_row_4_id
-                                }
-                                check_variable = { which = hsr_corp_s3_state value > 0 }
-                                check_variable = { which = hsr_corp_s3_state value < 4 }
-                                hsr_corp_can_visit = yes
-                            }
-                            save_global_event_target_as = hsr_corp_row_4@event_target:hsr_corp_actor
-                            event_target:hsr_corp_actor = {
-                                set_variable = { which = hsr_corp_portfolio_opened value = 1 }
-                            }
-                            hsr_corp_open_company = { SLOT = 3 ID = event_target:hsr_corp_actor.hsr_corp_row_4_id }
-                            carrier_event = {
-                                id = hsr_corp.30
-                            }
-                        }
                     }
-                }
-                if = {
-                    limit = {
-                        check_variable = { which = hsr_corp_portfolio_opened value = 0 }
-                        check_variable = { which = hsr_corp_row_4_id value > 0 }
-                    }
-                    every_country = {
-                        every_owned_colony = {
-                            carrier = {
-                                if = {
-                                    limit = {
+                    if = {
+                        limit = {
+                            check_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                            check_variable = { which = hsr_corp_row_4_id value > 0 }
+                        }
+                        every_country = {
+                            every_owned_colony = {
+                                carrier = {
+                                    if = {
+                                        limit = {
+                                            event_target:hsr_corp_actor = {
+                                                check_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                                                check_variable = { which = hsr_corp_row_4_slot value = 1 }
+                                            }
+                                            check_variable = {
+                                                which = hsr_corp_s1_id
+                                                value = event_target:hsr_corp_actor.hsr_corp_row_4_id
+                                            }
+                                            check_variable = { which = hsr_corp_s1_state value > 0 }
+                                            check_variable = { which = hsr_corp_s1_state value < 4 }
+                                            hsr_corp_can_visit = yes
+                                        }
+                                        save_global_event_target_as = hsr_corp_row_4@event_target:hsr_corp_actor
                                         event_target:hsr_corp_actor = {
-                                            check_variable = { which = hsr_corp_portfolio_opened value = 0 }
-                                            check_variable = { which = hsr_corp_row_4_slot value = 1 }
+                                            set_variable = { which = hsr_corp_portfolio_opened value = 1 }
                                         }
-                                        check_variable = {
-                                            which = hsr_corp_s1_id
-                                            value = event_target:hsr_corp_actor.hsr_corp_row_4_id
+                                        hsr_corp_open_company = {
+                                            SLOT = 1
+                                            ID = event_target:hsr_corp_actor.hsr_corp_row_4_id
                                         }
-                                        check_variable = { which = hsr_corp_s1_state value > 0 }
-                                        check_variable = { which = hsr_corp_s1_state value < 4 }
-                                        hsr_corp_can_visit = yes
+                                        carrier_event = {
+                                            id = hsr_corp.30
+                                        }
                                     }
-                                    save_global_event_target_as = hsr_corp_row_4@event_target:hsr_corp_actor
-                                    event_target:hsr_corp_actor = {
-                                        set_variable = { which = hsr_corp_portfolio_opened value = 1 }
-                                    }
-                                    hsr_corp_open_company = {
-                                        SLOT = 1
-                                        ID = event_target:hsr_corp_actor.hsr_corp_row_4_id
-                                    }
-                                    carrier_event = {
-                                        id = hsr_corp.30
-                                    }
-                                }
-                                if = {
-                                    limit = {
+                                    if = {
+                                        limit = {
+                                            event_target:hsr_corp_actor = {
+                                                check_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                                                check_variable = { which = hsr_corp_row_4_slot value = 2 }
+                                            }
+                                            check_variable = {
+                                                which = hsr_corp_s2_id
+                                                value = event_target:hsr_corp_actor.hsr_corp_row_4_id
+                                            }
+                                            check_variable = { which = hsr_corp_s2_state value > 0 }
+                                            check_variable = { which = hsr_corp_s2_state value < 4 }
+                                            hsr_corp_can_visit = yes
+                                        }
+                                        save_global_event_target_as = hsr_corp_row_4@event_target:hsr_corp_actor
                                         event_target:hsr_corp_actor = {
-                                            check_variable = { which = hsr_corp_portfolio_opened value = 0 }
-                                            check_variable = { which = hsr_corp_row_4_slot value = 2 }
+                                            set_variable = { which = hsr_corp_portfolio_opened value = 1 }
                                         }
-                                        check_variable = {
-                                            which = hsr_corp_s2_id
-                                            value = event_target:hsr_corp_actor.hsr_corp_row_4_id
+                                        hsr_corp_open_company = {
+                                            SLOT = 2
+                                            ID = event_target:hsr_corp_actor.hsr_corp_row_4_id
                                         }
-                                        check_variable = { which = hsr_corp_s2_state value > 0 }
-                                        check_variable = { which = hsr_corp_s2_state value < 4 }
-                                        hsr_corp_can_visit = yes
+                                        carrier_event = {
+                                            id = hsr_corp.30
+                                        }
                                     }
-                                    save_global_event_target_as = hsr_corp_row_4@event_target:hsr_corp_actor
-                                    event_target:hsr_corp_actor = {
-                                        set_variable = { which = hsr_corp_portfolio_opened value = 1 }
-                                    }
-                                    hsr_corp_open_company = {
-                                        SLOT = 2
-                                        ID = event_target:hsr_corp_actor.hsr_corp_row_4_id
-                                    }
-                                    carrier_event = {
-                                        id = hsr_corp.30
-                                    }
-                                }
-                                if = {
-                                    limit = {
+                                    if = {
+                                        limit = {
+                                            event_target:hsr_corp_actor = {
+                                                check_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                                                check_variable = { which = hsr_corp_row_4_slot value = 3 }
+                                            }
+                                            check_variable = {
+                                                which = hsr_corp_s3_id
+                                                value = event_target:hsr_corp_actor.hsr_corp_row_4_id
+                                            }
+                                            check_variable = { which = hsr_corp_s3_state value > 0 }
+                                            check_variable = { which = hsr_corp_s3_state value < 4 }
+                                            hsr_corp_can_visit = yes
+                                        }
+                                        save_global_event_target_as = hsr_corp_row_4@event_target:hsr_corp_actor
                                         event_target:hsr_corp_actor = {
-                                            check_variable = { which = hsr_corp_portfolio_opened value = 0 }
-                                            check_variable = { which = hsr_corp_row_4_slot value = 3 }
+                                            set_variable = { which = hsr_corp_portfolio_opened value = 1 }
                                         }
-                                        check_variable = {
-                                            which = hsr_corp_s3_id
-                                            value = event_target:hsr_corp_actor.hsr_corp_row_4_id
+                                        hsr_corp_open_company = {
+                                            SLOT = 3
+                                            ID = event_target:hsr_corp_actor.hsr_corp_row_4_id
                                         }
-                                        check_variable = { which = hsr_corp_s3_state value > 0 }
-                                        check_variable = { which = hsr_corp_s3_state value < 4 }
-                                        hsr_corp_can_visit = yes
-                                    }
-                                    save_global_event_target_as = hsr_corp_row_4@event_target:hsr_corp_actor
-                                    event_target:hsr_corp_actor = {
-                                        set_variable = { which = hsr_corp_portfolio_opened value = 1 }
-                                    }
-                                    hsr_corp_open_company = {
-                                        SLOT = 3
-                                        ID = event_target:hsr_corp_actor.hsr_corp_row_4_id
-                                    }
-                                    carrier_event = {
-                                        id = hsr_corp.30
+                                        carrier_event = {
+                                            id = hsr_corp.30
+                                        }
                                     }
                                 }
                             }
@@ -5436,171 +5534,171 @@ hsr_corp_portfolio_open_5 = {
     effect = {
         from = {
             hidden_effect = {
-                from = {
-                    save_event_target_as = hsr_corp_actor
-                }
                 save_event_target_as = hsr_corp_actor
-                set_variable = { which = hsr_corp_portfolio_opened value = 0 }
                 if = {
-                    limit = {
-                        exists = event_target:hsr_corp_row_5@this
-                    }
-                    event_target:hsr_corp_row_5@this = {
-                        if = {
-                            limit = {
+                    limit = { exists = event_target:hsr_corp_actor }
+                    set_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                    if = {
+                        limit = {
+                            exists = event_target:hsr_corp_row_5@this
+                        }
+                        event_target:hsr_corp_row_5@this = {
+                            if = {
+                                limit = {
+                                    event_target:hsr_corp_actor = {
+                                        check_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                                        check_variable = { which = hsr_corp_row_5_slot value = 1 }
+                                    }
+                                    check_variable = {
+                                        which = hsr_corp_s1_id
+                                        value = event_target:hsr_corp_actor.hsr_corp_row_5_id
+                                    }
+                                    check_variable = { which = hsr_corp_s1_state value > 0 }
+                                    check_variable = { which = hsr_corp_s1_state value < 4 }
+                                    hsr_corp_can_visit = yes
+                                }
+                                save_global_event_target_as = hsr_corp_row_5@event_target:hsr_corp_actor
                                 event_target:hsr_corp_actor = {
-                                    check_variable = { which = hsr_corp_portfolio_opened value = 0 }
-                                    check_variable = { which = hsr_corp_row_5_slot value = 1 }
+                                    set_variable = { which = hsr_corp_portfolio_opened value = 1 }
                                 }
-                                check_variable = {
-                                    which = hsr_corp_s1_id
-                                    value = event_target:hsr_corp_actor.hsr_corp_row_5_id
+                                hsr_corp_open_company = { SLOT = 1 ID = event_target:hsr_corp_actor.hsr_corp_row_5_id }
+                                carrier_event = {
+                                    id = hsr_corp.30
                                 }
-                                check_variable = { which = hsr_corp_s1_state value > 0 }
-                                check_variable = { which = hsr_corp_s1_state value < 4 }
-                                hsr_corp_can_visit = yes
                             }
-                            save_global_event_target_as = hsr_corp_row_5@event_target:hsr_corp_actor
-                            event_target:hsr_corp_actor = {
-                                set_variable = { which = hsr_corp_portfolio_opened value = 1 }
+                            if = {
+                                limit = {
+                                    event_target:hsr_corp_actor = {
+                                        check_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                                        check_variable = { which = hsr_corp_row_5_slot value = 2 }
+                                    }
+                                    check_variable = {
+                                        which = hsr_corp_s2_id
+                                        value = event_target:hsr_corp_actor.hsr_corp_row_5_id
+                                    }
+                                    check_variable = { which = hsr_corp_s2_state value > 0 }
+                                    check_variable = { which = hsr_corp_s2_state value < 4 }
+                                    hsr_corp_can_visit = yes
+                                }
+                                save_global_event_target_as = hsr_corp_row_5@event_target:hsr_corp_actor
+                                event_target:hsr_corp_actor = {
+                                    set_variable = { which = hsr_corp_portfolio_opened value = 1 }
+                                }
+                                hsr_corp_open_company = { SLOT = 2 ID = event_target:hsr_corp_actor.hsr_corp_row_5_id }
+                                carrier_event = {
+                                    id = hsr_corp.30
+                                }
                             }
-                            hsr_corp_open_company = { SLOT = 1 ID = event_target:hsr_corp_actor.hsr_corp_row_5_id }
-                            carrier_event = {
-                                id = hsr_corp.30
+                            if = {
+                                limit = {
+                                    event_target:hsr_corp_actor = {
+                                        check_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                                        check_variable = { which = hsr_corp_row_5_slot value = 3 }
+                                    }
+                                    check_variable = {
+                                        which = hsr_corp_s3_id
+                                        value = event_target:hsr_corp_actor.hsr_corp_row_5_id
+                                    }
+                                    check_variable = { which = hsr_corp_s3_state value > 0 }
+                                    check_variable = { which = hsr_corp_s3_state value < 4 }
+                                    hsr_corp_can_visit = yes
+                                }
+                                save_global_event_target_as = hsr_corp_row_5@event_target:hsr_corp_actor
+                                event_target:hsr_corp_actor = {
+                                    set_variable = { which = hsr_corp_portfolio_opened value = 1 }
+                                }
+                                hsr_corp_open_company = { SLOT = 3 ID = event_target:hsr_corp_actor.hsr_corp_row_5_id }
+                                carrier_event = {
+                                    id = hsr_corp.30
+                                }
                             }
                         }
-                        if = {
-                            limit = {
-                                event_target:hsr_corp_actor = {
-                                    check_variable = { which = hsr_corp_portfolio_opened value = 0 }
-                                    check_variable = { which = hsr_corp_row_5_slot value = 2 }
-                                }
-                                check_variable = {
-                                    which = hsr_corp_s2_id
-                                    value = event_target:hsr_corp_actor.hsr_corp_row_5_id
-                                }
-                                check_variable = { which = hsr_corp_s2_state value > 0 }
-                                check_variable = { which = hsr_corp_s2_state value < 4 }
-                                hsr_corp_can_visit = yes
-                            }
-                            save_global_event_target_as = hsr_corp_row_5@event_target:hsr_corp_actor
-                            event_target:hsr_corp_actor = {
-                                set_variable = { which = hsr_corp_portfolio_opened value = 1 }
-                            }
-                            hsr_corp_open_company = { SLOT = 2 ID = event_target:hsr_corp_actor.hsr_corp_row_5_id }
-                            carrier_event = {
-                                id = hsr_corp.30
-                            }
-                        }
-                        if = {
-                            limit = {
-                                event_target:hsr_corp_actor = {
-                                    check_variable = { which = hsr_corp_portfolio_opened value = 0 }
-                                    check_variable = { which = hsr_corp_row_5_slot value = 3 }
-                                }
-                                check_variable = {
-                                    which = hsr_corp_s3_id
-                                    value = event_target:hsr_corp_actor.hsr_corp_row_5_id
-                                }
-                                check_variable = { which = hsr_corp_s3_state value > 0 }
-                                check_variable = { which = hsr_corp_s3_state value < 4 }
-                                hsr_corp_can_visit = yes
-                            }
-                            save_global_event_target_as = hsr_corp_row_5@event_target:hsr_corp_actor
-                            event_target:hsr_corp_actor = {
-                                set_variable = { which = hsr_corp_portfolio_opened value = 1 }
-                            }
-                            hsr_corp_open_company = { SLOT = 3 ID = event_target:hsr_corp_actor.hsr_corp_row_5_id }
-                            carrier_event = {
-                                id = hsr_corp.30
-                            }
-                        }
                     }
-                }
-                if = {
-                    limit = {
-                        check_variable = { which = hsr_corp_portfolio_opened value = 0 }
-                        check_variable = { which = hsr_corp_row_5_id value > 0 }
-                    }
-                    every_country = {
-                        every_owned_colony = {
-                            carrier = {
-                                if = {
-                                    limit = {
+                    if = {
+                        limit = {
+                            check_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                            check_variable = { which = hsr_corp_row_5_id value > 0 }
+                        }
+                        every_country = {
+                            every_owned_colony = {
+                                carrier = {
+                                    if = {
+                                        limit = {
+                                            event_target:hsr_corp_actor = {
+                                                check_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                                                check_variable = { which = hsr_corp_row_5_slot value = 1 }
+                                            }
+                                            check_variable = {
+                                                which = hsr_corp_s1_id
+                                                value = event_target:hsr_corp_actor.hsr_corp_row_5_id
+                                            }
+                                            check_variable = { which = hsr_corp_s1_state value > 0 }
+                                            check_variable = { which = hsr_corp_s1_state value < 4 }
+                                            hsr_corp_can_visit = yes
+                                        }
+                                        save_global_event_target_as = hsr_corp_row_5@event_target:hsr_corp_actor
                                         event_target:hsr_corp_actor = {
-                                            check_variable = { which = hsr_corp_portfolio_opened value = 0 }
-                                            check_variable = { which = hsr_corp_row_5_slot value = 1 }
+                                            set_variable = { which = hsr_corp_portfolio_opened value = 1 }
                                         }
-                                        check_variable = {
-                                            which = hsr_corp_s1_id
-                                            value = event_target:hsr_corp_actor.hsr_corp_row_5_id
+                                        hsr_corp_open_company = {
+                                            SLOT = 1
+                                            ID = event_target:hsr_corp_actor.hsr_corp_row_5_id
                                         }
-                                        check_variable = { which = hsr_corp_s1_state value > 0 }
-                                        check_variable = { which = hsr_corp_s1_state value < 4 }
-                                        hsr_corp_can_visit = yes
+                                        carrier_event = {
+                                            id = hsr_corp.30
+                                        }
                                     }
-                                    save_global_event_target_as = hsr_corp_row_5@event_target:hsr_corp_actor
-                                    event_target:hsr_corp_actor = {
-                                        set_variable = { which = hsr_corp_portfolio_opened value = 1 }
-                                    }
-                                    hsr_corp_open_company = {
-                                        SLOT = 1
-                                        ID = event_target:hsr_corp_actor.hsr_corp_row_5_id
-                                    }
-                                    carrier_event = {
-                                        id = hsr_corp.30
-                                    }
-                                }
-                                if = {
-                                    limit = {
+                                    if = {
+                                        limit = {
+                                            event_target:hsr_corp_actor = {
+                                                check_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                                                check_variable = { which = hsr_corp_row_5_slot value = 2 }
+                                            }
+                                            check_variable = {
+                                                which = hsr_corp_s2_id
+                                                value = event_target:hsr_corp_actor.hsr_corp_row_5_id
+                                            }
+                                            check_variable = { which = hsr_corp_s2_state value > 0 }
+                                            check_variable = { which = hsr_corp_s2_state value < 4 }
+                                            hsr_corp_can_visit = yes
+                                        }
+                                        save_global_event_target_as = hsr_corp_row_5@event_target:hsr_corp_actor
                                         event_target:hsr_corp_actor = {
-                                            check_variable = { which = hsr_corp_portfolio_opened value = 0 }
-                                            check_variable = { which = hsr_corp_row_5_slot value = 2 }
+                                            set_variable = { which = hsr_corp_portfolio_opened value = 1 }
                                         }
-                                        check_variable = {
-                                            which = hsr_corp_s2_id
-                                            value = event_target:hsr_corp_actor.hsr_corp_row_5_id
+                                        hsr_corp_open_company = {
+                                            SLOT = 2
+                                            ID = event_target:hsr_corp_actor.hsr_corp_row_5_id
                                         }
-                                        check_variable = { which = hsr_corp_s2_state value > 0 }
-                                        check_variable = { which = hsr_corp_s2_state value < 4 }
-                                        hsr_corp_can_visit = yes
+                                        carrier_event = {
+                                            id = hsr_corp.30
+                                        }
                                     }
-                                    save_global_event_target_as = hsr_corp_row_5@event_target:hsr_corp_actor
-                                    event_target:hsr_corp_actor = {
-                                        set_variable = { which = hsr_corp_portfolio_opened value = 1 }
-                                    }
-                                    hsr_corp_open_company = {
-                                        SLOT = 2
-                                        ID = event_target:hsr_corp_actor.hsr_corp_row_5_id
-                                    }
-                                    carrier_event = {
-                                        id = hsr_corp.30
-                                    }
-                                }
-                                if = {
-                                    limit = {
+                                    if = {
+                                        limit = {
+                                            event_target:hsr_corp_actor = {
+                                                check_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                                                check_variable = { which = hsr_corp_row_5_slot value = 3 }
+                                            }
+                                            check_variable = {
+                                                which = hsr_corp_s3_id
+                                                value = event_target:hsr_corp_actor.hsr_corp_row_5_id
+                                            }
+                                            check_variable = { which = hsr_corp_s3_state value > 0 }
+                                            check_variable = { which = hsr_corp_s3_state value < 4 }
+                                            hsr_corp_can_visit = yes
+                                        }
+                                        save_global_event_target_as = hsr_corp_row_5@event_target:hsr_corp_actor
                                         event_target:hsr_corp_actor = {
-                                            check_variable = { which = hsr_corp_portfolio_opened value = 0 }
-                                            check_variable = { which = hsr_corp_row_5_slot value = 3 }
+                                            set_variable = { which = hsr_corp_portfolio_opened value = 1 }
                                         }
-                                        check_variable = {
-                                            which = hsr_corp_s3_id
-                                            value = event_target:hsr_corp_actor.hsr_corp_row_5_id
+                                        hsr_corp_open_company = {
+                                            SLOT = 3
+                                            ID = event_target:hsr_corp_actor.hsr_corp_row_5_id
                                         }
-                                        check_variable = { which = hsr_corp_s3_state value > 0 }
-                                        check_variable = { which = hsr_corp_s3_state value < 4 }
-                                        hsr_corp_can_visit = yes
-                                    }
-                                    save_global_event_target_as = hsr_corp_row_5@event_target:hsr_corp_actor
-                                    event_target:hsr_corp_actor = {
-                                        set_variable = { which = hsr_corp_portfolio_opened value = 1 }
-                                    }
-                                    hsr_corp_open_company = {
-                                        SLOT = 3
-                                        ID = event_target:hsr_corp_actor.hsr_corp_row_5_id
-                                    }
-                                    carrier_event = {
-                                        id = hsr_corp.30
+                                        carrier_event = {
+                                            id = hsr_corp.30
+                                        }
                                     }
                                 }
                             }
@@ -5683,171 +5781,171 @@ hsr_corp_portfolio_open_6 = {
     effect = {
         from = {
             hidden_effect = {
-                from = {
-                    save_event_target_as = hsr_corp_actor
-                }
                 save_event_target_as = hsr_corp_actor
-                set_variable = { which = hsr_corp_portfolio_opened value = 0 }
                 if = {
-                    limit = {
-                        exists = event_target:hsr_corp_row_6@this
-                    }
-                    event_target:hsr_corp_row_6@this = {
-                        if = {
-                            limit = {
+                    limit = { exists = event_target:hsr_corp_actor }
+                    set_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                    if = {
+                        limit = {
+                            exists = event_target:hsr_corp_row_6@this
+                        }
+                        event_target:hsr_corp_row_6@this = {
+                            if = {
+                                limit = {
+                                    event_target:hsr_corp_actor = {
+                                        check_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                                        check_variable = { which = hsr_corp_row_6_slot value = 1 }
+                                    }
+                                    check_variable = {
+                                        which = hsr_corp_s1_id
+                                        value = event_target:hsr_corp_actor.hsr_corp_row_6_id
+                                    }
+                                    check_variable = { which = hsr_corp_s1_state value > 0 }
+                                    check_variable = { which = hsr_corp_s1_state value < 4 }
+                                    hsr_corp_can_visit = yes
+                                }
+                                save_global_event_target_as = hsr_corp_row_6@event_target:hsr_corp_actor
                                 event_target:hsr_corp_actor = {
-                                    check_variable = { which = hsr_corp_portfolio_opened value = 0 }
-                                    check_variable = { which = hsr_corp_row_6_slot value = 1 }
+                                    set_variable = { which = hsr_corp_portfolio_opened value = 1 }
                                 }
-                                check_variable = {
-                                    which = hsr_corp_s1_id
-                                    value = event_target:hsr_corp_actor.hsr_corp_row_6_id
+                                hsr_corp_open_company = { SLOT = 1 ID = event_target:hsr_corp_actor.hsr_corp_row_6_id }
+                                carrier_event = {
+                                    id = hsr_corp.30
                                 }
-                                check_variable = { which = hsr_corp_s1_state value > 0 }
-                                check_variable = { which = hsr_corp_s1_state value < 4 }
-                                hsr_corp_can_visit = yes
                             }
-                            save_global_event_target_as = hsr_corp_row_6@event_target:hsr_corp_actor
-                            event_target:hsr_corp_actor = {
-                                set_variable = { which = hsr_corp_portfolio_opened value = 1 }
+                            if = {
+                                limit = {
+                                    event_target:hsr_corp_actor = {
+                                        check_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                                        check_variable = { which = hsr_corp_row_6_slot value = 2 }
+                                    }
+                                    check_variable = {
+                                        which = hsr_corp_s2_id
+                                        value = event_target:hsr_corp_actor.hsr_corp_row_6_id
+                                    }
+                                    check_variable = { which = hsr_corp_s2_state value > 0 }
+                                    check_variable = { which = hsr_corp_s2_state value < 4 }
+                                    hsr_corp_can_visit = yes
+                                }
+                                save_global_event_target_as = hsr_corp_row_6@event_target:hsr_corp_actor
+                                event_target:hsr_corp_actor = {
+                                    set_variable = { which = hsr_corp_portfolio_opened value = 1 }
+                                }
+                                hsr_corp_open_company = { SLOT = 2 ID = event_target:hsr_corp_actor.hsr_corp_row_6_id }
+                                carrier_event = {
+                                    id = hsr_corp.30
+                                }
                             }
-                            hsr_corp_open_company = { SLOT = 1 ID = event_target:hsr_corp_actor.hsr_corp_row_6_id }
-                            carrier_event = {
-                                id = hsr_corp.30
+                            if = {
+                                limit = {
+                                    event_target:hsr_corp_actor = {
+                                        check_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                                        check_variable = { which = hsr_corp_row_6_slot value = 3 }
+                                    }
+                                    check_variable = {
+                                        which = hsr_corp_s3_id
+                                        value = event_target:hsr_corp_actor.hsr_corp_row_6_id
+                                    }
+                                    check_variable = { which = hsr_corp_s3_state value > 0 }
+                                    check_variable = { which = hsr_corp_s3_state value < 4 }
+                                    hsr_corp_can_visit = yes
+                                }
+                                save_global_event_target_as = hsr_corp_row_6@event_target:hsr_corp_actor
+                                event_target:hsr_corp_actor = {
+                                    set_variable = { which = hsr_corp_portfolio_opened value = 1 }
+                                }
+                                hsr_corp_open_company = { SLOT = 3 ID = event_target:hsr_corp_actor.hsr_corp_row_6_id }
+                                carrier_event = {
+                                    id = hsr_corp.30
+                                }
                             }
                         }
-                        if = {
-                            limit = {
-                                event_target:hsr_corp_actor = {
-                                    check_variable = { which = hsr_corp_portfolio_opened value = 0 }
-                                    check_variable = { which = hsr_corp_row_6_slot value = 2 }
-                                }
-                                check_variable = {
-                                    which = hsr_corp_s2_id
-                                    value = event_target:hsr_corp_actor.hsr_corp_row_6_id
-                                }
-                                check_variable = { which = hsr_corp_s2_state value > 0 }
-                                check_variable = { which = hsr_corp_s2_state value < 4 }
-                                hsr_corp_can_visit = yes
-                            }
-                            save_global_event_target_as = hsr_corp_row_6@event_target:hsr_corp_actor
-                            event_target:hsr_corp_actor = {
-                                set_variable = { which = hsr_corp_portfolio_opened value = 1 }
-                            }
-                            hsr_corp_open_company = { SLOT = 2 ID = event_target:hsr_corp_actor.hsr_corp_row_6_id }
-                            carrier_event = {
-                                id = hsr_corp.30
-                            }
-                        }
-                        if = {
-                            limit = {
-                                event_target:hsr_corp_actor = {
-                                    check_variable = { which = hsr_corp_portfolio_opened value = 0 }
-                                    check_variable = { which = hsr_corp_row_6_slot value = 3 }
-                                }
-                                check_variable = {
-                                    which = hsr_corp_s3_id
-                                    value = event_target:hsr_corp_actor.hsr_corp_row_6_id
-                                }
-                                check_variable = { which = hsr_corp_s3_state value > 0 }
-                                check_variable = { which = hsr_corp_s3_state value < 4 }
-                                hsr_corp_can_visit = yes
-                            }
-                            save_global_event_target_as = hsr_corp_row_6@event_target:hsr_corp_actor
-                            event_target:hsr_corp_actor = {
-                                set_variable = { which = hsr_corp_portfolio_opened value = 1 }
-                            }
-                            hsr_corp_open_company = { SLOT = 3 ID = event_target:hsr_corp_actor.hsr_corp_row_6_id }
-                            carrier_event = {
-                                id = hsr_corp.30
-                            }
-                        }
                     }
-                }
-                if = {
-                    limit = {
-                        check_variable = { which = hsr_corp_portfolio_opened value = 0 }
-                        check_variable = { which = hsr_corp_row_6_id value > 0 }
-                    }
-                    every_country = {
-                        every_owned_colony = {
-                            carrier = {
-                                if = {
-                                    limit = {
+                    if = {
+                        limit = {
+                            check_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                            check_variable = { which = hsr_corp_row_6_id value > 0 }
+                        }
+                        every_country = {
+                            every_owned_colony = {
+                                carrier = {
+                                    if = {
+                                        limit = {
+                                            event_target:hsr_corp_actor = {
+                                                check_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                                                check_variable = { which = hsr_corp_row_6_slot value = 1 }
+                                            }
+                                            check_variable = {
+                                                which = hsr_corp_s1_id
+                                                value = event_target:hsr_corp_actor.hsr_corp_row_6_id
+                                            }
+                                            check_variable = { which = hsr_corp_s1_state value > 0 }
+                                            check_variable = { which = hsr_corp_s1_state value < 4 }
+                                            hsr_corp_can_visit = yes
+                                        }
+                                        save_global_event_target_as = hsr_corp_row_6@event_target:hsr_corp_actor
                                         event_target:hsr_corp_actor = {
-                                            check_variable = { which = hsr_corp_portfolio_opened value = 0 }
-                                            check_variable = { which = hsr_corp_row_6_slot value = 1 }
+                                            set_variable = { which = hsr_corp_portfolio_opened value = 1 }
                                         }
-                                        check_variable = {
-                                            which = hsr_corp_s1_id
-                                            value = event_target:hsr_corp_actor.hsr_corp_row_6_id
+                                        hsr_corp_open_company = {
+                                            SLOT = 1
+                                            ID = event_target:hsr_corp_actor.hsr_corp_row_6_id
                                         }
-                                        check_variable = { which = hsr_corp_s1_state value > 0 }
-                                        check_variable = { which = hsr_corp_s1_state value < 4 }
-                                        hsr_corp_can_visit = yes
+                                        carrier_event = {
+                                            id = hsr_corp.30
+                                        }
                                     }
-                                    save_global_event_target_as = hsr_corp_row_6@event_target:hsr_corp_actor
-                                    event_target:hsr_corp_actor = {
-                                        set_variable = { which = hsr_corp_portfolio_opened value = 1 }
-                                    }
-                                    hsr_corp_open_company = {
-                                        SLOT = 1
-                                        ID = event_target:hsr_corp_actor.hsr_corp_row_6_id
-                                    }
-                                    carrier_event = {
-                                        id = hsr_corp.30
-                                    }
-                                }
-                                if = {
-                                    limit = {
+                                    if = {
+                                        limit = {
+                                            event_target:hsr_corp_actor = {
+                                                check_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                                                check_variable = { which = hsr_corp_row_6_slot value = 2 }
+                                            }
+                                            check_variable = {
+                                                which = hsr_corp_s2_id
+                                                value = event_target:hsr_corp_actor.hsr_corp_row_6_id
+                                            }
+                                            check_variable = { which = hsr_corp_s2_state value > 0 }
+                                            check_variable = { which = hsr_corp_s2_state value < 4 }
+                                            hsr_corp_can_visit = yes
+                                        }
+                                        save_global_event_target_as = hsr_corp_row_6@event_target:hsr_corp_actor
                                         event_target:hsr_corp_actor = {
-                                            check_variable = { which = hsr_corp_portfolio_opened value = 0 }
-                                            check_variable = { which = hsr_corp_row_6_slot value = 2 }
+                                            set_variable = { which = hsr_corp_portfolio_opened value = 1 }
                                         }
-                                        check_variable = {
-                                            which = hsr_corp_s2_id
-                                            value = event_target:hsr_corp_actor.hsr_corp_row_6_id
+                                        hsr_corp_open_company = {
+                                            SLOT = 2
+                                            ID = event_target:hsr_corp_actor.hsr_corp_row_6_id
                                         }
-                                        check_variable = { which = hsr_corp_s2_state value > 0 }
-                                        check_variable = { which = hsr_corp_s2_state value < 4 }
-                                        hsr_corp_can_visit = yes
+                                        carrier_event = {
+                                            id = hsr_corp.30
+                                        }
                                     }
-                                    save_global_event_target_as = hsr_corp_row_6@event_target:hsr_corp_actor
-                                    event_target:hsr_corp_actor = {
-                                        set_variable = { which = hsr_corp_portfolio_opened value = 1 }
-                                    }
-                                    hsr_corp_open_company = {
-                                        SLOT = 2
-                                        ID = event_target:hsr_corp_actor.hsr_corp_row_6_id
-                                    }
-                                    carrier_event = {
-                                        id = hsr_corp.30
-                                    }
-                                }
-                                if = {
-                                    limit = {
+                                    if = {
+                                        limit = {
+                                            event_target:hsr_corp_actor = {
+                                                check_variable = { which = hsr_corp_portfolio_opened value = 0 }
+                                                check_variable = { which = hsr_corp_row_6_slot value = 3 }
+                                            }
+                                            check_variable = {
+                                                which = hsr_corp_s3_id
+                                                value = event_target:hsr_corp_actor.hsr_corp_row_6_id
+                                            }
+                                            check_variable = { which = hsr_corp_s3_state value > 0 }
+                                            check_variable = { which = hsr_corp_s3_state value < 4 }
+                                            hsr_corp_can_visit = yes
+                                        }
+                                        save_global_event_target_as = hsr_corp_row_6@event_target:hsr_corp_actor
                                         event_target:hsr_corp_actor = {
-                                            check_variable = { which = hsr_corp_portfolio_opened value = 0 }
-                                            check_variable = { which = hsr_corp_row_6_slot value = 3 }
+                                            set_variable = { which = hsr_corp_portfolio_opened value = 1 }
                                         }
-                                        check_variable = {
-                                            which = hsr_corp_s3_id
-                                            value = event_target:hsr_corp_actor.hsr_corp_row_6_id
+                                        hsr_corp_open_company = {
+                                            SLOT = 3
+                                            ID = event_target:hsr_corp_actor.hsr_corp_row_6_id
                                         }
-                                        check_variable = { which = hsr_corp_s3_state value > 0 }
-                                        check_variable = { which = hsr_corp_s3_state value < 4 }
-                                        hsr_corp_can_visit = yes
-                                    }
-                                    save_global_event_target_as = hsr_corp_row_6@event_target:hsr_corp_actor
-                                    event_target:hsr_corp_actor = {
-                                        set_variable = { which = hsr_corp_portfolio_opened value = 1 }
-                                    }
-                                    hsr_corp_open_company = {
-                                        SLOT = 3
-                                        ID = event_target:hsr_corp_actor.hsr_corp_row_6_id
-                                    }
-                                    carrier_event = {
-                                        id = hsr_corp.30
+                                        carrier_event = {
+                                            id = hsr_corp.30
+                                        }
                                     }
                                 }
                             }

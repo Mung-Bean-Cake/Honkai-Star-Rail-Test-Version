@@ -51,6 +51,10 @@ hsr_corp_initialize_slot = {
 hsr_corp_initialize = {
     optimize_memory
     if = {
+        limit = { NOT = { is_variable_set = hsr_credits_planet_trade_storage } }
+        set_variable = { which = hsr_credits_planet_trade_storage value = 0 }
+    }
+    if = {
         limit = {
             NOT = {
                 has_carrier_flag = hsr_corp_data_initialized
@@ -74,27 +78,27 @@ hsr_corp_resolve_parties = {
     }
     if = {
         limit = {
-            exists = "event_target:hsr_corp_founder_s$SLOT$@this"
+            exists = event_target:hsr_corp_founder_s$SLOT$@this
         }
-        "event_target:hsr_corp_founder_s$SLOT$@this" = {
+        event_target:hsr_corp_founder_s$SLOT$@this = {
             save_event_target_as = hsr_corp_founder
             save_event_target_as = hsr_corp_controller
         }
     }
     if = {
         limit = {
-            exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
+            exists = event_target:hsr_corp_foreign_s$SLOT$@this
         }
-        "event_target:hsr_corp_foreign_s$SLOT$@this" = {
+        event_target:hsr_corp_foreign_s$SLOT$@this = {
             save_event_target_as = hsr_corp_foreign
         }
     }
     if = {
         limit = {
             check_variable = { which = hsr_corp_s$SLOT$_foreign_control value = 1 }
-            exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
+            exists = event_target:hsr_corp_foreign_s$SLOT$@this
         }
-        "event_target:hsr_corp_foreign_s$SLOT$@this" = {
+        event_target:hsr_corp_foreign_s$SLOT$@this = {
             save_event_target_as = hsr_corp_controller
         }
     }
@@ -308,9 +312,9 @@ hsr_corp_create = {
         save_event_target_as = hsr_corp_hq
         every_country = {
             every_war = {
-                remove_war_flag = "hsr_corp_aid_s$SLOT$@event_target:hsr_corp_hq"
+                remove_war_flag = hsr_corp_aid_s$SLOT$@event_target:hsr_corp_hq
             }
-            remove_country_flag = "hsr_corp_crisis_aid_s$SLOT$@event_target:hsr_corp_hq"
+            remove_country_flag = hsr_corp_crisis_aid_s$SLOT$@event_target:hsr_corp_hq
         }
         event_target:global_event_country = {
             if = {
@@ -340,11 +344,14 @@ hsr_corp_create = {
         divide_variable = { which = hsr_corp_s$SLOT$_share_price value = 100 }
         set_variable = { which = hsr_corp_s$SLOT$_founder_basis value = hsr_corp_s$SLOT$_share_price }
         owner = {
-            save_global_event_target_as = "hsr_corp_founder_s$SLOT$@event_target:hsr_corp_hq"
-            save_global_event_target_as = "hsr_corp_notified_controller_s$SLOT$@event_target:hsr_corp_hq"
-            save_global_event_target_as = "hsr_corp_payer_s$SLOT$@event_target:hsr_corp_hq"
+            save_global_event_target_as = hsr_corp_founder_s$SLOT$@event_target:hsr_corp_hq
+            save_global_event_target_as = hsr_corp_notified_controller_s$SLOT$@event_target:hsr_corp_hq
+            save_global_event_target_as = hsr_corp_payer_s$SLOT$@event_target:hsr_corp_hq
         }
-        clear_global_event_target = "hsr_corp_foreign_s$SLOT$@this"
+        if = {
+            limit = { exists = event_target:hsr_corp_foreign_s$SLOT$@this }
+            clear_global_event_target = hsr_corp_foreign_s$SLOT$@this
+        }
         if = {
             limit = {
                 check_variable = { which = hsr_corp_setup_payment value = 0 }
@@ -443,7 +450,7 @@ hsr_corp_finish_building = {
         }
         if = {
             limit = {
-                exists = "event_target:hsr_corp_payer_s$SLOT$@this"
+                exists = event_target:hsr_corp_payer_s$SLOT$@this
                 OR = {
                     NOT = {
                         check_variable = { which = hsr_corp_s$SLOT$_regime value = 2 }
@@ -470,9 +477,9 @@ hsr_corp_refund_building = {
     }
     if = {
         limit = {
-            exists = "event_target:hsr_corp_payer_s$SLOT$@this"
+            exists = event_target:hsr_corp_payer_s$SLOT$@this
         }
-        "event_target:hsr_corp_payer_s$SLOT$@this" = {
+        event_target:hsr_corp_payer_s$SLOT$@this = {
             save_event_target_as = hsr_corp_refund_country
         }
     }
@@ -515,10 +522,22 @@ hsr_corp_close_slot = {
         }
         set_variable = { which = hsr_corp_s$SLOT$_state value = 4 }
         save_event_target_as = hsr_corp_hq
-        clear_global_event_target = "hsr_corp_founder_s$SLOT$@this"
-        clear_global_event_target = "hsr_corp_payer_s$SLOT$@this"
-        clear_global_event_target = "hsr_corp_notified_controller_s$SLOT$@this"
-        clear_global_event_target = "hsr_corp_foreign_s$SLOT$@this"
+        if = {
+            limit = { exists = event_target:hsr_corp_founder_s$SLOT$@this }
+            clear_global_event_target = hsr_corp_founder_s$SLOT$@this
+        }
+        if = {
+            limit = { exists = event_target:hsr_corp_payer_s$SLOT$@this }
+            clear_global_event_target = hsr_corp_payer_s$SLOT$@this
+        }
+        if = {
+            limit = { exists = event_target:hsr_corp_notified_controller_s$SLOT$@this }
+            clear_global_event_target = hsr_corp_notified_controller_s$SLOT$@this
+        }
+        if = {
+            limit = { exists = event_target:hsr_corp_foreign_s$SLOT$@this }
+            clear_global_event_target = hsr_corp_foreign_s$SLOT$@this
+        }
         remove_carrier_flag = hsr_corp_building_s$SLOT$
         remove_carrier_flag = hsr_corp_reform_s$SLOT$
         remove_carrier_flag = hsr_corp_offer_s$SLOT$
@@ -611,7 +630,7 @@ hsr_corp_update_view = {
     }
     if = {
         limit = {
-            exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
+            exists = event_target:hsr_corp_foreign_s$SLOT$@this
             event_target:hsr_corp_actor = {
                 is_same_value = event_target:hsr_corp_foreign
             }
@@ -880,7 +899,10 @@ hsr_corp_begin_carrier_transfer = {
                 set_variable = { which = hsr_corp_transfer_s1_aid_cd_days value = prev.hsr_corp_remaining_days }
             }
             remove_carrier_flag = hsr_corp_aid_cd_s1
-            clear_global_event_target = hsr_corp_transfer_founder_s1@event_target:hsr_corp_transfer_bank
+            if = {
+                limit = { exists = event_target:hsr_corp_transfer_founder_s1@event_target:hsr_corp_transfer_bank }
+                clear_global_event_target = hsr_corp_transfer_founder_s1@event_target:hsr_corp_transfer_bank
+            }
             if = {
                 limit = {
                     exists = event_target:hsr_corp_founder_s1@this
@@ -889,7 +911,10 @@ hsr_corp_begin_carrier_transfer = {
                     save_global_event_target_as = hsr_corp_transfer_founder_s1@event_target:hsr_corp_transfer_bank
                 }
             }
-            clear_global_event_target = hsr_corp_founder_s1@this
+            if = {
+                limit = { exists = event_target:hsr_corp_founder_s1@this }
+                clear_global_event_target = hsr_corp_founder_s1@this
+            }
             if = {
                 limit = {
                     exists = event_target:hsr_corp_transfer_founder_s1@event_target:hsr_corp_transfer_bank
@@ -919,7 +944,10 @@ hsr_corp_begin_carrier_transfer = {
                     }
                 }
             }
-            clear_global_event_target = hsr_corp_transfer_foreign_s1@event_target:hsr_corp_transfer_bank
+            if = {
+                limit = { exists = event_target:hsr_corp_transfer_foreign_s1@event_target:hsr_corp_transfer_bank }
+                clear_global_event_target = hsr_corp_transfer_foreign_s1@event_target:hsr_corp_transfer_bank
+            }
             if = {
                 limit = {
                     exists = event_target:hsr_corp_foreign_s1@this
@@ -928,7 +956,10 @@ hsr_corp_begin_carrier_transfer = {
                     save_global_event_target_as = hsr_corp_transfer_foreign_s1@event_target:hsr_corp_transfer_bank
                 }
             }
-            clear_global_event_target = hsr_corp_foreign_s1@this
+            if = {
+                limit = { exists = event_target:hsr_corp_foreign_s1@this }
+                clear_global_event_target = hsr_corp_foreign_s1@this
+            }
             if = {
                 limit = {
                     exists = event_target:hsr_corp_transfer_foreign_s1@event_target:hsr_corp_transfer_bank
@@ -958,7 +989,10 @@ hsr_corp_begin_carrier_transfer = {
                     }
                 }
             }
-            clear_global_event_target = hsr_corp_transfer_payer_s1@event_target:hsr_corp_transfer_bank
+            if = {
+                limit = { exists = event_target:hsr_corp_transfer_payer_s1@event_target:hsr_corp_transfer_bank }
+                clear_global_event_target = hsr_corp_transfer_payer_s1@event_target:hsr_corp_transfer_bank
+            }
             if = {
                 limit = {
                     exists = event_target:hsr_corp_payer_s1@this
@@ -967,8 +1001,14 @@ hsr_corp_begin_carrier_transfer = {
                     save_global_event_target_as = hsr_corp_transfer_payer_s1@event_target:hsr_corp_transfer_bank
                 }
             }
-            clear_global_event_target = hsr_corp_payer_s1@this
-            clear_global_event_target = hsr_corp_transfer_notified_controller_s1@event_target:hsr_corp_transfer_bank
+            if = {
+                limit = { exists = event_target:hsr_corp_payer_s1@this }
+                clear_global_event_target = hsr_corp_payer_s1@this
+            }
+            if = {
+                limit = { exists = event_target:hsr_corp_transfer_notified_controller_s1@event_target:hsr_corp_transfer_bank }
+                clear_global_event_target = hsr_corp_transfer_notified_controller_s1@event_target:hsr_corp_transfer_bank
+            }
             if = {
                 limit = {
                     exists = event_target:hsr_corp_notified_controller_s1@this
@@ -977,7 +1017,10 @@ hsr_corp_begin_carrier_transfer = {
                     save_global_event_target_as = hsr_corp_transfer_notified_controller_s1@event_target:hsr_corp_transfer_bank
                 }
             }
-            clear_global_event_target = hsr_corp_notified_controller_s1@this
+            if = {
+                limit = { exists = event_target:hsr_corp_notified_controller_s1@this }
+                clear_global_event_target = hsr_corp_notified_controller_s1@this
+            }
             hsr_corp_refund_offer = { SLOT = 2 }
             set_variable = { which = hsr_corp_s2_notice_id value = 0 }
             event_target:hsr_corp_transfer_bank = {
@@ -1186,7 +1229,10 @@ hsr_corp_begin_carrier_transfer = {
                 set_variable = { which = hsr_corp_transfer_s2_aid_cd_days value = prev.hsr_corp_remaining_days }
             }
             remove_carrier_flag = hsr_corp_aid_cd_s2
-            clear_global_event_target = hsr_corp_transfer_founder_s2@event_target:hsr_corp_transfer_bank
+            if = {
+                limit = { exists = event_target:hsr_corp_transfer_founder_s2@event_target:hsr_corp_transfer_bank }
+                clear_global_event_target = hsr_corp_transfer_founder_s2@event_target:hsr_corp_transfer_bank
+            }
             if = {
                 limit = {
                     exists = event_target:hsr_corp_founder_s2@this
@@ -1195,7 +1241,10 @@ hsr_corp_begin_carrier_transfer = {
                     save_global_event_target_as = hsr_corp_transfer_founder_s2@event_target:hsr_corp_transfer_bank
                 }
             }
-            clear_global_event_target = hsr_corp_founder_s2@this
+            if = {
+                limit = { exists = event_target:hsr_corp_founder_s2@this }
+                clear_global_event_target = hsr_corp_founder_s2@this
+            }
             if = {
                 limit = {
                     exists = event_target:hsr_corp_transfer_founder_s2@event_target:hsr_corp_transfer_bank
@@ -1225,7 +1274,10 @@ hsr_corp_begin_carrier_transfer = {
                     }
                 }
             }
-            clear_global_event_target = hsr_corp_transfer_foreign_s2@event_target:hsr_corp_transfer_bank
+            if = {
+                limit = { exists = event_target:hsr_corp_transfer_foreign_s2@event_target:hsr_corp_transfer_bank }
+                clear_global_event_target = hsr_corp_transfer_foreign_s2@event_target:hsr_corp_transfer_bank
+            }
             if = {
                 limit = {
                     exists = event_target:hsr_corp_foreign_s2@this
@@ -1234,7 +1286,10 @@ hsr_corp_begin_carrier_transfer = {
                     save_global_event_target_as = hsr_corp_transfer_foreign_s2@event_target:hsr_corp_transfer_bank
                 }
             }
-            clear_global_event_target = hsr_corp_foreign_s2@this
+            if = {
+                limit = { exists = event_target:hsr_corp_foreign_s2@this }
+                clear_global_event_target = hsr_corp_foreign_s2@this
+            }
             if = {
                 limit = {
                     exists = event_target:hsr_corp_transfer_foreign_s2@event_target:hsr_corp_transfer_bank
@@ -1264,7 +1319,10 @@ hsr_corp_begin_carrier_transfer = {
                     }
                 }
             }
-            clear_global_event_target = hsr_corp_transfer_payer_s2@event_target:hsr_corp_transfer_bank
+            if = {
+                limit = { exists = event_target:hsr_corp_transfer_payer_s2@event_target:hsr_corp_transfer_bank }
+                clear_global_event_target = hsr_corp_transfer_payer_s2@event_target:hsr_corp_transfer_bank
+            }
             if = {
                 limit = {
                     exists = event_target:hsr_corp_payer_s2@this
@@ -1273,8 +1331,14 @@ hsr_corp_begin_carrier_transfer = {
                     save_global_event_target_as = hsr_corp_transfer_payer_s2@event_target:hsr_corp_transfer_bank
                 }
             }
-            clear_global_event_target = hsr_corp_payer_s2@this
-            clear_global_event_target = hsr_corp_transfer_notified_controller_s2@event_target:hsr_corp_transfer_bank
+            if = {
+                limit = { exists = event_target:hsr_corp_payer_s2@this }
+                clear_global_event_target = hsr_corp_payer_s2@this
+            }
+            if = {
+                limit = { exists = event_target:hsr_corp_transfer_notified_controller_s2@event_target:hsr_corp_transfer_bank }
+                clear_global_event_target = hsr_corp_transfer_notified_controller_s2@event_target:hsr_corp_transfer_bank
+            }
             if = {
                 limit = {
                     exists = event_target:hsr_corp_notified_controller_s2@this
@@ -1283,7 +1347,10 @@ hsr_corp_begin_carrier_transfer = {
                     save_global_event_target_as = hsr_corp_transfer_notified_controller_s2@event_target:hsr_corp_transfer_bank
                 }
             }
-            clear_global_event_target = hsr_corp_notified_controller_s2@this
+            if = {
+                limit = { exists = event_target:hsr_corp_notified_controller_s2@this }
+                clear_global_event_target = hsr_corp_notified_controller_s2@this
+            }
             hsr_corp_refund_offer = { SLOT = 3 }
             set_variable = { which = hsr_corp_s3_notice_id value = 0 }
             event_target:hsr_corp_transfer_bank = {
@@ -1492,7 +1559,10 @@ hsr_corp_begin_carrier_transfer = {
                 set_variable = { which = hsr_corp_transfer_s3_aid_cd_days value = prev.hsr_corp_remaining_days }
             }
             remove_carrier_flag = hsr_corp_aid_cd_s3
-            clear_global_event_target = hsr_corp_transfer_founder_s3@event_target:hsr_corp_transfer_bank
+            if = {
+                limit = { exists = event_target:hsr_corp_transfer_founder_s3@event_target:hsr_corp_transfer_bank }
+                clear_global_event_target = hsr_corp_transfer_founder_s3@event_target:hsr_corp_transfer_bank
+            }
             if = {
                 limit = {
                     exists = event_target:hsr_corp_founder_s3@this
@@ -1501,7 +1571,10 @@ hsr_corp_begin_carrier_transfer = {
                     save_global_event_target_as = hsr_corp_transfer_founder_s3@event_target:hsr_corp_transfer_bank
                 }
             }
-            clear_global_event_target = hsr_corp_founder_s3@this
+            if = {
+                limit = { exists = event_target:hsr_corp_founder_s3@this }
+                clear_global_event_target = hsr_corp_founder_s3@this
+            }
             if = {
                 limit = {
                     exists = event_target:hsr_corp_transfer_founder_s3@event_target:hsr_corp_transfer_bank
@@ -1531,7 +1604,10 @@ hsr_corp_begin_carrier_transfer = {
                     }
                 }
             }
-            clear_global_event_target = hsr_corp_transfer_foreign_s3@event_target:hsr_corp_transfer_bank
+            if = {
+                limit = { exists = event_target:hsr_corp_transfer_foreign_s3@event_target:hsr_corp_transfer_bank }
+                clear_global_event_target = hsr_corp_transfer_foreign_s3@event_target:hsr_corp_transfer_bank
+            }
             if = {
                 limit = {
                     exists = event_target:hsr_corp_foreign_s3@this
@@ -1540,7 +1616,10 @@ hsr_corp_begin_carrier_transfer = {
                     save_global_event_target_as = hsr_corp_transfer_foreign_s3@event_target:hsr_corp_transfer_bank
                 }
             }
-            clear_global_event_target = hsr_corp_foreign_s3@this
+            if = {
+                limit = { exists = event_target:hsr_corp_foreign_s3@this }
+                clear_global_event_target = hsr_corp_foreign_s3@this
+            }
             if = {
                 limit = {
                     exists = event_target:hsr_corp_transfer_foreign_s3@event_target:hsr_corp_transfer_bank
@@ -1570,7 +1649,10 @@ hsr_corp_begin_carrier_transfer = {
                     }
                 }
             }
-            clear_global_event_target = hsr_corp_transfer_payer_s3@event_target:hsr_corp_transfer_bank
+            if = {
+                limit = { exists = event_target:hsr_corp_transfer_payer_s3@event_target:hsr_corp_transfer_bank }
+                clear_global_event_target = hsr_corp_transfer_payer_s3@event_target:hsr_corp_transfer_bank
+            }
             if = {
                 limit = {
                     exists = event_target:hsr_corp_payer_s3@this
@@ -1579,8 +1661,14 @@ hsr_corp_begin_carrier_transfer = {
                     save_global_event_target_as = hsr_corp_transfer_payer_s3@event_target:hsr_corp_transfer_bank
                 }
             }
-            clear_global_event_target = hsr_corp_payer_s3@this
-            clear_global_event_target = hsr_corp_transfer_notified_controller_s3@event_target:hsr_corp_transfer_bank
+            if = {
+                limit = { exists = event_target:hsr_corp_payer_s3@this }
+                clear_global_event_target = hsr_corp_payer_s3@this
+            }
+            if = {
+                limit = { exists = event_target:hsr_corp_transfer_notified_controller_s3@event_target:hsr_corp_transfer_bank }
+                clear_global_event_target = hsr_corp_transfer_notified_controller_s3@event_target:hsr_corp_transfer_bank
+            }
             if = {
                 limit = {
                     exists = event_target:hsr_corp_notified_controller_s3@this
@@ -1589,7 +1677,10 @@ hsr_corp_begin_carrier_transfer = {
                     save_global_event_target_as = hsr_corp_transfer_notified_controller_s3@event_target:hsr_corp_transfer_bank
                 }
             }
-            clear_global_event_target = hsr_corp_notified_controller_s3@this
+            if = {
+                limit = { exists = event_target:hsr_corp_notified_controller_s3@this }
+                clear_global_event_target = hsr_corp_notified_controller_s3@this
+            }
             remove_deposit = d_hsr_corp_enterprise
             set_variable = { which = hsr_corp_s1_state value = 0 }
             set_variable = { which = hsr_corp_s1_id value = 0 }
@@ -2050,7 +2141,10 @@ hsr_corp_finish_carrier_transfer = {
                 days = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s1_aid_cd_days
             }
         }
-        clear_global_event_target = hsr_corp_founder_s1@this
+        if = {
+            limit = { exists = event_target:hsr_corp_founder_s1@this }
+            clear_global_event_target = hsr_corp_founder_s1@this
+        }
         if = {
             limit = {
                 exists = event_target:hsr_corp_transfer_founder_s1@event_target:hsr_corp_transfer_bank
@@ -2059,8 +2153,14 @@ hsr_corp_finish_carrier_transfer = {
                 save_global_event_target_as = hsr_corp_founder_s1@event_target:hsr_corp_new_hq
             }
         }
-        clear_global_event_target = hsr_corp_transfer_founder_s1@event_target:hsr_corp_transfer_bank
-        clear_global_event_target = hsr_corp_foreign_s1@this
+        if = {
+            limit = { exists = event_target:hsr_corp_transfer_founder_s1@event_target:hsr_corp_transfer_bank }
+            clear_global_event_target = hsr_corp_transfer_founder_s1@event_target:hsr_corp_transfer_bank
+        }
+        if = {
+            limit = { exists = event_target:hsr_corp_foreign_s1@this }
+            clear_global_event_target = hsr_corp_foreign_s1@this
+        }
         if = {
             limit = {
                 exists = event_target:hsr_corp_transfer_foreign_s1@event_target:hsr_corp_transfer_bank
@@ -2069,8 +2169,14 @@ hsr_corp_finish_carrier_transfer = {
                 save_global_event_target_as = hsr_corp_foreign_s1@event_target:hsr_corp_new_hq
             }
         }
-        clear_global_event_target = hsr_corp_transfer_foreign_s1@event_target:hsr_corp_transfer_bank
-        clear_global_event_target = hsr_corp_payer_s1@this
+        if = {
+            limit = { exists = event_target:hsr_corp_transfer_foreign_s1@event_target:hsr_corp_transfer_bank }
+            clear_global_event_target = hsr_corp_transfer_foreign_s1@event_target:hsr_corp_transfer_bank
+        }
+        if = {
+            limit = { exists = event_target:hsr_corp_payer_s1@this }
+            clear_global_event_target = hsr_corp_payer_s1@this
+        }
         if = {
             limit = {
                 exists = event_target:hsr_corp_transfer_payer_s1@event_target:hsr_corp_transfer_bank
@@ -2079,8 +2185,14 @@ hsr_corp_finish_carrier_transfer = {
                 save_global_event_target_as = hsr_corp_payer_s1@event_target:hsr_corp_new_hq
             }
         }
-        clear_global_event_target = hsr_corp_transfer_payer_s1@event_target:hsr_corp_transfer_bank
-        clear_global_event_target = hsr_corp_notified_controller_s1@this
+        if = {
+            limit = { exists = event_target:hsr_corp_transfer_payer_s1@event_target:hsr_corp_transfer_bank }
+            clear_global_event_target = hsr_corp_transfer_payer_s1@event_target:hsr_corp_transfer_bank
+        }
+        if = {
+            limit = { exists = event_target:hsr_corp_notified_controller_s1@this }
+            clear_global_event_target = hsr_corp_notified_controller_s1@this
+        }
         if = {
             limit = {
                 exists = event_target:hsr_corp_transfer_notified_controller_s1@event_target:hsr_corp_transfer_bank
@@ -2089,7 +2201,10 @@ hsr_corp_finish_carrier_transfer = {
                 save_global_event_target_as = hsr_corp_notified_controller_s1@event_target:hsr_corp_new_hq
             }
         }
-        clear_global_event_target = hsr_corp_transfer_notified_controller_s1@event_target:hsr_corp_transfer_bank
+        if = {
+            limit = { exists = event_target:hsr_corp_transfer_notified_controller_s1@event_target:hsr_corp_transfer_bank }
+            clear_global_event_target = hsr_corp_transfer_notified_controller_s1@event_target:hsr_corp_transfer_bank
+        }
         set_variable = {
             which = hsr_corp_s2_state
             value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_state
@@ -2365,7 +2480,10 @@ hsr_corp_finish_carrier_transfer = {
                 days = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s2_aid_cd_days
             }
         }
-        clear_global_event_target = hsr_corp_founder_s2@this
+        if = {
+            limit = { exists = event_target:hsr_corp_founder_s2@this }
+            clear_global_event_target = hsr_corp_founder_s2@this
+        }
         if = {
             limit = {
                 exists = event_target:hsr_corp_transfer_founder_s2@event_target:hsr_corp_transfer_bank
@@ -2374,8 +2492,14 @@ hsr_corp_finish_carrier_transfer = {
                 save_global_event_target_as = hsr_corp_founder_s2@event_target:hsr_corp_new_hq
             }
         }
-        clear_global_event_target = hsr_corp_transfer_founder_s2@event_target:hsr_corp_transfer_bank
-        clear_global_event_target = hsr_corp_foreign_s2@this
+        if = {
+            limit = { exists = event_target:hsr_corp_transfer_founder_s2@event_target:hsr_corp_transfer_bank }
+            clear_global_event_target = hsr_corp_transfer_founder_s2@event_target:hsr_corp_transfer_bank
+        }
+        if = {
+            limit = { exists = event_target:hsr_corp_foreign_s2@this }
+            clear_global_event_target = hsr_corp_foreign_s2@this
+        }
         if = {
             limit = {
                 exists = event_target:hsr_corp_transfer_foreign_s2@event_target:hsr_corp_transfer_bank
@@ -2384,8 +2508,14 @@ hsr_corp_finish_carrier_transfer = {
                 save_global_event_target_as = hsr_corp_foreign_s2@event_target:hsr_corp_new_hq
             }
         }
-        clear_global_event_target = hsr_corp_transfer_foreign_s2@event_target:hsr_corp_transfer_bank
-        clear_global_event_target = hsr_corp_payer_s2@this
+        if = {
+            limit = { exists = event_target:hsr_corp_transfer_foreign_s2@event_target:hsr_corp_transfer_bank }
+            clear_global_event_target = hsr_corp_transfer_foreign_s2@event_target:hsr_corp_transfer_bank
+        }
+        if = {
+            limit = { exists = event_target:hsr_corp_payer_s2@this }
+            clear_global_event_target = hsr_corp_payer_s2@this
+        }
         if = {
             limit = {
                 exists = event_target:hsr_corp_transfer_payer_s2@event_target:hsr_corp_transfer_bank
@@ -2394,8 +2524,14 @@ hsr_corp_finish_carrier_transfer = {
                 save_global_event_target_as = hsr_corp_payer_s2@event_target:hsr_corp_new_hq
             }
         }
-        clear_global_event_target = hsr_corp_transfer_payer_s2@event_target:hsr_corp_transfer_bank
-        clear_global_event_target = hsr_corp_notified_controller_s2@this
+        if = {
+            limit = { exists = event_target:hsr_corp_transfer_payer_s2@event_target:hsr_corp_transfer_bank }
+            clear_global_event_target = hsr_corp_transfer_payer_s2@event_target:hsr_corp_transfer_bank
+        }
+        if = {
+            limit = { exists = event_target:hsr_corp_notified_controller_s2@this }
+            clear_global_event_target = hsr_corp_notified_controller_s2@this
+        }
         if = {
             limit = {
                 exists = event_target:hsr_corp_transfer_notified_controller_s2@event_target:hsr_corp_transfer_bank
@@ -2404,7 +2540,10 @@ hsr_corp_finish_carrier_transfer = {
                 save_global_event_target_as = hsr_corp_notified_controller_s2@event_target:hsr_corp_new_hq
             }
         }
-        clear_global_event_target = hsr_corp_transfer_notified_controller_s2@event_target:hsr_corp_transfer_bank
+        if = {
+            limit = { exists = event_target:hsr_corp_transfer_notified_controller_s2@event_target:hsr_corp_transfer_bank }
+            clear_global_event_target = hsr_corp_transfer_notified_controller_s2@event_target:hsr_corp_transfer_bank
+        }
         set_variable = {
             which = hsr_corp_s3_state
             value = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_state
@@ -2680,7 +2819,10 @@ hsr_corp_finish_carrier_transfer = {
                 days = event_target:hsr_corp_transfer_bank.hsr_corp_transfer_s3_aid_cd_days
             }
         }
-        clear_global_event_target = hsr_corp_founder_s3@this
+        if = {
+            limit = { exists = event_target:hsr_corp_founder_s3@this }
+            clear_global_event_target = hsr_corp_founder_s3@this
+        }
         if = {
             limit = {
                 exists = event_target:hsr_corp_transfer_founder_s3@event_target:hsr_corp_transfer_bank
@@ -2689,8 +2831,14 @@ hsr_corp_finish_carrier_transfer = {
                 save_global_event_target_as = hsr_corp_founder_s3@event_target:hsr_corp_new_hq
             }
         }
-        clear_global_event_target = hsr_corp_transfer_founder_s3@event_target:hsr_corp_transfer_bank
-        clear_global_event_target = hsr_corp_foreign_s3@this
+        if = {
+            limit = { exists = event_target:hsr_corp_transfer_founder_s3@event_target:hsr_corp_transfer_bank }
+            clear_global_event_target = hsr_corp_transfer_founder_s3@event_target:hsr_corp_transfer_bank
+        }
+        if = {
+            limit = { exists = event_target:hsr_corp_foreign_s3@this }
+            clear_global_event_target = hsr_corp_foreign_s3@this
+        }
         if = {
             limit = {
                 exists = event_target:hsr_corp_transfer_foreign_s3@event_target:hsr_corp_transfer_bank
@@ -2699,8 +2847,14 @@ hsr_corp_finish_carrier_transfer = {
                 save_global_event_target_as = hsr_corp_foreign_s3@event_target:hsr_corp_new_hq
             }
         }
-        clear_global_event_target = hsr_corp_transfer_foreign_s3@event_target:hsr_corp_transfer_bank
-        clear_global_event_target = hsr_corp_payer_s3@this
+        if = {
+            limit = { exists = event_target:hsr_corp_transfer_foreign_s3@event_target:hsr_corp_transfer_bank }
+            clear_global_event_target = hsr_corp_transfer_foreign_s3@event_target:hsr_corp_transfer_bank
+        }
+        if = {
+            limit = { exists = event_target:hsr_corp_payer_s3@this }
+            clear_global_event_target = hsr_corp_payer_s3@this
+        }
         if = {
             limit = {
                 exists = event_target:hsr_corp_transfer_payer_s3@event_target:hsr_corp_transfer_bank
@@ -2709,8 +2863,14 @@ hsr_corp_finish_carrier_transfer = {
                 save_global_event_target_as = hsr_corp_payer_s3@event_target:hsr_corp_new_hq
             }
         }
-        clear_global_event_target = hsr_corp_transfer_payer_s3@event_target:hsr_corp_transfer_bank
-        clear_global_event_target = hsr_corp_notified_controller_s3@this
+        if = {
+            limit = { exists = event_target:hsr_corp_transfer_payer_s3@event_target:hsr_corp_transfer_bank }
+            clear_global_event_target = hsr_corp_transfer_payer_s3@event_target:hsr_corp_transfer_bank
+        }
+        if = {
+            limit = { exists = event_target:hsr_corp_notified_controller_s3@this }
+            clear_global_event_target = hsr_corp_notified_controller_s3@this
+        }
         if = {
             limit = {
                 exists = event_target:hsr_corp_transfer_notified_controller_s3@event_target:hsr_corp_transfer_bank
@@ -2719,7 +2879,10 @@ hsr_corp_finish_carrier_transfer = {
                 save_global_event_target_as = hsr_corp_notified_controller_s3@event_target:hsr_corp_new_hq
             }
         }
-        clear_global_event_target = hsr_corp_transfer_notified_controller_s3@event_target:hsr_corp_transfer_bank
+        if = {
+            limit = { exists = event_target:hsr_corp_transfer_notified_controller_s3@event_target:hsr_corp_transfer_bank }
+            clear_global_event_target = hsr_corp_transfer_notified_controller_s3@event_target:hsr_corp_transfer_bank
+        }
         set_variable = { which = hsr_corp_selected value = 0 }
         set_variable = { which = hsr_corp_session_id value = 0 }
         hsr_corp_refresh_jobs = yes
@@ -2736,3 +2899,5 @@ hsr_corp_finish_carrier_transfer = {
         }
     }
 }
+
+

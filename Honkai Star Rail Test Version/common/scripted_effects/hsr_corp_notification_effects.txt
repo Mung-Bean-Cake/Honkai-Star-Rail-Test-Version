@@ -37,43 +37,55 @@ hsr_corp_notify_lifecycle = {
             hsr_corp_send_company_notice = { SLOT = $SLOT$ KIND = $KIND$ }
         }
     }
-    "event_target:hsr_corp_founder_s$SLOT$@this" = {
-        if = {
-            limit = {
-                NOT = {
-                    is_same_value = event_target:hsr_corp_notice_hq.owner
+    if = {
+        limit = { exists = event_target:hsr_corp_founder_s$SLOT$@this }
+        event_target:hsr_corp_founder_s$SLOT$@this = {
+            if = {
+                limit = {
+                    NOT = {
+                        is_same_value = event_target:hsr_corp_notice_hq.owner
+                    }
                 }
+                hsr_corp_send_company_notice = { SLOT = $SLOT$ KIND = $KIND$ }
             }
-            hsr_corp_send_company_notice = { SLOT = $SLOT$ KIND = $KIND$ }
         }
     }
-    "event_target:hsr_corp_foreign_s$SLOT$@this" = {
-        if = {
-            limit = {
-                NOT = {
-                    is_same_value = event_target:hsr_corp_notice_hq.owner
+    if = {
+        limit = { exists = event_target:hsr_corp_foreign_s$SLOT$@this }
+        event_target:hsr_corp_foreign_s$SLOT$@this = {
+            if = {
+                limit = {
+                    NOT = {
+                        is_same_value = event_target:hsr_corp_notice_hq.owner
+                    }
+                    OR = {
+                        NOT = { exists = event_target:hsr_corp_founder_s$SLOT$@event_target:hsr_corp_notice_hq }
+                        NOT = { is_same_value = event_target:hsr_corp_founder_s$SLOT$@event_target:hsr_corp_notice_hq }
+                    }
                 }
-                NOT = {
-                    is_same_value = "event_target:hsr_corp_founder_s$SLOT$@event_target:hsr_corp_notice_hq"
-                }
+                hsr_corp_send_company_notice = { SLOT = $SLOT$ KIND = $KIND$ }
             }
-            hsr_corp_send_company_notice = { SLOT = $SLOT$ KIND = $KIND$ }
         }
     }
-    "event_target:hsr_corp_notified_controller_s$SLOT$@this" = {
-        if = {
-            limit = {
-                NOT = {
-                    is_same_value = event_target:hsr_corp_notice_hq.owner
+    if = {
+        limit = { exists = event_target:hsr_corp_notified_controller_s$SLOT$@this }
+        event_target:hsr_corp_notified_controller_s$SLOT$@this = {
+            if = {
+                limit = {
+                    NOT = {
+                        is_same_value = event_target:hsr_corp_notice_hq.owner
+                    }
+                    OR = {
+                        NOT = { exists = event_target:hsr_corp_founder_s$SLOT$@event_target:hsr_corp_notice_hq }
+                        NOT = { is_same_value = event_target:hsr_corp_founder_s$SLOT$@event_target:hsr_corp_notice_hq }
+                    }
+                    OR = {
+                        NOT = { exists = event_target:hsr_corp_foreign_s$SLOT$@event_target:hsr_corp_notice_hq }
+                        NOT = { is_same_value = event_target:hsr_corp_foreign_s$SLOT$@event_target:hsr_corp_notice_hq }
+                    }
                 }
-                NOT = {
-                    is_same_value = "event_target:hsr_corp_founder_s$SLOT$@event_target:hsr_corp_notice_hq"
-                }
-                NOT = {
-                    is_same_value = "event_target:hsr_corp_foreign_s$SLOT$@event_target:hsr_corp_notice_hq"
-                }
+                hsr_corp_send_company_notice = { SLOT = $SLOT$ KIND = $KIND$ }
             }
-            hsr_corp_send_company_notice = { SLOT = $SLOT$ KIND = $KIND$ }
         }
     }
 }
@@ -89,9 +101,9 @@ hsr_corp_sync_control_notice = {
         save_event_target_as = hsr_corp_notice_hq
         if = {
             limit = {
-                exists = "event_target:hsr_corp_notified_controller_s$SLOT$@this"
+                exists = event_target:hsr_corp_notified_controller_s$SLOT$@this
             }
-            "event_target:hsr_corp_notified_controller_s$SLOT$@this" = {
+            event_target:hsr_corp_notified_controller_s$SLOT$@this = {
                 if = {
                     limit = {
                         NOT = {
@@ -105,7 +117,7 @@ hsr_corp_sync_control_notice = {
                 if = {
                     limit = {
                         NOT = {
-                            is_same_value = "event_target:hsr_corp_notified_controller_s$SLOT$@event_target:hsr_corp_notice_hq"
+                            is_same_value = event_target:hsr_corp_notified_controller_s$SLOT$@event_target:hsr_corp_notice_hq
                         }
                     }
                     hsr_corp_send_company_notice = { SLOT = $SLOT$ KIND = CONTROL_GAINED }
@@ -123,7 +135,7 @@ hsr_corp_sync_control_notice = {
         }
         set_variable = { which = hsr_corp_s$SLOT$_control_notice_initialized value = 1 }
         event_target:hsr_corp_controller = {
-            save_global_event_target_as = "hsr_corp_notified_controller_s$SLOT$@event_target:hsr_corp_notice_hq"
+            save_global_event_target_as = hsr_corp_notified_controller_s$SLOT$@event_target:hsr_corp_notice_hq
         }
     }
 }

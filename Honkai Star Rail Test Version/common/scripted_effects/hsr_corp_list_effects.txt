@@ -6,77 +6,98 @@ hsr_corp_build_portfolio = {
     hidden_effect = {
         save_event_target_as = hsr_corp_actor
         if = {
-            limit = {
-                NOT = {
-                    is_variable_set = hsr_corp_list_page
+            limit = { exists = event_target:hsr_corp_actor }
+            if = {
+                limit = {
+                    NOT = {
+                        is_variable_set = hsr_corp_list_page
+                    }
                 }
+                set_variable = { which = hsr_corp_list_page value = 0 }
             }
-            set_variable = { which = hsr_corp_list_page value = 0 }
-        }
-        if = {
-            limit = {
-                NOT = {
-                    is_variable_set = hsr_corp_list_mode
+            if = {
+                limit = {
+                    NOT = {
+                        is_variable_set = hsr_corp_list_mode
+                    }
                 }
+                set_variable = { which = hsr_corp_list_mode value = 0 }
             }
-            set_variable = { which = hsr_corp_list_mode value = 0 }
-        }
-        if = {
-            limit = {
-                NOT = {
-                    is_variable_set = hsr_corp_compact_half
+            if = {
+                limit = {
+                    NOT = {
+                        is_variable_set = hsr_corp_compact_half
+                    }
                 }
+                set_variable = { which = hsr_corp_compact_half value = 0 }
             }
-            set_variable = { which = hsr_corp_compact_half value = 0 }
-        }
-        hsr_corp_prepare_year = yes
-        set_variable = { which = hsr_corp_list_index value = 0 }
-        set_variable = { which = hsr_corp_portfolio_value value = 0 }
-        set_variable = { which = hsr_corp_portfolio_pnl value = 0 }
-        set_variable = { which = hsr_corp_portfolio_count value = 0 }
-        set_variable = { which = hsr_corp_portfolio_shares value = 0 }
-        set_variable = { which = hsr_corp_investable_count value = 0 }
-        set_variable = { which = hsr_corp_list_offset value = hsr_corp_list_page }
-        multiply_variable = { which = hsr_corp_list_offset value = 6 }
-        set_variable = { which = hsr_corp_list_next value = hsr_corp_list_offset }
-        change_variable = { which = hsr_corp_list_next value = 6 }
-        set_variable = { which = hsr_corp_row_1_id value = 0 }
-        clear_global_event_target = hsr_corp_row_1@this
-        set_variable = { which = hsr_corp_row_2_id value = 0 }
-        clear_global_event_target = hsr_corp_row_2@this
-        set_variable = { which = hsr_corp_row_3_id value = 0 }
-        clear_global_event_target = hsr_corp_row_3@this
-        set_variable = { which = hsr_corp_row_4_id value = 0 }
-        clear_global_event_target = hsr_corp_row_4@this
-        set_variable = { which = hsr_corp_row_5_id value = 0 }
-        clear_global_event_target = hsr_corp_row_5@this
-        set_variable = { which = hsr_corp_row_6_id value = 0 }
-        clear_global_event_target = hsr_corp_row_6@this
-        every_country = {
-            every_owned_colony = {
-                carrier = {
-                    if = {
-                        limit = {
-                            has_carrier_flag = hsr_corp_has_records
+            hsr_corp_prepare_year = yes
+            set_variable = { which = hsr_corp_list_index value = 0 }
+            set_variable = { which = hsr_corp_portfolio_value value = 0 }
+            set_variable = { which = hsr_corp_portfolio_pnl value = 0 }
+            set_variable = { which = hsr_corp_portfolio_count value = 0 }
+            set_variable = { which = hsr_corp_portfolio_shares value = 0 }
+            set_variable = { which = hsr_corp_investable_count value = 0 }
+            set_variable = { which = hsr_corp_list_offset value = hsr_corp_list_page }
+            multiply_variable = { which = hsr_corp_list_offset value = 6 }
+            set_variable = { which = hsr_corp_list_next value = hsr_corp_list_offset }
+            change_variable = { which = hsr_corp_list_next value = 6 }
+            set_variable = { which = hsr_corp_row_1_id value = 0 }
+            if = {
+                limit = { exists = event_target:hsr_corp_row_1@this }
+                clear_global_event_target = hsr_corp_row_1@this
+            }
+            set_variable = { which = hsr_corp_row_2_id value = 0 }
+            if = {
+                limit = { exists = event_target:hsr_corp_row_2@this }
+                clear_global_event_target = hsr_corp_row_2@this
+            }
+            set_variable = { which = hsr_corp_row_3_id value = 0 }
+            if = {
+                limit = { exists = event_target:hsr_corp_row_3@this }
+                clear_global_event_target = hsr_corp_row_3@this
+            }
+            set_variable = { which = hsr_corp_row_4_id value = 0 }
+            if = {
+                limit = { exists = event_target:hsr_corp_row_4@this }
+                clear_global_event_target = hsr_corp_row_4@this
+            }
+            set_variable = { which = hsr_corp_row_5_id value = 0 }
+            if = {
+                limit = { exists = event_target:hsr_corp_row_5@this }
+                clear_global_event_target = hsr_corp_row_5@this
+            }
+            set_variable = { which = hsr_corp_row_6_id value = 0 }
+            if = {
+                limit = { exists = event_target:hsr_corp_row_6@this }
+                clear_global_event_target = hsr_corp_row_6@this
+            }
+            every_country = {
+                every_owned_colony = {
+                    carrier = {
+                        if = {
+                            limit = {
+                                has_carrier_flag = hsr_corp_has_records
+                            }
+                            hsr_corp_consider_row = { SLOT = 1 }
+                            hsr_corp_consider_row = { SLOT = 2 }
+                            hsr_corp_consider_row = { SLOT = 3 }
                         }
-                        hsr_corp_consider_row = { SLOT = 1 }
-                        hsr_corp_consider_row = { SLOT = 2 }
-                        hsr_corp_consider_row = { SLOT = 3 }
                     }
                 }
             }
+            set_variable = { which = hsr_corp_list_total value = hsr_corp_list_index }
+            set_variable = { which = hsr_corp_compact_next value = hsr_corp_compact_half }
+            multiply_variable = { which = hsr_corp_compact_next value = 3 }
+            change_variable = { which = hsr_corp_compact_next value = hsr_corp_list_offset }
+            change_variable = { which = hsr_corp_compact_next value = 3 }
+            set_variable = { which = hsr_corp_compact_page value = hsr_corp_list_page }
+            multiply_variable = { which = hsr_corp_compact_page value = 2 }
+            change_variable = { which = hsr_corp_compact_page value = hsr_corp_compact_half }
+            change_variable = { which = hsr_corp_compact_page value = 1 }
+            set_variable = { which = hsr_corp_page_display value = hsr_corp_list_page }
+            change_variable = { which = hsr_corp_page_display value = 1 }
         }
-        set_variable = { which = hsr_corp_list_total value = hsr_corp_list_index }
-        set_variable = { which = hsr_corp_compact_next value = hsr_corp_compact_half }
-        multiply_variable = { which = hsr_corp_compact_next value = 3 }
-        change_variable = { which = hsr_corp_compact_next value = hsr_corp_list_offset }
-        change_variable = { which = hsr_corp_compact_next value = 3 }
-        set_variable = { which = hsr_corp_compact_page value = hsr_corp_list_page }
-        multiply_variable = { which = hsr_corp_compact_page value = 2 }
-        change_variable = { which = hsr_corp_compact_page value = hsr_corp_compact_half }
-        change_variable = { which = hsr_corp_compact_page value = 1 }
-        set_variable = { which = hsr_corp_page_display value = hsr_corp_list_page }
-        change_variable = { which = hsr_corp_page_display value = 1 }
     }
 }
 
@@ -86,8 +107,8 @@ hsr_corp_consider_row = {
     set_variable = { which = hsr_corp_row_basis value = 0 }
     if = {
         limit = {
-            exists = "event_target:hsr_corp_founder_s$SLOT$@this"
-            "event_target:hsr_corp_founder_s$SLOT$@this" = {
+            exists = event_target:hsr_corp_founder_s$SLOT$@this
+            event_target:hsr_corp_founder_s$SLOT$@this = {
                 is_same_value = event_target:hsr_corp_actor
             }
         }
@@ -96,8 +117,8 @@ hsr_corp_consider_row = {
     }
     if = {
         limit = {
-            exists = "event_target:hsr_corp_foreign_s$SLOT$@this"
-            "event_target:hsr_corp_foreign_s$SLOT$@this" = {
+            exists = event_target:hsr_corp_foreign_s$SLOT$@this
+            event_target:hsr_corp_foreign_s$SLOT$@this = {
                 is_same_value = event_target:hsr_corp_actor
             }
         }
@@ -232,7 +253,7 @@ hsr_corp_consider_row = {
 
 hsr_corp_store_row = {
     optimize_memory
-    save_global_event_target_as = "hsr_corp_row_$ROW$@event_target:hsr_corp_actor"
+    save_global_event_target_as = hsr_corp_row_$ROW$@event_target:hsr_corp_actor
     save_event_target_as = hsr_corp_row_hq_$ROW$
     event_target:hsr_corp_actor = {
         set_variable = { which = hsr_corp_row_$ROW$_slot value = $SLOT$ }
