@@ -2595,3 +2595,220 @@ country_event = {
         name = "path_country.26.a"
     }
 }
+carrier_event = {
+    id = path_country.30
+    is_triggered_only = yes
+    hide_window = yes
+    immediate = {
+        if = {
+            limit = {
+                has_observation_outpost = yes
+            }
+            observation_outpost_owner = {
+                country_event = { id = planet_destruction.1000 days = 1 }
+            }
+        }
+        if = {
+            limit = {
+                is_planet_class = pc_ai
+                NOT = { has_planet_flag = machine_lair }
+            }
+            set_carrier_flag = destroyed_by_colossus
+            set_carrier_flag = planet_cracked #doesn't matter
+            carrier_event = { id = crisis.2040 }
+        }
+        if = {
+            limit = {
+                is_planet_class = pc_ai
+                has_planet_flag = machine_lair
+            }
+            set_carrier_flag = destroyed_by_colossus
+            set_carrier_flag = planet_cracked
+            from.owner = { save_event_target_as = final_machine_world_destroyer }
+            stop_crisis_sound = yes
+            carrier_event = { id = crisis.2046 }
+        }
+        if = {
+            limit = {
+                exists = owner
+                owner = { is_country_type = swarm }
+            }
+            every_country = {
+                limit = { has_event_chain = "prethoryn_scourge_chain" }
+                add_event_chain_counter = {
+                    event_chain = "prethoryn_scourge_chain"
+                    counter = "infested_worlds"
+                    amount = -1
+                }
+                add_event_chain_counter = {
+                    event_chain = "prethoryn_scourge_chain"
+                    counter = "infested_worlds_cleansed"
+                    amount = 1
+                }
+            }
+        }
+        if = {
+            limit = {
+                exists = owner
+                owner = {
+                    NOT = { is_same_value = from.owner }
+                    OR = {
+                        is_country_type = default
+                        is_country_type = fallen_empire
+                        is_country_type = awakened_fallen_empire
+                    }
+                }
+            }
+            if = {
+                limit = {
+                    is_colony = yes
+                }
+                add_threat = { who = from.owner amount = 5 }
+                every_country = {
+                    limit = {
+                        NOR = {
+                            is_same_value = from.owner
+                            is_same_value = root.owner
+                            AND = {
+                                has_federation = yes
+                                is_in_federation_with = from.owner
+                            }
+                        }
+                        OR = {
+                            has_communications = from.owner
+                            has_communications = root.owner
+                        }
+                        OR = {
+                            AND = {
+                                has_federation = yes
+                                is_in_federation_with = root.owner
+                            }
+                            has_ai_personality = awakened_fallen_empire_xenophile
+                            AND = {
+                                is_country_type = default
+                                OR = {
+                                    is_egalitarian = yes
+                                    is_xenophile = yes
+                                }
+                            }
+                        }
+                    }
+                    if = {
+                        limit = { root = { is_colony = yes } }
+                        add_opinion_modifier = {
+                            modifier = opinion_toxified_a_world
+                            who = from.owner
+                        }
+                    }
+                }
+            }
+            owner = {
+                if = {
+                    limit = { root = { is_colony = yes } }
+                    add_opinion_modifier = {
+                        modifier = opinion_toxified_my_uninhabited_world
+                        who = from.owner
+                    }
+                }
+                else = {
+                    add_opinion_modifier = {
+                        modifier = opinion_toxified_my_world
+                        who = from.owner
+                    }
+                }
+                if = {
+                    limit = { NOT = { has_ethic = ethic_gestalt_consciousness } }
+                    add_modifier = {
+                        modifier = colossus_victim
+                        days = 10800 # 30 years
+                    }
+                }
+            }
+            if = {
+                limit = {
+                    exists = owner
+                    owner = { is_country_type = primitive }
+                }
+                # modifier for allies + those upset by genocide
+                every_country = {
+                    limit = {
+                        NOT = { is_same_value = from.owner }
+                        OR = {
+                            has_communications = from.owner
+                            has_communications = root.owner
+                        }
+                        OR = {
+                            has_ai_personality = awakened_fallen_empire_xenophile
+                            AND = {
+                                is_country_type = default
+                                NOR = {
+                                    is_xenophobe = yes
+                                    is_homicidal = yes
+                                    is_xenophile = yes
+                                }
+                            }
+                        }
+                    }
+                    add_opinion_modifier = {
+                        modifier = opinion_toxified_a_primitive_world
+                        who = from.owner
+                    }
+                }
+                every_country = {
+                    limit = {
+                        NOT = { is_same_value = from.owner }
+                        OR = {
+                            has_communications = from.owner
+                            has_communications = root.owner
+                        }
+                        OR = {
+                            has_ai_personality = awakened_fallen_empire_xenophile
+                            AND = {
+                                is_country_type = default
+                                is_xenophile = yes
+                            }
+                        }
+                    }
+                    add_opinion_modifier = {
+                        modifier = opinion_toxified_a_primitive_world_phile
+                        who = from.owner
+                    }
+                }
+            }
+        }
+        if = {
+            limit = {
+                exists = owner
+            }
+            owner = {
+                if = {
+                    limit = {
+                        is_at_war_with = from.fleet.owner
+                    }
+                    add_static_war_exhaustion = {
+                        attacker = from.fleet.owner
+                        location = root
+                        value_for_planet_destruction = 2.5
+                    }
+                }
+            }
+        }
+        destroy_colony = yes
+        if = {
+            limit = {
+                exists = orbital_defence
+            }
+            destroy_fleet = orbital_defence
+        }
+        remove_all_buildings = yes
+        change_pc = pc_asteroid
+        set_planet_size = 10
+        clear_deposits = yes
+        add_deposit = d_crystal_kraken_body_bombed
+        add_deposit = d_toxic_god_deitys_swarms
+        if = {
+            limit = { has_modifier = holy_planet }
+            remove_modifier = holy_planet
+        }
+    }
+}

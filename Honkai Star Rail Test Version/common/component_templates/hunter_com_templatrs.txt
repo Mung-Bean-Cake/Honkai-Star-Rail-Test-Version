@@ -226,6 +226,30 @@ utility_component_template = {
         }
     }
 }
+utility_component_template = {
+    key = "xz_power_core_suihuang"
+    size = medium
+    icon = "xz_power_core_suihuang"
+    icon_frame = 1
+    power = 7200
+    resources = {
+        category = ship_components
+        cost = { xundi = 240 }
+        upkeep = {
+            xundi = 2
+        }
+    }
+    component_set = "xz_power_core"
+    prerequisites = { tech_xz_power_core_suihuang }
+    show_tech_unlock_if = {}
+    ai_weight = {
+        weight = 4
+        modifier = {
+            has_origin = origin_Xianzhou
+            factor = 4
+        }
+    }
+}
 ######################################
 ###  推进器  dawn_thruster_components ###
 ######################################
@@ -555,6 +579,35 @@ utility_component_template = {
         }
     }
 }
+utility_component_template = {
+    key = "xz_HYPERDRIVE_liekong"
+    size = small
+    icon = "xz_HYPERDRIVE_liekong"
+    icon_frame = 1
+    power = -135
+    resources = {
+        category = ship_components
+        cost = { xundi = 180 }
+    }
+    ftl = yes
+    ship_modifier = {
+        ship_windup_mult = -0.40
+        ship_jumpdrive_cooldown_mult = -0.4
+        ship_tracking_add = 10
+        ship_evasion_add = 5
+        ship_shield_penetration_add = 0.15
+    }
+    component_set = "xz_ftl_components"
+    prerequisites = { tech_xz_HYPERDRIVE_liekong }
+    show_tech_unlock_if = { country_uses_bio_ships = no }
+    ai_weight = {
+        weight = 4
+        modifier = {
+            has_origin = origin_Xianzhou
+            factor = 4
+        }
+    }
+}
 ######################################
 ###  传感器  dawn_sensor_components ###
 ######################################
@@ -676,7 +729,7 @@ utility_component_template = {
     size = medium
     icon = "GFX_ship_part_sensor_2"
     icon_frame = 1
-    power = -80
+    power = -120
     resources = {
         category = ship_components
         cost = { xundi = 45 }
@@ -685,7 +738,7 @@ utility_component_template = {
     hyperlane_range = 3
     ship_modifier = {
         ship_tracking_add = 10
-        ship_fire_rate_mult = 0.3
+        ship_fire_rate_mult = 0.2
         ship_hull_add = 5000
     }
     component_set = "xz_sensor_components"
@@ -696,6 +749,34 @@ utility_component_template = {
         modifier = {
             has_origin = origin_Xianzhou
             factor = 3
+        }
+    }
+}
+utility_component_template = {
+    key = "xz_sensor_tianmu"
+    size = medium
+    icon = "xz_sensor_tianmu"
+    icon_frame = 1
+    power = -200
+    resources = {
+        category = ship_components
+        cost = { xundi = 120 }
+    }
+    sensor_range = 3
+    hyperlane_range = 4
+    ship_modifier = {
+        ship_tracking_add = 15
+        ship_fire_rate_mult = 0.25
+        ship_hull_add = 24000
+    }
+    component_set = "xz_sensor_components"
+    prerequisites = { tech_xz_sensor_tianmu }
+    show_tech_unlock_if = { country_uses_bio_ships = no }
+    ai_weight = {
+        weight = 4
+        modifier = {
+            has_origin = origin_Xianzhou
+            factor = 4
         }
     }
 }
@@ -1369,6 +1450,7 @@ utility_component_template = {
         }
     }
 }
+#护甲/护盾
 #丰饶//裂爆丰饶盾
 utility_component_template = {
     key = "fengrao_burst_shield_small"
@@ -1477,6 +1559,77 @@ utility_component_template = {
     show_tech_unlock_if = { country_uses_bio_ships = no }
     ai_weight = { weight = 3 }
 }
+#巡猎//青丘瓷甲
+utility_component_template = {
+    key = "qingqiu_armor_small"
+    size = small
+    icon = "qingqiu_armor"
+    icon_frame = 1
+    power = 0
+    resources = {
+        category = ship_components
+        cost = { 
+            xundi = 20
+        }
+        upkeep = {
+        }
+    }
+    component_set = "qingqiu_armor"
+    modifier = {
+        ship_armor_hardening_add = 0.3
+        ship_armor_add = 5000
+    }
+    prerequisites = { tech_qingqiu_armor }
+    show_tech_unlock_if = { country_uses_bio_ships = no }
+    ai_weight = { weight = 2 }
+}
+utility_component_template = {
+    key = "qingqiu_armor_medium"
+    size = medium
+    icon = "qingqiu_armor"
+    icon_frame = 1
+    power = 0
+    resources = {
+        category = ship_components
+        cost = { 
+            xundi = 50
+        }
+        upkeep = {
+        }
+    }
+    component_set = "qingqiu_armor"
+    modifier = {
+        ship_armor_hardening_add = 0.75
+        ship_armor_add = 12000
+    }
+    prerequisites = { tech_qingqiu_armor }
+    show_tech_unlock_if = { country_uses_bio_ships = no }
+    ai_weight = { weight = 2 }
+}
+utility_component_template = {
+    key = "qingqiu_armor_large"
+    size = large
+    icon = "qingqiu_armor"
+    icon_frame = 1
+    power = 0
+    resources = {
+        category = ship_components
+        cost = { 
+            xundi = 120
+        }
+        upkeep = {
+        }
+    }
+    component_set = "qingqiu_armor"
+    modifier = {
+        ship_armor_hardening_add = 1.4
+        ship_armor_add = 20000
+    }
+    prerequisites = { tech_qingqiu_armor }
+    show_tech_unlock_if = { country_uses_bio_ships = no }
+    ai_weight = { weight = 3 }
+}
+#舰船武器
 #阿哈舰载机
 strike_craft_component_template = {
     key = "aha_strike_craft"
@@ -1532,9 +1685,6 @@ weapon_component_template = {
     icon_frame = 1
     type = missile
     firing_arc = 180.0
-    show_tech_unlock_if = {
-        has_origin = origin_StellaronHunter
-    }
     prerequisites = { tech_aha_missile_1 }
     power = -80
     damage = { min = 360 max = 820 }
@@ -1577,9 +1727,6 @@ weapon_component_template = {
     icon_frame = 1
     type = missile
     firing_arc = 270.0
-    show_tech_unlock_if = {
-        has_origin = origin_StellaronHunter
-    }
     prerequisites = { tech_aha_missile_research_aoe }
     power = -180
     damage = { min = 560 max = 1080 }
@@ -1626,9 +1773,6 @@ weapon_component_template = {
     firing_arc = 270.0
     potential = {
     }
-    show_tech_unlock_if = {
-        has_origin = origin_StellaronHunter
-    }
     prerequisites = { tech_aha_missile_research_chain }
     power = -220
     damage = { min = 560 max = 1080 }
@@ -1673,9 +1817,6 @@ weapon_component_template = {
     icon = "xz_basic_kinetic"
     icon_frame = 1
     type = instant
-    show_tech_unlock_if = {
-        has_origin = origin_StellaronHunter
-    }
     prerequisites = { tech_xz_kanxingqian }
     power = -40
     damage = { min = 150 max = 240 }
@@ -1712,9 +1853,6 @@ weapon_component_template = {
     icon = "xz_basic_kinetic"
     icon_frame = 1
     type = instant
-    show_tech_unlock_if = {
-        has_origin = origin_StellaronHunter
-    }
     prerequisites = { tech_xz_kanxingqian }
     power = -60
     damage = { min = 150 max = 240 }
@@ -1751,9 +1889,6 @@ weapon_component_template = {
     icon = "xz_basic_kinetic"
     icon_frame = 1
     type = instant
-    show_tech_unlock_if = {
-        has_origin = origin_StellaronHunter
-    }
     prerequisites = { tech_xz_kanxingqian_large }
     power = -80
     damage = { min = 160 max = 240 }
@@ -1789,9 +1924,6 @@ weapon_component_template = {
     icon = "xz_basic_energy"
     icon_frame = 1
     type = instant
-    show_tech_unlock_if = {
-        has_origin = origin_StellaronHunter
-    }
     prerequisites = { tech_xz_lianshijian }
     power = -90
     damage = { min = 180 max = 275 }
@@ -1827,9 +1959,6 @@ weapon_component_template = {
     icon = "xz_basic_energy"
     icon_frame = 1
     type = instant
-    show_tech_unlock_if = {
-        has_origin = origin_StellaronHunter
-    }
     prerequisites = { tech_xz_lianshijian }
     power = -120
     damage = { min = 180 max = 275 }
@@ -1865,9 +1994,6 @@ weapon_component_template = {
     icon = "xz_large_energy"
     icon_frame = 1
     type = instant
-    show_tech_unlock_if = {
-        has_origin = origin_StellaronHunter
-    }
     prerequisites = { tech_xz_chihuonu }
     power = -140
     damage = { min = 120 max = 320 }
@@ -1904,9 +2030,6 @@ weapon_component_template = {
     icon = "xz_large_energy"
     icon_frame = 1
     type = instant
-    show_tech_unlock_if = {
-        has_origin = origin_StellaronHunter
-    }
     prerequisites = { tech_xz_chihuonu }
     power = -220
     damage = { min = 120 max = 480 }
@@ -1943,9 +2066,6 @@ weapon_component_template = {
     type = instant
     icon = "xz_thunder_crossbow"
     icon_frame = 1
-    show_tech_unlock_if = {
-        has_origin = origin_StellaronHunter
-    }
     prerequisites = { tech_xz_thunder_crossbow }
     power = -200   
     damage = { min = 120 max = 200 }
@@ -1983,9 +2103,6 @@ weapon_component_template = {
     type = instant
     icon = "xz_thunder_crossbow"
     icon_frame = 1
-    show_tech_unlock_if = {
-        has_origin = origin_StellaronHunter
-    }
     prerequisites = { tech_xz_thunder_crossbow_titan }
     power = -600   
     damage = { min = 750 max = 1200 }
@@ -2027,13 +2144,10 @@ weapon_component_template = {
     type = instant
     icon = "xz_guanxing_ballista"
     icon_frame = 1
-    show_tech_unlock_if = {
-        has_origin = origin_StellaronHunter
-    }
     prerequisites = { tech_xz_guanxing_ballista }
     power = -320
-    damage = { min = 90 max = 270 }
-    windup = { min = 4.5 max = 9 }
+    damage = { min = 160 max = 330 }
+    windup = { min = 5 max = 11 }
     total_fire_time = 5
     min_range = 25
     range = 125
@@ -2060,12 +2174,86 @@ weapon_component_template = {
         }
     }
 }
+weapon_component_template = {
+    key = "xz_light_flowing"
+    size = extra_large
+    type = instant
+    icon = "xz_light_flowing"
+    icon_frame = 1
+    prerequisites = { tech_xz_light_flowing }
+    power = -480
+    damage = { min = 240 max = 1000 }
+    windup = { min = 5 max = 7 }
+    total_fire_time = 8
+    min_range = 15
+    range = 80
+    accuracy = 0.4
+    tracking = 0.4
+    shield_damage = 7
+    hull_damage = 2.7
+    armor_penetration = 9
+    armor_damage = 5.6
+    chain_count = 12
+    chain_range = 15
+    chain_damage = 1400
+    component_set = "xz_light_flowing"
+    projectile_gfx = particle_lance
+    tags = { weapon_type_energy }
+    ai_tags = { weapon_type_energy }
+    ai_weight = { weight = 5 }
+    resources = {
+        category = ship_components
+        cost = {
+            xundi = 320
+        }
+        upkeep = {
+        }
+    }
+}
+weapon_component_template = {
+    key = "xz_magic_sword_floating_array"
+    size = extra_large
+    type = instant
+    icon = "xz_magic_sword_floating_array"
+    icon_frame = 1
+    prerequisites = { tech_xz_magic_sword_floating_array }
+    power = -420
+    damage = { min = 360 max = 540 }
+    windup = { min = 4 max = 12 }
+    total_fire_time = 6
+    min_range = 45
+    range = 150
+    accuracy = 0.7
+    tracking = 0.75
+    shield_damage = 4.2
+    shield_penetration = 6
+    hull_damage = 2
+    armor_damage = 7.2
+    armor_penetration = 12
+    chain_count = 3
+    chain_range = 10
+    chain_damage = 960
+    component_set = "xz_magic_sword_floating_array"
+    projectile_gfx = particle_lance
+    tags = { weapon_type_energy }
+    ai_tags = { weapon_type_energy }
+    ai_weight = { weight = 5 }
+    resources = {
+        category = ship_components
+        cost = {
+            xundi = 500
+        }
+        upkeep = {
+        }
+    }
+}
+#舰船光环
+#丰饶盾杀光环
 utility_component_template = {
     key = "shield_killer_fengrao"
-    size = medium
     icon = "shield_killer_fengrao"
     icon_frame = 1
-    power = -200
+    power = -300
     component_set = "path_aura_components"
     class_restriction = { shipclass_military shipclass_transport shipclass_military_special shipclass_starbase }
     hostile_aura = {
@@ -2100,12 +2288,12 @@ utility_component_template = {
     ai_weight = { weight = 3 }
     prerequisites = { tech_fengrao_burst_shield_extra }
 }
+#丰饶能量坍缩光环
 utility_component_template = {
     key = "energy_killer_fengrao"
-    size = medium
     icon = "energy_killer_fengrao"
     icon_frame = 1
-    power = -200
+    power = -420
     component_set = "path_aura_components"
     class_restriction = { shipclass_military shipclass_transport shipclass_military_special shipclass_starbase }
     hostile_aura = {
@@ -2140,12 +2328,12 @@ utility_component_template = {
     ai_weight = { weight = 3 }
     prerequisites = { tech_fengrao_burst_shield_extra }
 }
+#丰饶疗愈光环
 utility_component_template = {
     key = "treatment_fengrao"
-    size = medium
     icon = "treatment_fengrao"
     icon_frame = 1
-    power = -200
+    power = -640
     component_set = "path_aura_components"
     class_restriction = { shipclass_military shipclass_transport shipclass_military_special shipclass_starbase }
     friendly_aura = {
@@ -2176,4 +2364,119 @@ utility_component_template = {
     }
     ai_weight = { weight = 3 }
     prerequisites = { tech_fengrao_burst_shield_extra }
+}
+#巡猎指引光环
+utility_component_template = {
+    key = "xunlie_guide"
+    icon = "xunlie_guide"
+    icon_frame = 1
+    power = -400
+    component_set = "path_aura_components"
+    class_restriction = { shipclass_military shipclass_transport shipclass_military_special shipclass_starbase }
+    friendly_aura = {
+        name = "xunlie_guide"
+        system_wide = yes
+        stack_info = {
+            id = xunlie_guide
+            priority = 1
+        }
+        modifier = {
+            ship_armor_damage_mult = 2.4
+            ship_tracking_add = 20
+            ship_armor_penetration_add = 5
+        }
+        graphics = {
+            area_effect = {
+                entity = "circle_area_entity"
+                dynamic_scale = yes
+            }
+            ship_effect = {
+                entity = "ship_aura_negative_entity"
+                dynamic_scale = no
+            }
+        }
+    }
+    ai_weight = { weight = 5 }
+    prerequisites = { tech_xunlie_guide }
+}
+#云骑战阵光环
+utility_component_template = {
+    key = "xunlie_cloud_zhanzhen"
+    icon = "xunlie_cloud_zhanzhen"
+    icon_frame = 1
+    power = -750
+    component_set = "path_aura_components"
+    class_restriction = { shipclass_military shipclass_transport shipclass_military_special shipclass_starbase }
+    friendly_aura = {
+        name = "xunlie_cloud_zhanzhen"
+        system_wide = yes
+        stack_info = {
+            id = xunlie_cloud_zhanzhen
+            priority = 1
+        }
+        modifier = {
+            ship_shield_damage_mult = 4.8
+            ship_fire_rate_mult = 0.25
+            ship_accuracy_add = 10
+            ship_shield_penetration_add = 9.6
+        }
+        graphics = {
+            area_effect = {
+                entity = "circle_area_entity"
+                dynamic_scale = yes
+            }
+            ship_effect = {
+                entity = "ship_aura_negative_entity"
+                dynamic_scale = no
+            }
+        }
+    }
+    ai_weight = { weight = 5 }
+    prerequisites = { tech_xunlie_cloud_zhanzhen }
+}
+#A槽配件
+utility_component_template = {
+    key = "xz_kanyun_focus"
+    size = aux
+    icon = "xz_kanyun_focus"
+    icon_frame = 1
+    power = -80
+    resources = {
+        category = ship_components
+        cost = {
+            xundi = 100
+        }
+    }
+    ship_modifier = {
+        ship_accuracy_add = 10
+        ship_tracking_add = 15
+        ship_weapon_range_mult = 0.05
+    }
+    prerequisites = { tech_xz_kanyun_focus }
+    component_set = "xz_kanyun_focus"
+    ai_weight = {
+        weight = 15
+        modifier = {
+            factor = 4
+            is_preferred_weapons = weapon_type_kinetic
+        }
+    }
+}
+#巨像武器
+weapon_component_template = {
+    key = "xunlie_zhuminghuo"
+    size = planet_killer
+    type = planet_killer
+    use_ship_main_target = no
+    icon = xunlie_zhuminghuo
+    icon_frame = 1
+    potential = {
+        is_ship_size = xunlie_colossus
+    }
+    power = -6000
+    windup = 90
+    total_fire_time = 60
+    component_set = "xunlie_zhuminghuo"
+    planet_destruction_gfx = "planet_toxifier_gfx"
+    prerequisites = { tech_xunlie_zhuminghuo }
 }
