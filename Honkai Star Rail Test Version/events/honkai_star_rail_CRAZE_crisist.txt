@@ -208,7 +208,7 @@ country_event = {
 			progress = 0.1
 		}
 		enable_special_project = {
-			name = the_tantao_power
+			name = the_tantao_power_1
 			location = event_target:craze_planet_1
 			owner = root
 		}
@@ -263,6 +263,15 @@ country_event = {
 	desc = craze.10_desc
 	picture = GFX_evt_astral_rift_rockworms_2
 	is_triggered_only = yes
+
+	trigger = {
+		owner = {
+			resource_stockpile_compare = {
+				resource = the_power_of_wish
+				value = 440
+			}
+		}
+	}
 
 	immediate = {	
 		create_country = {
@@ -402,7 +411,12 @@ country_event = {
 			change_variable = { which = tz_menp_1_test_2_defeated_count value = 1 }
 			if = {
 				limit = { check_variable = { which = tz_menp_1_test_2_defeated_count value >= 3 }  NOT = { has_country_flag = crisis_reward_given_flag } }
-				country_event = { id = craze.13 days = 1 } 
+				
+				enable_special_project = {
+					name = tz_menp_1_test_2_project
+					owner = root
+					location = capital_scope
+				}
 			}
         }
 	}   
@@ -410,15 +424,112 @@ country_event = {
 
 country_event = {
     id = craze.13
-    title = "craze.13.name"
-    desc = "craze.13.desc"
-    picture = GFX_evt_ship_in_orbit 
+    title = "craze.13_title"
+    desc = "craze.13_desc"
+	picture = GFX_evt_mysterious_signal
     is_triggered_only = yes
 
     option = {
-        name = craze.13_op_1
-		set_country_flag = achieve_menp_1_test_2
+        name = "craze.13_op_1"        
     }
+	option = {
+		set_country_flag = achieve_menp_1_test_2
+        name = "craze.13_op_2"
+		enable_special_project = {
+			name = the_tantao_power_2
+			owner = root
+			location = capital_scope
+		} 
+    }
+}
+#天灾
+#2-3考验
+country_event = {
+	id = craze.10
+	title = craze.10_title
+	desc = craze.10_desc
+	picture = GFX_evt_astral_rift_rockworms_2
+	is_triggered_only = yes
+
+	trigger = {
+		owner = {
+			resource_stockpile_compare = {
+				resource = the_power_of_wish
+				value = 440
+			}
+		}
+	}
+
+	immediate = {	
+		create_country = {
+            name = "NAME_tz_menp_1_test_2" 
+            species = from
+            authority = auth_imperial
+            ethos = {
+                ethic = ethic_gestalt_consciousness
+            }
+            type = "Hostile_mid_crisis_country"
+            name_list = "DOT_SR_HUMAN1"
+            flag = random
+
+			effect = {
+				save_global_event_target_as = NAME_tz_menp_1_test_2
+			}
+		}
+
+
+		random_system = {
+			limit = {
+				owner = {
+					is_ai = no
+					has_origin = origin_erxiangleyuan
+				}
+			    has_planet_class = pc_erxiangleyuan
+			}
+			random_system = {
+				limit = {
+					distance = {
+					    source = event_target:erxiangleyuan_system
+					    min_jumps = 4
+					    max_jumps = 9
+				}
+				}
+				while = {
+					count= 3
+				create_fleet = {
+					effect = {
+						set_fleet_flag = NAME_tz_menp_1_test_2
+						set_owner = event_target:NAME_tz_menp_1_test_2
+						while = {
+							count = 20
+							create_ship = {
+								name = random
+								design = tantao_peitai_ship_design
+								graphical_culture = humanoid_01
+							}
+						}
+						fleet_event = { id = craze.11 }
+						set_location = {
+							target = prev
+							distance = 45
+							angle = random
+						}
+					}				
+				}
+				}
+				
+				
+			}			
+		}
+	}
+
+	option = {
+		name = craze.10_op_1
+		set_variable = { 
+			which = tz_menp_1_test_2_defeated_count 
+			value = 0 
+		}
+	}
 }
 #——————————天灾目标
 #建造节点
@@ -468,4 +579,60 @@ country_event = {
 			remove_country_flag = decision_craze_party_3
 		}
 	}
+}
+#击毁船
+country_event = {
+    id = craze.1002
+    hide_window = yes
+    is_triggered_only = yes
+
+    trigger = {
+        # 确认攻击方是玩家
+        from = { 
+			is_ai = no  
+		    has_origin = origin_erxiangleyuan 
+			has_country_flag = achieve_menp_party_level_2
+		}
+        # 确认被摧毁的舰船存在
+        exists = fromfrom
+    }
+
+    immediate = {
+        # 切换到玩家国家作用域
+        from = {
+			set_variable = {
+				which = crisobj_destroy_fleet_points
+				value = 0
+			}
+
+            # 判定船型并给予额外点数
+			if = {
+                limit = { fromfrom = { is_ship_size = ark_ship } } # 方舟
+                change_variable = { which = crisobj_destroy_fleet_points value = 200 }
+            }
+			if = {
+                limit = { fromfrom = { is_ship_size = juggernaut } } # 主宰
+                change_variable = { which = crisobj_destroy_fleet_points value = 100 }
+            }
+            if = {
+                limit = { fromfrom = { is_ship_size = colossus } } # 巨像
+                change_variable = { which = crisobj_destroy_fleet_points value = 50 }
+            }
+            else_if = {
+                limit = { fromfrom = { is_ship_size = titan } } # 泰坦
+                change_variable = { which = crisobj_destroy_fleet_points value = 20 }
+            }
+            else_if = {
+                limit = { fromfrom = { is_ship_size = battleship } } # 战列舰
+                change_variable = { which = crisobj_destroy_fleet_points value = 5 }
+            }
+            else_if = {
+				limit = { fromfrom = { is_ship_size = battleship } }
+                change_variable = { which = crisobj_destroy_fleet_points value = 1 } # 基础点数
+            }
+
+		
+			owner = {complete_crisis_objective = crisobj_destroy_fleet}
+        }
+    }
 }

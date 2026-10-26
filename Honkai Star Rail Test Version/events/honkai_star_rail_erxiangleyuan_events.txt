@@ -150,6 +150,11 @@ country_event = {
 				change_variable = {which = planet_huanyu_pleasure_1 value = 1}
 				change_variable = {which = planet_huanyu_pleasure_2 value = 100}
 			}
+			if = {
+				limit = {check_variable = {which = planet_huanyu_pleasure value < planet_huanyu_pleasure_2}}
+				change_variable = {which = planet_huanyu_pleasure_1 value = -1}
+				change_variable = {which = planet_huanyu_pleasure_2 value = -100}
+			}
 		}
 		
 		export_resource_stockpile_to_variable = {
@@ -159,6 +164,24 @@ country_event = {
 		export_resource_stockpile_to_variable = {
 			resource = huanyu_pleasure
 			variable = huanyu_pleasure
+		}
+		if = {
+			limit = {owner = {has_ascension_perk = ap_the_craze_crisis}}
+			export_resource_stockpile_to_variable = {
+			resource = the_power_of_wish
+			variable = the_power_of_wish
+			
+		}
+		    if = {
+				limit = {check_variable = {which = the_power_of_wish value >= the_power_of_wish_2}}
+				change_variable = {which = the_power_of_wish_1 value = 1}
+				change_variable = {which = the_power_of_wish_2 value = 100}
+			}
+			if = {
+				limit = {check_variable = {which = the_power_of_wish value < the_power_of_wish_2}}
+				change_variable = {which = the_power_of_wish_1 value = -1}
+				change_variable = {which = the_power_of_wish_2 value = -100}
+			}
 		}
 	}
 }
