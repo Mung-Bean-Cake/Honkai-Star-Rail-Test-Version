@@ -1648,22 +1648,22 @@ strike_craft_component_template = {
     }
     potential = {
     }
-    count = 32
+    count = 24
     regeneration_per_day = 4
-    launch_time = 8
-    damage = { min = 28 max = 42 }
+    launch_time = 9
+    damage = { min = 28 max = 44 }
     cooldown = 16
-    range = 40
-    engagement_range = 180
+    range = 100
+    engagement_range = 60
     accuracy = 0.5
-    tracking = 0.90
+    tracking = 0.70
     health = 45
     armor = 20
     shield = 30
     evasion = 0.20
-    speed = 960
-    rotation_speed = 0.5
-    acceleration = 1
+    speed = 720
+    rotation_speed = 0.45
+    acceleration = 0.9
     shield_penetration = 4
     hull_damage = 1.5
     armor_damage = 3
@@ -2182,8 +2182,8 @@ weapon_component_template = {
     icon_frame = 1
     prerequisites = { tech_xz_light_flowing }
     power = -480
-    damage = { min = 240 max = 1000 }
-    windup = { min = 5 max = 7 }
+    damage = { min = 240 max = 980 }
+    windup = { min = 5.6 max = 7.2 }
     total_fire_time = 8
     min_range = 15
     range = 80
@@ -2212,7 +2212,7 @@ weapon_component_template = {
 }
 weapon_component_template = {
     key = "xz_magic_sword_floating_array"
-    size = extra_large
+    size = titanic
     type = instant
     icon = "xz_magic_sword_floating_array"
     icon_frame = 1
@@ -2242,6 +2242,137 @@ weapon_component_template = {
         category = ship_components
         cost = {
             xundi = 500
+        }
+        upkeep = {
+        }
+    }
+}
+#蜂群孢子巢
+strike_craft_component_template = {
+    key = "bee_home_craft"
+    size = large
+    entity = "bomber_entity"
+    weapon_type = point_defence
+    projectile_gfx = "scout_laser_1"
+    power = -80
+    potential = {
+    }
+    count = 16
+    regeneration_per_day = 8
+    launch_time = 6
+    damage = { min = 36 max = 64 }
+    cooldown = 10
+    range = 80
+    engagement_range = 40
+    accuracy = 0.7
+    tracking = 0.60
+    health = 90
+    armor = 60
+    shield = 0
+    evasion = 0.35
+    speed = 920
+    rotation_speed = 0.5
+    acceleration = 1
+    shield_penetration = 2
+    hull_damage = 2.2
+    armor_damage = 3.6
+    ship_behavior = "fighters_behavior"
+    icon = "bee_home_craft"
+    icon_frame = 1
+    component_set = "bee_home_craft"
+    tags = { weapon_type_strike_craft }
+    ai_tags = { weapon_role_point_defense carrier }
+    point_defence_targets = { "strike_craft" }
+    prerequisites = { tech_bee_home_craft }
+    ai_weight = { weight = 5 }
+    resources = {
+        category = ship_components
+        cost = {
+            xundi = 50
+        }
+        upkeep = {
+        }
+    }
+}
+#孢丝缠结炮
+weapon_component_template = {
+    key = "bee_baosi"
+    size = point_defence
+    type = point_defence
+    icon = "bee_baosi"
+    icon_frame = 1
+    component_set = "bee_baosi"
+    projectile_gfx = "barb_battery_1"
+    power = -30
+    damage = { min = 8 max = 14 }
+    total_fire_time = 3
+    range = 60
+    accuracy = 0.75
+    tracking = 0.7
+    hull_damage = 1.50
+    shield_damage = 1.60
+    armor_damage = 0.55
+    shield_penetration = 0.4
+    tags = {
+        weapon_type_point_defense
+        weapon_type_kinetic
+    }
+    ai_tags = {
+        weapon_role_point_defense
+        screen
+        screen_stealth
+    }
+    point_defence_targets = { "missile" "strike_craft" }
+    prerequisites = { "tech_bee_baosi" }
+    ai_weight = {
+        weight = 5
+    }
+    resources = {
+        category = ship_components
+        cost = {
+            xundi = 30
+        }
+        upkeep = {
+        }
+    }
+}
+#子囊裂殖器
+weapon_component_template = {
+    key = "bee_zinang"
+    size = point_defence
+    type = point_defence
+    icon = "bee_zinang"
+    icon_frame = 1
+    component_set = "bee_zinang"
+    projectile_gfx = "barb_battery_1"
+    power = -30
+    damage = { min = 10 max = 21 }
+    total_fire_time = 3.5
+    range = 60
+    accuracy = 0.85
+    tracking = 0.75
+    hull_damage = 1.80
+    shield_damage = 1.40
+    armor_damage = 0.8
+    armor_penetration = 0.7
+    tags = {
+        weapon_type_point_defense
+        weapon_type_kinetic
+    }
+    ai_tags = {
+        weapon_role_point_defense
+        screen
+        screen_stealth
+    }
+    point_defence_targets = { "missile" "strike_craft" }
+    prerequisites = { "tech_bee_zinang" }
+    ai_weight = {
+        weight = 5
+    }
+    resources = {
+        category = ship_components
+        cost = {
+            xundi = 50
         }
         upkeep = {
         }

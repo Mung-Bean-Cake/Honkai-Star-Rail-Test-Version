@@ -2812,3 +2812,106 @@ carrier_event = {
         }
     }
 }
+country_event = {
+    id = path_country.31
+    hide_window = yes
+    is_triggered_only = yes
+    trigger = {
+        OR = {
+            has_origin = origin_StellaronHunter
+            has_origin = origin_Xianzhou
+        }
+    }
+    immediate = {
+        set_variable = { which = breeding_focus value = 1 }
+        every_owned_ship = {
+            limit = { is_ship_size = muchao_fanyu }
+            add_modifier = {
+                modifier = breeding_focus_modifier
+                days = -1
+            }
+        }
+    }
+}
+country_event = {
+    id = path_country.32
+    hide_window = yes
+    is_triggered_only = yes
+    trigger = {
+        OR = {
+            has_origin = origin_StellaronHunter
+            has_origin = origin_Xianzhou
+        }
+    }
+    immediate = {
+        set_variable = { which = breeding_focus value = 0 }
+        every_owned_ship = {
+            limit = { is_ship_size = muchao_fanyu }
+            remove_modifier = breeding_focus_modifier
+        }
+        add_resource = {
+            xundi = -50
+        }
+    }
+}
+country_event = {
+    id = path_country.33
+    hide_window = yes
+    is_triggered_only = yes
+    trigger = {
+        OR = {
+            has_origin = origin_StellaronHunter
+            has_origin = origin_Xianzhou
+        }
+        any_owned_ship = {
+            is_ship_size = muchao_fanyu
+        }
+    }
+    immediate = {
+        if = {
+            limit = { NOT = { is_variable_set = breeding_spawn_timer } }
+            set_variable = { which = breeding_spawn_timer value = 0 }
+        }
+        change_variable = { which = breeding_spawn_timer value = 1 }
+        if = {
+            limit = { check_variable = { which = breeding_spawn_timer value >= 6 } }
+            set_variable = { which = breeding_spawn_timer value = 0 }
+            every_owned_ship = {
+                limit = {
+                    is_ship_size = muchao_fanyu
+                }
+                save_event_target_as = muchao_fanyu_position
+                solar_system = {
+                    create_fleet = {
+                        name = "蜂巢星槎"
+                        effect = {
+                            if = {
+                                limit = { root = {
+                                    check_variable = { which = breeding_focus value = 1 }  
+                                } }
+                                while = {
+                                    count = 3
+                                    create_ship = {
+                                        design = xz_xingcha_bee
+                                        graphical_culture = owner
+                                    }
+                                }
+                                set_fleet_stance = aggressive
+                                set_location = event_target:muchao_fanyu_position
+                            }
+                            else = {
+                                create_ship = {
+                                    design = xz_xingcha_bee
+                                    graphical_culture = owner
+                                }
+                                set_fleet_stance = aggressive
+                                set_location = event_target:muchao_fanyu_position
+                            }
+                            set_owner = root
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

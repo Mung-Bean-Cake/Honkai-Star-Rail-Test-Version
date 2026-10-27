@@ -1,5 +1,6 @@
 yuhuang_crisis_difficulty_toggle = {
 	length = 0
+	icon = GFX_edict_type_policy
 	edict_cap_usage = 0
 	resources = {
 		category = edicts
@@ -50,5 +51,41 @@ yuhuang_crisis_difficulty_toggle = {
 	}
 	ai_weight = {
 		weight = 0
+	}
+}
+breeding_focus = {
+	length = -1
+	icon = GFX_edict_type_policy
+	edict_cap_usage = 0
+	potential = {
+		any_owned_ship = {
+			is_ship_size = muchao_fanyu
+		}
+	}
+	allow = {
+		OR = {
+			has_origin = origin_StellaronHunter
+			has_origin = origin_Xianzhou
+		}
+	}
+	effect = {
+		if = {
+			limit = {
+				check_variable = { which = breeding_focus value = 1 }  
+			}
+			custom_tooltip = edict_breeding_focus_on
+		}		
+		else_if = {
+			limit = {
+				check_variable = { which = breeding_focus value = 0 }  
+			}
+			custom_tooltip = edict_breeding_focus_off
+		}
+		hidden_effect = {
+			country_event = { id = path_country.31 }
+		}
+	}
+	on_disabled = {
+		country_event = { id = path_country.32 }
 	}
 }
