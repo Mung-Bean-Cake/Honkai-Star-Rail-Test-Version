@@ -24,6 +24,13 @@ ap_xunlie_hunt = {
 				has_valid_civic = civic_hive_familiar_face
 			}
 		}
+		NOT = {
+			has_ascension_perk = ap_wings_of_stars
+		}
+		custom_tooltip = {
+			fail_text = "not_wings_of_stars"
+			is_subject = no
+		}
 	}
 	on_enabled = {
 		add_research_option = tech_xz_thunder_crossbow_titan
@@ -39,5 +46,48 @@ ap_xunlie_hunt = {
 			has_origin = origin_Xianzhou
 			factor = 100
 		}
+	}
+}
+ap_wings_of_stars = {
+	potential = {
+		OR = {
+			has_origin = origin_StellaronHunter
+			has_origin = origin_Xianzhou
+		}
+	}
+	possible = {
+		NOT = {
+			has_ascension_perk = ap_xunlie_hunt
+		}
+		has_country_flag = kill_yuhuang
+		custom_tooltip = {
+			fail_text = "not_xunlie_hunt"
+			is_subject = no
+		}
+		if = {
+			custom_tooltip = {
+				fail_text = "requires_ascension_perks_3"
+				num_ascension_perks >= 3
+			}
+			NOR = {
+				is_pacifist = yes
+				has_civic = civic_machine_servitor
+				has_valid_civic = civic_hive_familiar_face
+			}
+		}
+	}
+	on_enabled = {
+		activate_crisis_progression = wings_of_stars
+	}
+	triggered_modifier = {
+		potential = {
+			owner = {has_country_flag = Flesh_and_Cogs}
+		}
+		ship_weapon_range_mult = 0.2
+		ship_hull_mult = 0.3
+		federation_fleet_cap_add = 3000
+	}
+	ai_weight= {
+		factor = 0
 	}
 }

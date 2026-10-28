@@ -4507,7 +4507,7 @@ market_confirm_59_effect = {
 					NAME = "jiedu_wangguiren"
 					DESC = "jiedu_wangguiren_desc"
 					LEADER_PORTRAIT = wangguiren
-					SKILL = 5
+					SKILL = 8
 					CLASS = governor
 					GENDER = female
 					HIDEAGE = yes
@@ -4591,7 +4591,7 @@ market_confirm_60_effect = {
 					NAME = dark_moze
 					DESC = "dark_moze_desc"
 					LEADER_PORTRAIT = moze
-					SKILL = 5
+					SKILL = 8
 					CLASS = commander
 					GENDER = male
 					HIDEAGE = yes
@@ -4678,7 +4678,7 @@ market_confirm_61_effect = {
 					NAME = player_guinaifen
 					DESC = "player_guinaifen_desc"
 					LEADER_PORTRAIT = guinaifen
-					SKILL = 5
+					SKILL = 8
 					CLASS = official
 					GENDER = female
 					HIDEAGE = yes
@@ -6137,6 +6137,94 @@ market_confirm_82_effect = {
 						}
 						add_resource = {
 							xundi = 30000
+						}
+					}
+				}
+			}
+		}
+	}
+}
+market_confirm_83_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_leader_4_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 17500
+					}
+					owner = {
+						has_country_flag = The_Forbidden_Wing
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_has_leader_4_effect_disabled
+			hidden_trigger = {
+				NOT = {
+					from = {
+						any_owned_leader = {
+							has_trait = trait_miaosuan_fuxuan_6
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 6
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -17500
+				}
+				SR_leader_creator = {
+					SPECIES_NAME = "Star_Rail"
+					SPECIES_CLASS = "Star_Rail"
+					NAME = miaosuan_fuxuan
+					DESC = "miaosuan_fuxuan_desc"
+					LEADER_PORTRAIT = miaosuan_fuxuan
+					SKILL = 8
+					CLASS = scientist
+					GENDER = female
+					HIDEAGE = yes
+					ETHIC = ethic_fanatic_egalitarian
+					EVENT_TARGET = miaosuan_fuxuan
+				}
+				last_created_leader = {
+					remove_all_positive_traits = yes
+					add_trait = trait_miaosuan_fuxuan_1
+					add_trait = trait_miaosuan_fuxuan_2
+					add_trait = trait_miaosuan_fuxuan_3
+					add_trait = trait_miaosuan_fuxuan_4
+					add_trait = trait_miaosuan_fuxuan_5
+					add_trait = trait_miaosuan_fuxuan_6
+				}
+				SR_hire_leader = {
+					EVENT_TARGET = miaosuan_fuxuan
+				} 
+				add_opinion_modifier = {
+					who = event_target:origin_Xianzhou
+					modifier = opinion_xianzhou_leader_trade_favorability
+				}
+				if = {
+					limit = { exists = event_target:origin_Xianzhou }
+					event_target:origin_Xianzhou = {
+						add_opinion_modifier = {
+							who = from
+							modifier = opinion_xianzhou_leader_trade_favorability
+						}
+						add_resource = {
+							xundi = 17500
 						}
 					}
 				}

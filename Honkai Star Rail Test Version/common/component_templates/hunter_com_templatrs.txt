@@ -2255,8 +2255,6 @@ strike_craft_component_template = {
     weapon_type = point_defence
     projectile_gfx = "scout_laser_1"
     power = -80
-    potential = {
-    }
     count = 16
     regeneration_per_day = 8
     launch_time = 6
@@ -2324,6 +2322,17 @@ weapon_component_template = {
     }
     point_defence_targets = { "missile" "strike_craft" }
     prerequisites = { "tech_bee_baosi" }
+    on_hit = {
+        if = {
+            limit = {
+                NOT = { has_modifier = bee_baosi_hit }
+            }
+            add_modifier = {
+                modifier = bee_baosi_hit
+                days = 10
+            }
+        }
+    }
     ai_weight = {
         weight = 5
     }
