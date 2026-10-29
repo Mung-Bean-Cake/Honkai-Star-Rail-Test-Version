@@ -2793,15 +2793,6 @@ carrier_event = {
                 }
             }
         }
-        while = {
-            count = value:per_100_pop_amount
-            from.owner = {
-                if = {
-                    limit = { has_ascension_perk = ap_wings_of_stars }
-                    complete_crisis_objective = wings_zhuminghuo_kill_planet
-                }
-            }
-        }
         destroy_colony = yes
         if = {
             limit = {
@@ -2818,6 +2809,13 @@ carrier_event = {
         if = {
             limit = { has_modifier = holy_planet }
             remove_modifier = holy_planet
+        }
+        owner = {
+            wings_give_limited_reward = {
+                VAR = wings_chosen_from_titan
+                MAX = 8
+                REWARD = 200
+            }
         }
     }
 }
@@ -2920,6 +2918,123 @@ country_event = {
                         }
                     }
                 }
+            }
+        }
+    }
+}
+carrier_event = {
+    id = path_country.34
+    is_triggered_only = yes
+    hide_window = yes
+    immediate = {
+        if = {
+            limit = {
+                exists = space_owner
+                space_owner = {
+                    is_at_war_with = from.fleet.owner
+                }
+            }
+            space_owner = {
+                add_static_war_exhaustion = {
+                    attacker = from.fleet.owner
+                    location = root
+                    value_for_planet_destruction = 2.5
+                }
+            }
+        }
+        solar_system = {
+            random_system_planet = {
+                limit = {
+                    is_star = no
+                    is_asteroid = no
+                    OR = {
+                        is_colony = yes
+                        is_colonizable = yes
+                    }
+                }
+                remove_planet = yes 
+            }
+        }
+        change_pc = pc_xunlie_mirror
+        set_planet_size = 10
+        clear_deposits = yes
+        owner = {
+            wings_give_limited_reward = {
+                VAR = wings_chosen_from_titan
+                MAX = 10
+                REWARD = 300
+            }
+        }
+    }
+}
+ship_event = {
+    id = path_country.35
+    hide_window = yes
+    is_triggered_only = yes
+    trigger = {
+        owner = {
+            has_ascension_perk = ap_wings_of_stars
+            OR = {
+                has_origin = origin_StellaronHunter
+                has_origin = origin_Xianzhou
+            }
+        }
+        is_ship_size = muchao_fanyu
+    }
+    immediate = {
+        owner = {
+            wings_give_limited_reward = {
+                VAR = wings_chosen_from_titan
+                MAX = 4
+                REWARD = 50
+            }
+        }
+    }
+}
+country_event = {
+    id = path_country.36
+    hide_window = yes
+    is_triggered_only = yes
+    trigger = {
+        exists = from
+        from = {
+            has_ascension_perk = ap_wings_of_stars
+            OR = {
+                has_origin = origin_StellaronHunter
+                has_origin = origin_Xianzhou
+            }
+        }
+    }
+    immediate = {
+        from = {
+            wings_give_limited_reward = {
+                VAR = wings_chosen_from_destroy
+                MAX = 2
+                REWARD = 400
+            }
+        }
+    }
+}
+planet_event = {
+    id = path_country.37
+    hide_window = yes
+    is_triggered_only = yes
+    trigger = {
+        owner = {
+            OR = {
+                has_origin = origin_StellaronHunter
+                has_origin = origin_Xianzhou
+            }
+        }
+        has_planet_flag = hunter_extra_hub
+    }
+    immediate = {
+        change_pc = pc_extra_hunter_hub
+        owner = {
+            wings_give_limited_reward = {
+                VAR = wings_chosen_from_titan
+                MAX = 3
+                REWARD = 400
             }
         }
     }

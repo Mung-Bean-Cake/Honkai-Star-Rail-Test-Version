@@ -332,3 +332,14 @@ create_fengraomin_robber = {
 		}
 	}
 }
+wings_give_limited_reward = {
+	if = {
+		limit = { NOT = { is_variable_set = $VAR$ } }
+		set_variable = { which = $VAR$ value = 0 }
+	}
+	if = {
+		limit = { check_variable = { which = $VAR$ value < $MAX$ } }
+		add_resource = { chosen_of_xunlie = $REWARD$ }
+		change_variable = { which = $VAR$ value = 1 }
+	}
+}
