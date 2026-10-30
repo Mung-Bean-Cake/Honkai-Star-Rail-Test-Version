@@ -1,0 +1,41 @@
+wg_digongyin_guanchuan = {
+    casus_belli = digongyin_guanchuan
+    hide = no_cb
+    surrender_acceptance = -100
+    potential = {
+        has_origin = origin_StellaronHunter
+        has_ascension_perk = ap_wings_of_stars
+    }
+    possible = {
+        has_origin = origin_StellaronHunter
+        has_ascension_perk = ap_wings_of_stars
+        from = {
+            is_country_type = default
+            is_subject = no
+        }
+    }
+    on_accept = {
+        hidden_effect = {
+            from = {
+                every_owned_planet = {
+                    every_owned_pop_group = {
+                        sacrifice_pop_group = {
+                            pop_group = this
+                            percentage = 0.5 
+                        }
+                    }
+                    set_owner = root
+                    set_controller = root
+                }
+            }
+            from = { destroy_country = yes }
+        }
+        add_resource = {
+            xundi = 20000
+            influence = 150
+        }
+    }
+    ai_weight = {
+        weight = 0
+    }
+}
