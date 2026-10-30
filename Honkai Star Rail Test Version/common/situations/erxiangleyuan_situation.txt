@@ -268,3 +268,224 @@ situation_craze_situation_1 = {
 		}
 	}
 }
+
+
+
+situation_craze_situation_2 = {
+	picture = GFX_craze_the_trade
+	complete_icon_frame = GFX_situation_outcome_frame_blue
+	complete_icon = GFX_situation_outcome_positive
+	on_progress_complete = {
+		custom_tooltip = situation_craze_situation_2_finish
+		hidden_effect = {
+			hidden_effect = { destroy_situation = this }
+			owner = {
+					remove_country_flag = allow_opt
+					if = {
+						limit = {owner = {has_country_flag = craze_situation_2_approach_2}}
+						set_country_flag = 	situation_craze_situation_2_4_allow
+						remove_country_flag = craze_situation_2_approach_2
+					}
+					if = {
+						limit = {owner = {has_country_flag = craze_situation_2_approach_3}}	
+						set_country_flag = 	situation_craze_situation_2_4_refuse
+						remove_country_flag = craze_situation_2_approach_3
+					}
+
+					country_event = {
+						id = craze.14
+						days = 1
+					}
+				}
+		}
+		set_situation_locked = yes
+	}
+	stages = {
+		situation_craze_situation_2_0 = {
+			icon = GFX_situation_stage_1
+			icon_background = GFX_situation_stage_frame_blue
+			end = 1
+			on_first_enter = {
+				owner = {
+					country_event = {
+						id = craze.17
+						days = 1
+					}
+				}
+				
+			}
+			
+			custom_tooltip = situation_craze_situation_2_desc
+		}
+		situation_craze_situation_2_1 = {
+			icon = GFX_situation_stage_2
+			icon_background = GFX_situation_stage_frame_blue
+			end = 2
+			on_first_enter = {
+				set_situation_approach = craze_situation_2_approach_1
+				owner = {
+					remove_country_flag = allow_opt
+					country_event = {
+						id = craze.18
+						days = 1
+					}
+				}
+				
+			}
+			
+			custom_tooltip = situation_craze_situation_2_desc
+		}
+		situation_craze_situation_2_2 = {
+			icon = GFX_situation_stage_3
+			icon_background = GFX_situation_stage_frame_blue
+			end = 3
+			on_first_enter = {
+				set_situation_approach = craze_situation_2_approach_1
+				owner = {
+					remove_country_flag = allow_opt
+					if = {
+						limit = {owner = {has_country_flag = craze_situation_2_approach_2}}
+						add_modifier = {
+							modifier = situation_craze_situation_2_1
+							days = -1
+						}
+						every_owned_planet = {
+							limit = {has_planet_flag = guiji_objective not = {has_building = building_phantasmoon_court_1}}
+							remove_planet_flag = guiji_objective
+						}
+						set_country_flag = 	situation_craze_situation_2_1_allow
+						remove_country_flag = craze_situation_2_approach_2
+					}
+					if = {
+						limit = {owner = {has_country_flag = craze_situation_2_approach_3}}	
+						set_country_flag = 	situation_craze_situation_2_1_refuse
+						remove_country_flag = craze_situation_2_approach_3
+					}
+
+					country_event = {
+						id = craze.19
+						days = 1
+					}
+				}
+			}
+			
+			custom_tooltip = situation_craze_situation_2_desc
+		}
+		situation_craze_situation_2_3 = {
+			icon = GFX_situation_stage_4
+			icon_background = GFX_situation_stage_frame_blue
+			end = 4
+			on_first_enter = {
+				set_situation_approach = craze_situation_2_approach_1
+				owner = {
+					remove_country_flag = allow_opt
+					if = {
+						limit = {owner = {has_country_flag = craze_situation_2_approach_2}}
+						add_modifier = {
+							modifier = situation_craze_situation_2_2
+							days = -1
+						}
+						set_country_flag = 	situation_craze_situation_2_2_allow
+						remove_country_flag = craze_situation_2_approach_2
+					}
+					if = {
+						limit = {owner = {has_country_flag = craze_situation_2_approach_3}}	
+						set_country_flag = 	situation_craze_situation_2_2_refuse
+						remove_country_flag = craze_situation_2_approach_3
+					}
+
+					country_event = {
+						id = craze.20
+						days = 1
+					}
+				}
+			}
+			
+			custom_tooltip = situation_craze_situation_2_desc
+		}
+		situation_craze_situation_2_4 = {
+			icon = GFX_situation_stage_5
+			icon_background = GFX_situation_stage_frame_blue
+			end = 5
+			on_first_enter = {
+				set_situation_approach = craze_situation_2_approach_1
+				owner = {
+					remove_country_flag = allow_opt
+					if = {
+						limit = {owner = {has_country_flag = craze_situation_2_approach_2}}
+						add_modifier = {
+							modifier = situation_craze_situation_2_3
+							days = -1
+						}
+						set_country_flag = 	situation_craze_situation_2_3_allow
+						remove_country_flag = craze_situation_2_approach_2
+					}
+					if = {
+						limit = {owner = {has_country_flag = craze_situation_2_approach_3}}	
+						set_country_flag = 	situation_craze_situation_2_3_refuse
+						remove_country_flag = craze_situation_2_approach_3
+					}
+				
+					country_event = {
+						id = craze.21
+						days = 1
+					}
+				}
+			}
+			
+			custom_tooltip = situation_craze_situation_1_desc
+		}
+		
+		
+	}
+	
+
+	approach = {
+		name = craze_situation_2_approach_1
+		icon = GFX_situation_approach_balance_sheet
+		icon_background = GFX_situation_approach_bg_red
+		
+	}
+	approach = {
+		name = craze_situation_2_approach_2
+		icon = GFX_situation_approach_balance_sheet
+		icon_background = GFX_situation_approach_bg_green
+		allow = {
+			owner = {has_country_flag = allow_opt}
+		}
+		on_select = {
+			owner = {set_country_flag = craze_situation_2_approach_2}
+		}
+		
+	}
+	approach = {
+		name = craze_situation_2_approach_3
+		icon = GFX_situation_approach_balance_sheet
+		icon_background = GFX_situation_approach_bg_red
+		allow = {
+			owner = {has_country_flag = allow_opt}
+		}
+		on_select = {
+			owner = {set_country_flag = craze_situation_2_approach_3}
+		}
+		
+	}
+	
+
+	on_monthly = {
+		
+	}
+	monthly_progress = {
+		base = 0
+		modifier = {
+			add = 1
+			desc = string_current_approach
+			current_situation_approach = craze_situation_2_approach_2
+		}
+		 modifier = {
+			add = 1
+			desc = string_current_approach
+			current_situation_approach = craze_situation_2_approach_3
+		}
+	}
+}

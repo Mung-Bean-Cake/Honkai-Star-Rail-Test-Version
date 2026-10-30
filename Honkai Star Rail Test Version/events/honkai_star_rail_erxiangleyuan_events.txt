@@ -408,6 +408,37 @@ country_event = {
         default_hide_option = yes
     } 
 }
+#————————————————————————————————————————————————————————————重相位对映体魔方
+country_event = {
+	id= xiaoqiaosi.1008
+	title = xiaoqiaosi.1008
+	desc  ={trigger = {has_country_flag = situation_craze_situation_2_3_allow} text = xiaoqiaosi.1008_desc0}
+	#desc  ={trigger = {has_country_flag = check_xiaodian_1} text = xiaoqiaosi.1008_desc1}
+	is_triggered_only = yes
+
+	immediate = {
+		if = {
+			limit = {owner = {has_country_flag = situation_craze_situation_2_3_allow not = {has_country_flag = situation_craze_situation_2_3_achieve}}}
+			country_event = {
+				id = xiaoqiaosi.1009
+				days = 1
+			}
+			set_country_flag = situation_craze_situation_2_3_achieve
+		}
+		else_if = {
+			random_list = {
+				10 = {
+					if = {
+						#limit = {not = {has_country_flag = cube_tech_1}}
+						#add_tech_progress = {tech = cube_tech_1 progress = 0.01}
+						#set_country_flag = cube_tech_1
+					}
+				}
+		
+		}
+		}
+	}
+}
 
 #————————————————————————————————————————————————————————————
 #引导事件
