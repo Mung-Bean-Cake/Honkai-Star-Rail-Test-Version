@@ -5,6 +5,7 @@ digongyin_guanchuan = {
         is_country_type = default
         has_origin = origin_StellaronHunter
         has_ascension_perk = ap_wings_of_stars
+        has_crisis_perk = wings_of_stars_level_1_1
         is_subject = no
     }
     is_valid = {
@@ -15,8 +16,16 @@ digongyin_guanchuan = {
             is_in_federation_with = from
         }
         from = {
-            is_country_type = default
+            OR = {
+                is_country_type = default
+                is_country_type = fallen_empire
+                is_country_type = awakened_fallen_empire
+                is_country_type = nomad
+            }
             is_subject = no
+            NOT = {
+                has_origin = origin_Xianzhou   
+            }
         }
     }
 }

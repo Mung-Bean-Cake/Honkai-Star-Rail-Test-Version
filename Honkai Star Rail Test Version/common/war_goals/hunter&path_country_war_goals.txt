@@ -4,26 +4,56 @@ wg_digongyin_guanchuan = {
     surrender_acceptance = -100
     potential = {
         has_origin = origin_StellaronHunter
-        has_ascension_perk = ap_wings_of_stars
     }
     possible = {
-        has_origin = origin_StellaronHunter
         has_ascension_perk = ap_wings_of_stars
+        has_crisis_perk = wings_of_stars_level_1_1
         from = {
-            is_country_type = default
+            OR = {
+                is_country_type = default
+                is_country_type = fallen_empire
+                is_country_type = awakened_fallen_empire
+                is_country_type = nomad
+            }
             is_subject = no
+            NOT = {
+                has_origin = origin_Xianzhou   
+            }
         }
     }
     on_accept = {
+        from = { save_event_target_as = nomad_raid_defender }
         hidden_effect = {
             from = {
                 every_owned_planet = {
                     every_owned_pop_group = {
                         sacrifice_pop_group = {
                             pop_group = this
-                            percentage = 0.5 
+                            percentage = 0.5
                         }
                     }
+                }
+            }
+            from = {
+                every_owned_fleet = {
+                    limit = { is_arkship_guanchuan = yes }
+                    every_owned_ship = {
+                        repair_ship = yes
+                        set_disabled = no
+                        colony = {
+                            every_owned_pop_group = {
+                                sacrifice_pop_group = {
+                                    pop_group = this
+                                    percentage = 0.5
+                                }
+                            }
+                        }
+                    }
+                    set_owner = root
+                }
+            }
+            from = {
+                every_owned_planet = {
                     set_owner = root
                     set_controller = root
                 }
@@ -33,6 +63,40 @@ wg_digongyin_guanchuan = {
         add_resource = {
             xundi = 20000
             influence = 150
+        }
+    }
+    on_status_quo = {
+        hidden_effect = {
+            from = {
+                every_owned_planet = {
+                    limit = { is_controlled_by = root }
+                    set_owner = root
+                    set_controller = root
+                }
+            }
+            from = {
+                every_owned_fleet = {
+                    limit = {
+                        any_owned_ship = {
+                            is_arkship_guanchuan = yes
+                            is_disabled = yes
+                        }
+                    }
+                    every_owned_ship = {
+                        repair_ship = yes
+                        set_disabled = no
+                        colony = {
+                            every_owned_pop_group = {
+                                sacrifice_pop_group = {
+                                    pop_group = this
+                                    percentage = 0.5
+                                }
+                            }
+                        }
+                    }
+                    set_owner = root
+                }
+            }
         }
     }
     ai_weight = {
