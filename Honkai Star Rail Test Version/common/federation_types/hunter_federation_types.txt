@@ -2,7 +2,7 @@ new_order_federation = {
     base_intel = 50
     icon = "new_order_federation"
     potential = {
-        always = yes
+        has_tradition = tr_hunter_forward_4
     }
     allow = {
         federation_check_for_subject_trigger = yes
@@ -61,6 +61,80 @@ new_order_federation = {
         set_federation_law = succession_type_rotation	#继任方式：轮换制
         set_federation_law = succession_term_years_40		#主序任期：40年
         set_federation_law = fleet_contribution_none		#舰队共享：高
+        set_federation_law = federation_build_fleets_everyone	#联邦舰队建设：所有人
+        set_federation_law = vote_weight_equal		#投票权重：平等
+        set_federation_law = declare_war_president_vote	#宣战方式：主席决定
+        set_federation_law = invite_members_unanimous_vote	#新成员邀请制：一致通过
+        set_federation_law = kick_members_majority_vote		#成员开除制：多数通过
+        set_federation_law = free_migration_no		#自由移民：禁止
+        set_federation_law = treaties_separate_yes		#自主协议：启用
+        set_federation_flag = enable_federation_cooldowns
+    }
+    ai_weight = {
+        base = 0
+    }
+}
+xunlie_gov_federation = {
+    base_intel = 50
+    icon = "new_order_federation"
+    potential = {
+        has_ascension_perk = ap_wings_of_stars
+    }
+    allow = {
+        federation_check_for_subject_trigger = yes
+        custom_tooltip = {
+            fail_text = requires_actor_not_barbaric_despoilers
+            NOT = { has_valid_civic = civic_barbaric_despoilers }
+        }
+        has_crisis_perk = wings_of_stars_level_3_1
+    }
+    levels = {
+        level_1 = {
+            experience = 800
+            perks = {
+                xunlie_gov_navy_capacity
+            }
+        }
+        level_2 = {
+            experience = 1800
+            perks = {
+                xunlie_gov_build_speed
+                xunlie_gov_ship_weapon  
+                xunlie_gov_army_damage
+            }
+        }
+        level_3 = {
+            experience = 3000
+            perks = {
+                xunlie_gov_army_health
+                xunlie_gov_fire_rate
+                xunlie_gov_cloud_knight
+            }
+        }
+        level_4 = {
+            experience = 4500
+            perks = {
+                xunlie_gov_star_map
+                xunlie_gov_smelter
+                xunlie_gov_doctor
+            }
+        }
+        level_5 = {
+            perks = {
+                xunlie_gov_judge
+                xunlie_gov_command_limit
+                xunlie_gov_cohesion
+            }
+        }
+    }
+    on_create = {
+        remove_federation_flag = enable_federation_cooldowns
+        set_federation_law = allow_subjects_to_join_yes   #附庸可加入联邦
+        set_federation_law = centralization_minimal #联邦集权：最低
+        set_federation_law = succession_type_strongest	#继任方式：实力至上
+        set_federation_law = succession_power_tech	#继任实力判断：科技
+        set_federation_law = succession_term_years_40		#主序任期：40年
+        set_federation_law = hunter_fleet_contribution_high		#舰队共享：特高
         set_federation_law = federation_build_fleets_everyone	#联邦舰队建设：所有人
         set_federation_law = vote_weight_equal		#投票权重：平等
         set_federation_law = declare_war_president_vote	#宣战方式：主席决定
