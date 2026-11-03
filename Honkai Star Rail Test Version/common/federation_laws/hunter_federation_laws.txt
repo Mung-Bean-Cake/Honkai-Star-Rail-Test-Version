@@ -1,11 +1,11 @@
-hunter_fleet_contribution_high = {
+hunter_fleet_contribution_medium = {
 	allow = {
 		custom_tooltip = {
 			NOT = {
 				AND = {
-					NOT = { has_federation_law = hunter_fleet_contribution_high }
-					has_modifier = federation_law_category_fleet_contribution_cooldown
-					has_any_federation_law_in_category = law_category_fleet_contribution
+					NOT = { has_federation_law = hunter_fleet_contribution_medium }
+					has_modifier = hunter_federation_law_category_fleet_contribution_cooldown
+					has_any_federation_law_in_category = law_hunter_fleet_contribution
 				}
 			}
 		}
@@ -20,16 +20,16 @@ hunter_fleet_contribution_high = {
 		base = 0
 	}
 	modifier =	{
-		description = "hunter_fleet_contribution_high_effect"
+		description = "hunter_fleet_contribution_medium_effect"
 		federation_fleet_contribution_factor = 0.4
-		federation_fleet_cap_add = 9000
+		federation_fleet_cap_add = 5000
 	}
-	cohesion_growth = -0.25
+	cohesion_growth = -0.5
 	on_enact = {
 		if = {
 			limit = { has_federation_flag = enable_federation_cooldowns }
 			add_modifier = {
-				modifier = federation_law_category_fleet_contribution_cooldown
+				modifier = hunter_federation_law_category_fleet_contribution_cooldown
 				days = @cooldown
 			}
 		}
@@ -43,6 +43,79 @@ hunter_fleet_contribution_high = {
 					flag = no_federation_fleet_build_right_cooldown
 					days = 10
 				}
+			}
+		}
+		every_member = {
+			if = {
+				limit = {
+					has_modifier = federation_naval_cap_contribution_mult_large
+				}
+				remove_modifier = federation_naval_cap_contribution_mult_large
+			}
+			add_modifier = {
+				modifier = federation_naval_cap_contribution_mult_medium
+				years = 100
+			}
+		}
+	}
+	ai_weight = {
+		base = 40
+	}
+}
+hunter_fleet_contribution_high = {
+	allow = {
+		custom_tooltip = {
+			NOT = {
+				AND = {
+					NOT = { has_federation_law = hunter_fleet_contribution_high }
+					has_modifier = hunter_federation_law_category_fleet_contribution_cooldown
+					has_any_federation_law_in_category = law_hunter_fleet_contribution
+				}
+			}
+		}
+	}
+	potential = {
+		has_federation_type = xunlie_gov_federation
+	}
+	required_centralization = {
+		base = 0
+	}
+	modifier =	{
+		description = "hunter_fleet_contribution_high_effect"
+		federation_fleet_contribution_factor = 0.6
+		federation_fleet_cap_add = 9000
+	}
+	cohesion_growth = -0.75
+	on_enact = {
+		if = {
+			limit = { has_federation_flag = enable_federation_cooldowns }
+			add_modifier = {
+				modifier = hunter_federation_law_category_fleet_contribution_cooldown
+				days = @cooldown
+			}
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					has_federation_flag = no_federation_fleet
+				}
+				remove_federation_flag = no_federation_fleet
+				set_timed_federation_flag = {
+					flag = no_federation_fleet_build_right_cooldown
+					days = 10
+				}
+			}
+		}
+		every_member = {
+			if = {
+				limit = {
+					has_modifier = federation_naval_cap_contribution_mult_medium
+				}
+				remove_modifier = federation_naval_cap_contribution_mult_medium
+			}
+			add_modifier = {
+				modifier = federation_naval_cap_contribution_mult_large
+				years = 100
 			}
 		}
 	}

@@ -6155,7 +6155,7 @@ market_confirm_83_effect = {
 						value >= 17500
 					}
 					owner = {
-						has_country_flag = The_Forbidden_Wing
+						has_ascension_perk = ap_wings_of_stars
 					}
 				}
 			}
@@ -6225,6 +6225,93 @@ market_confirm_83_effect = {
 						}
 						add_resource = {
 							xundi = 17500
+						}
+					}
+				}
+			}
+		}
+	}
+}
+market_confirm_84_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_leader_5_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 24000
+					}
+					owner = {
+						has_crisis_perk = wings_of_stars_level_3_1
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_has_leader_5_effect_disabled
+			hidden_trigger = {
+				NOT = {
+					from = {
+						any_owned_leader = {
+							has_trait = trait_jiantai_yanqing_5
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 6
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -24000
+				}
+				SR_leader_creator = {
+					SPECIES_NAME = "Star_Rail"
+					SPECIES_CLASS = "Star_Rail"
+					NAME = jiantai_yanqing
+					DESC = "jiantai_yanqing_desc"
+					LEADER_PORTRAIT = jiantai_yanqing
+					SKILL = 5
+					CLASS = official
+					GENDER = male
+					HIDEAGE = yes
+					ETHIC = ethic_fanatic_pacifist
+					EVENT_TARGET = jiantai_yanqing
+				}
+				last_created_leader = {
+					remove_all_positive_traits = yes
+					add_trait = trait_jiantai_yanqing_1
+					add_trait = trait_jiantai_yanqing_2
+					add_trait = trait_jiantai_yanqing_3
+					add_trait = trait_jiantai_yanqing_4
+					add_trait = trait_jiantai_yanqing_5
+				}
+				SR_hire_leader = {
+					EVENT_TARGET = jiantai_yanqing
+				} 
+				add_opinion_modifier = {
+					who = event_target:origin_Xianzhou
+					modifier = opinion_xianzhou_leader_trade_favorability
+				}
+				if = {
+					limit = { exists = event_target:origin_Xianzhou }
+					event_target:origin_Xianzhou = {
+						add_opinion_modifier = {
+							who = from
+							modifier = opinion_xianzhou_leader_trade_favorability
+						}
+						add_resource = {
+							xundi = 24000
 						}
 					}
 				}
