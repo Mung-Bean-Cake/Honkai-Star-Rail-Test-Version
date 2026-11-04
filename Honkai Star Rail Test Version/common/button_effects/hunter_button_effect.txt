@@ -4640,7 +4640,7 @@ market_confirm_61_effect = {
 				from = {
 					resource_stockpile_compare = {
 						resource = xundi
-						value >= 10500
+						value >= 15000
 					}
 				}
 			}
@@ -4670,7 +4670,7 @@ market_confirm_61_effect = {
 		hidden_effect = {
 			from = {
 				add_resource = {
-					xundi = -10500
+					xundi = -15000
 				}
 				SR_leader_creator = {
 					SPECIES_NAME = "Star_Rail"
@@ -4708,7 +4708,7 @@ market_confirm_61_effect = {
 							modifier = opinion_xianzhou_leader_trade_favorability
 						}
 						add_resource = {
-							xundi = 10500
+							xundi = 15000
 						}
 					}
 				}
@@ -6152,7 +6152,7 @@ market_confirm_83_effect = {
 				from = {
 					resource_stockpile_compare = {
 						resource = xundi
-						value >= 17500
+						value >= 21000
 					}
 					owner = {
 						has_ascension_perk = ap_wings_of_stars
@@ -6185,7 +6185,7 @@ market_confirm_83_effect = {
 		hidden_effect = {
 			from = {
 				add_resource = {
-					xundi = -17500
+					xundi = -21000
 				}
 				SR_leader_creator = {
 					SPECIES_NAME = "Star_Rail"
@@ -6224,7 +6224,7 @@ market_confirm_83_effect = {
 							modifier = opinion_xianzhou_leader_trade_favorability
 						}
 						add_resource = {
-							xundi = 17500
+							xundi = 21000
 						}
 					}
 				}
@@ -6240,7 +6240,7 @@ market_confirm_84_effect = {
 				from = {
 					resource_stockpile_compare = {
 						resource = xundi
-						value >= 24000
+						value >= 30000
 					}
 					owner = {
 						has_crisis_perk = wings_of_stars_level_3_1
@@ -6273,7 +6273,7 @@ market_confirm_84_effect = {
 		hidden_effect = {
 			from = {
 				add_resource = {
-					xundi = -24000
+					xundi = -30000
 				}
 				SR_leader_creator = {
 					SPECIES_NAME = "Star_Rail"
@@ -6311,7 +6311,94 @@ market_confirm_84_effect = {
 							modifier = opinion_xianzhou_leader_trade_favorability
 						}
 						add_resource = {
-							xundi = 24000
+							xundi = 30000
+						}
+					}
+				}
+			}
+		}
+	}
+}
+market_confirm_85_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_leader_6_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 48000
+					}
+					owner = {
+						has_crisis_perk = wings_of_stars_level_5_1
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_has_leader_6_effect_disabled
+			hidden_trigger = {
+				NOT = {
+					from = {
+						any_owned_leader = {
+							has_trait = trait_liejian_yunli_5
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = xianzhou_market_page
+				value = 6
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -48000
+				}
+				SR_leader_creator = {
+					SPECIES_NAME = "Star_Rail"
+					SPECIES_CLASS = "Star_Rail"
+					NAME = liejian_yunli
+					DESC = "liejian_yunli_desc"
+					LEADER_PORTRAIT = liejian_yunli
+					SKILL = 5
+					CLASS = commander
+					GENDER = female
+					HIDEAGE = yes
+					ETHIC = ethic_fanatic_militarist
+					EVENT_TARGET = liejian_yunli
+				}
+				last_created_leader = {
+					remove_all_positive_traits = yes
+					add_trait = trait_liejian_yunli_1
+					add_trait = trait_liejian_yunli_2
+					add_trait = trait_liejian_yunli_3
+					add_trait = trait_liejian_yunli_4
+					add_trait = trait_liejian_yunli_5
+				}
+				SR_hire_leader = {
+					EVENT_TARGET = liejian_yunli
+				} 
+				add_opinion_modifier = {
+					who = event_target:origin_Xianzhou
+					modifier = opinion_xianzhou_leader_trade_favorability
+				}
+				if = {
+					limit = { exists = event_target:origin_Xianzhou }
+					event_target:origin_Xianzhou = {
+						add_opinion_modifier = {
+							who = from
+							modifier = opinion_xianzhou_leader_trade_favorability
+						}
+						add_resource = {
+							xundi = 48000
 						}
 					}
 				}
