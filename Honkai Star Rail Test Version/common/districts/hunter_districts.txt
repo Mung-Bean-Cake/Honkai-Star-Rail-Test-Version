@@ -3,7 +3,7 @@ district_hunter_gov = {
 	icon = district_hunter_gov
     custom_gui = hunter_hub_main_district
 	zone_slots = {
-        zone_pc_extra_hunter_hub
+        zone_pc_hunter_hub_normal
 	}
     show_on_uncolonized = {
 		exists = from
@@ -331,9 +331,80 @@ district_hunter_yinlang = {
         weight = 100
     }
 }
-
+district_hunter_taibusi = {
+    base_buildtime = 900
+    icon = district_hunter_taibusi
+    custom_gui = hunter_hub_main_district
+    zone_slots = {
+        zone_pc_extra_hunter_hub
+    }
+    show_on_uncolonized = {
+        exists = from
+        from = {
+            OR = {
+                has_origin = origin_StellaronHunter
+            }
+        }
+    }
+    potential = {
+        exists = owner
+        owner = {
+            OR = {
+                has_origin = origin_StellaronHunter
+            }
+        }
+        uses_district_set = pc_extra_hunter_hub
+    }
+    resources = {
+        category = planet_districts
+        produces = {
+            unity = 50
+            physics_research = 20
+            society_research = 20
+            engineering_research = 20
+        }
+        cost = {
+            xundi = 500
+            food = 200
+        }
+        upkeep = {
+            xundi = 50
+            food = 20
+            alloys = 20
+        }
+    }
+    planet_modifier = {
+        planet_housing_add = 2000
+        job_star_map_diviner_add = 50
+        job_jade_abacus_calculator_add = 10
+        planet_district_hunter_taibusi_build_speed_mult = 0.05
+        planet_building_taibusi_observatory_build_speed_mult = 0.05
+        planet_building_xingcha_trade_port_build_speed_mult = 0.05
+    }
+    triggered_planet_modifier = {
+        potential = {
+            exists = owner
+            owner = {
+                has_valid_civic = civic_StellaronHunter_2
+            }
+        }
+        pop_happiness = 0.1
+        pop_star_map_diviner_workforce_mult = 0.01
+        planet_building_dongtian_build_speed_mult = 0.05
+    }
+    triggered_planet_modifier = {
+        potential = {
+            exists = owner
+            owner = {
+                has_valid_civic = civic_StellaronHunter_1
+            }
+        }
+        planet_housing_add = 1500
+        planet_crime_add = -2
+    }
+}
 district_gelamo_miner = {
-    base_buildtime = 450
+    base_buildtime = 580
     expansion_planner = yes
     custom_gui = extend_planet_district_entry_1
     icon = district_gelamo_miner
@@ -344,7 +415,6 @@ district_gelamo_miner = {
                 has_origin = origin_StellaronHunter
             }
         }
-        uses_district_set = pc_hunter_hub_set
     }
     potential = {
         exists = owner
@@ -381,14 +451,13 @@ district_gelamo_miner = {
             minerals = 80
         }
         cost = {
-            alloys = 800
+            xundi = 150
             food = 150
             unity = 400
             huanyudu = 360
         }
         upkeep = {
             unity = 200
-            alloys = 300
             huanyudu = 20
             food = 40
         }
@@ -422,6 +491,170 @@ district_gelamo_miner = {
         planet_building_hunter_farm_2_build_speed_mult = 0.05
         planet_building_hunter_hacker_build_speed_mult = 0.05
         planet_building_hunter_hacker_2_build_speed_mult = 0.05
+    }
+    ai_weight = {
+        weight = 100
+    }
+}
+district_hunter_building_factory = {
+    base_buildtime = 540
+    expansion_planner = yes
+    custom_gui = extend_planet_district_entry_1
+    icon = district_hunter_building_factory
+    show_on_uncolonized = {
+        exists = from
+        from = {
+            OR = {
+                has_origin = origin_StellaronHunter
+            }
+        }
+    }
+    potential = {
+        exists = owner
+        owner = {
+            OR = {
+                has_origin = origin_StellaronHunter
+            }
+        }
+        uses_district_set = pc_extra_hunter_hub
+    }
+    conversion_ratio = 1
+    convert_to = {
+        district_crashed_slaver_ship
+        district_arcology_housing
+        district_rw_city
+        district_nexus
+        district_hive
+        district_prison
+        district_craglands
+        district_mindlink
+        district_crashed_slaver_ship
+        district_resort
+        district_slave
+    }
+    zone_slots = {
+        zone_pc_extra_hunter_hub
+    }
+    resources = {
+        category = planet_districts
+        produces = {
+            energy = 20
+            alloys = 50
+            minerals = 20
+        }
+        cost = {
+            xundi = 200
+            food = 300
+            unity = 400
+        }
+        upkeep = {
+            xundi = 20
+            food = 50
+            unity = 50
+        }
+    }
+    planet_modifier = {
+        job_smelter_add = 100
+        planet_building_rough_melting_furnace_build_speed_mult = 0.05
+        job_cloud_knight_trainer_add = 10
+        planet_building_shence_office_overseas_center_build_speed_mult = 0.05
+        planet_building_xianzhou_melting_furnace_build_speed_mult = 0.05
+        planet_housing_add = -800
+        planet_district_hunter_building_factory_build_speed_mult = 0.05
+    }
+    triggered_planet_modifier = {
+        potential = {
+            exists = owner
+            owner = {
+                has_valid_civic = civic_StellaronHunter_1
+            }
+        }
+        planet_amenities_mult = 0.02
+        planet_building_cloud_knight_training_center_build_speed_mult = 0.05
+        job_smelter_add = 20
+    }
+    ai_weight = {
+        weight = 100
+    }
+}
+district_hunter_shackle_prison = {
+    base_buildtime = 640
+    expansion_planner = yes
+    custom_gui = extend_planet_district_entry_1
+    icon = district_hunter_building_factory
+    show_on_uncolonized = {
+        exists = from
+        from = {
+            OR = {
+                has_origin = origin_StellaronHunter
+            }
+        }
+    }
+    potential = {
+        exists = owner
+        owner = {
+            OR = {
+                has_origin = origin_StellaronHunter
+            }
+        }
+        uses_district_set = pc_extra_hunter_hub
+    }
+    conversion_ratio = 1
+    convert_to = {
+        district_crashed_slaver_ship
+        district_arcology_housing
+        district_rw_city
+        district_nexus
+        district_hive
+        district_prison
+        district_craglands
+        district_mindlink
+        district_crashed_slaver_ship
+        district_resort
+        district_slave
+    }
+    zone_slots = {
+        zone_pc_extra_hunter_hub
+    }
+    resources = {
+        category = planet_districts
+        produces = {
+            energy = 20
+            alloys = 50
+            minerals = 20
+        }
+        cost = {
+            xundi = 400
+            food = 100
+            unity = 500
+        }
+        upkeep = {
+            xundi = 30
+            food = 20
+            unity = 80
+        }
+    }
+    planet_modifier = {
+        job_xianzhou_judge_add = 100
+        job_xianzhou_doctor_add = 10
+        planet_building_shackle_prison_build_speed_mult = 0.05
+        planet_building_xianzhou_gongzaosi_build_speed_mult = 0.05
+        planet_building_xianzhou_dandingsi_build_speed_mult = 0.05
+        planet_housing_add = -800
+        planet_district_hunter_building_factory_build_speed_mult = 0.05
+        army_defense_health_mult = 0.15
+        planet_crime_add = -2
+    }
+    triggered_planet_modifier = {
+        potential = {
+            exists = owner
+            owner = {
+                has_valid_civic = civic_StellaronHunter_1
+            }
+        }
+        army_defense_morale_mult = 0.1
+        planet_crime_floor_add = -0.5
+        job_xianzhou_judge_add = 10
     }
     ai_weight = {
         weight = 100
