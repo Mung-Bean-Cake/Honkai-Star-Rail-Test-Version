@@ -598,7 +598,6 @@ country_event = {
         exists = event_target:yuhuang_fengrao_country
     }
     immediate = {
-        save_event_target_as = failure_yuhuang_country
         create_species = {
             name = failure_fengrao
             class = fengraomin
@@ -650,7 +649,7 @@ country_event = {
             }
             ignore_initial_colony_error = yes
             effect = {
-                save_event_target_as = failure_yuhuang_country
+                save_global_event_target_as = failure_yuhuang_country
                 every_country = {
                     limit = {
                         NOT = { is_same_value = event_target:failure_yuhuang_country }
@@ -833,11 +832,10 @@ country_event = {
         room = fe_hive_1_room
     }
     is_triggered_only = yes
-    force_open = yes
+    custom_gui = "enclave_caravaneer_window"
     diplomatic = yes
     trigger = {
-        exists = from
-        from = event_target:failure_yuhuang_country
+        exists = event_target:failure_yuhuang_country
     }
     option = {
         name = end_message
