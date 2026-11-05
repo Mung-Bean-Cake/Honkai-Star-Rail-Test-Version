@@ -90,7 +90,7 @@ country_event = {
         }
         has_country_flag = fengraomin
         any_playable_country = {
-		has_origin = origin_StellaronHunter
+		    has_origin = origin_StellaronHunter
 	    }
     }
     mean_time_to_happen = {
@@ -295,6 +295,16 @@ country_event = {
                 every_country = {
                     limit = {
                         NOT = { is_same_value = event_target:yuhuang_fengrao_country }
+                        NOR = {
+                            AND = {
+                                exists = event_target:shouxing_faction
+                                is_same_value = event_target:shouxing_faction
+                            }
+                            AND = {
+                                exists = event_target:cihang_faction
+                                is_same_value = event_target:cihang_faction
+                            }
+                        }
                     }
                     event_target:yuhuang_fengrao_country = {
                         establish_communications_no_message = prev
@@ -356,7 +366,7 @@ country_event = {
     is_triggered_only = yes
     trigger = {
         any_playable_country = {
-		has_origin = origin_StellaronHunter
+		    has_origin = origin_StellaronHunter
 	    }
     }
     immediate = {
@@ -379,7 +389,7 @@ country_event = {
     is_triggered_only = yes
     trigger = {
         any_playable_country = {
-		has_origin = origin_StellaronHunter
+		    has_origin = origin_StellaronHunter
 	    }
     }
     immediate = {
@@ -408,7 +418,7 @@ country_event = {
     fire_only_once = yes
     trigger = {
         any_playable_country = {
-		has_origin = origin_StellaronHunter
+		    has_origin = origin_StellaronHunter
 	    }
         NOT = {
             has_country_flag = kill_yuhuang
@@ -583,8 +593,9 @@ country_event = {
     is_triggered_only = yes
     trigger = {
         any_playable_country = {
-		has_origin = origin_StellaronHunter
+		    has_origin = origin_StellaronHunter
 	    }
+        exists = event_target:yuhuang_fengrao_country
     }
     immediate = {
         save_event_target_as = failure_yuhuang_country
@@ -610,7 +621,7 @@ country_event = {
             effect = {save_event_target_as = failure_yuhuang_species}
         }
         create_country = {
-            name = failure_yuhuang_country_1
+            name = failure_yuhuang_country
             name_list = DOT_SR_fengraomin
             species = event_target:failure_yuhuang_species
             type = fengraomin
@@ -639,98 +650,33 @@ country_event = {
             }
             ignore_initial_colony_error = yes
             effect = {
-                save_event_target_as = failure_yuhuang_country_1
-                establish_communications_no_message = prev
-            }
-        }
-        create_country = {
-            name = failure_yuhuang_country_2
-            name_list = DOT_SR_fengraomin
-            species = event_target:failure_yuhuang_species
-            type = fengraomin
-            civics = { civic = civic_barbaric_despoilers }
-            authority = auth_oligarchic
-            origin = origin_broken_shackles
-            flag = {
-                icon = {
-                    category = spherical
-                    file = "flag_spherical_18.dds"
-                }
-                background= {
-                    category = "backgrounds"
-                    file = "pattern_01.dds"
-                }
-                colors={
-                    "pink"
-                    "yellow"
-                    "null"
-                    "null"
+                save_event_target_as = failure_yuhuang_country
+                every_country = {
+                    limit = {
+                        NOT = { is_same_value = event_target:failure_yuhuang_country }
+                    }
+                    event_target:failure_yuhuang_country = {
+                        establish_communications_no_message = prev
+                    }
                 }
             }
-            ethos = {
-                ethic = ethic_militarist
-                ethic = ethic_materialist
-                ethic = ethic_xenophobe
-            }
-            ignore_initial_colony_error = yes
-            effect = {
-                save_event_target_as = failure_yuhuang_country_2
-                establish_communications_no_message = prev
-            }
         }
-        set_variable = {
-            which = failure_yuhuang_split value = 0
-        }
-        event_target:failure_yuhuang_country = {
+        event_target:yuhuang_fengrao_country = {
             every_owned_fleet = {
                 limit = {
                     owner = {
-                        is_same_value = event_target:failure_yuhuang_country
+                        is_same_value = event_target:yuhuang_fengrao_country
                     }
                 }
-                if = {
-                    limit = {
-                        check_variable = {
-                            which = failure_yuhuang_split
-                            value = 0
-                        }
-                    }
-                    set_owner = event_target:failure_yuhuang_country_1
-                    set_variable = {
-                        which = failure_yuhuang_split value = 1
-                    }
-                }
-                else = {
-                    set_owner = event_target:failure_yuhuang_country_2
-                    set_variable = {
-                        which = failure_yuhuang_split value = 0
-                    }
-                }
+                set_owner = event_target:failure_yuhuang_country
             }
             every_owned_starbase = {
                 limit = {
                     owner = {
-                        is_same_value = event_target:failure_yuhuang_country
+                        is_same_value = event_target:yuhuang_fengrao_country
                     }
                 }
-                if = {
-                    limit = {
-                        check_variable = {
-                            which = failure_yuhuang_split
-                            value = 0
-                        }
-                    }
-                    set_owner = event_target:failure_yuhuang_country_1
-                    set_variable = {
-                        which = failure_yuhuang_split value = 1
-                    }
-                }
-                else = {
-                    set_owner = event_target:failure_yuhuang_country_2
-                    set_variable = {
-                        which = failure_yuhuang_split value = 0
-                    }
-                }
+                set_owner = event_target:failure_yuhuang_country
             }
             destroy_country = yes
         }
@@ -826,5 +772,75 @@ country_event = {
     }
     option = {
         name = script_crisis.21.a
+    }
+}
+country_event = {
+    id = script_crisis.22
+    hide_window = yes
+    is_triggered_only = yes
+    trigger = {
+        has_global_flag = fengrao_crisis_started
+        NOT = { has_global_flag = fengrao_50_year_timer }
+        NOT = { has_global_flag = fengrao_50_year_timeout_triggered }
+        exists = event_target:yuhuang_fengrao_country
+        any_playable_country = {
+            has_origin = origin_StellaronHunter
+        }
+    }
+    immediate = {
+        set_global_flag = fengrao_50_year_timeout_triggered
+        event_target:yuhuang_fengrao_country = {
+            every_owned_fleet = {
+                limit = {
+                    has_fleet_flag = yuhuang_fleet
+                }
+                delete_fleet = {
+                    target = this
+                    kill_leader = no
+                }
+            }
+        }
+        event_target:yuhuang_fengrao_country = {
+            country_event = { id = script_crisis.17 }
+        }
+        every_country = {
+            limit = {
+                is_ai = no
+            }
+            country_event = {id = script_crisis.23}
+        }
+    }
+}
+country_event = {
+    id = script_crisis.23
+    title = script_crisis.23.title
+    desc = script_crisis.23.desc
+    picture = GFX_evt_space_funeral
+    show_sound = event_airlock
+    is_triggered_only = yes
+    fire_only_once = yes
+
+    option = {
+        name = script_crisis.23.a
+    }
+}
+country_event = {
+    id = script_crisis.24
+    title = "failure_yuhuang_title"
+    desc = "failure_yuhuang_introduction"
+    picture_event_data = {
+        portrait = event_target:failure_yuhuang_species
+        room = fe_hive_1_room
+    }
+    is_triggered_only = yes
+    force_open = yes
+    diplomatic = yes
+    trigger = {
+        exists = from
+        from = event_target:failure_yuhuang_country
+    }
+    option = {
+        name = end_message
+        default_hide_option = yes
     }
 }
