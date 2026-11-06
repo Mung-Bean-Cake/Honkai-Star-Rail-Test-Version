@@ -3039,23 +3039,31 @@ planet_event = {
         }
     }
 }
-starbase_event = {
+country_event = {
     id = path_country.38
     hide_window = yes
     is_triggered_only = yes
     trigger = {
         exists = owner
-        owner = {
-            has_ascension_perk = ap_wings_of_stars
+        has_ascension_perk = ap_wings_of_stars
+        any_owned_starbase = {
+            has_starbase_building = digongshu
+            check_variable = { which = digongshu_reward_given value = 0 }
         }
-        has_starbase_building = digongshu
     }
     immediate = {
-        owner = {
-            wings_give_limited_reward = {
-                VAR = wings_build_digongshu
-                MAX = 20
-                REWARD = 20
+        every_owned_starbase = {
+            limit = { 
+                has_starbase_building = digongshu 
+                check_variable = { which = digongshu_reward_given value = 0 }
+            }
+            add_variable = { which = digongshu_reward_given value = 1 }
+            owner = {
+                wings_give_limited_reward = {
+                    VAR = wings_build_digongshu
+                    MAX = 20
+                    REWARD = 20
+                }
             }
         }
     }
