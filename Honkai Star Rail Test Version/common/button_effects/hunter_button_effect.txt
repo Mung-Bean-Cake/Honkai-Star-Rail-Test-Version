@@ -4563,6 +4563,7 @@ market_confirm_59_effect = {
 					effect = {
 						change_leader_portrait = wangguiren
 						change_background_ethic = ethic_materialist
+						set_leader_flag = jiedu_wangguiren
 					}
 				}
 				add_resource = {
@@ -4648,6 +4649,7 @@ market_confirm_60_effect = {
 					effect = {
 						change_leader_portrait = moze
 						change_background_ethic = ethic_militarist
+						set_leader_flag = dark_moze
 					}
 				}
 				add_resource = {
@@ -4736,6 +4738,7 @@ market_confirm_61_effect = {
 					effect = {
 						change_leader_portrait = guinaifen
 						change_background_ethic = ethic_pacifist
+						set_leader_flag = player_guinaifen
 					}
 				}
 				add_opinion_modifier = {
@@ -6253,6 +6256,7 @@ market_confirm_83_effect = {
 					effect = {
 						change_leader_portrait = miaosuan_fuxuan
 						change_background_ethic = ethic_fanatic_egalitarian
+						set_leader_flag = miaosuan_fuxuan
 					}
 				}
 				add_opinion_modifier = {
@@ -6341,6 +6345,7 @@ market_confirm_84_effect = {
 					effect = {
 						change_leader_portrait = jiantai_yanqing
 						change_background_ethic = ethic_fanatic_pacifist
+						set_leader_flag = jiantai_yanqing
 					}
 				}
 				add_opinion_modifier = {
@@ -6429,6 +6434,7 @@ market_confirm_85_effect = {
 					effect = {
 						change_leader_portrait = liejian_yunli
 						change_background_ethic = ethic_fanatic_militarist
+						set_leader_flag = liejian_yunli
 					}
 				}
 				add_opinion_modifier = {
@@ -6666,6 +6672,748 @@ market_confirm_88_effect = {
 						}
 					}
 				}
+			}
+		}
+	}
+}
+linyuanjing_1_effect = {
+	allow = {
+	}
+	potential = {
+	}
+	effect = {
+		hidden_effect = {
+			owner = {
+				set_variable = {
+					which = linyuanjing_page
+					value = 1
+				}
+			}
+		}
+	}
+}
+linyuanjing_2_effect = {
+	allow = {
+	}
+	potential = {
+	}
+	effect = {
+		hidden_effect = {
+			owner = {
+				set_variable = {
+					which = linyuanjing_page
+					value = 2
+				}
+			}
+		}
+	}
+}
+linyuanjing_3_effect = {
+	allow = {
+	}
+	potential = {
+	}
+	effect = {
+		hidden_effect = {
+			owner = {
+				set_variable = {
+					which = linyuanjing_page
+					value = 3
+				}
+			}
+		}
+	}
+}
+linyuanjing_4_effect = {
+	allow = {
+	}
+	potential = {
+	}
+	effect = {
+		hidden_effect = {
+			owner = {
+				set_variable = {
+					which = linyuanjing_page
+					value = 4
+				}
+			}
+		}
+	}
+}
+linyuanjing_prev_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_prev_effect_disabled
+			hidden_trigger = {
+				from = {
+					OR = {
+						AND = {
+							OR = {
+								check_variable = {
+									which = linyuanjing_page
+									value = 1
+								}
+							}
+							NOT = {
+								check_variable = {
+									which = linyuanjing_extra_page
+									value = 1
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_no_effect_disabled
+			hidden_trigger = {
+				from = {
+					OR = {
+						check_variable = {
+							which = linyuanjing_page
+							value = 1
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+	}
+	effect = {
+		hidden_effect = {
+			owner = {
+				change_variable = {
+					which = linyuanjing_extra_page
+					value = -1
+				}
+			}
+		}
+	}
+}
+linyuanjing_next_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = market_next_effect_disabled
+			hidden_trigger = {
+				from = {
+					OR = {
+						AND = {
+							OR = {
+								check_variable = {
+									which = linyuanjing_page
+									value = 1
+								}
+							}
+							NOT = {
+								check_variable = {
+									which = linyuanjing_extra_page
+									value = 2
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = market_no_effect_disabled
+			hidden_trigger = {
+				from = {
+					OR = {
+						check_variable = {
+							which = linyuanjing_page
+							value = 1
+						}
+					}
+				}
+			}
+		}
+	}
+	potential = {
+	}
+	effect = {
+		hidden_effect = {
+			owner = {
+				change_variable = {
+					which = linyuanjing_extra_page
+					value = 1
+				}
+			}
+		}
+	}
+}
+linyuanjing_page_1_effect = {
+	allow = {	
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = linyuanjing_page
+				value = 1
+			}
+			check_variable = {
+				which = linyuanjing_extra_page
+				value = 1
+			}
+		}
+	}
+	effect = {
+	}
+}
+linyuanjing_confirm_1_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = linyuanjing_reborn_1_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 4000
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = linyuanjing_need_not_reborn_1_effect_disabled
+			hidden_trigger = {
+				from = {
+					has_country_flag = jiedu_wangguiren_wait
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = linyuanjing_page
+				value = 1
+			}
+			check_variable = {
+				which = linyuanjing_extra_page
+				value = 1
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -4000
+				}
+				create_leader = {
+					name = jiedu_wangguiren
+					tier = leader_tier_legendary
+					class = governor
+					species = this
+					gender = female
+					event_leader = yes
+					immortal = yes
+					randomize_traits = no
+					skill = 1
+					hide_age = yes
+					skip_background_generation = no
+					custom_description = "jiedu_wangguiren_desc"
+					traits = {
+						trait = trait_jiedu_wangguiren_1
+						trait = trait_jiedu_wangguiren_2
+						trait = trait_jiedu_wangguiren_3
+						trait = trait_jiedu_wangguiren_4
+						trait = trait_jiedu_wangguiren_5
+					}
+					effect = {
+						change_leader_portrait = wangguiren
+						change_background_ethic = ethic_materialist
+						set_leader_flag = jiedu_wangguiren
+					}
+				}
+				if = {
+					limit = { exists = event_target:origin_Xianzhou }
+					event_target:origin_Xianzhou = {
+						add_resource = {
+							xundi = 3000
+						}
+					}
+				}
+				remove_country_flag = jiedu_wangguiren_wait
+			}
+		}
+	}
+}
+linyuanjing_confirm_2_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = linyuanjing_reborn_2_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 5000
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = linyuanjing_need_not_reborn_2_effect_disabled
+			hidden_trigger = {
+				from = {
+					has_country_flag = dark_moze_wait
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = linyuanjing_page
+				value = 1
+			}
+			check_variable = {
+				which = linyuanjing_extra_page
+				value = 1
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -5000
+				}
+				create_leader = {
+					name = dark_moze
+					tier = leader_tier_legendary
+					class = commander
+					species = this
+					gender = male
+					event_leader = yes
+					immortal = yes
+					randomize_traits = no
+					skill = 1
+					hide_age = yes
+					skip_background_generation = no
+					custom_description = "dark_moze_desc"
+					traits = {
+						trait = trait_dark_moze_1
+						trait = trait_dark_moze_2
+						trait = trait_dark_moze_3
+						trait = trait_dark_moze_4
+						trait = trait_dark_moze_5
+					}
+					effect = {
+						change_leader_portrait = moze
+						change_background_ethic = ethic_militarist
+						set_leader_flag = dark_moze
+					}
+				}
+				if = {
+					limit = { exists = event_target:origin_Xianzhou }
+					event_target:origin_Xianzhou = {
+						add_resource = {
+							xundi = 3750
+						}
+					}
+				}
+				remove_country_flag = dark_moze_wait
+			}
+		}
+	}
+}
+linyuanjing_confirm_3_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = linyuanjing_reborn_3_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 7000
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = linyuanjing_need_not_reborn_3_effect_disabled
+			hidden_trigger = {
+				from = {
+					has_country_flag = player_guinaifen_wait
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = linyuanjing_page
+				value = 1
+			}
+			check_variable = {
+				which = linyuanjing_extra_page
+				value = 1
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -7000
+				}
+				create_leader = {
+					name = player_guinaifen
+					tier = leader_tier_legendary
+					class = official
+					species = this
+					gender = female
+					event_leader = yes
+					immortal = yes
+					randomize_traits = no
+					skill = 1
+					hide_age = yes
+					skip_background_generation = no
+					custom_description = "player_guinaifen_desc"
+					traits = {
+						trait = trait_player_guinaifen_1
+						trait = trait_player_guinaifen_2
+						trait = trait_player_guinaifen_3
+						trait = trait_player_guinaifen_4
+						trait = trait_player_guinaifen_5
+					}
+					effect = {
+						change_leader_portrait = guinaifen
+						change_background_ethic = ethic_pacifist
+						set_leader_flag = player_guinaifen
+					}
+				}
+				if = {
+					limit = { exists = event_target:origin_Xianzhou }
+					event_target:origin_Xianzhou = {
+						add_resource = {
+							xundi = 5250
+						}
+					}
+				}
+				remove_country_flag = player_guinaifen_wait
+			}
+		}
+	}
+}
+linyuanjing_confirm_4_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = linyuanjing_reborn_4_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 12000
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = linyuanjing_need_not_reborn_4_effect_disabled
+			hidden_trigger = {
+				from = {
+					has_country_flag = miaosuan_fuxuan_wait
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = linyuanjing_page
+				value = 1
+			}
+			check_variable = {
+				which = linyuanjing_extra_page
+				value = 1
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -12000
+				}
+				create_leader = {
+					name = miaosuan_fuxuan
+					tier = leader_tier_legendary
+					class = scientist
+					species = this
+					gender = female
+					event_leader = yes
+					immortal = yes
+					randomize_traits = no
+					skill = 3
+					hide_age = yes
+					skip_background_generation = no
+					custom_description = "miaosuan_fuxuan_desc"
+					traits = {
+						trait = trait_miaosuan_fuxuan_1
+						trait = trait_miaosuan_fuxuan_2
+						trait = trait_miaosuan_fuxuan_3
+						trait = trait_miaosuan_fuxuan_4
+						trait = trait_miaosuan_fuxuan_5
+						trait = trait_miaosuan_fuxuan_6
+					}
+					effect = {
+						change_leader_portrait = miaosuan_fuxuan
+						change_background_ethic = ethic_fanatic_egalitarian
+						set_leader_flag = miaosuan_fuxuan
+					}
+				}
+				if = {
+					limit = { exists = event_target:origin_Xianzhou }
+					event_target:origin_Xianzhou = {
+						add_resource = {
+							xundi = 9000
+						}
+					}
+				}
+				remove_country_flag = miaosuan_fuxuan_wait
+			}
+		}
+	}
+}
+linyuanjing_confirm_5_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = linyuanjing_reborn_5_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 16000
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = linyuanjing_need_not_reborn_5_effect_disabled
+			hidden_trigger = {
+				from = {
+					has_country_flag = jiantai_yanqing_wait
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = linyuanjing_page
+				value = 1
+			}
+			check_variable = {
+				which = linyuanjing_extra_page
+				value = 1
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -16000
+				}
+				create_leader = {
+					name = jiantai_yanqing
+					tier = leader_tier_legendary
+					class = official
+					species = this
+					gender = male
+					event_leader = yes
+					immortal = yes
+					randomize_traits = no
+					skill = 2
+					hide_age = yes
+					skip_background_generation = no
+					custom_description = "jiantai_yanqing_desc"
+					traits = {
+						trait = trait_jiantai_yanqing_1
+						trait = trait_jiantai_yanqing_2
+						trait = trait_jiantai_yanqing_3
+						trait = trait_jiantai_yanqing_4
+						trait = trait_jiantai_yanqing_5
+					}
+					effect = {
+						change_leader_portrait = jiantai_yanqing
+						change_background_ethic = ethic_fanatic_pacifist
+						set_leader_flag = jiantai_yanqing
+					}
+				}
+				if = {
+					limit = { exists = event_target:origin_Xianzhou }
+					event_target:origin_Xianzhou = {
+						add_resource = {
+							xundi = 12000
+						}
+					}
+				}
+				remove_country_flag = jiantai_yanqing_wait
+			}
+		}
+	}
+}
+linyuanjing_confirm_6_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = linyuanjing_reborn_6_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 20000
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = linyuanjing_need_not_reborn_6_effect_disabled
+			hidden_trigger = {
+				from = {
+					has_country_flag = liejian_yunli_wait
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = linyuanjing_page
+				value = 1
+			}
+			check_variable = {
+				which = linyuanjing_extra_page
+				value = 1
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -20000
+				}
+				create_leader = {
+					name = liejian_yunli
+					tier = leader_tier_legendary
+					class = commander
+					species = this
+					gender = female
+					event_leader = yes
+					immortal = yes
+					randomize_traits = no
+					skill = 2
+					hide_age = yes
+					skip_background_generation = no
+					custom_description = "liejian_yunli_desc"
+					traits = {
+						trait = trait_liejian_yunli_1
+						trait = trait_liejian_yunli_2
+						trait = trait_liejian_yunli_3
+						trait = trait_liejian_yunli_4
+						trait = trait_liejian_yunli_5
+					}
+					effect = {
+						change_leader_portrait = liejian_yunli
+						change_background_ethic = ethic_fanatic_militarist
+						set_leader_flag = liejian_yunli
+					}
+				}
+				if = {
+					limit = { exists = event_target:origin_Xianzhou }
+					event_target:origin_Xianzhou = {
+						add_resource = {
+							xundi = 15000
+						}
+					}
+				}
+				remove_country_flag = liejian_yunli_wait
+			}
+		}
+	}
+}
+linyuanjing_confirm_7_effect = {
+	allow = {
+		custom_tooltip = {
+			fail_text = linyuanjing_reborn_7_effect_disabled
+			hidden_trigger = {
+				from = {
+					resource_stockpile_compare = {
+						resource = xundi
+						value >= 4000
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = linyuanjing_need_not_reborn_7_effect_disabled
+			hidden_trigger = {
+				from = {
+					has_country_flag = feiguang_jingliu_wait
+				}
+			}
+		}
+	}
+	potential = {
+		from = {
+			check_variable = {
+				which = linyuanjing_page
+				value = 1
+			}
+			check_variable = {
+				which = linyuanjing_extra_page
+				value = 1
+			}
+		}
+	}
+	effect = {
+		hidden_effect = {
+			from = {
+				add_resource = {
+					xundi = -4000
+				}
+				create_leader = {
+					name = feiguang_jingliu
+					tier = leader_tier_legendary
+					class = commander
+					species = this
+					gender = female
+					event_leader = yes
+					immortal = yes
+					randomize_traits = no
+					skill = 5
+					hide_age = yes
+					skip_background_generation = no
+					custom_description = "feiguang_jingliu_desc"
+					traits = {
+						trait = trait_feiguang_jingliu_1
+						trait = trait_feiguang_jingliu_2
+						trait = trait_feiguang_jingliu_3
+						trait = trait_feiguang_jingliu_4
+						trait = trait_feiguang_jingliu_5
+						trait = trait_feiguang_jingliu_6
+						trait = trait_feiguang_jingliu_7
+					}
+					effect = {
+						change_leader_portrait = feiguang_jingliu
+						change_background_ethic = ethic_fanatic_militarist
+						set_leader_flag = feiguang_jingliu
+					}
+				}
+				if = {
+					limit = { exists = event_target:origin_Xianzhou }
+					event_target:origin_Xianzhou = {
+						add_resource = {
+							xundi = 3000
+						}
+					}
+				}
+				remove_country_flag = feiguang_jingliu_wait
 			}
 		}
 	}
