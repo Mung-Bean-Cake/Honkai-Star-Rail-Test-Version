@@ -110,7 +110,7 @@ decision_custom_design = {
 
 	effect = {
 		owner = {
-			country_event = {id =xiaoqiaosi.1007}
+			country_event = {id =xiaoqiaosi.1005}
 		}
 	}
 
@@ -288,6 +288,66 @@ decision_craze_party_3 = {
 			owner = {set_country_flag = decision_craze_party_3}
 			owner = {country_event = {id = craze.1001}}
 		}
+	}
+
+	ai_weight = {
+		weight = 1
+		modifier = {
+			factor = 100
+			exists = owner
+			OR = {
+				pop_amount >= 7000
+				is_capital = yes
+			}
+		}
+	}
+}
+#————————————————————————
+decision_seek_for_fengrao = {
+	important = yes
+	owned_planets_only = yes
+	icon = decision_arcology_project
+
+	enactment_time = 300
+	resources = {
+		category = decisions
+		cost = {
+			
+		}
+	}
+
+	potential = {
+		or = {
+			is_planet_class = pc_gaia
+		}
+		
+		is_artificial = no
+		exists = owner
+		owner = { 
+			has_origin = origin_erxiangleyuan
+			has_ascension_perk = ap_the_craze_crisis  
+			has_country_flag = seek_for_fengrao
+		}
+	}
+
+	allow = {
+		owner = {is_ai = no}
+	}
+
+	on_queued = {
+		set_planet_flag = seek_for_fengrao_planet
+		owner = {
+			country_event = {
+				id = craze.42
+			}
+		}
+	}
+
+	on_unqueued = {
+	}
+
+	effect = {
+		
 	}
 
 	ai_weight = {

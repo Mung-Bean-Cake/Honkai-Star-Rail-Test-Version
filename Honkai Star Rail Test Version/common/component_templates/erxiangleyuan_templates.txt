@@ -5,24 +5,238 @@ weapon_component_template = { # Neutron Beam
 	type = planet_killer
 	use_ship_main_target = no
 
-	prerequisites = { "tech_pk_neutron" }
+	
 
 	icon = GFX_ship_part_neutron_sweep
 	icon_frame = 1
 
-	potential = {
-		ship_uses_colossus_components = yes
-	}
+	prerequisites = {"tech_achieve_menp_2_test_3"}
 	size_restriction = { craze_star_eater }
 	component_set = "craze_planet_eater"
 
-	planet_destruction_gfx = "neutron_planet_gfx"
+	planet_destruction_gfx = "gobble_planet_gfx"
+
+	valid_for_country = {
+		#has_menace_perk = menp_planet_eater
+	}
 
 	ai_weight = {
 		factor = 1
 		modifier = {
 			factor = 5
 			is_homicidal = no
+		}
+	}
+}
+weapon_component_template = {
+    key = "craze_planet_eater_beam"
+    size = titanic
+    type = instant
+    prio_projectile = yes
+
+    icon = "GFX_ship_part_perdition_beam"
+    icon_frame = 1
+
+    firing_arc = 30
+    use_ship_main_target = no
+
+    tags = { weapon_type_energy weapon_role_artillery t_slot }
+
+    
+    component_set = "craze_planet_eater_beam"
+    projectile_gfx = "perdition_beam"
+
+	prerequisites = {"tech_achieve_menp_2_test_3"}
+    size_restriction = { craze_star_eater }
+    resources = {
+        category = ship_components
+        cost = {
+            alloys = 100
+            # rare_crystals = @titanic_t6_rare
+        }
+        upkeep = {
+           
+            
+        }
+    }
+	power = 1000 #能耗，理论上应该为负数
+    damage = { min = 15000 max = 30000  }
+	hull_damage = 3
+    shield_damage = 2
+	armor_damage = 2
+	windup = { min = 200 max = 200}
+	range = 300
+	accuracy = 1
+    tracking = 0.2
+    target_weights = {
+         titan = 5
+         battleship = 2
+    }
+
+    ai_weight = {
+        weight = 1
+        modifier = {
+            # factor = 0.0
+            # no_resource_for_component = { RESOURCE = rare_crystals }
+        }
+    }
+}
+utility_component_template = {
+	key = "craze_star_eater_power"
+	size = small
+	icon = "GFX_ship_part_reactor_3"
+	icon_frame = 1
+	power = 100000
+	resources = {
+		category = ship_components
+		cost = {
+			alloys = 10
+		}
+		upkeep = {
+			energy = 0.10
+			alloys = 0.01
+		}
+	}
+	prerequisites = {  }
+	component_set = "power_core"
+	prerequisites = {"tech_achieve_menp_2_test_3"}
+    size_restriction = { craze_star_eater }
+	ai_weight = {
+		weight = 0
+	}
+}
+
+#曲时空推进器
+utility_component_template = {
+	key = "craze_star_eater_tuijin"
+	size = small
+	icon = "GFX_ship_part_thruster_5"
+	icon_frame = 1
+	power = -500
+	resources = {
+		category = ship_components
+		cost = {
+			alloys = 10
+		}
+	}
+
+	modifier = {
+		ship_base_speed_mult = 0.4
+	}
+
+	prerequisites = { }
+	component_set = "thruster_components"
+	prerequisites = {"tech_achieve_menp_2_test_3"}
+    size_restriction = { craze_star_eater }
+	ai_weight = {
+		weight = 0
+	}
+}
+
+#时空间探针
+utility_component_template = {
+	key = "craze_star_eater_leida"
+	size = medium
+	icon = "GFX_ship_part_sensor_3"
+	icon_frame = 1
+	power = -500
+	resources = {
+		category = ship_components
+		cost = {
+			alloys = 10
+		}
+	}
+	modifier = {
+		SHIP_EVASION_ADD = 5
+		SHIP_ACCURACY_ADD = 5
+	}
+	sensor_range = 4
+	hyperlane_range = 5
+	
+
+	prerequisites = { }
+	component_set = "sensor_components"
+	prerequisites = {"tech_achieve_menp_2_test_3"}
+    size_restriction = { craze_star_eater }
+	ai_weight = {
+		weight = 0
+	}
+}
+
+#阿房宫系统
+utility_component_template = {
+	key = "craze_star_eater_diannao"
+	size = small
+	icon = "GFX_ship_part_computer_artillery_sapient"
+	icon_frame = 1
+	power = -500
+	resources = {
+		category = ship_components
+		cost = {
+			alloys = 10
+		}
+	}
+	class_restriction = { shipclass_military shipclass_starbase shipclass_military_special }
+	prerequisites = {"tech_achieve_menp_2_test_3"}
+    size_restriction = { craze_star_eater }
+	component_set = "combat_computers"
+	ship_behavior = "artillery"
+	prerequisites = {  }
+	ai_tags = { artillery artillery_stealth energy_torpedoes energy_torpedoes_stealth }
+	ai_tag_weight = 0
+
+	ship_modifier = {
+		ship_fire_rate_mult = 0.1
+		ship_weapon_range_mult = 0.1
+	}
+
+	ai_weight = {
+		weight = 0
+	}
+}
+
+#光环
+utility_component_template = {
+	key = "craze_star_eater_guanghuan"
+	size = medium
+	icon = "GFX_ship_part_aura_inspiring_presence"
+	icon_frame = 1
+	power = 0
+	hidden = yes
+	prerequisites = {"tech_achieve_menp_2_test_3"}
+    size_restriction = { craze_star_eater }
+	component_set = "ENIGMATIC_DISRUPTION_FIELD"
+
+	hostile_aura = {
+		name = "craze_star_eater_guanghuan"
+		system_wide = yes
+
+		stack_info = {			#A ship can only be affected by one aura of a certain id. If multiple auras have the same ID the one with the highest priority will be applied.
+			id = craze_star_eater_guanghuan
+			priority = 1
+		}
+
+		modifier = {
+			ship_shield_regen_add_perc = -0.10
+			ship_armor_regen_add_perc = -0.10
+			weapon_type_point_defense_weapon_damage_mult = -0.2
+			weapon_type_point_defense_weapon_fire_rate_mult = -0.2
+		}
+
+		damage_per_day = { 
+            shield_damage = 200
+            accuracy = 0.5 
+		}
+
+		graphics = {
+			area_effect = {
+				entity = "circle_area_entity"
+				dynamic_scale = yes
+			}
+			ship_effect = {
+				entity = "ship_aura_negative_entity"
+				dynamic_scale = no
+			}
 		}
 	}
 }
