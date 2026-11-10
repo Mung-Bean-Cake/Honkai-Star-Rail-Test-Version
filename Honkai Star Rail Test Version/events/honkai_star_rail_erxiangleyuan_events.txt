@@ -132,6 +132,7 @@ country_event = {
 		}
 	}
 }
+#各种资源变换为变量，不要动
 country_event = {
 	id = xiaoqiaosi.1004
 	hide_window = yes
@@ -185,203 +186,10 @@ country_event = {
 		}
 	}
 }
-##DOT_SR_Hunter.4
-country_event = {
-    id = xiaoqiaosi.1005
-    is_triggered_only = yes
-    title = DOT_SR_Hunter.4.title
-    desc = DOT_SR_Hunter.4.desc
-    picture = aha_gift
-    trigger = {
-		has_origin = origin_erxiangleyuan
-        NOT = {has_country_flag = refuse_aha_gift}
-		 from= {
-			or = {
-				is_megastructure_type = mega_shipyard_0
-                is_megastructure_type = dyson_sphere_0
-                is_megastructure_type = spy_orb_0
-                is_megastructure_type = think_tank_0
-                is_megastructure_type = matter_decompressor_0
-                is_megastructure_type = mega_art_installation_0
-                is_megastructure_type = interstellar_assembly_0
-			}
-           
-        }
-    }
-    immediate = {
-		remove_country_flag = received_aha_gift
-    }
-    option = {
-        name = DOT_SR_Hunter.4.b
-        custom_tooltip = DOT_SR_Hunter.4.th
-        set_country_flag = refuse_aha_gift
-        hidden_effect = {
-            random_planet_within_border = {
-                limit = {
-                    is_capital = yes
-                }
-                remove_building = building_factory_1
-                remove_building = building_medical_1
-                remove_building = building_holo_theatres
-                remove_building = building_robot_assembly_plant
-            }
-        }
-    }
-    option = {
-        name = DOT_SR_Hunter.4.a
-        custom_tooltip = DOT_SR_Hunter.4.tt
-        owner = {
-            set_country_flag = received_aha_gift_1
-            add_resource = {
-                alloys = 10000
-                energy = 5000
-                yuzhousuipian = 1000
-            }
-            add_modifier = {
-                modifier = aha_joke_2
-                days = 1800
-            }
-        }
-        from = {
-            set_megastructure_flag = aha_gift
-        }
-    }
-}
-##DOT_SR_Hunter.27
-country_event = {
-    id = xiaoqiaosi.1006
-    title = DOT_SR_Hunter.27.title
-    desc = DOT_SR_Hunter.27.desc
-    is_triggered_only = yes
-    picture = aha_gift
-    trigger = {
-        has_country_flag = received_aha_gift_1
-        from= {
-			or = {
-				is_megastructure_type = mega_shipyard_3
-                is_megastructure_type = dyson_sphere_5
-                is_megastructure_type = spy_orb_4
-                is_megastructure_type = think_tank_3
-                is_megastructure_type = matter_decompressor_4
-                is_megastructure_type = mega_art_installation_3
-                is_megastructure_type = interstellar_assembly_4
-			}
-           
-        }
-        NOT = {has_modifier = aha_joke}
-        NOT = {from = {is_special_megastructure = yes}}
-    }
-    immediate = {
-       every_owned_megastructure = {
-		if = {
-			limit = {has_megastructure_flag = aha_gift is_megastructure_type = mega_shipyard_3}
-            delete_megastructure = this
-			root = {
-			    if = {
-                limit = {
-					has_relic = r_contingency_core
-                    has_country_flag = built_mega_shipyard_site
-                }
-                remove_country_flag = built_mega_shipyard_site_contingency
-            }
-            remove_country_flag = built_mega_shipyard_site
-		}
-		}
-		if = {
-			limit = {has_megastructure_flag = aha_gift is_megastructure_type = dyson_sphere_5}
-            delete_megastructure = this
-			root = {
-			    if = {
-                limit = {
-                    has_relic = r_contingency_core
-                    has_country_flag = built_dyson_sphere
-                }
-                remove_country_flag = built_dyson_sphere_contingency
-            }
-            remove_country_flag = built_dyson_sphere
-		}
-		}
-		if = {
-			limit = {has_megastructure_flag = aha_gift is_megastructure_type = spy_orb_4}
-            delete_megastructure = this
-			root = {
-			    if = {
-                limit = {
-					has_relic = r_contingency_core
-                    has_country_flag = built_spyorb
-                }
-                remove_country_flag = built_spyorb_contingency
-            }
-            remove_country_flag = built_spyorb
-		}
-		}
-		if = {
-			limit = {has_megastructure_flag = aha_gift is_megastructure_type = think_tank_3}
-            delete_megastructure = this
-			root = {
-			    if = {
-                limit = {
-                    has_relic = r_contingency_core
-                    has_country_flag = built_think_tank
-                }
-                remove_country_flag = built_think_tank_contingency
-            }
-            remove_country_flag = built_think_tank
-		}
-		}
-		if = {
-			limit = {has_megastructure_flag = aha_gift is_megastructure_type = matter_decompressor_4}
-            delete_megastructure = this
-			root = {
-			    if = {
-                limit = {
-                    has_relic = r_contingency_core
-                    has_country_flag = built_matter_decompressor_site
-                }
-                remove_country_flag = built_matter_decompressor_site_contingency
-            }
-            remove_country_flag = built_matter_decompressor_site
-		}
-		}
-		if = {
-			limit = {has_megastructure_flag = aha_gift is_megastructure_type = mega_art_installation_3}
-            delete_megastructure = this
-			root = {
-			    if = {
-                limit = {
-                    has_relic = r_contingency_core
-                    has_country_flag = built_mega_art_installation
-                }
-                remove_country_flag = built_mega_art_installation_contingency
-            }
-            remove_country_flag = built_mega_art_installation
-		}
-		}
-		if = {
-			limit = {has_megastructure_flag = aha_gift is_megastructure_type = interstellar_assembly_4}
-            delete_megastructure = this
-			root = {
-			    if = {
-                limit = {
-                    has_relic = r_contingency_core
-                    has_country_flag = built_mega_shipyard_site
-                }
-                remove_country_flag = built_interstellar_assembly_site_contingency
-            }
-            remove_country_flag = built_interstellar_assembly_site
-		}
-		}
-       
-       }
-       
-    }
-    option = {
-        name = DOT_SR_Hunter.27.a
-    }
-}
+
 
 country_event = {
-    id = xiaoqiaosi.1007
+    id = xiaoqiaosi.1005
     title = "xiaoqiaosi.4001_title"
     desc = xiaoqiaosi.4001_title
     is_triggered_only = yes
@@ -1502,7 +1310,7 @@ country_event = {
 					set_owner = root
 					create_ship = {
 						name =  "Kingdom_big_ship"
-					    design = "NAME_Kingdom_big_ship_design" 
+					    design = "Kingdom_big_ship_design" 
 					}
 					set_location = {
 						target = ROOT.capital_scope
@@ -1535,7 +1343,7 @@ country_event = {
 		set_country_flag = is_show_time_langzun
 		change_variable = {
 			which = num_leader_langzun_t1
-			value = 1
+			value = 2
 		}
 		change_variable = {
 			which = xiaodian
@@ -2030,7 +1838,7 @@ country_event = {
 			limit = {any_owned_leader = {has_leader_flag = langzun} has_country_flag = is_huanyu_time not = {has_country_flag = is_show_time_langzun}}
 			change_variable = {
 				which = num_leader_langzun_t1
-				value = 2
+				value = 5
 			}
 		}	
 		#真珠
@@ -2088,6 +1896,15 @@ country_event = {
 	title = xiaoqiaosi.3003_title
 	desc = xiaoqiaosi.3003_desc
 	is_triggered_only = yes
+
+	immediate = {
+		set_country_flag = achieve_menp_1_test_2
+		set_country_flag = achieve_menp_2_test_3
+		add_resource = {
+			the_power_of_wish = 3000
+		}
+		
+	}
 	
 }
 country_event = {

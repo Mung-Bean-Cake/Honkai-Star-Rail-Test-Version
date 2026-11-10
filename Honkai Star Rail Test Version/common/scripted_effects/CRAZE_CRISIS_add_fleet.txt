@@ -1,0 +1,109 @@
+create_tongxie_fleet = {
+    owner = {
+        create_leader = {
+            class = commander
+            species = root
+            name = random
+            skill = 10
+            effect = {
+                set_age = 10
+                save_event_target_as = tongxie_fleet_leader
+            }
+        }
+    }
+    create_fleet = {
+        effect = {
+            set_owner = event_target:achieve_menp_4_test_5_tongxie
+            while = {
+                count = 5
+                create_ship = {
+                    name = random
+                    design = "craze_pinuokangni_mothership_design"
+                    graphical_culture = humanoid_01
+                }
+            }
+            while = {
+                count = 30
+                create_ship = {
+                    name = random
+                    design = "craze_pinuokangni_battleship_design"
+                    graphical_culture = humanoid_01
+                }
+            }
+            assign_leader = event_target:tongxie_fleet_leader
+            set_location = {
+                target = root
+                distance = 45
+                angle = random
+            }
+            set_fleet_bombardment_stance = indiscriminate
+            fleet_event = { id = DDT_FY.4000 }
+            create_antimatter_ship_buff = yes
+        }
+    }
+}
+create_common_starbase_tongxie = {
+    create_starbase = {
+        size = common_starbase
+        owner = event_target:achieve_menp_4_test_5_tongxie
+        
+    }
+    last_created_ship = {
+        create_antimatter_starbase_buff = yes
+    }
+}
+
+create_shenmi_fleet = {
+    owner = {
+        create_leader = {
+            class = commander
+            species = root
+            name = random
+            skill = 10
+            effect = {
+                set_age = 10
+                save_event_target_as = shenmi_fleet_leader
+            }
+        }
+    }
+    create_fleet = {
+        effect = {
+            set_owner = event_target:achieve_menp_4_test_5_shenmi
+            while = {
+                count = 25
+                create_ship = {
+                    name = random
+                    design = "craze_shenmi_corvetteship_design"
+                    graphical_culture = humanoid_01
+                }
+            }
+            while = {
+                count = 30
+                create_ship = {
+                    name = random
+                    design = "craze_shenmi_cruisership_design"
+                    graphical_culture = humanoid_01
+                }
+            }
+            assign_leader = event_target:shenmi_fleet_leader
+            set_location = {
+                target = root
+                distance = 45
+                angle = random
+            }
+            set_fleet_bombardment_stance = indiscriminate
+            fleet_event = { id = DDT_FY.4000 }
+            create_antimatter_ship_buff = yes
+        }
+    }
+}
+create_common_starbase_shenmi = {
+    create_starbase = {
+        size = common_starbase
+        owner = event_target:achieve_menp_4_test_5_shenmi
+       
+    }
+    last_created_ship = {
+        create_antimatter_starbase_buff = yes
+    }
+}
