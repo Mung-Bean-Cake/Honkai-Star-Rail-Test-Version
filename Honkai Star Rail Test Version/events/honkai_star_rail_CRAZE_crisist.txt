@@ -1288,11 +1288,18 @@ country_event = {
 		}
 		if = {
 			limit = {has_country_flag = achieve_menp_4_test_5_fengrao}
+
 			set_country_flag = seek_for_fengrao
 			country_event = {
 				id = craze.41
 				days = 1
 			}
+
+		}
+		if = {
+			limit = {has_country_flag = achieve_menp_4_test_5_fanyu}
+			set_country_flag = seek_for_fanyu
+
 
 		}
 	}
@@ -1403,6 +1410,9 @@ country_event = {
 		room = root
 	}
 	fire_only_once = yes
+	trigger = {
+		not = {has_country_flag = already_seek_for_shenmi_fail}
+	}
 	
 
 	option = { 
@@ -1489,22 +1499,45 @@ country_event = {
 country_event = {
 	id = craze.45
 	title = craze.45_title
-	desc  ={trigger = {not = {has_country_flag = already_seek_for_shenmi} text = craze.45_desc1}}
-	desc  ={trigger = {has_country_flag = already_seek_for_shenmi_fail} text = craze.45_desc2}
+	desc = craze.45_desc
 	#picture
 	is_triggered_only = yes
 
 	immediate = {
-		if = {
-			limit = {not = {has_country_flag = already_seek_for_shenmi_fail}}
-			#set_country_flag = achieve_menp_4_test_5_shenmi
-		}
+		
 	}
 	option = {
-		name = craze.42_op_4
-		country_event = {id = craze.44 days = 1}
+		name = craze.45_op_1
+		
 	}
 }
+
+#公司与仙舟
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #——————————天灾目标
 #建造节点
 planet_event = {
@@ -1565,7 +1598,7 @@ country_event = {
     trigger = {
         from = { 
 			is_ai = no  
-		    has_origin = origin_erxiangleyuan 
+		    has_origin = origin_erxiangleyuan
 			has_country_flag = achieve_menp_1_test_2
 		}
         exists = fromfrom
