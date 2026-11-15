@@ -912,6 +912,7 @@ country_event = {
 	hide_window = yes
 	is_triggered_only = yes
 	trigger = {
+		country_has_situation = {type = craze_situation_2}
 		not = {
 			or = {
 				has_country_flag = situation_craze_situation_2_4_allow
@@ -944,7 +945,7 @@ country_event = {
 	id = craze.25
 	title = craze.25_title
 	desc = craze.25_desc
-	picture = GFX_evt_federation_fleet
+	picture = GFX_evt_magnetic_storm
 	is_triggered_only = yes
 	
 	immediate = {
@@ -1132,6 +1133,7 @@ country_event = {
     id = craze.32
     title = craze.32_title
 	desc = craze.32_desc
+	picture = GFX_evt_astral_rift_crystal_3
     is_triggered_only = yes
 
     trigger = {    
@@ -1140,377 +1142,45 @@ country_event = {
 
    option = {
 		name = craze.32_op_1
-		country_event = {id = craze.33}	
+		country_event = {id = craze.33}
 	} 
 }
 country_event = {
     id = craze.33
     title = craze.33_title
 	desc = craze.33_desc
+	picture = GFX_evt_astral_rift_whiteout_2
     is_triggered_only = yes
 
-    option = {
-		name = craze.32_op_1
-		country_event = {id = craze.34}	
+   option = {
+		name = craze.33_op_1
+		set_country_flag = achieve_menp_3_test_4
+		
 	} 
 }
 country_event = {
     id = craze.34
     title = craze.34_title
 	desc = craze.34_desc
-    is_triggered_only = yes
-
-	option = {
-		name = craze.32_op_1
-		country_event = {id = craze.35}	
-	}  
-}
-country_event = {
-    id = craze.35
-    title = craze.35_title
-	desc = craze.35_desc
-    is_triggered_only = yes
-
-    
-	option = {
-		name = craze.32_op_1
-		country_event = {id = craze.36}		
-	} 
-}
-country_event = {
-    id = craze.36
-    title = craze.36_title
-	desc = craze.36_desc
-    is_triggered_only = yes
-
-    immediate = {
-		set_country_flag = achieve_menp_3_test_4
-	}   
-	option = {
-		name = craze.32_op_1	
-		country_event = {id = craze.37}	
-	} 
-}
-country_event = {
-    id = craze.37
-    title = craze.37_title
-	desc = craze.37_desc
-    is_triggered_only = yes
-
-	option = {
-		name = craze.37_op_1
-		set_country_flag = 	achieve_menp_4_test_5_tongxie
-	} 
-	option = {
-		name = craze.37_op_2
-		set_country_flag = 	achieve_menp_4_test_5_fengrao	
-	}
-	option = {
-		name = craze.37_op_3
-		set_country_flag = 	achieve_menp_4_test_5_fanyu
-	}
-	option = {
-		name = craze.37_op_4
-		set_country_flag = 	achieve_menp_4_test_5_shenmi	
-	}
-}
-
-country_event = {
-    id = craze.38
-    title = craze.38_title
-	desc  ={trigger = {has_country_flag = achieve_menp_4_test_5_tongxie} text = craze.38_desc1}
-	desc  ={trigger = {has_country_flag = achieve_menp_4_test_5_fengrao} text = craze.38_desc2}
-	desc  ={trigger = {has_country_flag = achieve_menp_4_test_5_fanyu} text = craze.38_desc3}
-	desc  ={trigger = {has_country_flag = achieve_menp_4_test_5_shenmi} text = craze.38_desc4}
-	#picture
+	picture = GFX_evt_astral_rift_vortex
     is_triggered_only = yes
 
 	trigger = {
 		has_ascension_perk = ap_the_craze_crisis 
 		resource_stockpile_compare = {
 			resource = the_power_of_wish
-			value >=6000
+			value >=7000
 		}
 	}
+	
 
-	immediate = {
-		#DOT_SR_system_04
-		if = {
-			limit = {has_country_flag = achieve_menp_4_test_5_tongxie}
-			
-			create_country = {
-                name = "Penacony" 
-                species = from
-                authority = auth_oligarchic
-				origin = origin_Penacony
-                ethos = {
-                   ethic = "ethic_xenophile"
-	               ethic = "ethic_pacifist"
-	               ethic = "ethic_spiritualist"
-                }
-                type = "Hostile_mid_crisis_country"
-                name_list = "DOT_SR_HUMAN1"
-                flag = random
-
-			    effect = {
-				    save_global_event_target_as = achieve_menp_4_test_5_tongxie
-					                         
-			    }
-		    }
-			event_target:erxiangleyuan_system = {
-				spawn_system = {
-					initializer = DOT_SR_system_04
-					max_jumps = 30
-			        min_jumps = 10
-			        hyperlane = yes
-			        direction = rimwards
-					effect = {
-						set_owner = event_target:achieve_menp_4_test_5_tongxie
-						save_global_event_target_as = achieve_menp_4_test_5_tongxie_system
-					}
-				}
-			}
-			event_target:achieve_menp_4_test_5_tongxie_system = {
-				create_tongxie_fleet = yes
-				create_tongxie_fleet = yes
-			    create_common_starbase_tongxie = yes
-				
-			}
-		}
-		if = {
-			limit = {has_country_flag = achieve_menp_4_test_5_shenmi}
-
-			set_country_flag = seek_for_shenmi
-			set_variable = {
-				which = seek_for_shenmi
-				value = 0
-			}
-		}
-		if = {
-			limit = {has_country_flag = achieve_menp_4_test_5_fengrao}
-
-			set_country_flag = seek_for_fengrao
-			country_event = {
-				id = craze.41
-				days = 1
-			}
-
-		}
-		if = {
-			limit = {has_country_flag = achieve_menp_4_test_5_fanyu}
-			set_country_flag = seek_for_fanyu
-
-
-		}
-	}
-
-	option = {
-		name = craze.38_op_1
-		
+   option = {
+		name = craze.34_op_1	
 	} 
-	
 }
-country_event = {
-	id = craze.39
-	hide_window = yes
-	is_triggered_only = yes
-	trigger = {
-		not = {has_country_flag = already_seek_for_shenmi}
-	}
 
-	immediate = {
-		if = {
-			limit = {check_variable = {which = seek_for_shenmi value <3}}
-			change_variable = {
-			    which = seek_for_shenmi
-			    value = 1
-		    }
-			country_event = {id = craze.40}
-		}
-		if = {
-			limit = {check_variable = {which = seek_for_shenmi value =>3}}
-			set_country_flag = already_seek_for_shenmi
-			country_event = {id = craze.40}
-		}
-	}
-}
-country_event = {
-	id = craze.40
-	title = craze.40_title
-	desc  ={trigger = {not = {has_country_flag = already_seek_for_shenmi} text = craze.40_desc1}}
-	desc  ={trigger = {has_country_flag = already_seek_for_shenmi} text = craze.40_desc2}
-	#picture = 
-	is_triggered_only = yes
 
-	immediate = {
-		if= {
-			limit = {has_country_flag = already_seek_for_shenmi}
-			create_country = {
-                name = "shenmi_vs_???" 
-                species = from
-                authority = auth_oligarchic
-                ethos = {
-                   ethic = "ethic_xenophile"
-	               ethic = "ethic_pacifist"
-	               ethic = "ethic_spiritualist"
-                }
-                type = "Hostile_mid_crisis_country"
-                name_list = "DOT_SR_HUMAN1"
-                flag = random
 
-			    effect = {
-				    save_global_event_target_as = achieve_menp_4_test_5_shenmi
-					                         
-			    }
-		    }
-			event_target:erxiangleyuan_system = {
-				spawn_system = {
-					initializer = DOT_SR_system_04
-					max_jumps = 30
-			        min_jumps = 10
-			        hyperlane = yes
-			        direction = rimwards
-					effect = {
-						set_owner = event_target:achieve_menp_4_test_5_shenmi
-						save_global_event_target_as = achieve_menp_4_test_5_shenmi_system
-					}
-				}
-			}
-			event_target:achieve_menp_4_test_5_shenmi_system = {
-				create_shenmi_fleet = yes
-				create_shenmi_fleet = yes
-			    create_common_starbase_shenmi = yes
-				
-			}
-		}
-	}
-	option = {
-		name = craze.40_op_1
-	}
-}
-country_event = {
-	id = craze.41
-	title = craze.41_title
-	desc = craze.41_desc
-	is_triggered_only = yes
-
-	option = {
-		name = craze.41_op_1
-	}
-	
-}
-country_event = {
-	id = craze.42
-	title = "craze.42_title"
-	desc = "craze.42_desc"
-	diplomatic = yes
-	picture = GFX_evt_mysterious_signal
-	picture_event_data = {
-		portrait = jingyuan
-		room = root
-	}
-	fire_only_once = yes
-	trigger = {
-		not = {has_country_flag = already_seek_for_shenmi_fail}
-	}
-	
-
-	option = { 
-		name = craze.42_op_1
-		response_text = craze.42_op_1.response
-		country_event = {id = craze.42 days = 1}
-	}
-
-	option = { 
-		name = craze.42_op_2
-		response_text = craze.42_op_2.response
-		country_event = {id = craze.42 days = 1}
-		
-	}
-
-	option = { 
-		name = craze.42_op_3
-		response_text = craze.42_op_3.response
-		country_event = {id = craze.43 days = 1}
-		
-		
-	}
-  	
-	
-	option = {
-		name = craze.42_op_4
-		default_hide_option = yes
-		country_event = {id = craze.43 days = 1}
-	}
-}
-country_event = {
-	id = craze.43
-	title = craze.43_title
-	desc = craze.43_title
-	#picture
-	is_triggered_only = yes
-
-	immediate = {
-		random_owned_planet = {
-			limit = {has_planet_flag = seek_for_fengrao_planet}
-			destroy_colony = yes
-		}
-	}
-	option = {
-		name = craze.42_op_4
-		country_event = {id = craze.44 days = 1}
-	}
-}
-country_event = {
-	id = craze.44
-	title = "craze.44_title"
-	desc = "craze.44_desc"
-	diplomatic = yes
-	picture = GFX_evt_mysterious_signal
-	picture_event_data = {
-		portrait = jingyuan
-		room = root
-	}
-	is_triggered_only = yes
-
-	option = { 
-		name = craze.44_op_1
-		response_text = craze.44_op_1.response
-		country_event = {id = craze.42 days = 1}
-	}
-
-	option = { 
-		name = craze.44_op_2
-		response_text = craze.44_op_2.response
-		country_event = {id = craze.42 days = 1}
-		
-	}
-
-	option = { 
-		name = craze.44_op_3
-		response_text = craze.44_op_3.response
-		set_country_flag = already_seek_for_shenmi_fail
-		country_event = {
-			id = craze.45
-			days = 1
-		}
-	}
-}
-country_event = {
-	id = craze.45
-	title = craze.45_title
-	desc = craze.45_desc
-	#picture
-	is_triggered_only = yes
-
-	immediate = {
-		
-	}
-	option = {
-		name = craze.45_op_1
-		
-	}
-}
 
 #公司与仙舟
 

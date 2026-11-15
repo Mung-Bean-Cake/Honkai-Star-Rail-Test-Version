@@ -1,0 +1,37 @@
+#二相乐园
+#重相位对映体魔方
+relic_double_phase_enantiomer_cube = {
+	activation_duration = 30   #冷却时间
+    portrait = "GFX_r_double_phase_enantiomer_cube" #图标，动态，需要定义
+    sound = "relic_activation_the_rubricator" #点击的声音
+	possible = { #检测是否能被启动
+        custom_tooltip = {
+            fail_text = "requires_relic_no_cooldown"
+            NOT = {
+                has_modifier = relic_activation_cooldown
+            }
+        }
+    }
+	active_effect = { #启动的时候的效果
+        custom_tooltip = double_phase_enantiomer_cube_effect
+        hidden_effect = {
+            country_event = {
+                id = xiaoqiaosi.1008
+            }
+        }
+        custom_tooltip = relic_triumph_cooldown_veryveryshort
+    }
+    possible = { #检测是否能被启动
+	    custom_tooltip = {
+            fail_text = "haimeixiewan"
+			has_country_flag = haimeixiewan
+        }
+        custom_tooltip = {
+            fail_text = "requires_relic_no_cooldown"
+            NOT = {
+                has_modifier = relic_activation_cooldown
+            }
+        }
+    }
+   
+}
