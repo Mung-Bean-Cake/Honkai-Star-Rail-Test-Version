@@ -91,8 +91,10 @@ decision_custom_design = {
 	}
 
 	potential = {
-		has_building = building_phantasmoon_court
-		is_planet_class = pc_erxiangleyuan
+		or = {
+			has_building = building_phantasmoon_court
+			has_building = building_phantasmoon_court_1
+		}		
 		is_artificial = no
 		exists = owner
 		owner = { has_origin = origin_erxiangleyuan }
@@ -324,9 +326,10 @@ decision_seek_for_fengrao = {
 		is_artificial = no
 		exists = owner
 		owner = { 
+			not = {has_country_flag = already_seek_for_shenmi_fail}
 			has_origin = origin_erxiangleyuan
 			has_ascension_perk = ap_the_craze_crisis  
-			has_country_flag = seek_for_fengrao
+			has_country_flag = achieve_menp_4_test_5_ing
 		}
 	}
 
@@ -337,9 +340,7 @@ decision_seek_for_fengrao = {
 	on_queued = {
 		set_planet_flag = seek_for_fengrao_planet
 		owner = {
-			country_event = {
-				id = craze.42
-			}
+			country_event = {id = craze.38}
 		}
 	}
 

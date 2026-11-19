@@ -1,0 +1,88 @@
+mega_mingtu_eater = {
+	entity = "mega_mingtu_eater"
+	construction_entity = "construction_platform_entity"
+	portrait = "GFX_megastructure_construction_background"
+	place_entity_on_planet_plane = no
+	entity_offset = { x = -20 y = -20 }
+	rotate_to_center = no
+	scale_offset = yes
+	build_time = 1800
+	resources = {
+		category = megastructures
+		cost = {
+			alloys = 20000
+			minerals = 5000
+			energy = 5000
+		}
+
+	}
+
+	custom_tooltip_requirements = "MEGASTRUCTURE_TOOLTIP_REQUIREMENTS_MATTER_DECOMPRESSOR"
+
+	prerequisites = { "tech_mingtu_eater" }
+
+	potential = {
+		
+	}
+
+	possible = {
+		hidden_trigger = {
+			exists = starbase
+		}
+		custom_tooltip = {
+			fail_text = "requires_inside_border"
+			is_inside_border = from
+		}
+		custom_tooltip = {
+			fail_text = "requires_surveyed_system"
+			NOT = {
+				any_system_planet = {
+					is_surveyed = {
+						who = prev.from
+						status = no
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = "requires_no_habitable_planets"
+			NOT = {
+				any_system_planet = {
+					colonizable_planet = yes
+				}
+			}
+		}
+		custom_tooltip = {
+			fail_text = "requires_no_existing_matter_decompressor"
+			from = {
+				OR = {
+					has_relic = r_contingency_core
+					NOT = { has_country_flag = built_matter_decompressor_site }
+				}
+			}
+		}
+	}
+
+	placement_rules = {
+		planet_possible = {
+			custom_tooltip = {
+				fail_text = "must_build_around_star"
+				is_star = yes
+			}
+		}
+	}
+
+	# root = system
+	# from = country
+
+	on_build_start = {}
+	on_build_cancel = {}
+	on_build_complete = {
+		root = {
+			random_system_planet = {
+				limit = {is_star = yes}
+				remove_planet = yes
+			}
+		}
+	}
+}

@@ -338,17 +338,7 @@ building_phantasmoon_court_1 = {
 
 	potential = {
 		owner = {has_origin = origin_erxiangleyuan}
-		exists = planet
-		planet = {
-			not = {
-				has_building = building_phantasmoon_court
-			}
-		}
-		owner = {
-			check_variable = {
-			    which = building_phantasmoon_court_1_amount
-			    value < 3
-		}
+		exists = planet	
 		has_technology = tech_building_phantasmoon_court_1
 		}
 		
@@ -360,6 +350,18 @@ building_phantasmoon_court_1 = {
 		}
 	}
 	allow = {
+		custom_tooltip = {
+			hidden_trigger = {planet = {not = {has_building = building_phantasmoon_court}}}
+			text = build_building_phantasmoon_court_1_fail_1
+		}
+		custom_tooltip = {
+			hidden_trigger = {owner = {check_variable = {which = building_phantasmoon_court_1_amount value <9}}}
+			text = build_building_phantasmoon_court_1_fail_2
+		}
+		custom_tooltip = {
+			hidden_trigger = {planet = {is_planet_class = pc_erxiangleyuan}}
+			text = build_building_phantasmoon_court_1_fail_3
+		}
 	}
 	
 	

@@ -791,6 +791,7 @@ country_event = {
 	option = {
 		name = craze.17_op_4
 		default_hide_option = yes
+		set_country_flag = craze_situation_2_patience
 		random_situation = {
 			limit = {is_situation_type = situation_craze_situation_2}
 			add_situation_progress = 1
@@ -912,7 +913,7 @@ country_event = {
 	hide_window = yes
 	is_triggered_only = yes
 	trigger = {
-		country_has_situation = {type = craze_situation_2}
+		has_country_flag = craze_situation_2_patience
 		not = {
 			or = {
 				has_country_flag = situation_craze_situation_2_4_allow
@@ -1172,13 +1173,455 @@ country_event = {
 			value >=7000
 		}
 	}
+
+	immediate = {
+		set_country_flag = achieve_menp_4_test_5_ing
+		#同谐
+		random_system = {
+            limit = {
+                distance = {
+                    source = event_target:erxiangleyuan_system
+                    min_jumps = 15
+                    max_jumps = 20
+                }  
+            }
+			spawn_system = {
+				initializer = DOT_SR_system_04
+			    hyperlane = yes
+			    direction = rimwards
+				effect = {
+				   save_global_event_target_as = achieve_menp_4_test_5_tongxie_system
+			    }
+			}   
+        }
+        event_target:achieve_menp_4_test_5_tongxie_system = {
+           
+			random_system_planet = {
+                limit = { is_star = yes }
+				planet_event = {id = craze.35}
+				set_owner = event_target:achieve_menp_4_test_5_tongxie
+            }
+			random_system_planet = {
+                limit = { is_planet_class = pc_city }
+				set_owner = event_target:achieve_menp_4_test_5_tongxie
+            }
+        }
+		
+		#神秘
+	    # id = craze.36
+		set_variable = {
+			which = seek_for_shenmi
+			value = 0 
+		}
+		while = {
+			random_system = {
+				limit = {
+					distance = {
+						source = event_target:erxiangleyuan_system
+						max_jumps = 6
+						min_jumps = 2
+					}
+				}
+				random_system_planet = {
+					limit = {is_star = no}
+					split_astral_scar = { ID = microverse }
+				}
+			}
+		}
+
+	}
 	
+	
+	#丰饶
+	#星球决议 decision_seek_for_fengrao
+	#触发 id = craze.38
 
    option = {
 		name = craze.34_op_1	
 	} 
 }
 
+planet_event = {
+	id = craze.35
+	hide_window = yes
+	is_triggered_only = yes
+
+	immediate = {
+		create_species = {
+            name = "Penacony"
+            class = "ANTIMATTER"
+            namelist = "DOT_SR_HUMAN1"
+            traits = {
+                trait = "trait_The_Destruction_special"
+            }
+            effect = { save_global_event_target_as = menp_4_test_5_tongxie_pop }
+        }
+        create_species = {
+            name = Penacony
+            class = "HUIMIE"
+            traits = {
+                trait = "trait_The_Destruction_special"
+            }
+            effect = { save_global_event_target_as = menp_4_test_5_tongxie_ruler }
+        }
+		create_country = {
+            name = "Penacony"
+            species = from
+            authority = auth_oligarchic
+            origin = origin_Penacony
+            ethos = {
+                ethic = "ethic_xenophile"
+                ethic = "ethic_pacifist"
+                ethic = "ethic_spiritualist"
+            }
+			type = Hostile_end_crisis_country
+            name_list = "DOT_SR_HUMAN1"
+            flag = random
+            effect = {
+                save_global_event_target_as = achieve_menp_4_test_5_tongxie
+            }
+        }
+		create_tongxie_fleet = yes
+		create_tongxie_fleet = yes
+		create_tongxie_fleet = yes
+		create_tongxie_fleet = yes
+		
+		event_target:achieve_menp_4_test_5_tongxie_system = {
+			create_common_starbase_tongxie = yes
+		}
+		solar_system = {
+			create_starbase = {
+				size = starbase_citadel
+				owner = event_target:achieve_menp_4_test_5_tongxie
+				effect = {
+					set_starbase_flag = achieve_menp_4_test_5_tongxie_starbase
+				}
+			}
+		}
+	}
+}
+
+#神秘
+country_event = {
+	id = craze.36
+	title = craze.36_title
+	desc ={trigger = {owner = {check_variable = {which = seek_for_shenmi value <3}}   }text = craze.36_desc1}
+	desc ={trigger = {owner = {check_variable = {which = seek_for_shenmi value >= 3}} }text = craze.36_desc2}
+	
+	picture = GFX_evt_formless_system
+	is_triggered_only = yes
+
+	trigger = {
+		not = {has_country_flag = already_seeked_shenmi}
+	}
+
+	immediate = {
+		if = {
+			limit = {check_variable = {which = seek_for_shenmi value <3}}
+		    change_variable = {
+			    which = seek_for_shenmi
+			    value = 1
+		    }
+		}
+		
+		if = {
+			limit = {check_variable = {which = seek_for_shenmi value >= 3}}
+
+			owner = {set_country_flag = already_seeked_shenmi}
+			random_system = {
+				limit = {
+					distance = {
+						source = event_target:erxiangleyuan_system
+						min_jumps = 4
+						max_jumps = 5
+					}		
+				}
+				spawn_system = {
+					initializer = DOT_SR_system_ss3
+					hyperlane = yes
+					direction = rimwards
+				    effect = {
+				        save_global_event_target_as = achieve_menp_4_test_5_shenmi_system
+					}
+				}
+			}
+			event_target:achieve_menp_4_test_5_shenmi_system = {
+			    random_system_planet = {
+                    limit = { is_planet_class = pc_black_hole }
+				    planet_event = {id = craze.37}
+				    set_owner = event_target:achieve_menp_4_test_5_shenmi
+                }
+			    random_system_planet = {
+                    limit = { is_planet_class = pc_black_hole }
+				    set_owner = event_target:achieve_menp_4_test_5_shenmi
+                }
+            }
+		}
+	}
+}
+
+planet_event = {
+	id = craze.37
+	hide_window = yes
+	is_triggered_only = yes
+
+	immediate = {
+		create_species = {
+            name = "shenmi"
+            class = "ANTIMATTER"
+            namelist = "DOT_SR_HUMAN1"
+            traits = {
+                trait = "trait_The_Destruction_special"
+            }
+            effect = { save_global_event_target_as = menp_4_test_5_shenmi_pop }
+        }
+        create_species = {
+            name = shenmi
+            class = "HUIMIE"
+            traits = {
+                trait = "trait_The_Destruction_special"
+            }
+            effect = { save_global_event_target_as = menp_4_test_5_shenmi_ruler }
+        }
+		create_country = {
+            name = "shenmi_vs_???"
+            species = from
+            authority = auth_oligarchic
+            #origin = origin_Penacony
+            ethos = {
+                ethic = "ethic_xenophile"
+                ethic = "ethic_pacifist"
+                ethic = "ethic_spiritualist"
+            }
+			type = Hostile_end_crisis_country
+            name_list = "DOT_SR_HUMAN1"
+            flag = random
+            effect = {
+                save_global_event_target_as = achieve_menp_4_test_5_shenmi
+            }
+        }
+		create_shenmi_fleet = yes
+		create_shenmi_fleet = yes
+		create_shenmi_fleet = yes
+		create_shenmi_fleet = yes
+		
+		event_target:achieve_menp_4_test_5_shenmi_system = {
+			create_common_starbase_shenmi = yes
+		}
+		solar_system = {
+			create_starbase = {
+				size = starbase_citadel
+				owner = event_target:achieve_menp_4_test_5_shenmi
+				effect = {
+					set_starbase_flag = achieve_menp_4_test_5_shenmi_starbase
+				}
+			}
+		}
+	}
+}
+#丰饶
+country_event = {
+	id = craze.38
+	title = "craze.38_title"
+	desc = "craze.38_desc"
+	diplomatic = yes
+	picture = GFX_evt_mysterious_signal
+	picture_event_data = {
+		portrait = jingyuan
+		room = root
+	}
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+
+	option = { 
+		name = craze.38_op_1
+		response_text = craze.38_op_1.response
+		country_event = {id = craze.38 days = 1}
+	}
+
+	option = { 
+		name = craze.38_op_2
+		response_text = craze.38_op_2.response
+		country_event = {id = craze.38 days = 1}
+		
+	}
+
+	option = { 
+		name = craze.38_op_3
+		response_text = craze.38_op_3.response
+		country_event = {id = craze.39 days = 1}
+		
+		
+	}
+  	
+	
+	option = {
+		name = craze.38_op_4
+		default_hide_option = yes
+		country_event = {id = craze.39 days = 1}
+	}
+}
+country_event = {
+	id = craze.39
+	title = craze.39_title
+	desc = craze.39_title
+	picture = GFX_evt_exploding_planet
+	is_triggered_only = yes
+
+	immediate = {
+		random_owned_planet = {
+			limit = {has_planet_flag = seek_for_fengrao_planet}
+			destroy_colony = yes
+		}
+	}
+	option = {
+		name = craze.39_op_4
+		country_event = {id = craze.40 days = 1}
+	}
+}
+country_event = {
+	id = craze.40
+	title = "craze.40_title"
+	desc = "craze.40_desc"
+	diplomatic = yes
+	picture = GFX_evt_mysterious_signal
+	picture_event_data = {
+		portrait = jingyuan
+		room = root
+	}
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { 
+		name = craze.40_op_1
+		response_text = craze.40_op_1.response
+		country_event = {id = craze.40 days = 1}
+	}
+
+	option = { 
+		name = craze.40_op_2
+		response_text = craze.40_op_2.response
+		country_event = {id = craze.40 days = 1}
+		
+	}
+
+	option = { 
+		name = craze.40_op_3
+		response_text = craze.40_op_3.response
+		set_country_flag = already_seek_for_shenmi_fail
+		
+	}
+}
+#三个信标
+starbase_event = {
+	id = craze.41
+	title = craze.41_title
+	desc = craze.41_desc
+	picture = GFX_evt_interstellar_assembly
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		this = {
+			or = {
+				has_starbase_flag = achieve_menp_4_test_5_tongxie_starbase
+				has_starbase_flag = achieve_menp_4_test_5_shenmi_starbase
+				has_starbase_flag = achieve_menp_4_test_5_zhishi_starbase
+			}
+		}
+	}
+
+	immediate = {
+		from = {
+			owner = {
+				add_tech_progress = {
+				tech = tech_mingtu_eater
+				progress = 0.01
+			    }
+			}
+		}
+	}
+	option = {
+		name = craze.41_op_1
+	}
+}
+
+country_event = {
+	id = craze.42
+	title = craze.42_title
+	desc ={trigger = {owner = {has_country_flag = eat_tongxie}}text = craze.42_desc1}
+	desc ={trigger = {owner = {has_country_flag = eat_shenmi} }text = craze.42_desc2}
+	desc ={trigger = {owner = {has_country_flag = eat_zhishi} }text = craze.42_desc3}
+	picture = GFX_evt_interstellar_assembly
+	is_triggered_only = yes
+
+	trigger = {
+		from = {
+			is_megastructure_type = mega_mingtu_eater
+		}
+	}
+
+	immediate = {
+		if = {
+			limit = { fromfrom = {has_starbase_flag = achieve_menp_4_test_5_tongxie_starbase}}
+			set_country_flag = eat_tongxie
+		}
+		if = {
+			limit = { fromfrom = {has_starbase_flag = achieve_menp_4_test_5_shenmi_starbase}}
+			set_country_flag = eat_shenmi
+		}
+		if = {
+			limit = { fromfrom = {has_starbase_flag = achieve_menp_4_test_5_zhishi_starbase}}
+			set_country_flag = eat_zhishi
+		}
+		
+	}
+	option = {
+		name = craze.42_op_1
+		country_event = {
+			id = craze.43
+		}
+	}
+}
+
+country_event = {
+	id = craze.43
+	hide_window = yes
+	is_triggered_only = yes
+
+	immediate = {
+		owner = {
+			remove_country_flag = eat_tongxie
+		    remove_country_flag = eat_shenmi
+		    remove_country_flag = eat_zhishi
+			add_tech_progress = {
+			tech = tech_mingtu_eater
+			progress = 0.01
+			}
+		}
+	}
+}
+
+planet_event = {
+	id = craze.6008
+	title = astral_planes.6008.name
+	desc = astral_planes.6008.desc
+	picture = GFX_evt_astral_rift
+	show_sound = rift_open
+	location = from
+	is_triggered_only = yes
+
+	option = {
+		name = FASCINATING
+		
+			split_astral_scar = { ID = microverse }
+			solar_system = {
+				remove_modifier = instable_astral_scar_modifier
+			}
+		
+	}
+}
 
 
 

@@ -804,3 +804,255 @@ DOT_SR_system_ss2 = {
 		
 	}
 }
+DOT_SR_system_ss2 = {
+	name = "craze_broken_system"
+	class = "sc_binary_8"
+	max_instances = 1
+	asteroid_belt = {
+		type = rocky_asteroid_belt
+		radius = 125
+	}
+	usage = custom_empire
+	flags = {  }
+	init_effect = {
+		save_global_event_target_as = tantao_system
+	}
+	planet = {
+		class = pc_black_hole
+		orbit_distance = 0
+		
+	}
+	planet = {
+		name = "craze_bronken_planet" 
+		class = pc_broken
+			
+		orbit_angle = { min = 90 max = 270 }
+		orbit_distance = 20
+			
+		size = 40
+		starting_planet = no
+		init_effect = { 
+          save_global_event_target_as = still_alive_planet
+          set_planet_flag = still_alive_planet
+		}		
+		deposit_blockers = none
+		
+		
+	}
+}
+DOT_SR_system_ss3 = {
+    class = sc_black_hole
+	name = "NAME_mystery_0"
+
+	max_instances = 1
+	scaled_spawn_chance = 8	# scales by galaxy size (1000 stars = 10x base)
+
+	flags = {  }
+
+	planet = {
+		class = star
+		orbit_distance = 0
+		size = 40
+
+		init_effect = {
+			prevent_anomaly = yes
+			clear_deposits = yes
+			save_event_target_as = patrol_1
+			set_deposit = d_dark_matter_deposit_10
+			create_ambient_object = {
+				type = "space_storm_1"
+				location = this
+			}
+			last_created_ambient_object = {
+				set_location = {
+					target = prev
+					distance = 0
+					angle = random
+				}
+			}
+		}
+	}
+
+	change_orbit = 60
+
+	planet = {
+		class = "pc_black_hole"
+		name = "NAME_mystery_1"
+		orbit_distance = 0
+		orbit_angle = 1
+		size = 20
+		has_ring = no
+
+		init_effect = {
+			prevent_anomaly = yes
+		}
+	}
+
+	change_orbit = 60
+
+	planet = {
+		class = "pc_black_hole"
+		name = "NAME_mystery_2"
+		orbit_distance = 0
+		orbit_angle = 210
+		size = 20
+		has_ring = no
+
+		init_effect = {
+			prevent_anomaly = yes
+			save_event_target_as = patrol_2
+			clear_deposits = yes
+		}
+	}
+
+	change_orbit = 60
+
+	planet = {
+		class = "pc_black_hole"
+		name = "NAME_mystery_3"
+		orbit_distance = 0
+		orbit_angle = 75
+		size = 10
+		has_ring = no
+
+		init_effect = {
+			prevent_anomaly = yes
+		}
+	}
+
+	change_orbit = 10
+
+	planet = {
+		class = "pc_black_hole"
+		name = "NAME_mystery_4"
+		orbit_distance = 0
+		orbit_angle = 120
+		size = 20
+		has_ring = no
+
+		init_effect = {
+			prevent_anomaly = yes
+			clear_deposits = yes
+		}
+	}
+
+	planet = {
+		class = "pc_black_hole"
+		name = "NAME_mystery_5"
+		orbit_distance = 0
+		orbit_angle = 200
+		size = 15
+		has_ring = no
+
+		init_effect = {
+			prevent_anomaly = yes
+		}
+	}
+
+	change_orbit = 5
+
+	planet = {
+		class = "pc_black_hole"
+		name = "NAME_mystery_6"
+		orbit_distance = 0
+		orbit_angle = 90
+		size = 15
+		has_ring = no
+
+		init_effect = {
+			prevent_anomaly = yes
+			save_event_target_as = patrol_3
+		}
+	}
+
+	planet = {
+		class = "pc_black_hole"
+		name = "NAME_mystery_7"
+		orbit_distance = 0
+		orbit_angle = 130
+		size = 20
+		has_ring = no
+
+		init_effect = {
+			prevent_anomaly = yes
+			clear_deposits = yes
+		}
+	}
+
+	change_orbit = 30
+
+	planet = {
+		class = "pc_black_hole"
+		name = "NAME_mystery_8"
+		orbit_distance = 0
+		orbit_angle = 245
+		size = 10
+		has_ring = no
+
+		init_effect = {
+			prevent_anomaly = yes
+		}
+	}
+
+	change_orbit = 10
+
+	planet = {
+		class = "pc_black_hole"
+		name = "NAME_mystery_9"
+		orbit_distance = 0
+		orbit_angle = 110
+		size = 20
+		has_ring = no
+
+		init_effect = {
+			prevent_anomaly = yes
+			clear_deposits = yes
+		}
+	}
+
+	change_orbit = 10
+
+	planet = {
+		class = "pc_black_hole"
+		name = "NAME_mystery_10"
+		orbit_distance = 0
+		orbit_angle = 170
+		size = 10
+		has_ring = no
+
+		init_effect = {
+			prevent_anomaly = yes
+			save_event_target_as = patrol_4
+		}
+	}
+
+	init_effect = {
+		create_country = {
+            name = "shenmi_vs_???" 
+            species = from
+            authority = auth_oligarchic
+            ethos = {
+                ethic = "ethic_xenophile"
+	            ethic = "ethic_pacifist"
+	            ethic = "ethic_spiritualist"
+            }
+            type = "Hostile_mid_crisis_country"
+            name_list = "DOT_SR_HUMAN1"
+            flag = random
+
+			effect = {
+				save_global_event_target_as = achieve_menp_4_test_5_shenmi
+					                         
+			}
+		}
+        create_shenmi_fleet = yes
+        create_shenmi_fleet = yes
+        create_shenmi_fleet = yes
+        create_shenmi_fleet = yes
+        create_starbase = {
+			size = starbase_citadel
+			owner = event_target:achieve_menp_4_test_5_shenmi
+	    }
+	}
+}
+
