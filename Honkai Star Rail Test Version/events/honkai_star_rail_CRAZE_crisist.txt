@@ -244,7 +244,7 @@ country_event = {
 	id = craze.9
 	title = craze.9_title
 	desc = craze.9_desc
-	picture = GFX_evt_nomad_contracts
+	picture = GFX_craze_9
 	is_triggered_only = yes
 	fire_only_once = yes
 
@@ -1757,75 +1757,115 @@ country_event = {
     id = craze.46
     title = craze.34_title
 	desc = craze.34_desc
-	picture = GFX_evt_astral_rift_vortex
+	picture = GFX_evt_fallen_empire_awakes
     is_triggered_only = yes
 	fire_only_once = yes
 
 	immediate = {
-		set_country_flag = achieve_menp_4_test_5_ing
-		#同谐
+		#仙舟舰队
 		random_system = {
-            limit = {
-                distance = {
-                    source = event_target:erxiangleyuan_system
-                    min_jumps = 15
-                    max_jumps = 20
-                }  
-            }
-			spawn_system = {
-				initializer = DOT_SR_system_04
-			    hyperlane = yes
-			    direction = rimwards
-				effect = {
-				   save_global_event_target_as = achieve_menp_4_test_5_tongxie_system
-			    }
-			}   
-        }
-        event_target:achieve_menp_4_test_5_tongxie_system = {
-            set_star_flag = achieve_menp_4_test_5_tongxie_system
-			random_system_planet = {
-                limit = { is_star = yes }
-				planet_event = {id = craze.35}
-				set_owner = event_target:achieve_menp_4_test_5_tongxie
-            }
-			random_system_planet = {
-                limit = { is_planet_class = pc_city }
-				set_owner = event_target:achieve_menp_4_test_5_tongxie
-            }
-        }
-		
-		#神秘
-	    # id = craze.36
-		set_variable = {
-			which = seek_for_shenmi
-			value = 0 
-		}
-		while = {
-			random_system = {
-				limit = {
-					distance = {
-						source = event_target:erxiangleyuan_system
-						max_jumps = 6
-						min_jumps = 2
-					}
-				}
-				random_system_planet = {
-					limit = {is_star = no}
-					split_astral_scar = { ID = microverse }
+			limit = {
+				distance = {
+					source = event_target:erxiangleyuan_system
+					min_jumps = 10
 				}
 			}
+			spawn_system = {
+				initializer = DOT_SR_system_ss5
+				hyperlane = yes
+			    direction = rimwards
+				effect = {
+				    save_global_event_target_as = achieve_menp_4_test_5_xianzhou_1
+					set_name = "achieve_menp_4_test_5_xianzhou_1"
+			    }
+			}		
 		}
-
+		#公司舰队
+		random_system = {
+			limit = {
+				distance = {
+					source = event_target:erxiangleyuan_system
+					min_jumps = 10
+				}
+			}
+			spawn_system = {
+				initializer = DOT_SR_system_ss5
+				hyperlane = yes
+			    direction = rimwards
+				effect = {
+				    save_global_event_target_as = achieve_menp_4_test_5_gongsi_1
+					set_name = "achieve_menp_4_test_5_gongsi_1"
+			    }
+			}		
+		}
+		#黑塔舰队
+		random_system = {
+			limit = {
+				distance = {
+					source = event_target:erxiangleyuan_system
+					min_jumps = 10
+				}
+			}
+			spawn_system = {
+				initializer = DOT_SR_system_ss5
+				hyperlane = yes
+			    direction = rimwards
+				effect = {
+				    save_global_event_target_as = achieve_menp_4_test_5_heita_1
+					set_name = "achieve_menp_4_test_5_heita_1"
+			    }
+			}		
+		}
+		set_spawn_system_batch = begin
+		no_scope = {
+			spawn_system = {
+				initializer = DOT_SR_system_ss5
+				hyperlane = yes
+			    direction = rimwards
+				effect = {
+				    save_global_event_target_as = achieve_menp_4_test_5_xianzhou_2
+					set_name = "achieve_menp_4_test_5_xianzhou_2"
+			    }
+			}			
+		}
+		no_scope = {
+			spawn_system = {
+				initializer = DOT_SR_system_ss5
+				hyperlane = yes
+			    direction = rimwards
+				effect = {
+				    save_global_event_target_as = achieve_menp_4_test_5_gongsi_2
+					set_name = "achieve_menp_4_test_5_gongsi_2"
+			    }
+			}			
+		}
+		no_scope = {
+			spawn_system = {
+				initializer = DOT_SR_system_ss5
+				hyperlane = yes
+			    direction = rimwards
+				effect = {
+				    save_global_event_target_as = achieve_menp_4_test_5_heita_2
+					set_name = "achieve_menp_4_test_5_heita_2"
+			    }
+			}			
+		}
+		event_target:achieve_menp_4_test_5_xianzhou_1 ={
+			link_wormholes = event_target:achieve_menp_4_test_5_xianzhou_2
+			isolate_system = yes
+		}
+		event_target:achieve_menp_4_test_5_gongsi_1 ={
+			link_wormholes = event_target:achieve_menp_4_test_5_gongsi_2
+			isolate_system = yes
+		}
+		event_target:achieve_menp_4_test_5_heita_1 ={
+			link_wormholes = event_target:achieve_menp_4_test_5_heita_2
+			isolate_system = yes
+		}
+		set_spawn_system_batch = end
+		
 	}
-	
-	
-	#丰饶
-	#星球决议 decision_seek_for_fengrao
-	#触发 id = craze.38
-
-   option = {
-		name = craze.34_op_1	
-	} 
+		
 }
 
 
