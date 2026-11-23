@@ -804,42 +804,7 @@ DOT_SR_system_ss2 = {
 		
 	}
 }
-DOT_SR_system_ss2 = {
-	name = "craze_broken_system"
-	class = "sc_binary_8"
-	max_instances = 1
-	asteroid_belt = {
-		type = rocky_asteroid_belt
-		radius = 125
-	}
-	usage = custom_empire
-	flags = {  }
-	init_effect = {
-		save_global_event_target_as = tantao_system
-	}
-	planet = {
-		class = pc_black_hole
-		orbit_distance = 0
-		
-	}
-	planet = {
-		name = "craze_bronken_planet" 
-		class = pc_broken
-			
-		orbit_angle = { min = 90 max = 270 }
-		orbit_distance = 20
-			
-		size = 40
-		starting_planet = no
-		init_effect = { 
-          save_global_event_target_as = still_alive_planet
-          set_planet_flag = still_alive_planet
-		}		
-		deposit_blockers = none
-		
-		
-	}
-}
+
 DOT_SR_system_ss3 = {
     class = sc_black_hole
 	name = "NAME_mystery_0"
@@ -857,7 +822,6 @@ DOT_SR_system_ss3 = {
 		init_effect = {
 			prevent_anomaly = yes
 			clear_deposits = yes
-			save_event_target_as = patrol_1
 			set_deposit = d_dark_matter_deposit_10
 			create_ambient_object = {
 				type = "space_storm_1"
@@ -1025,34 +989,30 @@ DOT_SR_system_ss3 = {
 			save_event_target_as = patrol_4
 		}
 	}
-
-	init_effect = {
-		create_country = {
-            name = "shenmi_vs_???" 
-            species = from
-            authority = auth_oligarchic
-            ethos = {
-                ethic = "ethic_xenophile"
-	            ethic = "ethic_pacifist"
-	            ethic = "ethic_spiritualist"
-            }
-            type = "Hostile_mid_crisis_country"
-            name_list = "DOT_SR_HUMAN1"
-            flag = random
-
-			effect = {
-				save_global_event_target_as = achieve_menp_4_test_5_shenmi
-					                         
-			}
-		}
-        create_shenmi_fleet = yes
-        create_shenmi_fleet = yes
-        create_shenmi_fleet = yes
-        create_shenmi_fleet = yes
-        create_starbase = {
-			size = starbase_citadel
-			owner = event_target:achieve_menp_4_test_5_shenmi
-	    }
-	}
 }
-
+DOT_SR_system_ss4 = {
+	name = "hidden_by_firm_system"
+	class = "sc_binary_8"
+	max_instances = 1
+	asteroid_belt = {
+		type = rocky_asteroid_belt
+		radius = 125
+	}
+	usage = custom_empire
+	flags = {  }
+	init_effect = {
+		save_global_event_target_as = tantao_system
+	}
+	planet = {
+		class = pc_black_hole
+		orbit_distance = 0
+		init_effect = {
+            spawn_megastructure = {
+                type = mega_emperor_scepter
+                planet = solar_system.star
+                coords_from = this
+            }
+        }
+	}
+	
+}

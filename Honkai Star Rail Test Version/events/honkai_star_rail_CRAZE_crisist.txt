@@ -264,6 +264,8 @@ country_event = {
 	desc = craze.10_desc
 	picture = GFX_evt_astral_rift_rockworms_2
 	is_triggered_only = yes
+	fire_only_once = yes
+
 
 	trigger = {
 		owner = {
@@ -452,6 +454,7 @@ country_event = {
 	desc = craze.14_desc
 	picture = GFX_evt_fleet_evil
 	is_triggered_only = yes
+	
 
 	immediate = {	
 		create_country = {
@@ -571,7 +574,7 @@ country_event = {
 		    }					
 		}
 		}
-		else_if = {
+		else = {
 			while = {
 			count = 3
 			random_system = {
@@ -731,6 +734,8 @@ country_event = {
     desc = "craze.16_desc"
 	picture = GFX_evt_fleet_evil
     is_triggered_only = yes
+	fire_only_once = yes
+
 
 	trigger = {
 		owner = {
@@ -946,7 +951,7 @@ country_event = {
 	id = craze.25
 	title = craze.25_title
 	desc = craze.25_desc
-	picture = GFX_evt_magnetic_storm
+	picture = GFX_craze_25
 	is_triggered_only = yes
 	
 	immediate = {
@@ -1066,6 +1071,8 @@ country_event  = {
 	desc = craze.31_desc
 	picture = GFX_evt_shroud_whisperers_in_the_void
 	is_triggered_only = yes
+	fire_only_once = yes
+
 
 	trigger = {
 		has_ascension_perk = ap_the_craze_crisis 
@@ -1165,6 +1172,7 @@ country_event = {
 	desc = craze.34_desc
 	picture = GFX_evt_astral_rift_vortex
     is_triggered_only = yes
+	fire_only_once = yes
 
 	trigger = {
 		has_ascension_perk = ap_the_craze_crisis 
@@ -1195,7 +1203,7 @@ country_event = {
 			}   
         }
         event_target:achieve_menp_4_test_5_tongxie_system = {
-           
+            set_star_flag = achieve_menp_4_test_5_tongxie_system
 			random_system_planet = {
                 limit = { is_star = yes }
 				planet_event = {id = craze.35}
@@ -1346,6 +1354,7 @@ country_event = {
 				}
 			}
 			event_target:achieve_menp_4_test_5_shenmi_system = {
+				set_star_flag = achieve_menp_4_test_5_shenmi_system
 			    random_system_planet = {
                     limit = { is_planet_class = pc_black_hole }
 				    planet_event = {id = craze.37}
@@ -1509,15 +1518,16 @@ country_event = {
 	option = { 
 		name = craze.40_op_3
 		response_text = craze.40_op_3.response
-		set_country_flag = already_seek_for_shenmi_fail
+		set_country_flag = eat_fengrao
 		
 	}
 }
-#三个信标
+#四个信标
 starbase_event = {
 	id = craze.41
 	title = craze.41_title
-	desc = craze.41_desc
+	desc ={trigger = {owner = {not ={has_country_flag = has_tech_mingtu_eater}}}text = craze.41_desc0}
+	desc ={trigger = {owner = {has_country_flag = has_tech_mingtu_eater}       }text = craze.41_desc1}
 	picture = GFX_evt_interstellar_assembly
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -1533,6 +1543,30 @@ starbase_event = {
 	}
 
 	immediate = {
+		if = {
+			limit = {this = {has_starbase_flag = achieve_menp_4_test_5_tongxie_starbase}}
+			 event_target:achieve_menp_4_test_5_tongxie_system = {
+				create_point_of_interest = {
+					id = point.craze.41_1
+					name = system_full_of_tongxie
+					location = event_target:achieve_menp_4_test_5_tongxie_system
+				}
+			 }
+		}
+		if = {
+			limit = {this = {has_starbase_flag = achieve_menp_4_test_5_shenmi_starbase}}
+			 event_target:achieve_menp_4_test_5_tongxie_system = {
+				create_point_of_interest = {
+					id = point.craze.41_2
+					name = system_full_of_shenmi
+					location = event_target:achieve_menp_4_test_5_shenmi_system
+				}
+			 }
+		}
+		if = {
+			limit = {owner = {not = {has_country_flag = has_tech_mingtu_eater}}}
+			owner = {set_country_flag = tech_mingtu_eater} 
+		}
 		from = {
 			owner = {
 				add_tech_progress = {
@@ -1552,7 +1586,8 @@ country_event = {
 	title = craze.42_title
 	desc ={trigger = {owner = {has_country_flag = eat_tongxie}}text = craze.42_desc1}
 	desc ={trigger = {owner = {has_country_flag = eat_shenmi} }text = craze.42_desc2}
-	desc ={trigger = {owner = {has_country_flag = eat_zhishi} }text = craze.42_desc3}
+	desc ={trigger = {owner = {has_country_flag = eat_fengrao}}text = craze.42_desc3}
+	desc ={trigger = {owner = {has_country_flag = eat_zhishi} }text = craze.42_desc4}
 	picture = GFX_evt_interstellar_assembly
 	is_triggered_only = yes
 
@@ -1564,69 +1599,234 @@ country_event = {
 
 	immediate = {
 		if = {
-			limit = { fromfrom = {has_starbase_flag = achieve_menp_4_test_5_tongxie_starbase}}
+			limit = { fromfrom = {has_star_flag = achieve_menp_4_test_5_tongxie_system}}
 			set_country_flag = eat_tongxie
+			set_country_flag = achieve_menp_4_test_5_tongxie
+			remove_point_of_interest = point.craze.41_1
 		}
 		if = {
-			limit = { fromfrom = {has_starbase_flag = achieve_menp_4_test_5_shenmi_starbase}}
+			limit = { fromfrom = {has_star_flag = achieve_menp_4_test_5_shenmi_system}}
 			set_country_flag = eat_shenmi
+			set_country_flag = achieve_menp_4_test_5_shenmi
+			remove_point_of_interest = point.craze.41_2
 		}
 		if = {
-			limit = { fromfrom = {has_starbase_flag = achieve_menp_4_test_5_zhishi_starbase}}
+			limit = { fromfrom = {has_star_flag = achieve_menp_4_test_5_fengrao_system}}
+			set_country_flag = eat_fengrao
+			set_country_flag = achieve_menp_4_test_5_fengrao
+			remove_point_of_interest = point.craze.41_3
+		}
+		if = {
+			limit = { fromfrom = {has_star_flag = achieve_menp_4_test_5_zhishi_system}}
 			set_country_flag = eat_zhishi
+			set_country_flag = achieve_menp_4_test_5_zhishi
+			remove_point_of_interest = point.craze.41_4
 		}
 		
 	}
 	option = {
 		name = craze.42_op_1
-		country_event = {
-			id = craze.43
-		}
+		remove_country_flag = eat_tongxie
+		remove_country_flag = eat_shenmi
+		remove_country_flag = eat_zhishi
+		remove_country_flag = eat_fengrao
 	}
 }
 
 country_event = {
 	id = craze.43
-	hide_window = yes
+	title = craze.43_title
+	desc ={trigger = {owner = {not ={has_country_flag = has_tech_mingtu_eater}}}text = craze.43_desc0}
+	desc ={trigger = {owner = {has_country_flag = has_tech_mingtu_eater}       }text = craze.43_desc1}
 	is_triggered_only = yes
 
 	immediate = {
-		owner = {
-			remove_country_flag = eat_tongxie
-		    remove_country_flag = eat_shenmi
-		    remove_country_flag = eat_zhishi
-			add_tech_progress = {
-			tech = tech_mingtu_eater
-			progress = 0.01
+		if = {
+			limit = {owner = {not = {has_country_flag = has_tech_mingtu_eater}}}
+			owner = {set_country_flag = tech_mingtu_eater} 
+		}
+		from = {
+			owner = {
+				add_tech_progress = {
+				tech = tech_mingtu_eater
+				progress = 0.01
+			    }
 			}
+		}
+		event_target:achieve_menp_4_test_5_fengrao_system = {
+			create_point_of_interest = {
+				id = point.craze.41_3
+				name = system_full_of_fengrao
+				location = event_target:achieve_menp_4_test_5_fengrao_system
+			}
+		}
+		
+	}
+	option = {
+		name = craze.41_op_1
+	}
+}
+
+
+#一根权杖
+country_event  = {
+	id = craze.44
+	title = craze.44_title
+	desc = craze.44_desc
+	picture = GFX_evt_sapient_AI
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		has_ascension_perk = ap_the_craze_crisis 
+		resource_stockpile_compare = {
+			resource = the_power_of_wish
+			value >=10000
+		}
+	}
+	immediate = {
+		random_system = {
+				limit = {
+					distance = {
+					    source = event_target:erxiangleyuan_system
+					    min_jumps = 7
+					    max_jumps = 7
+				    }
+				}
+				spawn_system = {
+					initializer = DOT_SR_system_ss4
+					hyperlane = yes
+			        direction = rimwards
+				    effect = {
+				        save_global_event_target_as = achieve_menp_4_test_5_zhishi_system
+			        }
+				}			
+		    }
+			event_target:achieve_menp_4_test_5_zhishi_system = {
+				set_star_flag = achieve_menp_4_test_5_zhishi_system
+            }
+			event_target:achieve_menp_4_test_5_zhishi_system = {
+				create_point_of_interest = {
+					id = point.craze.41_4
+					name = system_full_of_zhishi
+					location = event_target:achieve_menp_4_test_5_zhishi_system
+				}
+			 }
+	}
+
+	option = {
+		name = craze.31_op_1	
+	}	
+}
+
+#最终阶段
+country_event = {
+	id = craze.45
+	title = craze.45_title
+	desc= craze.45_desc
+	picture = GFX_craze_45
+	is_triggered_only = yes
+
+	trigger = {
+		owner = {
+			nor = {
+				has_ascension_perk = ap_max_craze_crisis
+				has_ascension_perk = ap_no_craze_crisis
+			}
+			has_country_flag = achieve_menp_4_test_5_tongxie
+			has_country_flag = achieve_menp_4_test_5_shenmi
+			has_country_flag = achieve_menp_4_test_5_fengrao
+			has_country_flag = achieve_menp_4_test_5_zhishi
+		}
+	}
+
+	immediate = {
+		remove_ascension_perk = ap_the_craze_crisis
+		add_ascension_perk = ap_max_craze_crisis
+	}
+	option = {
+		name = craze.45_op_1
+		country_event = {
+			id = craze.46
+			days = 360
 		}
 	}
 }
-
-planet_event = {
-	id = craze.6008
-	title = astral_planes.6008.name
-	desc = astral_planes.6008.desc
-	picture = GFX_evt_astral_rift
-	show_sound = rift_open
-	location = from
-	is_triggered_only = yes
-
-	option = {
-		name = FASCINATING
-		
-			split_astral_scar = { ID = microverse }
-			solar_system = {
-				remove_modifier = instable_astral_scar_modifier
-			}
-		
-	}
-}
-
-
-
 #公司与仙舟
+country_event = {
+    id = craze.46
+    title = craze.34_title
+	desc = craze.34_desc
+	picture = GFX_evt_astral_rift_vortex
+    is_triggered_only = yes
+	fire_only_once = yes
 
+	immediate = {
+		set_country_flag = achieve_menp_4_test_5_ing
+		#同谐
+		random_system = {
+            limit = {
+                distance = {
+                    source = event_target:erxiangleyuan_system
+                    min_jumps = 15
+                    max_jumps = 20
+                }  
+            }
+			spawn_system = {
+				initializer = DOT_SR_system_04
+			    hyperlane = yes
+			    direction = rimwards
+				effect = {
+				   save_global_event_target_as = achieve_menp_4_test_5_tongxie_system
+			    }
+			}   
+        }
+        event_target:achieve_menp_4_test_5_tongxie_system = {
+            set_star_flag = achieve_menp_4_test_5_tongxie_system
+			random_system_planet = {
+                limit = { is_star = yes }
+				planet_event = {id = craze.35}
+				set_owner = event_target:achieve_menp_4_test_5_tongxie
+            }
+			random_system_planet = {
+                limit = { is_planet_class = pc_city }
+				set_owner = event_target:achieve_menp_4_test_5_tongxie
+            }
+        }
+		
+		#神秘
+	    # id = craze.36
+		set_variable = {
+			which = seek_for_shenmi
+			value = 0 
+		}
+		while = {
+			random_system = {
+				limit = {
+					distance = {
+						source = event_target:erxiangleyuan_system
+						max_jumps = 6
+						min_jumps = 2
+					}
+				}
+				random_system_planet = {
+					limit = {is_star = no}
+					split_astral_scar = { ID = microverse }
+				}
+			}
+		}
+
+	}
+	
+	
+	#丰饶
+	#星球决议 decision_seek_for_fengrao
+	#触发 id = craze.38
+
+   option = {
+		name = craze.34_op_1	
+	} 
+}
 
 
 
