@@ -34,3 +34,20 @@ on_entering_system_first_time = {
 		DOTGI_teyvat.200
 	}
 }
+
+# 三舰进度：事件驱动，无任何周期脉冲
+#   1) 开局每国排一次日程（DOT_SR_Dvalin.025）→ 45 / 85 年各自只掷一次 20%
+#   2) 通讯建立时判定是否「遇到星穹列车」（DOT_SR_Dvalin.028）
+# 注：原 zz_DOT_SR_ship_pulse.txt 的每月脉冲已删除。
+
+on_game_start_country = {
+	events = {
+		DOT_SR_Dvalin.025
+	}
+}
+
+on_post_communications_established_always_fire = {
+	events = {
+		DOT_SR_Dvalin.028
+	}
+}
