@@ -10,8 +10,11 @@ entity = {
 	state = { name = "idle" state_time = 5 animation = "idle"
 		event = { time = 0 node = "part1" particle = "hyper_relay_portal_effect" keep_particle = yes trigger_once = yes }
 	}
-	state = { name = "moving" state_time = 5
+	state = { name = "moving" state_time = 5 animation = "moving"
 		event = { time = 0 node = "part1" particle = "hyper_relay_portal_effect" keep_particle = yes trigger_once = yes }
 	}
-	state = { name = "death" state_time = 5 looping = no }
+	state = { name = "attack" looping = no next_state = "idle" animation = "moving"
+		event = { time = 0 node = "part1" particle = "dragon_weapon_muzzle_particle" keep_particle = no trigger_once = yes }
+	}
+	state = { name = "death" state_time = 5 looping = no animation = "idle" }
 }

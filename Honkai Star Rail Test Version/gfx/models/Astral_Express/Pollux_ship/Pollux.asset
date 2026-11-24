@@ -1,8 +1,45 @@
+animation = {
+	name = "Pollux_idle_animation"
+	file = "Pollux_idle.anim"
+}
+
+animation = {
+	name = "Pollux_moving_animation"
+	file = "Pollux_moving.anim"
+}
+
 entity = {
 	name = "Pollux_entity"
 	pdxmesh = "Pollux"
 	default_state = "idle"
-	state = { name = "idle" state_time = 5 animation = "idle" }
-	state = { name = "moving" state_time = 5 }
-	state = { name = "death" state_time = 5 looping = no }
+	state = { name = "idle" animation = "idle" state_time = 5
+		event = { time = 0 node = "thruster_C" particle = "generic_big_3_exhaust_circle_idle" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_L" particle = "generic_big_3_exhaust_circle_idle" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_R" particle = "generic_big_3_exhaust_circle_idle" keep_particle = yes trigger_once = yes }
+	}
+	state = { name = "moving" animation = "moving" state_time = 5
+		event = { time = 0 node = "thruster_C" particle = "generic_big_3_exhaust_circle_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_C" particle = "generic_1_75_exhaust_circle_long_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_L" particle = "generic_big_3_exhaust_circle_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_L" particle = "generic_1_75_exhaust_circle_long_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_R" particle = "generic_big_3_exhaust_circle_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_R" particle = "generic_1_75_exhaust_circle_long_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_U" particle = "generic_big_3_exhaust_circle_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_U" particle = "generic_1_75_exhaust_circle_long_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_D" particle = "generic_big_3_exhaust_circle_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_D" particle = "generic_1_75_exhaust_circle_long_moving" keep_particle = yes trigger_once = yes }
+	}
+	state = { name = "attack" animation = "moving" looping = no next_state = "idle"
+		event = { time = 0 node = "thruster_C" particle = "generic_big_3_exhaust_circle_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_C" particle = "generic_2_5_exhaust_line_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_L" particle = "generic_big_3_exhaust_circle_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_L" particle = "generic_2_5_exhaust_line_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_R" particle = "generic_big_3_exhaust_circle_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_R" particle = "generic_2_5_exhaust_line_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_U" particle = "generic_big_3_exhaust_circle_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_U" particle = "generic_2_5_exhaust_line_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_D" particle = "generic_big_3_exhaust_circle_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_D" particle = "generic_2_5_exhaust_line_moving" keep_particle = yes trigger_once = yes }
+	}
+	state = { name = "death" state_time = 5 looping = no animation = "idle" }
 }

@@ -2,7 +2,34 @@ entity = {
 	name = "Sam_entity"
 	pdxmesh = "Sam"
 	default_state = "idle"
-	state = { name = "idle" state_time = 5 animation = "idle" }
-	state = { name = "moving" state_time = 5 }
+	state = { name = "idle" state_time = 5
+		event = { time = 0 node = "thruster_C" particle = "generic_1_5_exhaust_circle_idle" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_L" particle = "generic_1_5_exhaust_circle_idle" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_R" particle = "generic_1_5_exhaust_circle_idle" keep_particle = yes trigger_once = yes }
+	}
+	state = { name = "moving" state_time = 5
+		event = { time = 0 node = "thruster_C" particle = "generic_1_5_exhaust_circle_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_C" particle = "generic_1_5_exhaust_circle_long_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_L" particle = "generic_1_5_exhaust_circle_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_L" particle = "generic_1_5_exhaust_circle_long_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_R" particle = "generic_1_5_exhaust_circle_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_R" particle = "generic_1_5_exhaust_circle_long_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_U" particle = "generic_1_5_exhaust_circle_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_U" particle = "generic_1_5_exhaust_circle_long_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_D" particle = "generic_1_5_exhaust_circle_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_D" particle = "generic_1_5_exhaust_circle_long_moving" keep_particle = yes trigger_once = yes }
+	}
+	state = { name = "attack" looping = no next_state = "idle"
+		event = { time = 0 node = "thruster_C" particle = "generic_1_5_exhaust_circle_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_C" particle = "generic_1_25_exhaust_circle_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_L" particle = "generic_1_5_exhaust_circle_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_L" particle = "generic_1_25_exhaust_circle_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_R" particle = "generic_1_5_exhaust_circle_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_R" particle = "generic_1_25_exhaust_circle_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_U" particle = "generic_1_5_exhaust_circle_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_U" particle = "generic_1_25_exhaust_circle_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_D" particle = "generic_1_5_exhaust_circle_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_D" particle = "generic_1_25_exhaust_circle_moving" keep_particle = yes trigger_once = yes }
+	}
 	state = { name = "death" state_time = 5 looping = no }
 }
