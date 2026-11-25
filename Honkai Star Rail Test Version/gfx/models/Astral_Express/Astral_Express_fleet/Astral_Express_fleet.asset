@@ -26,17 +26,28 @@ entity = {
 	locator = { name = "train_head" position = { 0 12 446 } }
 	locator = { name = "train_tail" position = { 0 12 -456 } }
 	locator = { name = "train_side_l_0" position = { -13 10 -300 } }
-	locator = { name = "train_side_r_0" position = { 13 10 -300 } }
 	locator = { name = "train_side_l_1" position = { -13 10 -150 } }
-	locator = { name = "train_side_r_1" position = { 13 10 -150 } }
 	locator = { name = "train_side_l_2" position = { -13 10 0 } }
-	locator = { name = "train_side_r_2" position = { 13 10 0 } }
 	locator = { name = "train_side_l_3" position = { -13 10 150 } }
-	locator = { name = "train_side_r_3" position = { 13 10 150 } }
 	locator = { name = "train_side_l_4" position = { -13 10 300 } }
+	locator = { name = "train_side_r_0" position = { 13 10 -300 } }
+	locator = { name = "train_side_r_1" position = { 13 10 -150 } }
+	locator = { name = "train_side_r_2" position = { 13 10 0 } }
+	locator = { name = "train_side_r_3" position = { 13 10 150 } }
 	locator = { name = "train_side_r_4" position = { 13 10 300 } }
 
-	state = { name = "idle" 	state_time = 5
+	# ---- 引擎尾焰挂点（3×3）----
+	locator = { name = "thruster_ML" position = { -8.0 12.0 448.0 } }
+	locator = { name = "thruster_MC" position = { -1.0 12.0 448.0 } }
+	locator = { name = "thruster_MR" position = { 6.0 12.0 448.0 } }
+	locator = { name = "thruster_UL" position = { -8.0 20.0 448.0 } }
+	locator = { name = "thruster_UC" position = { -1.0 20.0 448.0 } }
+	locator = { name = "thruster_UR" position = { 6.0 20.0 448.0 } }
+	locator = { name = "thruster_DL" position = { -8.0 4.0 448.0 } }
+	locator = { name = "thruster_DC" position = { -1.0 4.0 448.0 } }
+	locator = { name = "thruster_DR" position = { 6.0 4.0 448.0 } }
+
+	state = { name = "idle" state_time = 5
 		event = { time = 0 node = "train_top_01" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
 		event = { time = 0 node = "train_top_02" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
 		event = { time = 0 node = "train_top_03" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
@@ -61,8 +72,12 @@ entity = {
 		event = { time = 0 node = "train_side_r_3" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
 		event = { time = 0 node = "train_side_l_4" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
 		event = { time = 0 node = "train_side_r_4" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_ML" particle = "DOTGI_ark_exhaust_idle" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_MC" particle = "DOTGI_ark_exhaust_idle" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_MR" particle = "DOTGI_ark_exhaust_idle" keep_particle = yes trigger_once = yes }
 	}
-	state = { name = "moving" 	state_time = 5
+
+	state = { name = "moving" state_time = 5
 		event = { time = 0 node = "train_top_01" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
 		event = { time = 0 node = "train_top_02" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
 		event = { time = 0 node = "train_top_03" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
@@ -87,8 +102,16 @@ entity = {
 		event = { time = 0 node = "train_side_r_3" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
 		event = { time = 0 node = "train_side_l_4" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
 		event = { time = 0 node = "train_side_r_4" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_ML" particle = "DOTGI_ark_exhaust_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_MC" particle = "DOTGI_ark_exhaust_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_MR" particle = "DOTGI_ark_exhaust_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_UL" particle = "DOTGI_ark_exhaust_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_UC" particle = "DOTGI_ark_exhaust_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_UR" particle = "DOTGI_ark_exhaust_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_DC" particle = "DOTGI_ark_exhaust_moving" keep_particle = yes trigger_once = yes }
 	}
-	state = { name = "attack" 	looping = no next_state = "idle"
+
+	state = { name = "attack" state_time = 5 looping = no next_state = "idle"
 		event = { time = 0 node = "train_top_01" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
 		event = { time = 0 node = "train_top_02" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
 		event = { time = 0 node = "train_top_03" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
@@ -113,6 +136,16 @@ entity = {
 		event = { time = 0 node = "train_side_r_3" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
 		event = { time = 0 node = "train_side_l_4" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
 		event = { time = 0 node = "train_side_r_4" particle = "ship_light_blue_effect" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_ML" particle = "DOTGI_ark_exhaust_attack" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_MC" particle = "DOTGI_ark_exhaust_attack" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_MR" particle = "DOTGI_ark_exhaust_attack" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_UL" particle = "DOTGI_ark_exhaust_attack" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_UC" particle = "DOTGI_ark_exhaust_attack" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_UR" particle = "DOTGI_ark_exhaust_attack" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_DL" particle = "DOTGI_ark_exhaust_attack" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_DC" particle = "DOTGI_ark_exhaust_attack" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "thruster_DR" particle = "DOTGI_ark_exhaust_attack" keep_particle = yes trigger_once = yes }
 	}
+
 	state = { name = "death" state_time = 5 looping = no }
 }

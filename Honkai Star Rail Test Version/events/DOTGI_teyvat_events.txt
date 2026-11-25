@@ -21,7 +21,13 @@
 namespace = DOTGI_teyvat
 
 # ---------------------------------------------------------------------
-# 0) 开局掷骰：非 AI 帝国 100%（星穹列车起源）/ 50% 获得裂隙
+# 0) 裂隙掷骰：
+#    列车起源——开局立即 100% 生成，即使是 AI 国家也一样；
+#    其它 MOD 起源——20 年后 60% 生成，但只针对非 AI 国家；
+#    非 MOD 起源——20 年后 40% 生成，只针对非 AI 国家。
+#    （见 .100 / .104 / .103；.100 与 .101 的 trigger 用
+#     OR { has_origin = origin_Astral_Express  is_ai = no } 放行列车 AI，
+#     其余起源在 .100 入口就要求非 AI，.103 也再次兜底）
 # ---------------------------------------------------------------------
 country_event = {
 	id = DOTGI_teyvat.100
@@ -29,7 +35,11 @@ country_event = {
 	is_triggered_only = yes
 
 	trigger = {
-		is_ai = no
+		# 列车起源：即使是 AI 也要生成；非列车起源：必须是非 AI 玩家国家
+		OR = {
+			has_origin = origin_Astral_Express
+			is_ai = no
+		}
 		is_country_type = default
 		has_astral_planes_dlc = yes		# 星界裂隙本体需要 Astral Planes
 		exists = capital_scope
@@ -38,13 +48,73 @@ country_event = {
 
 	immediate = {
 		if = {
+			# 星穹列车起源：开局立即生成（AI/玩家都生成）
 			limit = { has_origin = origin_Astral_Express }
 			country_event = { id = DOTGI_teyvat.101 }
 		}
 		else_if = {
+			# 其它 MOD 起源（此处已确定非 AI）：20 年后 60% 生成（掷骰交给 .104）
 			limit = {
-				random = { chance = 50 }
+				OR = {
+					has_origin = origin_Xianzhou
+					has_origin = origin_Herta_Space_Station
+					has_origin = origin_luosi_star
+					has_origin = origin_Penacony
+					has_origin = origin_StellaronHunter
+					has_origin = origin_hsr_ipc
+					has_origin = origin_erxiangleyuan
+					has_origin = origin_belobog
+				}
 			}
+			country_event = { id = DOTGI_teyvat.104 years = 20 }
+		}
+		else = {
+			# 非 MOD 起源（此处已确定非 AI）：20 年后掷骰，40% 几率生成（掷骰交给 .103）
+			country_event = { id = DOTGI_teyvat.103 years = 20 }
+		}
+	}
+}
+
+# ---------------------------------------------------------------------
+# 0a) 20 年后为其它 MOD 起源掷骰（60%）；THIS = 原玩家国家（必须是非 AI）
+# ---------------------------------------------------------------------
+country_event = {
+	id = DOTGI_teyvat.104
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		is_ai = no
+		NOT = { has_country_flag = DOTGI_teyvat_void_signal_started }
+		exists = capital_scope
+	}
+
+	immediate = {
+		if = {
+			limit = { random = { chance = 60 } }
+			country_event = { id = DOTGI_teyvat.101 }
+		}
+	}
+}
+
+# ---------------------------------------------------------------------
+# 0b) 20 年后为非 MOD 起源掷骰（40%）；THIS = 原玩家国家（必须是非 AI）
+# ---------------------------------------------------------------------
+country_event = {
+	id = DOTGI_teyvat.103
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		# 只有非列车起源会走到这里（列车走 .101），仍需非 AI 兜底
+		is_ai = no
+		NOT = { has_country_flag = DOTGI_teyvat_void_signal_started }
+		exists = capital_scope
+	}
+
+	immediate = {
+		if = {
+			limit = { random = { chance = 40 } }
 			country_event = { id = DOTGI_teyvat.101 }
 		}
 	}
@@ -59,6 +129,11 @@ country_event = {
 	is_triggered_only = yes
 
 	trigger = {
+		# 列车起源即使是 AI 也要生成；其余起源只针对非 AI（.103 已确保）
+		OR = {
+			has_origin = origin_Astral_Express
+			is_ai = no
+		}
 		NOT = { has_country_flag = DOTGI_teyvat_void_signal_started }
 		exists = capital_scope
 	}
@@ -504,6 +579,10 @@ country_event = {
 							}
 						}
 					}
+
+					# ---- 提瓦特方舟「死兆星号」----
+					# 木船模型由 SZX_ships 转换而来，参照星穹列车方舟补了灯光与尾焰（3/6/9）
+					DOTGI_grant_alcor_ark = yes
 				}
 			}
 

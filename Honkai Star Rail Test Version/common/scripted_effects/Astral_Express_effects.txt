@@ -205,3 +205,43 @@ DOTGI_complete_distress_signal = {
 		}
 	}
 }
+
+# =====================================================================
+# 授予提瓦特方舟「死兆星号」
+# 作用域：提瓦特国家（DOTGI_teyvat.220 觉醒时调用一次）
+# event_target:DOTGI_teyvat_planet = 提瓦特母星
+# =====================================================================
+DOTGI_grant_alcor_ark = {
+	if = {
+		limit = { NOT = { has_country_flag = DOTGI_alcor_granted } }
+		set_country_flag = DOTGI_alcor_granted
+		create_fleet = {
+			name = DOTGI_alcor_fleet_name
+			effect = {
+				set_owner = event_target:DOTGI_teyvat_country
+				set_name = DOTGI_alcor_fleet_name
+				create_ship = {
+					name = DOTGI_alcor_ship_name
+					design = Alcor
+				}
+				if = {
+					limit = { exists = event_target:DOTGI_teyvat_planet }
+					set_location = {
+						target = event_target:DOTGI_teyvat_planet
+						distance = 60
+						angle = random
+						direction = in_system
+					}
+				}
+				else = {
+					set_location = {
+						target = event_target:DOTGI_teyvat_country.capital_scope
+						distance = 60
+						angle = random
+						direction = in_system
+					}
+				}
+			}
+		}
+	}
+}
