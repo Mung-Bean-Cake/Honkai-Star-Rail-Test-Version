@@ -134,16 +134,37 @@ country_event = {
 		}
 		text = "DOT_SR_Dvalin.001.desc_devoured"
 	}
+	# 无星界裂隙 DLC 时走原本路径，上面两个提瓦特结局 flag 都不存在，用通用文案兜底
+	desc = {
+		trigger = {
+			NOR = {
+				any_country = { has_country_flag = DOTGI_teyvat_awakened }
+				any_country = { has_country_flag = DOTGI_teyvat_devoured }
+			}
+		}
+		text = "DOT_SR_Dvalin.001.desc"
+	}
 	picture = GFX_evt_DOT_SR_003
 	# show_sound = event_psionic
 	location = root
 	fire_only_once = yes
 	trigger = {
-		# 必须在完成提瓦特事件线之后（提瓦特觉醒 / 提瓦特被吞噬两种结局均可）
-		has_country_flag = DOTGI_void_signal_started
+		# 两条获得路径二选一：
+		# ① 有星界裂隙 DLC：完成提瓦特剧情线后（觉醒 / 沉没两种结局均可）
+		# ② 无星界裂隙 DLC：沿用原本方式（开局 40 年后自动来投）
 		or = {
-			any_country = { has_country_flag = DOTGI_teyvat_awakened }
-			any_country = { has_country_flag = DOTGI_teyvat_devoured }
+			AND = {
+				has_astral_planes_dlc = yes
+				has_country_flag = DOTGI_teyvat_void_signal_started
+				or = {
+					any_country = { has_country_flag = DOTGI_teyvat_awakened }
+					any_country = { has_country_flag = DOTGI_teyvat_devoured }
+				}
+			}
+			AND = {
+				NOT = { has_astral_planes_dlc = yes }
+				years_passed > 40
+			}
 		}
 		or = {
 			is_ai = no
