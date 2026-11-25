@@ -43,41 +43,48 @@ pc_train = {
 }
 
 # 静止
+# 2026-11-25 母星校验攻关（第 4 轮）：普通帝国预设母星的"常规通道"要求与原版 9 大标准类
+# 同构——标准类全部满足：initial=yes（不写 starting_planet，即默认 yes）、
+# climate ∈ dry/wet/cold、colonizable=yes、有指向它的宜居偏好特质；
+# 且不写 starting_planet = no（pc_ark 写了 no 但它走游牧通道，不能抄）。
 pc_astral_express = {
-    entity = "ocean_planet"
-    entity_scale = @planet_standard_scale
-    icon = GFX_planet_type_ocean
-    icon_large = GFX_planet_type_ocean_big
-    climate = "wet"
-    initial = yes
-    # 设计器按类名判定母星是否有效：自定义类必须显式声明此开关才会进入
-    # 可选母星白名单（pc_ark/pc_habitat/pc_cosmogenesis_world 都是这么做的）。
-    # 缺了它，即使定义抄成 pc_ocean 一模一样、宜居链齐全，仍报 EMPIRE_DESIGN_INVALID_PLANET_CLASS。
-    default_planet_selection = yes
-    ideal = yes  # 让设计器把 pc_astral_express 当作宜居特质的理想星球类
+    habitat = yes
+    entity = "orbital_habitat"
+    icon = GFX_planet_type_generic_arkship
+    icon_large = GFX_planet_type_generic_arkship_big
+    entity_scale = 1.0
+    enable_tilt = no
+    fixed_entity_scale = yes
+    place_entity_on_planet_plane = no
+    entity_face_object = no
     auto_trait_prio = {
-        trait_auto_pc_astral_express_preference
+        trait_auto_pc_habitat_preference
     }
-    starting_planet = yes  # 允许作为帝国设计器预设母星
-    atmosphere_color		= hsv { 0.58 0.5 0.9 }
+    atmosphere_color		= hsv { 0.0 0.0 1.0 }
     atmosphere_intensity	= 1.0
     atmosphere_width		= 0.5
-    city_color_lut = "gfx/portraits/misc/colorcorrection_ocean.dds"
-    min_distance_from_sun = @habitable_min_distance
-    max_distance_from_sun = @habitable_max_distance
-    spawn_odds = @habitable_spawn_odds
+    # show_city = no
+    city_color_lut = "gfx/portraits/misc/colorcorrection_continental.dds"
     extra_orbit_size = 0
     extra_planet_count = 0
-    chance_of_ring = 0.2
-    planet_size = { min = @habitable_planet_min_size max = @habitable_planet_max_size }
-    moon_size = { min = @habitable_moon_min_size max = @habitable_moon_max_size }
+    chance_of_ring = 0.0
+    planet_size = 6
+    moon_size = 1
     colonizable = yes
-    district_set = standard
-    uses_alternative_skies_for_moons = yes
-    uses_alternative_skies_if_has_orbital_ring = yes
+    district_set = habitat
+    starting_district = district_hab_housing
+    # starting_planet = no
+    orbit_lines = no
+    has_colonization_influence_cost = no
+    climate = "artificial"
+    is_artificial_planet = yes
+    default_planet_selection = yes
+    modifier = {
+        planet_colony_development_speed_mult = 2.0
+        pop_environment_tolerance = 0.40
+    }
     carry_cap_per_free_district = @carry_cap_normal
 }
-
 # 暂不使用
 pc_habitat_planet_class = {
     # habitat = yes
