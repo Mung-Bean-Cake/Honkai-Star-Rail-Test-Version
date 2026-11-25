@@ -7,6 +7,7 @@ namespace = DOT_SR_Dvalin
 namespace = SR_Paragon
 namespace = DOT_SR_Gram
 namespace = DOT_SR_Amph
+namespace = DOT_SR_AstralNomad.1
 
 #生成殖民地：星穹列车
 country_event = {
@@ -1914,6 +1915,126 @@ country_event = {
 		name = DOT_SR_Amph.504.a
 		owner = {
 			country_event = { id = DOT_SR_Dvalin.017 days = 1 }
+		}
+	}
+}
+
+# ---------------------------------------------------------------------
+# 星穹列车起源 · 提瓦特事件完结后的抉择 —— 是否彻底转型为游牧文明
+# 玩家可自由选择；AI 国家权重压制成 100% 选择转型（ai_chance 100 vs 0）。
+# 转型序列照抄原版 synthetic_dawn_events.txt（机器起义转游牧）的完整流程：
+# is_nomadic 代码旗 + 四项方舟专属科技 + 游牧资源转换器
+# + 游牧经济局势（nomads.20）与方舟随机事件导演（arkship.1）。
+# ---------------------------------------------------------------------
+country_event = {
+	id = DOT_SR_AstralNomad.1
+	title = DOT_SR_AstralNomad.1.name
+	desc = DOT_SR_AstralNomad.1.desc
+	picture = GFX_evt_gaia
+	show_sound = event_scanner
+	is_triggered_only = yes
+
+	trigger = {
+		has_origin = origin_Astral_Express
+		host_has_dlc = "Nomads"
+		NOT = { has_country_flag = DOT_SR_astral_nomad_event_done }
+	}
+
+	immediate = {
+		set_country_flag = DOT_SR_astral_nomad_event_done
+	}
+
+	# 选择一：彻底转型为游牧文明 —— AI 国家 100% 选择此项
+	option = {
+		name = DOT_SR_AstralNomad.1.a
+		custom_tooltip = DOT_SR_AstralNomad.1.a.tt
+		ai_chance = { factor = 100 }
+		set_country_as_nomad_effect = { IS_NOMAD = yes }
+		set_resource_converter = nomadic_operational_reserves
+		set_faction_properties = { needs_border_access = no }
+		set_variable = { which = contract_completed value = 0 }
+		give_technology = { tech = tech_civilian_arkship message = no }
+		give_technology = { tech = tech_science_arkship message = no }
+		give_technology = { tech = tech_military_arkship message = no }
+		give_technology = { tech = tech_waystation_1 message = no }
+		# 方舟随机事件导演 + 游牧经济局势（星之日志）
+		country_event = { id = arkship.1 random = 1800 }
+		country_event = { id = nomads.20 }
+	}
+
+	# 选择二：维持定居文明
+	option = {
+		name = DOT_SR_AstralNomad.1.b
+		ai_chance = { factor = 0 }
+	}
+}
+
+# ---------------------------------------------------------------------
+# 星穹列车起源 · 相遇即通行
+# 与任何普通文明建立通讯的瞬间，双向自动开放边界（通行权）。
+# 挂钩 on_post_communications_established_always_fire（This=建立通讯方，
+# From=对方）；on_action 可能只对单侧触发一次，故 root / from 两侧都判。
+# set_closed_borders status=no 双向各一次（对照原版 origin_events_1.txt 联邦成员写法）。
+# ---------------------------------------------------------------------
+country_event = {
+	id = DOT_SR_AstralExpressContact.1
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		is_country_type = default
+		from = { is_country_type = default }
+		or = {
+			has_origin = origin_Astral_Express
+			from = { has_origin = origin_Astral_Express }
+		}
+	}
+
+	immediate = {
+		# 本方 → 对方开放本方边界
+		set_closed_borders = { who = from status = no }
+		# 对方 → 本方开放对方边界
+		from = {
+			set_closed_borders = { who = root status = no }
+		}
+		# 相遇即友善：双向 +100 好感（永久、不叠加，unique）
+		add_opinion_modifier = { who = from modifier = opinion_dot_sr_express_goodwill }
+		from = {
+			add_opinion_modifier = { who = root modifier = opinion_dot_sr_express_goodwill }
+		}
+	}
+}
+
+# ---------------------------------------------------------------------
+# 星穹列车起源 · 高度友善 —— 存档兼容清扫（旧存档里已建交的国家一次性补好感）
+# 挂 on_game_start_country：THIS = 任意国家；若与列车起源文明已建交则双向补好感。
+# ---------------------------------------------------------------------
+country_event = {
+	id = DOT_SR_AstralExpressContact.2
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		is_country_type = default
+		any_country = {
+			has_origin = origin_Astral_Express
+			has_communications = prev
+		}
+	}
+
+	immediate = {
+		every_country = {
+			limit = {
+				has_origin = origin_Astral_Express
+				has_communications = prev
+			}
+			# THIS = 列车起源文明，prev = 事件国家
+			# 列车 → 对方好感
+			add_opinion_modifier = { who = prev modifier = opinion_dot_sr_express_goodwill }
+			# 对方 → 列车好感（回 prev 作用域加，who=prev 即列车）
+			prev = {
+				add_opinion_modifier = { who = prev modifier = opinion_dot_sr_express_goodwill }
+			}
 		}
 	}
 }
