@@ -51,19 +51,17 @@ country_event = {
 		give_technology = { tech = tech_honkai_star_rail_hull_t1 message = no }
 		give_technology = { tech = tech_honkai_star_rail_power_t1 message = no }
 		give_technology = { tech = tech_science_arkship message = no }
-		#星穹列车虽然是游牧起源，但同样允许建造普通恒星基地（见 common/ship_sizes、common/technology 的 zz_Astral_Express_* 覆盖）
+		#星穹列车已按普通（非游牧）起源处理：保留列车方舟，正常建造恒星基地；下列科技照常发放。
 		give_technology = { tech = tech_starbase_1 message = no }
 		give_technology = { tech = tech_starbase_2 message = no }
 		give_technology = { tech = tech_solar_panel_network message = no }
 		give_technology = { tech = tech_space_defense_station_1 message = no }
 		add_research_option = tech_galactic_archivism
 		# set_policy = {	}
-		random_owned_fleet = {
-			limit = { is_arkship_fleet = yes }
-			unassign_leader = this
-		}
-		random_owned_ship = {
-			limit = { is_arkship_ship = yes }
+		# 像黑塔空间站一样：普通帝国开局在母星(Pegana)上主动生成列车方舟舰队。
+		# 不再依赖游牧开局自动给的方舟船，也不再需要 set_country_as_nomad_effect。
+		capital_scope = {
+			save_event_target_as = astral_start_planet  # 先记住母星，首都迁走后仍指向它
 			create_fleet = {
 				name = "Astral_Express"
 				effect = {
@@ -90,7 +88,6 @@ country_event = {
 							}
 							colony = {
 								add_building = building_capital
-								set_capital = yes
 								while = {
 									count = 2
 									create_pop_group = {
@@ -98,6 +95,7 @@ country_event = {
 										species = owner_main_species
 									}
 								}
+								set_capital = yes  # 列车方舟成为首都（母星随后被清殖民）
 							}
 						}
 					}
@@ -110,7 +108,11 @@ country_event = {
 					}
 				}
 			}
-			delete_ship = this
+		}
+		# 列车方舟生成后，原母星变成没有被殖民的火山星球。
+		event_target:astral_start_planet = {
+			destroy_colony = yes
+			change_pc = pc_volcanic
 		}
 	}
 }

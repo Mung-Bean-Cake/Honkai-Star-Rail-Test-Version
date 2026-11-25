@@ -41,6 +41,43 @@ pc_train = {
     carry_cap_per_free_district = @carry_cap_normal
     single_build_queue = yes
 }
+
+# 静止
+pc_astral_express = {
+    entity = "ocean_planet"
+    entity_scale = @planet_standard_scale
+    icon = GFX_planet_type_ocean
+    icon_large = GFX_planet_type_ocean_big
+    climate = "wet"
+    initial = yes
+    # 设计器按类名判定母星是否有效：自定义类必须显式声明此开关才会进入
+    # 可选母星白名单（pc_ark/pc_habitat/pc_cosmogenesis_world 都是这么做的）。
+    # 缺了它，即使定义抄成 pc_ocean 一模一样、宜居链齐全，仍报 EMPIRE_DESIGN_INVALID_PLANET_CLASS。
+    default_planet_selection = yes
+    ideal = yes  # 让设计器把 pc_astral_express 当作宜居特质的理想星球类
+    auto_trait_prio = {
+        trait_auto_pc_astral_express_preference
+    }
+    starting_planet = yes  # 允许作为帝国设计器预设母星
+    atmosphere_color		= hsv { 0.58 0.5 0.9 }
+    atmosphere_intensity	= 1.0
+    atmosphere_width		= 0.5
+    city_color_lut = "gfx/portraits/misc/colorcorrection_ocean.dds"
+    min_distance_from_sun = @habitable_min_distance
+    max_distance_from_sun = @habitable_max_distance
+    spawn_odds = @habitable_spawn_odds
+    extra_orbit_size = 0
+    extra_planet_count = 0
+    chance_of_ring = 0.2
+    planet_size = { min = @habitable_planet_min_size max = @habitable_planet_max_size }
+    moon_size = { min = @habitable_moon_min_size max = @habitable_moon_max_size }
+    colonizable = yes
+    district_set = standard
+    uses_alternative_skies_for_moons = yes
+    uses_alternative_skies_if_has_orbital_ring = yes
+    carry_cap_per_free_district = @carry_cap_normal
+}
+
 # 暂不使用
 pc_habitat_planet_class = {
     # habitat = yes
@@ -73,49 +110,6 @@ pc_habitat_planet_class = {
     is_artificial_planet = yes
     default_planet_selection = yes
     modifier = {
-        planet_max_buildings_add = 12
-        planet_colony_development_speed_mult = 2.5
-        pop_environment_tolerance = 0.80
-        planet_jobs_produces_mult = 0.10
-    }
-    carry_cap_per_free_district = @carry_cap_normal
-}
-pc_astral_express = {
-    # habitat = yes
-    entity = "orbital_habitat"
-    climate = "artificial"
-    initial = yes
-    auto_trait_prio = {
-        trait_auto_pc_ark_preference
-    }
-    preview_entity = "Astral_Express_planet_entity"
-    picture = pc_habitat #
-    icon = GFX_planet_type_habitat
-    planet_size = { min = @habitable_planet_min_size max = @habitable_planet_max_size }
-    moon_size = { min = @habitable_moon_min_size max = @habitable_moon_max_size }
-    place_entity_on_planet_plane = no
-    entity_face_object = no
-    atmosphere_color = hsv { 0.0 0.0 1.0 }
-    atmosphere_intensity = 1.0
-    atmosphere_width = 0.5
-    show_city = no
-    city_color_lut = "gfx/portraits/misc/colorcorrection_continental.dds"
-    extra_orbit_size = 0
-    extra_planet_count = 1
-    chance_of_ring = 1.0
-    planet_size = 18
-    moon_size = 1
-    colonizable = yes
-    district_set = standard
-    starting_planet = no
-    orbit_lines = no
-    ideal = yes
-    enable_tilt = no
-    has_colonization_influence_cost = no
-    is_artificial_planet = yes
-    default_planet_selection = yes
-    modifier = {
-        planet_max_buildings_add = 12
         planet_colony_development_speed_mult = 2.5
         pop_environment_tolerance = 0.80
         planet_jobs_produces_mult = 0.10

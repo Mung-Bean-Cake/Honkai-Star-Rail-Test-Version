@@ -20,7 +20,8 @@ DOT_SR_humans1 = {
 		trait="trait_knowledge_wisdom"
 		trait="trait_exceptional_talent"
 	}
-	is_nomadic = yes
+	# 星穹列车为普通帝国（像黑塔空间站一样），不再需要游牧 DLC。
+	# is_nomadic 已移除；列车方舟改由开局事件 astral_express.1 主动生成。
 	room = "astral_express_1_room"	
 	authority = "auth_Astral_Express"
 	civics = {  "civic_idealistic_foundation" }
@@ -32,8 +33,11 @@ DOT_SR_humans1 = {
 	origin = "origin_Astral_Express"
 	flag = empire_hsr_0
 	planet_name = "Astral_Express"
-	planet_class = "pc_ark"
-	ship_size = "science_arkship_tier_1"
+	planet_class = "pc_ocean"
+	# planet_class = "pc_astral_express"
+	# 母星 Pegana 用自定义 pc_astral_express（已配专属宜居特质 trait_pc_astral_express_preference，
+	# 含 ideal_planet_class + bound_to_planet_classes，设计器可正常识别）；开局事件转成未殖民火山星球；
+	# 列车方舟舰队由开局事件在 capital_scope 下主动生成。
 	initializer = "DOT_SR_system_01"
 	system_name = "Astral_Express"	
 	graphical_culture = "DSC_03"

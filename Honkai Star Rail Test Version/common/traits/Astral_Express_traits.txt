@@ -1,0 +1,144 @@
+# 列车预设起始母星 pc_astral_express 的宜居偏好特质
+# 完全仿照原版 trait_pc_ark_preference（方舟是自定义星球类的黄金模板）：
+# 必须同时有 ideal_planet_class 和 bound_to_planet_classes，设计器才会把它当作
+# 该星球类的宜居特质并自动加到物种上，否则判母星无效、隐藏预设。
+trait_pc_astral_express_preference = {
+    icon = "gfx/interface/icons/traits/trait_pc_habitat_preference.dds"
+    short_name = "trait_pc_astral_express_preference_short"
+    bound_to_planet_classes = {
+        pc_astral_express
+    }
+    ideal_planet_class = pc_astral_express
+    species_potential_add = {
+        always = yes
+    }
+    species_possible_add = {
+        always = yes
+    }
+    species_possible_merge_add = {
+        always = yes
+    }
+    # Star_Rail 是本 MOD 自定义的 archetype，必须列进来，否则设计器不给物种绑这个宜居特质。
+    allowed_archetypes = { BIOLOGICAL PRESAPIENT LITHOID MACHINE ROBOT Star_Rail }
+    initial = no
+    randomized = no
+    sorting_priority = 30
+    modifier = {
+        pc_astral_express_habitability = 0.80
+    }
+    ai_weight = {
+        weight = 0
+    }
+}
+
+# pc_astral_express 的自动生成宜居特质（供 auto_trait_prio 使用）。
+# 照抄原版 trait_auto_pc_habitat_preference，用字面值代替文件级 @变量（MOD 新文件里未定义）。
+trait_auto_pc_astral_express_preference = {
+    inline_script = {
+        script = traits/auto_preference_planet_class
+        PLANET_CLASS = pc_astral_express
+    }
+    modifier = {
+        pc_desert_habitability = -0.20
+        pc_arid_habitability = -0.20
+        pc_savannah_habitability = -0.20
+        pc_tropical_habitability = -0.20
+        pc_continental_habitability = -0.20
+        pc_ocean_habitability = -0.20
+        pc_tundra_habitability = -0.20
+        pc_arctic_habitability = -0.20
+        pc_alpine_habitability = -0.20
+        pc_nuked_habitability = -0.20
+        pc_habitat_habitability = -0.20
+        pc_astral_express_habitability = 0.50
+        pc_volcanic_habitability = -0.20
+    }
+}
+
+# ============================================================
+#  星穹铁道 × 原神 · 提瓦特联动 —— 物种特质
+#  提瓦特（原神）种族专属特质，提供极高增益。
+# ============================================================
+
+trait_DOTGI_genshin_blessing = {
+	cost = 0
+	icon = "gfx/interface/icons/traits/DOTGI_genshin_blessing.dds"
+	immortal_leaders = no
+	improves_leaders = no
+	randomized = no
+	advanced_trait = no
+	allowed_archetypes = { Star_Rail }
+	species_possible_remove = {
+		always = no
+	}
+	species_potential_add = {
+		always = no
+	}
+	tags = { organic positive }
+	modifier = {
+		# 产出：全领域大幅提升
+		planet_jobs_energy_produces_mult = 0.5
+		planet_jobs_minerals_produces_mult = 0.5
+		planet_jobs_food_produces_mult = 0.5
+		planet_jobs_physics_research_produces_mult = 0.5
+		planet_jobs_society_research_produces_mult = 0.5
+		planet_jobs_engineering_research_produces_mult = 0.5
+		planet_jobs_unity_produces_mult = 0.5
+		planet_jobs_alloys_produces_mult = 0.3
+		planet_jobs_consumer_goods_produces_mult = 0.3
+		# 人口与稳定
+		logistic_growth_mult = 0.5
+		pop_happiness = 0.15
+		planet_amenities_add = 5
+		# 领袖
+		leader_lifespan_add = 200
+		# 战争
+		army_damage_mult = 0.5
+		ship_armor_penetration_mult = 0.5
+	}
+	assembly_score = {
+
+	}
+}
+# 原神·璃月七星「玉衡」刻晴
+# 由风魔龙事件 DOT_SR_Dvalin.001 生成，担任「Dvalin_General」舰指挥官
+leader_trait_yuheng = {
+	inline_script = {
+		script = trait/hsr_icons
+		ICON = "GFX_leader_trait_yuheng"
+		CLASS = commander
+		RARITY = paragon
+		COUNCIL = yes
+		TIER = 1
+	}
+	fleet_modifier = {
+		ship_weapon_range_mult = 0.1
+	}
+	councilor_modifier = {
+		councilor_exp_gain = 0.2
+		council_agenda_progress_speed = 0.15
+		starbase_shipyard_build_cost_mult = -0.15
+		starbase_shipyard_build_speed_mult = 0.2
+		spy_network_levels_add = 10
+		spy_network_daily_value_mult = 0.50
+	}
+	army_modifier = {
+		army_damage_mult = 0.5
+		army_morale = 0.5
+		army_health = 0.5
+		army_collateral_damage_mult = -0.25
+	}
+	sector_modifier = {
+		deposit_blockers_cost_mult = -0.15
+		planet_clear_blocker_time_mult = -0.15
+		planet_clear_blocker_speed_mult = 0.15
+	}
+	planet_modifier = {
+		planet_buildings_upkeep_mult = -0.05
+		planet_districts_upkeep_mult = -0.05
+		planet_building_build_speed_mult = 0.15
+	}
+	leader_class = { commander }
+	initial = no
+	randomized = no
+}
