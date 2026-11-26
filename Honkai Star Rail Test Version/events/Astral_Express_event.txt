@@ -7,7 +7,7 @@ namespace = DOT_SR_Dvalin
 namespace = SR_Paragon
 namespace = DOT_SR_Gram
 namespace = DOT_SR_Amph
-namespace = DOT_SR_AstralNomad.1
+namespace = DOT_SR_AstralNomad
 
 #生成殖民地：星穹列车
 country_event = {
@@ -120,6 +120,8 @@ country_event = {
 }
 
 # 风魔龙传奇：提瓦特剧情结局之后，东风之龙特瓦林来投
+# （2026-11-26 起取消"无 DLC 开局 40 年自动来投"的兜底分支：无 DLC 时提瓦特链
+#   改走黑洞通道，结局照常触发，风魔龙统一从提瓦特剧情线获得。）
 country_event = {
 	id = DOT_SR_Dvalin.001
 	title = "DOT_SR_Dvalin.001.name"
@@ -136,37 +138,16 @@ country_event = {
 		}
 		text = "DOT_SR_Dvalin.001.desc_devoured"
 	}
-	# 无星界裂隙 DLC 时走原本路径，上面两个提瓦特结局 flag 都不存在，用通用文案兜底
-	desc = {
-		trigger = {
-			NOR = {
-				any_country = { has_country_flag = DOTGI_teyvat_awakened }
-				any_country = { has_country_flag = DOTGI_teyvat_devoured }
-			}
-		}
-		text = "DOT_SR_Dvalin.001.desc"
-	}
 	picture = GFX_evt_DOT_SR_003
 	# show_sound = event_psionic
 	location = root
 	fire_only_once = yes
 	trigger = {
-		# 两条获得路径二选一：
-		# ① 有星界裂隙 DLC：完成提瓦特剧情线后（觉醒 / 沉没两种结局均可）
-		# ② 无星界裂隙 DLC：沿用原本方式（开局 40 年后自动来投）
+		# 提瓦特剧情线（裂隙或黑洞通道均可）完结后：觉醒 / 沉没两种结局均可
+		has_country_flag = DOTGI_teyvat_void_signal_started
 		or = {
-			AND = {
-				has_astral_planes_dlc = yes
-				has_country_flag = DOTGI_teyvat_void_signal_started
-				or = {
-					any_country = { has_country_flag = DOTGI_teyvat_awakened }
-					any_country = { has_country_flag = DOTGI_teyvat_devoured }
-				}
-			}
-			AND = {
-				NOT = { has_astral_planes_dlc = yes }
-				years_passed > 40
-			}
+			any_country = { has_country_flag = DOTGI_teyvat_awakened }
+			any_country = { has_country_flag = DOTGI_teyvat_devoured }
 		}
 		or = {
 			is_ai = no
@@ -1456,34 +1437,15 @@ country_event = {
 	fire_only_once = yes
 	is_triggered_only = yes
 	immediate = {
-		create_fleet = {
-			name = DOT_SR_Fleet_Himeko
-			effect = {
-				set_owner = ROOT
-				set_name = DOT_SR_Fleet_Himeko
-				create_ship = {
-					name = DOT_SR_Ship_Himeko
-					design = Himeko
-				}
-				set_location = {
-					target = ROOT.capital_scope
-					distance = 50
-					angle = random
-					direction = in_system
-				}
-				save_global_event_target_as = Himeko_Exist
-			}
-		}
-		set_country_flag = DOT_SR_himeko_obtained
+		DOT_SR_grant_himeko_direct = yes
 	}
 	diplomatic = yes
 	picture_event_data = {
-		room = "DOT_SR_Dvalin_1_room"
+		room = "DOT_SR_Dvalin_2_room"
 	}
 	option = {
 		name = DOT_SR_Dvalin.014.a
 		add_resource = { minerals = 100 }
-		DOTGI_grant_alcor_ark = yes		
 	}
 	option = {
 		name = DOT_SR_Dvalin.014.b
@@ -1545,7 +1507,7 @@ country_event = {
 	location = root
 	diplomatic = yes
 	picture_event_data = {
-		room = "DOT_SR_Dvalin_1_room"
+		room = "DOT_SR_Dvalin_3_room"
 	}
 	is_triggered_only = yes
 	immediate = {
@@ -1584,7 +1546,7 @@ country_event = {
 	location = root
 	diplomatic = yes
 	picture_event_data = {
-		room = "DOT_SR_Dvalin_1_room"
+		room = "DOT_SR_Dvalin_3_room"
 	}
 	is_triggered_only = yes
 	immediate = {
@@ -1652,7 +1614,11 @@ country_event = {
 			limit = { is_ai = no }
 			if = {
 				limit = { has_origin = origin_Astral_Express }
-				dot_sr_ship_start_clock = yes
+				# 列车起源开局直接获得姬子（不弹 .014 事件），只排 40/80 年考古线索时钟
+				set_country_flag = DOT_SR_ae_met
+				DOT_SR_grant_himeko_direct = yes
+				country_event = { id = DOT_SR_Dvalin.015 years = 40 }
+				country_event = { id = DOT_SR_Dvalin.013 years = 80 }
 			}
 			else = {
 				country_event = { id = DOT_SR_Dvalin.026 years = 45 }
@@ -1920,6 +1886,68 @@ country_event = {
 }
 
 # ---------------------------------------------------------------------
+# 星穹列车起源 · 开局抉择（外交型事件）—— 是否追寻开拓道路启航
+# 有游牧 DLC 时开局弹出；文案强调列车是否要再度启航、追寻开拓道路。
+# 选项一 = 成为彻底游牧文明（AI 不会选，factor=0）；选项二 = 继续普通文明（AI factor=100）。
+# 转型序列照抄 DOT_SR_AstralNomad.1（提瓦特完结抉择），用独立旗标避免与后者冲突。
+# ---------------------------------------------------------------------
+country_event = {
+	id = DOT_SR_AstralNomad.0
+	title = DOT_SR_AstralNomad.0.name
+	desc = DOT_SR_AstralNomad.0.desc
+	picture = GFX_evt_gaia
+	show_sound = event_scanner
+	location = root
+	is_triggered_only = yes
+	fire_only_once = yes
+	diplomatic = yes
+	picture_event_data = {
+		room = "astral_express_1_room"
+	}
+
+	trigger = {
+		has_origin = origin_Astral_Express
+		# host_has_dlc = "Nomads"
+		NOT = { has_country_flag = DOT_SR_astral_nomad_early_done }
+	}
+
+	immediate = {
+		set_country_flag = DOT_SR_astral_nomad_early_done
+	}
+
+	# 选项一：追寻开拓道路，成为彻底游牧文明 —— AI 不会选择
+	option = {
+		name = DOT_SR_AstralNomad.0.a
+		custom_tooltip = DOT_SR_AstralNomad.0.a.tt
+		ai_chance = { factor = 0 }
+		# 彻底游牧：必须在转为游牧之前拆星基——设 is_nomadic 后殖民地/星基归属会脱离常规遍历。
+		# 注意：dismantle 只对 orbital station 有效；恒星基地是 fleet，必须 destroy_fleet。
+		# 方舟舰的随舰星基不占星系，不在 every_owned_starbase 里，不受影响。
+		hidden_effect = {
+			every_owned_starbase = {
+				fleet = { destroy_fleet = this }
+			}
+		}
+		set_country_as_nomad_effect = { IS_NOMAD = yes }
+		set_resource_converter = nomadic_operational_reserves
+		set_faction_properties = { needs_border_access = no }
+		set_variable = { which = contract_completed value = 0 }
+		give_technology = { tech = tech_civilian_arkship message = no }
+		give_technology = { tech = tech_science_arkship message = no }
+		give_technology = { tech = tech_military_arkship message = no }
+		give_technology = { tech = tech_waystation_1 message = no }
+		country_event = { id = arkship.1 random = 1800 }
+		country_event = { id = nomads.20 }
+	}
+
+	# 选项二：继续作为普通文明（停靠、扎根）—— AI 必定选择
+	option = {
+		name = DOT_SR_AstralNomad.0.b
+		ai_chance = { factor = 100 }
+	}
+}
+
+# ---------------------------------------------------------------------
 # 星穹列车起源 · 提瓦特事件完结后的抉择 —— 是否彻底转型为游牧文明
 # 玩家可自由选择；AI 国家权重压制成 100% 选择转型（ai_chance 100 vs 0）。
 # 转型序列照抄原版 synthetic_dawn_events.txt（机器起义转游牧）的完整流程：
@@ -1936,7 +1964,7 @@ country_event = {
 
 	trigger = {
 		has_origin = origin_Astral_Express
-		host_has_dlc = "Nomads"
+		# host_has_dlc = "Nomads"
 		NOT = { has_country_flag = DOT_SR_astral_nomad_event_done }
 	}
 
@@ -1950,6 +1978,13 @@ country_event = {
 		custom_tooltip = DOT_SR_AstralNomad.1.a.tt
 		ai_chance = { factor = 100 }
 		set_country_as_nomad_effect = { IS_NOMAD = yes }
+		# 彻底游牧：销毁所有固定恒星基地（方舟舰的随舰星基不占星系，不受影响）
+		# 注意：dismantle 只对 orbital station 有效；恒星基地是 fleet，必须 destroy_fleet。
+		hidden_effect = {
+			every_owned_starbase = {
+				fleet = { destroy_fleet = this }
+			}
+		}
 		set_resource_converter = nomadic_operational_reserves
 		set_faction_properties = { needs_border_access = no }
 		set_variable = { which = contract_completed value = 0 }

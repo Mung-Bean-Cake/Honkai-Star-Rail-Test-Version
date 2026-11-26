@@ -41,7 +41,7 @@ country_event = {
 			is_ai = no
 		}
 		is_country_type = default
-		has_astral_planes_dlc = yes		# 星界裂隙本体需要 Astral Planes
+		# 无星界裂隙 DLC 时链路照常：.101 会改走「黑洞通道」分支（不生成裂隙）
 		exists = capital_scope
 		NOT = { has_country_flag = DOTGI_teyvat_void_signal_started }
 	}
@@ -141,11 +141,15 @@ country_event = {
 	immediate = {
 		set_country_flag = DOTGI_teyvat_void_signal_started
 
-		# ---- 1) 在首都星系内生成星界裂隙【来自虚空的求救信号】 ----
+		# ---- 1) 有 DLC：在首都星系内生成星界裂隙【来自虚空的求救信号】----
+		#      无 DLC：跳过裂隙（后面第 5.5 步直接生成连接提瓦特的黑洞/虫洞）
 		capital_scope = {
 			solar_system = {
 				if = {
-					limit = { NOT = { has_astral_rift = yes } }
+					limit = {
+						root = { has_astral_planes_dlc = yes }
+						NOT = { has_astral_rift = yes }
+					}
 					spawn_astral_rift = {
 						id = DOTGI_teyvat_rift
 						orbit_distance = 100
@@ -161,8 +165,10 @@ country_event = {
 		}
 
 		# ---- 2) 发现裂隙的同时：局势【来自虚空的求救信号】立即开始 ----
+		#      （无 DLC 时没有裂隙可探索，不开此局势，黑洞直接生成）
 		if = {
 			limit = {
+				root = { has_astral_planes_dlc = yes }
 				NOT = { any_situation = { is_situation_type = DOTGI_distress_signal_situation } }
 			}
 			start_situation = { type = DOTGI_distress_signal_situation }
@@ -220,6 +226,19 @@ country_event = {
 					}
 				}
 			}
+		}
+
+		# ---- 5.5) 无星界裂隙 DLC：跳过裂隙探索阶段，直接生成连接提瓦特的黑洞（虫洞）----
+		# （有 DLC 时此效果由裂隙探索完结事件 .190 调用；DOTGI_open_teyvat_wormhole
+		#   自带 DOTGI_void_signal_resolved 防重入旗，重复调用无副作用）
+		if = {
+			limit = {
+				root = { has_astral_planes_dlc = no }
+				exists = event_target:DOTGI_teyvat_system
+			}
+			DOTGI_open_teyvat_wormhole = yes
+			# 无裂隙可探索，求救信号局势直接完结（开局提示过黑洞已生成）
+			DOTGI_complete_distress_signal = yes
 		}
 
 		# ---- 6) 建立提瓦特文明（盖亚母星 · 机械时代原始文明 · 领袖荧） ----
@@ -353,7 +372,15 @@ country_event = {
 country_event = {
 	id = DOTGI_teyvat.151
 	title = DOTGI_teyvat.151.name
-	desc = DOTGI_teyvat.151.desc
+	desc = {
+		trigger = { has_astral_planes_dlc = yes }
+		text = "DOTGI_teyvat.151.desc"
+	}
+	# 无星界裂隙 DLC：通道是黑洞而非裂隙，文案用专用版本
+	desc = {
+		trigger = { has_astral_planes_dlc = no }
+		text = "DOTGI_teyvat.151.desc_norift"
+	}
 	picture = GFX_evt_astral_rift_advisor_nice
 	show_sound = event_scanner
 	is_triggered_only = yes
@@ -583,6 +610,29 @@ country_event = {
 					# ---- 提瓦特方舟「死兆星号」----
 					# 木船模型由 SZX_ships 转换而来，参照星穹列车方舟补了灯光与尾焰（3/6/9）
 					DOTGI_grant_alcor_ark = yes
+
+					# ---- 深渊危机解决后：提瓦特获得通行权 ----
+					# 对象：星穹列车起源国家 + 非AI（玩家）国家。
+					# 互惠双向开放边界（set_closed_borders status=no，对照 DOT_SR_AstralExpressContact.1），
+					# 与列车起源文明「相遇即双向通行」的既有设定保持一致。
+					# 排除提瓦特自身，避免自己对自己设置边界状态。
+					every_country = {
+						limit = {
+							is_country_type = default
+							NOT = { is_same_value = event_target:DOTGI_teyvat_country }
+							OR = {
+								has_origin = origin_Astral_Express
+								is_ai = no
+							}
+						}
+						save_event_target_as = DOTGI_passage_partner
+						# 对方 → 提瓦特开放边界（提瓦特可通行进入）
+						set_closed_borders = { who = event_target:DOTGI_teyvat_country status = no }
+						# 提瓦特 → 对方开放边界（互惠）
+						event_target:DOTGI_teyvat_country = {
+							set_closed_borders = { who = event_target:DOTGI_passage_partner status = no }
+						}
+					}
 				}
 			}
 
@@ -709,5 +759,38 @@ country_event = {
 
 	option = {
 		name = DOTGI_teyvat.230.a
+	}
+}
+
+# ---------------------------------------------------------------------
+# 测试专用：控制台输入 event DOTGI_teyvat.900 直接获得死兆星号
+# 复用正式结局 .220 的授予效果，可反复触发（每次清除防重入旗后新建一艘）
+# ---------------------------------------------------------------------
+country_event = {
+	id = DOTGI_teyvat.900
+	title = DOTGI_teyvat.900.name
+	desc = DOTGI_teyvat.900.desc
+	picture = GFX_evt_astral_rift_riftworld
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			# 把当前国家（玩家）设为授予目标，供 DOTGI_grant_alcor_ark 使用
+			save_event_target_as = DOTGI_teyvat_country
+			# 有首都则作为舰队停泊星球，与正式流程一致
+			if = {
+				limit = { exists = capital_scope }
+				capital_scope = {
+					save_event_target_as = DOTGI_teyvat_planet
+				}
+			}
+			# 测试用：允许重复触发，每次都会新建一艘死兆星号
+			remove_country_flag = DOTGI_alcor_granted
+			DOTGI_grant_alcor_ark = yes
+		}
+	}
+
+	option = {
+		name = DOTGI_teyvat.900.a
 	}
 }

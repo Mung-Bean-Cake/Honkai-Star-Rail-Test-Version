@@ -7,6 +7,30 @@ dot_sr_ship_start_clock = {
 	country_event = { id = DOT_SR_Dvalin.013 years = 80 }
 }
 
+# 姬子舰队直接生成（不走事件弹窗）：列车起源开局专用，也在 .014 里复用。
+# 调用者必须是国家作用域（ROOT = 获赠国）。
+DOT_SR_grant_himeko_direct = {
+	create_fleet = {
+		name = DOT_SR_Fleet_Himeko
+		effect = {
+			set_owner = ROOT
+			set_name = DOT_SR_Fleet_Himeko
+			create_ship = {
+				name = DOT_SR_Ship_Himeko
+				design = Himeko
+			}
+			set_location = {
+				target = ROOT.capital_scope
+				distance = 50
+				angle = random
+				direction = in_system
+			}
+			save_global_event_target_as = Himeko_Exist
+		}
+	}
+	set_country_flag = DOT_SR_himeko_obtained
+}
+
 # ============================================================
 #  星穹铁道 × 原神 · 提瓦特联动 —— 脚本效果
 # ============================================================
@@ -220,10 +244,31 @@ DOTGI_grant_alcor_ark = {
 			effect = {
 				set_owner = event_target:DOTGI_teyvat_country
 				set_name = DOTGI_alcor_fleet_name
+				# 镜像 astral_express.1 的列车方舟生成模式：
+				# 方舟舰 create_ship 必须在 effect 里手动初始化 starbase（星基模块/建筑）
+				# 与 colony（舰体殖民地的建筑+人口），否则只有一具空壳、没有方舟效果。
 				create_ship = {
 					name = DOTGI_alcor_ship_name
-					design = Alcor
+					design = "Alcor"
+					effect = {
+						set_graphical_culture = civilian_arkship
+						# 星基模块与建筑：直接复用原版游牧方舟初始化效果（船作用域）
+						initialize_arkship_starbase_effect = yes
+						# 舰体殖民地：首都建筑 + 提瓦特人口（照抄 astral_express.1 的 colony 块）
+						colony = {
+							add_building = building_capital
+							while = {
+								count = 2
+								create_pop_group = {
+									size = 100
+									species = owner_main_species
+								}
+							}
+						}
+					}
 				}
+				set_fleet_stance = evasive
+				set_fleet_flag = DOTGI_alcor_fleet
 				if = {
 					limit = { exists = event_target:DOTGI_teyvat_planet }
 					set_location = {
