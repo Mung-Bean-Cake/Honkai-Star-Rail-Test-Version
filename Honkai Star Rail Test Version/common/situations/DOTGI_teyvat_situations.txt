@@ -57,9 +57,15 @@ DOTGI_distress_signal_situation = {
 		}
 	}
 
-	# 进度完全由裂隙探索事件推进
+	# 进度主要由裂隙探索事件推进；列车起源文明对信号格外执着（AI 高意愿兜底）：
+	# 每月额外 +0.5（满进度 100，纯被动约 200 个月完成；裂隙远征事件每步 +25/+30 可大幅加速）。
 	monthly_progress = {
 		base = 0
+		modifier = {
+			desc = DOTGI_distress_express_eagerness
+			add = 0.5
+			owner = { has_origin = origin_Astral_Express }
+		}
 	}
 
 	approach = {
@@ -196,6 +202,12 @@ DOTGI_abyss_erosion_situation = {
 		}
 		ai_weight = {
 			base = 100
+			# 列车起源 AI 对化解深渊侵蚀有极高意愿（写法对照原版 01_narrative_situations
+			# ai_weight modifier 用 owner 作用域检查的先例）
+			modifier = {
+				add = 200
+				owner = { has_origin = origin_Astral_Express }
+			}
 		}
 	}
 

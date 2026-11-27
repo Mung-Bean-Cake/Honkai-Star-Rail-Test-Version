@@ -5,6 +5,9 @@
 namespace = astral_express
 namespace = DOT_SR_Dvalin
 namespace = SR_Paragon
+namespace = DOT_SR_Gram
+namespace = DOT_SR_Amph
+namespace = DOT_SR_AstralNomad
 
 #生成殖民地：星穹列车
 country_event = {
@@ -49,19 +52,17 @@ country_event = {
 		give_technology = { tech = tech_honkai_star_rail_hull_t1 message = no }
 		give_technology = { tech = tech_honkai_star_rail_power_t1 message = no }
 		give_technology = { tech = tech_science_arkship message = no }
-		#星穹列车虽然是游牧起源，但同样允许建造普通恒星基地（见 common/ship_sizes、common/technology 的 zz_Astral_Express_* 覆盖）
+		#星穹列车已按普通（非游牧）起源处理：保留列车方舟，正常建造恒星基地；下列科技照常发放。
 		give_technology = { tech = tech_starbase_1 message = no }
 		give_technology = { tech = tech_starbase_2 message = no }
 		give_technology = { tech = tech_solar_panel_network message = no }
 		give_technology = { tech = tech_space_defense_station_1 message = no }
 		add_research_option = tech_galactic_archivism
 		# set_policy = {	}
-		random_owned_fleet = {
-			limit = { is_arkship_fleet = yes }
-			unassign_leader = this
-		}
-		random_owned_ship = {
-			limit = { is_arkship_ship = yes }
+		# 像黑塔空间站一样：普通帝国开局在母星(Pegana)上主动生成列车方舟舰队。
+		# 不再依赖游牧开局自动给的方舟船，也不再需要 set_country_as_nomad_effect。
+		capital_scope = {
+			save_event_target_as = astral_start_planet  # 先记住母星，首都迁走后仍指向它
 			create_fleet = {
 				name = "Astral_Express"
 				effect = {
@@ -88,7 +89,6 @@ country_event = {
 							}
 							colony = {
 								add_building = building_capital
-								set_capital = yes
 								while = {
 									count = 2
 									create_pop_group = {
@@ -96,6 +96,7 @@ country_event = {
 										species = owner_main_species
 									}
 								}
+								set_capital = yes  # 列车方舟成为首都（母星随后被清殖民）
 							}
 						}
 					}
@@ -108,23 +109,46 @@ country_event = {
 					}
 				}
 			}
-			delete_ship = this
+		}
+		# 列车方舟生成后，原母星变成没有被殖民的火山星球（名字改回 Pegana/裴伽纳）。
+		event_target:astral_start_planet = {
+			destroy_colony = yes
+			change_pc = pc_volcanic
+			set_name = Pegana
 		}
 	}
 }
 
-# 风魔龙传奇
+# 风魔龙传奇：提瓦特剧情结局之后，东风之龙特瓦林来投
+# （2026-11-26 起取消"无 DLC 开局 40 年自动来投"的兜底分支：无 DLC 时提瓦特链
+#   改走黑洞通道，结局照常触发，风魔龙统一从提瓦特剧情线获得。）
 country_event = {
 	id = DOT_SR_Dvalin.001
 	title = "DOT_SR_Dvalin.001.name"
-	desc = "DOT_SR_Dvalin.001.desc"
+	# 文案按提瓦特结局分支：拯救成功 / 提瓦特沉没
+	desc = {
+		trigger = {
+			any_country = { has_country_flag = DOTGI_teyvat_awakened }
+		}
+		text = "DOT_SR_Dvalin.001.desc"
+	}
+	desc = {
+		trigger = {
+			any_country = { has_country_flag = DOTGI_teyvat_devoured }
+		}
+		text = "DOT_SR_Dvalin.001.desc_devoured"
+	}
 	picture = GFX_evt_DOT_SR_003
 	# show_sound = event_psionic
 	location = root
 	fire_only_once = yes
 	trigger = {
-		# has_technology = tech_hyper_drive_1
-		years_passed > 40
+		# 提瓦特剧情线（裂隙或黑洞通道均可）完结后：觉醒 / 沉没两种结局均可
+		has_country_flag = DOTGI_teyvat_void_signal_started
+		or = {
+			any_country = { has_country_flag = DOTGI_teyvat_awakened }
+			any_country = { has_country_flag = DOTGI_teyvat_devoured }
+		}
 		or = {
 			is_ai = no
 			has_origin = origin_Astral_Express
@@ -207,208 +231,6 @@ country_event = {
 			limit = { is_ship_size = Dvalin_General }
 			delete_fleet = This
 		}
-	}
-}
-
-country_event = {
-	id = DOT_SR_Dvalin.002
-	title = "DOT_SR_Dvalin.002.name"
-	desc = "DOT_SR_Dvalin.002.desc"
-	picture = GFX_evt_DOT_SR_003
-	# show_sound = event_psionic
-	location = root
-	is_triggered_only = yes
-	immediate = {
-	}
-	diplomatic = yes #是否启用外交界面
-	# diplomatic_title = DOT_SR_Dvalin.001.name #外交界面标题本地化 Key，不写默认为“传入通讯”
-	picture_event_data = {
-		room = "DOT_SR_Dvalin_1_room" #房间图层
-		# portrait = Dvalin #肖像图层，可承接 Root.Leader
-	}
-	option = {
-		name = DOT_SR_Dvalin.002.a
-		add_resource = { minerals = 100 }
-		add_resource = { food = -10 }
-		country_event = { id = DOT_SR_Dvalin.003 days = 200 }
-	}
-	option = {
-		name = DOT_SR_Dvalin.002.b
-		add_resource = { minerals = 100 }
-		add_resource = { food = -10 }
-		# country_event = { id = DOT_SR_Dvalin.003 days = 200 }
-	}
-}
-
-country_event = {
-	id = DOT_SR_Dvalin.003
-	title = "DOT_SR_Dvalin.003.name"
-	desc = "DOT_SR_Dvalin.003.desc"
-	picture = GFX_evt_DOT_SR_003
-	# show_sound = event_psionic
-	location = root
-	is_triggered_only = yes
-	immediate = {
-	}
-	diplomatic = yes #是否启用外交界面
-	# diplomatic_title = DOT_SR_Dvalin.001.name #外交界面标题本地化，不写默认为“传入通讯”
-	picture_event_data = {
-		room = "DOT_SR_Dvalin_1_room" #房间图层
-		# portrait = Dvalin #肖像图层，可承接 Root.Leader
-	}
-	option = {
-		name = DOT_SR_Dvalin.003.a
-		add_resource = { minerals = 100 }
-		country_event = { id = DOT_SR_Dvalin.004 days = 200 }
-	}
-	option = {
-		name = DOT_SR_Dvalin.003.b
-		add_resource = { minerals = 100 }
-		add_resource = { food = -10 }
-		# country_event = { id = DOT_SR_Dvalin.003 days = 200 }
-	}
-}
-
-country_event = {
-	id = DOT_SR_Dvalin.004
-	title = "DOT_SR_Dvalin.004.name"
-	desc = "DOT_SR_Dvalin.004.desc"
-	picture = GFX_evt_DOT_SR_003
-	# show_sound = event_psionic
-	location = root
-	is_triggered_only = yes
-	immediate = {
-	}
-	diplomatic = yes #是否启用外交界面
-	# diplomatic_title = DOT_SR_Dvalin.001.name #外交界面标题本地化，不写默认为“传入通讯”
-	picture_event_data = {
-		room = "DOT_SR_Dvalin_1_room" #房间图层
-		# portrait = Dvalin #肖像图层，可承接 Root.Leader
-	}
-	option = {
-		name = DOT_SR_Dvalin.004.a
-		add_resource = { minerals = 100 }
-		country_event = { id = DOT_SR_Dvalin.005 days = 200 }
-	}
-	option = {
-		name = DOT_SR_Dvalin.004.b
-		add_resource = { minerals = 100 }
-		add_resource = { food = -10 }
-		# country_event = { id = DOT_SR_Dvalin.003 days = 200 }
-	}
-}
-
-country_event = {
-	id = DOT_SR_Dvalin.005
-	title = "DOT_SR_Dvalin.005.name"
-	desc = "DOT_SR_Dvalin.005.desc"
-	picture = GFX_evt_DOT_SR_003
-	# show_sound = event_psionic
-	location = root
-	is_triggered_only = yes
-	immediate = {
-	}
-	diplomatic = yes #是否启用外交界面
-	# diplomatic_title = DOT_SR_Dvalin.001.name #外交界面标题本地化，不写默认为“传入通讯”
-	picture_event_data = {
-		room = "DOT_SR_Dvalin_1_room" #房间图层
-		# portrait = Dvalin #肖像图层，可承接 Root.Leader
-	}
-	option = {
-		name = DOT_SR_Dvalin.005.a
-		add_resource = { minerals = 100 }
-		country_event = { id = DOT_SR_Dvalin.006 days = 200 }
-	}
-	option = {
-		name = DOT_SR_Dvalin.005.b
-		add_resource = { minerals = 100 }
-		add_resource = { food = -10 }
-		# country_event = { id = DOT_SR_Dvalin.003 days = 200 }
-	}
-}
-
-country_event = {
-	id = DOT_SR_Dvalin.006
-	title = "DOT_SR_Dvalin.006.name"
-	desc = "DOT_SR_Dvalin.006.desc"
-	picture = GFX_evt_DOT_SR_003
-	# show_sound = event_psionic
-	location = root
-	is_triggered_only = yes
-	immediate = {
-	}
-	diplomatic = yes #是否启用外交界面
-	# diplomatic_title = DOT_SR_Dvalin.001.name #外交界面标题本地化，不写默认为“传入通讯”
-	picture_event_data = {
-		room = "DOT_SR_Dvalin_1_room" #房间图层
-		# portrait = Dvalin #肖像图层，可承接 Root.Leader
-	}
-	option = {
-		name = DOT_SR_Dvalin.006.a
-		add_resource = { minerals = 100 }
-		country_event = { id = DOT_SR_Dvalin.007 days = 200 }
-	}
-	option = {
-		name = DOT_SR_Dvalin.006.b
-		add_resource = { minerals = 100 }
-		add_resource = { food = -10 }
-		# country_event = { id = DOT_SR_Dvalin.003 days = 200 }
-	}
-}
-
-country_event = {
-	id = DOT_SR_Dvalin.007
-	title = "DOT_SR_Dvalin.007.name"
-	desc = "DOT_SR_Dvalin.007.desc"
-	picture = GFX_evt_DOT_SR_003
-	# show_sound = event_psionic
-	location = root
-	is_triggered_only = yes
-	immediate = {
-	}
-	diplomatic = yes #是否启用外交界面
-	# diplomatic_title = DOT_SR_Dvalin.001.name #外交界面标题本地化，不写默认为“传入通讯”
-	picture_event_data = {
-		room = "DOT_SR_Dvalin_1_room" #房间图层
-		# portrait = Dvalin #肖像图层，可承接 Root.Leader
-	}
-	option = {
-		name = DOT_SR_Dvalin.007.a
-		add_resource = { minerals = 100 }
-		# country_event = { id = DOT_SR_Dvalin.008 days = 200 }
-	}
-	option = {
-		name = DOT_SR_Dvalin.007.b
-		add_resource = { minerals = 100 }
-		add_resource = { food = -10 }
-		# country_event = { id = DOT_SR_Dvalin.003 days = 200 }
-	}
-}
-
-country_event = {
-	id = DOT_SR_Dvalin.008
-	title = "DOT_SR_Dvalin.008.name"
-	desc = "DOT_SR_Dvalin.008.desc"
-	picture = GFX_evt_DOT_SR_003
-	# show_sound = event_psionic
-	location = root
-	is_triggered_only = yes
-	immediate = {
-	}
-	diplomatic = yes #是否启用外交界面
-	# diplomatic_title = DOT_SR_Dvalin.001.name #外交界面标题本地化，不写默认为“传入通讯”
-	picture_event_data = {
-		room = "DOT_SR_Dvalin_1_room" #房间图层
-		# portrait = Dvalin #肖像图层，可承接 Root.Leader
-	}
-	option = {
-		name = DOT_SR_Dvalin.008.a
-		add_resource = { minerals = 100 }
-		# country_event = { id = DOT_SR_Dvalin.008 days = 200 }
-	}
-	option = {
-		name = DOT_SR_Dvalin.008.b
-		add_resource = { minerals = 100 }
 	}
 }
 
@@ -1596,6 +1418,657 @@ country_event = {
 		hidden_effect = {
 			event_target:ruanmei_leader = {
 				kill_leader = { show_notification = no }
+			}
+		}
+	}
+}
+
+# ============================================================
+# 三舰获得：姬子（直接给）/ 萨姆、玻吕刻斯（先给考古线索，挖完才给船）
+# ============================================================
+
+# ---------- 姬子·启行：星穹列车起源开局即得；其他起源遇到星穹列车国家即得 ----------
+country_event = {
+	id = DOT_SR_Dvalin.014
+	title = "DOT_SR_Dvalin.014.name"
+	desc = "DOT_SR_Dvalin.014.desc"
+	picture = GFX_evt_DOT_SR_003
+	location = root
+	fire_only_once = yes
+	is_triggered_only = yes
+	immediate = {
+		DOT_SR_grant_himeko_direct = yes
+	}
+	diplomatic = yes
+	picture_event_data = {
+		room = "DOT_SR_Dvalin_2_room"
+	}
+	option = {
+		name = DOT_SR_Dvalin.014.a
+		add_resource = { minerals = 100 }
+	}
+	option = {
+		name = DOT_SR_Dvalin.014.b
+		add_resource = { minerals = 100 }
+		delete_fleet = event_target:Himeko_Exist
+	}
+}
+
+# ---------- 萨姆线索：给「格拉姆铁骑」考古点（由排期直接调用，不做任何周期检查） ----------
+country_event = {
+	id = DOT_SR_Dvalin.015
+	title = "DOT_SR_Dvalin.015.name"
+	desc = "DOT_SR_Dvalin.015.desc"
+	picture = GFX_evt_DOT_SR_003
+	location = root
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		if = {
+			limit = { NOT = { has_country_flag = DOT_SR_sam_clue_given } }
+			capital_scope = { create_archaeological_site = DOT_SR_Gram_site }
+			set_country_flag = DOT_SR_sam_clue_given
+		}
+	}
+	option = {
+		name = DOT_SR_Dvalin.015.a
+		add_resource = { influence = 50 }
+	}
+}
+
+# ---------- 玻吕刻斯线索：给「翁法罗斯英雄纪」考古点（由排期直接调用，不做任何周期检查） ----------
+country_event = {
+	id = DOT_SR_Dvalin.013
+	title = "DOT_SR_Dvalin.013.name"
+	desc = "DOT_SR_Dvalin.013.desc"
+	picture = GFX_evt_DOT_SR_003
+	location = root
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		if = {
+			limit = { NOT = { has_country_flag = DOT_SR_pollux_clue_given } }
+			capital_scope = { create_archaeological_site = DOT_SR_Amph_site }
+			set_country_flag = DOT_SR_pollux_clue_given
+		}
+	}
+	option = {
+		name = DOT_SR_Dvalin.013.a
+		add_resource = { influence = 50 }
+	}
+}
+
+# ---------- 萨姆到手（格拉姆铁骑考古完成） ----------
+country_event = {
+	id = DOT_SR_Dvalin.016
+	title = "DOT_SR_Dvalin.016.name"
+	desc = "DOT_SR_Dvalin.016.desc"
+	picture = GFX_evt_DOT_SR_003
+	location = root
+	diplomatic = yes
+	picture_event_data = {
+		room = "DOT_SR_Dvalin_3_room"
+	}
+	is_triggered_only = yes
+	immediate = {
+		create_fleet = {
+			name = DOT_SR_Fleet_Sam
+			effect = {
+				set_owner = ROOT
+				set_name = DOT_SR_Fleet_Sam
+				create_ship = {
+					name = DOT_SR_Ship_Sam
+					design = Sam
+				}
+				set_location = {
+					target = ROOT.capital_scope
+					distance = 50
+					angle = random
+					direction = in_system
+				}
+				save_global_event_target_as = Sam_Exist
+			}
+		}
+		set_country_flag = DOT_SR_sam_obtained
+	}
+	option = {
+		name = DOT_SR_Dvalin.016.a
+		add_resource = { minerals = 100 }
+	}
+}
+
+# ---------- 玻吕刻斯到手（翁法罗斯英雄纪考古完成） ----------
+country_event = {
+	id = DOT_SR_Dvalin.017
+	title = "DOT_SR_Dvalin.017.name"
+	desc = "DOT_SR_Dvalin.017.desc"
+	picture = GFX_evt_DOT_SR_003
+	location = root
+	diplomatic = yes
+	picture_event_data = {
+		room = "DOT_SR_Dvalin_3_room"
+	}
+	is_triggered_only = yes
+	immediate = {
+		create_fleet = {
+			name = DOT_SR_Fleet_Pollux
+			effect = {
+				set_owner = ROOT
+				set_name = DOT_SR_Fleet_Pollux
+				create_ship = {
+					name = DOT_SR_Ship_Pollux
+					design = Pollux
+				}
+				set_location = {
+					target = ROOT.capital_scope
+					distance = 50
+					angle = random
+					direction = in_system
+				}
+				save_global_event_target_as = Pollux_Exist
+			}
+		}
+		set_country_flag = DOT_SR_pollux_obtained
+	}
+	option = {
+		name = DOT_SR_Dvalin.017.a
+		add_resource = { minerals = 100 }
+	}
+}
+
+# ---------- 兜底：萨姆考古点出现的通知 ----------
+country_event = {
+	id = DOT_SR_Dvalin.023
+	title = "DOT_SR_Dvalin.023.name"
+	desc = "DOT_SR_Dvalin.023.desc"
+	picture = GFX_evt_DOT_SR_003
+	location = root
+	is_triggered_only = yes
+	option = {
+		name = DOT_SR_Dvalin.023.a
+	}
+}
+
+# ---------- 兜底：玻吕刻斯考古点出现的通知 ----------
+country_event = {
+	id = DOT_SR_Dvalin.024
+	title = "DOT_SR_Dvalin.024.name"
+	desc = "DOT_SR_Dvalin.024.desc"
+	picture = GFX_evt_DOT_SR_003
+	location = root
+	is_triggered_only = yes
+	option = {
+		name = DOT_SR_Dvalin.024.a
+	}
+}
+
+# ---------- 开局排期（隐藏）：全流程唯一的入口，不做任何每月检查 ----------
+# 星穹列车起源 → 姬子立即到手，40 / 80 年后各给一次考古线索
+# 其他起源     → 45 年 / 85 年各排一个一次性事件，各自只掷一次 20%
+country_event = {
+	id = DOT_SR_Dvalin.025
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		if = {
+			limit = { is_ai = no }
+			if = {
+				limit = { has_origin = origin_Astral_Express }
+				# 列车起源开局直接获得姬子（不弹 .014 事件），只排 40/80 年考古线索时钟
+				set_country_flag = DOT_SR_ae_met
+				DOT_SR_grant_himeko_direct = yes
+				country_event = { id = DOT_SR_Dvalin.015 years = 40 }
+				country_event = { id = DOT_SR_Dvalin.013 years = 80 }
+			}
+			else = {
+				country_event = { id = DOT_SR_Dvalin.026 years = 45 }
+				country_event = { id = DOT_SR_Dvalin.027 years = 85 }
+			}
+		}
+	}
+}
+
+# ---------- 45 年兜底：一次性掷 20%，掷完即止 ----------
+country_event = {
+	id = DOT_SR_Dvalin.026
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		if = {
+			limit = {
+				is_ai = no
+				NOT = { has_country_flag = DOT_SR_ae_met }
+				NOT = { has_country_flag = DOT_SR_sam_clue_given }
+				NOT = { has_country_flag = DOT_SR_sam_roll_done }
+			}
+			set_country_flag = DOT_SR_sam_roll_done
+			random_list = {
+				20 = {
+					capital_scope = { create_archaeological_site = DOT_SR_Gram_site }
+					set_country_flag = DOT_SR_sam_clue_given
+					country_event = { id = DOT_SR_Dvalin.023 days = 1 }
+				}
+				80 = { }
+			}
+		}
+	}
+}
+
+# ---------- 85 年兜底：一次性掷 20%，掷完即止 ----------
+country_event = {
+	id = DOT_SR_Dvalin.027
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		if = {
+			limit = {
+				is_ai = no
+				NOT = { has_country_flag = DOT_SR_ae_met }
+				NOT = { has_country_flag = DOT_SR_pollux_clue_given }
+				NOT = { has_country_flag = DOT_SR_pollux_roll_done }
+			}
+			set_country_flag = DOT_SR_pollux_roll_done
+			random_list = {
+				20 = {
+					capital_scope = { create_archaeological_site = DOT_SR_Amph_site }
+					set_country_flag = DOT_SR_pollux_clue_given
+					country_event = { id = DOT_SR_Dvalin.024 days = 1 }
+				}
+				80 = { }
+			}
+		}
+	}
+}
+
+# ---------- 通讯建立时判定「遇到星穹列车」（事件驱动，零周期开销） ----------
+country_event = {
+	id = DOT_SR_Dvalin.028
+	hide_window = yes
+	is_triggered_only = yes
+	immediate = {
+		# 本人不是星穹列车，但新建立通讯的对方是 → 本人开始计时
+		if = {
+			limit = {
+				is_ai = no
+				NOT = { has_origin = origin_Astral_Express }
+				NOT = { has_country_flag = DOT_SR_ae_met }
+				any_country = {
+					has_origin = origin_Astral_Express
+					NOT = { is_same_value = root }
+					has_communications = root
+				}
+			}
+			dot_sr_ship_start_clock = yes
+		}
+		# 本人是星穹列车，对方是其他起源 → 让对开始计时
+		else_if = {
+			limit = {
+				has_origin = origin_Astral_Express
+				exists = from
+				from = {
+					is_ai = no
+					NOT = { has_origin = origin_Astral_Express }
+					NOT = { has_country_flag = DOT_SR_ae_met }
+				}
+			}
+			from = { dot_sr_ship_start_clock = yes }
+		}
+	}
+}
+
+# ============================================================
+# 格拉姆铁骑考古 / 翁法罗斯英雄纪考古 事件链
+# 结构照抄 DOT_SR_archaeological_event.txt 的 Death_of_Akivili.500
+# 最后阶段不直接造舰，而是转交给 DOT_SR_Dvalin.016 / .017，
+# 复用已验证的 create_fleet 写法（ROOT = 国家）。
+# ============================================================
+
+# ---------------- 格拉姆铁骑考古（萨姆） ----------------
+country_event = {
+	id = DOT_SR_Gram.500
+	title = DOT_SR_Gram.500.name
+	desc = DOT_SR_Gram.500.desc
+	picture = GFX_evt_DOT_SR_002
+	location = from
+	archaeology = yes
+	is_triggered_only = yes
+	option = {
+		name = DOT_SR_Gram.500.a
+		owner = {
+			add_resource = { physics_research = 150 }
+		}
+	}
+}
+
+country_event = {
+	id = DOT_SR_Gram.501
+	title = DOT_SR_Gram.501.name
+	desc = DOT_SR_Gram.501.desc
+	picture = GFX_evt_DOT_SR_002
+	location = from
+	archaeology = yes
+	is_triggered_only = yes
+	option = {
+		name = DOT_SR_Gram.501.a
+		owner = {
+			add_resource = { engineering_research = 150 }
+		}
+	}
+}
+
+country_event = {
+	id = DOT_SR_Gram.502
+	title = DOT_SR_Gram.502.name
+	desc = DOT_SR_Gram.502.desc
+	picture = GFX_evt_DOT_SR_002
+	location = from
+	archaeology = yes
+	is_triggered_only = yes
+	option = {
+		name = DOT_SR_Gram.502.a
+		owner = {
+			add_resource = { unity = 100 }
+		}
+	}
+}
+
+country_event = {
+	id = DOT_SR_Gram.503
+	title = DOT_SR_Gram.503.name
+	desc = DOT_SR_Gram.503.desc
+	picture = GFX_evt_DOT_SR_002
+	location = from
+	archaeology = yes
+	is_triggered_only = yes
+	option = {
+		name = DOT_SR_Gram.503.a
+		owner = {
+			add_resource = { physics_research = 300 engineering_research = 300 }
+		}
+	}
+}
+
+country_event = {
+	id = DOT_SR_Gram.504
+	title = DOT_SR_Gram.504.name
+	desc = DOT_SR_Gram.504.desc
+	picture = GFX_evt_DOT_SR_002
+	location = from
+	archaeology = yes
+	is_triggered_only = yes
+	option = {
+		name = DOT_SR_Gram.504.a
+		owner = {
+			country_event = { id = DOT_SR_Dvalin.016 days = 1 }
+		}
+	}
+}
+
+# ---------------- 翁法罗斯英雄纪考古（玻吕刻斯） ----------------
+country_event = {
+	id = DOT_SR_Amph.500
+	title = DOT_SR_Amph.500.name
+	desc = DOT_SR_Amph.500.desc
+	picture = GFX_evt_DOT_SR_002
+	location = from
+	archaeology = yes
+	is_triggered_only = yes
+	option = {
+		name = DOT_SR_Amph.500.a
+		owner = {
+			add_resource = { society_research = 150 }
+		}
+	}
+}
+
+country_event = {
+	id = DOT_SR_Amph.501
+	title = DOT_SR_Amph.501.name
+	desc = DOT_SR_Amph.501.desc
+	picture = GFX_evt_DOT_SR_002
+	location = from
+	archaeology = yes
+	is_triggered_only = yes
+	option = {
+		name = DOT_SR_Amph.501.a
+		owner = {
+			add_resource = { society_research = 150 }
+		}
+	}
+}
+
+country_event = {
+	id = DOT_SR_Amph.502
+	title = DOT_SR_Amph.502.name
+	desc = DOT_SR_Amph.502.desc
+	picture = GFX_evt_DOT_SR_002
+	location = from
+	archaeology = yes
+	is_triggered_only = yes
+	option = {
+		name = DOT_SR_Amph.502.a
+		owner = {
+			add_resource = { influence = 100 }
+		}
+	}
+}
+
+country_event = {
+	id = DOT_SR_Amph.503
+	title = DOT_SR_Amph.503.name
+	desc = DOT_SR_Amph.503.desc
+	picture = GFX_evt_DOT_SR_002
+	location = from
+	archaeology = yes
+	is_triggered_only = yes
+	option = {
+		name = DOT_SR_Amph.503.a
+		owner = {
+			add_resource = { society_research = 300 unity = 100 }
+		}
+	}
+}
+
+country_event = {
+	id = DOT_SR_Amph.504
+	title = DOT_SR_Amph.504.name
+	desc = DOT_SR_Amph.504.desc
+	picture = GFX_evt_DOT_SR_002
+	location = from
+	archaeology = yes
+	is_triggered_only = yes
+	option = {
+		name = DOT_SR_Amph.504.a
+		owner = {
+			country_event = { id = DOT_SR_Dvalin.017 days = 1 }
+		}
+	}
+}
+
+# ---------------------------------------------------------------------
+# 星穹列车起源 · 开局抉择（外交型事件）—— 是否追寻开拓道路启航
+# 有游牧 DLC 时开局弹出；文案强调列车是否要再度启航、追寻开拓道路。
+# 选项一 = 成为彻底游牧文明（AI 不会选，factor=0）；选项二 = 继续普通文明（AI factor=100）。
+# 转型序列照抄 DOT_SR_AstralNomad.1（提瓦特完结抉择），用独立旗标避免与后者冲突。
+# ---------------------------------------------------------------------
+country_event = {
+	id = DOT_SR_AstralNomad.0
+	title = DOT_SR_AstralNomad.0.name
+	desc = DOT_SR_AstralNomad.0.desc
+	picture = GFX_evt_gaia
+	show_sound = event_scanner
+	location = root
+	is_triggered_only = yes
+	fire_only_once = yes
+	diplomatic = yes
+	picture_event_data = {
+		room = "astral_express_1_room"
+	}
+
+	trigger = {
+		has_origin = origin_Astral_Express
+		# host_has_dlc = "Nomads"
+		NOT = { has_country_flag = DOT_SR_astral_nomad_early_done }
+	}
+
+	immediate = {
+		set_country_flag = DOT_SR_astral_nomad_early_done
+	}
+
+	# 选项一：追寻开拓道路，成为彻底游牧文明 —— AI 不会选择
+	option = {
+		name = DOT_SR_AstralNomad.0.a
+		custom_tooltip = DOT_SR_AstralNomad.0.a.tt
+		ai_chance = { factor = 0 }
+		# 彻底游牧：必须在转为游牧之前拆星基——设 is_nomadic 后殖民地/星基归属会脱离常规遍历。
+		# 注意：dismantle 只对 orbital station 有效；恒星基地是 fleet，必须 destroy_fleet。
+		# 方舟舰的随舰星基不占星系，不在 every_owned_starbase 里，不受影响。
+		hidden_effect = {
+			every_owned_starbase = {
+				fleet = { destroy_fleet = this }
+			}
+		}
+		set_country_as_nomad_effect = { IS_NOMAD = yes }
+		set_resource_converter = nomadic_operational_reserves
+		set_faction_properties = { needs_border_access = no }
+		set_variable = { which = contract_completed value = 0 }
+		give_technology = { tech = tech_civilian_arkship message = no }
+		give_technology = { tech = tech_science_arkship message = no }
+		give_technology = { tech = tech_military_arkship message = no }
+		give_technology = { tech = tech_waystation_1 message = no }
+		country_event = { id = arkship.1 random = 1800 }
+		country_event = { id = nomads.20 }
+	}
+
+	# 选项二：继续作为普通文明（停靠、扎根）—— AI 必定选择
+	option = {
+		name = DOT_SR_AstralNomad.0.b
+		ai_chance = { factor = 100 }
+	}
+}
+
+# ---------------------------------------------------------------------
+# 星穹列车起源 · 提瓦特事件完结后的抉择 —— 是否彻底转型为游牧文明
+# 玩家可自由选择；AI 国家权重压制成 100% 选择转型（ai_chance 100 vs 0）。
+# 转型序列照抄原版 synthetic_dawn_events.txt（机器起义转游牧）的完整流程：
+# is_nomadic 代码旗 + 四项方舟专属科技 + 游牧资源转换器
+# + 游牧经济局势（nomads.20）与方舟随机事件导演（arkship.1）。
+# ---------------------------------------------------------------------
+country_event = {
+	id = DOT_SR_AstralNomad.1
+	title = DOT_SR_AstralNomad.1.name
+	desc = DOT_SR_AstralNomad.1.desc
+	picture = GFX_evt_gaia
+	show_sound = event_scanner
+	is_triggered_only = yes
+
+	trigger = {
+		has_origin = origin_Astral_Express
+		# host_has_dlc = "Nomads"
+		NOT = { has_country_flag = DOT_SR_astral_nomad_event_done }
+	}
+
+	immediate = {
+		set_country_flag = DOT_SR_astral_nomad_event_done
+	}
+
+	# 选择一：彻底转型为游牧文明 —— AI 国家 100% 选择此项
+	option = {
+		name = DOT_SR_AstralNomad.1.a
+		custom_tooltip = DOT_SR_AstralNomad.1.a.tt
+		ai_chance = { factor = 100 }
+		set_country_as_nomad_effect = { IS_NOMAD = yes }
+		# 彻底游牧：销毁所有固定恒星基地（方舟舰的随舰星基不占星系，不受影响）
+		# 注意：dismantle 只对 orbital station 有效；恒星基地是 fleet，必须 destroy_fleet。
+		hidden_effect = {
+			every_owned_starbase = {
+				fleet = { destroy_fleet = this }
+			}
+		}
+		set_resource_converter = nomadic_operational_reserves
+		set_faction_properties = { needs_border_access = no }
+		set_variable = { which = contract_completed value = 0 }
+		give_technology = { tech = tech_civilian_arkship message = no }
+		give_technology = { tech = tech_science_arkship message = no }
+		give_technology = { tech = tech_military_arkship message = no }
+		give_technology = { tech = tech_waystation_1 message = no }
+		# 方舟随机事件导演 + 游牧经济局势（星之日志）
+		country_event = { id = arkship.1 random = 1800 }
+		country_event = { id = nomads.20 }
+	}
+
+	# 选择二：维持定居文明
+	option = {
+		name = DOT_SR_AstralNomad.1.b
+		ai_chance = { factor = 0 }
+	}
+}
+
+# ---------------------------------------------------------------------
+# 星穹列车起源 · 相遇即通行
+# 与任何普通文明建立通讯的瞬间，双向自动开放边界（通行权）。
+# 挂钩 on_post_communications_established_always_fire（This=建立通讯方，
+# From=对方）；on_action 可能只对单侧触发一次，故 root / from 两侧都判。
+# set_closed_borders status=no 双向各一次（对照原版 origin_events_1.txt 联邦成员写法）。
+# ---------------------------------------------------------------------
+country_event = {
+	id = DOT_SR_AstralExpressContact.1
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		is_country_type = default
+		from = { is_country_type = default }
+		or = {
+			has_origin = origin_Astral_Express
+			from = { has_origin = origin_Astral_Express }
+		}
+	}
+
+	immediate = {
+		# 本方 → 对方开放本方边界
+		set_closed_borders = { who = from status = no }
+		# 对方 → 本方开放对方边界
+		from = {
+			set_closed_borders = { who = root status = no }
+		}
+		# 相遇即友善：双向 +100 好感（永久、不叠加，unique）
+		add_opinion_modifier = { who = from modifier = opinion_dot_sr_express_goodwill }
+		from = {
+			add_opinion_modifier = { who = root modifier = opinion_dot_sr_express_goodwill }
+		}
+	}
+}
+
+# ---------------------------------------------------------------------
+# 星穹列车起源 · 高度友善 —— 存档兼容清扫（旧存档里已建交的国家一次性补好感）
+# 挂 on_game_start_country：THIS = 任意国家；若与列车起源文明已建交则双向补好感。
+# ---------------------------------------------------------------------
+country_event = {
+	id = DOT_SR_AstralExpressContact.2
+	hide_window = yes
+	is_triggered_only = yes
+
+	trigger = {
+		is_country_type = default
+		any_country = {
+			has_origin = origin_Astral_Express
+			has_communications = prev
+		}
+	}
+
+	immediate = {
+		every_country = {
+			limit = {
+				has_origin = origin_Astral_Express
+				has_communications = prev
+			}
+			# THIS = 列车起源文明，prev = 事件国家
+			# 列车 → 对方好感
+			add_opinion_modifier = { who = prev modifier = opinion_dot_sr_express_goodwill }
+			# 对方 → 列车好感（回 prev 作用域加，who=prev 即列车）
+			prev = {
+				add_opinion_modifier = { who = prev modifier = opinion_dot_sr_express_goodwill }
 			}
 		}
 	}

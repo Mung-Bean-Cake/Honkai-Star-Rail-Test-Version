@@ -1,0 +1,49 @@
+animation = {
+	name = "Pollux_idle_animation"
+	file = "Pollux_idle.anim"
+}
+
+animation = {
+	name = "Pollux_moving_animation"
+	file = "Pollux_moving.anim"
+}
+
+entity = {
+	locator = { name = "DOTGI_exh_L" position = { -9.0 8.0 54.0 } }
+	locator = { name = "DOTGI_exh_R" position = { 9.0 8.0 54.0 } }
+	locator = { name = "DOTGI_exh_UL" position = { -9.0 20.0 54.0 } }
+	locator = { name = "DOTGI_exh_UR" position = { 9.0 20.0 54.0 } }
+	locator = { name = "DOTGI_exh_DL" position = { -9.0 -4.0 54.0 } }
+	locator = { name = "DOTGI_exh_DR" position = { 9.0 -4.0 54.0 } }
+	name = "Pollux_entity"
+	pdxmesh = "Pollux"
+	default_state = "idle"
+
+	game_data = {
+		bloom_factor = 1.25
+		emissive_recolor_crunch = 1.9
+	}
+
+	state = { name = "idle" animation = "idle" state_time = 5
+		event = { time = 0 node = "DOTGI_exh_L" particle = "generic_big_3_exhaust_circle_idle" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "DOTGI_exh_R" particle = "generic_big_3_exhaust_circle_idle" keep_particle = yes trigger_once = yes }
+	}
+
+	state = { name = "moving" animation = "moving" state_time = 5
+		event = { time = 0 node = "DOTGI_exh_L" particle = "generic_big_3_exhaust_circle_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "DOTGI_exh_R" particle = "generic_big_3_exhaust_circle_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "DOTGI_exh_UL" particle = "generic_big_3_exhaust_circle_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "DOTGI_exh_UR" particle = "generic_big_3_exhaust_circle_moving" keep_particle = yes trigger_once = yes }
+	}
+
+	state = { name = "attack" animation = "moving" state_time = 5 looping = no next_state = "idle"
+		event = { time = 0 node = "DOTGI_exh_L" particle = "generic_big_3_exhaust_circle_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "DOTGI_exh_R" particle = "generic_big_3_exhaust_circle_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "DOTGI_exh_UL" particle = "generic_big_3_exhaust_circle_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "DOTGI_exh_UR" particle = "generic_big_3_exhaust_circle_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "DOTGI_exh_DL" particle = "generic_big_3_exhaust_circle_moving" keep_particle = yes trigger_once = yes }
+		event = { time = 0 node = "DOTGI_exh_DR" particle = "generic_big_3_exhaust_circle_moving" keep_particle = yes trigger_once = yes }
+	}
+
+	state = { name = "death" state_time = 5 looping = no animation = "idle" }
+}
